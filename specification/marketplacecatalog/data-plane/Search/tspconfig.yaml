@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/search"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-marketplace-catalog-search"
+    namespace: "Search"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.MarketplaceCatalog.Search"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.MarketplaceCatalog.Search"
+    namespace: "Azure.MarketplaceCatalog.Search"
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/marketplace-catalog-search-rest"
+    package-details:
+      name: "@azure-rest/contoso-widgetmanager"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-search"
+    namespace: "com.azure.search"
+    service-name: "Search"
+    artifact-id: "azure-search"
+    flavor: azure
+    clear-output-folder: true
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azsearch"
+    module: "github.com/Azure/azure-sdk-for-go/sdk/search/azsearch"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

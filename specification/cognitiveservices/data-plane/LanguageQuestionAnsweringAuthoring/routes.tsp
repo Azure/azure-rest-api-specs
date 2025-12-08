@@ -80,25 +80,14 @@ interface QuestionAnsweringProjects {
   @pollingOperation(QuestionAnsweringProjects.getExportStatus)
   export is Foundations.LongRunningOperation<
     {
-      /**
-       * The name of the project to use.
-       */
+      /** The name of the project to use. */
       @maxLength(100)
       @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
-      /**
-       * Knowledge base Import or Export format.
-       */
-      @query("format")
-      format?: format = format.json;
-
-      /**
-       * Kind of the asset of the project.
-       */
-      @query("assetKind")
-      assetKind?: AssestKind;
+      /** Optional export parameters. See `ExportQueryParameters`. */
+      ...ExportQueryParameters;
     },
     ExportJobResponse,
     {},
@@ -122,29 +111,16 @@ interface QuestionAnsweringProjects {
   @pollingOperation(QuestionAnsweringProjects.getImportStatus)
   `import` is Foundations.LongRunningOperation<
     {
-      /**
-       * The name of the project to use.
-       */
+      /** The name of the project to use. */
       @maxLength(100)
       @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
       @path
       projectName: string;
 
-      /**
-       * Knowledge base Import or Export format.
-       */
-      @query("format")
-      format?: format = format.json;
+      /** Optional import parameters. See `ImportQueryParameters`. */
+      ...ImportQueryParameters;
 
-      /**
-       * Kind of the asset of the project.
-       */
-      @query("assetKind")
-      assetKind?: AssestKind;
-
-      /**
-       * Project assets the needs to be imported.
-       */
+      /** Project assets the needs to be imported. */
       @bodyRoot
       body?: ImportJobOptions;
     },

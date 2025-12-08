@@ -3,6 +3,9 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

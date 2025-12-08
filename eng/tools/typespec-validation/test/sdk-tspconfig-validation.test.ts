@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Enable eslint, fix errors
+
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
@@ -247,6 +250,8 @@ const tsDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/arm-aaa-rest",
   "{output-dir}/{service-dir}/aaa--rest",
   [new TspConfigTsDpEmitterOutputDirSubRule()],
+  false,
+  { "is-modular-library": false },
 );
 
 const tsDpPackageNameTestCases = createEmitterOptionTestCases(
@@ -256,6 +261,8 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+  false,
+  { "is-modular-library": false },
 );
 
 const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(

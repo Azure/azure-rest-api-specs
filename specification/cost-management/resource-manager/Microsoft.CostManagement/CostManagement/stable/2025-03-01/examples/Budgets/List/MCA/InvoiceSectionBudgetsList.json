@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "billingAccountId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01",
+    "billingProfileId": "MYDEVTESTBP",
+    "invoiceSectionId": "AAAA-BBBB-CCC-DDD",
+    "scope": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/MYDEVTESTBP/invoiceSections/AAAA-BBBB-CCC-DDD"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestBudget1",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157c\"",
+            "id": "/providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/MYDEVTESTBP/invoiceSections/AAAA-BBBB-CCC-DDD/providers/Microsoft.CostManagement/budgets/TestBudget1",
+            "properties": {
+              "amount": 20,
+              "category": "Cost",
+              "currentSpend": {
+                "amount": 5,
+                "unit": "USD"
+              },
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_80_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 80,
+                  "thresholdType": "Actual"
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+              }
+            }
+          },
+          {
+            "name": "TestBudget2",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157d\"",
+            "id": "/providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/MYDEVTESTBP/invoiceSections/AAAA-BBBB-CCC-DDD/providers/Microsoft.CostManagement/budgets/TestBudget2",
+            "properties": {
+              "amount": 60,
+              "category": "Cost",
+              "currentSpend": {
+                "amount": 20,
+                "unit": "USD"
+              },
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_70_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 70,
+                  "thresholdType": "Actual"
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Budgets_List",
+  "title": "InvoiceSectionBudgetsList-MCA"
+}

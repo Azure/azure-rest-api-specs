@@ -1,0 +1,155 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "resourceGroupName": "MYDEVTESTRG",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestBudget0",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget0",
+            "properties": {
+              "amount": 100.65,
+              "category": "Cost",
+              "currentSpend": {
+                "amount": 80.89,
+                "unit": "USD"
+              },
+              "filter": {
+                "and": [
+                  {
+                    "dimensions": {
+                      "name": "ResourceId",
+                      "operator": "In",
+                      "values": [
+                        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MSVM2",
+                        "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
+                      ]
+                    }
+                  },
+                  {
+                    "tags": {
+                      "name": "category",
+                      "operator": "In",
+                      "values": [
+                        "Dev",
+                        "Prod"
+                      ]
+                    }
+                  },
+                  {
+                    "tags": {
+                      "name": "department",
+                      "operator": "In",
+                      "values": [
+                        "engineering",
+                        "sales"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_90_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactGroups": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 90,
+                  "thresholdType": "Actual"
+                },
+                "Actual_GreaterThan_80_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThan",
+                  "threshold": 80
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+              }
+            }
+          },
+          {
+            "name": "TestBudget1",
+            "type": "Microsoft.CostManagement/budgets",
+            "eTag": "\"1d34d012214157f\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/budgets/TestBudget1",
+            "properties": {
+              "amount": 200.65,
+              "category": "Cost",
+              "currentSpend": {
+                "amount": 120.89,
+                "unit": "USD"
+              },
+              "filter": {},
+              "notifications": {
+                "Actual_GreaterThanOrEqualTo_60_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactGroups": [
+                    "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/microsoft.insights/actionGroups/SampleActionGroup"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThanOrEqualTo",
+                  "threshold": 60,
+                  "thresholdType": "Actual"
+                },
+                "Actual_GreaterThan_40_Percent": {
+                  "contactEmails": [
+                    "johndoe@contoso.com",
+                    "janesmith@contoso.com"
+                  ],
+                  "contactRoles": [
+                    "Contributor",
+                    "Reader"
+                  ],
+                  "enabled": true,
+                  "operator": "GreaterThan",
+                  "threshold": 40
+                }
+              },
+              "timeGrain": "Monthly",
+              "timePeriod": {
+                "endDate": "2024-10-31T00:00:00Z",
+                "startDate": "2023-04-01T00:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Budgets_List",
+  "title": "ResourceGroupBudgetsList"
+}

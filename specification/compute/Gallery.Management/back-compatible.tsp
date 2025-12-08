@@ -121,3 +121,13 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImageVersion.properties
 );
+
+@@clientLocation(Galleries.listByArtifactName,
+  "SoftDeletedResource",
+  "!csharp"
+);
+@@clientLocation(Galleries.gallerySharingProfileUpdate,
+  "GallerySharingProfile",
+  "!csharp"
+);
+@@clientName(Galleries.gallerySharingProfileUpdate, "update", "!csharp");

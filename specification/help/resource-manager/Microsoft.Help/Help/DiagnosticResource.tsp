@@ -34,23 +34,9 @@ interface DiagnosticResources {
   /**
    * Creates a diagnostic for the specific resource using solutionId from discovery solutions. <br/>Diagnostics are powerful solutions that access product resources or other relevant data and provide the root cause of the issue and the steps to address the issue.<br/><br/>
    */
-  create is Legacy.ExtensionOperations.CreateOrUpdateAsync<
+  create is Legacy.Extension.CreateOrUpdateAsync<
+    Extension.ScopeParameter,
     DiagnosticResource,
-    Parameters = {
-      ...ApiVersionParameter;
-      ...Extension.ScopeParameter;
-      ...Legacy.Provider;
-
-      /**
-       * Unique resource name for insight resources
-       */
-      @path
-      @segment("diagnostics")
-      @minLength(1)
-      @maxLength(100)
-      @pattern("^[A-Za-z0-9-+@()_]+$")
-      diagnosticsResourceName: string;
-    },
     OptionalRequestBody = true
   >;
 }

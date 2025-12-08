@@ -965,3 +965,26 @@ model ResourceSku {
   @added(Versions.v2025_08_01)
   size?: Size;
 }
+
+/**
+ * The list response for dashboard definitions.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
+
+/**
+ * Properties specific to the dashboard definition.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionProperties {
+  /**
+   * The dashboard definition data in JSON format.
+   */
+  serializedData?: string;
+
+  /**
+   * The provisioning state of the dashboard definition resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}

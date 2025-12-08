@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myApp",
+        "type": "Microsoft.ServiceFabric/managedClusters/applications",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp",
+        "location": "eastus",
+        "properties": {
+          "parameters": {
+            "param1": "value1"
+          },
+          "provisioningState": "Updating",
+          "upgradePolicy": {
+            "applicationHealthPolicy": {
+              "considerWarningAsError": true,
+              "defaultServiceTypeHealthPolicy": {
+                "maxPercentUnhealthyPartitionsPerService": 0,
+                "maxPercentUnhealthyReplicasPerPartition": 0,
+                "maxPercentUnhealthyServices": 0
+              },
+              "maxPercentUnhealthyDeployedApplications": 0,
+              "serviceTypeHealthPolicyMap": {
+                "service1": {
+                  "maxPercentUnhealthyPartitionsPerService": 30,
+                  "maxPercentUnhealthyReplicasPerPartition": 30,
+                  "maxPercentUnhealthyServices": 30
+                }
+              }
+            },
+            "forceRestart": false,
+            "instanceCloseDelayDuration": 600,
+            "recreateApplication": false,
+            "rollingUpgradeMonitoringPolicy": {
+              "failureAction": "Rollback",
+              "healthCheckRetryTimeout": "00:10:00",
+              "healthCheckStableDuration": "00:05:00",
+              "healthCheckWaitDuration": "00:02:00",
+              "upgradeDomainTimeout": "00:15:00",
+              "upgradeTimeout": "01:00:00"
+            },
+            "upgradeMode": "UnmonitoredAuto",
+            "upgradeReplicaSetCheckTimeout": 3600
+          },
+          "version": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applicationTypes/myAppType/versions/1.0"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Applications_Get",
+  "title": "Get an application"
+}

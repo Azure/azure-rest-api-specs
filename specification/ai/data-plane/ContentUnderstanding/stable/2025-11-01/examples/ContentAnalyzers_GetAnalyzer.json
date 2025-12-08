@@ -1,0 +1,49 @@
+{
+  "title": "Get Analyzer",
+  "operationId": "ContentAnalyzers_Get",
+  "parameters": {
+    "api-version": "2025-11-01",
+    "analyzerId": "myAnalyzer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "analyzerId": "myAnalyzer",
+        "description": "My analyzer",
+        "tags": {
+          "createdBy": "John"
+        },
+        "status": "creating",
+        "createdAt": "2025-05-01T18:46:36.051Z",
+        "lastModifiedAt": "2025-05-01T18:46:36.051Z",
+        "baseAnalyzerId": "prebuilt-document",
+        "config": {
+          "locales": null,
+          "enableOcr": true,
+          "enableLayout": true,
+          "enableFormula": false,
+          "returnDetails": true
+        },
+        "fieldSchema": {
+          "name": "MyForm",
+          "description": "My form",
+          "fields": {
+            "Company": {
+              "type": "string",
+              "description": "Name of company."
+            }
+          },
+          "definitions": {}
+        },
+        "knowledgeSources": [
+          {
+            "kind": "labeledData",
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+            "prefix": "trainingData",
+            "fileListPath": "trainingData/fileList.jsonl"
+          }
+        ]
+      }
+    }
+  }
+}

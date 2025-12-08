@@ -53,12 +53,23 @@ model StandbyContainerGroupPoolResourceProperties {
 @doc("Specifies the elasticity profile of the standby container group pools.")
 model StandbyContainerGroupPoolElasticityProfile {
   @doc("Specifies maximum number of standby container groups in the standby pool.")
+  @minValue(0)
   @maxValue(2000)
+  @removed(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @renamedFrom(Microsoft.StandbyPool.Versions.`2025-10-01`, "maxReadyCapacity")
+  oldMaxReadyCapacity: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies maximum number of standby container groups in the standby pool.")
   @minValue(0)
   maxReadyCapacity: int64;
 
   @doc("Specifies refill policy of the pool.")
   refillPolicy?: RefillPolicy;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the dynamic sizing configuration.")
+  dynamicSizing?: DynamicSizing;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)

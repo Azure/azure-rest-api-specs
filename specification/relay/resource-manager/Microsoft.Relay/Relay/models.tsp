@@ -3,9 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Relay;
 
@@ -216,11 +214,13 @@ model AccessKeys {
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryKey?: string;
 
   /**
    * A base64-encoded 256-bit secondary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryKey?: string;
 
   /**
@@ -440,8 +440,8 @@ model RelayUpdateParameters extends ResourceNamespacePatch {
   /**
    * Description of Relay namespace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RelayNamespaceProperties;
 }
 
@@ -552,9 +552,9 @@ model Operation {
   /**
    * Properties of the operation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: Record<unknown>;
 }
 

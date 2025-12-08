@@ -82,3 +82,28 @@ using Microsoft.Compute;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
+
+@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.listByRestorePoint,
+  "DiskRestorePoint",
+  "!csharp"
+);
+@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  DiskAccesses,
+  "!csharp"
+);

@@ -218,6 +218,7 @@ model DataflowGraphDestinationAddIfNotPresentHeaderAction
   actionType: AddIfNotPresent;
 
   /** The name of the header to add. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /** The value of the header to add. */
@@ -231,6 +232,7 @@ model DataflowGraphDestinationRemoveHeaderAction
   actionType: Remove;
 
   /** The name of the header to remove. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 }
 
@@ -241,6 +243,7 @@ model DataflowGraphDestinationAddOrReplaceHeaderAction
   actionType: AddOrReplace;
 
   /** The name of the header to add or replace. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /** The value of the header to add or replace. */

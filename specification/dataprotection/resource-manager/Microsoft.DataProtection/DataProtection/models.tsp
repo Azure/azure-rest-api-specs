@@ -2389,6 +2389,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   blobSasKey?: string;
 
@@ -2401,6 +2402,7 @@ model ExportJobsResult {
   /**
    * SAS key to access the ExcelFile blob.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   excelFileBlobSasKey?: string;
 }

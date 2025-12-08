@@ -48,6 +48,7 @@ model ProjectProperties is AzureResourceProperties {
   @doc("Location of service map workspace created by customer.")
   customerWorkspaceLocation?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("""
     This value can be set to 'enabled' to avoid breaking changes on existing
     customer resources and templates. If set to 'disabled', traffic over public

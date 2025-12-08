@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "$expand": "properties/data",
+    "$top": 5,
+    "api-version": "2025-03-01",
+    "billingAccountId": "100",
+    "scope": "providers/Microsoft.Billing/billingAccounts/100"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/100/providers/microsoft.CostManagement/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource group",
+              "category": "ResourceGroup",
+              "data": [
+                "thoroetrg01",
+                "default-notificationhubs-westus",
+                "jedikeyvaultrg",
+                "contosocodeflow8d4a",
+                "noobaa"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 377,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          },
+          {
+            "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/100/providers/microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
+              "data": [
+                "microsoft.automation/automationaccounts",
+                "microsoft.databricks/workspaces",
+                "microsoft.dbformysql/servers",
+                "microsoft.containerregistry/registries",
+                "microsoft.search/searchservices"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 37,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Dimensions_List",
+  "title": "BillingAccountDimensionsListExpandAndTop-Legacy"
+}

@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"

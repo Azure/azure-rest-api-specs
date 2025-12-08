@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Oracle.Database;
 
-@@clientName(Oracle.Database, "OracleDatabaseMgmt", "python");
+@@clientName(Oracle.Database, "OracleDatabaseMgmtClient", "python");
 @@clientName(Oracle.Database, "OracleDatabaseManagementClient", "javascript");
 
 // CSharp

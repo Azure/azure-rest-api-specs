@@ -1,0 +1,28 @@
+{
+  "operationId": "Scans",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "body": {
+      "scanType": "RunNow"
+    },
+    "scheduleId": "12345678-abcd-1234-ef00-123456abcdef"
+  },
+  "title": "Scan_Create",
+  "responses": {
+    "202": {
+      "body": {
+        "id": "12345678-abcd-1234-ef00-123456abcdef",
+        "status": "InProgress",
+        "kind": "Create",
+        "lastUpdated": "2025-11-13T08:45:30.123Z",
+        "statusMessage": "Scan creation initiated successfully.",
+        "progressPercentage": 5
+      },
+      "headers": {
+        "Operation-Id": "12345678-abcd-1234-ef00-123456abcdeg",
+        "Operation-Location": "https://purview.azure.com/operations/12345678-abcd-1234-ef00-123456abcdeg"
+      }
+    }
+  }
+}

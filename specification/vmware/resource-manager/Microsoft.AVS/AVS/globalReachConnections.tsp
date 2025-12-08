@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 
 @armResourceOperations
@@ -78,6 +77,7 @@ model GlobalReachConnectionProperties {
   @visibility(Lifecycle.Read)
   addressPrefix?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("""
     Authorization key from the peer express route used for the global reach
     connection

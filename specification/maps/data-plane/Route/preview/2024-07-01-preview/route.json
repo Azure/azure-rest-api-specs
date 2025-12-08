@@ -875,7 +875,7 @@
         },
         "features": {
           "type": "array",
-          "description": "A set of points to snap to road network. You can have a minimum of 2 points and maximum of 100 points and the two consecutive points must be within 6 kilometer of each other and a total road distance of up to 100 kilometers. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
+          "description": "A set of points to snap to road network. You can have a minimum of 2 points and maximum of 5000 points and the two consecutive points must be within 6 kilometer of each other and a total road distance of up to 100 kilometers. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS point that cannot be snapped to a road network.",
           "minimum": 2,
           "maximum": 100,
           "items": {
@@ -2838,13 +2838,13 @@
           "$ref": "#/definitions/RouteRangeVehicleSpec"
         },
         "distanceBudgetInMeters ": {
-          "description": "The distance budget specifies the maximum range in meters which can be traveled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 360,000 meters; otherwise, it is 500,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
+          "description": "The distance budget specifies the maximum range in meters which can be traveled from the origin waypoint. It cannot be set when `timeBudgetInSec` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum distance supported is 90000 meters; otherwise, it is 500,000 meters.\n\nExample: \"distanceBudgetInMeters\":5000",
           "type": "number",
           "minimum": 0,
           "maximum": 500000
         },
         "timeBudgetInSec": {
-          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 14,400 seconds; otherwise, it is 21,600 seconds.\n\nExample: \"timeBudgetInSec\":3600",
+          "description": "The time budget specifies the maximum time in seconds available for travel, defining how far one can go within this time constraint from the origin waypoint. It cannot be set when `distanceBudgetInMeters` is specified.\n\nWhen `isSimplifiedPolygon` is false, the maximum time supported is 3600 seconds; otherwise, it is 21,600 seconds.\n\nExample: \"timeBudgetInSec\":3600",
           "type": "number",
           "minimum": 0,
           "maximum": 21600

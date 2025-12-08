@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// @ts-check
 
 import { mkdir, writeFile } from "fs/promises";
 import { dirname, join, resolve } from "path";

@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "externalCloudProviderId": "100",
+    "externalCloudProviderType": "externalBillingAccounts",
+    "parameters": {
+      "type": "Usage",
+      "dataset": {
+        "aggregation": {
+          "totalCost": {
+            "name": "Cost",
+            "function": "Sum"
+          }
+        },
+        "filter": {
+          "and": [
+            {
+              "or": [
+                {
+                  "dimensions": {
+                    "name": "ResourceLocation",
+                    "operator": "In",
+                    "values": [
+                      "East US",
+                      "West Europe"
+                    ]
+                  }
+                },
+                {
+                  "tags": {
+                    "name": "Environment",
+                    "operator": "In",
+                    "values": [
+                      "UAT",
+                      "Prod"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "dimensions": {
+                "name": "ResourceGroup",
+                "operator": "In",
+                "values": [
+                  "API"
+                ]
+              }
+            }
+          ]
+        },
+        "granularity": "Daily"
+      },
+      "timePeriod": {
+        "from": "2022-08-01T00:00:00+00:00",
+        "to": "2022-08-31T23:59:59+00:00"
+      },
+      "timeframe": "Custom"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+        "type": "Microsoft.CostManagement/query",
+        "id": "/providers/Microsoft.CostManagement/externalBillingAccounts/100/query/6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+        "properties": {
+          "columns": [
+            {
+              "name": "PreTaxCost",
+              "type": "Number"
+            },
+            {
+              "name": "CostStatus",
+              "type": "String"
+            },
+            {
+              "name": "Currency",
+              "type": "String"
+            }
+          ],
+          "nextLink": null,
+          "rows": [
+            [
+              0,
+              "Forecast",
+              "USD"
+            ],
+            [
+              30.2572751438,
+              "Forecast",
+              "USD"
+            ],
+            [
+              0.07675760200000002,
+              "Forecast",
+              "USD"
+            ],
+            [
+              50.43096419040001,
+              "Forecast",
+              "USD"
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Forecast_ExternalCloudProviderUsage",
+  "title": "ExternalBillingAccountForecast"
+}

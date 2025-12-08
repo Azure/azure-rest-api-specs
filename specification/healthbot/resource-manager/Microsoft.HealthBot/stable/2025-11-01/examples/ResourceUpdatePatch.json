@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "botName": "samplebotname",
+    "identity": {
+      "type": "SystemAssigned, UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
+        "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
+      }
+    },
+    "parameters": {
+      "sku": {
+        "name": "F0"
+      }
+    },
+    "resourceGroupName": "healthbotClient",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "samplebotname",
+        "type": "Microsoft.HealthBot/healthBots",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname",
+        "identity": {
+          "type": "SystemAssigned, UserAssigned",
+          "principalId": "principalId",
+          "tenantId": "tenantId",
+          "userAssignedIdentities": {
+            "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi": {},
+            "/subscriptions/subscription-id/resourcegroups/myrg/providers/microsoft.managedidentity/userassignedidentities/my-mi2": {}
+          }
+        },
+        "location": "East US",
+        "properties": {
+          "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/contoso"
+        },
+        "sku": {
+          "name": "F0"
+        },
+        "systemData": {
+          "createdAt": "2020-05-05T17:18:19.1234567Z",
+          "createdBy": "jack@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z",
+          "lastModifiedBy": "ryan@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "samplebotname",
+        "type": "Microsoft.HealthBot/healthBots",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.HealthBot/healthBots/samplebotname",
+        "location": "East US",
+        "properties": {
+          "botManagementPortalLink": "https://us.healthbot.microsoft.com/account/contoso"
+        },
+        "sku": {
+          "name": "F0"
+        },
+        "systemData": {
+          "createdAt": "2020-05-05T17:18:19.1234567Z",
+          "createdBy": "jack@outlook.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-05-06T17:18:19.1234567Z",
+          "lastModifiedBy": "ryan@outlook.com",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Healthbot/locations/eastus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2025-11-01"
+      }
+    }
+  },
+  "operationId": "Bots_Update",
+  "title": "BotUpdate"
+}

@@ -97,7 +97,7 @@ namespace Language.ConversationsClientCustomizations;
 
 @@clientName(Conversation, "ConversationInput");
 
-@@clientName(ConversationPiiCategories.USSocialSecurityNumber,
+@@clientName(ConversationPiiCategoriesExclude.USSocialSecurityNumber,
   "UsSocialSecurityNumber"
 );
 @@clientName(ConversationPiiCategoriesExclude,

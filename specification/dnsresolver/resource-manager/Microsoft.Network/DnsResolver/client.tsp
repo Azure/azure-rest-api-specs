@@ -4,8 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Network;
 
-@@clientName(Microsoft.Network, "DnsResolverManagementClient", "javascript");
-
+@@clientName(Microsoft.Network,
+  "DnsResolverManagementClient",
+  "javascript, python"
+);
 @@clientName(ProvisioningState, "DnsResolverProvisioningState", "csharp");
 @@clientName(ForwardingRule, "DnsForwardingRule", "csharp");
 @@clientName(ForwardingRuleState, "DnsForwardingRuleState", "csharp");

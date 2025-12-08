@@ -331,6 +331,10 @@ union RunStatus {
 
   @doc("Represents a run that expired before it could otherwise finish.")
   expired: "expired",
+
+  @doc("Represents a run that cannot be completed due to safety guardrails.")
+  @added(Versions.v2025_05_15_preview)
+  incomplete: "incomplete",
 }
 
 @discriminator("type")

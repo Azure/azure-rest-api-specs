@@ -92,6 +92,19 @@ union KeyType {
 }
 
 /**
+ * The workspace type.
+ */
+union WorkspaceKind {
+  string,
+
+  /** The workspace is a general-purpose workspace. */
+  V1: "V1",
+
+  /** The workspace is a V2 workspace. */
+  V2: "V2",
+}
+
+/**
  * The response of a list Providers operation.
  */
 model OfferingsListResult is Azure.Core.Page<ProviderDescription>;
@@ -238,6 +251,30 @@ model TargetDescription {
    * List of content encodings accepted by this target.
    */
   acceptedContentEncodings?: string[];
+
+  /**
+   * The qubit number
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(100000)
+  numQubits?: int32;
+
+  /**
+   * Target QIR profile
+   */
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  targetProfile?: string;
+
+  /**
+   * The metadata of this target.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Approved by ARM API review for metadata property."
+  @added(Versions.v2025_11_01_preview)
+  @visibility(Lifecycle.Read)
+  metadata?: Record<unknown>;
 }
 
 /**
@@ -394,6 +431,12 @@ model WorkspaceResourceProperties {
   storageAccount?: StorageAccountResourceId;
 
   /**
+   * Whether this workspace is V1 or V2.
+   */
+  @added(Versions.v2025_11_01_preview)
+  workspaceKind?: WorkspaceKind;
+
+  /**
    * The URI of the workspace endpoint.
    */
   @visibility(Lifecycle.Read)
@@ -533,6 +576,7 @@ model ApiKey {
   /**
    * The Api key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   key?: string;
 }

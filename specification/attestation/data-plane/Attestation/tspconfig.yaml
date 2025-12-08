@@ -1,0 +1,43 @@
+parameters:
+  "service-dir":
+    default: "sdk/attestation"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/attestation.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-attestation"
+    package-name: "azure-security-attestation"
+    package-pprint-name: "Attestation"
+    namespace: "azure.security.attestation"
+    package-version: "1.1.0"
+    flavor: "azure"
+    generate-test: false
+    generate-sample: false
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Security.Attestation"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-attestation"
+    namespace: "com.azure.security.attestation"
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/attestation"
+    flavor: "azure"
+    generate-metadata: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/attestation"
+      description: "Azure Attestation"

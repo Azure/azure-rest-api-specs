@@ -113,6 +113,7 @@ model GenerateSecretString {
   @doc("Specifies whether to exclude uppercase letters from the password. If you don't include this switch, the password can contain uppercase letters.")
   excludeUppercase?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The JSON key name for the key/value pair, where the value is the generated password. This pair is added to the JSON structure specified by the ``SecretStringTemplate`` parameter. If you specify this parameter, then you must also specify ``SecretStringTemplate``.")
   generateStringKey?: string;
 

@@ -3,7 +3,6 @@ namespace Microsoft.AVS;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 
 @armResourceOperations
@@ -64,6 +63,7 @@ model HcxEnterpriseSiteProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: HcxEnterpriseSiteProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The activation key")
   @visibility(Lifecycle.Read)
   activationKey?: string;

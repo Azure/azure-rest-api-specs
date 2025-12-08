@@ -612,9 +612,9 @@ model AutonomousDatabaseUpdate
     AutonomousDatabase,
     "Name" | "name" | "properties"
   >>> {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AutonomousDatabaseUpdateProperties;
 }
 

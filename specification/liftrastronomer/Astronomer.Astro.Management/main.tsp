@@ -1,4 +1,5 @@
 import "./LiftrBase.Data/main.tsp";
+import "./back-compatible.tsp";
 
 import "@typespec/rest";
 import "@typespec/versioning";

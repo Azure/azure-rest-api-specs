@@ -120,7 +120,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Server"
         }
       },
       "patch": {
@@ -205,7 +206,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Server"
         }
       },
       "delete": {
@@ -1054,6 +1056,11 @@
           "$ref": "#/definitions/DataEncryption",
           "default": null,
           "description": "Data encryption properties of a server."
+        },
+        "availabilityZone": {
+          "type": "string",
+          "default": "",
+          "description": "Availability zone of a server."
         },
         "createMode": {
           "type": "string",

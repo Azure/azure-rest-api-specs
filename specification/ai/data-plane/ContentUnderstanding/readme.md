@@ -4,29 +4,22 @@
 
 Configuration for generating Content Understanding SDK.
 
-The current release is `2025-05-01-preview`.
+The current release is `2025-11-01`.
 
 ``` yaml
 
-tag: 2025-05-01-preview
+tag: 2025-11-01
 add-credentials: true
 openapi-type: data-plane
 ```
 
 # Releases
 
-### Release 2025-05-01-preview
-These settings apply only when `--tag=2024-12-01-preview` is specified on the command line.
-``` yaml $(tag) == '2025-05-01-preview'
+### Release 2025-11-01
+These settings apply only when `--tag=2025-11-01` is specified on the command line.
+``` yaml $(tag) == '2025-11-01'
 input-file:
-  - preview/2025-05-01-preview/ContentUnderstanding.json
-```
-
-### Release 2024-12-01-preview
-These settings apply only when `--tag=2024-12-01-preview` is specified on the command line.
-``` yaml $(tag) == '2024-12-01-preview'
-input-file:
-  - preview/2024-12-01-preview/ContentUnderstanding.json
+  - stable/2025-11-01/ContentUnderstanding.json
 ```
 
 # Code Generation
@@ -45,7 +38,7 @@ swagger-to-sdk: []
 suppressions:
   - code: EnumMustHaveType
     from: ContentUnderstanding.json
-    where: $.definitions.FieldDefinition.properties
+    where: $.definitions.ContentFieldDefinition.properties
     reason: False alert.  'enum' is a custom property name here, not the Swagger property
   - code: AvoidAnonymousTypes
     from: ContentUnderstanding.json

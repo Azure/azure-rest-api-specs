@@ -1,4 +1,5 @@
 import "./LiftrBase.Storage/main.tsp";
+import "./back-compatible.tsp";
 import "@typespec/openapi";
 
 @armProviderNamespace
@@ -244,6 +245,7 @@ model AzureVmwareService {
   @doc("Azure resource ID of the AVS SDDC the storage pool is connected to")
   sddcResourceId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @removed(Versions.v1_preview)
   @doc("Immutable identifier for the vSpherePlugin provided by Pure Storage. The value is available if the vSpherePlugin has been enabled for the storage pool.")
   vSpherePluginKey?: string;

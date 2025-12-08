@@ -170,6 +170,7 @@ model AwsRedshiftClusterProperties {
   @doc("The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.")
   masterPasswordSecretKmsKeyId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The password associated with the master user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Password must be between 8 and 64 characters in length, should have at least one uppercase letter.Must contain at least one lowercase letter.Must contain one number.Can be any printable ASCII character.")
   masterUserPassword?: string;
 

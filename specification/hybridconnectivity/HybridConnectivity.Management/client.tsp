@@ -90,7 +90,10 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(EndpointResources, "Endpoints", "javascript");
 
-@@clientName(Microsoft.HybridConnectivity, "HybridConnectivityMgmt", "python");
+@@clientName(Microsoft.HybridConnectivity,
+  "HybridConnectivityMgmtClient",
+  "python"
+);
 @@alternateType(AADProfileProperties.serverId, uuid, "csharp");
 @@alternateType(AADProfileProperties.tenantId, uuid, "csharp");
 @@clientName(InventoryResource, "PublicCloudInventory", "csharp");

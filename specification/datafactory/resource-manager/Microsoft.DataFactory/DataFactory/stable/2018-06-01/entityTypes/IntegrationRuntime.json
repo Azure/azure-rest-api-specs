@@ -94,6 +94,36 @@
         "customerVirtualNetwork": {
           "description": "The name of virtual network to which Azure-SSIS integration runtime will join",
           "$ref": "#/definitions/IntegrationRuntimeCustomerVirtualNetwork"
+        },
+        "interactiveQuery": {
+          "description": "Interactive authoring capability reference.",
+          "$ref": "#/definitions/InteractiveQueryProperties"
+        }
+      }
+    },
+    "InteractiveQueryProperties": {
+      "description": "Interactive authoring capability type properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The interactive authoring capability status. Must be one of InteractiveCapabilityStatus. The default value is 'Enabling'.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InteractiveCapabilityStatus",
+            "modelAsString": true
+          }
+        },
+        "autoTerminationMinutes": {
+          "description": "The allowed idle time for interactive authoring.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },

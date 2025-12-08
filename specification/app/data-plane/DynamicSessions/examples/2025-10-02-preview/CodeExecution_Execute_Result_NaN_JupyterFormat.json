@@ -1,0 +1,36 @@
+{
+  "title": "CodeExecution_Execute_Result_NaN_JupyterFormat",
+  "operationId": "CodeExecution_Execute",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "identifier": "testSessionIdentifier",
+    "codeExecutionRequest": {
+      "codeInputType": "Inline",
+      "executionType": "Synchronous",
+      "code": "a = float('nan');a",
+      "timeoutInSeconds": 60,
+      "outputStreamsMaxLength": 4096,
+      "returnJupyterFormatExecutionResult": true
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "operation-id": "testExecutionId",
+        "Operation-Location": "operation-location-uri"
+      },
+      "body": {
+        "id": "testExecutionId",
+        "identifier": "testSessionIdentifier",
+        "executionType": "Synchronous",
+        "status": "Succeeded",
+        "result": {
+          "stdout": "",
+          "stderr": "",
+          "executionResult": "nan",
+          "executionTimeInMilliseconds": 4
+        }
+      }
+    }
+  }
+}

@@ -650,6 +650,7 @@ model SignalRProperties {
    * When it's Enabled, network ACLs still apply.
    * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "Enabled";
 
   /**
@@ -1334,8 +1335,8 @@ model PrivateLinkResource
   /**
    * Private link resource properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateLinkResourceProperties;
 }
 

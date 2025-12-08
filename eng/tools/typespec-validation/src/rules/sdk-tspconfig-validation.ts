@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Enable eslint, fix errors
+
 import { join } from "path";
 import { Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
@@ -250,7 +253,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
   folder: string,
 ): SkipResult {
   const isRLCClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === false;
   const shouldSkip = isManagementSdk(folder) || isRLCClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
@@ -262,7 +265,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
 
 function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
   const isModularClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== false;
   const shouldSkip = isManagementSdk(folder) || isModularClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
@@ -410,7 +413,12 @@ export class TspConfigGoModuleMatchPatternSubRule extends TspconfigEmitterOption
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (module === undefined) return { success: true };
     return super.validate(config);
   }
@@ -427,7 +435,12 @@ export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmi
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (containingModule === undefined) return { success: true };
     return super.validate(config);
   }

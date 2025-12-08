@@ -206,6 +206,7 @@ model AuthenticateOidcConfig {
   @doc("The OAuth 2.0 client identifier.")
   clientId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.")
   clientSecret?: string;
 

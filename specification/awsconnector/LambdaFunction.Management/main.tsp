@@ -172,6 +172,7 @@ model Code {
   @doc("An Amazon S3 bucket in the same AWS-Region as your function. The bucket can be in a different AWS-account.")
   s3Bucket?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The Amazon S3 key of the deployment package.")
   s3Key?: string;
 

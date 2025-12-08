@@ -3,12 +3,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./models/datalakeconnector.tsp";
 import "./models/diagnosticservice.tsp";
 import "./models/mqttbroker.tsp";
 import "./models/mqttbridgeconnector.tsp";
 import "./models/kafkaconnector.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

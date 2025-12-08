@@ -57,8 +57,8 @@ interface Secrets {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<Secret>
     >,
     SecretCreateOrUpdateParameters,
-    Secret | ArmResourceCreatedResponse<Secret>,
-    CloudError
+    Response = ArmResponse<Secret> | ArmResourceCreatedSyncResponse<Secret>,
+    ErrorResponse = CloudError
   >;
 
   /**

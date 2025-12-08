@@ -21,3 +21,4 @@ namespace Microsoft.Kubernetes;
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@clientName(Microsoft.Kubernetes, "ConnectedKubernetesClient", "javascript");

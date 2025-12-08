@@ -6,7 +6,7 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-@@clientName(Microsoft.Compute, "RecommenderMgmt", "python");
+@@clientName(Microsoft.Compute, "RecommenderMgmtClient", "python");
 @@clientName(Microsoft.Compute,
   "ComputeRecommenderManagementClient",
   "javascript"

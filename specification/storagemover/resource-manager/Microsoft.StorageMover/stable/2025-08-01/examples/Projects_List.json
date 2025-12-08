@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/Microsoft.StorageMover/storageMovers/projects?$skiptoken=fake-continue-token",
+        "value": [
+          {
+            "name": "examples-projectName1",
+            "type": "Microsoft.StorageMover/storageMovers/projects",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName1",
+            "properties": {
+              "description": "Example Project 1 Description"
+            }
+          },
+          {
+            "name": "examples-projectName2",
+            "type": "Microsoft.StorageMover/storageMovers/projects",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName2",
+            "properties": {
+              "description": "Example Project 2 Description"
+            }
+          },
+          {
+            "name": "examples-projectName3",
+            "type": "Microsoft.StorageMover/storageMovers/projects",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName2",
+            "properties": {
+              "description": "Example Project 3 Description"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Projects_List",
+  "title": "Projects_List"
+}

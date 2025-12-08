@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "scope": "providers/Microsoft.Billing/billingAccounts/{acctId}",
+    "api-version": "2025-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/providers/microsoft.billingbenefits/applicableConditionalCredits/C20251028000000000000",
+            "name": "C20251028000000000000",
+            "type": "Microsoft.BillingBenefits/applicableConditionalCredits",
+            "properties": {
+              "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/conditionalcredits/testprimaryconditionalcredit",
+              "entityType": "Primary",
+              "displayName": "Conditional Credit 20250801",
+              "systemId": "C20251028000000000000",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+              "startAt": "2025-07-01T00:00:00Z",
+              "endAt": "2026-03-31T23:59:59Z",
+              "allowContributors": "Enabled",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
+              "provisioningState": "Succeeded",
+              "status": "Active",
+              "milestones": [
+                {
+                  "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+                  "name": "Q1 Milestone",
+                  "status": "Completed",
+                  "endAt": "2025-10-01T00:00:00Z",
+                  "spendTarget": {
+                    "amount": 50000,
+                    "currencyCode": "USD"
+                  },
+                  "award": {
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 5000,
+                      "currencyCode": "USD"
+                    },
+                    "startAt": "2025-10-01T00:00:00Z",
+                    "endAt": "2025-12-31T23:59:59Z",
+                    "balanceVersion": 13,
+                    "systemId": "credit98765432"
+                  }
+                },
+                {
+                  "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
+                  "name": "Q2 Milestone",
+                  "status": "Active",
+                  "endAt": "2026-03-31T23:59:59Z",
+                  "spendTarget": {
+                    "amount": 100000,
+                    "currencyCode": "USD"
+                  },
+                  "award": {
+                    "duration": "P3M",
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 10000,
+                      "currencyCode": "USD"
+                    }
+                  }
+                }
+              ]
+            },
+            "location": "global",
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "systemData": {
+              "createdByType": "User",
+              "createdAt": "2025-09-01T01:01:01.1075056Z",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-01T01:01:01.1075056Z"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28/providers/microsoft.billingbenefits/applicableConditionalCredits/C20251028000000000000",
+            "name": "C20251028000000000000",
+            "type": "Microsoft.BillingBenefits/conditionalCredits",
+            "properties": {
+              "benefitResourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/conditionalcredits/testprimaryconditionalcredit2",
+              "entityType": "Contributor",
+              "displayName": "Conditional Credit 20250802",
+              "systemId": "C20251028000000000000",
+              "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+              "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+              "startAt": "2026-04-01T00:00:00Z",
+              "endAt": "2026-07-31T23:59:59Z",
+              "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:11111111-1111-1111-1111-111111111111_2025-10-28",
+              "provisioningState": "Succeeded",
+              "status": "Active",
+              "milestones": [
+                {
+                  "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
+                  "name": "Q3 Milestone",
+                  "status": "Active",
+                  "endAt": "2026-07-31T23:59:59Z",
+                  "spendTarget": {
+                    "amount": 75000,
+                    "currencyCode": "USD"
+                  },
+                  "award": {
+                    "duration": "P3M",
+                    "credit": {
+                      "grain": "FullTerm",
+                      "amount": 7500,
+                      "currencyCode": "USD"
+                    }
+                  }
+                }
+              ],
+              "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/000187f7-0000-0260-ab43-b8473ce57f1d:11111111-1111-1111-1111-111111111111_2025-10-28"
+            },
+            "location": "global",
+            "tags": {
+              "key3": "value3"
+            },
+            "systemData": {
+              "createdByType": "User",
+              "createdAt": "2025-09-02T01:01:01.1075056Z",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-02T01:01:01.1075056Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

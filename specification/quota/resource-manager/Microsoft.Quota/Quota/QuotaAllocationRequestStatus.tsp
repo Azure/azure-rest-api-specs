@@ -13,9 +13,8 @@ namespace Microsoft.Quota;
 /**
  * The subscription quota allocation status.
  */
-@tenantResource
 model QuotaAllocationRequestStatus
-  is Azure.ResourceManager.ProxyResource<QuotaAllocationRequestStatusProperties> {
+  is Azure.ResourceManager.ExtensionResource<QuotaAllocationRequestStatusProperties> {
   ...ResourceNameParameter<
     Resource = QuotaAllocationRequestStatus,
     KeyName = "allocationId",

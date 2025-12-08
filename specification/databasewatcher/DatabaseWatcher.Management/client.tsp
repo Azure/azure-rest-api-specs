@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DatabaseWatcher;
 
-@@clientName(Microsoft.DatabaseWatcher, "DatabaseWatcherMgmt", "python");
+@@clientName(Microsoft.DatabaseWatcher, "DatabaseWatcherMgmtClient", "python");
 @@clientName(Microsoft.DatabaseWatcher,
   "DatabaseWatcherManagementClient",
   "java"
@@ -56,6 +56,10 @@ using Microsoft.DatabaseWatcher;
 @@clientName(WatcherStatus, "DatabaseWatcherStatus", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "DatabaseWatcherResourceProvisioningState",
+  "csharp"
+);
+@@clientName(alertRuleCreationProperties,
+  "alertRuleCreationProperty",
   "csharp"
 );
 @@alternateType(Datastore.kustoClusterUri, url, "csharp");

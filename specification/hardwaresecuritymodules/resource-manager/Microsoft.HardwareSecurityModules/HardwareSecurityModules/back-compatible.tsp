@@ -31,13 +31,16 @@ using Microsoft.HardwareSecurityModules;
   "!python,!java,!csharp"
 );
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
-  "backupRequestProperties"
+  "backupRequestProperties",
+  "!csharp"
 );
 @@clientName(CloudHsmClusters.backup::parameters.body,
-  "backupRequestProperties"
+  "backupRequestProperties",
+  "!csharp"
 );
 @@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
-  "restoreRequestProperties"
+  "restoreRequestProperties",
+  "!csharp"
 );
 //@@clientLocation and @@clientName decorators for operations that had custom @operationId
 //These ensure consistent operationId generation and client method naming in the output

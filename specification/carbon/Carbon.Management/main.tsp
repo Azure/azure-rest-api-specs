@@ -488,6 +488,7 @@ model CarbonEmissionDataListResult {
   @Azure.ResourceManager.identifiers(#[])
   value: CarbonEmissionData[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
   skipToken?: string;
 

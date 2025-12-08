@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "$filter": "properties/scope eq 'Single' AND properties/lookBackPeriod eq 'Last7Days'",
+    "api-version": "2024-08-01",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2024-08-01&$filter=properties/scope+eq+'Single'+AND+properties/lookBackPeriod+eq+'Last7Days'&$skiptoken=AQAAAA%3D%3D&",
+        "value": [
+          {
+            "name": "reservationRecommendations1",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations1",
+            "kind": "legacy",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": 0,
+              "firstUsageDate": "2018-03-06T00:00:00Z",
+              "lastUsageDate": "2018-03-15T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 4.634521202630137,
+              "recommendedQuantity": 1,
+              "scope": "Single",
+              "skuProperties": [
+                {
+                  "name": "Cores",
+                  "value": "1"
+                },
+                {
+                  "name": "Ram",
+                  "value": "1"
+                }
+              ],
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "term": "P1Y",
+              "totalCostWithReservedInstances": 0,
+              "totalHours": 527
+            },
+            "sku": "Standard_DS1_v2"
+          },
+          {
+            "name": "reservationRecommendations2",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations/reservationRecommendations2",
+            "kind": "legacy",
+            "location": "northeurope",
+            "properties": {
+              "costWithNoReservedInstances": 0,
+              "firstUsageDate": "2018-03-06T00:00:00Z",
+              "lastUsageDate": "2018-03-08T00:00:00Z",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 7.289315723178081,
+              "recommendedQuantity": 1,
+              "scope": "Single",
+              "skuProperties": [
+                {
+                  "name": "SkuDisplayName",
+                  "value": "B"
+                },
+                {
+                  "name": "CPU",
+                  "value": "1"
+                }
+              ],
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "term": "P3Y",
+              "totalCostWithReservedInstances": 0,
+              "totalHours": 427
+            },
+            "sku": "Standard_DS1_v2"
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ReservationRecommendations_List",
+  "title": "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy"
+}

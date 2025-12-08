@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-01
+tag: package-preview-2025-12-01-preview
 
 directive:
   - from: edgeDevices.json
@@ -97,6 +97,7 @@ suppressions:
       - arcSettings.json
       - clusters.json
       - extensions.json
+      - hci.json
       - operations.json
       - offers.json
       - publishers.json
@@ -236,6 +237,54 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-preview-2025-12-01-preview
+
+These settings apply only when `--tag=package-preview-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-12-01-preview'
+input-file:
+  - preview/2025-12-01-preview/arcSettings.json
+  - preview/2025-12-01-preview/clusters.json
+  - preview/2025-12-01-preview/deploymentSettings.json
+  - preview/2025-12-01-preview/edgeDeviceJobs.json
+  - preview/2025-12-01-preview/edgeDevices.json
+  - preview/2025-12-01-preview/extensions.json
+  - preview/2025-12-01-preview/hciCommon.json
+  - preview/2025-12-01-preview/offers.json
+  - preview/2025-12-01-preview/publishers.json
+  - preview/2025-12-01-preview/securitySettings.json
+  - preview/2025-12-01-preview/skus.json
+  - preview/2025-12-01-preview/updateRuns.json
+  - preview/2025-12-01-preview/updates.json
+  - preview/2025-12-01-preview/updateSummaries.json
+  - preview/2025-12-01-preview/validatedSolutionRecipes.json
+  - preview/2025-12-01-preview/hci.json
+```
+
+### Tag: package-preview-2025-11-01-preview
+
+These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/arcSettings.json
+  - preview/2025-11-01-preview/clusters.json
+  - preview/2025-11-01-preview/deploymentSettings.json
+  - preview/2025-11-01-preview/edgeDeviceJobs.json
+  - preview/2025-11-01-preview/edgeDevices.json
+  - preview/2025-11-01-preview/extensions.json
+  - preview/2025-11-01-preview/hciCommon.json
+  - preview/2025-11-01-preview/offers.json
+  - preview/2025-11-01-preview/publishers.json
+  - preview/2025-11-01-preview/securitySettings.json
+  - preview/2025-11-01-preview/skus.json
+  - preview/2025-11-01-preview/updateRuns.json
+  - preview/2025-11-01-preview/updates.json
+  - preview/2025-11-01-preview/updateSummaries.json
+  - preview/2025-11-01-preview/validatedSolutionRecipes.json
+  - preview/2025-11-01-preview/hci.json
 ```
 
 ### Tag: package-2025-10-01

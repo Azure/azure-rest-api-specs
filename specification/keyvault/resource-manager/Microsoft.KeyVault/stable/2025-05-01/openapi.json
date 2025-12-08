@@ -2613,7 +2613,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Secret"
             }
@@ -2622,13 +2622,6 @@
             "description": "Resource 'Secret' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Secret"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {

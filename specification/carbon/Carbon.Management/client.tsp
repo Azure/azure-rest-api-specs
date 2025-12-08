@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.Carbon;
 
-@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
+@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmtClient", "python");
 @@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
 
 // CSharp
@@ -66,7 +66,7 @@ using Microsoft.Carbon;
   "ResourceGroupCarbonEmissionTopItemMonthlySummary",
   "csharp"
 );
-@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmt", "python");
+@@clientName(Microsoft.Carbon, "CarbonOptimizationMgmtClient", "python");
 @@clientName(Microsoft.Carbon, "CarbonOptimizationManagementClient", "java");
 @@clientName(Microsoft.Carbon,
   "CarbonOptimizationManagementClient",

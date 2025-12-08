@@ -40,13 +40,14 @@ options:
     package-details:
       name: "@azure/eventgrid-systemevents"
     flavor: azure
-    is-modular-library: true
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azsystemevents"
     service-dir: "sdk/messaging/eventgrid"
     emitter-output-dir: "{output-dir}/{service-dir}/azsystemevents"
     slice-elements-byval: true
     flavor: "azure"
+    # executes any go:generate commands in build.go, which generates the system events enumeration.
+    go-generate: build.go
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-systemevents"
     namespace: com.azure.messaging.eventgrid.systemevents

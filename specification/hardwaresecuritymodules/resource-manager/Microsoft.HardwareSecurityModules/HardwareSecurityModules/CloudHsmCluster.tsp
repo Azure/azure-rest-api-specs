@@ -7,7 +7,6 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.HardwareSecurityModules;
 /**
@@ -36,7 +35,27 @@ model CloudHsmCluster
   sku?: CloudHsmClusterSku;
 }
 
-@armResourceOperations
+alias CloudHsmClustersOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /** The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 23 characters in length. */
+    @path
+    @segment("cloudHsmClusters")
+    @minLength(3)
+    @maxLength(23)
+    @pattern("^[a-zA-Z0-9-]{3,23}$")
+    cloudHsmClusterName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface CloudHsmClusters {
   /**
    * Gets the specified Cloud HSM Cluster
@@ -166,71 +185,51 @@ interface CloudHsmClusters {
   /**
    * Gets the backup operation status of the specified Cloud HSM Cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/backupOperationStatus/{jobId}")
   @get
-  cloudHsmClusterBackupStatusGet(
-    ...ResourceInstanceParameters<
-      Resource,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
-    >,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @path
-    @segment("cloudHsmClusters")
-    @minLength(3)
-    @maxLength(23)
-    @pattern("^[a-zA-Z0-9-]{3,23}$")
-    cloudHsmClusterName: string,
-
-    /**
-     * Identifier for the backup operation
-     */
-    @path
-    @segment("backupOperationStatus")
-    jobId: string,
-  ): (BackupResult &
-    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-    @header("Location")
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    location?: string;
-  } & Azure.Core.RequestIdResponseHeader> | ErrorResponse;
+  cloudHsmClusterBackupStatusGet is CloudHsmClustersOps.ActionSync<
+    CloudHsmCluster,
+    void,
+    Response = (BackupResult &
+      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+    } & Azure.Core.RequestIdResponseHeader>,
+    Parameters = {
+      /**
+       * Identifier for the backup operation
+       */
+      @path
+      @key
+      jobId: string;
+    },
+    OverrideErrorType = ErrorResponse
+  >;
   /**
    * Gets the restore operation status of the specified Cloud HSM Cluster
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restoreOperationStatus/{jobId}")
   @get
-  cloudHsmClusterRestoreStatusGet(
-    ...ResourceInstanceParameters<
-      Resource,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<CloudHsmCluster>
-    >,
-
-    /**
-     * Name of the Cloud HSM Cluster
-     */
-    @path
-    @segment("cloudHsmClusters")
-    @minLength(3)
-    @maxLength(23)
-    @pattern("^[a-zA-Z0-9-]{3,23}$")
-    cloudHsmClusterName: string,
-
-    /**
-     * Identifier for the restore operation
-     */
-    @path
-    @segment("restoreOperationStatus")
-    jobId: string,
-  ): (RestoreResult &
-    Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
-    @header("Location")
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    location?: string;
-  } & Azure.Core.RequestIdResponseHeader> | ErrorResponse;
+  cloudHsmClusterRestoreStatusGet is CloudHsmClustersOps.ActionSync<
+    CloudHsmCluster,
+    void,
+    Response = (RestoreResult &
+      Azure.Core.RequestIdResponseHeader) | ArmAcceptedResponse<ExtraHeaders = {
+      @header("Location")
+      @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+      location?: string;
+    } & Azure.Core.RequestIdResponseHeader>,
+    Parameters = {
+      /**
+       * Identifier for the restore operation
+       */
+      @path
+      @key
+      jobId: string;
+    },
+    OverrideErrorType = ErrorResponse
+  >;
 }
 
 @@maxLength(CloudHsmCluster.name, 23);

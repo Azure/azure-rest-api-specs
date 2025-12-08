@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/netapp"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/netapp.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-netapp"
+    namespace: "azure.mgmt.netapp"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-netapp"
+    namespace: "com.azure.resourcemanager.netapp"
+    service-name: "NetAppFiles"
+    flavor: azure
+    float32-as-double: false
+    client-side-validations: true
+    uuid-as-string: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-netapp"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-netapp"
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/armnetapp"
+    service-dir: "sdk/resourcemanager/netapp"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetapp/v8"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

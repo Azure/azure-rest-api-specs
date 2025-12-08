@@ -12,6 +12,8 @@ package-name: azure-mgmt-datadog
 namespace: azure.mgmt.datadog
 package-version: 1.0.0b1
 clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true # !!temporary!! to solve the duplicate schema issue of ErrorResponse in common-type
 ```
 
 ``` yaml $(python)
