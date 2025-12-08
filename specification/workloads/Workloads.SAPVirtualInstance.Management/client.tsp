@@ -91,7 +91,6 @@ using Microsoft.Workloads;
 @@clientName(SAPCentralServerInstance, "SapCentralServerInstance", "java");
 @@clientName(SAPDatabaseInstance, "SapDatabaseInstance", "java");
 @@clientName(SAPVirtualInstance, "SapVirtualInstance", "java");
-@@clientName(SAPVirtualInstanceMetadata, "SapVirtualInstanceMetadata", "java");
 @@clientName(UpdateSAPVirtualInstanceRequest,
   "UpdateSapVirtualInstanceRequest",
   "java"
@@ -216,10 +215,6 @@ using Microsoft.Workloads;
 @@clientName(SAPCentralServerInstance, "SapCentralServerInstance", "csharp");
 @@clientName(SAPDatabaseInstance, "SapDatabaseInstance", "csharp");
 @@clientName(SAPVirtualInstance, "SapVirtualInstance", "csharp");
-@@clientName(SAPVirtualInstanceMetadata,
-  "SapVirtualInstanceMetadata",
-  "csharp"
-);
 @@clientName(UpdateSAPVirtualInstanceRequest,
   "UpdateSapVirtualInstanceRequest",
   "csharp"
