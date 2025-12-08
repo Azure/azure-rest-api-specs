@@ -1025,8 +1025,8 @@ model DiskUpdate {
   /**
    * Disk resource update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DiskUpdateProperties;
 
   /**
@@ -1321,8 +1321,8 @@ model PrivateLinkResource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateLinkResourceProperties;
 
   /**
@@ -1485,8 +1485,8 @@ model DiskEncryptionSetUpdate {
   /**
    * disk encryption set resource update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DiskEncryptionSetUpdateProperties;
 
   /**
@@ -1529,12 +1529,11 @@ model DiskEncryptionSetUpdateProperties {
 /**
  * FIXME: Custom Page for string
  */
-@Azure.Core.pagedResult
 @friendlyName("Paged{name}", Resource)
 @doc("Paged collection of string items")
 model CustomPage<Resource extends string> {
   @doc("The items on this page")
-  @Azure.Core.items
+  @pageItems
   value: Resource[];
 
   @doc("The link to the next page of items")
@@ -1861,8 +1860,8 @@ model SnapshotUpdate {
   /**
    * Snapshot resource update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SnapshotUpdateProperties;
 
   /**

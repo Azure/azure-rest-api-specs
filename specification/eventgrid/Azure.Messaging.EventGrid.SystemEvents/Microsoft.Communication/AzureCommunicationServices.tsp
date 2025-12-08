@@ -144,6 +144,9 @@ model AcsChatMessageDeletedInThreadEventData
 model AcsChatThreadCreatedWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadCreatedExample)
@@ -152,6 +155,9 @@ model AcsChatThreadCreatedWithUserEventData
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
@@ -168,6 +174,9 @@ model AcsChatThreadWithUserDeletedEventData
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
+
+  /** The chat thread deletion reason. */
+  reason?: AcsChatThreadDeletedReasonType;
 }
 
 // @example(MicrosoftCommunicationChatThreadPropertiesUpdatedPerUserExample)
@@ -183,11 +192,15 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   editTime: utcDateTime;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties: Record<unknown>;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -196,6 +209,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadPropertiesBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -644,15 +660,19 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Accepted Worker Labels */
+  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Accepted Worker Tags */
+  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Accepted Job Labels */
+  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Accepted Job Tags */
+  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -692,6 +712,7 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Issued Worker Labels */
+  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Issued Time in UTC */
@@ -705,12 +726,15 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   expiresOn: utcDateTime;
 
   /** Router Worker Offer Issued Worker Tags */
+  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Issued Job Labels */
+  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Issued Job Tags */
+  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -743,9 +767,11 @@ model AcsRouterWorkerRegisteredEventData {
   totalCapacity?: int32;
 
   /** Router Worker Registered Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Registered Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -757,9 +783,11 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   queueId?: string;
 
   /** Router Job events Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Jobs events Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -804,6 +832,7 @@ model AcsRouterQueueDetails {
   name?: string;
 
   /** Router Queue Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 }
 
@@ -856,6 +885,7 @@ alias AcsChatMessageBaseEventData = {
   messageBody: string;
 
   /** The chat message metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 };
 
@@ -868,6 +898,7 @@ alias AcsChatThreadBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
@@ -897,6 +928,7 @@ alias AcsChatThreadPropertiesBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
+  @visibility(Lifecycle.Read)
   metadata: Record<string>;
 };
 
@@ -1204,6 +1236,7 @@ model AcsChatThreadParticipantProperties {
   participantCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The metadata of the user */
+  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 }
 
@@ -1265,9 +1298,11 @@ model AcsRecordingChunkInfoProperties {
 /** Custom Context of Incoming Call */
 model AcsIncomingCallCustomContext {
   /** Sip Headers for incoming call */
+  @visibility(Lifecycle.Read)
   sipHeaders: Record<string>;
 
   /** Voip Headers for incoming call */
+  @visibility(Lifecycle.Read)
   voipHeaders: Record<string>;
 }
 
@@ -1376,9 +1411,11 @@ model AcsRouterWorkerUpdatedEventData {
   totalCapacity?: int32;
 
   /** Router Worker Updated Labels */
+  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Updated Tags */
+  @visibility(Lifecycle.Read)
   tags: Record<string>;
 
   /** Router Worker Properties Updated */
@@ -1539,6 +1576,15 @@ model AcsMessageChannelEventError {
   channelMessage?: string;
 }
 
+/** Schema of common properties of all chat retention policy */
+model AcsChatRetentionPolicy {
+  /** The chat retention policy kind. */
+  kind?: AcsChatRetentionPolicyKind;
+
+  /** The delete thread after number of days. */
+  deleteThreadAfterDays?: int32;
+}
+
 /** Interactive reply kind */
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
@@ -1549,6 +1595,28 @@ union AcsInteractiveReplyKind {
 
   /** Messaged interactive reply type is Unknown */
   "unknown",
+
+  string,
+}
+
+/** Chat Retention Policy kind */
+union AcsChatRetentionPolicyKind {
+  /** None */
+  "none",
+
+  /** ThreadCreationDate */
+  "threadCreationDate",
+
+  string,
+}
+
+/** Chat Thread Deletion Reason Type */
+union AcsChatThreadDeletedReasonType {
+  /** DeletedByUser */
+  "deletedByUser",
+
+  /** DeletedByPolicy */
+  "deletedByPolicy",
 
   string,
 }

@@ -23,6 +23,7 @@ interface Applications {
     API.
     """)
   @route("/applications")
+  @list
   listApplications is ListOperation<
     {
       ...CommonListParameters;
@@ -68,6 +69,7 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
+  @list
   listPoolUsageMetrics is ListOperation<
     {
       ...CommonListParameters;
@@ -91,8 +93,9 @@ interface Pools {
     {}
   >;
 
-  @summary("Lists all of the Pools which be mounted.")
-  @doc("Lists all of the Pools which be mounted.")
+  @summary("Lists all of the Pools in the specified Account.")
+  @doc("Lists all of the Pools in the specified Account.")
+  @list
   @route("/pools")
   listPools is ListOperation<
     {
@@ -284,6 +287,7 @@ interface Pools {
   >;
 
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
+  @list
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
   listSupportedImages is ListOperation<
@@ -300,6 +304,7 @@ interface Pools {
     use a list query.
     """)
   @route("/nodecounts")
+  @list
   listPoolNodeCounts is ListOperation<
     {
       ...CommonListParameters;
@@ -464,6 +469,7 @@ interface Jobs {
 
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
+  @list
   @route("/jobs")
   listJobs is ListOperation<
     {
@@ -476,6 +482,7 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
+  @list
   listJobsFromSchedule is ListOperation<
     {
       ...CommonListParameters;
@@ -498,6 +505,7 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
+  @list
   listJobPreparationAndReleaseTaskStatus is ListOperation<
     {
       ...CommonListParameters;
@@ -521,90 +529,6 @@ interface Jobs {
       ...GetJobTaskCountsRequiredParameters;
     },
     BatchTaskCountsResult
-  >;
-}
-
-// Certificate Interface
-#suppress "@azure-tools/typespec-azure-core/no-response-body" ""
-#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
-@tag("Certificates")
-interface Certificates {
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Creates a Certificate to the specified Account.")
-  @doc("Creates a Certificate to the specified Account.")
-  @route("/certificates")
-  createCertificate is CreateOperation<
-    {
-      ...CommonJsonParameters;
-      ...CreateCertificateRequiredParameters;
-    },
-    {}
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Lists all of the Certificates that have been added to the specified Account.")
-  @doc("Lists all of the Certificates that have been added to the specified Account.")
-  @route("/certificates")
-  listCertificates is ListOperation<
-    {
-      ...CommonListParameters;
-      ...ListCertificatesOptionalParameters;
-    },
-    BatchCertificateListResult
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Cancels a failed deletion of a Certificate from the specified Account.")
-  @doc("""
-    If you try to delete a Certificate that is being used by a Pool or Compute
-    Node, the status of the Certificate changes to deleteFailed. If you decide that
-    you want to continue using the Certificate, you can use this operation to set
-    the status of the Certificate back to active. If you intend to delete the
-    Certificate, you do not need to run this operation after the deletion failed.
-    You must make sure that the Certificate is not being used by any resources, and
-    then you can try again to delete the Certificate.
-    """)
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
-  cancelCertificateDeletion is PostOperation<
-    {
-      ...CommonParameters;
-      ...CancelCertificateDeletionRequiredParameters;
-    },
-    NoContentSuccessResponseHeaders
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @summary("Deletes a Certificate from the specified Account.")
-  @doc("""
-    You cannot delete a Certificate if a resource (Pool or Compute Node) is using
-    it. Before you can delete a Certificate, you must therefore make sure that the
-    Certificate is not associated with any existing Pools, the Certificate is not
-    installed on any Nodes (even if you remove a Certificate from a Pool, it is not
-    removed from existing Compute Nodes in that Pool until they restart), and no
-    running Tasks depend on the Certificate. If you try to delete a Certificate
-    that is in use, the deletion fails. The Certificate status changes to
-    deleteFailed. You can use Cancel Delete Certificate to set the status back to
-    active if you decide that you want to continue using the Certificate.
-    """)
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  deleteCertificate is DeleteOperation<
-    {
-      ...CommonParameters;
-      ...DeleteCertificateRequiredParameters;
-    },
-    DeleteCertificateResponse
-  >;
-
-  #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
-  @doc("Gets information about the specified Certificate.")
-  @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})")
-  getCertificate is ReadOperation<
-    {
-      ...CommonParameters;
-      ...GetCertificateRequiredParameters;
-      ...GetCertificateOptionalParameters;
-    },
-    BatchCertificate
   >;
 }
 
@@ -746,6 +670,7 @@ interface JobSchedules {
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
+  @list
   listJobSchedules is ListOperation<
     {
       ...CommonListParameters;
@@ -783,6 +708,7 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
+  @list
   listTasks is ListOperation<
     {
       ...CommonListParameters;
@@ -871,6 +797,7 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
+  @list
   listSubTasks is ReadOperation<
     {
       ...CommonParameters;
@@ -957,6 +884,7 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
+  @list
   listTaskFiles is ListOperation<
     {
       ...CommonListParameters;
@@ -1146,6 +1074,7 @@ interface Nodes {
 
   @summary("Lists the Compute Nodes in the specified Pool.")
   @doc("Lists the Compute Nodes in the specified Pool.")
+  @list
   @route("/pools/{poolId}/nodes")
   listNodes is ListOperation<
     {
@@ -1171,6 +1100,7 @@ interface Nodes {
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
+  @list
   listNodeExtensions is ListOperation<
     {
       ...CommonListParameters;
@@ -1218,6 +1148,7 @@ interface Nodes {
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
+  @list
   listNodeFiles is ListOperation<
     {
       ...CommonListParameters;

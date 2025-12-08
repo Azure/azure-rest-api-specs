@@ -1,4 +1,4 @@
-// @ts-check
+/* v8 ignore start */
 
 export const PER_PAGE_MAX = 100;
 

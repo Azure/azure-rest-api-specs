@@ -1,3 +1,5 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+
 /**
  * Represents the input parameters required for spec-gen-sdk command execution.
  */
@@ -9,7 +11,7 @@ export interface SpecGenSdkCmdInput {
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
-  sdkLanguage: string;
+  sdkLanguage: SdkName;
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
@@ -17,14 +19,6 @@ export interface SpecGenSdkCmdInput {
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
   headBranch?: string;
-}
-
-/**
- * Data for the API view request.
- */
-export interface APIViewRequestData {
-  packageName: string;
-  filePath: string;
 }
 
 /*
@@ -37,28 +31,6 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
-
-/**
- * Represents the result of the spec-gen-sdk generation process.
- */
-export interface SpecGenSdkArtifactInfo {
-  language: string;
-  result: string;
-  prNumber?: string;
-  labelAction?: boolean;
-  isSpecGenSdkCheckRequired: boolean;
-  apiViewRequestData: APIViewRequestData[];
-}
-
-/**
- * Represents supported SDK language identifiers.
- */
-export type SdkName =
-  | "azure-sdk-for-go"
-  | "azure-sdk-for-java"
-  | "azure-sdk-for-js"
-  | "azure-sdk-for-net"
-  | "azure-sdk-for-python";
 
 /**
  * Represents the plane types for SDK generation settings
@@ -84,16 +56,16 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
     managementPlane: true,
   },
   "azure-sdk-for-java": {
-    dataPlane: false,
+    dataPlane: true,
     managementPlane: true,
   },
   "azure-sdk-for-js": {
-    dataPlane: false,
+    dataPlane: true,
     managementPlane: true,
   },
   "azure-sdk-for-net": {
     dataPlane: false,
-    managementPlane: true,
+    managementPlane: false,
   },
   "azure-sdk-for-python": {
     dataPlane: true,

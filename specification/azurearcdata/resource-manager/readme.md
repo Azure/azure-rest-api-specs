@@ -27,7 +27,7 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-03
+tag: package-2026-01-01
 ```
 
 ``` yaml
@@ -42,6 +42,48 @@ directive:
   - suppress: ResourceNameRestriction
     from: sqlServerAvailabilityGroups.json
     reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
+
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - Microsoft.AzureArcData/stable/2026-01-01/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/stable/2026-01-01/azurearcdata.json
+  - Microsoft.AzureArcData/stable/2026-01-01/common.json
+  - Microsoft.AzureArcData/stable/2026-01-01/dataControllers.json
+  - Microsoft.AzureArcData/stable/2026-01-01/failoverGroups.json
+  - Microsoft.AzureArcData/stable/2026-01-01/operations.json
+  - Microsoft.AzureArcData/stable/2026-01-01/postgresInstances.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlManagedInstances.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlServerDatabases.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlServerEsuLicenses.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlServerInstances.json
+  - Microsoft.AzureArcData/stable/2026-01-01/sqlServerLicenses.json
+```
+
+### Tag: package-preview-2025-06-01-preview
+
+These settings apply only when `--tag=package-preview-2025-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-06-01-preview'
+input-file:
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/common.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/failoverGroups.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/operations.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlServerDatabases.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlServerEsuLicenses.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2025-06-01-preview/sqlServerLicenses.json
 ```
 
 ### Tag: package-preview-2025-03

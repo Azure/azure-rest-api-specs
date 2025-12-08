@@ -4,6 +4,7 @@
     2. It calculates what set of labels should be added or removed from the PR.
 */
 
+import * as z from "zod";
 import { includesEvery, includesNone } from "../../../shared/src/array.js";
 import {
   brchTsg,
@@ -45,20 +46,23 @@ import {
  * @property {Set<string>} toRemove - The set of labels to remove
  */
 
+export const ImpactAssessmentSchema = z.object({
+  resourceManagerRequired: z.boolean().describe("Whether a resource manager review is required."),
+  dataPlaneRequired: z.boolean().describe("Whether a data plane review is required."),
+  suppressionReviewRequired: z.boolean().describe("Whether a suppression review is required."),
+  isNewApiVersion: z.boolean().describe("Whether this PR introduces a new API version."),
+  rpaasRpNotInPrivateRepo: z
+    .boolean()
+    .describe("Whether the RPaaS RP is not present in the private repo."),
+  rpaasChange: z.boolean().describe("Whether this PR includes RPaaS changes."),
+  newRP: z.boolean().describe("Whether this PR introduces a new resource provider."),
+  rpaasRPMissing: z.boolean().describe("Whether the RPaaS RP label is missing."),
+  typeSpecChanged: z.boolean().describe("Whether a TypeSpec file has changed."),
+  isDraft: z.boolean().describe("Whether the PR is a draft."),
+  targetBranch: z.string().describe("The name of the target branch for the PR."),
+});
 /**
- * @typedef {Object} ImpactAssessment
- * @property {boolean} resourceManagerRequired - Whether a resource manager review is required.
- * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
- * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
- * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
- * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
- * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
- * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
- * @property {boolean} newRP - Whether this PR introduces a new resource provider.
- * @property {boolean} rpaasRPMissing - Whether the RPaaS RP label is missing.
- * @property {boolean} typeSpecChanged - Whether a TypeSpec file has changed.
- * @property {boolean} isDraft - Whether the PR is a draft.
- * @property {string} targetBranch - The name of the target branch for the PR.
+ * @typedef {import("zod").infer<typeof ImpactAssessmentSchema>} ImpactAssessment
  */
 
 /**
@@ -411,8 +415,8 @@ export const breakingChangesCheckType = {
  * @returns {void}
  */
 export function processArmReviewLabels(context, existingLabels) {
-  // only kick this off if the ARMReview label is present
-  if (existingLabels.includes("ARMReview")) {
+  // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
+  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -466,9 +470,9 @@ This function does the following, **among other things**:
 /**
  * @param {LabelContext} labelContext
  * @param {ImpactAssessment} impactAssessment
- * @returns {Promise<{armReviewLabelShouldBePresent: boolean}>}
+ * @returns {{armReviewLabelShouldBePresent: boolean}}
  */
-export async function processImpactAssessment(labelContext, impactAssessment) {
+export function processImpactAssessment(labelContext, impactAssessment) {
   console.log("ENTER definition processARMReview");
 
   // By default these two should not be present. We may determine later in this function that they should be present after all.
@@ -505,8 +509,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   );
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
 
-  const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
-  rpaasExceptionLabel.shouldBePresent = impactAssessment.rpaasExceptionRequired || false;
+  const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
     "CI-RpaaSRPNotInPrivateRepo",
@@ -537,11 +540,11 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
     }
 
     armReviewLabel.shouldBePresent = impactAssessment.resourceManagerRequired;
-    await processARMReviewWorkflowLabels(
+    processARMReviewWorkflowLabels(
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
+      rpaasExceptionLabelPresent,
       impactAssessment.rpaasRpNotInPrivateRepo,
     );
   }
@@ -555,7 +558,6 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
 
   // this is the only labelling that was part of original pipelinebot logic, it handles the rotation of
@@ -623,9 +625,8 @@ labels are being removed or added to a PR is pipelineBotOnPRLabelEvent.ts.
  * @param {boolean} ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent
  * @param {boolean} rpaasExceptionLabelShouldBePresent
  * @param {boolean} ciRpaasRPNotInPrivateRepoLabelShouldBePresent
- * @returns {Promise<void>}
  */
-async function processARMReviewWorkflowLabels(
+function processARMReviewWorkflowLabels(
   labelContext,
   armReviewLabelShouldBePresent,
   ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
@@ -642,13 +643,15 @@ async function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
+
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas;
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -707,7 +710,23 @@ async function processARMReviewWorkflowLabels(
       `blockedOnRpaas: ${blockedOnRpaas}. ` +
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
-  return;
+}
+
+/**
+ * @param {LabelContext} labelContext
+ * @returns {boolean}
+ */
+function getBlockedOnVersioningPolicy(labelContext) {
+  const pendingVersioningReview =
+    labelContext.present.has("VersioningReviewRequired") &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    labelContext.present.has("BreakingChangeReviewRequired") &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  return blockedOnVersioningPolicy;
 }
 
 /**
@@ -1148,9 +1167,9 @@ export const requiredLabelsRules = rulesPri0dataPlane
  * @param {string[]} existingLabels
  * @param {string} targetBranch
  *
- * @returns {Promise<{presentBlockingLabels: string[], missingRequiredLabels: string[]}>}
+ * @returns {{presentBlockingLabels: string[], missingRequiredLabels: string[]}}
  */
-export async function getPresentBlockingLabelsAndMissingRequiredLabels(
+export function getPresentBlockingLabelsAndMissingRequiredLabels(
   core,
   repo,
   owner,
@@ -1160,15 +1179,17 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
   // this is a little bit of a strange looking branch format, but not going to touch this for now.
   const repoTargetBranch = `${repo}/${targetBranch}`;
 
-  const violatedReqLabelsRules = await getViolatedRequiredLabelsRules(
+  const violatedReqLabelsRules = getViolatedRequiredLabelsRules(
     core,
     existingLabels,
     repoTargetBranch,
   );
   const presentBlockingLabels = getPresentBlockingLabels(violatedReqLabelsRules);
 
-  const requiredLabelsFromRules = (
-    await getViolatedRequiredLabelsRules(core, existingLabels, repoTargetBranch)
+  const requiredLabelsFromRules = getViolatedRequiredLabelsRules(
+    core,
+    existingLabels,
+    repoTargetBranch,
   )
     .filter((rule) => rule.anyRequiredLabels.length > 0)
     // See comment on RequiredLabelRule.anyRequiredLabels to understand why we pick [0] from rule.anyRequiredLabels here.
@@ -1185,12 +1206,12 @@ export async function getPresentBlockingLabelsAndMissingRequiredLabels(
  * @param {typeof import("@actions/core")} core
  * @param {string[]} labels
  * @param {string} targetBranch This function uses a special format {repo/branch}, e.g. "azure-rest-api-specs/main".
- * @returns {Promise<RequiredLabelRule[]>}
+ * @returns {RequiredLabelRule[]}
  */
-export async function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
+export function getViolatedRequiredLabelsRules(core, labels, targetBranch) {
   const violatedRules = [];
   for (const rule of requiredLabelsRules) {
-    if (await requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
+    if (requiredLabelRuleViolated(core, labels, targetBranch, rule)) {
       violatedRules.push(rule);
     }
   }
@@ -1202,9 +1223,9 @@ export async function getViolatedRequiredLabelsRules(core, labels, targetBranch)
  * @param {string[]} presentLabels
  * @param {string} targetBranch
  * @param {RequiredLabelRule} rule
- * @returns {Promise<boolean>}
+ * @returns {boolean}
  */
-export async function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
+export function requiredLabelRuleViolated(core, presentLabels, targetBranch, rule) {
   const branchIsApplicable = rule.branches === undefined || rule.branches.includes(targetBranch);
 
   const anyPrerequisiteLabelPresent =

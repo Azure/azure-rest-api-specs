@@ -1,10 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
-import updateLabels, { updateLabelsImpl } from "../src/update-labels.js";
+import { fullGitSha } from "../../shared/test/examples.js";
+import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.js";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.js";
+
+/**
+ * @param {unknown} asyncFunctionArgs
+ */
+function updateLabels(asyncFunctionArgs) {
+  return updateLabelsSrc(
+    /** @type {import("@actions/github-script").AsyncFunctionArguments} */ (asyncFunctionArgs),
+  );
+}
 
 describe("updateLabels", () => {
   it("loads inputs from context", async () => {
+    const core = createMockCore();
+
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
@@ -18,7 +30,7 @@ describe("updateLabels", () => {
         action: "completed",
         workflow_run: {
           event: "pull_request",
-          head_sha: "abc123",
+          head_sha: fullGitSha,
           id: 456,
           repository: {
             name: "TestRepoName",
@@ -31,13 +43,10 @@ describe("updateLabels", () => {
       },
     };
 
-    await expect(
-      updateLabels({
-        github: github,
-        context: context,
-        core: createMockCore(),
-      }),
-    ).resolves.toBeUndefined();
+    await expect(updateLabels({ github, context, core })).resolves.toBeUndefined();
+
+    expect(core.setOutput).toBeCalledWith("head_sha", fullGitSha);
+    expect(core.setOutput).toBeCalledWith("issue_number", 123);
 
     expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
       owner: "TestRepoOwnerLogin",
@@ -63,12 +72,15 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: NaN,
         github: github,
         core: createMockCore(),
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Required input 'run_id' not found in env or context]`,
+    );
 
     expect(github.rest.issues.addLabels).toBeCalledTimes(0);
     expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
@@ -88,6 +100,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: NaN,
         run_id: 456,
         github: github,
@@ -106,6 +119,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: NaN,
         run_id: 456,
         github: github,
@@ -137,6 +151,7 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: 456,
         github: github,
@@ -187,12 +202,51 @@ describe("updateLabelsImpl", () => {
       updateLabelsImpl({
         owner: "owner",
         repo: "repo",
+        head_sha: fullGitSha,
         issue_number: 123,
         run_id: 456,
         github: github,
         core: createMockCore(),
       }),
-    ).rejects.toThrow();
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Invalid value for label 'baz': invalid.  Expected "true" or "false".]`,
+    );
+
+    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
+      owner: "owner",
+      repo: "repo",
+      run_id: 456,
+      per_page: PER_PAGE_MAX,
+    });
+
+    // Ensure no labels are added or removed if any are invalid
+    expect(github.rest.issues.addLabels).toBeCalledTimes(0);
+    expect(github.rest.issues.removeLabel).toBeCalledTimes(0);
+  });
+
+  it("throws for invalid label name", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "label-foo=true" },
+          { name: "label-bar=false" },
+          { name: "label-=true" },
+        ],
+      },
+    });
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        run_id: 456,
+        github: github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(`[Error: Invalid value for label name: '']`);
 
     expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
       owner: "owner",
@@ -218,6 +272,7 @@ describe("updateLabelsImpl", () => {
     const updateLabelsImplPromise = updateLabelsImpl({
       owner: "owner",
       repo: "repo",
+      head_sha: fullGitSha,
       issue_number: 123,
       run_id: 456,
       github: github,

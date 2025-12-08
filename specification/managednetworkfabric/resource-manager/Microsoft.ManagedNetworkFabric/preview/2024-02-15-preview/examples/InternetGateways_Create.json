@@ -1,0 +1,83 @@
+{
+  "title": "InternetGateways_Create_MaximumSet_Gen",
+  "operationId": "InternetGateways_Create",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "internetGatewayName": "example-internetGateway",
+    "resource": {
+      "properties": {
+        "annotation": "annotation",
+        "internetGatewayRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-internetGatewayRule",
+        "type": "Infrastructure",
+        "networkFabricControllerId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkFabricController"
+      },
+      "tags": {
+        "keyId": "KeyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "internetGatewayRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-internetGatewayRule",
+          "ipv4Address": "10.10.10.10",
+          "port": 25,
+          "type": "Infrastructure",
+          "networkFabricControllerId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkFabricController",
+          "provisioningState": "Accepted"
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway",
+        "name": "example-internetGateway",
+        "type": "microsoft.managednetworkfabric/internetGateways",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "internetGatewayRuleId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-internetGatewayRule",
+          "ipv4Address": "10.10.10.10",
+          "port": 25,
+          "type": "Infrastructure",
+          "networkFabricControllerId": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkFabricController",
+          "provisioningState": "Accepted"
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/subscriptionId/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway",
+        "name": "example-internetGateway",
+        "type": "microsoft.managednetworkfabric/internetGateways",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

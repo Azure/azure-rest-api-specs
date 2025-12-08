@@ -12,33 +12,32 @@ options:
   "@azure-tools/typespec-python":
     api-version: "2025-05-15-preview"
     package-mode: "dataplane"
-    package-dir: "azure-ai-agents"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-agents"
+    package-name: "azure-ai-agents"
     flavor: azure
     generate-test: false
     generate-sample: false
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2025-05-15-preview"
-    package-mode: "dataplane"
-    package-dir: "Azure.AI.Agents.Persistent"
-    namespace: "{package-dir}"
-    package-name: "{package-dir}"
+    namespace: Azure.AI.Agents.Persistent
+    package-name: "{namespace}"
     model-namespace: false
     flavor: azure
-    generate-test: false
-    generate-sample: false
     examples-dir: "{project-dir}/examples"
     clear-output-folder: true
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Agents.Persistent
     model-namespace: false
     api-version: "2025-05-15-preview"
   "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-agents"
     api-version: "v1"
-    generateTest: true
-    generateMetadata: false
-    packageDetails:
+    generate-test: true
+    generate-metadata: false
+    package-details:
       name: "@azure/ai-agents"
     flavor: azure
 linter:
