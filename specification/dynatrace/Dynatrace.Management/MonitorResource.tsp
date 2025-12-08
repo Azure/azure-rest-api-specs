@@ -104,14 +104,14 @@ interface MonitorResources {
   >;
 
   /**
-   * Gets the list of managed agent resources by the Dynatrace monitor.
+   * Gets the list of managed compute resources by the Dynatrace monitor.
    */
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
   @list
-  listManagedAgentResources is ArmResourceActionSync<
+  listManagedComputeResources is ArmResourceActionSync<
     MonitorResource,
     void,
-    ArmResponse<ManagedAgentResourceListResponse>
+    ArmResponse<ManagedComputeResourceListResponse>
   >;
 
   /**

@@ -28,7 +28,7 @@ using Dynatrace.Observability;
 @@clientName(MonitorResources.manageSreAgentConnectors::parameters.body,
   "request"
 );
-@@clientLocation(MonitorResources.listManagedAgentResources, "Monitors");
+@@clientLocation(MonitorResources.listManagedComputeResources, "Monitors");
 @@clientLocation(MonitorResources.listHosts, "Monitors");
 @@clientLocation(MonitorResources.getMetricStatus, "Monitors");
 @@clientName(MonitorResources.getMetricStatus::parameters.body, "request");

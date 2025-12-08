@@ -943,13 +943,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listManagedAgentResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listManagedComputeResources": {
       "post": {
-        "operationId": "Monitors_ListManagedAgentResources",
+        "operationId": "Monitors_ListManagedComputeResources",
         "tags": [
           "MonitorResources"
         ],
-        "description": "Gets the list of managed agent resources by the Dynatrace monitor.",
+        "description": "Gets the list of managed compute resources by the Dynatrace monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -973,7 +973,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagedAgentResourceListResponse"
+              "$ref": "#/definitions/ManagedComputeResourceListResponse"
             }
           },
           "default": {
@@ -984,11 +984,11 @@
           }
         },
         "x-ms-examples": {
-          "Monitors_ListManagedAgentResources_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_ListManagedAgentResources_MaximumSet_Gen.json"
+          "Monitors_ListManagedComputeResources_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListManagedComputeResources_MaximumSet_Gen.json"
           },
-          "Monitors_ListManagedAgentResources_MinimumSet_Gen": {
-            "$ref": "./examples/Monitors_ListManagedAgentResources_MinimumSet_Gen.json"
+          "Monitors_ListManagedComputeResources_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_ListManagedComputeResources_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2608,9 +2608,9 @@
         }
       }
     },
-    "ManagedAgentResourceInfo": {
+    "ManagedComputeResourceInfo": {
       "type": "object",
-      "description": "Details of a managed agent resource monitored by the Dynatrace monitor.",
+      "description": "Details of a managed compute resource monitored by the Dynatrace monitor.",
       "properties": {
         "monitoredResourceId": {
           "type": "string",
@@ -2640,15 +2640,15 @@
         }
       }
     },
-    "ManagedAgentResourceListResponse": {
+    "ManagedComputeResourceListResponse": {
       "type": "object",
-      "description": "Response of a list operation for managed agent resources.",
+      "description": "Response of a list operation for managed compute resources.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ManagedAgentResourceInfo items on this page",
+          "description": "The ManagedComputeResourceInfo items on this page",
           "items": {
-            "$ref": "#/definitions/ManagedAgentResourceInfo"
+            "$ref": "#/definitions/ManagedComputeResourceInfo"
           }
         },
         "nextLink": {

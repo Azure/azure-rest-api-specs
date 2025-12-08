@@ -601,17 +601,17 @@ model VMExtensionPayload {
 }
 
 /**
- * Response of a list operation for managed agent resources.
+ * Response of a list operation for managed compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-model ManagedAgentResourceListResponse
-  is Azure.Core.Page<ManagedAgentResourceInfo>;
+model ManagedComputeResourceListResponse
+  is Azure.Core.Page<ManagedComputeResourceInfo>;
 
 /**
- * Details of a managed agent resource monitored by the Dynatrace monitor.
+ * Details of a managed compute resource monitored by the Dynatrace monitor.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-model ManagedAgentResourceInfo {
+model ManagedComputeResourceInfo {
   /**
    * The full ARM resource ID of the monitored resource.
    */
