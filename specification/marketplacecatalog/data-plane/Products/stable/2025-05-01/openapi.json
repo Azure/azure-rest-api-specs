@@ -37,7 +37,7 @@
   "paths": {
     "/products": {
       "get": {
-        "operationId": "ListProducts",
+        "operationId": "Products_List",
         "description": "Retrieves a list of products available in the marketplace catalog",
         "parameters": [
           {
@@ -97,18 +97,14 @@
     },
     "/products/{uniqueProductId}": {
       "get": {
-        "operationId": "GetProduct",
+        "operationId": "Products_Get",
         "description": "Retrieves a single product by ID from the marketplace catalog",
         "parameters": [
           {
-            "name": "uniqueProductId",
-            "in": "path",
-            "description": "Unique product identifier",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "#/parameters/UniqueProductIdParameter"
           },
           {
             "$ref": "#/parameters/SingleMarketParameter"
@@ -161,8 +157,8 @@
     },
     "/skus": {
       "get": {
-        "operationId": "ListSkus",
-        "description": "Retrieves a list of SKUs available in the marketplace catalog.",
+        "operationId": "Skus_List",
+        "description": "Retrieves a list of SKUs available in the marketplace catalog",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2206,6 +2202,14 @@
       "in": "query",
       "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: $orderby=productDisplayName desc.This API only supports ordering by a single field. Note that not all fields currently support orderBy",
       "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UniqueProductIdParameter": {
+      "name": "uniqueProductId",
+      "in": "path",
+      "description": "Unique product identifier",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     }
