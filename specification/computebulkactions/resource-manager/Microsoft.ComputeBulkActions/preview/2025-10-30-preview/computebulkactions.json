@@ -2221,7 +2221,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information"
         },
         "correlationid": {
@@ -2247,7 +2247,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information"
         },
         "correlationid": {
@@ -2277,7 +2277,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information"
         },
         "correlationid": {
@@ -2303,7 +2303,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information"
         },
         "correlationid": {
@@ -2329,7 +2329,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information"
         },
         "correlationid": {
@@ -4171,7 +4171,7 @@
         "resourceCount"
       ]
     },
-    "ResourceWithCorrelationId": {
+    "ResourceWithContext": {
       "type": "object",
       "description": "The resources needed for the user request with the correlationId",
       "properties": {
@@ -4187,14 +4187,14 @@
             ]
           }
         },
-        "correlationId": {
+        "context": {
           "type": "string",
           "description": "The operational context of the resourceId"
         }
       },
       "required": [
         "id",
-        "correlationId"
+        "context"
       ]
     },
     "Resources": {
@@ -4222,15 +4222,15 @@
         "ids"
       ]
     },
-    "ResourcesWithCorrelationId": {
+    "ResourcesWithContext": {
       "type": "object",
-      "description": "The resources needed for the user request with the correlationId",
+      "description": "The resources needed for the user request with the context for traacking purposes",
       "properties": {
         "ids": {
           "type": "array",
           "description": "The resource ids used for the request",
           "items": {
-            "$ref": "#/definitions/ResourceWithCorrelationId"
+            "$ref": "#/definitions/ResourceWithContext"
           }
         }
       },
@@ -4633,7 +4633,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
@@ -4664,7 +4664,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
@@ -4695,7 +4695,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {
@@ -4726,7 +4726,7 @@
           "description": "The resources for the request"
         },
         "resourcesWithContext": {
-          "$ref": "#/definitions/ResourcesWithCorrelationId",
+          "$ref": "#/definitions/ResourcesWithContext",
           "description": "The resources for the request with operation context information needed for notification tracking."
         },
         "correlationid": {

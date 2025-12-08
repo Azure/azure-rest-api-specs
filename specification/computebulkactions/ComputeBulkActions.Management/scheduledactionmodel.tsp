@@ -202,7 +202,7 @@ model Resources {
 }
 
 @doc("The resources needed for the user request with the correlationId")
-model ResourceWithCorrelationId {
+model ResourceWithContext {
   @doc("The resource ids used for the request")
   id: armResourceIdentifier<[
     {
@@ -211,13 +211,13 @@ model ResourceWithCorrelationId {
   ]>;
 
   @doc("The operational context of the resourceId")
-  correlationId: string;
+  context: string;
 }
 
-@doc("The resources needed for the user request with the correlationId")
-model ResourcesWithCorrelationId {
+@doc("The resources needed for the user request with the context for traacking purposes")
+model ResourcesWithContext {
   @doc("The resource ids used for the request")
-  ids: Array<ResourceWithCorrelationId>;
+  ids: Array<ResourceWithContext>;
 }
 
 @doc("Resource creation data model")
@@ -395,7 +395,7 @@ model SubmitTypeRequest {
   resources?: Resources;
 
   @doc("The resources for the request with operation context information needed for notification tracking.")
-  resourcesWithContext?: ResourcesWithCorrelationId;
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("CorrelationId item")
   correlationid: string;
@@ -410,7 +410,7 @@ model ExecuteTypeRequest {
   resources?: Resources;
 
   @doc("The resources for the request with operation context information")
-  resourcesWithContext?: ResourcesWithCorrelationId;
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("CorrelationId item")
   correlationid: string;
