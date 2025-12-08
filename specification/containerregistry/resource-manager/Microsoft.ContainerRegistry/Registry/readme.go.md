@@ -62,5 +62,5 @@ directive:
 ``` yaml $(go) && $(tag) == 'package-2025-11'
 input-file:
   - stable/2025-11-01/containerregistry.json
-  - ../RegistryTasks/preview/2019-06-01-preview/containerregistry_build.json
+  - ../RegistryTasks/preview/2025-03-01-preview/containerregistry_build.json
 ```
