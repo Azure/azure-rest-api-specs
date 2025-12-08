@@ -438,7 +438,9 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @added(Versions.v2025_11_01)
   BestEffortAligned: "BestEffortAligned",
 }
 
