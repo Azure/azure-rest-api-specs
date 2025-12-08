@@ -4959,9 +4959,11 @@ model NGramTokenizer extends LexicalTokenizer {
 @doc("Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.")
 model PathHierarchyTokenizer extends LexicalTokenizer {
   @doc("The delimiter character to use. Default is \"/\".")
+  @maxLength(1)
   delimiter?: string = "/";
 
   @doc("A value that, if set, replaces the delimiter character. Default is \"/\".")
+  @maxLength(1)
   replacement?: string = "/";
 
   @doc("The maximum token length. Default and maximum is 300.")
