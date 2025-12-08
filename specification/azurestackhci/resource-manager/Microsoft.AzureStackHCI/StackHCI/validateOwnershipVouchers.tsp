@@ -41,6 +41,8 @@ model ValidateOwnershipVouchersRequest {
 );
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
 
+@@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
+
 @added(Versions.v2025_12_01_preview)
 @doc("Validate Ownership Voucher Response")
 model ValidateOwnershipVouchersResponse {
