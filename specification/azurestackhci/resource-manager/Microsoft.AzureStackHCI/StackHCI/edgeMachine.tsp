@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -133,7 +134,7 @@ model EdgeMachineProperties {
 
   @doc("Reported properties for edge machine.")
   @visibility(Lifecycle.Read)
-  reportedProperties?: ReportedProperties;
+  reportedProperties?: EdgeMachineReportedReportedProperties;
 
   @doc("operation status details for edge machine.")
   @visibility(Lifecycle.Read)
@@ -286,7 +287,7 @@ union EdgeMachineState {
 
 @added(Versions.v2025_12_01_preview)
 @doc("Reported properties for edge machine.")
-model ReportedProperties {
+model EdgeMachineReportedReportedProperties {
   @doc("Last time data reported.")
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
@@ -328,153 +329,6 @@ model NetworkProfile {
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Network Interface Card (NIC) Details of edge machine.")
-model NicDetail {
-  /**
-   * Adapter Name of NIC
-   */
-  @visibility(Lifecycle.Read)
-  adapterName?: string;
-
-  /**
-   * Interface Description of NIC
-   */
-  @visibility(Lifecycle.Read)
-  interfaceDescription?: string;
-
-  /**
-   * Component Id of NIC
-   */
-  @visibility(Lifecycle.Read)
-  componentId?: string;
-
-  /**
-   * Driver Version of NIC
-   */
-  @visibility(Lifecycle.Read)
-  driverVersion?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  @visibility(Lifecycle.Read)
-  ip4Address?: string;
-
-  /**
-   * Subnet Mask of NIC
-   */
-  @visibility(Lifecycle.Read)
-  subnetMask?: string;
-
-  /**
-   * Default Gateway of NIC
-   */
-  @visibility(Lifecycle.Read)
-  defaultGateway?: string;
-
-  /**
-   * DNS Servers for NIC
-   */
-  @visibility(Lifecycle.Read)
-  dnsServers?: string[];
-
-  /**
-   * Default Isolation of Management NIC
-   */
-  @visibility(Lifecycle.Read)
-  defaultIsolationId?: string;
-
-  /**
-   * MAC address information of NIC.
-   */
-  @visibility(Lifecycle.Read)
-  macAddress?: string;
-
-  /**
-   * The slot attached to the NIC.
-   */
-  @visibility(Lifecycle.Read)
-  slot?: string;
-
-  /**
-   * The switch attached to the NIC, if any.
-   */
-  @visibility(Lifecycle.Read)
-  switchName?: string;
-
-  /**
-   * The type of NIC, physical, virtual, management.
-   */
-  @visibility(Lifecycle.Read)
-  nicType?: string;
-
-  /**
-   * The VLAN ID of the physical NIC.
-   */
-  @visibility(Lifecycle.Read)
-  vlanId?: string;
-
-  /**
-   * The status of NIC, up, disconnected.
-   */
-  @visibility(Lifecycle.Read)
-  nicStatus?: string;
-
-  /**
-   * Describes the RDMA capability of the network adapter.
-   */
-  @visibility(Lifecycle.Read)
-  rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Switch Details of edge machine.")
-model SwitchDetail {
-  /**
-   * The name of the switch.
-   */
-  @visibility(Lifecycle.Read)
-  switchName?: string;
-
-  /**
-   * The type of the switch. e.g. external, internal.
-   */
-  @visibility(Lifecycle.Read)
-  switchType?: string;
-
-  /**
-   * This represents extensions installed on virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["extensionName"])
-  extensions?: SwitchExtension[];
-}
-
-/**
- * This represents extensions installed on virtualSwitch.
- */
-@added(Versions.v2025_12_01_preview)
-model SwitchExtension {
-  /**
-   * Unique identifier for virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  switchId?: string;
-
-  /**
-   * This will show extension name for virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  extensionName?: string;
-
-  /**
-   * This represents whether extension is enabled on virtualSwitch.
-   */
-  @visibility(Lifecycle.Read)
-  extensionEnabled?: boolean;
 }
 
 /**
@@ -532,24 +386,6 @@ model OsProfile {
 }
 
 /**
- * Describes the RDMA capability of the network adapter.
- */
-@added(Versions.v2025_12_01_preview)
-union RdmaCapability {
-  string,
-
-  /**
-   * Network Adapter on the device is RDMA Capable
-   */
-  Enabled: "Enabled",
-
-  /**
-   * Network Adapter on the device isn't RDMA Capable
-   */
-  Disabled: "Disabled",
-}
-
-/**
  * Hardware profile for the machine
  */
 @added(Versions.v2025_12_01_preview)
@@ -603,178 +439,4 @@ model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
-}
-
-/**
- * Solution builder extension (SBE) deployment package information.
- */
-@added(Versions.v2025_12_01_preview)
-model SbeDeploymentPackageInfo {
-  /**
-   * SBE deployment validation code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /**
-   * A detailed message that explains the SBE package validation result.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /**
-   * This represents discovered update results for matching updates and store it as SBE manifest.
-   */
-  @visibility(Lifecycle.Read)
-  sbeManifest?: string;
-}
-
-/**
- * Extensions details for edge device.
- */
-@added(Versions.v2025_12_01_preview)
-model ExtensionProfile {
-  /**
-   * List of Arc extensions installed on edge device.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["extensionName"])
-  extensions?: Extension[];
-}
-
-/**
- * Arc extension installed on edge device.
- */
-@added(Versions.v2025_12_01_preview)
-model Extension {
-  /**
-   * Arc extension name installed on edge device.
-   */
-  @visibility(Lifecycle.Read)
-  extensionName?: string;
-
-  /**
-   * Arc extension state from arc machine extension.
-   */
-  @visibility(Lifecycle.Read)
-  state?: ArcExtensionState;
-
-  /**
-   * Error details while installing Arc extension.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#[])
-  errorDetails?: ErrorDetailModel[];
-
-  /**
-   * Exception details while installing Arc extension.
-   */
-  @visibility(Lifecycle.Read)
-  exception?: string;
-
-  /**
-   * Arc Extension Azure resource id.
-   */
-  @visibility(Lifecycle.Read)
-  extensionResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * Extension version installed.
-   */
-  @visibility(Lifecycle.Read)
-  typeHandlerVersion?: string;
-
-  /**
-   * Extension managed by user or Azure.
-   */
-  @visibility(Lifecycle.Read)
-  managedBy?: ExtensionManagedBy;
-}
-
-/**
- * Arc extension installation state.
- */
-@added(Versions.v2025_12_01_preview)
-union ArcExtensionState {
-  string,
-
-  /**
-   * Arc extension state is not specified.
-   */
-  NotSpecified: "NotSpecified",
-
-  /**
-   * Arc extension state is Accepted when extension installation triggered.
-   */
-  Accepted: "Accepted",
-
-  /**
-   * Arc extension state is Canceled.
-   */
-  Canceled: "Canceled",
-
-  /**
-   * Arc extension is in Creating State.
-   */
-  Creating: "Creating",
-
-  /**
-   * Arc extension is in Deleted State.
-   */
-  Deleted: "Deleted",
-
-  /**
-   * Arc extension is in Deleting State.
-   */
-  Deleting: "Deleting",
-
-  /**
-   * Arc extension state is Failed.
-   */
-  Failed: "Failed",
-
-  /**
-   * Arc extension is in Moving State.
-   */
-  Moving: "Moving",
-
-  /**
-   * Arc extension state is Succeeded.
-   */
-  Succeeded: "Succeeded",
-
-  /**
-   * Arc extension is in Updating State.
-   */
-  Updating: "Updating",
-}
-
-/**
- * details of validation failure
- */
-@added(Versions.v2025_12_01_preview)
-model ErrorDetailModel {
-  /**
-   * Exception details while installing extension.
-   */
-  @visibility(Lifecycle.Read)
-  exception?: string;
-}
-
-/**
- * Extension managed by user or Azure.
- */
-@added(Versions.v2025_12_01_preview)
-union ExtensionManagedBy {
-  string,
-
-  /**
-   * Extension managed by user.
-   */
-  User: "User",
-
-  /**
-   * Extension managed by Azure.
-   */
-  Azure: "Azure",
 }
