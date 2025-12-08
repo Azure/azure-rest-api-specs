@@ -4,9 +4,6 @@ using TypeSpec.Http;
 
 namespace AzureMonitorExporter;
 
-@maxLength(8192)
-scalar PropertyValue extends string;
-
 /**
  * Type of the metric data.
  */
@@ -158,7 +155,6 @@ model TelemetryEnvelope {
    * i.e. managed code consumers should not use format 'O' for parsing as it
    * specifies a fixed length. Example: 2009-06-15T13:45:30.0000000Z.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   time: utcDateTime;
 
   /**
@@ -320,7 +316,7 @@ model AvailabilityData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -394,7 +390,7 @@ model EventData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -431,7 +427,7 @@ model ExceptionData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -538,7 +534,7 @@ model MessageData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -563,7 +559,7 @@ model MetricsData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 }
 
 /**
@@ -583,7 +579,7 @@ model PageViewData extends Domain {
   /**
    * Event name. Keep it low cardinality to allow proper grouping and useful metrics.
    */
-  @maxLength(1024)
+  @maxLength(512)
   name: string;
 
   /**
@@ -608,7 +604,7 @@ model PageViewData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -634,7 +630,7 @@ model PageViewPerfData extends Domain {
   /**
    * Event name. Keep it low cardinality to allow proper grouping and useful metrics.
    */
-  @maxLength(1024)
+  @maxLength(512)
   name: string;
 
   /**
@@ -679,7 +675,7 @@ model PageViewPerfData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -749,7 +745,7 @@ model RemoteDependencyData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
@@ -812,7 +808,7 @@ model RequestData extends Domain {
   /**
    * Collection of custom properties.
    */
-  properties?: Record<PropertyValue>;
+  properties?: Record<string>;
 
   /**
    * Collection of custom measurements.
