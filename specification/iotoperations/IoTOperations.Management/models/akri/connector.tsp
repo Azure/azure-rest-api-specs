@@ -65,6 +65,6 @@ model AkriConnectorAllocatedDevice {
 
 /** AkriConnector status. */
 @added(Versions.`2025-12-01-preview`)
-model AkriConnectorStatus{
+model AkriConnectorStatus {
   ...ResourceHealthStatus;
 }

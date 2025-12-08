@@ -320,6 +320,6 @@ model DataflowSourceOperationSettings {
 
 /** Dataflow status. */
 @added(Versions.`2025-12-01-preview`)
-model DataflowStatus{
+model DataflowStatus {
   ...ResourceHealthStatus;
 }

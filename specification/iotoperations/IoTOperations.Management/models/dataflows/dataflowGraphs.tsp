@@ -305,6 +305,6 @@ model DataflowGraphConnectionOutput {
 
 /** DataflowGraph status. */
 @added(Versions.`2025-12-01-preview`)
-model DataflowGraphStatus{
+model DataflowGraphStatus {
   ...ResourceHealthStatus;
 }

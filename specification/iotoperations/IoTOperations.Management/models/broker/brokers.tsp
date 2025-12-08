@@ -627,6 +627,6 @@ union SubscriberMessageDropStrategy {
 
 /** AkriConnector status. */
 @added(Versions.`2025-12-01-preview`)
-model BrokerStatus{
+model BrokerStatus {
   ...ResourceHealthStatus;
 }

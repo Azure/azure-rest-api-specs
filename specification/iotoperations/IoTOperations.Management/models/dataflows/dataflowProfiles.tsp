@@ -63,6 +63,6 @@ model ProfileDiagnostics {
 
 /** DataflowProfile status. */
 @added(Versions.`2025-12-01-preview`)
-model DataflowProfileStatus{
+model DataflowProfileStatus {
   ...ResourceHealthStatus;
 }

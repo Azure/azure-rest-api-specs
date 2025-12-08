@@ -16,8 +16,7 @@ namespace Microsoft.IoTOperations;
 /** AkriDiscoveryHandler resource. */
 @added(Versions.`2025-12-01-preview`)
 @parentResource(InstanceResource)
-model AkriServiceResource
-  is ProxyResource<AkriServiceProperties> {
+model AkriServiceResource is ProxyResource<AkriServiceProperties> {
   /** Name of AkriService resource. */
   @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
   @key("akriServiceName")
@@ -55,6 +54,6 @@ model AkriServiceProperties {
 
 /** AkriService status. */
 @added(Versions.`2025-12-01-preview`)
-model AkriServiceStatus{
+model AkriServiceStatus {
   ...ResourceHealthStatus;
 }
