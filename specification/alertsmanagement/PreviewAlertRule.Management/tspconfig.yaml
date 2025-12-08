@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/pre"
+    default: "sdk/previewalertrule"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -12,31 +12,31 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-confidentialledger"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-confidentialledger"
-    namespace: "azure.mgmt.confidentialledger"
+    package-dir: "azure-mgmt-previewalertrule"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-previewalertrule"
+    namespace: "azure.mgmt.previewalertrule"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-confidentialledger"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-confidentialledger"
-    namespace: "com.azure.resourcemanager.confidentialledger"
-    service-name: "ConfidentialLedger" # human-readable service name, whitespace allowed
+    package-dir: "azure-resourcemanager-previewalertrule"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-previewalertrule"
+    namespace: "com.azure.resourcemanager.previewalertrule"
+    service-name: "PreviewAlertRule" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/confidentialledger
-    package-dir: "arm-confidentialledger"
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-confidentialledger"
+    service-dir: sdk/previewalertrule
+    package-dir: "arm-previewalertrule"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-previewalertrule"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-confidentialledger"
+      name: "@azure/arm-previewalertrule"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/confidentialledger"
-    emitter-output-dir: "{output-dir}/{service-dir}/armconfidentialledger"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armconfidentialledger"
+    service-dir: "sdk/resourcemanager/previewalertrule"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpreviewalertrule"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpreviewalertrule"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
