@@ -17,6 +17,16 @@ using Microsoft.Workloads;
   "SapApplicationServerInstances",
   "autorest"
 );
+@@clientName(SAPVirtualInstances.getSizingRecommendations,
+  "InvokeSizingRecommendations"
+);
+@@clientName(SAPVirtualInstances.getSapSupportedSku, "InvokeSapSupportedSku");
+@@clientName(SAPVirtualInstances.getDiskConfigurations,
+  "InvokeDiskConfigurations"
+);
+@@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
+  "InvokeAvailabilityZoneDetails"
+);
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
   "autorest"
