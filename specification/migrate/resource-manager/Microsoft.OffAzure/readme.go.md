@@ -10,7 +10,7 @@ go:
 ```
 
 ```yaml $(go) && $(track2)
-license-header: MICROSOFT_MIT_NO_VERSION
+license-header: MICROSOFT_MIT_NO_VERSION_Temp
 module-name: sdk/resourcemanager/migrationdiscovery/armmigrationdiscovery
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
