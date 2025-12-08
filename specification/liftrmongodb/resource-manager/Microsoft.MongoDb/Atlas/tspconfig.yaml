@@ -6,10 +6,11 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+    output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
