@@ -285,39 +285,6 @@ union EdgeMachineState {
 }
 
 @added(Versions.v2025_12_01_preview)
-@doc("The provisioning state of a resource.")
-union ProvisioningState {
-  string,
-
-  @doc("The resource provision state is not specified")
-  NotSpecified: "NotSpecified",
-
-  @doc("Resource has been created.")
-  Succeeded: "Succeeded",
-
-  @doc("Resource creation failed.")
-  Failed: "Failed",
-
-  @doc("Resource creation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("Resource creation is in progress.")
-  InProgress: "InProgress",
-
-  @doc("The resource is being provisioned")
-  Provisioning: "Provisioning",
-
-  @doc("The resource is updating")
-  Updating: "Updating",
-
-  @doc("The resource is being deleted")
-  Deleting: "Deleting",
-
-  @doc("The resource create request has been accepted")
-  Accepted: "Accepted",
-}
-
-@added(Versions.v2025_12_01_preview)
 @doc("Reported properties for edge machine.")
 model ReportedProperties {
   @doc("Last time data reported.")
