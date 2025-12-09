@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./models-service.tsp";
 import "./models-shared.tsp";
 
@@ -652,10 +653,12 @@ model KnowledgeBaseErrorDetail {
 
   @doc("The error details.")
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   details?: KnowledgeBaseErrorDetail[];
 
   @doc("The error additional info.")
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   additionalInfo?: KnowledgeBaseErrorAdditionalInfo[];
 }
 
