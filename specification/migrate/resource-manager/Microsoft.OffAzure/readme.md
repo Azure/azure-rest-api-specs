@@ -36,6 +36,9 @@ These settings apply only when `--tag=package-2025-12-12-preview` is specified o
 ``` yaml $(tag) == 'package-2025-12-12-preview'
 input-file:
 - preview/2025-12-12-preview/migrate.json
+suppressions:
+  - code: BodyTopLevelProperties
+    reason: Legacy model structure maintained for backward compatibility with existing clients
 ```
 
 ### Tag: package-2024-12-01-preview
