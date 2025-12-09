@@ -21,7 +21,7 @@ interface ContentUnderstandingClient {
 
   analyzeBinary is ContentAnalyzers.analyzeBinary;
 
-  copy is ContentAnalyzers.copy;
+  copy is ContentAnalyzers.copyAnalyzer;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Doesn't fit standard naming"
   createAnalyzer is ContentAnalyzers.createOrReplace;
@@ -74,9 +74,6 @@ interface ContentUnderstandingClient {
 // Rename 'range' to 'inputRange' for clarity that it specifies input range.
 @@clientName(AnalyzeInput.range, "inputRange");
 @@clientName(AnalyzeBinaryRequest.range, "inputRange");
-
-// Rename copy operation to copyAnalyzer for all SDKs while keeping REST URL as :copy
-@@clientName(ContentUnderstandingClient.copy, "copyAnalyzer");
 
 // .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
 @@clientName(ContentUnderstandingClient.listAnalyzers,

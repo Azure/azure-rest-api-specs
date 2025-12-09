@@ -183,6 +183,7 @@ interface ContentAnalyzers {
   @added(Versions.v2025_11_01)
   @doc("Create a copy of the source analyzer to the current location.")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
+  @action("copy") // Required. Enforce the action name as that it is not changed by ContentUnderstandingClient in client.tsp
   copy is Operations.LongRunningResourceAction<
     ContentAnalyzer,
     CopyRequest,
