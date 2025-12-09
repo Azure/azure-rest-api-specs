@@ -6271,14 +6271,16 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The additional info type."
+          "description": "The additional info type.",
+          "readOnly": true
         },
         "info": {
           "type": "object",
           "description": "The additional info.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -6288,29 +6290,34 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The error code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "The error target."
+          "description": "The error target.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
           "description": "The error details.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "readOnly": true
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
-          }
+          },
+          "readOnly": true
         }
       }
     },
