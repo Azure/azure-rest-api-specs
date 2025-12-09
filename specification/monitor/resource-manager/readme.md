@@ -58,7 +58,7 @@ input-file:
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
   - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
-  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
+  - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
@@ -133,15 +133,6 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: metricAlert_API.json
     reason: Service design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
-```
-
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
 ```
 
 ### Tag: package-2024-04

@@ -111,6 +111,7 @@ model DataflowBuiltInTransformationSettings {
 
 @doc("Dataflow BuiltIn Transformation dataset properties")
 model DataflowBuiltInTransformationDataset {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The key of the dataset.")
   @maxLength(64)
   key: string;
@@ -258,6 +259,7 @@ model DataflowDestinationAddIfNotPresentHeaderAction
   @doc("The type of header operation to perform.")
   actionType: AddIfNotPresent;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to add.")
   key: string;
 
@@ -272,6 +274,7 @@ model DataflowDestinationRemoveHeaderAction
   @doc("The type of header operation to perform.")
   actionType: Remove;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to remove.")
   key: string;
 }
@@ -283,6 +286,7 @@ model DataflowDestinationAddOrReplaceHeaderAction
   @doc("The type of header operation to perform.")
   actionType: AddOrReplace;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The name of the header to add or replace.")
   key: string;
 

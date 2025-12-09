@@ -3,6 +3,18 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerRegistry;
 
+// Flatten properties for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AgentPool.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Run.properties, "autorest");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Task.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TaskRun.properties,
+  "autorest"
+);
+
 @@clientName(AgentPools.create::parameters.resource, "agentPool");
 @@clientName(AgentPools.update::parameters.properties, "updateParameters");
 

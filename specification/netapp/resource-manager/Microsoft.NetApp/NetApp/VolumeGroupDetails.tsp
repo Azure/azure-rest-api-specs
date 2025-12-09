@@ -8,8 +8,6 @@ import "./NetAppAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -111,7 +109,7 @@ model VolumeGroupMetaData {
   /**
    * Application specific placement rules for the volume group
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   globalPlacementRules?: PlacementKeyValuePairs[];
 
   /**

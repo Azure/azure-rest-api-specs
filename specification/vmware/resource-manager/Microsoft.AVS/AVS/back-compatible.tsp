@@ -12,7 +12,7 @@ import "./workloadNetworks-dhcpConfigurations.tsp";
 
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.AVS;
+using Microsoft.AVS;
 
 @@clientLocation(WorkloadNetworkVmGroups.list, WorkloadNetworks, "!csharp");
 @@clientLocation(WorkloadNetworkVmGroups.get, WorkloadNetworks, "!csharp");
@@ -161,3 +161,74 @@ namespace Microsoft.AVS;
 @@clientName(WorkloadNetworkDhcpConfigurations.create, "CreateDhcp");
 @@clientName(WorkloadNetworkDhcpConfigurations.update, "UpdateDhcp");
 @@clientName(WorkloadNetworkDhcpConfigurations.delete, "DeleteDhcp");
+
+// Flatten properties for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Datastore.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpressRouteAuthorization.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalReachConnection.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HcxEnterpriseSite.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IscsiPath.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloud.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProvisionedNetwork.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PureStoragePolicy.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsService.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsZone.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkGateway.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPortMirroring.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetwork.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPublicIP.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkSegment.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVMGroup.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
+  "autorest"
+);

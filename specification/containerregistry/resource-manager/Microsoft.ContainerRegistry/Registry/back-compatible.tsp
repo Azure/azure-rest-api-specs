@@ -3,7 +3,49 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerRegistry;
 
-// Remove deprecated @flattenProperty decorators since they're handled by @Azure.ClientGenerator.Core.Legacy.flattenProperty in models.tsp
+// Flatten properties for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Archive.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ArchiveVersion.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheRule.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConnectedRegistry.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CredentialSet.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExportPipeline.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImportPipeline.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PipelineRun.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Replication.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScopeMap.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Token.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Webhook.properties,
+  "autorest"
+);
 
 @@clientName(IPRule.value, "IPAddressOrRange");
 

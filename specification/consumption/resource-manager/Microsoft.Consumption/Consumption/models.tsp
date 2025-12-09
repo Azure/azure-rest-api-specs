@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using Azure.ResourceManager.Foundations;
+using Azure.ResourceManager;
 
 namespace Microsoft.Consumption;
 
@@ -404,7 +404,7 @@ model PricesheetDownloadProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
-model UsageDetail extends Resource {
+model UsageDetail extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Specifies the kind of usage details.
    */
@@ -428,7 +428,7 @@ model UsageDetail extends Resource {
  * A marketplace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Marketplace extends Resource {
+model Marketplace extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the marketplace usage detail.
    */
@@ -692,7 +692,7 @@ model BudgetFilter {
   /**
    * The logical "AND" expression. Must have at least 2 items.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @minItems(0)
   and?: BudgetFilterProperties[];
 
@@ -833,7 +833,7 @@ model ForecastSpend {
  * A resource listing all tags.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TagsResult extends ProxyResource {
+model TagsResult extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * The properties of the tag.
    */
@@ -852,7 +852,7 @@ model TagProperties {
   /**
    * A list of Tag.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   tags?: Tag[];
 
   /**
@@ -899,7 +899,7 @@ model ChargesListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
-model ChargeSummary extends ProxyResource {
+model ChargeSummary extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Specifies the kind of charge summary.
    */
@@ -915,7 +915,7 @@ model ChargeSummary extends ProxyResource {
  * A balance resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Balance extends Resource {
+model Balance extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the balance.
    */
@@ -1037,14 +1037,14 @@ model BalanceProperties {
    * List of new purchases.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   newPurchasesDetails?: BalancePropertiesNewPurchasesDetailsItem[];
 
   /**
    * List of Adjustments (Promo credit, SIE credit etc.).
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   adjustmentDetails?: BalancePropertiesAdjustmentDetailsItem[];
 }
 
@@ -1084,7 +1084,7 @@ model BalancePropertiesAdjustmentDetailsItem {
  * reservation summary resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationSummary extends Resource {
+model ReservationSummary extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the reservation summary.
    */
@@ -1214,7 +1214,7 @@ model ReservationSummaryProperties {
  * reservation detail resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationDetail extends Resource {
+model ReservationDetail extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the reservation detail.
    */
@@ -1314,7 +1314,7 @@ model ReservationDetailProperties {
  */
 @discriminator("kind")
 model ReservationRecommendation {
-  ...Resource;
+  ...Azure.ResourceManager.Foundations.Resource;
   ...ResourceAttributes;
 
   /**
@@ -1357,7 +1357,8 @@ model ResourceAttributes {
  * Reservation recommendation details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationRecommendationDetailsModel extends Resource {
+model ReservationRecommendationDetailsModel
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource Location.
    */
@@ -1476,7 +1477,7 @@ model ReservationRecommendationDetailsSavingsProperties {
   /**
    * List of calculated savings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   calculatedSavings?: ReservationRecommendationDetailsCalculatedSavingsProperties[];
 
   /**
@@ -1629,7 +1630,8 @@ model HighCasedErrorDetails {
  * Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationTransaction extends Resource {
+model ReservationTransaction
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of a legacy reservation transaction.
    */
@@ -1796,7 +1798,8 @@ model LegacyReservationTransactionProperties {
  * Modern Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ModernReservationTransaction extends Resource {
+model ModernReservationTransaction
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of a modern reservation transaction.
    */
@@ -1948,7 +1951,7 @@ model PriceSheetModel {
    * Price sheet
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["meterId"])
+  @identifiers(#["meterId"])
   pricesheets?: PriceSheetProperties[];
 
   /**
@@ -2174,7 +2177,8 @@ model OperationDisplay {
  * A management group aggregated cost resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManagementGroupAggregatedCostResult extends Resource {
+model ManagementGroupAggregatedCostResult
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the Management Group Aggregated Cost.
    */
@@ -2284,7 +2288,7 @@ model Events {
  * An event summary resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EventSummary extends ProxyResource {
+model EventSummary extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * The event properties.
    */
@@ -2535,7 +2539,7 @@ model Lots {
  * A lot summary resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LotSummary extends ProxyResource {
+model LotSummary extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * The lot properties.
    */
@@ -3674,7 +3678,7 @@ model LegacyReservationRecommendationProperties {
    * List of sku properties
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   skuProperties?: SkuProperty[];
 
   /**
@@ -3856,7 +3860,7 @@ model ModernReservationRecommendationProperties {
    * List of sku properties
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   skuProperties?: SkuProperty[];
 
   /**

@@ -26,32 +26,28 @@ describe("execFile", () => {
   it("exec fails with too-small buffer", async () => {
     await expect(
       execFile(file, args, { ...options, maxBuffer: expected.length - 1 }),
-    ).rejects.toThrowError(
-      expect.objectContaining({
-        stdout: "test",
-        stderr: "",
-        code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
-      }),
-    );
+    ).rejects.toMatchObject({
+      stdout: "test",
+      stderr: "",
+      code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER",
+    });
   });
 });
 
 describe("execNpm", () => {
   it("succeeds with --version", async () => {
-    await expect(execNpm(["--version"], options)).resolves.toEqual({
-      stdout: expect.toSatisfy((v) => semver.valid(v) !== null),
+    await expect(execNpm(["--version"], options)).resolves.toMatchObject({
+      stdout: /** @type {unknown} */ (expect.toSatisfy((v) => semver.valid(String(v)) !== null)),
       stderr: "",
     });
   });
 
   it("fails with --help", async () => {
-    await expect(execNpm(["--help"], options)).rejects.toThrowError(
-      expect.objectContaining({
-        stdout: expect.stringMatching(/usage/i),
-        stderr: "",
-        code: 1,
-      }),
-    );
+    await expect(execNpm(["--help"], options)).rejects.toMatchObject({
+      stdout: /** @type {unknown} */ (expect.stringMatching(/usage/i)),
+      stderr: "",
+      code: 1,
+    });
   });
 });
 
@@ -61,7 +57,7 @@ describe("execNpmExec", () => {
   // so it is used.
   it("runs prettier", async () => {
     await expect(execNpmExec(["prettier", "--version"], options)).resolves.toEqual({
-      stdout: expect.toSatisfy((v) => semver.valid(v) !== null),
+      stdout: /** @type {unknown} */ (expect.toSatisfy((v) => semver.valid(String(v)) !== null)),
       stderr: "",
       error: undefined,
     });

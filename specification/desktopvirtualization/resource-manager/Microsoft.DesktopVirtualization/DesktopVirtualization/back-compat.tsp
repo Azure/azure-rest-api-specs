@@ -64,3 +64,52 @@ using Microsoft.DesktopVirtualization;
 );
 
 @@clientName(MSIXImages, "MsixImages", "autorest");
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ActiveSessionHostConfiguration.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationGroup.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AppAttachPackage.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Application.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Desktop.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(HostPool.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MSIXPackage.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionWithSystemData.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPersonalSchedule.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlan.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScalingPlanPooledSchedule.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHost.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostConfiguration.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SessionHostManagement.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserSession.properties,
+  "autorest"
+);

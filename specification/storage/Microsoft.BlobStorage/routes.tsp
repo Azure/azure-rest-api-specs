@@ -31,8 +31,8 @@ namespace Storage.Blob {
     contentType: RequestMediaType,
 
     ...ApiVersionHeader,
-    ...TParams,
     ...ClientRequestIdHeader,
+    ...TParams,
   ): (TResponse & {
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -50,7 +50,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     TError = StorageError
-  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;

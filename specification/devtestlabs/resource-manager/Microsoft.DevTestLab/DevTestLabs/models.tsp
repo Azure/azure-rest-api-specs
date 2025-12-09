@@ -901,6 +901,7 @@ model ArtifactSourceProperties {
   /**
    * The security token to authenticate to the artifact source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   securityToken?: string;
 
   /**
@@ -1677,11 +1678,13 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
@@ -2835,11 +2838,13 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
