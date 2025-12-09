@@ -3,7 +3,7 @@
   "info": {
     "title": "HDInsightManagementClient",
     "description": "The HDInsight Management Client.",
-    "version": "2025-01-15-preview"
+    "version": "2023-08-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -80,15 +80,6 @@
           },
           "Create cluster with availability zones": {
             "$ref": "./examples/CreateHDInsightClusterWithAvailabilityZones.json"
-          },
-          "Create cluster with storage WASB + MSI": {
-            "$ref": "./examples/CreateHDInsightClusterWithWasbMsi.json"
-          },
-          "Create cluster with storage ADLSGen2 + MSI": {
-            "$ref": "./examples/CreateHDInsightClusterWithADLSGen2Msi.json"
-          },
-          "Create cluster with Entra User": {
-            "$ref": "./examples/CreateHDInsightClusterWithEntraUser.json"
           }
         },
         "parameters": [
@@ -142,9 +133,6 @@
         "x-ms-examples": {
           "Patch HDInsight Linux clusters": {
             "$ref": "./examples/PatchLinuxHadoopCluster.json"
-          },
-          "Patch HDInsight Linux clusters with system assigned MSI": {
-            "$ref": "./examples/PatchLinuxHadoopClusterWithSystemMSI.json"
           }
         },
         "parameters": [
@@ -608,9 +596,6 @@
         "x-ms-examples": {
           "Enable HTTP connectivity": {
             "$ref": "./examples/HDI_Clusters_UpdateGatewaySettings_Enable.json"
-          },
-          "Update Entra User In HDInsight": {
-            "$ref": "./examples/HDI_Clusters_UpdateGatewaySettings_EntraUser.json"
           }
         },
         "parameters": [
@@ -1287,30 +1272,8 @@
             "name": "PrivateLink",
             "modelAsString": true
           }
-        },
-        "publicIpTag": {
-          "description": "Gets or sets the IP tag for the public IPs created along with the HDInsight Clusters. ",
-          "$ref": "#/definitions/IpTag"
         }
       }
-    },
-    "IpTag": {
-      "type": "object",
-      "required": [
-        "ipTagType",
-        "tag"
-      ],
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "Gets or sets the ipTag type: Example FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "Gets or sets value of the IpTag associated with the public IP. Example HDInsight, SQL, Storage etc"
-        }
-      },
-      "description": "Contains the IpTag associated with the public IP address"
     },
     "ComputeIsolationProperties": {
       "type": "object",
@@ -1455,10 +1418,6 @@
             "type": "string"
           },
           "description": "The resource tags."
-        },
-        "identity": {
-          "$ref": "#/definitions/ClusterIdentity",
-          "description": "The identity of the cluster, if configured. Setting this property will override the existing identity configuration of the cluster."
         }
       },
       "description": "The PatchCluster request parameters"
@@ -1670,7 +1629,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1694,7 +1653,7 @@
           "description": "The identity of the cluster, if configured."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -2016,17 +1975,9 @@
           "type": "string",
           "x-ms-client-name": "password",
           "description": "The gateway settings user password."
-        },
-        "restAuthEntraUsers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntraUserInfo",
-            "description": "Details of an Entra user for gateway access."
-          },
-          "description": "List of Entra users for gateway access."
         }
       },
-      "description": "The update gateway settings request parameters. Note either basic or entra user should be provided at a time."
+      "description": "The update gateway settings request parameters."
     },
     "GatewaySettings": {
       "type": "object",
@@ -2048,35 +1999,9 @@
           "x-ms-client-name": "password",
           "description": "The gateway settings user password.",
           "readOnly": true
-        },
-        "restAuthEntraUsers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntraUserInfo",
-            "description": "Details of an Entra user for gateway access."
-          },
-          "description": "List of Entra users for gateway access."
         }
       },
       "description": "Gateway settings."
-    },
-    "EntraUserInfo": {
-      "type": "object",
-      "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "The unique object ID of the Entra user or client ID of the enterprise applications."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the Entra user."
-        },
-        "upn": {
-          "type": "string",
-          "description": "The User Principal Name (UPN) of the Entra user. It may be empty in certain cases, such as for enterprise applications."
-        }
-      },
-      "description": "Details of an Entra user for gateway access."
     },
     "AsyncOperationResult": {
       "type": "object",
