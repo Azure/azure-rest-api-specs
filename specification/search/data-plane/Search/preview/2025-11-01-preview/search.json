@@ -15457,12 +15457,17 @@
       "type": "object",
       "description": "Description for what data to store in Azure Tables.",
       "properties": {
+        "generatedKeyName": {
+          "type": "string",
+          "description": "Name of generated key to store projection under."
+        },
         "tableName": {
           "type": "string",
           "description": "Name of the Azure table to store projected data in."
         }
       },
       "required": [
+        "generatedKeyName",
         "tableName"
       ],
       "allOf": [

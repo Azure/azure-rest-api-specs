@@ -3765,6 +3765,9 @@ model SearchIndexerKnowledgeStoreProjection {
 @doc("Description for what data to store in Azure Tables.")
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
+  @doc("Name of generated key to store projection under.")
+  generatedKeyName: string;
+
   @doc("Name of the Azure table to store projected data in.")
   tableName: string;
 }
