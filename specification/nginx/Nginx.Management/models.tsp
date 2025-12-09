@@ -747,8 +747,8 @@ model NginxDeploymentScalingProperties {
   /**
    * The settings for enabling automatic scaling of the deployment. If this field is specified, 'scale.capacity' must be empty.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   autoScaleSettings?: NginxDeploymentScalingPropertiesAutoScaleSettings;
 }
 
@@ -978,8 +978,8 @@ model NginxDeploymentUpdateProperties {
   /**
    * Update settings for NGINX App Protect (NAP)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   nginxAppProtect?: NginxDeploymentUpdatePropertiesNginxAppProtect;
 }
 

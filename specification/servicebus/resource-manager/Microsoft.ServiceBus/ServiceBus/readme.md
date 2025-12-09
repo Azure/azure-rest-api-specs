@@ -288,6 +288,9 @@ directive:
   - suppress: PutResponseCodes
     from: AuthorizationRules.json
     reason: Breaking change in order to change the API response code.
+  - suppress: LroErrorContent
+    from: servicebus.json
+    reason: Suppress it for now to avoid breaking change because it is referenced by many files.Will update in next api version.Please scope the suppression to the Namespaces PATCH operation only.
 ```
 
 

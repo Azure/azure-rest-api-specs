@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-10-15",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1",
+    "fleetspaceName": "fleetspace1",
+    "fleetspaceAccountName": "db1",
+    "body": {
+      "properties": {
+        "globalDatabaseAccountProperties": {
+          "armLocation": "West US",
+          "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db1",
+        "name": "db1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "globalDatabaseAccountProperties": {
+            "armLocation": "West US",
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-10-15",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-10-15"
+      },
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db1",
+        "name": "db1",
+        "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "globalDatabaseAccountProperties": {
+            "armLocation": "West US",
+            "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+          }
+        }
+      }
+    }
+  }
+}

@@ -450,3 +450,8 @@ using Microsoft.AVS;
   Record<unknown>,
   "java,go"
 );
+
+// We do not wish for ServiceComponents operations to be in the SDKs.
+@@scope(ServiceComponents.checkAvailability,
+  "!(python,javascript,go,java,csharp)"
+);

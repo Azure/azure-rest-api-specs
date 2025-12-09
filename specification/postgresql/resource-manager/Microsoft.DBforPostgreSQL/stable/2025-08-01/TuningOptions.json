@@ -117,7 +117,22 @@
             "$ref": "#/parameters/TuningOptionParameter"
           },
           {
-            "$ref": "#/parameters/RecommendationTypeParameter"
+            "name": "recommendationType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "CreateIndex",
+              "DropIndex",
+              "ReIndex",
+              "AnalyzeTable"
+            ],
+            "x-ms-enum": {
+              "name": "RecommendationTypeParameterEnum",
+              "modelAsString": true
+            },
+            "description": "Recommendations list filter. Retrieves recommendations based on type.",
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -294,7 +309,7 @@
             "AnalyzeTable"
           ],
           "x-ms-enum": {
-            "name": "RecommendationType",
+            "name": "RecommendationTypeEnum",
             "modelAsString": true
           },
           "description": "Type for this recommendation."
@@ -440,24 +455,7 @@
       ],
       "description": "The name of the tuning option.",
       "x-ms-enum": {
-        "name": "TuningOption",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "RecommendationTypeParameter": {
-      "name": "recommendationType",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "CreateIndex",
-        "DropIndex",
-        "AnalyzeTable"
-      ],
-      "description": "Recommendations list filter. Retrieves recommendations based on type.",
-      "x-ms-enum": {
-        "name": "RecommendationType",
+        "name": "TuningOptionParameterEnum",
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"

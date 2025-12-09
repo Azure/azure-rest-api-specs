@@ -1,0 +1,27 @@
+{
+  "title": "NetworkFabrics_BatchUpdate",
+  "operationId": "NetworkFabrics_BatchUpdate",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "operation": "Stop",
+      "batchId": "batchid1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "batchId": "batchid1",
+        "configurationState": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

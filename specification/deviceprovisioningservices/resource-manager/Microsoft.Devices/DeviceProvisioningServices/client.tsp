@@ -16,6 +16,14 @@ using Microsoft.Devices;
   "certificate_name1",
   "python"
 );
+@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+  "certificateName1",
+  "go"
+);
+@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+  "certificateName1",
+  "go"
+);
 @@clientName(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "CheckDeviceProvisioningServicesNameAvailability",
   "csharp"

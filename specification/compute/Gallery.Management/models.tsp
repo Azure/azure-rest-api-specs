@@ -621,8 +621,8 @@ model GalleryUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a Shared Image Gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryProperties;
 
   /**
@@ -856,8 +856,8 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageProperties;
 }
 
@@ -1460,8 +1460,8 @@ model GalleryImageVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -1572,8 +1572,8 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery Application Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryApplicationProperties;
 }
 
@@ -1710,8 +1710,8 @@ model GalleryApplicationVersionUpdate extends UpdateResourceDefinition {
   /**
    * Describes the properties of a gallery image version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryApplicationVersionProperties;
 }
 
@@ -1761,8 +1761,8 @@ model GallerySoftDeletedResource
   /**
    * Describes the properties of a soft-deleted resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GallerySoftDeletedResourceProperties;
 }
 
@@ -2024,8 +2024,8 @@ model GalleryInVMAccessControlProfileVersionUpdate
   /**
    * Describes the properties of an inVMAccessControlProfile version.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryInVMAccessControlProfileVersionProperties;
 }
 
@@ -2067,8 +2067,8 @@ model PirSharedGalleryResource extends PirResource {
   /**
    * The identifier information of shared gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   identifier?: SharedGalleryIdentifier;
 }
 
@@ -2347,8 +2347,8 @@ model PirCommunityGalleryResource {
   /**
    * The identifier information of community gallery.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   identifier?: CommunityGalleryIdentifier;
 }
 
