@@ -39,14 +39,6 @@ model AkriServiceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  /** The number of replicas for the ADR service. */
-  @minValue(1)
-  @maxValue(5)
-  adrServiceReplicas?: int32 = 1;
-
-  /** Mqtt connection configuration settings. */
-  mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
-
   /** The status for the service. */
   @visibility(Lifecycle.Read)
   status?: AkriServiceStatus;
