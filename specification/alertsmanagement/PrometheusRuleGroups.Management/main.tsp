@@ -22,10 +22,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Prometheus Rule Groups Client
+ * Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "PrometheusRuleGroupsClient" })
+@service(#{ title: "Azure Alerts Management Service Resource Provider" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.AlertsManagement;

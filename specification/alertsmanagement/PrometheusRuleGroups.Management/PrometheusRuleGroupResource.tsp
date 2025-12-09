@@ -31,21 +31,21 @@ interface PrometheusRuleGroupResources {
   /**
    * Retrieve a Prometheus rule group definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_Get")
   get is ArmResourceRead<PrometheusRuleGroupResource>;
 
   /**
    * Create or update a Prometheus rule group definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<PrometheusRuleGroupResource>;
 
   /**
    * Update an Prometheus rule group definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -56,14 +56,14 @@ interface PrometheusRuleGroupResources {
   /**
    * Delete a Prometheus rule group definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_Delete")
   delete is ArmResourceDeleteSync<PrometheusRuleGroupResource>;
 
   /**
    * Retrieve Prometheus rule group definitions in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     PrometheusRuleGroupResource,
@@ -73,7 +73,7 @@ interface PrometheusRuleGroupResources {
   /**
    * Retrieve Prometheus all rule group definitions in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrometheusRuleGroups_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     PrometheusRuleGroupResource,

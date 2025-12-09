@@ -47,12 +47,16 @@ model PrometheusRuleGroupResourceCollection {
    */
   @pageItems
   value?: PrometheusRuleGroupResource[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * An Azure Prometheus rule group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrometheusRuleGroupProperties {
   /**
    * Rule group description.
@@ -113,7 +117,7 @@ model PrometheusRule {
   /**
    * Labels to add or overwrite before storing the result.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   labels?: Record<string>;
 
   /**
@@ -129,12 +133,13 @@ model PrometheusRule {
   /**
    * The annotations clause specifies a set of informational labels that can be used to store longer additional information such as alert descriptions or runbook links. The annotation values can be templated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   annotations?: Record<string>;
 
   /**
    * Actions that are performed when the alert rule becomes active, and when an alert condition is resolved.
    */
+  @identifiers(#[])
   actions?: PrometheusRuleGroupAction[];
 
   /**
@@ -155,7 +160,7 @@ model PrometheusRuleGroupAction {
   /**
    * The properties of an action group object.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actionProperties?: Record<string>;
 }
 
@@ -181,14 +186,14 @@ model PrometheusRuleGroupResourcePatchParameters {
   /**
    * Resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PrometheusRuleGroupResourcePatchParametersProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrometheusRuleGroupResourcePatchParametersProperties {
   /**
    * the flag that indicates whether the Prometheus rule group is enabled.
