@@ -1,0 +1,76 @@
+{
+  "title": "ScheduledActionExtension_ListByVms_MaximumSet",
+  "operationId": "ScheduledActionExtension_ListByVms",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceUri": "subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/testVM1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "resourceType": "VirtualMachine",
+              "actionType": "Start",
+              "startTime": "2025-12-03T12:55:56.397Z",
+              "endTime": "2025-12-03T12:55:56.397Z",
+              "schedule": {
+                "scheduledTime": "10:00:00",
+                "timeZone": "UTC",
+                "requestedWeekDays": [
+                  "Monday"
+                ],
+                "requestedMonths": [
+                  "January"
+                ],
+                "requestedDaysOfTheMonth": [
+                  30
+                ],
+                "executionParameters": {
+                  "optimizationPreference": "Cost",
+                  "retryPolicy": {
+                    "retryCount": 7,
+                    "retryWindowInMinutes": 17,
+                    "onFailureAction": "Unknown"
+                  }
+                },
+                "deadlineType": "Unknown"
+              },
+              "notificationSettings": [
+                {
+                  "destination": "admin@contoso.com",
+                  "type": "Email",
+                  "language": "en-us",
+                  "disabled": true
+                }
+              ],
+              "disabled": true,
+              "provisioningState": "Succeeded",
+              "resourceNotificationSettings": [
+                {
+                  "destination": "admin@contoso.com",
+                  "type": "Email",
+                  "language": "en-us",
+                  "disabled": true
+                }
+              ]
+            },
+            "id": "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.ComputeSchedule/scheduledActions/scheduledaction-test01",
+            "name": "knyvgraionucenjdoglqxpjdqvcj",
+            "type": "hylmdzpamvysqrtjepzpme",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-12-03T12:55:56.171Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-12-03T12:55:56.171Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}
