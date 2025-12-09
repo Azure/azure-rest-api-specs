@@ -59,7 +59,6 @@ model AkriConnectorTemplateProperties {
   @added(Versions.`2025-09-01-preview`)
   connectorMetadataRef?: string;
 
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status' instead."
   ...ResourceHealth;
 }
 

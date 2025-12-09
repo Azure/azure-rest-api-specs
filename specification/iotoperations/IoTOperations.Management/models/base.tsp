@@ -65,10 +65,11 @@ union ResourceHealthState {
   Unknown,
 }
 
-#deprecated "Field deprecated since v2025-12-01-preview service version. Use 'status' instead."
+// #deprecated "Field deprecated since v2025-12-01-preview service version. Use 'status' instead."
 alias ResourceHealth = {
   @doc("The health state of the resource.")
   @added(Versions.`2025-09-01-preview`)
+  @removed(Versions.`2025-12-01-preview`)
   @visibility(Lifecycle.Read)
   healthState?: ResourceHealthState = Unknown;
 };

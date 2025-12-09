@@ -55,7 +55,6 @@ model DataflowGraphProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: DataflowGraphStatus;
 
-  #suppress "deprecated" "ResourceHealth is deprecated, use 'status' instead."
   ...ResourceHealth;
 }
 
