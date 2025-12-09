@@ -1254,15 +1254,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "properties": {
-                "upgradeAfterDate": {
-                  "description": "The end date of the 30-day testing window in ISO 8601 format.",
-                  "type": "string",
-                  "format": "date",
-                  "readOnly": true
-                }
-              }
+              "$ref": "#/definitions/UpgradeWindow"
             }
           },
           "default": {
@@ -2098,6 +2090,18 @@
         "readyForUpgrade": {
           "type": "boolean",
           "description": "Indicates whether the service is ready for upgrade."
+        }
+      }
+    },
+    "UpgradeWindow": {
+      "description": "The 30-day testing window end date response.",
+      "type": "object",
+      "properties": {
+        "upgradeAfterDate": {
+          "description": "The end date of the 30-day testing window in ISO 8601 format.",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
         }
       }
     }
