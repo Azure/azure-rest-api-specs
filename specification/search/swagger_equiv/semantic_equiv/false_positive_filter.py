@@ -6,6 +6,7 @@ from the comparison results. False positives are differences that are expected
 and don't indicate actual semantic differences between the APIs.
 """
 
+import os
 import re
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Set
@@ -39,6 +40,7 @@ class FalsePositiveFilter:
     def __init__(self):
         """Initialize the filter with default rules."""
         self.rules: List[FalsePositiveRule] = []
+        self._known_false_positive_definitions: Optional[Set[str]] = None
         self._init_default_rules()
 
     def _init_default_rules(self) -> None:
@@ -129,6 +131,15 @@ class FalsePositiveFilter:
                 name="x_nullable_false_vs_missing",
                 description="Ignore x-nullable: false vs missing x-nullable (both mean not nullable)",
                 matcher=self._match_x_nullable_false_vs_missing,
+            )
+        )
+
+        # Known false positive definitions (comprehensive list)
+        self.add_rule(
+            FalsePositiveRule(
+                name="known_false_positive_definitions",
+                description="Ignore known false positive definition differences (comprehensive list)",
+                matcher=self._match_known_false_positive_definitions,
             )
         )
 
@@ -367,10 +378,12 @@ class FalsePositiveFilter:
 
     def _match_service_statistics_schema_name(self, diff: Difference) -> bool:
         """Match ServiceStatistics vs SearchServiceStatistics naming differences."""
-        if diff.type not in [
-            DifferenceType.RESPONSE_SCHEMA_MISMATCH,
-            DifferenceType.DEFINITION_MISMATCH,
-        ]:
+        # Check for response schema mismatches or any definition-related differences
+        if not (
+            diff.type == DifferenceType.RESPONSE_SCHEMA_MISMATCH
+            or diff.type == DifferenceType.DEFINITION_MISMATCH
+            or diff.type.value.startswith("def_mismatch")
+        ):
             return False
 
         message_lower = diff.message.lower()
@@ -386,11 +399,16 @@ class FalsePositiveFilter:
 
     def _match_definition_name_prefix(self, diff: Difference) -> bool:
         """Match definition name differences with Search prefix."""
-        if diff.type not in [
-            DifferenceType.MISSING_DEFINITION,
-            DifferenceType.EXTRA_DEFINITION,
-            DifferenceType.DEFINITION_MISMATCH,
-        ]:
+        # Check for any definition-related differences
+        if not (
+            diff.type
+            in [
+                DifferenceType.MISSING_DEFINITION,
+                DifferenceType.EXTRA_DEFINITION,
+                DifferenceType.DEFINITION_MISMATCH,
+            ]
+            or diff.type.value.startswith("def_mismatch")
+        ):
             return False
 
         # Pattern: one name is prefix of another with "Search" added
@@ -573,6 +591,71 @@ class FalsePositiveFilter:
 
         # If we get here, both are False or None - these are equivalent
         return True
+
+    def _load_known_false_positive_definitions(self) -> Set[str]:
+        """
+        Load known false positive definitions from the text file.
+
+        Returns:
+            Set of definition names and pairs
+        """
+        definitions = set()
+        # Get the directory where this Python file is located
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        definitions_file = os.path.join(
+            current_dir, "known_false_positive_definitions.txt"
+        )
+
+        try:
+            with open(definitions_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    # Strip whitespace
+                    line = line.strip()
+                    # Skip empty lines and comments
+                    if line and not line.startswith("#"):
+                        definitions.add(line)
+        except FileNotFoundError:
+            # If file doesn't exist, return empty set
+            # This allows the filter to continue working even if the file is missing
+            pass
+
+        return definitions
+
+    def _match_known_false_positive_definitions(self, diff: Difference) -> bool:
+        """
+        Match known false positive definition differences.
+        Checks if the definition name from the context field is in the known false positives list.
+        """
+        # Check if this is a definition-related difference
+        # This includes: DEFINITION_MISMATCH, DEFINITION_MISMATCH_TYPE, DEFINITION_MISMATCH_X_NULLABLE,
+        # DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES, DEFINITION_MISMATCH_DEFAULT, DEFINITION_MISMATCH_READONLY,
+        # MISSING_DEFINITION, EXTRA_DEFINITION
+        if not (
+            diff.type
+            in [DifferenceType.MISSING_DEFINITION, DifferenceType.EXTRA_DEFINITION]
+            or diff.type.value.startswith("def_mismatch")
+        ):
+            return False
+
+        # Load known false positive definitions from file (lazy loading)
+        if self._known_false_positive_definitions is None:
+            self._known_false_positive_definitions = (
+                self._load_known_false_positive_definitions()
+            )
+
+        known_false_positives = self._known_false_positive_definitions
+
+        # Extract definition name from context field
+        # Context format: "||<def_name>||||<possible_match>" for MISSING/EXTRA_DEFINITION
+        if diff.context:
+            # Split by "||" and get the definition name (second element)
+            parts = diff.context.split("||")
+            if len(parts) >= 2:
+                def_name = parts[1].strip()
+                if def_name in known_false_positives:
+                    return True
+
+        return False
 
 
 # Convenience function for use in CLI

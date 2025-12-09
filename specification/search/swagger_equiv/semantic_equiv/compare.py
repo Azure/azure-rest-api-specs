@@ -1178,7 +1178,55 @@ class ApiComparator:
         desc2 = describe_schema(schema2)
 
         if desc1 == desc2:
-            return f"schemas have same structure {desc1} but differ in content"
+            # Same structure but different content - try to identify what differs
+            content_diffs = []
+
+            # Check enum values if both have enums
+            if (
+                schema1.constraints
+                and schema2.constraints
+                and schema1.constraints.enum
+                and schema2.constraints.enum
+            ):
+                enum1 = set(schema1.constraints.enum)
+                enum2 = set(schema2.constraints.enum)
+                if enum1 != enum2:
+                    missing_values = enum1 - enum2
+                    extra_values = enum2 - enum1
+                    if missing_values:
+                        content_diffs.append(
+                            f"missing enum values: {sorted(missing_values)}"
+                        )
+                    if extra_values:
+                        content_diffs.append(
+                            f"extra enum values: {sorted(extra_values)}"
+                        )
+
+            # Check property values if both have properties
+            if schema1.properties and schema2.properties:
+                props1_set = set(schema1.properties.keys())
+                props2_set = set(schema2.properties.keys())
+                if props1_set != props2_set:
+                    missing_props = props1_set - props2_set
+                    extra_props = props2_set - props1_set
+                    if missing_props:
+                        content_diffs.append(
+                            f"missing properties: {sorted(missing_props)}"
+                        )
+                    if extra_props:
+                        content_diffs.append(f"extra properties: {sorted(extra_props)}")
+
+            # Check default values
+            if schema1.constraints and schema2.constraints:
+                if schema1.constraints.default != schema2.constraints.default:
+                    content_diffs.append(
+                        f"default: {schema1.constraints.default} vs {schema2.constraints.default}"
+                    )
+
+            if content_diffs:
+                return f"schemas have same structure {desc1}; differences: {'; '.join(content_diffs)}"
+            else:
+                return f"schemas have same structure {desc1} but differ in content (details unknown)"
         else:
             return f"schema structure differs: {desc1} vs {desc2}"
 
