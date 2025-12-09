@@ -50,8 +50,14 @@ enum Action {
 enum IntervalUnit {
   DAYS: "Days",
 }
-@@alternateType(TriggerParameters.intervalUnit, IntervalUnit, "java");
-@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnit, "java");
+@@alternateType(TriggerParameters.intervalUnit,
+  IntervalUnit,
+  "java, javascript"
+);
+@@alternateType(TriggerParametersUpdate.intervalUnit,
+  IntervalUnit,
+  "java, javascript"
+);
 
 @@usage(StorageAccount,
   Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
