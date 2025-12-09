@@ -110,14 +110,9 @@ interface MonitorResources {
   @list
   listManagedComputeResources is ArmResourceActionSync<
     MonitorResource,
-    {
-      /**
-       * Optional filter to get resources of a specific type.
-       */
-      @query
-      resourceType?: string;
-    },
-    ArmResponse<ManagedComputeResourceListResponse>
+    ManagedComputeResourcesRequest,
+    ArmResponse<ManagedComputeResourceListResponse>,
+    OptionalRequestBody = true
   >;
 
   /**
@@ -201,6 +196,9 @@ interface MonitorResources {
 );
 @@doc(MonitorResources.manageAgentInstallation::parameters.body,
   "List of resources and action"
+);
+@@doc(MonitorResources.listManagedComputeResources::parameters.body,
+  "The details of the list managed compute resources request."
 );
 @@doc(MonitorResources.getMetricStatus::parameters.body,
   "The details of the metric status request."

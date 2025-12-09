@@ -601,6 +601,28 @@ model VMExtensionPayload {
 }
 
 /**
+ * Resource types for managed compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union ManagedComputeResourceType {
+  string,
+
+  /** Azure Kubernetes Service managed clusters */
+  ManagedClusters: "managedClusters",
+}
+
+/**
+ * The request body for listing managed compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model ManagedComputeResourcesRequest {
+  /**
+   * Optional filter to get resources of a specific type.
+   */
+  resourceType?: ManagedComputeResourceType;
+}
+
+/**
  * Response of a list operation for managed compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)

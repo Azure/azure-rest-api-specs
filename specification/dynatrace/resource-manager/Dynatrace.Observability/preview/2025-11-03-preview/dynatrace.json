@@ -969,19 +969,12 @@
             "pattern": "^[a-zA-Z0-9_-]*$"
           },
           {
-            "name": "resourceType",
-            "in": "query",
-            "description": "Optional filter to get resources of a specific type.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
-            "required": true,
+            "description": "The details of the list managed compute resources request.",
+            "required": false,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ManagedComputeResourcesRequest"
             }
           }
         ],
@@ -2676,6 +2669,34 @@
       "required": [
         "value"
       ]
+    },
+    "ManagedComputeResourceType": {
+      "type": "string",
+      "description": "Resource types for managed compute resources.",
+      "enum": [
+        "managedClusters"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedComputeResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedClusters",
+            "value": "managedClusters",
+            "description": "Azure Kubernetes Service managed clusters"
+          }
+        ]
+      }
+    },
+    "ManagedComputeResourcesRequest": {
+      "type": "object",
+      "description": "The request body for listing managed compute resources.",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/ManagedComputeResourceType",
+          "description": "Optional filter to get resources of a specific type."
+        }
+      }
     },
     "ManagedIdentityType": {
       "type": "string",
