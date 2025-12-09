@@ -15,18 +15,26 @@ using Microsoft.Storage;
 @@clientName(SKUCapability, "SkuCapability", "java");
 @@clientName(IPRule, "IpRule", "java");
 @@clientName(IPRule.value, "ipAddressOrRange", "java");
+@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
 @@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
 @@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
 @@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
 @@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
 @@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
+@@clientName(AccountSasParameters.signedIp,
+  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  "javascript"
+);
 @@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
 @@clientName(FileShareLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
 @@clientName(FileShareLimits.minProvisionedIOPS, "minProvisionedIops", "java");
 @@clientName(BurstingConstants.burstFloorIOPS, "burstFloorIops", "java");
 @@clientName(AccountUsageElements.provisionedIOPS, "provisionedIops", "java");
 @@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
-@@clientName(ServiceSasParameters.signedIp, "iPAddressOrRange", "javascript");
+@@clientName(ServiceSasParameters.signedIp,
+  "$DO_NOT_NORMALIZE$iPAddressOrRange",
+  "javascript"
+);
 
 // should only be used in Java
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
