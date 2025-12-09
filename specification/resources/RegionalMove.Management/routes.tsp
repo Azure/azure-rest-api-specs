@@ -25,8 +25,8 @@ interface RegionalMoveContainers {
 
   delete is ArmResourceDeleteSync<RegionalMoveContainer>;
 
-  @action("finalize")
-  finalize is ArmResourceActionSync<
+  @action("finalizeMove")
+  finalizeMove is ArmResourceActionSync<
     RegionalMoveContainer,
     RegionalMoveFinalizationRequestContent,
     OkResponse,
