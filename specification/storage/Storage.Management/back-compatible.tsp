@@ -61,7 +61,7 @@ using Microsoft.Storage;
 
 @@clientName(VirtualNetworkRule.id, "VirtualNetworkResourceId");
 
-@@clientName(IPRule.value, "IPAddressOrRange", "!java");
+@@clientName(IPRule.value, "IPAddressOrRange", "!java, !javascript");
 
 @@clientName(NetworkRuleSet.bypass, "Bypass");
 
@@ -129,14 +129,20 @@ using Microsoft.Storage;
 @@clientName(AccountSasParameters.signedServices, "Services");
 @@clientName(AccountSasParameters.signedResourceTypes, "ResourceTypes");
 @@clientName(AccountSasParameters.signedPermission, "Permissions");
-@@clientName(AccountSasParameters.signedIp, "IPAddressOrRange", "!java");
+@@clientName(AccountSasParameters.signedIp,
+  "IPAddressOrRange",
+  "!java, !javascript"
+);
 @@clientName(AccountSasParameters.signedProtocol, "Protocols");
 @@clientName(AccountSasParameters.signedStart, "SharedAccessStartTime");
 @@clientName(AccountSasParameters.signedExpiry, "SharedAccessExpiryTime");
 
 @@clientName(ServiceSasParameters.signedResource, "Resource");
 @@clientName(ServiceSasParameters.signedPermission, "Permissions");
-@@clientName(ServiceSasParameters.signedIp, "IPAddressOrRange", "!java");
+@@clientName(ServiceSasParameters.signedIp,
+  "IPAddressOrRange",
+  "!java, !javascript"
+);
 @@clientName(ServiceSasParameters.signedProtocol, "Protocols");
 @@clientName(ServiceSasParameters.signedStart, "SharedAccessStartTime");
 @@clientName(ServiceSasParameters.signedExpiry, "SharedAccessExpiryTime");
