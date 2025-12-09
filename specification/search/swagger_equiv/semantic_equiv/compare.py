@@ -679,9 +679,12 @@ class ApiComparator:
                 schema_diffs = self._get_schema_differences(
                     param1.schema, param2.schema
                 )
-                diff_details = (
-                    "; ".join(schema_diffs) if schema_diffs else "unknown differences"
-                )
+                if not schema_diffs:
+                    # If no specific diffs found, provide basic comparison
+                    schema_diffs = [
+                        self._get_basic_schema_comparison(param1.schema, param2.schema)
+                    ]
+                diff_details = "; ".join(schema_diffs)
 
                 self.differences.append(
                     Difference(
@@ -724,11 +727,14 @@ class ApiComparator:
                 constraint_diffs = self._get_constraint_differences(
                     param1.constraints, param2.constraints
                 )
-                diff_details = (
-                    "; ".join(constraint_diffs)
-                    if constraint_diffs
-                    else "unknown differences"
-                )
+                if not constraint_diffs:
+                    # If no specific diffs found, provide basic constraint info
+                    constraint_diffs = [
+                        self._get_basic_constraint_comparison(
+                            param1.constraints, param2.constraints
+                        )
+                    ]
+                diff_details = "; ".join(constraint_diffs)
 
                 self.differences.append(
                     Difference(
@@ -895,17 +901,28 @@ class ApiComparator:
                     context=context,
                 )
             )
-            print(
-                f"Response schemas mismatch \t {context}\t {'; '.join(schema_diffs) if schema_diffs else 'unknown differences'}"
-            )
+            if not schema_diffs:
+                # If no specific diffs found, provide basic comparison
+                schema_diffs = [
+                    self._get_basic_schema_comparison(
+                        response1.schema, response2.schema
+                    )
+                ]
+            print(f"Response schemas mismatch \t {context}\t {'; '.join(schema_diffs)}")
 
         # Response headers must match
         if not self._headers_equal(resp1.headers, resp2.headers):
             # Get detailed header differences
             header_diffs = self._get_header_differences(resp1.headers, resp2.headers)
-            diff_details = (
-                "; ".join(header_diffs) if header_diffs else "unknown differences"
-            )
+            if not header_diffs:
+                # If no specific diffs found, report header count or keys
+                h1_keys = set((resp1.headers or {}).keys())
+                h2_keys = set((resp2.headers or {}).keys())
+                if h1_keys != h2_keys:
+                    header_diffs = [f"header keys differ: {h1_keys} vs {h2_keys}"]
+                else:
+                    header_diffs = ["header values differ"]
+            diff_details = "; ".join(header_diffs)
 
             self.differences.append(
                 Difference(
@@ -1086,21 +1103,126 @@ class ApiComparator:
             )
 
     def _format_short_diffs(self, schema_diffs: List[str]) -> List[str]:
-        """Format schema differences in shorter format."""
+        """Format schema differences in shorter, more readable format."""
         short_diffs = []
         for diff in schema_diffs:
-            # Keep constraint diffs short
+            # Handle constraint diffs - remove "constraint" prefix, normalize names
             if diff.startswith("constraint "):
                 # Extract the key part: constraint x_nullable: True vs None -> x-nullable: True vs None
                 diff = diff.replace("constraint ", "")
                 diff = diff.replace("x_nullable", "x-nullable")
                 diff = diff.replace("read_only", "readOnly")
-            # Keep property diffs short
+            # Handle property diffs - use backticks and cleaner format
             elif diff.startswith("property '"):
-                # property 'name': type: string vs None -> property `name`: type: string vs None
-                diff = diff.replace("property '", "property `").replace("':", "`:")
+                # property 'name': type: string vs None -> Property `name`: type: string vs None
+                diff = diff.replace("property '", "Property `").replace("':", "`:")
+            # Handle other common patterns
+            elif diff.startswith("type:"):
+                diff = diff.replace("type:", "Type:")
+            elif diff.startswith("format:"):
+                diff = diff.replace("format:", "Format:")
+            elif diff.startswith("required:"):
+                diff = diff.replace("required:", "Required:")
+
             short_diffs.append(diff)
         return short_diffs
+
+    def _get_basic_schema_comparison(
+        self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
+    ) -> str:
+        """Get a basic comparison string when detailed differences can't be determined.
+
+        This is a fallback that provides useful information about what differs
+        between two schemas when _get_schema_differences returns empty.
+        """
+        if schema1 is None and schema2 is None:
+            return "both schemas are None"
+        if schema1 is None:
+            return "first schema is None"
+        if schema2 is None:
+            return "second schema is None"
+
+        # Build a description of each schema's key characteristics
+        def describe_schema(s: CanonicalSchema) -> str:
+            parts = []
+            if s.type:
+                parts.append(f"type={s.type}")
+            if s.format:
+                parts.append(f"format={s.format}")
+            if s.ref:
+                ref_name = s.ref.split("/")[-1] if "/" in s.ref else s.ref
+                parts.append(f"$ref={ref_name}")
+            if s.properties:
+                parts.append(f"properties={len(s.properties)}")
+            if s.items:
+                parts.append("items=defined")
+            if s.all_of:
+                parts.append(f"allOf={len(s.all_of)}")
+            if s.one_of:
+                parts.append(f"oneOf={len(s.one_of)}")
+            if s.any_of:
+                parts.append(f"anyOf={len(s.any_of)}")
+            if s.constraints:
+                const_parts = []
+                if s.constraints.enum:
+                    const_parts.append(f"enum({len(s.constraints.enum)})")
+                if s.constraints.x_nullable is not None:
+                    const_parts.append(f"x-nullable={s.constraints.x_nullable}")
+                if s.constraints.read_only is not None:
+                    const_parts.append(f"readOnly={s.constraints.read_only}")
+                if const_parts:
+                    parts.append(f"constraints=[{','.join(const_parts)}]")
+            return "{" + ", ".join(parts) + "}" if parts else "{empty}"
+
+        desc1 = describe_schema(schema1)
+        desc2 = describe_schema(schema2)
+
+        if desc1 == desc2:
+            return f"schemas have same structure {desc1} but differ in content"
+        else:
+            return f"schema structure differs: {desc1} vs {desc2}"
+
+    def _get_basic_constraint_comparison(
+        self, c1: Optional[CanonicalConstraints], c2: Optional[CanonicalConstraints]
+    ) -> str:
+        """Get a basic comparison string for constraints when detailed differences can't be determined."""
+        if c1 is None and c2 is None:
+            return "both constraints are None"
+        if c1 is None:
+            return "first constraints is None"
+        if c2 is None:
+            return "second constraints is None"
+
+        # Build a description of each constraint's key characteristics
+        def describe_constraints(c: CanonicalConstraints) -> str:
+            parts = []
+            if c.minimum is not None:
+                parts.append(f"min={c.minimum}")
+            if c.maximum is not None:
+                parts.append(f"max={c.maximum}")
+            if c.min_length is not None:
+                parts.append(f"minLen={c.min_length}")
+            if c.max_length is not None:
+                parts.append(f"maxLen={c.max_length}")
+            if c.enum:
+                parts.append(f"enum({len(c.enum)})")
+            if c.pattern:
+                parts.append(f"pattern='{c.pattern}'")
+            if c.x_nullable is not None:
+                parts.append(f"x-nullable={c.x_nullable}")
+            if c.read_only is not None:
+                parts.append(f"readOnly={c.read_only}")
+            if c.default is not None:
+                parts.append(f"default={c.default}")
+            return "{" + ", ".join(parts) + "}" if parts else "{empty}"
+
+        desc1 = describe_constraints(c1)
+        desc2 = describe_constraints(c2)
+
+        if desc1 == desc2:
+            return f"constraints have same structure {desc1} but differ in values"
+        else:
+            return f"constraint structure differs: {desc1} vs {desc2}"
 
     def _categorize_definition_mismatch(
         self, def_name: str, schema_diffs: List[str]
@@ -1274,10 +1396,12 @@ class ApiComparator:
                             f"property '{prop_name}': {'; '.join(prop_diffs)}"
                         )
                     else:
-                        # Property differs but we couldn't determine why - report it anyway
-                        differences.append(
-                            f"property '{prop_name}': schemas differ (details unknown)"
+                        # Property differs but we couldn't determine specific differences
+                        # Provide basic schema info as fallback
+                        basic_diff = self._get_basic_schema_comparison(
+                            props1[prop_name], props2[prop_name]
                         )
+                        differences.append(f"property '{prop_name}': {basic_diff}")
 
             if schema1.required != schema2.required:
                 req1 = schema1.required or frozenset()
@@ -1591,8 +1715,8 @@ class ApiComparator:
 
         This implements depth-first comparison with memoization:
         - If both schemas have $ref to definitions, extract the definition names
-        - Check if those definitions have been compared already (in compared_definitions)
-        - If not, trigger comparison and add to compared_definitions
+        - Check if those definitions have been compared already using tuple-based memoization
+        - If not, trigger comparison and add to compared_definition_pairs
 
         This prevents duplicate reporting and handles nested references efficiently.
         """
@@ -1622,14 +1746,26 @@ class ApiComparator:
         ):
             return
 
-        # Check if already compared (memoization)
-        # For renamed definitions, use the source (hand-authored) name as the key
-        comparison_key = def_name1
-        if comparison_key in self.compared_definitions:
+        # Normalize def_name2 if it's a known rename
+        # Check if def_name2 is in KNOWN_DEFINITION_RENAMES values, and if so, use the mapped hand-authored name
+        normalized_def_name1 = def_name1
+        for hand_name, tsp_name in KNOWN_DEFINITION_RENAMES.items():
+            if def_name1 == hand_name and def_name2 == tsp_name:
+                # This is a known mapping, use it as-is
+                normalized_def_name1 = hand_name
+                break
+            elif def_name1 == tsp_name:
+                # def_name1 might be using TSP name, normalize to hand-authored
+                normalized_def_name1 = hand_name
+                break
+
+        # Check if already compared using tuple-based memoization
+        comparison_key = (normalized_def_name1, def_name2)
+        if comparison_key in self.compared_definition_pairs:
             return
 
         # Mark as compared to prevent infinite recursion and duplicate reporting
-        self.compared_definitions.add(comparison_key)
+        self.compared_definition_pairs.add(comparison_key)
 
         # Trigger recursive comparison
         def_schema1 = self.api1.definitions[def_name1]
@@ -1651,11 +1787,21 @@ class ApiComparator:
                     def_name1, schema_diffs
                 )
 
-                message = (
-                    f"Definition '{def_name1}'"
-                    + (f" VS '{def_name2}'" if def_name1 != def_name2 else "")
-                    + f":\n- {chr(10).join([f'- {d}' if not d.startswith('-') else d for d in short_diffs])}"
-                )
+                # Build message with cleaner bullet point formatting
+                if def_name1 != def_name2:
+                    header = f"Definition `{def_name1}` VS `{def_name2}`"
+                else:
+                    header = f"Definition `{def_name1}`"
+
+                # Format differences with proper bullets and indentation
+                formatted_diffs = []
+                for d in short_diffs:
+                    if not d.startswith("- ") and not d.startswith("  "):
+                        formatted_diffs.append(f"  - {d}")
+                    else:
+                        formatted_diffs.append(f"  {d}")
+
+                message = f"{header}:\n" + "\n".join(formatted_diffs)
 
                 self.differences.append(
                     Difference(
@@ -1668,7 +1814,7 @@ class ApiComparator:
                     f"Definition schemas mismatch (recursive)\t {def_name1}"
                     + (f" ~ {def_name2}" if def_name1 != def_name2 else "")
                 )
-                print(f"\n- " + "\n- ".join(short_diffs))
+                print(f"\n  - " + "\n  - ".join(short_diffs))
 
     def _format_additional_properties(self, add_props) -> str:
         """Format additionalProperties for readable display."""
@@ -2056,6 +2202,14 @@ class ApiComparator:
             return False
 
         # All constraint fields must match exactly, including readOnly and x-nullable
+        # Special handling: x_nullable=False is equivalent to x_nullable=None (false positive)
+        x_nullable1 = (
+            constraints1.x_nullable if constraints1.x_nullable is not False else None
+        )
+        x_nullable2 = (
+            constraints2.x_nullable if constraints2.x_nullable is not False else None
+        )
+
         return (
             constraints1.minimum == constraints2.minimum
             and constraints1.maximum == constraints2.maximum
@@ -2070,7 +2224,7 @@ class ApiComparator:
             and constraints1.enum == constraints2.enum  # Frozensets handle ordering
             and constraints1.default == constraints2.default
             and constraints1.read_only == constraints2.read_only
-            and constraints1.x_nullable == constraints2.x_nullable
+            and x_nullable1 == x_nullable2  # False and None are treated as equivalent
         )
 
     def _get_constraint_differences(
@@ -2176,10 +2330,14 @@ class ApiComparator:
         # Azure-specific extensions
         if constraints1.x_nullable != constraints2.x_nullable:
             # Only report if hand-authored has True and TSP has None
+            # Note: False vs None is NOT reported (false positive)
             if constraints1.x_nullable is True and constraints2.x_nullable is None:
                 differences.append(
                     f"x_nullable: {constraints1.x_nullable} vs {constraints2.x_nullable}"
                 )
+            # Explicitly skip False vs None as it's a false positive
+            elif constraints1.x_nullable is False and constraints2.x_nullable is None:
+                pass  # This is a known false positive, don't report
 
         return differences
 
@@ -3091,10 +3249,19 @@ class ApiComparator:
         x_nullable1 = param1.constraints.x_nullable if param1.constraints else None
         x_nullable2 = param2.constraints.x_nullable if param2.constraints else None
 
-        if x_nullable1 != x_nullable2:
-            differences_found.append(
-                f"x-nullable: {source1}={x_nullable1} vs {source2}={x_nullable2}"
-            )
+        # Normalize: treat False as None (false positive)
+        x_nullable1_normalized = x_nullable1 if x_nullable1 is not False else None
+        x_nullable2_normalized = x_nullable2 if x_nullable2 is not False else None
+
+        if x_nullable1_normalized != x_nullable2_normalized:
+            # Only report if it's not a False vs None comparison (which is a false positive)
+            if not (
+                (x_nullable1 is False and x_nullable2 is None)
+                or (x_nullable1 is None and x_nullable2 is False)
+            ):
+                differences_found.append(
+                    f"x-nullable: {source1}={x_nullable1} vs {source2}={x_nullable2}"
+                )
 
         # Check if this is comparing with different naming conventions
         # The full_name1 might have x-ms-client-name, full_name2 might be SearchOptions.camelCase
@@ -3365,25 +3532,33 @@ class ApiComparator:
                 context_name, schema_diffs
             )
 
-            # Format differences
+            # Format differences with cleaner bullet points
             short_diffs = self._format_short_diffs(schema_diffs)
-            diff_details = (
-                "\n- " + "\n- ".join(short_diffs)
-                if short_diffs
-                else "unknown differences"
-            )
+
+            # Format differences with proper bullets and indentation
+            formatted_diffs = []
+            for d in short_diffs:
+                if not d.startswith("- ") and not d.startswith("  "):
+                    formatted_diffs.append(f"  - {d}")
+                else:
+                    formatted_diffs.append(f"  {d}")
+
+            if not formatted_diffs:
+                # If no specific diffs found, provide basic comparison
+                basic_diff = self._get_basic_schema_comparison(
+                    resolved_schema1, resolved_schema2
+                )
+                formatted_diffs = [f"  - {basic_diff}"]
+            diff_details = "\n" + "\n".join(formatted_diffs)
 
             # Build message
             if hand_name != tsp_name:
-                message = f"Definition '{hand_name}' VS '{tsp_name}':{diff_details}"
+                message = f"Definition `{hand_name}` VS `{tsp_name}`:{diff_details}"
                 context_str = f"||{hand_name}||||{tsp_name}"
                 print(
-                    f"Definition schemas mismatch ({source})\t {hand_name} ~ {tsp_name}\n{diff_details}"
+                    f"Definition schemas mismatch ({source})\t {hand_name} ~ {tsp_name}{diff_details}"
                 )
             else:
-                message = f"Definition '{hand_name}':{diff_details}"
-                context_str = f"||{hand_name}||||"
-
                 # Find references for common definitions
                 refs1 = self._find_definition_references(hand_name, api1)
                 refs2 = self._find_definition_references(tsp_name, api2)
@@ -3395,9 +3570,13 @@ class ApiComparator:
                 no_ref_info = (
                     f" (no ref in {'/'.join(no_ref_parts)})" if no_ref_parts else ""
                 )
-                message += no_ref_info
+
+                message = f"Definition `{hand_name}`:{diff_details}"
+                if no_ref_info:
+                    message += f"\n  - Note: {no_ref_info[2:-1]}"  # Remove leading ' (' and trailing ')'
+                context_str = f"||{hand_name}||||"
                 print(
-                    f"Definition schemas mismatch\t {hand_name}{no_ref_info}\n{diff_details}"
+                    f"Definition schemas mismatch\t {hand_name}{no_ref_info}{diff_details}"
                 )
 
             self.differences.append(
