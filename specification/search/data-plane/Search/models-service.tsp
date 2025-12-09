@@ -3765,9 +3765,6 @@ model SearchIndexerKnowledgeStoreProjection {
 @doc("Description for what data to store in Azure Tables.")
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
-  @doc("Name of generated key to store projection under.")
-  generatedKeyName: string;
-
   @doc("Name of the Azure table to store projected data in.")
   tableName: string;
 }
@@ -4009,7 +4006,7 @@ model SearchField {
   @doc("The dimensionality of the vector field.")
   @maxValue(4096)
   @minValue(2)
-  dimensions?: int32 | null;
+  dimensions?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field.")
@@ -5432,19 +5429,19 @@ model HnswParameters {
   @doc("The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time.")
   @maxValue(10)
   @minValue(4)
-  m?: int32 | null = 4;
+  m?: int32 = 4;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns.")
   @maxValue(1000)
   @minValue(100)
-  efConstruction?: int32 | null = 400;
+  efConstruction?: int32 = 400;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns.")
   @maxValue(1000)
   @minValue(100)
-  efSearch?: int32 | null = 500;
+  efSearch?: int32 = 500;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The similarity metric to use for vector comparisons.")
@@ -6024,7 +6021,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6048,7 +6045,7 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6070,7 +6067,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   @doc("A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'.")
   maskingMode?: PIIDetectionSkillMaskingMode;
@@ -6078,7 +6075,7 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'.")
   @maxLength(1)
-  maskingCharacter?: string | null;
+  maskingCharacter?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")

@@ -6059,7 +6059,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "modelVersion": {
           "type": "string",
@@ -6094,7 +6095,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "modelVersion": {
           "type": "string",
@@ -6547,21 +6549,24 @@
           "format": "int32",
           "description": "The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time.",
           "default": 4,
-          "x-nullable": true
+          "minimum": 4,
+          "maximum": 10
         },
         "efConstruction": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 400,
-          "x-nullable": true
+          "minimum": 100,
+          "maximum": 1000
         },
         "efSearch": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 500,
-          "x-nullable": true
+          "minimum": 100,
+          "maximum": 1000
         },
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
@@ -12735,7 +12740,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "maskingMode": {
           "$ref": "#/definitions/PIIDetectionSkillMaskingMode",
@@ -12744,7 +12750,7 @@
         "maskingCharacter": {
           "type": "string",
           "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'.",
-          "x-nullable": true
+          "maxLength": 1
         },
         "modelVersion": {
           "type": "string",
@@ -14550,7 +14556,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The dimensionality of the vector field.",
-          "x-nullable": true
+          "minimum": 2,
+          "maximum": 4096
         },
         "vectorSearchProfile": {
           "type": "string",
@@ -15437,17 +15444,12 @@
       "type": "object",
       "description": "Description for what data to store in Azure Tables.",
       "properties": {
-        "generatedKeyName": {
-          "type": "string",
-          "description": "Name of generated key to store projection under."
-        },
         "tableName": {
           "type": "string",
           "description": "Name of the Azure table to store projected data in."
         }
       },
       "required": [
-        "generatedKeyName",
         "tableName"
       ],
       "allOf": [
