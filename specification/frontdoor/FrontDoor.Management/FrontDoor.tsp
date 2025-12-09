@@ -13,14 +13,23 @@ namespace Microsoft.Network;
 /**
  * Front Door represents a collection of backend endpoints to route traffic to along with rules that specify how traffic is sent there.
  */
-model FrontDoor
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FrontDoorProperties> {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model FrontDoor is Azure.ResourceManager.ProxyResource<FrontDoorProperties> {
   ...ResourceNameParameter<
     Resource = FrontDoor,
     KeyName = "frontDoorName",
     SegmentName = "frontDoors",
     NamePattern = "^[a-zA-Z0-9]+([-a-zA-Z0-9]?[a-zA-Z0-9])*$"
   >;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /** Resource tags. */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

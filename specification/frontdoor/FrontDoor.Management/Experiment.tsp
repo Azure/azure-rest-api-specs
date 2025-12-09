@@ -14,15 +14,24 @@ namespace Microsoft.Network;
 /**
  * Defines the properties of an Experiment
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Profile)
-model Experiment
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ExperimentProperties> {
+model Experiment is Azure.ResourceManager.ProxyResource<ExperimentProperties> {
   ...ResourceNameParameter<
     Resource = Experiment,
     KeyName = "experimentName",
     SegmentName = "Experiments",
     NamePattern = "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$"
   >;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /** Resource tags. */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

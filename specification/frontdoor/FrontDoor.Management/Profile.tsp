@@ -13,8 +13,9 @@ namespace Microsoft.Network;
 /**
  * Defines an Network Experiment Profile and lists of Experiments
  */
-model Profile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Profile is Azure.ResourceManager.ProxyResource<ProfileProperties> {
   ...ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
@@ -27,6 +28,14 @@ model Profile
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   etag?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /** Resource tags. */
+  tags?: Record<string>;
 }
 
 @armResourceOperations

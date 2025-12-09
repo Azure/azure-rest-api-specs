@@ -2019,7 +2019,7 @@ model ManagedRuleSetDefinitionList is Azure.Core.Page<ManagedRuleSetDefinition>;
  * Describes the a managed rule set definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ManagedRuleSetDefinition is Resource {
+model ManagedRuleSetDefinition extends Resource {
   /**
    * Properties for a managed rule set definition.
    */
@@ -2979,11 +2979,39 @@ model PreconfiguredEndpointList is Azure.Core.Page<PreconfiguredEndpoint>;
  * Defines the properties of a preconfigured endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PreconfiguredEndpoint extends Resource {
+model PreconfiguredEndpoint {
   /**
    * The properties of a preconfiguredEndpoint
    */
   properties?: PreconfiguredEndpointProperties;
+
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the endpoint.
+   */
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
 }
 
 /**
