@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-preview-2025-11-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-11-01-preview'
 input-file:
-  - Microsoft.Subscription/preview/2025-11-01-preview/subscriptions.json
+  - preview/2025-11-01-preview/subscriptions.json
 ```
 
 ### Tag: package-2024-08-preview
