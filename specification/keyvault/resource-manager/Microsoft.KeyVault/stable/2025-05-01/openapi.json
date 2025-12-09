@@ -3087,8 +3087,8 @@
       "type": "string",
       "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
       "enum": [
-        "recover",
-        "default"
+        "default",
+        "recover"
       ],
       "x-ms-enum": {
         "name": "CreateMode",
@@ -4046,11 +4046,19 @@
           "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ManagedHsmResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4071,6 +4079,11 @@
       "type": "object",
       "description": "Properties of a private link resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource",
+          "readOnly": true
+        },
         "groupId": {
           "type": "string",
           "description": "Group identifier of private link resource.",
@@ -4576,55 +4589,6 @@
           "$ref": "#/definitions/ManagedHSMSecurityDomainProperties",
           "description": "Managed HSM security domain properties.",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedHsmResource": {
-      "type": "object",
-      "description": "Managed HSM resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Azure Resource Manager resource ID for the managed HSM Pool.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location where the managed HSM Pool should be created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/ManagedHsmSku",
-          "description": "SKU details"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the key vault resource.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       }
     },
@@ -5731,16 +5695,20 @@
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
         },
-        "location": {
-          "type": "string",
-          "description": "Azure location of the key vault resource."
-        },
         "tags": {
           "type": "object",
-          "description": "Tags assigned to the key vault resource.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5748,7 +5716,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
