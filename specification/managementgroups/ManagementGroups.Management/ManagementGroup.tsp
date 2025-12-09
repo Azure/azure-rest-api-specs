@@ -167,7 +167,6 @@ interface ManagementGroups {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @list
   @get
   @action("settings")
   list is Extension.ActionSync<

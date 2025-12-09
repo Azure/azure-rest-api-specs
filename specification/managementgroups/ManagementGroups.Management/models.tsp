@@ -697,7 +697,6 @@ model HierarchySettingsList {
   /**
    * The list of hierarchy settings.
    */
-  @pageItems
   value?: HierarchySettingsInfo[];
 
   /**
@@ -1065,6 +1064,16 @@ model EntityHierarchyItemProperties {
   children?: EntityHierarchyItem[];
 }
 
-model EntityListResult is Azure.Core.Page<EntityInfo>;
+/**
+ * Describes the result of the request to view entities.
+ */
+model EntityListResult {
+  ...Azure.Core.Page<EntityInfo>;
+
+  /**
+   * Total count of records that match the filter.
+   */
+  count?: int32;
+}
 
 model DescendantListResult is Azure.Core.Page<DescendantInfo>;

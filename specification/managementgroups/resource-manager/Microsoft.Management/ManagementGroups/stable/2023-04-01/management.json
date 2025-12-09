@@ -487,7 +487,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ManagementGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -611,7 +612,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AzureAsyncOperationResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -1596,7 +1598,7 @@
     },
     "EntityListResult": {
       "type": "object",
-      "description": "Paged collection of EntityInfo items",
+      "description": "Describes the result of the request to view entities.",
       "properties": {
         "value": {
           "type": "array",
@@ -1609,6 +1611,11 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of records that match the filter."
         }
       },
       "required": [
