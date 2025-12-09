@@ -1,4 +1,4 @@
-name: ARM Auto SignOff
+name: ARM Auto SignOff - Set Status
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -12,7 +12,11 @@ on:
       - unlabeled
   workflow_run:
     workflows:
-      ["ARM Incremental TypeSpec", "Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+      [
+        "ARM Auto Signoff - Analyze Code",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
     types: [completed]
 
 permissions:
@@ -29,8 +33,8 @@ permissions:
   statuses: read
 
 jobs:
-  arm-auto-signoff:
-    name: ARM Auto SignOff
+  arm-auto-signoff-status:
+    name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
     # pull_request_target:labeled - filter to only the input and output labels
@@ -74,7 +78,7 @@ jobs:
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
             return await getLabelAction({ github, context, core });
 
       - if: |
