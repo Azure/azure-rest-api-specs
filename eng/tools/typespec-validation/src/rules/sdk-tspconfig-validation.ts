@@ -576,6 +576,99 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+export class TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule extends TspconfigSubRuleBase {
+  private emitterName = "@azure-tools/typespec-python";
+
+  constructor() {
+    super("namespace", "derived from emitter-output-dir");
+  }
+
+  public getPathOfKeyToValidate() {
+    return `options.${this.emitterName}.namespace`;
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const emitterOptions = config?.options?.[this.emitterName];
+    if (!emitterOptions || typeof emitterOptions !== "object")
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}" with the required python emitter settings`,
+        `Please configure "options.${this.emitterName}" with the python emitter settings including "namespace" and "emitter-output-dir"`,
+      );
+
+    const namespace = emitterOptions?.namespace;
+    if (typeof namespace !== "string" || namespace.trim().length === 0)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.namespace" with the value derived from "emitter-output-dir"`,
+        `Please add "options.${this.emitterName}.namespace" and ensure it matches the value derived from "emitter-output-dir"`,
+      );
+
+    const emitterOutputDir = emitterOptions?.["emitter-output-dir"];
+    if (typeof emitterOutputDir !== "string" || emitterOutputDir.trim().length === 0)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.emitter-output-dir" used to derive the namespace`,
+        `Please add "options.${this.emitterName}.emitter-output-dir" and ensure it matches the python SDK naming convention`,
+      );
+
+    const resolvedSegmentResult = this.resolveLastPathSegment(emitterOutputDir, emitterOptions);
+    if (!resolvedSegmentResult.success)
+      return this.createFailedResult(resolvedSegmentResult.error, resolvedSegmentResult.action);
+
+    const derivedNamespace = resolvedSegmentResult.segment.replace(/-/g, ".");
+
+    if (derivedNamespace !== namespace)
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.namespace "${namespace}" does not match the value derived from options.${this.emitterName}.emitter-output-dir "${derivedNamespace}"`,
+        `Please update "options.${this.emitterName}.namespace" to "${derivedNamespace}" or adjust "options.${this.emitterName}.emitter-output-dir" so the derived namespace matches`,
+      );
+
+    return { success: true };
+  }
+
+  private resolveLastPathSegment(
+    emitterOutputDir: string,
+    emitterOptions: Record<string, any>,
+  ): { success: true; segment: string } | { success: false; error: string; action: string } {
+    const segments = emitterOutputDir
+      .split("/")
+      .map((segment) => segment.trim())
+      .filter(
+        (segment) => segment !== "" && segment !== "{output-dir}" && segment !== "{service-dir}",
+      );
+
+    let lastSegment = segments.length > 0 ? segments[segments.length - 1] : emitterOutputDir.trim();
+
+    if (lastSegment.length === 0)
+      return {
+        success: false,
+        error: `Unable to derive the namespace from options.${this.emitterName}.emitter-output-dir "${emitterOutputDir}"`,
+        action: `Please provide a valid "options.${this.emitterName}.emitter-output-dir" so that the namespace can be derived`,
+      };
+
+    const unresolvedVariables: Set<string> = new Set();
+    lastSegment = lastSegment.replace(/\{([^}]+)\}/g, (_match, variableName: string) => {
+      const value = emitterOptions?.[variableName];
+      if (typeof value === "string" && value.trim().length > 0) {
+        return value.trim();
+      }
+      unresolvedVariables.add(variableName);
+      return _match;
+    });
+
+    if (unresolvedVariables.size > 0)
+      return {
+        success: false,
+        error: `Could not resolve variable${unresolvedVariables.size > 1 ? "s" : ""} {${Array.from(unresolvedVariables).join("}, {")}} in options.${this.emitterName}.emitter-output-dir`,
+        action: `Please define ${unresolvedVariables.size > 1 ? "these variables" : "this variable"} in options.${this.emitterName} so the namespace can be derived`,
+      };
+
+    return { success: true, segment: lastSegment }; // segment may already include dots when namespace is used directly
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
@@ -655,6 +748,7 @@ export const defaultRules = [
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpEmitterOutputDirSubRule(),
+  new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
   new TspConfigCsharpAzNamespaceSubRule(),
