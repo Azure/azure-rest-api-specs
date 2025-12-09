@@ -1,0 +1,357 @@
+{
+  "title": "EdgeMachineJobs_CreateOrUpdate_ProvisionOs",
+  "operationId": "EdgeMachineJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine1",
+    "jobsName": "ProvisionOs",
+    "resource": {
+      "properties": {
+        "provisioningRequest": {
+          "osProfile": {
+            "osName": "AzureLinux",
+            "osType": "AzureLinux",
+            "osVersion": "3.0",
+            "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+            "vsrVersion": "1.0.0",
+            "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+            "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
+            "operationType": "Provision"
+          },
+          "userDetails": [
+            {
+              "userName": "edgeuser",
+              "secretType": "KeyVault",
+              "secretLocation": "https://bhukumar-test-kv.vault.azure.net/secrets/edgeuser/7b2d7db11bad4e1599cb6a0f4d2b2e00",
+              "sshPubKey": [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7... edgeuser@example.com"
+              ]
+            }
+          ],
+          "onboardingConfiguration": {
+            "resourceId": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.HybridCompute/machines/bkumar-t1",
+            "location": "eastus",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "arcVirtualMachineId": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+            "type": "HybridComputeMachine"
+          },
+          "deviceConfiguration": {
+            "network": {
+              "networkAdapters": [
+                {
+                  "ipAssignmentType": "Automatic",
+                  "ipAddress": "",
+                  "ipAddressRange": {
+                    "startIp": "",
+                    "endIp": ""
+                  },
+                  "gateway": "",
+                  "subnetMask": "",
+                  "dnsAddressArray": [
+                    "8.8.8.8"
+                  ],
+                  "vlanId": "0"
+                }
+              ]
+            },
+            "hostName": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+            "webProxy": {
+              "connectionUri": "https://microsoft.com/a",
+              "port": "",
+              "bypassList": []
+            },
+            "time": {
+              "primaryTimeServer": "",
+              "secondaryTimeServer": "",
+              "timeZone": "UTC"
+            },
+            "storage": {
+              "partitionSize": "30GB"
+            }
+          },
+          "target": "AzureLinux",
+          "customConfiguration": "eyJjdXN0b21Db25maWciOiAiZXhhbXBsZSBiYXNlNjQgZW5jb2RlZCBjb25maWcifQ=="
+        },
+        "jobType": "ProvisionOs",
+        "deploymentMode": "Deploy"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/ProvisionOs",
+        "name": "ProvisionOs",
+        "type": "microsoft.azurestackhci/edgemachines/jobs",
+        "properties": {
+          "provisioningRequest": {
+            "osProfile": {
+              "osName": "AzureLinux",
+              "osType": "AzureLinux",
+              "osVersion": "3.0",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+              "vsrVersion": "1.0.0",
+              "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+              "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
+              "operationType": "Provision"
+            },
+            "userDetails": [
+              {
+                "userName": "edgeuser",
+                "secretType": "KeyVault",
+                "secretLocation": "https://bhukumar-test-kv.vault.azure.net/secrets/edgeuser/7b2d7db11bad4e1599cb6a0f4d2b2e00",
+                "sshPubKey": [
+                  "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7... edgeuser@example.com"
+                ]
+              }
+            ],
+            "onboardingConfiguration": {
+              "resourceId": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.HybridCompute/machines/bkumar-t1",
+              "location": "eastus",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "arcVirtualMachineId": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+              "type": "HybridComputeMachine"
+            },
+            "deviceConfiguration": {
+              "network": {
+                "networkAdapters": [
+                  {
+                    "ipAssignmentType": "Automatic",
+                    "ipAddress": "",
+                    "ipAddressRange": {
+                      "startIp": "",
+                      "endIp": ""
+                    },
+                    "gateway": "",
+                    "subnetMask": "",
+                    "dnsAddressArray": [
+                      "8.8.8.8"
+                    ],
+                    "vlanId": "0"
+                  }
+                ]
+              },
+              "hostName": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+              "webProxy": {
+                "connectionUri": "https://microsoft.com/a",
+                "port": "",
+                "bypassList": []
+              },
+              "time": {
+                "primaryTimeServer": "",
+                "secondaryTimeServer": "",
+                "timeZone": "UTC"
+              },
+              "storage": {
+                "partitionSize": "30GB"
+              }
+            },
+            "target": "AzureLinux",
+            "customConfiguration": "eyJjdXN0b21Db25maWciOiAiZXhhbXBsZSBiYXNlNjQgZW5jb2RlZCBjb25maWcifQ=="
+          },
+          "reportedProperties": {
+            "percentComplete": 100,
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "name": "Initialize",
+                  "startTimeUtc": "03/11/2025 15:11:01",
+                  "endTimeUtc": "03/11/2025 15:11:01",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "ResolveConfiguration",
+                  "startTimeUtc": "03/11/2025 15:11:02",
+                  "endTimeUtc": "03/11/2025 15:11:02",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "DownloadOSArtifacts",
+                  "startTimeUtc": "03/11/2025 15:11:03",
+                  "endTimeUtc": "03/11/2025 15:11:23",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "SetupHybridComputeRP",
+                  "startTimeUtc": "03/11/2025 15:11:23",
+                  "endTimeUtc": "03/11/2025 15:13:24",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "PrepareTargetOSProvisioning",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "InitiateTargetOSProvisioning",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "BootIntoTargetOS",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                }
+              ]
+            },
+            "validationStatus": {}
+          },
+          "jobType": "ProvisionOs",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "8f94f7e2-00c8-4751-986c-3802143c7900",
+          "startTimeUtc": "2025-03-12T10:42:06.0716967Z",
+          "endTimeUtc": "2025-03-12T10:45:32.7360665Z",
+          "status": "DeploymentSuccess"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.AzureStackHCI/EdgeMachines/em1/jobs/ProvisionOs",
+        "name": "ProvisionOs",
+        "type": "microsoft.azurestackhci/edgemachines/jobs",
+        "properties": {
+          "provisioningRequest": {
+            "osProfile": {
+              "osName": "AzureLinux",
+              "osType": "AzureLinux",
+              "osVersion": "3.0",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+              "vsrVersion": "1.0.0",
+              "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+              "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t",
+              "operationType": "Provision"
+            },
+            "userDetails": [
+              {
+                "userName": "edgeuser",
+                "secretType": "KeyVault",
+                "secretLocation": "https://bhukumar-test-kv.vault.azure.net/secrets/edgeuser/7b2d7db11bad4e1599cb6a0f4d2b2e00",
+                "sshPubKey": [
+                  "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7... edgeuser@example.com"
+                ]
+              }
+            ],
+            "onboardingConfiguration": {
+              "resourceId": "/subscriptions/ff0aa6da-20f8-44fe-9aee-381c8e8a4aeb/resourceGroups/bhukumar-test-rg/providers/Microsoft.HybridCompute/machines/bkumar-t1",
+              "location": "eastus",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "arcVirtualMachineId": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+              "type": "HybridComputeMachine"
+            },
+            "deviceConfiguration": {
+              "network": {
+                "networkAdapters": [
+                  {
+                    "ipAssignmentType": "Automatic",
+                    "ipAddress": "",
+                    "ipAddressRange": {
+                      "startIp": "",
+                      "endIp": ""
+                    },
+                    "gateway": "",
+                    "subnetMask": "",
+                    "dnsAddressArray": [
+                      "8.8.8.8"
+                    ],
+                    "vlanId": "0"
+                  }
+                ]
+              },
+              "hostName": "634b9db8-83e1-46ed-b391-c1614e2d0097",
+              "webProxy": {
+                "connectionUri": "https://microsoft.com/a",
+                "port": "",
+                "bypassList": []
+              },
+              "time": {
+                "primaryTimeServer": "",
+                "secondaryTimeServer": "",
+                "timeZone": "UTC"
+              },
+              "storage": {
+                "partitionSize": "30GB"
+              }
+            },
+            "target": "AzureLinux",
+            "customConfiguration": "eyJjdXN0b21Db25maWciOiAiZXhhbXBsZSBiYXNlNjQgZW5jb2RlZCBjb25maWcifQ=="
+          },
+          "reportedProperties": {
+            "percentComplete": 100,
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "name": "Initialize",
+                  "startTimeUtc": "03/11/2025 15:11:01",
+                  "endTimeUtc": "03/11/2025 15:11:01",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "ResolveConfiguration",
+                  "startTimeUtc": "03/11/2025 15:11:02",
+                  "endTimeUtc": "03/11/2025 15:11:02",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "DownloadOSArtifacts",
+                  "startTimeUtc": "03/11/2025 15:11:03",
+                  "endTimeUtc": "03/11/2025 15:11:23",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "SetupHybridComputeRP",
+                  "startTimeUtc": "03/11/2025 15:11:23",
+                  "endTimeUtc": "03/11/2025 15:13:24",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "PrepareTargetOSProvisioning",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "InitiateTargetOSProvisioning",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "BootIntoTargetOS",
+                  "description": "NotStarted",
+                  "startTimeUtc": "01/01/0001 00:00:00",
+                  "endTimeUtc": "01/01/0001 00:00:00",
+                  "status": "Succeeded"
+                }
+              ]
+            },
+            "validationStatus": {}
+          },
+          "jobType": "ProvisionOs",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "8f94f7e2-00c8-4751-986c-3802143c7900",
+          "startTimeUtc": "2025-03-12T10:42:06.0716967Z",
+          "endTimeUtc": "2025-03-12T10:45:32.7360665Z",
+          "status": "DeploymentSuccess"
+        }
+      }
+    }
+  }
+}

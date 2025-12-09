@@ -24,4 +24,19 @@ directive:
           }
         }
       }
+  - from: PaloAltoNetworks.Cloudngfw.json
+    where-operation: GlobalRulestack_commit
+    transform: > 
+      $.responses["202"] = 
+        {
+          "description": "The request has been received but not yet acted upon."
+        }
+  - from: PaloAltoNetworks.Cloudngfw.json
+    where-operation: LocalRulestacks_commit
+    transform: >
+      $.responses["202"] = 
+        {  
+          "description": "The request has been received but not yet acted upon."
+        }
+      
 ```
