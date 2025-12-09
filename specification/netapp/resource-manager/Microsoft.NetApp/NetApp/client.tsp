@@ -83,3 +83,12 @@ using Microsoft.NetApp;
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
+
+@@clientName(QuotaItem, "SubscriptionQuotaItem", "go");
+@@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
+@@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
+
+@@clientName(Microsoft.NetApp.CachePropertiesExportPolicy,
+  "NetAppCachePropertiesExportPolicy",
+  "csharp"
+);
