@@ -276,6 +276,22 @@ Always read the template before editing so you follow the canonical configuratio
          `git checkout <branch name>`.
    - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
 
+8. **Language Exclusion Policy**:
+   - **CRITICAL**: Mark a language as excluded in a release plan **ONLY** when the language emitter configuration is intentionally missing or not configured in the `tspconfig.yaml` file.
+   - **DO NOT** mark a language as excluded if:
+     - SDK generation pipeline fails due to compilation errors, validation errors, or other technical issues
+     - The language emitter is configured in `tspconfig.yaml` but the pipeline encounters runtime errors
+     - There are temporary infrastructure or service issues causing pipeline failures
+   - **DO** mark a language as excluded if:
+     - The language emitter configuration is intentionally missing from `tspconfig.yaml`
+     - The service team has made a deliberate decision not to support a particular language
+     - The user provides explicit justification for not including a language in the release
+   - **When SDK generation fails**:
+     - Investigate the pipeline failure logs to identify the root cause
+     - Help the user fix compilation errors, configuration issues, or other problems
+     - Re-run the SDK generation pipeline after fixes are applied
+     - Only suggest language exclusion if the user explicitly states the language will not be supported
+
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
 ## Steps to generate SDK from TypeSpec API specification
