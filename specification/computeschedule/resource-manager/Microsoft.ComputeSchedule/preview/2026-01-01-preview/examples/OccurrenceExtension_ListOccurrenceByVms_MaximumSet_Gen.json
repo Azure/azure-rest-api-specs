@@ -3,7 +3,7 @@
   "operationId": "OccurrenceExtension_ListOccurrenceByVms",
   "parameters": {
     "api-version": "2026-01-01-preview",
-    "resourceUri": "ih"
+    "resourceUri": "subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/testVM1"
   },
   "responses": {
     "200": {
@@ -14,7 +14,7 @@
               "resourceId": "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.Compute/virtualMachines/testVM1",
               "notificationSettings": [
                 {
-                  "destination": "osvfsvcjebuigfy",
+                  "destination": "admin@contoso.com",
                   "type": "Email",
                   "language": "en-us",
                   "disabled": true
@@ -23,24 +23,24 @@
               "scheduledTime": "2025-12-03T12:55:56.170Z",
               "provisioningState": "Succeeded",
               "errorDetails": {
-                "code": "qdoi",
-                "message": "sscbadevmxudkgvc",
-                "target": "jgxczrmikdgpcwlltcu",
+                "code": "ResourceNotFound",
+                "message": "The requested resource was not found",
+                "target": "Microsoft.Compute/virtualMachines",
                 "details": [],
                 "innererror": {
-                  "code": "yujumrcdflvg"
+                  "code": "OperationFailed"
                 }
               },
-              "scheduledActionId": "eamodcbwijsxrdgkengzqmsomtekdh"
+              "scheduledActionId": "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.ComputeSchedule/scheduledActions/scheduledaction-test01"
             },
-            "id": "hfzfxionihqm",
-            "name": "gnnrhrjup",
-            "type": "cknawzkthkvm",
+            "id": "/subscriptions/4F73D9F5-A38C-44CB-9BE3-2F1EC42137A5/resourceGroups/rgcomputeschedule/providers/Microsoft.ComputeSchedule/occurrences/occurrence01",
+            "name": "occurrence01",
+            "type": "Microsoft.ComputeSchedule/occurrences",
             "systemData": {
-              "createdBy": "oyirdvou",
+              "createdBy": "user@contoso.com",
               "createdByType": "User",
               "createdAt": "2025-12-03T12:55:56.171Z",
-              "lastModifiedBy": "nozrqxgurmktpxxhohzmkynduzipcs",
+              "lastModifiedBy": "admin@contoso.com",
               "lastModifiedByType": "User",
               "lastModifiedAt": "2025-12-03T12:55:56.171Z"
             }
