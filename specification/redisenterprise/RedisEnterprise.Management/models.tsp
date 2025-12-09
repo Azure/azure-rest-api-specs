@@ -1373,12 +1373,14 @@ model AccessKeys {
   /**
    * The current primary key that clients can use to authenticate
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The current secondary key that clients can use to authenticate
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 }

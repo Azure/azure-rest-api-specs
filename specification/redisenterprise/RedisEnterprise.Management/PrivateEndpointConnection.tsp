@@ -32,7 +32,7 @@ interface PrivateEndpointConnections {
     Cluster,
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<
-      Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+      PrivateEndpointConnection,
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
     >
   >;
