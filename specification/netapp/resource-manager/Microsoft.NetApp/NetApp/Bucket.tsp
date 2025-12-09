@@ -85,13 +85,6 @@ model BucketProperties {
   permissions?: BucketPermissions = BucketPermissions.ReadOnly;
 
   /**
-   * Action to take when there is a certificate conflict.
-   * Possible values include: 'Update', 'Fail'
-   */
-  @added(Versions.v2025_09_01_preview)
-  onCertificateConflictAction?: OnCertificateConflictAction;
-
-  /**
    * Specifies the Azure Key Vault settings. These are used when
    * a) retrieving the bucket server certificate, and
    * b) storing the bucket credentials
