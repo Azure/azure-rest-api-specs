@@ -3,7 +3,7 @@
   "info": {
     "title": "Open Energy Platform Management Service APIs",
     "description": "Open Energy Platform Management Service APIs",
-    "version": "2025-11-11"
+    "version": "2025-12-15"
   },
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.OpenEnergyPlatform/checkNameAvailability": {
@@ -240,6 +240,9 @@
         }
       },
       "patch": {
+        "tags": [
+          "UserRPOepResource"
+        ],
         "description": "Updates the oep resource.",
         "operationId": "EnergyServices_Update",
         "x-ms-long-running-operation": true,
@@ -304,6 +307,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "UserRPOepResource"
+        ],
         "description": "Deletes oep resource",
         "operationId": "EnergyServices_Delete",
         "x-ms-long-running-operation": true,
@@ -907,6 +913,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/privateEndpointConnectionProxies/{privateEndpointConnectionProxyId}/validate": {
       "post": {
+        "tags": [
+          "PrivateEndpointConnectionProxies"
+        ],
         "description": "(INTERNAL - DO NOT USE) Validates a private endpoint connection proxy object.",
         "operationId": "PrivateEndpointConnectionProxies_Validate",
         "parameters": [
@@ -1168,6 +1177,100 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/testingWindow": {
+      "get": {
+        "tags": [
+          "TestingWindow"
+        ],
+        "description": "Gets the 30-day window end date for a milestone testing period.",
+        "operationId": "TestingWindow_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TestingWindow"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestingWindow_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestingWindow_Get_MaximumSet_Gen.json"
+          },
+          "TestingWindow_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TestingWindow_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/readyForUpgrade": {
+      "post": {
+        "tags": [
+          "TestingWindow"
+        ],
+        "description": "Marks an ADME resource as ready for upgrade during a milestone testing period.",
+        "operationId": "EnergyServices_ReadyForUpgrade",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "The resource name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully marked as ready for upgrade."
+          },
+          "400": {
+            "description": "Bad Request - The resource does not meet the criteria to be marked as ready for upgrade. For example, this occurs when deferUpgrades is set to false.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnergyServices_ReadyForUpgrade_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ReadyForUpgrade_MaximumSet_Gen.json"
+          },
+          "EnergyServices_ReadyForUpgrade_MinimumSet_Gen": {
+            "$ref": "./examples/EnergyServices_ReadyForUpgrade_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1402,6 +1505,14 @@
         },
         "referenceData": {
           "$ref": "#/definitions/ReferenceDataProperties"
+        },
+        "milestoneVersion": {
+          "type": "string",
+          "description": "The milestone version of the service.",
+          "readOnly": true
+        },
+        "upgradeSettings": {
+          "$ref": "#/definitions/UpgradeSettings"
         }
       }
     },
@@ -1576,6 +1687,9 @@
       "properties": {
         "encryption": {
           "$ref": "#/definitions/Encryption"
+        },
+        "upgradeSettings": {
+          "$ref": "#/definitions/UpgradeSettings"
         }
       }
     },
@@ -1917,6 +2031,32 @@
               }
             ]
           }
+        }
+      }
+    },
+    "UpgradeSettings": {
+      "description": "The upgrade settings for the ADME instance.",
+      "type": "object",
+      "properties": {
+        "deferUpgrades": {
+          "type": "boolean",
+          "description": "Indicates whether major upgrades should be deferred."
+        },
+        "readyForUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the service is ready for upgrade."
+        }
+      }
+    },
+    "TestingWindow": {
+      "description": "The 30-day testing window end date response.",
+      "type": "object",
+      "properties": {
+        "testingWindowEndDate": {
+          "description": "The end date of the 30-day testing window in ISO 8601 format.",
+          "type": "string",
+          "format": "date",
+          "readOnly": true
         }
       }
     }
