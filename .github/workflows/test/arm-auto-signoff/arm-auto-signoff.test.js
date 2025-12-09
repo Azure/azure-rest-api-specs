@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { CommitStatusState } from "../../shared/src/github.js";
-import { getLabelActionImpl } from "../src/arm-auto-signoff.js";
-import { LabelAction } from "../src/label.js";
-import { createMockCore, createMockGithub as createMockGithubBase } from "./mocks.js";
+import { CommitStatusState } from "../../../shared/src/github.js";
+import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-auto-signoff-status.js";
+import { LabelAction } from "../../src/label.js";
+import { createMockCore, createMockGithub as createMockGithubBase } from "../mocks.js";
 
 const core = createMockCore();
 
