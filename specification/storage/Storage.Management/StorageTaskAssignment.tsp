@@ -57,15 +57,12 @@ interface StorageTaskAssignments {
    */
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
-    ResourceInstanceParameters<
-      StorageTaskAssignment,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageTaskAssignment>
-    >,
+  update is ArmCustomPatchAsync<
+    StorageTaskAssignment,
     StorageTaskAssignmentUpdateParameters,
     Response = ArmResponse<StorageTaskAssignment> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageTaskAssignment> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    ErrorResponse = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
