@@ -9,7 +9,7 @@ using LiftrBase.Storage;
 
 namespace LiftrBase;
 
-@@clientName(Qumulo.Storage, "QumuloMgmt", "python");
+@@clientName(Qumulo.Storage, "QumuloMgmtClient", "python");
 @@clientName(FileSystemResource, "QumuloFileSystemResource", "csharp");
 @@clientName(FileSystemResourceProperties.storageSku,
   "StorageSkuName",
@@ -43,8 +43,10 @@ namespace LiftrBase;
   "csharp"
 );
 
-#suppress "deprecated" "for backward compatibility purpose"
-@@flattenProperty(LiftrBase.Storage.FileSystemResource.properties, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
+  "csharp"
+);
 
 /**
  * For backward compatibility purpose, this enum is added back.

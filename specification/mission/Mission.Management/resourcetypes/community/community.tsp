@@ -105,7 +105,7 @@ model ApprovalSettings {
   notificationOnApprovalDeletion?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
+  @identifiers(#["approverEntraId"])
   @doc("List of mandatory approvers for the approval request")
   mandatoryApprovers?: MandatoryApprover[];
 
@@ -156,7 +156,7 @@ model CommunityBaseModel {
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @doc("List of services governed by a community.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
@@ -165,7 +165,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   communityRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)

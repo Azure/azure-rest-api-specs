@@ -203,6 +203,7 @@ model AkriConnectorsContainerRegistrySettings {
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorsSecret {
   /** The key in the secret to be mounted. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secretKey: string;
 
   /** The application-defined alias for the secret. */

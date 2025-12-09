@@ -1,0 +1,90 @@
+{
+  "title": "List NSP resource associations",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "association1",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association1",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "accessMode": "Enforced",
+              "hasProvisioningIssues": "no"
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          },
+          {
+            "name": "association2",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association2",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "accessMode": "Audit",
+              "hasProvisioningIssues": "no"
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          },
+          {
+            "name": "association3",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations/association3",
+            "type": "Microsoft.Network/networkSecurityPerimeters/resourceAssociations",
+            "properties": {
+              "provisioningState": "Failed",
+              "privateLinkResource": {
+                "id": "/subscriptions/{paasSubscriptionId}/resourceGroups/{paasResourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}"
+              },
+              "profile": {
+                "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/{profileName}"
+              },
+              "accessMode": "Learning",
+              "hasProvisioningIssues": "yes"
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/resourceAssociations?api-version=2024-10-01&$skipToken=10"
+      }
+    }
+  }
+}

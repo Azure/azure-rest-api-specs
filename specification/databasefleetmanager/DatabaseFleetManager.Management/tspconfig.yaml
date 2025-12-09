@@ -10,23 +10,23 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/databasefleetmanager.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databasefleetmanager"
     namespace: "azure.mgmt.databasefleetmanager"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databasefleetmanager"
     namespace: "com.azure.resourcemanager.databasefleetmanager"
     service-name: "databasefleetmanager"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/databasefleetmanager"
-    package-dir: "armdatabasefleetmanager"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatabasefleetmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabasefleetmanager"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-examples: true
+    generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
@@ -39,7 +39,7 @@ options:
     namespace: "Azure.ResourceManager.DatabaseFleetManager"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databasefleetmanager"
     flavor: azure
     package-details:
       name: "@azure/arm-databasefleetmanager"

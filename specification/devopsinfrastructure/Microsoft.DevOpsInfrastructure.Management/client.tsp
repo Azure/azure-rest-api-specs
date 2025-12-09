@@ -86,6 +86,8 @@ using Microsoft.DevOpsInfrastructure;
   "csharp"
 );
 
+@@clientName(DeleteResourcesDetails, "DevOpsDeleteResourcesDetails", "csharp");
+
 @@clientName(ResourceStatus, "DevOpsResourceStatus", "csharp");
 
 @@clientName(ResourceSku, "DevOpsResourceSku", "csharp");
@@ -99,6 +101,18 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(StorageProfile, "DevOpsStorageProfile", "csharp");
 
 @@clientName(VmssFabricProfile, "DevOpsVmssFabricProfile", "csharp");
-
+@@clientName(CheckNameAvailabilityResult,
+  "DevOpsCheckNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(Pools.checkNameAvailability,
+  "CheckDevOpsPoolNameAvailability",
+  "csharp"
+);
+@@clientName(AvailabilityStatus, "DevOpsAvailabilityStatus", "csharp");
+@@clientName(EphemeralType, "DevOpsEphemeralType", "csharp");
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
+
+@@clientName(StorageAccountType.StandardSSDLRS, "StandardSSDLRS", "javascript");
+@@clientName(StorageAccountType.StandardSSDZRS, "StandardSSDZRS", "javascript");

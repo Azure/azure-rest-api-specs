@@ -18,12 +18,11 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/edge/{version-status}/{version}/operations.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-commonedgesitemanageroperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commonedgesitemanageroperations"
     namespace: "com.azure.resourcemanager.commonedgesitemanageroperations"
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-resourcemanager-commonedgesitemanageroperations"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-commonedgesitemanageroperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-commonedgesitemanageroperations"
     namespace: "azure.mgmt.commonedgesitemanageroperations"
     generate-test: true
     generate-sample: true
@@ -31,7 +30,7 @@ options:
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     flavor: azure
-    package-dir: "arm-commonedgesitemanageroperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-commonedgesitemanageroperations"
     package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
   "@azure-tools/typespec-csharp":
@@ -42,8 +41,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/commonedgesitemanageroperations"
-    package-dir: "armcommonedgesitemanageroperations"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcommonedgesitemanageroperations"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcommonedgesitemanageroperations"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -34,7 +34,7 @@ options:
     model-namespace: false
     generate-protocol-methods: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai-assistants"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-openai-assistants"
     namespace: "com.azure.ai.openai.assistants"
     partial-update: true
     enable-sync-stack: true
@@ -44,9 +44,8 @@ options:
     custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun,OpenAIPageableListOfVectorStore,OpenAIPageableListOfVectorStoreFile,UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "openai"
+    emitter-output-dir: "{output-dir}/{service-dir}/openai"
     generate-metadata: false
-    is-modular-library: true
     package-details:
       name: "@azure/openai-assistants"
     flavor: azure

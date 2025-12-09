@@ -12,33 +12,33 @@ options:
     output-file: "{version-status}/{version}/RecommenderRP.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.ComputeRecommender"
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.Compute.Recommender"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computerecommender"
     namespace: "azure.mgmt.computerecommender"
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computerecommender"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computerecommender"
-    namespace: "com.azure.resourcemanager.computerecommender"
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-recommender"
+    namespace: "com.azure.resourcemanager.compute.recommender"
     service-name: "Compute Recommender"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-computerecommender"
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computerecommender"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-computerecommender"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/computerecommender"
-    package-dir: "armcomputerecommender"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/resourcemanager/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecommender"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecommender"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

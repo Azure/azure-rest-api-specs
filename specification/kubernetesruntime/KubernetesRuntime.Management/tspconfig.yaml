@@ -10,17 +10,13 @@ options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: resource-manager
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/kubernetesruntime.json"
     use-read-only-status-schema: true
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
     namespace: "Azure.ResourceManager.ContainerOrchestratorRuntime"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-containerorchestratorruntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerorchestratorruntime"
     namespace: "azure.mgmt.containerorchestratorruntime"
     flavor: "azure"
     generate-test: true
@@ -28,12 +24,22 @@ options:
   "@azure-tools/typespec-ts":
     "service-dir": "sdk/kubernetesruntime"
     experimental-extensible-enums: true
-    package-dir: "arm-containerorchestratorruntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerorchestratorruntime"
     flavor: azure
     package-details:
       name: "@azure/arm-containerorchestratorruntime"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerorchestratorruntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerorchestratorruntime"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerorchestratorruntime"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-containerorchestratorruntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerorchestratorruntime"
     namespace: "com.azure.resourcemanager.containerorchestratorruntime"
     service-name: "Container Orchestrator Runtime"
     flavor: "azure"

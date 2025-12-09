@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Standard CACO",
+            "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+            "startAt": "2025-12-01T00:00:00Z",
+            "allowContributors": "Disabled",
+            "milestones": [
+              {
+                "name": "Milestone 1",
+                "spendTarget": {
+                  "amount": 50000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "duration": "P3M",
+                  "credit": {
+                    "amount": 5000,
+                    "currencyCode": "USD"
+                  }
+                },
+                "endAt": "2026-03-31T00:00:00Z"
+              }
+            ]
+          }
+        },
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "High Value CACO",
+            "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+            "startAt": "2025-12-01T00:00:00Z",
+            "allowContributors": "Enabled",
+            "milestones": [
+              {
+                "name": "Milestone 1",
+                "spendTarget": {
+                  "amount": 2000000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "duration": "P3M",
+                  "credit": {
+                    "amount": 500000,
+                    "currencyCode": "USD"
+                  }
+                },
+                "endAt": "2026-03-31T00:00:00Z"
+              }
+            ]
+          }
+        },
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Special Product CACO",
+            "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+            "startAt": "2025-12-01T00:00:00Z",
+            "allowContributors": "Disabled",
+            "milestones": [
+              {
+                "name": "Milestone 1",
+                "spendTarget": {
+                  "amount": 75000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "duration": "P3M",
+                  "credit": {
+                    "amount": 7500,
+                    "currencyCode": "USD"
+                  }
+                },
+                "endAt": "2026-03-31T00:00:00Z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          },
+          {
+            "valid": true
+          },
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,4872 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-01-preview",
+    "title": "Desktop Virtualization API Client"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.DesktopVirtualization/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List all of the available operations the Desktop Virtualization resource provider supports.",
+        "x-ms-examples": {
+          "OperationDescription_List": {
+            "$ref": "./examples/OperationDescription_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Get",
+        "description": "Get a workspace.",
+        "x-ms-examples": {
+          "Workspace_Get": {
+            "$ref": "./examples/Workspace_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Create or update a workspace.",
+        "x-ms-examples": {
+          "Workspace_Create": {
+            "$ref": "./examples/Workspace_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "workspace",
+            "description": "Object containing Workspace definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "201": {
+            "description": "Successfully created workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Delete",
+        "description": "Remove a workspace.",
+        "x-ms-examples": {
+          "Workspace_Delete": {
+            "$ref": "./examples/Workspace_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted workspace."
+          },
+          "204": {
+            "description": "Workspace does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_Update",
+        "description": "Update a workspace.",
+        "x-ms-examples": {
+          "Workspace_Update": {
+            "$ref": "./examples/Workspace_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "workspace",
+            "description": "Object containing Workspace definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated workspace.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "List workspaces.",
+        "x-ms-examples": {
+          "Workspace_ListByResourceGroup": {
+            "$ref": "./examples/Workspace_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspaces in resource group.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/workspaces": {
+      "get": {
+        "tags": [
+          "Workspace"
+        ],
+        "operationId": "Workspaces_ListBySubscription",
+        "description": "List workspaces in subscription.",
+        "x-ms-examples": {
+          "Workspace_ListBySubscription": {
+            "$ref": "./examples/Workspace_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved workspaces in subscription.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}": {
+      "get": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Get",
+        "description": "Get a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Get": {
+            "$ref": "./examples/ScalingPlan_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Create",
+        "description": "Create or update a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Create": {
+            "$ref": "./examples/ScalingPlan_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "scalingPlan",
+            "description": "Object containing scaling plan definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "201": {
+            "description": "Successfully created scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Delete",
+        "description": "Remove a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Delete": {
+            "$ref": "./examples/ScalingPlan_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted scaling plan."
+          },
+          "204": {
+            "description": "Scaling plan does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_Update",
+        "description": "Update a scaling plan.",
+        "x-ms-examples": {
+          "ScalingPlans_Update": {
+            "$ref": "./examples/ScalingPlan_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "scalingPlan",
+            "description": "Object containing scaling plan definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated scaling plan.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlan"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
+      "get": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_ListByResourceGroup",
+        "description": "List scaling plans.",
+        "x-ms-examples": {
+          "ScalingPlans_ListByResourceGroup": {
+            "$ref": "./examples/ScalingPlan_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scaling plans in resource group.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
+      "get": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_ListBySubscription",
+        "description": "List scaling plans in subscription.",
+        "x-ms-examples": {
+          "ScalingPlans_ListBySubscription": {
+            "$ref": "./examples/ScalingPlan_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scaling plans in subscription.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}": {
+      "get": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_Get",
+        "description": "Get an application group.",
+        "x-ms-examples": {
+          "ApplicationGroup_Get": {
+            "$ref": "./examples/ApplicationGroup_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved application group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroup"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_CreateOrUpdate",
+        "description": "Create or update an applicationGroup.",
+        "x-ms-examples": {
+          "ApplicationGroup_Create": {
+            "$ref": "./examples/ApplicationGroup_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "name": "applicationGroup",
+            "description": "Object containing ApplicationGroup definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated application group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroup"
+            }
+          },
+          "201": {
+            "description": "Successfully created application group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroup"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_Delete",
+        "description": "Remove an applicationGroup.",
+        "x-ms-examples": {
+          "ApplicationGroup_Delete": {
+            "$ref": "./examples/ApplicationGroup_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed application group."
+          },
+          "204": {
+            "description": "Application group does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_Update",
+        "description": "Update an applicationGroup.",
+        "x-ms-examples": {
+          "ApplicationGroups_Update": {
+            "$ref": "./examples/ApplicationGroup_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "name": "applicationGroup",
+            "description": "Object containing ApplicationGroup definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroupPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated application group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroup"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
+      "get": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_ListByResourceGroup",
+        "description": "List applicationGroups.",
+        "x-ms-examples": {
+          "ApplicationGroup_ListByResourceGroup": {
+            "$ref": "./examples/ApplicationGroup_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved application groups in resource group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroupList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/applicationGroups": {
+      "get": {
+        "tags": [
+          "ApplicationGroup"
+        ],
+        "operationId": "ApplicationGroups_ListBySubscription",
+        "description": "List applicationGroups in subscription.",
+        "x-ms-examples": {
+          "ApplicationGroup_List": {
+            "$ref": "./examples/ApplicationGroup_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are applicationGroupType."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved application groups in subscription.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGroupList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/startMenuItems": {
+      "get": {
+        "tags": [
+          "StartMenuItem"
+        ],
+        "operationId": "StartMenuItems_List",
+        "description": "List start menu items in the given application group.",
+        "x-ms-examples": {
+          "StartMenuItem_List": {
+            "$ref": "./examples/StartMenuItem_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved start menu items in application group.",
+            "schema": {
+              "$ref": "#/definitions/StartMenuItemList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/applications/{applicationName}": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Get",
+        "description": "Get an application.",
+        "x-ms-examples": {
+          "Application_Get": {
+            "$ref": "./examples/Application_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved application.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_CreateOrUpdate",
+        "description": "Create or update an application.",
+        "x-ms-examples": {
+          "Application_Create": {
+            "$ref": "./examples/Application_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "name": "application",
+            "description": "Object containing Application definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated application.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "201": {
+            "description": "Successfully created application.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Delete",
+        "description": "Remove an application.",
+        "x-ms-examples": {
+          "Application_Delete": {
+            "$ref": "./examples/Application_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed application."
+          },
+          "204": {
+            "description": "Application does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Update",
+        "description": "Update an application.",
+        "x-ms-examples": {
+          "Application_Update": {
+            "$ref": "./examples/Application_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationNameParameter"
+          },
+          {
+            "name": "application",
+            "description": "Object containing Application definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ApplicationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated application.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/applications": {
+      "get": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_List",
+        "description": "List applications.",
+        "x-ms-examples": {
+          "Applications_List": {
+            "$ref": "./examples/Application_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved applications in application group.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/desktops/{desktopName}": {
+      "get": {
+        "tags": [
+          "Desktop"
+        ],
+        "operationId": "Desktops_Get",
+        "description": "Get a desktop.",
+        "x-ms-examples": {
+          "Desktop_Get": {
+            "$ref": "./examples/Desktop_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DesktopNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved desktop.",
+            "schema": {
+              "$ref": "#/definitions/Desktop"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Desktop"
+        ],
+        "operationId": "Desktops_Update",
+        "description": "Update a desktop.",
+        "x-ms-examples": {
+          "Desktop_Update": {
+            "$ref": "./examples/Desktop_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DesktopNameParameter"
+          },
+          {
+            "name": "desktop",
+            "description": "Object containing Desktop definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DesktopPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated desktop.",
+            "schema": {
+              "$ref": "#/definitions/Desktop"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/applicationGroups/{applicationGroupName}/desktops": {
+      "get": {
+        "tags": [
+          "Desktop"
+        ],
+        "operationId": "Desktops_List",
+        "description": "List desktops.",
+        "x-ms-examples": {
+          "Desktop_List": {
+            "$ref": "./examples/Desktop_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApplicationGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved desktops in application group.",
+            "schema": {
+              "$ref": "#/definitions/DesktopList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_Get",
+        "description": "Get a host pool.",
+        "x-ms-examples": {
+          "HostPool_Get": {
+            "$ref": "./examples/HostPool_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool.",
+            "schema": {
+              "$ref": "#/definitions/HostPool"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_CreateOrUpdate",
+        "description": "Create or update a host pool.",
+        "x-ms-examples": {
+          "HostPool_Create": {
+            "$ref": "./examples/HostPool_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPool",
+            "description": "Object containing HostPool definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated host pool.",
+            "schema": {
+              "$ref": "#/definitions/HostPool"
+            }
+          },
+          "201": {
+            "description": "Successfully created host pool.",
+            "schema": {
+              "$ref": "#/definitions/HostPool"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_Delete",
+        "description": "Remove a host pool.",
+        "x-ms-examples": {
+          "HostPool_Delete": {
+            "$ref": "./examples/HostPool_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to delete sessionHost."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed host pool."
+          },
+          "204": {
+            "description": "Host pool does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_Update",
+        "description": "Update a host pool.",
+        "x-ms-examples": {
+          "HostPool_Update": {
+            "$ref": "./examples/HostPool_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "hostPool",
+            "description": "Object containing HostPool definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/HostPoolPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated host pool.",
+            "schema": {
+              "$ref": "#/definitions/HostPool"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_ListByResourceGroup",
+        "description": "List hostPools.",
+        "x-ms-examples": {
+          "HostPool_ListByResourceGroup": {
+            "$ref": "./examples/HostPool_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in resource group.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/hostPools": {
+      "get": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_List",
+        "description": "List hostPools in subscription.",
+        "x-ms-examples": {
+          "HostPool_List": {
+            "$ref": "./examples/HostPool_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in subscription.",
+            "schema": {
+              "$ref": "#/definitions/HostPoolList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/retrieveRegistrationToken": {
+      "post": {
+        "tags": [
+          "HostPool"
+        ],
+        "operationId": "HostPools_RetrieveRegistrationToken",
+        "description": "Registration token of the host pool.",
+        "x-ms-examples": {
+          "HostPools_RetrieveRegistrationToken_Post": {
+            "$ref": "./examples/HostPools_RetrieveRegistrationToken_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved host pool in resource group.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationInfo"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/userSessions": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_ListByHostPool",
+        "description": "List userSessions.",
+        "x-ms-examples": {
+          "UserSession_ListByHostPool": {
+            "$ref": "./examples/UserSession_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData filter expression. Valid properties for filtering are userprincipalname and sessionstate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user sessions in host pool.",
+            "schema": {
+              "$ref": "#/definitions/UserSessionList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}": {
+      "get": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHosts_Get",
+        "description": "Get a session host.",
+        "x-ms-examples": {
+          "SessionHost_Get": {
+            "$ref": "./examples/SessionHost_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved session host.",
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHosts_Delete",
+        "description": "Remove a SessionHost.",
+        "x-ms-examples": {
+          "SessionHost_Delete": {
+            "$ref": "./examples/SessionHost_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to force sessionHost deletion even when userSession exists."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed session host."
+          },
+          "204": {
+            "description": "Session host does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHosts_Update",
+        "description": "Update a session host.",
+        "x-ms-examples": {
+          "SessionHost_Update": {
+            "$ref": "./examples/SessionHost_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "name": "sessionHost",
+            "description": "Object containing SessionHost definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SessionHostPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated session host.",
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts": {
+      "get": {
+        "tags": [
+          "SessionHost"
+        ],
+        "operationId": "SessionHosts_List",
+        "description": "List sessionHosts.",
+        "x-ms-examples": {
+          "SessionHost_List": {
+            "$ref": "./examples/SessionHost_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved session hosts in host pool.",
+            "schema": {
+              "$ref": "#/definitions/SessionHostList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
+      "get": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Get",
+        "description": "Get a msixpackage.",
+        "x-ms-examples": {
+          "MSIXPackage_Get": {
+            "$ref": "./examples/MsixPackage_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_CreateOrUpdate",
+        "description": "Create or update a MSIX package.",
+        "x-ms-examples": {
+          "MSIXPackage_Create": {
+            "$ref": "./examples/MsixPackage_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          },
+          {
+            "name": "msixPackage",
+            "description": "Object containing  MSIX Package definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated  MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "201": {
+            "description": "Successfully created  MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Delete",
+        "description": "Remove an MSIX Package.",
+        "x-ms-examples": {
+          "MSIXPackage_Delete": {
+            "$ref": "./examples/MsixPackage_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed MSIX Package."
+          },
+          "204": {
+            "description": "MSIX Package does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_Update",
+        "description": "Update an  MSIX Package.",
+        "x-ms-examples": {
+          "MSIXPackage_Update": {
+            "$ref": "./examples/MsixPackage_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MSIXPackageFullNameParameter"
+          },
+          {
+            "name": "msixPackage",
+            "description": "Object containing MSIX Package definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/MSIXPackagePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated MSIX Package.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackage"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
+      "get": {
+        "tags": [
+          "MSIXPackage"
+        ],
+        "operationId": "MSIXPackages_List",
+        "description": "List MSIX packages in hostpool.",
+        "x-ms-examples": {
+          "MSIXPackage_List": {
+            "$ref": "./examples/MsixPackage_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX Packages in hostpool.",
+            "schema": {
+              "$ref": "#/definitions/MSIXPackageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/expandMsixImage": {
+      "post": {
+        "tags": [
+          "MsixImage"
+        ],
+        "operationId": "MsixImages_Expand",
+        "description": "Expands and Lists MSIX packages in an Image, given the Image Path.",
+        "x-ms-examples": {
+          "MsixImage_Expand": {
+            "$ref": "./examples/MsixImage_Expand_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "name": "msixImageURI",
+            "description": "Object containing URI to MSIX Image",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MSIXImageURI"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved MSIX packages in specified Image Path.",
+            "schema": {
+              "$ref": "#/definitions/ExpandMsixImageList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Get",
+        "description": "Get a userSession.",
+        "x-ms-examples": {
+          "UserSession_Get": {
+            "$ref": "./examples/UserSession_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user session.",
+            "schema": {
+              "$ref": "#/definitions/UserSession"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Delete",
+        "description": "Remove a userSession.",
+        "x-ms-examples": {
+          "UserSession_Delete": {
+            "$ref": "./examples/UserSession_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Force flag to login off userSession."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed user session."
+          },
+          "204": {
+            "description": "User session does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions": {
+      "get": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_List",
+        "description": "List userSessions.",
+        "x-ms-examples": {
+          "UserSession_List": {
+            "$ref": "./examples/UserSession_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user sessions in session host.",
+            "schema": {
+              "$ref": "#/definitions/UserSessionList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/disconnect": {
+      "post": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_Disconnect",
+        "description": "Disconnect a userSession.",
+        "x-ms-examples": {
+          "UserSession_Disconnect_Post": {
+            "$ref": "./examples/UserSession_Disconnect_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully disconnected user session."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/userSessions/{userSessionId}/sendMessage": {
+      "post": {
+        "tags": [
+          "UserSession"
+        ],
+        "operationId": "UserSessions_SendMessage",
+        "description": "Send a message to a user.",
+        "x-ms-examples": {
+          "UserSession_SendMessage_Post": {
+            "$ref": "./examples/UserSession_SendMessage_Post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionHostNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserSessionIdParameter"
+          },
+          {
+            "name": "sendMessage",
+            "description": "Object containing message includes title and message body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SendMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully sent message to user session."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/scalingPlans": {
+      "get": {
+        "tags": [
+          "ScalingPlan"
+        ],
+        "operationId": "ScalingPlans_ListByHostPool",
+        "description": "List scaling plan associated with hostpool.",
+        "x-ms-examples": {
+          "UserSession_SendMessage_Post": {
+            "$ref": "./examples/ScalingPlan_ListByHostPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HostPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scaling plan associated with hostpool.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorProperties"
+        }
+      }
+    },
+    "CloudErrorProperties": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "description": "Result of the request to list operations.",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "description": "Supported operation of this resource provider.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft Desktop Virtualization.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "Is a data action.",
+          "type": "boolean"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of the operation",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Represents a Workspace definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for Workspace",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties"
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "description": "Schema for Workspace properties.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Workspace. (internal use)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Workspace."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Workspace."
+        },
+        "applicationGroupReferences": {
+          "type": "array",
+          "description": "List of applicationGroup resource Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceList": {
+      "type": "object",
+      "title": "WorkspaceList",
+      "description": "List of Workspace definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Workspace definitions.",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "WorkspacePatch": {
+      "type": "object",
+      "description": "Workspace properties that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "Detailed properties for Workspace",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspacePatchProperties"
+        }
+      }
+    },
+    "WorkspacePatchProperties": {
+      "description": "Workspace properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of Workspace."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Workspace."
+        },
+        "applicationGroupReferences": {
+          "type": "array",
+          "description": "List of applicationGroup links.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationGroup": {
+      "type": "object",
+      "description": "Represents a ApplicationGroup definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ApplicationGroup",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGroupProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "ApplicationGroupProperties": {
+      "description": "Schema for ApplicationGroup properties.",
+      "type": "object",
+      "required": [
+        "hostPoolArmPath",
+        "applicationGroupType"
+      ],
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of ApplicationGroup. (internal use)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of ApplicationGroup."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of ApplicationGroup."
+        },
+        "hostPoolArmPath": {
+          "type": "string",
+          "description": "HostPool arm path of ApplicationGroup.",
+          "x-nullable": false
+        },
+        "workspaceArmPath": {
+          "type": "string",
+          "description": "Workspace arm path of ApplicationGroup.",
+          "readOnly": true
+        },
+        "applicationGroupType": {
+          "enum": [
+            "RemoteApp",
+            "Desktop"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Resource Type of ApplicationGroup.",
+          "x-nullable": false
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGroupPatch": {
+      "type": "object",
+      "description": "ApplicationGroup properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "ApplicationGroup properties that can be patched.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGroupPatchProperties"
+        }
+      }
+    },
+    "ApplicationGroupPatchProperties": {
+      "description": "ApplicationGroup properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of ApplicationGroup."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of ApplicationGroup."
+        }
+      }
+    },
+    "ApplicationGroupList": {
+      "type": "object",
+      "title": "ApplicationGroupList",
+      "description": "List of ApplicationGroup definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ApplicationGroup definitions.",
+          "items": {
+            "$ref": "#/definitions/ApplicationGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "HostPool": {
+      "type": "object",
+      "description": "Represents a HostPool definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for HostPool",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HostPoolProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "HostPoolProperties": {
+      "description": "Properties of HostPool.",
+      "type": "object",
+      "required": [
+        "hostPoolType",
+        "loadBalancerType",
+        "preferredAppGroupType"
+      ],
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of HostPool. (internal use)",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of HostPool."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of HostPool."
+        },
+        "hostPoolType": {
+          "enum": [
+            "Personal",
+            "Pooled",
+            "BYODesktop"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "HostPool type for desktop.",
+          "x-nullable": false
+        },
+        "personalDesktopAssignmentType": {
+          "enum": [
+            "Automatic",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "PersonalDesktopAssignmentType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "PersonalDesktopAssignment type for HostPool."
+        },
+        "customRdpProperty": {
+          "type": "string",
+          "description": "Custom rdp property of HostPool."
+        },
+        "maxSessionLimit": {
+          "type": "integer",
+          "description": "The max session limit of HostPool."
+        },
+        "loadBalancerType": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst",
+            "Persistent"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of the load balancer.",
+          "x-nullable": false
+        },
+        "ring": {
+          "type": "integer",
+          "description": "The ring number of HostPool."
+        },
+        "validationEnvironment": {
+          "type": "boolean",
+          "description": "Is validation environment."
+        },
+        "registrationInfo": {
+          "$ref": "#/definitions/RegistrationInfo",
+          "description": "The registration info of HostPool."
+        },
+        "vmTemplate": {
+          "type": "string",
+          "description": "VM template for sessionhosts configuration within hostpool."
+        },
+        "applicationGroupReferences": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of applicationGroup links.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ssoadfsAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "ssoClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "ssoClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "ssoSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group",
+          "x-nullable": false
+        },
+        "startVMOnConnect": {
+          "type": "boolean",
+          "description": "The flag to turn on/off StartVMOnConnect feature."
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
+        },
+        "cloudPcResource": {
+          "type": "boolean",
+          "description": "Is cloud pc resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "HostPoolPatch": {
+      "type": "object",
+      "description": "HostPool properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "HostPool properties that can be patched.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HostPoolPatchProperties"
+        }
+      }
+    },
+    "HostPoolPatchProperties": {
+      "description": "Properties of HostPool.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of HostPool."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of HostPool."
+        },
+        "customRdpProperty": {
+          "type": "string",
+          "description": "Custom rdp property of HostPool."
+        },
+        "maxSessionLimit": {
+          "type": "integer",
+          "description": "The max session limit of HostPool."
+        },
+        "personalDesktopAssignmentType": {
+          "enum": [
+            "Automatic",
+            "Direct"
+          ],
+          "x-ms-enum": {
+            "name": "PersonalDesktopAssignmentType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "PersonalDesktopAssignment type for HostPool."
+        },
+        "loadBalancerType": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst",
+            "Persistent"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of the load balancer."
+        },
+        "ring": {
+          "type": "integer",
+          "description": "The ring number of HostPool."
+        },
+        "validationEnvironment": {
+          "type": "boolean",
+          "description": "Is validation environment."
+        },
+        "registrationInfo": {
+          "$ref": "#/definitions/RegistrationInfoPatch",
+          "description": "The registration info of HostPool."
+        },
+        "vmTemplate": {
+          "type": "string",
+          "description": "VM template for sessionhosts configuration within hostpool."
+        },
+        "ssoadfsAuthority": {
+          "type": "string",
+          "description": "URL to customer ADFS server for signing WVD SSO certificates."
+        },
+        "ssoClientId": {
+          "type": "string",
+          "description": "ClientId for the registered Relying Party used to issue WVD SSO certificates."
+        },
+        "ssoClientSecretKeyVaultPath": {
+          "type": "string",
+          "description": "Path to Azure KeyVault storing the secret used for communication to ADFS."
+        },
+        "ssoSecretType": {
+          "enum": [
+            "SharedKey",
+            "Certificate",
+            "SharedKeyInKeyVault",
+            "CertificateInKeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "SSOSecretType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of single sign on Secret Type."
+        },
+        "preferredAppGroupType": {
+          "enum": [
+            "None",
+            "Desktop",
+            "RailApplications"
+          ],
+          "x-ms-enum": {
+            "name": "PreferredAppGroupType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of preferred application group type, default to Desktop Application Group"
+        },
+        "startVMOnConnect": {
+          "type": "boolean",
+          "description": "The flag to turn on/off StartVMOnConnect feature."
+        }
+      }
+    },
+    "RegistrationInfo": {
+      "description": "Represents a RegistrationInfo definition.",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Expiration time of registration token."
+        },
+        "token": {
+          "type": "string",
+          "description": "The registration token base64 encoded string."
+        },
+        "registrationTokenOperation": {
+          "enum": [
+            "Delete",
+            "None",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "RegistrationTokenOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of resetting the token.",
+          "x-nullable": false
+        }
+      }
+    },
+    "RegistrationInfoPatch": {
+      "description": "Represents a RegistrationInfo definition.",
+      "type": "object",
+      "properties": {
+        "expirationTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Expiration time of registration token."
+        },
+        "registrationTokenOperation": {
+          "enum": [
+            "Delete",
+            "None",
+            "Update"
+          ],
+          "x-ms-enum": {
+            "name": "RegistrationTokenOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The type of resetting the token."
+        }
+      }
+    },
+    "SendMessage": {
+      "description": "Represents message sent to a UserSession.",
+      "type": "object",
+      "properties": {
+        "messageTitle": {
+          "type": "string",
+          "description": "Title of message."
+        },
+        "messageBody": {
+          "type": "string",
+          "description": "Body of message."
+        }
+      }
+    },
+    "HostPoolList": {
+      "type": "object",
+      "title": "HostPoolList",
+      "description": "List of HostPool definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of HostPool definitions.",
+          "items": {
+            "$ref": "#/definitions/HostPool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "MSIXPackage": {
+      "description": "Schema for MSIX Package properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for MSIX Package",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MSIXPackageProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackageProperties": {
+      "description": "Schema for MSIX Package properties.",
+      "type": "object",
+      "properties": {
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share.",
+          "x-nullable": false
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "x-nullable": false
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal. ",
+          "x-nullable": true
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image. ",
+          "x-nullable": false
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed.",
+          "x-nullable": false
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool. ",
+          "x-nullable": false
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageDependencies"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Package Version found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageApplications"
+          },
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackagePatch": {
+      "type": "object",
+      "description": "MSIX Package properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for MSIX Package",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MSIXPackagePatchProperties"
+        }
+      }
+    },
+    "MSIXPackagePatchProperties": {
+      "description": "MSIX Package properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "isActive": {
+          "type": "boolean",
+          "description": "Set a version of the package to be active across hostpool. "
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Set Registration mode. Regular or Delayed."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name for MSIX Package."
+        }
+      }
+    },
+    "MsixPackageApplications": {
+      "description": "Schema for MSIX Package Application properties.",
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Package Application Id, found in appxmanifest.xml.",
+          "x-nullable": false
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Package Application.",
+          "x-nullable": false
+        },
+        "appUserModelID": {
+          "type": "string",
+          "description": "Used to activate Package Application. Consists of Package Name and ApplicationID. Found in appxmanifest.xml.",
+          "x-nullable": false
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name.",
+          "x-nullable": false
+        },
+        "iconImageName": {
+          "type": "string",
+          "description": "User friendly name.",
+          "x-nullable": false
+        },
+        "rawIcon": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        },
+        "rawPng": {
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        }
+      }
+    },
+    "MsixPackageDependencies": {
+      "description": "Schema for MSIX Package Dependencies properties.",
+      "type": "object",
+      "properties": {
+        "dependencyName": {
+          "type": "string",
+          "description": "Name of package dependency.",
+          "x-nullable": false
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Name of dependency publisher.",
+          "x-nullable": false
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Dependency version required.",
+          "x-nullable": false
+        }
+      }
+    },
+    "MSIXPackageList": {
+      "type": "object",
+      "title": "MsixPackageList",
+      "description": "List of MSIX Package definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of MSIX Package definitions.",
+          "items": {
+            "$ref": "#/definitions/MSIXPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "Application": {
+      "description": "Schema for Application properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for Application",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "description": "Schema for Application properties.",
+      "type": "object",
+      "required": [
+        "commandLineSetting"
+      ],
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Application. (internal use)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Application."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Application."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Specifies a path for the executable file for the application."
+        },
+        "msixPackageFamilyName": {
+          "type": "string",
+          "description": "Specifies the package family name for MSIX applications",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "msixPackageApplicationId": {
+          "type": "string",
+          "description": "Specifies the package application Id for MSIX applications",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "applicationType": {
+          "enum": [
+            "InBuilt",
+            "MsixApplication"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteApplicationType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Resource Type of Application.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "commandLineSetting": {
+          "enum": [
+            "DoNotAllow",
+            "Allow",
+            "Require"
+          ],
+          "x-ms-enum": {
+            "name": "CommandLineSetting",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.",
+          "x-nullable": false
+        },
+        "commandLineArguments": {
+          "type": "string",
+          "description": "Command Line Arguments for Application."
+        },
+        "showInPortal": {
+          "type": "boolean",
+          "description": "Specifies whether to show the RemoteApp program in the RD Web Access server."
+        },
+        "iconPath": {
+          "type": "string",
+          "description": "Path to icon."
+        },
+        "iconIndex": {
+          "type": "integer",
+          "description": "Index of the icon."
+        },
+        "iconHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Hash of the icon."
+        },
+        "iconContent": {
+          "readOnly": true,
+          "type": "string",
+          "format": "byte",
+          "description": "the icon a 64 bit string as a byte array."
+        }
+      }
+    },
+    "ApplicationList": {
+      "type": "object",
+      "title": "ApplicationList",
+      "description": "List of Application definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Application definitions.",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ApplicationPatch": {
+      "type": "object",
+      "description": "Application properties that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "Detailed properties for Application",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationPatchProperties"
+        }
+      }
+    },
+    "ApplicationPatchProperties": {
+      "description": "Application properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of Application."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Application."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Specifies a path for the executable file for the application."
+        },
+        "commandLineSetting": {
+          "enum": [
+            "DoNotAllow",
+            "Allow",
+            "Require"
+          ],
+          "x-ms-enum": {
+            "name": "CommandLineSetting",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all."
+        },
+        "commandLineArguments": {
+          "type": "string",
+          "description": "Command Line Arguments for Application."
+        },
+        "showInPortal": {
+          "type": "boolean",
+          "description": "Specifies whether to show the RemoteApp program in the RD Web Access server."
+        },
+        "iconPath": {
+          "type": "string",
+          "description": "Path to icon."
+        },
+        "iconIndex": {
+          "type": "integer",
+          "description": "Index of the icon."
+        },
+        "msixPackageFamilyName": {
+          "type": "string",
+          "description": "Specifies the package family name for MSIX applications",
+          "x-nullable": true
+        },
+        "msixPackageApplicationId": {
+          "type": "string",
+          "description": "Specifies the package application Id for MSIX applications",
+          "x-nullable": true
+        },
+        "applicationType": {
+          "enum": [
+            "InBuilt",
+            "MsixApplication"
+          ],
+          "x-ms-enum": {
+            "name": "RemoteApplicationType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Resource Type of Application."
+        }
+      }
+    },
+    "Desktop": {
+      "description": "Schema for Desktop properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for Desktop",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DesktopProperties"
+        }
+      }
+    },
+    "DesktopProperties": {
+      "description": "Schema for Desktop properties.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Desktop. (internal use)",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of Desktop."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Desktop."
+        },
+        "iconHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Hash of the icon."
+        },
+        "iconContent": {
+          "readOnly": true,
+          "type": "string",
+          "format": "byte",
+          "description": "The icon a 64 bit string as a byte array."
+        }
+      }
+    },
+    "DesktopList": {
+      "type": "object",
+      "title": "DesktopList",
+      "description": "List of Desktop definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Desktop definitions.",
+          "items": {
+            "$ref": "#/definitions/Desktop"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "DesktopPatch": {
+      "type": "object",
+      "description": "Desktop properties that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "Detailed properties for Desktop",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DesktopPatchProperties"
+        }
+      }
+    },
+    "DesktopPatchProperties": {
+      "description": "Desktop properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of Desktop."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly name of Desktop."
+        }
+      }
+    },
+    "StartMenuItemProperties": {
+      "description": "Schema for StartMenuItem properties.",
+      "type": "object",
+      "properties": {
+        "appAlias": {
+          "type": "string",
+          "description": "Alias of StartMenuItem."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Path to the file of StartMenuItem."
+        },
+        "commandLineArguments": {
+          "type": "string",
+          "description": "Command line arguments for StartMenuItem."
+        },
+        "iconPath": {
+          "type": "string",
+          "description": "Path to the icon."
+        },
+        "iconIndex": {
+          "type": "integer",
+          "description": "Index of the icon."
+        }
+      }
+    },
+    "StartMenuItem": {
+      "type": "object",
+      "description": "Represents a StartMenuItem definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for StartMenuItem",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StartMenuItemProperties"
+        }
+      }
+    },
+    "StartMenuItemList": {
+      "type": "object",
+      "title": "StartMenuItemList",
+      "description": "List of StartMenuItem definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of StartMenuItem definitions.",
+          "items": {
+            "$ref": "#/definitions/StartMenuItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ExpandMsixImageProperties": {
+      "description": "Schema for Expand MSIX Image properties.",
+      "type": "object",
+      "properties": {
+        "packageAlias": {
+          "type": "string",
+          "description": "Alias of MSIX Package."
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "VHD/CIM image path on Network Share.",
+          "x-nullable": false
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Package Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package Family Name from appxmanifest.xml. Contains Package Name and Publisher name. ",
+          "x-nullable": false
+        },
+        "packageFullName": {
+          "type": "string",
+          "description": "Package Full Name from appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User friendly Name to be displayed in the portal. ",
+          "x-nullable": true
+        },
+        "packageRelativePath": {
+          "type": "string",
+          "description": "Relative Path to the package inside the image. ",
+          "x-nullable": false
+        },
+        "isRegularRegistration": {
+          "type": "boolean",
+          "description": "Specifies how to register Package in feed.",
+          "x-nullable": false
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Make this version of the package the active one across the hostpool. ",
+          "x-nullable": false
+        },
+        "packageDependencies": {
+          "type": "array",
+          "description": "List of package dependencies. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageDependencies"
+          },
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Package Version found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Date Package was last updated, found in the appxmanifest.xml. ",
+          "x-nullable": false
+        },
+        "packageApplications": {
+          "type": "array",
+          "description": "List of package applications. ",
+          "items": {
+            "$ref": "#/definitions/MsixPackageApplications"
+          },
+          "x-nullable": false
+        }
+      }
+    },
+    "ExpandMsixImage": {
+      "type": "object",
+      "description": "Represents the definition of contents retrieved after expanding the MSIX Image. ",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ExpandMsixImage",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpandMsixImageProperties"
+        }
+      }
+    },
+    "ExpandMsixImageList": {
+      "type": "object",
+      "title": "ExpandMsixImageList",
+      "description": "List of MSIX package properties retrieved from MSIX Image expansion.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of MSIX package properties from give MSIX Image.",
+          "items": {
+            "$ref": "#/definitions/ExpandMsixImage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "MSIXImageURI": {
+      "description": "Represents URI referring to MSIX Image",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "URI to Image"
+        }
+      }
+    },
+    "SessionHost": {
+      "type": "object",
+      "description": "Represents a SessionHost definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for SessionHost",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostProperties"
+        }
+      }
+    },
+    "SessionHostProperties": {
+      "description": "Schema for SessionHost properties.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of SessionHost. (internal use)",
+          "readOnly": true
+        },
+        "lastHeartBeat": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Last heart beat from SessionHost."
+        },
+        "sessions": {
+          "type": "integer",
+          "description": "Number of sessions on SessionHost."
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Version of agent on SessionHost."
+        },
+        "allowNewSession": {
+          "type": "boolean",
+          "description": "Allow a new session."
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "description": "Virtual Machine Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id of SessionHost's underlying virtual machine.",
+          "readOnly": true
+        },
+        "assignedUser": {
+          "type": "string",
+          "description": "User assigned to SessionHost."
+        },
+        "status": {
+          "enum": [
+            "Available",
+            "Unavailable",
+            "Shutdown",
+            "Disconnected",
+            "Upgrading",
+            "UpgradeFailed",
+            "NoHeartbeat",
+            "NotJoinedToDomain",
+            "DomainTrustRelationshipLost",
+            "SxSStackListenerNotReady",
+            "FSLogixNotHealthy",
+            "NeedsAssistance"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Available",
+                "description": "Session Host has passed all the health checks and is available to handle connections."
+              },
+              {
+                "value": "Unavailable",
+                "description": "Session Host is either turned off or has failed critical health checks which is causing service not to be able to route connections to this session host. Note this replaces previous 'NoHeartBeat' status."
+              },
+              {
+                "value": "Shutdown",
+                "description": "Session Host is shutdown - RD Agent reported session host to be stopped or deallocated."
+              },
+              {
+                "value": "Disconnected",
+                "description": "The Session Host is unavailable because it is currently disconnected."
+              },
+              {
+                "value": "Upgrading",
+                "description": "Session Host is unavailable because currently an upgrade of RDAgent/side-by-side stack is in progress. Note: this state will be removed once the upgrade completes and the host is able to accept connections."
+              },
+              {
+                "value": "UpgradeFailed",
+                "description": "Session Host is unavailable because the critical component upgrade (agent, side-by-side stack, etc.) failed."
+              },
+              {
+                "value": "NoHeartbeat",
+                "description": "The Session Host is not heart beating."
+              },
+              {
+                "value": "NotJoinedToDomain",
+                "description": "SessionHost is not joined to domain."
+              },
+              {
+                "value": "DomainTrustRelationshipLost",
+                "description": "SessionHost's domain trust relationship lost"
+              },
+              {
+                "value": "SxSStackListenerNotReady",
+                "description": "SxS stack installed on the SessionHost is not ready to receive connections."
+              },
+              {
+                "value": "FSLogixNotHealthy",
+                "description": "FSLogix is in an unhealthy state on the session host."
+              },
+              {
+                "value": "NeedsAssistance",
+                "description": "New status to inform admins that the health on their endpoint needs to be fixed. The connections might not fail, as these issues are not fatal."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Status for a SessionHost."
+        },
+        "statusTimestamp": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the status.",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The version of the OS on the session host."
+        },
+        "sxSStackVersion": {
+          "type": "string",
+          "description": "The version of the side by side stack on the session host."
+        },
+        "updateState": {
+          "enum": [
+            "Initial",
+            "Pending",
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateState",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Update state of a SessionHost."
+        },
+        "lastUpdateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        },
+        "updateErrorMessage": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "sessionHostHealthCheckResults": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of SessionHostHealthCheckReports",
+          "items": {
+            "$ref": "#/definitions/SessionHostHealthCheckReport"
+          }
+        }
+      }
+    },
+    "SessionHostHealthCheckReport": {
+      "type": "object",
+      "description": "The report for session host information.",
+      "properties": {
+        "healthCheckName": {
+          "enum": [
+            "DomainJoinedCheck",
+            "DomainTrustCheck",
+            "FSLogixHealthCheck",
+            "SxSStackListenerCheck",
+            "UrlsAccessibleCheck",
+            "MonitoringAgentCheck",
+            "DomainReachable",
+            "WebRTCRedirectorCheck",
+            "SupportedEncryptionCheck",
+            "MetaDataServiceCheck",
+            "AppAttachHealthCheck"
+          ],
+          "x-ms-enum": {
+            "name": "HealthCheckName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "DomainJoinedCheck",
+                "description": "Verifies the SessionHost is joined to a domain. If this check fails is classified as fatal as no connection can succeed if the SessionHost is not joined to the domain."
+              },
+              {
+                "value": "DomainTrustCheck",
+                "description": "Verifies the SessionHost is not experiencing domain trust issues that will prevent authentication on SessionHost at connection time when session is created. If this check fails is classified as fatal as no connection can succeed if we cannot reach the domain for authentication on the SessionHost."
+              },
+              {
+                "value": "FSLogixHealthCheck",
+                "description": "Verifies the FSLogix service is up and running to make sure users' profiles are loaded in the session. If this check fails is classified as fatal as even if the connection can succeed, user experience is bad as the user profile cannot be loaded and user will get a temporary profile in the session."
+              },
+              {
+                "value": "SxSStackListenerCheck",
+                "description": "Verifies that the SxS stack is up and running so connections can succeed. If this check fails is classified as fatal as no connection can succeed if the SxS stack is not ready."
+              },
+              {
+                "value": "UrlsAccessibleCheck",
+                "description": "Verifies that the required WVD service and Geneva URLs are reachable from the SessionHost. These URLs are: RdTokenUri, RdBrokerURI, RdDiagnosticsUri and storage blob URLs for agent monitoring (geneva). If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is unable to store warm path data (logs, operations ...)."
+              },
+              {
+                "value": "MonitoringAgentCheck",
+                "description": "Verifies that the required Geneva agent is running. If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is missing or running (possibly) older version."
+              },
+              {
+                "value": "DomainReachable",
+                "description": "Verifies the domain the SessionHost is joined to is still reachable. If this check fails is classified as fatal as no connection can succeed if the domain the SessionHost is joined is not reachable at the time of connection."
+              },
+              {
+                "value": "WebRTCRedirectorCheck",
+                "description": "Verifies whether the WebRTCRedirector component is healthy. The WebRTCRedirector component is used to optimize video and audio performance in Microsoft Teams. This checks whether the component is still running, and whether there is a higher version available. If this check fails, it is non fatal and the machine still can service connections, main issue may be the WebRTCRedirector component has to be restarted or updated."
+              },
+              {
+                "value": "SupportedEncryptionCheck",
+                "description": "Verifies the value of SecurityLayer registration key. If the value is 0 (SecurityLayer.RDP) this check fails with Error code = NativeMethodErrorCode.E_FAIL and is fatal. If the value is 1 (SecurityLayer.Negotiate) this check fails with Error code = NativeMethodErrorCode.ERROR_SUCCESS and is non fatal."
+              },
+              {
+                "value": "MetaDataServiceCheck",
+                "description": "Verifies the metadata service is accessible and return compute properties."
+              },
+              {
+                "value": "AppAttachHealthCheck",
+                "description": "Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual deregistration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Represents the name of the health check operation performed.",
+          "readOnly": true
+        },
+        "healthCheckResult": {
+          "enum": [
+            "Unknown",
+            "HealthCheckSucceeded",
+            "HealthCheckFailed",
+            "SessionHostShutdown"
+          ],
+          "x-ms-enum": {
+            "name": "HealthCheckResult",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Health check result is not currently known."
+              },
+              {
+                "value": "HealthCheckSucceeded",
+                "description": "Health check passed."
+              },
+              {
+                "value": "HealthCheckFailed",
+                "description": "Health check failed."
+              },
+              {
+                "value": "SessionHostShutdown",
+                "description": "We received a Shutdown notification."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "Represents the Health state of the health check we performed.",
+          "readOnly": true
+        },
+        "additionalFailureDetails": {
+          "$ref": "#/definitions/SessionHostHealthCheckFailureDetails",
+          "description": "Additional detailed information on the failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "SessionHostHealthCheckFailureDetails": {
+      "type": "object",
+      "description": "Contains details on the failure.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Failure message: hints on what is wrong and how to recover.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code corresponding for the failure.",
+          "readOnly": true
+        },
+        "lastHealthCheckDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update.",
+          "readOnly": true
+        }
+      }
+    },
+    "SessionHostPatch": {
+      "type": "object",
+      "description": "SessionHost properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for SessionHost",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SessionHostPatchProperties"
+        }
+      }
+    },
+    "SessionHostPatchProperties": {
+      "description": "SessionHost properties that can be patched.",
+      "type": "object",
+      "properties": {
+        "allowNewSession": {
+          "type": "boolean",
+          "description": "Allow a new session."
+        },
+        "assignedUser": {
+          "type": "string",
+          "description": "User assigned to SessionHost."
+        }
+      }
+    },
+    "SessionHostList": {
+      "type": "object",
+      "title": "SessionHostList",
+      "description": "List of SessionHost definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of SessionHost definitions.",
+          "items": {
+            "$ref": "#/definitions/SessionHost"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "UserSession": {
+      "type": "object",
+      "description": "Represents a UserSession definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for UserSession",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UserSessionProperties"
+        }
+      }
+    },
+    "UserSessionProperties": {
+      "description": "Schema for UserSession properties.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of user session. (internal use)",
+          "readOnly": true
+        },
+        "userPrincipalName": {
+          "type": "string",
+          "description": "The user principal name."
+        },
+        "applicationType": {
+          "enum": [
+            "RemoteApp",
+            "Desktop"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Application type of application."
+        },
+        "sessionState": {
+          "enum": [
+            "Unknown",
+            "Active",
+            "Disconnected",
+            "Pending",
+            "LogOff",
+            "UserProfileDiskMounted"
+          ],
+          "x-ms-enum": {
+            "name": "SessionState",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "State of user session."
+        },
+        "activeDirectoryUserName": {
+          "type": "string",
+          "description": "The active directory user name."
+        },
+        "createTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the user session create."
+        }
+      }
+    },
+    "UserSessionList": {
+      "type": "object",
+      "title": "UserSessionList",
+      "description": "List of UserSession definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of UserSession definitions.",
+          "items": {
+            "$ref": "#/definitions/UserSession"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlan": {
+      "type": "object",
+      "title": "ScalingPlan",
+      "description": "Represents a scaling plan definition.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for scaling plan.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanProperties"
+        }
+      }
+    },
+    "ScalingPlanProperties": {
+      "type": "object",
+      "description": "Scaling plan properties.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of scaling plan. (internal use)",
+          "readOnly": true
+        },
+        "ring": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ring number of scaling plan."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of scaling plan."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name of scaling plan."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Timezone of the scaling plan."
+        },
+        "hostPoolType": {
+          "enum": [
+            "Personal",
+            "Pooled",
+            "BYODesktop"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "HostPool type for desktop.",
+          "x-nullable": false
+        },
+        "exclusionTag": {
+          "type": "string",
+          "description": "Exclusion tag for scaling plan."
+        },
+        "schedules": {
+          "type": "array",
+          "description": "List of ScalingSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingSchedule"
+          }
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of ScalingHostPoolReference definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingHostPoolReference"
+          }
+        }
+      }
+    },
+    "ScalingSchedule": {
+      "description": "Scaling plan schedule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the scaling schedule."
+        },
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string"
+          }
+        },
+        "rampUpStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Starting time for ramp up period."
+        },
+        "rampUpLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp up period."
+        },
+        "rampUpMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp up period."
+        },
+        "rampUpCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp up period."
+        },
+        "peakStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Starting time for peak period."
+        },
+        "peakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for peak period."
+        },
+        "rampDownStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for ramp down period."
+        },
+        "rampDownMinimumHostsPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum host percentage for ramp down period."
+        },
+        "rampDownCapacityThresholdPct": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Capacity threshold for ramp down period."
+        },
+        "rampDownForceLogoffUsers": {
+          "type": "boolean",
+          "description": "Should users be logged off forcefully from hosts."
+        },
+        "rampDownStopHostsWhen": {
+          "enum": [
+            "ZeroSessions",
+            "ZeroActiveSessions"
+          ],
+          "x-ms-enum": {
+            "name": "StopHostsWhen",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Specifies when to stop hosts during ramp down period."
+        },
+        "rampDownWaitTimeMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes to wait to stop hosts during ramp down period."
+        },
+        "rampDownNotificationMessage": {
+          "type": "string",
+          "description": "Notification message for users during ramp down period."
+        },
+        "offPeakStartTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakLoadBalancingAlgorithm": {
+          "enum": [
+            "BreadthFirst",
+            "DepthFirst"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHostLoadBalancingAlgorithm",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "ScalingHostPoolReference": {
+      "description": "Scaling plan reference to hostpool.",
+      "type": "object",
+      "properties": {
+        "hostPoolArmPath": {
+          "type": "string",
+          "description": "Arm path of referenced hostpool."
+        },
+        "scalingPlanEnabled": {
+          "type": "boolean",
+          "description": "Is the scaling plan enabled for this hostpool."
+        }
+      }
+    },
+    "ScalingPlanList": {
+      "type": "object",
+      "title": "ScalingPlanList",
+      "description": "List of scaling plan definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of scaling plan definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlanPatch": {
+      "type": "object",
+      "description": "Scaling plan properties that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "tags to be updated"
+        },
+        "properties": {
+          "description": "Detailed properties for scaling plan",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPatchProperties"
+        }
+      }
+    },
+    "ScalingPlanPatchProperties": {
+      "type": "object",
+      "description": "Scaling plan properties.",
+      "properties": {
+        "ring": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ring number of scaling plan."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of scaling plan."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "User friendly name of scaling plan."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Timezone of the scaling plan."
+        },
+        "hostPoolType": {
+          "enum": [
+            "Personal",
+            "Pooled",
+            "BYODesktop"
+          ],
+          "x-ms-enum": {
+            "name": "HostPoolType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "HostPool type for desktop.",
+          "x-nullable": false
+        },
+        "exclusionTag": {
+          "type": "string",
+          "description": "Exclusion tag for scaling plan."
+        },
+        "schedules": {
+          "type": "array",
+          "description": "List of ScalingSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingSchedule"
+          }
+        },
+        "hostPoolReferences": {
+          "type": "array",
+          "description": "List of ScalingHostPoolReference definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingHostPoolReference"
+          }
+        }
+      }
+    },
+    "MigrationRequestProperties": {
+      "type": "object",
+      "description": "Properties for arm migration.",
+      "properties": {
+        "operation": {
+          "enum": [
+            "Start",
+            "Revoke",
+            "Complete",
+            "Hide",
+            "Unhide"
+          ],
+          "x-ms-enum": {
+            "name": "Operation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Start",
+                "description": "Start the migration."
+              },
+              {
+                "value": "Revoke",
+                "description": "Revoke the migration."
+              },
+              {
+                "value": "Complete",
+                "description": "Complete the migration."
+              },
+              {
+                "value": "Hide",
+                "description": "Hide the hostpool."
+              },
+              {
+                "value": "Unhide",
+                "description": "Unhide the hostpool."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The type of operation for migration."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The path to the legacy object to migrate."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "HostPoolNameParameter": {
+      "name": "hostPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the host pool within the specified resource group",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "MSIXPackageFullNameParameter": {
+      "name": "msixPackageFullName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The version specific package full name of the MSIX package within specified hostpool",
+      "maxLength": 100,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationGroupNameParameter": {
+      "name": "applicationGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the application group",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ApplicationNameParameter": {
+      "name": "applicationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the application within the specified application group",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "DesktopNameParameter": {
+      "name": "desktopName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the desktop within the specified desktop group",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace",
+      "maxLength": 64,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "SessionHostNameParameter": {
+      "name": "sessionHostName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the session host within the specified host pool",
+      "maxLength": 48,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "UserSessionIdParameter": {
+      "name": "userSessionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the user session within the specified session host",
+      "maxLength": 24,
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "StartMenuItemNameParameter": {
+      "name": "startMenuItemName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the start menu item within the specified host pool",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "MSIXImageURIParameter": {
+      "name": "msixImageURI",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "URI to the MSIX Image (VHD/CIM).",
+      "maxLength": 100,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "ScalingPlanNameParameter": {
+      "name": "scalingPlanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the scaling plan.",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

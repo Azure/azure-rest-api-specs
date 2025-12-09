@@ -8,6 +8,7 @@ import "./ProviderInstance.tsp";
 import "./SapLandscapeMonitor.tsp";
 import "./Alert.tsp";
 import "./AlertTemplate.tsp";
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -28,16 +29,12 @@ enum Versions {
   /**
    * The 2023-12-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_12_01_preview: "2023-12-01-preview",
 
   /**
    * The 2024-02-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_02_01_preview: "2024-02-01-preview",
 }

@@ -25,19 +25,18 @@ options:
     namespace: Azure.AI.ChatProtocol
     model-namespace: false
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-chatprotocol"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-chatprotocol"
     namespace: "azure.ai.chatprotocol"
     package-mode: dataplane
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    package-dir: "ai-chat-protocol"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-chat-protocol"
     package-details:
       name: "@azure/ai-chat-protocol"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-chatprotocol"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-chatprotocol"
     namespace: "com.azure.ai.chatprotocol"
     flavor: azure

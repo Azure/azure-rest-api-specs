@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "workspaceName": "testWorkspace",
+    "reachabilityAnalysisRunName": "testAnalysisRunName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testWorkspace/reachabilityAnalysisRuns/testAnalysisRunName",
+        "name": "testAnalysisRunName",
+        "type": "Microsoft.Network/networkManagers/verifierWorkspaces/reachabilityAnalysisRuns",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "A sample  reachability analysis intent",
+          "intentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisIntents/testReachabilityAnalysisIntenant1",
+          "provisioningState": "Succeeded",
+          "intentContent": {
+            "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc",
+            "destinationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmDest",
+            "ipTraffic": {
+              "sourceIps": [
+                "10.4.0.0"
+              ],
+              "destinationIps": [
+                "10.4.0.1"
+              ],
+              "sourcePorts": [
+                "0"
+              ],
+              "destinationPorts": [
+                "0"
+              ],
+              "protocols": [
+                "Any"
+              ]
+            }
+          },
+          "analysisResult": "{\"resultOutcome\":\"NoPacketsReached\",\"unreachedTrace\":\"[{\\\"name\\\":\\\"testVmSrc\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc\\\",\\\"resourceType\\\":\\\"Microsoft.Compute/virtualMachines\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet has source IP address matching one of the network interface IPs.\\\",\\\"explanationCode\\\":\\\"MATCHED_NETWORK_INTERFACE_IP_SOURCE\\\",\\\"matchedNetworkInterfaceAddress\\\":{\\\"networkInterface\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface\\\",\\\"ipAddress\\\":\\\"10.5.0.4\\\"}}},{\\\"name\\\":\\\"testNetworkInterface\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface\\\",\\\"resourceType\\\":\\\"Microsoft.Network/networkInterfaces\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet has source IP address matching one of the network interface IPs.\\\",\\\"explanationCode\\\":\\\"MATCHED_NETWORK_INTERFACE_IP_SOURCE\\\",\\\"matchedNetworkInterfaceAddress\\\":{\\\"networkInterface\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface\\\",\\\"ipAddress\\\":\\\"10.5.0.4\\\"}}},{\\\"name\\\":\\\"testNetworkManager\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager\\\",\\\"resourceType\\\":\\\"Microsoft.Network/networkManagers\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet matched an admin security rule.\\\",\\\"explanationCode\\\":\\\"MATCHED_ADMIN_SECURITY_RULE\\\",\\\"matchedSecurityRule\\\":{\\\"name\\\":\\\"AllowAllOutbound\\\",\\\"action\\\":\\\"Allow\\\",\\\"destinationAddress\\\":\\\"*\\\",\\\"sourceAddress\\\":\\\"*\\\",\\\"destinationPort\\\":\\\"1-65535\\\",\\\"sourcePort\\\":\\\"1-65535\\\",\\\"protocol\\\":\\\"Any\\\"}}},{\\\"name\\\":\\\"testnsg\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/nsg-eus2\\\",\\\"resourceType\\\":\\\"Microsoft.Network/networkSecurityGroups\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet matched a network security rule.\\\",\\\"explanationCode\\\":\\\"MATCHED_NETWORK_SECURITY_RULE\\\",\\\"matchedSecurityRule\\\":{\\\"name\\\":\\\"defaultSecurityRules/AllowVnetOutBound\\\",\\\"action\\\":\\\"allow\\\",\\\"destinationAddress\\\":\\\"VirtualNetwork\\\",\\\"sourceAddress\\\":\\\"VirtualNetwork\\\",\\\"destinationPort\\\":\\\"0-65535\\\",\\\"sourcePort\\\":\\\"0-65535\\\",\\\"protocol\\\":\\\"All\\\"}}},{\\\"name\\\":\\\"default\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/default\\\",\\\"resourceType\\\":\\\"Microsoft.Network/virtualNetworks/subnets\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet matched a system route.\\\",\\\"explanationCode\\\":\\\"MATCHED_SYSTEM_ROUTE\\\",\\\"matchedSubnetRoute\\\":{\\\"source\\\":\\\"Default\\\",\\\"addressPrefix\\\":\\\"10.1.0.0/16\\\",\\\"nextHopIpAddress\\\":[],\\\"nextHopType\\\":\\\"ConnectedGroup\\\"}}},{\\\"name\\\":\\\"testvnet1\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testvnet1\\\",\\\"resourceType\\\":\\\"Microsoft.Network/virtualNetworks\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"0\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\",\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet destination IP is destined to subnet prefix.\\\",\\\"explanationCode\\\":\\\"MATCHED_SUBNET_PREFIX\\\",\\\"matchedSubnetPrefix\\\":{\\\"subnet\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testvnet-1/subnets/default\\\",\\\"subnetPrefix\\\":\\\"10.1.0.0/24\\\"}}},{\\\"name\\\":\\\"default\\\",\\\"resourceId\\\":\\\"/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/testvnet1/subnets/default\\\",\\\"resourceType\\\":\\\"Microsoft.Network/virtualNetworks/subnets\\\",\\\"packet\\\":{\\\"destinationAddress\\\":\\\"10.1.0.4\\\",\\\"destinationPort\\\":\\\"443\\\",\\\"sourceAddress\\\":\\\"10.5.0.4\\\",\\\"sourcePort\\\":\\\"0\\\"\\\"protocol\\\":\\\"TCP\\\"},\\\"explanation\\\":{\\\"description\\\":\\\"Packet denied due to VM not currently running.\\\",\\\"explanationCode\\\":\\\"VM_TURNED_OFF\\\"}}]\"}",
+          "errorMessage": ""
+        }
+      }
+    }
+  }
+}

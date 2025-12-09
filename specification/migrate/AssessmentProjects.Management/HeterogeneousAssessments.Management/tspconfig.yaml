@@ -10,7 +10,7 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{output-dir}"
-    output-file: "{azure-resource-provider-folder}/{service-name}/AssessmentProjects/{version-status}/{version}/heterogeneousAssessments.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/HeterogenousAssessments/{version-status}/{version}/heterogeneousAssessments.json"
     azure-resource-provider-folder: ./resource-manager
     use-read-only-status-schema: true
     arm-types-dir: "{project-root}/../../../common-types/resource-management"
@@ -22,22 +22,32 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Migrate"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-migrate"
     namespace: "azure.mgmt.migrate"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-migrate"
     namespace: "com.azure.resourcemanager.migrate"
     service-name: "migrate"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-migrate"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-migrate"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmigrate"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmigrate"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-client-generator-cli":
     "additionalDirectories":
-      - "specification/migrate/AssessmentProjects.Management/Common"
+      - "specification/migrate/AssessmentProjects.Management/HeterogeneousAssessments.Management"

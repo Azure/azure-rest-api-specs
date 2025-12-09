@@ -1,0 +1,26 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/mongocluster/armmongocluster
+      breaking-changes:
+        - Enum `MongoClusterStatus` has been removed
+        - Enum `NodeKind` has been removed
+        - Field `AdministratorLogin`, `AdministratorLoginPassword`, `EarliestRestoreTime`, `NodeGroupSpecs` of struct `Properties` has been removed
+        - Field `AdministratorLogin`, `AdministratorLoginPassword`, `NodeGroupSpecs` of struct `UpdateProperties` has been removed
+        - Struct `NodeGroupSpec` has been removed
+        - Type of `Properties.ClusterStatus` has been changed from `*MongoClusterStatus` to `*Status`
+  azure-sdk-for-python:
+    - package: azure-mgmt-mongocluster
+      breaking-changes:
+        - Model MongoClusterProperties no longer has parameter administrator_login
+        - Model MongoClusterProperties no longer has parameter administrator_login_password
+        - Model MongoClusterProperties no longer has parameter earliest_restore_time
+        - Model MongoClusterProperties no longer has parameter node_group_specs
+        - Model MongoClusterUpdateProperties no longer has parameter administrator_login
+        - Model MongoClusterUpdateProperties no longer has parameter administrator_login_password
+        - Model MongoClusterUpdateProperties no longer has parameter node_group_specs
+  azure-sdk-for-js:
+    - package: "@azure/arm-mongocluster"
+      breaking-changes:
+        - Enum KnownOrigin no longer has value System
+        - Enum KnownOrigin no longer has value User
+        - Enum KnownOrigin no longer has value UserSystem

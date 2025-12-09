@@ -27,8 +27,10 @@ jobs:
 
       - name: Run spelling check
         run: |
+          $allFiles = Get-ChildItem -Path specification -Recurse -File
+          Write-Host "Found $($allFiles.Count) files to check"
           ./eng/common/spelling/Invoke-Cspell.ps1 `
-            -ScanGlobs '**' `
+            -FileList $allFiles.FullName `
             -CSpellConfigPath './cspell.json' `
             -SpellCheckRoot (Resolve-Path specification)
         shell: pwsh

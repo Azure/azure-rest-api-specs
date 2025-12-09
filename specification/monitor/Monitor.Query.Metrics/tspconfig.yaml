@@ -17,28 +17,28 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Insights/{version-status}/{version}/metricBatch.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-monitor-querymetrics"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-querymetrics"
+    package-name: "azure-monitor-querymetrics"
     package-mode: dataplane
     package-version: 1.0.0
     flavor: azure
     namespace: azure.monitor.querymetrics
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Monitor.Query.Metrics"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
+    package-name: "Azure.Monitor.Query.Metrics"
+    namespace: "{package-name}"
+    generate-convenience-methods: true
+    generate-protocol-methods: false
+    model-namespace: true
   "@azure-tools/typespec-ts":
-    package-dir: "monitor-query-metrics"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-query-metrics"
     package-details:
       name: "@azure/monitor-query-metrics"
       description: "Azure Monitor Query Metrics library"
       version: "1.0.0"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-query-metrics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-query-metrics"
     namespace: com.azure.monitor.query.metrics
     flavor: azure
     use-object-for-unknown: true
@@ -49,9 +49,8 @@ options:
     customization-class: "customization/src/main/java/MetricsQueryCustomization.java"
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/query"
-    package-dir: "azmetrics"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/query/azmetrics"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmetrics"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmetrics"
     single-client: true
     generate-fakes: true
     inject-spans: true

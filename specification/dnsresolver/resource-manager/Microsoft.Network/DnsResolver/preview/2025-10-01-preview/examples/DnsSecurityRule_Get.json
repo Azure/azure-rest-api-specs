@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "dnsResolverPolicyName": "sampleDnsResolverPolicy",
+    "dnsSecurityRuleName": "sampleDnsSecurityRule",
+    "resourceGroupName": "sampleResourceGroup",
+    "subscriptionId": "abdd4249-9f34-4cc6-8e42-c2e32110603e"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleDnsSecurityRule",
+        "type": "Microsoft.Network/dnsResolverPolicies/dnsSecurityRules",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsResolverPolicies/sampleDnsResolverPolicy/dnsSecurityRules/sampleDnsSecurityRule",
+        "location": "westus2",
+        "properties": {
+          "action": {
+            "actionType": "Block"
+          },
+          "dnsResolverDomainLists": [
+            {
+              "id": "/subscriptions/abdd4249-9f34-4cc6-8e42-c2e32110603e/resourceGroups/sampleResourceGroup/providers/Microsoft.Network/dnsResolverDomainLists/sampleDnsResolverDomainList"
+            }
+          ],
+          "dnsSecurityRuleState": "Enabled",
+          "priority": 100,
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-04-01T01:01:01.1075056Z",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-04-02T02:03:01.1974346Z",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "key1": "value1"
+        }
+      }
+    }
+  },
+  "operationId": "DnsSecurityRules_Get",
+  "title": "Retrieve DNS security rule for DNS resolver policy"
+}

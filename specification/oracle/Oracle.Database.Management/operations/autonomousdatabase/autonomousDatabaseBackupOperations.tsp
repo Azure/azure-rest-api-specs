@@ -1,9 +1,11 @@
 import "../../models/autonomousdatabase/autonomousDatabaseBackup.tsp";
 import "../commons.tsp";
+import "@typespec/http";
 
 using Azure.ResourceManager;
 using Autorest;
 using TypeSpec.Versioning;
+using Http;
 
 namespace Oracle.Database;
 
@@ -18,6 +20,7 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -1,7 +1,7 @@
 import "./WebModels/AvsAssessmentV2.tsp";
 import "./WebModels/AvsAssessedMachineV2.tsp";
 import "./WebModels/AvsAssessmentV2Summary.tsp";
-import "../Common/DataModels/DownloadUrl.tsp";
+import "./Normalized Contract/DataModels/DownloadUrl.tsp";
 import "./WebModels/AvsGraphAssessmentOptions.tsp";
 
 using TypeSpec.Http;

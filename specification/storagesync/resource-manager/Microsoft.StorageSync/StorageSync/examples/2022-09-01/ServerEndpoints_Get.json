@@ -1,0 +1,215 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01",
+    "resourceGroupName": "SampleResourceGroup_1",
+    "serverEndpointName": "SampleServerEndpoint_1",
+    "storageSyncServiceName": "SampleStorageSyncService_1",
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
+    "syncGroupName": "SampleSyncGroup_1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SampleServerEndpoint_1",
+        "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints",
+        "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
+        "properties": {
+          "cloudTiering": "on",
+          "cloudTieringStatus": {
+            "cachePerformance": {
+              "cacheHitBytes": 922337203685477600,
+              "cacheHitBytesPercent": 50,
+              "cacheMissBytes": 922337203685477600,
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z"
+            },
+            "datePolicyStatus": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "tieredFilesMostRecentAccessTimestamp": "2019-04-17T19:04:59.1959227Z"
+            },
+            "filesNotTiering": {
+              "errors": [
+                {
+                  "errorCode": -2134347771,
+                  "fileCount": 10
+                },
+                {
+                  "errorCode": -2134347770,
+                  "fileCount": 20
+                },
+                {
+                  "errorCode": -2134347769,
+                  "fileCount": 30
+                }
+              ],
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "totalFileCount": 60
+            },
+            "health": "Error",
+            "healthLastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "lastCloudTieringResult": -2134347771,
+            "lastSuccessTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "lowDiskMode": {
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "state": "Disabled"
+            },
+            "spaceSavings": {
+              "cachedSizeBytes": 50000000,
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z",
+              "spaceSavingsBytes": 50000000,
+              "spaceSavingsPercent": 50,
+              "totalSizeCloudBytes": 100000000,
+              "volumeSizeBytes": 922337203685477600
+            },
+            "volumeFreeSpacePolicyStatus": {
+              "currentVolumeFreeSpacePercent": 5,
+              "effectiveVolumeFreeSpacePolicy": 30,
+              "lastUpdatedTimestamp": "2019-04-17T19:04:59.1959227Z"
+            }
+          },
+          "friendlyName": "somemachine.redmond.corp.microsoft.com",
+          "initialDownloadPolicy": "NamespaceThenModifiedFiles",
+          "initialUploadPolicy": "Merge",
+          "lastOperationName": "ICreateServerEndpointWorkflow",
+          "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
+          "localCacheMode": "UpdateLocallyCachedFiles",
+          "offlineDataTransfer": "on",
+          "offlineDataTransferShareName": "myfileshare",
+          "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
+          "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "provisioningState": "Succeeded",
+          "recallStatus": {
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "recallErrors": [
+              {
+                "count": 5,
+                "errorCode": -2134347775
+              },
+              {
+                "count": 10,
+                "errorCode": -2134347774
+              },
+              {
+                "count": 15,
+                "errorCode": -2134347773
+              }
+            ],
+            "totalRecallErrorsCount": 30
+          },
+          "serverEndpointProvisioningStatus": {
+            "provisioningStatus": "Ready_SyncFunctional",
+            "provisioningStepStatuses": [
+              {
+                "name": "ManifestGeneration",
+                "additionalInformation": {
+                  "ItemsProcessed": "1001",
+                  "ItemsRemaining": "0"
+                },
+                "endTime": "2019-04-17T19:06:59.1959227Z",
+                "errorCode": 0,
+                "minutesLeft": 0,
+                "progressPercentage": 100,
+                "startTime": "2019-04-17T19:04:59.1959227Z",
+                "status": "Completed"
+              },
+              {
+                "name": "ManifestConsumption",
+                "additionalInformation": {
+                  "ItemsProcessed": "1001",
+                  "ItemsRemaining": "0"
+                },
+                "endTime": "2019-04-17T19:06:59.1959227Z",
+                "errorCode": 0,
+                "minutesLeft": 0,
+                "progressPercentage": 100,
+                "startTime": "2019-04-17T19:04:59.1959227Z",
+                "status": "Completed"
+              },
+              {
+                "name": "NamespaceApply",
+                "additionalInformation": {
+                  "ItemsProcessed": "1001",
+                  "ItemsRemaining": "0"
+                },
+                "endTime": "2019-04-17T19:06:59.1959227Z",
+                "errorCode": 0,
+                "minutesLeft": 0,
+                "progressPercentage": 100,
+                "startTime": "2019-04-17T19:04:59.1959227Z",
+                "status": "Completed"
+              },
+              {
+                "name": "PrepareForSync",
+                "additionalInformation": {
+                  "ItemsProcessed": "1001",
+                  "ItemsRemaining": "0"
+                },
+                "endTime": "2019-05-17T19:08:59.1959227Z",
+                "errorCode": 0,
+                "minutesLeft": 0,
+                "progressPercentage": 100,
+                "startTime": "2019-05-17T19:06:59.1959227Z",
+                "status": "Completed"
+              }
+            ],
+            "provisioningType": "FastDRv2"
+          },
+          "serverLocalPath": "D:\\SampleServerEndpoint_1",
+          "serverName": "somemachine.redmond.corp.microsoft.com",
+          "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
+          "syncStatus": {
+            "combinedHealth": "Error",
+            "downloadActivity": {
+              "appliedBytes": 94805587,
+              "appliedItemCount": 100,
+              "perItemErrorCount": 0,
+              "timestamp": "2018-06-11T23:32:51.1057915Z",
+              "totalBytes": 19583674,
+              "totalItemCount": 300
+            },
+            "downloadHealth": "Healthy",
+            "downloadStatus": {
+              "filesNotSyncingErrors": null,
+              "lastSyncPerItemErrorCount": 0,
+              "lastSyncResult": 0,
+              "lastSyncSuccessTimestamp": "2018-06-11T23:28:33.9217334Z",
+              "lastSyncTimestamp": "2018-06-11T23:28:33.9217334Z",
+              "persistentFilesNotSyncingCount": null,
+              "transientFilesNotSyncingCount": null
+            },
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "offlineDataTransferStatus": "InProgress",
+            "syncActivity": "UploadAndDownload",
+            "totalPersistentFilesNotSyncingCount": null,
+            "uploadActivity": {
+              "appliedBytes": 57348983,
+              "appliedItemCount": 1000,
+              "perItemErrorCount": 300,
+              "timestamp": "2018-06-11T23:32:51.1057915Z",
+              "totalBytes": 1958367412,
+              "totalItemCount": 2300
+            },
+            "uploadHealth": "Error",
+            "uploadStatus": {
+              "filesNotSyncingErrors": null,
+              "lastSyncPerItemErrorCount": 1000,
+              "lastSyncResult": -2134351810,
+              "lastSyncSuccessTimestamp": null,
+              "lastSyncTimestamp": "2018-06-11T23:32:51.1057915Z",
+              "persistentFilesNotSyncingCount": null,
+              "transientFilesNotSyncingCount": null
+            }
+          },
+          "tierFilesOlderThanDays": 0,
+          "volumeFreeSpacePercent": 100
+        }
+      },
+      "headers": {
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730",
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403"
+      }
+    }
+  },
+  "operationId": "ServerEndpoints_Get",
+  "title": "ServerEndpoints_Get"
+}

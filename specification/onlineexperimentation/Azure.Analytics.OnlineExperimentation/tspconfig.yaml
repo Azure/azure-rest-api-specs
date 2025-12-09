@@ -18,17 +18,16 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azonlineexperimentation"
     service-dir: "sdk/analytics"
-    package-dir: "azonlineexperimentation"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azonlineexperimentation"
     generate-fakes: true
     inject-spans: true
     single-client: true
     slice-elements-byval: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-onlineexperimentation"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-onlineexperimentation"
+    package-name: "azure-onlineexperimentation"
     namespace: "azure.onlineexperimentation"
     generate-test: false
     generate-sample: false
@@ -47,7 +46,7 @@ options:
     namespace: Azure.Analytics.OnlineExperimentation
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "onlineexperimentation-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/onlineexperimentation-rest"
     is-modular-library: false
     package-details:
       name: "@azure-rest/onlineexperimentation"
@@ -55,7 +54,7 @@ options:
     generate-metadata: true
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-onlineexperimentation"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-analytics-onlineexperimentation"
     namespace: com.azure.analytics.onlineexperimentation
     partial-update: true
     flavor: azure

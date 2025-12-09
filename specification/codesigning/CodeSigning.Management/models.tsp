@@ -151,9 +151,7 @@ model CodeSigningAccountPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "deprecated" "Legacy flatten"
   @doc("Properties of the trusted signing account.")
-  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
 }
 
@@ -248,11 +246,9 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   status?: CertificateProfileStatus;
 
-  #suppress "deprecated" "Legacy flatten"
   @doc("List of renewed certificates.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }
 
@@ -280,9 +276,7 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
-  #suppress "deprecated" "Legacy flatten"
   @doc("Revocations history of a certificate.")
-  @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;
 }
 
@@ -328,6 +322,9 @@ model RevokeCertificate {
 
 @doc("The parameters used to check the availability of the trusted signing account name.")
 model CheckNameAvailability {
+  @doc("The type of the resource, \"Microsoft.CodeSigning/codeSigningAccounts\".")
+  type: string;
+
   @doc("Trusted signing account name.")
   name: string;
 }

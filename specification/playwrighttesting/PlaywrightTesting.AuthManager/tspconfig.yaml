@@ -15,12 +15,12 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-developer-microsoftplaywrighttesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
     namespace: "azure.developer.microsoftplaywrighttesting"
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "microsoft-playwright-testing-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/microsoft-playwright-testing-rest"
     title: Microsoft Playwright Testing
     description: Microsoft Playwright Testing Client
     generate-metadata: true
@@ -41,7 +41,7 @@ options:
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false
   "@azure-tools/typespec-java":
-    package-dir: "azure-developer-microsoftplaywrighttesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
     namespace: com.azure.developer.microsoftplaywrighttesting
     partial-update: true
     generate-tests: false

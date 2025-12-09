@@ -25,7 +25,7 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]) {
 }
 
 export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
 
   builtLines.push(`## All specifications passed ${reportName}`);
   builtLines.push("| File | Status |");
@@ -44,7 +44,7 @@ export function outputSuccessSummary(swaggerFiles: string[], reportName: string)
 }
 
 export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
   let checkName: string = "";
 
   builtLines.push(`## Error Summary - ${reportName}`);
@@ -61,7 +61,7 @@ export function outputErrorSummary(errors: ReportableOavError[], reportName: str
 
   // sort the errors by file name then by error code
   errors.sort((a, b) => {
-    const nameCompare = a.file.localeCompare(b.file);
+    const nameCompare = (a.file || "").localeCompare(b.file || "");
     if (nameCompare !== 0) {
       return nameCompare;
     }

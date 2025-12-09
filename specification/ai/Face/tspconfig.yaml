@@ -13,7 +13,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-vision-face"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-face"
     namespace: "azure.ai.vision.face"
     package-version: 1.0.0b2
     package-mode: dataplane
@@ -31,7 +31,7 @@ options:
     namespace: Azure.AI.Vision.Face
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "ai-vision-face-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-vision-face-rest"
     generate-metadata: true
     is-modular-library: false
     flavor: azure
@@ -39,7 +39,7 @@ options:
       name: "@azure-rest/ai-vision-face"
       description: "Face API REST Client"
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-vision-face"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-face"
     namespace: com.azure.ai.vision.face
     partial-update: true
     use-eclipse-language-server: false

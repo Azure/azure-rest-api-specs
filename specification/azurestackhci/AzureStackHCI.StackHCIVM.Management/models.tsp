@@ -32,6 +32,10 @@ union HyperVGeneration {
   @doc("Generation 2 (V2) hypervisor")
   V2: "V2",
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Not applicable/determined by platform")
+  NA: "NA",
+
   string,
 }
 
@@ -439,19 +443,148 @@ union IPPoolTypeEnum {
   string,
 }
 
-@doc("The ARM ID for a Network Interface.")
+@added(Versions.v2025_09_01_preview)
+@doc("Type of public IP addresses")
+union PublicIPAddressType {
+  @doc("IPv4 IP Address")
+  IPv4: "IPv4",
+
+  @doc("IPv6 IP Address")
+  IPv6: "IPv6",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Type of session persistence [Default, SourceIP, SourceIPProtocol]")
+union LoadBalancerRuleSessionPersistenceType {
+  @doc("Default - 5-tuple hashing")
+  Default: "Default",
+
+  @doc("Source IP - 2-tuple hashing looking at src-dst ip")
+  SourceIP: "SourceIP",
+
+  @doc("SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol")
+  SourceIPProtocol: "SourceIPProtocol",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Protocol for health probes")
+union LoadBalancerProbeProtocol {
+  @doc("TCP - TCP port checking")
+  TCP: "Tcp",
+
+  @doc("HTTP - HTTP request")
+  HTTP: "Http",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Backend Address Admin states")
+union LoadBalancerBackendAddressAdminState {
+  @doc("Up - forced admin state up")
+  Up: "Up",
+
+  @doc("Down - forced admin state down")
+  Down: "Down",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Protocol for load balancing rules")
+union LoadBalancerRuleTransportProtocol {
+  @doc("TCP - load balance only tcp traffic")
+  TCP: "Tcp",
+
+  @doc("Udp - load balance only UDP traffic")
+  UDP: "Udp",
+
+  @doc("All - load balance all UDP and TCP traffic")
+  All: "All",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Protocol for inbound NAT rules")
+union InboundNATRuleProtocol {
+  @doc("TCP - load balance only tcp traffic")
+  TCP: "Tcp",
+
+  @doc("Udp - load balance only UDP traffic")
+  UDP: "Udp",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric resource type")
+union FabricResourceTypeEnum {
+  @doc("Fabric resource of L2IsolationDomain type")
+  L2IsolationDomain: "L2IsolationDomain",
+
+  @doc("Fabric resource of L3InternalNetwork type")
+  L3InternalNetwork: "L3InternalNetwork",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric connection health state type")
+union FabricConnectionHealthEnum {
+  @doc("Fabric connection health state - healthy type")
+  Healthy: "Healthy",
+
+  @doc("Fabric connection health state - warning type")
+  Warning: "Warning",
+
+  @doc("Fabric connection health state - error type")
+  Error: "Error",
+
+  @doc("Fabric connection health state - unknown type")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Fabric integration state type")
+union FabricIntegrationStateEnum {
+  @doc("Fabric integration state - connected type")
+  Connected: "Connected",
+
+  @doc("Fabric integration state - disconnected type")
+  Disconnected: "Disconnected",
+
+  @doc("Fabric integration state - misconfigured type")
+  Misconfigured: "Misconfigured",
+
+  @doc("Fabric integration state - notapplicable type")
+  NotApplicable: "NotApplicable",
+
+  @doc("Fabric integration state - connecting type")
+  Connecting: "Connecting",
+
+  string,
+}
+
+@doc("The Azure Resource ID for a Network Interface.")
 model NetworkInterfaceArmReference {
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
     }
   ]>;
 }
-@doc("The ARM ID for a Network Interface.")
+@doc("The Azure Resource ID for a Network Interface.")
 model SubnetIpConfigurationReference {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "ID is already shipped. Changing the casing is a breaking change."
-  @doc("The ARM ID for a Network Interface.")
+  @doc("The Azure Resource ID for a Network Interface.")
   ID?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkInterfaces";
@@ -459,9 +592,20 @@ model SubnetIpConfigurationReference {
   ]>;
 }
 
-@doc("The ARM ID for a Network Security Group.")
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a resource consuming IP on a subnet")
+model VirtualNetworkSubnetIpConfigurationReference {
+  @doc("The Azure Resource ID for a Network Interface.")
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+
+@doc("The Azure Resource ID for a Network Security Group.")
 model NetworkSecurityGroupArmReference {
-  @doc("The ARM ID for a Network Security Group.")
+  @doc("The Azure Resource ID for a Network Security Group.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/networkSecurityGroups";
@@ -469,31 +613,118 @@ model NetworkSecurityGroupArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Logical Network.")
+@doc("The Azure Resource ID for a Logical Network.")
 model LogicalNetworkArmReference {
-  @doc("The ARM ID for a Logical Network.")
+  @doc("The Azure Resource ID for a Logical Network.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
     },
     {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
+      type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Machine.")
+@added(Versions.v2025_09_01_preview)
+@doc("The ARM ID for a Network Security Group.")
+model NatGatewayArmReference {
+  @doc("The ARM ID for a Network Security Group.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/natGateways";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+model ManagedNetworkFabricArmReference {
+  @doc("The Azure Resource ID for a Managed Network Fabric L2ISD or L3ISD internal network")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/l2isolationdomains";
+    },
+    {
+      type: "Microsoft.ManagedNetworkFabric/l3isolationdomain/internalnetworks";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a Virtual Network")
+model VirtualNetworkArmReference {
+  @doc("The Azure Resource ID for a Virtual Network.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualnetworks";
+    }
+  ]>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID for a Virtual Network subnet")
+model VirtualNetworkSubnetArmReference {
+  @doc("The Azure Resource ID for a Virtual Network subnet.")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualnetwork/subnets";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID of a Public IP resource")
+model PublicIPAddressArmReference {
+  @doc("The Azure Resource ID of a Public IP resource")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("Reference to a LoadBalancer Frontend IPConfiguration")
+model LoadBalancerFrontendIPConfigurationReference {
+  @doc("name of the frontnedIPConfiguration")
+  name: string;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Reference to a LoadBalancer backend address pool reference")
+model LoadBalancerBackendAddressPoolReference {
+  @doc("name of the backend address pool")
+  name: string;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Reference to a LoadBalancer health probe")
+model LoadBalancerProbeReference {
+  @doc("name of the health probe")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("The Azure Resource ID of an IPConfiguration resource")
+model IPConfigurationArmReference {
+  @doc("The Azure Resource ID of an IPConfiguration resource")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/loadBalancer/frontendIPConfigurations";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
+}
+
+@doc("The Azure Resource ID for a Virtual Machine.")
 model VirtualMachineArmReference {
-  @doc("The ARM ID for a Virtual Machine.")
+  @doc("The Azure Resource ID for a Virtual Machine.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualMachineInstance";
@@ -501,9 +732,9 @@ model VirtualMachineArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Storage Container.")
+@doc("The Azure Resource ID for a Storage Container.")
 model StorageContainerArmReference {
-  @doc("The ARM ID for a Storage Container.")
+  @doc("The Azure Resource ID for a Storage Container.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
@@ -511,9 +742,9 @@ model StorageContainerArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Gallery Image.")
+@doc("The Azure Resource ID for a Gallery Image.")
 model ImageArmReference {
-  @doc("The ARM ID for an image resource used by the virtual machine instance.")
+  @doc("The Azure Resource ID for an image resource used by the virtual machine instance.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   id?: armResourceIdentifier<[
     {
@@ -525,9 +756,9 @@ model ImageArmReference {
   ]>;
 }
 
-@doc("The ARM ID for a Virtual Hard Disk.")
+@doc("The Azure Resource ID for a Virtual Hard Disk.")
 model VirtualHardDiskArmReference {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   id?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
@@ -558,10 +789,6 @@ model GalleryImageProperties {
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
-  @added(Versions.v2024_08_01_preview)
-  @doc("The credentials used to login to the image repository that has access to the specified image")
-  vmImageRepositoryCredentials?: VmImageRepositoryCredentials;
-
   @doc("This is the gallery image definition identifier.")
   identifier?: GalleryImageIdentifier;
 
@@ -585,17 +812,6 @@ model GalleryImageProperties {
   ]>;
 }
 
-@added(Versions.v2024_08_01_preview)
-@doc("The credentials used to login to the image repository that has access to the specified image")
-model VmImageRepositoryCredentials {
-  @doc("Username for accessing image repository")
-  username: string;
-
-  @doc("Password for accessing image repository")
-  @secret
-  password: string;
-}
-
 @doc("This is the gallery image definition identifier.")
 model GalleryImageIdentifier {
   @doc("The name of the gallery image definition publisher.")
@@ -613,9 +829,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -691,7 +907,7 @@ model ExtendedLocation {
 
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -701,8 +917,12 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Managed network fabric l2/l3 ISD for this logical network. If set empty, the logical network remains entirely local.")
+  fabricNetworkConfiguration?: ManagedNetworkFabricArmReference;
+
   @doc("Subnet - list of subnets under the logical network")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -730,9 +950,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -752,7 +972,7 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipConfigurationReferences?: SubnetIpConfigurationReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
@@ -762,11 +982,16 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
+
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  @doc("Provisioning state of the subnet resource.")
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Route table resource.")
@@ -783,24 +1008,24 @@ model RouteTable {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "deprecated" "LEGACY flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the route table.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteTableProperties;
 }
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   routes?: Route[];
 }
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattened property"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the route.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -931,7 +1156,7 @@ model SecurityRuleProperties {
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -954,9 +1179,14 @@ model NetworkInterfaceProperties {
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
   networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
+  bypassSdnPolicies?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -997,6 +1227,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -1018,6 +1249,56 @@ model NetworkInterfaceStatusProvisioningStatus {
   status?: Status;
 }
 
+@added(Versions.v2025_09_01_preview)
+@doc("Issues exposed by managed network fabric")
+model FabricIssue {
+  @doc("Specific error/warning code.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("issue severity")
+  @visibility(Lifecycle.Read)
+  severity?: string;
+
+  @doc("Description of the issue")
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  @doc("specific property or resource that has the issue")
+  @visibility(Lifecycle.Read)
+  target?: string;
+
+  @doc("Timestamp of the issue as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  timestamp?: utcDateTime;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+model FabricIntegrationStatus {
+  @doc("Current fabric integration state.")
+  @visibility(Lifecycle.Read)
+  state?: FabricIntegrationStateEnum;
+
+  @doc("Health status of the fabric connection.")
+  @visibility(Lifecycle.Read)
+  health?: FabricConnectionHealthEnum;
+
+  @doc("Timestamp of the last fabric health check as ISO 8601 string")
+  @visibility(Lifecycle.Read)
+  lastChecked?: utcDateTime;
+
+  @doc("Type of fabric resource referenced.")
+  @visibility(Lifecycle.Read)
+  resourceType?: FabricResourceTypeEnum;
+
+  @doc("Issues raised by fabric")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
+  issues?: FabricIssue[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -1028,6 +1309,10 @@ model LogicalNetworkStatus {
 
   @doc("Logical network provisioning status")
   provisioningStatus?: LogicalNetworkStatusProvisioningStatus;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("Enhanced fabric integration status with detailed health monitoring and connectivity state.")
+  fabricIntegration?: FabricIntegrationStatus;
 }
 
 @doc("Describes the status of the provisioning.")
@@ -1041,9 +1326,468 @@ model LogicalNetworkStatusProvisioningStatus {
 
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Virtual network resource properties")
+model VirtualNetworkProperties {
+  @doc("Virtual Network address space. All subnets must be within the defined range.")
+  addressSpace: VirtualNetworkAddressSpace;
+
+  @doc("Virtual Network DHCP options. Inherited by all subnets and VMs.")
+  dhcpOptions: VirtualNetworkDhcpOptions;
+
+  @doc("The provisioning state of the virtual network resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed status of Virtual Network")
+  status?: VirtualNetworkStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Address Space Information")
+model VirtualNetworkAddressSpace {
+  @doc("A list of one or more CIDR blocks that define the address space.")
+  addressPrefixes: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("DHCP options for virtual networks")
+model VirtualNetworkDhcpOptions {
+  @doc("An array of DNS server IP addresses that VMs or wokloads in the vnet can inherit")
+  dnsServers?: string[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The observed status of the virtual network")
+model VirtualNetworkStatus {
+  @doc("VirtualNetwork provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("virtual network provisioning status")
+  provisioningStatus?: VirtualNetworkStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network operations")
+model VirtualNetworkStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("VirtualNetwork subnet resource")
+model VirtualNetworkSubnetProperties {
+  @doc("Subnet CIDR")
+  addressPrefix: string;
+
+  @doc("Network Security Group attached to the subnet.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("Nat Gateway attached to the subnet for non-vnet traffic.")
+  natGateway?: NatGatewayArmReference;
+
+  @doc("RouteTable defining custom routes for the subnet.")
+  routeTable?: RouteTable;
+
+  @doc("List of ip configurations for the subnet")
+  @visibility(Lifecycle.Read)
+  ipConfigurations?: VirtualNetworkSubnetIpConfigurationReference[];
+
+  @doc("The provisioning state of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed status of the virtual network subnet resource.")
+  @visibility(Lifecycle.Read)
+  status?: VirtualNetworkSubnetStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatus {
+  @doc("VirtualNetworkSubnet provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Public IP provisioning status")
+  provisioningStatus?: VirtualNetworkSubnetStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of virtual network subnet operations")
+model VirtualNetworkSubnetStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the virtual network subnet")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the virtual network subnet [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("Public IP Properties resource.")
+model PublicIPAddressProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Whether the public IP is v4 or v6. Defaults to IPv4")
+  publicIPAddressVersion?: PublicIPAddressType;
+
+  @doc("ipAllocationScope: Azure Reference to a particular IP Pool (ALM) or a LogicalNetwork (ALL) for allocating public IP")
+  ipAllocationScope?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/logicalNetworks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/publicIPAddresses";
+    }
+  ]>;
+
+  @doc("IP Address. This is static. If the user specifies, we allocate that otherwise allocate from logical network address space.")
+  ipAddress?: string;
+
+  @doc("network interface or LoadBalancer frontendIPconfiguration using this public IP")
+  @visibility(Lifecycle.Read)
+  ipConfiguration?: IPConfigurationArmReference;
+
+  @doc("natGateway using this public IP")
+  @visibility(Lifecycle.Read)
+  natGateway?: NatGatewayArmReference;
+
+  @doc("Provisioning state of the public IP")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("Inbound nat rule properties")
+model InboundNATRuleProperties {
+  @doc("Protocol for the NAT rule")
+  protocol: InboundNATRuleProtocol;
+
+  @doc("Frontend Port for the inbound rule")
+  frontendPort: int32;
+
+  @doc("backend Port for the inbound rule")
+  backendPort: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("IP configuration for the target backend.")
+  backendIPConfiguration: IPConfigurationArmReference;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Public IP Address for this NAT rule")
+  publicIPAddress: PublicIPAddressArmReference;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("Inbound nat rule properties")
+model InboundNATRule {
+  @doc("name of the inbound nat rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("properties of the inbound nat rule")
+  properties: InboundNATRuleProperties;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Nat Gateway resource properties")
+model NatGatewayProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("List of public ip addresses that the gateway can use for NAT.")
+  @identifiers(#[])
+  publicIPAddresses?: PublicIPAddressArmReference[];
+
+  @visibility(Lifecycle.Read)
+  @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
+  @identifiers(#[])
+  subnets?: VirtualNetworkSubnetArmReference[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @Azure.ResourceManager.identifiers(#[])
+  inboundNATRules?: InboundNATRule[];
+
+  @doc("Provisioning state of the public IP")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Nat Gateway")
+  @visibility(Lifecycle.Read)
+  status?: NatGatewayStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Nat Gateway resource status")
+model NatGatewayStatus {
+  @doc("NatGateway provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("NatGateway provisioning status")
+  provisioningStatus?: NatGatewayStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Provisioning status of Nat Gateway ")
+model NatGatewayStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the nat gateway")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the nat gateway [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("FrontendIP Configuration object for a load balancer.")
+model FrontendIPConfiguration {
+  @doc("name for the frontend IP configuration.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("properties for this frontendIPConfiguration")
+  properties: FrontendIPConfigurationProperties;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@added(Versions.v2025_09_01_preview)
+@doc("FrontendIP Configuration object for a load balancer.")
+model FrontendIPConfigurationProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Private IP Address that was allocated (dynamic) or is to be allocated (static) from the subnet.")
+  privateIPAddress?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("privateIPAllocationMethod - set to Static for requesting a specific IP")
+  privateIPAllocationMethod?: IpAllocationMethodEnum;
+
+  @doc("subnet - the subnet from which to allocate the private IP")
+  subnet?: VirtualNetworkSubnetArmReference;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Public IP ")
+  publicIPAddress?: PublicIPAddressArmReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Backend address pool for the load balancer.")
+model BackendAddressPoolProperties {
+  @doc("List of backend addresses for the backend pool")
+  @identifiers(#[])
+  loadBalancerBackendAddresses?: LoadBalancerBackendAddress[];
+
+  @doc("Reference to the virtual network for this backend pool. Mutually exclusive with logicalNetwork")
+  virtualNetwork?: VirtualNetworkArmReference;
+
+  @doc("Reference to the logical network for this backend pool. Mutually exclusive with virtualNetwork")
+  logicalNetwork?: LogicalNetworkArmReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Backend address pool for the load balancer.")
+model BackendAddressPool {
+  @doc("name of the backend pool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("properties for the backend pool")
+  properties: BackendAddressPoolProperties;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("LoadBalancer Backend Address properties")
+model LoadBalancerBackendAddressProperties {
+  @doc("admin state - if set to false, the address is removed from the pool")
+  adminState?: LoadBalancerBackendAddressAdminState;
+
+  @doc("IP address of the backend target. Populated automatically from the referenced IP configuration.")
+  @visibility(Lifecycle.Read)
+  ipAddress?: string;
+
+  @doc("Reference to the subnet containing the backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with logicalNetwork.")
+  @visibility(Lifecycle.Read)
+  subnet?: VirtualNetworkSubnetArmReference;
+
+  @doc("Reference to the virtual network containing the backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with logicalNetwork.")
+  @visibility(Lifecycle.Read)
+  virtualNetwork?: VirtualNetworkArmReference;
+
+  @doc("Reference to the logical network containing this backend address. Populated automatically from the referenced IP configuration. Mutually exclusive with subnet and virtualNetwork.")
+  @visibility(Lifecycle.Read)
+  logicalNetwork?: LogicalNetworkArmReference;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Nic Based backend-ip association")
+  networkInterfaceIPConfiguration?: IPConfigurationArmReference;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("LoadBalancer Backend Address")
+model LoadBalancerBackendAddress {
+  @doc("name of the backend address")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("backend address properties")
+  properties: LoadBalancerBackendAddressProperties;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Properties for LoadBalancerRules")
+model LoadBalancerRuleProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("arm reference to frontend IP being used by this LB")
+  frontendIPConfiguration: LoadBalancerFrontendIPConfigurationReference;
+
+  @doc("arm reference to backend pool being used by ths pool")
+  backendAddressPool: LoadBalancerBackendAddressPoolReference;
+
+  @doc("Frontend port to accept connections")
+  frontendPort: int32;
+
+  @doc("backendPort to forward connections")
+  backendPort: int32;
+
+  @doc("IP Protocol that the rule must load-balance")
+  protocol: LoadBalancerRuleTransportProtocol;
+
+  @doc("Reference for the health probe for this connection")
+  probe?: LoadBalancerProbeReference;
+
+  @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
+  loadDistribution?: LoadBalancerRuleSessionPersistenceType = LoadBalancerRuleSessionPersistenceType.Default;
+
+  @doc("Time for which connections are preserved before being torn down.")
+  idleTimeoutInMinutes?: int32;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("LoadBalancer Rules")
+model LoadBalancerRule {
+  @doc("name of the load balancer rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("load balancer rule properties")
+  properties: LoadBalancerRuleProperties;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("properties for LoadBalancer health probes")
+model ProbeProperties {
+  @doc("Protocol for this probe: Can be Tcp or Http - Diverges from Azure where Https is also an option")
+  protocol: LoadBalancerProbeProtocol;
+
+  @doc("Port on the backend address to probe")
+  port: int32;
+
+  @doc("For http probes, specify the request path e.g. /health")
+  requestPath?: string;
+
+  @doc("Probe interval in seconds (5-300) default 15")
+  intervalInSeconds?: int32 = 15;
+
+  @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
+  numberOfProbes?: int32 = 2;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Load balancer health probes")
+model Probe {
+  @doc("name of the load balancer health probe")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+  name: string;
+
+  @doc("load balancer rule properties")
+  properties: ProbeProperties;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Load Balancer resource properties")
+model LoadBalancerProperties {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+  @doc("Frontend IPs for the loadbalancer.")
+  frontendIPConfigurations: FrontendIPConfiguration[];
+
+  @doc("backendAddressPools for the loadbalancer")
+  backendAddressPools?: BackendAddressPool[];
+
+  @doc("load balancer rules")
+  loadBalancingRules?: LoadBalancerRule[];
+
+  @doc("load balancer health probes")
+  probes?: Probe[];
+
+  @doc("Provisioning state of the Load Balancer")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("observed state of the load balancer")
+  @visibility(Lifecycle.Read)
+  status?: LoadBalancerStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The observed status of the virtual network")
+model LoadBalancerStatus {
+  @doc("LoadBalancer provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("virtual network provisioning status")
+  provisioningStatus?: LoadBalancerStatusProvisioningStatus;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Status of load balancer operations")
+model LoadBalancerStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the load balancer")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the loadbalancer [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@doc("The virtual network subnet resource patch definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateRequest {
+  @doc("properties to update")
+  properties?: VirtualNetworkSubnetUpdateProperties;
+}
+
+@doc("The virtual network subnet resource patch properties definition.")
+@added(Versions.v2025_09_01_preview)
+model VirtualNetworkSubnetUpdateProperties {
+  @doc("NetworkSecurityGroup - Network Security Group attached to the subnet.")
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
+
+  @doc("NatGateway - NatGateway attached to the subnet.")
+  natGateway?: NatGatewayArmReference;
 }
 
 @doc("Properties under the marketplace gallery image resource")
@@ -1080,6 +1824,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -1116,14 +1861,14 @@ model MarketplaceGalleryImageStatusDownloadStatus {
 
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
 
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 
@@ -1140,11 +1885,15 @@ model NetworkInterfacesUpdateProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("This setting is applicable only when SDN is supported and enabled in the environment. Indicates whether SDN policies should be bypassed for this network interface. By default, SDN is enabled. Set this value to true only if you want to disable SDN for the network interface.")
+  bypassSdnPolicies?: boolean;
 }
 
 @doc("Tags object for patch operations.")
 model TagsObject {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags.")
   tags?: Record<string>;
 }
@@ -1163,6 +1912,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -1194,7 +1944,7 @@ model StorageContainerStatusProvisioningStatus {
 
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 }
@@ -1233,6 +1983,11 @@ model VirtualHardDiskProperties {
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Absolute path of the VHD. This is only applicable when createFromLocal is true.")
+  @secret
+  localVhdPath?: string;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -1253,6 +2008,7 @@ model VirtualHardDiskProperties {
   maxShares?: int64;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -1273,7 +2029,7 @@ model VirtualHardDiskStatus {
   uploadStatus?: VirtualHardDiskUploadStatus;
 
   @added(Versions.v2025_06_01_preview)
-  @doc("ARM IDs of the VMs that are consuming the VHD.")
+  @doc("Azure Resource IDs of the VMs that are consuming the VHD.")
   managedBy?: string[];
 
   @added(Versions.v2025_06_01_preview)
@@ -1303,8 +2059,6 @@ model VirtualHardDiskDownloadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 }
 
@@ -1320,8 +2074,6 @@ model VirtualHardDiskUploadStatus {
 
   @added(Versions.v2024_10_01_preview)
   @doc("The progress of the operation in percentage")
-  @minValue(0)
-  @maxValue(100)
   progressPercentage?: int64;
 
   @added(Versions.v2024_10_01_preview)
@@ -1335,7 +2087,7 @@ model VirtualHardDiskUploadStatus {
 
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
   @doc("Resource tags")
   tags?: Record<string>;
 
@@ -1363,7 +2115,7 @@ model VirtualHardDiskUploadRequest {
 @added(Versions.v2024_05_01_preview)
 @doc("Response for uploading virtual hard disk.")
 model VirtualHardDiskUploadResponse {
-  @doc("The ARM ID for a Virtual Hard Disk.")
+  @doc("The Azure Resource ID for a Virtual Hard Disk.")
   virtualHardDiskId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/virtualHardDisks";
@@ -1401,6 +2153,10 @@ model VirtualMachineInstanceProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("HyperV name of the VM. This is only applicable when createFromLocal is true.")
+  localVmName?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility(Lifecycle.Read)
@@ -1459,7 +2215,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - list of gpus to be attached to the virtual machine instance")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 
@@ -1549,7 +2305,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
-  @identifiers(#["path"])
+  @Azure.ResourceManager.identifiers(#["path"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1676,7 +2432,7 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   statuses?: InstanceViewStatus[];
 }
 
@@ -1699,6 +2455,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")
@@ -1743,8 +2500,8 @@ model GuestAgentInstallStatus {
   agentVersion?: string;
 
   @doc("Details about the error state.")
-  @identifiers(#[])
   @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: Azure.ResourceManager.Foundations.ErrorDetail[];
 }
 
@@ -1801,7 +2558,7 @@ model HardwareProfileUpdate {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GPU is a short form. It is the correct case."
   @added(Versions.v2024_05_01_preview)
   @doc("virtualMachineGPUs - updated list of GPUs on the virtual machine instance")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   virtualMachineGPUs?: VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU[];
 }
 

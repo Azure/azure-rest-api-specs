@@ -27,10 +27,64 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-07-01
+tag: package-2025-09-01
 ```
 
 ---
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.SecurityInsights/stable/2025-09-01/AlertRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/AutomationRules.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Bookmarks.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductPackages.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ContentTemplates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/dataConnectorDefinitions.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/DataConnectors.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Incidents.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Metadata.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/OnboardingStates.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/operations.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/SourceControls.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/stable/2025-09-01/Watchlists.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataConnectors.json
+    where:
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
+    reason: These properties are unknown and need to be specified by the customer (each request can have different values)
+  - code: AvoidAdditionalProperties
+    from: AlertRules.json
+    where:
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+```
 
 ### Tag: package-preview-2025-07-01
 

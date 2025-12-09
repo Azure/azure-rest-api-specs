@@ -1,0 +1,128 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "billingAccountId": "100",
+    "costAllocationRule": {
+      "properties": {
+        "description": "This is a testRule",
+        "status": "Active",
+        "details": {
+          "sourceResources": [
+            {
+              "name": "ResourceGroupName",
+              "resourceType": "Dimension",
+              "values": [
+                "sampleRG",
+                "secondRG"
+              ]
+            }
+          ],
+          "targetResources": [
+            {
+              "name": "ResourceGroupName",
+              "policyType": "FixedProportion",
+              "resourceType": "Dimension",
+              "values": [
+                {
+                  "name": "destinationRG",
+                  "percentage": 45
+                },
+                {
+                  "name": "destinationRG2",
+                  "percentage": 54
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ruleName": "testRule"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testRule",
+        "type": "Microsoft.CostManagement/costAllocationRules",
+        "id": "/providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
+        "properties": {
+          "description": "This is a testRule",
+          "createdDate": "2020-06-18T22:21:51.1287144Z",
+          "status": "Creating",
+          "updatedDate": "2020-06-18T22:21:51.1287144Z",
+          "details": {
+            "sourceResources": [
+              {
+                "name": "ResourceGroupName",
+                "resourceType": "Dimension",
+                "values": [
+                  "sampleRG"
+                ]
+              }
+            ],
+            "targetResources": [
+              {
+                "name": "ResourceGroupName",
+                "policyType": "FixedProportion",
+                "resourceType": "Dimension",
+                "values": [
+                  {
+                    "name": "destinationRG",
+                    "percentage": 50
+                  },
+                  {
+                    "name": "destinationRG2",
+                    "percentage": 50
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testRule",
+        "type": "Microsoft.CostManagement/costAllocationRules",
+        "id": "/providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/costAllocationRules/testRule",
+        "properties": {
+          "description": "This is a testRule",
+          "createdDate": "2020-06-18T22:21:51.1287144Z",
+          "status": "Creating",
+          "updatedDate": "2020-06-18T22:21:51.1287144Z",
+          "details": {
+            "sourceResources": [
+              {
+                "name": "ResourceGroupName",
+                "resourceType": "Dimension",
+                "values": [
+                  "sampleRG"
+                ]
+              }
+            ],
+            "targetResources": [
+              {
+                "name": "ResourceGroupName",
+                "policyType": "FixedProportion",
+                "resourceType": "Dimension",
+                "values": [
+                  {
+                    "name": "destinationRG",
+                    "percentage": 50
+                  },
+                  {
+                    "name": "destinationRG2",
+                    "percentage": 50
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "CostAllocationRules_CreateOrUpdate",
+  "title": "CostAllocationRulesCreateResourceGroup"
+}

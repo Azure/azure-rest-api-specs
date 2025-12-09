@@ -43,7 +43,9 @@ function createMockGithub({ incrementalTypeSpec }) {
 
 describe("getLabelActionImpl", () => {
   it("throws if inputs null", async () => {
-    await expect(getLabelActionImpl({})).rejects.toThrow();
+    await expect(
+      getLabelActionImpl(/** @type {Parameters<typeof getLabelActionImpl>[0]} */ ({})),
+    ).rejects.toThrow();
   });
 
   it("throws if no artifact from incremental typespec", async () => {

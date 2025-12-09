@@ -31,8 +31,8 @@ namespace Storage.Blob {
     contentType: RequestMediaType,
 
     ...ApiVersionHeader,
-    ...TParams,
     ...ClientRequestIdHeader,
+    ...TParams,
   ): (TResponse & {
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -50,7 +50,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     TError = StorageError
-  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -594,6 +594,7 @@ namespace Storage.Blob {
         ...MaxResultsParameter;
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
+        ...ListBlobsStartFrom;
       },
       {
         ...DateResponseHeader;
@@ -622,6 +623,7 @@ namespace Storage.Blob {
         ...MaxResultsParameter;
         ...ListBlobsIncludeParameter;
         ...TimeoutParameter;
+        ...ListBlobsStartFrom;
       },
       {
         ...DateResponseHeader;
@@ -1457,6 +1459,10 @@ namespace Storage.Blob {
           ...VersionIdParameter;
           ...LeaseIdOptionalParameter;
           ...IfTagsParameter;
+          ...IfBlobModifiedSinceHeader;
+          ...IfBlobUnmodifiedSinceHeader;
+          ...IfBlobMatchHeader;
+          ...IfBlobNoneMatchHeader;
         },
         {
           ...DateResponseHeader;
@@ -1485,6 +1491,11 @@ namespace Storage.Blob {
           /** The blob tags. */
           @body
           tags: BlobTags;
+
+          ...IfBlobModifiedSinceHeader;
+          ...IfBlobUnmodifiedSinceHeader;
+          ...IfBlobMatchHeader;
+          ...IfBlobNoneMatchHeader;
         },
         {
           @statusCode statusCode: 204;

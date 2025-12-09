@@ -17,13 +17,12 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/ingestion/{version-status}/{version}/DataCollectionRules.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-monitor-ingestion"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-ingestion"
     package-mode: dataplane
     flavor: azure
     namespace: azure.monitor.ingestion
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-ingestion"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-ingestion"
     namespace: com.azure.monitor.ingestion
     flavor: azure
     partial-update: true
@@ -32,9 +31,8 @@ options:
     customization-class: "customization/src/main/java/MonitorIngestionCustomizations.java"
   "@azure-tools/typespec-go":
     service-dir: "sdk/monitor/ingestion"
-    package-dir: "azlogs"
-    module: "github.com/Azure/azure-sdk-for-go/sdk/monitor/ingestion/azlogs"
-    module-version: "0.0.1"
+    emitter-output-dir: "{output-dir}/{service-dir}/azlogs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azlogs"
     single-client: true
     rawjson-as-bytes: true
     inject-spans: true
@@ -46,8 +44,7 @@ options:
     model-namespace: false
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
-    package-dir: "monitor-ingestion"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-ingestion"
     package-details:
       name: "@azure/monitor-ingestion"
       description: "Azure Monitor Ingestion library"

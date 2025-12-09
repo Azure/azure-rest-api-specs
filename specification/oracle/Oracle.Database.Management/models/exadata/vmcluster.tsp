@@ -5,7 +5,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Oracle.Database;
 
@@ -120,6 +119,18 @@ union CloudVmClusterLifecycleState {
 
   @doc("Indicates that resource in Failed state")
   Failed: "Failed",
+
+  string,
+}
+
+@added(Versions.v20250801_preview)
+@doc("Specifies the type of storage management for the Cloud VM Cluster if its ASM or Exascale.")
+union ExadataVmClusterStorageManagementType {
+  @doc("Indicates that storage management for the Cloud VM Cluster is ASM")
+  ASM: "ASM",
+
+  @doc("Indicates that storage management for the Cloud VM Cluster is Exascale")
+  Exascale: "Exascale",
 
   string,
 }
@@ -356,6 +367,16 @@ model CloudVmClusterProperties {
   @doc("The compute model of the VM Cluster.")
   @visibility(Lifecycle.Read)
   computeModel?: ComputeModel;
+
+  @added(Versions.v20250801_preview)
+  @doc("Exadata Database Storage Vault ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  exascaleDbStorageVaultId?: ExascaleDbStorageVaultResourceId;
+
+  @added(Versions.v20250801_preview)
+  @doc("Specifies whether the type of storage management for the VM cluster is ASM or Exascale.")
+  @visibility(Lifecycle.Read)
+  storageManagementType?: ExadataVmClusterStorageManagementType;
 }
 
 @doc("Add/Remove (Virtual Machine) DbNode model")
