@@ -12,6 +12,15 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Storage;
 
 /**
+ * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
+ */
+union IntervalUnit {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  days: "Days",
+}
+
+/**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5757,7 +5766,7 @@ model TriggerParameters {
   /**
    * Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit;
 
   /**
    * When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
@@ -5984,7 +5993,7 @@ model TriggerParametersUpdate {
   /**
    * Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'
    */
-  intervalUnit?: "Days";
+  intervalUnit?: IntervalUnit;
 
   /**
    * When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'

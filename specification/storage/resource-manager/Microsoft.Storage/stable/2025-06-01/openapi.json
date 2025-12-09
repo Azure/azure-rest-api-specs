@@ -9352,6 +9352,23 @@
         }
       }
     },
+    "IntervalUnit": {
+      "type": "string",
+      "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+      "enum": [
+        "Days"
+      ],
+      "x-ms-enum": {
+        "name": "IntervalUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "days",
+            "value": "Days"
+          }
+        ]
+      }
+    },
     "InventoryRuleType": {
       "type": "string",
       "description": "The valid value is Inventory",
@@ -14044,14 +14061,8 @@
           "minimum": 1
         },
         "intervalUnit": {
-          "type": "string",
-          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
-          "enum": [
-            "Days"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/IntervalUnit",
+          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
@@ -14081,14 +14092,8 @@
           "minimum": 1
         },
         "intervalUnit": {
-          "type": "string",
-          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
-          "enum": [
-            "Days"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/IntervalUnit",
+          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
