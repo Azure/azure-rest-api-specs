@@ -8,7 +8,6 @@
  * @property {boolean} documentation - True if PR contains documentation (.md) file changes
  * @property {boolean} examples - True if PR contains example file changes (/examples/*.json)
  * @property {boolean} functional - True if PR contains functional spec changes (API-impacting)
- * @property {boolean} nonFunctional - True if PR contains non-functional spec changes (metadata only)
  * @property {boolean} other - True if PR contains other file types (config, scripts, etc.)
  */
 
@@ -21,7 +20,6 @@ export function createEmptyPullRequestChanges() {
     documentation: false,
     examples: false,
     functional: false,
-    nonFunctional: false,
     other: false,
   };
 }
@@ -31,7 +29,6 @@ export function createEmptyPullRequestChanges() {
  * A PR is trivial if it contains only:
  * - Documentation changes
  * - Example changes
- * - Non-functional spec changes
  * And does NOT contain:
  * - Functional spec changes
  * - Other file types
@@ -41,9 +38,9 @@ export function createEmptyPullRequestChanges() {
  */
 export function isTrivialPullRequest(changes) {
   // Trivial if no functional changes and no other files
-  // Must have at least one of: documentation, examples, or nonFunctional
+  // Must have at least one of: documentation, examples
   const hasNoBlockingChanges = !changes.functional && !changes.other;
-  const hasTrivialChanges = changes.documentation || changes.examples || changes.nonFunctional;
+  const hasTrivialChanges = changes.documentation || changes.examples;
   
   return hasNoBlockingChanges && hasTrivialChanges;
 }
@@ -56,8 +53,7 @@ export function isTrivialPullRequest(changes) {
 export function isDocumentationOnly(changes) {
   return changes.documentation && 
     !changes.examples && 
-    !changes.functional && 
-    !changes.nonFunctional && 
+    !changes.functional &&
     !changes.other;
 }
 
@@ -69,18 +65,6 @@ export function isDocumentationOnly(changes) {
 export function isExamplesOnly(changes) {
   return !changes.documentation && 
     changes.examples && 
-    !changes.functional && 
-    !changes.nonFunctional && 
-    !changes.other;
-}
-
-/**
- * Checks if a PR contains only non-functional spec changes (with optional docs/examples)
- * @param {PullRequestChanges} changes - The PR changes object
- * @returns {boolean} - True if only non-functional changes (+ optional docs/examples)
- */
-export function isNonFunctionalOnly(changes) {
-  return changes.nonFunctional && 
-    !changes.functional && 
+    !changes.functional &&
     !changes.other;
 }

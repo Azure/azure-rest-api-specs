@@ -36,29 +36,18 @@ const NON_FUNCTIONAL_PROPERTIES = new Set([
   'example',
   'examples',
   'x-ms-client-name',
-  'x-ms-parameter-name',
-  'x-ms-enum',
-  'x-ms-discriminator-value',
-  'x-ms-client-flatten',
-  'x-ms-azure-resource',
-  'x-ms-mutability',
-  'x-ms-secret',
-  'x-ms-parameter-location',
-  'x-ms-skip-url-encoding',
-  'x-ms-long-running-operation',
-  'x-ms-long-running-operation-options',
-  'x-ms-pageable',
-  'x-ms-odata',
-  'tags',
-  'x-ms-api-annotation'
+  'tags'
 ]);
 
 /**
  * Analyzes a PR to determine what types of changes it contains
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<string>} JSON string of {@link import('../../../shared/src/pr-changes.js').PullRequestChanges}
+ * @param {{ core: import('@actions/core'), context: import('@actions/github').context }} args
+ * @returns {Promise<string>} JSON string with categorized change types
  */
 export default async function checkTrivialChanges({ core, context }) {
+  // Create result object once at the top
+  const changes = createEmptyPullRequestChanges();
+  
   // Get the actual PR base branch from GitHub context
   // This works for any target branch (main, dev, release/*, etc.)
   const baseBranch = context.payload.pull_request?.base?.ref || "main";
@@ -86,9 +75,12 @@ export default async function checkTrivialChanges({ core, context }) {
     renames: changedFilesStatuses.renames.filter(r => resourceManager(r.to) || resourceManager(r.from))
   };
 
+  // Early exit if no resource-manager changes
   if (changedRmFiles.length === 0) {
     core.info("No resource-manager changes detected in PR");
-    return JSON.stringify(createEmptyPullRequestChanges());
+    core.info(`PR Changes: ${JSON.stringify(changes)}`);
+    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    return JSON.stringify(changes);
   }
 
   // Check if PR contains non-resource-manager changes
@@ -97,9 +89,10 @@ export default async function checkTrivialChanges({ core, context }) {
     const nonRmFiles = changedFiles.filter(file => !resourceManager(file));
     core.info(`PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff`);
     core.info(`Non-RM files: ${nonRmFiles.slice(0, 5).join(', ')}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ''}`);
-    const result = createEmptyPullRequestChanges();
-    result.other = true;
-    return JSON.stringify(result);
+    changes.other = true;
+    core.info(`PR Changes: ${JSON.stringify(changes)}`);
+    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    return JSON.stringify(changes);
   }
 
   // Check for non-trivial file operations (additions, deletions, renames)
@@ -107,13 +100,14 @@ export default async function checkTrivialChanges({ core, context }) {
   if (hasNonTrivialFileOperations) {
     core.info("Non-trivial file operations detected (new spec files, deletions, or renames)");
     // These are functional changes by policy
-    const result = createEmptyPullRequestChanges();
-    result.functional = true;
-    return JSON.stringify(result);
+    changes.functional = true;
+    core.info(`PR Changes: ${JSON.stringify(changes)}`);
+    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    return JSON.stringify(changes);
   }
 
-  // Analyze what types of changes are present
-  const changes = await analyzePullRequestChanges(changedRmFiles, git, core, baseRef);
+  // Analyze what types of changes are present and update the changes object
+  await analyzePullRequestChanges(changedRmFiles, git, core, baseRef, changes);
 
   core.info(`PR Changes: ${JSON.stringify(changes)}`);
   core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
@@ -157,16 +151,15 @@ function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
 }
 
 /**
- * Analyzes a PR to determine what types of changes it contains
+ * Analyzes a PR to determine what types of changes it contains and updates the changes object
  * @param {string[]} changedFiles - Array of changed file paths
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {typeof import("@actions/core")} core - Core logger
  * @param {string} baseRef - The base branch reference (e.g., "origin/main")
- * @returns {Promise<import('../../../shared/src/pr-changes.js').PullRequestChanges>}
+ * @param {import('../../../shared/src/pr-changes.js').PullRequestChanges} changes - Changes object to update
+ * @returns {Promise<void>}
  */
-async function analyzePullRequestChanges(changedFiles, git, core, baseRef) {
-  const changes = createEmptyPullRequestChanges();
-
+async function analyzePullRequestChanges(changedFiles, git, core, baseRef, changes) {
   // Categorize files by type
   const documentationFiles = changedFiles.filter(markdown);
   const exampleFiles = changedFiles.filter(example);
@@ -193,15 +186,13 @@ async function analyzePullRequestChanges(changedFiles, git, core, baseRef) {
     core.info(`Analyzing ${specFiles.length} spec files...`);
     
     let hasFunctionalChanges = false;
-    let hasNonFunctionalChanges = false;
 
     for (const file of specFiles) {
       core.info(`Analyzing file: ${file}`);
       
       try {
-        const isNonFunctional = await analyzeSpecFileForFunctionalChanges(file, git, core, baseRef);
+        const isNonFunctional = await analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef);
         if (isNonFunctional) {
-          hasNonFunctionalChanges = true;
           core.info(`File ${file} contains only non-functional changes`);
         } else {
           hasFunctionalChanges = true;
@@ -218,24 +209,20 @@ async function analyzePullRequestChanges(changedFiles, git, core, baseRef) {
     }
 
     changes.functional = hasFunctionalChanges;
-    changes.nonFunctional = hasNonFunctionalChanges;
   }
-
-  return changes;
 }
 
 /**
- * Analyzes changes in a spec file to determine if they are functional or non-functional
+ * Analyzes changes in a spec file to determine if they are only non-functional
  * Note: New files and deletions should already be filtered by checkForNonTrivialFileOperations
  * @param {string} file - The file path
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {typeof import("@actions/core")} core - Core logger
  * @param {string} baseRef - The base branch reference (e.g., "origin/main")
- * @returns {Promise<boolean>} - True if changes are non-functional only
+ * @returns {Promise<boolean>} - True if changes are non-functional only, false if any functional changes detected
  */
-async function analyzeSpecFileForFunctionalChanges(file, git, core, baseRef) {
-  let baseContent;
-  let headContent;
+async function analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef) {
+  let baseContent, headContent;
   
   try {
     // Get file content from PR base branch
