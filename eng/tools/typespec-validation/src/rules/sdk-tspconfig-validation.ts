@@ -21,21 +21,11 @@ export abstract class TspconfigSubRuleBase {
   }
 
   public async execute(folder: string): Promise<RuleResult> {
-    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
-    if (!tspconfigExists)
+    const config = await this.loadConfig(folder);
+    if (!config) {
       return this.createFailedResult(
-        `Failed to find ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml",
-      );
-
-    let config = undefined;
-    try {
-      const configText = await readTspConfig(folder);
-      config = yamlParse(configText);
-    } catch (error) {
-      return this.createFailedResult(
-        `Failed to parse ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml.",
+        `Failed to load ${join(folder, "tspconfig.yaml")}`,
+        "Please ensure tspconfig.yaml exists and is valid",
       );
     }
 
@@ -46,6 +36,21 @@ export abstract class TspconfigSubRuleBase {
         stdOutput: `Validation skipped. ${reason}`,
       };
     return this.validate(config);
+  }
+
+  public async loadConfig(folder: string): Promise<any | null> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
+    if (!tspconfigExists) {
+      return null;
+    }
+
+    try {
+      const configText = await readTspConfig(folder);
+      const config = yamlParse(configText);
+      return config;
+    } catch (error) {
+      return null;
+    }
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -118,6 +123,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return this.emitterName;
   }
 
+  public skipIfEmitterNotConfigured(config: any): boolean {
+    const isConfigured = config?.options?.[this.emitterName] !== undefined;
+    return !isConfigured;
+  }
+
   protected tryFindOption(config: any): Record<string, any> | undefined {
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
     for (const segment of this.keyToValidate.split(".")) {
@@ -126,6 +136,77 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       else return undefined;
     }
     return option;
+  }
+
+  protected resolveVariables(value: string, config: any): { resolved: string; error?: string } {
+    let resolvedValue = value;
+    const variablePattern = /\{([^}]+)\}/g;
+    const maxIterations = 10; // Prevent infinite loops
+    let iterations = 0;
+
+    // Keep resolving until no more variables are found or max iterations reached
+    while (resolvedValue.includes("{") && iterations < maxIterations) {
+      iterations++;
+      let hasUnresolvedVariables = false;
+      const currentValue = resolvedValue;
+
+      // Reset regex lastIndex for each iteration
+      variablePattern.lastIndex = 0;
+      let match;
+
+      while ((match = variablePattern.exec(currentValue)) !== null) {
+        const variableName = match[1];
+
+        // Try to resolve variable from multiple sources:
+        // 1. From the emitter's options (e.g., namespace, package-name)
+        // 2. From parameters (e.g., service-dir, output-dir)
+        // 3. From global options
+        let variableValue: string | undefined;
+
+        // Check emitter options first
+        variableValue = config?.options?.[this.emitterName]?.[variableName];
+
+        // If not found, check parameters
+        if (!variableValue) {
+          variableValue = config?.parameters?.[variableName]?.default;
+        }
+
+        // If not found, check global options (for variables like output-dir)
+        if (!variableValue) {
+          variableValue = config?.[variableName];
+        }
+
+        if (variableValue && typeof variableValue === "string") {
+          resolvedValue = resolvedValue.replace(`{${variableName}}`, variableValue);
+        } else {
+          hasUnresolvedVariables = true;
+        }
+      }
+
+      // If no progress was made in this iteration and there are still unresolved variables, return error
+      if (hasUnresolvedVariables && resolvedValue === currentValue) {
+        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
+        return {
+          resolved: resolvedValue,
+          error: `Could not resolve variable {${unresolvedVar}}. The variable is not defined in options.${this.emitterName}, parameters, or config`,
+        };
+      }
+
+      // If no more variables to resolve, break
+      if (!resolvedValue.includes("{")) {
+        break;
+      }
+    }
+
+    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+      return {
+        resolved: resolvedValue,
+        error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
+      };
+    }
+
+    return { resolved: resolvedValue };
   }
 
   protected validate(config: any): RuleResult {
@@ -152,16 +233,33 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private skipValidateNamespace: boolean;
-
-  constructor(
-    emitterName: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-    skipValidateNamespace: boolean = false,
-  ) {
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(emitterName, keyToValidate, expectedValue);
-    this.skipValidateNamespace = skipValidateNamespace;
+  }
+
+  private tryResolveAndValidate(
+    path: string,
+    config: any,
+  ): { success: boolean; resolved?: string; error?: string } {
+    // First, try to validate the path as-is
+    if (this.validateValue(path, this.expectedValue)) {
+      return { success: true, resolved: path };
+    }
+
+    // Only resolve variables if validation failed and path contains variables
+    if (path.includes("{")) {
+      const { resolved, error } = this.resolveVariables(path, config);
+      if (error) {
+        return { success: false, error };
+      }
+
+      // Validate the resolved path
+      const isValid = this.validateValue(resolved, this.expectedValue);
+      return { success: isValid, resolved };
+    }
+
+    // No variables and validation failed
+    return { success: false, resolved: path };
   }
 
   protected validate(config: any): RuleResult {
@@ -180,51 +278,64 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       );
     }
 
-    let pathToValidate: string;
-
     // Handle various path formats with different prefixes
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
     // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+    // Format 4: {output-dir}/{service-dir}/{namespace} where namespace needs to be resolved
 
+    // For simple paths without '/', validate directly
     if (!actualValue.includes("/")) {
-      pathToValidate = actualValue;
-    } else {
-      const pathParts = actualValue.split("/");
-      const filteredParts = pathParts.filter(
-        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
-      );
-      pathToValidate = filteredParts.join("/");
-    }
-
-    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
-    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
+      const result = this.tryResolveAndValidate(actualValue, config);
+      if (result.error) {
+        return this.createFailedResult(
+          result.error,
+          `Please define the variable in your configuration or use a direct path value`,
+        );
+      }
+      if (!result.success) {
+        return this.createFailedResult(
+          `The path part "${result.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+          `Please update the emitter-output-dir path to follow the SDK naming convention`,
+        );
+      }
       return { success: true };
     }
 
-    // Resolve any variables in the pathToValidate
-    // Check if pathToValidate contains variables like {namespace}
-    const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
-    if (variableMatch) {
-      const variableName = variableMatch[1];
-      const variableValue = config?.options?.[this.emitterName]?.[variableName];
+    // For paths with '/', filter out prefix parts and try from last segment backward
+    const filteredParts = actualValue
+      .split("/")
+      .filter((part) => part !== "{output-dir}" && part !== "{service-dir}");
 
-      if (variableValue && typeof variableValue === "string") {
-        // Replace the variable with its value
-        pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
-      } else {
-        return this.createFailedResult(
-          `Could not resolve variable {${variableName}} in path "${pathToValidate}". The variable is not defined in options.${this.emitterName}`,
-          `Please define the ${variableName} variable in your configuration or use a direct path value`,
-        );
-      }
+    // Try from the last segment backward to find a valid match
+    for (let i = filteredParts.length - 1; i >= 0; i--) {
+      const candidatePath = filteredParts.slice(i).join("/");
+      const result = this.tryResolveAndValidate(candidatePath, config);
+
+      // Skip if resolution failed, try next segment
+      if (result.error) continue;
+
+      // If validation succeeds, return success immediately
+      if (result.success) return { success: true };
     }
 
-    if (!this.validateValue(pathToValidate, this.expectedValue))
+    // If all segments failed, try the complete filtered path as final attempt
+    const completePath = filteredParts.join("/");
+    const finalResult = this.tryResolveAndValidate(completePath, config);
+
+    if (finalResult.error) {
       return this.createFailedResult(
-        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        finalResult.error,
+        `Please define the variable in your configuration or use a direct path value`,
+      );
+    }
+
+    if (!finalResult.success) {
+      return this.createFailedResult(
+        `The path part "${finalResult.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
         `Please update the emitter-output-dir path to follow the SDK naming convention`,
       );
+    }
 
     return { success: true };
   }
@@ -541,7 +652,6 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
       "@azure-tools/typespec-python",
       "emitter-output-dir",
       new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
-      true,
     );
   }
   protected skip(_: any, folder: string) {
@@ -631,7 +741,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
-export const defaultRules = [
+export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
@@ -657,6 +767,9 @@ export const defaultRules = [
   new TspConfigPythonDpEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
+];
+
+export const optionalRules = [
   new TspConfigCsharpAzNamespaceSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
@@ -664,14 +777,21 @@ export const defaultRules = [
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
+export const defaultRules = [...requiredRules, ...optionalRules];
+
 export class SdkTspConfigValidationRule implements Rule {
-  private subRules: TspconfigSubRuleBase[] = [];
+  private requiredRules: TspconfigSubRuleBase[] = [];
+  private optionalRules: TspconfigSubRuleBase[] = [];
   private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
-    this.subRules = subRules;
+  constructor(
+    requiredSubRules: TspconfigSubRuleBase[] = requiredRules,
+    optionalSubRules: TspconfigSubRuleBase[] = optionalRules,
+  ) {
+    this.requiredRules = requiredSubRules;
+    this.optionalRules = optionalSubRules;
   }
 
   async execute(folder: string): Promise<RuleResult> {
@@ -688,27 +808,31 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const failedResults = [];
     let success = true;
-    for (const subRule of this.subRules) {
+
+    // Execute required rules
+    for (const subRule of this.requiredRules) {
       // Check for both direct matches and wildcard patterns
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
 
-      let isSubRuleSuccess = result.success;
+      success &&= result.success;
+    }
 
-      // TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
+    // Execute optional rules (failures don't affect overall success)
+    for (const subRule of this.optionalRules) {
+      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
+
+      // Skip if emitter is not configured (only for emitter-based rules)
       if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
-        const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
-        const emitterName = emitterOptionSubRule.getEmitterName();
-        if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
-          );
-          isSubRuleSuccess = true;
+        const config = await subRule.loadConfig(folder);
+        if (config && subRule.skipIfEmitterNotConfigured(config)) {
+          continue;
         }
       }
 
-      success &&= isSubRuleSuccess;
+      const result = await subRule.execute(folder!);
+      if (!result.success) failedResults.push(result);
     }
 
     const stdOutputFailedResults =
