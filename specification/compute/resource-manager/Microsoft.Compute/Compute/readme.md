@@ -419,15 +419,6 @@ input-file:
   - stable/2024-11-01/ComputeRP.json
 ```
 
-### Tag: package-2025-02-01-preview
-
-These settings apply only when `--tag=package-2025-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-02-01-preview'
-input-file:
-  - Diagnostic/preview/2025-02-01-preview/diagnostic.json
-```
-
 ### Tag: package-python-sdk
 
 These settings apply only when `--tag=package-python-sdk` is specified on the command line.
@@ -626,15 +617,6 @@ input-file:
   - stable/2024-03-02/DiskRP.json
 ```
 
-### Tag: package-2024-06-01-preview
-
-These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-06-01-preview'
-input-file:
-  - Diagnostic/preview/2024-06-01-preview/diagnostic.json
-```
-
 ### Tag: package-2024-03-01
 
 These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
@@ -691,24 +673,6 @@ input-file:
   - stable/2024-03-01/capacityReservation.json
   - stable/2024-03-01/logAnalytic.json
   - stable/2024-03-01/runCommand.json
-```
-
-### Tag: package-2024-03-01-preview
-
-These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-01-preview'
-input-file:
-  - Diagnostic/preview/2024-03-01-preview/diagnostic.json
-```
-
-### Tag: package-2024-03-01-preview-only
-
-These settings apply only when `--tag=package-2024-03-01-preview-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-01-preview-only'
-input-file:
-  - Diagnostic/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2023-07-03
@@ -1725,16 +1689,6 @@ input-file:
   - stable/2021-07-01/sharedGallery.json
   - stable/2021-07-01/communityGallery.json
   - Cloudservice/stable/2021-03-01/cloudService.json
-  - Diagnostic/preview/2021-06-01-preview/diagnostic.json
-```
-
-### Tag: package-2021-06-01-preview-only
-
-These settings apply only when `--tag=package-2021-06-01-preview-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-06-01-preview-only'
-input-file:
-  - Diagnostic/preview/2021-06-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2021-04-01
