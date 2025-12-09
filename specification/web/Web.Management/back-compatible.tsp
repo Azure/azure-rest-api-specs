@@ -97,7 +97,7 @@ using Microsoft.Web;
 @@flattenProperty(StaticSiteUserARMResource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StringDictionary.properties);
+@@flattenProperty(StringDictionary.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DatabaseConnectionPatchRequest.properties);
@@ -139,10 +139,12 @@ using Microsoft.Web;
 @@flattenProperty(SiteAuthSettings.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AzureStoragePropertyDictionaryResource.properties);
+@@flattenProperty(AzureStoragePropertyDictionaryResource.properties,
+  "!javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConnectionStringDictionary.properties);
+@@flattenProperty(ConnectionStringDictionary.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SiteConfigurationSnapshotInfo.properties);
