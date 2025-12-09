@@ -493,7 +493,7 @@ model DataAssetQueryRequest {
   @doc("To filter by data map asset Ids.")
   dataMapAssetIds?: string[];
 
-   @doc("includingOrphans true or false")
+  @doc("includingOrphans true or false")
   includingOrphans?: boolean;
 }
 
@@ -1701,4 +1701,16 @@ model QueryDuplicateResponse {
   @doc("The request body containing Duplicate entity count.")
   @bodyRoot
   body: EntityCount;
+}
+
+@doc("DuplicateQueryRequest.")
+model DuplicateQueryRequest {
+  @doc("To filter by name keyword.")
+  nameKeyword: string;
+}
+
+@doc("DuplicateOkrQueryRequest.")
+model DuplicateOkrQueryRequest {
+  @doc("To filter by definition keyword.")
+  definition: string;
 }
