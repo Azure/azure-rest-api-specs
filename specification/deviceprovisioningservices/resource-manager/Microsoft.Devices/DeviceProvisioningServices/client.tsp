@@ -67,6 +67,10 @@ using Microsoft.Devices;
   "CertificateVerificationCodeResult",
   "csharp"
 );
+@@clientName(PrivateEndpoint,
+  "DeviceProvisioningServicesPrivateEndpoint",
+  "csharp"
+);
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
 
 @@alternateType(VerificationCodeResponseProperties.certificate,
@@ -98,6 +102,10 @@ using Microsoft.Devices;
 );
 @@clientName(VerificationCodeRequest,
   "CertificateVerificationCodeContent",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "DeviceProvisioningServicesPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(PrivateEndpointConnectionProperties,
