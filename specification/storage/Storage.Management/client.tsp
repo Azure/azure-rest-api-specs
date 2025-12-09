@@ -26,6 +26,7 @@ using Microsoft.Storage;
 @@clientName(BurstingConstants.burstFloorIOPS, "burstFloorIops", "java");
 @@clientName(AccountUsageElements.provisionedIOPS, "provisionedIops", "java");
 @@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
+@@clientName(ServiceSasParameters.signedIp, "iPAddressOrRange", "javascript");
 
 // should only be used in Java
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
