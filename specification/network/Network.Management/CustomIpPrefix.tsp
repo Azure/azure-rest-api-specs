@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Custom IP prefix resource.
  */
 model CustomIpPrefix
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CustomIpPrefixPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<CustomIpPrefixPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = CustomIpPrefix,
     KeyName = "customIpPrefixName",
@@ -28,8 +28,18 @@ model CustomIpPrefix
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  zones?: string[];
 }
 
 @armResourceOperations

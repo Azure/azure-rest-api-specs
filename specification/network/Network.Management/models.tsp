@@ -6722,6 +6722,7 @@ enum PacketCaptureTargetType {
 /**
  * An error response from the service.
  */
+@Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
   /**
@@ -6733,6 +6734,7 @@ model CloudError {
 /**
  * An error response from the service.
  */
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -12263,7 +12265,7 @@ model FirewallPacketCaptureParameters {
   filters?: AzureFirewallPacketCaptureRule[];
 
   /**
-   * The Azure Firewall packet capture operation to perform
+   * The packet capture operation to perform. If the Start operation is selected, please provide all the fields in the firewallPacketCaptureParameters to successfully initiate the packet capture. If the Status or Stop operation is selected, only the operation field is required; all other fields in the firewallPacketCaptureParameters can be omitted to successfully retrieve the capture status or stop the capture.
    */
   operation?: AzureFirewallPacketCaptureOperationType = AzureFirewallPacketCaptureOperationType.Start;
 }
@@ -12397,42 +12399,42 @@ model BastionHostPropertiesFormat {
   /**
    * Enable/Disable Copy/Paste feature of the Bastion Host resource.
    */
-  disableCopyPaste?: boolean;
+  disableCopyPaste?: boolean = false;
 
   /**
    * Enable/Disable File Copy feature of the Bastion Host resource.
    */
-  enableFileCopy?: boolean;
+  enableFileCopy?: boolean = false;
 
   /**
    * Enable/Disable IP Connect feature of the Bastion Host resource.
    */
-  enableIpConnect?: boolean;
+  enableIpConnect?: boolean = false;
 
   /**
    * Enable/Disable Shareable Link of the Bastion Host resource.
    */
-  enableShareableLink?: boolean;
+  enableShareableLink?: boolean = false;
 
   /**
    * Enable/Disable Tunneling feature of the Bastion Host resource.
    */
-  enableTunneling?: boolean;
+  enableTunneling?: boolean = false;
 
   /**
    * Enable/Disable Kerberos feature of the Bastion Host resource.
    */
-  enableKerberos?: boolean;
+  enableKerberos?: boolean = false;
 
   /**
    * Enable/Disable Session Recording feature of the Bastion Host resource.
    */
-  enableSessionRecording?: boolean;
+  enableSessionRecording?: boolean = false;
 
   /**
    * Enable/Disable Private Only feature of the Bastion Host resource.
    */
-  enablePrivateOnlyBastion?: boolean;
+  enablePrivateOnlyBastion?: boolean = false;
 }
 
 /**
@@ -12839,6 +12841,12 @@ model DdosDetectionRule extends SubResource {
    * The name of the DDoS detection rule.
    */
   name?: string;
+
+  /**
+   * The resource ID of the DDoS detection rule.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -13945,6 +13953,7 @@ model ExpressRouteCrossConnectionRoutesTableSummary {
 /**
  * Properties specific to ExpressRoutePorts peering location resources.
  */
+@summary("ExpressRoutePorts Location Properties")
 model ExpressRoutePortsLocationPropertiesFormat {
   /**
    * Address of peering location.
@@ -13973,6 +13982,7 @@ model ExpressRoutePortsLocationPropertiesFormat {
 /**
  * Real-time inventory of available ExpressRoute port bandwidths.
  */
+@summary("ExpressRoutePorts Location Bandwidths")
 model ExpressRoutePortsLocationBandwidths {
   /**
    * Bandwidth descriptive name.
@@ -13990,6 +14000,7 @@ model ExpressRoutePortsLocationBandwidths {
 /**
  * Properties specific to ExpressRoutePort resources.
  */
+@summary("ExpressRoutePort Properties")
 model ExpressRoutePortPropertiesFormat {
   /**
    * The name of the peering location that the ExpressRoutePort is mapped to physically.
@@ -14033,6 +14044,7 @@ model ExpressRoutePortPropertiesFormat {
   /**
    * The set of physical links of the ExpressRoutePort resource.
    */
+  @summary("ExpressRouteLink Sub-Resources")
   links?: ExpressRouteLink[];
 
   /**
@@ -14063,6 +14075,7 @@ model ExpressRoutePortPropertiesFormat {
  * ExpressRouteLink child resource definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@summary("ExpressRouteLink")
 model ExpressRouteLink extends SubResource {
   /**
    * ExpressRouteLink properties.
@@ -14084,6 +14097,7 @@ model ExpressRouteLink extends SubResource {
 /**
  * Properties specific to ExpressRouteLink resources.
  */
+@summary("ExpressRouteLink Resource Properties")
 model ExpressRouteLinkPropertiesFormat {
   /**
    * Name of Azure router associated with physical port.
@@ -14141,6 +14155,7 @@ model ExpressRouteLinkPropertiesFormat {
 /**
  * ExpressRouteLink Mac Security Configuration.
  */
+@summary("Definition of ExpressRouteLink Mac Security configuration.")
 model ExpressRouteLinkMacSecConfig {
   /**
    * Keyvault Secret Identifier URL containing Mac security CKN key.
@@ -14166,6 +14181,7 @@ model ExpressRouteLinkMacSecConfig {
 /**
  * Response for ListExpressRouteLinks API service call.
  */
+@summary("ExpressRouteLink List Result")
 model ExpressRouteLinkListResult is Azure.Core.Page<ExpressRouteLink>;
 
 /**
@@ -14191,6 +14207,7 @@ model GenerateExpressRoutePortsLOAResult {
 /**
  * Properties of ExpressRoutePort Authorization.
  */
+@summary("ExpressRoute Port Authorization Properties")
 model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
    * The authorization key.
@@ -14464,7 +14481,7 @@ model DnsSettings {
   /**
    * FQDNs in Network Rules are supported when set to true.
    */
-  requireProxyForNetworkRules?: boolean;
+  requireProxyForNetworkRules?: boolean | null;
 }
 
 /**
@@ -14474,28 +14491,31 @@ model ExplicitProxy {
   /**
    * When set to true, explicit proxy mode is enabled.
    */
-  enableExplicitProxy?: boolean;
+  enableExplicitProxy?: boolean | null;
 
   /**
    * Port number for explicit proxy http protocol, cannot be greater than 64000.
    */
+  @minValue(0)
   @maxValue(64000)
   httpPort?: int32;
 
   /**
    * Port number for explicit proxy https protocol, cannot be greater than 64000.
    */
+  @minValue(0)
   @maxValue(64000)
   httpsPort?: int32;
 
   /**
    * When set to true, pac file port and url needs to be provided.
    */
-  enablePacFile?: boolean;
+  enablePacFile?: boolean | null;
 
   /**
    * Port number for firewall to serve PAC file.
    */
+  @minValue(0)
   @maxValue(64000)
   pacFilePort?: int32;
 
@@ -14701,6 +14721,7 @@ model IdpsQueryObject {
   /**
    * Contain all filters names and values
    */
+  @identifiers(#[])
   filters?: FilterItems[];
 
   /**
@@ -15038,6 +15059,7 @@ model CommonResource {
  * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
  */
 @error
+@summary("Error response")
 model CommonErrorResponse {
   /**
    * The error object.
@@ -15928,7 +15950,7 @@ model EffectiveNetworkSecurityGroup {
   /**
    * Mapping of tags to list of IP Addresses included within the tag.
    */
-  tagMap?: string;
+  tagMap?: Record<string[]>;
 }
 
 /**
@@ -18357,6 +18379,7 @@ model ErrorResponse {
   /**
    * The error details object.
    */
+  @summary("Error")
   error?: ErrorDetails;
 }
 
@@ -19157,6 +19180,7 @@ model ConnectivitySource {
   /**
    * The source port from which a connectivity check will be performed.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 }
@@ -19178,6 +19202,7 @@ model ConnectivityDestination {
   /**
    * Port on which check connectivity will be performed.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 }
@@ -19882,6 +19907,7 @@ model ConnectionMonitorSource {
   /**
    * The source port used by connection monitor.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 }
@@ -19903,6 +19929,7 @@ model ConnectionMonitorDestination {
   /**
    * The destination port used by connection monitor.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 }
@@ -20074,6 +20101,7 @@ model ConnectionMonitorHttpConfiguration {
   /**
    * The port to connect to.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 
@@ -20110,6 +20138,7 @@ model ConnectionMonitorTcpConfiguration {
   /**
    * The port to connect to.
    */
+  @minValue(0)
   @maxValue(65535)
   port?: int32;
 
@@ -20900,6 +20929,12 @@ model BgpServiceCommunity extends Azure.ResourceManager.CommonTypes.Resource {
    * Properties of the BGP service community.
    */
   properties?: BgpServiceCommunityPropertiesFormat;
+
+  /** Resource location. */
+  location?: string;
+
+  /** Resource tags. */
+  tags?: TagsObject;
 }
 
 /**
@@ -22488,6 +22523,7 @@ model BgpPeerStatus {
    * The autonomous system number of the remote BGP peer.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(4294967295)
   asn?: int64;
 
@@ -25419,6 +25455,7 @@ model BgpConnectionProperties {
   /**
    * Peer ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   peerAsn?: int64;
 
@@ -27022,6 +27059,24 @@ model ResourceNavigationLinksListResult
 model ServiceAssociationLinksListResult
   is Azure.Core.Page<ServiceAssociationLink>;
 
+@summary("ExpressRoute Port List Result")
+model ExpressRoutePortListResult is Azure.Core.Page<ExpressRoutePort>;
+
+@summary("ExpressRoute Port Authorization List Result")
+model ExpressRoutePortAuthorizationListResult
+  is Azure.Core.Page<ExpressRoutePortAuthorization>;
+
+@summary("ExpressRoutePorts Location List Result")
+model ExpressRoutePortsLocationListResult
+  is Azure.Core.Page<ExpressRoutePortsLocation>;
+
 @@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
   "ListVirtualHubRouteTableV2sResult"
+);
+@@Azure.ClientGenerator.Core.clientName(HttpConfigurationMethod,
+  "HTTPConfigurationMethod"
+);
+@@Azure.ClientGenerator.Core.clientName(HttpHeader, "HTTPHeader");
+@@Azure.ClientGenerator.Core.clientName(ConnectivityGroupItem,
+  "connectivityGroupItem"
 );

@@ -209,8 +209,6 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ConnectionMonitor.properties);
 
-@@clientName(ConnectionMonitorHttpConfiguration.preferHTTPS, "preferHttps");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Operation.properties);
 

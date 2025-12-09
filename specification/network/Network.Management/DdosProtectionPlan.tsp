@@ -14,14 +14,29 @@ namespace Microsoft.Network;
  * A DDoS protection plan in a resource group.
  */
 model DdosProtectionPlan
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DdosProtectionPlanPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<DdosProtectionPlanPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = DdosProtectionPlan,
     KeyName = "ddosProtectionPlanName",
     SegmentName = "ddosProtectionPlans",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  tags: TagsObject;
+
+  /**
+   * The ETag of the DDoS protection plan.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

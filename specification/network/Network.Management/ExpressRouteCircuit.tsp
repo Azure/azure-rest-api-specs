@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * ExpressRouteCircuit resource.
  */
 model ExpressRouteCircuit
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ExpressRouteCircuitPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<ExpressRouteCircuitPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = ExpressRouteCircuit,
     KeyName = "circuitName",
@@ -22,13 +22,19 @@ model ExpressRouteCircuit
     NamePattern = ""
   >;
 
+  /** Resource tags. */
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
   /**
    * The SKU.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: ExpressRouteCircuitSku;
-
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
 @armResourceOperations

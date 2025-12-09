@@ -15,14 +15,20 @@ namespace Microsoft.Network;
  */
 @subscriptionResource
 model ExpressRouteProviderPort
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ExpressRouteProviderPortProperties> {
+  is Azure.ResourceManager.ProxyResource<ExpressRouteProviderPortProperties> {
   ...ResourceNameParameter<
     Resource = ExpressRouteProviderPort,
     KeyName = "providerport",
     SegmentName = "expressRouteProviderPorts",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  location: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

@@ -23,7 +23,10 @@ model ExpressRouteCircuitAuthorization
     SegmentName = "authorizations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

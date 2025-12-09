@@ -14,14 +14,24 @@ namespace Microsoft.Network;
  * Differentiated Services Code Point configuration for any given network interface
  */
 model DscpConfiguration
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DscpConfigurationPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<DscpConfigurationPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = DscpConfiguration,
     KeyName = "dscpConfigurationName",
     SegmentName = "dscpConfigurations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  etag?: string;
 }
 
 @armResourceOperations

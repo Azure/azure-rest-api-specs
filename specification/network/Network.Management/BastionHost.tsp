@@ -14,15 +14,26 @@ namespace Microsoft.Network;
  * Bastion Host resource.
  */
 model BastionHost
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<BastionHostPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<BastionHostPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = BastionHost,
     KeyName = "bastionHostName",
     SegmentName = "bastionHosts",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  zones?: string[];
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * The sku of this Bastion Host.

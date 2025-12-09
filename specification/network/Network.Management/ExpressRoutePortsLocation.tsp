@@ -14,14 +14,23 @@ namespace Microsoft.Network;
  * Definition of the ExpressRoutePorts peering location resource.
  */
 @subscriptionResource
+@summary("ExpressRoutePorts Peering Location")
 model ExpressRoutePortsLocation
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ExpressRoutePortsLocationPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<ExpressRoutePortsLocationPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = ExpressRoutePortsLocation,
     KeyName = "locationName",
     SegmentName = "ExpressRoutePortsLocations",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  location: string;
 }
 
 @armResourceOperations
@@ -41,6 +50,7 @@ interface ExpressRoutePortsLocations {
   list is ArmResourceListByParent<
     ExpressRoutePortsLocation,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Response = ExpressRoutePortsLocationListResult,
     Error = CloudError
   >;
 }

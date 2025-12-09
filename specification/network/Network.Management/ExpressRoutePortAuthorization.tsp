@@ -13,6 +13,7 @@ namespace Microsoft.Network;
 /**
  * ExpressRoutePort Authorization resource definition.
  */
+@summary("ExpressRoute Port Authorization")
 model ExpressRoutePortAuthorization
   is Azure.ResourceManager.ProxyResource<ExpressRoutePortAuthorizationPropertiesFormat> {
   ...ResourceNameParameter<
@@ -21,7 +22,10 @@ model ExpressRoutePortAuthorization
     SegmentName = "authorizations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -51,12 +55,18 @@ interface ExpressRoutePortAuthorizations {
   /**
    * Gets the specified authorization from the specified express route port.
    */
-  get is ExpressRoutePortAuthorizationOps.Read<ExpressRoutePortAuthorization, OverrideErrorType = CloudError>;
+  get is ExpressRoutePortAuthorizationOps.Read<
+    ExpressRoutePortAuthorization,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Creates or updates an authorization in the specified express route port.
    */
-  createOrUpdate is ExpressRoutePortAuthorizationOps.CreateOrUpdateAsync<ExpressRoutePortAuthorization,  OverrideErrorType = CloudError>;
+  createOrUpdate is ExpressRoutePortAuthorizationOps.CreateOrUpdateAsync<
+    ExpressRoutePortAuthorization,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Deletes the specified authorization from the specified express route port.
@@ -67,13 +77,18 @@ interface ExpressRoutePortAuthorizations {
   delete is ExpressRoutePortAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRoutePortAuthorization,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
-,    OverrideErrorType = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all authorizations in an express route port.
    */
-  list is ExpressRoutePortAuthorizationOps.List<ExpressRoutePortAuthorization, OverrideErrorType = CloudError>;
+  list is ExpressRoutePortAuthorizationOps.List<
+    ExpressRoutePortAuthorization,
+    Response = ExpressRoutePortAuthorizationListResult,
+    OverrideErrorType = CloudError
+  >;
 }
 
 @@doc(ExpressRoutePortAuthorization.name, "The name of the authorization.");

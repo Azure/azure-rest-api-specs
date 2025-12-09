@@ -58,6 +58,7 @@
 | `definitions.BastionHostPropertiesFormat.properties.networkAcls.$ref__added` | added | `#/definitions/BastionHostPropertiesFormatNetworkAcls` |
 | `definitions.BastionHostPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.BgpConnectionProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.ConnectionMonitorResult.properties.tags.$ref__added` | added | `#/definitions/TagsObject` |
 | `definitions.ConnectionMonitorResultProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.$ref__added` | added | `#/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities` |
 | `definitions.ConnectivityConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
@@ -69,6 +70,7 @@
 | `definitions.CustomIpPrefixPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.DdosCustomPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.DdosDetectionRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.DdosProtectionPlan.properties.tags.$ref__added` | added | `#/definitions/TagsObject` |
 | `definitions.DdosProtectionPlanPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.DelegationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.DscpConfigurationPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
@@ -391,6 +393,7 @@
 | `definitions.BgpConnection.properties.type__deleted` | deleted | `{"type":"string","description":"Connection type.","readOnly":true}` |
 | `definitions.BgpConnectionProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.CommonErrorAdditionalInfo.properties.info.type__deleted` | deleted | `object` |
+| `definitions.ConnectionMonitorResult.properties.tags.type__deleted` | deleted | `object` |
 | `definitions.ConnectionMonitorResult.properties.type__deleted` | deleted | `{"type":"string","description":"Connection monitor type.","readOnly":true}` |
 | `definitions.ConnectionMonitorResultProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.ConnectionSharedKeyResult.properties.type__deleted` | deleted | `{"type":"string","description":"Resource type.","readOnly":true}` |
@@ -404,6 +407,7 @@
 | `definitions.CustomIpPrefixPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.DdosCustomPolicyPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.DdosDetectionRulePropertiesFormat.properties.provisioningState.type__added` | added | `string` |
+| `definitions.DdosProtectionPlan.properties.tags.type__deleted` | deleted | `object` |
 | `definitions.DdosProtectionPlan.properties.type__deleted` | deleted | `{"type":"string","description":"Resource type.","readOnly":true}` |
 | `definitions.DdosProtectionPlanPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.DelegationProperties.properties.provisioningState.type__added` | added | `string` |
@@ -664,18 +668,7 @@
 | `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
 | `definitions.AzureFirewallAutoscaleConfiguration.properties.maxCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `2` |
-| `definitions.BgpConnectionProperties.properties.peerAsn.minimum__deleted` | deleted | `0` |
-| `definitions.BgpPeerStatus.properties.asn.minimum__deleted` | deleted | `0` |
 | `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorDestination.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorHttpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorSource.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectionMonitorTcpConfiguration.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectivityDestination.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ConnectivitySource.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.httpPort.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.httpsPort.minimum__deleted` | deleted | `0` |
-| `definitions.ExplicitProxy.properties.pacFilePort.minimum__deleted` | deleted | `0` |
 | `definitions.FirewallPolicyRuleApplicationProtocol.properties.port.minimum__deleted` | deleted | `0` |
 | `definitions.HopLinkProperties.properties.roundTripTimeAvg.minimum__deleted` | deleted | `0` |
 | `definitions.HopLinkProperties.properties.roundTripTimeMax.minimum__deleted` | deleted | `0` |
@@ -823,25 +816,33 @@
 | `definitions.ConnectivityConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.required__deleted` | deleted | `["connectedGroupPrivateEndpointsScale","connectedGroupAddressOverlap","peeringEnforcement"]` |
 | `definitions.CustomIpPrefixListResult.required__added` | added | `["value"]` |
+| `definitions.DdosProtectionPlan.required__added` | added | `["location","tags"]` |
 | `definitions.DdosProtectionPlanListResult.required__added` | added | `["value"]` |
 | `definitions.DefaultAdminRule.required__added` | added | `["kind"]` |
+| `definitions.DscpConfiguration.required__added` | added | `["location","tags"]` |
 | `definitions.DscpConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.EffectiveNetworkSecurityGroupListResult.required__added` | added | `["value"]` |
 | `definitions.EffectiveRouteListResult.required__added` | added | `["value"]` |
 | `definitions.EndpointServicesListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCircuit.required__added` | added | `["location","tags"]` |
 | `definitions.ExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitPeeringListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitsArpTableListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitsRoutesTableListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteCrossConnection.required__added` | added | `["location","tags"]` |
 | `definitions.ExpressRouteCrossConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCrossConnectionPeeringList.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCrossConnectionsRoutesTableSummaryListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteGateway.required__added` | added | `["location","tags"]` |
 | `definitions.ExpressRouteLinkListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRoutePort.required__added` | added | `["location","tags"]` |
 | `definitions.ExpressRoutePortAuthorizationListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRoutePortListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRoutePortsLocation.required__added` | added | `["location","tags"]` |
 | `definitions.ExpressRoutePortsLocationListResult.required__added` | added | `["value"]` |
+| `definitions.ExpressRouteProviderPort.required__added` | added | `["location"]` |
 | `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteServiceProviderListResult.required__added` | added | `["value"]` |
 | `definitions.FirewallPolicyListResult.required__added` | added | `["value"]` |
@@ -1317,6 +1318,7 @@
 | `definitions.DefaultAdminPropertiesFormat.properties.destinationPortRanges.items.description__deleted` | deleted | `The destination port.` |
 | `definitions.DefaultAdminPropertiesFormat.properties.sourcePortRanges.items.description__deleted` | deleted | `The source port.` |
 | `definitions.DelegationProperties.properties.provisioningState.description__added` | added | `Provisioning states of a resource.` |
+| `definitions.EffectiveNetworkSecurityGroup.properties.tagMap.additionalProperties.description__deleted` | deleted | `List of IP Addresses within the tag (key).` |
 | `definitions.FilterItems.properties.values.items.description__deleted` | deleted | `Value of the field to filter by` |
 | `definitions.IpamPool.properties.properties.description__added` | added | `Properties of IpamPool resource properties which are specific to the Pool resource.` |
 | `definitions.IpamPoolUpdate.properties.properties.description__added` | added | `Represents the IpamPool update properties.` |
@@ -1397,14 +1399,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BastionHostPropertiesFormat.properties.disableCopyPaste.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableFileCopy.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableIpConnect.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableKerberos.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enablePrivateOnlyBastion.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableSessionRecording.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableShareableLink.default__deleted` | deleted | `false` |
-| `definitions.BastionHostPropertiesFormat.properties.enableTunneling.default__deleted` | deleted | `false` |
 | `definitions.FlowLogFormatParameters.properties.version.default__deleted` | deleted | `0` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixLength.default__deleted` | deleted | `0` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixType.default__deleted` | deleted | `null` |
@@ -1426,7 +1420,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS['x-ms-client-name__added']` | added | `preferHttps` |
 | `definitions.ProtocolConfiguration.properties.HTTPConfiguration['x-ms-client-name__added']` | added | `httpConfiguration` |
 | `definitions.VirtualHubProperties.properties.virtualHubRouteTableV2s['x-ms-client-name__added']` | added | `virtualHubRouteTableV2S` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}'].delete.parameters[3]['x-ms-client-name__added']` | added | `If-Match` |
@@ -1445,16 +1438,17 @@
 | `definitions.ApplicationGatewayAvailableSslOptions.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.ApplicationSecurityGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.AzureFirewall.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
-| `definitions.BastionHost.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.CustomIpPrefix.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.DdosCustomPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.DscpConfiguration.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRouteCircuit.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRouteCrossConnection.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRouteGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRoutePort.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRoutePortsLocation.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.ExpressRouteProviderPort.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.BastionHost.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.BgpServiceCommunity.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.CustomIpPrefix.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.DdosCustomPolicy.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.DscpConfiguration.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRouteCircuit.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRouteCrossConnection.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRouteGateway.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRoutePort.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRoutePortsLocation.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.ExpressRouteProviderPort.properties.location__added` | added | `{"type":"string","description":"Resource tags."}` |
 | `definitions.FirewallPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.FirewallPolicyDraft.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.FlowLog.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
@@ -1533,8 +1527,9 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.additionalProperties__added` | added | `{"type":"string"}` |
+| `definitions.ConnectionMonitorResult.properties.tags.additionalProperties__deleted` | deleted | `{"type":"string"}` |
 | `definitions.ConnectivityIssue.properties.context.items.additionalProperties__added` | added | `{"type":"string"}` |
-| `definitions.EffectiveNetworkSecurityGroup.properties.tagMap.additionalProperties__deleted` | deleted | `{"description":"List of IP Addresses within the tag (key).","items":{"type":"string"},"type":"array"...` |
+| `definitions.DdosProtectionPlan.properties.tags.additionalProperties__deleted` | deleted | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.200.schema.additionalProperties__added` | added | `{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.additionalProperties__added` | added | `{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}` |
 
@@ -1615,12 +1610,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.HTTPConfiguration__deleted` | deleted | `{"type":"object","description":"HTTP configuration of the connectivity check.","properties":{"method...` |
-
-### Changes for `HTTPHeader`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HTTPHeader__deleted` | deleted | `{"type":"object","description":"The HTTP header.","properties":{"name":{"type":"string","description...` |
 
 ### Changes for `IpGroups`
 
@@ -1730,12 +1719,6 @@
 |------|------------|-------|
 | `definitions.VpnSiteId__deleted` | deleted | `{"type":"object","description":"VpnSite Resource.","properties":{"vpnSite":{"type":"string","descrip...` |
 
-### Changes for `connectivityGroupItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.connectivityGroupItem__deleted` | deleted | `{"type":"object","description":"Connectivity group item.","properties":{"networkGroupId":{"type":"st...` |
-
 ### Changes for `Azure.ResourceManager.ArmAcceptedLroResponse<"Resource operation accepted.", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>`
 
 | Path | Change Type | Value |
@@ -1766,12 +1749,6 @@
 |------|------------|-------|
 | `definitions.ConnectivityConfigurationPropertiesConnectivityCapabilities__added` | added | `{"type":"object","description":"Collection of additional settings to enhance specific topology behav...` |
 
-### Changes for `ConnectivityGroupItem`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectivityGroupItem__added` | added | `{"type":"object","description":"Connectivity group item.","properties":{"networkGroupId":{"type":"st...` |
-
 ### Changes for `ExpressRouteGatewayPropertiesAutoScaleConfiguration`
 
 | Path | Change Type | Value |
@@ -1795,12 +1772,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.HttpConfiguration__added` | added | `{"type":"object","description":"HTTP configuration of the connectivity check.","properties":{"method...` |
-
-### Changes for `HttpHeader`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HttpHeader__added` | added | `{"type":"object","description":"The HTTP header.","properties":{"name":{"type":"string","description...` |
 
 ### Changes for `IpamPoolPrefixAllocationPool`
 
@@ -1911,7 +1882,8 @@
 |------|------------|-------|
 | `definitions.AdminRuleCollection.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.BaseAdminRule.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
-| `definitions.ConnectivityConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
+| `definitions.ConnectivityConfiguration.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
+| `definitions.ExpressRouteCircuit.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.NetworkGroup.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.NetworkManagerRoutingConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.RoutingRule.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
@@ -1930,16 +1902,16 @@
 | `definitions.ApplicationGatewayAvailableSslOptions.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.ApplicationSecurityGroup.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.AzureFirewall.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
-| `definitions.BastionHost.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.CustomIpPrefix.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.DdosCustomPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.DscpConfiguration.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRouteCircuit.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRouteCrossConnection.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRouteGateway.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRoutePort.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRoutePortsLocation.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.ExpressRouteProviderPort.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.BastionHost.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.BgpServiceCommunity.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.CustomIpPrefix.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.DdosCustomPolicy.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.DscpConfiguration.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.ExpressRouteCircuit.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.ExpressRouteCrossConnection.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.ExpressRouteGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.ExpressRoutePort.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.ExpressRoutePortsLocation.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.FirewallPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.FirewallPolicyDraft.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.FlowLog.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
@@ -2454,9 +2426,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ApplicationGatewayFirewallDisabledRuleGroup.properties.rules.items['x-nullable__deleted']` | deleted | `false` |
-| `definitions.DnsSettings.properties.requireProxyForNetworkRules['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ExplicitProxy.properties.enableExplicitProxy['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ExplicitProxy.properties.enablePacFile['x-nullable__deleted']` | deleted | `true` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixLength['x-nullable__deleted']` | deleted | `true` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength['x-nullable__deleted']` | deleted | `true` |
 
@@ -2466,8 +2435,8 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayWafDynamicManifestResult.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"}...` |
 | `definitions.AzureWebCategory.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"}...` |
-| `definitions.ConnectionMonitorResult.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"}]` |
-| `definitions.DdosProtectionPlan.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"}]` |
+| `definitions.ConnectionMonitorResult.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"}...` |
+| `definitions.DdosProtectionPlan.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"}...` |
 | `definitions.PrivateLinkServiceProperties.properties.autoApproval.allOf__deleted` | deleted | `[{"$ref":"#/definitions/ResourceSet"}]` |
 | `definitions.PrivateLinkServiceProperties.properties.visibility.allOf__deleted` | deleted | `[{"$ref":"#/definitions/ResourceSet"}]` |
 | `definitions.SignaturesOverrides.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"}...` |
@@ -2481,7 +2450,6 @@
 | `definitions.AzureWebCategory.properties.id__deleted` | deleted | `{"type":"string","description":"Resource ID."}` |
 | `definitions.ConnectionMonitorResult.properties.id__deleted` | deleted | `{"type":"string","description":"ID of the connection monitor.","readOnly":true}` |
 | `definitions.ConnectionSharedKeyResult.properties.id__deleted` | deleted | `{"type":"string","description":"The identifier of the shared key for a vpn link connection."}` |
-| `definitions.DdosDetectionRule.properties.id__deleted` | deleted | `{"type":"string","description":"The resource ID of the DDoS detection rule.","readOnly":true}` |
 | `definitions.DdosProtectionPlan.properties.id__deleted` | deleted | `{"type":"string","description":"Resource ID.","readOnly":true}` |
 | `definitions.ExpressRouteProviderPort.properties.id__deleted` | deleted | `{"type":"string","description":"Fully qualified resource ID for the resource.","readOnly":true}` |
 | `definitions.ResourceNavigationLink.properties.id__deleted` | deleted | `{"type":"string","description":"Resource navigation link identifier.","readOnly":true}` |
@@ -2503,6 +2471,7 @@
 | `definitions.BreakOutCategoryPolicies.properties.optimize.readOnly__deleted` | deleted | `false` |
 | `definitions.DdosSettings.properties.ddosProtectionPlan.readOnly__deleted` | deleted | `false` |
 | `definitions.DdosSettings.properties.protectionMode.readOnly__deleted` | deleted | `false` |
+| `definitions.DscpConfiguration.properties.etag.readOnly__deleted` | deleted | `true` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.links.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyDraftProperties.properties.basePolicy.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.basePolicy.readOnly__deleted` | deleted | `false` |
@@ -2564,42 +2533,6 @@
 | `definitions.VpnSiteProperties.properties.o365Policy.readOnly__deleted` | deleted | `false` |
 | `definitions.WebApplicationFirewallPolicyListResult.properties.value.readOnly__deleted` | deleted | `true` |
 
-### Changes for `x-ms-external`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CloudError['x-ms-external__deleted']` | deleted | `true` |
-| `definitions.CloudErrorBody['x-ms-external__deleted']` | deleted | `true` |
-
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.CommonErrorResponse.title__deleted` | deleted | `Error response` |
-| `definitions.ErrorResponse.properties.error.title__deleted` | deleted | `Error` |
-| `definitions.ExpressRouteLink.title__deleted` | deleted | `ExpressRouteLink` |
-| `definitions.ExpressRouteLinkListResult.title__deleted` | deleted | `ExpressRouteLink List Result` |
-| `definitions.ExpressRouteLinkMacSecConfig.title__deleted` | deleted | `Definition of ExpressRouteLink Mac Security configuration.` |
-| `definitions.ExpressRouteLinkPropertiesFormat.title__deleted` | deleted | `ExpressRouteLink Resource Properties` |
-| `definitions.ExpressRoutePort.title__deleted` | deleted | `ExpressRoute Port` |
-| `definitions.ExpressRoutePortAuthorization.title__deleted` | deleted | `ExpressRoute Port Authorization` |
-| `definitions.ExpressRoutePortAuthorizationListResult.title__deleted` | deleted | `ExpressRoute Port Authorization List Result` |
-| `definitions.ExpressRoutePortAuthorizationPropertiesFormat.title__deleted` | deleted | `ExpressRoute Port Authorization Properties` |
-| `definitions.ExpressRoutePortListResult.title__deleted` | deleted | `ExpressRoute Port List Result` |
-| `definitions.ExpressRoutePortPropertiesFormat.properties.links.title__deleted` | deleted | `ExpressRouteLink Sub-Resources` |
-| `definitions.ExpressRoutePortPropertiesFormat.title__deleted` | deleted | `ExpressRoutePort Properties` |
-| `definitions.ExpressRoutePortsLocation.title__deleted` | deleted | `ExpressRoutePorts Peering Location` |
-| `definitions.ExpressRoutePortsLocationBandwidths.title__deleted` | deleted | `ExpressRoutePorts Location Bandwidths` |
-| `definitions.ExpressRoutePortsLocationListResult.title__deleted` | deleted | `ExpressRoutePorts Location List Result` |
-| `definitions.ExpressRoutePortsLocationPropertiesFormat.title__deleted` | deleted | `ExpressRoutePorts Location Properties` |
-| `definitions.InternetIngressPublicIpsProperties.title__deleted` | deleted | `Internet Ingress Public Ip Properties` |
-| `definitions.NetworkVirtualApplianceSku.title__deleted` | deleted | `Available NetworkVirtualApplianceSkus` |
-| `definitions.NetworkVirtualApplianceSkuInstances.title__deleted` | deleted | `Network Virtual Appliance Sku Instances` |
-| `definitions.NetworkVirtualApplianceSkuPropertiesFormat.title__deleted` | deleted | `Network Virtual Appliance Sku Properties` |
-| `definitions.NvaInVnetSubnetReferenceProperties.title__deleted` | deleted | `Subnet references where the NVA NICS will be deployed` |
-| `definitions.VirtualApplianceAdditionalNicProperties.title__deleted` | deleted | `Network Virtual Appliance Additional Nic Properties` |
-| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
-
 ### Changes for `nextLink`
 
 | Path | Change Type | Value |
@@ -2608,18 +2541,23 @@
 | `definitions.NetworkWatcherListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 | `definitions.PacketCaptureListResult.properties.nextLink__added` | added | `{"type":"string","format":"uri","description":"[Placeholder] Discription for nextLink property"}` |
 
-### Changes for `x-ms-mutability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ConnectionMonitorResult.properties.location['x-ms-mutability__added']` | added | `["create","read"]` |
-| `definitions.DdosProtectionPlan.properties.location['x-ms-mutability__added']` | added | `["create","read"]` |
-
 ### Changes for `kind`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.DefaultAdminRule.properties.kind__added` | added | `{"type":"string","description":"Whether the rule is custom or default.","enum":["Default"],"x-ms-enu...` |
+
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.InternetIngressPublicIpsProperties.title__deleted` | deleted | `Internet Ingress Public Ip Properties` |
+| `definitions.NetworkVirtualApplianceSku.title__deleted` | deleted | `Available NetworkVirtualApplianceSkus` |
+| `definitions.NetworkVirtualApplianceSkuInstances.title__deleted` | deleted | `Network Virtual Appliance Sku Instances` |
+| `definitions.NetworkVirtualApplianceSkuPropertiesFormat.title__deleted` | deleted | `Network Virtual Appliance Sku Properties` |
+| `definitions.NvaInVnetSubnetReferenceProperties.title__deleted` | deleted | `Subnet references where the NVA NICS will be deployed` |
+| `definitions.VirtualApplianceAdditionalNicProperties.title__deleted` | deleted | `Network Virtual Appliance Additional Nic Properties` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
 
 ### Changes for `x-ms-azure-resource`
 
@@ -2815,9 +2753,7 @@
 | `definitions.BackendAddressPoolPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the backend address pool resource.` | `Provisioning states of a resource.` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BaseAdminRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.BastionHost.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.BastionHost.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
-| `definitions.BastionHost.properties.zones.description` | `A list of availability zones denoting where the resource needs to come from.` | `The availability zones.` |
+| `definitions.BastionHost.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.BastionHostIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BastionHostIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.description` | `Private IP allocation method.` | `IP address allocation method.` |
 | `definitions.BastionHostIPConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the bastion host IP configuration resource.` | `Provisioning states of a resource.` |
@@ -2831,19 +2767,14 @@
 | `definitions.BgpConnectionProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `Provisioning states of a resource.` |
 | `definitions.BgpServiceCommunity.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.ConfigurationGroup.properties.properties.$ref` | `./networkManagerGroup.json#/definitions/NetworkGroupProperties` | `#/definitions/NetworkGroupProperties` |
-| `definitions.ConnectionMonitorHttpConfiguration.properties.method['x-ms-enum'].name` | `HTTPConfigurationMethod` | `HttpConfigurationMethod` |
-| `definitions.ConnectionMonitorHttpConfiguration.properties.requestHeaders.items.$ref` | `#/definitions/HTTPHeader` | `#/definitions/HttpHeader` |
 | `definitions.ConnectionMonitorListResult.description` | `List of connection monitors.` | `[Placeholder] Discription for page model` |
 | `definitions.ConnectionMonitorListResult.properties.value.description` | `Information about connection monitors.` | `[Placeholder] Discription for value property` |
-| `definitions.ConnectionMonitorResult.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
-| `definitions.ConnectionMonitorResult.properties.location.description` | `Connection monitor location.` | `The geo-location where the resource lives` |
-| `definitions.ConnectionMonitorResult.properties.tags.description` | `Connection monitor tags.` | `Resource tags.` |
 | `definitions.ConnectionMonitorResultProperties.properties.provisioningState.description` | `The provisioning state of the connection monitor.` | `Provisioning states of a resource.` |
 | `definitions.ConnectionSharedKey.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ConnectionSharedKeyResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ConnectivityConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ConnectivityConfigurationProperties.properties.appliesToGroups.items.$ref` | `#/definitions/connectivityGroupItem` | `#/definitions/ConnectivityGroupItem` |
 | `definitions.ConnectivityConfigurationProperties.properties.provisioningState.description` | `The provisioning state of the connectivity configuration resource.` | `Provisioning states of a resource.` |
+| `definitions.connectivityGroupItem.properties.isGlobal.description` | `Flag if global is supported.` | `Flag if global mesh is supported.` |
 | `definitions.ConnectivityParameters.properties.preferredIPVersion.description` | `Preferred IP version of the connection.` | `IP address version.` |
 | `definitions.Container.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ContainerNetworkInterface.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2852,35 +2783,32 @@
 | `definitions.ContainerNetworkInterfaceConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the container network interface configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.ContainerNetworkInterfaceIpConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the container network interface IP configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.ContainerNetworkInterfacePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the container network interface resource.` | `Provisioning states of a resource.` |
-| `definitions.CustomIpPrefix.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.CustomIpPrefix.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.CustomIpPrefix.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.CustomIpPrefix.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
-| `definitions.CustomIpPrefix.properties.zones.description` | `A list of availability zones denoting the IP allocated for the resource needs to come from.` | `The availability zones.` |
+| `definitions.CustomIpPrefix.properties.zones.description` | `A list of availability zones denoting the IP allocated for the resource needs to come from.` | `A list of availability zones denoting where the resource needs to come from.` |
 | `definitions.CustomIpPrefixPropertiesFormat.properties.childCustomIpPrefixes.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.CustomIpPrefixPropertiesFormat.properties.customIpPrefixParent.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.CustomIpPrefixPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the custom IP prefix resource.` | `Provisioning states of a resource.` |
 | `definitions.CustomIpPrefixPropertiesFormat.properties.publicIpPrefixes.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.DdosCustomPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.DdosCustomPolicy.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.DdosCustomPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.DdosCustomPolicyPropertiesFormat.properties.frontEndIpConfiguration.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.DdosCustomPolicyPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the DDoS custom policy resource.` | `Provisioning states of a resource.` |
 | `definitions.DdosDetectionRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.DdosDetectionRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the DDoS detection rule.` | `Provisioning states of a resource.` |
-| `definitions.DdosProtectionPlan.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
-| `definitions.DdosProtectionPlan.properties.location.description` | `Resource location.` | `The geo-location where the resource lives` |
+| `definitions.DdosProtectionPlan.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `The ETag of the DDoS protection plan.` |
 | `definitions.DdosProtectionPlanPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the DDoS protection plan resource.` | `Provisioning states of a resource.` |
 | `definitions.DdosProtectionPlanPropertiesFormat.properties.publicIPAddresses.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.DdosProtectionPlanPropertiesFormat.properties.virtualNetworks.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.DdosSettings.properties.ddosProtectionPlan.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.Delegation.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.DscpConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.DscpConfiguration.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.DscpConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.DscpConfigurationPropertiesFormat.properties.associatedNetworkInterfaces.items.$ref` | `./networkInterface.json#/definitions/NetworkInterface` | `#/definitions/NetworkInterface` |
 | `definitions.DscpConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the DSCP Configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.EffectiveBaseSecurityAdminRule.properties.ruleCollectionAppliesToGroups.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/NetworkManagerSecurityGroupItem` | `#/definitions/NetworkManagerSecurityGroupItem` |
 | `definitions.EffectiveConnectivityConfiguration.properties.properties.$ref` | `./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfigurationProperties` | `#/definitions/ConnectivityConfigurationProperties` |
 | `definitions.EffectiveDefaultSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat` | `#/definitions/DefaultAdminPropertiesFormat` |
 | `definitions.EffectiveNetworkSecurityGroup.properties.networkSecurityGroup.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
+| `definitions.EffectiveNetworkSecurityGroup.properties.tagMap.type` | `string` | `object` |
 | `definitions.EffectiveNetworkSecurityGroupAssociation.properties.networkInterface.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.EffectiveNetworkSecurityGroupAssociation.properties.networkManager.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.EffectiveNetworkSecurityGroupAssociation.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2888,17 +2816,13 @@
 | `definitions.EffectiveSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat` | `#/definitions/AdminPropertiesFormat` |
 | `definitions.EndpointServiceResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ErrorResponse.properties.error.$ref` | `./network.json#/definitions/ErrorDetails` | `#/definitions/ErrorDetails` |
-| `definitions.ExpressRouteCircuit.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ExpressRouteCircuit.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ExpressRouteCircuit.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRouteCircuitAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ExpressRouteCircuitAuthorization.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ExpressRouteCircuitConnection.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route circuit connection resource.` | `Provisioning states of a resource.` |
 | `definitions.ExpressRouteCircuitPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ExpressRouteCircuitPeering.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.expressRouteConnection.$ref` | `./virtualWan.json#/definitions/ExpressRouteConnectionId` | `#/definitions/ExpressRouteConnectionId` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route circuit peering resource.` | `Provisioning states of a resource.` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2906,8 +2830,7 @@
 | `definitions.ExpressRouteCircuitPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route circuit resource.` | `Provisioning states of a resource.` |
 | `definitions.ExpressRouteConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteConnectionProperties.properties.provisioningState.description` | `The provisioning state of the express route connection resource.` | `Provisioning states of a resource.` |
-| `definitions.ExpressRouteCrossConnection.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ExpressRouteCrossConnection.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ExpressRouteCrossConnection.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRouteCrossConnectionPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.ipv6PeeringConfig.$ref` | `./expressRouteCircuit.json#/definitions/Ipv6ExpressRouteCircuitPeeringConfig` | `#/definitions/Ipv6ExpressRouteCircuitPeeringConfig` |
 | `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.microsoftPeeringConfig.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeeringConfig` | `#/definitions/ExpressRouteCircuitPeeringConfig` |
@@ -2917,26 +2840,21 @@
 | `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.description` | `The provisioning state of the circuit in the connectivity provider system.` | `The ServiceProviderProvisioningState state of the resource.` |
 | `definitions.ExpressRouteFailoverAllTestDetails.type` | `array` | `object` |
 | `definitions.ExpressRouteFailoverSingleTestDetailsObject.type` | `array` | `object` |
-| `definitions.ExpressRouteGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ExpressRouteGateway.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ExpressRouteGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRouteGatewayProperties.properties.provisioningState.description` | `The provisioning state of the express route gateway resource.` | `Provisioning states of a resource.` |
 | `definitions.ExpressRouteLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteLinkPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route link resource.` | `Provisioning states of a resource.` |
-| `definitions.ExpressRoutePort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ExpressRoutePort.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ExpressRoutePort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRoutePort.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.ExpressRoutePortAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ExpressRoutePortAuthorization.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the authorization resource.` | `Provisioning states of a resource.` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.circuits.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route port resource.` | `Provisioning states of a resource.` |
-| `definitions.ExpressRoutePortsLocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
+| `definitions.ExpressRoutePortsLocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRoutePortsLocationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route port location resource.` | `Provisioning states of a resource.` |
-| `definitions.ExpressRouteProviderPort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.ExpressRouteProviderPort.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.ExpressRouteProviderPort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRouteServiceProvider.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route service provider resource.` | `Provisioning states of a resource.` |
-| `definitions.FirewallPacketCaptureParameters.properties.operation.description` | `The packet capture operation to perform. If the Start operation is selected, please provide all the fields in the firewallPacketCaptureParameters to successfully initiate the packet capture. If the Status or Stop operation is selected, only the operation field is required; all other fields in the firewallPacketCaptureParameters can be omitted to successfully retrieve the capture status or stop the capture.` | `The Azure Firewall packet capture operation to perform` |
 | `definitions.FirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.FirewallPolicy.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.FirewallPolicy.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |

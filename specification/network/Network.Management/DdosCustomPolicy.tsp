@@ -14,14 +14,23 @@ namespace Microsoft.Network;
  * A DDoS custom policy in a resource group.
  */
 model DdosCustomPolicy
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DdosCustomPolicyPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<DdosCustomPolicyPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = DdosCustomPolicy,
     KeyName = "ddosCustomPolicyName",
     SegmentName = "ddosCustomPolicies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

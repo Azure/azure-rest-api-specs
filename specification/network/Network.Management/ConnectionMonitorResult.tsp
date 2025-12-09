@@ -16,14 +16,23 @@ namespace Microsoft.Network;
  */
 @parentResource(NetworkWatcher)
 model ConnectionMonitorResult
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ConnectionMonitorResultProperties> {
+  is Azure.ResourceManager.ProxyResource<ConnectionMonitorResultProperties> {
   ...ResourceNameParameter<
     Resource = ConnectionMonitorResult,
     KeyName = "connectionMonitorName",
     SegmentName = "connectionMonitors",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /** Connection monitor location. */
+  location?: string;
+
+  /** Connection monitor tags. */
+  tags?: TagsObject;
 }
 
 @armResourceOperations

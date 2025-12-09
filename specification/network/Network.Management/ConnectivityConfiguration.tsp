@@ -23,7 +23,9 @@ model ConnectivityConfiguration
     SegmentName = "connectivityConfigurations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  etag?: string;
 }
 
 @armResourceOperations

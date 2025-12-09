@@ -14,14 +14,25 @@ namespace Microsoft.Network;
  * ExpressRoute gateway resource.
  */
 model ExpressRouteGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ExpressRouteGatewayProperties> {
+  is Azure.ResourceManager.ProxyResource<ExpressRouteGatewayProperties> {
   ...ResourceNameParameter<
     Resource = ExpressRouteGateway,
     KeyName = "expressRouteGatewayName",
     SegmentName = "expressRouteGateways",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -56,38 +67,50 @@ interface ExpressRouteGateways {
   /**
    * Creates or updates a ExpressRoute gateway in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ExpressRouteGateway, Error = CloudError>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates express route gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchAsync<ExpressRouteGateway,
+  updateTags is ArmCustomPatchAsync<
+    ExpressRouteGateway,
     PatchModel = TagsObject,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteGateway> &
-      Azure.Core.Foundations.RetryAfterHeader
-  , Error = CloudError>;
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is ArmResourceDeleteWithoutOkAsync<ExpressRouteGateway,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,  Error = CloudError>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
 
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteGatewayList>
-  , Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteGatewayList>,
+    Error = CloudError
+  >;
 
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
-  listBySubscription is ArmListBySubscription<ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteGatewayList>
-  , Error = CloudError>;
+  listBySubscription is ArmListBySubscription<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteGatewayList>,
+    Error = CloudError
+  >;
 
   /**
    * Creates a connection between an ExpressRoute gateway and an ExpressRoute circuit.
@@ -99,8 +122,9 @@ interface ExpressRouteGateways {
   expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
     ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
-    Request = ExpressRouteConnection
-,    OverrideErrorType = CloudError>;
+    Request = ExpressRouteConnection,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets the specified ExpressRouteConnection.
@@ -122,8 +146,9 @@ interface ExpressRouteGateways {
   @delete
   expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
     ExpressRouteGateway,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse
-,    OverrideErrorType = CloudError>;
+    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Lists ExpressRouteConnections.
