@@ -148,8 +148,8 @@ using Azure.Core;
 
 @@Azure.ResourceManager.identifiers(MhsmRegionsListResult.value, #["name"]);
 
-@@clientName(Azure.ResourceManager.CommonTypes.Resource,
-  "ArmResource",
+@@clientName(Azure.ResourceManager.CommonTypes.createdByType,
+  "IdentityType",
   "python"
 );
 @@clientName(VaultListResult, "ResourceListResult");
