@@ -1198,11 +1198,11 @@ interface Blob {
       @header("x-ms-snapshot")
       snapshot?: string;
 
-      ...EtagResponseHeader;
-      ...LastModifiedResponseHeader;
-      ...VersionIdResponseHeader;
-      ...DateResponseHeader;
-      ...RequestServerEncryptedResponseHeader;
+      ...EtagResponseHeaderPrivate;
+      ...LastModifiedResponseHeaderPrivate;
+      ...VersionIdResponseHeaderPrivate;
+      ...DateResponseHeaderPrivate;
+      ...RequestServerEncryptedResponseHeaderPrivate;
     }
   >;
 
