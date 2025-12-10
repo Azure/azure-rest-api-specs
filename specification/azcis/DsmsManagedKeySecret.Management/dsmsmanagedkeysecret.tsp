@@ -15,6 +15,7 @@ model DsmsManagedKeySecretResourceProperties {
   @doc("ARM resource id.")
   armResourceId: string; // Camel case for the parameter names.
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Managed Key subtype. Used to determine which way to store the secret in dSMS. Acceptable values (case sensitive): 'Password', 'ConnectionString'. Optional, 'Password' by default.")
   managedKeySubType: "Password" | "ConnectionString" | string;
 

@@ -89,6 +89,7 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
 alias enablementState =
   | "Enabled"
   | "InProgress"
@@ -184,6 +185,7 @@ model DesiredConfiguration {
   defenderCspm?: desiredEnablementState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
 alias desiredEnablementState = "Enable" | "Disable" | string;
 
 @doc("Configuration for the Change Tracking and Inventory service.")
