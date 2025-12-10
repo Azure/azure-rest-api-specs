@@ -46,5 +46,6 @@ directive:
     reason: Operations API is implemented as a separate service.
   - suppress: AvoidAdditionalProperties
     from: regionalMove.json
-    reason: Regional Move Containers allow updating resource properties during copy operations. These can be any arbitrary ARM resource properties.
+    where: $.definitions.RegionalMoveRequestedResource.properties.resourceOverrides
+    reason: Regional Move Containers allow overriding resource properties during copy operations. These can be any arbitrary ARM resource properties. We pass them through as-is to the RP.
 ```
