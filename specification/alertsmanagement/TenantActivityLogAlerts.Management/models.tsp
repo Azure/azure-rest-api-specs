@@ -26,7 +26,7 @@ model ManagementGroup<ParameterName extends valueof string = "managementGroupNam
 /**
  * An Azure Activity Log Alert rule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertRuleProperties {
   /**
    * The tenant GUID. Must be provided for tenant-level and management group events rules.
@@ -80,7 +80,7 @@ model AlertRuleAllOfCondition {
  *   _Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._
  *
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertRuleAnyOfOrLeafCondition extends AlertRuleLeafCondition {
   /**
    * An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.
@@ -134,13 +134,13 @@ model ActionGroup {
   /**
    * the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   webhookProperties?: Record<string>;
 
   /**
    * Predefined list of properties and configuration items for the action group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   actionProperties?: Record<string>;
 }
 
@@ -175,7 +175,7 @@ model AzureResource {
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -186,7 +186,7 @@ model TenantAlertRulePatchObject {
   /**
    * The resource tags
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**

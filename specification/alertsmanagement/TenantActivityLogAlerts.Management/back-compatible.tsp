@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TenantAlertRulePatchObject.properties);
 
 @@clientLocation(TenantActivityLogAlertResources.get,
@@ -30,5 +30,5 @@ using Microsoft.AlertsManagement;
 @@clientLocation(TenantActivityLogAlertResources.listByTenant,
   "TenantActivityLogAlerts"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TenantActivityLogAlertResource.properties);

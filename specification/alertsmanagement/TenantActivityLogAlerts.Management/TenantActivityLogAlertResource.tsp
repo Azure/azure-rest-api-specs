@@ -40,15 +40,11 @@ interface TenantActivityLogAlertResources {
   /**
    * Get Tenant Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TenantActivityLogAlerts_Get")
   get is Extension.Read<ManagementGroup, TenantActivityLogAlertResource>;
 
   /**
    * Create a new Tenant Activity Log Alert rule or update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TenantActivityLogAlerts_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     ManagementGroup,
     TenantActivityLogAlertResource
@@ -57,8 +53,6 @@ interface TenantActivityLogAlertResources {
   /**
    * Updates 'tags' and 'enabled' fields in an existing Tenant Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TenantActivityLogAlerts_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     ManagementGroup,
@@ -69,8 +63,6 @@ interface TenantActivityLogAlertResources {
   /**
    * Delete a Tenant Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TenantActivityLogAlerts_Delete")
   delete is Extension.DeleteSync<
     ManagementGroup,
     TenantActivityLogAlertResource
@@ -79,8 +71,6 @@ interface TenantActivityLogAlertResources {
   /**
    * Get a list of all Tenant Activity Log Alert rules in a management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TenantActivityLogAlerts_ListByManagementGroup")
   listByManagementGroup is Extension.ListByTarget<
     ManagementGroup,
     TenantActivityLogAlertResource,
