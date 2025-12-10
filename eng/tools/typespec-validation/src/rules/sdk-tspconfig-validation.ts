@@ -208,7 +208,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     if (option === undefined) {
       return {
         resolved: "",
-        error: `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        error: `Failed to find "options.${this.emitterName}.emitter-output-dir"`,
       };
     }
 
@@ -216,7 +216,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     if (typeof actualValue !== "string") {
       return {
         resolved: "",
-        error: `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
+        error: `The value of options.${this.emitterName}.emitter-output-dir "${actualValue}" must be a string`,
       };
     }
     // Handle various path formats with different prefixes
@@ -236,21 +236,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     }
 
     // Resolve variables in the extracted path
-    const { resolved, error } = this.resolveVariables(extractedPath, config);
-    if (error) {
-      return { resolved: extractedPath, error };
-    }
-
-    // Validate the resolved path
-    const isValid = this.validateValue(resolved, this.expectedValue);
-    if (!isValid) {
-      return {
-        resolved,
-        error: `Resolved path "${resolved}" does not match expected pattern`,
-      };
-    }
-
-    return { resolved };
+    return this.resolveVariables(extractedPath, config);
   }
 
   protected validate(config: any): RuleResult {
@@ -287,6 +273,14 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
       return this.createFailedResult(
         result.error,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
+      );
+    }
+
+    // Validate the resolved path
+    if (!this.validateValue(result.resolved, this.expectedValue)) {
+      return this.createFailedResult(
+        `The path part "${result.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        `Please update the emitter-output-dir path to follow the SDK naming convention`,
       );
     }
 
