@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "parameters": {
+      "Action": "FullUpdate",
+      "AddressLocations": [
+        {
+          "AddressLocation": "192.0.0.1",
+          "Addresses": [
+            {
+              "Address": "10.0.0.4",
+              "Services": [
+                "Service1"
+              ]
+            }
+          ],
+          "AddressUpdateAction": "FullUpdate"
+        },
+        {
+          "AddressLocation": "192.0.0.2",
+          "Addresses": [
+            {
+              "Address": "10.0.0.5",
+              "Services": [
+                "Service2"
+              ]
+            },
+            {
+              "Address": "10.0.0.6"
+            }
+          ],
+          "AddressUpdateAction": "PartialUpdate"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "OK"
+      }
+    }
+  }
+}
