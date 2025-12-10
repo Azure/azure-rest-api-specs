@@ -309,7 +309,8 @@
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "ArrayEncoding.commaDelimited"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -574,7 +575,8 @@
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "ArrayEncoding.commaDelimited"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1063,7 +1065,8 @@
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "ArrayEncoding.commaDelimited"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2877,7 +2880,8 @@
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "ArrayEncoding.commaDelimited"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3195,7 +3199,8 @@
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "ArrayEncoding.commaDelimited"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3850,10 +3855,14 @@
         "minimumCoverage": {
           "type": "number",
           "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
+          "default": 80,
+          "minimum": 0,
+          "maximum": 100
         },
         "searchFields": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
         },
         "suggesterName": {
@@ -4671,20 +4680,24 @@
         "batchSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The desired batch size which indicates number of documents."
+          "description": "The desired batch size which indicates number of documents.",
+          "x-nullable": true
         },
         "degreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "description": "If set, the number of parallel calls that can be made to the Web API."
+          "description": "If set, the number of parallel calls that can be made to the Web API.",
+          "x-nullable": true
         },
         "authResourceId": {
           "type": "string",
-          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token."
+          "description": "Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.",
+          "x-nullable": true
         },
         "authIdentity": {
           "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared."
+          "description": "The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.",
+          "x-nullable": true
         },
         "apiKey": {
           "type": "string",
@@ -6059,7 +6072,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "modelVersion": {
           "type": "string",
@@ -6094,7 +6108,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "modelVersion": {
           "type": "string",
@@ -6265,14 +6280,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The additional info type."
+          "description": "The additional info type.",
+          "readOnly": true
         },
         "info": {
           "type": "object",
           "description": "The additional info.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "additionalProperties": {},
+          "readOnly": true
         }
       }
     },
@@ -6282,29 +6297,34 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "The error code."
+          "description": "The error code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "target": {
           "type": "string",
-          "description": "The error target."
+          "description": "The error target.",
+          "readOnly": true
         },
         "details": {
           "type": "array",
           "description": "The error details.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "readOnly": true
         },
         "additionalInfo": {
           "type": "array",
           "description": "The error additional info.",
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -6547,21 +6567,24 @@
           "format": "int32",
           "description": "The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time.",
           "default": 4,
-          "x-nullable": true
+          "minimum": 4,
+          "maximum": 10
         },
         "efConstruction": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 400,
-          "x-nullable": true
+          "minimum": 100,
+          "maximum": 1000
         },
         "efSearch": {
           "type": "integer",
           "format": "int32",
           "description": "The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns.",
           "default": 500,
-          "x-nullable": true
+          "minimum": 100,
+          "maximum": 1000
         },
         "metric": {
           "$ref": "#/definitions/VectorSearchAlgorithmMetric",
@@ -8552,7 +8575,8 @@
           "items": {
             "$ref": "#/definitions/KnowledgeBaseErrorDetail"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "additionalInfo": {
           "type": "array",
@@ -8560,7 +8584,8 @@
           "items": {
             "$ref": "#/definitions/KnowledgeBaseErrorAdditionalInfo"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -12735,7 +12760,8 @@
           "type": "number",
           "format": "double",
           "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
+          "minimum": 0,
+          "maximum": 1
         },
         "maskingMode": {
           "$ref": "#/definitions/PIIDetectionSkillMaskingMode",
@@ -12744,7 +12770,7 @@
         "maskingCharacter": {
           "type": "string",
           "description": "The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'.",
-          "x-nullable": true
+          "maxLength": 1
         },
         "modelVersion": {
           "type": "string",
@@ -12853,6 +12879,8 @@
         },
         "flags": {
           "$ref": "#/definitions/RegexFlags",
+          "type": "string",
+          "format": "ArrayEncoding.pipeDelimited",
           "description": "Regular expression flags."
         },
         "stopwords": {
@@ -14550,7 +14578,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The dimensionality of the vector field.",
-          "x-nullable": true
+          "minimum": 2,
+          "maximum": 4096
         },
         "vectorSearchProfile": {
           "type": "string",
@@ -15699,6 +15728,7 @@
         },
         "highlight": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
         },
         "highlightPostTag": {
@@ -15712,10 +15742,14 @@
         "minimumCoverage": {
           "type": "number",
           "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100."
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100.",
+          "default": 100,
+          "minimum": 0,
+          "maximum": 100
         },
         "orderby": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "queryType": {
@@ -15751,6 +15785,7 @@
         },
         "searchFields": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
         },
         "searchMode": {
@@ -15767,6 +15802,7 @@
         },
         "select": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
         },
         "skip": {
@@ -15811,6 +15847,7 @@
         },
         "semanticFields": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of field names used for semantic ranking."
         },
         "vectorQueries": {
@@ -18007,10 +18044,14 @@
         "minimumCoverage": {
           "type": "number",
           "format": "double",
-          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80."
+          "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
+          "default": 80,
+          "minimum": 0,
+          "maximum": 100
         },
         "orderby": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "search": {
@@ -18019,10 +18060,12 @@
         },
         "searchFields": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
         },
         "select": {
           "type": "string",
+          "format": "ArrayEncoding.commaDelimited",
           "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
         },
         "suggesterName": {
@@ -18108,6 +18151,7 @@
         },
         "synonyms": {
           "type": "string",
+          "format": "ArrayEncoding.newlineDelimited",
           "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines."
         },
         "encryptionKey": {
@@ -19629,6 +19673,9 @@
           "x-nullable": true
         }
       },
+      "required": [
+        "modelVersion"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/SearchIndexerSkill"
@@ -20839,6 +20886,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "minimum": 700,
       "x-ms-parameter-location": "method",
       "x-nullable": true
     },

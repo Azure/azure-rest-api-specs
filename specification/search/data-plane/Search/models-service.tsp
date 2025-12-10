@@ -3865,7 +3865,9 @@ model SynonymMap {
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
   format: "solr";
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
+  @encode(ArrayEncoding.newlineDelimited)
   synonyms: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4005,11 +4007,10 @@ model SearchField {
   @doc("The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.")
   normalizer?: LexicalNormalizerName | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The dimensionality of the vector field.")
   @maxValue(4096)
   @minValue(2)
-  dimensions?: int32 | null;
+  dimensions?: int32;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field.")
@@ -4814,7 +4815,9 @@ model PatternAnalyzer extends LexicalAnalyzer {
   @doc("A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters.")
   pattern?: string = "\\W+";
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("Regular expression flags.")
+  @encode(ArrayEncoding.pipeDelimited)
   flags?: RegexFlags;
 
   @doc("A list of stopwords.")
@@ -5428,23 +5431,20 @@ model HnswAlgorithmConfiguration extends VectorSearchAlgorithmConfiguration {
 
 @doc("Contains the parameters specific to the HNSW algorithm.")
 model HnswParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The number of bi-directional links created for every new element during construction. Increasing this parameter value may improve recall and reduce retrieval times for datasets with high intrinsic dimensionality at the expense of increased memory consumption and longer indexing time.")
   @maxValue(10)
   @minValue(4)
-  m?: int32 | null = 4;
+  m?: int32 = 4;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The size of the dynamic list containing the nearest neighbors, which is used during index time. Increasing this parameter may improve index quality, at the expense of increased indexing time. At a certain point, increasing this parameter leads to diminishing returns.")
   @maxValue(1000)
   @minValue(100)
-  efConstruction?: int32 | null = 400;
+  efConstruction?: int32 = 400;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The size of the dynamic list containing the nearest neighbors, which is used during search time. Increasing this parameter may improve search results, at the expense of slower search. At a certain point, increasing this parameter leads to diminishing returns.")
   @maxValue(1000)
   @minValue(100)
-  efSearch?: int32 | null = 500;
+  efSearch?: int32 = 500;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The similarity metric to use for vector comparisons.")
@@ -6020,11 +6020,10 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6044,11 +6043,10 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6066,19 +6064,17 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   @minValue(0)
   @maxValue(1)
-  minimumPrecision?: float64 | null;
+  minimumPrecision?: float64;
 
   @doc("A parameter that provides various ways to mask the personal information detected in the input text. Default is 'none'.")
   maskingMode?: PIIDetectionSkillMaskingMode;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The character used to mask the text if the maskingMode parameter is set to replace. Default is '*'.")
   @maxLength(1)
-  maskingCharacter?: string | null;
+  maskingCharacter?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
@@ -6320,7 +6316,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 model VisionVectorizeSkill extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
-  modelVersion?: string | null;
+  modelVersion: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of skill.")
@@ -6464,17 +6460,21 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("The desired timeout for the request. Default is 30 seconds.")
   timeout?: duration;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The desired batch size which indicates number of documents.")
-  batchSize?: int32;
+  batchSize?: int32 | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("If set, the number of parallel calls that can be made to the Web API.")
-  degreeOfParallelism?: int32;
+  degreeOfParallelism?: int32 | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token.")
-  authResourceId?: string;
+  authResourceId?: string | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
-  authIdentity?: SearchIndexerDataIdentity;
+  authIdentity?: SearchIndexerDataIdentity | null;
 
   @doc("API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time.")
   apiKey?: string;

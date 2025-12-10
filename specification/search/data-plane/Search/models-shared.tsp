@@ -26,8 +26,10 @@ alias preferHeader = {
 };
 
 alias selectQuery = {
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.")
   @query
+  @encode(ArrayEncoding.commaDelimited)
   $select?: string;
 };
 
@@ -216,26 +218,34 @@ model ErrorResponse {
 @doc("The error detail.")
 model ErrorDetail {
   @doc("The error code.")
+  @visibility(Lifecycle.Read)
   code?: string;
 
   @doc("The error message.")
+  @visibility(Lifecycle.Read)
   message?: string;
 
   @doc("The error target.")
+  @visibility(Lifecycle.Read)
   target?: string;
 
   @doc("The error details.")
+  @visibility(Lifecycle.Read)
   details?: ErrorDetail[];
 
   @doc("The error additional info.")
+  @visibility(Lifecycle.Read)
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
 @doc("The resource management error additional info.")
 model ErrorAdditionalInfo {
   @doc("The additional info type.")
+  @visibility(Lifecycle.Read)
   type?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   @doc("The additional info.")
-  info?: Record<string>;
+  @visibility(Lifecycle.Read)
+  info?: Record<unknown>;
 }
