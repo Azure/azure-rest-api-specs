@@ -1,0 +1,8 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/azurestackhci/armazurestackhci
+      breaking-changes:
+        - "Type of `ArcSettingProperties.ConnectivityProperties` has been changed from `any` to `*ArcConnectivityProperties`"
+        - "Type of `ArcSettingsPatchProperties.ConnectivityProperties` has been changed from `any` to `*ArcConnectivityProperties`"
+        - "`StatusFailed`, `StatusInProgress`, `StatusSucceeded` from enum `Status` has been removed"
+        - "Operation `*OperationsClient.List` has supported pagination, use `*OperationsClient.NewListPager` instead."
