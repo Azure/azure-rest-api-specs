@@ -269,11 +269,11 @@ scalar AzureDeviceRegistryNamespaceID
     }
   ]>;
 
-@doc("Describes the current runtime health of the resource.")
+@doc("Represents the health state of a resource.")
 @added(Versions.`2025-12-01-preview`)
 model ResourceHealthStatus {
   @visibility(Lifecycle.Read)
-  @doc("The health state of the resource.")
+  @doc("The high-level health status of the resource.")
   status?: ResourceHealthState;
 
   @visibility(Lifecycle.Read)
