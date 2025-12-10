@@ -44,6 +44,7 @@ jobs:
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
+        github.event.label.name == 'ARMAutoSignedOff' ||
         github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
         github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
         github.event.label.name == 'ARMReview' ||
@@ -74,7 +75,7 @@ jobs:
       #   issueNumber: number
       # }
       - id: get-label-action
-        name: ARM Auto SignOff - Set Status
+        name: ARM Auto SignOff
         uses: actions/github-script@v7
         with:
           script: |

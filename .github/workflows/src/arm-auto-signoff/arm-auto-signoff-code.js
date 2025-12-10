@@ -1,4 +1,6 @@
 import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
+import incrementalTypeSpec from './arm-incremental-typespec.js';
+import checkTrivialChanges from './trivial-changes-check.js';
 
 /**
  * Main entry point for ARM Auto-SignOff Code workflow
@@ -12,8 +14,6 @@ import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
  * @returns {Promise<string>} JSON string containing combined results
  */
 export default async function armAutoSignOffCode({ github, context, core }) {
-  const { default: incrementalTypeSpec } = await import('./incremental-typespec.js');
-  const { default: checkTrivialChanges } = await import('./trivial-changes-check.js');
 
   core.info('Starting ARM Auto-SignOff Code analysis...');
 
