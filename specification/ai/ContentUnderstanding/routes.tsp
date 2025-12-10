@@ -64,6 +64,7 @@ interface ContentAnalyzers {
   @doc("Create a new analyzer asynchronously.")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
   @put
+  @finalOperation(ContentAnalyzers.get)
   @route("/analyzers/{analyzerId}")
   createOrReplace is Foundations.Operation<
     Foundations.ItemKeysOf<ContentAnalyzer> & {
