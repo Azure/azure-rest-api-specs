@@ -14,14 +14,28 @@ namespace Microsoft.Network;
  * FirewallPolicy Resource.
  */
 model FirewallPolicy
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FirewallPolicyPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<FirewallPolicyPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = FirewallPolicy,
     KeyName = "firewallPolicyName",
     SegmentName = "firewallPolicies",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * The identity of the firewall policy.

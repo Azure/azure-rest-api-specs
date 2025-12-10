@@ -6559,14 +6559,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/loadBalancers": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/NetworkInterfaceLoadBalancerListResult",
-                "__new": "#/definitions/LoadBalancerListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -18153,63 +18145,6 @@
       },
       "x-ms-identifiers": []
     },
-    "FirewallPolicySNAT__deleted": {
-      "type": "object",
-      "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
-      "properties": {
-        "privateRanges": {
-          "type": "array",
-          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "autoLearnPrivateRanges": {
-          "type": "string",
-          "description": "The operation mode for automatically learning private ranges to not be SNAT",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AutoLearnPrivateRangesMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "HTTPConfiguration__deleted": {
-      "type": "object",
-      "description": "HTTP configuration of the connectivity check.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "HTTP method.",
-          "enum": [
-            "Get"
-          ],
-          "x-ms-enum": {
-            "name": "HTTPMethod",
-            "modelAsString": true
-          }
-        },
-        "headers": {
-          "type": "array",
-          "description": "List of HTTP headers.",
-          "items": {
-            "$ref": "#/definitions/HTTPHeader"
-          }
-        },
-        "validStatusCodes": {
-          "type": "array",
-          "description": "Valid status codes.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      }
-    },
     "IpGroups__deleted": {
       "type": "array",
       "description": "List of IpGroups associated with azure firewall.",
@@ -18307,24 +18242,6 @@
         "resourceIdDimensionNameOverride": {
           "type": "string",
           "description": "The resource Id dimension name override."
-        }
-      }
-    },
-    "NetworkInterfaceLoadBalancerListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "./loadBalancer.json#/definitions/LoadBalancer"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
         }
       }
     },
@@ -18693,63 +18610,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Maximum number of scale units deployed for ExpressRoute gateway."
-        }
-      }
-    },
-    "FirewallPolicySnat__added": {
-      "type": "object",
-      "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
-      "properties": {
-        "privateRanges": {
-          "type": "array",
-          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "autoLearnPrivateRanges": {
-          "type": "string",
-          "description": "The operation mode for automatically learning private ranges to not be SNAT",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AutoLearnPrivateRangesMode",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "HttpConfiguration__added": {
-      "type": "object",
-      "description": "HTTP configuration of the connectivity check.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "HTTP method.",
-          "enum": [
-            "Get"
-          ],
-          "x-ms-enum": {
-            "name": "HttpMethod",
-            "modelAsString": true
-          }
-        },
-        "headers": {
-          "type": "array",
-          "description": "List of HTTP headers.",
-          "items": {
-            "$ref": "#/definitions/HTTPHeader"
-          }
-        },
-        "validStatusCodes": {
-          "type": "array",
-          "description": "Valid status codes.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
         }
       }
     },
@@ -23430,27 +23290,18 @@
       }
     },
     "FirewallPolicy": {
+      "required__added": [
+        "location",
+        "tags"
+      ],
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "Resource location."
         },
         "identity": {
           "$ref": {
@@ -23465,28 +23316,25 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
       ]
     },
     "FirewallPolicyDraft": {
+      "required__added": [
+        "location",
+        "tags"
+      ],
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         }
       },
       "allOf": [
@@ -23495,7 +23343,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -23525,12 +23373,6 @@
           "description": {
             "__old": "The operation mode for Threat Intelligence.",
             "__new": "The operation mode for Threat Intel."
-          }
-        },
-        "snat": {
-          "$ref": {
-            "__old": "#/definitions/FirewallPolicySNAT",
-            "__new": "#/definitions/FirewallPolicySnat"
           }
         }
       }
@@ -23629,19 +23471,12 @@
             "__old": "The operation mode for Threat Intelligence.",
             "__new": "The operation mode for Threat Intel."
           }
-        },
-        "snat": {
-          "$ref": {
-            "__old": "#/definitions/FirewallPolicySNAT",
-            "__new": "#/definitions/FirewallPolicySnat"
-          }
         }
       }
     },
     "FirewallPolicyRuleApplicationProtocol": {
       "properties": {
         "port": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false,
           "exclusiveMaximum__deleted": false
         }
@@ -23665,12 +23500,6 @@
           "type": "string",
           "description": "Rule Group type.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -23751,27 +23580,17 @@
       }
     },
     "FlowLog": {
+      "required__added": [
+        "tags"
+      ],
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "Resource location."
         },
         "identity": {
           "$ref": {
@@ -23786,18 +23605,11 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
       ]
-    },
-    "FlowLogFormatParameters": {
-      "properties": {
-        "version": {
-          "default__deleted": 0
-        }
-      }
     },
     "FlowLogInformation": {
       "properties": {
@@ -23850,16 +23662,7 @@
           "readOnly": true
         },
         "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
-        },
-        "zones": {
-          "description": {
-            "__old": "A list of availability zones denoting the IP allocated for the resource needs to come from.",
-            "__new": "The availability zones."
-          }
+          "readOnly__deleted": true
         }
       },
       "allOf": [
@@ -23986,19 +23789,6 @@
         }
       }
     },
-    "HopLinkProperties": {
-      "properties": {
-        "roundTripTimeMin": {
-          "minimum__deleted": 0
-        },
-        "roundTripTimeAvg": {
-          "minimum__deleted": 0
-        },
-        "roundTripTimeMax": {
-          "minimum__deleted": 0
-        }
-      }
-    },
     "HubIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAllocationMethod": {
@@ -24061,12 +23851,6 @@
           "type": "string",
           "description": "Ipconfiguration type.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -24091,12 +23875,6 @@
           "type": "string",
           "description": "Resource type.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -24255,7 +24033,6 @@
       "properties": {
         "privateIPAllocationMethod": {
           "$ref__deleted": "./network.json#/definitions/IPAllocationMethod",
-          "default__deleted": "Dynamic",
           "type__added": "string",
           "enum__added": [
             "Static",
@@ -24264,10 +24041,6 @@
           "x-ms-enum__added": {
             "name": "IPAllocationMethod",
             "modelAsString": true
-          },
-          "description": {
-            "__old": "The private IP address allocation method.",
-            "__new": "IP address allocation method."
           }
         },
         "subnet": {
@@ -24381,12 +24154,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -24458,12 +24225,6 @@
           "type": "string",
           "description": "NVA inbound security rule type.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -24507,9 +24268,6 @@
     },
     "InboundSecurityRules": {
       "properties": {
-        "destinationPortRange": {
-          "minimum__deleted": 0
-        },
         "destinationPortRanges": {
           "readOnly__deleted": false
         },
@@ -24519,7 +24277,6 @@
       }
     },
     "InternetIngressPublicIpsProperties": {
-      "title__deleted": "Internet Ingress Public Ip Properties",
       "properties": {
         "id": {
           "readOnly__deleted": false
@@ -24529,25 +24286,12 @@
     "IpAllocation": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -24556,7 +24300,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -24582,8 +24326,6 @@
           }
         },
         "prefixLength": {
-          "default__deleted": 0,
-          "x-nullable__deleted": true,
           "format__added": "int32"
         },
         "prefixType": {
@@ -24608,25 +24350,12 @@
     "IpGroup": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -24635,7 +24364,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -24694,7 +24423,7 @@
         "etag": {
           "description": {
             "__old": "String representing unique etag for the resource document.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
+            "__new": "A unique read-only string that changes whenever the resource is updated."
           }
         }
       },
@@ -24727,13 +24456,6 @@
             }
           },
           "$ref__added": "#/definitions/IpamPoolPrefixAllocationPool"
-        }
-      }
-    },
-    "IpamPoolProperties": {
-      "properties": {
-        "provisioningState": {
-          "readOnly__deleted": true
         }
       }
     },
@@ -24855,30 +24577,17 @@
     "LoadBalancer": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
             "__new": "#/definitions/ExtendedLocation"
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
           }
         }
       },
@@ -24888,7 +24597,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25000,12 +24709,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -25071,36 +24774,13 @@
       }
     },
     "LocalNetworkGateway": {
-      "properties": {
-        "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25166,30 +24846,17 @@
     "NatGateway": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "zones": {
           "description": {
             "__old": "A list of availability zones denoting the zone in which Nat Gateway should be deployed.",
             "__new": "The availability zones."
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
           }
         }
       },
@@ -25199,7 +24866,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25289,7 +24956,7 @@
         },
         "etag__added": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -25350,30 +25017,17 @@
     "NetworkInterface": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
             "__new": "#/definitions/ExtendedLocation"
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
           }
         }
       },
@@ -25383,7 +25037,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25410,12 +25064,6 @@
         "type__deleted": {
           "type": "string",
           "description": "Resource type."
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -25476,7 +25124,8 @@
           }
         },
         "privateIPAddressPrefixLength": {
-          "x-nullable__deleted": true
+          "minimum__deleted": 1,
+          "maximum__deleted": 128
         },
         "privateIPAllocationMethod": {
           "$ref__deleted": "./network.json#/definitions/IPAllocationMethod",
@@ -25556,6 +25205,21 @@
       "required__added": [
         "value"
       ]
+    },
+    "NetworkInterfaceLoadBalancerListResult": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "./loadBalancer.json#/definitions/LoadBalancer",
+              "__new": "#/definitions/LoadBalancer"
+            }
+          }
+        }
+      }
     },
     "NetworkInterfacePropertiesFormat": {
       "properties": {
@@ -27579,11 +27243,7 @@
     "ProtocolConfiguration": {
       "properties": {
         "HTTPConfiguration": {
-          "x-ms-client-name__added": "httpConfiguration",
-          "$ref": {
-            "__old": "#/definitions/HTTPConfiguration",
-            "__new": "#/definitions/HttpConfiguration"
-          }
+          "x-ms-client-name__added": "httpConfiguration"
         }
       }
     },

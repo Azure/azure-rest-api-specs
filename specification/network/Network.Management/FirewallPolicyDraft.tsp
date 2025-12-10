@@ -17,13 +17,23 @@ namespace Microsoft.Network;
 @singleton("default")
 @parentResource(FirewallPolicy)
 model FirewallPolicyDraft
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FirewallPolicyDraftProperties> {
+  is Azure.ResourceManager.ProxyResource<FirewallPolicyDraftProperties> {
   ...ResourceNameParameter<
     Resource = FirewallPolicyDraft,
     KeyName = "firewallPolicyDraft",
     SegmentName = "firewallPolicyDrafts",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location: string;
 }
 
 @armResourceOperations

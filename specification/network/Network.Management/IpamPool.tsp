@@ -23,7 +23,11 @@ model IpamPool
     SegmentName = "ipamPools",
     NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
@@ -36,14 +40,17 @@ interface IpamPools {
   /**
    * Creates/Updates the Pool resource.
    */
-  create is ArmResourceCreateOrReplaceAsync<IpamPool,
+  create is ArmResourceCreateOrReplaceAsync<
+    IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Updates the specific Pool resource.
@@ -65,19 +72,23 @@ interface IpamPools {
   /**
    * Delete the Pool resource.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<IpamPool,
+  delete is ArmResourceDeleteWithoutOkAsync<
+    IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
       @header
       `If-Match`?: string;
-    }, Error = CloudError>;
+    },
+    Error = CloudError
+  >;
 
   /**
    * Gets list of Pool resources at Network Manager level.
    */
-  list is ArmResourceListByParent<IpamPool,
+  list is ArmResourceListByParent<
+    IpamPool,
     Parameters = {
       /**
        * Optional skip token.
@@ -115,16 +126,23 @@ interface IpamPools {
   /**
    * Get the Pool Usage.
    */
-  getPoolUsage is ArmResourceActionSync<IpamPool, void, ArmResponse<PoolUsage>, Error = CloudError>;
+  getPoolUsage is ArmResourceActionSync<
+    IpamPool,
+    void,
+    ArmResponse<PoolUsage>,
+    Error = CloudError
+  >;
 
   /**
    * List Associated Resource in the Pool.
    */
   @list
-  listAssociatedResources is ArmResourceActionSync<IpamPool,
+  listAssociatedResources is ArmResourceActionSync<
+    IpamPool,
     void,
-    ArmResponse<PoolAssociationList>
-  , Error = CloudError>;
+    ArmResponse<PoolAssociationList>,
+    Error = CloudError
+  >;
 }
 
 @@doc(IpamPool.name, "Pool resource name.");

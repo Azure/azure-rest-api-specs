@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * A network interface in a resource group.
  */
 model NetworkInterface
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkInterfacePropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NetworkInterfacePropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NetworkInterface,
     KeyName = "networkInterfaceName",
@@ -28,7 +28,16 @@ model NetworkInterface
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -210,7 +219,7 @@ interface NetworkInterfaceOperationGroup {
   networkInterfaceLoadBalancersList is NetworkInterfaceOperationGroupOps.ActionSync<
     NetworkInterface,
     void,
-    ArmResponse<ResourceListResult<LoadBalancer>>
+    ArmResponse<NetworkInterfaceLoadBalancerListResult>
   >;
 }
 

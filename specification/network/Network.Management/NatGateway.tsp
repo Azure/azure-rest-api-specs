@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Nat Gateway resource.
  */
 model NatGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NatGatewayPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NatGatewayPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NatGateway,
     KeyName = "natGatewayName",
@@ -28,8 +28,21 @@ model NatGateway
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: NatGatewaySku;
 
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /**
+   * The availability zones.
+   */
+  zones?: string[];
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

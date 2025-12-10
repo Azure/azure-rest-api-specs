@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * A common class for general resource information.
  */
 model LocalNetworkGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+  is Azure.ResourceManager.ProxyResource<
     LocalNetworkGatewayPropertiesFormat,
     false
   > {
@@ -24,7 +24,11 @@ model LocalNetworkGateway
     SegmentName = "localNetworkGateways",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

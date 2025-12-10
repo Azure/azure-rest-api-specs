@@ -14,14 +14,24 @@ namespace Microsoft.Network;
  * IpAllocation resource.
  */
 model IpAllocation
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IpAllocationPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<IpAllocationPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = IpAllocation,
     KeyName = "ipAllocationName",
     SegmentName = "IpAllocations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

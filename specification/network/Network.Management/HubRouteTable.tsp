@@ -23,8 +23,12 @@ model HubRouteTable
     SegmentName = "hubRouteTables",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-}
+    
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+  }
 
 @armResourceOperations
 interface HubRouteTables {

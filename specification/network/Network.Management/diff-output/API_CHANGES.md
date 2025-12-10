@@ -669,11 +669,7 @@
 | `definitions.AzureFirewallAutoscaleConfiguration.properties.maxCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.FirewallPolicyRuleApplicationProtocol.properties.port.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeAvg.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeMax.minimum__deleted` | deleted | `0` |
-| `definitions.HopLinkProperties.properties.roundTripTimeMin.minimum__deleted` | deleted | `0` |
-| `definitions.InboundSecurityRules.properties.destinationPortRange.minimum__deleted` | deleted | `0` |
+| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength.minimum__deleted` | deleted | `1` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.minimum__deleted` | deleted | `0` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.minimum__deleted` | deleted | `0` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceAsn.minimum__deleted` | deleted | `0` |
@@ -697,6 +693,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength.maximum__deleted` | deleted | `128` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].maximum__added` | added | `20` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].maximum__added` | added | `20` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].maximum__added` | added | `20` |
@@ -845,8 +842,11 @@
 | `definitions.ExpressRouteProviderPort.required__added` | added | `["location"]` |
 | `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteServiceProviderListResult.required__added` | added | `["value"]` |
+| `definitions.FirewallPolicy.required__added` | added | `["location","tags"]` |
+| `definitions.FirewallPolicyDraft.required__added` | added | `["location","tags"]` |
 | `definitions.FirewallPolicyListResult.required__added` | added | `["value"]` |
 | `definitions.FirewallPolicyRuleCollectionGroupListResult.required__added` | added | `["value"]` |
+| `definitions.FlowLog.required__added` | added | `["tags"]` |
 | `definitions.FlowLogListResult.required__added` | added | `["value"]` |
 | `definitions.InboundNatRuleListResult.required__added` | added | `["value"]` |
 | `definitions.IpAllocationListResult.required__added` | added | `["value"]` |
@@ -882,6 +882,7 @@
 | `definitions.NetworkGroupListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkInterfaceIPConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkInterfaceListResult.required__added` | added | `["value"]` |
+| `definitions.NetworkInterfaceLoadBalancerListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkInterfaceTapConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkManagerConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.NetworkManagerListResult.required__added` | added | `["value"]` |
@@ -1399,10 +1400,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FlowLogFormatParameters.properties.version.default__deleted` | deleted | `0` |
-| `definitions.IpAllocationPropertiesFormat.properties.prefixLength.default__deleted` | deleted | `0` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixType.default__deleted` | deleted | `null` |
-| `definitions.IPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.default__deleted` | deleted | `Dynamic` |
 | `definitions.PacketCaptureParameters.properties.bytesToCapturePerPacket.default__deleted` | deleted | `0` |
 | `definitions.RetentionPolicyParameters.properties.days.default__deleted` | deleted | `0` |
 | `definitions.RetentionPolicyParameters.properties.enabled.default__deleted` | deleted | `false` |
@@ -1449,15 +1447,14 @@
 | `definitions.ExpressRoutePort.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
 | `definitions.ExpressRoutePortsLocation.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
 | `definitions.ExpressRouteProviderPort.properties.location__added` | added | `{"type":"string","description":"Resource tags."}` |
-| `definitions.FirewallPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.FirewallPolicyDraft.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.FlowLog.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.IpAllocation.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.IpGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.LoadBalancer.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.LocalNetworkGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NatGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkInterface.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.FirewallPolicy.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.FirewallPolicyDraft.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.FlowLog.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.IpAllocation.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.IpGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.LoadBalancer.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.NatGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.NetworkInterface.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.NetworkManager.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.NetworkProfile.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.NetworkSecurityGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
@@ -1599,18 +1596,6 @@
 |------|------------|-------|
 | `definitions.Filters__deleted` | deleted | `{"type":"array","description":"Describers the filters to filter response by","items":{"$ref":"#/defi...` |
 
-### Changes for `FirewallPolicySNAT`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FirewallPolicySNAT__deleted` | deleted | `{"type":"object","description":"The private IP addresses/IP ranges to which traffic will not be SNAT...` |
-
-### Changes for `HTTPConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HTTPConfiguration__deleted` | deleted | `{"type":"object","description":"HTTP configuration of the connectivity check.","properties":{"method...` |
-
 ### Changes for `IpGroups`
 
 | Path | Change Type | Value |
@@ -1634,12 +1619,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.MetricSpecification__deleted` | deleted | `{"type":"object","description":"Description of metrics specification.","properties":{"name":{"type":...` |
-
-### Changes for `NetworkInterfaceLoadBalancerListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NetworkInterfaceLoadBalancerListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `NspAccessRuleReconcile`
 
@@ -1761,18 +1740,6 @@
 |------|------------|-------|
 | `definitions.ExpressRouteGatewayPropertiesAutoScaleConfigurationBounds__added` | added | `{"type":"object","description":"Minimum and maximum number of scale units to deploy.","properties":{...` |
 
-### Changes for `FirewallPolicySnat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FirewallPolicySnat__added` | added | `{"type":"object","description":"The private IP addresses/IP ranges to which traffic will not be SNAT...` |
-
-### Changes for `HttpConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HttpConfiguration__added` | added | `{"type":"object","description":"HTTP configuration of the connectivity check.","properties":{"method...` |
-
 ### Changes for `IpamPoolPrefixAllocationPool`
 
 | Path | Change Type | Value |
@@ -1884,7 +1851,7 @@
 | `definitions.BaseAdminRule.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.ConnectivityConfiguration.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.ExpressRouteCircuit.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
-| `definitions.NetworkGroup.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
+| `definitions.NetworkGroup.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.NetworkManagerRoutingConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.RoutingRule.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.RoutingRuleCollection.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
@@ -1912,15 +1879,14 @@
 | `definitions.ExpressRouteGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.ExpressRoutePort.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.ExpressRoutePortsLocation.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
-| `definitions.FirewallPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.FirewallPolicyDraft.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.FlowLog.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.IpAllocation.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.IpGroup.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.LoadBalancer.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.LocalNetworkGateway.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NatGateway.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkInterface.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.FirewallPolicy.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.FirewallPolicyDraft.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.FlowLog.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.IpAllocation.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.IpGroup.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.LoadBalancer.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NatGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkInterface.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.NetworkManager.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.NetworkProfile.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.NetworkSecurityGroup.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
@@ -2426,8 +2392,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ApplicationGatewayFirewallDisabledRuleGroup.properties.rules.items['x-nullable__deleted']` | deleted | `false` |
-| `definitions.IpAllocationPropertiesFormat.properties.prefixLength['x-nullable__deleted']` | deleted | `true` |
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength['x-nullable__deleted']` | deleted | `true` |
 
 ### Changes for `allOf`
 
@@ -2475,11 +2439,11 @@
 | `definitions.ExpressRoutePortPropertiesFormat.properties.links.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyDraftProperties.properties.basePolicy.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.basePolicy.readOnly__deleted` | deleted | `false` |
+| `definitions.FrontendIPConfiguration.properties.etag.readOnly__deleted` | deleted | `true` |
 | `definitions.InboundSecurityRuleProperties.properties.rules.readOnly__deleted` | deleted | `false` |
 | `definitions.InboundSecurityRules.properties.appliesOn.readOnly__deleted` | deleted | `false` |
 | `definitions.InboundSecurityRules.properties.destinationPortRanges.readOnly__deleted` | deleted | `false` |
 | `definitions.InternetIngressPublicIpsProperties.properties.id.readOnly__deleted` | deleted | `false` |
-| `definitions.IpamPoolProperties.properties.provisioningState.readOnly__deleted` | deleted | `true` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.loadBalancerFrontendIPConfiguration.readOnly__deleted` | deleted | `false` |
 | `definitions.NetworkManagerConnectionProperties.properties.connectionState.readOnly__added` | added | `true` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.readOnly__deleted` | deleted | `false` |
@@ -2547,23 +2511,22 @@
 |------|------------|-------|
 | `definitions.DefaultAdminRule.properties.kind__added` | added | `{"type":"string","description":"Whether the rule is custom or default.","enum":["Default"],"x-ms-enu...` |
 
+### Changes for `x-ms-azure-resource`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.ipAddress['x-ms-azure-resource__deleted']` | deleted | `false` |
+
 ### Changes for `title`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InternetIngressPublicIpsProperties.title__deleted` | deleted | `Internet Ingress Public Ip Properties` |
 | `definitions.NetworkVirtualApplianceSku.title__deleted` | deleted | `Available NetworkVirtualApplianceSkus` |
 | `definitions.NetworkVirtualApplianceSkuInstances.title__deleted` | deleted | `Network Virtual Appliance Sku Instances` |
 | `definitions.NetworkVirtualApplianceSkuPropertiesFormat.title__deleted` | deleted | `Network Virtual Appliance Sku Properties` |
 | `definitions.NvaInVnetSubnetReferenceProperties.title__deleted` | deleted | `Subnet references where the NVA NICS will be deployed` |
 | `definitions.VirtualApplianceAdditionalNicProperties.title__deleted` | deleted | `Network Virtual Appliance Additional Nic Properties` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
-
-### Changes for `x-ms-azure-resource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.ipAddress['x-ms-azure-resource__deleted']` | deleted | `false` |
 
 ### Changes for `x-ms-client-flatten`
 
@@ -2855,12 +2818,10 @@
 | `definitions.ExpressRouteProviderPort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.ExpressRouteServiceProvider.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route service provider resource.` | `Provisioning states of a resource.` |
-| `definitions.FirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.FirewallPolicy.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.FirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.FirewallPolicy.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
-| `definitions.FirewallPolicyDraft.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
+| `definitions.FirewallPolicyDraft.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.FirewallPolicyDraftProperties.properties.basePolicy.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.FirewallPolicyDraftProperties.properties.snat.$ref` | `#/definitions/FirewallPolicySNAT` | `#/definitions/FirewallPolicySnat` |
 | `definitions.FirewallPolicyDraftProperties.properties.threatIntelMode.description` | `The operation mode for Threat Intelligence.` | `The operation mode for Threat Intel.` |
 | `definitions.FirewallPolicyLogAnalyticsResources.properties.defaultWorkspaceId.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FirewallPolicyLogAnalyticsWorkspace.properties.workspaceId.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2869,20 +2830,15 @@
 | `definitions.FirewallPolicyPropertiesFormat.properties.firewalls.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the firewall policy resource.` | `Provisioning states of a resource.` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.ruleCollectionGroups.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.FirewallPolicyPropertiesFormat.properties.snat.$ref` | `#/definitions/FirewallPolicySNAT` | `#/definitions/FirewallPolicySnat` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.threatIntelMode.description` | `The operation mode for Threat Intelligence.` | `The operation mode for Threat Intel.` |
 | `definitions.FirewallPolicyRuleCollectionGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.FirewallPolicyRuleCollectionGroup.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.FirewallPolicyRuleCollectionGroupDraft.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.FirewallPolicyRuleCollectionGroupProperties.properties.provisioningState.description` | `The provisioning state of the firewall policy rule collection group resource.` | `Provisioning states of a resource.` |
-| `definitions.FlowLog.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.FlowLog.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.FlowLog.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.FlowLog.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.FlowLogInformation.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.FlowLogPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the flow log.` | `Provisioning states of a resource.` |
 | `definitions.FrontendIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.FrontendIPConfiguration.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
-| `definitions.FrontendIPConfiguration.properties.zones.description` | `A list of availability zones denoting the IP allocated for the resource needs to come from.` | `The availability zones.` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.gatewayLoadBalancer.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatPools.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2895,13 +2851,11 @@
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.publicIPPrefix.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
 | `definitions.HubIpConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.HubIpConfiguration.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.description` | `The private IP address allocation method.` | `IP address allocation method.` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the IP configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `#/definitions/PublicIPAddress` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
 | `definitions.HubRouteTable.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.HubRouteTable.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.HubRouteTableProperties.properties.provisioningState.description` | `The provisioning state of the RouteTable resource.` | `Provisioning states of a resource.` |
 | `definitions.HubVirtualNetworkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.description` | `The provisioning state of the hub virtual network connection resource.` | `Provisioning states of a resource.` |
@@ -2911,37 +2865,31 @@
 | `definitions.InboundNatPoolPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the inbound NAT pool resource.` | `Provisioning states of a resource.` |
 | `definitions.InboundNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.InboundNatRule.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.InboundNatRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatRulePropertiesFormat.properties.backendIPConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.InboundNatRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the inbound NAT rule resource.` | `Provisioning states of a resource.` |
 | `definitions.InboundSecurityRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.InboundSecurityRule.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.InboundSecurityRuleProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `Provisioning states of a resource.` |
-| `definitions.IpAllocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.IpAllocation.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.IpAllocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixType.description` | `The address prefix Type for the IpAllocation.` | `IP address version.` |
 | `definitions.IpAllocationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IpAllocationPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IpamPool.allOf[0].$ref` | `./network.json#/definitions/CommonTrackedResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
-| `definitions.IpamPool.properties.etag.description` | `String representing unique etag for the resource document.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.IpamPool.properties.etag.description` | `String representing unique etag for the resource document.` | `A unique read-only string that changes whenever the resource is updated.` |
 | `definitions.IPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IPConfigurationProfile.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IPConfigurationProfilePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the IP configuration profile resource.` | `Provisioning states of a resource.` |
 | `definitions.IPConfigurationProfilePropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
-| `definitions.IPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.description` | `The private IP address allocation method.` | `IP address allocation method.` |
 | `definitions.IPConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the IP configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.IPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `#/definitions/PublicIPAddress` |
 | `definitions.IPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
-| `definitions.IpGroup.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.IpGroup.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.IpGroup.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.IpGroupPropertiesFormat.properties.firewallPolicies.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IpGroupPropertiesFormat.properties.firewalls.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.IpGroupPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the IpGroups resource.` | `Provisioning states of a resource.` |
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.LoadBalancer.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.LoadBalancer.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.LoadBalancer.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.LoadBalancer.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.loadBalancerFrontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.networkInterfaceIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2950,18 +2898,15 @@
 | `definitions.LoadBalancerPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the load balancer resource.` | `Provisioning states of a resource.` |
 | `definitions.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.LoadBalancingRule.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPools.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.probe.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the load balancing rule resource.` | `Provisioning states of a resource.` |
-| `definitions.LocalNetworkGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.LocalNetworkGateway.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.LocalNetworkGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.LocalNetworkGatewayPropertiesFormat.properties.localNetworkAddressSpace.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `#/definitions/AddressSpace` |
 | `definitions.LocalNetworkGatewayPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the local network gateway resource.` | `Provisioning states of a resource.` |
-| `definitions.NatGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NatGateway.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NatGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NatGateway.properties.zones.description` | `A list of availability zones denoting the zone in which Nat Gateway should be deployed.` | `The availability zones.` |
 | `definitions.NatGatewayPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the NAT gateway resource.` | `Provisioning states of a resource.` |
 | `definitions.NatGatewayPropertiesFormat.properties.publicIpAddresses.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2973,12 +2918,10 @@
 | `definitions.NetworkGroup.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkGroupProperties.properties.provisioningState.description` | `The provisioning state of the scope assignment resource.` | `Provisioning states of a resource.` |
 | `definitions.NetworkIntentPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkInterface.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkInterface.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkInterface.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkInterface.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
 | `definitions.NetworkInterfaceAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `#/definitions/SecurityRule` |
 | `definitions.NetworkInterfaceIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.NetworkInterfaceIPConfiguration.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.applicationGatewayBackendAddressPools.items.$ref` | `./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool` | `#/definitions/ApplicationGatewayBackendAddressPool` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.applicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.gatewayLoadBalancer.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2990,6 +2933,7 @@
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `#/definitions/PublicIPAddress` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.virtualNetworkTaps.items.$ref` | `./virtualNetworkTap.json#/definitions/VirtualNetworkTap` | `#/definitions/VirtualNetworkTap` |
+| `definitions.NetworkInterfaceLoadBalancerListResult.properties.value.items.$ref` | `./loadBalancer.json#/definitions/LoadBalancer` | `#/definitions/LoadBalancer` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.dscpConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.networkSecurityGroup.$ref` | `./networkSecurityGroup.json#/definitions/NetworkSecurityGroup` | `#/definitions/NetworkSecurityGroup` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.privateEndpoint.$ref` | `./privateEndpoint.json#/definitions/PrivateEndpoint` | `#/definitions/PrivateEndpoint` |
@@ -3102,7 +3046,6 @@
 | `definitions.ProbePropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ProbePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the probe resource.` | `Provisioning states of a resource.` |
 | `definitions.PropagatedRouteTable.properties.ids.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.ProtocolConfiguration.properties.HTTPConfiguration.$ref` | `#/definitions/HTTPConfiguration` | `#/definitions/HttpConfiguration` |
 | `definitions.PublicIPAddress.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
 | `definitions.PublicIPAddress.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.PublicIPAddress.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
@@ -3705,7 +3648,6 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/ipConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/loadBalancers'].get.responses.200.schema.$ref` | `#/definitions/NetworkInterfaceLoadBalancerListResult` | `#/definitions/LoadBalancerListResult` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/loadBalancers'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations/{tapConfigurationName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |

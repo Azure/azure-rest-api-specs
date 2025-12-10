@@ -7583,7 +7583,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
    */
   @maxValue(128)
   @minValue(1)
-  privateIPAddressPrefixLength?: int32;
+  privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The private IP address allocation method.
@@ -8678,7 +8678,7 @@ model FlowLogFormatParameters {
   /**
    * The version (revision) of the flow log.
    */
-  version?: int32;
+  version?: int32 = 0;
 }
 
 /**
@@ -8953,7 +8953,7 @@ model IPConfigurationPropertiesFormat {
   /**
    * The private IP address allocation method.
    */
-  privateIPAllocationMethod?: IPAllocationMethod;
+  privateIPAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Dynamic;
 
   /**
    * The reference to the subnet resource.
@@ -15004,6 +15004,7 @@ model IpamPoolProperties {
   /**
    * Provisioning states of a resource.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -15356,7 +15357,7 @@ model IpAllocationPropertiesFormat {
   /**
    * The address prefix length for the IpAllocation.
    */
-  prefixLength?: int32;
+  prefixLength?: int32 | null = 0;
 
   /**
    * The address prefix Type for the IpAllocation.
@@ -18077,6 +18078,7 @@ model VirtualApplianceAdditionalNicProperties {
 /**
  * Resource Uri of Public Ip for Standard Load Balancer Frontend End.
  */
+@summary("Internet Ingress Public Ip Properties")
 model InternetIngressPublicIpsProperties {
   /**
    * Resource Uri of Public Ip
@@ -18346,6 +18348,7 @@ model InboundSecurityRules {
   /**
    * NVA port ranges to be opened up. One needs to provide specific ports.
    */
+  @minValue(0)
   @maxValue(65535)
   destinationPortRange?: int32;
 
@@ -19407,6 +19410,7 @@ model HopLinkProperties {
    * Minimum roundtrip time in milliseconds.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(4294967295)
   roundTripTimeMin?: int64;
 
@@ -19414,6 +19418,7 @@ model HopLinkProperties {
    * Average roundtrip time in milliseconds.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(4294967295)
   roundTripTimeAvg?: int64;
 
@@ -19421,6 +19426,7 @@ model HopLinkProperties {
    * Maximum roundtrip time in milliseconds.
    */
   @visibility(Lifecycle.Read)
+  @minValue(0)
   @maxValue(4294967295)
   roundTripTimeMax?: int64;
 }
@@ -26469,6 +26475,7 @@ model FirewallPolicyRuleApplicationProtocol {
   /**
    * Port number for the protocol, cannot be greater than 64000.
    */
+  @minValue(0)
   @maxValue(64000)
   port?: int32;
 }
@@ -27080,3 +27087,8 @@ model ExpressRoutePortsLocationListResult
 @@Azure.ClientGenerator.Core.clientName(ConnectivityGroupItem,
   "connectivityGroupItem"
 );
+@@Azure.ClientGenerator.Core.clientName(FirewallPolicySnat,
+  "FirewallPolicySNAT"
+);
+@@Azure.ClientGenerator.Core.clientName(HttpConfiguration, "HTTPConfiguration");
+@@Azure.ClientGenerator.Core.clientName(HttpMethod, "HTTPMethod");

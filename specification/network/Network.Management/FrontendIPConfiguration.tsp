@@ -23,8 +23,16 @@ model FrontendIPConfiguration
     SegmentName = "frontendIPConfigurations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
+  
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
+
+  /**
+   * A list of availability zones denoting the IP allocated for the resource needs to come from.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  zones?: string[];
 }
 
 @armResourceOperations

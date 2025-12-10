@@ -14,13 +14,24 @@ namespace Microsoft.Network;
  * LoadBalancer resource.
  */
 model LoadBalancer
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<LoadBalancerPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<LoadBalancerPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = LoadBalancer,
     KeyName = "loadBalancerName",
     SegmentName = "loadBalancers",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * The extended location of the load balancer.
@@ -33,8 +44,6 @@ model LoadBalancer
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: LoadBalancerSku;
-
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
 alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperations<

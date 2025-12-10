@@ -13,15 +13,24 @@ namespace Microsoft.Network;
 /**
  * The IpGroups resource information.
  */
-model IpGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<IpGroupPropertiesFormat> {
+model IpGroup is Azure.ResourceManager.ProxyResource<IpGroupPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = IpGroup,
     KeyName = "ipGroupsName",
     SegmentName = "ipGroups",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

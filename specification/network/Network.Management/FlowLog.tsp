@@ -15,15 +15,28 @@ namespace Microsoft.Network;
  * A flow log resource.
  */
 @parentResource(NetworkWatcher)
-model FlowLog
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FlowLogPropertiesFormat> {
+model FlowLog is Azure.ResourceManager.ProxyResource<FlowLogPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = FlowLog,
     KeyName = "flowLogName",
     SegmentName = "flowLogs",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags: TagsObject;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * FlowLog resource Managed Identity
