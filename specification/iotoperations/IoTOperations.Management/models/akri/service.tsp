@@ -47,5 +47,7 @@ model AkriServiceProperties {
 /** AkriService status. */
 @added(Versions.`2025-12-01-preview`)
 model AkriServiceStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the AkriService. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

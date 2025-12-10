@@ -52,6 +52,7 @@ model DataflowProfileProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: DataflowProfileStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -63,5 +64,7 @@ model ProfileDiagnostics {
 /** DataflowProfile status. */
 @added(Versions.`2025-12-01-preview`)
 model DataflowProfileStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the DataflowProfile. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

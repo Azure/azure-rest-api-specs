@@ -69,6 +69,7 @@ model BrokerProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: BrokerStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -624,8 +625,10 @@ union SubscriberMessageDropStrategy {
   DropOldest: "DropOldest",
 }
 
-/** AkriConnector status. */
+/** BrokerStatus status. */
 @added(Versions.`2025-12-01-preview`)
 model BrokerStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the Broker. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

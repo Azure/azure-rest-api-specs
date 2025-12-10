@@ -56,6 +56,7 @@ model DataflowProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: DataflowStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -317,8 +318,10 @@ model DataflowSourceOperationSettings {
   dataSources: NonEmptyString[];
 }
 
-/** Dataflow status. */
+/** DataflowStatus status. */
 @added(Versions.`2025-12-01-preview`)
 model DataflowStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the Dataflow. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

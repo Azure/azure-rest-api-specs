@@ -47,6 +47,7 @@ model AkriConnectorProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: AkriConnectorStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -65,5 +66,7 @@ model AkriConnectorAllocatedDevice {
 /** AkriConnector status. */
 @added(Versions.`2025-12-01-preview`)
 model AkriConnectorStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the AkriConnector. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

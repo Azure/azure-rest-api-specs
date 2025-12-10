@@ -55,6 +55,7 @@ model DataflowGraphProperties {
   @added(Versions.`2025-12-01-preview`)
   status?: DataflowGraphStatus;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -305,5 +306,7 @@ model DataflowGraphConnectionOutput {
 /** DataflowGraph status. */
 @added(Versions.`2025-12-01-preview`)
 model DataflowGraphStatus {
-  ...ResourceHealthStatus;
+  /** The health state of the DataflowGraph. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }
