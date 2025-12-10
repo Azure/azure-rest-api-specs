@@ -305,7 +305,7 @@ Step 2: Identify API spec status
 **Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
 **Actions**:
 1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of  https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
-2. If already merged, follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate the SDK
+2. If already merged, follow the steps in [typespec to sdk](../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK
 3. If no, proceed to Step 3 to review and commit changes
 **Success Criteria**: User decision on spec readiness obtained
 
@@ -354,11 +354,11 @@ Step 5: Create Specification Pull Request
     - Display created PR details
 **Success Criteria**: Specification pull request exists
 
-Follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate the SDK.
+Follow the steps in [typespec to sdk](../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK.
 
 # Release readiness of SDK and information about the release pipeline
 
-Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+Run [check package readiness](../eng/common/instructions/azsdk-tools/check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
 ## SDK customizations in TypeSpec projects
 
