@@ -172,12 +172,15 @@ model ResourceOperationError {
 
 @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
 @doc("Describes the fallback operation that was performed")
-model FallbackOperation {
+model FallbackOperationInfo {
   @doc("The last operation type that was performed as a fallback")
-  lastOpType?: ResourceOperationType;
+  lastOpType: ResourceOperationType;
 
   @doc("The status of the fallback operation")
-  status?: string;
+  status: string;
+
+  @doc("The error code if the fallback operation failed")
+  error?: ResourceOperationError;
 }
 
 @doc("The details of a response from an operation on a resource")
@@ -217,7 +220,7 @@ model ResourceOperationDetails {
 
   @added(Microsoft.ComputeSchedule.Versions.`2026-01-01-preview`)
   @doc("Fallback operation details if a fallback was performed")
-  fallbackOperation?: FallbackOperation;
+  fallbackOperationInfo?: FallbackOperationInfo;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Time the operation was complete if errors are null")
