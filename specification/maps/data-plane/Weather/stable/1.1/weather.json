@@ -2512,7 +2512,7 @@
         "name": {
           "x-ms-client-name": "description",
           "type": "string",
-          "description": "**For pollen:**\nReturns the name of the pollen, such as tree, grass, ragweed, or mold.\n\n**For pollutants:**\nWhen the `name` property is `AirQuality`, the name of the pollutant is returned in the `type` property.\nValid pollutants include: PM2.5, PM10, O3, NO2, SO2, and CO.\n\n**For UV Index:**\nWhen the `name` property is `UVIndex`, the UV index is returned in the `value` property. Valid UV Index values range from 0 to 11+ and represent the intensity of ultraviolet radiation.\nUV Index values are categorized as follows:\n<ul><li><B>0-2</B>: Low</li><li><B>3-5</B>: Moderate</li><li><B>6-7</B>: High</li><li><B>8-10</B>: Very High</li></ul>"
+          "description": "**For pollen:**\nReturns the name of the pollen, such as tree, grass, ragweed, or mold.\n\n**For pollutants:**\nWhen the `name` property is `AirQuality`, the name of the pollutant is returned in the `type` property.\nValid pollutants include: PM2.5, PM10, O3, NO2, SO2, and CO.\n\n**For UV Index:**\nWhen the `name` property is `UVIndex`, the UV index is returned in the `value` property. Valid UV Index values range from 0 to 11+ and represent the intensity of ultraviolet radiation.\nUV Index values are categorized as follows:\n<ul><li><B>0-2</B>: Low</li><li><B>3-5</B>: Moderate</li><li><B>6-7</B>: High</li><li><B>8-10</B>: Very High</li><li><B>11+</B>: Extreme</li></ul>"
         },
         "value": {
           "type": "integer",
@@ -2526,7 +2526,7 @@
         "categoryValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Provides a numerical representation of the air quality or pollen level. This value corresponds to the qualitative `category` property, offering a precise way to quantify the air quality or pollen level."
+          "description": "Provides a numerical representation of the air quality or pollen level. This value corresponds to the qualitative `category` property, offering a precise way to quantify the air quality or pollen level. These values range from 1 to 6, with 1 implying good conditions and 6 implying hazardous conditions."
         },
         "type": {
           "x-ms-client-name": "airQualityType",
@@ -2551,7 +2551,7 @@
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherUnitRange",
-          "description": "Provides RealFeel™ Temperature values for the specified day, measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in the request. This metric, developed by AccuWeather, incorporates over a dozen factors, including humidity, wind speed, cloud cover, and sun intensity, to offer a comprehensive measure of how the weather actually feels.\n\nFor more information, see [What is the AccuWeather RealFeel Temperature?](https://www.accuweather.com/en/weather-news/what-is-the-accuweather-realfeel-temperature/156655)"
+          "description": "Provides RealFeel™ Temperature values for the specified day, measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in the request. This metric, developed by AccuWeather, incorporates over a dozen factors, including humidity, wind speed, cloud cover, and sun intensity, to offer a comprehensive measure of how the weather actually feels."
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherUnitRange",
@@ -3145,7 +3145,7 @@
         "category": {
           "x-ms-client-name": "categoryDescription",
           "type": "string",
-          "description": "Provides a qualitative assessment of the index, describing the `categoryValue` property. Categories vary among indices and may include values such as Excellent, Good, Fair, Poor, and Very Poor."
+          "description": "Provides a qualitative assessment of the index, describing the `categoryValue` property. Categories vary among indices and may include values such as Excellent, Very Good, Good, Fair, and Poor."
         },
         "categoryValue": {
           "type": "integer",
@@ -3798,7 +3798,7 @@
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of precipitation accumulated over the specified day, measured in centimeters (cm) or inches (in), depending on the unit specified in the request."
+          "description": "The amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), depending on the unit specified in the request."
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherUnit",
@@ -3842,7 +3842,7 @@
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnitYearMax",
-          "description": "The amount of precipitation accumulated over the specified day, measured in centimeters (cm) or inches (in), based on the specified unit in the request."
+          "description": "The amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), based on the specified unit in the request."
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherUnitYearMax",
@@ -3886,7 +3886,7 @@
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Provides the amount of precipitation accumulated over the specified day, measured in centimeters (cm) or inches (in), based on the specified unit in the request."
+          "description": "Provides the amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), based on the specified unit in the request."
         }
       }
     },
