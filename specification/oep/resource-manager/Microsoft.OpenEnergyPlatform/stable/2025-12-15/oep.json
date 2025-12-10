@@ -1232,49 +1232,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/scheduledUpgradeAfter": {
-      "get": {
-        "tags": [
-          "UpgradeWindow"
-        ],
-        "description": "Gets the 30-day window end date for a milestone testing period.",
-        "operationId": "ScheduledUpgradeAfter_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/UpgradeWindow"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpgradeWindow_Get_MaximumSet_Gen": {
-            "$ref": "./examples/UpgradeWindow_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/readyForUpgrade": {
       "post": {
         "tags": [
-          "UpgradeWindow"
+          "ReadyForUpgrade"
         ],
         "description": "Marks an ADME resource as ready for upgrade during a milestone testing period.",
         "operationId": "EnergyServices_ReadyForUpgrade",
@@ -2089,21 +2050,15 @@
         },
         "readyForUpgrade": {
           "type": "boolean",
-          "description": "Indicates whether the service is ready for upgrade."
+          "description": "Indicates whether the instance is ready for upgrade."
+        },
+        "autoUpgradeAfterDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The date after which the instance will be automatically upgraded if it is marked as ready for upgrade.",
+          "readOnly": true
         }
       }
-    },
-    "UpgradeWindow": {
-      "description": "The 30-day testing window end date response.",
-      "type": "object",
-      "properties": {
-        "upgradeAfterDate": {
-          "description": "The end date of the 30-day testing window in ISO 8601 format.",
-          "type": "string",
-          "format": "date"
-        }
-      },
-      "x-ms-azure-resource": false
     }
   },
   "securityDefinitions": {
