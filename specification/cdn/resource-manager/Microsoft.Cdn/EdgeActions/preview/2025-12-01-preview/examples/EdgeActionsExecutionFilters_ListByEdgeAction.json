@@ -1,0 +1,44 @@
+{
+  "operationId": "EdgeActionExecutionFilters_ListByEdgeAction",
+  "title": "ListEdgeActionsExecutionFilters_byEdgeAction",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/executionFilters/executionFilters1",
+            "name": "executionFilter1",
+            "type": "Microsoft.Cdn/edgeActions/executionFilters",
+            "location": "global",
+            "properties": {
+              "versionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/Microsoft.Cdn/EdgeActions/edgeAction1/versions/version1",
+              "executionFilterIdentifierHeaderName": "header-key",
+              "executionFilterIdentifierHeaderValue": "header-value",
+              "provisioningState": "Succeeded",
+              "lastUpdateTime": "2024-04-25T15:19:23Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/executionFilters/executionFilters2",
+            "name": "executionFilter2",
+            "type": "Microsoft.Cdn/edgeActions/executionFilters",
+            "location": "global",
+            "properties": {
+              "versionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/Microsoft.Cdn/EdgeActions/edgeAction1/versions/version2",
+              "executionFilterIdentifierHeaderName": "header-key2",
+              "executionFilterIdentifierHeaderValue": "header-value2",
+              "provisioningState": "Succeeded",
+              "lastUpdateTime": "2024-04-25T15:19:23Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
