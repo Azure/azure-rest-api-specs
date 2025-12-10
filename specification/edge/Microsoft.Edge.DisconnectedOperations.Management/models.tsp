@@ -352,10 +352,10 @@ model HardwareSettingProperties {
   totalCores: int32;
 
   @doc("The disk space in GB")
-  diskSpaceInGB: int32;
+  diskSpaceInGb: int32;
 
   @doc("The memory in GB")
-  memoryInGB: int32;
+  memoryInGb: int32;
 
   @doc("The OEM")
   oem: string;
