@@ -110,8 +110,8 @@ interface MonitorResources {
   @list
   listMonitoredComputeResources is ArmResourceActionSync<
     MonitorResource,
-    ManagedComputeResourcesRequest,
-    ArmResponse<ManagedComputeResourceListResponse>,
+    MonitoredComputeResourcesRequest,
+    ArmResponse<MonitoredComputeResourceListResponse>,
     OptionalRequestBody = true
   >;
 

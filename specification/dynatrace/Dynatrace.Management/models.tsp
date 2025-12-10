@@ -601,13 +601,13 @@ model VMExtensionPayload {
 }
 
 /**
- * Resource types for managed compute resources.
+ * Resource types for monitored compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-union ManagedComputeResourceType {
+union MonitoredComputeResourceType {
   string,
 
-  /** All managed compute resource types */
+  /** All monitored compute resource types */
   All: "All",
 
   /** Azure Kubernetes Service managed clusters */
@@ -615,28 +615,28 @@ union ManagedComputeResourceType {
 }
 
 /**
- * The request body for listing managed compute resources.
+ * Request body for listing monitored compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-model ManagedComputeResourcesRequest {
+model MonitoredComputeResourcesRequest {
   /**
-   * Optional filter to get resources of a specific type. If not provided or set to "All", returns all managed compute resources.
+   * Optional filter to get resources of a specific type. If not provided or set to "All", returns all monitored compute resources.
    */
-  resourceType?: ManagedComputeResourceType;
+  resourceType?: MonitoredComputeResourceType;
 }
 
 /**
- * Response of a list operation for managed compute resources.
+ * Response of a list operation for monitored compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-model ManagedComputeResourceListResponse
-  is Azure.Core.Page<ManagedComputeResourceInfo>;
+model MonitoredComputeResourceListResponse
+  is Azure.Core.Page<MonitoredComputeResourceInfo>;
 
 /**
- * Details of a managed compute resource monitored by the Dynatrace monitor.
+ * Details of a monitored compute resource monitored by the Dynatrace monitor.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
-model ManagedComputeResourceInfo {
+model MonitoredComputeResourceInfo {
   /**
    * The full ARM resource ID of the monitored resource.
    */
@@ -646,6 +646,11 @@ model ManagedComputeResourceInfo {
    * Flag indicating if the resource is currently being monitored.
    */
   isMonitored?: boolean;
+
+  /**
+   * Reason for monitoring status.
+   */
+  reasonForMonitoringStatus?: string;
 }
 
 /**
