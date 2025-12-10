@@ -270,13 +270,13 @@ model OperationServiceSpecificationDefinition {
   /**
    * A list of Azure Monitoring metrics definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: OperationMetricSpecificationDefinition[];
 
   /**
    * A list of Azure Monitoring log definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: OperationLogSpecificationDefinition[];
 }
 

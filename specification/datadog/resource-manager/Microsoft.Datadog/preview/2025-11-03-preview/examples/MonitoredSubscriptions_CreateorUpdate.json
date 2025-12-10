@@ -1,0 +1,209 @@
+{
+  "parameters": {
+    "api-version": "2025-11-03-preview",
+    "body": {
+      "properties": {
+        "monitoredSubscriptionList": [
+          {
+            "status": "Active",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+            "tagRules": {
+              "automuting": true,
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "Environment",
+                    "action": "Include",
+                    "value": "Prod"
+                  },
+                  {
+                    "name": "Environment",
+                    "action": "Exclude",
+                    "value": "Dev"
+                  }
+                ],
+                "sendAadLogs": false,
+                "sendResourceLogs": true,
+                "sendSubscriptionLogs": true
+              },
+              "metricRules": {
+                "filteringTags": []
+              }
+            }
+          },
+          {
+            "status": "Failed",
+            "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+            "tagRules": {
+              "automuting": true,
+              "logRules": {
+                "filteringTags": [
+                  {
+                    "name": "Environment",
+                    "action": "Include",
+                    "value": "Prod"
+                  },
+                  {
+                    "name": "Environment",
+                    "action": "Exclude",
+                    "value": "Dev"
+                  }
+                ],
+                "sendAadLogs": false,
+                "sendResourceLogs": true,
+                "sendSubscriptionLogs": true
+              },
+              "metricRules": {
+                "filteringTags": []
+              }
+            }
+          }
+        ],
+        "operation": "AddBegin"
+      }
+    },
+    "configurationName": "default",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Datadog/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/monitoredSubscriptions/default",
+        "properties": {
+          "monitoredSubscriptionList": [
+            {
+              "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "tagRules": {
+                "automuting": true,
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "action": "Include",
+                      "value": "Prod"
+                    },
+                    {
+                      "name": "Environment",
+                      "action": "Exclude",
+                      "value": "Dev"
+                    }
+                  ],
+                  "sendAadLogs": false,
+                  "sendResourceLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "metricRules": {
+                  "filteringTags": []
+                }
+              }
+            },
+            {
+              "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "tagRules": {
+                "automuting": true,
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "action": "Include",
+                      "value": "Prod"
+                    },
+                    {
+                      "name": "Environment",
+                      "action": "Exclude",
+                      "value": "Dev"
+                    }
+                  ],
+                  "sendAadLogs": false,
+                  "sendResourceLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "metricRules": {
+                  "filteringTags": []
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Datadog/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/monitoredSubscriptions/default",
+        "properties": {
+          "monitoredSubscriptionList": [
+            {
+              "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "tagRules": {
+                "automuting": true,
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "action": "Include",
+                      "value": "Prod"
+                    },
+                    {
+                      "name": "Environment",
+                      "action": "Exclude",
+                      "value": "Dev"
+                    }
+                  ],
+                  "sendAadLogs": false,
+                  "sendResourceLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "metricRules": {
+                  "filteringTags": []
+                }
+              }
+            },
+            {
+              "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "tagRules": {
+                "automuting": true,
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "Environment",
+                      "action": "Include",
+                      "value": "Prod"
+                    },
+                    {
+                      "name": "Environment",
+                      "action": "Exclude",
+                      "value": "Dev"
+                    }
+                  ],
+                  "sendAadLogs": false,
+                  "sendResourceLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "metricRules": {
+                  "filteringTags": []
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Datadog/monitors/test?api-version=2022-09-01"
+      }
+    }
+  },
+  "operationId": "MonitoredSubscriptions_CreateorUpdate",
+  "title": "Monitors_AddMonitoredSubscriptions"
+}

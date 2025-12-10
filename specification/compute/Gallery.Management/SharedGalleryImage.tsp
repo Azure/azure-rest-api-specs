@@ -35,7 +35,7 @@ interface SharedGalleryImages {
   /**
    * List shared gallery images by subscription id or tenant id.
    */
-  list is Azure.ResourceManager.Legacy.ComputeLegacyOperations.ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
     SharedGalleryImage,
     Parameters = {
       /**

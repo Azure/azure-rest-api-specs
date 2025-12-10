@@ -63,7 +63,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -591,7 +591,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -873,7 +873,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1183,7 +1183,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1560,7 +1560,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -1867,7 +1867,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2360,7 +2360,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -2514,7 +2514,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "description": "A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.",
             "required": false,
             "type": "integer",
             "format": "int32",
@@ -6632,7 +6632,8 @@
         "cancelled",
         "failed",
         "completed",
-        "expired"
+        "expired",
+        "incomplete"
       ],
       "x-ms-enum": {
         "name": "RunStatus",
@@ -6677,6 +6678,11 @@
             "name": "expired",
             "value": "expired",
             "description": "Represents a run that expired before it could otherwise finish."
+          },
+          {
+            "name": "incomplete",
+            "value": "incomplete",
+            "description": "Represents a run that cannot be completed due to safety guardrails."
           }
         ]
       }

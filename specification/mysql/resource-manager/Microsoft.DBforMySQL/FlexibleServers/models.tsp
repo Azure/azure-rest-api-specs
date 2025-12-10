@@ -167,6 +167,10 @@ union ServerVersion {
   `5.7`: "5.7",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `8.0.21`: "8.0.21",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_06_01_preview)
+  `8.4`: "8.4",
 }
 
 /**

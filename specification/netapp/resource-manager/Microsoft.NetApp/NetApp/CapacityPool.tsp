@@ -6,10 +6,9 @@ import "./models.tsp";
 import "./NetAppAccount.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Http;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -161,12 +160,14 @@ model PoolPatchProperties {
    * Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @clientName("customThroughputMibpsInt", "csharp")
   customThroughputMibps?: int32 | null;
 }
 
 /**
  * Encryption type of the capacity pool, set encryption type for data at rest for this pool and all volumes in it. This value can only be set when creating new pool.
  */
+@clientName("CapacityPoolEncryptionType", "csharp")
 union EncryptionType {
   string,
 
