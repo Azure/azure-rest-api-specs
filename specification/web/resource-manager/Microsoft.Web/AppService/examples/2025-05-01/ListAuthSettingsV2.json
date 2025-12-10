@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "name": "sitef6141",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "authsettingsv2",
+        "type": "Microsoft.Web/sites/authsettingsv2",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/config/authsettingsv2",
+        "kind": "app",
+        "properties": {
+          "globalValidation": {
+            "excludedPaths": [
+              "/nosecrets/Path"
+            ],
+            "requireAuthentication": true,
+            "unauthenticatedClientAction": "Return403"
+          },
+          "httpSettings": {
+            "forwardProxy": {
+              "convention": "Standard",
+              "customHostHeaderName": "authHeader",
+              "customProtoHeaderName": "customProtoHeader"
+            },
+            "requireHttps": true,
+            "routes": {
+              "apiPrefix": "/authv2/"
+            }
+          },
+          "identityProviders": {
+            "google": {
+              "enabled": true,
+              "login": {
+                "scopes": [
+                  "admin"
+                ]
+              },
+              "registration": {
+                "clientId": "42d795a9-8abb-4d06-8534-39528af40f8e.apps.googleusercontent.com",
+                "clientSecretSettingName": "ClientSecret"
+              },
+              "validation": {
+                "allowedAudiences": [
+                  "https://example.com"
+                ]
+              }
+            }
+          },
+          "login": {
+            "allowedExternalRedirectUrls": [
+              "https://someurl.com"
+            ],
+            "cookieExpiration": {
+              "convention": "IdentityProviderDerived",
+              "timeToExpiration": "2022:09-01T00:00Z"
+            },
+            "nonce": {
+              "validateNonce": true
+            },
+            "preserveUrlFragmentsForLogins": true,
+            "routes": {
+              "logoutEndpoint": "https://app.com/logout"
+            },
+            "tokenStore": {
+              "enabled": true,
+              "fileSystem": {
+                "directory": "/wwwroot/sites/example"
+              },
+              "tokenRefreshExtensionHours": 96
+            }
+          },
+          "platform": {
+            "configFilePath": "/auth/config.json",
+            "enabled": true,
+            "runtimeVersion": "~1"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "WebApps_GetAuthSettingsV2",
+  "title": "List Auth Settings V2"
+}

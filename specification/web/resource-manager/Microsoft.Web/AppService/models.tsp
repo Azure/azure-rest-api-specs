@@ -281,6 +281,24 @@ union RuntimeName {
 }
 
 /**
+ * Function app site update strategy type. Available options: Recreate, RollingUpdate
+ */
+union SiteUpdateStrategyType {
+  string,
+  /**
+   * If the app is under load and a deployment or site state update occurs, all pods will be removed
+   * and will need to be Recreated all at once. This is the default behavior.
+   */
+  Recreate: "Recreate",
+
+  /**
+   * If the app is under load and a deployment or site state update occurs, pods will be drained in
+   * batches and gradually replaced, thus minimizing impact to throughput.
+   */
+  RollingUpdate: "RollingUpdate",
+}
+
+/**
  * Sets the log level for the Dapr sidecar. Allowed values are debug, info, warn, error. Default is info.
  */
 union DaprLogLevel {
@@ -3447,6 +3465,12 @@ model FunctionAppConfig {
    * Function app scale and concurrency settings.
    */
   scaleAndConcurrency?: FunctionsScaleAndConcurrency;
+
+  /**
+   * Function app site update strategy configuration.
+   */
+  @added(Versions.v2025_05_01)
+  siteUpdateStrategy?: FunctionsSiteUpdateStrategy;
 }
 
 /**
@@ -3539,6 +3563,16 @@ model FunctionsScaleAndConcurrency {
    * Scale and concurrency settings for the function app triggers.
    */
   triggers?: FunctionsScaleAndConcurrencyTriggers;
+}
+
+/**
+ * Function app site update strategy configuration for deployments and site config updates.
+ */
+model FunctionsSiteUpdateStrategy {
+  /**
+   * Function app site update strategy type. Available options: Recreate, RollingUpdate
+   */
+  type?: SiteUpdateStrategyType;
 }
 
 /**
