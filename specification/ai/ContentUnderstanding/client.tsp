@@ -24,6 +24,7 @@ interface ContentUnderstandingClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   copyAnalyzer is ContentAnalyzers.copy;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Doesn't fit standard naming"
   createAnalyzer is ContentAnalyzers.createOrReplace;
 
