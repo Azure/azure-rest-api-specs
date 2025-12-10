@@ -180,17 +180,47 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @added(Versions.v2025_11_01)
   @doc("Create a copy of the source analyzer to the current location.")
+  @action
+  @actionSeparator(":")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
-  @action("copy") // Required. Enforce the action name as that it is not changed by ContentUnderstandingClient in client.tsp
-  copy is Operations.LongRunningResourceAction<
+  copy is Foundations.ResourceOperation<
     ContentAnalyzer,
-    CopyRequest,
-    ContentAnalyzer,
-    Foundations.Error,
-    AllowReplaceTrait
+    CopyRequest & {
+      @added(Versions.v2025_11_01)
+      @doc("Allow the operation to replace an existing resource.")
+      @query
+      allowReplace?: boolean = false;
+
+      ...ClientRequestIdHeader;
+    },
+    Foundations.ResourceCreatedOrOkResponse<ResourceOperationStatus<ContentAnalyzer> &
+      Foundations.LongRunningStatusLocation<ContentAnalyzer> &
+      ClientRequestIdHeader>,
+    ServiceTraits
   >;
+
+  // @added(Versions.v2025_11_01)
+  // @doc("Create a copy of the source analyzer to the current location.")
+  // @pollingOperation(ContentAnalyzers.getOperationStatus)
+  // copy is Operations.LongRunningResourceAction<
+  //   ContentAnalyzer,
+  //   {
+  //     @doc("Azure resource ID of the source analyzer location.  Defaults to the current resource.")
+  //     sourceAzureResourceId?: string;
+
+  //     @doc("Azure region of the source analyzer location.  Defaults to current region.")
+  //     sourceRegion?: string;
+
+  //     @doc("Source analyzer ID.")
+  //     sourceAnalyzerId: string;
+  //   },
+  //   ContentAnalyzer,
+  //   Foundations.Error,
+  //   AllowReplaceTrait
+  // >;
 
   @added(Versions.v2025_11_01)
   @doc("Get authorization for copying this analyzer to another location.")

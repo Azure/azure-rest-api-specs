@@ -21,6 +21,7 @@ interface ContentUnderstandingClient {
 
   analyzeBinary is ContentAnalyzers.analyzeBinary;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   copyAnalyzer is ContentAnalyzers.copy;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Doesn't fit standard naming"
