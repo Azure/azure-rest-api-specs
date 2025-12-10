@@ -69,6 +69,6 @@ interface Credentials {
   @added(Versions.v2026_04_01)
   revokeDeviceAccess is ArmResourceActionNoResponseContentAsync<
     Credential,
-    void
+    CredentialsRevokeDeviceAccessRequest
   >;
 }
