@@ -993,9 +993,6 @@
           }
         },
         "x-ms-examples": {
-          "Monitors_ListManagedComputeResources_MaximumSet_Gen": {
-            "$ref": "./examples/Monitors_ListManagedComputeResources_MaximumSet_Gen.json"
-          },
           "Monitors_ListManagedComputeResources_MinimumSet_Gen": {
             "$ref": "./examples/Monitors_ListManagedComputeResources_MinimumSet_Gen.json"
           }
@@ -2626,10 +2623,6 @@
           "format": "arm-id",
           "description": "The full ARM resource ID of the monitored resource."
         },
-        "resourceType": {
-          "type": "string",
-          "description": "The type of the Azure resource (e.g., managedClusters)."
-        },
         "isMonitored": {
           "type": "boolean",
           "description": "Flag indicating if the resource is currently being monitored."
@@ -2651,19 +2644,6 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
-        },
-        "monitorId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The ARM resource ID path of the Dynatrace monitor."
-        },
-        "partnerName": {
-          "type": "string",
-          "description": "The partner name associated with the monitoring."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID of the monitored resources."
         }
       },
       "required": [
@@ -2674,12 +2654,18 @@
       "type": "string",
       "description": "Resource types for managed compute resources.",
       "enum": [
+        "All",
         "managedClusters"
       ],
       "x-ms-enum": {
         "name": "ManagedComputeResourceType",
         "modelAsString": true,
         "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "All managed compute resource types"
+          },
           {
             "name": "ManagedClusters",
             "value": "managedClusters",
@@ -2694,7 +2680,7 @@
       "properties": {
         "resourceType": {
           "$ref": "#/definitions/ManagedComputeResourceType",
-          "description": "Optional filter to get resources of a specific type."
+          "description": "Optional filter to get resources of a specific type. If not provided or set to \"All\", returns all managed compute resources."
         }
       }
     },

@@ -607,6 +607,9 @@ model VMExtensionPayload {
 union ManagedComputeResourceType {
   string,
 
+  /** All managed compute resource types */
+  All: "All",
+
   /** Azure Kubernetes Service managed clusters */
   ManagedClusters: "managedClusters",
 }
@@ -617,7 +620,7 @@ union ManagedComputeResourceType {
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model ManagedComputeResourcesRequest {
   /**
-   * Optional filter to get resources of a specific type.
+   * Optional filter to get resources of a specific type. If not provided or set to "All", returns all managed compute resources.
    */
   resourceType?: ManagedComputeResourceType;
 }
@@ -627,22 +630,7 @@ model ManagedComputeResourcesRequest {
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model ManagedComputeResourceListResponse
-  is Azure.Core.Page<ManagedComputeResourceInfo> {
-  /**
-   * The ARM resource ID path of the Dynatrace monitor.
-   */
-  monitorId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The partner name associated with the monitoring.
-   */
-  partnerName?: string;
-
-  /**
-   * Tenant ID of the monitored resources.
-   */
-  tenantId?: string;
-}
+  is Azure.Core.Page<ManagedComputeResourceInfo>;
 
 /**
  * Details of a managed compute resource monitored by the Dynatrace monitor.
@@ -653,11 +641,6 @@ model ManagedComputeResourceInfo {
    * The full ARM resource ID of the monitored resource.
    */
   monitoredResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The type of the Azure resource (e.g., managedClusters).
-   */
-  resourceType?: string;
 
   /**
    * Flag indicating if the resource is currently being monitored.
