@@ -104,11 +104,11 @@ interface MonitorResources {
   >;
 
   /**
-   * Gets the list of managed compute resources by the Dynatrace monitor.
+   * Gets the list of monitored compute resources by the Dynatrace monitor.
    */
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
   @list
-  listManagedComputeResources is ArmResourceActionSync<
+  listMonitoredComputeResources is ArmResourceActionSync<
     MonitorResource,
     ManagedComputeResourcesRequest,
     ArmResponse<ManagedComputeResourceListResponse>,
@@ -197,8 +197,8 @@ interface MonitorResources {
 @@doc(MonitorResources.manageAgentInstallation::parameters.body,
   "List of resources and action"
 );
-@@doc(MonitorResources.listManagedComputeResources::parameters.body,
-  "The details of the list managed compute resources request."
+@@doc(MonitorResources.listMonitoredComputeResources::parameters.body,
+  "The details of the list monitored compute resources request."
 );
 @@doc(MonitorResources.getMetricStatus::parameters.body,
   "The details of the metric status request."

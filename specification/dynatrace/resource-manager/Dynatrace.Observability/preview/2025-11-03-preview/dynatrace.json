@@ -943,13 +943,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listManagedComputeResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredComputeResources": {
       "post": {
-        "operationId": "Monitors_ListManagedComputeResources",
+        "operationId": "Monitors_ListMonitoredComputeResources",
         "tags": [
           "MonitorResources"
         ],
-        "description": "Gets the list of managed compute resources by the Dynatrace monitor.",
+        "description": "Gets the list of monitored compute resources by the Dynatrace monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -971,7 +971,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The details of the list managed compute resources request.",
+            "description": "The details of the list monitored compute resources request.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/ManagedComputeResourcesRequest"
@@ -993,7 +993,10 @@
           }
         },
         "x-ms-examples": {
-          "Monitors_ListManagedComputeResources_MinimumSet_Gen": {
+          "Monitors_ListMonitoredComputeResources_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_ListManagedComputeResources_MaximumSet_Gen.json"
+          },
+          "Monitors_ListMonitoredComputeResources_MinimumSet_Gen": {
             "$ref": "./examples/Monitors_ListManagedComputeResources_MinimumSet_Gen.json"
           }
         },
