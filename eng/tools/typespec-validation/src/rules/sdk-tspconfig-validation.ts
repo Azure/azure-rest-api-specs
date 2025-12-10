@@ -118,14 +118,139 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return this.emitterName;
   }
 
-  protected tryFindOption(config: any): Record<string, any> | undefined {
+  protected tryFindOption(config: any, keyToValidate?: string): Record<string, any> | undefined {
+    const key = keyToValidate ?? this.keyToValidate;
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
-    for (const segment of this.keyToValidate.split(".")) {
+    for (const segment of key.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
         option = option![segment];
       else return undefined;
     }
     return option;
+  }
+
+  protected resolveVariables(value: string, config: any): { resolved: string; error?: string } {
+    let resolvedValue = value;
+    const variablePattern = /\{([^}]+)\}/g;
+    const maxIterations = 10; // Prevent infinite loops
+    let iterations = 0;
+
+    // Keep resolving until no more variables are found or max iterations reached
+    while (resolvedValue.includes("{") && iterations < maxIterations) {
+      iterations++;
+      let hasUnresolvedVariables = false;
+      const currentValue = resolvedValue;
+
+      // Reset regex lastIndex for each iteration
+      variablePattern.lastIndex = 0;
+      let match;
+
+      while ((match = variablePattern.exec(currentValue)) !== null) {
+        const variableName = match[1];
+
+        // Try to resolve variable from multiple sources:
+        // 1. From the emitter's options (e.g., namespace, package-name)
+        // 2. From parameters (e.g., service-dir, output-dir)
+        // 3. From global options
+        let variableValue: string | undefined;
+
+        // Check emitter options first
+        variableValue = config?.options?.[this.emitterName]?.[variableName];
+
+        // If not found, check parameters
+        if (!variableValue) {
+          variableValue = config?.parameters?.[variableName]?.default;
+        }
+
+        // If not found, check global options (for variables like output-dir)
+        if (!variableValue) {
+          variableValue = config?.[variableName];
+        }
+
+        if (variableValue && typeof variableValue === "string") {
+          resolvedValue = resolvedValue.replace(`{${variableName}}`, variableValue);
+        } else {
+          hasUnresolvedVariables = true;
+        }
+      }
+
+      // If no progress was made in this iteration and there are still unresolved variables, return error
+      if (hasUnresolvedVariables && resolvedValue === currentValue) {
+        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
+        return {
+          resolved: resolvedValue,
+          error: `Could not resolve variable {${unresolvedVar}}. The variable is not defined in options.${this.emitterName}, parameters, or config`,
+        };
+      }
+
+      // If no more variables to resolve, break
+      if (!resolvedValue.includes("{")) {
+        break;
+      }
+    }
+
+    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+      return {
+        resolved: resolvedValue,
+        error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
+      };
+    }
+
+    return { resolved: resolvedValue };
+  }
+
+  protected getPackageNameFromEmitterOutputDir(config: any): {
+    resolved: string;
+    error?: string;
+  } {
+    const option = this.tryFindOption(config, "emitter-output-dir");
+    if (option === undefined) {
+      return {
+        resolved: "",
+        error: `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+      };
+    }
+
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (typeof actualValue !== "string") {
+      return {
+        resolved: "",
+        error: `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
+      };
+    }
+    // Handle various path formats with different prefixes
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+
+    let extractedPath: string;
+    if (!actualValue.includes("/")) {
+      extractedPath = actualValue;
+    } else {
+      const pathParts = actualValue.split("/");
+      const filteredParts = pathParts.filter(
+        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
+      );
+      extractedPath = filteredParts.join("/");
+    }
+
+    // Resolve variables in the extracted path
+    const { resolved, error } = this.resolveVariables(extractedPath, config);
+    if (error) {
+      return { resolved: extractedPath, error };
+    }
+
+    // Validate the resolved path
+    const isValid = this.validateValue(resolved, this.expectedValue);
+    if (!isValid) {
+      return {
+        resolved,
+        error: `Resolved path "${resolved}" does not match expected pattern`,
+      };
+    }
+
+    return { resolved };
   }
 
   protected validate(config: any): RuleResult {
@@ -152,79 +277,18 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 }
 
 class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
-  private skipValidateNamespace: boolean;
-
-  constructor(
-    emitterName: string,
-    keyToValidate: string,
-    expectedValue: ExpectedValueType,
-    skipValidateNamespace: boolean = false,
-  ) {
+  constructor(emitterName: string, keyToValidate: string, expectedValue: ExpectedValueType) {
     super(emitterName, keyToValidate, expectedValue);
-    this.skipValidateNamespace = skipValidateNamespace;
   }
 
   protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined)
+    const result = this.getPackageNameFromEmitterOutputDir(config);
+    if (result.error) {
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        result.error,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
       );
-
-    const actualValue = option as unknown as undefined | string | boolean;
-    if (typeof actualValue !== "string") {
-      return this.createFailedResult(
-        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
-        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
-      );
     }
-
-    let pathToValidate: string;
-
-    // Handle various path formats with different prefixes
-    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
-    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
-    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-
-    if (!actualValue.includes("/")) {
-      pathToValidate = actualValue;
-    } else {
-      const pathParts = actualValue.split("/");
-      const filteredParts = pathParts.filter(
-        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
-      );
-      pathToValidate = filteredParts.join("/");
-    }
-
-    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
-    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
-      return { success: true };
-    }
-
-    // Resolve any variables in the pathToValidate
-    // Check if pathToValidate contains variables like {namespace}
-    const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
-    if (variableMatch) {
-      const variableName = variableMatch[1];
-      const variableValue = config?.options?.[this.emitterName]?.[variableName];
-
-      if (variableValue && typeof variableValue === "string") {
-        // Replace the variable with its value
-        pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
-      } else {
-        return this.createFailedResult(
-          `Could not resolve variable {${variableName}} in path "${pathToValidate}". The variable is not defined in options.${this.emitterName}`,
-          `Please define the ${variableName} variable in your configuration or use a direct path value`,
-        );
-      }
-    }
-
-    if (!this.validateValue(pathToValidate, this.expectedValue))
-      return this.createFailedResult(
-        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
-        `Please update the emitter-output-dir path to follow the SDK naming convention`,
-      );
 
     return { success: true };
   }
@@ -540,8 +604,7 @@ export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitter
     super(
       "@azure-tools/typespec-python",
       "emitter-output-dir",
-      new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
-      true,
+      new RegExp(/^azure[-.]mgmt([-.][a-z]+){1,2}$/),
     );
   }
   protected skip(_: any, folder: string) {
@@ -584,6 +647,15 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
       "emitter-output-dir",
       new RegExp(/^azure(-[a-z]+){1,3}$/),
     );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigPythonDpEmitterOutputDirSubRule1 extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "emitter-output-dir", new RegExp(/^{namespace}$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
