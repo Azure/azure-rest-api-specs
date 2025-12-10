@@ -1,6 +1,6 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
-import { basename, dirname, relative, resolve } from "path";
+import { dirname, relative, resolve } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
@@ -341,13 +341,6 @@ export class Swagger {
    */
   get tag() {
     return this.#tag;
-  }
-
-  /**
-   * @returns {string}
-   */
-  get version() {
-    return basename(dirname(this.#path));
   }
 
   /**
