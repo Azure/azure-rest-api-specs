@@ -66,6 +66,34 @@ suppressions:
       - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
 ```
 
+### Tag: package-2025-10-10
+
+These settings apply only when `--tag=package-2025-10-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-10'
+input-file:
+  - stable/2025-10-10/desktopvirtualization.json
+suppressions:
+  - code: PutRequestResponseSchemeArm
+    from: desktopvirtualization.json
+    reason: The system metadata are not the input parameters, and our service doesn't support patch operation fot this resource, this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PatchIdentityProperty
+    from: desktopvirtualization.json
+    reason: Our service doesn't support update the identity in the patch method.  
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}'].patch.parameters[4]
+```
+
 ### Tag: package-preview-2025-09-01-preview
 
 These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
