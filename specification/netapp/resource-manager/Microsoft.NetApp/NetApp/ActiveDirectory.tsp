@@ -167,7 +167,9 @@ interface ActiveDirectoryConfigs {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ActiveDirectoryConfig,
       ActiveDirectoryConfigProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ActiveDirectoryConfig> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Delete the specified Active Directory configuration */
