@@ -87,6 +87,15 @@ directive:
     reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05'
+input-file:
+    - stable/2025-05-01/openapi.json
+```
+
 ### Tag: package-2025-03
 
 These settings apply only when `--tag=package-2025-03` is specified on the command line.
