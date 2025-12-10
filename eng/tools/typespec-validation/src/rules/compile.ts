@@ -1,9 +1,7 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
-import { defaultLogger } from "@azure-tools/specs-shared/logger";
-import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import path, { basename, dirname, normalize, resolve } from "path";
+import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { inspect } from "util";
@@ -92,15 +90,24 @@ export class CompileRule implements Rule {
 
           const versionsWithHandwrittenSwagger: string[] = [];
           const versionsWithTspGeneratedSwagger: string[] = [];
-          const specModel = new SpecModel(outputFolder, { logger: defaultLogger });
-          const swaggers = (await specModel.getSwaggers()).filter((s) =>
-            s.path.startsWith(resolve(outputFolder)),
+
+          const allPattern = path.posix.join(...outputFolder.split(path.win32.sep), "**", "*.json");
+          const allAllSwaggers = (await globby(allPattern, { ignore: ["**/examples/**"] })).map(
+            // Globby always returns posix paths
+            (p) => normalize(p),
           );
-          for (const swagger of swaggers) {
-            if (await swagger.getTypeSpecGenerated()) {
-              versionsWithTspGeneratedSwagger.push(swagger.version);
+
+          for (const swagger of allAllSwaggers) {
+            const version = basename(dirname(swagger));
+            const swaggerText = await readFile(swagger, { encoding: "utf8" });
+            const swaggerObj = JSON.parse(swaggerText) as {
+              info?: Record<string, unknown>;
+            };
+
+            if (swaggerObj["info"]?.["x-typespec-generated"] !== undefined) {
+              versionsWithTspGeneratedSwagger.push(version);
             } else {
-              versionsWithHandwrittenSwagger.push(swagger.version);
+              versionsWithHandwrittenSwagger.push(version);
             }
           }
 
