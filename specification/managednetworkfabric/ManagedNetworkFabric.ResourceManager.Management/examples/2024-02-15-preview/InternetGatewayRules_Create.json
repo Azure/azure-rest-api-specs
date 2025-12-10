@@ -1,0 +1,94 @@
+{
+  "title": "InternetGatewayRules_Create_MaximumSet_Gen",
+  "operationId": "InternetGatewayRules_Create",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "internetGatewayRuleName": "example-internetGatewayRule",
+    "resource": {
+      "properties": {
+        "annotation": "annotationValue",
+        "ruleProperties": {
+          "action": "Allow",
+          "addressList": [
+            "10.10.10.10"
+          ]
+        }
+      },
+      "tags": {
+        "KeyID": "KeyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotationValue",
+          "ruleProperties": {
+            "action": "Allow",
+            "addressList": [
+              "10.10.10.10"
+            ]
+          },
+          "provisioningState": "Accepted",
+          "internetGatewayIds": [
+            "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ]
+        },
+        "tags": {
+          "KeyID": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
+        "name": "example-internetGatewayRule",
+        "type": "microsoft.managednetworkfabric/internetGatewayRules",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "annotation": "annotationValue",
+          "ruleProperties": {
+            "action": "Allow",
+            "addressList": [
+              "10.10.10.10"
+            ]
+          },
+          "provisioningState": "Accepted",
+          "internetGatewayIds": [
+            "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ]
+        },
+        "tags": {
+          "KeyID": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/example-InternetGatewayRule",
+        "name": "example-internetGatewayRule",
+        "type": "microsoft.managednetworkfabric/internetGatewayRules",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

@@ -34,3 +34,29 @@ using Microsoft.Chaos;
 @@clientName(Operations.list, "ListAll", "autorest");
 @@clientName(ExperimentExecutions.getExecutionDetails, "ExecutionDetails");
 @@clientName(PrivateAccesses.privateLinkResources, "GetPrivateLinkResources");
+
+// Flatten properties for backward compatibility
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Capability.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapabilityType.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentExecution.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateAccess.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Target.properties,
+  "autorest"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TargetType.properties,
+  "autorest"
+);

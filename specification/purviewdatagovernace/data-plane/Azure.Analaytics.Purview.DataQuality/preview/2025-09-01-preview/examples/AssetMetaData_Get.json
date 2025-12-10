@@ -1,0 +1,124 @@
+{
+  "operationId": "GetObserver",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111"
+  },
+  "title": "AssetMetaData_Get",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CAMPAIGN_ANALYTICS",
+        "businessDomain": {
+          "type": "BusinessDomainReference",
+          "referenceId": "76be16f9-5cb3-4839-83d6-4e3829a8ab0c"
+        },
+        "dataProduct": {
+          "type": "DataProductReference",
+          "referenceId": "2a1d2087-09e2-4ecf-817d-1f5bfcbc31bf"
+        },
+        "type": "Basic",
+        "dataAsset": {
+          "type": "DataAssetReference",
+          "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869"
+        },
+        "ETag": "250025c0-0000-3200-0000-685e748d0000",
+        "typeProperties": {
+          "inputDatasets": [
+            {
+              "alias": "CAMPAIGN_ANALYTICS",
+              "primary": true,
+              "dataset": {
+                "businessDomain": {
+                  "referenceId": "e0c0840b-f087-4c3e-99e2-63075572d33b",
+                  "type": "BusinessDomainReference"
+                },
+                "dataProduct": {
+                  "referenceId": "757b96c3-af76-45a8-a7cd-0f4b90e27d9a",
+                  "type": "DataProductReference"
+                },
+                "dataAsset": {
+                  "referenceId": "fadb55b6-aa10-47d5-82c4-5e2723ba7869",
+                  "type": "DataAssetReference"
+                },
+                "datasourceFQN": "snowflake://fljqaun-gpa78346.snowflakecomputing.com/databases/dream_demo",
+                "schema": {
+                  "origin": "DataProfiling",
+                  "items": [
+                    {
+                      "name": "ID",
+                      "type": "Number",
+                      "typeProperties": {
+                        "integral": false,
+                        "precision": 38,
+                        "scale": 38
+                      }
+                    },
+                    {
+                      "name": "REGION",
+                      "type": "String"
+                    },
+                    {
+                      "name": "COUNTRY",
+                      "type": "String"
+                    },
+                    {
+                      "name": "PRODUCT_CATEGORY",
+                      "type": "String"
+                    },
+                    {
+                      "name": "CAMPAIGN_NAME",
+                      "type": "String"
+                    },
+                    {
+                      "name": "REVENUE",
+                      "type": "Number",
+                      "typeProperties": {
+                        "integral": false,
+                        "precision": 38,
+                        "scale": 38
+                      }
+                    },
+                    {
+                      "name": "REVENUE_TARGET",
+                      "type": "Number",
+                      "typeProperties": {
+                        "integral": false,
+                        "precision": 38,
+                        "scale": 38
+                      }
+                    },
+                    {
+                      "name": "CITY",
+                      "type": "String"
+                    },
+                    {
+                      "name": "STATE",
+                      "type": "String"
+                    }
+                  ]
+                },
+                "projectAs": [],
+                "type": "SnowflakeTable",
+                "typeProperties": {
+                  "format": "table",
+                  "schemaName": "PUBLIC",
+                  "tableName": "CAMPAIGN_ANALYTICS"
+                }
+              }
+            }
+          ],
+          "projection": null
+        },
+        "createdAt": "2025-01-09T11:18:00.1199307Z",
+        "createdBy": "ca31eca9-668e-4933-82f8-69bdeecc6632",
+        "id": "083b54ef-f417-4c1c-ad05-e4e5579619b4",
+        "lastModifiedAt": "2025-06-27T10:38:05.0847187Z",
+        "lastModifiedBy": "92522642-6537-4785-9fcd-fe58afaa43c5",
+        "isDQAsset": false
+      }
+    }
+  }
+}

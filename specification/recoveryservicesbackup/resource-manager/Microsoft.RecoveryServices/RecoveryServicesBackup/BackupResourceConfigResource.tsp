@@ -30,6 +30,7 @@ model BackupResourceConfigResource
   eTag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Legacy API"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface BackupResourceStorageConfigsNonCRR {

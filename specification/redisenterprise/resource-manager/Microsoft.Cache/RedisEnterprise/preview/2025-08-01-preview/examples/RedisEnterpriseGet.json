@@ -30,6 +30,34 @@
           "redisVersion": "6",
           "minimumTlsVersion": "1.2",
           "publicNetworkAccess": "Disabled",
+          "maintenanceConfiguration": {
+            "maintenanceWindows": [
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Monday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Tuesday"
+                }
+              },
+              {
+                "type": "Weekly",
+                "duration": "PT6H",
+                "startHourUtc": 3,
+                "schedule": {
+                  "dayOfWeek": "Wednesday"
+                }
+              }
+            ]
+          },
           "privateEndpointConnections": [
             {
               "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/privateEndpointConnections/cachePec",

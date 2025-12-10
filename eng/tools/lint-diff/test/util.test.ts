@@ -1,12 +1,11 @@
-import { vol } from "memfs";
+import { fs as memfs, vol } from "memfs";
 import { beforeEach } from "node:test";
 import { describe, expect, test, vi } from "vitest";
 import { isFailure, isWarning, pathExists } from "../src/util.js";
 
 vi.mock("fs/promises", () => {
-  const memfs = require("memfs");
   return {
-    ...memfs.fs.promises,
+    ...memfs.promises,
   };
 });
 
