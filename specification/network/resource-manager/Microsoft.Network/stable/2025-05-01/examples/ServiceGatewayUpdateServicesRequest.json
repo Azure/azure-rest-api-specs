@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "parameters": {
+      "Action": "FullUpdate",
+      "ServiceRequests": [
+        {
+          "Service": {
+            "Name": "Service1",
+            "Properties": {
+              "ServiceType": "Inbound",
+              "IsDefault": "True",
+              "LoadBalancerBackendPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                }
+              ],
+              "PublicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway"
+            }
+          }
+        },
+        {
+          "Service": {
+            "Name": "Service2",
+            "Properties": {
+              "ServiceType": "Outbound",
+              "IsDefault": "False"
+            }
+          },
+          "IsDelete": "True"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "OK"
+      }
+    }
+  }
+}

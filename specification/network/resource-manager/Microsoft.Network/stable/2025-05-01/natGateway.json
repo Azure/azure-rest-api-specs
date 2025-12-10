@@ -145,6 +145,9 @@
           },
           "Get nat gateway with StandardV2 Sku": {
             "$ref": "./examples/NatGatewayGetStandardV2Sku.json"
+          },
+          "Get nat gateway with service gateway": {
+            "$ref": "./examples/NatGatewayWithServiceGatewayGet.json"
           }
         }
       },
@@ -214,6 +217,9 @@
           },
           "Create nat gateway with StandardV2 Sku": {
             "$ref": "./examples/NatGatewayCreateOrUpdateStandardV2Sku.json"
+          },
+          "Create nat gateway with service gateway": {
+            "$ref": "./examples/NatGatewayWithServiceGatewayCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -432,6 +438,10 @@
         "sourceVirtualNetwork": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to the source virtual network using this nat gateway resource."
+        },
+        "ServiceGateway": {
+          "$ref": "./ServiceGateway.json#/definitions/ServiceGateway",
+          "description": "Reference to an existing service gateway."
         },
         "resourceGuid": {
           "readOnly": true,
