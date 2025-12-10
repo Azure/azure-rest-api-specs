@@ -38,3 +38,7 @@ using Microsoft.ResourceConnector;
   "OperationDisplay",
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
