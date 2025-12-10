@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/search"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/search.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-search-documents"
+    package-name: "{package-dir}"
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.Search.Documents"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.Search.Documents"
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    package-dir: "azure-search-documents"
+    generate-Metadata: true
+    generate-Test: true
+    flavor: azure
+    packageDetails:
+      name: "@azure/azure-search-documents"
+      description: "Azure.Search.Documents"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-search-documents"
+    namespace: com.azure.search.documents
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/search/azsearchdocuments"
+    package-dir: "azsearchdocuments"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -1,14 +1,14 @@
-# SearchServiceClient and SearchIndexClient
+# AI Search
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for SearchServiceClient and SearchIndexClient.
-
+This is the AutoRest configuration file for AI Search.
 
 ---
+
 ## Getting Started
 
-To build the SDK for SearchServiceClient and SearchIndexClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for AI Search, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -211,8 +211,11 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-09-01'
 input-file:
-- stable/2025-09-01/searchservice.json
-- stable/2025-09-01/searchindex.json
+- stable/2025-09-01/search.json
+suppressions:
+  - code: LroExtension 
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2025-09-searchservice
@@ -234,14 +237,15 @@ input-file:
 ```
 
 ### Tag: package-2025-08-01-preview
-
 These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-- preview/2025-08-01-preview/knowledgeagent.json
-- preview/2025-08-01-preview/searchservice.json
-- preview/2025-08-01-preview/searchindex.json
+- preview/2025-08-01-preview/search.json
+suppressions:
+  - code: LroExtension 
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2025-08-knowledgeagent-preview
