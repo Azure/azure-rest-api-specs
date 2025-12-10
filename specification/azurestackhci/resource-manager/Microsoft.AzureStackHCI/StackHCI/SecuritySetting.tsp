@@ -17,11 +17,11 @@ namespace Microsoft.AzureStackHCI;
 @parentResource(Cluster)
 model SecuritySetting
   is Azure.ResourceManager.ProxyResource<SecurityProperties> {
-  ...ResourceNameParameter<
-    Resource = SecuritySetting,
-    KeyName = "securitySettingsName",
-    SegmentName = "securitySettings"
-  >;
+  @path
+  @key("securitySettingsName")
+  @segment("securitySettings")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  name: string = "default";
 }
 
 @armResourceOperations
@@ -51,73 +51,4 @@ interface SecuritySettings {
 @@doc(SecuritySetting.properties,
   "The resource-specific properties for this resource."
 );
-
-// Models
-
-/**
- * Security properties of the resource
- */
-model SecurityProperties {
-  /**
-   * Secured Core Compliance Assignment
-   */
-  securedCoreComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
-
-  /**
-   * WDAC Compliance Assignment
-   */
-  wdacComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
-
-  /**
-   * SMB encryption for intra-cluster traffic Compliance Assignment
-   */
-  smbEncryptionForIntraClusterTrafficComplianceAssignment?: ComplianceAssignmentType = ComplianceAssignmentType.Audit;
-
-  /**
-   * Security Compliance Status
-   */
-  @visibility(Lifecycle.Read)
-  securityComplianceStatus?: SecurityComplianceStatus;
-
-  /**
-   * The status of the last operation.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * Security compliance properties of the resource
- */
-model SecurityComplianceStatus {
-  /**
-   * Indicates whether HCI hosts meets secured-core server requirements.
-   */
-  @visibility(Lifecycle.Read)
-  securedCoreCompliance?: ComplianceStatus;
-
-  /**
-   * Indicates whether HCI hosts have enforced consistent Windows Defender Application Control.
-   */
-  @visibility(Lifecycle.Read)
-  wdacCompliance?: ComplianceStatus;
-
-  /**
-   * Indicates whether data at-rest encryption is enabled on Azure Stack HCI clustered volumes.
-   */
-  @visibility(Lifecycle.Read)
-  dataAtRestEncrypted?: ComplianceStatus;
-
-  /**
-   * Indicates whether HCI cluster has data in-transit protection.
-   */
-  @visibility(Lifecycle.Read)
-  dataInTransitProtected?: ComplianceStatus;
-
-  /**
-   * Time in UTC when compliance status was last updated.
-   */
-  @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdated?: utcDateTime;
-}
+@@visibility(SecuritySetting.properties, Lifecycle.Read, Lifecycle.Create);
