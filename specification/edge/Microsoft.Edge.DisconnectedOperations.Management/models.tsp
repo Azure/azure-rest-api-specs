@@ -348,63 +348,66 @@ model HardwareSettingProperties {
   @doc("The resource provisioning state")
   provisioningState?: ResourceProvisioningState;
 
-  @doc("Total number of cores")
+  @doc("The total number of cores")
   totalCores: int32;
 
-  @doc("Disk space in GB")
-  diskSpace: int32;
+  @doc("The disk space in GB")
+  diskSpaceInGB: int32;
 
-  @doc("Memory in GB")
-  memory: int32;
+  @doc("The memory in GB")
+  memoryInGB: int32;
 
-  @doc("Hardware vendor")
-  hardwareVendor: string;
+  @doc("The OEM")
+  oem: string;
 
-  @doc("Hardware SKU")
+  @doc("The hardware SKU")
   hardwareSku: string;
 
-  @doc("Number of nodes")
+  @doc("The number of nodes")
   nodes: int32;
 
-  @doc("Active version at registration")
-  activeVersion: string;
+  @doc("The active version at registration")
+  versionAtRegistration: string;
 
-  @doc("Solution builder extension at registration")
+  @doc("The solution builder extension at registration")
   solutionBuilderExtension: string;
+
+  @doc("The unique Id of the device")
+  deviceId: string;
 }
 
-@doc("Billing period")
+@doc("The billing period")
 @added(Microsoft.Edge.Versions.v2025_08_01)
 model BillingPeriod {
-  @doc("Number of cores")
+  @doc("The number of cores")
   cores: int32;
 
-  @doc("Pricing model")
+  @doc("The pricing model")
   pricingModel: PricingModel;
 
   @visibility(Lifecycle.Read)
-  @doc("Billing start date")
+  @doc("The billing start date")
   startDate?: plainDate;
 
   @visibility(Lifecycle.Read)
-  @doc("Billing end date")
+  @doc("The billing end date")
   endDate?: plainDate;
 }
 
 @doc("The billing configuration")
 @added(Microsoft.Edge.Versions.v2025_08_01)
 model BillingConfiguration {
-  @doc("Auto renew setting")
+  @doc("The auto renew setting")
   autoRenew: AutoRenew;
 
   @visibility(Lifecycle.Read)
-  @doc("Billing status")
+  @doc("The billing status")
   billingStatus: BillingStatus;
 
-  @doc("Current billing configuration")
+  @doc("The current billing configuration")
   current: BillingPeriod;
 
-  @doc("Upcoming billing configuration")
+  @doc("The upcoming billing configuration")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   upcoming?: BillingPeriod;
 }

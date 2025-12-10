@@ -1215,20 +1215,20 @@
       "properties": {
         "autoRenew": {
           "$ref": "#/definitions/AutoRenew",
-          "description": "Auto renew setting"
+          "description": "The auto renew setting"
         },
         "billingStatus": {
           "$ref": "#/definitions/BillingStatus",
-          "description": "Billing status",
+          "description": "The billing status",
           "readOnly": true
         },
         "current": {
           "$ref": "#/definitions/BillingPeriod",
-          "description": "Current billing configuration"
+          "description": "The current billing configuration"
         },
         "upcoming": {
           "$ref": "#/definitions/BillingPeriod",
-          "description": "Upcoming billing configuration",
+          "description": "The upcoming billing configuration",
           "x-ms-mutability": [
             "read",
             "update"
@@ -1247,15 +1247,15 @@
       "properties": {
         "autoRenew": {
           "$ref": "#/definitions/AutoRenew",
-          "description": "Auto renew setting"
+          "description": "The auto renew setting"
         },
         "current": {
           "$ref": "#/definitions/BillingPeriodUpdate",
-          "description": "Current billing configuration"
+          "description": "The current billing configuration"
         },
         "upcoming": {
           "$ref": "#/definitions/BillingPeriodUpdate",
-          "description": "Upcoming billing configuration",
+          "description": "The upcoming billing configuration",
           "x-ms-mutability": [
             "read",
             "update"
@@ -1283,27 +1283,27 @@
     },
     "BillingPeriod": {
       "type": "object",
-      "description": "Billing period",
+      "description": "The billing period",
       "properties": {
         "cores": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of cores"
+          "description": "The number of cores"
         },
         "pricingModel": {
           "$ref": "#/definitions/PricingModel",
-          "description": "Pricing model"
+          "description": "The pricing model"
         },
         "startDate": {
           "type": "string",
           "format": "date",
-          "description": "Billing start date",
+          "description": "The billing start date",
           "readOnly": true
         },
         "endDate": {
           "type": "string",
           "format": "date",
-          "description": "Billing end date",
+          "description": "The billing end date",
           "readOnly": true
         }
       },
@@ -1314,16 +1314,16 @@
     },
     "BillingPeriodUpdate": {
       "type": "object",
-      "description": "Billing period",
+      "description": "The billing period",
       "properties": {
         "cores": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of cores"
+          "description": "The number of cores"
         },
         "pricingModel": {
           "$ref": "#/definitions/PricingModel",
-          "description": "Pricing model"
+          "description": "The pricing model"
         }
       }
     },
@@ -1648,49 +1648,54 @@
         "totalCores": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of cores"
+          "description": "The total number of cores"
         },
-        "diskSpace": {
+        "diskSpaceInGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Disk space in GB"
+          "description": "The disk space in GB"
         },
-        "memory": {
+        "memoryInGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Memory in GB"
+          "description": "The memory in GB"
         },
-        "hardwareVendor": {
+        "oem": {
           "type": "string",
-          "description": "Hardware vendor"
+          "description": "The OEM"
         },
         "hardwareSku": {
           "type": "string",
-          "description": "Hardware SKU"
+          "description": "The hardware SKU"
         },
         "nodes": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of nodes"
+          "description": "The number of nodes"
         },
-        "activeVersion": {
+        "versionAtRegistration": {
           "type": "string",
-          "description": "Active version at registration"
+          "description": "The active version at registration"
         },
         "solutionBuilderExtension": {
           "type": "string",
-          "description": "Solution builder extension at registration"
+          "description": "The solution builder extension at registration"
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The unique Id of the device"
         }
       },
       "required": [
         "totalCores",
-        "diskSpace",
-        "memory",
-        "hardwareVendor",
+        "diskSpaceInGB",
+        "memoryInGB",
+        "oem",
         "hardwareSku",
         "nodes",
-        "activeVersion",
-        "solutionBuilderExtension"
+        "versionAtRegistration",
+        "solutionBuilderExtension",
+        "deviceId"
       ]
     },
     "Image": {
