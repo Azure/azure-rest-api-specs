@@ -242,7 +242,8 @@ model ErrorAdditionalInfo {
   @visibility(Lifecycle.Read)
   type?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   @doc("The additional info.")
   @visibility(Lifecycle.Read)
-  info?: Record<string>;
+  info?: Record<unknown>;
 }
