@@ -27,5 +27,8 @@ using Microsoft.AlertsManagement;
 @@clientLocation(TenantActivityLogAlertResources.listByManagementGroup,
   "TenantActivityLogAlerts"
 );
+@@clientLocation(TenantActivityLogAlertResources.listByTenant,
+  "TenantActivityLogAlerts"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(TenantActivityLogAlertResource.properties);

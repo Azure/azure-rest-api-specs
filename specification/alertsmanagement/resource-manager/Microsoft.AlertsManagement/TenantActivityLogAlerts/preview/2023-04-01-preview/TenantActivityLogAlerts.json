@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "TenantActivityLogAlertsClient",
+    "title": "Tenant Level Activity Log Alert Rules in AlertsManagement Resource Provider",
     "version": "2023-04-01-preview",
-    "description": "Tenant Activity Log Alerts Client",
+    "description": "Tenant Level Activity Log Alert Rules provides rules creation on management group level.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -44,6 +44,42 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
+      "get": {
+        "operationId": "TenantActivityLogAlerts_ListByTenant",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Get a list of all Tenant Activity Log Alert rules in the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantAlertRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Activity Log Alerts by tenant": {
+            "$ref": "./examples/TenantActivityLogAlertRule_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
       "get": {
         "operationId": "TenantActivityLogAlerts_ListByManagementGroup",
@@ -61,7 +97,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           }
         ],
         "responses": {
@@ -105,7 +142,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "alertRuleName",
@@ -152,7 +190,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "alertRuleName",
@@ -214,7 +253,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "alertRuleName",
@@ -270,7 +310,8 @@
             "description": "The management group ID.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 90
           },
           {
             "name": "alertRuleName",
@@ -441,6 +482,43 @@
         "condition",
         "actions"
       ]
+    },
+    "AzureResource": {
+      "type": "object",
+      "description": "An Azure resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource Id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "default": "global",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "TenantActivityLogAlertResource": {
       "type": "object",

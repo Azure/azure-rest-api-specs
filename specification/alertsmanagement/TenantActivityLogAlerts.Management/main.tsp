@@ -22,10 +22,13 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Tenant Activity Log Alerts Client
+ * Tenant Level Activity Log Alert Rules provides rules creation on management group level.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
-@service(#{ title: "TenantActivityLogAlertsClient" })
+@service(#{
+  title: "Tenant Level Activity Log Alert Rules in AlertsManagement Resource Provider",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AlertsManagement;

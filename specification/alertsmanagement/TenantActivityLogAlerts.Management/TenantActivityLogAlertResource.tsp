@@ -29,33 +29,39 @@ model TenantActivityLogAlertResource
 @armResourceOperations
 interface TenantActivityLogAlertResources {
   /**
+   * Get a list of all Tenant Activity Log Alert rules in the tenant.
+   */
+  listByTenant is Extension.ListByTarget<
+    Extension.Tenant,
+    TenantActivityLogAlertResource,
+    Response = ArmResponse<TenantAlertRuleList>
+  >;
+
+  /**
    * Get Tenant Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActivityLogAlerts_Get")
-  get is Extension.Read<
-    Extension.ManagementGroup,
-    TenantActivityLogAlertResource
-  >;
+  get is Extension.Read<ManagementGroup, TenantActivityLogAlertResource>;
 
   /**
    * Create a new Tenant Activity Log Alert rule or update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActivityLogAlerts_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
-    Extension.ManagementGroup,
+    ManagementGroup,
     TenantActivityLogAlertResource
   >;
 
   /**
    * Updates 'tags' and 'enabled' fields in an existing Tenant Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActivityLogAlerts_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
-    Extension.ManagementGroup,
+    ManagementGroup,
     TenantActivityLogAlertResource,
     PatchModel = TenantAlertRulePatchObject
   >;
@@ -63,20 +69,20 @@ interface TenantActivityLogAlertResources {
   /**
    * Delete a Tenant Activity Log Alert rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActivityLogAlerts_Delete")
   delete is Extension.DeleteSync<
-    Extension.ManagementGroup,
+    ManagementGroup,
     TenantActivityLogAlertResource
   >;
 
   /**
    * Get a list of all Tenant Activity Log Alert rules in a management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActivityLogAlerts_ListByManagementGroup")
   listByManagementGroup is Extension.ListByTarget<
-    Extension.ManagementGroup,
+    ManagementGroup,
     TenantActivityLogAlertResource,
     Response = ArmResponse<TenantAlertRuleList>
   >;

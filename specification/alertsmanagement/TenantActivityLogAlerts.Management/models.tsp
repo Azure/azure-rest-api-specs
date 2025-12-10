@@ -10,6 +10,19 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AlertsManagement;
 
+@tenantResource
+@armVirtualResource("Microsoft.Management")
+model ManagementGroup<ParameterName extends valueof string = "managementGroupName"> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @path
+  @minLength(1)
+  @maxLength(90)
+  @segment("managementGroups")
+  @key(ParameterName)
+  @doc("The management group ID.")
+  name: string;
+}
+
 /**
  * An Azure Activity Log Alert rule.
  */
