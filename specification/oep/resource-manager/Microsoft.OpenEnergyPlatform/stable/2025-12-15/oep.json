@@ -1232,13 +1232,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/readyForUpgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenEnergyPlatform/energyServices/{resourceName}/markReadyForUpgrade": {
       "post": {
         "tags": [
           "ReadyForUpgrade"
         ],
-        "description": "Marks an ADME resource as ready for upgrade during a milestone testing period.",
-        "operationId": "EnergyServices_ReadyForUpgrade",
+        "description": "Marks an energy services resource as ready for upgrade during a milestone testing period.",
+        "operationId": "EnergyServices_MarkReadyForUpgrade",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
@@ -1272,8 +1272,8 @@
           }
         },
         "x-ms-examples": {
-          "EnergyServices_ReadyForUpgrade_MaximumSet_Gen": {
-            "$ref": "./examples/EnergyServices_ReadyForUpgrade_MaximumSet_Gen.json"
+          "EnergyServices_MarkReadyForUpgrade_MaximumSet_Gen": {
+            "$ref": "./examples/EnergyServices_MarkReadyForUpgrade_MaximumSet_Gen.json"
           }
         }
       }
@@ -2041,12 +2041,31 @@
       }
     },
     "UpgradeSettings": {
-      "description": "The upgrade settings for the ADME instance.",
+      "description": "The upgrade settings for the energy services instance.",
       "type": "object",
       "properties": {
-        "deferUpgrades": {
-          "type": "boolean",
-          "description": "Indicates whether major upgrades should be deferred."
+        "upgradePolicy": {
+          "type": "string",
+          "description": "Specifies the upgrade policy for the service during milestone upgrade periods.",
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Deferred"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradePolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Automatic",
+                "description": "The service will be automatically upgraded during the major upgrade window."
+              },
+              {
+                "value": "Deferred",
+                "description": "Major upgrades are deferred by 30 days."
+              }
+            ]
+          }
         },
         "readyForUpgrade": {
           "type": "boolean",
