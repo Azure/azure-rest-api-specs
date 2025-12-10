@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ServiceLinker;
@@ -295,14 +296,14 @@ model DryrunProperties {
    * the result of the dryrun
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   prerequisiteResults?: DryrunPrerequisiteResult[];
 
   /**
    * the preview of the operations for creation
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operationPreviews?: DryrunOperationPreview[];
 
   /**
@@ -646,7 +647,7 @@ model DaprProperties {
   /**
    * Additional dapr metadata
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metadata?: DaprMetadata[];
 
   /**
@@ -794,7 +795,7 @@ model ValidateResult {
   /**
    * The detail of validation result
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   validationDetail?: ValidationResultItem[];
 }
 
@@ -839,7 +840,7 @@ model ConfigurationResult {
   /**
    * The configuration properties for source resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   configurations?: SourceConfiguration[];
 }
 
