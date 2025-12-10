@@ -1029,6 +1029,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1329,6 +1334,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2011,6 +2021,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2397,6 +2412,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2756,6 +2776,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3293,6 +3318,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4087,6 +4117,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -6351,14 +6386,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Cache' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -6383,7 +6423,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cache"
         },
         "x-ms-long-running-operation": true
       },
@@ -13232,25 +13273,6 @@
         }
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "Backup": {
       "type": "object",
       "description": "Backup under a Backup Vault",
@@ -14196,18 +14218,12 @@
           "maximum": 1125899906842624
         },
         "exportPolicy": {
-          "type": "array",
-          "description": "Set of export policy rules",
-          "items": {
-            "$ref": "#/definitions/ExportPolicyRule"
-          },
-          "x-ms-identifiers": [
-            "ruleIndex"
-          ]
+          "$ref": "#/definitions/CachePropertiesExportPolicy",
+          "description": "Set of export policy rules"
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol",
           "items": {
             "$ref": "#/definitions/ProtocolTypes"
           }
@@ -14374,6 +14390,22 @@
         "originClusterInformation"
       ]
     },
+    "CachePropertiesExportPolicy": {
+      "type": "object",
+      "description": "Set of export policy rules",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "description": "Export policy rule",
+          "items": {
+            "$ref": "#/definitions/ExportPolicyRule"
+          },
+          "x-ms-identifiers": [
+            "ruleIndex"
+          ]
+        }
+      }
+    },
     "CacheProvisioningState": {
       "type": "string",
       "description": "Azure lifecycle management",
@@ -14452,18 +14484,12 @@
           "maximum": 1125899906842624
         },
         "exportPolicy": {
-          "type": "array",
-          "description": "Set of export policy rules",
-          "items": {
-            "$ref": "#/definitions/ExportPolicyRule"
-          },
-          "x-ms-identifiers": [
-            "ruleIndex"
-          ]
+          "$ref": "#/definitions/CachePropertiesExportPolicy",
+          "description": "Set of export policy rules"
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol",
           "items": {
             "$ref": "#/definitions/ProtocolTypes"
           }
@@ -15333,18 +15359,51 @@
     },
     "ElasticBackupPolicyUpdate": {
       "type": "object",
-      "description": "NetApp Elastic Backup Policy resource",
+      "description": "The type used for update operations of the ElasticBackupPolicy.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ElasticBackupPolicyProperties",
+          "$ref": "#/definitions/ElasticBackupPolicyUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "ElasticBackupPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ElasticBackupPolicy.",
+      "properties": {
+        "dailyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Daily backups count to keep",
+          "minimum": 2,
+          "maximum": 1017
+        },
+        "weeklyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Weekly backups count to keep",
+          "minimum": 0,
+          "maximum": 1019
+        },
+        "monthlyBackupsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Monthly backups count to keep",
+          "minimum": 0,
+          "maximum": 1019
+        },
+        "policyState": {
+          "$ref": "#/definitions/ElasticBackupPolicyState",
+          "description": "The property to identify whether Backup Policy is enabled or not"
         }
-      ]
+      }
     },
     "ElasticBackupProperties": {
       "type": "object",
@@ -15580,18 +15639,16 @@
     },
     "ElasticBackupVaultUpdate": {
       "type": "object",
-      "description": "NetApp elastic backup vault resource",
+      "description": "The type used for update operations of the ElasticBackupVault.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/ElasticBackupVaultProperties",
-          "description": "The resource-specific properties for this resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "ElasticCapacityPool": {
       "type": "object",
@@ -16448,18 +16505,46 @@
     },
     "ElasticSnapshotPolicyUpdate": {
       "type": "object",
-      "description": "NetApp Elastic Snapshot Policy under an Elastic Account",
+      "description": "The type used for update operations of the ElasticSnapshotPolicy.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ElasticSnapshotPolicyProperties",
+          "$ref": "#/definitions/ElasticSnapshotPolicyUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "ElasticSnapshotPolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ElasticSnapshotPolicy.",
+      "properties": {
+        "hourlySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyHourlySchedule",
+          "description": "Schedule for hourly snapshots"
+        },
+        "dailySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyDailySchedule",
+          "description": "Schedule for daily snapshots"
+        },
+        "weeklySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyWeeklySchedule",
+          "description": "Schedule for weekly snapshots"
+        },
+        "monthlySchedule": {
+          "$ref": "#/definitions/ElasticSnapshotPolicyMonthlySchedule",
+          "description": "Schedule for monthly snapshots"
+        },
+        "policyStatus": {
+          "$ref": "#/definitions/PolicyStatus",
+          "description": "Configures if the snapshot policy is enabled on the volumes connected to the policy."
         }
-      ]
+      }
     },
     "ElasticSnapshotPolicyVolumeList": {
       "type": "object",
@@ -18235,11 +18320,11 @@
     },
     "NicInfo": {
       "type": "object",
-      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount IP Address.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "ipAddress",
+          "description": "IP Address",
           "readOnly": true
         },
         "volumeResourceIds": {
@@ -18639,7 +18724,7 @@
     },
     "ProtocolTypes": {
       "type": "string",
-      "description": "Export policy rule",
+      "description": "Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol",
       "enum": [
         "NFSv3",
         "NFSv4",

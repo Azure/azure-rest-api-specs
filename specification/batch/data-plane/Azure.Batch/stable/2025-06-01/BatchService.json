@@ -11434,7 +11434,7 @@
         },
         "state": {
           "$ref": "#/definitions/BatchNodeState",
-          "description": "The current state of the Compute Node. The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.",
+          "description": "The current state of the Compute Node.",
           "readOnly": true
         },
         "schedulingState": {
@@ -16265,7 +16265,7 @@
       "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
       "enum": [
         "trustedLaunch",
-        "confidentialVM"
+        "confidentialvm"
       ],
       "x-ms-enum": {
         "name": "SecurityTypes",
@@ -16278,7 +16278,7 @@
           },
           {
             "name": "confidentialVM",
-            "value": "confidentialVM",
+            "value": "confidentialvm",
             "description": "Azure confidential computing offers confidential VMs are for tenants with high security and confidentiality requirements. These VMs provide a strong, hardware-enforced boundary to help meet your security needs. You can use confidential VMs for migrations without making changes to your code, with the platform protecting your VM's state from being read or modified."
           }
         ]
