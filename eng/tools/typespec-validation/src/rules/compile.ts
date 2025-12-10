@@ -1,9 +1,12 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
+import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import path, { basename, dirname, normalize } from "path";
+import path, { basename, dirname, normalize, resolve } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
+import { inspect } from "util";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
@@ -84,6 +87,35 @@ export class CompileRule implements Rule {
 
           stdOutput += "\nOutput folder:\n";
           stdOutput += outputFolder + "\n";
+
+          // Compare versions with TSP and handwritten swagger
+
+          const versionsWithHandwrittenSwagger: string[] = [];
+          const versionsWithTspGeneratedSwagger: string[] = [];
+          const specModel = new SpecModel(outputFolder, { logger: defaultLogger });
+          const swaggers = (await specModel.getSwaggers()).filter((s) =>
+            s.path.startsWith(resolve(outputFolder)),
+          );
+          for (const swagger of swaggers) {
+            if (await swagger.getTypeSpecGenerated()) {
+              versionsWithTspGeneratedSwagger.push(swagger.version);
+            } else {
+              versionsWithHandwrittenSwagger.push(swagger.version);
+            }
+          }
+
+          versionsWithHandwrittenSwagger.sort().reverse();
+          versionsWithTspGeneratedSwagger.sort().reverse();
+
+          stdOutput += `\nVersions with hand-written swagger: ${inspect(versionsWithHandwrittenSwagger)}\n`;
+          stdOutput += `Versions with tsp-generated swagger: ${inspect(versionsWithTspGeneratedSwagger)}\n`;
+
+          if (versionsWithHandwrittenSwagger[0] > versionsWithTspGeneratedSwagger[0]) {
+            success = false;
+            errorOutput += pc.red(
+              `Version ${versionsWithHandwrittenSwagger[0]} was not generated from TypeSpec, but is later than ${versionsWithTspGeneratedSwagger[0]} which was.`,
+            );
+          }
 
           // Filter to only specs matching the folder and filename extracted from the first output-file.
           // Necessary to handle multi-project specs like keyvault.
