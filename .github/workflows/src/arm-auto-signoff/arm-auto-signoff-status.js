@@ -176,11 +176,11 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
 /**
  * Check ARM Analysis workflow results (combines incremental TypeSpec and trivial changes)
- * @param {Array} workflowRuns - Array of workflow runs
- * @param {Object} github - GitHub client
+ * @param {Array<any>} workflowRuns - Array of workflow runs
+ * @param {any} github - GitHub client
  * @param {string} owner - Repository owner
  * @param {string} repo - Repository name  
- * @param {Object} core - Core logger
+ * @param {any} core - Core logger
  * @returns {Promise<{shouldAutoSign: boolean, reason: string, labelsToAdd?: string[]}>}
  */
 async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core) {
@@ -259,4 +259,7 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
       // Fall back to legacy artifact checking
     }
   }
+  
+  // If we get here, no combined artifact found - treat as not qualifying
+  return { shouldAutoSign: false, reason: "No combined analysis artifact found" };
 }

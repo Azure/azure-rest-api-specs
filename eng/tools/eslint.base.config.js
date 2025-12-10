@@ -1,3 +1,5 @@
+// @ts-check
+
 import { defineBaseConfig as defineSharedBaseConfig } from "@azure-tools/specs-shared/eslint-base-config";
 import { defineConfig } from "eslint/config";
 

@@ -12,7 +12,11 @@ on:
       - unlabeled
   workflow_run:
     workflows:
-      ["ARM Auto-SignOff - Analyze Code", "Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+      [
+        "ARM Auto Signoff - Analyze Code",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
     types: [completed]
 
 permissions:
@@ -29,7 +33,7 @@ permissions:
   statuses: read
 
 jobs:
-  arm-auto-signoff:
+  arm-auto-signoff-status:
     name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
@@ -70,7 +74,7 @@ jobs:
       #   issueNumber: number
       # }
       - id: get-label-action
-        name: ARM Auto SignOff 
+        name: ARM Auto SignOff - Set Status
         uses: actions/github-script@v7
         with:
           script: |
