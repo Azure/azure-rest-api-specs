@@ -3865,9 +3865,9 @@ model SynonymMap {
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
   format: "solr";
 
-  // #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
-  // @encode(ArrayEncoding.newlineDelimited)
+  @encode(ArrayEncoding.newlineDelimited)
   synonyms: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -4815,7 +4815,9 @@ model PatternAnalyzer extends LexicalAnalyzer {
   @doc("A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters.")
   pattern?: string = "\\W+";
 
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("Regular expression flags.")
+  @encode(ArrayEncoding.pipeDelimited)
   flags?: RegexFlags;
 
   @doc("A list of stopwords.")
