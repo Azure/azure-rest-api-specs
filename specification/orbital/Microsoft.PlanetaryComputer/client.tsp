@@ -31,7 +31,7 @@ namespace Customizations;
 @@convenientAPI(StacItems.update, false, "csharp,java");
 
 // To use maps instead of binary data for non-primitive union types
-@@alternateType(IntervalLegendsResponse.body, Record<unknown>[]);
+@@alternateType(IntervalLegendsResponse.body, Record<unknown>);
 
 // Workaround errors CS0019 and CS0019
 @@alternateType(StacCollectionTemporalExtent.interval, string[][], "csharp");
