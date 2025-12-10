@@ -1,7 +1,6 @@
 // Map Legends interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "./models.tiler.map-legends.tsp";
 import "./models.common.images.tsp";
 
 using TypeSpec.Rest;
@@ -12,6 +11,29 @@ namespace Microsoft.PlanetaryComputer;
 interface MapsIntervalLegends {
   /**
    * Generate values and color swatches mapping for a given interval classmap.
+   *
+   * Returns a color map for intervals, where each interval is defined by:
+   * - A numeric range `[min, max]` representing the interval boundaries.
+   * - An RGBA color `[red, green, blue, alpha]` associated with the interval.
+   *
+   * The response is a 2D array of interval definitions, where each element is a pair:
+   * - The first element is an array of two numbers `[min, max]` defining the interval.
+   * - The second element is an array of four numbers `[red, green, blue, alpha]` defining the RGBA color.
+   *
+   * Example:
+   * ```json
+   * [
+   *   [
+   *     [-2, 0], [0, 0, 0, 0]
+   *   ],
+   *   [
+   *     [1, 32], [255, 255, 178, 255]
+   *   ]
+   * ]
+   * ```
+   * This example defines two intervals:
+   * - The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).
+   * - The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Interval Legend")
@@ -40,7 +62,7 @@ interface MapsIntervalLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    IntervalLegendsResponse
+    Record<unknown>
   >;
 }
 
