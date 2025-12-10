@@ -28,7 +28,16 @@
             {
               "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource1",
               "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource1Copy",
-              "apiVersion": "2025-04-01"
+              "apiVersion": "2025-04-01",
+              "resourceOverrides": {
+                "sku": {
+                  "name": "ExampleSkuForTargetLocation"
+                },
+                "properties": {
+                  "sampleResourceProperty1": "OverrideValue1",
+                  "sampleResourceProperty2": 42
+                }
+              }
             },
             {
               "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource2",

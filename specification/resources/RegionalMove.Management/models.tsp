@@ -113,7 +113,7 @@ model RegionalMoveRequestedResource {
 
   /** Properties to be overridden/modified on the resource during the copy operation. The resource provider will reject invalid modifications. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This needs to include properties of any arbitrary resource type."
-  resourceProperties?: Record<unknown>;
+  resourceOverrides?: Record<unknown>;
 
   /** The API version to use to perform the copy operation. */
   apiVersion: string;
