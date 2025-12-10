@@ -3865,7 +3865,9 @@ model SynonymMap {
   @doc("The format of the synonym map. Only the 'solr' format is currently supported.")
   format: "solr";
 
+  // #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
+  // @encode(ArrayEncoding.newlineDelimited)
   synonyms: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
@@ -6312,7 +6314,7 @@ model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
 model VisionVectorizeSkill extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
-  modelVersion?: string | null;
+  modelVersion: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("A URI fragment specifying the type of skill.")
