@@ -92,7 +92,9 @@ export class CompileRule implements Rule {
           const versionsWithTspGeneratedSwagger: string[] = [];
 
           const allPattern = path.posix.join(...outputFolder.split(path.win32.sep), "**", "*.json");
-          const allAllSwaggers = (await globby(allPattern, { ignore: ["**/examples/**"] })).map(
+          const allAllSwaggers = (
+            await globby(allPattern, { ignore: ["**/examples/**", "**/scenarios/**"] })
+          ).map(
             // Globby always returns posix paths
             (p) => normalize(p),
           );
