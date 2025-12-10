@@ -183,7 +183,7 @@ interface ContentAnalyzers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @added(Versions.v2025_11_01)
   @doc("Create a copy of the source analyzer to the current location.")
-  @action
+  @action("copy")
   @actionSeparator(":")
   @pollingOperation(ContentAnalyzers.getOperationStatus)
   copy is Foundations.ResourceOperation<
