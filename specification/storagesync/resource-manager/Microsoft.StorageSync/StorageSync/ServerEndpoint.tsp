@@ -50,11 +50,8 @@ interface ServerEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
-  create is ArmCreateOperation<
-    ResourceInstanceParameters<
-      ServerEndpoint,
-      DefaultBaseParameters<ServerEndpoint>
-    >,
+  create is Legacy.CreateOrReplaceAsync<
+    ServerEndpoint,
     ServerEndpointCreateParameters,
     Response = (ArmResourceUpdatedResponse<ServerEndpoint> & {
       @header("x-ms-correlation-request-id")
@@ -74,7 +71,7 @@ interface ServerEndpoints {
       @doc("request id.")
       requestId?: string;
     }),
-    ErrorResponse = StorageSyncError
+    Error = StorageSyncError
   >;
 
   /**
