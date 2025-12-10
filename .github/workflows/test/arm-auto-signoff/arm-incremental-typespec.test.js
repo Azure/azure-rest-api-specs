@@ -1,6 +1,6 @@
 import { relative, resolve } from "path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { repoRoot } from "../../shared/test/repo.js";
+import { repoRoot } from "../../../shared/test/repo.js";
 
 const mockRaw = vi.hoisted(() => vi.fn().mockResolvedValue(""));
 const mockShow = vi.hoisted(() => vi.fn().mockResolvedValue(""));
@@ -13,14 +13,14 @@ vi.mock("simple-git", () => ({
 }));
 
 import { inspect } from "util";
-import * as changedFiles from "../../shared/src/changed-files.js";
+import * as changedFiles from "../../../shared/src/changed-files.js";
 import {
   contosoReadme,
   swaggerHandWritten,
   swaggerTypeSpecGenerated,
-} from "../../shared/test/examples.js";
-import incrementalTypeSpecImpl from "../src/arm-incremental-typespec.js";
-import { createMockCore } from "./mocks.js";
+} from "../../../shared/test/examples.js";
+import incrementalTypeSpecImpl from "../../src/arm-auto-signoff/arm-incremental-typespec.js";
+import { createMockCore } from "../mocks.js";
 
 const core = createMockCore();
 
