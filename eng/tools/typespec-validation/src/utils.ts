@@ -54,7 +54,7 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .resolve(folder)
     .split(path.sep)
     .join("/")
-    .replace(/^([a-z]):/, (_match, driveLetter) => driveLetter.toUpperCase() + ":");
+    .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
 }
 
 export async function gitDiffTopSpecFolder(folder: string) {
