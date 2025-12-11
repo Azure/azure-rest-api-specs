@@ -29,7 +29,7 @@ using Rest;
 @@Legacy.flattenProperty(CreateOrUpdateSettingsRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(EntityInfo.properties);
+@@Legacy.flattenProperty(EntityInfo.properties, "!javascript");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(OperationResults.properties);
