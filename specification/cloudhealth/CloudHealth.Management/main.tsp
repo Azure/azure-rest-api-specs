@@ -21,6 +21,9 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-05-01-preview")
   v2025_05_01_preview: "2025-05-01-preview",
+
+  @doc("2026-01-01-preview")
+  v2026_01_01_preview: "2026-01-01-preview",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -54,6 +57,7 @@ model HealthModel is TrackedResource<HealthModelProperties> {
 
 @doc("HealthModel properties")
 model HealthModelProperties {
+  @removed(Versions.v2026_01_01_preview)
   @visibility(Lifecycle.Read)
   @doc("The data plane endpoint for interacting with health data")
   dataplaneEndpoint?: string;
@@ -90,6 +94,11 @@ model ModelDiscoverySettings {
 @pattern(proxyResourceNameRegex)
 @doc("Type for signal definition resource name.")
 scalar signalDefinitionName extends string;
+
+@added(Versions.v2026_01_01_preview)
+@pattern(proxyResourceNameRegex)
+@doc("Type for signal name.")
+scalar signalName extends string;
 
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
@@ -147,6 +156,7 @@ model SignalDefinitionProperties {
 
 @doc("Evaluation rule for a signal definition")
 model EvaluationRule {
+  @removed(Versions.v2026_01_01_preview)
   @doc("Configure to use ML-based dynamic thresholds. When used, degradedRule and unhealthyRule must not be set.")
   dynamicDetectionRule?: DynamicDetectionRule;
 
@@ -168,6 +178,7 @@ model ThresholdRule {
   threshold: string;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("ML-based evaluation rule for a signal definition")
 model DynamicDetectionRule {
   @doc("ML model to use for dynamic thresholds")
@@ -185,6 +196,7 @@ model DynamicDetectionRule {
   trainingStartTime?: utcDateTime;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("ML-based model variants")
 union DynamicThresholdModel {
   string,
@@ -193,6 +205,7 @@ union DynamicThresholdModel {
   AnomalyDetection: "AnomalyDetection",
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Threshold direction for dynamic thresholds")
 union DynamicThresholdDirection {
   string,
@@ -308,20 +321,44 @@ model PrometheusMetricsSignalDefinitionProperties
 union SignalOperator {
   string,
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Lower than")
   LowerThan: "LowerThan",
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Lower than or equal to")
   LowerOrEquals: "LowerOrEquals",
 
   @doc("Greater than")
   GreaterThan: "GreaterThan",
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Greater than or equal to")
   GreaterOrEquals: "GreaterOrEquals",
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Equal to")
   Equals: "Equals",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Less than")
+  LessThan: "LessThan",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Less than or equal to")
+  LessThanOrEqual: "LessThanOrEqual",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Greater than or equal to")
+  GreaterThanOrEqual: "GreaterThanOrEqual",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Equal to")
+  Equal: "Equal",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Not equal to")
+  NotEqual: "NotEqual",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-explanatory"
@@ -434,8 +471,13 @@ model EntityProperties {
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Signal groups which are assigned to this entity")
   signals?: SignalGroup;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Signal groups which are assigned to this entity")
+  signalGroups?: SignalGroups;
 
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
@@ -451,6 +493,26 @@ model EntityProperties {
 
   @doc("Alert configuration for this entity")
   alerts?: EntityAlerts;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Status of a signal")
+model SignalStatus {
+  @visibility(Lifecycle.Read)
+  @doc("Health state of this signal")
+  healthState?: HealthState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Reported value of the signal")
+  value?: float64;
+
+  @visibility(Lifecycle.Read)
+  @doc("Timestamp when the value was reported")
+  reportedAt?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("Error message if the signal status cannot be retrieved")
+  error?: string;
 }
 
 @doc("Alert configuration for an entity")
@@ -515,6 +577,7 @@ model IconDefinition {
   customData?: string;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Contains various signal groups that can be assigned to an entity")
 model SignalGroup {
   @doc("Azure Resource Signal Group")
@@ -525,6 +588,22 @@ model SignalGroup {
 
   @doc("Azure Monitor Workspace Signal Group")
   azureMonitorWorkspace?: AzureMonitorWorkspaceSignalGroup;
+
+  @doc("Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity.")
+  dependencies?: DependenciesSignalGroup;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Contains various signal groups that can be assigned to an entity")
+model SignalGroups {
+  @doc("Azure Resource Signal Group")
+  azureResource?: AzureResourceSignals;
+
+  @doc("Log Analytics Signal Group")
+  azureLogAnalytics?: LogAnalyticsSignals;
+
+  @doc("Azure Monitor Workspace Signal Group")
+  azureMonitorWorkspace?: AzureMonitorWorkspaceSignals;
 
   @doc("Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity.")
   dependencies?: DependenciesSignalGroup;
@@ -553,6 +632,7 @@ union DependenciesAggregationType {
   Thresholds: "Thresholds",
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("A grouping of signal assignments and link to a data source")
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
@@ -564,6 +644,7 @@ model SignalAssignmentGroup {
   authenticationSetting: authenticationSettingName;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Group of signal definition assignments")
 model SignalAssignment {
   @doc("Signal definitions referenced by their names. All definitions are combined with an AND operator.")
@@ -573,22 +654,119 @@ model SignalAssignment {
   signalDefinitions: signalDefinitionName[];
 }
 
+@added(Versions.v2026_01_01_preview)
+@discriminator("signalKind")
+@doc("Additional properties for signal instances assigned to an entity")
+model SignalInstanceProperties {
+  @doc("Kind of the signal instance")
+  signalKind: SignalKind;
+  
+  @doc("Unique name of the signal within the entity")
+  @minLength(1)
+  @maxLength(260)
+  name: string;
+
+  @doc("Optional reference to a signal definition that provides default values")
+  signalDefinitionName?: signalDefinitionName;
+
+  @visibility(Lifecycle.Read)
+  @doc("Current status of the signal")
+  status?: SignalStatus;
+}
+
+@removed(Versions.v2026_01_01_preview)
 @doc("A grouping of signal assignments for an Azure resource")
 model AzureResourceSignalGroup is SignalAssignmentGroup {
   @doc("Azure resource ID")
   azureResourceId: armResourceIdentifier<[]>;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("A grouping of signal assignments for a Log Analytics Workspace")
 model LogAnalyticsSignalGroup is SignalAssignmentGroup {
   @doc("Log Analytics Workspace resource ID")
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("A grouping of signal assignments for a Azure Monitor Workspace")
 model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
   @doc("Azure Monitor workspace resource ID")
   azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("An Azure Resource Metric signal instance assigned to an entity")
+model AzureResourceSignal extends SignalInstanceProperties {
+  @doc("Kind of the signal instance")
+  signalKind: SignalKind.AzureResourceMetric;
+  ...OmitProperties<ResourceMetricSignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A Log Analytics Query signal instance assigned to an entity")
+model LogAnalyticsSignal extends SignalInstanceProperties {
+  @doc("Kind of the signal instance")
+  signalKind: SignalKind.LogAnalyticsQuery;
+  ...OmitProperties<LogAnalyticsQuerySignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A Prometheus Metrics Query signal instance assigned to an entity")
+model PrometheusMetricsSignal extends SignalInstanceProperties {
+  @doc("Kind of the signal instance")
+  signalKind: SignalKind.PrometheusMetricsQuery;
+  ...OmitProperties<PrometheusMetricsSignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A grouping of Azure resource signals")
+model AzureResourceSignals {
+  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  authenticationSetting: authenticationSettingName;
+
+  @doc("Azure resource ID")
+  azureResourceId: armResourceIdentifier<[]>;
+
+  @doc("Azure resource kind (e.g., 'functionapp'). Populated by the UI for icon rendering. Can be null if not populated.")
+  @minLength(0)
+  @maxLength(256)
+  azureResourceKind?: string;
+
+  @doc("Signals assigned to this group")
+  @maxItems(50)
+  @identifiers(#["name"])
+  signals?: AzureResourceSignal[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A grouping of Log Analytics workspace signals")
+model LogAnalyticsSignals {
+  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  authenticationSetting: authenticationSettingName;
+
+  @doc("Log Analytics workspace resource ID")
+  logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
+
+  @doc("Signals assigned to this group")
+  @maxItems(50)
+  @identifiers(#["name"])
+  signals?: LogAnalyticsSignal[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A grouping of Azure Monitor workspace signals")
+model AzureMonitorWorkspaceSignals {
+  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  authenticationSetting: authenticationSettingName;
+
+  @doc("Azure Monitor workspace resource ID")
+  azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
+
+  @doc("Signals assigned to this signal group")
+  @maxItems(50)
+  @identifiers(#["name"])
+  signals?: PrometheusMetricsSignal[];
 }
 
 @doc("Type of impact an entity has on health state propagation")
@@ -615,8 +793,13 @@ union HealthState {
   @doc("Degraded status")
   Degraded: "Degraded",
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Error status (Unhealthy)")
   Error: "Error",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Unhealthy status")
+  Unhealthy: "Unhealthy",
 
   @doc("Unknown status")
   Unknown: "Unknown",
@@ -772,6 +955,77 @@ union DiscoveryRuleRecommendedSignalsBehavior {
   Disabled: "Disabled",
 }
 
+@added(Versions.v2026_01_01_preview)
+@doc("Request body for getting entity health history")
+model EntityHistoryRequest {
+  @doc("Start time for the history query. Defaults to 24 hours ago if not specified.")
+  startAt?: utcDateTime;
+
+  @doc("End time for the history query. Defaults to now if not specified.")
+  endAt?: utcDateTime;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Response containing entity health state transitions")
+model EntityHistoryResponse {
+  @doc("Name of the entity")
+  entityName: string;
+
+  @doc("List of health state transitions")
+  @identifiers(#["occurredAt"])
+  transitions: HealthStateTransition[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A health state transition record")
+model HealthStateTransition {
+  @doc("Previous health state before the transition")
+  previousState: HealthState;
+
+  @doc("New health state after the transition")
+  newState: HealthState;
+
+  @doc("Timestamp when the transition occurred")
+  occurredAt: utcDateTime;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Request body for getting signal history")
+model SignalHistoryRequest {
+  @doc("Name of the signal to get history for")
+  signalName: signalName;
+
+  @doc("Start time for the history query. Defaults to 24 hours ago if not specified.")
+  startAt?: utcDateTime;
+
+  @doc("End time for the history query. Defaults to now if not specified.")
+  endAt?: utcDateTime;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Response containing signal history time series")
+model SignalHistoryResponse {
+  @doc("Name of the signal")
+  signalName: signalName;
+
+  @doc("Time series data points")
+  @identifiers(#["occurredAt"])
+  timeSeries: SignalTimeSeriesPoint[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("A data point in the signal time series")
+model SignalTimeSeriesPoint {
+  @doc("Timestamp of the data point")
+  occurredAt: utcDateTime;
+
+  @doc("Signal value at this point in time")
+  value?: float64;
+
+  @doc("Health state at this point in time")
+  healthState: HealthState;
+}
+
 alias TimestampQueryParam = {
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
   @query
@@ -828,6 +1082,18 @@ interface Entities {
     Azure.ResourceManager.Foundations.BaseParameters<Entity> &
       TimestampQueryParam
   >;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Retrieve the health state transition history for an entity")
+  @post
+  @action("getHistory")
+  getHistory is ArmResourceActionSync<Entity, EntityHistoryRequest, EntityHistoryResponse>;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Retrieve the time series history for a signal on an entity")
+  @post
+  @action("getSignalHistory")
+  getSignalHistory is ArmResourceActionSync<Entity, SignalHistoryRequest, SignalHistoryResponse>;
 }
 
 @armResourceOperations(Relationship)
