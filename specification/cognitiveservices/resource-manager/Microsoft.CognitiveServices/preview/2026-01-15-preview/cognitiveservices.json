@@ -7574,6 +7574,454 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/list": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "List agents by subscription with optional filtering and sorting",
+        "description": "Retrieves a paginated list of agents for the specified subscription with optional filtering and sorting",
+        "operationId": "Agents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "list",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentListOptions"
+            },
+            "description": "Agent list options."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved agent list",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List agents": {
+            "$ref": "./examples/AgentsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/start": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Start an agent",
+        "description": "Starts a specified agent",
+        "operationId": "Agents_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentLifecycleRequest"
+            },
+            "description": "Agent lifecycle request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully started agent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start agent": {
+            "$ref": "./examples/AgentsStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/stop": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Stop an agent",
+        "description": "Stops a specified agent",
+        "operationId": "Agents_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentLifecycleRequest"
+            },
+            "description": "Agent lifecycle request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully stopped agent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop agent": {
+            "$ref": "./examples/AgentsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/block": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Block an agent",
+        "description": "Blocks a specified agent",
+        "operationId": "Agents_Block",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentLifecycleRequest"
+            },
+            "description": "Agent lifecycle request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully blocked agent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Block agent": {
+            "$ref": "./examples/AgentsBlock.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/unblock": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Unblock an agent",
+        "description": "Unblocks a specified agent",
+        "operationId": "Agents_UnBlock",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentLifecycleRequest"
+            },
+            "description": "Agent lifecycle request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully unblocked agent"
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unblock agent": {
+            "$ref": "./examples/AgentsUnBlock.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/register": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Register an agent",
+        "description": "Registers a new agent",
+        "operationId": "Agents_Register",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProxiedAgentRegistrationRequest"
+            },
+            "description": "Agent registration request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully registered agent",
+            "schema": {
+              "$ref": "#/definitions/UnifiedAgentDto"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register agent": {
+            "$ref": "./examples/AgentsRegister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/unregister": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Unregister an agent",
+        "description": "Unregisters an existing agent",
+        "operationId": "Agents_Unregister",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentUnregistrationRequest"
+            },
+            "description": "Agent unregistration request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully unregistered agent",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unregister agent": {
+            "$ref": "./examples/AgentsUnregister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/register": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Register a tool",
+        "description": "Registers a new tool",
+        "operationId": "Tools_Register",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully registered tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register tool": {
+            "$ref": "./examples/ToolsRegister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/unregister": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Unregister a tool",
+        "description": "Unregisters an existing tool",
+        "operationId": "Tools_Unregister",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully unregistered tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unregister tool": {
+            "$ref": "./examples/ToolsUnregister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/validate": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Validates a tool",
+        "description": "Validates the configuration of a tool",
+        "operationId": "Tools_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully validated tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate tool": {
+            "$ref": "./examples/ToolsValidate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -13712,6 +14160,812 @@
           "items": {
             "type": "string"
           },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "A2a": {
+      "type": "object",
+      "description": "Additional properties for agent-to-agent communication",
+      "properties": {
+        "cardUrl": {
+          "type": "string",
+          "description": "URL of the card used in agent-to-agent communication",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentActionMeta": {
+      "type": "object",
+      "description": "Additional properties required for taking the action",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "The URI to be used when taking the action on the agent",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentActions": {
+      "type": "string",
+      "description": "The actions that can be performed on the agent",
+      "enum": [
+        "Start",
+        "Stop",
+        "Block",
+        "UnBlock"
+      ],
+      "x-ms-enum": {
+        "name": "AgentActions",
+        "modelAsString": true
+      }
+    },
+    "AgentActionsCapability": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "description": "The list of commands that can be executed on the agent",
+          "items": {
+            "$ref": "#/definitions/AgentActions"
+          },
+          "x-nullable": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/AgentActionMeta",
+          "description": "Metadata regarding the agent actions"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentCapabilities": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/AgentActionsCapability",
+          "description": "Capabilities related to agent actions",
+          "x-nullable": true
+        },
+        "management": {
+          "$ref": "#/definitions/AgentManagementCapability",
+          "description": "Capabilities related to agent management",
+          "x-nullable": true
+        },
+        "observability": {
+          "$ref": "#/definitions/AgentObservabilityCapability",
+          "description": "Capabilities related to agent observability",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentKind": {
+      "type": "string",
+      "description": "The kind of agent",
+      "enum": [
+        "Unknown",
+        "Interactive",
+        "Workflow",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AgentKind",
+        "modelAsString": true
+      }
+    },
+    "AgentLifecycleRequest": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "The agent's platform (Foundry, AI Gateway, Copilot, etc.)"
+        },
+        "agentKind": {
+          "$ref": "#/definitions/AgentKind",
+          "description": "The agent's kind (Interactive, Workflow, etc.)"
+        },
+        "action": {
+          "$ref": "#/definitions/AgentActions",
+          "description": "The action requested (Start, Stop, Block, etc.)"
+        },
+        "actionMeta": {
+          "$ref": "#/definitions/AgentActionMeta",
+          "description": "Additional properties required for taking the action"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentList": {
+      "type": "object",
+      "description": "Represents a list of agents with pagination information",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "The list of agents",
+          "items": {
+            "$ref": "#/definitions/UnifiedAgentDto"
+          },
+          "x-nullable": true
+        },
+        "totalCount": {
+          "type": "integer",
+          "description": "The total count of agents",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentListOptions": {
+      "type": "object",
+      "properties": {
+        "platforms": {
+          "type": "array",
+          "description": "The platforms to filter agents by",
+          "items": {
+            "$ref": "#/definitions/PlatformType"
+          },
+          "x-nullable": true
+        },
+        "filterByName": {
+          "type": "string",
+          "description": "The name to filter agents by",
+          "x-nullable": true
+        },
+        "sortBy": {
+          "$ref": "#/definitions/AgentSortableField",
+          "description": "The sort field for the list"
+        },
+        "sortOrder": {
+          "$ref": "#/definitions/AgentSortOrder",
+          "description": "The sort order for the list"
+        },
+        "page": {
+          "type": "integer",
+          "description": "The page number of the results",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "description": "The number of results to return per page",
+          "format": "int32"
+        },
+        "projects": {
+          "type": "array",
+          "description": "The list of project IDs to filter agents by",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "agentEntityId": {
+          "type": "string",
+          "description": "The exact ID of the agent to filter"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentManagement": {
+      "type": "string",
+      "description": "The management actions that can be performed on the agent",
+      "enum": [
+        "ViewTraces",
+        "Unregister"
+      ],
+      "x-ms-enum": {
+        "name": "AgentManagement",
+        "modelAsString": true
+      }
+    },
+    "AgentManagementCapability": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "description": "The list of commands that can be executed on the agent",
+          "items": {
+            "$ref": "#/definitions/AgentManagement"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentObservabilityCapability": {
+      "type": "object",
+      "description": "Capabilities related to agent observability",
+      "properties": {
+        "tracing": {
+          "$ref": "#/definitions/AgentTracingCapability",
+          "description": "Capabilities related to agent tracing"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSortOrder": {
+      "type": "string",
+      "description": "The sorting order for agent listing",
+      "enum": [
+        "Asc",
+        "Desc"
+      ],
+      "x-ms-enum": {
+        "name": "AgentSortOrder",
+        "modelAsString": true
+      }
+    },
+    "AgentSortableField": {
+      "type": "string",
+      "description": "Fields that can be used for sorting agents",
+      "enum": [
+        "Name",
+        "State"
+      ],
+      "x-ms-enum": {
+        "name": "AgentSortableField",
+        "modelAsString": true
+      }
+    },
+    "AgentState": {
+      "type": "string",
+      "description": "The agent's current state",
+      "enum": [
+        "Unknown",
+        "Running",
+        "Stopped",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AgentState",
+        "modelAsString": true
+      }
+    },
+    "AgentStatus": {
+      "type": "string",
+      "description": "The agent's current status",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Inactive",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AgentStatus",
+        "modelAsString": true
+      }
+    },
+    "AgentTracingCapability": {
+      "type": "object",
+      "description": "Capabilities related to agent tracing",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "description": "The Application Insights resource ID associated with the agent",
+          "format": "arm-id",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentUnregistrationRequest": {
+      "type": "object",
+      "description": "The request to unregister an agent",
+      "properties": {
+        "agentEntityId": {
+          "type": "string",
+          "description": "The internal identifier of the agent to unregister"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonElement": {
+      "type": "object",
+      "properties": {
+        "valueKind": {
+          "$ref": "#/definitions/JsonValueKind"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonValueKind": {
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Object",
+        "Array",
+        "String",
+        "Number",
+        "True",
+        "False",
+        "Null"
+      ],
+      "x-ms-enum": {
+        "name": "JsonValueKind",
+        "modelAsString": true
+      }
+    },
+    "PlatformType": {
+      "type": "string",
+      "description": "The platform where the agent exists",
+      "enum": [
+        "Unset",
+        "Foundry",
+        "AzureSreAgent",
+        "AzureAgentLoop",
+        "AzureAiGateway",
+        "Copilot"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformType",
+        "modelAsString": true
+      }
+    },
+    "Protocols": {
+      "type": "object",
+      "description": "The agent-to-agent protocols used to register this agent",
+      "properties": {
+        "a2a": {
+          "$ref": "#/definitions/A2a",
+          "description": "Additional properties for agent-to-agent communication"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProxiedAgentRegistrationRequest": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "The ID of the agent to register"
+        },
+        "agentEntityId": {
+          "type": "string",
+          "description": "The internal identifier of the agent to register"
+        },
+        "name": {
+          "type": "string",
+          "description": "The agent's display name",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The agent's description",
+          "x-nullable": true
+        },
+        "projectResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the project associated to this agent",
+          "x-nullable": true
+        },
+        "sourceType": {
+          "type": "string",
+          "description": "The type of the source of this agent",
+          "x-nullable": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistrationProperties",
+          "description": "Additional properties to register this agent"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The name of the type used to register this agent",
+          "x-nullable": true
+        },
+        "backendUrl": {
+          "type": "string",
+          "description": "The backend URL used to register this agent",
+          "x-nullable": true
+        },
+        "agentId": {
+          "type": "string",
+          "description": "The internal ID used to register this agent",
+          "x-nullable": true
+        },
+        "managementPortalUrl": {
+          "type": "string",
+          "description": "The URL of a management portal used to register this agent",
+          "x-nullable": true
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol used to register this agent",
+          "x-nullable": true
+        },
+        "protocols": {
+          "$ref": "#/definitions/Protocols",
+          "description": "The agent-to-agent protocols used to register this agent"
+        },
+        "basePath": {
+          "type": "string",
+          "description": "The base path to be appended to the URL of AI Gateway",
+          "x-nullable": true
+        },
+        "contentJsonPath": {
+          "type": "string",
+          "description": "The JSON path to follow in the payload to reach the content",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceDetailProperties": {
+      "type": "object",
+      "description": "The detailed properties themselves at the source",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of source platform"
+        }
+      }
+    },
+    "FoundrySourceDetailProperties": {
+      "type": "object",
+      "description": "Properties specific to Foundry source details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Foundry",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the resource associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The account name associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "agentName": {
+          "type": "string",
+          "description": "The agent name associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Foundry resource",
+          "x-nullable": true
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "The name of the application associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "applicationResourceId": {
+          "type": "string",
+          "description": "The resource ID of the application associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "The name of the deployment associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "deploymentResourceId": {
+          "type": "string",
+          "description": "The resource ID of the deployment associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "instanceIdentityClientId": {
+          "type": "string",
+          "description": "The client ID of the instance identity associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "instanceIdentityPrincipalId": {
+          "type": "string",
+          "description": "The principal ID of the instance identity associated with the Foundry resource",
+          "x-nullable": true
+        },
+        "instanceIdentityTenantId": {
+          "type": "string",
+          "description": "The tenant ID of the instance identity associated with the Foundry resource",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SreAgentSourceDetailProperties": {
+      "type": "object",
+      "description": "Properties specific to SRE Agent source details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureSreAgent",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID associated with the SRE Agent",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group associated with the SRE Agent",
+          "x-nullable": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name associated with the SRE Agent",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AzureAgentLoopSourceDetailProperties": {
+      "type": "object",
+      "description": "Properties specific to Azure Agent Loop source details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAgentLoop",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID associated with the Azure Agent Loop",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group associated with the Azure Agent Loop",
+          "x-nullable": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name associated with the Azure Agent Loop",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AzureAiGatewaySourceDetailProperties": {
+      "type": "object",
+      "description": "Properties specific to Azure AI Gateway source details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureAiGateway",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID associated with the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group associated with the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name associated with the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The project name associated with the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "aiGatewayAzurePortalUrl": {
+          "type": "string",
+          "description": "The Azure portal URL for the AI Gateway",
+          "x-nullable": true
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol used by the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "a2a": {
+          "$ref": "#/definitions/A2a",
+          "description": "The agent-to-agent specific properties for the Azure AI Gateway",
+          "x-nullable": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the Azure AI Gateway",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "CopilotSourceDetailProperties": {
+      "type": "object",
+      "description": "Properties specific to Copilot source details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Copilot",
+      "properties": {
+        "environmentId": {
+          "type": "string",
+          "description": "The Copilot environment ID where the agent is running",
+          "x-nullable": true
+        },
+        "botId": {
+          "type": "string",
+          "description": "The Copilot bot ID",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceDetails": {
+      "type": "object",
+      "description": "Detailed properties of the given agent at source",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The name of the source type used to look for detailed properties",
+          "x-nullable": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceDetailProperties",
+          "description": "The detailed properties themselves at the source"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ToolActionRequest": {
+      "type": "object",
+      "description": "Request to perform an action on a tool registered in FCP",
+      "properties": {
+        "projectResourceId": {
+          "type": "string",
+          "description": "The resource ID of the project that contains the tool",
+          "x-nullable": true
+        },
+        "toolUrl": {
+          "type": "string",
+          "description": "The URL of the tool to perform the action on",
+          "x-nullable": true
+        },
+        "gatewayUrl": {
+          "type": "string",
+          "description": "The gateway URL associated with the tool",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UnifiedAgentDto": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/PlatformType",
+          "description": "The platform where the agent exists"
+        },
+        "kind": {
+          "$ref": "#/definitions/AgentKind",
+          "description": "The agent's kind (Interactive, Workflow, etc.)"
+        },
+        "agentEntityId": {
+          "type": "string",
+          "description": "The unique identifier of the agent (not the Entra agent ID) formed by the platform type, an environment id and an agent identifier (derived from ARM where available)"
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the agent is on the source platform",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the agent",
+          "x-nullable": true
+        },
+        "agentId": {
+          "type": "string",
+          "description": "The unique name of the agent in the source platform",
+          "x-nullable": true
+        },
+        "agentEndpoint": {
+          "type": "string",
+          "description": "The endpoint that can be used to interface with the agent",
+          "x-nullable": true
+        },
+        "managementPortalUrl": {
+          "type": "string",
+          "description": "Management URL that can be used to manage the agent",
+          "x-nullable": true
+        },
+        "projectResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the project associated to this agent",
+          "x-nullable": true
+        },
+        "source": {
+          "type": "string",
+          "description": "The source platform where the agent is running",
+          "x-nullable": true
+        },
+        "sourceDetails": {
+          "$ref": "#/definitions/SourceDetails",
+          "description": "Detailed properties of the given agent at source"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the agent",
+          "x-nullable": true
+        },
+        "published": {
+          "type": "boolean",
+          "description": "Indicates whether the agent is published or not"
+        },
+        "deployed": {
+          "type": "boolean",
+          "description": "Indicates whether the agent is deployed or not"
+        },
+        "state": {
+          "$ref": "#/definitions/AgentState",
+          "description": "The state of the agent (running, stopped, etc.)"
+        },
+        "status": {
+          "$ref": "#/definitions/AgentStatus",
+          "description": "The status of the agent (active, inactive, blocked, etc.)"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/AgentCapabilities",
+          "description": "An object describing the capabilities that FCP can execute over this agent"
+        },
+        "linkedAssets": {
+          "type": "string",
+          "description": "Assets that are linked to the given agent and that are also managed by FCP",
+          "x-nullable": true
+        },
+        "tags": {
+          "type": "string",
+          "description": "The tags that are associated with this entity",
+          "x-nullable": true
+        },
+        "extensionData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonElement"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UnifiedToolDto": {
+      "type": "object",
+      "properties": {
+        "toolUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "gatewayUrl": {
+          "type": "string",
           "x-nullable": true
         }
       },

@@ -121,6 +121,14 @@ suppressions:
     reason: Provide customers ability to define custom conditions for when a rule is activated.
     where:
       - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: AvoidAdditionalProperties
+    reason: SourceDetailProperties requires flexible schema to support various agent source configurations.
+    where:
+      - $.definitions.SourceDetailProperties
+  - code: AvoidAdditionalProperties
+    reason: extensionData allows agents to store custom metadata as key-value pairs with JsonElement values.
+    where:
+      - $.definitions.UnifiedAgentDto.properties.extensionData
   - code: TopLevelResourcesListByResourceGroup
     reason: These are subscription level resources and are modeled after the RaiPolicy List operation
     where: 
@@ -129,6 +137,19 @@ suppressions:
   - code: ResourceNameRestriction
     reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
     from: cognitiveservices.json
+  - code: PostResponseCodes
+    reason: These FCP operations use POST request types to supported advanced search options that are needed in the payload.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/list"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/start"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/stop"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/block"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/unblock"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/register"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/agents/default/unregister"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/register"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/unregister"].post
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/tools/default/validate"].post
 ```
 
 ### Tag: package-2025-10-01-preview
@@ -139,18 +160,6 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
-  - code:  ProvisioningStateMustBeReadOnly
-    reason: Schema ref is AgentApplicationResource -> AgenticApplication. AgenticApplication has a readonly provisioning state.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].get.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].put.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].put.responses.201.schema
-  - code:  ProvisioningStateMustBeReadOnly
-    reason: Schema ref is AgentDeploymentResource -> AgentDeployment. AgentDeployment has a readonly provisioning state.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].get.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.200.schema
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/agentDeployments/{deploymentName}"].put.responses.201.schema
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
