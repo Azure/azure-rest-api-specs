@@ -1410,6 +1410,13 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.IndexedSharePointContainerName,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexedSharePointContainerName,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.IndexedSharePointKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
