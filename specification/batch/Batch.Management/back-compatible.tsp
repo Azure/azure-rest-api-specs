@@ -128,7 +128,3 @@ using Microsoft.Batch;
   "go"
 );
 @@alternateType(IPRule.action, "Allow", "go");
-@@clientName(NspAccessRuleProperties.subscriptions,
-  "AccessRulePropertiesSubscriptionsItem",
-  "go"
-);
