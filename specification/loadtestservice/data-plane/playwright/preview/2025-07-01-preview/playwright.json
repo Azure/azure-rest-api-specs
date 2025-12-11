@@ -62,6 +62,64 @@
   },
   "tags": [],
   "paths": {
+    "/playwrightworkspaces/{workspaceId}": {
+      "get": {
+        "operationId": "Workspaces_Get",
+        "description": "Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID in GUID format.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 36,
+            "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "x-ms-useragent",
+            "in": "header",
+            "description": "Optional header to specify additional client information when the standard 'User-Agent' header cannot be explicitly set, such as when using Playwright Client. The value should follow the standard 'User-Agent' header format.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/playwrightworkspaces/{workspaceId}/access-tokens": {
       "get": {
         "operationId": "AccessTokens_List",
@@ -1040,6 +1098,48 @@
         ]
       }
     },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The Azure subscription state.",
+      "enum": [
+        "Registered",
+        "Warned",
+        "Suspended",
+        "Deleted",
+        "Unregistered"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "The subscription state is Registered."
+          },
+          {
+            "name": "Warned",
+            "value": "Warned",
+            "description": "The subscription state is Warned."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The subscription state is Suspended."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The subscription state is Deleted."
+          },
+          {
+            "name": "Unregistered",
+            "value": "Unregistered",
+            "description": "The subscription state is Unregistered."
+          }
+        ]
+      }
+    },
     "TestRun": {
       "type": "object",
       "description": "Model of a test run used for tracking purposes.",
@@ -1133,6 +1233,147 @@
             "create"
           ]
         }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Playwright workspace is the parent resource for most of the other service resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The workspace ID in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The fully-qualified Azure resource id for the workspace.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The workspace name.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/WorkspaceState",
+          "description": "The state of workspace - Active | Inactive",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The Azure subscription id in GUID format for the workspace.",
+          "readOnly": true
+        },
+        "subscriptionState": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "The Azure subscription state - Registered | Unregistered | Warned | Suspended | Deleted",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Azure tenant id in GUID format for the workspace.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The workspace resource location in Azure, for eg. eastus, southeastasia.",
+          "readOnly": true
+        },
+        "regionalAffinity": {
+          "type": "string",
+          "description": "This property sets the connection region for Playwright client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "localAuth": {
+          "type": "string",
+          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is Enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is Disabled."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "storageUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "When set on Playwright workspace resource, it provides the URI of the Azure storage account used to store workspace artifacts, test results, and reports.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "resourceId",
+        "name",
+        "state",
+        "subscriptionId",
+        "subscriptionState",
+        "tenantId",
+        "location"
+      ]
+    },
+    "WorkspaceState": {
+      "type": "string",
+      "description": "The Playwright workspace state.",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The workspace is Active."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "The workspace is Inactive."
+          }
+        ]
       }
     }
   },
