@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
   """)
 @service(#{ title: "PurviewDataQuality" })
 @server(
-  "{endpoint}/purviewdataquality/api",
+  "{endpoint}/datagovernance/quality",
   "Purview Data Quality Service is a fully managed cloud service that enables comprehensive data quality monitoring, assessment, and governance across organizational data assets.",
   {
     endpoint: url,
@@ -40,6 +40,9 @@ namespace PurviewDataQuality;
 enum ApiVersions {
   @doc("2025-09-01-preview service API version")
   v2025_09_01_preview: "2025-09-01-preview",
+
+  @doc("2025-12-11-preview service API version")
+  v2025_12_11_preview: "2025-12-11-preview",
 }
 
 alias AuthToken = OAuth2Auth<[
