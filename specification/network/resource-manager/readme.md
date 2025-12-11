@@ -103,7 +103,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2025-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2025-05-01/webapplicationfirewall.json
-  suppressions:
+suppressions:
   - code: PutResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
     where:
