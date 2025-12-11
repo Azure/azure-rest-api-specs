@@ -1201,7 +1201,7 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
     }
   >;
