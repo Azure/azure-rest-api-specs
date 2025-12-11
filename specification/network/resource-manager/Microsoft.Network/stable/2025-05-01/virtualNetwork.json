@@ -599,6 +599,9 @@
           },
           "Create subnet with service endpoints with network identifier": {
             "$ref": "./examples/SubnetCreateServiceEndpointNetworkIdentifier.json"
+          },
+          "Create Subnet with service gateway": {
+            "$ref": "./examples/SubnetCreateWithServiceGateway.json"
           }
         }
       }
@@ -1687,6 +1690,10 @@
             "$ref": "#/definitions/IpamPoolPrefixAllocation"
           },
           "description": "A list of IPAM Pools for allocating IP address prefixes."
+        },
+        "serviceGateway": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to an existing service gateway."
         }
       },
       "description": "Properties of the subnet."
