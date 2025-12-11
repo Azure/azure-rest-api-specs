@@ -53,6 +53,7 @@ using Microsoft.DBforPostgreSQL;
   "AdministratorsMicrosoftEntra"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdministratorMicrosoftEntra.properties
 );
 
@@ -69,6 +70,7 @@ using Microsoft.DBforPostgreSQL;
   "AdvancedThreatProtectionSettings"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtectionSettingsModel.properties
 );
 
@@ -85,20 +87,24 @@ using Microsoft.DBforPostgreSQL;
   "BackupsAutomaticAndOnDemand"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupAutomaticAndOnDemand.properties
 );
 
 @@clientName(Configurations.put::parameters.resource, "parameters");
 @@clientName(Configurations.update::parameters.properties, "parameters");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Configuration.properties);
 
 @@clientName(Databases.create::parameters.resource, "parameters");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Database.properties);
 
 @@clientName(FirewallRules.createOrUpdate::parameters.resource, "parameters");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FirewallRule.properties);
 
 @@clientLocation(BackupsLongTermRetentionOperations.get,
@@ -108,21 +114,25 @@ using Microsoft.DBforPostgreSQL;
   "BackupsLongTermRetention"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupsLongTermRetentionOperation.properties
 );
 
 @@clientName(Migrations.create::parameters.resource, "parameters");
 @@clientName(Migrations.update::parameters.properties, "parameters");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Migration.properties);
 
 @@clientName(PrivateEndpointConnections.update::parameters.resource,
   "parameters"
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
@@ -141,7 +151,9 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Servers.restart::parameters.body, "parameters");
 @@clientName(Servers.serversStart, "Start");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Server.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualEndpoint.properties);
 
 @@clientLocation(TuningOptionsOperationGroup.get, "TuningOptions");
