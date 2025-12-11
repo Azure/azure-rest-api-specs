@@ -14,8 +14,7 @@ import {
   isTrivialPullRequest,
   isDocumentationOnly,
   isExamplesOnly,
-  isNonFunctionalOnly,
-} from "../../../shared/src/pr-changes.js";
+} from "./pr-changes.js";
 import { CoreLogger } from "../core-logger.js";
 
 // Enable simple-git debug logging to improve console output
@@ -156,7 +155,7 @@ function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {typeof import("@actions/core")} core - Core logger
  * @param {string} baseRef - The base branch reference (e.g., "origin/main")
- * @param {import('../../../shared/src/pr-changes.js').PullRequestChanges} changes - Changes object to update
+ * @param {import('./pr-changes.js').PullRequestChanges} changes - Changes object to update
  * @returns {Promise<void>}
  */
 async function analyzePullRequestChanges(changedFiles, git, core, baseRef, changes) {

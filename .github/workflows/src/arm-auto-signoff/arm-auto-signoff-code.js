@@ -1,9 +1,9 @@
-import { isTrivialPullRequest } from "../../../shared/src/pr-changes.js";
+import { isTrivialPullRequest } from "./pr-changes.js
 import incrementalTypeSpec from './arm-incremental-typespec.js';
 import checkTrivialChanges from './trivial-changes-check.js';
 
 /**
- * Main entry point for ARM Auto-SignOff Code workflow
+ * Main entry point for ARM Auto Signoff Code workflow
  * 
  * This module orchestrates all checks to determine if a PR qualifies for auto sign-off.
  * It combines results from:
@@ -13,9 +13,9 @@ import checkTrivialChanges from './trivial-changes-check.js';
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<string>} JSON string containing combined results
  */
-export default async function armAutoSignOffCode({ github, context, core }) {
+export default async function armAutoSignoffCode({ github, context, core }) {
 
-  core.info('Starting ARM Auto-SignOff Code analysis...');
+  core.info('Starting ARM Auto Signoff Code analysis.');
 
   // Run incremental TypeSpec check
   core.startGroup('Checking for incremental TypeSpec changes');
@@ -32,18 +32,18 @@ export default async function armAutoSignOffCode({ github, context, core }) {
 
   // Determine if PR qualifies for auto sign-off
   const isTrivial = isTrivialPullRequest(trivialChanges);
-  const qualifiesForAutoSignOff = incrementalTypeSpecResult || isTrivial;
+  const qualifiesForAutoSignoff = incrementalTypeSpecResult || isTrivial;
 
   // Combine results
   const combined = {
     incrementalTypeSpec: incrementalTypeSpecResult,
     trivialChanges: trivialChanges,
-    qualifiesForAutoSignOff: qualifiesForAutoSignOff
+    qualifiesForAutoSignoff: qualifiesForAutoSignoff
   };
 
   core.info(`Combined result: ${JSON.stringify(combined, null, 2)}`);
-  core.info(`Qualifies for auto sign-off: ${combined.qualifiesForAutoSignOff}`);
+  core.info(`Qualifies for auto sign-off: ${combined.qualifiesForAutoSignoff}`);
 
   // Return key-value format: incrementalTypeSpec-true,isTrivial-false,qualifies-true
-  return `incrementalTypeSpec-${incrementalTypeSpecResult},isTrivial-${isTrivial},qualifies-${qualifiesForAutoSignOff}`;
+  return `incrementalTypeSpec-${incrementalTypeSpecResult},isTrivial-${isTrivial},qualifies-${qualifiesForAutoSignoff}`;
 }

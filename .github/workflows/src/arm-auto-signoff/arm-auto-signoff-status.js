@@ -8,7 +8,7 @@ import { extractInputs } from "../context.js";
 /* v8 ignore start */
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<{headSha: string, issueNumber: number, autoSignOffLabels?: string[]}>}
+ * @returns {Promise<{headSha: string, issueNumber: number, autoSignoffLabels?: string[]}>}
  */
 export default async function getLabelAction({ github, context, core }) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
@@ -32,7 +32,7 @@ export default async function getLabelAction({ github, context, core }) {
  * @param {string} params.head_sha
  * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} params.github
  * @param {typeof import("@actions/core")} params.core
- * @returns {Promise<{headSha: string, issueNumber: number, autoSignOffLabels?: string[]}>}
+ * @returns {Promise<{headSha: string, issueNumber: number, autoSignoffLabels?: string[]}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
@@ -77,12 +77,12 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return {
       headSha: head_sha,
       issueNumber: issue_number,
-      autoSignOffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
+      autoSignoffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
     };
   }
 
   // Store the labels for auto sign-off
-  const autoSignOffLabels = armAnalysisResult.labelsToAdd || [];
+  const autoSignoffLabels = armAnalysisResult.labelsToAdd || [];
 
   const allLabelsMatch =
     labelNames.includes("ARMReview") &&
@@ -95,7 +95,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return {
       headSha: head_sha,
       issueNumber: issue_number,
-      autoSignOffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
+      autoSignoffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
     };
   }
 
@@ -140,7 +140,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       return {
         headSha: head_sha,
         issueNumber: issue_number,
-        autoSignOffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
+        autoSignoffLabels: hasAutoSignedOffLabels ? [] : undefined, // Only remove if we had auto labels before
       };
     }
 
@@ -160,7 +160,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return {
       headSha: head_sha,
       issueNumber: issue_number,
-      autoSignOffLabels: autoSignOffLabels,
+      autoSignoffLabels: autoSignoffLabels,
     };
   }
 
@@ -170,7 +170,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   return {
     headSha: head_sha,
     issueNumber: issue_number,
-    autoSignOffLabels: hasAutoSignedOffLabels ? [] : undefined, // undefined means don't touch labels
+    autoSignoffLabels: hasAutoSignedOffLabels ? [] : undefined, // undefined means don't touch labels
   };
 }
 
@@ -184,7 +184,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
  * @returns {Promise<{shouldAutoSign: boolean, reason: string, labelsToAdd?: string[]}>}
  */
 async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core) {
-  const wfName = "ARM Auto-SignOff - Analyze Code";
+  const wfName = "ARM Auto-Signoff - Analyze Code";
   const armAnalysisRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
@@ -233,11 +233,11 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
       // Extract values directly by key name
       const incrementalTypeSpec = keyValuePairs[0]?.endsWith('-true') ?? false;
       const isTrivial = keyValuePairs[1]?.endsWith('-true') ?? false;
-      const qualifiesForAutoSignOff = keyValuePairs[2]?.endsWith('-true') ?? false;
+      const qualifiesForAutoSignoff = keyValuePairs[2]?.endsWith('-true') ?? false;
       
-      core.info(`ARM analysis results: incrementalTypeSpec=${incrementalTypeSpec}, isTrivial=${isTrivial}, qualifiesForAutoSignOff=${qualifiesForAutoSignOff}`);
+      core.info(`ARM analysis results: incrementalTypeSpec=${incrementalTypeSpec}, isTrivial=${isTrivial}, qualifiesForAutoSignoff=${qualifiesForAutoSignoff}`);
       
-      if (qualifiesForAutoSignOff) {
+      if (qualifiesForAutoSignoff) {
         const labelsToAdd = [];
         
         if (incrementalTypeSpec) {

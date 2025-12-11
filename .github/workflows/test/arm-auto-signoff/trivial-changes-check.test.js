@@ -7,9 +7,9 @@ vi.mock("simple-git", () => ({
 }));
 
 import * as simpleGit from "simple-git";
-import * as changedFiles from "../../shared/src/changed-files.js";
-import checkTrivialChanges from "../src/arm-auto-signoff/trivial-changes-check.js";
-import { createMockCore, createMockContext } from "./mocks.js";
+import * as changedFiles from "../../../shared/src/changed-files.js";
+import checkTrivialChanges from "../../src/arm-auto-signoff/trivial-changes-check.js";
+import { createMockCore, createMockContext } from "../mocks.js";
 
 const core = createMockCore();
 const context = createMockContext();
