@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Private link service resource.
  */
 model PrivateLinkService
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PrivateLinkServiceProperties> {
+  is Azure.ResourceManager.ProxyResource<PrivateLinkServiceProperties> {
   ...ResourceNameParameter<
     Resource = PrivateLinkService,
     KeyName = "serviceName",
@@ -23,12 +23,27 @@ model PrivateLinkService
   >;
 
   /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
    * The extended location of the load balancer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Private endpoint resource.
  */
 model PrivateEndpoint
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PrivateEndpointProperties> {
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpoint,
     KeyName = "privateEndpointName",
@@ -28,7 +28,20 @@ model PrivateEndpoint
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias PrivateDnsZoneGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<

@@ -16,13 +16,21 @@ namespace Microsoft.Network;
  */
 @parentResource(NetworkInterface)
 model PublicIPAddress
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PublicIPAddressPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<PublicIPAddressPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = PublicIPAddress,
     KeyName = "publicIpAddressName",
     SegmentName = "publicipaddresses",
     NamePattern = ""
   >;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
 
   /**
    * The extended location of the public ip address.
@@ -36,8 +44,19 @@ model PublicIPAddress
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   sku?: PublicIPAddressSku;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...Azure.ResourceManager.AvailabilityZonesProperty;
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * A list of availability zones denoting the IP allocated for the resource needs to come from.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+
+  zones?: string[];
 }
 
 alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<

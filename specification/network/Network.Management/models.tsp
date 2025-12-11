@@ -17691,6 +17691,7 @@ model ReachabilityAnalysisIntentProperties {
   /**
    * Provisioning states of a resource.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -17769,6 +17770,7 @@ model ReachabilityAnalysisRunProperties {
   /**
    * Provisioning states of a resource.
    */
+  @secret
   provisioningState?: ProvisioningState;
 }
 
@@ -18854,18 +18856,21 @@ model PacketCaptureSettings {
   /**
    * Number of file count. Default value of count is 10 and maximum number is 10000.
    */
+  @minValue(0)
   @maxValue(10000)
   fileCount?: int32 = 10;
 
   /**
    * Number of bytes captured per packet. Default value in bytes 104857600 (100MB) and maximum in bytes 4294967295 (4GB).
    */
+  @minValue(0)
   @maxValue(4294967295)
   fileSizeInBytes?: int64 = 104857600;
 
   /**
    * Maximum duration of the capture session in seconds is 604800s (7 days) for a file. Default value in second 86400s (1 day).
    */
+  @minValue(0)
   @maxValue(604800)
   sessionTimeLimitInSeconds?: int32 = 86400;
 }
@@ -22597,6 +22602,7 @@ model RadiusAuthServer {
   /**
    * Radius server secret
    */
+  @secret
   radiusServerSecret?: string;
 }
 

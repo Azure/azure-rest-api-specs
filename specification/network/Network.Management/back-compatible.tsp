@@ -201,8 +201,6 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(FlowLogInformation.properties);
 
-@@clientName(ProtocolConfiguration.HTTPConfiguration, "httpConfiguration");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(HopLink.properties);
 
