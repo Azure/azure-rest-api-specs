@@ -138,6 +138,8 @@
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.$ref__deleted` | deleted | `#/definitions/NvaInterfaceConfigurations` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
+| `definitions.Operation.properties.display.$ref__added` | added | `#/definitions/OperationDisplay` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.$ref__added` | added | `#/definitions/OperationPropertiesFormatServiceSpecification` |
 | `definitions.OutboundRulePropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.P2SVpnGatewayProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
@@ -491,6 +493,8 @@
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.type__added` | added | `array` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
+| `definitions.Operation.properties.display.type__deleted` | deleted | `object` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.type__deleted` | deleted | `object` |
 | `definitions.OutboundRule.properties.type__deleted` | deleted | `{"type":"string","description":"Type of the resource.","readOnly":true}` |
 | `definitions.OutboundRulePropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.type__added` | added | `string` |
@@ -670,12 +674,6 @@
 | `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength.minimum__deleted` | deleted | `1` |
-| `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceAsn.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.bytesToCapturePerPacket.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.timeLimitInSeconds.minimum__deleted` | deleted | `0` |
-| `definitions.PacketCaptureParameters.properties.totalBytesPerSession.minimum__deleted` | deleted | `0` |
 | `definitions.PacketCaptureSettings.properties.fileCount.minimum__deleted` | deleted | `0` |
 | `definitions.PacketCaptureSettings.properties.fileSizeInBytes.minimum__deleted` | deleted | `0` |
 | `definitions.PacketCaptureSettings.properties.sessionTimeLimitInSeconds.minimum__deleted` | deleted | `0` |
@@ -901,6 +899,7 @@
 | `definitions.NspLoggingConfigurationListResult.required__added` | added | `["value"]` |
 | `definitions.NspProfileListResult.required__added` | added | `["value"]` |
 | `definitions.NspServiceTagsListResult.required__added` | added | `["value"]` |
+| `definitions.OperationListResult.required__added` | added | `["value"]` |
 | `definitions.P2SVpnGateway.required__deleted` | deleted | `["location"]` |
 | `definitions.PeerExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.PerimeterAssociableResourcesListResult.required__added` | added | `["value"]` |
@@ -1401,7 +1400,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.IpAllocationPropertiesFormat.properties.prefixType.default__deleted` | deleted | `null` |
-| `definitions.PacketCaptureParameters.properties.bytesToCapturePerPacket.default__deleted` | deleted | `0` |
 | `definitions.RetentionPolicyParameters.properties.days.default__deleted` | deleted | `0` |
 | `definitions.RetentionPolicyParameters.properties.enabled.default__deleted` | deleted | `false` |
 | `definitions.SubnetPropertiesFormat.properties.sharingScope.default__deleted` | deleted | `null` |
@@ -1455,13 +1453,13 @@
 | `definitions.LoadBalancer.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.NatGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.NetworkInterface.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
-| `definitions.NetworkManager.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkProfile.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkSecurityGroup.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkVirtualAppliance.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkVirtualApplianceSku.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.NetworkWatcher.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.P2SVpnGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.NetworkManager.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.NetworkProfile.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.NetworkSecurityGroup.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.NetworkVirtualAppliance.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.NetworkVirtualApplianceSku.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
+| `definitions.NetworkWatcher.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.P2SVpnGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.PrivateEndpoint.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.PrivateLinkService.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
 | `definitions.PublicIPAddress.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
@@ -1530,12 +1528,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes'].post.responses.200.schema.additionalProperties__added` | added | `{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.additionalProperties__added` | added | `{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}` |
 
-### Changes for `Availability`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Availability__deleted` | deleted | `{"type":"object","description":"Availability of the metric.","properties":{"timeGrain":{"type":"stri...` |
-
 ### Changes for `AzureAsyncOperationResult`
 
 | Path | Change Type | Value |
@@ -1584,12 +1576,6 @@
 |------|------------|-------|
 | `definitions.ConnectionStateSnapshot__deleted` | deleted | `{"type":"object","description":"Connection state snapshot.","properties":{"connectionState":{"type":...` |
 
-### Changes for `Dimension`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Dimension__deleted` | deleted | `{"type":"object","description":"Dimension of the metric.","properties":{"name":{"type":"string","des...` |
-
 ### Changes for `Filters`
 
 | Path | Change Type | Value |
@@ -1608,18 +1594,6 @@
 |------|------------|-------|
 | `definitions.IssueContext__deleted` | deleted | `{"type":"object","description":"A key-value pair that provides additional context on the issue.","ad...` |
 
-### Changes for `LogSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LogSpecification__deleted` | deleted | `{"type":"object","description":"Description of logging specification.","properties":{"name":{"type":...` |
-
-### Changes for `MetricSpecification`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.MetricSpecification__deleted` | deleted | `{"type":"object","description":"Description of metrics specification.","properties":{"name":{"type":...` |
-
 ### Changes for `NspAccessRuleReconcile`
 
 | Path | Change Type | Value |
@@ -1637,24 +1611,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NvaInterfaceConfigurations__deleted` | deleted | `{"type":"array","description":"The NVA in VNet interface configurations details","maxItems":3,"items...` |
-
-### Changes for `Operation`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Operation__deleted` | deleted | `{"type":"object","description":"Network REST API operation definition.","properties":{"name":{"type"...` |
-
-### Changes for `OperationListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
-
-### Changes for `OperationPropertiesFormat`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OperationPropertiesFormat__deleted` | deleted | `{"type":"object","description":"Description of operation properties format.","properties":{"serviceS...` |
 
 ### Changes for `PeerRouteList`
 
@@ -1758,6 +1714,18 @@
 |------|------------|-------|
 | `definitions.NetworkVirtualAppliancePropertiesFormatNetworkProfile__added` | added | `{"type":"object","description":"Network Profile containing configurations for Public and Private NIC...` |
 
+### Changes for `OperationDisplay`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.OperationDisplay__added` | added | `{"type":"object","description":"Display metadata associated with the operation.","properties":{"prov...` |
+
+### Changes for `OperationPropertiesFormatServiceSpecification`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.OperationPropertiesFormatServiceSpecification__added` | added | `{"type":"object","description":"Specification of the service.","properties":{"metricSpecifications":...` |
+
 ### Changes for `PolicySettingsLogScrubbing`
 
 | Path | Change Type | Value |
@@ -1852,7 +1820,7 @@
 | `definitions.ConnectivityConfiguration.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.ExpressRouteCircuit.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.NetworkGroup.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
-| `definitions.NetworkManagerRoutingConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
+| `definitions.NetworkManagerRoutingConfiguration.properties.etag__added` | added | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.RoutingRule.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.RoutingRuleCollection.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
 | `definitions.SecurityAdminConfiguration.properties.etag__added` | added | `{"type":"string","description":"\\"If etag is provided in the response body, it may also be provided ...` |
@@ -1887,13 +1855,13 @@
 | `definitions.LoadBalancer.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.NatGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.NetworkInterface.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
-| `definitions.NetworkManager.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkProfile.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkSecurityGroup.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkVirtualAppliance.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkVirtualApplianceSku.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.NetworkWatcher.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.P2SVpnGateway.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.NetworkManager.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkProfile.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkSecurityGroup.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkVirtualAppliance.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkVirtualApplianceSku.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.NetworkWatcher.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.P2SVpnGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.PrivateEndpoint.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.PrivateLinkService.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
 | `definitions.PublicIPAddress.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
@@ -2360,6 +2328,8 @@
 | `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.properties__deleted` | deleted | `{"principalId":{"readOnly":true,"type":"string","description":"The principal id of user assigned ide...` |
 | `definitions.NetworkManagerProperties.properties.networkManagerScopes.properties__deleted` | deleted | `{"managementGroups":{"type":"array","description":"List of management groups.","items":{"type":"stri...` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.networkProfile.properties__deleted` | deleted | `{"networkInterfaceConfigurations":{"type":"array","items":{"$ref":"#/definitions/VirtualApplianceNet...` |
+| `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft Network."},"resource":{"type...` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.properties__deleted` | deleted | `{"metricSpecifications":{"type":"array","description":"Operation service specification.","items":{"$...` |
 | `definitions.PolicySettings.properties.logScrubbing.properties__deleted` | deleted | `{"state":{"type":"string","description":"State of the log scrubbing config. Default value is Enabled...` |
 | `definitions.SignaturesOverrides.properties.properties.properties__deleted` | deleted | `{"signatures":{"$ref":"#/definitions/Signatures","type":"object"}}` |
 
@@ -2517,16 +2487,11 @@
 |------|------------|-------|
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.ipAddress['x-ms-azure-resource__deleted']` | deleted | `false` |
 
-### Changes for `title`
+### Changes for `maxItems`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkVirtualApplianceSku.title__deleted` | deleted | `Available NetworkVirtualApplianceSkus` |
-| `definitions.NetworkVirtualApplianceSkuInstances.title__deleted` | deleted | `Network Virtual Appliance Sku Instances` |
-| `definitions.NetworkVirtualApplianceSkuPropertiesFormat.title__deleted` | deleted | `Network Virtual Appliance Sku Properties` |
-| `definitions.NvaInVnetSubnetReferenceProperties.title__deleted` | deleted | `Subnet references where the NVA NICS will be deployed` |
-| `definitions.VirtualApplianceAdditionalNicProperties.title__deleted` | deleted | `Network Virtual Appliance Additional Nic Properties` |
-| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.maxItems__added` | added | `3` |
 
 ### Changes for `x-ms-client-flatten`
 
@@ -2534,17 +2499,6 @@
 |------|------------|-------|
 | `definitions.NspAccessRuleProperties.properties.networkSecurityPerimeters.items['x-ms-client-flatten__deleted']` | deleted | `true` |
 | `definitions.NspAccessRuleProperties.properties.subscriptions.items['x-ms-client-flatten__deleted']` | deleted | `true` |
-
-### Changes for `uniqueItems`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.NspLinkProperties.properties.localInboundProfiles.uniqueItems__deleted` | deleted | `true` |
-| `definitions.NspLinkProperties.properties.localOutboundProfiles.uniqueItems__deleted` | deleted | `true` |
-| `definitions.NspLinkProperties.properties.remoteInboundProfiles.uniqueItems__deleted` | deleted | `true` |
-| `definitions.NspLinkProperties.properties.remoteOutboundProfiles.uniqueItems__deleted` | deleted | `true` |
-| `definitions.NspLinkReferenceProperties.properties.localInboundProfiles.uniqueItems__deleted` | deleted | `true` |
-| `definitions.NspLinkReferenceProperties.properties.localOutboundProfiles.uniqueItems__deleted` | deleted | `true` |
 
 ### Changes for `x-ms-secret`
 
@@ -2557,6 +2511,13 @@
 | `definitions.VpnClientConfiguration.properties.radiusServerSecret['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.VpnServerConfigurationProperties.properties.radiusServerSecret['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.VpnSiteLinkConnectionProperties.properties.sharedKey['x-ms-secret__deleted']` | deleted | `true` |
+
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualApplianceAdditionalNicProperties.title__deleted` | deleted | `Network Virtual Appliance Additional Nic Properties` |
+| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
 
 ## Modified Values
 
@@ -2941,30 +2902,24 @@
 | `definitions.NetworkInterfacePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network interface resource.` | `Provisioning states of a resource.` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.virtualMachine.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NetworkInterfaceTapConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.NetworkInterfaceTapConfiguration.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network interface tap configuration resource.` | `Provisioning states of a resource.` |
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.virtualNetworkTap.$ref` | `./virtualNetworkTap.json#/definitions/VirtualNetworkTap` | `#/definitions/VirtualNetworkTap` |
-| `definitions.NetworkManager.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkManager.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkManager.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkManagerConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.NetworkManagerConnection.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.NetworkManagerConnectionProperties.properties.connectionState.description` | `Connection state.` | `The current scope connection state.` |
 | `definitions.NetworkManagerProperties.properties.provisioningState.description` | `The provisioning state of the network manager resource.` | `Provisioning states of a resource.` |
 | `definitions.NetworkManagerRoutingConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkManagerRoutingConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `Provisioning states of a resource.` |
-| `definitions.NetworkProfile.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkProfile.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkProfile.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkProfilePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network profile resource.` | `Provisioning states of a resource.` |
-| `definitions.NetworkSecurityGroup.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkSecurityGroup.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkSecurityGroup.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkSecurityGroupPropertiesFormat.properties.flowLogs.items.$ref` | `./networkWatcher.json#/definitions/FlowLog` | `#/definitions/FlowLog` |
 | `definitions.NetworkSecurityGroupPropertiesFormat.properties.networkInterfaces.items.$ref` | `./networkInterface.json#/definitions/NetworkInterface` | `#/definitions/NetworkInterface` |
 | `definitions.NetworkSecurityGroupPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network security group resource.` | `Provisioning states of a resource.` |
 | `definitions.NetworkSecurityGroupPropertiesFormat.properties.subnets.items.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
 | `definitions.NetworkSecurityGroupResult.properties.securityRuleAccessResult.description` | `The network traffic is allowed or denied.` | `Whether network traffic is allowed or denied.` |
 | `definitions.NetworkSecurityPerimeter.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
-| `definitions.NetworkVirtualAppliance.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkVirtualAppliance.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkVirtualAppliance.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkVirtualAppliance.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.NetworkVirtualApplianceConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.provisioningState.description` | `The provisioning state of the NetworkVirtualApplianceConnection resource.` | `Provisioning states of a resource.` |
@@ -2973,10 +2928,8 @@
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceConnections.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualApplianceSites.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.NetworkVirtualApplianceSku.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkVirtualApplianceSku.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
-| `definitions.NetworkWatcher.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.NetworkWatcher.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.NetworkVirtualApplianceSku.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkWatcher.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NetworkWatcherListResult.description` | `Response for ListNetworkWatchers API service call.` | `[Placeholder] Discription for page model` |
 | `definitions.NetworkWatcherListResult.properties.value.description` | `List of network watcher resources.` | `[Placeholder] Discription for value property` |
 | `definitions.NetworkWatcherPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network watcher resource.` | `Provisioning states of a resource.` |
@@ -2989,9 +2942,7 @@
 | `definitions.NspLinkReferenceProperties.properties.status.description` | `The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.` | `The NSP link state.` |
 | `definitions.NspLoggingConfiguration.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NspProfile.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.OrderBy.properties.order['x-ms-enum'].name` | `FirewallPolicyIDPSQuerySortOrder` | `FirewallPolicyIdpsQuerySortOrder` |
 | `definitions.OutboundRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.OutboundRule.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
 | `definitions.OutboundRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.frontendIPConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the outbound rule resource.` | `Provisioning states of a resource.` |
@@ -2999,8 +2950,7 @@
 | `definitions.P2SConnectionConfigurationProperties.properties.configurationPolicyGroupAssociations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.P2SConnectionConfigurationProperties.properties.provisioningState.description` | `The provisioning state of the P2SConnectionConfiguration resource.` | `Provisioning states of a resource.` |
 | `definitions.P2SConnectionConfigurationProperties.properties.vpnClientAddressPool.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `#/definitions/AddressSpace` |
-| `definitions.P2SVpnGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.P2SVpnGateway.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.P2SVpnGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.P2SVpnGatewayProperties.properties.provisioningState.description` | `The provisioning state of the P2S VPN gateway resource.` | `Provisioning states of a resource.` |
 | `definitions.P2SVpnGatewayProperties.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.P2SVpnGatewayProperties.properties.vpnServerConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -3310,7 +3260,6 @@
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections/{networkManagerConnectionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
-| `paths['/providers/microsoft.Network/operations'].get.responses.200.schema.$ref` | `#/definitions/OperationListResult` | `../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult` |
 | `paths['/providers/microsoft.Network/operations'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `#/definitions/Error` |

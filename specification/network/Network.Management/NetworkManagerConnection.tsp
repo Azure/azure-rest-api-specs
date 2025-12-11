@@ -22,7 +22,11 @@ model NetworkManagerConnection
     SegmentName = "networkManagerConnections",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias NetworkManagerConnectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -53,7 +57,10 @@ interface NetworkManagerConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubscriptionNetworkManagerConnections_Get")
-  get is NetworkManagerConnectionOps.Read<NetworkManagerConnection, ErrorType = CloudError>;
+  get is NetworkManagerConnectionOps.Read<
+    NetworkManagerConnection,
+    ErrorType = CloudError
+  >;
 
   /**
    * Create a network manager connection on this subscription.
@@ -67,7 +74,10 @@ interface NetworkManagerConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SubscriptionNetworkManagerConnections_Delete")
-  delete is NetworkManagerConnectionOps.DeleteSync<NetworkManagerConnection, ErrorType = CloudError>;
+  delete is NetworkManagerConnectionOps.DeleteSync<
+    NetworkManagerConnection,
+    ErrorType = CloudError
+  >;
 
   /**
    * List all network manager connections created by this subscription.

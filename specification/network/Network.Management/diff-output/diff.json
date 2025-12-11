@@ -166,14 +166,6 @@
     "/providers/microsoft.Network/operations": {
       "get": {
         "responses": {
-          "200": {
-            "schema": {
-              "$ref": {
-                "__old": "#/definitions/OperationListResult",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-              }
-            }
-          },
           "default": {
             "schema": {
               "$ref": {
@@ -17861,24 +17853,6 @@
     }
   },
   "definitions": {
-    "Availability__deleted": {
-      "type": "object",
-      "description": "Availability of the metric.",
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "description": "The time grain of the availability."
-        },
-        "retention": {
-          "type": "string",
-          "description": "The retention of the availability."
-        },
-        "blobDuration": {
-          "type": "string",
-          "description": "Duration of the availability blob."
-        }
-      }
-    },
     "AzureAsyncOperationResult__deleted": {
       "type": "object",
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.",
@@ -18119,24 +18093,6 @@
         }
       }
     },
-    "Dimension__deleted": {
-      "type": "object",
-      "description": "Dimension of the metric.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the dimension."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the dimension."
-        },
-        "internalName": {
-          "type": "string",
-          "description": "The internal name of the dimension."
-        }
-      }
-    },
     "Filters__deleted": {
       "type": "array",
       "description": "Describers the filters to filter response by",
@@ -18159,92 +18115,6 @@
         "type": "string"
       }
     },
-    "LogSpecification__deleted": {
-      "type": "object",
-      "description": "Description of logging specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the specification."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the specification."
-        },
-        "blobDuration": {
-          "type": "string",
-          "description": "Duration of the blob."
-        }
-      }
-    },
-    "MetricSpecification__deleted": {
-      "type": "object",
-      "description": "Description of metrics specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the metric."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the metric."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "The description of the metric."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Units the metric to be displayed in."
-        },
-        "aggregationType": {
-          "type": "string",
-          "description": "The aggregation type."
-        },
-        "availabilities": {
-          "type": "array",
-          "description": "List of availability.",
-          "items": {
-            "$ref": "#/definitions/Availability"
-          }
-        },
-        "enableRegionalMdmAccount": {
-          "type": "boolean",
-          "description": "Whether regional MDM account enabled."
-        },
-        "fillGapWithZero": {
-          "type": "boolean",
-          "description": "Whether gaps would be filled with zeros."
-        },
-        "metricFilterPattern": {
-          "type": "string",
-          "description": "Pattern for the filter of the metric."
-        },
-        "dimensions": {
-          "type": "array",
-          "description": "List of dimensions.",
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        },
-        "isInternal": {
-          "type": "boolean",
-          "description": "Whether the metric is internal."
-        },
-        "sourceMdmAccount": {
-          "type": "string",
-          "description": "The source MDM account."
-        },
-        "sourceMdmNamespace": {
-          "type": "string",
-          "description": "The source MDM namespace."
-        },
-        "resourceIdDimensionNameOverride": {
-          "type": "string",
-          "description": "The resource Id dimension name override."
-        }
-      }
-    },
     "NspAccessRuleReconcile__deleted": {
       "type": "object",
       "description": "Request object for NSP reconcile.",
@@ -18263,91 +18133,6 @@
         "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
       },
       "readOnly": false
-    },
-    "Operation__deleted": {
-      "type": "object",
-      "description": "Network REST API operation definition.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name: {provider}/{resource}/{operation}."
-        },
-        "display": {
-          "type": "object",
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "type": "string",
-              "description": "Service provider: Microsoft Network."
-            },
-            "resource": {
-              "type": "string",
-              "description": "Resource on which the operation is performed."
-            },
-            "operation": {
-              "type": "string",
-              "description": "Type of the operation: get, read, delete, etc."
-            },
-            "description": {
-              "type": "string",
-              "description": "Description of the operation."
-            }
-          }
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation."
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationPropertiesFormat",
-          "description": "Operation properties format.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "OperationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "OperationPropertiesFormat__deleted": {
-      "type": "object",
-      "description": "Description of operation properties format.",
-      "properties": {
-        "serviceSpecification": {
-          "type": "object",
-          "description": "Specification of the service.",
-          "properties": {
-            "metricSpecifications": {
-              "type": "array",
-              "description": "Operation service specification.",
-              "items": {
-                "$ref": "#/definitions/MetricSpecification"
-              }
-            },
-            "logSpecifications": {
-              "type": "array",
-              "description": "Operation log specification.",
-              "items": {
-                "$ref": "#/definitions/LogSpecification"
-              }
-            }
-          }
-        }
-      }
     },
     "PeerRouteList__deleted": {
       "type": "object",
@@ -18659,6 +18444,48 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfiguration"
+          }
+        }
+      }
+    },
+    "OperationDisplay__added": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft Network."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of the operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
+        }
+      }
+    },
+    "OperationPropertiesFormatServiceSpecification__added": {
+      "type": "object",
+      "description": "Specification of the service.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Operation service specification.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Operation log specification.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
           }
         }
       }
@@ -25285,12 +25112,6 @@
           "type": "string",
           "description": "Sub Resource type.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -25348,25 +25169,12 @@
           "readOnly": true
         },
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -25375,7 +25183,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25387,12 +25195,6 @@
           "$ref": "./network.json#/definitions/SystemData",
           "description": "The system metadata related to this resource.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -25503,7 +25305,7 @@
         },
         "etag__added": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -25551,25 +25353,12 @@
     "NetworkProfile": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "Resource location."
         }
       },
       "allOf": [
@@ -25578,7 +25367,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25616,25 +25405,12 @@
     "NetworkSecurityGroup": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "Resource location."
         }
       },
       "allOf": [
@@ -25643,7 +25419,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25743,30 +25519,17 @@
     "NetworkVirtualAppliance": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
             "__new": "#/definitions/ManagedServiceIdentity"
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
           }
         }
       },
@@ -25776,7 +25539,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -25823,11 +25586,9 @@
           }
         },
         "asn": {
-          "minimum__deleted": 0,
           "readOnly__deleted": false
         },
         "tunnelIdentifier": {
-          "minimum__deleted": 0,
           "readOnly__deleted": false
         }
       }
@@ -25859,7 +25620,6 @@
           "readOnly__deleted": false
         },
         "virtualApplianceAsn": {
-          "minimum__deleted": 0,
           "readOnly__deleted": false
         },
         "sshPublicKey": {
@@ -25932,6 +25692,7 @@
         "nvaInterfaceConfigurations": {
           "$ref__deleted": "#/definitions/NvaInterfaceConfigurations",
           "type__added": "array",
+          "maxItems__added": 3,
           "items__added": {
             "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
           }
@@ -25944,28 +25705,14 @@
       ]
     },
     "NetworkVirtualApplianceSku": {
-      "title__deleted": "Available NetworkVirtualApplianceSkus",
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "Resource location."
         }
       },
       "allOf": [
@@ -25974,45 +25721,26 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
       ]
-    },
-    "NetworkVirtualApplianceSkuInstances": {
-      "title__deleted": "Network Virtual Appliance Sku Instances"
     },
     "NetworkVirtualApplianceSkuListResult": {
       "required__added": [
         "value"
       ]
     },
-    "NetworkVirtualApplianceSkuPropertiesFormat": {
-      "title__deleted": "Network Virtual Appliance Sku Properties"
-    },
     "NetworkWatcher": {
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -26021,7 +25749,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -26154,22 +25882,6 @@
         "value"
       ]
     },
-    "NspLinkProperties": {
-      "properties": {
-        "localInboundProfiles": {
-          "uniqueItems__deleted": true
-        },
-        "localOutboundProfiles": {
-          "uniqueItems__deleted": true
-        },
-        "remoteInboundProfiles": {
-          "uniqueItems__deleted": true
-        },
-        "remoteOutboundProfiles": {
-          "uniqueItems__deleted": true
-        }
-      }
-    },
     "NspLinkReference": {
       "allOf": [
         [
@@ -26190,12 +25902,6 @@
     },
     "NspLinkReferenceProperties": {
       "properties": {
-        "localInboundProfiles": {
-          "uniqueItems__deleted": true
-        },
-        "localOutboundProfiles": {
-          "uniqueItems__deleted": true
-        },
         "status": {
           "description": {
             "__old": "The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.",
@@ -26246,7 +25952,6 @@
       ]
     },
     "NvaInVnetSubnetReferenceProperties": {
-      "title__deleted": "Subnet references where the NVA NICS will be deployed",
       "properties": {
         "id": {
           "readOnly__deleted": false
@@ -26287,15 +25992,58 @@
         }
       }
     },
-    "OrderBy": {
+    "Operation": {
       "properties": {
-        "order": {
-          "x-ms-enum": {
-            "name": {
-              "__old": "FirewallPolicyIDPSQuerySortOrder",
-              "__new": "FirewallPolicyIdpsQuerySortOrder"
+        "display": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Network."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of the operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
             }
-          }
+          },
+          "$ref__added": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "OperationPropertiesFormat": {
+      "properties": {
+        "serviceSpecification": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "metricSpecifications": {
+              "type": "array",
+              "description": "Operation service specification.",
+              "items": {
+                "$ref": "#/definitions/MetricSpecification"
+              }
+            },
+            "logSpecifications": {
+              "type": "array",
+              "description": "Operation log specification.",
+              "items": {
+                "$ref": "#/definitions/LogSpecification"
+              }
+            }
+          },
+          "$ref__added": "#/definitions/OperationPropertiesFormatServiceSpecification"
         }
       }
     },
@@ -26309,12 +26057,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
         }
       },
       "allOf": [
@@ -26437,25 +26179,12 @@
       ],
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -26464,7 +26193,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -26543,16 +26272,6 @@
     },
     "PacketCaptureParameters": {
       "properties": {
-        "bytesToCapturePerPacket": {
-          "default__deleted": 0,
-          "minimum__deleted": 0
-        },
-        "totalBytesPerSession": {
-          "minimum__deleted": 0
-        },
-        "timeLimitInSeconds": {
-          "minimum__deleted": 0
-        },
         "captureSettings": {
           "type__deleted": "object"
         }

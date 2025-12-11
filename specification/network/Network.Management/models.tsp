@@ -17549,22 +17549,26 @@ model NspLinkProperties {
   /**
    * Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.
    */
+  @uniqueItems
   localInboundProfiles?: string[];
 
   /**
    * Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.
    */
+  @uniqueItems
   @visibility(Lifecycle.Read)
   localOutboundProfiles?: string[];
 
   /**
    * Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.
    */
+  @uniqueItems
   remoteInboundProfiles?: string[];
 
   /**
    * Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.
    */
+  @uniqueItems
   @visibility(Lifecycle.Read)
   remoteOutboundProfiles?: string[];
 
@@ -17615,11 +17619,13 @@ model NspLinkReferenceProperties {
   /**
    * Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.
    */
+  @uniqueItems
   localInboundProfiles?: string[];
 
   /**
    * Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.
    */
+  @uniqueItems
   @visibility(Lifecycle.Read)
   localOutboundProfiles?: string[];
 
@@ -17864,6 +17870,7 @@ model NetworkVirtualAppliancePropertiesFormat {
   /**
    * VirtualAppliance ASN. Microsoft private, public and IANA reserved ASN are not supported.
    */
+  @minValue(0)
   @maxValue(4294967295)
   virtualApplianceAsn?: int64;
 
@@ -17938,6 +17945,7 @@ model NetworkVirtualAppliancePropertiesFormat {
   /**
    * The NVA in VNet interface configurations
    */
+  @maxItems(3)
   nvaInterfaceConfigurations?: NvaInterfaceConfigurationsProperties[];
 
   /**
@@ -18165,6 +18173,7 @@ model NvaInterfaceConfigurationsProperties {
 /**
  * The resource URI of the subnets where the NVA NICS will be deployed
  */
+@summary("Subnet references where the NVA NICS will be deployed")
 model NvaInVnetSubnetReferenceProperties {
   /**
    * Resource Uri of Subnet
@@ -18269,6 +18278,7 @@ model BreakOutCategoryPolicies {
  * Properties specific to NetworkVirtualApplianceSkus.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@summary("Network Virtual Appliance Sku Properties")
 model NetworkVirtualApplianceSkuPropertiesFormat {
   /**
    * Network Virtual Appliance Sku vendor.
@@ -18291,6 +18301,7 @@ model NetworkVirtualApplianceSkuPropertiesFormat {
 /**
  * List of available Sku and instances.
  */
+@summary("Network Virtual Appliance Sku Instances")
 model NetworkVirtualApplianceSkuInstances {
   /**
    * Scale Unit.
@@ -18727,18 +18738,21 @@ model PacketCaptureParameters {
   /**
    * Number of bytes captured per packet, the remaining bytes are truncated.
    */
+  @minValue(0)
   @maxValue(4294967295)
-  bytesToCapturePerPacket?: int64;
+  bytesToCapturePerPacket?: int64 = 0;
 
   /**
    * Maximum size of the capture output.
    */
+  @minValue(0)
   @maxValue(4294967295)
   totalBytesPerSession?: int64 = 1073741824;
 
   /**
    * Maximum duration of the capture session in seconds.
    */
+  @minValue(0)
   @maxValue(18000)
   timeLimitInSeconds?: int32 = 18000;
 
@@ -20336,6 +20350,8 @@ model OperationDisplay {
    */
   description?: string;
 }
+
+model OperationListResult is Azure.Core.Page<Operation>;
 
 /**
  * Description of operation properties format.
@@ -25423,12 +25439,14 @@ model NetworkVirtualApplianceConnectionProperties {
   /**
    * Network Virtual Appliance ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   asn?: int64;
 
   /**
    * Unique identifier for the connection.
    */
+  @minValue(0)
   @maxValue(4294967295)
   tunnelIdentifier?: int64;
 
@@ -27092,3 +27110,10 @@ model ExpressRoutePortsLocationListResult
 );
 @@Azure.ClientGenerator.Core.clientName(HttpConfiguration, "HTTPConfiguration");
 @@Azure.ClientGenerator.Core.clientName(HttpMethod, "HTTPMethod");
+@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsQuerySortOrder,
+  "FirewallPolicyIDPSQuerySortOrder"
+);
+@@doc(PacketCaptureListResult, "List of packet capture sessions.");
+@@doc(PacketCaptureListResult.value,
+  "Information about packet capture sessions."
+);

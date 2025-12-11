@@ -14,15 +14,28 @@ namespace Microsoft.Network;
  * Definition of the NetworkVirtualApplianceSkus resource.
  */
 @subscriptionResource
+@summary("Available NetworkVirtualApplianceSkus")
 model NetworkVirtualApplianceSku
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkVirtualApplianceSkuPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NetworkVirtualApplianceSkuPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NetworkVirtualApplianceSku,
     KeyName = "skuName",
     SegmentName = "networkVirtualApplianceSkus",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** Resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

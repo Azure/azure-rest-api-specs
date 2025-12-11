@@ -14,14 +14,24 @@ namespace Microsoft.Network;
  * Network profile resource.
  */
 model NetworkProfile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkProfilePropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NetworkProfilePropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NetworkProfile,
     KeyName = "networkProfileName",
     SegmentName = "networkProfiles",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

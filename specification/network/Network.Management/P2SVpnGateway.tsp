@@ -14,14 +14,26 @@ namespace Microsoft.Network;
  * P2SVpnGateway Resource.
  */
 model P2SVpnGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<P2SVpnGatewayProperties> {
+  is Azure.ResourceManager.ProxyResource<P2SVpnGatewayProperties> {
   ...ResourceNameParameter<
     Resource = P2SVpnGateway,
     KeyName = "gatewayName",
     SegmentName = "p2svpnGateways",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias P2SVpnGatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<

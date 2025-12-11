@@ -14,14 +14,24 @@ namespace Microsoft.Network;
  * The Managed Network resource
  */
 model NetworkManager
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkManagerProperties> {
+  is Azure.ResourceManager.ProxyResource<NetworkManagerProperties> {
   ...ResourceNameParameter<
     Resource = NetworkManager,
     KeyName = "networkManagerName",
     SegmentName = "networkManagers",
     NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

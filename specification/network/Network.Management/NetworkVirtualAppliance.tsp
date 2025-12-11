@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * NetworkVirtualAppliance Resource.
  */
 model NetworkVirtualAppliance
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkVirtualAppliancePropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NetworkVirtualAppliancePropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NetworkVirtualAppliance,
     KeyName = "networkVirtualApplianceName",
@@ -22,13 +22,22 @@ model NetworkVirtualAppliance
     NamePattern = ""
   >;
 
+  /** Resource tags. */
+  tags?: TagsObject;
+
+  /** Resource location. */
+  location?: string;
+
   /**
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: ManagedServiceIdentity;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.Legacy.LegacyOperations<

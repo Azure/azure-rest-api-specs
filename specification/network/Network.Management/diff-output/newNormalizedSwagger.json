@@ -201,7 +201,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -36458,6 +36458,24 @@
         "value"
       ]
     },
+    "Availability": {
+      "type": "object",
+      "description": "Availability of the metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The time grain of the availability."
+        },
+        "retention": {
+          "type": "string",
+          "description": "The retention of the availability."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the availability blob."
+        }
+      }
+    },
     "AvailableDelegation": {
       "type": "object",
       "description": "The serviceName of an AvailableDelegation indicates a possible delegation for a subnet.",
@@ -41027,6 +41045,24 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of the metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "The internal name of the dimension."
         }
       }
     },
@@ -48655,6 +48691,24 @@
         }
       }
     },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Description of logging specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the blob."
+        }
+      }
+    },
     "ManagedRuleGroupOverride": {
       "type": "object",
       "description": "Defines a managed rule group override setting.",
@@ -48962,6 +49016,74 @@
         "action": {
           "type": "string",
           "description": "The network traffic is allowed or denied. Possible values are 'Allow' and 'Deny'."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Description of metrics specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Units the metric to be displayed in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type."
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availability.",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether regional MDM account enabled."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Whether gaps would be filled with zeros."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern for the filter of the metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "List of dimensions.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Whether the metric is internal."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "The resource Id dimension name override."
         }
       }
     },
@@ -49940,7 +50062,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -50008,29 +50130,22 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -50088,7 +50203,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -50407,7 +50522,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -50519,29 +50634,22 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -50691,29 +50799,22 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -50940,19 +51041,12 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -50960,13 +51054,13 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -51061,12 +51155,14 @@
           "type": "integer",
           "format": "int64",
           "description": "Network Virtual Appliance ASN.",
+          "minimum": 0,
           "maximum": 4294967295
         },
         "tunnelIdentifier": {
           "type": "integer",
           "format": "int64",
           "description": "Unique identifier for the connection.",
+          "minimum": 0,
           "maximum": 4294967295
         },
         "bgpPeerAddress": {
@@ -51169,6 +51265,7 @@
           "type": "integer",
           "format": "int64",
           "description": "VirtualAppliance ASN. Microsoft private, public and IANA reserved ASN are not supported.",
+          "minimum": 0,
           "maximum": 4294967295
         },
         "sshPublicKey": {
@@ -51258,6 +51355,7 @@
         "nvaInterfaceConfigurations": {
           "type": "array",
           "description": "The NVA in VNet interface configurations",
+          "maxItems": 3,
           "items": {
             "$ref": "#/definitions/NvaInterfaceConfigurationsProperties"
           }
@@ -51304,6 +51402,7 @@
     },
     "NetworkVirtualApplianceSku": {
       "type": "object",
+      "title": "Available NetworkVirtualApplianceSkus",
       "description": "Definition of the NetworkVirtualApplianceSkus resource.",
       "properties": {
         "properties": {
@@ -51312,34 +51411,28 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "Resource location."
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
     "NetworkVirtualApplianceSkuInstances": {
       "type": "object",
+      "title": "Network Virtual Appliance Sku Instances",
       "description": "List of available Sku and instances.",
       "properties": {
         "scaleUnit": {
@@ -51378,6 +51471,7 @@
     },
     "NetworkVirtualApplianceSkuPropertiesFormat": {
       "type": "object",
+      "title": "Network Virtual Appliance Sku Properties",
       "description": "Properties specific to NetworkVirtualApplianceSkus.",
       "properties": {
         "vendor": {
@@ -51412,29 +51506,22 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -51831,6 +51918,7 @@
         "localInboundProfiles": {
           "type": "array",
           "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           }
@@ -51838,6 +51926,7 @@
         "localOutboundProfiles": {
           "type": "array",
           "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           },
@@ -51846,6 +51935,7 @@
         "remoteInboundProfiles": {
           "type": "array",
           "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           }
@@ -51853,6 +51943,7 @@
         "remoteOutboundProfiles": {
           "type": "array",
           "description": "Remote Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           },
@@ -51964,6 +52055,7 @@
         "localInboundProfiles": {
           "type": "array",
           "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           }
@@ -51971,6 +52063,7 @@
         "localOutboundProfiles": {
           "type": "array",
           "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
+          "uniqueItems": true,
           "items": {
             "type": "string"
           },
@@ -52156,6 +52249,7 @@
     },
     "NvaInVnetSubnetReferenceProperties": {
       "type": "object",
+      "title": "Subnet references where the NVA NICS will be deployed",
       "description": "The resource URI of the subnets where the NVA NICS will be deployed",
       "properties": {
         "id": {
@@ -52242,6 +52336,102 @@
         }
       }
     },
+    "Operation": {
+      "type": "object",
+      "description": "Network REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesFormat",
+          "description": "Operation properties format.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft Network."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of the operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationPropertiesFormat": {
+      "type": "object",
+      "description": "Description of operation properties format.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationPropertiesFormatServiceSpecification",
+          "description": "Specification of the service."
+        }
+      }
+    },
+    "OperationPropertiesFormatServiceSpecification": {
+      "type": "object",
+      "description": "Specification of the service.",
+      "properties": {
+        "metricSpecifications": {
+          "type": "array",
+          "description": "Operation service specification.",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        },
+        "logSpecifications": {
+          "type": "array",
+          "description": "Operation log specification.",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
     "OrderBy": {
       "type": "object",
       "description": "Describes a column to sort",
@@ -52258,7 +52448,7 @@
             "Descending"
           ],
           "x-ms-enum": {
-            "name": "FirewallPolicyIdpsQuerySortOrder",
+            "name": "FirewallPolicyIDPSQuerySortOrder",
             "modelAsString": true
           }
         }
@@ -52275,7 +52465,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
@@ -52532,29 +52722,22 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -52751,6 +52934,8 @@
           "type": "integer",
           "format": "int64",
           "description": "Number of bytes captured per packet, the remaining bytes are truncated.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 4294967295
         },
         "totalBytesPerSession": {
@@ -52758,6 +52943,7 @@
           "format": "int64",
           "description": "Maximum size of the capture output.",
           "default": 1073741824,
+          "minimum": 0,
           "maximum": 4294967295
         },
         "timeLimitInSeconds": {
@@ -52765,6 +52951,7 @@
           "format": "int32",
           "description": "Maximum duration of the capture session in seconds.",
           "default": 18000,
+          "minimum": 0,
           "maximum": 18000
         },
         "storageLocation": {

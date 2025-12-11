@@ -14,14 +14,26 @@ namespace Microsoft.Network;
  * NetworkSecurityGroup resource.
  */
 model NetworkSecurityGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<NetworkSecurityGroupPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<NetworkSecurityGroupPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityGroup,
     KeyName = "networkSecurityGroupName",
     SegmentName = "networkSecurityGroups",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** Resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations
