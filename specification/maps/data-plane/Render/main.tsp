@@ -16,9 +16,8 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-/** Subscription Key Authentication */
-model SubscriptionKeyAuth
-  is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
+/** Shared Key Authentication */
+model SharedKeyAuth is ApiKeyAuth<ApiKeyLocation.header, "subscription-key">;
 
 /** SAS Token Authentication */
 model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
@@ -29,7 +28,7 @@ model SasTokenAuth is ApiKeyAuth<ApiKeyLocation.header, "SAS Token">;
 @useAuth(
   AadOauth2Auth<[
     "https://atlas.microsoft.com/.default"
-  ]> | SubscriptionKeyAuth | SasTokenAuth
+  ]> | SharedKeyAuth | SasTokenAuth
 )
 @service(#{ title: "Maps Render" })
 @versioned(Versions)
