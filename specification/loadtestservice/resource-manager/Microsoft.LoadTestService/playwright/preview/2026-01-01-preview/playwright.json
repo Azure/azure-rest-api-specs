@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service Management API",
-    "version": "2025-09-01",
+    "version": "2026-01-01-preview",
     "description": "Playwright Service Management API provides access to Playwright workspace resources and their operations through Azure Resource Manager.",
     "x-typespec-generated": [
       {
@@ -959,6 +959,11 @@
           "maxLength": 36,
           "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
+        },
+        "storageUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
         }
       }
     },
@@ -1044,6 +1049,11 @@
         "localAuth": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Enables the workspace to use local authentication through service access tokens for operations."
+        },
+        "storageUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
         }
       }
     },
