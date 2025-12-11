@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2024-02-preview` is specified on t
 ```yaml $(tag) == 'package-2024-02-preview'
 input-file:
   - preview/2024-02-01-preview/management.json
-  - preview/2024-02-01-preview/serviceGroups.json
 ```
 
 ### Tag: package-2023-04
@@ -127,18 +126,6 @@ These settings apply only when `--tag=package-2017-08` is specified on the comma
 input-file:
   - preview/2017-08-31-preview/management.json
 ```
----
-
-# Suppression
-
-``` yaml
-suppressions:
-  - code: TenantLevelAPIsNotAllowed
-    reason: These are tenant level APIs and resource types by design.
-    from: serviceGroups.json
-    where: $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}"]
-```
----
 
 # Code Generation
 
