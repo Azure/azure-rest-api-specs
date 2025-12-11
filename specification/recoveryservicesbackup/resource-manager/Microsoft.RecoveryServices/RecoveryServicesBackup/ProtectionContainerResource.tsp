@@ -12,6 +12,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for container with backup items. Containers with specific workloads are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(BackupFabricResource)
 model ProtectionContainerResource
   is TrackedResourceWithOptionalLocation<ProtectionContainer> {

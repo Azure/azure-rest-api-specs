@@ -4,10 +4,8 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 /**
@@ -24,6 +22,7 @@ model DnsForwardingRuleset
     SegmentName = "dnsForwardingRulesets",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }
 
