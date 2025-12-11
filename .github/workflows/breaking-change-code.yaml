@@ -68,7 +68,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.swagger-breaking-change-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: job-summary
           path: ${{ steps.swagger-breaking-change-analyze-code.outputs.summary }}
