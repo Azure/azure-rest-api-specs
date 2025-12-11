@@ -20,44 +20,44 @@ output-folder: $(python-sdks-folder)/mysqlflexibleservers/azure-mgmt-mysqlflexib
 directive:
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/administrators/{administratorName}"]
-    transform: $.put["x-ms-long-running-operation-options"] = {}
+    transform: delete $.put["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}"]
-    transform: $.put["x-ms-long-running-operation-options"] = {}
+    transform: delete $.put["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/configurations/{configurationName}"]
-    transform: $.patch["x-ms-long-running-operation-options"] = {}
+    transform: delete $.patch["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases/{databaseName}"]
-    transform: $.put["x-ms-long-running-operation-options"] = {}
+    transform: delete $.put["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/databases/{databaseName}"]
-    transform: $.delete["x-ms-long-running-operation-options"] = {}
+    transform: delete $.delete["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}"]
-    transform: $.put["x-ms-long-running-operation-options"] = {}
+    transform: delete $.put["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}"]
-    transform: $.delete["x-ms-long-running-operation-options"] = {}
+    transform: delete $.delete["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenances/{maintenanceName}"]
-    transform: $.patch["x-ms-long-running-operation-options"] = {}
+    transform: delete $.patch["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}"]
-    transform: $.put["x-ms-long-running-operation-options"] = {}
+    transform: delete $.put["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}"]
-    transform: $.patch["x-ms-long-running-operation-options"] = {}
+    transform: delete $.patch["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/failover"]
-    transform: $.post["x-ms-long-running-operation-options"] = {}
+    transform: delete $.post["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/restart"]
-    transform: $.post["x-ms-long-running-operation-options"] = {}
+    transform: delete $.post["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/start"]
-    transform: $.post["x-ms-long-running-operation-options"] = {}
+    transform: delete $.post["x-ms-long-running-operation-options"]
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/stop"]
-    transform: $.post["x-ms-long-running-operation-options"] = {}
+    transform: delete $.post["x-ms-long-running-operation-options"]
 ```
