@@ -71,4 +71,3 @@ interface AccessTokens {
   @doc("Lists access tokens for the specified workspace ID. Supports OData query parameters: $select, $filter, $orderby, $top, and $skip. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
   list is Operations.ResourceList<AccessToken>;
 }
-

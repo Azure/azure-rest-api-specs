@@ -55,5 +55,5 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 
   @doc("Preview version 2026-01-01-preview with experimental features.")
-  v2026_01_01_preview: "2026-01-01-preview"
+  v2026_01_01_preview: "2026-01-01-preview",
 }

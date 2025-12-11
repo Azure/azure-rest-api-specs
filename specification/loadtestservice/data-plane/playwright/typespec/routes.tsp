@@ -55,7 +55,7 @@ alias GetBrowsersResponse = {
 
 interface Workspaces {
   // Workspaces Operations
-  
+
   @added(Versions.v2026_01_01_preview)
   @doc("Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.")
   get is Operations.ResourceRead<Workspace>;
