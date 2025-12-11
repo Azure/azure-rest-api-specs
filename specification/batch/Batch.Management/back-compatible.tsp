@@ -122,3 +122,9 @@ using Microsoft.Batch;
 @@clientName(LocationOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
+@@alternateType(DiffDiskSettings.placement, "CacheDisk", "go");
+@@alternateType(CheckNameAvailabilityParameters.type,
+  "Microsoft.Batch/batchAccounts",
+  "go"
+);
+@@alternateType(IPRule.action, "Allow", "go");
