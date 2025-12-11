@@ -138,8 +138,14 @@ model SignalDefinitionProperties {
   refreshInterval?: RefreshInterval = "PT1M";
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @removed(Versions.v2026_01_01_preview)
   @doc("Optional set of labels (key-value pairs)") // Since Signal Definition is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @added(Versions.v2026_01_01_preview)
+  @doc("Optional set of tags (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
+  tags?: Record<string4096>;
 
   @doc("Unit of the signal result (e.g. Bytes, MilliSeconds, Percent, Count))")
   @minLength(1)
@@ -468,8 +474,14 @@ model EntityProperties {
   impact?: EntityImpact = "Standard";
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @removed(Versions.v2026_01_01_preview)
   @doc("Optional set of labels (key-value pairs)") // Since Entity is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @added(Versions.v2026_01_01_preview)
+  @doc("Optional set of tags (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
+  tags?: Record<string4096>;
 
   @removed(Versions.v2026_01_01_preview)
   @doc("Signal groups which are assigned to this entity")
@@ -877,8 +889,14 @@ model RelationshipProperties {
   childEntityName: entityName;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @removed(Versions.v2026_01_01_preview)
   @doc("Optional set of labels (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
   labels?: Record<string4096>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "approved scenario for use as Tags alternative in proxy resource"
+  @added(Versions.v2026_01_01_preview)
+  @doc("Optional set of tags (key-value pairs)") // Since Relationship is a proxy resource, we cannot use Azure Tags
+  tags?: Record<string4096>;
 
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the relationship cannot be deleted manually.")

@@ -41,9 +41,9 @@ suppressions:
   - code: AvoidAdditionalProperties
     reason: Approved scenario for use as Tags alternative in proxy resource
     where:
-      - $.definitions.EntityProperties.properties.labels
-      - $.definitions.RelationshipProperties.properties.labels
-      - $.definitions.SignalDefinitionProperties.properties.labels
+      - $.definitions.EntityProperties.properties.tags
+      - $.definitions.RelationshipProperties.properties.tags
+      - $.definitions.SignalDefinitionProperties.properties.tags
 ```
 
 
