@@ -235,7 +235,10 @@ Always read the template before editing so you follow the canonical configuratio
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
 - To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
-- Always run the [`azsdk_verify_setup`](../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool to check the user's development environment setup for using SDK MCP tools. DO NOT PROCEED with running other tools before completing this step. Only skip for queries that don't need tools.
+- When using Copilot from Visual Studio or VS Code (not applicable when using Coding Agent on Github.com):
+  - **Always run** the [`azsdk_verify_setup`](../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool first to validate the user's development environment for SDK MCP tools.
+  - **Do not proceed** with any other tool execution until this step is complete.
+  - **Skip this check only** for queries that do not require tool execution.
 
 ### Basic Rules for SDK Generation from TypeSpec
 
@@ -275,6 +278,22 @@ Always read the template before editing so you follow the canonical configuratio
        - If a branch already exists and differs from the current branch, prompt the user to switch using
          `git checkout <branch name>`.
    - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
+
+8. **Language Exclusion Policy**:
+   - **CRITICAL**: Mark a language as excluded in a release plan **ONLY** when the language emitter configuration is intentionally missing or not configured in the `tspconfig.yaml` file.
+   - **DO NOT** mark a language as excluded if:
+     - SDK generation pipeline fails due to compilation errors, validation errors, or other technical issues
+     - The language emitter is configured in `tspconfig.yaml` but the pipeline encounters runtime errors
+     - There are temporary infrastructure or service issues causing pipeline failures
+   - **DO** mark a language as excluded if:
+     - The language emitter configuration is intentionally missing from `tspconfig.yaml`
+     - The service team has made a deliberate decision not to support a particular language
+     - The user provides explicit justification for not including a language in the release
+   - **When SDK generation fails**:
+     - Investigate the pipeline failure logs to identify the root cause
+     - Help the user fix compilation errors, configuration issues, or other problems
+     - Re-run the SDK generation pipeline after fixes are applied
+     - Only suggest language exclusion if the user explicitly states the language will not be supported
 
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
