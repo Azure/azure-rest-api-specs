@@ -22,7 +22,7 @@ function createMockGithub({ incrementalTypeSpec }) {
           conclusion: null,
         },
         {
-          name: "ARM Auto-SignOff - Analyze Code",
+          name: "ARM Auto SignOff - Analyze Code",
           id: 456,
           status: "completed",
           conclusion: "success",
@@ -109,7 +109,7 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Auto-SignOff - Analyze Code",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 456,
             status: "in_progress",
             conclusion: null,
@@ -162,14 +162,14 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Auto-SignOff - Analyze Code",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 456,
             status: "completed",
             conclusion: "success",
             updated_at: "2020-01-22T19:33:08Z",
           },
           {
-            name: "ARM Auto-SignOff - Analyze Code",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 789,
             status: "completed",
             conclusion: "failure",

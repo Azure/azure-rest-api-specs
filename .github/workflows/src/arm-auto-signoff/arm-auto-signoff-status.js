@@ -184,7 +184,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
  * @returns {Promise<{shouldAutoSign: boolean, reason: string, labelsToAdd?: string[]}>}
  */
 async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core) {
-  const wfName = "ARM Auto-Signoff - Analyze Code";
+  const wfName = "ARM Auto SignOff - Analyze Code";
   const armAnalysisRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
