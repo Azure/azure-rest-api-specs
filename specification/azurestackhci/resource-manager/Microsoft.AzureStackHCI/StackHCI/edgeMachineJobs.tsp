@@ -235,7 +235,7 @@ model EdgeMachineRemoteSupportNodeSettings {
   @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
-   @doc("The error message, if any, from the last connection attempt.")
+  @doc("The error message, if any, from the last connection attempt.")
   @visibility(Lifecycle.Read)
   connectionErrorMessage?: string;
 }
