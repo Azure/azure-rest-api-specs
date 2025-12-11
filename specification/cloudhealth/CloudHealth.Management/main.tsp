@@ -660,7 +660,7 @@ model SignalAssignment {
 model SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind;
-  
+
   @doc("Unique name of the signal within the entity")
   @minLength(1)
   @maxLength(260)
@@ -700,7 +700,11 @@ model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
 model AzureResourceSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.AzureResourceMetric;
-  ...OmitProperties<ResourceMetricSignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+
+  ...OmitProperties<
+    ResourceMetricSignalDefinitionProperties,
+    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+  >;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -708,7 +712,11 @@ model AzureResourceSignal extends SignalInstanceProperties {
 model LogAnalyticsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.LogAnalyticsQuery;
-  ...OmitProperties<LogAnalyticsQuerySignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+
+  ...OmitProperties<
+    LogAnalyticsQuerySignalDefinitionProperties,
+    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+  >;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -716,7 +724,11 @@ model LogAnalyticsSignal extends SignalInstanceProperties {
 model PrometheusMetricsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.PrometheusMetricsQuery;
-  ...OmitProperties<PrometheusMetricsSignalDefinitionProperties, "provisioningState" | "deletionDate" | "tags" | "signalKind">;
+
+  ...OmitProperties<
+    PrometheusMetricsSignalDefinitionProperties,
+    "provisioningState" | "deletionDate" | "tags" | "signalKind"
+  >;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1087,13 +1099,21 @@ interface Entities {
   @doc("Retrieve the health state transition history for an entity")
   @post
   @action("getHistory")
-  getHistory is ArmResourceActionSync<Entity, EntityHistoryRequest, EntityHistoryResponse>;
+  getHistory is ArmResourceActionSync<
+    Entity,
+    EntityHistoryRequest,
+    EntityHistoryResponse
+  >;
 
   @added(Versions.v2026_01_01_preview)
   @doc("Retrieve the time series history for a signal on an entity")
   @post
   @action("getSignalHistory")
-  getSignalHistory is ArmResourceActionSync<Entity, SignalHistoryRequest, SignalHistoryResponse>;
+  getSignalHistory is ArmResourceActionSync<
+    Entity,
+    SignalHistoryRequest,
+    SignalHistoryResponse
+  >;
 }
 
 @armResourceOperations(Relationship)
