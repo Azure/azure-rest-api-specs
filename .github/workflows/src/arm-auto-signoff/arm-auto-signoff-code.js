@@ -1,4 +1,4 @@
-import { isTrivialPullRequest } from "./pr-changes.js
+import { isTrivialPullRequest } from "./pr-changes.js";
 import incrementalTypeSpec from './arm-incremental-typespec.js';
 import checkTrivialChanges from './trivial-changes-check.js';
 
