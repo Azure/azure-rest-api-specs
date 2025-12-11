@@ -35,7 +35,7 @@ describe("createLogHook", () => {
   it("logs request info with body", () => {
     const mockLogger = createMockLogger();
     const logHook = createLogHook(
-      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {any} */ r) => r),
+      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {object} */ r) => r),
       mockLogger,
     );
 
@@ -58,7 +58,7 @@ describe("createLogHook", () => {
   it("logs request info without body", () => {
     const mockLogger = createMockLogger();
     const logHook = createLogHook(
-      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {any} */ r) => r),
+      /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {object} */ r) => r),
       mockLogger,
     );
 

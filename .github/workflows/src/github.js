@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { toPercent } from "../../shared/src/math.js";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.js";
 
@@ -18,7 +19,7 @@ export async function writeToActionsSummary(content, core) {
     await core.summary.addRaw(content).write();
     core.info("Successfully wrote to the GitHub Actions summary");
   } catch (error) {
-    throw new Error(`Failed to write to the GitHub Actions summary: ${error}`);
+    throw new Error(`Failed to write to the GitHub Actions summary: ${inspect(error)}`);
   }
 }
 
@@ -33,8 +34,9 @@ export function createLogHook(endpoint, logger) {
    */
   function logHook(options) {
     const request = endpoint(options);
-    const { method, url, body } = request;
-    logger.info(`[github] ${method.toUpperCase()} ${url} ${body ? JSON.stringify(body) : ""}`);
+    logger.info(
+      `[github] ${request.method.toUpperCase()} ${request.url} ${request.body ? JSON.stringify(request.body) : ""}`,
+    );
   }
 
   return logHook;

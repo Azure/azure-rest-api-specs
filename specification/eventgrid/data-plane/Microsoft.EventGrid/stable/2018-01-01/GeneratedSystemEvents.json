@@ -699,6 +699,45 @@
         }
       ]
     },
+    "AcsChatRetentionPolicy": {
+      "type": "object",
+      "description": "Schema of common properties of all chat retention policy",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyKind",
+          "description": "The chat retention policy kind."
+        },
+        "deleteThreadAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The delete thread after number of days."
+        }
+      }
+    },
+    "AcsChatRetentionPolicyKind": {
+      "type": "string",
+      "description": "Chat Retention Policy kind",
+      "enum": [
+        "none",
+        "threadCreationDate"
+      ],
+      "x-ms-enum": {
+        "name": "AcsChatRetentionPolicyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "None"
+          },
+          {
+            "name": "threadCreationDate",
+            "value": "threadCreationDate",
+            "description": "ThreadCreationDate"
+          }
+        ]
+      }
+    },
     "AcsChatThreadCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -727,6 +766,10 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
           "readOnly": true
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicy",
+          "description": "The retention policy for the chat."
         }
       },
       "required": [
@@ -768,6 +811,10 @@
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
           "readOnly": true
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicy",
+          "description": "The retention policy for the chat."
         }
       },
       "required": [
@@ -793,6 +840,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The deletion time of the thread"
+        },
+        "reason": {
+          "$ref": "#/definitions/AcsChatThreadDeletedReasonType",
+          "description": "The chat thread deletion reason."
         }
       },
       "required": [
@@ -803,6 +854,30 @@
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
         }
       ]
+    },
+    "AcsChatThreadDeletedReasonType": {
+      "type": "string",
+      "description": "Chat Thread Deletion Reason Type",
+      "enum": [
+        "deletedByUser",
+        "deletedByPolicy"
+      ],
+      "x-ms-enum": {
+        "name": "AcsChatThreadDeletedReasonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "deletedByUser",
+            "value": "deletedByUser",
+            "description": "DeletedByUser"
+          },
+          {
+            "name": "deletedByPolicy",
+            "value": "deletedByPolicy",
+            "description": "DeletedByPolicy"
+          }
+        ]
+      }
     },
     "AcsChatThreadEventBaseProperties": {
       "type": "object",
@@ -896,6 +971,10 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicy",
+          "description": "The retention policy for the chat."
         }
       },
       "required": [
@@ -934,6 +1013,10 @@
           "type": "object",
           "description": "The updated thread properties",
           "additionalProperties": {}
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicy",
+          "description": "The retention policy for the chat."
         }
       },
       "required": [
