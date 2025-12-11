@@ -49,14 +49,14 @@ jobs:
         name: Setup Node 20 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v7 uses Node 20
+          # actions/github-script@v8 uses Node 20
           node-version: 20.x
           install-command: npm ci --omit dev
           working-directory: ./${{ matrix.folder }}
 
       - if: ${{ matrix.folder == '.github' }}
         name: Verify all modules are importable
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { join } = await import("path");
@@ -68,7 +68,7 @@ jobs:
       - name: Install dev deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v7 uses Node 20
+          # actions/github-script@v8 uses Node 20
           node-version: 20.x
           working-directory: ./${{ matrix.folder }}
 

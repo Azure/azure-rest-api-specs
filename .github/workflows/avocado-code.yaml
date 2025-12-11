@@ -70,7 +70,7 @@ jobs:
         if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v7 uses Node 20
+          # actions/github-script@v8 uses Node 20
           node-version: 20.x
           # "--no-audit": improves performance
           # "--omit dev": not needed at runtime, improves performance
@@ -80,7 +80,7 @@ jobs:
       - name: Generate job summary
         if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         id: generate-job-summary
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { default: generateJobSummary } =
