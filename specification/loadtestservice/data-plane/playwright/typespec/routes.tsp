@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Playwright;
 
@@ -54,6 +56,7 @@ alias GetBrowsersResponse = {
 interface Workspaces {
   // Workspaces Operations
   
+  @added(Versions.v2026_01_01_preview)
   @doc("Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.")
   get is Operations.ResourceRead<Workspace>;
 
