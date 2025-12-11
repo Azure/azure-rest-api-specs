@@ -1719,10 +1719,10 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PathHierarchyTokenizer,
+@@clientNamespace(Search.PathHierarchyTokenizerV2,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PathHierarchyTokenizer,
+@@clientNamespace(Search.PathHierarchyTokenizerV2,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2621,8 +2621,8 @@ namespace KnowledgeBaseRetrievalClient {
   "maxStoragePerIndexInBytes"
 );
 @@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
-@@clientName(PathHierarchyTokenizer.reverse, "reverseTokenOrder");
-@@clientName(PathHierarchyTokenizer.skip, "numberOfTokensToSkip");
+@@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
+@@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
 @@clientName(CommonGramTokenFilter.queryMode, "useQueryMode");
 @@clientName(KeepTokenFilter.keepWordsCase, "lowerCaseKeepWords");
 @@clientName(LengthTokenFilter.min, "minLength");
@@ -2908,8 +2908,8 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(PathHierarchyTokenizer.`@odata.type`, "odataType");
-@@clientName(PathHierarchyTokenizer.`@odata.type`, "odatatype", "javascript");
+@@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
+@@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
 @@clientName(Search.ClassicSimilarityAlgorithm,
