@@ -31,7 +31,6 @@ union ProjectKind {
    * A project to build conversation summarization models which are able to summarize long conversations.
    */
   @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v2025_11_01)
   CustomConversationSummarization: "CustomConversationSummarization",
 }
 

@@ -6,7 +6,7 @@ using Language.Conversations.Authoring;
 using Azure.ClientGenerator.Core;
 using Versioning;
 
-@useDependency(Language.Conversations.Authoring.Versions.v2025_05_15_preview)
+@useDependency(Language.Conversations.Authoring.Versions.v2025_11_15_preview)
 namespace Language.ConversationsAuthoringClientCustomizations;
 
 @@clientName(conversationAuthoringListDeployments, "listDeployments");

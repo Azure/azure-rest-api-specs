@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringName": "peeringName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "registeredPrefixName0",
+            "type": "Microsoft.Peering/registeredPrefixes",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName0",
+            "properties": {
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "prefix": "10.22.20.0/24",
+              "prefixValidationState": "Verified",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "registeredPrefixName1",
+            "type": "Microsoft.Peering/registeredPrefixes",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName1",
+            "properties": {
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "prefix": "10.22.21.0/24",
+              "prefixValidationState": "Verified",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "registeredPrefixName2",
+            "type": "Microsoft.Peering/registeredPrefixes",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName2",
+            "properties": {
+              "prefix": "10.22.22.0/24",
+              "prefixValidationState": "Pending",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RegisteredPrefixes_ListByPeering",
+  "title": "List all the registered prefixes associated with the peering"
+}

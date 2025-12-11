@@ -57,7 +57,7 @@ input-file: Microsoft.Contoso/preview/2021-10-01-preview/contoso.json
 
 ### Tag: empty-properties
 
-This tag has no yaml entites defined and is intended to test parser scenarios
+This tag has no yaml entities defined and is intended to test parser scenarios
 around empty properties.
 
 ``` yaml $(tag) == 'empty-properties'

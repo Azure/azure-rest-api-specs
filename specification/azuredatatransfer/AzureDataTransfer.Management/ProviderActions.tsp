@@ -42,14 +42,7 @@ interface AzureDataTransfer {
   @renamedFrom(Versions.v2025_10_10_preview, "listFlowProfiles")
   listFlowProfilesOld is ArmProviderActionSync<
     Request = ListFlowProfilesRequest,
-    Response = {
-      /**
-       * A list of FlowProfile metadata created under the specified pipeline.
-       */
-      @added(Versions.v2025_05_30_preview)
-      @bodyRoot
-      flowProfileList?: FlowProfileMetadata[];
-    }
+    Response = FlowProfilesListResult
   >;
 
   /**

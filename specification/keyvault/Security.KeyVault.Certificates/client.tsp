@@ -225,6 +225,8 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(AdministratorDetails.EmailAddress, "Email", "go");
 
 @@clientName(SubjectAlternativeNames.upns, "UserPrincipalNames", "go");
+@@clientName(SubjectAlternativeNames.uris, "URIs", "go");
+@@clientName(SubjectAlternativeNames.ipAddresses, "IPAddresses", "go");
 @@clientName(X509CertificateProperties.ekus, "EnhancedKeyUsage", "go");
 
 @@clientName(CertificateBundle.cer, "CER", "go");
@@ -241,10 +243,14 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
+// Elide createCertificate but keep the request model for a convenience poller (LRO).
+@@scope(KeyVault.createCertificate, "!rust");
+@@usage(CertificateCreateParameters, Usage.input, "rust");
 @@clientName(CertificateCreateParameters,
   "CreateCertificateParameters",
   "rust"
 );
+
 @@clientName(CertificateImportParameters,
   "ImportCertificateParameters",
   "rust"

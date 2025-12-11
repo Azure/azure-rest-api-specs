@@ -8,7 +8,7 @@ using Microsoft.DurableTask;
   "com.azure.resourcemanager.durabletask",
   "java"
 );
-@@clientName(Microsoft.DurableTask, "DurableTaskMgmt", "python");
+@@clientName(Microsoft.DurableTask, "DurableTaskMgmtClient", "python");
 @@clientName(Microsoft.DurableTask, "DurableTaskManagementClient", "java");
 
 // csharp
@@ -23,6 +23,7 @@ using Microsoft.DurableTask;
   "csharp"
 );
 @@clientName(SchedulerSku, "DurableTaskSchedulerSku", "csharp");
+@@clientName(SchedulerSkuName, "DurableTaskSchedulerSkuName", "csharp");
 @@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
 @@clientName(PurgeableOrchestrationState,
@@ -38,3 +39,5 @@ using Microsoft.DurableTask;
   "DurableTaskRetentionPolicyProperties",
   "csharp"
 );
+@@clientName(SchedulerProperties.ipAllowlist, "IPAllowlist", "csharp");
+@@clientName(SchedulerPropertiesUpdate.ipAllowlist, "IPAllowlist", "csharp");

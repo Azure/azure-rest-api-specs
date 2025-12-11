@@ -1,20 +1,30 @@
-// @ts-check
-
 import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
 
 /**
  * @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["context"]} Context
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["core"]} Core
  */
 
-// Partial mock of `github` parameter passed into github-script actions
+/**
+ * @returns {GitHub & ReturnType<typeof createMockGithubImpl>}
+ */
 export function createMockGithub() {
+  return /** @type {GitHub & ReturnType<typeof createMockGithubImpl>} */ (createMockGithubImpl());
+}
+
+// Partial mock of `github` parameter passed into github-script actions
+function createMockGithubImpl() {
   return {
     hook: {
       after: vi.fn(),
       before: vi.fn(),
     },
-    paginate: async (func, params) => {
+    paginate: /** @template T,U */ async (
+      /** @type {(input: T) => Promise<{data: Array<U>|Record<string,Array<U>>}>} */ func,
+      /** @type {T} */ params,
+    ) => {
       // Assume all test data fits in single page
       const data = (await func(params)).data;
 
@@ -57,15 +67,18 @@ export function createMockGithub() {
 }
 
 /**
- * @returns {GitHub}
- * @param {any} mockGithub
+ * @returns {Core & ReturnType<typeof createMockCoreImpl>}
  */
-export function asGitHub(mockGithub) {
-  return /** @type {GitHub} */ mockGithub;
+export function createMockCore() {
+  return /** @type {Core & ReturnType<typeof createMockCoreImpl>} */ (createMockCoreImpl());
 }
 
 // Partial mock of `core` parameter passed into to github-script actions
-export function createMockCore() {
+function createMockCoreImpl() {
+  const summary = {};
+  summary.addRaw = vi.fn().mockReturnValue(summary);
+  summary.write = vi.fn().mockResolvedValue(undefined);
+
   return {
     debug: vi.fn(console.debug),
     info: vi.fn(console.log),
@@ -75,13 +88,7 @@ export function createMockCore() {
     isDebug: vi.fn().mockReturnValue(true),
     setOutput: vi.fn((name, value) => console.log(`setOutput('${name}', '${value}')`)),
     setFailed: vi.fn((msg) => console.log(`setFailed('${msg}')`)),
-    summary: {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      addRaw: vi.fn(function (content) {
-        return this; // Return 'this' for method chaining
-      }),
-      write: vi.fn().mockResolvedValue(undefined),
-    },
+    summary,
   };
 }
 
@@ -96,8 +103,15 @@ export function createMockRequestError(status) {
   });
 }
 
-// Partial mock of `context` parameter passed into github-script actions
+/**
+ * @returns {Context & ReturnType<createMockContextImpl>}
+ */
 export function createMockContext() {
+  return /** @type {Context & ReturnType<createMockContextImpl>} */ (createMockContextImpl());
+}
+
+// Partial mock of `context` parameter passed into github-script actions
+function createMockContextImpl() {
   return {
     payload: {},
     repo: {
