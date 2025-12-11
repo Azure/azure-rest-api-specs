@@ -235,7 +235,10 @@ Always read the template before editing so you follow the canonical configuratio
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
 - To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
-- Always run the [`azsdk_verify_setup`](../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool to check the user's development environment setup for using SDK MCP tools. DO NOT PROCEED with running other tools before completing this step. Only skip for queries that don't need tools.
+- When using Copilot from Visual Studio or VS Code (not applicable when using Coding Agent on Github.com):
+  - **Always run** the [`azsdk_verify_setup`](../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool first to validate the user's development environment for SDK MCP tools.
+  - **Do not proceed** with any other tool execution until this step is complete.
+  - **Skip this check only** for queries that do not require tool execution.
 
 ### Basic Rules for SDK Generation from TypeSpec
 
