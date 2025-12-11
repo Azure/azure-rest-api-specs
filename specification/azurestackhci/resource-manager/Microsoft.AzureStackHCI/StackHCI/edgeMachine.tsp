@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -134,7 +133,7 @@ model EdgeMachineProperties {
 
   @doc("Reported properties for edge machine.")
   @visibility(Lifecycle.Read)
-  reportedProperties?: EdgeMachineReportedReportedProperties;
+  reportedProperties?: EdgeMachineReportedProperties;
 
   @doc("operation status details for edge machine.")
   @visibility(Lifecycle.Read)
@@ -287,14 +286,14 @@ union EdgeMachineState {
 
 @added(Versions.v2025_12_01_preview)
 @doc("Reported properties for edge machine.")
-model EdgeMachineReportedReportedProperties {
+model EdgeMachineReportedProperties {
   @doc("Last time data reported.")
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 
   @doc("Network details for edge machine.")
   @visibility(Lifecycle.Read)
-  networkProfile?: NetworkProfile;
+  networkProfile?: EdgeMachineNetworkProfile;
 
   @doc("OS Properties for edge machine.")
   @visibility(Lifecycle.Read)
@@ -319,16 +318,116 @@ model EdgeMachineReportedReportedProperties {
 
 @added(Versions.v2025_12_01_preview)
 @doc("NetworkProfile of edge machine.")
-model NetworkProfile {
+model EdgeMachineNetworkProfile {
   @doc("List of Network Interface Card (NIC) Details of edge machine.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["adapterName"])
-  nicDetails?: NicDetail[];
+  nicDetails?: EdgeMachineNicDetail[];
 
   @doc("List of switch Details of edge machine.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("Network Interface Card (NIC) Details of edge machine.")
+model EdgeMachineNicDetail {
+  /**
+   * Adapter Name of NIC
+   */
+  @visibility(Lifecycle.Read)
+  adapterName?: string;
+
+  /**
+   * Interface Description of NIC
+   */
+  @visibility(Lifecycle.Read)
+  interfaceDescription?: string;
+
+  /**
+   * Component Id of NIC
+   */
+  @visibility(Lifecycle.Read)
+  componentId?: string;
+
+  /**
+   * Driver Version of NIC
+   */
+  @visibility(Lifecycle.Read)
+  driverVersion?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  @visibility(Lifecycle.Read)
+  ip4Address?: string;
+
+  /**
+   * Subnet Mask of NIC
+   */
+  @visibility(Lifecycle.Read)
+  subnetMask?: string;
+
+  /**
+   * Default Gateway of NIC
+   */
+  @visibility(Lifecycle.Read)
+  defaultGateway?: string;
+
+  /**
+   * DNS Servers for NIC
+   */
+  @visibility(Lifecycle.Read)
+  dnsServers?: string[];
+
+  /**
+   * Default Isolation of Management NIC
+   */
+  @visibility(Lifecycle.Read)
+  defaultIsolationId?: string;
+
+  /**
+   * MAC address information of NIC.
+   */
+  @visibility(Lifecycle.Read)
+  macAddress?: string;
+
+  /**
+   * The slot attached to the NIC.
+   */
+  @visibility(Lifecycle.Read)
+  slot?: string;
+
+  /**
+   * The switch attached to the NIC, if any.
+   */
+  @visibility(Lifecycle.Read)
+  switchName?: string;
+
+  /**
+   * The type of NIC, physical, virtual, management.
+   */
+  @visibility(Lifecycle.Read)
+  nicType?: string;
+
+  /**
+   * The VLAN ID of the physical NIC.
+   */
+  @visibility(Lifecycle.Read)
+  vlanId?: string;
+
+  /**
+   * The status of NIC, up, disconnected.
+   */
+  @visibility(Lifecycle.Read)
+  nicStatus?: string;
+
+  /**
+   * Describes the RDMA capability of the network adapter.
+   */
+  @visibility(Lifecycle.Read)
+  rdmaCapability?: RdmaCapability = RdmaCapability.Disabled;
 }
 
 /**
@@ -439,4 +538,15 @@ model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
+}
+/**
+ * details of validation failure
+ */
+@added(Versions.v2025_12_01_preview)
+model ErrorDetailModel {
+  /**
+   * Exception details while installing extension.
+   */
+  @visibility(Lifecycle.Read)
+  exception?: string;
 }

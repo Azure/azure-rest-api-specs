@@ -8257,6 +8257,144 @@
         "value"
       ]
     },
+    "EdgeMachineNetworkProfile": {
+      "type": "object",
+      "description": "NetworkProfile of edge machine.",
+      "properties": {
+        "nicDetails": {
+          "type": "array",
+          "description": "List of Network Interface Card (NIC) Details of edge machine.",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineNicDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "adapterName"
+          ]
+        },
+        "switchDetails": {
+          "type": "array",
+          "description": "List of switch Details of edge machine.",
+          "items": {
+            "$ref": "#/definitions/SwitchDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "switchName"
+          ]
+        }
+      }
+    },
+    "EdgeMachineNicDetail": {
+      "type": "object",
+      "description": "Network Interface Card (NIC) Details of edge machine.",
+      "properties": {
+        "adapterName": {
+          "type": "string",
+          "description": "Adapter Name of NIC",
+          "readOnly": true
+        },
+        "interfaceDescription": {
+          "type": "string",
+          "description": "Interface Description of NIC",
+          "readOnly": true
+        },
+        "componentId": {
+          "type": "string",
+          "description": "Component Id of NIC",
+          "readOnly": true
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "Driver Version of NIC",
+          "readOnly": true
+        },
+        "ip4Address": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet Mask of NIC",
+          "readOnly": true
+        },
+        "defaultGateway": {
+          "type": "string",
+          "description": "Default Gateway of NIC",
+          "readOnly": true
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "DNS Servers for NIC",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "defaultIsolationId": {
+          "type": "string",
+          "description": "Default Isolation of Management NIC",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "MAC address information of NIC.",
+          "readOnly": true
+        },
+        "slot": {
+          "type": "string",
+          "description": "The slot attached to the NIC.",
+          "readOnly": true
+        },
+        "switchName": {
+          "type": "string",
+          "description": "The switch attached to the NIC, if any.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "The type of NIC, physical, virtual, management.",
+          "readOnly": true
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "The VLAN ID of the physical NIC.",
+          "readOnly": true
+        },
+        "nicStatus": {
+          "type": "string",
+          "description": "The status of NIC, up, disconnected.",
+          "readOnly": true
+        },
+        "rdmaCapability": {
+          "type": "string",
+          "description": "Describes the RDMA capability of the network adapter.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "RdmaCapability",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Network Adapter on the device is RDMA Capable"
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
     "EdgeMachinePatch": {
       "type": "object",
       "description": "Model for patching edge machine.",
@@ -8385,7 +8523,7 @@
           "readOnly": true
         },
         "reportedProperties": {
-          "$ref": "#/definitions/EdgeMachineReportedReportedProperties",
+          "$ref": "#/definitions/EdgeMachineReportedProperties",
           "description": "Reported properties for edge machine.",
           "readOnly": true
         },
@@ -8462,7 +8600,7 @@
           "readOnly": true
         },
         "nodeSettings": {
-          "$ref": "#/definitions/RemoteSupportNodeSettings",
+          "$ref": "#/definitions/EdgeMachineRemoteSupportNodeSettings",
           "description": "Optional settings for configuring the node for remote support.",
           "readOnly": true
         },
@@ -8479,7 +8617,40 @@
         }
       }
     },
-    "EdgeMachineReportedReportedProperties": {
+    "EdgeMachineRemoteSupportNodeSettings": {
+      "type": "object",
+      "description": "Represents the settings of a remote support node.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of the remote support node.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were created, in UTC.",
+          "readOnly": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the node settings were last updated, in UTC.",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "type": "string",
+          "description": "The current connection status of the remote support session.",
+          "readOnly": true
+        },
+        "connectionErrorMessage": {
+          "type": "string",
+          "description": "The error message, if any, from the last connection attempt.",
+          "readOnly": true
+        }
+      }
+    },
+    "EdgeMachineReportedProperties": {
       "type": "object",
       "description": "Reported properties for edge machine.",
       "properties": {
@@ -8490,7 +8661,7 @@
           "readOnly": true
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
+          "$ref": "#/definitions/EdgeMachineNetworkProfile",
           "description": "Network details for edge machine.",
           "readOnly": true
         },
@@ -8603,6 +8774,17 @@
             "description": "Edge solution for Windows based edge devices."
           }
         ]
+      }
+    },
+    "ErrorDetailModel": {
+      "type": "object",
+      "description": "details of validation failure",
+      "properties": {
+        "exception": {
+          "type": "string",
+          "description": "Exception details while installing extension.",
+          "readOnly": true
+        }
       }
     },
     "Extension": {
@@ -10556,34 +10738,6 @@
         "networkVirtualizationEnabled": {
           "type": "boolean",
           "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
-        }
-      }
-    },
-    "NetworkProfile": {
-      "type": "object",
-      "description": "NetworkProfile of edge machine.",
-      "properties": {
-        "nicDetails": {
-          "type": "array",
-          "description": "List of Network Interface Card (NIC) Details of edge machine.",
-          "items": {
-            "$ref": "#/definitions/NicDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "adapterName"
-          ]
-        },
-        "switchDetails": {
-          "type": "array",
-          "description": "List of switch Details of edge machine.",
-          "items": {
-            "$ref": "#/definitions/SwitchDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "switchName"
-          ]
         }
       }
     },
