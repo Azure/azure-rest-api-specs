@@ -922,7 +922,7 @@ union StorageFaultDomainAlignmentType {
  * Specifies the storage alignment status for the disk.
  */
 @added(Versions.v2025_11_01)
-union StorageAlignment {
+union StorageAlignmentStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
@@ -2532,7 +2532,7 @@ model VirtualMachineScaleSetOSDisk {
    * Specifies the storage fault domain alignment type for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageFDAlignment?: StorageFaultDomainAlignmentType;
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
@@ -2671,7 +2671,7 @@ model VirtualMachineScaleSetDataDisk {
    * Specifies the storage fault domain alignment type for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageFDAlignment?: StorageFaultDomainAlignmentType;
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -3895,7 +3895,7 @@ model VirtualMachineScaleSetUpdateOSDisk {
    * Specifies the storage fault domain alignment type for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageFDAlignment?: StorageFaultDomainAlignmentType;
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
@@ -5063,7 +5063,7 @@ model DiskInstanceView {
    * Specifies the storage alignment status for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageAlignment?: StorageAlignment;
+  storageAlignmentStatus?: StorageAlignmentStatus;
 }
 
 /**
@@ -5271,7 +5271,7 @@ model OSDisk {
    * Specifies the storage fault domain alignment type for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageFDAlignment?: StorageFaultDomainAlignmentType;
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -5353,7 +5353,7 @@ model DataDisk {
    * Specifies the storage fault domain alignment type for the disk.
    */
   @added(Versions.v2025_11_01)
-  storageFDAlignment?: StorageFaultDomainAlignmentType;
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
