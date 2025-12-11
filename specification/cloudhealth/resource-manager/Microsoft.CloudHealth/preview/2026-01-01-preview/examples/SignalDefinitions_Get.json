@@ -27,10 +27,13 @@
           "timeGrain": "PT1M",
           "dataUnit": "Count",
           "evaluationRules": {
-            "dynamicDetectionRule": {
-              "dynamicThresholdModel": "AnomalyDetection",
-              "modelSensitivity": 4.5,
-              "dynamicThresholdDirection": "GreaterThan"
+            "degradedRule": {
+              "operator": "LowerThan",
+              "threshold": "10"
+            },
+            "unhealthyRule": {
+              "operator": "LowerThan",
+              "threshold": "1"
             }
           }
         },
