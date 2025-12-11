@@ -208,12 +208,36 @@ model EdgeMachineRemoteSupportJobReportedProperties {
 
   @doc("Optional settings for configuring the node for remote support.")
   @visibility(Lifecycle.Read)
-  nodeSettings?: RemoteSupportNodeSettings;
+  nodeSettings?: EdgeMachineRemoteSupportNodeSettings;
 
   @doc("Details of the remote support session.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("Represents the settings of a remote support node.")
+model EdgeMachineRemoteSupportNodeSettings {
+  @doc("The state of the remote support node.")
+  @visibility(Lifecycle.Read)
+  state?: string;
+
+  @doc("The timestamp when the node settings were created, in UTC.")
+  @visibility(Lifecycle.Read)
+  createdAt?: utcDateTime;
+
+  @doc("The timestamp when the node settings were last updated, in UTC.")
+  @visibility(Lifecycle.Read)
+  updatedAt?: utcDateTime;
+
+  @doc("The current connection status of the remote support session.")
+  @visibility(Lifecycle.Read)
+  connectionStatus?: string;
+
+   @doc("The error message, if any, from the last connection attempt.")
+  @visibility(Lifecycle.Read)
+  connectionErrorMessage?: string;
 }
 
 @added(Versions.v2025_12_01_preview)
