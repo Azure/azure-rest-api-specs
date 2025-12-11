@@ -1688,6 +1688,11 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.KeywordTokenizerV2, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KeywordTokenizerV2,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.MicrosoftLanguageTokenizer,
   "Azure.Search.Documents.Indexes"
 );
@@ -1726,6 +1731,13 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(Search.LuceneStandardTokenizerV2,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.LuceneStandardTokenizerV2,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.UaxUrlEmailTokenizer,
   "Azure.Search.Documents.Indexes"
 );
@@ -1765,6 +1777,13 @@ namespace KnowledgeBaseRetrievalClient {
   "Azure.Search.Documents.Indexes"
 );
 @@clientNamespace(Search.EdgeNGramTokenFilter,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.EdgeNGramTokenFilterV2,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EdgeNGramTokenFilterV2,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -1797,6 +1816,11 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(Search.NGramTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.NGramTokenFilter,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.NGramTokenFilterV2, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.NGramTokenFilterV2,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2192,23 +2216,23 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-// @@clientNamespace(Search.SentimentSkillV3, "Azure.Search.Documents.Indexes");
-// @@clientNamespace(Search.SentimentSkillV3,
-//   "com.azure.search.documents.indexes",
-//   "java"
-// );
+@@clientNamespace(Search.SentimentSkillV3, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SentimentSkillV3,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.EntityLinkingSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.EntityLinkingSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-// @@clientNamespace(Search.EntityRecognitionSkillV3,
-//   "Azure.Search.Documents.Indexes"
-// );
-// @@clientNamespace(Search.EntityRecognitionSkillV3,
-//   "com.azure.search.documents.indexes",
-//   "java"
-// );
+@@clientNamespace(Search.EntityRecognitionSkillV3,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EntityRecognitionSkillV3,
+  "com.azure.search.documents.indexes",
+  "java"
+);
 @@clientNamespace(Search.PIIDetectionSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.PIIDetectionSkill,
   "com.azure.search.documents.indexes",
@@ -2673,6 +2697,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(EdgeNGramTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(KeywordTokenizer.`@odata.type`, "odataType");
 @@clientName(KeywordTokenizer.`@odata.type`, "odatatype", "javascript");
+@@clientName(KeywordTokenizerV2.`@odata.type`, "odataType");
+@@clientName(KeywordTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(MicrosoftLanguageTokenizer.`@odata.type`, "odataType");
 @@clientName(MicrosoftLanguageTokenizer.`@odata.type`,
   "odatatype",
@@ -2689,6 +2715,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(PatternTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType");
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odatatype", "javascript");
+@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType");
+@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType");
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
@@ -2704,6 +2732,8 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(EdgeNGramTokenFilter.`@odata.type`, "odataType");
 @@clientName(EdgeNGramTokenFilter.`@odata.type`, "odatatype", "javascript");
+@@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odataType");
+@@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(ElisionTokenFilter.`@odata.type`, "odataType");
 @@clientName(ElisionTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(KeepTokenFilter.`@odata.type`, "odataType");
@@ -2716,6 +2746,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(LimitTokenFilter.`@odata.type`, "odatatype", "javascript");
 @@clientName(NGramTokenFilter.`@odata.type`, "odataType");
 @@clientName(NGramTokenFilter.`@odata.type`, "odatatype", "javascript");
+@@clientName(NGramTokenFilterV2.`@odata.type`, "odataType");
+@@clientName(NGramTokenFilterV2.`@odata.type`, "odatatype", "javascript");
 @@clientName(PatternCaptureTokenFilter.`@odata.type`, "odataType");
 @@clientName(PatternCaptureTokenFilter.`@odata.type`,
   "odatatype",
@@ -2830,18 +2862,16 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(ShaperSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(MergeSkill.`@odata.type`, "odataType");
 @@clientName(MergeSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odataType");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(SentimentSkill.`@odata.type`, "odataType");
 @@clientName(SentimentSkill.`@odata.type`, "odatatype", "javascript");
-// @@clientName(SentimentSkillV3.`@odata.type`, "odataType");
-// @@clientName(SentimentSkillV3.`@odata.type`, "odatatype", "javascript");
+@@clientName(SentimentSkillV3.`@odata.type`, "odataType");
+@@clientName(SentimentSkillV3.`@odata.type`, "odatatype", "javascript");
 @@clientName(EntityLinkingSkill.`@odata.type`, "odataType");
 @@clientName(EntityLinkingSkill.`@odata.type`, "odatatype", "javascript");
-// @@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType");
-// @@clientName(EntityRecognitionSkillV3.`@odata.type`, "odatatype", "javascript");
 @@clientName(EntityRecognitionSkill.`@odata.type`, "odataType");
 @@clientName(EntityRecognitionSkill.`@odata.type`, "odatatype", "javascript");
+@@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType");
+@@clientName(EntityRecognitionSkillV3.`@odata.type`, "odatatype", "javascript");
 @@clientName(PIIDetectionSkill.`@odata.type`, "odataType");
 @@clientName(PIIDetectionSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(SplitSkill.`@odata.type`, "odataType");
