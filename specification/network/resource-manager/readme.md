@@ -24,7 +24,7 @@ To see additional help and options, run:
 
 These are the global settings for the Network API.
 
-```yaml
+``` yaml
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
@@ -111,7 +111,7 @@ input-file:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -132,7 +132,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -223,7 +223,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -244,7 +244,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -335,7 +335,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -356,7 +356,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -447,7 +447,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -468,7 +468,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -481,7 +481,6 @@ directive:
 ```
 
 ### Tag: package-2024-09-preview
-
 These settings apply only when `--tag=package-2024-09-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-09-preview'
@@ -559,7 +558,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -586,7 +585,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -677,7 +676,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -704,7 +703,7 @@ directive:
     where: "$.definitions.ProxyResource"
     transform: >
       $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
-
+      
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.Resource"
     transform: >
@@ -717,7 +716,6 @@ directive:
 ```
 
 ### Tag: package-2024-06-preview
-
 These settings apply only when `--tag=package-2024-06-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2024-06-preview'
@@ -812,7 +810,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
   - code: DeleteResponseCodes
     reason: Required for multiple response codes. Reviewed by ARM team.
-    where:
+    where: 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
@@ -914,6 +912,7 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+
 ```
 
 ### Tag: package-2024-03
@@ -1180,7 +1179,6 @@ suppressions:
 ```
 
 ### Tag: package-2023-11-preview
-
 These settings apply only when `--tag=package-2023-11-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-11-preview'
@@ -1318,12 +1316,11 @@ input-file:
   - Microsoft.Network/stable/2023-11-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2023-11-01/webapplicationfirewall.json
 ```
-
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.Network/stable/2023-09-01/applicationGateway.json
   - Microsoft.Network/stable/2023-09-01/applicationGatewayWafDynamicManifests.json
@@ -1392,7 +1389,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-preview'
+``` yaml $(tag) == 'package-2023-08-preview'
 input-file:
   - Microsoft.Network/preview/2023-08-01-preview/network.json
   - Microsoft.Network/preview/2023-08-01-preview/networkSecurityPerimeter.json
@@ -1402,7 +1399,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07-preview'
+``` yaml $(tag) == 'package-2023-07-preview'
 input-file:
   - Microsoft.Network/preview/2023-07-01-preview/network.json
   - Microsoft.Network/preview/2023-07-01-preview/networkSecurityPerimeter.json
@@ -1412,7 +1409,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.Network/stable/2023-06-01/applicationGateway.json
   - Microsoft.Network/stable/2023-06-01/applicationGatewayWafDynamicManifests.json
@@ -1481,7 +1478,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-05'
+``` yaml $(tag) == 'package-2023-05'
 input-file:
   - Microsoft.Network/stable/2023-05-01/applicationGateway.json
   - Microsoft.Network/stable/2023-05-01/applicationGatewayWafDynamicManifests.json
@@ -1620,7 +1617,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04'
+``` yaml $(tag) == 'package-2023-04'
 input-file:
   - Microsoft.Network/stable/2023-04-01/applicationGateway.json
   - Microsoft.Network/stable/2023-04-01/applicationGatewayWafDynamicManifests.json
@@ -1689,7 +1686,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02'
+``` yaml $(tag) == 'package-2023-02'
 input-file:
   - Microsoft.Network/stable/2023-02-01/applicationGateway.json
   - Microsoft.Network/stable/2023-02-01/applicationGatewayWafDynamicManifests.json
@@ -1758,7 +1755,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06-preview'
+``` yaml $(tag) == 'package-2022-06-preview'
 input-file:
   - Microsoft.Network/preview/2022-06-01-preview/network.json
   - Microsoft.Network/preview/2022-06-01-preview/networkManagerGroupMembership.json
@@ -1829,7 +1826,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11'
+``` yaml $(tag) == 'package-2022-11'
 input-file:
   - Microsoft.Network/stable/2022-11-01/applicationGateway.json
   - Microsoft.Network/stable/2022-11-01/applicationGatewayWafDynamicManifests.json
@@ -1898,7 +1895,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.Network/stable/2022-09-01/applicationGateway.json
   - Microsoft.Network/stable/2022-09-01/applicationGatewayWafDynamicManifests.json
@@ -1967,7 +1964,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.Network/stable/2022-07-01/applicationGateway.json
   - Microsoft.Network/stable/2022-07-01/applicationGatewayWafDynamicManifests.json
@@ -2036,7 +2033,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05'
+``` yaml $(tag) == 'package-2022-05'
 input-file:
   - Microsoft.Network/stable/2022-05-01/applicationGateway.json
   - Microsoft.Network/stable/2022-05-01/applicationGatewayWafDynamicManifests.json
@@ -2105,7 +2102,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01'
 input-file:
   - Microsoft.Network/stable/2022-01-01/applicationGateway.json
   - Microsoft.Network/stable/2022-01-01/applicationSecurityGroup.json
@@ -2172,7 +2169,7 @@ input-file:
 
 These settings apply only when `--tag=2022-04-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-04-preview'
+``` yaml $(tag) == 'package-2022-04-preview'
 input-file:
   - Microsoft.Network/preview/2022-04-01-preview/network.json
   - Microsoft.Network/preview/2022-04-01-preview/networkManager.json
@@ -2240,7 +2237,7 @@ input-file:
 
 These settings apply only when `--tag=2022-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02-preview'
+``` yaml $(tag) == 'package-2022-02-preview'
 input-file:
   - Microsoft.Network/preview/2022-02-01-preview/network.json
   - Microsoft.Network/preview/2022-02-01-preview/networkManager.json
@@ -2308,7 +2305,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.Network/stable/2021-08-01/applicationGateway.json
   - Microsoft.Network/stable/2021-08-01/applicationSecurityGroup.json
@@ -2366,7 +2363,7 @@ input-file:
 
 These settings apply only when `--tag=2021-05-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05-preview'
+``` yaml $(tag) == 'package-2021-05-preview'
 input-file:
   - Microsoft.Network/preview/2021-05-01-preview/network.json
   - Microsoft.Network/preview/2021-05-01-preview/networkManager.json
@@ -2434,7 +2431,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+``` yaml $(tag) == 'package-2021-05'
 input-file:
   - Microsoft.Network/stable/2021-05-01/applicationGateway.json
   - Microsoft.Network/stable/2021-05-01/applicationSecurityGroup.json
@@ -2492,7 +2489,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - Microsoft.Network/stable/2021-03-01/applicationGateway.json
   - Microsoft.Network/stable/2021-03-01/applicationSecurityGroup.json
@@ -2550,7 +2547,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.Network/stable/2021-02-01/applicationGateway.json
   - Microsoft.Network/stable/2021-02-01/applicationSecurityGroup.json
@@ -2608,7 +2605,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11'
+``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.Network/stable/2020-11-01/applicationGateway.json
   - Microsoft.Network/stable/2020-11-01/applicationSecurityGroup.json
@@ -2660,13 +2657,14 @@ input-file:
   - Microsoft.Network/stable/2020-11-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-11-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-11-01/webapplicationfirewall.json
+
 ```
 
 ### Tag: package-2021-02-preview-only
 
 These settings apply only when `--tag=2021-02-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02-preview-only'
+``` yaml $(tag) == 'package-2021-02-preview-only'
 input-file:
   - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
@@ -2682,7 +2680,7 @@ input-file:
 
 These settings apply only when `--tag=2021-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02-preview'
+``` yaml $(tag) == 'package-2021-02-preview'
 input-file:
   - Microsoft.Network/preview/2021-02-01-preview/network.json
   - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
@@ -2748,7 +2746,7 @@ input-file:
 
 These settings apply only when `--tag=2021-03-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-preview'
+``` yaml $(tag) == 'package-2021-03-preview'
 input-file:
   - Microsoft.Network/stable/2021-02-01/applicationGateway.json
   - Microsoft.Network/stable/2021-02-01/applicationSecurityGroup.json
@@ -2807,7 +2805,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-08'
+``` yaml $(tag) == 'package-2020-08'
 input-file:
   - Microsoft.Network/stable/2020-08-01/applicationGateway.json
   - Microsoft.Network/stable/2020-08-01/applicationSecurityGroup.json
@@ -2865,7 +2863,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07'
+``` yaml $(tag) == 'package-2020-07'
 input-file:
   - Microsoft.Network/stable/2020-07-01/applicationGateway.json
   - Microsoft.Network/stable/2020-07-01/applicationSecurityGroup.json
@@ -2923,7 +2921,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Network/stable/2020-06-01/applicationGateway.json
   - Microsoft.Network/stable/2020-06-01/applicationSecurityGroup.json
@@ -2978,7 +2976,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-05'
+``` yaml $(tag) == 'package-2020-05'
 input-file:
   - Microsoft.Network/stable/2020-05-01/applicationGateway.json
   - Microsoft.Network/stable/2020-05-01/applicationSecurityGroup.json
@@ -3031,7 +3029,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-04'
+``` yaml $(tag) == 'package-2020-04'
 input-file:
   - Microsoft.Network/stable/2020-04-01/applicationGateway.json
   - Microsoft.Network/stable/2020-04-01/applicationSecurityGroup.json
@@ -3084,7 +3082,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03'
+``` yaml $(tag) == 'package-2020-03'
 input-file:
   - Microsoft.Network/stable/2020-03-01/applicationGateway.json
   - Microsoft.Network/stable/2020-03-01/applicationSecurityGroup.json
@@ -3137,7 +3135,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-12'
+``` yaml $(tag) == 'package-2019-12'
 input-file:
   - Microsoft.Network/stable/2019-12-01/applicationGateway.json
   - Microsoft.Network/stable/2019-12-01/applicationSecurityGroup.json
@@ -3189,7 +3187,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11'
+``` yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.Network/stable/2019-11-01/applicationGateway.json
   - Microsoft.Network/stable/2019-11-01/applicationSecurityGroup.json
@@ -3240,7 +3238,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09'
+``` yaml $(tag) == 'package-2019-09'
 input-file:
   - Microsoft.Network/stable/2019-09-01/applicationGateway.json
   - Microsoft.Network/stable/2019-09-01/applicationSecurityGroup.json
@@ -3292,7 +3290,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08'
 input-file:
   - Microsoft.Network/stable/2019-08-01/applicationGateway.json
   - Microsoft.Network/stable/2019-08-01/applicationSecurityGroup.json
@@ -3343,7 +3341,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07'
+``` yaml $(tag) == 'package-2019-07'
 input-file:
   - Microsoft.Network/stable/2019-07-01/applicationGateway.json
   - Microsoft.Network/stable/2019-07-01/applicationSecurityGroup.json
@@ -3393,7 +3391,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06'
+``` yaml $(tag) == 'package-2019-06'
 input-file:
   - Microsoft.Network/stable/2019-06-01/applicationGateway.json
   - Microsoft.Network/stable/2019-06-01/applicationSecurityGroup.json
@@ -3442,7 +3440,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.Network/stable/2019-04-01/applicationGateway.json
   - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
@@ -3489,7 +3487,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02'
+``` yaml $(tag) == 'package-2019-02'
 input-file:
   - Microsoft.Network/stable/2019-02-01/applicationGateway.json
   - Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
@@ -3533,7 +3531,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-12'
+``` yaml $(tag) == 'package-2018-12'
 input-file:
   - Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
@@ -3576,7 +3574,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-12-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-12-only'
+``` yaml $(tag) == 'package-2018-12-only'
 input-file:
   - Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
@@ -3616,7 +3614,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-11'
+``` yaml $(tag) == 'package-2018-11'
 input-file:
   - Microsoft.Network/stable/2018-11-01/applicationGateway.json
   - Microsoft.Network/stable/2018-11-01/applicationSecurityGroup.json
@@ -3658,7 +3656,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10'
+``` yaml $(tag) == 'package-2018-10'
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -3699,7 +3697,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2018-08'
 input-file:
   - Microsoft.Network/stable/2018-08-01/applicationGateway.json
   - Microsoft.Network/stable/2018-08-01/applicationSecurityGroup.json
@@ -3740,555 +3738,559 @@ input-file:
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
+
 input-file:
-  - Microsoft.Network/stable/2018-07-01/azureFirewall.json
-  - Microsoft.Network/stable/2018-07-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-07-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-07-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-07-01/ddosProtectionPlan.json
-  - Microsoft.Network/stable/2018-07-01/endpointService.json
-  - Microsoft.Network/stable/2018-07-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-07-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2018-07-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-07-01/network.json
-  - Microsoft.Network/stable/2018-07-01/networkInterface.json
-  - Microsoft.Network/stable/2018-07-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-07-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-07-01/operation.json
-  - Microsoft.Network/stable/2018-07-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-07-01/publicIpPrefix.json
-  - Microsoft.Network/stable/2018-07-01/routeFilter.json
-  - Microsoft.Network/stable/2018-07-01/routeTable.json
-  - Microsoft.Network/stable/2018-07-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-07-01/usage.json
-  - Microsoft.Network/stable/2018-07-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-07-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2018-07-01/virtualWan.json
-  - Microsoft.Network/stable/2018-07-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2018-07-01/vmssPublicIpAddress.json
-  - Microsoft.Network/stable/2018-07-01/serviceEndpointPolicy.json
+- Microsoft.Network/stable/2018-07-01/azureFirewall.json
+- Microsoft.Network/stable/2018-07-01/applicationGateway.json
+- Microsoft.Network/stable/2018-07-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-07-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-07-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-07-01/endpointService.json
+- Microsoft.Network/stable/2018-07-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-07-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-07-01/loadBalancer.json
+- Microsoft.Network/stable/2018-07-01/network.json
+- Microsoft.Network/stable/2018-07-01/networkInterface.json
+- Microsoft.Network/stable/2018-07-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-07-01/networkWatcher.json
+- Microsoft.Network/stable/2018-07-01/operation.json
+- Microsoft.Network/stable/2018-07-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/publicIpPrefix.json
+- Microsoft.Network/stable/2018-07-01/routeFilter.json
+- Microsoft.Network/stable/2018-07-01/routeTable.json
+- Microsoft.Network/stable/2018-07-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-07-01/usage.json
+- Microsoft.Network/stable/2018-07-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-07-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-07-01/virtualWan.json
+- Microsoft.Network/stable/2018-07-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-07-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-07-01/serviceEndpointPolicy.json
 ```
 
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-06'
+``` yaml $(tag) == 'package-2018-06'
+
 input-file:
-  - Microsoft.Network/stable/2018-06-01/azureFirewall.json
-  - Microsoft.Network/stable/2018-06-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-06-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-06-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-06-01/ddosProtectionPlan.json
-  - Microsoft.Network/stable/2018-06-01/endpointService.json
-  - Microsoft.Network/stable/2018-06-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-06-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2018-06-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-06-01/network.json
-  - Microsoft.Network/stable/2018-06-01/networkInterface.json
-  - Microsoft.Network/stable/2018-06-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-06-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-06-01/operation.json
-  - Microsoft.Network/stable/2018-06-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-06-01/routeFilter.json
-  - Microsoft.Network/stable/2018-06-01/routeTable.json
-  - Microsoft.Network/stable/2018-06-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-06-01/usage.json
-  - Microsoft.Network/stable/2018-06-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-06-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2018-06-01/virtualWan.json
-  - Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-06-01/azureFirewall.json
+- Microsoft.Network/stable/2018-06-01/applicationGateway.json
+- Microsoft.Network/stable/2018-06-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-06-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-06-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-06-01/endpointService.json
+- Microsoft.Network/stable/2018-06-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-06-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-06-01/loadBalancer.json
+- Microsoft.Network/stable/2018-06-01/network.json
+- Microsoft.Network/stable/2018-06-01/networkInterface.json
+- Microsoft.Network/stable/2018-06-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-06-01/networkWatcher.json
+- Microsoft.Network/stable/2018-06-01/operation.json
+- Microsoft.Network/stable/2018-06-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-06-01/routeFilter.json
+- Microsoft.Network/stable/2018-06-01/routeTable.json
+- Microsoft.Network/stable/2018-06-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-06-01/usage.json
+- Microsoft.Network/stable/2018-06-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-06-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-06-01/virtualWan.json
+- Microsoft.Network/stable/2018-06-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-06-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-04
 
 These settings apply only when `--tag=package-2018-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-04'
+``` yaml $(tag) == 'package-2018-04'
+
 input-file:
-  - Microsoft.Network/stable/2018-04-01/azureFirewall.json
-  - Microsoft.Network/stable/2018-04-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-04-01/ddosProtectionPlan.json
-  - Microsoft.Network/stable/2018-04-01/endpointService.json
-  - Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2018-04-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-04-01/network.json
-  - Microsoft.Network/stable/2018-04-01/networkInterface.json
-  - Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-04-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-04-01/operation.json
-  - Microsoft.Network/stable/2018-04-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-04-01/routeFilter.json
-  - Microsoft.Network/stable/2018-04-01/routeTable.json
-  - Microsoft.Network/stable/2018-04-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-04-01/usage.json
-  - Microsoft.Network/stable/2018-04-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2018-04-01/virtualWan.json
-  - Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-04-01/azureFirewall.json
+- Microsoft.Network/stable/2018-04-01/applicationGateway.json
+- Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-04-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-04-01/endpointService.json
+- Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-04-01/loadBalancer.json
+- Microsoft.Network/stable/2018-04-01/network.json
+- Microsoft.Network/stable/2018-04-01/networkInterface.json
+- Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-04-01/networkWatcher.json
+- Microsoft.Network/stable/2018-04-01/operation.json
+- Microsoft.Network/stable/2018-04-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-04-01/routeFilter.json
+- Microsoft.Network/stable/2018-04-01/routeTable.json
+- Microsoft.Network/stable/2018-04-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-04-01/usage.json
+- Microsoft.Network/stable/2018-04-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-04-01/virtualWan.json
+- Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-2018-02'
+
 input-file:
-  - Microsoft.Network/stable/2018-02-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-02-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-02-01/ddosProtectionPlan.json
-  - Microsoft.Network/stable/2018-02-01/endpointService.json
-  - Microsoft.Network/stable/2018-02-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-02-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2018-02-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-02-01/network.json
-  - Microsoft.Network/stable/2018-02-01/networkInterface.json
-  - Microsoft.Network/stable/2018-02-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-02-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-02-01/operation.json
-  - Microsoft.Network/stable/2018-02-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-02-01/routeFilter.json
-  - Microsoft.Network/stable/2018-02-01/routeTable.json
-  - Microsoft.Network/stable/2018-02-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-02-01/usage.json
-  - Microsoft.Network/stable/2018-02-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-02-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2018-02-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2018-02-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-02-01/applicationGateway.json
+- Microsoft.Network/stable/2018-02-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-02-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-02-01/ddosProtectionPlan.json
+- Microsoft.Network/stable/2018-02-01/endpointService.json
+- Microsoft.Network/stable/2018-02-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-02-01/expressRouteCrossConnection.json
+- Microsoft.Network/stable/2018-02-01/loadBalancer.json
+- Microsoft.Network/stable/2018-02-01/network.json
+- Microsoft.Network/stable/2018-02-01/networkInterface.json
+- Microsoft.Network/stable/2018-02-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-02-01/networkWatcher.json
+- Microsoft.Network/stable/2018-02-01/operation.json
+- Microsoft.Network/stable/2018-02-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-02-01/routeFilter.json
+- Microsoft.Network/stable/2018-02-01/routeTable.json
+- Microsoft.Network/stable/2018-02-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-02-01/usage.json
+- Microsoft.Network/stable/2018-02-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-02-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-02-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-02-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-01'
+``` yaml $(tag) == 'package-2018-01'
 input-file:
-  - Microsoft.Network/stable/2018-01-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-01-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-01-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-01-01/endpointService.json
-  - Microsoft.Network/stable/2018-01-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-01-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-01-01/network.json
-  - Microsoft.Network/stable/2018-01-01/networkInterface.json
-  - Microsoft.Network/stable/2018-01-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-01-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-01-01/operation.json
-  - Microsoft.Network/stable/2018-01-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-01-01/routeFilter.json
-  - Microsoft.Network/stable/2018-01-01/routeTable.json
-  - Microsoft.Network/stable/2018-01-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-01-01/usage.json
-  - Microsoft.Network/stable/2018-01-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-01-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2018-01-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2018-01-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2018-01-01/applicationGateway.json
+- Microsoft.Network/stable/2018-01-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-01-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-01-01/endpointService.json
+- Microsoft.Network/stable/2018-01-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-01-01/loadBalancer.json
+- Microsoft.Network/stable/2018-01-01/network.json
+- Microsoft.Network/stable/2018-01-01/networkInterface.json
+- Microsoft.Network/stable/2018-01-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-01-01/networkWatcher.json
+- Microsoft.Network/stable/2018-01-01/operation.json
+- Microsoft.Network/stable/2018-01-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-01-01/routeFilter.json
+- Microsoft.Network/stable/2018-01-01/routeTable.json
+- Microsoft.Network/stable/2018-01-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-01-01/usage.json
+- Microsoft.Network/stable/2018-01-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-01-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-01-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2018-01-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2018-01-only
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-01-only'
+``` yaml $(tag) == 'package-2018-01-only'
 input-file:
-  - Microsoft.Network/stable/2018-01-01/applicationGateway.json
-  - Microsoft.Network/stable/2018-01-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2018-01-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2018-01-01/endpointService.json
-  - Microsoft.Network/stable/2018-01-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2018-01-01/loadBalancer.json
-  - Microsoft.Network/stable/2018-01-01/network.json
-  - Microsoft.Network/stable/2018-01-01/networkInterface.json
-  - Microsoft.Network/stable/2018-01-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2018-01-01/networkWatcher.json
-  - Microsoft.Network/stable/2018-01-01/operation.json
-  - Microsoft.Network/stable/2018-01-01/publicIpAddress.json
-  - Microsoft.Network/stable/2018-01-01/routeFilter.json
-  - Microsoft.Network/stable/2018-01-01/routeTable.json
-  - Microsoft.Network/stable/2018-01-01/serviceCommunity.json
-  - Microsoft.Network/stable/2018-01-01/usage.json
-  - Microsoft.Network/stable/2018-01-01/virtualNetwork.json
-  - Microsoft.Network/stable/2018-01-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2018-01-01/applicationGateway.json
+- Microsoft.Network/stable/2018-01-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2018-01-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2018-01-01/endpointService.json
+- Microsoft.Network/stable/2018-01-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2018-01-01/loadBalancer.json
+- Microsoft.Network/stable/2018-01-01/network.json
+- Microsoft.Network/stable/2018-01-01/networkInterface.json
+- Microsoft.Network/stable/2018-01-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2018-01-01/networkWatcher.json
+- Microsoft.Network/stable/2018-01-01/operation.json
+- Microsoft.Network/stable/2018-01-01/publicIpAddress.json
+- Microsoft.Network/stable/2018-01-01/routeFilter.json
+- Microsoft.Network/stable/2018-01-01/routeTable.json
+- Microsoft.Network/stable/2018-01-01/serviceCommunity.json
+- Microsoft.Network/stable/2018-01-01/usage.json
+- Microsoft.Network/stable/2018-01-01/virtualNetwork.json
+- Microsoft.Network/stable/2018-01-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2017-11
 
 These settings apply only when `--tag=package-2017-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-11'
+``` yaml $(tag) == 'package-2017-11'
 input-file:
-  - Microsoft.Network/stable/2017-11-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-11-01/endpointService.json
-  - Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-11-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-11-01/network.json
-  - Microsoft.Network/stable/2017-11-01/networkInterface.json
-  - Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-11-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-11-01/operation.json
-  - Microsoft.Network/stable/2017-11-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-11-01/routeFilter.json
-  - Microsoft.Network/stable/2017-11-01/routeTable.json
-  - Microsoft.Network/stable/2017-11-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-11-01/usage.json
-  - Microsoft.Network/stable/2017-11-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-11-01/applicationGateway.json
+- Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-11-01/endpointService.json
+- Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-11-01/loadBalancer.json
+- Microsoft.Network/stable/2017-11-01/network.json
+- Microsoft.Network/stable/2017-11-01/networkInterface.json
+- Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/networkWatcher.json
+- Microsoft.Network/stable/2017-11-01/operation.json
+- Microsoft.Network/stable/2017-11-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-11-01/routeFilter.json
+- Microsoft.Network/stable/2017-11-01/routeTable.json
+- Microsoft.Network/stable/2017-11-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-11-01/usage.json
+- Microsoft.Network/stable/2017-11-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-11-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-11-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-11-only
 
 These settings apply only when `--tag=package-2017-11-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-11-only'
+``` yaml $(tag) == 'package-2017-11-only'
 input-file:
-  - Microsoft.Network/stable/2017-11-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-11-01/endpointService.json
-  - Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-11-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-11-01/network.json
-  - Microsoft.Network/stable/2017-11-01/networkInterface.json
-  - Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-11-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-11-01/operation.json
-  - Microsoft.Network/stable/2017-11-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-11-01/routeFilter.json
-  - Microsoft.Network/stable/2017-11-01/routeTable.json
-  - Microsoft.Network/stable/2017-11-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-11-01/usage.json
-  - Microsoft.Network/stable/2017-11-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-11-01/applicationGateway.json
+- Microsoft.Network/stable/2017-11-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-11-01/endpointService.json
+- Microsoft.Network/stable/2017-11-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-11-01/loadBalancer.json
+- Microsoft.Network/stable/2017-11-01/network.json
+- Microsoft.Network/stable/2017-11-01/networkInterface.json
+- Microsoft.Network/stable/2017-11-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-11-01/networkWatcher.json
+- Microsoft.Network/stable/2017-11-01/operation.json
+- Microsoft.Network/stable/2017-11-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-11-01/routeFilter.json
+- Microsoft.Network/stable/2017-11-01/routeTable.json
+- Microsoft.Network/stable/2017-11-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-11-01/usage.json
+- Microsoft.Network/stable/2017-11-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-11-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2017-10
 
 These settings apply only when `--tag=package-2017-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-10'
+``` yaml $(tag) == 'package-2017-10'
 input-file:
-  - Microsoft.Network/stable/2017-10-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-10-01/endpointService.json
-  - Microsoft.Network/stable/2017-10-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-10-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-10-01/network.json
-  - Microsoft.Network/stable/2017-10-01/networkInterface.json
-  - Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-10-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-10-01/operation.json
-  - Microsoft.Network/stable/2017-10-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-10-01/routeFilter.json
-  - Microsoft.Network/stable/2017-10-01/routeTable.json
-  - Microsoft.Network/stable/2017-10-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-10-01/usage.json
-  - Microsoft.Network/stable/2017-10-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-10-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-10-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/applicationGateway.json
+- Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-10-01/endpointService.json
+- Microsoft.Network/stable/2017-10-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-10-01/loadBalancer.json
+- Microsoft.Network/stable/2017-10-01/network.json
+- Microsoft.Network/stable/2017-10-01/networkInterface.json
+- Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/networkWatcher.json
+- Microsoft.Network/stable/2017-10-01/operation.json
+- Microsoft.Network/stable/2017-10-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/routeFilter.json
+- Microsoft.Network/stable/2017-10-01/routeTable.json
+- Microsoft.Network/stable/2017-10-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-10-01/usage.json
+- Microsoft.Network/stable/2017-10-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-10-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-10-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-10-only
 
 These settings apply only when `--tag=package-2017-10-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-10-only'
+``` yaml $(tag) == 'package-2017-10-only'
 input-file:
-  - Microsoft.Network/stable/2017-10-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-10-01/endpointService.json
-  - Microsoft.Network/stable/2017-10-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-10-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-10-01/network.json
-  - Microsoft.Network/stable/2017-10-01/networkInterface.json
-  - Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-10-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-10-01/operation.json
-  - Microsoft.Network/stable/2017-10-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-10-01/routeFilter.json
-  - Microsoft.Network/stable/2017-10-01/routeTable.json
-  - Microsoft.Network/stable/2017-10-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-10-01/usage.json
-  - Microsoft.Network/stable/2017-10-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-10-01/applicationGateway.json
+- Microsoft.Network/stable/2017-10-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-10-01/endpointService.json
+- Microsoft.Network/stable/2017-10-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-10-01/loadBalancer.json
+- Microsoft.Network/stable/2017-10-01/network.json
+- Microsoft.Network/stable/2017-10-01/networkInterface.json
+- Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/networkWatcher.json
+- Microsoft.Network/stable/2017-10-01/operation.json
+- Microsoft.Network/stable/2017-10-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/routeFilter.json
+- Microsoft.Network/stable/2017-10-01/routeTable.json
+- Microsoft.Network/stable/2017-10-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-10-01/usage.json
+- Microsoft.Network/stable/2017-10-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2017-09
 
 These settings apply only when `--tag=package-2017-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-09'
+``` yaml $(tag) == 'package-2017-09'
 input-file:
-  - Microsoft.Network/stable/2017-09-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-09-01/endpointService.json
-  - Microsoft.Network/stable/2017-09-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-09-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-09-01/network.json
-  - Microsoft.Network/stable/2017-09-01/networkInterface.json
-  - Microsoft.Network/stable/2017-09-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-09-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-09-01/operation.json
-  - Microsoft.Network/stable/2017-09-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-09-01/routeFilter.json
-  - Microsoft.Network/stable/2017-09-01/routeTable.json
-  - Microsoft.Network/stable/2017-09-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-09-01/usage.json
-  - Microsoft.Network/stable/2017-09-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/applicationGateway.json
+- Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-09-01/endpointService.json
+- Microsoft.Network/stable/2017-09-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-09-01/loadBalancer.json
+- Microsoft.Network/stable/2017-09-01/network.json
+- Microsoft.Network/stable/2017-09-01/networkInterface.json
+- Microsoft.Network/stable/2017-09-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/networkWatcher.json
+- Microsoft.Network/stable/2017-09-01/operation.json
+- Microsoft.Network/stable/2017-09-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/routeFilter.json
+- Microsoft.Network/stable/2017-09-01/routeTable.json
+- Microsoft.Network/stable/2017-09-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-09-01/usage.json
+- Microsoft.Network/stable/2017-09-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-09-only
 
 These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-09-only'
+``` yaml $(tag) == 'package-2017-09-only'
 input-file:
-  - Microsoft.Network/stable/2017-09-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-09-01/endpointService.json
-  - Microsoft.Network/stable/2017-09-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-09-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-09-01/network.json
-  - Microsoft.Network/stable/2017-09-01/networkInterface.json
-  - Microsoft.Network/stable/2017-09-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-09-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-09-01/operation.json
-  - Microsoft.Network/stable/2017-09-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-09-01/routeFilter.json
-  - Microsoft.Network/stable/2017-09-01/routeTable.json
-  - Microsoft.Network/stable/2017-09-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-09-01/usage.json
-  - Microsoft.Network/stable/2017-09-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-09-01/applicationGateway.json
+- Microsoft.Network/stable/2017-09-01/applicationSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-09-01/endpointService.json
+- Microsoft.Network/stable/2017-09-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-09-01/loadBalancer.json
+- Microsoft.Network/stable/2017-09-01/network.json
+- Microsoft.Network/stable/2017-09-01/networkInterface.json
+- Microsoft.Network/stable/2017-09-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-09-01/networkWatcher.json
+- Microsoft.Network/stable/2017-09-01/operation.json
+- Microsoft.Network/stable/2017-09-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/routeFilter.json
+- Microsoft.Network/stable/2017-09-01/routeTable.json
+- Microsoft.Network/stable/2017-09-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-09-01/usage.json
+- Microsoft.Network/stable/2017-09-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-09-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2017-08
 
 These settings apply only when `--tag=package-2017-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-08'
+``` yaml $(tag) == 'package-2017-08'
 input-file:
-  - Microsoft.Network/stable/2017-08-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-08-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-08-01/endpointService.json
-  - Microsoft.Network/stable/2017-08-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-08-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-08-01/network.json
-  - Microsoft.Network/stable/2017-08-01/networkInterface.json
-  - Microsoft.Network/stable/2017-08-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-08-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-08-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-08-01/routeFilter.json
-  - Microsoft.Network/stable/2017-08-01/routeTable.json
-  - Microsoft.Network/stable/2017-08-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-08-01/usage.json
-  - Microsoft.Network/stable/2017-08-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-08-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-08-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-08-01/applicationGateway.json
+- Microsoft.Network/stable/2017-08-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-08-01/endpointService.json
+- Microsoft.Network/stable/2017-08-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-08-01/loadBalancer.json
+- Microsoft.Network/stable/2017-08-01/network.json
+- Microsoft.Network/stable/2017-08-01/networkInterface.json
+- Microsoft.Network/stable/2017-08-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-08-01/networkWatcher.json
+- Microsoft.Network/stable/2017-08-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-08-01/routeFilter.json
+- Microsoft.Network/stable/2017-08-01/routeTable.json
+- Microsoft.Network/stable/2017-08-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-08-01/usage.json
+- Microsoft.Network/stable/2017-08-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-08-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-08-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-08-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-06
 
 These settings apply only when `--tag=package-2017-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-06'
+``` yaml $(tag) == 'package-2017-06'
 input-file:
-  - Microsoft.Network/stable/2017-06-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-06-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-06-01/endpointService.json
-  - Microsoft.Network/stable/2017-06-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-06-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-06-01/network.json
-  - Microsoft.Network/stable/2017-06-01/networkInterface.json
-  - Microsoft.Network/stable/2017-06-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-06-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-06-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-06-01/routeFilter.json
-  - Microsoft.Network/stable/2017-06-01/routeTable.json
-  - Microsoft.Network/stable/2017-06-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-06-01/usage.json
-  - Microsoft.Network/stable/2017-06-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-06-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-06-01/applicationGateway.json
+- Microsoft.Network/stable/2017-06-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-06-01/endpointService.json
+- Microsoft.Network/stable/2017-06-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-06-01/loadBalancer.json
+- Microsoft.Network/stable/2017-06-01/network.json
+- Microsoft.Network/stable/2017-06-01/networkInterface.json
+- Microsoft.Network/stable/2017-06-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-06-01/networkWatcher.json
+- Microsoft.Network/stable/2017-06-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-06-01/routeFilter.json
+- Microsoft.Network/stable/2017-06-01/routeTable.json
+- Microsoft.Network/stable/2017-06-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-06-01/usage.json
+- Microsoft.Network/stable/2017-06-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-06-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-06-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-06-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-03
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-03'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
-  - Microsoft.Network/stable/2017-03-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-03-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-03-01/network.json
-  - Microsoft.Network/stable/2017-03-01/networkInterface.json
-  - Microsoft.Network/stable/2017-03-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-03-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-03-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-03-01/routeFilter.json
-  - Microsoft.Network/stable/2017-03-01/routeTable.json
-  - Microsoft.Network/stable/2017-03-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-03-01/usage.json
-  - Microsoft.Network/stable/2017-03-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2017-03-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-03-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-03-01/applicationGateway.json
+- Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-03-01/loadBalancer.json
+- Microsoft.Network/stable/2017-03-01/network.json
+- Microsoft.Network/stable/2017-03-01/networkInterface.json
+- Microsoft.Network/stable/2017-03-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-03-01/networkWatcher.json
+- Microsoft.Network/stable/2017-03-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-03-01/routeFilter.json
+- Microsoft.Network/stable/2017-03-01/routeTable.json
+- Microsoft.Network/stable/2017-03-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-03-01/usage.json
+- Microsoft.Network/stable/2017-03-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-03-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-03-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2017-03-only
 
 These settings apply only when `--tag=package-2017-03-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-03-only'
+``` yaml $(tag) == 'package-2017-03-only'
 input-file:
-  - Microsoft.Network/stable/2017-03-01/applicationGateway.json
-  - Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2017-03-01/loadBalancer.json
-  - Microsoft.Network/stable/2017-03-01/network.json
-  - Microsoft.Network/stable/2017-03-01/networkInterface.json
-  - Microsoft.Network/stable/2017-03-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2017-03-01/networkWatcher.json
-  - Microsoft.Network/stable/2017-03-01/publicIpAddress.json
-  - Microsoft.Network/stable/2017-03-01/routeFilter.json
-  - Microsoft.Network/stable/2017-03-01/routeTable.json
-  - Microsoft.Network/stable/2017-03-01/serviceCommunity.json
-  - Microsoft.Network/stable/2017-03-01/usage.json
-  - Microsoft.Network/stable/2017-03-01/virtualNetwork.json
-  - Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-03-01/applicationGateway.json
+- Microsoft.Network/stable/2017-03-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2017-03-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2017-03-01/loadBalancer.json
+- Microsoft.Network/stable/2017-03-01/network.json
+- Microsoft.Network/stable/2017-03-01/networkInterface.json
+- Microsoft.Network/stable/2017-03-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-03-01/networkWatcher.json
+- Microsoft.Network/stable/2017-03-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-03-01/routeFilter.json
+- Microsoft.Network/stable/2017-03-01/routeTable.json
+- Microsoft.Network/stable/2017-03-01/serviceCommunity.json
+- Microsoft.Network/stable/2017-03-01/usage.json
+- Microsoft.Network/stable/2017-03-01/virtualNetwork.json
+- Microsoft.Network/stable/2017-03-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2017-03-30-only
 
 These settings apply only when `--tag=package-2017-03-30-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-03-30-only'
+``` yaml $(tag) == 'package-2017-03-30-only'
 input-file:
-  - Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
+- Microsoft.Network/stable/2017-09-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2017-09-01/vmssPublicIpAddress.json
 ```
 
 ### Tag: package-2016-12
 
 These settings apply only when `--tag=package-2016-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-12'
+``` yaml $(tag) == 'package-2016-12'
 input-file:
-  - Microsoft.Network/stable/2016-12-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2016-12-01/applicationGateway.json
-  - Microsoft.Network/stable/2016-12-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2016-12-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2016-12-01/loadBalancer.json
-  - Microsoft.Network/stable/2016-12-01/network.json
-  - Microsoft.Network/stable/2016-12-01/networkInterface.json
-  - Microsoft.Network/stable/2016-12-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2016-12-01/networkWatcher.json
-  - Microsoft.Network/stable/2016-12-01/publicIpAddress.json
-  - Microsoft.Network/stable/2016-12-01/routeFilter.json
-  - Microsoft.Network/stable/2016-12-01/routeTable.json
-  - Microsoft.Network/stable/2016-12-01/serviceCommunity.json
-  - Microsoft.Network/stable/2016-12-01/usage.json
-  - Microsoft.Network/stable/2016-12-01/virtualNetwork.json
-  - Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2016-12-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2016-12-01/applicationGateway.json
+- Microsoft.Network/stable/2016-12-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2016-12-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2016-12-01/loadBalancer.json
+- Microsoft.Network/stable/2016-12-01/network.json
+- Microsoft.Network/stable/2016-12-01/networkInterface.json
+- Microsoft.Network/stable/2016-12-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2016-12-01/networkWatcher.json
+- Microsoft.Network/stable/2016-12-01/publicIpAddress.json
+- Microsoft.Network/stable/2016-12-01/routeFilter.json
+- Microsoft.Network/stable/2016-12-01/routeTable.json
+- Microsoft.Network/stable/2016-12-01/serviceCommunity.json
+- Microsoft.Network/stable/2016-12-01/usage.json
+- Microsoft.Network/stable/2016-12-01/virtualNetwork.json
+- Microsoft.Network/stable/2016-12-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2016-09
 
 These settings apply only when `--tag=package-2016-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-09'
+``` yaml $(tag) == 'package-2016-09'
 input-file:
-  - Microsoft.Network/stable/2016-09-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2016-09-01/applicationGateway.json
-  - Microsoft.Network/stable/2016-09-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2016-09-01/expressRouteCircuit.json
-  - Microsoft.Network/stable/2016-09-01/loadBalancer.json
-  - Microsoft.Network/stable/2016-09-01/network.json
-  - Microsoft.Network/stable/2016-09-01/networkInterface.json
-  - Microsoft.Network/stable/2016-09-01/networkSecurityGroup.json
-  - Microsoft.Network/stable/2016-09-01/networkWatcher.json
-  - Microsoft.Network/stable/2016-09-01/publicIpAddress.json
-  - Microsoft.Network/stable/2016-09-01/routeTable.json
-  - Microsoft.Network/stable/2016-09-01/usage.json
-  - Microsoft.Network/stable/2016-09-01/virtualNetwork.json
-  - Microsoft.Network/stable/2016-09-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2016-09-01/vmssNetworkInterface.json
+- Microsoft.Network/stable/2016-09-01/applicationGateway.json
+- Microsoft.Network/stable/2016-09-01/checkDnsAvailability.json
+- Microsoft.Network/stable/2016-09-01/expressRouteCircuit.json
+- Microsoft.Network/stable/2016-09-01/loadBalancer.json
+- Microsoft.Network/stable/2016-09-01/network.json
+- Microsoft.Network/stable/2016-09-01/networkInterface.json
+- Microsoft.Network/stable/2016-09-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2016-09-01/networkWatcher.json
+- Microsoft.Network/stable/2016-09-01/publicIpAddress.json
+- Microsoft.Network/stable/2016-09-01/routeTable.json
+- Microsoft.Network/stable/2016-09-01/usage.json
+- Microsoft.Network/stable/2016-09-01/virtualNetwork.json
+- Microsoft.Network/stable/2016-09-01/virtualNetworkGateway.json
 ```
 
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-06'
+``` yaml $(tag) == 'package-2016-06'
 input-file:
-  - Microsoft.Network/stable/2016-06-01/network.json
+- Microsoft.Network/stable/2016-06-01/network.json
 ```
 
 ### Tag: package-2016-03
 
 These settings apply only when `--tag=package-2016-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2016-03'
+``` yaml $(tag) == 'package-2016-03'
 input-file:
-  - Microsoft.Network/stable/2016-03-30/network.json
+- Microsoft.Network/stable/2016-03-30/network.json
 ```
 
 ### Tag: package-2015-06split
 
 These settings apply only when `--tag=package-2015-06split` is specified on the command line.
 
-```yaml $(tag) == 'package-2015-06split'
+``` yaml $(tag) == 'package-2015-06split'
 input-file:
-  - Microsoft.Network/stable/2015-06-15/applicationGateway.json
-  - Microsoft.Network/stable/2015-06-15/checkDnsAvailability.json
-  - Microsoft.Network/stable/2015-06-15/expressRouteCircuit.json
-  - Microsoft.Network/stable/2015-06-15/loadBalancer.json
-  - Microsoft.Network/stable/2015-06-15/network.json
-  - Microsoft.Network/stable/2015-06-15/networkInterface.json
-  - Microsoft.Network/stable/2015-06-15/networkSecurityGroup.json
-  - Microsoft.Network/stable/2015-06-15/publicIpAddress.json
-  - Microsoft.Network/stable/2015-06-15/routeTable.json
-  - Microsoft.Network/stable/2015-06-15/usage.json
-  - Microsoft.Network/stable/2015-06-15/virtualNetwork.json
-  - Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
-  - Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
+- Microsoft.Network/stable/2015-06-15/applicationGateway.json
+- Microsoft.Network/stable/2015-06-15/checkDnsAvailability.json
+- Microsoft.Network/stable/2015-06-15/expressRouteCircuit.json
+- Microsoft.Network/stable/2015-06-15/loadBalancer.json
+- Microsoft.Network/stable/2015-06-15/network.json
+- Microsoft.Network/stable/2015-06-15/networkInterface.json
+- Microsoft.Network/stable/2015-06-15/networkSecurityGroup.json
+- Microsoft.Network/stable/2015-06-15/publicIpAddress.json
+- Microsoft.Network/stable/2015-06-15/routeTable.json
+- Microsoft.Network/stable/2015-06-15/usage.json
+- Microsoft.Network/stable/2015-06-15/virtualNetwork.json
+- Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json
+- Microsoft.Network/stable/2015-06-15/vmssNetworkInterface.json
 ```
 
 ### Tag: package-2015-05-preview
 
 These settings apply only when `--tag=package-2015-05-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2015-05-preview'
+``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-  - Microsoft.Network/preview/2015-05-01-preview/network.json
+- Microsoft.Network/preview/2015-05-01-preview/network.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
 
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
 
-```yaml $(tag) == 'profile-hybrid-2020-09-01'
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
   - Microsoft.Network/stable/2018-11-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2018-11-01/loadBalancer.json
@@ -4303,7 +4305,7 @@ input-file:
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerConnectivityConfiguration.json
@@ -4328,7 +4330,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: DeleteResponseCodes
     from: networkManagerRoutingConfiguration.json
-    reason: support response code 200 for delete operations
+    reason: support response code 200 for delete operations 
   - suppress: DeleteResponseCodes
     from: networkManagerSecurityUserConfiguration.json
     reason: support response code 200 for delete operations
@@ -4430,7 +4432,7 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: securityPartnerProvider.json
-    reason: name, id and type properties are inherited from the upper level
+    reason: name, id and type properties are inherited from the upper level  
   - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceCommunity.json
     reason: name, id and type properties are inherited from the upper level
@@ -4568,8 +4570,8 @@ directive:
     from: virtualNetworkGateway.json
     reason: We are using Dictionaries in the NRP APIs which are already rolled out. Suppress it since this is used by the Gateway Resiliency APIs.
     where:
-      - $.definitions.GatewayRouteSet.properties.details
-      - $.definitions.GatewayRouteSetsInformation.properties.circuitsMetadataMap
+    - $.definitions.GatewayRouteSet.properties.details
+    - $.definitions.GatewayRouteSetsInformation.properties.circuitsMetadataMap
 ```
 
 ---
@@ -4581,7 +4583,7 @@ directive:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
@@ -4598,7 +4600,7 @@ swagger-to-sdk:
 
 ## Suppression
 
-```yaml
+``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualWan.json
@@ -4626,21 +4628,21 @@ directive:
 suppressions:
   - code: ResourceNameRestriction
     from: bastionhost.json
-    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs.
+    reason: The resource name parameter 'bastionHostName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all Bastion APIs. 
   - code: LroErrorContent
     reason: CloudError does not follow required error schema. Suppress it for now to avoid breaking change because it is referenced by many files.
   - code: ResourceNameRestriction
     from: virtualWan.json
     reason: The resource name parameter 'gatewayName', 'connectionName', 'linkConnectionName' is not defined with a 'pattern' restriction. Suppress it for now to avoid breaking change because it is referenced by all vpn link connection APIs.
     where:
-      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys"]
-      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
-      - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default"]
+    - $.paths.["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey"]
   - code: BodyTopLevelProperties
     from: virtualWan.json
     reason: False alarm.
     where:
-      - $.definitions.ConnectionSharedKeyResultList
+    - $.definitions.ConnectionSharedKeyResultList
 ```
 
 ## Go
