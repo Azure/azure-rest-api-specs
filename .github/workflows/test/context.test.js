@@ -253,9 +253,9 @@ describe("extractInputs", () => {
       };
 
       const github = createMockGithub();
-      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(async (args) => {
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation((args) => {
         console.log(JSON.stringify(args));
-        return {
+        return Promise.resolve({
           data: [
             {
               base: {
@@ -278,7 +278,7 @@ describe("extractInputs", () => {
               number: 124,
             },
           ].slice(0, numPullRequests),
-        };
+        });
       });
 
       if (numPullRequests === 0) {
