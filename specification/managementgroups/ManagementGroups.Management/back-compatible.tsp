@@ -18,7 +18,7 @@ using Rest;
 @@Legacy.flattenProperty(AzureAsyncOperationResults.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(DescendantInfo.properties);
+@@Legacy.flattenProperty(DescendantInfo.properties, "!javascript");
 
 @@clientName(HierarchySettingsList.`@nextLink`, "NextLink");
 
