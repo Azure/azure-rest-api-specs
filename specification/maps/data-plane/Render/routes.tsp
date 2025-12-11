@@ -136,7 +136,7 @@ interface Render {
       /**
        * The tile returned from a successful API call.
        */
-      @body
+      @bodyRoot
       body?: bytes;
     }
   >;
@@ -276,7 +276,7 @@ interface Render {
       /**
        * The tile returned from a successful API call.
        */
-      @body
+      @bodyRoot
       body?: bytes;
     }
   >;
@@ -746,7 +746,7 @@ interface Render {
       /**
        * This image is returned from a successful Get Map Static Image call.
        */
-      @body
+      @bodyRoot
       body?: bytes;
     }
   >;
