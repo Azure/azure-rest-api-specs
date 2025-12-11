@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "list": {
+      "platforms": [
+        "Copilot"
+      ],
+      "filterByName": "agentName",
+      "sortBy": "Name",
+      "sortOrder": "Asc",
+      "page": 1,
+      "pageSize": 10,
+      "projects": [
+        "project-name"
+      ],
+      "id": "agent-id"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "platform": "Copilot",
+            "kind": "Interactive",
+            "id": "Copilot:/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject:environments/00000000-1111-2222-3333-444444444444/bots/00000000-1111-2222-3333-444444444444",
+            "name": "Example Copilot Agent",
+            "description": "",
+            "agentId": "",
+            "agentEndpoint": "",
+            "managementPortalUrl": "https://copilotstudio.microsoft.com/environments/00000000-1111-2222-3333-444444444444/bots/00000000-1111-2222-3333-444444444444/overview",
+            "projectResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroups/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+            "source": "Microsoft.CopilotStudio/environments",
+            "sourceDetails": {
+              "type": "Microsoft.CopilotStudio",
+              "properties": {
+                "environmentId": "00000000-1111-2222-3333-444444444444",
+                "botId": "00000000-1111-2222-3333-444444444444"
+              }
+            },
+            "location": "eastus",
+            "published": true,
+            "deployed": true,
+            "state": "Stopped",
+            "status": "Active",
+            "capabilities": {
+              "actions": {
+                "commands": [
+                  "Start",
+                  "Stop"
+                ],
+                "metadata": {
+                  "resourceUri": "environments/00000000-1111-2222-3333-444444444444/bots/00000000-1111-2222-3333-444444444444"
+                }
+              },
+              "management": null,
+              "observability": null
+            },
+            "linkedAssets": "",
+            "tags": ""
+          }
+        ],
+        "totalCount": 1
+      }
+    },
+    "400": {},
+    "403": {}
+  }
+}

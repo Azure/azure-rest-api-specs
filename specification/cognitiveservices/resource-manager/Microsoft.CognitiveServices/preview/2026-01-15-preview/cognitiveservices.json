@@ -7574,6 +7574,470 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/agents/list": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "List agents by subscription",
+        "description": "Retrieves a paginated list of agents for the specified subscription with optional filtering and sorting",
+        "operationId": "Agents_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "list",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentListOptions"
+            },
+            "description": "Agent list options."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved agent list",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List agents": {
+            "$ref": "./examples/AgentsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/agents/{agentAction}": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Take an action on a given agent",
+        "description": "Performs a specified action on a given agent",
+        "operationId": "Agents_Action",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentAction",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Start",
+              "Stop",
+              "Block",
+              "UnBlock"
+            ],
+            "x-ms-enum": {
+              "name": "AgentAction",
+              "modelAsString": true
+            },
+            "description": "The action to perform on the agent."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentLifecycleRequest"
+            },
+            "description": "Agent lifecycle request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully performed action on agent"
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start agent": {
+            "$ref": "./examples/AgentsStart.json"
+          },
+          "Stop agent": {
+            "$ref": "./examples/AgentsStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/agents/register": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Register an agent",
+        "description": "Registers a new agent",
+        "operationId": "Agents_Register",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProxiedAgentRegistrationRequest"
+            },
+            "description": "Agent registration request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully registered agent",
+            "schema": {
+              "$ref": "#/definitions/UnifiedAgentDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register agent": {
+            "$ref": "./examples/AgentsRegister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/agents/unregister": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Unregister an agent",
+        "description": "Unregisters an existing agent",
+        "operationId": "Agents_Unregister",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/AgentUnregistrationRequest"
+            },
+            "description": "Agent unregistration request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully unregistered agent",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unregister agent": {
+            "$ref": "./examples/AgentsUnregister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/tools/register": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Register a tool",
+        "description": "Registers a new tool",
+        "operationId": "Tools_Register",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully registered tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Register tool": {
+            "$ref": "./examples/ToolsRegister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/tools/unregister": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Unregister a tool",
+        "description": "Unregisters an existing tool",
+        "operationId": "Tools_Unregister",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully unregistered tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unregister tool": {
+            "$ref": "./examples/ToolsUnregister.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/tools/validate": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "Validates a tool",
+        "description": "Validates the configuration of a tool",
+        "operationId": "Tools_Validate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ToolActionRequest"
+            },
+            "description": "Tool action request."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully validated tool",
+            "schema": {
+              "$ref": "#/definitions/UnifiedToolDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden",
+            "x-ms-error-response": true
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "x-ms-error-response": true
+          },
+          "504": {
+            "description": "Gateway Timeout",
+            "x-ms-error-response": true
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate tool": {
+            "$ref": "./examples/ToolsValidate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -13712,6 +14176,518 @@
           "items": {
             "type": "string"
           },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "A2a": {
+      "type": "object",
+      "properties": {
+        "cardUrl": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentActionMeta": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentActions": {
+      "type": "string",
+      "enum": [
+        "Start",
+        "Stop",
+        "Block",
+        "UnBlock"
+      ],
+      "x-ms-enum": {
+        "name": "AgentActions",
+        "modelAsString": true
+      }
+    },
+    "AgentActionsCapability": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentActions"
+          },
+          "x-nullable": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/AgentActionMeta"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentCapabilities": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "$ref": "#/definitions/AgentActionsCapability",
+          "x-nullable": true
+        },
+        "management": {
+          "$ref": "#/definitions/AgentManagementCapability",
+          "x-nullable": true
+        },
+        "observability": {
+          "$ref": "#/definitions/AgentObservabilityCapability",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentKind": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Interactive",
+        "Workflow",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AgentKind",
+        "modelAsString": true
+      }
+    },
+    "AgentLifecycleRequest": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/PlatformType"
+        },
+        "agentKind": {
+          "$ref": "#/definitions/AgentKind"
+        },
+        "action": {
+          "$ref": "#/definitions/AgentActions"
+        },
+        "actionMeta": {
+          "$ref": "#/definitions/AgentActionMeta"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentList": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnifiedAgentDto"
+          },
+          "x-nullable": true
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentListOptions": {
+      "type": "object",
+      "properties": {
+        "platforms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatformType"
+          },
+          "x-nullable": true
+        },
+        "filterByName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "sortBy": {
+          "$ref": "#/definitions/AgentSortableField"
+        },
+        "sortOrder": {
+          "$ref": "#/definitions/AgentSortOrder"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentManagement": {
+      "type": "string",
+      "enum": [
+        "ViewTraces",
+        "Unregister"
+      ],
+      "x-ms-enum": {
+        "name": "AgentManagement",
+        "modelAsString": true
+      }
+    },
+    "AgentManagementCapability": {
+      "type": "object",
+      "properties": {
+        "commands": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentManagement"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentObservabilityCapability": {
+      "type": "object",
+      "properties": {
+        "tracing": {
+          "$ref": "#/definitions/AgentTracingCapability"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSortOrder": {
+      "type": "string",
+      "enum": [
+        "Asc",
+        "Desc"
+      ],
+      "x-ms-enum": {
+        "name": "AgentSortOrder",
+        "modelAsString": true
+      }
+    },
+    "AgentSortableField": {
+      "type": "string",
+      "enum": [
+        "Name",
+        "State"
+      ],
+      "x-ms-enum": {
+        "name": "AgentSortableField",
+        "modelAsString": true
+      }
+    },
+    "AgentState": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Running",
+        "Stopped",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AgentState",
+        "modelAsString": true
+      }
+    },
+    "AgentStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Active",
+        "Inactive",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AgentStatus",
+        "modelAsString": true
+      }
+    },
+    "AgentTracingCapability": {
+      "type": "object",
+      "properties": {
+        "applicationInsightsResourceId": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentUnregistrationRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonElement": {
+      "type": "object",
+      "properties": {
+        "valueKind": {
+          "$ref": "#/definitions/JsonValueKind"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonValueKind": {
+      "type": "string",
+      "enum": [
+        "Undefined",
+        "Object",
+        "Array",
+        "String",
+        "Number",
+        "True",
+        "False",
+        "Null"
+      ],
+      "x-ms-enum": {
+        "name": "JsonValueKind",
+        "modelAsString": true
+      }
+    },
+    "PlatformType": {
+      "type": "string",
+      "enum": [
+        "Unset",
+        "Foundry",
+        "AzureSreAgent",
+        "AzureAgentLoop",
+        "AzureAiGateway",
+        "Copilot"
+      ],
+      "x-ms-enum": {
+        "name": "PlatformType",
+        "modelAsString": true
+      }
+    },
+    "Protocols": {
+      "type": "object",
+      "properties": {
+        "a2a": {
+          "$ref": "#/definitions/A2a"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProxiedAgentRegistrationRequest": {
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "projectResourceId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "sourceType": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistrationProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistrationProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "azureResource": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "backendUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "agentId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "managementPortalUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "protocol": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "protocols": {
+          "$ref": "#/definitions/Protocols"
+        },
+        "basePath": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "contentJsonPath": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceDetailProperties": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "SourceDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SourceDetailProperties"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ToolActionRequest": {
+      "type": "object",
+      "properties": {
+        "projectResourceId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "toolUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "gatewayUrl": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UnifiedAgentDto": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/PlatformType"
+        },
+        "kind": {
+          "$ref": "#/definitions/AgentKind"
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "agentId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "agentEndpoint": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "managementPortalUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "projectResourceId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "source": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "sourceDetails": {
+          "$ref": "#/definitions/SourceDetails"
+        },
+        "location": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "deployed": {
+          "type": "boolean"
+        },
+        "state": {
+          "$ref": "#/definitions/AgentState"
+        },
+        "status": {
+          "$ref": "#/definitions/AgentStatus"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/AgentCapabilities"
+        },
+        "linkedAssets": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "tags": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "extensionData": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonElement"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "UnifiedToolDto": {
+      "type": "object",
+      "properties": {
+        "toolUrl": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "gatewayUrl": {
+          "type": "string",
           "x-nullable": true
         }
       },
