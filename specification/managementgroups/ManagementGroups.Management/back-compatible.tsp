@@ -85,7 +85,6 @@ using Rest;
   "checkNameAvailabilityRequest"
 );
 
-
 // Customization to make subscriptionId a method parameter instead of the default client level parameter.
 @@override(SubscriptionUnderManagementGroups.getSubscription,
   getSubscriptionCustomized
