@@ -8,6 +8,7 @@ import "./evaluations/routes.tsp";
 import "./datasets/routes.tsp";
 import "./indexes/routes.tsp";
 import "./deployments/routes.tsp";
+import "./notifications/routes.tsp";
 import "./red-teams/routes.tsp";
 
 using TypeSpec.Http;
