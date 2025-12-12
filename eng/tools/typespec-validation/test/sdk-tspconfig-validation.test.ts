@@ -610,6 +610,19 @@ options:
     success: false,
     subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
   },
+  {
+    description: "Validate Ts mgmt recursive variable resolution (namespace -> package-name)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    package-name: "arm-aaa-bbb"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+`,
+    success: true,
+    subRules: [new TspConfigTsMgmtModularEmitterOutputDirSubRule()],
+  },
 ];
 
 const suppressEntireRuleTestCase: Case = {
