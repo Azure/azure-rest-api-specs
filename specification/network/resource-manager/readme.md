@@ -127,6 +127,17 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: network.json
     reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: serviceGateway.json
+    reason: Code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
