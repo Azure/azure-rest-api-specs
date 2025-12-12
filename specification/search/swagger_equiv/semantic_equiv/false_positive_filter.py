@@ -6,12 +6,12 @@ from the comparison results. False positives are differences that are expected
 and don't indicate actual semantic differences between the APIs.
 """
 
-import os
 import re
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Set
 
 from compare import Difference, DifferenceType
+from known_fp_def import KNOWN_FALSE_POSITIVE_DEFINITIONS
 
 
 @dataclass
@@ -40,7 +40,9 @@ class FalsePositiveFilter:
     def __init__(self):
         """Initialize the filter with default rules."""
         self.rules: List[FalsePositiveRule] = []
-        self._known_false_positive_definitions: Optional[Set[str]] = None
+        self._known_false_positive_definitions: Optional[Set[str]] = (
+            KNOWN_FALSE_POSITIVE_DEFINITIONS
+        )
         self._init_default_rules()
 
     def _init_default_rules(self) -> None:
@@ -712,35 +714,6 @@ class FalsePositiveFilter:
 
         return False
 
-    def _load_known_false_positive_definitions(self) -> Set[str]:
-        """
-        Load known false positive definitions from the text file.
-
-        Returns:
-            Set of definition names and pairs
-        """
-        definitions = set()
-        # Get the directory where this Python file is located
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        definitions_file = os.path.join(
-            current_dir, "known_false_positive_definitions.txt"
-        )
-
-        try:
-            with open(definitions_file, "r", encoding="utf-8") as f:
-                for line in f:
-                    # Strip whitespace
-                    line = line.strip()
-                    # Skip empty lines and comments
-                    if line and not line.startswith("#"):
-                        definitions.add(line)
-        except FileNotFoundError:
-            # If file doesn't exist, return empty set
-            # This allows the filter to continue working even if the file is missing
-            pass
-
-        return definitions
-
     def _match_known_false_positive_definitions(self, diff: Difference) -> bool:
         """
         Match known false positive definition differences.
@@ -757,14 +730,6 @@ class FalsePositiveFilter:
         ):
             return False
 
-        # Load known false positive definitions from file (lazy loading)
-        if self._known_false_positive_definitions is None:
-            self._known_false_positive_definitions = (
-                self._load_known_false_positive_definitions()
-            )
-
-        known_false_positives = self._known_false_positive_definitions
-
         # Extract definition name from context field
         # Context format: "||<def_name>||||<possible_match>" for MISSING/EXTRA_DEFINITION
         if diff.context:
@@ -772,7 +737,7 @@ class FalsePositiveFilter:
             parts = diff.context.split("||")
             if len(parts) >= 2:
                 def_name = parts[1].strip()
-                if def_name in known_false_positives:
+                if def_name in self._known_false_positive_definitions:
                     return True
 
         return False

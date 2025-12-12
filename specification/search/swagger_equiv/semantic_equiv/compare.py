@@ -11,9 +11,7 @@ According to doc/equiv_contract.md, comparison covers three dimensions:
 3. Schemas / definitions
 """
 
-from dataclasses import dataclass
-from enum import Enum
-from typing import Any, Dict, FrozenSet, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 from canonical_models import (
     CanonicalApi,
@@ -26,154 +24,8 @@ from canonical_models import (
     ParameterLocation,
     build_canonical_api_from_swagger,
 )
-
-# Known renamed mappings between hand-authored and TSP-compiled swaggers
-# Extracted from human review CSV analysis
-KNOWN_DEFINITION_RENAMES = {
-    "AmlSkill": "AzureMachineLearningSkill",
-    "AnswerResult": "QueryAnswerResult",
-    "Answers": "QueryAnswerType",
-    "AzureOpenAIParameters": "AzureOpenAIVectorizerParameters",
-    "BinaryQuantizationVectorSearchCompressionConfiguration": "BinaryQuantizationCompression",
-    "BM25Similarity": "BM25SimilarityAlgorithm",
-    "CaptionResult": "QueryCaptionResult",
-    "Captions": "QueryCaptionType",
-    "ClassicSimilarity": "ClassicSimilarityAlgorithm",
-    "DataToExtract": "BlobIndexerDataToExtract",
-    "EdgeNGramTokenFilterV2": "EdgeNGramTokenFilter",
-    "ExecutionEnvironment": "IndexerExecutionEnvironment",
-    "ExhaustiveKnnVectorSearchAlgorithmConfiguration": "ExhaustiveKnnAlgorithmConfiguration",
-    "ImageAction": "BlobIndexerImageAction",
-    "KeywordTokenizerV2": "KeywordTokenizer",
-    "KnowledgeBaseErrorAdditionalInfo": "ErrorAdditionalInfo",
-    "KnowledgeBaseErrorDetail": "ErrorDetail",
-    "LuceneStandardTokenizerV2": "LuceneStandardTokenizer",
-    "NGramTokenFilterV2": "NGramTokenFilter",
-    "ParsingMode": "BlobIndexerParsingMode",
-    "PathHierarchyTokenizerV2": "PathHierarchyTokenizer",
-    "PdfTextRotationAlgorithm": "BlobIndexerPDFTextRotationAlgorithm",
-    "QueryResultDocumentSemanticFieldState": "SemanticFieldState",
-    "RawVectorQuery": "VectorizedQuery",
-    "ScalarQuantizationVectorSearchCompressionConfiguration": "ScalarQuantizationCompression",
-    "SemanticErrorHandling": "SemanticErrorMode",
-    "SemanticPartialResponseReason": "SemanticErrorReason",
-    "SemanticPartialResponseType": "SemanticSearchResultsType",
-    "SemanticSettings": "SemanticSearch",
-    "ServiceStatistics": "SearchServiceStatistics",
-    "Similarity": "SimilarityAlgorithm",
-    "Speller": "QuerySpellerType",
-    "Suggester": "SearchSuggester",
-    "VectorSearchCompressionConfiguration": "VectorSearchCompression",
-    "WebApiParameters": "WebApiVectorizerParameters",
-}
-
-
-class DifferenceType(Enum):
-    """Types of differences that can be detected."""
-
-    # Path-level differences
-    MISSING_PATH = "missing_path_in_tsp"
-    EXTRA_PATH = "extra_path_in_tsp"
-
-    # Method-level differences
-    MISSING_METHOD = "missing_method_in_tsp"
-    EXTRA_METHOD = "extra_method_in_tsp"
-
-    # Operation-level differences
-    OPERATION_ID_MISMATCH = "operation_id_mismatch"
-    PATH_INCONSISTENCY = "path_inconsistency"
-    OPERATION_ID_INCONSISTENCY = "operation_id_inconsistency"
-    MISSING_PARAMETER = "missing_parameter_in_tsp"
-    EXTRA_PARAMETER = "extra_parameter_in_tsp"
-    PARAMETER_MISMATCH = "parameter_mismatch"
-    PARAMETER_MISMATCH_NAME_CASE = "parameter_mismatch_name_case"
-    REQUEST_BODY_MISMATCH = "request_body_mismatch"
-    CONSUMES_MISMATCH = "consumes_mismatch"
-    PRODUCES_MISMATCH = "produces_mismatch"
-
-    # Response-level differences
-    MISSING_RESPONSE = "missing_response_in_tsp"
-    EXTRA_RESPONSE = "extra_response_in_tsp"
-    RESPONSE_SCHEMA_MISMATCH = "response_schema_mismatch"
-    RESPONSE_HEADERS_MISMATCH = "response_headers_mismatch"
-
-    # Definition-level differences
-    MISSING_DEFINITION = "missing_def_in_tsp"
-    EXTRA_DEFINITION = "extra_def_in_tsp"
-    DEFINITION_MISMATCH = "def_mismatch"
-    DEFINITION_MISMATCH_TYPE = "def_mismatch_type"
-    DEFINITION_MISMATCH_X_NULLABLE = "def_mismatch_x-nullable-true"
-    DEFINITION_MISMATCH_ADDITIONAL_PROPERTIES = "def_mismatch_additionalProperties-true"
-    DEFINITION_MISMATCH_DEFAULT = "def_mismatch_default-value"
-    DEFINITION_MISMATCH_READONLY = "def_mismatch_readOnly-true"
-
-    # Schema-level differences
-    SCHEMA_TYPE_MISMATCH = "schema_type_mismatch"
-    SCHEMA_FORMAT_MISMATCH = "schema_format_mismatch"
-    SCHEMA_PROPERTIES_MISMATCH = "schema_properties_mismatch"
-    SCHEMA_REQUIRED_MISMATCH = "schema_required_mismatch"
-    SCHEMA_ADDITIONAL_PROPERTIES_MISMATCH = "schema_additional_properties_mismatch"
-    SCHEMA_ITEMS_MISMATCH = "schema_items_mismatch"
-    SCHEMA_CONSTRAINTS_MISMATCH = "schema_constraints_mismatch"
-    SCHEMA_COMPOSITION_MISMATCH = "schema_composition_mismatch"
-
-    # Global API configuration differences
-    SWAGGER_VERSION_MISMATCH = "swagger_version_mismatch"
-    INFO_MISMATCH = "info_mismatch"
-    GLOBAL_CONSUMES_MISMATCH = "global_consumes_mismatch"
-    GLOBAL_PRODUCES_MISMATCH = "global_produces_mismatch"
-    SCHEMES_MISMATCH = "schemes_mismatch"
-    HOST_MISMATCH = "host_mismatch"
-    BASE_PATH_MISMATCH = "base_path_mismatch"
-    X_MS_PARAMETERIZED_HOST_MISMATCH = "x_ms_parameterized_host_mismatch"
-    X_MS_CODE_GENERATION_SETTINGS_MISMATCH = "x_ms_code_generation_settings_mismatch"
-    SECURITY_DEFINITIONS_MISMATCH = "security_definitions_mismatch"
-    SECURITY_MISMATCH = "security_mismatch"
-    TAGS_MISMATCH = "tags_mismatch"
-    EXTERNAL_DOCS_MISMATCH = "external_docs_mismatch"
-
-    # Global parameter and response differences
-    MISSING_GLOBAL_PARAMETER = "missing_global_parameter_in_tsp"
-    EXTRA_GLOBAL_PARAMETER = "extra_global_parameter_in_tsp"
-    GLOBAL_PARAMETER_MISMATCH = "global_parameter_mismatch"
-    MISSING_GLOBAL_RESPONSE = "missing_global_response_in_tsp"
-    EXTRA_GLOBAL_RESPONSE = "extra_global_response_in_tsp"
-    GLOBAL_RESPONSE_MISMATCH = "global_response_mismatch"
-
-
-@dataclass
-class Difference:
-    """Represents a single difference between two APIs."""
-
-    type: DifferenceType
-    message: str
-    context: Optional[str] = None  # Path, method, parameter name, etc.
-
-    def __str__(self) -> str:
-        if self.context:
-            return f"[{self.context}] {self.message}"
-        return self.message
-
-
-@dataclass
-class EquivalencyResult:
-    """Result of an equivalency comparison."""
-
-    equivalent: bool
-    differences: List[Difference]
-
-    @property
-    def difference_count(self) -> int:
-        return len(self.differences)
-
-    def get_summary(self) -> str:
-        """Get a summary string of the comparison result."""
-        if self.equivalent:
-            return "APIs are semantically equivalent"
-        else:
-            return (
-                f"APIs are NOT equivalent ({self.difference_count} differences found)"
-            )
+from diff_type import Difference, DifferenceType, EquivalencyResult
+from known_def_match import KNOWN_DEFINITION_RENAMES
 
 
 class ApiComparator:
@@ -904,9 +756,7 @@ class ApiComparator:
             if not schema_diffs:
                 # If no specific diffs found, provide basic comparison
                 schema_diffs = [
-                    self._get_basic_schema_comparison(
-                        response1.schema, response2.schema
-                    )
+                    self._get_basic_schema_comparison(resp1.schema, resp2.schema)
                 ]
             print(f"Response schemas mismatch \t {context}\t {'; '.join(schema_diffs)}")
 
@@ -1334,6 +1184,168 @@ class ApiComparator:
 
         return DifferenceType.DEFINITION_MISMATCH
 
+    def _refs_match_or_renamed(self, ref1: Optional[str], ref2: Optional[str]) -> bool:
+        """Check if two refs point to the same or known renamed definitions.
+
+        Args:
+            ref1: First $ref value (e.g., "#/definitions/Foo")
+            ref2: Second $ref value (e.g., "#/definitions/Bar")
+
+        Returns:
+            True if refs point to same definition or known renames
+        """
+        if not ref1 or not ref2:
+            return False
+
+        # Check exact match first
+        if ref1 == ref2:
+            return True
+
+        # Extract definition names
+        def1 = ref1.split("/")[-1] if "/" in ref1 else ref1
+        def2 = ref2.split("/")[-1] if "/" in ref2 else ref2
+
+        # Check if definition names match
+        if def1 == def2:
+            # Special case: ErrorResponse can be from common-types or local
+            if def1 == "ErrorResponse":
+                # Allow mapping between common-types ErrorResponse and local ErrorResponse
+                common_types_pattern = "common-types/data-plane/"
+                has_common_types_ref = (
+                    common_types_pattern in ref1 or common_types_pattern in ref2
+                )
+                has_local_ref = (
+                    ref1 == "#/definitions/ErrorResponse"
+                    or ref2 == "#/definitions/ErrorResponse"
+                )
+                if has_common_types_ref and has_local_ref:
+                    return True
+            return True
+
+        # Check known renames in both directions
+        if (
+            KNOWN_DEFINITION_RENAMES.get(def1) == def2
+            or KNOWN_DEFINITION_RENAMES.get(def2) == def1
+        ):
+            return True
+
+        return False
+
+    def _schemas_reference_same_definitions(
+        self, schema1: CanonicalSchema, schema2: CanonicalSchema
+    ) -> bool:
+        """Check if two schemas reference the same or known renamed definitions in matching locations.
+
+        Compares refs in corresponding structural positions:
+        - Direct schema.ref with schema.ref
+        - allOf[i].ref with allOf[i].ref
+        - oneOf[i].ref with oneOf[i].ref
+        - anyOf[i].ref with anyOf[i].ref
+        - properties[key].ref with properties[key].ref
+        - items.ref with items.ref
+        - additionalProperties.ref with additionalProperties.ref
+
+        Returns True only if ALL refs in matching positions point to same/renamed definitions.
+        """
+        has_any_refs = False
+
+        # Check direct ref
+        if schema1.ref or schema2.ref:
+            has_any_refs = True
+            if not self._refs_match_or_renamed(schema1.ref, schema2.ref):
+                return False
+
+        # Check allOf refs at matching positions
+        if schema1.all_of or schema2.all_of:
+            list1 = schema1.all_of or []
+            list2 = schema2.all_of or []
+            if len(list1) == len(list2):
+                for s1, s2 in zip(list1, list2):
+                    if s1.ref or s2.ref:
+                        has_any_refs = True
+                        if not self._refs_match_or_renamed(s1.ref, s2.ref):
+                            return False
+            else:
+                # Different lengths - not a match
+                if any(s.ref for s in list1) or any(s.ref for s in list2):
+                    return False
+
+        # Check oneOf refs at matching positions
+        if schema1.one_of or schema2.one_of:
+            list1 = schema1.one_of or []
+            list2 = schema2.one_of or []
+            if len(list1) == len(list2):
+                for s1, s2 in zip(list1, list2):
+                    if s1.ref or s2.ref:
+                        has_any_refs = True
+                        if not self._refs_match_or_renamed(s1.ref, s2.ref):
+                            return False
+            else:
+                # Different lengths - not a match
+                if any(s.ref for s in list1) or any(s.ref for s in list2):
+                    return False
+
+        # Check anyOf refs at matching positions
+        if schema1.any_of or schema2.any_of:
+            list1 = schema1.any_of or []
+            list2 = schema2.any_of or []
+            if len(list1) == len(list2):
+                for s1, s2 in zip(list1, list2):
+                    if s1.ref or s2.ref:
+                        has_any_refs = True
+                        if not self._refs_match_or_renamed(s1.ref, s2.ref):
+                            return False
+            else:
+                # Different lengths - not a match
+                if any(s.ref for s in list1) or any(s.ref for s in list2):
+                    return False
+
+        # Check property refs at matching keys
+        if schema1.properties or schema2.properties:
+            props1 = schema1.properties or {}
+            props2 = schema2.properties or {}
+            common_keys = set(props1.keys()) & set(props2.keys())
+            for key in common_keys:
+                if props1[key].ref or props2[key].ref:
+                    has_any_refs = True
+                    if not self._refs_match_or_renamed(
+                        props1[key].ref, props2[key].ref
+                    ):
+                        return False
+
+        # Check items ref
+        if schema1.items or schema2.items:
+            if schema1.items and schema2.items:
+                if schema1.items.ref or schema2.items.ref:
+                    has_any_refs = True
+                    if not self._refs_match_or_renamed(
+                        schema1.items.ref, schema2.items.ref
+                    ):
+                        return False
+
+        # Check additionalProperties ref
+        if isinstance(schema1.additional_properties, CanonicalSchema) or isinstance(
+            schema2.additional_properties, CanonicalSchema
+        ):
+            add_props1 = (
+                schema1.additional_properties
+                if isinstance(schema1.additional_properties, CanonicalSchema)
+                else None
+            )
+            add_props2 = (
+                schema2.additional_properties
+                if isinstance(schema2.additional_properties, CanonicalSchema)
+                else None
+            )
+            if add_props1 and add_props2:
+                if add_props1.ref or add_props2.ref:
+                    has_any_refs = True
+                    if not self._refs_match_or_renamed(add_props1.ref, add_props2.ref):
+                        return False
+
+        # Only return True if we found matching refs and they all matched
+        return has_any_refs
+
     def _get_schema_differences(
         self,
         schema1: Optional[CanonicalSchema],
@@ -1354,6 +1366,11 @@ class ApiComparator:
             return ["schema missing in first spec"]
         if schema2 is None:
             return ["schema missing in second spec"]
+
+        # Early exit: If schemas reference the same or known renamed definitions,
+        # skip comparison to avoid duplicate diffs
+        if self._schemas_reference_same_definitions(schema1, schema2):
+            return []  # Same underlying definitions, no differences
 
         differences = []
 
@@ -2170,9 +2187,10 @@ class ApiComparator:
             ):
                 all_equal = False
 
-        # 4.5 References - $ref values must match exactly
-        if schema1.ref != schema2.ref:
-            all_equal = False
+        # 4.5 References - $ref values must match (considering known mappings)
+        if schema1.ref or schema2.ref:
+            if not self._refs_match_or_renamed(schema1.ref, schema2.ref):
+                all_equal = False
 
         # 4.2 Object Schemas
         if not self._object_schemas_equal(schema1, schema2):
@@ -3557,20 +3575,15 @@ class ApiComparator:
         schema1 = api1.definitions[hand_name]
         schema2 = api2.definitions[tsp_name]
 
-        # Resolve ref chains
-        resolved_schema1 = self._resolve_schema_ref_chain_with_mapping(
-            schema1, api1, api2
-        )
-        resolved_schema2 = self._resolve_schema_ref_chain_with_mapping(
-            schema2, api2, api1
-        )
+        # Don't resolve ref chains when comparing definitions directly.
+        # This avoids duplicate comparisons when definitions reference other definitions.
+        # The comparison will check refs directly and early-exit if they point to
+        # the same or renamed definitions.
 
         # Compare schemas and collect recursive triggers
-        if not self._schemas_equal(resolved_schema1, resolved_schema2):
+        if not self._schemas_equal(schema1, schema2):
             # Get detailed differences
-            schema_diffs = self._get_schema_differences(
-                resolved_schema1, resolved_schema2
-            )
+            schema_diffs = self._get_schema_differences(schema1, schema2)
 
             # Categorize mismatch type
             context_name = (
@@ -3593,9 +3606,7 @@ class ApiComparator:
 
             if not formatted_diffs:
                 # If no specific diffs found, provide basic comparison
-                basic_diff = self._get_basic_schema_comparison(
-                    resolved_schema1, resolved_schema2
-                )
+                basic_diff = self._get_basic_schema_comparison(schema1, schema2)
                 formatted_diffs = [f"  - {basic_diff}"]
             diff_details = "\n" + "\n".join(formatted_diffs)
 
@@ -3619,9 +3630,7 @@ class ApiComparator:
                     f" (no ref in {'/'.join(no_ref_parts)})" if no_ref_parts else ""
                 )
 
-                message = f"Definition `{hand_name}`:{diff_details}"
-                if no_ref_info:
-                    message += f"\n  - Note: {no_ref_info[2:-1]}"  # Remove leading ' (' and trailing ')'
+                message = f"Definition `{hand_name} {no_ref_info}`:{diff_details}"
                 context_str = f"||{hand_name}||||"
                 print(
                     f"Definition schemas mismatch\t {hand_name}{no_ref_info}{diff_details}"
@@ -3883,6 +3892,10 @@ def compare_swagger_specs(
         hand_authored_swagger, swagger_source="hand_authored"
     )
     api2 = build_canonical_api_from_swagger(typespec_swagger, swagger_source="tsp")
+
+    # Compare them
+    comparator = ApiComparator()
+    return comparator.compare_apis(api1, api2)
 
     # Compare them
     comparator = ApiComparator()
