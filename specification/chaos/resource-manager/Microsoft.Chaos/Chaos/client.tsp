@@ -32,6 +32,7 @@ using Microsoft.Chaos;
   "csharp"
 );
 @@scope(Microsoft.Chaos.OperationStatuses.get, "!csharp");
+@@scope(Microsoft.Chaos.Experiments.listAll, "!csharp");
 
 // typescript
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "javascript");
