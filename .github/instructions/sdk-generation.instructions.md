@@ -69,77 +69,74 @@ By following these rules, the SDK release process will remain clear, structured,
 Follow below steps to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
 Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps. Before using tools, check if user has Powershell installed.
 
-Your goal is to guide the user through the process of generating SDKs from TypeSpec projects. **Before starting**, show all the high level steps to the user and ask: 
+Your goal is to guide the user through the process of generating SDKs from TypeSpec projects. **Before starting**, show all the high level steps to the user and ask:
 
 > "Would you like to begin the SDK generation process now? (yes/no)"
 
 Wait for the user to respond with a confirmation before proceeding to Step 1. Use the provided tools to perform actions and gather information as needed.
 
 ### Verify API spec
+
 Step 1: Identify TypeSpec Project
 **Goal**: Locate the TypeSpec project root path
 **Actions**:
+
 1. Check if `tspconfig.yaml` or `main.tsp` files are open in editor
 2. If found, use the parent directory as project root
 3. If not found, prompt user: "Please provide the path to your TypeSpec project root directory"
 4. Validate the provided path contains required TypeSpec files main.tsp and tspconfig.yaml
 5. Run `azsdk_typespec_check_project_in_public_repo` to verify repository
 6. If not in public repo, inform: "Please make spec changes in Azure/azure-rest-api-specs public repo to generate SDKs". User can still generate SDKs locally from private repo but they should not push the changes to public SDK repo.
-**Success Criteria**: Valid TypeSpec project path identified
+   **Success Criteria**: Valid TypeSpec project path identified
 
 Step 2: Identify API spec status
 **Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
 **Actions**:
-1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of  https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
+
+1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
 2. If already merged, follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK
 3. If no, proceed to Step 3 to review and commit changes
-**Success Criteria**: User decision on spec readiness obtained
+   **Success Criteria**: User decision on spec readiness obtained
 
 Step 3: Validate TypeSpec Specification
 **Goal**: Ensure TypeSpec specification compiles without errors. Provide a complete summary after running the tool. Highlight any errors and help user fix them.
 **Condition**: Only if the spec is not already merged (from Step 2)
 **Message to user**: "TypeSpec validation takes around 20 - 30 seconds."
 **Actions**:
+
 1. Run `azsdk_run_typespec_validation` to validate the TypeSpec project.
 2. If validation succeeds, proceed to Step 4
-3. If validation fails:
-    - Display all compilation errors to user
-    - Agent should provide suggestions to fix them and prompt the user to verify the fixes. If agent cannot resolve the errors, then prompt the user to fix compilation errors"
-    - Wait for user to fix errors and re-run validation. Provide detailed information about all the changes done by copilot and prompt the user before rerunning the validation.
-**Success Criteria**: TypeSpec compilation passes without errors
+3. If validation fails: - Display all compilation errors to user - Agent should provide suggestions to fix them and prompt the user to verify the fixes. If agent cannot resolve the errors, then prompt the user to fix compilation errors" - Wait for user to fix errors and re-run validation. Provide detailed information about all the changes done by copilot and prompt the user before rerunning the validation.
+   **Success Criteria**: TypeSpec compilation passes without errors
 
 Step 4: Review and Commit Changes
 **Goal**: Stage and commit TypeSpec modifications
 **Condition**: Only if the TypeSpec validation succeeds (from Step 3)
 **Actions**:
+
 1. Run `azsdk_get_modified_typespec_projects` to identify changes
 2. If no changes found, inform: "No TypeSpec projects were modified in current branch" and go to SDK generation mentioned in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md).
 3. Display all modified files (excluding `.github` and `.vscode` folders)
 4. Prompt user: "Please review the modified files. Do you want to commit these changes? (yes/no)"
-5. If yes:
-    - If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding."
-    - Wait for user confirmation before continuing
-    - Run `git add <modified-files>`
-    - Prompt for commit message
-    - Run `git commit -m "<user-provided-message>"`
-    - Run `git push -u origin <current-branch-name>`
-**Success Criteria**: Changes committed and pushed to remote branch
+5. If yes: - If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding." - Wait for user confirmation before continuing - Run `git add <modified-files>` - Prompt for commit message - Run `git commit -m "<user-provided-message>"` - Run `git push -u origin <current-branch-name>`
+   **Success Criteria**: Changes committed and pushed to remote branch
 
 Step 5: Create Specification Pull Request
 **Goal**: Create PR for TypeSpec changes if not already created
 **Condition**: Only if there are committed changes (from Step 4)
 **Actions**:
+
 1. Prompt the user to confirm if a pull request already exists for API spec changes. If answer is no or unsure then check if spec PR already exists using `azsdk_get_pull_request_link_for_current_branch`
 2. If PR exists, display PR details and proceed to next steps in SDK generation.
 3. If no PR exists:
-    - Inform user: "No pull request found for the current branch. Proceeding to create a new pull request."
-    - Create a pull request using `azsdk_create_pull_request_for_current_branch`
-    - Prompt for PR title and description
-    - Display PR creation progress
-    - Wait for PR creation confirmation
-    - Display created PR details
+   - Inform user: "No pull request found for the current branch. Proceeding to create a new pull request."
+   - Create a pull request using `azsdk_create_pull_request_for_current_branch`
+   - Prompt for PR title and description
+   - Display PR creation progress
+   - Wait for PR creation confirmation
+   - Display created PR details
 4. Inform the user to follow the instructions on spec PR to get approval from API reviewers and merge the spec PR.
-**Success Criteria**: Specification pull request exists
+   **Success Criteria**: Specification pull request exists
 
 Follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK.
 

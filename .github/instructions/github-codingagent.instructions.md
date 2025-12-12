@@ -11,7 +11,6 @@ Run only SDK generation using pipeline and do not run SDK generation using local
 - Do not mark as language as excluded in the release plan just because SDK generation pipeline failed for that language. Inform user about the failure and suggest to check pipeline logs for more information.
 - Do not run verify setup, TypeSpec validation, service label check and analyze pipeline tools when running SDK generation using GitHub coding agent.
 
-
 ## Constraints:
 
 - Do not invoke other steps.
