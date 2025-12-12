@@ -648,7 +648,6 @@ class FalsePositiveFilter:
         if diff.type != DifferenceType.GLOBAL_PARAMETER_MISMATCH:
             return False
 
-        message_lower = diff.message.lower()
         context_lower = (diff.context or "").lower()
 
         # Known parameter groups and their parameters that get reported twice
@@ -662,12 +661,13 @@ class FalsePositiveFilter:
         ]
 
         # Check if this is a parameter property mismatch for a known duplicate
-        if "parameter property mismatch" in message_lower:
+        # Note: Message starts with capital P "Parameter property mismatch"
+        if diff.message.startswith("Parameter property mismatch"):
             # Check if the context indicates this is from a parameter group
             if "parameter_group:" in context_lower:
                 for param_name in duplicate_parameters:
-                    # Check if the parameter name appears in the context or message
-                    if param_name in context_lower or param_name in message_lower:
+                    # Check if the parameter name appears in the context
+                    if param_name in context_lower:
                         return True
 
         return False
