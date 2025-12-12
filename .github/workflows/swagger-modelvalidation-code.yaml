@@ -36,7 +36,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.swagger-model-validation.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: job-summary
           path: ${{ steps.swagger-model-validation.outputs.summary }}
