@@ -2476,10 +2476,6 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(SearchClient.Documents.count, "getDocumentCount");
 @@clientName(SearchClient.Documents.get, "getDocument");
-// @@clientName(SearchClient.Documents.searchPost, "search");
-// @@clientName(SearchClient.Documents.suggestPost, "suggest");
-// @@clientName(SearchClient.Documents.autocompletePost, "autocomplete");
-// @@clientName(SearchClient.Documents.index, "indexDocuments");
 @@clientName(SearchIndexClient.Indexes.list, "listIndexes");
 @@clientName(SearchIndexClient.Indexes.get, "getIndex");
 @@clientName(SearchIndexClient.Indexes.getStatistics, "getIndexStatistics");
