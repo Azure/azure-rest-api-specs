@@ -15,8 +15,8 @@ namespace Microsoft.AzureStackHCI;
 /**
  * EdgeDevice Jobs resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility use of DiscriminatedExtensionResource"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 @parentResource(EdgeDevice)
 model EdgeDeviceJob

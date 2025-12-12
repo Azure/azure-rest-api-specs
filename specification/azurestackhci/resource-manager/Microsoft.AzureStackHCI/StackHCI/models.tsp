@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -2036,6 +2037,20 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   clusterPattern?: ClusterPattern;
+
+  /**
+   * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmProperties?: ConfidentialVmProperties;
+
+  /**
+   * Software Defined Networking Properties of the cluster
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  sdnProperties?: ClusterSdnProperties;
 
   /**
    * Local Availability Zone information for HCI cluster
@@ -5412,6 +5427,13 @@ model HciNetworkProfile {
    */
   @visibility(Lifecycle.Read)
   hostNetwork?: HciEdgeDeviceHostNetwork;
+
+  /** 
+    oftware Defined Networking Properties of the cluster
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_12_01_preview)
+  sdnProperties?: SdnProperties;
 }
 
 /**
@@ -5848,4 +5870,18 @@ model ReportedProperties {
    */
   @visibility(Lifecycle.Read)
   extensionProfile?: ExtensionProfile;
+
+  /**
+   * Most recent edge device sync timestamp in UTC.
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  lastSyncTimestamp?: utcDateTime;
+
+  /**
+   * CVM support details for edge device.
+   */
+  @added(Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmProfile?: ConfidentialVmProfile;
 }
