@@ -2,7 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Compute;
+using Compute;
 
 @@clientName(NetworkApiVersion.`2020-11-01`, "TwoThousandTwenty1101", "go");
 @@clientName(NetworkApiVersion.`2022-11-01`, "TwoThousandTwentyTwo1101", "go");

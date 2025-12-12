@@ -29,13 +29,13 @@ namespace Azure.ResourceManager.Legacy {
       @segment("providers")
       @doc("The provider namespace (this parameter will not show up in operations).")
       provider: "Microsoft.ThisWillBeReplaced",
-    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Microsoft.Compute.CloudError;
+    ): ArmResponse<Azure.ResourceManager.Foundations.OperationListResult> | Common.CloudError;
   }
 
   interface ComputeLegacyOperations<
     ParentParameters extends {},
     ResourceTypeParameter extends {},
-    ErrorType extends {} = Microsoft.Compute.CloudError
+    ErrorType extends {} = Common.CloudError
   > {
     /**
      * @dev A long-running resource CreateOrUpdate (PUT)
@@ -383,7 +383,7 @@ namespace Azure.ResourceManager.Legacy {
     ParentFriendlyName extends valueof string = "",
     Parameters extends {} = {},
     Response extends {} = ArmResponse<ResourceListResult<Resource>>,
-    Error extends {} = Microsoft.Compute.CloudError
+    Error extends {} = Common.CloudError
   > is Azure.ResourceManager.Foundations.ArmReadOperation<
     ResourceParentParameters<Resource, BaseParameters> & Parameters,
     Response,

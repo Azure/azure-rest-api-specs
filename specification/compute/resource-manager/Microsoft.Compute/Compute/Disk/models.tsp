@@ -9,8 +9,9 @@ using TypeSpec.Http;
 using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Common;
 
-namespace Microsoft.Compute;
+namespace ComputeDisk;
 
 /**
  * The sku name.

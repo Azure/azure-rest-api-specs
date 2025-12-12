@@ -22,10 +22,10 @@ using TypeSpec.Versioning;
  * Compute Client
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Already exist outside this subservice"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Compute")
 @service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
-namespace Microsoft.Compute;
+namespace ComputeSku;
 
 /**
  * The available API versions.

@@ -43,10 +43,10 @@ using TypeSpec.Versioning;
 /**
  * Compute Client
  */
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Compute")
 @service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
-namespace Microsoft.Compute;
+namespace Compute;
 
 /**
  * The available API versions.

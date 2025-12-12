@@ -8,8 +8,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
-namespace Microsoft.Compute;
+namespace Compute;
 /**
  * Specifies information about the SSH public key.
  */

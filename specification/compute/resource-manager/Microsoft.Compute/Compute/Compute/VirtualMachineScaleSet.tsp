@@ -10,8 +10,9 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Versioning;
+using Common;
 
-namespace Microsoft.Compute;
+namespace Compute;
 /**
  * Describes a Virtual Machine Scale Set.
  */

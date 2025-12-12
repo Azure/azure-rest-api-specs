@@ -6,7 +6,7 @@ using Http;
 using OpenAPI;
 using TypeSpec.Rest;
 
-namespace Microsoft.Compute;
+namespace Common;
 
 /* Provides the standard '$expand' query parameter. */
 model $ExpandQueryParameter<T = string> {

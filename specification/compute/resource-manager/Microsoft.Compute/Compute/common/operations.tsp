@@ -9,7 +9,7 @@ using Rest;
 // using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Microsoft.Compute;
+namespace Common;
 
 /** Custom ArmResourceRead operation template with CloudError as Error */
 op ComputeResourceRead<
@@ -17,7 +17,7 @@ op ComputeResourceRead<
   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<Resource>,
-  Error extends {} = Microsoft.Compute.CloudError
+  Error extends {} = Common.CloudError
 > is ArmResourceRead<Resource, BaseParameters, Parameters, Response, Error>;
 
 /** Custom ArmResourceCreateOrReplaceAsync operation template with CloudError as Error */
@@ -31,7 +31,7 @@ op ComputeResourceCreateOrReplaceAsync<
     Resource,
     LroHeaders
   >,
-  Error extends {} = Microsoft.Compute.CloudError
+  Error extends {} = Common.CloudError
 > is ArmResourceCreateOrReplaceAsync<
   Resource,
   BaseParameters,

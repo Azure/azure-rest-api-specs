@@ -9,8 +9,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
-namespace Microsoft.Compute;
+namespace Compute;
 /**
  * The status of the latest virtual machine scale set rolling upgrade.
  */

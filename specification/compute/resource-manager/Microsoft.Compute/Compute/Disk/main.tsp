@@ -30,10 +30,10 @@ using TypeSpec.Versioning;
  * Compute Client
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
-@armProviderNamespace
+@armProviderNamespace("Microsoft.Compute")
 @service(#{ title: "Azure Compute resource management API." })
 @versioned(Versions)
-namespace Microsoft.Compute;
+namespace ComputeDisk;
 
 /**
  * The available API versions.

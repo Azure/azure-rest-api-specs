@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager.Legacy;
 
-namespace Microsoft.Compute;
+namespace Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@externalTypeRef(ApiError,

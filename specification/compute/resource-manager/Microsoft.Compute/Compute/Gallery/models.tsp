@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Compute;
+namespace ComputeGallery;
 
 /**
  * The provisioning state, which only appears in the response.

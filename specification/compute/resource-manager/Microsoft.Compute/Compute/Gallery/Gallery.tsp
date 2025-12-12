@@ -8,8 +8,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Common;
 
-namespace Microsoft.Compute;
+namespace ComputeGallery;
 /**
  * Specifies information about the Shared Image Gallery that you want to create or update.
  */
