@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "id": "bc3f9365-3ee0-4564-aa27-825016325557"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Feature",
+        "geometry": null,
+        "kind": "RouteMatrix",
+        "properties": {
+          "matrix": [
+            {
+              "arrivalAt": "2022-12-20T00:21:14+01:00",
+              "departureAt": "2022-12-19T16:39:57+01:00",
+              "destinationIndex": 0,
+              "distanceInMeters": 573064,
+              "durationInSeconds": 27677,
+              "durationTrafficInSeconds": 27677,
+              "originIndex": 0,
+              "statusCode": 200
+            },
+            {
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              },
+              "originIndex": 0,
+              "statusCode": 400
+            },
+            {
+              "arrivalAt": "2022-12-19T22:19:10+01:00",
+              "departureAt": "2022-12-19T16:39:57+01:00",
+              "destinationIndex": 0,
+              "distanceInMeters": 452488,
+              "durationInSeconds": 20353,
+              "durationTrafficInSeconds": 20353,
+              "originIndex": 1,
+              "statusCode": 200
+            },
+            {
+              "destinationIndex": 1,
+              "error": {
+                "code": "OUT_OF_REGION",
+                "message": "Input coordinates out of region"
+              },
+              "originIndex": 1,
+              "statusCode": 400
+            }
+          ],
+          "summary": {
+            "successfulCount": 2,
+            "totalCount": 4
+          }
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Not Found: the requested resource could not be found."
+        }
+      }
+    }
+  },
+  "operationId": "Route_GetRouteOperationsResult",
+  "title": "Retrieve the async matrix result"
+}

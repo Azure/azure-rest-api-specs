@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "routeMatrixAsyncRequest": {
+      "type": "FeatureCollection",
+      "avoid": [
+        "unpavedRoads"
+      ],
+      "departAt": "2022-12-19T16:39:57+01:00",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+              [
+                9.15049,
+                45.458545
+              ],
+              [
+                11.050541,
+                45.403337
+              ]
+            ]
+          },
+          "properties": {
+            "pointType": "origins"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "MultiPoint",
+            "coordinates": [
+              [
+                11.499931,
+                48.149853
+              ],
+              [
+                14.538226,
+                50.033688
+              ]
+            ]
+          },
+          "properties": {
+            "pointType": "destinations"
+          }
+        }
+      ],
+      "optimizeRoute": "fastest",
+      "traffic": "historical",
+      "travelMode": "truck"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://atlas.microsoft.com/route/operations/bc3f9365-3ee0-4564-aa27-825016325557?api-version=2025-01-01"
+      }
+    }
+  },
+  "operationId": "Route_PostRouteMatrixAsync",
+  "title": "Submit an asynchronous request for matrix"
+}
