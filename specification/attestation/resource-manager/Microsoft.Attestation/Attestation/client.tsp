@@ -7,7 +7,4 @@ using Azure.ClientGenerator.Core;
   "AttestationManagementClient",
   "javascript"
 );
-@@clientName(Microsoft.Attestation,
-  "AttestationManagementClient",
-  "python"
-);
+@@clientName(Microsoft.Attestation, "AttestationManagementClient", "python");
