@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft.Commerce",
+    "title": "UsageManagementClient",
     "version": "2015-06-01-preview",
-    "description": "// (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -44,10 +43,9 @@
       "get": {
         "operationId": "RateCard_Get",
         "description": "Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/commerce/ratecard"
+        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -89,10 +87,9 @@
       "get": {
         "operationId": "UsageAggregates_List",
         "description": "Query aggregated Azure subscription consumption data for a date range.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/commerce/usageaggregates"
+        },
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -166,10 +163,24 @@
               "$ref": "#/definitions/UsageAggregationListResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorObjectResponse"
             }
           }
         },
@@ -177,53 +188,100 @@
           "GetUsageAggregatesList": {
             "$ref": "./examples/GetUsageAggregatesList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "AggregationGranularity": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Hourly"
+      ],
+      "x-ms-enum": {
+        "name": "AggregationGranularity",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Daily"
+          },
+          {
+            "name": "Hourly",
+            "value": "Hourly",
+            "description": "Hourly"
+          }
+        ]
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "ErrorObjectResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response with a wrapper object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "Wrapper object for error information"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Describes the format of Error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        }
+      }
+    },
     "MeterInfo": {
       "type": "object",
       "description": "Detailed information about the meter.",
       "properties": {
         "MeterId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The unique identifier of the resource.",
-          "x-ms-client-name": "meterId"
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the resource."
         },
         "MeterName": {
           "type": "string",
-          "description": "The name of the meter, within the given meter category",
-          "x-ms-client-name": "meterName"
+          "description": "The name of the meter, within the given meter category"
         },
         "MeterCategory": {
           "type": "string",
-          "description": "The category of the meter, e.g., 'Cloud services', 'Networking', etc..",
-          "x-ms-client-name": "meterCategory"
+          "description": "The category of the meter, e.g., 'Cloud services', 'Networking', etc.."
         },
         "MeterSubCategory": {
           "type": "string",
-          "description": "The subcategory of the meter, e.g., 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
-          "x-ms-client-name": "meterSubCategory"
+          "description": "The subcategory of the meter, e.g., 'A6 Cloud services', 'ExpressRoute (IXP)', etc.."
         },
         "Unit": {
           "type": "string",
-          "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc.",
-          "x-ms-client-name": "unit"
+          "description": "The unit in which the meter consumption is charged, e.g., 'Hours', 'GB', etc."
         },
         "MeterTags": {
           "type": "array",
           "description": "Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party.",
           "items": {
             "type": "string"
-          },
-          "x-ms-client-name": "meterTags"
+          }
         },
         "MeterRegion": {
           "type": "string",
-          "description": "The region in which the Azure service is available.",
-          "x-ms-client-name": "meterRegion"
+          "description": "The region in which the Azure service is available."
         },
         "MeterRates": {
           "type": "object",
@@ -231,20 +289,17 @@
           "additionalProperties": {
             "format": "float",
             "type": "number"
-          },
-          "x-ms-client-name": "meterRates"
+          }
         },
         "EffectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Indicates the date from which the meter rate is effective.",
-          "x-ms-client-name": "effectiveDate"
+          "description": "Indicates the date from which the meter rate is effective."
         },
         "IncludedQuantity": {
           "type": "number",
           "format": "float",
-          "description": "The resource quantity that is included in the offer at no cost. Consumption beyond this quantity will be charged.",
-          "x-ms-client-name": "includedQuantity"
+          "description": "The resource quantity that is included in the offer at no cost. Consumption beyond this quantity will be charged."
         }
       }
     },
@@ -258,21 +313,19 @@
           "additionalProperties": {
             "format": "decimal",
             "type": "number"
-          },
-          "x-ms-client-name": "tieredDiscount"
+          }
         },
         "ExcludedMeterIds": {
           "type": "array",
           "description": "An array of meter ids that are excluded from the given offer terms.",
           "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "excludedMeterIds"
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/OfferTermInfoAutoGenerated"
+          "$ref": "#/definitions/OfferTermInfo"
         }
       ],
       "x-ms-discriminator-value": "Monetary Commitment"
@@ -284,26 +337,43 @@
         "Credit": {
           "type": "number",
           "format": "decimal",
-          "description": "The amount of credit provided under the terms of the given offer level.",
-          "x-ms-client-name": "credit"
+          "description": "The amount of credit provided under the terms of the given offer level."
         },
         "ExcludedMeterIds": {
           "type": "array",
           "description": "An array of meter ids that are excluded from the given offer terms.",
           "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "excludedMeterIds"
+            "$ref": "#/definitions/Azure.Core.uuid"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/OfferTermInfoAutoGenerated"
+          "$ref": "#/definitions/OfferTermInfo"
         }
       ],
       "x-ms-discriminator-value": "Monetary Credit"
     },
     "OfferTermInfo": {
+      "type": "object",
+      "description": "Describes the offer term.",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/OfferTermInfoEnum",
+          "description": "Name of the offer term"
+        },
+        "EffectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the date from which the offer term is effective."
+        }
+      },
+      "discriminator": "Name",
+      "required": [
+        "Name"
+      ]
+    },
+    "OfferTermInfoEnum": {
       "type": "string",
       "description": "Name of the offer term",
       "enum": [
@@ -312,7 +382,7 @@
         "Monetary Credit"
       ],
       "x-ms-enum": {
-        "name": "OfferTermInfo",
+        "name": "OfferTermInfoEnum",
         "modelAsString": false,
         "values": [
           {
@@ -333,25 +403,33 @@
         ]
       }
     },
-    "OfferTermInfoAutoGenerated": {
+    "RateCardQueryParameters": {
       "type": "object",
-      "description": "Describes the offer term.",
+      "description": "Parameters that are used in the odata $filter query parameter for providing RateCard information.",
       "properties": {
-        "Name": {
-          "$ref": "#/definitions/OfferTermInfo",
-          "description": "Name of the offer term",
-          "x-ms-client-name": "name"
-        },
-        "EffectiveDate": {
+        "OfferDurableId": {
           "type": "string",
-          "format": "date-time",
-          "description": "Indicates the date from which the offer term is effective.",
-          "x-ms-client-name": "effectiveDate"
+          "description": "The Offer ID parameter consists of the 'MS-AZR-' prefix, plus the Offer ID number (e.g., MS-AZR-0026P). See https://azure.microsoft.com/en-us/support/legal/offer-details/ for more information on the list of available Offer IDs, country/region availability, and billing currency.",
+          "pattern": "^MS-AZR-\\d{4}P(-\\d{4}P)*$"
+        },
+        "Currency": {
+          "type": "string",
+          "description": "The currency in which the rates need to be provided."
+        },
+        "Locale": {
+          "type": "string",
+          "description": "The culture in which the resource metadata needs to be localized."
+        },
+        "RegionInfo": {
+          "type": "string",
+          "description": "2 letter ISO code where the offer was purchased."
         }
       },
-      "discriminator": "Name",
       "required": [
-        "Name"
+        "OfferDurableId",
+        "Currency",
+        "Locale",
+        "RegionInfo"
       ]
     },
     "RecurringCharge": {
@@ -361,13 +439,12 @@
         "RecurringCharge": {
           "type": "integer",
           "format": "int32",
-          "description": "The amount of recurring charge as per the offer term.",
-          "x-ms-client-name": "recurringCharge"
+          "description": "The amount of recurring charge as per the offer term."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/OfferTermInfoAutoGenerated"
+          "$ref": "#/definitions/OfferTermInfo"
         }
       ],
       "x-ms-discriminator-value": "Recurring Charge"
@@ -378,13 +455,11 @@
       "properties": {
         "Currency": {
           "type": "string",
-          "description": "The currency in which the rates are provided.",
-          "x-ms-client-name": "currency"
+          "description": "The currency in which the rates are provided."
         },
         "Locale": {
           "type": "string",
-          "description": "The culture in which the resource information is localized.",
-          "x-ms-client-name": "locale"
+          "description": "The culture in which the resource information is localized."
         },
         "IsTaxIncluded": {
           "type": "boolean",
@@ -394,9 +469,8 @@
           "type": "array",
           "description": "A list of offer terms.",
           "items": {
-            "$ref": "#/definitions/OfferTermInfoAutoGenerated"
+            "$ref": "#/definitions/OfferTermInfo"
           },
-          "x-ms-client-name": "offerTerms",
           "x-ms-identifiers": [
             "Name"
           ]
@@ -407,7 +481,6 @@
           "items": {
             "$ref": "#/definitions/MeterInfo"
           },
-          "x-ms-client-name": "meters",
           "x-ms-identifiers": [
             "MeterId"
           ]
@@ -463,8 +536,7 @@
       "description": "Describes a sample of the usageAggregation.",
       "properties": {
         "subscriptionId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The subscription identifier for the Azure user."
         },
         "meterId": {
