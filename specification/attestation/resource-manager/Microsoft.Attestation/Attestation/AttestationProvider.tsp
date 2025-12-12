@@ -24,6 +24,31 @@ model AttestationProvider
 }
 
 @armResourceOperations
+interface AttestationProvidersOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {},
+      {}
+    > {}
+
+@armResourceOperations
+interface AttestationProvidersResourceGroupOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {},
+      {}
+    > {}
+
+@armResourceOperations
 interface AttestationProviders {
   /**
    * Get the status of Attestation Provider.
@@ -63,19 +88,19 @@ interface AttestationProviders {
   /**
    * Returns attestation providers list in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is AttestationProvidersResourceGroupOps.ListSinglePage<
     AttestationProvider,
     Response = ArmResponse<AttestationProviderListResult>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
    * Returns a list of attestation providers in a subscription.
    */
-  list is ArmListBySubscription<
+  list is AttestationProvidersOps.ListSinglePage<
     AttestationProvider,
     Response = ArmResponse<AttestationProviderListResult>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**

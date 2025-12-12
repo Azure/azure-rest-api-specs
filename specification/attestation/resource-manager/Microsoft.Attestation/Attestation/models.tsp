@@ -133,7 +133,7 @@ model ServiceSpecification {
   /**
    * Specifications of the Log for Microsoft Azure Attestation
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -269,7 +269,7 @@ model JsonWebKeySet {
    * can choose to assign a meaning to the order for their purposes, if
    * desired.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   keys?: JsonWebKey[];
 }
 
@@ -448,6 +448,6 @@ model OperationList {
    * List of supported operations.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: OperationsDefinition[];
 }
