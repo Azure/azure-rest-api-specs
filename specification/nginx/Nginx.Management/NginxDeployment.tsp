@@ -61,6 +61,11 @@ interface NginxDeployments {
     PatchModel = NginxDeploymentUpdateParameters,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxDeployment> &
       Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<NginxDeployment> | ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    ArmAsyncOperationHeader<FinalResult = NginxDeployment> &
+      Azure.Core.Foundations.RetryAfterHeader
+    > | ArmResourceCreatedResponse<NginxDeployment>,
     OptionalRequestBody = true
   >;
 

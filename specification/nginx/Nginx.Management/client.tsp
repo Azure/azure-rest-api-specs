@@ -90,12 +90,33 @@ using Azure.Core;
   "NginxCertificateError",
   "csharp"
 );
-@@clientName(NginxConfigurationResponseProperties,
-  "NginxConfigurationProperties",
+@@clientName(NginxConfigurationRequest,
+  "NginxConfigurationCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(NginxConfigurationRequest.type,
+  "ResourceType",
   "csharp"
 );
 @@clientName(NginxConfigurationRequestProperties,
   "NginxConfigurationCreateOrUpdateProperties",
+  "csharp"
+);
+@@clientName(NginxDeploymentApiKeyRequest,
+  "NginxDeploymentApiKeyCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(NginxDeploymentApiKeyRequest.type,
+  "ResourceType",
+  "csharp"
+);
+@@clientName(NginxDeploymentDefaultWafPolicyListResponse,
+  "NginxDeploymentDefaultWafPolicyListResult",
+  "csharp"
+);
+@@clientName(NginxDeploymentProperties.ipAddress, "IPAddress", "csharp");
+@@clientName(NginxDeploymentScalingPropertiesAutoScaleSettings,
+  "NginxDeploymentAutoScaleSettings",
   "csharp"
 );
 
@@ -121,6 +142,7 @@ using Azure.Core;
 @@clientName(AnalysisResultData, "NginxAnalysisResultDetails", "csharp");
 @@clientName(Level, "NginxDiagnosticLevel", "csharp");
 @@clientName(NginxConfigurationResponse, "NginxConfiguration", "csharp");
+@@usage(NginxConfigurationResponse, Usage.input, "csharp");
 @@clientName(NginxConfigurationResponseProperties,
   "NginxConfigurationProperties",
   "csharp"
@@ -131,11 +153,11 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(NginxConfigurationProtectedFileRequest,
-  "NginxConfigurationProtectedFileContent",
+  "NginxConfigurationContentProtectedFile",
   "csharp"
 );
 @@clientName(NginxConfigurationProtectedFileResponse,
-  "NginxConfigurationProtectedFileResult",
+  "NginxConfigurationProtectedFile",
   "csharp"
 );
 
@@ -164,5 +186,13 @@ using Azure.Core;
 @@clientName(NginxDeployments.wafPolicyList, "GetWafPolicies", "csharp");
 @@clientName(NginxDeployments.defaultWafPolicyList,
   "GetDefaultWafPolicies",
+  "csharp"
+);
+@@alternateType(NginxDeployment.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(NginxDeploymentUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
