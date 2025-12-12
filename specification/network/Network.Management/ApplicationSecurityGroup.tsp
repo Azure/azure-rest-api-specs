@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * An application security group in a resource group.
  */
 model ApplicationSecurityGroup
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationSecurityGroupPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<ApplicationSecurityGroupPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = ApplicationSecurityGroup,
     KeyName = "applicationSecurityGroupName",

@@ -13,15 +13,20 @@ namespace Microsoft.Network;
 /**
  * VirtualWAN Resource.
  */
-model VirtualWAN
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualWanProperties> {
+model VirtualWAN is Azure.ResourceManager.ProxyResource<VirtualWanProperties> {
   ...ResourceNameParameter<
     Resource = VirtualWAN,
     KeyName = "VirtualWANName",
     SegmentName = "virtualWans",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<

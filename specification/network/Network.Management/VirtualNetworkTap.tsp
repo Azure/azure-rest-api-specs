@@ -14,14 +14,20 @@ namespace Microsoft.Network;
  * Virtual Network Tap resource.
  */
 model VirtualNetworkTap
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualNetworkTapPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkTapPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = VirtualNetworkTap,
     KeyName = "tapName",
     SegmentName = "virtualNetworkTaps",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

@@ -14,14 +14,30 @@ namespace Microsoft.Network;
  * Route table resource.
  */
 model RouteTable
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RouteTablePropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<RouteTablePropertiesFormat> {
   ...ResourceNameParameter<
     Resource = RouteTable,
     KeyName = "routeTableName",
     SegmentName = "routeTables",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

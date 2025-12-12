@@ -16,7 +16,7 @@ namespace Microsoft.Network;
 @singleton("default")
 @subscriptionResource
 model ApplicationGatewayAvailableSslOptions
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationGatewayAvailableSslOptionsPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<ApplicationGatewayAvailableSslOptionsPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = ApplicationGatewayAvailableSslOptions,
     KeyName = "applicationGatewayAvailableSslOption",

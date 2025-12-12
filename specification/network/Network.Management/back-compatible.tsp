@@ -187,8 +187,6 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PerimeterAssociableResource.properties);
 
-@@clientName(VirtualApplianceNetworkInterfaceConfiguration.type, "nicType");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PacketCapture.properties);
 
@@ -242,10 +240,6 @@ using Microsoft.Network;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(P2SConnectionConfiguration.properties);
-
-@@clientName(VirtualHubProperties.virtualHubRouteTableV2s,
-  "virtualHubRouteTableV2S"
-);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(VirtualHubRouteTableV2.properties);

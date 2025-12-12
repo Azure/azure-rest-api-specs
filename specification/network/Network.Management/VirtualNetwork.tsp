@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * Virtual Network resource.
  */
 model VirtualNetwork
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualNetworkPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = VirtualNetwork,
     KeyName = "virtualNetworkName",
@@ -23,12 +23,27 @@ model VirtualNetwork
   >;
 
   /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
    * The extended location of the virtual network.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

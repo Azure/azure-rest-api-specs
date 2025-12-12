@@ -13,15 +13,30 @@ namespace Microsoft.Network;
 /**
  * VirtualHub Resource.
  */
-model VirtualHub
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VirtualHubProperties> {
+model VirtualHub is Azure.ResourceManager.ProxyResource<VirtualHubProperties> {
   ...ResourceNameParameter<
     Resource = VirtualHub,
     KeyName = "virtualHubName",
     SegmentName = "virtualHubs",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * Kind of service virtual hub. This is metadata used for the Azure portal experience for Route Server.

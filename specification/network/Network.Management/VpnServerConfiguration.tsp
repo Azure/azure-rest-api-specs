@@ -14,14 +14,20 @@ namespace Microsoft.Network;
  * VpnServerConfiguration Resource.
  */
 model VpnServerConfiguration
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VpnServerConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<VpnServerConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = VpnServerConfiguration,
     KeyName = "vpnServerConfigurationName",
     SegmentName = "vpnServerConfigurations",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

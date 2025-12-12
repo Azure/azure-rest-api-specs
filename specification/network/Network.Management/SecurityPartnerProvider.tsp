@@ -14,14 +14,30 @@ namespace Microsoft.Network;
  * Security Partner Provider resource.
  */
 model SecurityPartnerProvider
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SecurityPartnerProviderPropertiesFormat> {
+  is Azure.ResourceManager.ProxyResource<SecurityPartnerProviderPropertiesFormat> {
   ...ResourceNameParameter<
     Resource = SecurityPartnerProvider,
     KeyName = "securityPartnerProviderName",
     SegmentName = "securityPartnerProviders",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 @armResourceOperations

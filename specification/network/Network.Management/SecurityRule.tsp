@@ -23,7 +23,13 @@ model SecurityRule
     SegmentName = "securityRules",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias SecurityRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -58,7 +64,10 @@ interface SecurityRules {
   /**
    * Creates or updates a security rule in the specified network security group.
    */
-  createOrUpdate is SecurityRuleOps.CreateOrUpdateAsync<SecurityRule,  OverrideErrorType = CloudError>;
+  createOrUpdate is SecurityRuleOps.CreateOrUpdateAsync<
+    SecurityRule,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Deletes the specified network security rule.
@@ -66,8 +75,9 @@ interface SecurityRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is SecurityRuleOps.DeleteWithoutOkAsync<
     SecurityRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
-,    OverrideErrorType = CloudError>;
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all security rules in a network security group.
@@ -101,12 +111,18 @@ interface DefaultSecurityRules {
   /**
    * Get the specified default network security rule.
    */
-  get is DefaultSecurityRuleOps.Read<SecurityRule, OverrideErrorType = CloudError>;
+  get is DefaultSecurityRuleOps.Read<
+    SecurityRule,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Gets all default security rules in a network security group.
    */
-  list is DefaultSecurityRuleOps.List<SecurityRule, OverrideErrorType = CloudError>;
+  list is DefaultSecurityRuleOps.List<
+    SecurityRule,
+    OverrideErrorType = CloudError
+  >;
 }
 
 @@doc(SecurityRule.name, "The name of the security rule.");

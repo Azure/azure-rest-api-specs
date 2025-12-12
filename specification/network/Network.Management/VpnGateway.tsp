@@ -13,15 +13,20 @@ namespace Microsoft.Network;
 /**
  * VpnGateway Resource.
  */
-model VpnGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<VpnGatewayProperties> {
+model VpnGateway is Azure.ResourceManager.ProxyResource<VpnGatewayProperties> {
   ...ResourceNameParameter<
     Resource = VpnGateway,
     KeyName = "gatewayName",
     SegmentName = "vpnGateways",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
 alias VpnConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<

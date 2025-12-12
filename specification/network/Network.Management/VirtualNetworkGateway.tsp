@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * A common class for general resource information.
  */
 model VirtualNetworkGateway
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+  is Azure.ResourceManager.ProxyResource<
     VirtualNetworkGatewayPropertiesFormat,
     false
   > {
@@ -26,12 +26,27 @@ model VirtualNetworkGateway
   >;
 
   /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
+  /**
    * The extended location of type local virtual network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   extendedLocation?: ExtendedLocation;
 
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 
   /**
    * The identity of the virtual network gateway, if configured.

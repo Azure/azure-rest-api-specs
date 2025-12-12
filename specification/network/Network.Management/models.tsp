@@ -8658,12 +8658,12 @@ model RetentionPolicyParameters {
   /**
    * Number of days to retain flow log records.
    */
-  days?: int32;
+  days?: int32 = 0;
 
   /**
    * Flag to enable/disable retention.
    */
-  enabled?: boolean;
+  enabled?: boolean = false;
 }
 
 /**
@@ -17807,6 +17807,7 @@ model VerifierWorkspaceProperties {
   /**
    * Provisioning states of a resource.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -18073,6 +18074,7 @@ model VirtualApplianceIPConfigurationProperties {
 /**
  * Network Virtual Appliance Additional NIC properties.
  */
+@summary("Network Virtual Appliance Additional Nic Properties")
 model VirtualApplianceAdditionalNicProperties {
   /**
    * Name of additional nic
@@ -23193,6 +23195,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The IPSec shared key.
    */
+  @secret
   sharedKey?: string;
 
   /**
@@ -23507,6 +23510,7 @@ model VirtualRouterPropertiesFormat {
   /**
    * VirtualRouter ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   virtualRouterAsn?: int64;
 
@@ -23545,6 +23549,7 @@ model VirtualRouterPeeringProperties {
   /**
    * Peer ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   peerAsn?: int64;
 
@@ -24398,6 +24403,7 @@ model VirtualHubProperties {
   /**
    * VirtualRouter ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   virtualRouterAsn?: int64;
 
@@ -24527,6 +24533,7 @@ model VirtualRouterAutoScaleConfiguration {
   /**
    * The minimum number of scale units for VirtualHub Router.
    */
+  @minValue(0)
   minCapacity?: int32;
 }
 
@@ -25103,6 +25110,7 @@ model SharedKeyProperties {
   /**
    * The value of the shared key for the vpn link connection.
    */
+  @secret
   sharedKey?: string;
 
   /**
@@ -27119,7 +27127,14 @@ model ExpressRoutePortsLocationListResult
 @@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsQuerySortOrder,
   "FirewallPolicyIDPSQuerySortOrder"
 );
+@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureMode,
+  "FirewallPolicyIDPSSignatureMode"
+);
+@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureDirection,
+  "FirewallPolicyIDPSSignatureDirection"
+);
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(PacketCaptureListResult.value,
   "Information about packet capture sessions."
 );
+@@visibility(VirtualNetworkListUsageResult.value, Lifecycle.Read);
