@@ -64,7 +64,8 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ApplicationsOps.CreateOrUpdateSync<
     Application,
-    Response = ArmResourceUpdatedResponse<Application>
+    Response = ArmResourceUpdatedResponse<Application>,
+    OptionalRequestBody = true
   >;
 
   /**
