@@ -804,9 +804,7 @@ model SearchRequest {
   highlightPreTag?: string;
 
   @doc("A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100.")
-  @minValue(0)
-  @maxValue(100)
-  minimumCoverage?: float64 = 100;
+  minimumCoverage?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.")
@@ -1148,9 +1146,7 @@ model SuggestRequest {
   highlightPreTag?: string;
 
   @doc("A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.")
-  @minValue(0)
-  @maxValue(100)
-  minimumCoverage?: float64 = 80;
+  minimumCoverage?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.")
@@ -1276,9 +1272,7 @@ model AutocompleteRequest {
   highlightPreTag?: string;
 
   @doc("A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.")
-  @minValue(0)
-  @maxValue(100)
-  minimumCoverage?: float64 = 80;
+  minimumCoverage?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.")

@@ -4895,8 +4895,19 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
+#deprecated "Use KeywordTokenizerV2 instead."
 @doc("Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.")
 model KeywordTokenizer extends LexicalTokenizer {
+  @doc("The read buffer size in bytes. Default is 256.")
+  bufferSize?: int32 = 256;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
+  `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
+}
+
+@doc("Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.")
+model KeywordTokenizerV2 extends LexicalTokenizer {
   @doc("The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.")
   @maxValue(300)
   maxTokenLength?: int32 = 256;
@@ -4960,7 +4971,7 @@ model NGramTokenizer extends LexicalTokenizer {
 }
 
 @doc("Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.")
-model PathHierarchyTokenizer extends LexicalTokenizer {
+model PathHierarchyTokenizerV2 extends LexicalTokenizer {
   @doc("The delimiter character to use. Default is \"/\".")
   @maxLength(1)
   delimiter?: string = "/";
@@ -5000,8 +5011,19 @@ model PatternTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
+#deprecated "LuceneStandardTokenizer is deprecated. Use LuceneStandardTokenizerV2 instead."
 @doc("Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.")
 model LuceneStandardTokenizer extends LexicalTokenizer {
+  @doc("The maximum token length. Default is 255. Tokens longer than the maximum length are split.")
+  maxTokenLength?: int32 = 255;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
+  `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
+}
+
+@doc("Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.")
+model LuceneStandardTokenizerV2 extends LexicalTokenizer {
   @doc("The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.")
   @maxValue(300)
   maxTokenLength?: int32 = 255;
@@ -5088,7 +5110,25 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
+#deprecated "EdgeNGramTokenFilter is deprecated. Use EdgeNGramTokenFilterV2 instead."
 model EdgeNGramTokenFilter extends TokenFilter {
+  @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
+  minGram?: int32 = 1;
+
+  @doc("The maximum n-gram length. Default is 2.")
+  maxGram?: int32 = 2;
+
+  @doc("Specifies which side of the input the n-gram should be generated from. Default is \"front\".")
+  side?: EdgeNGramTokenFilterSide = EdgeNGramTokenFilterSide.Front;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
+  `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
+model EdgeNGramTokenFilterV2 extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
@@ -5171,7 +5211,22 @@ model LimitTokenFilter extends TokenFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 @doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
+#deprecated "NGramTokenFilter is deprecated. Use NGramTokenFilterV2 instead."
 model NGramTokenFilter extends TokenFilter {
+  @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
+  minGram?: int32 = 1;
+
+  @doc("The maximum n-gram length. Default is 2.")
+  maxGram?: int32 = 2;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
+  `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
+model NGramTokenFilterV2 extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
@@ -5965,39 +6020,39 @@ model MergeSkill extends SearchIndexerSkill {
   `@odata.type`: "#Microsoft.Skills.Text.MergeSkill";
 }
 
-// @doc("This skill is deprecated. Use the V3.EntityRecognitionSkill instead.")
-// model EntityRecognitionSkill extends SearchIndexerSkill {
-//   @doc("A list of entity categories that should be extracted.")
-//   categories?: EntityCategory[];
+@doc("This skill is deprecated. Use the V3.EntityRecognitionSkill instead.")
+model EntityRecognitionSkill extends SearchIndexerSkill {
+  @doc("A list of entity categories that should be extracted.")
+  categories?: EntityCategory[];
 
-//   @doc("A value indicating which language code to use. Default is `en`.")
-//   defaultLanguageCode?: EntityRecognitionSkillLanguage;
+  @doc("A value indicating which language code to use. Default is `en`.")
+  defaultLanguageCode?: EntityRecognitionSkillLanguage;
 
-//   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-//   @doc("Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced.")
-//   includeTypelessEntities?: boolean | null;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @doc("Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced.")
+  includeTypelessEntities?: boolean | null;
 
-//   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-//   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
-//   minimumPrecision?: float64 | null;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
+  minimumPrecision?: float64 | null;
 
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   @doc("A URI fragment specifying the type of skill.")
-//   `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
-// }
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
+  `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
+}
 
-// @doc("This skill is deprecated. Use the V3.SentimentSkill instead.")
-// model SentimentSkill extends SearchIndexerSkill {
-//   @doc("A value indicating which language code to use. Default is `en`.")
-//   defaultLanguageCode?: SentimentSkillLanguage;
+@doc("This skill is deprecated. Use the V3.SentimentSkill instead.")
+model SentimentSkill extends SearchIndexerSkill {
+  @doc("A value indicating which language code to use. Default is `en`.")
+  defaultLanguageCode?: SentimentSkillLanguage;
 
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   @doc("A URI fragment specifying the type of skill.")
-//   `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
-// }
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
+  `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
+}
 
 @doc("Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level.")
-model SentimentSkill extends SearchIndexerSkill {
+model SentimentSkillV3 extends SearchIndexerSkill {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: string | null;
@@ -6035,7 +6090,7 @@ model EntityLinkingSkill extends SearchIndexerSkill {
 }
 
 @doc("Using the Text Analytics API, extracts entities of different types from text.")
-model EntityRecognitionSkill extends SearchIndexerSkill {
+model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   @doc("A list of entity categories that should be extracted.")
   categories?: string[];
 
