@@ -135,6 +135,7 @@ model SqlRecommendationReasoning {
 
 @doc("Class representing Azure SQL Recommendation Reasoning Context.")
 model SqlRecommendationReasoningContext {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Gets the reasoning context key.")
   contextKey?: string;
 

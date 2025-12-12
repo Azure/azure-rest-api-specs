@@ -101,10 +101,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -174,10 +170,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -229,10 +221,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -284,10 +272,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:
@@ -339,10 +323,6 @@ suppressions:
     where:
       - $.definitions.ConnectionPropertiesV2.properties.metadata
       - $.definitions.CustomKeys.properties.keys
-  - code: NestedResourcesMustHaveListOperation
-    reason: This API will be added in the later api version, same behavior as AML RP and already got suppression approved.
-    where:
-      - $.definitions["CapabilityHostResource"]
   - code: LroLocationHeader
     reason: Align with existing API behavior in other APIs
     where:

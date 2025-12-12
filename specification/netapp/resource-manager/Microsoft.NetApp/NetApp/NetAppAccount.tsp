@@ -5,11 +5,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
+using Rest;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
@@ -24,6 +23,7 @@ model NetAppAccount
     SegmentName = "netAppAccounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -51,7 +51,7 @@ model AccountProperties {
   /**
    * Active Directories
    */
-  @OpenAPI.extension("x-ms-identifiers", #["activeDirectoryId"])
+  @identifiers(#["activeDirectoryId"])
   activeDirectories?: ActiveDirectory[];
 
   /**
@@ -83,12 +83,23 @@ model AccountProperties {
    * LDAP Configuration for the account.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   ldapConfiguration?: LdapConfiguration;
 }
 
 /**
  * LDAP configuration
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
@@ -443,7 +454,7 @@ model ChangeKeyVault {
   /**
    * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  @identifiers(#["virtualNetworkId"])
   keyVaultPrivateEndpoints: KeyVaultPrivateEndpoint[];
 }
 
