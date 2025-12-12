@@ -63,6 +63,14 @@ class FalsePositiveFilter:
             )
         )
 
+        self.add_rule(
+            FalsePositiveRule(
+                name="array_encoding_format_difference",
+                description="Ignore parameter format differences: None vs ArrayEncoding.commaDelimited",
+                matcher=self._match_array_encoding_format_difference,
+            )
+        )
+
         # Global parameter mapping rules
         self.add_rule(
             FalsePositiveRule(
@@ -140,6 +148,24 @@ class FalsePositiveFilter:
                 name="known_false_positive_definitions",
                 description="Ignore known false positive definition differences (comprehensive list)",
                 matcher=self._match_known_false_positive_definitions,
+            )
+        )
+
+        # Duplicate parameter mismatch reporting (filter parameter_mismatch when global_parameter_mismatch exists)
+        self.add_rule(
+            FalsePositiveRule(
+                name="duplicate_parameter_mismatch",
+                description="Ignore parameter_mismatch when global_parameter_mismatch exists for same parameter",
+                matcher=self._match_duplicate_parameter_mismatch,
+            )
+        )
+
+        # Inline body parameter schemas in specific operations
+        self.add_rule(
+            FalsePositiveRule(
+                name="inline_body_parameter_schemas",
+                description="Ignore body parameter schema differences where TSP uses inline definitions",
+                matcher=self._match_inline_body_parameter_schemas,
             )
         )
 
@@ -315,6 +341,25 @@ class FalsePositiveFilter:
             for param_name in known_path_params:
                 if param_name.lower() in diff.message.lower():
                     return True
+
+        return False
+
+    def _match_array_encoding_format_difference(self, diff: Difference) -> bool:
+        """Match parameter format differences between None and ArrayEncoding.commaDelimited."""
+        if diff.type != DifferenceType.PARAMETER_MISMATCH:
+            return False
+
+        # Check if the message indicates a format mismatch with ArrayEncoding.commaDelimited
+        message_lower = diff.message.lower()
+
+        # Pattern: "Parameter format mismatch: hand_authored None vs tsp ArrayEncoding.commaDelimited"
+        # or variations like "format: None vs ArrayEncoding.commaDelimited"
+        if (
+            "format" in message_lower
+            and "arrayencoding.commadelimited" in message_lower
+        ):
+            if "none" in message_lower or "null" in message_lower:
+                return True
 
         return False
 
@@ -591,6 +636,81 @@ class FalsePositiveFilter:
 
         # If we get here, both are False or None - these are equivalent
         return True
+
+    def _match_duplicate_parameter_mismatch(self, diff: Difference) -> bool:
+        """
+        Match duplicate global_parameter_mismatch that's already reported as parameter_mismatch.
+        This handles cases where the same parameter difference is reported at both operation level
+        and parameter group level. We want to keep the operation-level parameter_mismatch and
+        filter out the global_parameter_mismatch duplicate.
+        """
+        # Only filter global parameter mismatches (parameter group level)
+        if diff.type != DifferenceType.GLOBAL_PARAMETER_MISMATCH:
+            return False
+
+        message_lower = diff.message.lower()
+        context_lower = (diff.context or "").lower()
+
+        # Known parameter groups and their parameters that get reported twice
+        # These parameters are part of x-ms-parameter-grouping and get reported both at
+        # operation level (parameter_mismatch) and at group level (global_parameter_mismatch)
+        # We want to keep the operation-level reports and filter the global ones
+        duplicate_parameters = [
+            "querylanguage",
+            "semanticmaxwaitinmilliseconds",
+            # Add more parameter names here as needed
+        ]
+
+        # Check if this is a parameter property mismatch for a known duplicate
+        if "parameter property mismatch" in message_lower:
+            # Check if the context indicates this is from a parameter group
+            if "parameter_group:" in context_lower:
+                for param_name in duplicate_parameters:
+                    # Check if the parameter name appears in the context or message
+                    if param_name in context_lower or param_name in message_lower:
+                        return True
+
+        return False
+
+    def _match_inline_body_parameter_schemas(self, diff: Difference) -> bool:
+        """
+        Match body parameter schema differences where TypeSpec uses inline definitions.
+        This is by design - TypeSpec may inline schemas that were separate definitions in hand-authored spec.
+        """
+        if diff.type != DifferenceType.PARAMETER_MISMATCH:
+            return False
+
+        message_lower = diff.message.lower()
+        context_lower = (diff.context or "").lower()
+
+        # Known operations where body parameters use inline schemas in TypeSpec
+        known_inline_operations = [
+            ("indexers_resync", "indexerresync"),
+            ("indexers_resetdocs", "keysOrIds"),
+            ("skillsets_resetskills", "skillNames"),
+        ]
+
+        # Check if this is about a body parameter schema mismatch
+        if "body parameter schemas mismatch" not in message_lower:
+            return False
+
+        # Check for the telltale sign: "type: object vs None" and "ref: None vs #/definitions/..."
+        # This indicates hand-authored has inline object, TypeSpec has reference
+        if (
+            "type: object vs none" in message_lower
+            or "type: none vs object" in message_lower
+        ):
+            if "ref:" in message_lower:
+                # Check if it matches one of the known operations
+                for operation_id, param_name in known_inline_operations:
+                    if operation_id in context_lower or operation_id in message_lower:
+                        if (
+                            param_name.lower() in message_lower
+                            or param_name.lower() in context_lower
+                        ):
+                            return True
+
+        return False
 
     def _load_known_false_positive_definitions(self) -> Set[str]:
         """

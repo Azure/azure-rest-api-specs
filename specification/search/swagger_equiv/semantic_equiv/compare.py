@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Dict, FrozenSet, List, Optional, Set
 
-from models import (
+from canonical_models import (
     CanonicalApi,
     CanonicalConstraints,
     CanonicalOperation,
