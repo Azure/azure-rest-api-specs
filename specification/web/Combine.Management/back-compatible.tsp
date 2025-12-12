@@ -2106,7 +2106,7 @@ using Microsoft.Web;
 @@flattenProperty(AppServiceCertificateOrderPatchResource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AppServiceCertificatePatchResource.properties);
+@@flattenProperty(AppServiceCertificatePatchResource1.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ReissueCertificateOrderRequest.properties);

@@ -19,7 +19,6 @@ enum CertificateProductType {
   StandardDomainValidatedWildCardSsl,
 }
 
-
 /**
  * Current order status.
  */
@@ -76,7 +75,7 @@ model AppServiceCertificateOrderProperties {
    * State of the Key Vault secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  certificates?: Record<AppServiceCertificate>;
+  certificates?: Record<AppServiceCertificate1>;
 
   /**
    * Certificate distinguished name.
@@ -198,7 +197,7 @@ model AppServiceCertificateOrderProperties {
 /**
  * Key Vault container for a certificate that is purchased through Azure.
  */
-model AppServiceCertificate {
+model AppServiceCertificate1 {
   /**
    * Key Vault resource Id.
    */
@@ -305,7 +304,7 @@ model AppServiceCertificateOrderPatchResourceProperties {
    * State of the Key Vault secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  certificates?: Record<AppServiceCertificate>;
+  certificates?: Record<AppServiceCertificate1>;
 
   /**
    * Certificate distinguished name.
@@ -435,11 +434,11 @@ model AppServiceCertificateCollection
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AppServiceCertificatePatchResource extends ProxyOnlyResource {
+model AppServiceCertificatePatchResource1 extends ProxyOnlyResource {
   /**
    * Core resource properties
    */
-  properties?: AppServiceCertificate;
+  properties?: AppServiceCertificate1;
 }
 
 /**

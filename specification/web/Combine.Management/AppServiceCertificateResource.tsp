@@ -16,7 +16,7 @@ namespace Microsoft.Web;
  */
 @parentResource(AppServiceCertificateOrder)
 model AppServiceCertificateResource
-  is Azure.ResourceManager.TrackedResource<AppServiceCertificate> {
+  is Azure.ResourceManager.TrackedResource<AppServiceCertificate1> {
   ...ResourceNameParameter<
     Resource = AppServiceCertificateResource,
     KeyName = "name",
@@ -59,7 +59,7 @@ interface AppServiceCertificateResources {
   @patch(#{ implicitOptionality: false })
   updateCertificate is ArmCustomPatchSync<
     AppServiceCertificateResource,
-    PatchModel = AppServiceCertificatePatchResource,
+    PatchModel = AppServiceCertificatePatchResource1,
     Error = DefaultErrorResponse
   >;
 
