@@ -32,7 +32,6 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/edgeactions
     emitter-output-dir: "{output-dir}/{service-dir}/arm-edgeactions"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -47,11 +46,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  "@azure-tools/typespec-csharp":
-    service-dir: "sdk/edgeactions"
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.EdgeActions"
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.EdgeActions"
-    flavor: "azure"
-    clear-output-folder: true
-    generate-sample-project: true
-    generate-test-project: true
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
