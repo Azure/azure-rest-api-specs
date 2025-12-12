@@ -6274,6 +6274,16 @@
           "description": "Supported Storage Type for HCI Cluster",
           "readOnly": true
         },
+        "confidentialVmProperties": {
+          "$ref": "#/definitions/ConfidentialVmProperties",
+          "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+          "readOnly": true
+        },
+        "sdnProperties": {
+          "$ref": "#/definitions/ClusterSdnProperties",
+          "description": "Software Defined Networking Properties of the cluster",
+          "readOnly": true
+        },
         "localAvailabilityZones": {
           "type": "array",
           "description": "Local Availability Zone information for HCI cluster",
@@ -9704,6 +9714,11 @@
           "$ref": "#/definitions/HciEdgeDeviceHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
+        },
+        "sdnProperties": {
+          "$ref": "#/definitions/SdnProperties",
+          "description": "oftware Defined Networking Properties of the cluster",
+          "readOnly": true
         }
       }
     },
@@ -12608,6 +12623,17 @@
         "extensionProfile": {
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent edge device sync timestamp in UTC.",
+          "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "CVM support details for edge device.",
           "readOnly": true
         }
       }
