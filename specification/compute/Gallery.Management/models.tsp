@@ -1986,12 +1986,12 @@ model GalleryScriptParameter extends GenericGalleryParameter {
   /**
    * The minimum value of parameter.
    */
-  minValue?: string;
+  minimumValue?: string;
 
   /**
    * The minimum value of parameter.
    */
-  maxValue?: string;
+  maximumValue?: string;
 
   /**
    * A list of permissible values. Only applicable values are from 'enum' values defined in 'GalleryScriptParameter'.
