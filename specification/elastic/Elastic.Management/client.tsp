@@ -165,7 +165,6 @@ using Microsoft.Elastic;
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(SubscriptionList, "MonitoredSubscriptionList", "csharp");
 @@alternateType(ElasticCloudDeployment.elasticsearchServiceUrl, url, "csharp");
 @@alternateType(ElasticCloudDeployment.kibanaServiceUrl, url, "csharp");
 @@alternateType(ElasticCloudDeployment.kibanaSsoUrl, url, "csharp");
@@ -250,5 +249,13 @@ using Microsoft.Elastic;
 );
 @@clientName(ElasticVersionsOperationGroup.list,
   "GetElasticVersions",
+  "csharp"
+);
+@@clientName(MonitoredSubscriptionProperties,
+  "ElasticMonitoredSubscription",
+  "csharp"
+);
+@@clientName(SubscriptionList,
+  "ElasticMonitoredSubscriptionProperties",
   "csharp"
 );

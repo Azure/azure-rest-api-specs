@@ -143,6 +143,7 @@ using Azure.Core;
   azureLocation,
   "csharp"
 );
+@@alternateType(NginxCertificate.location, azureLocation, "csharp");
 @@clientName(ResourceSku, "NginxResourceSku", "csharp");
 @@clientName(WebApplicationFirewallStatus,
   "WebApplicationFirewallStatus",
