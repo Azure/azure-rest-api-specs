@@ -656,6 +656,9 @@
 | `definitions.VirtualNetworkGatewayAutoScaleBounds.properties.min.format__added` | added | `int32` |
 | `definitions.VirtualNetworkGatewayConnectionPropertiesFormat.properties.sharedKey.format__added` | added | `password` |
 | `definitions.VirtualNetworkTapPropertiesFormat.properties.destinationPort.format__added` | added | `int32` |
+| `definitions.VpnClientConfiguration.properties.radiusServerSecret.format__added` | added | `password` |
+| `definitions.VpnServerConfigurationProperties.properties.radiusServerSecret.format__added` | added | `password` |
+| `definitions.VpnSiteLinkConnectionProperties.properties.sharedKey.format__added` | added | `password` |
 | `definitions.WebApplicationFirewallCustomRule.properties.priority.format__added` | added | `int32` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].format__added` | added | `int32` |
@@ -674,10 +677,7 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `0` |
 | `definitions.ApplicationGatewayWebApplicationFirewallConfiguration.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
-| `definitions.AzureFirewallAutoscaleConfiguration.properties.maxCapacity.minimum__deleted` | deleted | `2` |
-| `definitions.AzureFirewallAutoscaleConfiguration.properties.minCapacity.minimum__deleted` | deleted | `2` |
 | `definitions.BgpSettings.properties.asn.minimum__deleted` | deleted | `0` |
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength.minimum__deleted` | deleted | `1` |
 | `definitions.PolicySettings.properties.customBlockResponseStatusCode.minimum__deleted` | deleted | `0` |
 | `definitions.PolicySettings.properties.fileUploadLimitInMb.minimum__deleted` | deleted | `0` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].minimum__added` | added | `1` |
@@ -688,7 +688,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.privateIPAddressPrefixLength.maximum__deleted` | deleted | `128` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].maximum__added` | added | `20` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[0].maximum__added` | added | `20` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/scopeConnections'].get.parameters[1].maximum__added` | added | `20` |
@@ -911,7 +910,6 @@
 | `definitions.ReachabilityAnalysisIntentListResult.required__added` | added | `["value"]` |
 | `definitions.ReachabilityAnalysisRunListResult.required__added` | added | `["value"]` |
 | `definitions.ResourceNavigationLinksListResult.required__added` | added | `["value"]` |
-| `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
 | `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
 | `definitions.RouteFilterRuleListResult.required__added` | added | `["value"]` |
 | `definitions.RouteListResult.required__added` | added | `["value"]` |
@@ -945,8 +943,6 @@
 | `definitions.VirtualNetworkTapListResult.required__added` | added | `["value"]` |
 | `definitions.VirtualRouterListResult.required__added` | added | `["value"]` |
 | `definitions.VirtualRouterPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualWAN.required__deleted` | deleted | `["location"]` |
-| `definitions.VpnGateway.required__deleted` | deleted | `["location"]` |
 | `definitions.VpnSite.required__deleted` | deleted | `["location"]` |
 | `definitions.WebApplicationFirewallPolicyListResult.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
@@ -1456,7 +1452,7 @@
 | `definitions.PrivateLinkService.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.PublicIPAddress.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.PublicIPPrefix.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
-| `definitions.RouteFilter.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
+| `definitions.RouteFilter.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.RouteTable.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.SecurityPartnerProvider.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.ServiceEndpointPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
@@ -1464,6 +1460,11 @@
 | `definitions.VirtualNetwork.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.VirtualNetworkGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.VirtualNetworkGatewayConnection.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VirtualNetworkGatewayConnectionListEntity.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VirtualNetworkTap.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VirtualRouter.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VirtualWAN.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VpnGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"location header"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"location header"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"The URL of the resource used to check the status of the asynchronous...` |
@@ -1849,7 +1850,7 @@
 | `definitions.PrivateLinkService.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.PublicIPAddress.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.PublicIPPrefix.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
-| `definitions.RouteFilter.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
+| `definitions.RouteFilter.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.RouteTable.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.SecurityPartnerProvider.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.ServiceEndpointPolicy.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
@@ -1857,6 +1858,10 @@
 | `definitions.VirtualNetwork.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.VirtualNetworkGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.VirtualNetworkGatewayConnection.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.VirtualNetworkGatewayConnectionListEntity.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.VirtualNetworkTap.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.VirtualRouter.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.VpnGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 
 ### Changes for `enum`
 
@@ -2438,7 +2443,6 @@
 | `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterAsn.readOnly__deleted` | deleted | `false` |
 | `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterIps.readOnly__deleted` | deleted | `false` |
 | `definitions.VpnSiteProperties.properties.o365Policy.readOnly__deleted` | deleted | `false` |
-| `definitions.WebApplicationFirewallPolicyListResult.properties.value.readOnly__deleted` | deleted | `true` |
 
 ### Changes for `nextLink`
 
@@ -2479,15 +2483,12 @@
 |------|------------|-------|
 | `definitions.RadiusServer.properties.radiusServerSecret['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.ReachabilityAnalysisRunProperties.properties.provisioningState['x-ms-secret__added']` | added | `true` |
-| `definitions.VpnClientConfiguration.properties.radiusServerSecret['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.VpnServerConfigurationProperties.properties.radiusServerSecret['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.VpnSiteLinkConnectionProperties.properties.sharedKey['x-ms-secret__deleted']` | deleted | `true` |
 
-### Changes for `title`
+### Changes for `tag`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.resourceState.title__deleted` | deleted | `Resource status of the policy.` |
+| `definitions.VirtualWAN.properties.tag__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 
 ## Modified Values
 
@@ -2985,8 +2986,7 @@
 | `definitions.ResourceNavigationLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ResourceNavigationLinkFormat.properties.provisioningState.description` | `The provisioning state of the resource navigation link resource.` | `Provisioning states of a resource.` |
 | `definitions.Route.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.RouteFilter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/Resource` |
-| `definitions.RouteFilter.properties.etag.description` | `A unique read-only string that changes whenever the resource is updated.` | `"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.")` |
+| `definitions.RouteFilter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.RouteFilterPropertiesFormat.properties.ipv6Peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
 | `definitions.RouteFilterPropertiesFormat.properties.peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
 | `definitions.RouteFilterPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the route filter resource.` | `Provisioning states of a resource.` |

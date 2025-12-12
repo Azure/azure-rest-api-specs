@@ -60,6 +60,7 @@ interface WebApplicationFirewallPolicies {
    */
   list is ArmResourceListByParent<
     WebApplicationFirewallPolicy,
+    Response = WebApplicationFirewallPolicyListResult,
     Error = CloudError
   >;
 
@@ -68,6 +69,7 @@ interface WebApplicationFirewallPolicies {
    */
   listAll is ArmListBySubscription<
     WebApplicationFirewallPolicy,
+    Response = WebApplicationFirewallPolicyListResult,
     Error = CloudError
   >;
 }

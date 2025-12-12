@@ -21879,6 +21879,7 @@ model VpnClientConfiguration {
   /**
    * The radius secret property of the VirtualNetworkGateway resource for vpn client connection. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.
    */
+  @secret
   radiusServerSecret?: string;
 
   /**
@@ -22282,6 +22283,16 @@ model VirtualNetworkGatewayListConnectionsResult
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model VirtualNetworkGatewayConnectionListEntity
   extends Azure.ResourceManager.CommonTypes.Resource {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  tags?: TagsObject;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  location?: string;
+
   /**
    * Properties of the virtual network gateway connection.
    */
@@ -23894,6 +23905,7 @@ model VpnServerConfigurationProperties {
   /**
    * The radius secret property of the VpnServerConfiguration resource for point to site client connection. We will no longer return radiusServerSecret in VpnServerConfiguration Create/Update/Get/List/UpdateTags APIs response. Please use VpnServerConfiguration ListRadiusSecrets API to fetch radius server secrets.
    */
+  @secret
   radiusServerSecret?: string;
 
   /**
@@ -24954,6 +24966,7 @@ model VpnSiteLinkConnectionProperties {
   /**
    * SharedKey for the vpn link connection. We will no longer return sharedKey in any Create/Update/Get/List/UpdateTags VpnGateway/VpnConnection/VpnLinkConnection APIs response. Please use 'Vpn Link Connections - List Default Shared Key' API to fetch Vpn link connection sharedKey.
    */
+  @secret
   sharedKey?: string;
 
   /**
@@ -25870,6 +25883,7 @@ model WebApplicationFirewallPolicyPropertiesFormat {
   /**
    * Resource status of the policy.
    */
+  @summary("Resource status of the policy.")
   @visibility(Lifecycle.Read)
   resourceState?: WebApplicationFirewallPolicyResourceState;
 
@@ -27098,6 +27112,9 @@ model ResourceNavigationLinksListResult
 model ServiceAssociationLinksListResult
   is Azure.Core.Page<ServiceAssociationLink>;
 
+model WebApplicationFirewallPolicyListResult
+  is Azure.Core.Page<WebApplicationFirewallPolicy>;
+
 @summary("ExpressRoute Port List Result")
 model ExpressRoutePortListResult is Azure.Core.Page<ExpressRoutePort>;
 
@@ -27133,8 +27150,15 @@ model ExpressRoutePortsLocationListResult
 @@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureDirection,
   "FirewallPolicyIDPSSignatureDirection"
 );
+@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryMatchOperator,
+  "scrubbingRuleEntryMatchOperator"
+);
+@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryState,
+  "scrubbingRuleEntryState"
+);
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(PacketCaptureListResult.value,
   "Information about packet capture sessions."
 );
 @@visibility(VirtualNetworkListUsageResult.value, Lifecycle.Read);
+@@visibility(WebApplicationFirewallPolicyListResult.value, Lifecycle.Read);

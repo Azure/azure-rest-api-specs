@@ -36898,12 +36898,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "minimum": 2,
           "x-nullable": true
         },
         "maxCapacity": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "minimum": 2,
           "x-nullable": true
         }
       }
@@ -49740,6 +49742,8 @@
           "type": "integer",
           "format": "int32",
           "description": "The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.",
+          "minimum": 1,
+          "maximum": 128,
           "x-nullable": true
         },
         "privateIPAllocationMethod": {
@@ -55743,29 +55747,25 @@
           "x-ms-client-flatten": true
         },
         "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -60051,6 +60051,14 @@
       "type": "object",
       "description": "A common class for general resource information.",
       "properties": {
+        "tags": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "properties": {
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat",
           "description": "Properties of the virtual network gateway connection.",
@@ -61448,6 +61456,14 @@
           "description": "Virtual Network Tap Properties.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -61587,6 +61603,14 @@
           "$ref": "#/definitions/VirtualRouterPropertiesFormat",
           "description": "Properties of the Virtual Router.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -61771,12 +61795,23 @@
           "description": "Properties of the virtual WAN.",
           "x-ms-client-flatten": true
         },
+        "tag": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -62072,7 +62107,9 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets."
+          "format": "password",
+          "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.",
+          "x-ms-secret": true
         },
         "radiusServers": {
           "type": "array",
@@ -62716,12 +62753,23 @@
           "description": "Properties of the VPN gateway.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -63262,7 +63310,9 @@
         },
         "radiusServerSecret": {
           "type": "string",
-          "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection. We will no longer return radiusServerSecret in VpnServerConfiguration Create/Update/Get/List/UpdateTags APIs response. Please use VpnServerConfiguration ListRadiusSecrets API to fetch radius server secrets."
+          "format": "password",
+          "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection. We will no longer return radiusServerSecret in VpnServerConfiguration Create/Update/Get/List/UpdateTags APIs response. Please use VpnServerConfiguration ListRadiusSecrets API to fetch radius server secrets.",
+          "x-ms-secret": true
         },
         "radiusServers": {
           "type": "array",
@@ -63450,7 +63500,9 @@
         },
         "sharedKey": {
           "type": "string",
-          "description": "SharedKey for the vpn link connection. We will no longer return sharedKey in any Create/Update/Get/List/UpdateTags VpnGateway/VpnConnection/VpnLinkConnection APIs response. Please use 'Vpn Link Connections - List Default Shared Key' API to fetch Vpn link connection sharedKey."
+          "format": "password",
+          "description": "SharedKey for the vpn link connection. We will no longer return sharedKey in any Create/Update/Get/List/UpdateTags VpnGateway/VpnConnection/VpnLinkConnection APIs response. Please use 'Vpn Link Connections - List Default Shared Key' API to fetch Vpn link connection sharedKey.",
+          "x-ms-secret": true
         },
         "enableBgp": {
           "type": "boolean",
@@ -63748,7 +63800,8 @@
           "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallPolicy"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -63802,6 +63855,7 @@
         },
         "resourceState": {
           "type": "string",
+          "title": "Resource status of the policy.",
           "description": "Resource status of the policy.",
           "enum": [
             "Creating",

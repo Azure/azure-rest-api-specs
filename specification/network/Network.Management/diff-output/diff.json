@@ -20493,16 +20493,6 @@
         }
       }
     },
-    "AzureFirewallAutoscaleConfiguration": {
-      "properties": {
-        "minCapacity": {
-          "minimum__deleted": 2
-        },
-        "maxCapacity": {
-          "minimum__deleted": 2
-        }
-      }
-    },
     "AzureFirewallFqdnTag": {
       "allOf": [
         [
@@ -24910,10 +24900,6 @@
             }
           }
         },
-        "privateIPAddressPrefixLength": {
-          "minimum__deleted": 1,
-          "maximum__deleted": 128
-        },
         "privateIPAllocationMethod": {
           "$ref__deleted": "./network.json#/definitions/IPAllocationMethod",
           "type__added": "string",
@@ -27280,30 +27266,14 @@
       ]
     },
     "RouteFilter": {
-      "required__deleted": [
-        "location"
-      ],
       "properties": {
         "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
         },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")"
-          }
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -27312,7 +27282,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
             }
           }
         ]
@@ -29221,6 +29191,16 @@
       ]
     },
     "VirtualNetworkGatewayConnectionListEntity": {
+      "properties": {
+        "tags__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",
@@ -29680,6 +29660,16 @@
       }
     },
     "VirtualNetworkTap": {
+      "properties": {
+        "tags__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",
@@ -29746,6 +29736,16 @@
       }
     },
     "VirtualRouter": {
+      "properties": {
+        "tags__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",
@@ -29875,9 +29875,16 @@
       }
     },
     "VirtualWAN": {
-      "required__deleted": [
-        "location"
-      ],
+      "properties": {
+        "tag__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",
@@ -30018,7 +30025,7 @@
           }
         },
         "radiusServerSecret": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
@@ -30188,9 +30195,16 @@
       }
     },
     "VpnGateway": {
-      "required__deleted": [
-        "location"
-      ],
+      "properties": {
+        "tags__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",
@@ -30397,7 +30411,7 @@
           }
         },
         "radiusServerSecret": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "radiusServers": {
           "items": {
@@ -30507,7 +30521,7 @@
           }
         },
         "sharedKey": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "vpnGatewayCustomBgpAddresses": {
           "items": {
@@ -30655,12 +30669,7 @@
     "WebApplicationFirewallPolicyListResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "readOnly__deleted": true
-        }
-      }
+      ]
     },
     "WebApplicationFirewallPolicyPropertiesFormat": {
       "properties": {
@@ -30691,9 +30700,6 @@
             "__old": "The provisioning state of the web application firewall policy resource.",
             "__new": "Provisioning states of a resource."
           }
-        },
-        "resourceState": {
-          "title__deleted": "Resource status of the policy."
         },
         "httpListeners": {
           "items": {
