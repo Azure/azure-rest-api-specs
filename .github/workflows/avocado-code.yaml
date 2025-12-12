@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # Must include all branches, for git branch logic in Avocado to work correctly
           fetch-depth: 0
@@ -92,7 +92,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.generate-job-summary.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.generate-job-summary.outputs.summary }}
