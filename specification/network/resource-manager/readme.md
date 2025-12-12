@@ -93,6 +93,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/securityPartnerProvider.json
   - Microsoft.Network/stable/2025-05-01/serviceCommunity.json
   - Microsoft.Network/stable/2025-05-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2025-05-01/serviceGateway.json
   - Microsoft.Network/stable/2025-05-01/serviceTags.json
   - Microsoft.Network/stable/2025-05-01/usage.json
   - Microsoft.Network/stable/2025-05-01/virtualNetwork.json
