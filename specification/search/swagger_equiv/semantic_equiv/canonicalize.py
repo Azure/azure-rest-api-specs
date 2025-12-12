@@ -1,7 +1,7 @@
 """
 Canonicalization module for the Swagger equivalency checker.
 
-This module implements the canonicalization rules from equiv_contract.md:
+This module implements the canonicalization rules from doc/equiv_contract.md:
 - Remove documentation-only fields (description, summary, externalDocs, example, examples, x-ms-examples)
 - Remove doc-only x-ms-* fields
 - Remove non-behavioral tags
@@ -13,46 +13,38 @@ preserving the exact API contract for strict comparison.
 """
 
 import copy
-from typing import Dict, Any, List, Set, Union
+from typing import Any, Dict, List, Set, Union
 
+# Fields to remove during canonicalization according to doc/equiv_contract.md section 2.1
+DOCUMENTATION_FIELDS = {"description", "summary", "externalDocs"}
 
-# Fields to remove during canonicalization according to equiv_contract.md section 2.1
-DOCUMENTATION_FIELDS = {
-    'description',
-    'summary',
-    'externalDocs'
-}
+# Example fields to remove according to doc/equiv_contract.md section 2.2
+EXAMPLE_FIELDS = {"example", "examples", "x-ms-examples"}
 
-# Example fields to remove according to equiv_contract.md section 2.2
-EXAMPLE_FIELDS = {
-    'example',
-    'examples',
-    'x-ms-examples'
-}
-
-# Tag fields to remove according to equiv_contract.md section 2.3
+# Tag fields to remove according to doc/equiv_contract.md section 2.3
 TAG_FIELDS = {
-    'tags'  # Both top-level and per-operation tags
+    "tags"  # Both top-level and per-operation tags
 }
 
-# Documentation-only vendor extensions according to equiv_contract.md section 2.4
+# Documentation-only vendor extensions according to doc/equiv_contract.md section 2.4
 DOC_ONLY_VENDOR_EXTENSIONS = {
-    'x-ms-summary'
+    "x-ms-summary"
     # Note: "Other doc-only x-ms-* fields" - this set can be expanded as needed
 }
 
 # Set-like arrays that should be deduplicated and sorted according to section 2.5
 SET_LIKE_ARRAYS = {
-    'consumes',
-    'produces',
-    'schemes',
-    'security'
+    "consumes",
+    "produces",
+    "schemes",
+    "security",
     # Note: "Other set-like arrays as designated" - can be expanded
 }
 
 
 class CanonicalizationError(Exception):
     """Exception raised for canonicalization-related errors."""
+
     pass
 
 
@@ -68,7 +60,7 @@ def should_remove_field(field_name: str, field_value: Any) -> bool:
         True if the field should be removed, False otherwise
     """
     # Preserve source tracking field
-    if field_name == '_swagger_source':
+    if field_name == "_swagger_source":
         return False
 
     # Documentation fields
@@ -236,10 +228,10 @@ def canonicalize_definitions(definitions: Dict[str, Any]) -> Dict[str, Any]:
 
 def canonicalize_swagger(swagger_dict: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Canonicalize a complete Swagger document according to equiv_contract.md rules.
+    Canonicalize a complete Swagger document according to doc/equiv_contract.md rules.
 
     This function implements the canonicalization rules specified in section 2
-    of equiv_contract.md:
+    of doc/equiv_contract.md:
     - Remove documentation-only fields
     - Remove example fields
     - Remove non-behavioral tags
@@ -269,11 +261,11 @@ def canonicalize_swagger(swagger_dict: Dict[str, Any]) -> Dict[str, Any]:
                 continue
 
             # Special handling for major sections
-            if key == 'paths':
+            if key == "paths":
                 canonical_value = canonicalize_paths(value)
                 if canonical_value:
                     canonical[key] = canonical_value
-            elif key == 'definitions':
+            elif key == "definitions":
                 canonical_value = canonicalize_definitions(value)
                 if canonical_value:
                     canonical[key] = canonical_value
@@ -293,8 +285,7 @@ def canonicalize_swagger(swagger_dict: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def canonicalize_both_specs(
-    hand_authored_swagger: Dict[str, Any],
-    typespec_swagger: Dict[str, Any]
+    hand_authored_swagger: Dict[str, Any], typespec_swagger: Dict[str, Any]
 ) -> tuple[Dict[str, Any], Dict[str, Any]]:
     """
     Canonicalize both the hand-authored and TypeSpec-compiled Swagger documents.
@@ -317,6 +308,8 @@ def canonicalize_both_specs(
     try:
         canonical_typespec = canonicalize_swagger(typespec_swagger)
     except Exception as e:
-        raise CanonicalizationError(f"Failed to canonicalize TypeSpec-compiled spec: {e}")
+        raise CanonicalizationError(
+            f"Failed to canonicalize TypeSpec-compiled spec: {e}"
+        )
 
     return canonical_hand_authored, canonical_typespec

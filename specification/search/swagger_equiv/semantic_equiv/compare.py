@@ -1,11 +1,11 @@
 """
 Comparison module for the Swagger equivalency checker.
 
-This module implements strict semantic comparison as described in equiv_contract.md.
+This module implements strict semantic comparison as described in doc/equiv_contract.md.
 It builds canonical API models from canonicalized Swagger documents and compares
 them for exact equivalency according to the contract rules.
 
-According to equiv_contract.md, comparison covers three dimensions:
+According to doc/equiv_contract.md, comparison covers three dimensions:
 1. Paths + HTTP methods
 2. Operations (parameters, request bodies, responses)
 3. Schemas / definitions
@@ -180,7 +180,7 @@ class ApiComparator:
     """
     Main class for comparing two canonical APIs for semantic equivalency.
 
-    Implements the strict comparison rules from equiv_contract.md.
+    Implements the strict comparison rules from doc/equiv_contract.md.
     """
 
     def __init__(self):
@@ -218,7 +218,7 @@ class ApiComparator:
         self.compared_definition_pairs = set()  # Reset for each comparison
         self.definition_comparison_queue = []  # Reset queue
 
-        # According to equiv_contract.md and the expanded CanonicalApi model,
+        # According to doc/equiv_contract.md and the expanded CanonicalApi model,
         # we check the following dimensions:
 
         # 1. Paths + HTTP methods
@@ -411,7 +411,7 @@ class ApiComparator:
         source2: str,
     ) -> None:
         """
-        Compare two operations according to equiv_contract.md section 3.2.
+        Compare two operations according to doc/equiv_contract.md section 3.2.
 
         Args:
             op1: First operation
@@ -649,7 +649,7 @@ class ApiComparator:
         source1: str,
         source2: str,
     ) -> None:
-        """Compare two parameters according to equiv_contract.md section 3.2.2."""
+        """Compare two parameters according to doc/equiv_contract.md section 3.2.2."""
         # Extract context components
         context_parts = (
             context.split("||") if "||" in context else ["<unknown>", context, ""]
@@ -863,7 +863,7 @@ class ApiComparator:
         source1: str,
         source2: str,
     ) -> None:
-        """Compare two responses according to equiv_contract.md section 3.2.4."""
+        """Compare two responses according to doc/equiv_contract.md section 3.2.4."""
 
         # Response schemas must match
         if not self._schemas_equal(resp1.schema, resp2.schema):
@@ -2110,7 +2110,7 @@ class ApiComparator:
         self, schema1: Optional[CanonicalSchema], schema2: Optional[CanonicalSchema]
     ) -> bool:
         """
-        Compare two schemas for equality according to equiv_contract.md section 4.
+        Compare two schemas for equality according to doc/equiv_contract.md section 4.
 
         Schemas are compared recursively and must match on:
         - Core schema fields (type, format - no coercion)

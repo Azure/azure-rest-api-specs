@@ -9,7 +9,7 @@ This module implements the CLI entry point that wires together all components:
 - Build models and compare for equivalency
 - Exit with appropriate code and output
 
-According to equiv_impl_guide.md, the CLI should:
+According to doc/equiv_impl_guide.md, the CLI should:
 - Exit with code 0 if equivalent, non-zero if not equivalent or error
 - Print summary to stdout
 - Write detailed artifacts to output directory

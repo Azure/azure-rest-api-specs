@@ -40,7 +40,7 @@ python cli.py --ignore-operation-id
 
 ## Configuration
 
-Edit `config.yaml` to specify the paths to your Swagger files. See `equiv_contract.md` for detailed equivalency rules and `equiv_impl_guide.md` for implementation details.
+Edit `config.yaml` to specify the paths to your Swagger files. See `doc/equiv_contract.md` for detailed equivalency rules and `doc/equiv_impl_guide.md` for implementation details.
 
 ## Output
 

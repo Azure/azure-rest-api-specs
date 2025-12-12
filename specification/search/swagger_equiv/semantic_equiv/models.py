@@ -2,7 +2,7 @@
 Canonical data models for the Swagger equivalency checker.
 
 This module defines immutable data structures that capture only the fields
-that matter for semantic equivalency checking as defined in equiv_contract.md.
+that matter for semantic equivalency checking as defined in doc/equiv_contract.md.
 
 The models are designed to:
 - Capture only behavioral API contract fields (not documentation)
@@ -69,7 +69,7 @@ class CanonicalSchema:
     """
     Represents a canonical schema definition.
 
-    According to equiv_contract.md section 4, schemas must match on:
+    According to doc/equiv_contract.md section 4, schemas must match on:
     - type, format (no coercion)
     - For objects: property sets, required sets, additionalProperties
     - For arrays: items schema, array constraints
@@ -107,7 +107,7 @@ class CanonicalParameter:
     """
     Represents a canonical parameter definition.
 
-    According to equiv_contract.md section 3.2.2, parameters are keyed by (in, name)
+    According to doc/equiv_contract.md section 3.2.2, parameters are keyed by (in, name)
     and must match on: in, name, required, full schema for body params,
     type/format/constraints for non-body params, enum, default.
     """
@@ -146,7 +146,7 @@ class CanonicalOperation:
     """
     Represents a canonical operation definition.
 
-    According to equiv_contract.md section 3.2, operations must match on:
+    According to doc/equiv_contract.md section 3.2, operations must match on:
     - operationId (unless configured otherwise)
     - Parameters (keyed by in+name)
     - Request body (consumes + schema)
@@ -184,7 +184,7 @@ class CanonicalApi:
     """
     Represents the complete canonical API definition.
 
-    According to equiv_contract.md, APIs must match on:
+    According to doc/equiv_contract.md, APIs must match on:
     - Path sets and HTTP method sets per path
     - Complete operation definitions
     - Complete schema/definition sets
