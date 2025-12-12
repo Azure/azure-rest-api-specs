@@ -103,6 +103,44 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2025-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2025-05-01/webapplicationfirewall.json
+suppressions:
+  - code: PutResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].put
+  - code: DeleteResponseCodes
+    reason: Required for multiple response codes. Reviewed by ARM team.
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}"].delete
+  - code: PatchIdentityProperty
+    reason: False alarm.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}"].patch.parameters[2]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}"].patch.parameters[3]
+  - code: SystemDataDefinitionsCommonTypes
+    from: networkVerifier.json
+    reason: False alarm for common type errors.
+  - code: SystemDataDefinitionsCommonTypes
+    from: network.json
+    reason: False alarm.
+directive:
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.ProxyResource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterProxyResource"
+      
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.Resource"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterResource"
+
+  - from: specification/common-types/resource-management/v6/types.json
+    where: "$.definitions.systemData"
+    transform: >
+      $["x-ms-client-name"] = "SecurityPerimeterSystemData"
 ```
 
 ### Tag: package-2025-03-01
