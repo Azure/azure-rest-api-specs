@@ -821,6 +821,7 @@ model ClusterMonitoringPolicy {
    * The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   healthCheckWaitDuration: duration;
 
@@ -828,6 +829,7 @@ model ClusterMonitoringPolicy {
    * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   healthCheckStableDuration: duration;
 
@@ -835,6 +837,7 @@ model ClusterMonitoringPolicy {
    * The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   healthCheckRetryTimeout: duration;
 
@@ -842,6 +845,7 @@ model ClusterMonitoringPolicy {
    * The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   upgradeTimeout: duration;
 
@@ -849,6 +853,7 @@ model ClusterMonitoringPolicy {
    * The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   upgradeDomainTimeout: duration;
 }
