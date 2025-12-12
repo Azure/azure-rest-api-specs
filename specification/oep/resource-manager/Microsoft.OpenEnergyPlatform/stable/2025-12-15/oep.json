@@ -2065,13 +2065,37 @@
           }
         },
         "readyForUpgrade": {
-          "type": "boolean",
-          "description": "Indicates whether the instance is ready for upgrade."
+          "type": "string",
+          "description": "Indicates the readiness status of the instance for upgrade.",
+          "default": "NotApplicable",
+          "enum": [
+            "NotApplicable",
+            "Ready",
+            "NotReady"
+          ],
+          "x-ms-enum": {
+            "name": "readyForUpgrade",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotApplicable",
+                "description": "Upgrade readiness is not applicable because the upgradePolicy is set to Automatic."
+              },
+              {
+                "value": "Ready",
+                "description": "The service has been marked as ready for upgrade. Only valid when upgradePolicy is Deferred."
+              },
+              {
+                "value": "NotReady",
+                "description": "The service is not ready for upgrade. Default state when upgradePolicy is Deferred."
+              }
+            ]
+          }
         },
         "autoUpgradeAfterDate": {
           "type": "string",
           "format": "date",
-          "description": "The date after which the instance will be automatically upgraded if it is marked as ready for upgrade.",
+          "description": "The date after which the instance will be automatically upgraded if it doesn't get marked as ready for upgrade.",
           "readOnly": true
         }
       }
