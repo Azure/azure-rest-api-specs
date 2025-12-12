@@ -4438,7 +4438,7 @@ model KnowledgeBaseAzureOpenAIModel extends KnowledgeBaseModel {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("Azure OpenAI parameters.")
-  azureOpenAIParameters: AzureOpenAiParameters;
+  azureOpenAIParameters: AzureOpenAIVectorizerParameters;
 }
 
 // Knowledge Source models

@@ -778,7 +778,7 @@ model KnowledgeSourceAzureOpenAIVectorizer extends KnowledgeSourceVectorizer {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   @doc("Contains the parameters specific to Azure OpenAI embedding vectorization.")
-  azureOpenAIParameters?: AzureOpenAiParameters;
+  azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
 }
 
 @doc("The current synchronization status of the knowledge source.")
