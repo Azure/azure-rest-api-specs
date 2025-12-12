@@ -1885,19 +1885,19 @@
     },
     "AzureMonitorWorkspaceSignals": {
       "type": "object",
-      "description": "A grouping of Azure Monitor workspace signals",
+      "description": "A grouping of Azure Monitor workspace signals.",
       "properties": {
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "azureMonitorWorkspaceResourceId": {
           "$ref": "#/definitions/AzureMonitorWorkspaceResourceId",
-          "description": "Azure Monitor workspace resource ID"
+          "description": "Azure Monitor workspace resource ID."
         },
         "signals": {
           "type": "array",
-          "description": "Signals assigned to this signal group",
+          "description": "Signals assigned to this signal group.",
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/PrometheusMetricsSignal"
@@ -1914,7 +1914,7 @@
     },
     "AzureResourceSignal": {
       "type": "object",
-      "description": "An Azure Resource Metric signal instance assigned to an entity",
+      "description": "An Azure Resource Metric signal instance assigned to an entity.",
       "properties": {
         "metricNamespace": {
           "type": "string",
@@ -2036,7 +2036,7 @@
       "properties": {
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "azureResourceId": {
           "type": "string",
@@ -2054,7 +2054,7 @@
         },
         "signals": {
           "type": "array",
-          "description": "Signals assigned to this group",
+          "description": "Signals assigned to this group.",
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AzureResourceSignal"
@@ -2733,7 +2733,7 @@
     },
     "LogAnalyticsSignal": {
       "type": "object",
-      "description": "A Log Analytics Query signal instance assigned to an entity",
+      "description": "A Log Analytics Query signal instance assigned to an entity.",
       "properties": {
         "queryText": {
           "type": "string",
@@ -2832,19 +2832,19 @@
     },
     "LogAnalyticsSignals": {
       "type": "object",
-      "description": "A grouping of Log Analytics workspace signals",
+      "description": "A grouping of Log Analytics workspace signals.",
       "properties": {
         "authenticationSetting": {
           "$ref": "#/definitions/authenticationSettingName",
-          "description": "Reference to the name of the authentication setting which is used for querying the data source"
+          "description": "Reference to the name of the authentication setting which is used for querying the data source."
         },
         "logAnalyticsWorkspaceResourceId": {
           "$ref": "#/definitions/LogAnalyticsWorkspaceResourceId",
-          "description": "Log Analytics workspace resource ID"
+          "description": "Log Analytics workspace resource ID."
         },
         "signals": {
           "type": "array",
-          "description": "Signals assigned to this group",
+          "description": "Signals assigned to this group.",
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/LogAnalyticsSignal"
@@ -2976,7 +2976,7 @@
     },
     "PrometheusMetricsSignal": {
       "type": "object",
-      "description": "A Prometheus Metrics Query signal instance assigned to an entity",
+      "description": "A Prometheus Metrics Query signal instance assigned to an entity.",
       "properties": {
         "queryText": {
           "type": "string",
@@ -3449,18 +3449,16 @@
           "description": "Kind of the signal instance"
         },
         "name": {
-          "type": "string",
-          "description": "Unique name of the signal within the entity",
-          "minLength": 1,
-          "maxLength": 260
+          "$ref": "#/definitions/signalName",
+          "description": "Unique name of the signal within the entity."
         },
         "signalDefinitionName": {
           "$ref": "#/definitions/signalDefinitionName",
-          "description": "Optional reference to a signal definition that provides default values"
+          "description": "Optional reference to a signal definition that provides default values."
         },
         "status": {
           "$ref": "#/definitions/SignalStatus",
-          "description": "Current status of the signal",
+          "description": "Current status of the signal.",
           "readOnly": true
         }
       },

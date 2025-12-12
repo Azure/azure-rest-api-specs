@@ -673,16 +673,14 @@ model SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind;
 
-  @doc("Unique name of the signal within the entity")
-  @minLength(1)
-  @maxLength(260)
-  name: string;
+  @doc("Unique name of the signal within the entity.")
+  name: signalName;
 
-  @doc("Optional reference to a signal definition that provides default values")
+  @doc("Optional reference to a signal definition that provides default values.")
   signalDefinitionName?: signalDefinitionName;
 
   @visibility(Lifecycle.Read)
-  @doc("Current status of the signal")
+  @doc("Current status of the signal.")
   status?: SignalStatus;
 }
 
@@ -708,7 +706,7 @@ model AzureMonitorWorkspaceSignalGroup is SignalAssignmentGroup {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("An Azure Resource Metric signal instance assigned to an entity")
+@doc("An Azure Resource Metric signal instance assigned to an entity.")
 model AzureResourceSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.AzureResourceMetric;
@@ -720,7 +718,7 @@ model AzureResourceSignal extends SignalInstanceProperties {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("A Log Analytics Query signal instance assigned to an entity")
+@doc("A Log Analytics Query signal instance assigned to an entity.")
 model LogAnalyticsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.LogAnalyticsQuery;
@@ -732,7 +730,7 @@ model LogAnalyticsSignal extends SignalInstanceProperties {
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("A Prometheus Metrics Query signal instance assigned to an entity")
+@doc("A Prometheus Metrics Query signal instance assigned to an entity.")
 model PrometheusMetricsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.PrometheusMetricsQuery;
@@ -746,7 +744,7 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
 @added(Versions.v2026_01_01_preview)
 @doc("A grouping of Azure resource signals")
 model AzureResourceSignals {
-  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  @doc("Reference to the name of the authentication setting which is used for querying the data source.")
   authenticationSetting: authenticationSettingName;
 
   @doc("Azure resource ID")
@@ -757,37 +755,37 @@ model AzureResourceSignals {
   @maxLength(256)
   azureResourceKind?: string;
 
-  @doc("Signals assigned to this group")
+  @doc("Signals assigned to this group.")
   @maxItems(50)
   @identifiers(#["name"])
   signals?: AzureResourceSignal[];
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("A grouping of Log Analytics workspace signals")
+@doc("A grouping of Log Analytics workspace signals.")
 model LogAnalyticsSignals {
-  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  @doc("Reference to the name of the authentication setting which is used for querying the data source.")
   authenticationSetting: authenticationSettingName;
 
-  @doc("Log Analytics workspace resource ID")
+  @doc("Log Analytics workspace resource ID.")
   logAnalyticsWorkspaceResourceId: LogAnalyticsWorkspaceResourceId;
 
-  @doc("Signals assigned to this group")
+  @doc("Signals assigned to this group.")
   @maxItems(50)
   @identifiers(#["name"])
   signals?: LogAnalyticsSignal[];
 }
 
 @added(Versions.v2026_01_01_preview)
-@doc("A grouping of Azure Monitor workspace signals")
+@doc("A grouping of Azure Monitor workspace signals.")
 model AzureMonitorWorkspaceSignals {
-  @doc("Reference to the name of the authentication setting which is used for querying the data source")
+  @doc("Reference to the name of the authentication setting which is used for querying the data source.")
   authenticationSetting: authenticationSettingName;
 
-  @doc("Azure Monitor workspace resource ID")
+  @doc("Azure Monitor workspace resource ID.")
   azureMonitorWorkspaceResourceId: AzureMonitorWorkspaceResourceId;
 
-  @doc("Signals assigned to this signal group")
+  @doc("Signals assigned to this signal group.")
   @maxItems(50)
   @identifiers(#["name"])
   signals?: PrometheusMetricsSignal[];
