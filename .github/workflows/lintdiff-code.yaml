@@ -80,7 +80,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.run-lintdiff.outputs.summary }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.run-lintdiff.outputs.summary }}
