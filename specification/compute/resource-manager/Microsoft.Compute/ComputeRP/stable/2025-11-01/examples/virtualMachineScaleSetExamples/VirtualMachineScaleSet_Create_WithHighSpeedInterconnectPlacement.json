@@ -1,0 +1,223 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "api-version": "2025-11-01",
+    "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 2,
+        "name": "Standard_D1_v2"
+      },
+      "location": "westus",
+      "properties": {
+        "orchestrationMode": "Flexible",
+        "highSpeedInterconnectPlacement": "None",
+        "platformFaultDomainCount": 1,
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "Canonical",
+              "offer": "0001-com-ubuntu-server-focal",
+              "sku": "20_04-lts-gen2",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage",
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              }
+            }
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "primary": true,
+                  "enableIPForwarding": true,
+                  "enableAcceleratedNetworking": false,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        },
+                        "primary": true,
+                        "applicationGatewayBackendAddressPools": [],
+                        "loadBalancerBackendAddressPools": [],
+                        "publicIPAddressConfiguration": {
+                          "name": "{vmss-name}",
+                          "properties": {
+                            "idleTimeoutInMinutes": 15
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "networkApiVersion": "2020-11-01"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_D1_v2"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": false,
+          "highSpeedInterconnectPlacement": "None",
+          "orchestrationMode": "Flexible",
+          "platformFaultDomainCount": 1,
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}"
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
+                          "applicationGatewayBackendAddressPools": [],
+                          "loadBalancerBackendAddressPools": [],
+                          "publicIPAddressConfiguration": {
+                            "name": "{vmss-name}",
+                            "properties": {
+                              "idleTimeoutInMinutes": 15
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "networkApiVersion": "2020-11-01"
+            }
+          }
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 2,
+          "name": "Standard_D1_v2"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": false,
+          "highSpeedInterconnectPlacement": "None",
+          "orchestrationMode": "Flexible",
+          "platformFaultDomainCount": 1,
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "0001-com-ubuntu-server-focal",
+                "sku": "20_04-lts-gen2",
+                "version": "latest"
+              },
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                }
+              }
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}"
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "enableAcceleratedNetworking": false,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "primary": true,
+                          "applicationGatewayBackendAddressPools": [],
+                          "loadBalancerBackendAddressPools": [],
+                          "publicIPAddressConfiguration": {
+                            "name": "{vmss-name}",
+                            "properties": {
+                              "idleTimeoutInMinutes": 15
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "networkApiVersion": "2020-11-01"
+            }
+          }
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "title": "Create a virtual machine scale set with high-speed interconnect placement."
+}
