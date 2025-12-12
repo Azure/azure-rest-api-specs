@@ -25,11 +25,11 @@ using TypeSpec.Versioning;
  * // (missing-service-description) Add service description
  */
 @armProviderNamespace
-@service(#{ title: "UsageManagementClient" })
+@service(#{ title: "Microsoft.Commerce" })
 @versioned(Versions)
 // FIXME: Common type version not set. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace UsageManagementClient;
+namespace Microsoft.Commerce;
 
 /**
  * The available API versions.
