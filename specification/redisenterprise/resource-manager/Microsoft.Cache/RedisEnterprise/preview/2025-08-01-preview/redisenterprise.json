@@ -2100,7 +2100,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
             }
           },
           "default": {
@@ -3692,6 +3692,28 @@
         "rdbFrequency": {
           "$ref": "#/definitions/RdbFrequency",
           "description": "Sets the frequency at which a snapshot of the database is created."
+        }
+      }
+    },
+    "PrivateEndpointConnectionResourceListResult": {
+      "type": "object",
+      "description": "List of private endpoint connections associated with the specified resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
         }
       }
     },

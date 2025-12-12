@@ -57,6 +57,19 @@ interface PrivateEndpointConnections {
   >;
 }
 
+/** List of private endpoint connections associated with the specified resource. */
+model PrivateEndpointConnectionResourceListResult {
+  /** Array of private endpoint connections. */
+  @identifiers(#["id"])
+  @pageItems
+  value?: PrivateEndpointConnection[];
+
+  /** URL to get the next set of operation list results (if there are any). */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: url;
+}
+
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.put::parameters.resource,
   "The private endpoint connection properties."
