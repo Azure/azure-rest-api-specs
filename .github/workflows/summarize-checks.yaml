@@ -84,7 +84,7 @@ jobs:
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.summarize-checks.outputs.summary }}
