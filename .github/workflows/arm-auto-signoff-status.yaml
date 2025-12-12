@@ -45,6 +45,8 @@ jobs:
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
         github.event.label.name == 'ARMAutoSignedOff' ||
+        github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
+        github.event.label.name == 'ARMAutoSignedOff-Trivial' ||
         github.event.label.name == 'ARMReview' ||
         github.event.label.name == 'ARMSignedOff' ||
         github.event.label.name == 'NotReadyForARMReview' ||
@@ -81,25 +83,28 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
             return await getLabelAction({ github, context, core });
 
-      - if: |
-          fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-          fromJson(steps.get-label-action.outputs.result).labelAction == 'remove'
-        name: Upload artifact with results
-        uses: ./.github/actions/add-label-artifact
-        with:
-          name: "ARMAutoSignedOff"
-          # Convert "add/remove" to "true/false"
-          value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
-
-      - if: |
-          fromJson(steps.get-label-action.outputs.result).labelAction == 'add' ||
-          fromJson(steps.get-label-action.outputs.result).labelAction == 'remove'
-        name: Upload artifact with results
+      # Add/remove specific auto sign-off labels based on analysis results
+      # Only upload label artifacts if we have autoSignoffLabels defined (not undefined)
+      - if: fromJson(steps.get-label-action.outputs.result).autoSignoffLabels != null
+        name: Upload artifact for ARMSignedOff label
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMSignedOff"
-          # Convert "add/remove" to "true/false"
-          value: "${{ fromJson(steps.get-label-action.outputs.result).labelAction == 'add' }}"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).autoSignoffLabels && (contains(fromJson(steps.get-label-action.outputs.result).autoSignoffLabels, 'ARMAutoSignedOff-IncrementalTSP') || contains(fromJson(steps.get-label-action.outputs.result).autoSignoffLabels, 'ARMAutoSignedOff-Trivial')) }}"
+
+      - if: fromJson(steps.get-label-action.outputs.result).autoSignoffLabels != null
+        name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-IncrementalTSP"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).autoSignoffLabels && contains(fromJson(steps.get-label-action.outputs.result).autoSignoffLabels, 'ARMAutoSignedOff-IncrementalTSP') }}"
+
+      - if: fromJson(steps.get-label-action.outputs.result).autoSignoffLabels != null
+        name: Upload artifact for ARMAutoSignedOff-Trivial label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-Trivial"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).autoSignoffLabels && contains(fromJson(steps.get-label-action.outputs.result).autoSignoffLabels, 'ARMAutoSignedOff-Trivial') }}"
 
       # Required for consumers to identify the head SHA associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
