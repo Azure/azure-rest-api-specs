@@ -2561,6 +2561,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(IndexBatch.value, "actions");
 @@clientName(IndexDocumentsResult.value, "results");
 @@clientName(IndexingResult.status, "succeeded");
+@@clientName(AutocompleteRequest.autocompleteMode, "mode");
 @@clientName(AutocompleteResult.value, "results");
 @@clientName(AutocompleteRequest.search, "searchText");
 @@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching");

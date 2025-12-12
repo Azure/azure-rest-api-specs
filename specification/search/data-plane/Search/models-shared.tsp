@@ -35,48 +35,56 @@ alias selectQuery = {
 
 alias indexNamePath = {
   @doc("The name of the index.")
+  @clientName("name")
   @path
   indexName: string;
 };
 
 alias indexerNamePath = {
   @doc("The name of the indexer.")
+  @clientName("name")
   @path
   indexerName: string;
 };
 
 alias dataSourceNamePath = {
   @doc("The name of the datasource.")
+  @clientName("name")
   @path
   dataSourceName: string;
 };
 
 alias skillsetNamePath = {
   @doc("The name of the skillset.")
+  @clientName("name")
   @path
   skillsetName: string;
 };
 
 alias synonymMapNamePath = {
   @doc("The name of the synonym map.")
+  @clientName("name")
   @path
   synonymMapName: string;
 };
 
 alias aliasNamePath = {
   @doc("The name of the alias.")
+  @clientName("name")
   @path
   aliasName: string;
 };
 
 alias sourceNamePath = {
   @doc("The name of the knowledge source.")
+  @clientName("name")
   @path
   sourceName: string;
 };
 
 alias knowledgeBaseNamePath = {
   @doc("The name of the knowledge base.")
+  @clientName("name")
   @path
   knowledgeBaseName: string;
 };
