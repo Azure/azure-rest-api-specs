@@ -2100,7 +2100,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -3695,27 +3695,26 @@
         }
       }
     },
-    "PrivateEndpointConnectionResourceListResult": {
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "List of private endpoint connections associated with the specified resource.",
+      "description": "The response of a PrivateEndpointConnection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "Array of private endpoint connections.",
+          "description": "The PrivateEndpointConnection items on this page",
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "URL to get the next set of operation list results (if there are any).",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Protocol": {
       "type": "string",
