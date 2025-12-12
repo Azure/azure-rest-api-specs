@@ -79,7 +79,7 @@ jobs:
       - run: npm run test:ci
 
       - name: Archive code coverage results
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: code-coverage-report-${{ matrix.os }}-${{ fromJSON('{".github":"github", ".github/shared":"github-shared"}')[matrix.folder] }}
           path: ./${{ matrix.folder }}/coverage
