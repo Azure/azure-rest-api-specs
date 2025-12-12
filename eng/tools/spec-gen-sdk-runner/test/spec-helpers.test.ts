@@ -1,3 +1,4 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, test, vi } from "vitest";
@@ -55,7 +56,7 @@ describe("detectChangedSpecConfigFiles", () => {
     runMode: "",
     localSdkRepoPath: "",
     sdkRepoName: "",
-    sdkLanguage: "",
+    sdkLanguage: SdkName.Go,
     specCommitSha: "",
     specRepoHttpsUrl: "",
   };

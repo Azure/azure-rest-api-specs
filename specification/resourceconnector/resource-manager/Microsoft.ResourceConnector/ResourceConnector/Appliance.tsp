@@ -140,5 +140,6 @@ interface Appliances {
 @@doc(Appliances.update::parameters.properties,
   "The updatable fields of an existing Appliance."
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliances.update::parameters.properties
 );
