@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-11-01-preview
+tag: package-2025-10
 ```
 
 ## Suppression
@@ -263,16 +263,7 @@ suppressions:
     reason: Changing it will break backward compatibility
 ```
 
-### Tag: package-preview-2025-11-01-preview
-
-These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-11-01-preview'
-input-file:
-  - preview/2025-11-01-preview/hci.json
-```
-
-### Tag: package-preview-2025-12-01-preview
+### Tag: package-2025-10
 
 These settings apply only when `--tag=package-2025-10` is specified on the command line.
 
