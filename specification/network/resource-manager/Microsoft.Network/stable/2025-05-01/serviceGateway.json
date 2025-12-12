@@ -113,13 +113,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -378,8 +371,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request successful."
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -395,11 +394,11 @@
           "Partial Update: Create, update, or delete address locations in the service gateway.": {
             "$ref": "./examples/ServiceGatewayPartialUpdateAddressLocationsRequest.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
-      },
-      "x-ms-long-running-operation": true,
-      "x-ms-long-running-operation-options": {
-        "final-state-via": "location"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices": {
@@ -438,8 +437,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request successful."
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -504,9 +509,8 @@
             "$ref": "./examples/ServiceGatewayGetAddressLocationsResponse.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -555,9 +559,8 @@
             "$ref": "./examples/ServiceGatewayGetServicesResponse.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -661,11 +664,11 @@
     },
     "ServiceGatewayAddress": {
       "properties": {
-        "Address": {
+        "address": {
           "type": "string",
           "description": "Address to update"
         },
-        "Services": {
+        "services": {
           "type": "array",
           "items": {
             "type": "string"
@@ -678,24 +681,31 @@
     },
     "ServiceGatewayAddressLocation": {
       "properties": {
-        "AddressLocation": {
+        "addressLocation": {
           "type": "string",
           "description": "Location to update"
         },
-        "AddressUpdateAction": {
+        "addressUpdateAction": {
           "type": "string",
           "description": "Specifies the type of update operation to perform on addresses within the address location of service gateway.\n\n- FullUpdate: Replaces all existing address data with the new list provided in the request. Any previously defined addresses not included will be removed.\n- PartialUpdate: Updates only the specified addresses.",
           "enum": [
             "FullUpdate",
             "PartialUpdate"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AddressUpdateAction",
+            "modelAsString": true
+          }
         },
-        "Addresses": {
+        "addresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceGatewayAddress"
           },
-          "description": "An array of addresses to create or update in locations."
+          "description": "An array of addresses to create or update in locations.",
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       },
       "description": "Properties of the service gateway address location.",
@@ -703,16 +713,19 @@
     },
     "ServiceGatewayAddressLocationResponse": {
       "properties": {
-        "AddressLocation": {
+        "addressLocation": {
           "type": "string",
           "description": "Location to update"
         },
-        "Addresses": {
+        "addresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceGatewayAddress"
           },
-          "description": "An array of addresses to create or update in locations."
+          "description": "An array of addresses to create or update in locations.",
+          "x-ms-identifiers": [
+            "address"
+          ]
         }
       },
       "description": "Properties of the service gateway address location.",
@@ -720,20 +733,27 @@
     },
     "ServiceGatewayUpdateAddressLocationsRequest": {
       "properties": {
-        "Action": {
+        "action": {
           "type": "string",
           "description": "Specifies the type of update operation to perform on address locations within the service gateway.\n\n- FullUpdate: Replaces all existing address location data with the new list provided in the request. Any previously defined locations not included will be removed.\n- PartialUpdate: Updates only the specified address locations.",
           "enum": [
             "FullUpdate",
             "PartialUpdate"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "UpdateAction",
+            "modelAsString": true
+          }
         },
-        "AddressLocations": {
+        "addressLocations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceGatewayAddressLocation"
           },
-          "description": "An array of address locations to create or update."
+          "description": "An array of address locations to create or update.",
+          "x-ms-identifiers": [
+            "addressLocation"
+          ]
         }
       },
       "description": "Properties of the service gateway update address locations request.",
@@ -741,27 +761,31 @@
     },
     "ServiceGatewayServicePropertiesFormat": {
       "properties": {
-        "ServiceType": {
+        "serviceType": {
           "type": "string",
           "description": "Name of the service.",
           "enum": [
             "Inbound",
             "Outbound",
             "InboundOutbound"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ServiceType",
+            "modelAsString": true
+          }
         },
-        "IsDefault": {
+        "isDefault": {
           "type": "boolean",
           "description": "Set to true to mark default service for inbound or outbound."
         },
-        "LoadBalancerBackendPools": {
+        "loadBalancerBackendPools": {
           "type": "array",
           "items": {
             "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
           },
           "description": "An array of load balancer backend address pools."
         },
-        "PublicNatGatewayId": {
+        "publicNatGatewayId": {
           "type": "string",
           "description": "Arm Resource Id of public natgateway."
         }
@@ -771,7 +795,7 @@
     },
     "ServiceGatewayService": {
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "Name of the service"
         },
@@ -786,11 +810,11 @@
     },
     "ServiceGatewayServiceRequest": {
       "properties": {
-        "IsDelete": {
+        "isDelete": {
           "type": "boolean",
           "description": "Set to true to mark the service for deletion."
         },
-        "Service": {
+        "service": {
           "$ref": "#/definitions/ServiceGatewayService",
           "description": "Service of service gateway."
         }
@@ -800,20 +824,27 @@
     },
     "ServiceGatewayUpdateServicesRequest": {
       "properties": {
-        "Action": {
+        "action": {
           "type": "string",
           "description": "Specifies the type of update operation to perform on services within the service gateway.\n\n- FullUpdate: Replaces all existing services with the new list provided in the request. Any previously defined services not included will be removed.\n- PartialUpdate: Updates only the specified services.",
           "enum": [
             "FullUpdate",
             "PartialUpdate"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ServiceUpdateAction",
+            "modelAsString": true
+          }
         },
-        "ServiceRequests": {
+        "serviceRequests": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceGatewayServiceRequest"
           },
-          "description": "Collection of service updates."
+          "description": "Collection of service updates.",
+          "x-ms-identifiers": [
+            "service/name"
+          ]
         }
       },
       "description": "Properties of the service gateway update services request.",
@@ -844,7 +875,8 @@
           }
         }
       },
-      "description": "SKU of a service gateway."
+      "description": "SKU of a service gateway.",
+      "type": "object"
     },
     "GetServiceGatewayAddressLocationsResult": {
       "properties": {
@@ -853,7 +885,10 @@
           "items": {
             "$ref": "#/definitions/ServiceGatewayAddressLocationResponse"
           },
-          "description": "A list of address locations of service gateway."
+          "description": "A list of address locations of service gateway.",
+          "x-ms-identifiers": [
+            "addressLocation"
+          ]
         },
         "nextLink": {
           "readOnly": true,
@@ -871,7 +906,10 @@
           "items": {
             "$ref": "#/definitions/ServiceGatewayService"
           },
-          "description": "A list of services of service gateway."
+          "description": "A list of services of service gateway.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "readOnly": true,
