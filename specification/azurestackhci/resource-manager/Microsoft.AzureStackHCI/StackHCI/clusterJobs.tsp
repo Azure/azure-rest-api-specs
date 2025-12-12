@@ -61,8 +61,8 @@ union HciJobType {
   GpuSwitchMode: "GpuSwitchMode",
 }
 
-@removed(Versions.v2025_11_01_preview)
 /** Cluster Job properties */
+@removed(Versions.v2025_11_01_preview)
 @discriminator("jobType")
 model ClusterJobProperties {
   /** Job Type to support polymorphic resource. */
