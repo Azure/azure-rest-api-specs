@@ -26,7 +26,7 @@ High level steps involved:
   2. Verify SDK repository
   3. Validate repository path
   4. Identify path to configuration file
-  5. Verify setup for the selected language
+  5. Verify setup for the selected language using `azsdk_verify_setup` MCP tool
   6. Generate SDK using `azsdk_package_generate_code` MCP tool
   7. Identify SDK project path
   8. Build/Compile SDK using `azsdk_package_build_code` MCP tool
