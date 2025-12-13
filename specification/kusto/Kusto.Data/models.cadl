@@ -1,0 +1,108 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+using Cadl.Rest;
+
+namespace KustoData.Models;
+
+@doc("Kusto Request Headers")
+model KustoRequestParameters {
+    @doc("The Accept header")
+    @header("Accept") accept: "application/json";
+    @doc("The Accept-Encoding header")
+    @header ("Accept-Encoding") acceptEncoding: "gzip" | "deflate";
+    @doc("The Authorization header")
+    @header("Authorization") authorization: string;
+    @doc("The Connection header")
+    @header("Connection") connection?: "Keep-Alive";
+    @doc("The Content-Length header")
+    @header("Content-Length") contentLength?: int64;
+    @doc("The Content-Type header")
+    @header("Content-Type") contentType: "application/json;charset=utf-8";
+    @doc("The Expect header.  Can be set to 100-Continue")
+    @header("Expect") expect?: string;
+    @doc("The Host header. Set to the qualified domain name that the request was sent to (for example, help.kusto.windows.net)")
+    @header("Host") host: string;
+}
+
+@doc("Kusto Request Telemetry Headers")
+model KustoRequestTelemetryHeaders {
+    @doc("The (friendly) name of the application making the request")
+    @header("x-ms-app") app?: string;
+    @doc("The (friendly) name of the user making the request")
+    @header("x-ms-user") user?: string;
+    @doc("The (friendly) name of the user making the request")
+    @header("x-ms-user-id") userId?: string;
+    @doc("A unique identifier for the request")
+    @header("x-ms-client-request-id") clientRequestId?: string;
+    @doc("The (friendly) version identifier for the client making the request")
+    @header("x-ms-client-version") clientVersion?: string;
+    @doc("If specified, forces the request to run in read-only mode, preventing it from making long-lasting changes")
+    @header("x-ms-readonly") readonly?: boolean;
+}
+
+@doc("Common Kusto Request Query Paramters")
+model KustoRequestQueryParameters {
+    @doc("Text of the query or control command to execute")
+    @query csl: string;
+    @doc("Name of the database in scope that is the target of the query or control command")
+    @query db?: string;
+    @doc("Provides client request properties that modify how the request is processed and its results.")
+    @query properties?: string;
+}
+
+@doc("Common Kusto Request Body Parameters")
+model KustoRequestBodyParameters {
+    @doc("Text of the query or control command to execute")
+    csl: string;
+    @doc("Name of the database in scope that is the target of the query or control command")
+    db?: string;
+    @doc("Provides client request properties that modify how the request is processed and its results.")
+    properties?: string;
+}
+
+alias TableKind = 
+    "PrimaryResult" |
+    "QueryCompletionInformation" |
+    "QueryTraceLog" |
+    "QueryPerfLog" |
+    "TableOfContents" |
+    "QueryProperties" |
+    "QueryPlan" |
+    "Unknown";
+
+@doc("Kusto Response V2 DataSet Header Frame")
+model V2DataSetHeaderFrame {
+    FrameType: "DataSetHeader";
+    IsProgressive: boolean;
+    Version: string;
+}
+
+model V2Column {
+    ColumnName: string;
+    ColumnType?: string;
+    DateType?: string;
+}
+
+model V2Table {
+    TableKind?: string;
+    TableName: string;
+    TableId?: int32;
+    Columns: V2Column[];
+    Rows: object[][];
+}
+
+model V2DataSetTableFrame extends V2Table {
+    FrameType: "DataTable";
+}
+
+model V2DataSetCompletionFrame {
+    FrameType: "DataSetCompletion";
+    HasErrors: boolean;
+    Cancelled: boolean;
+}
+
+alias V2Frames = (V2DataSetHeaderFrame | V2DataSetTableFrame | V2DataSetCompletionFrame)[];
