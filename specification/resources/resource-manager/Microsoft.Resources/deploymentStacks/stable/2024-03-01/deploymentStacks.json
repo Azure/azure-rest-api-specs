@@ -1299,6 +1299,10 @@
       "type": "object",
       "description": "Deployment stack properties.",
       "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error detail."
+        },
         "template": {
           "type": "object",
           "description": "The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both.",
@@ -1335,14 +1339,6 @@
           "$ref": "#/definitions/DeploymentStacksDebugSetting",
           "description": "The debug setting of the deployment."
         },
-        "bypassStackOutOfSyncError": {
-          "type": "boolean",
-          "description": "Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
         "deploymentScope": {
           "type": "string",
           "description": "The scope at which the initial deployment should be created. If a scope is not specified, it will default to the scope of the deployment stack. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}')."
@@ -1365,6 +1361,14 @@
           "type": "string",
           "description": "The correlation id of the last Deployment stack upsert or delete operation. It is in GUID format and is used for tracing.",
           "readOnly": true
+        },
+        "bypassStackOutOfSyncError": {
+          "type": "boolean",
+          "description": "Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
         },
         "detachedResources": {
           "type": "array",
@@ -1418,11 +1422,6 @@
       "required": [
         "actionOnUnmanage",
         "denySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentStacksError"
-        }
       ]
     },
     "DeploymentStackProvisioningState": {
@@ -1629,16 +1628,6 @@
             "description": "Keep the specified resources in Azure"
           }
         ]
-      }
-    },
-    "DeploymentStacksError": {
-      "type": "object",
-      "description": "Deployment Stacks error response.",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The error detail."
-        }
       }
     },
     "DeploymentStacksParametersLink": {
