@@ -53,15 +53,8 @@ jobs:
           sparse-checkout: |
             .github
 
-      - name: Setup Node 24 and install deps
-        uses: ./.github/actions/setup-node-install-deps
-        with:
-          # actions/github-script@v8 uses Node 24
-          node-version: 24.x
-          # "--no-audit": improves performance
-          # "--omit dev": not needed at runtime, improves performance
-          install-command: "npm ci --no-audit --omit dev"
-          working-directory: ./.github
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
 
       - id: dump-trigger-metadata
         name: Dump Trigger Metadata
