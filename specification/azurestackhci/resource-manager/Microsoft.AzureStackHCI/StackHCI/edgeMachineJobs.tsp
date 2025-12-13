@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -102,50 +103,8 @@ union EdgeMachineJobType {
 }
 
 @added(Versions.v2025_12_01_preview)
-@doc("Represents the various statuses a job can have throughout its lifecycle.")
-union JobStatus {
-  string,
-
-  @doc("The job status has not been specified.")
-  NotSpecified: "NotSpecified",
-
-  @doc("The job is currently undergoing validation.")
-  ValidationInProgress: "ValidationInProgress",
-
-  @doc("The job has successfully passed validation.")
-  ValidationSuccess: "ValidationSuccess",
-
-  @doc("The job has failed validation.")
-  ValidationFailed: "ValidationFailed",
-
-  @doc("The job's deployment is currently in progress.")
-  DeploymentInProgress: "DeploymentInProgress",
-
-  @doc("The job's deployment has failed.")
-  DeploymentFailed: "DeploymentFailed",
-
-  @doc("The job has been successfully deployed.")
-  DeploymentSuccess: "DeploymentSuccess",
-
-  @doc("The job has succeeded.")
-  Succeeded: "Succeeded",
-
-  @doc("The job has failed.")
-  Failed: "Failed",
-
-  @doc("The job has been canceled.")
-  Canceled: "Canceled",
-
-  @doc("The job is paused.")
-  Paused: "Paused",
-
-  @doc("The job is scheduled to run.")
-  Scheduled: "Scheduled",
-}
-
-@added(Versions.v2025_12_01_preview)
 @doc("Properties for adding a server in the cluster.")
-model RemoteSupportJobProperties extends EdgeMachineJobProperties {
+model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
   @doc("Job Type to support polymorphic resource.")
   jobType: EdgeMachineJobType.RemoteSupport;
 
@@ -160,7 +119,7 @@ model RemoteSupportJobProperties extends EdgeMachineJobProperties {
 
   @doc("log collection job reported properties.")
   @visibility(Lifecycle.Read)
-  reportedProperties?: RemoteSupportReportedProperties;
+  reportedProperties?: EdgeMachineRemoteSupportJobReportedProperties;
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -224,7 +183,7 @@ model ProvisioningRequest {
   onboardingConfiguration?: OnboardingConfiguration;
 
   @doc("Device configuration.")
-  deviceConfiguration?: DeviceConfiguration;
+  deviceConfiguration?: TargetDeviceConfiguration;
 
   @doc("Base64 encoded custom configuration for CAPI to use")
   customConfiguration?: string;
@@ -244,12 +203,12 @@ union ProvisioningOsType {
 
 @added(Versions.v2025_12_01_preview)
 @doc("Represents the reported properties of a remote support job.")
-model RemoteSupportReportedProperties {
-  ...JobReportedProperties;
+model EdgeMachineRemoteSupportJobReportedProperties {
+  ...EdgeMachineJobReportedProperties;
 
   @doc("Optional settings for configuring the node for remote support.")
   @visibility(Lifecycle.Read)
-  nodeSettings?: RemoteSupportNodeSettings;
+  nodeSettings?: EdgeMachineRemoteSupportNodeSettings;
 
   @doc("Details of the remote support session.")
   @visibility(Lifecycle.Read)
@@ -259,7 +218,7 @@ model RemoteSupportReportedProperties {
 
 @added(Versions.v2025_12_01_preview)
 @doc("Represents the settings of a remote support node.")
-model RemoteSupportNodeSettings {
+model EdgeMachineRemoteSupportNodeSettings {
   @doc("The state of the remote support node.")
   @visibility(Lifecycle.Read)
   state?: string;
@@ -282,61 +241,8 @@ model RemoteSupportNodeSettings {
 }
 
 @added(Versions.v2025_12_01_preview)
-@doc("Represents a remote support session.")
-model RemoteSupportSession {
-  @doc("Unique session Id.")
-  @visibility(Lifecycle.Read)
-  sessionId?: string;
-
-  @doc("The start time of the remote support session, in UTC.")
-  @visibility(Lifecycle.Read)
-  sessionStartTime?: utcDateTime;
-
-  @doc("The end time of the remote support session, in UTC.")
-  @visibility(Lifecycle.Read)
-  sessionEndTime?: utcDateTime;
-
-  @doc("The level of access granted during the remote support session.")
-  @visibility(Lifecycle.Read)
-  accessLevel?: RemoteSupportAccessLevel;
-
-  @doc("The location where the session transcript is stored.")
-  @visibility(Lifecycle.Read)
-  transcriptLocation?: string;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Defines the level of remote support access granted.")
-union RemoteSupportAccessLevel {
-  @doc("A custom access level provided as a string.")
-  string,
-
-  @doc("No remote support access is granted.")
-  None: "None",
-
-  @doc("Access is limited to diagnostics information only.")
-  Diagnostics: "Diagnostics",
-
-  @doc("Access includes diagnostics information and the ability to perform repairs.")
-  DiagnosticsAndRepair: "DiagnosticsAndRepair",
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Defines the type of remote support action to be performed on an edge device.")
-union RemoteSupportType {
-  @doc("A custom action type provided as a string.")
-  string,
-
-  @doc("Enables remote support for the edge device.")
-  Enable: "Enable",
-
-  @doc("Revokes remote support access for the edge device.")
-  Revoke: "Revoke",
-}
-
-@added(Versions.v2025_12_01_preview)
 @doc("Properties for pausing a server in the cluster.")
-model CollectLogJobProperties extends EdgeMachineJobProperties {
+model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
   @doc("ClusterJob Type to support polymorphic resource.")
   jobType: EdgeMachineJobType.CollectLog;
 
@@ -352,51 +258,23 @@ model CollectLogJobProperties extends EdgeMachineJobProperties {
 
   @doc("log collection job reported properties.")
   @visibility(Lifecycle.Read)
-  reportedProperties?: LogCollectionReportedProperties;
+  reportedProperties?: EdgeMachineCollectLogJobReportedProperties;
 }
 
 @added(Versions.v2025_12_01_preview)
 @doc("Represents the reported properties of a log collection job.")
-model LogCollectionReportedProperties {
+model EdgeMachineCollectLogJobReportedProperties {
   ...JobReportedProperties;
 
   @doc("Details of the log collection session.")
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["correlationId"])
-  logCollectionSessionDetails?: LogCollectionSession[];
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Represents a session for collecting logs from an edge device.")
-model LogCollectionSession {
-  @doc("The timestamp when log collection started, in ISO 8601 format.")
-  @visibility(Lifecycle.Read)
-  startTime?: string;
-
-  @doc("The timestamp when log collection ended, in ISO 8601 format.")
-  @visibility(Lifecycle.Read)
-  endTime?: string;
-
-  @doc("The total time logs were collected for, in ISO 8601 duration format.")
-  @visibility(Lifecycle.Read)
-  timeCollected?: string;
-
-  @doc("The size of the collected logs in bytes.")
-  @visibility(Lifecycle.Read)
-  logSize?: int32;
-
-  @doc("The status of the log collection session.")
-  @visibility(Lifecycle.Read)
-  status?: DeviceLogCollectionStatus;
-
-  @doc("A unique identifier for correlating this log collection session with other operations or sessions.")
-  @visibility(Lifecycle.Read)
-  correlationId?: string;
+  logCollectionSessionDetails?: LogCollectionJobSession[];
 }
 
 @added(Versions.v2025_12_01_preview)
 @doc("Reported Properties for job triggered from cloud.")
-model JobReportedProperties {
+model EdgeMachineJobReportedProperties {
   @doc("The percentage of the job that is complete.")
   @visibility(Lifecycle.Read)
   percentComplete?: int32;
@@ -408,94 +286,6 @@ model JobReportedProperties {
   @doc("Deployment status of job.")
   @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Represents the status of a log collection operation.")
-union DeviceLogCollectionStatus {
-  @doc("A custom status provided as a string.")
-  string,
-
-  @doc("Log collection operation has not been initiated.")
-  NotStarted: "NotStarted",
-
-  @doc("Indicates that the log collection operation is currently running.")
-  Running: "Running",
-
-  @doc("Indicates that the log collection operation has failed.")
-  Failed: "Failed",
-
-  @doc("Indicates that the log collection operation has completed successfully.")
-  Succeeded: "Succeeded",
-
-  @doc("Indicates that the log collection operation has completed successfully.")
-  Canceled: "Canceled",
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Validation / deployment status details for Job.")
-model EceActionStatus {
-  @doc("Job status.")
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  @doc("List of steps of Edge device job.")
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: Step[];
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Deployment mode to trigger job.")
-union DeploymentMode {
-  string,
-
-  @doc("Validate ECE action deployment for a cluster.")
-  Validate: "Validate",
-
-  @doc("Deploy ECE action deployment for a cluster.")
-  Deploy: "Deploy",
-}
-
-@added(Versions.v2025_12_01_preview)
-@doc("Step details during job execution.")
-model Step {
-  @doc("Name of step.")
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  @doc("Description of step.")
-  @visibility(Lifecycle.Read)
-  description?: string;
-
-  @doc("FullStepIndex of step.")
-  @visibility(Lifecycle.Read)
-  fullStepIndex?: string;
-
-  @doc("Start time in utc of step.")
-  @visibility(Lifecycle.Read)
-  startTimeUtc?: string;
-
-  @doc("End time in utc of step.")
-  @visibility(Lifecycle.Read)
-  endTimeUtc?: string;
-
-  @doc("Status of step. Allowed values are 'Error', 'Success', 'InProgress'")
-  @visibility(Lifecycle.Read)
-  status?: string;
-
-  @doc("List of nested steps during job execution..")
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  steps?: Step[];
-
-  @doc("List of exceptions in job execution.")
-  @visibility(Lifecycle.Read)
-  exception?: string[];
-
-  @doc("Error information for the step")
-  @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 @added(Versions.v2025_12_01_preview)
@@ -628,7 +418,7 @@ model OnboardingConfiguration {
 
 @added(Versions.v2025_12_01_preview)
 @doc("Device configuration.")
-model DeviceConfiguration {
+model TargetDeviceConfiguration {
   @doc("Network configuration.")
   network?: NetworkConfiguration;
 
