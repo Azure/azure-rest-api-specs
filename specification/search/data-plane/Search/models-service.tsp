@@ -5109,8 +5109,8 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
 #deprecated "EdgeNGramTokenFilter is deprecated. Use EdgeNGramTokenFilterV2 instead."
+@doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
 model EdgeNGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
   minGram?: int32 = 1;
@@ -5210,8 +5210,8 @@ model LimitTokenFilter extends TokenFilter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 #deprecated "NGramTokenFilter is deprecated. Use NGramTokenFilterV2 instead."
+@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 model NGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Must be less than the value of maxGram.")
   minGram?: int32 = 1;
