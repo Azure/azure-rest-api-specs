@@ -53,3 +53,6 @@ using AzureMonitorExporter;
 
 @@usage(DataPoint, Usage.output | Usage.json);
 @@access(DataPoint, Access.public);
+
+@@usage(ContextTagKeys, Usage.output | Usage.json);
+@@access(ContextTagKeys, Access.public);
