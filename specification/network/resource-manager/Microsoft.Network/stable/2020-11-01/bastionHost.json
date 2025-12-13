@@ -520,6 +520,25 @@
     }
   },
   "definitions": {
+    "Sku": {
+      "description": "The sku of this Bastion Host.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of this Bastion Host.",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "default": "Standard",
+          "x-ms-enum": {
+            "name": "BastionHostSkuName",
+            "modelAsString": true
+          }
+        }
+      },
+      "type": "object"
+    },
     "BastionHostIPConfigurationPropertiesFormat": {
       "properties": {
         "subnet": {
@@ -607,6 +626,10 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "description": "The sku of this Bastion Host.",
+          "$ref": "#/definitions/Sku"
         }
       },
       "allOf": [
@@ -614,7 +637,8 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Bastion Host resource."
+      "description": "Bastion Host resource.",
+      "required": ["properties"]
     },
     "BastionHostListResult": {
       "properties": {
