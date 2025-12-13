@@ -30,6 +30,20 @@ description: Microsoft Playwright Service Client
 openapi-type: data-plane
 tag: package-2025-09-01
 ```
+### Tag: package-2026-01-01-preview
+These settings apply only when `--tag=2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/playwright.json
+suppressions:
+  - code: ValidResponseCodeRequired
+    from: playwright.json
+    reason: Need 302 response code as a product requirement to redirect the client for script execution on remote browsers provided by the service.
+    where:
+      - $.paths["/playwrightworkspaces/{workspaceId}/browsers"].get.responses
+```
+
 ### Tag: package-2025-09-01
 These settings apply only when `--tag=2025-09-01` is specified on the command line.
 
