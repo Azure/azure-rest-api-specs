@@ -563,7 +563,7 @@ model SearchOptions {
   @doc("Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.")
   @minValue(700)
   @query
-  semanticMaxWaitInMilliseconds?: int32 | null;
+  semanticMaxWaitInMilliseconds?: int32;
 
   @doc("This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7. The maximum character length of answers can be configured by appending the pipe character '|' followed by the 'count-<number of maximum character length>', such as 'extractive|maxcharlength-600'.")
   @query
