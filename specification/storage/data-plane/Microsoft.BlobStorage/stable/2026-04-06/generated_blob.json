@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Storage Blob service",
-    "version": "2026-02-06",
+    "version": "2026-04-06",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -1599,6 +1599,24 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
+          },
+          {
+            "name": "x-ms-access-tier-if-modified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfModifiedSince"
+          },
+          {
+            "name": "x-ms-access-tier-if-unmodified-since",
+            "in": "header",
+            "description": "Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time.",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc7231",
+            "x-ms-client-name": "accessTierIfUnmodifiedSince"
           }
         ],
         "responses": {
@@ -4863,7 +4881,10 @@
                   "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
-                  "Premium_LRS"
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
                 ],
                 "x-ms-enum": {
                   "name": "SkuName",
@@ -4893,6 +4914,21 @@
                       "name": "PremiumLRS",
                       "value": "Premium_LRS",
                       "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
                     }
                   ]
                 }
@@ -8190,7 +8226,10 @@
                   "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
-                  "Premium_LRS"
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
                 ],
                 "x-ms-enum": {
                   "name": "SkuName",
@@ -8220,6 +8259,21 @@
                       "name": "PremiumLRS",
                       "value": "Premium_LRS",
                       "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
                     }
                   ]
                 }
@@ -9879,6 +9933,44 @@
               "modelAsString": false
             },
             "x-ms-client-name": "pageWrite"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -11583,6 +11675,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -12834,6 +12964,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -13376,6 +13544,44 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
+          },
+          {
+            "name": "x-ms-source-encryption-key",
+            "in": "header",
+            "description": "Optional. Specifies the source encryption key to use to encrypt the source data provided in the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKey"
+          },
+          {
+            "name": "x-ms-source-encryption-key-sha256",
+            "in": "header",
+            "description": "The SHA-256 hash of the provided source encryption key. Must be provided if the x-ms-source-encryption-key header is provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "sourceEncryptionKeySha256"
+          },
+          {
+            "name": "x-ms-source-encryption-algorithm",
+            "in": "header",
+            "description": "The algorithm used to produce the source encryption key hash. Currently, the only accepted value is \\\"AES256\\\". Must be provided if the x-ms-source-encryption-key is provided.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AES256"
+            ],
+            "x-ms-enum": {
+              "name": "EncryptionAlgorithmType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "AES256",
+                  "value": "AES256",
+                  "description": "The AES256 encryption algorithm."
+                }
+              ]
+            },
+            "x-ms-client-name": "sourceEncryptionAlgorithm"
           }
         ],
         "responses": {
@@ -15336,7 +15542,10 @@
                   "Standard_GRS",
                   "Standard_RAGRS",
                   "Standard_ZRS",
-                  "Premium_LRS"
+                  "Premium_LRS",
+                  "Standard_GZRS",
+                  "Premium_ZRS",
+                  "Standard_RAGZRS"
                 ],
                 "x-ms-enum": {
                   "name": "SkuName",
@@ -15366,6 +15575,21 @@
                       "name": "PremiumLRS",
                       "value": "Premium_LRS",
                       "description": "The premium LRS SKU."
+                    },
+                    {
+                      "name": "StandardGZRS",
+                      "value": "Standard_GZRS",
+                      "description": "The standard GZRS SKU."
+                    },
+                    {
+                      "name": "PremiumZRS",
+                      "value": "Premium_ZRS",
+                      "description": "The premium ZRS SKU."
+                    },
+                    {
+                      "name": "StandardRAGZRS",
+                      "value": "Standard_RAGZRS",
+                      "description": "The standard RAGZRS SKU."
                     }
                   ]
                 }
@@ -17223,6 +17447,11 @@
           "type": "string",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "expiry"
+        },
+        "DelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD.",
+          "x-ms-client-name": "delegatedUserTid"
         }
       },
       "required": [
@@ -18080,7 +18309,10 @@
         "Standard_GRS",
         "Standard_RAGRS",
         "Standard_ZRS",
-        "Premium_LRS"
+        "Premium_LRS",
+        "Standard_GZRS",
+        "Premium_ZRS",
+        "Standard_RAGZRS"
       ],
       "x-ms-enum": {
         "name": "SkuName",
@@ -18110,6 +18342,21 @@
             "name": "PremiumLRS",
             "value": "Premium_LRS",
             "description": "The premium LRS SKU."
+          },
+          {
+            "name": "StandardGZRS",
+            "value": "Standard_GZRS",
+            "description": "The standard GZRS SKU."
+          },
+          {
+            "name": "PremiumZRS",
+            "value": "Premium_ZRS",
+            "description": "The premium ZRS SKU."
+          },
+          {
+            "name": "StandardRAGZRS",
+            "value": "Standard_RAGZRS",
+            "description": "The standard RAGZRS SKU."
           }
         ]
       }
@@ -18266,6 +18513,11 @@
           "type": "string",
           "description": "The service version that created the key.",
           "x-ms-client-name": "signedVersion"
+        },
+        "SignedDelegatedUserTid": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified.",
+          "x-ms-client-name": "signedDelegatedUserTid"
         },
         "Value": {
           "$ref": "#/definitions/base64Bytes",
