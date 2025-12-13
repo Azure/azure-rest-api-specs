@@ -1,0 +1,33 @@
+{
+    "operationId": "GetServiceInfoList",
+    "description": "Gets the information about all services belonging to the application specified by the application ID when the number of results returned is limited by the MaxResults parameter.",
+    "parameters": {
+        "api-version": "6.4",
+        "MaxResults": 1,
+        "applicationId": "VisualObjects"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ContinuationToken": "<32_digit_continuationToken>",
+                "Items": [
+                    {
+                        "ServiceKind": "Stateful",
+                        "Name": "fabric:\/VisualObjects\/VisualObjects.ActorService",
+                        "TypeName": "VisualObjects.ActorServiceType",
+                        "ManifestVersion": "14.0.0",
+                        "HasPersistedState": true,
+                        "HealthState": "Ok",
+                        "ServiceStatus": "Active",
+                        "IsServiceGroup": false,
+                        "ServiceMetadata": {
+                            "ArmMetadata": {}
+                        },
+                        "Id": "VisualObjects\/VisualObjects.ActorService"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "operationId": "ResolveService",
+    "description": "Sends a health report on the Service Fabric service.",
+    "parameters": {
+        "api-version": "6.0",
+        "serviceId": "fabric:/VisualObjects/VisualObjects.ActorService",
+        "PartitionKeyValue": 5534023222112865485,
+        "PartitionKeyType": 2
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "Name": "fabric:/VisualObjects/VisualObjects.ActorService",
+                "PartitionInformation": {
+                    "ServicePartitionKind": "Int64Range",
+                    "Id": "365a03af-3718-4580-bef8-6f5f432ea092",
+                    "LowKey": "5534023222112865485",
+                    "HighKey": "9223372036854775807"
+                },
+                "Endpoints": [
+                    {
+                        "Kind": "StatefulPrimary",
+                        "Address": "{\"Endpoints\":{\"\":\"jeff-desktop.redmond.corp.microsoft.com:34001+365a03af-3718-4580-bef8-6f5f432ea092-133117243825817602\"}}"
+                    },
+                    {
+                        "Kind": "StatefulSecondary",
+                        "Address": ""
+                    },
+                    {
+                        "Kind": "StatefulSecondary",
+                        "Address": ""
+                    }
+                ],
+                "Version": "%7B%22PartitionId%22:%22365a03af-3718-4580-bef8-6f5f432ea092%22,%22FMVersion%22:%22109%22,%22StoreVersion%22:%229%22,%22GenerationNumber%22:%7B%22Generation%22:%22133117242098880691%22,%22NodeId%22:%7B%22Id%22:%22a3784be1d81710242ed0a9632647b4f7%22%7D%7D%7D"
+            }
+        }
+    }
+}
