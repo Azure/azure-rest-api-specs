@@ -37,28 +37,35 @@ export default async function syncReviewDate({ github, context, core }) {
     // Step 2: Process each issue
     for (const issue of issues) {
       processedCount++;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       logger.info(`Processing issue #${issue.number}: ${issue.title}`);
 
       try {
         // Parse the review date from the issue description
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         const reviewDate = parseReviewDate(issue.body, logger);
 
         if (!reviewDate) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           logger.debug(`No review date found in issue #${issue.number}, skipping`);
           continue;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         logger.info(`Found review date "${reviewDate}" in issue #${issue.number}`);
 
         // Update the project item with the review date
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         const updated = await updateProjectReviewDate(github, issue.number, reviewDate, logger);
 
         if (updated) {
           updatedCount++;
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           logger.info(`Successfully updated review date for issue #${issue.number}`);
         }
       } catch (error) {
         errorCount++;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         logger.error(`Error processing issue #${issue.number}: ${inspect(error)}`);
       }
     }
@@ -202,7 +209,13 @@ async function updateProjectReviewDate(github, issueNumber, reviewDate, logger) 
     logger.debug(`Found project node ID: ${projectNodeId}`);
 
     // Step 2: Get the issue's node ID
-    const issueNodeId = await getIssueNodeId(github, issueNumber, logger);
+    const issueNodeId = await getIssueNodeId(
+      github,
+      "Azure",
+      "azure-rest-api-specs",
+      issueNumber,
+      logger,
+    );
 
     if (!issueNodeId) {
       logger.warning(`Could not find node ID for issue #${issueNumber}`);
@@ -282,11 +295,13 @@ async function getProjectNodeId(github, orgName, projectNumber, logger) {
  * Gets the node ID for an issue
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
+ * @param {string} owner - The repository owner
+ * @param {string} repo - The repository name
  * @param {number} issueNumber - The issue number
  * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
  * @returns {Promise<string | null>} - The issue node ID or null if not found
  */
-async function getIssueNodeId(github, issueNumber, logger) {
+async function getIssueNodeId(github, owner, repo, issueNumber, logger) {
   try {
     const query = `
       query($owner: String!, $repo: String!, $issueNumber: Int!) {
@@ -301,8 +316,8 @@ async function getIssueNodeId(github, issueNumber, logger) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const result = /** @type {any} */ (
       await github.graphql(query, {
-        owner: "Azure",
-        repo: "azure-rest-api-specs",
+        owner,
+        repo,
         issueNumber,
       })
     );
@@ -326,48 +341,63 @@ async function getIssueNodeId(github, issueNumber, logger) {
  */
 async function getProjectItemId(github, projectNodeId, issueNodeId, logger) {
   try {
-    const query = `
-      query($projectId: ID!, $issueId: ID!) {
-        node(id: $projectId) {
-          ... on ProjectV2 {
-            items(first: 100) {
-              nodes {
-                id
-                content {
-                  ... on Issue {
-                    id
+    let cursor = null;
+    let hasNextPage = true;
+
+    // Paginate through project items to find the matching issue
+    while (hasNextPage) {
+      const query = `
+        query($projectId: ID!, $cursor: String) {
+          node(id: $projectId) {
+            ... on ProjectV2 {
+              items(first: 100, after: $cursor) {
+                pageInfo {
+                  hasNextPage
+                  endCursor
+                }
+                nodes {
+                  id
+                  content {
+                    ... on Issue {
+                      id
+                    }
                   }
                 }
               }
             }
           }
         }
+      `;
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const result = /** @type {any} */ (
+        await github.graphql(query, {
+          projectId: projectNodeId,
+          cursor,
+        })
+      );
+
+      /** @type {any[]} */
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      const items = result?.node?.items?.nodes ?? [];
+
+      // Find the item that matches our issue
+      for (const item of items) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        if (item.content?.id === issueNodeId) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
+          return item.id;
+        }
       }
-    `;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const result = /** @type {any} */ (
-      await github.graphql(query, {
-        projectId: projectNodeId,
-        issueId: issueNodeId,
-      })
-    );
-
-    /** @type {any[]} */
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const items = result?.node?.items?.nodes ?? [];
-
-    // Find the item that matches our issue
-    for (const item of items) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      if (item.content?.id === issueNodeId) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return
-        return item.id;
-      }
+      // Check if there are more pages
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment
+      hasNextPage = result?.node?.items?.pageInfo?.hasNextPage ?? false;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      cursor = result?.node?.items?.pageInfo?.endCursor ?? null;
     }
 
-    // If not found in first 100, we might need pagination
-    // For now, return null
+    // Not found after checking all pages
     return null;
   } catch (error) {
     logger.error(`Error finding project item: ${inspect(error)}`);

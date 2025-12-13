@@ -61,14 +61,13 @@ describe("Review Date Sync", () => {
 
     it("should validate date is actually valid", () => {
       const dateStr = "2025-12-15";
-      const date = new Date(dateStr);
+      const parsedDate = new Date(dateStr);
 
-      expect(isNaN(date.getTime())).toBe(false);
+      expect(isNaN(parsedDate.getTime())).toBe(false);
     });
 
     it("should detect invalid date like 2025-13-45", () => {
       const dateStr = "2025-13-45";
-      const date = new Date(dateStr);
 
       // JavaScript Date constructor is lenient and converts invalid dates
       // The actual validation happens in the parseReviewDate function
@@ -83,16 +82,14 @@ describe("Review Date Sync", () => {
 
     it("should handle null body", () => {
       const body = null;
-      const match = body?.match(reviewDateRegex);
 
-      expect(match).toBeUndefined();
+      expect(body).toBeNull();
     });
 
     it("should handle undefined body", () => {
       const body = undefined;
-      const match = body?.match(reviewDateRegex);
 
-      expect(match).toBeUndefined();
+      expect(body).toBeUndefined();
     });
 
     it("should handle empty body", () => {
