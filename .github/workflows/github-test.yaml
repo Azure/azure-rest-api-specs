@@ -46,15 +46,8 @@ jobs:
           args: -color -verbose
 
       - if: ${{ matrix.folder == '.github' }}
-        name: Setup Node 24 and install runtime deps
-        uses: ./.github/actions/setup-node-install-deps
-        with:
-          # actions/github-script@v8 uses Node 24
-          node-version: 24.x
-          # "--no-audit": improves performance
-          # "--omit dev": not needed at runtime, improves performance
-          install-command: "npm ci --no-audit --omit dev"
-          working-directory: ./${{ matrix.folder }}
+        name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
 
       - if: ${{ matrix.folder == '.github' }}
         name: Verify all modules are importable
