@@ -46,17 +46,19 @@ jobs:
           args: -color -verbose
 
       - if: ${{ matrix.folder == '.github' }}
-        name: Setup Node 20 and install runtime deps
+        name: Setup Node 24 and install runtime deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v7 uses Node 20
-          node-version: 20.x
-          install-command: npm ci --omit dev
+          # actions/github-script@v8 uses Node 24
+          node-version: 24.x
+          # "--no-audit": improves performance
+          # "--omit dev": not needed at runtime, improves performance
+          install-command: "npm ci --no-audit --omit dev"
           working-directory: ./${{ matrix.folder }}
 
       - if: ${{ matrix.folder == '.github' }}
         name: Verify all modules are importable
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { join } = await import("path");
@@ -68,8 +70,8 @@ jobs:
       - name: Install dev deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v7 uses Node 20
-          node-version: 20.x
+          # actions/github-script@v8 uses Node 24
+          node-version: 24.x
           working-directory: ./${{ matrix.folder }}
 
       - run: npm run lint
