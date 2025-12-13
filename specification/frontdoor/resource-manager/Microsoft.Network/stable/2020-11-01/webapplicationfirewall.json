@@ -757,6 +757,45 @@
           "readOnly": true,
           "description": "Version of the managed rule set type."
         },
+        "ruleSetFeatures": {
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/ManagedRuleSetFeatures",
+          "description": "Feature set applying to the Ruleset."
+        },
+        "supportedRuleActions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ActionType"
+          },
+          "description": "Supported actions for the Rule."
+        },
+        "supportedRuleSetActions": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetActionType"
+          },
+          "description": "Supported actions for the entire RuleSet."
+        },
+        "supportedSkus": {
+          "description": "Map of objects for sku to related properties like state, etc. Keys can only be one of Enumeration (Classic_AzureFrontDoor, Standard_AzureFrontDoor, Premium_AzureFrontDoor).",
+          "type": "object",
+          "properties": {
+            "Classic_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            },
+            "Standard_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            },
+            "Premium_AzureFrontDoor": {
+              "$ref": "#/definitions/RuleSetDataBag"
+            }
+          },
+          "readOnly": true,
+          "additionalProperties": false
+        },
         "ruleGroups": {
           "type": "array",
           "readOnly": true,
@@ -859,6 +898,41 @@
         }
       }
     },
+    "RuleSetDataBag": {
+      "description": "Holds properties relating to a ruleset and sku association.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ManagedRuleSetDefinitionState",
+          "description": "Represents the state of the ruleset."
+        }
+      }
+    },
+    "ManagedRuleSetFeatures": {
+      "description": "Defines the feature set for a RuleSet.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "anomalyScoring": {
+          "type": "boolean",
+          "description": "Flag for if AnomalyScoring is supported or not."
+        }
+      }
+    },
+    "ManagedRuleSetDefinitionState": {
+      "description": "Enumeration values for a ManagedRuleSet's state.",
+      "type": "string",
+      "enum": [
+        "GeneralAvailability",
+        "Preview",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedRuleSetDefinitionState",
+        "modelAsString": true
+      }
+    },
     "ActionType": {
       "description": "Defines the action to take on rule match.",
       "type": "string",
@@ -866,7 +940,8 @@
         "Allow",
         "Block",
         "Log",
-        "Redirect"
+        "Redirect",
+        "AnomalyScoring"
       ],
       "x-ms-enum": {
         "name": "ActionType",
