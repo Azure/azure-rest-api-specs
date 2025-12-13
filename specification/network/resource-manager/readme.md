@@ -93,6 +93,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/securityPartnerProvider.json
   - Microsoft.Network/stable/2025-05-01/serviceCommunity.json
   - Microsoft.Network/stable/2025-05-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2025-05-01/serviceGateway.json
   - Microsoft.Network/stable/2025-05-01/serviceTags.json
   - Microsoft.Network/stable/2025-05-01/usage.json
   - Microsoft.Network/stable/2025-05-01/virtualNetwork.json
@@ -126,6 +127,17 @@ suppressions:
   - code: SystemDataDefinitionsCommonTypes
     from: network.json
     reason: False alarm.
+  - code: PutRequestResponseSchemeArm
+    from: serviceGateway.json
+    reason: Code issue in PutRequestResponseSchemeArm validation.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayAddressLocationsResult
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: Not a standard azure resource.
+    where:
+      - $.definitions.GetServiceGatewayServicesResult
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
