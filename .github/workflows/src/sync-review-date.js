@@ -4,8 +4,8 @@ import { inspect } from "util";
  * Syncs Review Date from issue descriptions to GitHub Projects V2
  *
  * This function:
- * 1. Lists all open issues in the repository
- * 2. Parses each issue description for a line matching "Review Date: YYYY-MM-DD"
+ * 1. Lists all open issues with the label "api-review-scoping"
+ * 2. Parses each issue description for a line matching "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
  * 3. Finds the corresponding item in GitHub Projects (Azure org, project 196)
  * 4. Updates the 'Review Date' custom field with the parsed date
  *
@@ -26,9 +26,9 @@ export default async function syncReviewDate({ github, context, core }) {
   logger.info("Starting Review Date sync process...");
 
   try {
-    // Step 1: Get all open issues in the repository
+    // Step 1: Get all open issues with the "api-review-scoping" label
     const issues = await getAllOpenIssues(github, context, logger);
-    logger.info(`Found ${issues.length} open issues to process`);
+    logger.info(`Found ${issues.length} open issues with "api-review-scoping" label to process`);
 
     let processedCount = 0;
     let updatedCount = 0;
@@ -96,7 +96,7 @@ export default async function syncReviewDate({ github, context, core }) {
 }
 
 /**
- * Retrieves all open issues from the repository
+ * Retrieves all open issues with the "api-review-scoping" label from the repository
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
  * @param {import('@actions/github-script').AsyncFunctionArguments["context"]} context
@@ -108,15 +108,16 @@ async function getAllOpenIssues(github, context, logger) {
   const perPage = 100;
   let page = 1;
 
-  logger.debug("Fetching open issues from repository...");
+  logger.debug("Fetching open issues with 'api-review-scoping' label from repository...");
 
-  // Paginate through all open issues
+  // Paginate through all open issues with the label
   while (true) {
     try {
       const response = await github.rest.issues.listForRepo({
         owner: context.repo.owner,
         repo: context.repo.repo,
         state: "open",
+        labels: "api-review-scoping",
         per_page: perPage,
         page: page,
       });
@@ -145,33 +146,52 @@ async function getAllOpenIssues(github, context, logger) {
 /**
  * Parses the review date from an issue body
  *
- * Looks for a line in the format: "Review Date: YYYY-MM-DD"
- * The date must be in ISO format (YYYY-MM-DD)
+ * Looks for a line in the format: "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+ * Example: "Review Date: 01/15/2026 08:00 AM PT"
  *
  * @param {string | null | undefined} body - The issue body text
  * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
- * @returns {string | null} - The parsed date in YYYY-MM-DD format, or null if not found
+ * @returns {string | null} - The parsed date in YYYY-MM-DD format (ISO), or null if not found
  */
 function parseReviewDate(body, logger) {
   if (!body) {
     return null;
   }
 
-  // Regular expression to match "Review Date: YYYY-MM-DD"
-  // This regex ensures the date is in valid YYYY-MM-DD format
-  const reviewDateRegex = /Review Date:\s*(\d{4}-\d{2}-\d{2})/i;
+  // Regular expression to match "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+  // Captures: month, day, year, hour, minute, AM/PM
+  const reviewDateRegex =
+    /Review Date:\s*(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})\s+(AM|PM)\s+PT/i;
   const match = body.match(reviewDateRegex);
 
-  if (match && match[1]) {
-    const dateStr = match[1];
+  if (match) {
+    const month = match[1];
+    const day = match[2];
+    const year = match[3];
+    const hour = match[4];
+    const minute = match[5];
+    const ampm = match[6].toUpperCase();
+
+    // Convert to 24-hour format for validation
+    let hour24 = parseInt(hour);
+    if (ampm === "PM" && hour24 !== 12) {
+      hour24 += 12;
+    } else if (ampm === "AM" && hour24 === 12) {
+      hour24 = 0;
+    }
+
+    // Create a date string in ISO format for validation
+    // Note: The GitHub Projects date field only stores dates (not times), so we only need YYYY-MM-DD
+    const dateStr = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 
     // Validate the date is actually valid
-    const date = new Date(dateStr);
+    const date = new Date(`${dateStr}T${hour24.toString().padStart(2, "0")}:${minute}:00`);
     if (isNaN(date.getTime())) {
-      logger.warning(`Found invalid date format: ${dateStr}`);
+      logger.warning(`Found invalid date format: ${match[0]}`);
       return null;
     }
 
+    // Return date in ISO format (YYYY-MM-DD) for GitHub Projects API
     return dateStr;
   }
 

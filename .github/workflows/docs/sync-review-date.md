@@ -2,13 +2,13 @@
 
 ## Overview
 
-This GitHub Action automatically syncs review dates from issue descriptions to the GitHub Projects V2 'Review Date' custom field.
+This GitHub Action automatically syncs review dates from issue descriptions to the GitHub Projects V2 'Review Date' custom field for issues labeled with "api-review-scoping".
 
 ## How It Works
 
 1. **Scheduled Execution**: Runs daily at 6:00 AM UTC
-2. **Issue Parsing**: Scans all open issues in the repository for a specific pattern
-3. **Date Extraction**: Looks for lines matching `Review Date: YYYY-MM-DD` in issue descriptions
+2. **Issue Filtering**: Scans only open issues with the "api-review-scoping" label
+3. **Date Extraction**: Looks for lines matching `Review Date: MM/DD/YYYY HH:MM AM/PM PT` in issue descriptions
 4. **Project Update**: Updates the 'Review Date' custom field in Azure org's Project 196
 
 ## Issue Format
@@ -16,13 +16,16 @@ This GitHub Action automatically syncs review dates from issue descriptions to t
 To have the Review Date automatically synced, add a line in your issue description:
 
 ```
-Review Date: 2025-12-15
+Review Date: 01/15/2026 08:00 AM PT
 ```
 
 **Requirements:**
 
-- The date must be in ISO format: `YYYY-MM-DD`
+- The issue must have the label "api-review-scoping"
+- The date must be in the format: `MM/DD/YYYY HH:MM AM/PM PT`
+- Example: `Review Date: 01/15/2026 08:00 AM PT`
 - The pattern is case-insensitive
+- The time zone must be PT (Pacific Time)
 - The date must be valid (e.g., not 2025-13-45)
 
 ## Project Configuration
@@ -67,10 +70,11 @@ View the summary in the workflow run details.
 
 **Possible reasons:**
 
-1. The issue is not added to Project 196
-2. The 'Review Date' custom field doesn't exist in the project
-3. The date format in the issue description is incorrect
-4. Permission issues with the GitHub token
+1. The issue does not have the "api-review-scoping" label
+2. The issue is not added to Project 196
+3. The 'Review Date' custom field doesn't exist in the project
+4. The date format in the issue description is incorrect (must be MM/DD/YYYY HH:MM AM/PM PT)
+5. Permission issues with the GitHub token
 
 **Check the workflow logs** for specific error messages.
 
