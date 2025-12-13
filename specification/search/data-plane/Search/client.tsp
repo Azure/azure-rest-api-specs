@@ -2720,7 +2720,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType");
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType");
-@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odatatype", "javascript");
+@@clientName(LuceneStandardTokenizerV2.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType");
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
