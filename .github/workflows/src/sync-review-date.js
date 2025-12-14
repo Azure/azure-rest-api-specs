@@ -4,10 +4,12 @@ import { inspect } from "util";
  * Syncs Review Date from issue descriptions to GitHub Projects V2
  *
  * This function:
- * 1. Lists all open issues with the label "api-review-scoping"
- * 2. Parses each issue description for a line matching "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
- * 3. Finds the corresponding item in GitHub Projects (Azure org, project 196)
- * 4. Updates the 'Review Date' custom field with the parsed date
+ * 1. Lists all open issues with the label "API Review Scoping"
+ * 2. Parses each issue description and comments for a line matching "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+ * 3. Uses the last review date found (from issue body or comments)
+ * 4. Finds the corresponding item in GitHub Projects (Azure org, project 196)
+ * 5. Updates the 'Review Date' custom field with the parsed date
+ * 6. Links any PR mentioned in the format "PR: https://github.com/Azure/azure-rest-api-specs/pull/XXXXX"
  *
  * @param {object} params
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} params.github - GitHub API client
@@ -26,9 +28,9 @@ export default async function syncReviewDate({ github, context, core }) {
   logger.info("Starting Review Date sync process...");
 
   try {
-    // Step 1: Get all open issues with the "api-review-scoping" label
+    // Step 1: Get all open issues with the "API Review Scoping" label
     const issues = await getAllOpenIssues(github, context, logger);
-    logger.info(`Found ${issues.length} open issues with "api-review-scoping" label to process`);
+    logger.info(`Found ${issues.length} open issues with "API Review Scoping" label to process`);
 
     let processedCount = 0;
     let updatedCount = 0;
@@ -41,9 +43,13 @@ export default async function syncReviewDate({ github, context, core }) {
       logger.info(`Processing issue #${issue.number}: ${issue.title}`);
 
       try {
-        // Parse the review date from the issue description
+        // Get all comments for the issue
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        const reviewDate = parseReviewDate(issue.body, logger);
+        const comments = await getIssueComments(github, context, issue.number, logger);
+
+        // Parse the review date from issue body and all comments, use the last one found
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+        const reviewDate = findLastReviewDate(issue.body, comments, logger);
 
         if (!reviewDate) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -54,14 +60,29 @@ export default async function syncReviewDate({ github, context, core }) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         logger.info(`Found review date "${reviewDate}" in issue #${issue.number}`);
 
-        // Update the project item with the review date
+        // Extract PR link from issue body or comments
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        const updated = await updateProjectReviewDate(github, issue.number, reviewDate, logger);
+        const prNumber = findPRLink(issue.body, comments, logger);
+
+        // Update the project item with the review date
+        const updated = await updateProjectReviewDate(
+          github,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+          issue.number,
+          reviewDate,
+          logger,
+        );
 
         if (updated) {
           updatedCount++;
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           logger.info(`Successfully updated review date for issue #${issue.number}`);
+
+          // If there's a PR link, try to link it to the issue
+          if (prNumber) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+            await linkPRToIssue(github, context, issue.number, prNumber, logger);
+          }
         }
       } catch (error) {
         errorCount++;
@@ -96,7 +117,7 @@ export default async function syncReviewDate({ github, context, core }) {
 }
 
 /**
- * Retrieves all open issues with the "api-review-scoping" label from the repository
+ * Retrieves all open issues with the "API Review Scoping" label from the repository
  *
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
  * @param {import('@actions/github-script').AsyncFunctionArguments["context"]} context
@@ -108,7 +129,7 @@ async function getAllOpenIssues(github, context, logger) {
   const perPage = 100;
   let page = 1;
 
-  logger.debug("Fetching open issues with 'api-review-scoping' label from repository...");
+  logger.debug("Fetching open issues with 'API Review Scoping' label from repository...");
 
   // Paginate through all open issues with the label
   while (true) {
@@ -117,7 +138,7 @@ async function getAllOpenIssues(github, context, logger) {
         owner: context.repo.owner,
         repo: context.repo.repo,
         state: "open",
-        labels: "api-review-scoping",
+        labels: "API Review Scoping",
         per_page: perPage,
         page: page,
       });
@@ -141,6 +162,181 @@ async function getAllOpenIssues(github, context, logger) {
   }
 
   return issues;
+}
+
+/**
+ * Retrieves all comments for an issue
+ *
+ * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments["context"]} context
+ * @param {number} issueNumber - The issue number
+ * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
+ * @returns {Promise<Array<any>>}
+ */
+async function getIssueComments(github, context, issueNumber, logger) {
+  const comments = [];
+  const perPage = 100;
+  let page = 1;
+
+  logger.debug(`Fetching comments for issue #${issueNumber}...`);
+
+  // Paginate through all comments
+  while (true) {
+    try {
+      const response = await github.rest.issues.listComments({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: issueNumber,
+        per_page: perPage,
+        page: page,
+      });
+
+      comments.push(...response.data);
+
+      logger.debug(`Fetched page ${page}: ${response.data.length} comments`);
+
+      // If we got fewer items than perPage, we've reached the end
+      if (response.data.length < perPage) {
+        break;
+      }
+
+      page++;
+    } catch (error) {
+      logger.error(`Error fetching comments for issue #${issueNumber}: ${inspect(error)}`);
+      throw error;
+    }
+  }
+
+  return comments;
+}
+
+/**
+ * Finds the last review date from issue body and comments
+ *
+ * Scans the issue body and all comments for review dates, and returns the last one found.
+ * This allows for rescheduled meetings where the new date is in a comment.
+ *
+ * @param {string | null | undefined} issueBody - The issue body text
+ * @param {Array<any>} comments - Array of comment objects
+ * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
+ * @returns {string | null} - The last review date found in YYYY-MM-DD format, or null if not found
+ */
+function findLastReviewDate(issueBody, comments, logger) {
+  const allDates = [];
+
+  // Parse date from issue body
+  const bodyDate = parseReviewDate(issueBody, logger);
+  if (bodyDate) {
+    allDates.push(bodyDate);
+    logger.debug(`Found review date in issue body: ${bodyDate}`);
+  }
+
+  // Parse dates from all comments
+  for (const comment of comments) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    const commentDate = parseReviewDate(comment.body, logger);
+    if (commentDate) {
+      allDates.push(commentDate);
+      logger.debug(`Found review date in comment: ${commentDate}`);
+    }
+  }
+
+  // Return the last date found (most recent mention)
+  if (allDates.length > 0) {
+    const lastDate = allDates[allDates.length - 1];
+    logger.info(`Using last review date found: ${lastDate}`);
+    return lastDate;
+  }
+
+  return null;
+}
+
+/**
+ * Finds a PR link from issue body or comments
+ *
+ * Looks for a line in the format: "PR: https://github.com/Azure/azure-rest-api-specs/pull/XXXXX"
+ *
+ * @param {string | null | undefined} issueBody - The issue body text
+ * @param {Array<any>} comments - Array of comment objects
+ * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
+ * @returns {number | null} - The PR number, or null if not found
+ */
+function findPRLink(issueBody, comments, logger) {
+  // Regular expression to match PR link
+  const prLinkRegex = /PR:\s*https:\/\/github\.com\/Azure\/azure-rest-api-specs\/pull\/(\d+)/i;
+
+  // Check issue body
+  if (issueBody) {
+    const match = issueBody.match(prLinkRegex);
+    if (match) {
+      const prNumber = parseInt(match[1]);
+      logger.info(`Found PR link in issue body: #${prNumber}`);
+      return prNumber;
+    }
+  }
+
+  // Check comments
+  for (const comment of comments) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const match = comment.body?.match(prLinkRegex);
+    if (match) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+      const prNumber = parseInt(match[1]);
+      logger.info(`Found PR link in comment: #${prNumber}`);
+      return prNumber;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Links a PR to an issue by adding a comment
+ *
+ * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments["context"]} context
+ * @param {number} issueNumber - The issue number
+ * @param {number} prNumber - The PR number
+ * @param {{info: (msg: string) => void, warning: (msg: string) => void, error: (msg: string) => void, debug: (msg: string) => void}} logger
+ * @returns {Promise<void>}
+ */
+async function linkPRToIssue(github, context, issueNumber, prNumber, logger) {
+  try {
+    logger.info(`Linking PR #${prNumber} to issue #${issueNumber}...`);
+
+    // Check if the PR exists and get its details
+    await github.rest.pulls.get({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      pull_number: prNumber,
+    });
+
+    // Link the issue by mentioning it in the PR (creates a reference)
+    // First check if we already have a comment linking them
+    const prComments = await github.rest.issues.listComments({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: prNumber,
+    });
+
+    const linkComment = `Linked to issue #${issueNumber} for API review tracking.`;
+    const alreadyLinked = prComments.data.some((comment) => comment.body?.includes(linkComment));
+
+    if (!alreadyLinked) {
+      await github.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: prNumber,
+        body: linkComment,
+      });
+      logger.info(`Successfully linked PR #${prNumber} to issue #${issueNumber}`);
+    } else {
+      logger.debug(`PR #${prNumber} is already linked to issue #${issueNumber}`);
+    }
+  } catch (error) {
+    logger.error(`Error linking PR #${prNumber} to issue #${issueNumber}: ${inspect(error)}`);
+    // Don't throw - this is a nice-to-have feature, not critical
+  }
 }
 
 /**

@@ -3,9 +3,11 @@ name: Sync Review Date to Projects
 # This workflow runs daily to sync Review Date information from issue descriptions
 # to the corresponding field in GitHub Projects V2 (Azure org, project 196)
 #
-# It processes open issues with the "api-review-scoping" label and updates the
-# 'Review Date' custom field when it finds a line in the format:
-# "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+# It processes open issues with the "API Review Scoping" label and:
+# - Scans issue body and comments for lines in the format: "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+# - Uses the last review date found (to handle rescheduled meetings)
+# - Updates the 'Review Date' custom field
+# - Links any PR mentioned in the format "PR: https://github.com/Azure/azure-rest-api-specs/pull/XXXXX"
 
 on:
   # Run daily at 6:00 AM UTC

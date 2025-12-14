@@ -2,14 +2,16 @@
 
 ## Overview
 
-This GitHub Action automatically syncs review dates from issue descriptions to the GitHub Projects V2 'Review Date' custom field for issues labeled with "api-review-scoping".
+This GitHub Action automatically syncs review dates from issue descriptions to the GitHub Projects V2 'Review Date' custom field for issues labeled with "API Review Scoping".
 
 ## How It Works
 
 1. **Scheduled Execution**: Runs daily at 6:00 AM UTC
-2. **Issue Filtering**: Scans only open issues with the "api-review-scoping" label
-3. **Date Extraction**: Looks for lines matching `Review Date: MM/DD/YYYY HH:MM AM/PM PT` in issue descriptions
-4. **Project Update**: Updates the 'Review Date' custom field in Azure org's Project 196
+2. **Issue Filtering**: Scans only open issues with the "API Review Scoping" label
+3. **Date Extraction**: Looks for lines matching `Review Date: MM/DD/YYYY HH:MM AM/PM PT` in issue descriptions and comments
+4. **Last Date Wins**: If multiple review dates are found (e.g., rescheduled meetings), uses the last one mentioned
+5. **Project Update**: Updates the 'Review Date' custom field in Azure org's Project 196
+6. **PR Linking**: If a PR link is found (format: `PR: https://github.com/Azure/azure-rest-api-specs/pull/XXXXX`), links the PR to the issue
 
 ## Issue Format
 
@@ -19,13 +21,20 @@ To have the Review Date automatically synced, add a line in your issue descripti
 Review Date: 01/15/2026 08:00 AM PT
 ```
 
+Optionally, include a PR link to automatically link the PR to the issue:
+
+```
+PR: https://github.com/Azure/azure-rest-api-specs/pull/37730
+```
+
 **Requirements:**
 
-- The issue must have the label "api-review-scoping"
+- The issue must have the label "API Review Scoping"
 - The date must be in the format: `MM/DD/YYYY HH:MM AM/PM PT`
 - Example: `Review Date: 01/15/2026 08:00 AM PT`
 - The pattern is case-insensitive
 - The time zone must be PT (Pacific Time)
+- If the meeting is rescheduled, add a new review date line in a comment - the last date found will be used
 - The date must be valid (e.g., not 2025-13-45)
 
 ## Project Configuration
@@ -70,7 +79,7 @@ View the summary in the workflow run details.
 
 **Possible reasons:**
 
-1. The issue does not have the "api-review-scoping" label
+1. The issue does not have the "API Review Scoping" label
 2. The issue is not added to Project 196
 3. The 'Review Date' custom field doesn't exist in the project
 4. The date format in the issue description is incorrect (must be MM/DD/YYYY HH:MM AM/PM PT)
