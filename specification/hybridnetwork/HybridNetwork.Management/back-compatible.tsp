@@ -4,6 +4,14 @@ using Azure.ClientGenerator.Core;
 using Microsoft.HybridNetwork;
 
 @@clientName(ResourceElementTemplate.type, "ResourceElementType");
+@@clientName(NetworkFunctionDefinitionResourceElementTemplateDetails.type,
+  "ResourceElementType",
+  "go"
+);
+@@clientName(ArmResourceDefinitionResourceElementTemplateDetails.type,
+  "ResourceElementType",
+  "go"
+);
 
 @@clientName(ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
   "parameters"
