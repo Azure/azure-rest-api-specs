@@ -42,7 +42,7 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Get changed files
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
@@ -80,7 +80,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.run-lintdiff.outputs.summary }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.run-lintdiff.outputs.summary }}
