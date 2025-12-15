@@ -1,4 +1,6 @@
-trigger:
+trigger: none
+
+pr: 
   branches:
     include:
       - main
@@ -6,8 +8,6 @@ trigger:
     include:
       - .github/copilot-instructions.md
       - eng/common/instructions/azsdk-tools/**
-
-pr: none
 
 parameters:
   - name: EvalProject
@@ -33,16 +33,21 @@ variables:
   TargetRepoOwner: ${{ split(variables['Build.Repository.Name'], '/')[0] }}
   TargetRepoName: ${{ split(variables['Build.Repository.Name'], '/')[1] }}
   TargetRepoCommit: ${{ variables['Build.SourceVersion'] }}
- 
-extends:
-  template: /eng/common/pipelines/templates/jobs/ai-eval-job.yml
-  parameters:
-    EvalProject: ${{ parameters.EvalProject }}
-    OpenAIEndPoint: ${{ parameters.OpenAIEndPoint }}
-    Model: ${{ parameters.Model }}
-    EvalRepoOwner: ${{ parameters.EvalRepoOwner }}
-    EvalRepoName: ${{ parameters.EvalRepoName }}
-    EvalRepoCommit: ${{ parameters.EvalRepoCommit }}
-    TargetRepoOwner: $(TargetRepoOwner)
-    TargetRepoName: $(TargetRepoName)
-    TargetRepoCommit: $(TargetRepoCommit)
+
+stages:
+- stage: ai_evals
+  displayName: AI Evaluations
+  condition: eq(variables['System.TeamProject'], 'internal')
+
+  jobs:
+    - template: /eng/common/pipelines/templates/jobs/ai-eval-job.yml
+      parameters:
+        EvalProject: ${{ parameters.EvalProject }}
+        OpenAIEndPoint: ${{ parameters.OpenAIEndPoint }}
+        Model: ${{ parameters.Model }}
+        EvalRepoOwner: ${{ parameters.EvalRepoOwner }}
+        EvalRepoName: ${{ parameters.EvalRepoName }}
+        EvalRepoCommit: ${{ parameters.EvalRepoCommit }}
+        TargetRepoOwner: $(TargetRepoOwner)
+        TargetRepoName: $(TargetRepoName)
+        TargetRepoCommit: $(TargetRepoCommit)
