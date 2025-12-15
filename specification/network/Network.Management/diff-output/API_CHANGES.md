@@ -225,6 +225,7 @@
 | `definitions.VpnSiteProperties.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
@@ -309,6 +310,7 @@
 | `definitions.VpnSiteLink.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the resource that is unique within a resource group. Thi...` |
 | `definitions.VpnSiteLinkConnection.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the resource that is unique within a resource group. Thi...` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].name__added` | added | `$top` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].name__deleted` | deleted | `location` |
@@ -326,6 +328,7 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].in__added` | added | `query` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].in__deleted` | deleted | `path` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].in__deleted` | deleted | `path` |
@@ -599,6 +602,7 @@
 | `definitions.VpnSiteProperties.properties.provisioningState.type__added` | added | `string` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].type__added` | added | `integer` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].type__deleted` | deleted | `string` |
@@ -746,7 +750,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get__deleted` | deleted | `{"operationId":"ExpressRouteServiceProviders_List","description":"Gets all the available express rou...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get__deleted` | deleted | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServices","description":"Returns all ...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get__deleted` | deleted | `{"operationId":"AvailableDelegations_List","description":"Gets all of the available subnet delegatio...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].get__deleted` | deleted | `{"operationId":"AvailableServiceAliases_List","description":"Gets all available service aliases for ...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].get__deleted` | deleted | `{"operationId":"NetworkSecurityPerimeterServiceTags_List","description":"Gets the list of service ta...` |
@@ -764,7 +767,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].post__added` | added | `{"operationId":"ExpressRouteServiceProviders_List","description":"Gets all the available express rou...` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].post__added` | added | `{"operationId":"PrivateLinkServices_ListAutoApprovedPrivateLinkServices","description":"Returns all ...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].post__added` | added | `{"operationId":"AvailableDelegations_List","description":"Gets all of the available subnet delegatio...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases'].post__added` | added | `{"operationId":"AvailableServiceAliases_List","description":"Gets all available service aliases for ...` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags'].post__added` | added | `{"operationId":"NetworkSecurityPerimeterServiceTags_List","description":"Gets the list of service ta...` |
@@ -943,8 +945,8 @@
 | `definitions.VirtualNetworkTapListResult.required__added` | added | `["value"]` |
 | `definitions.VirtualRouterListResult.required__added` | added | `["value"]` |
 | `definitions.VirtualRouterPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.VpnSite.required__deleted` | deleted | `["location"]` |
 | `definitions.WebApplicationFirewallPolicyListResult.required__added` | added | `["value"]` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[0].required__deleted` | deleted | `true` |
@@ -1465,6 +1467,7 @@
 | `definitions.VirtualRouter.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.VirtualWAN.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `definitions.VpnGateway.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
+| `definitions.VpnSite.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences/{linkReferenceName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"location header"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links/{linkName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"location header"}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}'].delete.responses.202.headers.location__deleted` | deleted | `{"type":"string","description":"The URL of the resource used to check the status of the asynchronous...` |
@@ -1862,6 +1865,7 @@
 | `definitions.VirtualNetworkTap.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.VirtualRouter.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 | `definitions.VpnGateway.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
+| `definitions.VpnSite.properties.tags__added` | added | `{"$ref":"#/definitions/TagsObject","description":"Resource tags."}` |
 
 ### Changes for `enum`
 
@@ -3223,6 +3227,7 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkDnsNameAvailability'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.parameters[1].name` | `parameters` | `body` |

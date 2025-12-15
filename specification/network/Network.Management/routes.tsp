@@ -441,6 +441,7 @@ interface PrivateLinkServicesOperationGroup {
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServices")
   @autoRoute
   @list
+  @get
   @action("autoApprovedPrivateLinkServices")
   listAutoApprovedPrivateLinkServices is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
@@ -540,6 +541,7 @@ interface UsagesOperationGroup {
   @operationId("Usages_List")
   @autoRoute
   @list
+  @get
   @action("usages")
   list is ArmProviderActionSync<
     Response = UsagesListResult,

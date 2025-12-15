@@ -702,69 +702,28 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get__deleted": {
-        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
-        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
-        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -30433,9 +30392,16 @@
       }
     },
     "VpnSite": {
-      "required__deleted": [
-        "location"
-      ],
+      "properties": {
+        "tags__added": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location__added": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         [
           "~",

@@ -1992,7 +1992,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "post": {
+      "get": {
         "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
         "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
@@ -78881,12 +78881,23 @@
           "description": "Properties of the VPN site.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "$ref": "#/definitions/TagsObject",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
