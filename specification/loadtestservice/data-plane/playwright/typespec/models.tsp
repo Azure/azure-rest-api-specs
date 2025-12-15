@@ -63,10 +63,10 @@ union WorkspaceState {
   string,
 
   @doc("The workspace is Active.")
-  "Active",
+  Active: "Active",
 
   @doc("The workspace is Inactive.")
-  "Inactive",
+  Inactive: "Inactive",
 }
 
 @doc("The Azure subscription state.")
