@@ -7,12 +7,14 @@ import "./common.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.ChangeSafety;
 
 @doc("Resource to track the rollout steps, with SafeRollout as parent resource.")
 @parentResource(SafeRollout)
+@removed(Versions.v2026_01_01_preview)
 model Step is ProxyResource<StepProperties> {
   @doc("The name of the step")
   @pattern("^[a-zA-Z0-9-]{3,100}$")
@@ -24,15 +26,8 @@ model Step is ProxyResource<StepProperties> {
   name: string;
 }
 
-@doc("Azure resource Id of a StageProgression.")
-scalar StageProgressionResourceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ChangeSafety/changeStates/stageProgressions",
-    }
-  ]>;
-
 @doc("Details of the properties of the Step.")
+@removed(Versions.v2026_01_01_preview)
 model StepProperties {
   @visibility(Lifecycle.Read)
   @doc("The provisioning state of the step.")
@@ -56,6 +51,7 @@ model StepProperties {
 }
 
 @doc("Object to track the operations of the step.")
+@removed(Versions.v2026_01_01_preview)
 model StepOperation {
   @doc("The name of the operation")
   name: string;
@@ -80,6 +76,7 @@ model StepOperation {
 }
 
 @doc("Indicates the current status of the operation.")
+@removed(Versions.v2026_01_01_preview)
 union OperationStatus {
   string,
 
@@ -103,6 +100,7 @@ union OperationStatus {
 }
 
 @doc("The operation type.")
+@removed(Versions.v2026_01_01_preview)
 union OperationType {
   string,
 
@@ -118,7 +116,10 @@ union OperationType {
 
 @armResourceOperations
 interface Steps {
+  @removed(Versions.v2026_01_01_preview)
   get is ArmResourceRead<Step>;
+  @removed(Versions.v2026_01_01_preview)
   listBySubscription is ArmListBySubscription<Step>;
+  @removed(Versions.v2026_01_01_preview)
   listByParent is ArmResourceListByParent<Step>;
 }

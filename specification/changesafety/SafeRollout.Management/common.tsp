@@ -65,3 +65,11 @@ union Status {
   @doc("Resource is initialized.")
   Initialized: "Initialized",
 }
+
+@doc("Azure resource Id of a StageProgression.")
+scalar StageProgressionResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety/changeStates/stageProgressions",
+    }
+  ]>;
