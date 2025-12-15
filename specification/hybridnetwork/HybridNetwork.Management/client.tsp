@@ -13,7 +13,7 @@ namespace Microsoft.HybridNetwork;
 @@clientName(AzureCoreNFVIDetails, "AzureCoreNfviDetails", "java");
 @@clientName(AzureArcK8sClusterNFVIDetails,
   "AzureArcK8SClusterNfviDetails",
-  "java"
+  "java,python"
 );
 @@clientName(AzureOperatorNexusClusterNFVIDetails,
   "AzureOperatorNexusClusterNfviDetails",
@@ -29,5 +29,10 @@ namespace Microsoft.HybridNetwork;
 );
 @@clientName(VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
   "VirtualNetworkFunctionDefinitionVersion",
-  "java"
+  "java,python"
+);
+
+@@clientName(Microsoft.HybridNetwork,
+  "HybridNetworkManagementClient",
+  "python"
 );
