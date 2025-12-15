@@ -464,7 +464,7 @@ model WorkspaceResourceProperties {
   /**
    * DEPRECATED: This field is deprecated and will be removed in future versions. Please use the quotas under providers instead.
    */
-  #deprecated "This field is deprecated and will be removed in future versions. Please use the quotas under providers instead."
+  @removed(Versions.v2025_12_15_preview)
   @added(Versions.v2025_08_11_preview)
   quotas?: QuotaAllocations;
 }
