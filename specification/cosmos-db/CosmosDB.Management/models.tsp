@@ -28,13 +28,13 @@ model DataMaskingPolicy {
   /**
    * List of JSON paths to include in the masking policy.
    */
-  @identifiers(#[""])
+  @identifiers(#[])
   includedPaths?: DataMaskingPolicyIncludedPath[];
 
   /**
    * List of JSON paths to exclude from masking.
    */
-  @identifiers(#[""])
+  @identifiers(#[])
   excludedPaths?: DataMaskingPolicyExcludedPath[];
 
   /**
@@ -1282,7 +1282,7 @@ model DatabaseAccountGetProperties {
   /**
    * List of IpRules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IpAddressOrRange[];
 
   /**
@@ -1419,7 +1419,7 @@ model DatabaseAccountGetProperties {
   /**
    * The CORS policy for the Cosmos DB database account.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cors?: CorsPolicy[];
 
   /**
@@ -1723,13 +1723,13 @@ model RestoreParameters extends RestoreParametersBase {
   /**
    * List of specific databases available for restore.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   databasesToRestore?: DatabaseRestoreResource[];
 
   /**
    * List of specific gremlin databases available for restore.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   gremlinDatabasesToRestore?: GremlinDatabaseRestoreResource[];
 
   /**
@@ -2092,7 +2092,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * List of IpRules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IpAddressOrRange[];
 
   /**
@@ -2178,7 +2178,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * The CORS policy for the Cosmos DB database account.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cors?: CorsPolicy[];
 
   /**
@@ -2322,7 +2322,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * List of IpRules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IpAddressOrRange[];
 
   /**
@@ -2413,7 +2413,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * The CORS policy for the Cosmos DB database account.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   cors?: CorsPolicy[];
 
   /**
@@ -2511,7 +2511,7 @@ model FailoverPolicies {
    * List of failover policies.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failoverPolicies: FailoverPolicy[];
 }
 
@@ -2540,12 +2540,14 @@ model DatabaseAccountListKeysResult
   /**
    * Base 64 encoded value of the primary read-write key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-write key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryMasterKey?: string;
 }
@@ -2557,12 +2559,14 @@ model DatabaseAccountListReadOnlyKeysResult {
   /**
    * Base 64 encoded value of the primary read-only key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryReadonlyMasterKey?: string;
 
   /**
    * Base 64 encoded value of the secondary read-only key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryReadonlyMasterKey?: string;
 }
@@ -2574,7 +2578,7 @@ model DatabaseAccountListConnectionStringsResult {
   /**
    * An array that contains the connection strings for the Cosmos DB account.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectionStrings?: DatabaseAccountConnectionString[];
 }
 
@@ -2726,7 +2730,7 @@ model Metric {
   /**
    * The metric values for the specified time window and timestep.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   metricValues?: MetricValue[];
 }
@@ -2845,7 +2849,7 @@ model PercentileMetric {
   /**
    * The percentile metric values for the specified time window and timestep.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   metricValues?: PercentileMetricValue[];
 }
@@ -3047,7 +3051,7 @@ model MetricDefinition {
   /**
    * The list of metric availabilities for the account.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   metricAvailabilities?: MetricAvailability[];
 
@@ -3714,36 +3718,37 @@ model IndexingPolicy {
   /**
    * List of paths to include in the indexing
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includedPaths?: IncludedPath[];
 
   /**
    * List of paths to exclude from indexing
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   excludedPaths?: ExcludedPath[];
 
   /**
    * List of composite path list
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   compositeIndexes?: CompositePath[][];
 
   /**
    * List of spatial specifics
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   spatialIndexes?: SpatialSpec[];
 
   /**
    * List of paths to include in the vector indexing
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vectorIndexes?: VectorIndex[];
 
   /**
    * List of paths to include in the full text indexing
    */
+  @identifiers(#[])
   fullTextIndexes?: FullTextIndexPath[];
 }
 
@@ -3759,7 +3764,7 @@ model IncludedPath {
   /**
    * List of indexes for this path
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   indexes?: Indexes[];
 }
 
@@ -3883,7 +3888,7 @@ model UniqueKeyPolicy {
   /**
    * List of unique keys on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   uniqueKeys?: UniqueKey[];
 }
 
@@ -3924,7 +3929,7 @@ model ClientEncryptionPolicy {
   /**
    * Paths of the item that need encryption along with path-specific settings.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includedPaths: ClientEncryptionIncludedPath[];
 
   /**
@@ -4023,7 +4028,7 @@ model VectorEmbeddingPolicy {
   /**
    * List of vector embeddings
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   vectorEmbeddings?: VectorEmbedding[];
 }
 
@@ -4064,7 +4069,7 @@ model FullTextPolicy {
   /**
    * List of FullText Paths
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   fullTextPaths?: FullTextPath[];
 }
 
@@ -4668,7 +4673,7 @@ model MongoDBCollectionResource {
   /**
    * List of index keys
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   indexes?: MongoIndex[];
 
   /**
@@ -5577,32 +5582,32 @@ model ClusterResourceProperties {
   /**
    * List of TLS certificates used to authorize clients connecting to the cluster. All connections are TLS encrypted whether clientCertificates is set or not, but if clientCertificates is set, the managed Cassandra cluster will reject all connections not bearing a TLS client certificate that can be validated from one or more of the public certificates in this property.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clientCertificates?: Certificate[];
 
   /**
    * List of TLS certificates used to authorize gossip from unmanaged data centers. The TLS certificates of all nodes in unmanaged data centers must be verifiable using one of the certificates provided in this property.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   externalGossipCertificates?: Certificate[];
 
   /**
    * List of TLS certificates that unmanaged nodes must trust for gossip with managed nodes. All managed nodes will present TLS client certificates that are verifiable using one of the certificates provided in this property.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   gossipCertificates?: Certificate[];
 
   /**
    * List of IP addresses of seed nodes in unmanaged data centers. These will be added to the seed node lists of all managed nodes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   externalSeedNodes?: SeedNode[];
 
   /**
    * List of IP addresses of seed nodes in the managed data centers. These should be added to the seed node lists of all unmanaged nodes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   seedNodes?: SeedNode[];
 
@@ -5639,13 +5644,12 @@ model ClusterResourceProperties {
   /**
    * Extensions to be added or updated on cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   extensions?: string[];
 
   /**
    * List of backup schedules that define when you want to back up your data.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backupSchedules?: BackupSchedule[];
 
   /**
@@ -5928,7 +5932,7 @@ model ListCommands {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: CommandPublicResource[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -5945,7 +5949,7 @@ model ListBackups {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: BackupResource[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6032,7 +6036,7 @@ model DataCenterResourceProperties {
   /**
    * IP addresses for seed nodes in this data center. This is for reference. Generally you will want to use the seedNodes property on the cluster, which aggregates the seed nodes from all data centers in the cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   seedNodes?: SeedNode[];
 
@@ -6114,6 +6118,7 @@ model AuthenticationMethodLdapProperties {
   /**
    * Password of the look up user.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceUserPassword?: string;
 
   /**
@@ -6127,7 +6132,7 @@ model AuthenticationMethodLdapProperties {
   searchFilterTemplate?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serverCertificates?: Certificate[];
 
   /**
@@ -6148,13 +6153,13 @@ model CassandraClusterPublicStatus {
   /**
    * List relevant information about any connection errors to the Datacenters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   connectionErrors?: ConnectionError[];
 
   /**
    * List relevant information about any errors about cluster, data center and connection error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: CassandraError[];
 
   /**
@@ -6222,11 +6227,10 @@ model CassandraClusterPublicStatusDataCentersItem {
   /**
    * A list of all seed nodes in the cluster, managed and unmanaged.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   seedNodes?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodes?: ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems[];
 }
 
@@ -6352,13 +6356,13 @@ model MongoRoleDefinitionResource {
   /**
    * A set of privileges contained by the Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Scopes higher than Database are not enforceable as privilege.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privileges?: Privilege[];
 
   /**
    * The set of roles inherited by this Role Definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   roles?: Role[];
 }
 
@@ -6447,6 +6451,7 @@ model MongoUserDefinitionResource {
   /**
    * The password for User Definition. Response does not contain user password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -6457,13 +6462,12 @@ model MongoUserDefinitionResource {
   /**
    * A custom definition for the USer Definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   customData?: string;
 
   /**
    * The set of roles inherited by the User Definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   roles?: Role[];
 
   /**
@@ -6555,6 +6559,7 @@ model NotebookWorkspaceConnectionInfoResult {
   /**
    * Specifies auth token used for connecting to Notebook server (uses token-based auth).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   authToken?: string;
 
@@ -6638,13 +6643,12 @@ model SqlRoleDefinitionResource {
   /**
    * A set of fully qualified Scopes at or below which Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   assignableScopes?: string[];
 
   /**
    * The set of operations allowed through this Role Definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   permissions?: Permission[];
 }
 
@@ -6795,7 +6799,7 @@ model RestorableDatabaseAccountProperties {
    * List of regions where the of the database account can be restored from.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restorableLocations?: RestorableLocationResource[];
 }
 
@@ -8557,7 +8561,7 @@ model CassandraRUToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
    * Copy Job tasks.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: CassandraRUToCassandraRUCopyJobTask[];
 
   /**
@@ -8584,7 +8588,7 @@ model BlobToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: BlobToCassandraRUCopyJobTask[];
 
   /**
@@ -8612,7 +8616,7 @@ model CassandraRUToBlobCopyJobProperties extends BaseCopyJobProperties {
    * Copy Job tasks.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: CassandraRUToBlobCopyJobTask[];
 
   /**
@@ -8639,7 +8643,7 @@ model MongoRUToMongoRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: MongoRUToMongoRUCopyJobTask[];
 
   /**
@@ -8667,7 +8671,7 @@ model MongoRUToMongoVCoreCopyJobProperties extends BaseCopyJobProperties {
    * Copy Job tasks.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: MongoRUToMongoVCoreCopyJobTask[];
 
   /**
@@ -8694,7 +8698,7 @@ model NoSqlRUToNoSqlRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: NoSqlRUToNoSqlRUCopyJobTask[];
 
   /**
