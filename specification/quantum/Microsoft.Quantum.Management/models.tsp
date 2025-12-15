@@ -530,6 +530,12 @@ model Provider {
    * Id to track resource usage for the provider.
    */
   resourceUsageId?: string;
+
+  /**
+   * Quota allocations associated with this provider. Available only for special providers.
+   */
+  @added(Versions.v2025_12_15_preview)
+  quotas?: QuotaAllocations;
 }
 
 /**
