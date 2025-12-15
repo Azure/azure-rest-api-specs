@@ -26,7 +26,8 @@ interface UsageAggregatesOperationGroup {
   @list
   @action("UsageAggregates")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<UsageAggregation> | ArmAcceptedLroResponse,
+    Response = ResourceListResult<UsageAggregation> | (ArmAcceptedLroResponse &
+      ErrorObjectResponse),
     Scope = SubscriptionActionScope,
     Parameters = {
       /**
