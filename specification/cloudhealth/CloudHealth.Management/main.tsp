@@ -711,10 +711,10 @@ model AzureResourceSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.AzureResourceMetric;
 
-  ...OmitProperties<
+  ...OptionalProperties<OmitProperties<
     ResourceMetricSignalDefinitionProperties,
     "provisioningState" | "deletionDate" | "tags" | "signalKind"
-  >;
+  >>;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -723,10 +723,10 @@ model LogAnalyticsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.LogAnalyticsQuery;
 
-  ...OmitProperties<
+  ...OptionalProperties<OmitProperties<
     LogAnalyticsQuerySignalDefinitionProperties,
     "provisioningState" | "deletionDate" | "tags" | "signalKind"
-  >;
+  >>;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -735,10 +735,10 @@ model PrometheusMetricsSignal extends SignalInstanceProperties {
   @doc("Kind of the signal instance")
   signalKind: SignalKind.PrometheusMetricsQuery;
 
-  ...OmitProperties<
+  ...OptionalProperties<OmitProperties<
     PrometheusMetricsSignalDefinitionProperties,
     "provisioningState" | "deletionDate" | "tags" | "signalKind"
-  >;
+  >>;
 }
 
 @added(Versions.v2026_01_01_preview)
