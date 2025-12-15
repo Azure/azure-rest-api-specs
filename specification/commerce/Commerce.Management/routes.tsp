@@ -80,8 +80,9 @@ interface RateCardOperationGroup {
       /**
        * The filter to apply on the operation. It ONLY supports the 'eq' and 'and' logical operators at this time. All the 4 query parameters 'OfferDurableId',  'Currency', 'Locale', 'Region' are required to be a part of the $filter.
        */
-      @query("$filter")
-      filter: string;
-    }
+      @query
+      $filter: string;
+    },
+    Error = ErrorResponse
   >;
 }
