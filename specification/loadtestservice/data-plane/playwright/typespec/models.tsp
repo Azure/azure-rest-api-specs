@@ -74,19 +74,19 @@ union SubscriptionState {
   string,
 
   @doc("The subscription state is Registered.")
-  "Registered",
+  Registered: "Registered",
 
   @doc("The subscription state is Warned.")
-  "Warned",
+  Warned: "Warned",
 
   @doc("The subscription state is Suspended.")
-  "Suspended",
+  Suspended: "Suspended",
 
   @doc("The subscription state is Deleted.")
-  "Deleted",
+  Deleted: "Deleted",
 
   @doc("The subscription state is Unregistered.")
-  "Unregistered",
+  Unregistered: "Unregistered",
 }
 
 @doc("The enablement status of a feature.")
