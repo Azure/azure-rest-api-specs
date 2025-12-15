@@ -233,6 +233,11 @@ model DdaDetails {
  */
 model GpuPartitionDetails {
   /**
+   * The name used by Hyper-V commandlets for GPU partitioning
+   */
+  partitionableGpuName?: string;
+
+  /**
    * Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.
    */
   @visibility(Lifecycle.Read)

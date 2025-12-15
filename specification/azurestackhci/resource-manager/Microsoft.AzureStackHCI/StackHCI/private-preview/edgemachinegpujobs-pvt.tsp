@@ -2,6 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "./edgeMachineJobs-pvt.tsp";
+import "./edgemachinegpu-pvt.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -23,7 +25,7 @@ model EdgeMachineGpuJob
     Resource = EdgeMachineGpuJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,512}$"
   >;
 }
 
@@ -62,6 +64,12 @@ interface EdgeMachineGpuJobs {
  */
 @discriminator("jobType")
 model EdgeMachineGpuJobProperties {
+  /**
+   * The ID of the GPU on which the job is to be performed.
+   */
+  @visibility(Lifecycle.Read)
+  gpuId: string;
+
   /**
    * Type of GPU job to be performed.
    */
@@ -108,6 +116,12 @@ model EdgeMachineGpuJobProperties {
    */
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * Reported properties specific to the GPU job.
+   */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: JobReportedProperties;
 }
 
 /**
@@ -145,6 +159,11 @@ model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.CreatePartition;
+
+  /**
+   * Number of partitions to be created on the GPU.
+   */
+  partitionCount: int32;
 }
 
 /**
@@ -155,6 +174,11 @@ model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.SwitchMode;
+
+  /**
+   * Desired GPU mode to switch to.
+   */
+  mode: GpuMode;
 }
 
 /**
@@ -165,6 +189,11 @@ model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.AssignPartition;
+
+  /**
+   * Virtual machine ID to which the GPU partition is assigned.
+   */
+  vmId: string;
 }
 
 /**
@@ -175,4 +204,9 @@ model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Type of GPU job to be performed.
    */
   jobType: EdgeMachineGpuJobType.RemovePartition;
+
+  /**
+   * Virtual machine ID from which the GPU partition is removed.
+   */
+  vmId: string;
 }

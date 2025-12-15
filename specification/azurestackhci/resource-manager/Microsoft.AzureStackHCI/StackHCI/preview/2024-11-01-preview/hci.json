@@ -1623,7 +1623,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           }
         ],
         "responses": {
@@ -1696,7 +1696,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           },
           {
             "name": "resource",
@@ -1796,7 +1796,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           }
         ],
         "responses": {
@@ -2454,6 +2454,15 @@
     "AssignPartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for assigning GPU partition to a specific workload or virtual machine.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID to which the GPU partition is assigned."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -2523,6 +2532,16 @@
     "CreatePartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "properties": {
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of partitions to be created on the GPU."
+        }
+      },
+      "required": [
+        "partitionCount"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -3000,6 +3019,11 @@
       "type": "object",
       "description": "EdgeMachine GPU Job properties",
       "properties": {
+        "gpuId": {
+          "type": "string",
+          "description": "The ID of the GPU on which the job is to be performed.",
+          "readOnly": true
+        },
         "jobType": {
           "$ref": "#/definitions/EdgeMachineGpuJobType",
           "description": "Type of GPU job to be performed.",
@@ -3043,10 +3067,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "description": "Error details.",
           "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/JobReportedProperties",
+          "description": "Reported properties specific to the GPU job.",
+          "readOnly": true
         }
       },
       "discriminator": "jobType",
       "required": [
+        "gpuId",
         "jobType"
       ]
     },
@@ -3994,6 +4024,10 @@
       "type": "object",
       "description": "Represents the details of the GPU specifically in GPU-P mode.",
       "properties": {
+        "partitionableGpuName": {
+          "type": "string",
+          "description": "The name used by Hyper-V commandlets for GPU partitioning"
+        },
         "partitionSizeGb": {
           "type": "string",
           "description": "Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.",
@@ -5614,6 +5648,15 @@
     "RemovePartitionGpuJobProperties": {
       "type": "object",
       "description": "Properties for removing GPU partition and freeing up resources for other workloads.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID from which the GPU partition is removed."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"
@@ -5875,6 +5918,15 @@
     "SwitchModeGpuJobProperties": {
       "type": "object",
       "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Desired GPU mode to switch to."
+        }
+      },
+      "required": [
+        "mode"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/EdgeMachineGpuJobProperties"

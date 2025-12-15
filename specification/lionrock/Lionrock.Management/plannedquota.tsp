@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Lionrock;
 
@@ -19,10 +21,16 @@ model PlannedQuotaResourceProperties {
   contactEmail: string;
 
   @doc("The name of the subscription definition in the plan to bind the subscription ID to.")
-  subscriptionNameInPlan: string;
+  @madeOptional(Versions.v2025_12_04_preview)
+  subscriptionNameInPlan?: string;
 
   @doc("Stage name.")
+  @removed(Versions.v2025_12_04_preview)
   stage?: string;
+
+  @doc("Blueprint name.")
+  @added(Versions.v2025_12_04_preview)
+  blueprint?: string;
 
   @doc("The Azure location.")
   azureLocation: azureLocation;
