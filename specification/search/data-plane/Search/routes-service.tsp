@@ -4,6 +4,7 @@ import "./models-service.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Search;
 
@@ -70,6 +71,7 @@ interface DataSources {
   create is SearchOperation<
     {
       @doc("The definition of the datasource to create.")
+      @clientName("dataSourceConnection")
       @body
       dataSource: SearchIndexerDataSource;
     },
