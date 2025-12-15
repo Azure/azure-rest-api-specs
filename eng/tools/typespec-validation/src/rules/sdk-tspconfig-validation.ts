@@ -129,7 +129,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return option;
   }
 
-  protected resolveVariables(value: string, config: any): { resolved: string; error?: string } {
+  protected resolveVariables(
+    value: string,
+    config: Record<string, any>,
+  ): { resolved: string; error?: string } {
     let resolvedValue = value;
     const variablePattern = /\{([^}]+)\}/g;
     const maxIterations = 10; // Prevent infinite loops
@@ -200,7 +203,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return { resolved: resolvedValue };
   }
 
-  protected getPackageDirFromEmitterOutputDir(config: any): {
+  protected getPackageDirFromEmitterOutputDir(config: Record<string, any>): {
     resolved: string;
     error?: string;
   } {
