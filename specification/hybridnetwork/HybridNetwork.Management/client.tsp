@@ -36,3 +36,7 @@ namespace Microsoft.HybridNetwork;
   "HybridNetworkManagementClient",
   "python"
 );
+@@clientName(AzureArcK8sClusterNFVIDetails,
+  "AzureArcK8SClusterNFVIDetails",
+  "python"
+);
