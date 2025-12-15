@@ -14,7 +14,7 @@ using Azure.Core.Traits;
 namespace Language.Conversations;
 
 /** Task definition for custom conversational summarization. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeCustomConversationSummarizationTask
   extends AnalyzeConversationLROTask {
   /** discriminator kind */
@@ -42,7 +42,7 @@ model ConversationSummarizationTaskParametersBase
   summaryAspects: Array<SummaryAspect>;
 
   /** a text field to allow customers to use natural language to describe their needs for summarization. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   instruction?: string;
 }
 
@@ -53,7 +53,7 @@ model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
 }
 
 /** Supported parameters for a custom conversation summarization task. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   /** It controls the approximate number of sentences in the output summaries. */
   sentenceCount?: int32;
@@ -90,7 +90,7 @@ union SummaryAspect {
   recap: "recap",
 
   /** Action items and tasks that arose during a meeting. */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   followUpTasks: "follow-up tasks",
 }
 
@@ -106,7 +106,7 @@ model AnalyzeConversationSummarizationResult
 }
 
 /** Result for the custom summarization task on the conversation. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeCustomConversationSummarizationResult
   extends AnalyzeConversationJobResult {
   /** discriminator kind */
@@ -131,7 +131,7 @@ model SummaryResult {
 }
 
 /** Custom Summary Results */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model CustomSummaryResult {
   ...SummaryResultBase;
   ...CustomResult;

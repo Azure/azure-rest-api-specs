@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "conditionalCreditName": "conditionalCredit_20250801",
+    "contributorName": "caco_contributor_20250801",
+    "api-version": "2025-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801/contributors/{contributorCloudSubId}_{rgName}_caco_contributor_20250801",
+        "name": "{contributorCloudSubId}_{rgName}_caco_contributor_20250801",
+        "type": "Microsoft.BillingBenefits/conditionalCredits/contributors",
+        "properties": {
+          "entityType": "Contributor",
+          "displayName": "caco contributor 20250801",
+          "primaryResourceId": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+          "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+          "startAt": "2025-07-01T00:00:00Z",
+          "endAt": "2025-12-31T23:59:59Z",
+          "systemId": "13810867107109237",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/000187f7-0000-0260-ab43-b8473ce57f1d:11111111-1111-1111-1111-111111111111_2025-10-28",
+          "provisioningState": "Succeeded",
+          "status": "Active",
+          "primaryBillingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/000187f7-0000-0260-ab43-b8473ce57f1d:11111111-1111-1111-1111-111111111111_2025-10-28",
+          "milestones": [
+            {
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+              "name": "Q4 2025 Milestone",
+              "status": "Active",
+              "endAt": "2025-12-31T23:59:59Z",
+              "spendTarget": {
+                "amount": 50000,
+                "currencyCode": "USD"
+              },
+              "award": {
+                "duration": "P3M",
+                "credit": {
+                  "grain": "FullTerm",
+                  "amount": 5000,
+                  "currencyCode": "USD"
+                },
+                "balanceVersion": 13,
+                "systemId": "credit98765432"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

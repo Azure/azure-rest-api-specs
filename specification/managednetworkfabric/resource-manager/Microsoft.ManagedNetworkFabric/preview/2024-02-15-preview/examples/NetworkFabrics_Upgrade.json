@@ -1,0 +1,38 @@
+{
+  "title": "NetworkFabrics_Upgrade_MaximumSet_Gen",
+  "operationId": "NetworkFabrics_Upgrade",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "version": "3.x.x",
+      "action": "Start"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        },
+        "configurationState": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

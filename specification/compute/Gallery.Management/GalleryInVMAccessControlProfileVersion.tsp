@@ -41,7 +41,8 @@ interface GalleryInVMAccessControlProfileVersions {
   @operationId("GalleryInVMAccessControlProfileVersions_CreateOrUpdate")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryInVMAccessControlProfileVersion,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = GalleryInVMAccessControlProfileVersion> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -54,7 +55,7 @@ interface GalleryInVMAccessControlProfileVersions {
     GalleryInVMAccessControlProfileVersion,
     PatchModel = GalleryInVMAccessControlProfileVersionUpdate,
     Response = ArmResponse<GalleryInVMAccessControlProfileVersion> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = GalleryInVMAccessControlProfileVersion> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
