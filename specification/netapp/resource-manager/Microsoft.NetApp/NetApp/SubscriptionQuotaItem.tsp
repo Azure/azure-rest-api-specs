@@ -5,11 +5,10 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;

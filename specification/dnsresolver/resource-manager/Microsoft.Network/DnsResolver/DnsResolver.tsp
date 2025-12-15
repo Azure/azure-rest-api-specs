@@ -21,6 +21,7 @@ model DnsResolver
     SegmentName = "dnsResolvers",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }
 

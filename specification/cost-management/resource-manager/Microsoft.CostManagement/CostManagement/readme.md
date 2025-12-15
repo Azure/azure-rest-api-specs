@@ -39,17 +39,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-  - stable/2025-03-01/common-types.json
-  - stable/2025-03-01/costallocation.json
-  - stable/2025-03-01/costmanagement.benefits.json
-  - stable/2025-03-01/costmanagement.budgets.json
-  - stable/2025-03-01/costmanagement.exports.json
-  - stable/2025-03-01/costmanagement.generatecostdetailsreport.json
-  - stable/2025-03-01/costmanagement.generatedetailedcostreport.json
-  - stable/2025-03-01/costmanagement.json
-  - stable/2025-03-01/costmanagement.pricesheets.json
-  - stable/2025-03-01/scheduledActions.json
-  - stable/2025-03-01/settings.json
+  - stable/2025-03-01/openapi.json
 ```
 
 ### Tag: package-preview-2024-10-01-preview
@@ -575,15 +565,6 @@ These settings apply only when `--tag=package-2018-12-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-12-preview'
 input-file:
 - preview/2018-12-01-preview/costmanagement.json
-```
-
-### Tag: package-2019-01
-
-These settings apply only when `--tag=package-2019-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-01'
-input-file:
-- stable/2019-01-01/costmanagement.json
 ```
 
 ---

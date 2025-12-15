@@ -6,11 +6,9 @@ import "@typespec/versioning";
 import "./models.tsp";
 import "./Volume.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Versioning;
 
 namespace Microsoft.NetApp;
 
@@ -89,7 +87,7 @@ model RansomwareReportProperties {
    * Suspects identified in an ARP report
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["extension"])
+  @identifiers(#["extension"])
   suspects?: RansomwareSuspects[];
 
   /**
@@ -144,7 +142,7 @@ model RansomwareSuspects {
    * Suspect files
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["suspectFileName"])
+  @identifiers(#["suspectFileName"])
   suspectFiles?: SuspectFile[];
 }
 

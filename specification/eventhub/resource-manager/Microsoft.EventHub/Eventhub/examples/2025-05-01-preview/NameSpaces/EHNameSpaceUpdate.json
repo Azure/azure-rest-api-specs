@@ -71,62 +71,12 @@
         "tags": {}
       }
     },
-    "201": {
-      "body": {
-        "name": "NamespaceSample",
-        "type": "Microsoft.EventHub/Namespaces",
-        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample",
-        "identity": {
-          "type": "SystemAssigned, UserAssigned",
-          "principalId": "PrincipalIdGUID",
-          "tenantId": "TenantIdGUID",
-          "userAssignedIdentities": {
-            "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1": {
-              "clientId": "ClientIdGUID",
-              "principalId": "PrincipalIdGUID"
-            }
-          }
-        },
-        "location": "East US",
-        "properties": {
-          "createdAt": "2021-01-30T00:28:38.963Z",
-          "disableLocalAuth": false,
-          "encryption": {
-            "keySource": "Microsoft.KeyVault",
-            "keyVaultProperties": [
-              {
-                "identity": {
-                  "userAssignedIdentity": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ud1"
-                },
-                "keyName": "Samplekey",
-                "keyVaultUri": "https://sample-keyvault-user.vault-int.azure-int.net",
-                "keyVersion": ""
-              }
-            ],
-            "requireInfrastructureEncryption": false
-          },
-          "isAutoInflateEnabled": false,
-          "maximumThroughputUnits": 0,
-          "metricId": "MetricGUID:NamespaceSample",
-          "platformCapabilities": {
-            "confidentialCompute": {
-              "mode": "Disabled"
-            }
-          },
-          "provisioningState": "ActivatingIdentity",
-          "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/",
-          "updatedAt": "2021-01-30T00:31:13.657Z",
-          "zoneRedundant": false
-        },
-        "sku": {
-          "name": "Standard",
-          "capacity": 1,
-          "tier": "Standard"
-        },
-        "tags": {}
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status",
+        "Location": "https://management.azure.com/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceSample?api-version=2025-05-01-preview"
       }
-    },
-    "202": {}
+    }
   },
   "operationId": "Namespaces_Update",
   "title": "NamespacesUpdate"

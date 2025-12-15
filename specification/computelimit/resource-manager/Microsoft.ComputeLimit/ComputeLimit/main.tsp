@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./GuestSubscription.tsp";
 import "./SharedLimit.tsp";
+import "./back-compat.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
