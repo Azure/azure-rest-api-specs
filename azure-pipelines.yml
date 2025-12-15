@@ -1,26 +1,53 @@
-name: "Azure OpenAPI"
+trigger: none
 
-pool:
-  name: azsdk-pool
-  demands: ImageOverride -equals ubuntu-24.04
-
-trigger:
+pr: 
   branches:
     include:
-      - master
+      - main
+  paths:
+    include:
+      - .github/copilot-instructions.md
+      - eng/common/instructions/azsdk-tools/**
 
-pr:
-  autoCancel: false
+parameters:
+  - name: EvalProject
+    type: string
+    default: 'tools/azsdk-cli/Azure.Sdk.Tools.Cli.Evaluations'
+  - name: OpenAIEndPoint
+    type: string
+    default: 'https://openai-shared.openai.azure.com/'
+  - name: Model
+    type: string
+    default: 'gpt-5'
+  - name: EvalRepoOwner
+    type: string
+    default: 'Azure'
+  - name: EvalRepoName
+    type: string
+    default: 'azure-sdk-tools'
+  - name: EvalRepoCommit
+    type: string
+    default: 'main'
 
 variables:
-  TRAVIS: 'true'
-  TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
-  TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
-  TRAVIS_REPO_SLUG: $(Build.Repository.Name)
-  TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
-  TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
-  PR_ONLY: 'true'
+  TargetRepoOwner: ${{ split(variables['Build.Repository.Name'], '/')[0] }}
+  TargetRepoName: ${{ split(variables['Build.Repository.Name'], '/')[1] }}
+  TargetRepoCommit: ${{ variables['Build.SourceVersion'] }}
 
-jobs:
-- template: .azure-pipelines/BranchProtectionForPrivateRepo.yml
-- template: .azure-pipelines/ShouldSendPRToMain.yml
+stages:
+- stage: ai_evals
+  displayName: AI Evaluations
+  condition: eq(variables['System.TeamProject'], 'internal')
+
+  jobs:
+    - template: /eng/common/pipelines/templates/jobs/ai-eval-job.yml
+      parameters:
+        EvalProject: ${{ parameters.EvalProject }}
+        OpenAIEndPoint: ${{ parameters.OpenAIEndPoint }}
+        Model: ${{ parameters.Model }}
+        EvalRepoOwner: ${{ parameters.EvalRepoOwner }}
+        EvalRepoName: ${{ parameters.EvalRepoName }}
+        EvalRepoCommit: ${{ parameters.EvalRepoCommit }}
+        TargetRepoOwner: $(TargetRepoOwner)
+        TargetRepoName: $(TargetRepoName)
+        TargetRepoCommit: $(TargetRepoCommit)
