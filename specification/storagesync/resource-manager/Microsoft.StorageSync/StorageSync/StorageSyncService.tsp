@@ -114,7 +114,7 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")

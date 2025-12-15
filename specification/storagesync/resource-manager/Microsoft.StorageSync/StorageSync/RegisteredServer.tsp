@@ -21,6 +21,7 @@ model RegisteredServer
     Resource = RegisteredServer,
     KeyName = "serverId",
     SegmentName = "registeredServers",
+    Type = Azure.Core.uuid,
     NamePattern = ""
   >;
 }

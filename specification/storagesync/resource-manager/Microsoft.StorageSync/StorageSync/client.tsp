@@ -135,6 +135,11 @@ using Microsoft.StorageSync;
   "StorageSyncPrivateEndpointConnection",
   "csharp"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+
 @@clientName(Workflow, "StorageSyncWorkflow", "csharp");
 @@alternateType(WorkflowProperties.lastOperationId, uuid, "csharp");
 @@clientName(WorkflowStatus, "StorageSyncWorkflowStatus", "csharp");
@@ -307,6 +312,27 @@ using Microsoft.StorageSync;
   "csharp"
 );
 @@clientName(RegisteredServers.create::parameters.resource,
+  "content",
+  "csharp"
+);
+@@clientName(RegisteredServers.update::parameters.properties,
+  "content",
+  "csharp"
+);
+@@clientName(RegisteredServers.triggerRollover::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ServerEndpoints.create::parameters.resource, "content", "csharp");
+@@clientName(ServerEndpoints.recallAction::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ServerEndpoints.update::parameters.properties,
+  "content",
+  "csharp"
+);
+@@clientName(StorageSyncServices.update::parameters.properties,
   "content",
   "csharp"
 );
