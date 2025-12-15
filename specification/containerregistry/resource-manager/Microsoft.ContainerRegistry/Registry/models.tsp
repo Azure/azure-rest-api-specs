@@ -4,12 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -81,72 +76,6 @@ enum ResourceIdentityType {
   UserAssigned,
   `SystemAssigned, UserAssigned`,
   None,
-}
-
-/**
- * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.
- */
-model ProxyResource {
-  /**
-   * The resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
-}
-
-/**
- * Metadata pertaining to creation and last modification of the resource.
- */
-model SystemData {
-  /**
-   * The identity that created the resource.
-   */
-  createdBy?: string;
-
-  /**
-   * The type of identity that created the resource.
-   */
-  createdByType?: CreatedByType;
-
-  /**
-   * The timestamp of resource creation (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  createdAt?: utcDateTime;
-
-  /**
-   * The identity that last modified the resource.
-   */
-  lastModifiedBy?: string;
-
-  /**
-   * The type of identity that last modified the resource.
-   */
-  lastModifiedByType?: LastModifiedByType;
-
-  /**
-   * The timestamp of resource modification (UTC).
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedAt?: utcDateTime;
 }
 
 /**
@@ -270,13 +199,13 @@ model OperationServiceSpecificationDefinition {
   /**
    * A list of Azure Monitoring metrics definition.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: OperationMetricSpecificationDefinition[];
 
   /**
    * A list of Azure Monitoring log definitions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: OperationLogSpecificationDefinition[];
 }
 
@@ -350,47 +279,6 @@ model OperationListResult {
    */
   @nextLink
   nextLink?: string;
-}
-
-/**
- * An Azure resource.
- */
-model Resource {
-  /**
-   * The resource ID.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource. This cannot be changed after the resource is created.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  systemData?: SystemData;
 }
 
 /**

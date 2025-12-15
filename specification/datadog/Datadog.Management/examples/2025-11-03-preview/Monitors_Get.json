@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-11-03-preview",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "cspm": false,
+            "enterpriseAppId": null,
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null,
+            "resourceCollection": false
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    }
+  },
+  "operationId": "Monitors_Get",
+  "title": "Monitors_Get"
+}

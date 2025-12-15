@@ -1,8 +1,10 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+const mockDiff = vi.hoisted(() => vi.fn().mockResolvedValue(""));
+
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
-    diff: vi.fn().mockResolvedValue(""),
+    diff: mockDiff,
   }),
 }));
 
@@ -14,6 +16,7 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
+  markdown,
   preview,
   quickstartTemplate,
   readme,
@@ -38,35 +41,31 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
-    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(files.join("\n"));
+    mockDiff.mockResolvedValue(files.join("\n"));
 
     await expect(getChangedFiles(options)).resolves.toEqual(files);
-    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
 
     const specFiles = files.filter((f) => f.startsWith("specification"));
-    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(specFiles.join("\n"));
+    mockDiff.mockResolvedValue(specFiles.join("\n"));
     await expect(getChangedFiles({ ...options, paths: ["specification"] })).resolves.toEqual(
       specFiles,
     );
-    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
-      "--name-only",
-      "HEAD^",
-      "HEAD",
-      "--",
-      "specification",
-    ]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD", "--", "specification"]);
   });
 
   it("getChangedFiles returns empty array when no files are changed", async () => {
-    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
+    mockDiff.mockResolvedValue("");
     await expect(getChangedFiles()).resolves.toEqual([]);
-    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
   });
 
   const files = [
+    "CONTRIBUTING.MD",
     "cspell.json",
     "cspell.yaml",
     "MixedCase.jSoN",
+    "MixedCase.mD",
     "README.MD",
     "not-spec/contosowidgetmanager/data-plane/readme.md",
     "not-spec/contosowidgetmanager/resource-manager/readme.md",
@@ -118,6 +117,21 @@ describe("changedFiles", () => {
 
     expect(files.filter(json)).toEqual(expected);
     expect(filesResolved.filter(json)).toEqual(expected.map((f) => resolve(f)));
+  });
+
+  it("filter:markdown", () => {
+    const expected = [
+      "CONTRIBUTING.MD",
+      "MixedCase.mD",
+      "README.MD",
+      "not-spec/contosowidgetmanager/data-plane/readme.md",
+      "not-spec/contosowidgetmanager/resource-manager/readme.md",
+      "specification/contosowidgetmanager/data-plane/readme.md",
+      "specification/contosowidgetmanager/resource-manager/readme.md",
+    ];
+
+    expect(files.filter(markdown)).toEqual(expected);
+    expect(filesResolved.filter(markdown)).toEqual(expected.map((f) => resolve(f)));
   });
 
   it("filter:readme", () => {
@@ -249,7 +263,7 @@ describe("changedFiles", () => {
           "T\tspecification/service/type-changed.json",
         ].join("\n");
 
-        vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+        mockDiff.mockResolvedValue(gitOutput);
         let result = await getChangedFilesStatuses(options);
         expect(result).toEqual({
           additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
@@ -267,13 +281,13 @@ describe("changedFiles", () => {
           ],
           total: 7,
         });
-        expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-status", "HEAD^", "HEAD"]);
+        expect(mockDiff).toHaveBeenCalledWith(["--name-status", "HEAD^", "HEAD"]);
 
         const specGitOutput = gitOutput
           .split("\n")
           .filter((f) => f.includes("specification/"))
           .join("\n");
-        vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(specGitOutput);
+        mockDiff.mockResolvedValue(specGitOutput);
         result = await getChangedFilesStatuses({ ...options, paths: ["specification"] });
         expect(result).toEqual({
           additions: ["specification/new-service/readme.md", "specification/service/derived.json"],
@@ -290,7 +304,7 @@ describe("changedFiles", () => {
           ],
           total: 6,
         });
-        expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
+        expect(mockDiff).toHaveBeenCalledWith([
           "--name-status",
           "HEAD^",
           "HEAD",
@@ -301,7 +315,7 @@ describe("changedFiles", () => {
     );
 
     it("should handle empty git output", async () => {
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
+      mockDiff.mockResolvedValue("");
       const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [],
@@ -318,7 +332,7 @@ describe("changedFiles", () => {
         "A\tspecification/service2/main.tsp",
       ].join("\n");
 
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+      mockDiff.mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: ["specification/service1/readme.md", "specification/service2/main.tsp"],
@@ -335,7 +349,7 @@ describe("changedFiles", () => {
         "R100\tservice/old.tsp\tservice/new.tsp",
       ].join("\n");
 
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue(gitOutput);
+      mockDiff.mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
       expect(result).toEqual({
         additions: [],
@@ -362,14 +376,10 @@ describe("changedFiles", () => {
         cwd: "/custom/path",
       };
 
-      vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("A\ttest.json");
+      mockDiff.mockResolvedValue("A\ttest.json");
       await getChangedFilesStatuses(options);
       expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
-      expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith([
-        "--name-status",
-        "origin/main",
-        "feature-branch",
-      ]);
+      expect(mockDiff).toHaveBeenCalledWith(["--name-status", "origin/main", "feature-branch"]);
     });
   });
 });

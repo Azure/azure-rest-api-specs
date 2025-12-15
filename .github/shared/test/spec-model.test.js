@@ -25,7 +25,7 @@ describe("SpecModel", () => {
     await expect(specModel.getReadmes()).rejects.toThrowError(/no such file or directory/i);
   });
 
-  it("returns cached spec model", async () => {
+  it("returns cached spec model", () => {
     const path = randomUUID();
 
     const specModel1 = new SpecModel(path);
@@ -53,7 +53,7 @@ describe("SpecModel", () => {
     expect(readme.path).toBe(resolve(folder, "readme.md"));
     expect(readme.specModel).toBe(specModel);
 
-    expect(readme.getGlobalConfig()).resolves.toEqual({
+    await expect(readme.getGlobalConfig()).resolves.toEqual({
       "openapi-type": "arm",
       "openapi-subtype": "rpaas",
       tag: "package-2021-11-01",
@@ -109,6 +109,7 @@ describe("SpecModel", () => {
 
     const jsonRefsRelative = /** @type {SpecModelJSON} */ (
       await specModel.toJSONAsync({
+        includeOperations: true,
         includeRefs: true,
         relativePaths: true,
       })
@@ -116,6 +117,10 @@ describe("SpecModel", () => {
     const readmeJSONRelative = /** @type {ReadmeJSON} */ (jsonRefsRelative.readmes[0]);
     const readmePathRelative = readmeJSONRelative.path;
     expect(isAbsolute(readmePathRelative)).toBe(false);
+    expect(
+      /** @type {SwaggerJSON}*/ (/** @type {TagJSON} */ (readmeJSONRelative.tags[0]).inputFiles[0])
+        .operations,
+    ).toBeDefined();
     expect(
       /** @type {SwaggerJSON}*/ (/** @type {TagJSON} */ (readmeJSONRelative.tags[0]).inputFiles[0])
         .refs,
@@ -131,10 +136,9 @@ describe("SpecModel", () => {
 
     const globalConfig = await readme.getGlobalConfig();
 
-    const tag = globalConfig["tag"];
+    const tag = /** @type {unknown} */ (globalConfig["tag"]);
 
-    // @ts-expect-error testing runtime behavior of invalid types
-    expect(tag).not.toBeTypeOf(Date);
+    expect(tag).not.toBeTypeOf("object");
 
     expect(tag).toBeTypeOf("string");
     expect(tag).toBe("2022-12-01");
@@ -160,7 +164,7 @@ describe("SpecModel", () => {
     await expect(specModel.toJSONAsync({ embedErrors: true })).resolves.toMatchObject({
       readmes: [
         {
-          error: expect.stringMatching(/multiple.*tag/i),
+          error: /** @type {unknown} */ (expect.stringMatching(/multiple.*tag/i)),
         },
       ],
     });
@@ -221,9 +225,9 @@ describe("SpecModel", () => {
       );
       const specModel = new SpecModel(folder, options);
 
-      expect(
+      await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(/Failed to resolve file for swagger/i);
+      ).rejects.toThrowError(/Failed to read file for swagger/i);
     });
 
     it("throws when an input-file is invalid JSON", async () => {
@@ -235,10 +239,10 @@ describe("SpecModel", () => {
 
       await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
-      ).rejects.toThrowError(/is not a valid JSON Schema/i);
+      ).rejects.toThrowError(`SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON`);
 
       await expect(specModel.toJSONAsync({ includeRefs: true })).rejects.toThrowError(
-        /is not a valid JSON Schema/i,
+        `SyntaxError: Unexpected token 'i', "invalid json" is not valid JSON`,
       );
 
       await expect(
@@ -250,7 +254,11 @@ describe("SpecModel", () => {
               {
                 inputFiles: [
                   {
-                    error: expect.stringMatching(/is not a valid JSON Schema/i),
+                    error: /** @type {unknown} */ (
+                      expect.stringContaining(
+                        "Unexpected token 'i', \"invalid json\" is not valid JSON",
+                      )
+                    ),
                   },
                 ],
                 name: "package-2021-11-01",
@@ -262,7 +270,7 @@ describe("SpecModel", () => {
     });
   });
 
-  describe("getAffectedSwaggers", async () => {
+  describe("getAffectedSwaggers", () => {
     const folder = resolve(__dirname, "fixtures/getAffectedSwaggers/specification/1");
 
     const specModel = new SpecModel(folder, options);
@@ -393,22 +401,18 @@ describe.skip("Parse readmes", () => {
     }
   });
 
-  it(
-    "runs properly against specific services",
-    { timeout: 30 * Duration.Minute },
-    async ({ expect }) => {
-      /** @type {string[]} */
-      const folders = [
-        // Fill in services to test here
-      ];
-      for (const folder of folders) {
-        console.log(`Testing service: ${folder}`);
-        const specModel = new SpecModel(`specification/${folder}`, options);
+  it("runs properly against specific services", { timeout: 30 * Duration.Minute }, ({ expect }) => {
+    /** @type {string[]} */
+    const folders = [
+      // Fill in services to test here
+    ];
+    for (const folder of folders) {
+      console.log(`Testing service: ${folder}`);
+      const specModel = new SpecModel(`specification/${folder}`, options);
 
-        expect(specModel).toBeDefined();
-      }
-    },
-  );
+      expect(specModel).toBeDefined();
+    }
+  });
 });
 
 describe("getSwaggers", () => {

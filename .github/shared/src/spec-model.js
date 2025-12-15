@@ -1,5 +1,6 @@
 import { readdir } from "fs/promises";
 import { resolve } from "path";
+import { inspect } from "util";
 import { flatMapAsync, mapAsync } from "./array.js";
 import { readme } from "./changed-files.js";
 import { Readme } from "./readme.js";
@@ -25,6 +26,7 @@ import { SpecModelError } from "./spec-model-error.js";
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [embedErrors]
+ * @prop {boolean} [includeOperations] Whether to include the operations in each swagger. Increases runtime about 20x, from 6s to 120s for whole specs repo.
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  */
@@ -247,7 +249,7 @@ export class SpecModel {
    * @returns {string}
    */
   toString() {
-    return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
+    return `SpecModel(${this.#folder}, {logger: ${inspect(this.#logger)}}})`;
   }
 }
 

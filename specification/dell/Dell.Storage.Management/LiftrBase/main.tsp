@@ -2,7 +2,6 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -259,7 +258,7 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
-  @extension("x-ms-secret", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Replace this with @secret if this is a field that should eb kept private."
+  @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }
