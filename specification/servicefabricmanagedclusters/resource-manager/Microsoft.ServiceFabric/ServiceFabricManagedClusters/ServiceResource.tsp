@@ -210,6 +210,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
    * The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format "hh:mm:ss".
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   replicaRestartWaitDuration?: duration;
 
@@ -217,6 +218,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
    * The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format "hh:mm:ss".
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   quorumLossWaitDuration?: duration;
 
@@ -224,6 +226,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
    * The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format "hh:mm:ss".
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   standByReplicaKeepDuration?: duration;
 
@@ -231,6 +234,7 @@ model StatefulServiceProperties extends ServiceResourceProperties {
    * The duration for which replicas can stay InBuild before reporting that build is stuck, represented in ISO 8601 format "hh:mm:ss".
    */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Backwards compatibility with non-standard duration encoding in c#"
   @encode("duration-constant")
   servicePlacementTimeLimit?: duration;
 
