@@ -20,7 +20,7 @@ using Azure.Core;
 
 @@clientName(Vaults.listByVault, "GetPrivateLinkResources", "csharp");
 @@clientName(ManagedHsms.listByMHSMResource,
-  "GetPrivateLinkResources",
+  "GetMHSMPrivateLinkResourcesByManagedHsmResource",
   "csharp"
 );
 @@clientName(ManagedHsms.listByResource, "GetRegions", "csharp");
@@ -149,6 +149,7 @@ using Azure.Core;
 );
 @@clientName(MhsmNetworkRuleSet, "ManagedHsmNetworkRuleSet", "csharp");
 @@clientName(MhsmNetworkRuleSet.ipRules, "IPRules", "csharp");
+@@clientName(NetworkRuleSet.ipRules, "IPRules", "csharp");
 @@alternateType(VaultProperties.tenantId, uuid, "csharp");
 @@alternateType(VaultProperties.vaultUri, url, "csharp");
 @@clientName(MhsmPrivateEndpoint, "ManagedHsmPrivateEndpoint", "csharp");
@@ -264,6 +265,7 @@ using Azure.Core;
 @@clientName(DeletedManagedHsms.getDeleted, "get", "csharp");
 @@clientName(VaultCreateOrUpdateParameters, "KeyVaultCreateOrUpdateContent", "csharp");
 @@alternateType(MhsmPrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
