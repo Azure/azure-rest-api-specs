@@ -1670,7 +1670,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages": {
-      "post": {
+      "get": {
         "operationId": "Usages_List",
         "description": "List network usages for a subscription.",
         "parameters": [
@@ -32316,25 +32316,18 @@
       "type": "object",
       "description": "Network admin rule.",
       "properties": {
-        "Custom": {
-          "type": "string",
-          "description": "Discriminator property for AdminRule."
-        },
         "properties": {
           "$ref": "#/definitions/AdminPropertiesFormat",
           "description": "Indicates the properties of the security admin rule",
           "x-ms-client-flatten": true
         }
       },
-      "discriminator": "Custom",
-      "required": [
-        "Custom"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseAdminRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Custom"
     },
     "AdminRuleCollection": {
       "type": "object",
@@ -37987,6 +37980,7 @@
           }
         }
       },
+      "discriminator": "kind",
       "required": [
         "kind"
       ],
@@ -40897,26 +40891,14 @@
           "$ref": "#/definitions/DefaultAdminPropertiesFormat",
           "description": "Indicates the properties of the security admin rule",
           "x-ms-client-flatten": true
-        },
-        "kind": {
-          "type": "string",
-          "description": "Whether the rule is custom or default.",
-          "enum": [
-            "Default"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
         }
       },
-      "required": [
-        "kind"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseAdminRule"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "Default"
     },
     "DefaultRuleSetPropertyFormat": {
       "type": "object",

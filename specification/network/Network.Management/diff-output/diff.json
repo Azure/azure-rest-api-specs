@@ -1312,76 +1312,29 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages": {
-      "get__deleted": {
-        "operationId": "Usages_List",
-        "description": "List network usages for a subscription.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._ ]+$"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "pattern__deleted": "^[-\\w\\._ ]+$",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UsagesListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "List usages": {
-            "$ref": "./examples/UsageList.json"
-          },
-          "List usages spaced location": {
-            "$ref": "./examples/UsageListSpacedLocation.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "Usages_List",
-        "description": "List network usages for a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/UsagesListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List usages": {
-            "$ref": "./examples/UsageList.json"
-          },
-          "List usages spaced location": {
-            "$ref": "./examples/UsageListSpacedLocation.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -18597,19 +18550,6 @@
         }
       }
     },
-    "AdminRule": {
-      "x-ms-discriminator-value__deleted": "Custom",
-      "discriminator__added": "Custom",
-      "required__added": [
-        "Custom"
-      ],
-      "properties": {
-        "Custom__added": {
-          "type": "string",
-          "description": "Discriminator property for AdminRule."
-        }
-      }
-    },
     "AdminRuleCollection": {
       "properties": {
         "systemData__deleted": {
@@ -20807,7 +20747,6 @@
       }
     },
     "BaseAdminRule": {
-      "discriminator__deleted": "kind",
       "properties": {
         "systemData__deleted": {
           "$ref": "./network.json#/definitions/SystemData",
@@ -21824,24 +21763,6 @@
         "destinationPortRanges": {
           "items": {
             "description__deleted": "The destination port."
-          }
-        }
-      }
-    },
-    "DefaultAdminRule": {
-      "x-ms-discriminator-value__deleted": "Default",
-      "required__added": [
-        "kind"
-      ],
-      "properties": {
-        "kind__added": {
-          "type": "string",
-          "description": "Whether the rule is custom or default.",
-          "enum": [
-            "Default"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
           }
         }
       }

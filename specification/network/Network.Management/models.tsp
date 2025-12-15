@@ -16565,6 +16565,10 @@ model NetworkManagerConnectionProperties {
 /**
  * Proxy resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource
 model ChildResource {
   /**
    * Resource ID.
@@ -26858,12 +26862,16 @@ model EffectiveDefaultSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
 /**
  * Network admin rule.
  */
-@discriminator("Custom")
 model AdminRule extends BaseAdminRule {
   /**
    * Indicates the properties of the security admin rule
    */
   properties?: AdminPropertiesFormat;
+
+  /**
+   * Whether the rule is custom or default.
+   */
+  kind: "Custom";
 }
 
 /**

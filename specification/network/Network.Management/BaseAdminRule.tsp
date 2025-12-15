@@ -16,6 +16,7 @@ namespace Microsoft.Network;
  * Network base admin rule.
  */
 @parentResource(AdminRuleCollection)
+@discriminator("kind")
 model BaseAdminRule is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = BaseAdminRule,
