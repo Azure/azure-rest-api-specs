@@ -13,24 +13,29 @@ using Azure.Core;
 @@clientName(ManagedHsmKeyAttributes.exp, "Expires");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnectionItem.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnectionItem.properties
 );
 
 @@clientName(Error.innererror, "innerError");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "operationProperties");
 
@@ -40,6 +45,7 @@ using Azure.Core;
 @@clientName(Keys.createIfNotExist::parameters.resource, "parameters");
 @@clientLocation(KeyOperationGroup.getVersion, Keys);
 @@clientLocation(KeyOperationGroup.listVersions, Keys);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Key.properties);
 
 @@clientName(ManagedHsmKeys.createIfNotExist::parameters.resource,
@@ -47,6 +53,7 @@ using Azure.Core;
 );
 @@clientLocation(ManagedHsmKeyOperationGroup.getVersion, ManagedHsmKeys);
 @@clientLocation(ManagedHsmKeyOperationGroup.listVersions, ManagedHsmKeys);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedHsmKey.properties);
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "parameters");
@@ -58,6 +65,7 @@ using Azure.Core;
 @@clientLocation(DeletedVaults.purgeDeleted, Vaults);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
@@ -88,6 +96,7 @@ using Azure.Core;
   "MHSMPrivateEndpointConnections",
   "!csharp,!java"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnection.properties
 );
 
@@ -143,13 +152,14 @@ using Azure.Core;
   "!java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "OperationProperties");
 
 @@Azure.ResourceManager.identifiers(MhsmRegionsListResult.value, #["name"]);
 
-@@clientName(Azure.ResourceManager.CommonTypes.Resource,
-  "ArmResource",
+@@clientName(Azure.ResourceManager.CommonTypes.createdByType,
+  "IdentityType",
   "python"
 );
 @@clientName(VaultListResult, "ResourceListResult");
