@@ -57,6 +57,14 @@ model StorageAccount
   placement?: Placement;
 }
 
+alias StorageAccountListKeysParameters = {
+  /**
+   * Specifies type of the key to be listed. Possible value is kerb.
+   */
+  @query("$expand")
+  $expand?: "kerb";
+};
+
 @armResourceOperations
 interface StorageAccounts {
   /**
@@ -138,13 +146,7 @@ interface StorageAccounts {
     StorageAccount,
     void,
     ArmResponse<StorageAccountListKeysResult>,
-    Parameters = {
-      /**
-       * Specifies type of the key to be listed. Possible value is kerb.
-       */
-      @query("$expand")
-      $expand?: "kerb";
-    },
+    Parameters = StorageAccountListKeysParameters,
     Error = ErrorResponse
   >;
 
