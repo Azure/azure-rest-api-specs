@@ -177,6 +177,10 @@ namespace SearchIndexClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.KnowledgeSources.create;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    getStatus is Search.KnowledgeSources.getStatus;
   }
 
   interface Root {
@@ -2512,6 +2516,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexClient.Sources.get, "getKnowledgeSource");
 @@clientName(SearchIndexClient.Sources.list, "listKnowledgeSources");
+@@clientName(SearchIndexClient.Sources.getStatus, "getKnowledgeSourceStatus");
 @@clientName(SearchIndexerClient.Indexers.create, "createIndexer");
 @@clientName(SearchIndexerClient.Indexers.createOrUpdate,
   "createOrUpdateIndexer"
