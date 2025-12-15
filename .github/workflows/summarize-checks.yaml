@@ -43,7 +43,7 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
@@ -84,7 +84,7 @@ jobs:
       # May be used by downstream workflows
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-checks.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.summarize-checks.outputs.summary }}

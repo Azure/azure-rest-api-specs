@@ -2476,10 +2476,6 @@ namespace KnowledgeBaseRetrievalClient {
 
 @@clientName(SearchClient.Documents.count, "getDocumentCount");
 @@clientName(SearchClient.Documents.get, "getDocument");
-// @@clientName(SearchClient.Documents.searchPost, "search");
-// @@clientName(SearchClient.Documents.suggestPost, "suggest");
-// @@clientName(SearchClient.Documents.autocompletePost, "autocomplete");
-// @@clientName(SearchClient.Documents.index, "indexDocuments");
 @@clientName(SearchIndexClient.Indexes.list, "listIndexes");
 @@clientName(SearchIndexClient.Indexes.get, "getIndex");
 @@clientName(SearchIndexClient.Indexes.getStatistics, "getIndexStatistics");
@@ -2724,7 +2720,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType");
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType");
-@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odatatype", "javascript");
+@@clientName(LuceneStandardTokenizerV2.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType");
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
