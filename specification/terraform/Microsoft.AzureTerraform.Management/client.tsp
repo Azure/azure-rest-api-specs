@@ -19,7 +19,7 @@ using Microsoft.AzureTerraform;
 @@clientName(BaseExportModel.excludeTerraformResource,
   "TerraformResourcesToExclude",
   "csharp"
-);
+); 
 
 // Name ending with "Resource" is reserved for ARM resource in .NET SDK
 // Refer to https://github.com/Azure/azure-sdk-for-net/blob/4dacd22df0cf904b11cb3b1389aa566c552fdd0f/common/ManagementTestShared/Redesign/InheritanceCheckTests.cs#L23
