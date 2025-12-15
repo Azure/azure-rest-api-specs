@@ -3281,54 +3281,60 @@
                 "create"
               ]
             },
-            "percentComplete": {
-              "description": "The percentage of expansion job completion.",
-              "type": "number",
-              "format": "float",
-              "minimum": 0,
-              "maximum": 100,
-              "readOnly": true
-            },
             "status": {
+              "x-ms-client-flatten": true,
               "description": "The status of the expansion job.",
-              "enum": [
-                "InProgress",
-                "Completed",
-                "Failed",
-                "Deleting"
-              ],
-              "x-ms-enum": {
-                "modelAsString": true
-              },
-              "type": "string",
-              "readOnly": true
-            },
-            "statusCode": {
-              "description": "Error code for expansion job failure.",
-              "type": "string",
-              "readOnly": true
-            },
-            "statusMessage": {
-              "description": "Error message for expansion job failure.",
-              "type": "string",
-              "readOnly": true
-            },
-            "startTimeUTC": {
-              "description": "The time (in UTC) the expansion job started.",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "completionTimeUTC": {
-              "description": "The time (in UTC) when the expansion job completed. Only populated when job reaches a terminal state.",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "state": {
+                  "readOnly": true,
+                  "description": "The operational state of the expansion job. InProgress indicates the expansion is still running. Completed indicates expansion finished successfully. Failed means the expansion was unable to complete due to a fatal error. Deleting indicates the expansion is being rolled back.",
+                  "type": "string",
+                  "enum": [
+                    "InProgress",
+                    "Completed",
+                    "Failed",
+                    "Deleting"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ExpansionJobStatusType",
+                    "modelAsString": true
+                  }
+                },
+                "statusCode": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status code for expansion job."
+                },
+                "statusMessage": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "Server-defined status message for expansion job."
+                },
+                "percentComplete": {
+                  "description": "The percentage of expansion job completion.",
+                  "type": "number",
+                  "format": "float",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "readOnly": true
+                },
+                "startTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) the expansion job started.",
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "completionTimeUTC": {
+                  "readOnly": true,
+                  "description": "The time (in UTC) when the expansion job completed. Only populated when job reaches a terminal state.",
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
             }
-          },
-          "required": [
-            "newStorageCapacityTiB"
-          ]
+          }
         }
       }
     },
