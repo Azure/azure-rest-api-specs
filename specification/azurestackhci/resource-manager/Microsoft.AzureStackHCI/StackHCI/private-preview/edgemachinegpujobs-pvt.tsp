@@ -25,7 +25,7 @@ model EdgeMachineGpuJob
     Resource = EdgeMachineGpuJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,512}$"
   >;
 }
 
@@ -67,7 +67,7 @@ model EdgeMachineGpuJobProperties {
   /**
    * The ID of the GPU on which the job is to be performed.
    */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   gpuId: string;
 
   /**

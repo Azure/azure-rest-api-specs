@@ -1623,7 +1623,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           }
         ],
         "responses": {
@@ -1696,7 +1696,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           },
           {
             "name": "resource",
@@ -1796,7 +1796,7 @@
             "description": "Name of EdgeMachineGpuJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
           }
         ],
         "responses": {
@@ -3022,10 +3022,7 @@
         "gpuId": {
           "type": "string",
           "description": "The ID of the GPU on which the job is to be performed.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "jobType": {
           "$ref": "#/definitions/EdgeMachineGpuJobType",
