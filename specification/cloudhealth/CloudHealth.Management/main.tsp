@@ -997,7 +997,7 @@ model EntityHistoryRequest {
 @doc("Response containing entity health state transitions")
 model EntityHistoryResponse {
   @doc("Name of the entity")
-  entityName: string;
+  entityName: entityName;
 
   @doc("List of health state transitions")
   @identifiers(#["occurredAt"])
