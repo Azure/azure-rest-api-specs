@@ -7,26 +7,31 @@ namespace Microsoft.HybridConnectivity;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties,
+  "autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay,
+  "autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay,
+  "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress,
+  "autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile,
+  "autorest"
 );
 
 @@clientName(EndpointResources.createOrUpdate::parameters.resource,
@@ -46,7 +51,8 @@ namespace Microsoft.HybridConnectivity;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties,
+  "autorest"
 );
 
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");

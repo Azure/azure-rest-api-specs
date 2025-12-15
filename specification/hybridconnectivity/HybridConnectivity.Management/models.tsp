@@ -146,7 +146,7 @@ model ServiceConfigurationResourcePatch {
    * The service configuration properties.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   properties?: ServiceConfigurationPropertiesPatch;
 }
 
@@ -178,7 +178,7 @@ model EndpointAccessResource {
    * Azure relay hybrid connection access properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   relay?: RelayNamespaceAccessProperties;
 }
 
@@ -232,14 +232,14 @@ model IngressGatewayResource {
    * Azure relay hybrid connection access properties
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   relay?: RelayNamespaceAccessProperties;
 
   /**
    * Ingress gateway profile
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   ingress?: IngressProfileProperties;
 }
 
@@ -256,7 +256,7 @@ model IngressProfileProperties {
    * The AAD Profile
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   aadProfile: AADProfileProperties;
 }
 
