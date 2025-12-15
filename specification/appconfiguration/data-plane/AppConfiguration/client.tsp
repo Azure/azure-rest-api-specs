@@ -15,6 +15,7 @@ namespace SdkCustomizations;
 @@access(SnapshotUpdateParameters, Access.public, "python");
 
 // .NET specific customizations
+
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
 @@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
 @@clientName(putKeyValue, "SetConfigurationSettingInternal", "csharp");
