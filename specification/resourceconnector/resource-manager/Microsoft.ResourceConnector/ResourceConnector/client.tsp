@@ -24,3 +24,21 @@ using Microsoft.ResourceConnector;
   "creationTimestamp",
   "java"
 );
+
+@@clientName(Microsoft.ResourceConnector.Appliance, "Appliance", "csharp");
+@@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
+  "SupportedVersionCatalogVersionDataField",
+  "csharp"
+);
+@@clientName(Microsoft.ResourceConnector.ApplianceOperation,
+  "OperationEntity",
+  "csharp"
+);
+@@clientName(Microsoft.ResourceConnector.ApplianceOperationValueDisplay,
+  "OperationDisplay",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
