@@ -15,6 +15,6 @@ describe("workflow files", () => {
       .map((e) => e.name)
       .filter((f) => extname(f) !== ".yaml");
 
-    expect(nonYamlFiles, "workflow files must use extension '.yaml'").empty();
+    expect(nonYamlFiles, "workflow files must use extension '.yaml'").toEqual([]);
   });
 });
