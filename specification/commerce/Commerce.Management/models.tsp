@@ -27,7 +27,7 @@ enum AggregationGranularity {
  * Name of the offer term
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum OfferTermInfoEnum {
+enum OfferTermInfoName {
   /**
    * Recurring Charge
    */
@@ -210,7 +210,7 @@ model OfferTermInfo {
    * Name of the offer term
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Name: OfferTermInfoEnum;
+  Name: OfferTermInfoName;
 
   /**
    * Indicates the date from which the offer term is effective.
@@ -338,7 +338,7 @@ model MonetaryCredit extends OfferTermInfo {
    * Name of the offer term
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Name: OfferTermInfoEnum.MonetaryCredit;
+  Name: OfferTermInfoName.MonetaryCredit;
 }
 
 /**
@@ -362,7 +362,7 @@ model MonetaryCommitment extends OfferTermInfo {
    * Name of the offer term
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Name: OfferTermInfoEnum.MonetaryCommitment;
+  Name: OfferTermInfoName.MonetaryCommitment;
 }
 
 /**
@@ -380,5 +380,5 @@ model RecurringCharge extends OfferTermInfo {
    * Name of the offer term
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Name: OfferTermInfoEnum.RecurringCharge;
+  Name: OfferTermInfoName.RecurringCharge;
 }
