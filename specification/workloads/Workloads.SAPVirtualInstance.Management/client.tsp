@@ -162,21 +162,21 @@ using Microsoft.Workloads;
   "csharp"
 );
 @@clientName(SAPSizingRecommendationRequest,
-  "SapSizingRecommendationRequest",
+  "SapSizingRecommendationContent",
   "csharp"
 );
 @@clientName(SAPSizingRecommendationResult,
   "SapSizingRecommendationResult",
   "csharp"
 );
-@@clientName(SAPSupportedSkusRequest, "SapSupportedSkusRequest", "csharp");
+@@clientName(SAPSupportedSkusRequest, "SapSupportedSkusContent", "csharp");
 @@clientName(SAPSupportedResourceSkusResult,
   "SapSupportedResourceSkusResult",
   "csharp"
 );
 @@clientName(SAPSupportedSku, "SapSupportedSku", "csharp");
 @@clientName(SAPDiskConfigurationsRequest,
-  "SapDiskConfigurationsRequest",
+  "SapDiskConfigurationsContent",
   "csharp"
 );
 @@clientName(SAPDiskConfigurationsResult,
@@ -185,7 +185,7 @@ using Microsoft.Workloads;
 );
 @@clientName(SAPDiskConfiguration, "SapDiskConfiguration", "csharp");
 @@clientName(SAPAvailabilityZoneDetailsRequest,
-  "SapAvailabilityZoneDetailsRequest",
+  "SapAvailabilityZoneDetailsContent",
   "csharp"
 );
 @@clientName(SAPAvailabilityZoneDetailsResult,
@@ -405,23 +405,69 @@ using Microsoft.Workloads;
   "csharp"
 );
 @@clientName(ThreeTierRecommendationResult.dbVmSku, "DBVmSku", "csharp");
+@@clientName(MessageServerProperties.ipAddress, "IPAddress", "csharp");
 @@alternateType(MessageServerProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(EnqueueServerProperties.ipAddress, "IPAddress", "csharp");
 @@alternateType(EnqueueServerProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(EnqueueReplicationServerProperties.ipAddress, "IPAddress", "csharp");
 @@alternateType(EnqueueReplicationServerProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(SAPDatabaseProperties.ipAddress, "IPAddress", "csharp");
 @@alternateType(SAPDatabaseProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(SAPApplicationServerProperties.ipAddress, "IPAddress", "csharp");
 @@alternateType(SAPApplicationServerProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
+@@clientName(NetworkConfiguration.isSecondaryIpEnabled,
+  "isSecondaryIPEnabled",
+  "csharp"
+);
+@@clientName(LoadBalancerResourceNames.frontendIpConfigurationNames,
+  "frontendIPConfigurationNames",
+  "csharp"
+);
+@@clientName(OsSapConfiguration, "OSSapConfiguration", "csharp");
+@@clientName(VirtualMachineResourceNames.osDiskName, "OSDiskName", "csharp");
+@@clientName(DeploymentWithOSConfiguration.osSapConfiguration,
+  "OSSapConfiguration",
+  "csharp"
+);
+@@clientName(OSProfile.osConfiguration, "OSConfiguration", "csharp");
+@@clientName(VirtualMachineConfiguration.osProfile, "OSProfile", "csharp");
+@@clientName(SAPVirtualInstances.getSizingRecommendations,
+  "getSizingRecommendationsSapVirtualInstance",
+  "csharp"
+);
+@@clientName(SAPVirtualInstances.getSapSupportedSku,
+  "getSapSupportedSkuSapVirtualInstance",
+  "csharp"
+);
+@@clientName(SAPVirtualInstances.getDiskConfigurations,
+  "getDiskConfigurationsSapVirtualInstance",
+  "csharp"
+);
+@@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
+  "getAvailabilityZoneDetailsSapVirtualInstance",
+  "csharp"
+);
+
+@@alternateType(LoadBalancerDetails.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(CentralServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(DatabaseVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(ApplicationServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
