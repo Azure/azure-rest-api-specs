@@ -87,7 +87,7 @@ union PipelineJobType {
 /** Inline pipeline job */
 model InlinePipelineJob extends PipelineJobBase {
   /** Job type. */
-  type: "inline";
+  type: "Inline";
 
   /** Job definition. */
   definition: Job;
@@ -96,7 +96,7 @@ model InlinePipelineJob extends PipelineJobBase {
 /** Reference pipeline job */
 model ReferencePipelineJob extends PipelineJobBase {
   /** Job type. */
-  type: "reference";
+  type: "Reference";
 
   /** Job name reference. */
   name: string;
