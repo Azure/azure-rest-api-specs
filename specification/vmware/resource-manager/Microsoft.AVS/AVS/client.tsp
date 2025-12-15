@@ -291,7 +291,7 @@ using Microsoft.AVS;
 
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,
   "PrivateCloudIdentity",
-  "java,go,javascript"
+  "java,go,javascript,python"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityType,
   "ResourceIdentityType",
