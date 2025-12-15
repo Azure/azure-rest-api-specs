@@ -200,7 +200,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return { resolved: resolvedValue };
   }
 
-  protected getPackageNameFromEmitterOutputDir(config: any): {
+  protected getPackageDirFromEmitterOutputDir(config: any): {
     resolved: string;
     error?: string;
   } {
@@ -268,7 +268,7 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
   }
 
   protected validate(config: any): RuleResult {
-    const result = this.getPackageNameFromEmitterOutputDir(config);
+    const result = this.getPackageDirFromEmitterOutputDir(config);
     if (result.error) {
       return this.createFailedResult(
         result.error,
@@ -641,15 +641,6 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
       "emitter-output-dir",
       new RegExp(/^azure(-[a-z]+){1,3}$/),
     );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
-  }
-}
-
-export class TspConfigPythonDpEmitterOutputDirSubRule1 extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-python", "emitter-output-dir", new RegExp(/^{namespace}$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
