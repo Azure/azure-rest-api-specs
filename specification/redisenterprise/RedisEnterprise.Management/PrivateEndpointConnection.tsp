@@ -33,7 +33,7 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<
       PrivateEndpointConnection,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> & Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
