@@ -4,13 +4,13 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ProviderHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContentProperties.contents
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContentProperties.contents, "!python,!js"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceManagementAction.resources
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceManagementAction.resources, "!python,!js"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContent.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationsContent.properties, "!python,!js"
 );
 
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
