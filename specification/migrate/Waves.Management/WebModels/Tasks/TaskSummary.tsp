@@ -33,7 +33,7 @@ model TaskSummaryRequest {
 @doc("Task Summary Response model.")
 model TaskSummaryResponse {
   @doc("List of Task Summary Items")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   items: Array<TaskSummaryItem>;
 }
 
@@ -50,7 +50,7 @@ model TaskSummaryItem {
   statusCounts: TaskStatusCounts;
 
   @doc("List of tasks in this stage.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   tasks: Array<Task>;
 }
 
@@ -58,7 +58,7 @@ model TaskSummaryItem {
 @doc("Task Status Counts model.")
 model TaskStatusCounts {
   @doc("Status counts dictionary mapping TaskStatus to the count of tasks with that status.")
-  @OpenAPI.extension("x-ms-identifiers", #["status"])
+  @identifiers(#["status"])
   statusCounts: TaskStatusCountMap[];
 }
 

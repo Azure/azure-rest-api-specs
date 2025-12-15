@@ -3,11 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 
 namespace Microsoft.Devices;
 
@@ -543,11 +539,13 @@ model SharedAccessSignatureAuthorizationRuleAccessRightsDescription {
   /**
    * Primary SAS key value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   primaryKey?: string;
 
   /**
    * Secondary SAS key value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   secondaryKey?: string;
 
   /**

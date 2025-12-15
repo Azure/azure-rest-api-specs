@@ -2,119 +2,611 @@
   "swagger": "2.0",
   "info": {
     "title": "TrafficManagerManagementClient",
-    "version": "2022-04-01"
+    "version": "2022-04-01",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "produces": [
-    "application/json"
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Profiles"
+    },
+    {
+      "name": "TrafficManagerGeographicHierarchies"
+    },
+    {
+      "name": "UserMetricsModels"
+    }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}": {
-      "patch": {
-        "tags": [
-          "Endpoints"
-        ],
-        "operationId": "Endpoints_Update",
-        "description": "Update a Traffic Manager endpoint.",
+    "/providers/Microsoft.Network/checkTrafficManagerNameAvailability": {
+      "post": {
+        "operationId": "Profiles_CheckTrafficManagerRelativeDnsNameAvailability",
+        "description": "Checks the availability of a Traffic Manager Relative DNS name.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
-          },
-          {
-            "name": "endpointType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The type of the Traffic Manager endpoint to be updated.",
-            "enum": [
-              "AzureEndpoints",
-              "ExternalEndpoints",
-              "NestedEndpoints"
-            ],
-            "x-ms-enum": {
-              "name": "EndpointType",
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager endpoint to be updated."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Endpoint"
-            },
-            "description": "The Traffic Manager endpoint parameters supplied to the Update operation."
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The updated Traffic Manager endpoint.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/TrafficManagerNameAvailability"
             }
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "Endpoint-PATCH-External-Target": {
-            "$ref": "./examples/Endpoint-PATCH-External-Target.json"
+          "NameAvailabilityTest_NameAvailablePOST21": {
+            "$ref": "./examples/NameAvailabilityTest_NameAvailable-POST-example-21.json"
+          },
+          "NameAvailabilityTest_NameNotAvailablePOST23": {
+            "$ref": "./examples/NameAvailabilityTest_NameNotAvailable-POST-example-23.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Network/trafficManagerGeographicHierarchies/default": {
+      "get": {
+        "operationId": "GeographicHierarchies_GetDefault",
+        "tags": [
+          "TrafficManagerGeographicHierarchies"
+        ],
+        "description": "Gets the default Geographic Hierarchy used by the Geographic traffic routing method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TrafficManagerGeographicHierarchy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GeographicHierarchy-GET-default": {
+            "$ref": "./examples/GeographicHierarchy-GET-default.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkTrafficManagerNameAvailabilityV2": {
+      "post": {
+        "operationId": "Profiles_checkTrafficManagerNameAvailabilityV2",
+        "description": "Checks the availability of a Traffic Manager Relative DNS name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TrafficManagerNameAvailability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NameAvailabilityV2Test_NameAvailablePOST21": {
+            "$ref": "./examples/NameAvailabilityV2Test_NameAvailable-POST-example-21.json"
+          },
+          "NameAvailabilityV2Test_NameNotAvailablePOST23": {
+            "$ref": "./examples/NameAvailabilityV2Test_NameNotAvailable-POST-example-23.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default": {
+      "get": {
+        "operationId": "TrafficManagerUserMetricsKeys_Get",
+        "tags": [
+          "UserMetricsModels"
+        ],
+        "description": "Get the subscription-level key used for Real User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserMetricsModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-GET": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-GET.json"
           }
         }
       },
-      "get": {
+      "put": {
+        "operationId": "TrafficManagerUserMetricsKeys_CreateOrUpdate",
         "tags": [
-          "Endpoints"
+          "UserMetricsModels"
         ],
-        "operationId": "Endpoints_Get",
-        "description": "Gets a Traffic Manager endpoint.",
+        "description": "Create or update a subscription-level key used for Real User Metrics collection.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'UserMetricsModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UserMetricsModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-PUT": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-PUT.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TrafficManagerUserMetricsKeys_Delete",
+        "tags": [
+          "UserMetricsModels"
+        ],
+        "description": "Delete a subscription-level key used for Real User Metrics collection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TrafficManagerUserMetricsKeys-DELETE": {
+            "$ref": "./examples/TrafficManagerUserMetricsKeys-DELETE.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficmanagerprofiles": {
+      "get": {
+        "operationId": "Profiles_ListBySubscription",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Lists all Traffic Manager profiles within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription": {
+            "$ref": "./examples/Profile-GET-BySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles": {
+      "get": {
+        "operationId": "Profiles_ListByResourceGroup",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Lists all Traffic Manager profiles within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListProfilesByResourceGroup": {
+            "$ref": "./examples/Profile-GET-ByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}": {
+      "get": {
+        "operationId": "Profiles_Get",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Gets a Traffic Manager profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "profileName",
             "in": "path",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-GET-WithEndpoints": {
+            "$ref": "./examples/Profile-GET-WithEndpoints.json"
+          },
+          "Profile-GET-WithTrafficViewDisabled": {
+            "$ref": "./examples/Profile-GET-WithTrafficViewDisabled.json"
+          },
+          "Profile-GET-WithTrafficViewEnabled": {
+            "$ref": "./examples/Profile-GET-WithTrafficViewEnabled.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Profiles_CreateOrUpdate",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Create or update a Traffic Manager profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Profile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "201": {
+            "description": "Resource 'Profile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-PUT-MultiValue": {
+            "$ref": "./examples/Profile-PUT-MultiValue.json"
+          },
+          "Profile-PUT-NoEndpoints": {
+            "$ref": "./examples/Profile-PUT-NoEndpoints.json"
+          },
+          "Profile-PUT-WithAliasing": {
+            "$ref": "./examples/Profile-PUT-WithAliasing.json"
+          },
+          "Profile-PUT-WithCustomHeaders": {
+            "$ref": "./examples/Profile-PUT-WithCustomHeaders.json"
+          },
+          "Profile-PUT-WithEndpoints": {
+            "$ref": "./examples/Profile-PUT-WithEndpoints.json"
+          },
+          "Profile-PUT-WithNestedEndpoints": {
+            "$ref": "./examples/Profile-PUT-WithNestedEndpoints.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Profiles_Update",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Update a Traffic Manager profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Traffic Manager profile parameters supplied to the Update operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-PATCH-MonitorConfig": {
+            "$ref": "./examples/Profile-PATCH-MonitorConfig.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Profiles_Delete",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes a Traffic Manager profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile-DELETE": {
+            "$ref": "./examples/Profile-DELETE.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}": {
+      "get": {
+        "operationId": "Endpoints_Get",
+        "description": "Gets a Traffic Manager endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "endpointType",
             "in": "path",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
-            "description": "The type of the Traffic Manager endpoint.",
             "enum": [
               "AzureEndpoints",
               "ExternalEndpoints",
@@ -128,26 +620,20 @@
           {
             "name": "endpointName",
             "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager endpoint."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The Traffic Manager endpoint.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -166,28 +652,31 @@
         }
       },
       "put": {
-        "tags": [
-          "Endpoints"
-        ],
         "operationId": "Endpoints_CreateOrUpdate",
         "description": "Create or update a Traffic Manager endpoint.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "profileName",
             "in": "path",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
+            "type": "string"
           },
           {
             "name": "endpointType",
             "in": "path",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
-            "description": "The type of the Traffic Manager endpoint to be created or updated.",
             "enum": [
               "AzureEndpoints",
               "ExternalEndpoints",
@@ -201,47 +690,47 @@
           {
             "name": "endpointName",
             "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager endpoint to be created or updated."
+            "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
+            "description": "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Endpoint"
-            },
-            "description": "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The created or updated Endpoint.",
+            "description": "Resource 'Endpoint' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "201": {
-            "description": "The created or updated Endpoint.",
+            "description": "Resource 'Endpoint' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
+          "Endpoint-PUT-External-WithAlwaysServe": {
+            "$ref": "./examples/Endpoint-PUT-External-WithAlwaysServe.json"
+          },
+          "Endpoint-PUT-External-WithCustomHeaders": {
+            "$ref": "./examples/Endpoint-PUT-External-WithCustomHeaders.json"
+          },
           "Endpoint-PUT-External-WithGeoMapping": {
             "$ref": "./examples/Endpoint-PUT-External-WithGeoMapping.json"
           },
@@ -250,38 +739,35 @@
           },
           "Endpoint-PUT-External-WithSubnetMapping": {
             "$ref": "./examples/Endpoint-PUT-External-WithSubnetMapping.json"
-          },
-          "Endpoint-PUT-External-WithCustomHeaders": {
-            "$ref": "./examples/Endpoint-PUT-External-WithCustomHeaders.json"
-          },
-          "Endpoint-PUT-External-WithAlwaysServe": {
-            "$ref": "./examples/Endpoint-PUT-External-WithAlwaysServe.json"
           }
         }
       },
-      "delete": {
-        "tags": [
-          "Endpoints"
-        ],
-        "operationId": "Endpoints_Delete",
-        "description": "Deletes a Traffic Manager endpoint.",
+      "patch": {
+        "operationId": "Endpoints_Update",
+        "description": "Update a Traffic Manager endpoint.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "profileName",
             "in": "path",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
+            "type": "string"
           },
           {
             "name": "endpointType",
             "in": "path",
+            "description": "The type of the Traffic Manager endpoint.",
             "required": true,
             "type": "string",
-            "description": "The type of the Traffic Manager endpoint to be deleted.",
             "enum": [
               "AzureEndpoints",
               "ExternalEndpoints",
@@ -295,29 +781,96 @@
           {
             "name": "endpointName",
             "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager endpoint to be deleted."
+            "type": "string"
           },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Traffic Manager endpoint parameters supplied to the Update operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Endpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-PATCH-External-Target": {
+            "$ref": "./examples/Endpoint-PATCH-External-Target.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "description": "Deletes a Traffic Manager endpoint.",
+        "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointType",
+            "in": "path",
+            "description": "The type of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "AzureEndpoints",
+              "ExternalEndpoints",
+              "NestedEndpoints"
+            ],
+            "x-ms-enum": {
+              "name": "EndpointType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "The Traffic Manager Endpoint was deleted successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DeleteOperationResult"
             }
           },
           "204": {
-            "description": "The Traffic Manager Endpoint does not exist. It could have been deleted on a previous request."
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -330,448 +883,15 @@
         }
       }
     },
-    "/providers/Microsoft.Network/checkTrafficManagerNameAvailability": {
-      "post": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_CheckTrafficManagerRelativeDnsNameAvailability",
-        "description": "Checks the availability of a Traffic Manager Relative DNS name.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters"
-            },
-            "description": "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager Name Availability.",
-            "schema": {
-              "$ref": "#/definitions/TrafficManagerNameAvailability"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameAvailabilityTest_NameAvailablePOST21": {
-            "$ref": "./examples/NameAvailabilityTest_NameAvailable-POST-example-21.json"
-          },
-          "NameAvailabilityTest_NameNotAvailablePOST23": {
-            "$ref": "./examples/NameAvailabilityTest_NameNotAvailable-POST-example-23.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkTrafficManagerNameAvailabilityV2": {
-      "post": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_checkTrafficManagerNameAvailabilityV2",
-        "description": "Checks the availability of a Traffic Manager Relative DNS name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters"
-            },
-            "description": "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager Name Availability.",
-            "schema": {
-              "$ref": "#/definitions/TrafficManagerNameAvailability"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NameAvailabilityV2Test_NameAvailablePOST21": {
-            "$ref": "./examples/NameAvailabilityV2Test_NameAvailable-POST-example-21.json"
-          },
-          "NameAvailabilityV2Test_NameNotAvailablePOST23": {
-            "$ref": "./examples/NameAvailabilityV2Test_NameNotAvailable-POST-example-23.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles": {
-      "get": {
-        "tags": [
-          "Profiles"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "operationId": "Profiles_ListByResourceGroup",
-        "description": "Lists all Traffic Manager profiles within a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of Traffic Manager profiles.",
-            "schema": {
-              "$ref": "#/definitions/ProfileListResult"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListProfilesByResourceGroup": {
-            "$ref": "./examples/Profile-GET-ByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficmanagerprofiles": {
-      "get": {
-        "tags": [
-          "Profiles"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "operationId": "Profiles_ListBySubscription",
-        "description": "Lists all Traffic Manager profiles within a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of Traffic Manager profiles.",
-            "schema": {
-              "$ref": "#/definitions/ProfileListResult"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListBySubscription": {
-            "$ref": "./examples/Profile-GET-BySubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}": {
-      "get": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_Get",
-        "description": "Gets a Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager profile.",
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Profile-GET-WithEndpoints": {
-            "$ref": "./examples/Profile-GET-WithEndpoints.json"
-          },
-          "Profile-GET-WithTrafficViewEnabled": {
-            "$ref": "./examples/Profile-GET-WithTrafficViewEnabled.json"
-          },
-          "Profile-GET-WithTrafficViewDisabled": {
-            "$ref": "./examples/Profile-GET-WithTrafficViewDisabled.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_CreateOrUpdate",
-        "description": "Create or update a Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            },
-            "description": "The Traffic Manager profile parameters supplied to the CreateOrUpdate operation."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The created or updated Traffic Manager profile.",
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            }
-          },
-          "201": {
-            "description": "The created or updated Traffic Manager profile.",
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Profile-PUT-NoEndpoints": {
-            "$ref": "./examples/Profile-PUT-NoEndpoints.json"
-          },
-          "Profile-PUT-WithEndpoints": {
-            "$ref": "./examples/Profile-PUT-WithEndpoints.json"
-          },
-          "Profile-PUT-WithNestedEndpoints": {
-            "$ref": "./examples/Profile-PUT-WithNestedEndpoints.json"
-          },
-          "Profile-PUT-WithCustomHeaders": {
-            "$ref": "./examples/Profile-PUT-WithCustomHeaders.json"
-          },
-          "Profile-PUT-MultiValue": {
-            "$ref": "./examples/Profile-PUT-MultiValue.json"
-          },
-          "Profile-PUT-WithAliasing": {
-            "$ref": "./examples/Profile-PUT-WithAliasing.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_Delete",
-        "description": "Deletes a Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile to be deleted."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager Profile was deleted successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteOperationResult"
-            }
-          },
-          "204": {
-            "description": "The profile does not exist. It could have been deleted on a previous request."
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Profile-DELETE": {
-            "$ref": "./examples/Profile-DELETE.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Profiles"
-        ],
-        "operationId": "Profiles_Update",
-        "description": "Update a Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            },
-            "description": "The Traffic Manager profile parameters supplied to the Update operation."
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The updated Traffic Manager profile.",
-            "schema": {
-              "$ref": "#/definitions/Profile"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Profile-PATCH-MonitorConfig": {
-            "$ref": "./examples/Profile-PATCH-MonitorConfig.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Network/trafficManagerGeographicHierarchies/default": {
-      "get": {
-        "tags": [
-          "GeographicHierarchies"
-        ],
-        "operationId": "GeographicHierarchies_GetDefault",
-        "description": "Gets the default Geographic Hierarchy used by the Geographic traffic routing method.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The default Geographic Hierarchy.",
-            "schema": {
-              "$ref": "#/definitions/TrafficManagerGeographicHierarchy"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GeographicHierarchy-GET-default": {
-            "$ref": "./examples/GeographicHierarchy-GET-default.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}": {
       "get": {
-        "tags": [
-          "HeatMaps"
-        ],
         "operationId": "HeatMap_Get",
         "description": "Gets latest heatmap for Traffic Manager profile.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -780,13 +900,14 @@
           {
             "name": "profileName",
             "in": "path",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "description": "The name of the Traffic Manager profile."
+            "type": "string"
           },
           {
             "name": "heatMapType",
             "in": "path",
+            "description": "The type of the heatmap.",
             "required": true,
             "type": "string",
             "enum": [
@@ -795,52 +916,46 @@
             "x-ms-enum": {
               "name": "HeatMapType",
               "modelAsString": false
-            },
-            "description": "The type of HeatMap for the Traffic Manager profile."
+            }
           },
           {
             "name": "topLeft",
             "in": "query",
-            "required": false,
-            "allowEmptyValue": true,
             "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
+            "required": false,
             "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
             "items": {
               "type": "number",
               "format": "double"
-            }
+            },
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
           },
           {
             "name": "botRight",
             "in": "query",
-            "required": false,
-            "allowEmptyValue": true,
             "description": "The bottom right latitude,longitude pair of the rectangular viewport to query for.",
+            "required": false,
             "type": "array",
-            "minItems": 2,
-            "maxItems": 2,
-            "collectionFormat": "csv",
             "items": {
               "type": "number",
               "format": "double"
-            }
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            },
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
           }
         ],
         "responses": {
           "200": {
-            "description": "The Traffic Manager heatmap.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HeatMapModel"
             }
           },
           "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -850,133 +965,220 @@
           "HeatMap-GET": {
             "$ref": "./examples/HeatMap-GET.json"
           },
-          "HeatMap-GET-With-TopLeft-BotRight": {
-            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
-          },
           "HeatMap-GET-With-Null-Values": {
             "$ref": "./examples/HeatMap-GET-With-Null-Values.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/trafficManagerUserMetricsKeys/default": {
-      "get": {
-        "tags": [
-          "RealUserMetrics"
-        ],
-        "operationId": "TrafficManagerUserMetricsKeys_Get",
-        "description": "Get the subscription-level key used for Real User Metrics collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The subscription-level Traffic Manager Real User Metrics key.",
-            "schema": {
-              "$ref": "#/definitions/UserMetricsModel"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TrafficManagerUserMetricsKeys-GET": {
-            "$ref": "./examples/TrafficManagerUserMetricsKeys-GET.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "RealUserMetrics"
-        ],
-        "operationId": "TrafficManagerUserMetricsKeys_CreateOrUpdate",
-        "description": "Create or update a subscription-level key used for Real User Metrics collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "A new subscription-level key has been created for Real User Metrics collection.",
-            "schema": {
-              "$ref": "#/definitions/UserMetricsModel"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TrafficManagerUserMetricsKeys-PUT": {
-            "$ref": "./examples/TrafficManagerUserMetricsKeys-PUT.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "RealUserMetrics"
-        ],
-        "operationId": "TrafficManagerUserMetricsKeys_Delete",
-        "description": "Delete a subscription-level key used for Real User Metrics collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Traffic Manager Real User Metrics key was deleted successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteOperationResult"
-            }
-          },
-          "default": {
-            "description": "Default response. It will be deserialized as per the Error definition.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TrafficManagerUserMetricsKeys-DELETE": {
-            "$ref": "./examples/TrafficManagerUserMetricsKeys-DELETE.json"
+          "HeatMap-GET-With-TopLeft-BotRight": {
+            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "AllowedEndpointRecordType": {
+      "type": "string",
+      "description": "The allowed type DNS record types for this profile.",
+      "enum": [
+        "DomainName",
+        "IPv4Address",
+        "IPv6Address",
+        "Any"
+      ],
+      "x-ms-enum": {
+        "name": "AllowedEndpointRecordType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DomainName",
+            "value": "DomainName"
+          },
+          {
+            "name": "IPv4Address",
+            "value": "IPv4Address"
+          },
+          {
+            "name": "IPv6Address",
+            "value": "IPv6Address"
+          },
+          {
+            "name": "Any",
+            "value": "Any"
+          }
+        ]
+      }
+    },
+    "AlwaysServe": {
+      "type": "string",
+      "description": "If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AlwaysServe",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
+      "type": "object",
+      "description": "Parameters supplied to check Traffic Manager name operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error returned by the Azure Resource Manager",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The content of the error."
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "description": "The content of an error returned by the Azure Resource Manager",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target"
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
+        }
+      },
+      "x-ms-external": true
+    },
     "DeleteOperationResult": {
+      "type": "object",
+      "description": "The result of the request or operation.",
       "properties": {
         "boolean": {
           "type": "boolean",
-          "x-ms-client-name": "operationResult",
+          "description": "The result of the operation or request.",
           "readOnly": true,
-          "description": "The result of the operation or request."
+          "x-ms-client-name": "operationResult"
+        }
+      }
+    },
+    "DnsConfig": {
+      "type": "object",
+      "description": "Class containing DNS settings in a Traffic Manager profile.",
+      "properties": {
+        "relativeName": {
+          "type": "string",
+          "description": "The relative DNS name provided by this Traffic Manager profile. This value is combined with the DNS domain name used by Azure Traffic Manager to form the fully-qualified domain name (FQDN) of the profile."
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The fully-qualified domain name (FQDN) of the Traffic Manager profile. This is formed from the concatenation of the RelativeName with the DNS domain used by Azure Traffic Manager.",
+          "readOnly": true
+        },
+        "ttl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The DNS Time-To-Live (TTL), in seconds. This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile."
+        }
+      }
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "The result of the request or operation."
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointMonitorStatus": {
+      "type": "string",
+      "description": "The monitoring status of the endpoint.",
+      "enum": [
+        "CheckingEndpoint",
+        "Online",
+        "Degraded",
+        "Disabled",
+        "Inactive",
+        "Stopped",
+        "Unmonitored"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointMonitorStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CheckingEndpoint",
+            "value": "CheckingEndpoint"
+          },
+          {
+            "name": "Online",
+            "value": "Online"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped"
+          },
+          {
+            "name": "Unmonitored",
+            "value": "Unmonitored"
+          }
+        ]
+      }
     },
     "EndpointProperties": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager endpoint properties.",
       "properties": {
         "targetResourceId": {
           "type": "string",
@@ -987,16 +1189,8 @@
           "description": "The fully-qualified DNS name or IP address of the endpoint. Traffic Manager returns this value in DNS responses to direct traffic to this endpoint."
         },
         "endpointStatus": {
-          "type": "string",
-          "description": "The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EndpointStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EndpointStatus",
+          "description": "The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method."
         },
         "weight": {
           "type": "integer",
@@ -1013,21 +1207,8 @@
           "description": "Specifies the location of the external or nested endpoints when using the 'Performance' traffic routing method."
         },
         "endpointMonitorStatus": {
-          "type": "string",
-          "description": "The monitoring status of the endpoint.",
-          "enum": [
-            "CheckingEndpoint",
-            "Online",
-            "Degraded",
-            "Disabled",
-            "Inactive",
-            "Stopped",
-            "Unmonitored"
-          ],
-          "x-ms-enum": {
-            "name": "EndpointMonitorStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/EndpointMonitorStatus",
+          "description": "The monitoring status of the endpoint."
         },
         "minChildEndpoints": {
           "type": "integer",
@@ -1046,145 +1227,130 @@
         },
         "geoMapping": {
           "type": "array",
+          "description": "The list of countries/regions mapped to this endpoint when using the 'Geographic' traffic routing method. Please consult Traffic Manager Geographic documentation for a full list of accepted values.",
           "items": {
             "type": "string"
-          },
-          "description": "The list of countries/regions mapped to this endpoint when using the 'Geographic' traffic routing method. Please consult Traffic Manager Geographic documentation for a full list of accepted values."
+          }
         },
         "subnets": {
           "type": "array",
+          "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints.",
           "items": {
-            "type": "object",
-            "properties": {
-              "first": {
-                "type": "string",
-                "description": "First address in the subnet."
-              },
-              "last": {
-                "type": "string",
-                "description": "Last address in the subnet."
-              },
-              "scope": {
-                "type": "integer",
-                "description": "Block size (number of leading bits in the subnet mask)."
-              }
-            },
-            "description": "Subnet first address, scope, and/or last address."
-          },
-          "description": "The list of subnets, IP addresses, and/or address ranges mapped to this endpoint when using the 'Subnet' traffic routing method. An empty list will match all ranges not covered by other endpoints."
+            "$ref": "#/definitions/EndpointPropertiesSubnetsItem"
+          }
         },
         "customHeaders": {
           "type": "array",
+          "description": "List of custom headers.",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Header name."
-              },
-              "value": {
-                "type": "string",
-                "description": "Header value."
-              }
-            },
-            "description": "Custom header name and value."
-          },
-          "description": "List of custom headers."
+            "$ref": "#/definitions/EndpointPropertiesCustomHeadersItem"
+          }
         },
         "alwaysServe": {
+          "$ref": "#/definitions/AlwaysServe",
+          "description": "If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method."
+        }
+      }
+    },
+    "EndpointPropertiesCustomHeadersItem": {
+      "type": "object",
+      "description": "Custom header name and value.",
+      "properties": {
+        "name": {
           "type": "string",
-          "description": "If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AlwaysServe",
-            "modelAsString": true
+          "description": "Header name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Header value."
+        }
+      }
+    },
+    "EndpointPropertiesSubnetsItem": {
+      "type": "object",
+      "description": "Subnet first address, scope, and/or last address.",
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "First address in the subnet."
+        },
+        "last": {
+          "type": "string",
+          "description": "Last address in the subnet."
+        },
+        "scope": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Block size (number of leading bits in the subnet mask)."
+        }
+      }
+    },
+    "EndpointStatus": {
+      "type": "string",
+      "description": "The status of the endpoint. If the endpoint is Enabled, it is probed for endpoint health and is included in the traffic routing method.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EndpointStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
           }
-        }
-      },
-      "description": "Class representing a Traffic Manager endpoint properties."
+        ]
+      }
     },
-    "HeatMapModel": {
+    "GeographicHierarchyProperties": {
+      "type": "object",
+      "description": "Class representing the properties of the Geographic hierarchy used with the Geographic traffic routing method.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HeatMapProperties",
-          "description": "The properties of the Traffic Manager HeatMap."
+        "geographicHierarchy": {
+          "$ref": "#/definitions/Region",
+          "description": "The region at the root of the hierarchy from all the regions in the hierarchy can be retrieved."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Class representing a Traffic Manager HeatMap."
+      }
     },
-    "UserMetricsModel": {
+    "HeatMapEndpoint": {
+      "type": "object",
+      "description": "Class which is a sparse representation of a Traffic Manager endpoint.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserMetricsProperties",
-          "description": "The properties of the Traffic Manager User Metrics."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Class representing Traffic Manager User Metrics."
-    },
-    "QueryExperience": {
-      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM Resource ID of this Traffic Manager endpoint."
+        },
         "endpointId": {
           "type": "integer",
-          "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
-        },
-        "queryCount": {
-          "type": "integer",
-          "description": "The number of queries originating from this location."
-        },
-        "latency": {
-          "type": "number",
-          "format": "double",
-          "description": "The latency experienced by queries originating from this location."
+          "format": "int32",
+          "description": "A number uniquely identifying this endpoint in query experiences."
         }
-      },
-      "required": [
-        "endpointId",
-        "queryCount"
-      ],
-      "description": "Class representing a Traffic Manager HeatMap query experience properties."
+      }
     },
-    "TrafficFlow": {
+    "HeatMapModel": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager HeatMap.",
       "properties": {
-        "sourceIp": {
-          "type": "string",
-          "description": "The IP address that this query experience originated from."
-        },
-        "latitude": {
-          "type": "number",
-          "format": "double",
-          "description": "The approximate latitude that these queries originated from."
-        },
-        "longitude": {
-          "type": "number",
-          "format": "double",
-          "description": "The approximate longitude that these queries originated from."
-        },
-        "queryExperiences": {
-          "type": "array",
-          "description": "The query experiences produced in this HeatMap calculation.",
-          "items": {
-            "$ref": "#/definitions/QueryExperience"
-          }
+        "properties": {
+          "$ref": "#/definitions/HeatMapProperties",
+          "description": "The properties of the Traffic Manager HeatMap.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Class representing a Traffic Manager HeatMap traffic flow properties."
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "HeatMapProperties": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager HeatMap properties.",
       "properties": {
         "startTime": {
           "type": "string",
@@ -1210,98 +1376,19 @@
             "$ref": "#/definitions/TrafficFlow"
           }
         }
-      },
-      "description": "Class representing a Traffic Manager HeatMap properties."
-    },
-    "HeatMapEndpoint": {
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "The ARM Resource ID of this Traffic Manager endpoint."
-        },
-        "endpointId": {
-          "type": "integer",
-          "description": "A number uniquely identifying this endpoint in query experiences."
-        }
-      },
-      "description": "Class which is a sparse representation of a Traffic Manager endpoint."
-    },
-    "Endpoint": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/EndpointProperties",
-          "description": "The properties of the Traffic Manager endpoint."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Class representing a Traffic Manager endpoint."
-    },
-    "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource."
-        }
-      },
-      "description": "Parameters supplied to check Traffic Manager name operation."
-    },
-    "DnsConfig": {
-      "properties": {
-        "relativeName": {
-          "type": "string",
-          "description": "The relative DNS name provided by this Traffic Manager profile. This value is combined with the DNS domain name used by Azure Traffic Manager to form the fully-qualified domain name (FQDN) of the profile."
-        },
-        "fqdn": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The fully-qualified domain name (FQDN) of the Traffic Manager profile. This is formed from the concatenation of the RelativeName with the DNS domain used by Azure Traffic Manager."
-        },
-        "ttl": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The DNS Time-To-Live (TTL), in seconds. This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile."
-        }
-      },
-      "description": "Class containing DNS settings in a Traffic Manager profile."
+      }
     },
     "MonitorConfig": {
+      "type": "object",
+      "description": "Class containing endpoint monitoring settings in a Traffic Manager profile.",
       "properties": {
         "profileMonitorStatus": {
-          "type": "string",
-          "description": "The profile-level monitoring status of the Traffic Manager profile.",
-          "enum": [
-            "CheckingEndpoints",
-            "Online",
-            "Degraded",
-            "Disabled",
-            "Inactive"
-          ],
-          "x-ms-enum": {
-            "name": "ProfileMonitorStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProfileMonitorStatus",
+          "description": "The profile-level monitoring status of the Traffic Manager profile."
         },
         "protocol": {
-          "type": "string",
-          "description": "The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.",
-          "enum": [
-            "HTTP",
-            "HTTPS",
-            "TCP"
-          ],
-          "x-ms-enum": {
-            "name": "MonitorProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MonitorProtocol",
+          "description": "The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health."
         },
         "port": {
           "type": "integer",
@@ -1329,72 +1416,162 @@
         },
         "customHeaders": {
           "type": "array",
+          "description": "List of custom headers.",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Header name."
-              },
-              "value": {
-                "type": "string",
-                "description": "Header value."
-              }
-            },
-            "description": "Custom header name and value."
-          },
-          "description": "List of custom headers."
+            "$ref": "#/definitions/MonitorConfigCustomHeadersItem"
+          }
         },
         "expectedStatusCodeRanges": {
           "type": "array",
+          "description": "List of expected status code ranges.",
           "items": {
-            "type": "object",
-            "properties": {
-              "min": {
-                "type": "integer",
-                "description": "Min status code."
-              },
-              "max": {
-                "type": "integer",
-                "description": "Max status code."
-              }
-            },
-            "description": "Min and max value of a status code range."
+            "$ref": "#/definitions/MonitorConfigExpectedStatusCodeRangesItem"
+          }
+        }
+      }
+    },
+    "MonitorConfigCustomHeadersItem": {
+      "type": "object",
+      "description": "Custom header name and value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Header name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Header value."
+        }
+      }
+    },
+    "MonitorConfigExpectedStatusCodeRangesItem": {
+      "type": "object",
+      "description": "Min and max value of a status code range.",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Min status code."
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max status code."
+        }
+      }
+    },
+    "MonitorProtocol": {
+      "type": "string",
+      "description": "The protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.",
+      "enum": [
+        "HTTP",
+        "HTTPS",
+        "TCP"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "HTTP",
+            "value": "HTTP"
           },
-          "description": "List of expected status code ranges."
+          {
+            "name": "HTTPS",
+            "value": "HTTPS"
+          },
+          {
+            "name": "TCP",
+            "value": "TCP"
+          }
+        ]
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager profile.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProfileProperties",
+          "description": "The properties of the Traffic Manager profile.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Class containing endpoint monitoring settings in a Traffic Manager profile."
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
     },
-    "ProfileProperties": {
+    "ProfileListResult": {
+      "type": "object",
+      "description": "The response of a Profile list operation.",
       "properties": {
-        "profileStatus": {
-          "type": "string",
-          "description": "The status of the Traffic Manager profile.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ProfileStatus",
-            "modelAsString": true
+        "value": {
+          "type": "array",
+          "description": "The Profile items on this page",
+          "items": {
+            "$ref": "#/definitions/Profile"
           }
         },
-        "trafficRoutingMethod": {
+        "nextLink": {
           "type": "string",
-          "description": "The traffic routing method of the Traffic Manager profile.",
-          "enum": [
-            "Performance",
-            "Priority",
-            "Weighted",
-            "Geographic",
-            "MultiValue",
-            "Subnet"
-          ],
-          "x-ms-enum": {
-            "name": "TrafficRoutingMethod",
-            "modelAsString": true
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProfileMonitorStatus": {
+      "type": "string",
+      "description": "The profile-level monitoring status of the Traffic Manager profile.",
+      "enum": [
+        "CheckingEndpoints",
+        "Online",
+        "Degraded",
+        "Disabled",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "ProfileMonitorStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CheckingEndpoints",
+            "value": "CheckingEndpoints"
+          },
+          {
+            "name": "Online",
+            "value": "Online"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive"
           }
+        ]
+      }
+    },
+    "ProfileProperties": {
+      "type": "object",
+      "description": "Class representing the Traffic Manager profile properties.",
+      "properties": {
+        "profileStatus": {
+          "$ref": "#/definitions/ProfileStatus",
+          "description": "The status of the Traffic Manager profile."
+        },
+        "trafficRoutingMethod": {
+          "$ref": "#/definitions/TrafficRoutingMethod",
+          "description": "The traffic routing method of the Traffic Manager profile."
         },
         "dnsConfig": {
           "$ref": "#/definitions/DnsConfig",
@@ -1406,80 +1583,202 @@
         },
         "endpoints": {
           "type": "array",
+          "description": "The list of endpoints in the Traffic Manager profile.",
           "items": {
             "$ref": "#/definitions/Endpoint"
-          },
-          "description": "The list of endpoints in the Traffic Manager profile."
+          }
         },
         "trafficViewEnrollmentStatus": {
-          "type": "string",
-          "description": "Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TrafficViewEnrollmentStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/TrafficViewEnrollmentStatus",
+          "description": "Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile."
         },
         "allowedEndpointRecordTypes": {
           "type": "array",
+          "description": "The list of allowed endpoint record types.",
           "items": {
             "$ref": "#/definitions/AllowedEndpointRecordType"
-          },
-          "description": "The list of allowed endpoint record types."
+          }
         },
         "maxReturn": {
           "type": "integer",
-          "description": "Maximum number of endpoints to be returned for MultiValue routing type.",
-          "format": "int64"
+          "format": "int64",
+          "description": "Maximum number of endpoints to be returned for MultiValue routing type."
         }
-      },
-      "description": "Class representing the Traffic Manager profile properties."
-    },
-    "AllowedEndpointRecordType": {
-      "description": "The allowed type DNS record types for this profile.",
-      "type": "string",
-      "enum": [
-        "DomainName",
-        "IPv4Address",
-        "IPv6Address",
-        "Any"
-      ],
-      "x-ms-enum": {
-        "name": "AllowedEndpointRecordType",
-        "modelAsString": true
       }
     },
-    "Profile": {
+    "ProfileStatus": {
+      "type": "string",
+      "description": "The status of the Traffic Manager profile.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ProfileStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "ProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "QueryExperience": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager HeatMap query experience properties.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProfileProperties",
-          "description": "The properties of the Traffic Manager profile."
+        "endpointId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The id of the endpoint from the 'endpoints' array which these queries were routed to."
+        },
+        "queryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of queries originating from this location."
+        },
+        "latency": {
+          "type": "number",
+          "format": "double",
+          "description": "The latency experienced by queries originating from this location."
+        }
+      },
+      "required": [
+        "endpointId",
+        "queryCount"
+      ]
+    },
+    "Region": {
+      "type": "object",
+      "description": "Class representing a region in the Geographic hierarchy used with the Geographic traffic routing method.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The code of the region"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the region"
+        },
+        "regions": {
+          "type": "array",
+          "description": "The list of Regions grouped under this Region in the Geographic Hierarchy.",
+          "items": {
+            "$ref": "#/definitions/Region"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        }
+      }
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
-      ],
-      "description": "Class representing a Traffic Manager profile."
+      ]
     },
-    "ProfileListResult": {
+    "TrafficFlow": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager HeatMap traffic flow properties.",
       "properties": {
-        "value": {
+        "sourceIp": {
+          "type": "string",
+          "description": "The IP address that this query experience originated from."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The approximate latitude that these queries originated from."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "The approximate longitude that these queries originated from."
+        },
+        "queryExperiences": {
           "type": "array",
+          "description": "The query experiences produced in this HeatMap calculation.",
           "items": {
-            "$ref": "#/definitions/Profile"
-          },
-          "description": "Gets the list of Traffic manager profiles."
+            "$ref": "#/definitions/QueryExperience"
+          }
+        }
+      }
+    },
+    "TrafficManagerGeographicHierarchy": {
+      "type": "object",
+      "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GeographicHierarchyProperties",
+          "description": "The properties of the Geographic Hierarchy resource.",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "The list Traffic Manager profiles operation response."
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "TrafficManagerNameAvailability": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager Name Availability response.",
       "properties": {
         "name": {
           "type": "string",
@@ -1501,190 +1800,98 @@
           "type": "string",
           "description": "Descriptive message that explains why the name is not available, when applicable."
         }
-      },
-      "description": "Class representing a Traffic Manager Name Availability response."
+      }
     },
-    "Region": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The code of the region"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the region"
-        },
-        "regions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Region"
+    "TrafficRoutingMethod": {
+      "type": "string",
+      "description": "The traffic routing method of the Traffic Manager profile.",
+      "enum": [
+        "Performance",
+        "Priority",
+        "Weighted",
+        "Geographic",
+        "MultiValue",
+        "Subnet"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficRoutingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Performance",
+            "value": "Performance"
           },
-          "description": "The list of Regions grouped under this Region in the Geographic Hierarchy."
-        }
-      },
-      "description": "Class representing a region in the Geographic hierarchy used with the Geographic traffic routing method."
+          {
+            "name": "Priority",
+            "value": "Priority"
+          },
+          {
+            "name": "Weighted",
+            "value": "Weighted"
+          },
+          {
+            "name": "Geographic",
+            "value": "Geographic"
+          },
+          {
+            "name": "MultiValue",
+            "value": "MultiValue"
+          },
+          {
+            "name": "Subnet",
+            "value": "Subnet"
+          }
+        ]
+      }
     },
-    "GeographicHierarchyProperties": {
-      "properties": {
-        "geographicHierarchy": {
-          "$ref": "#/definitions/Region",
-          "description": "The region at the root of the hierarchy from all the regions in the hierarchy can be retrieved."
-        }
-      },
-      "description": "Class representing the properties of the Geographic hierarchy used with the Geographic traffic routing method."
+    "TrafficViewEnrollmentStatus": {
+      "type": "string",
+      "description": "Indicates whether Traffic View is 'Enabled' or 'Disabled' for the Traffic Manager profile. Null, indicates 'Disabled'. Enabling this feature will increase the cost of the Traffic Manage profile.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficViewEnrollmentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          }
+        ]
+      }
     },
-    "TrafficManagerGeographicHierarchy": {
+    "UserMetricsModel": {
+      "type": "object",
+      "description": "Class representing Traffic Manager User Metrics.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GeographicHierarchyProperties",
-          "description": "The properties of the Geographic Hierarchy resource."
+          "$ref": "#/definitions/UserMetricsProperties",
+          "description": "The properties of the Traffic Manager User Metrics.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
-      ],
-      "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
+      ]
     },
     "UserMetricsProperties": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager Real User Metrics key response.",
       "properties": {
         "key": {
           "type": "string",
           "description": "The key returned by the User Metrics operation."
         }
-      },
-      "description": "Class representing a Traffic Manager Real User Metrics key response."
-    },
-    "Resource": {
-      "description": "The core properties of ARM resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The Azure Region where the resource lives"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "CloudError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "The content of the error."
-        }
-      },
-      "description": "An error returned by the Azure Resource Manager",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message"
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "Error details"
-        }
-      },
-      "description": "The content of an error returned by the Azure Resource Manager",
-      "x-ms-external": true
-    }
-  },
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
       }
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "x-ms-parameter-location": "client"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version.",
-      "x-ms-parameter-location": "client"
-    }
-  }
+  "parameters": {}
 }

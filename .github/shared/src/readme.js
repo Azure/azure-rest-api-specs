@@ -2,6 +2,7 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
+import { inspect } from "util";
 import * as z from "zod";
 import { mapAsync } from "./array.js";
 import { SpecModelError } from "./spec-model-error.js";
@@ -174,7 +175,7 @@ export class Readme {
           } /* v8 ignore start: defensive rethrow */ else {
             throw error;
           }
-          /* v8 ignore end */
+          /* v8 ignore stop */
         }
 
         if (!parsedObj["input-file"]) {
@@ -274,6 +275,6 @@ export class Readme {
    * @returns {string}
    */
   toString() {
-    return `Readme(${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme(${this.#path}, {logger: ${inspect(this.#logger)}})`;
   }
 }

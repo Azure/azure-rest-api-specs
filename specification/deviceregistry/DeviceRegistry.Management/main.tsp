@@ -9,6 +9,7 @@ import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
 import "./namespaces.tsp";
 import "./ns_credential.tsp";
+import "./back-compatible.tsp";
 import "./ns_policy.tsp";
 import "./ns_assets.tsp";
 import "./ns_devices.tsp";
