@@ -978,6 +978,12 @@ model JobDefinitionUpdateProperties {
    */
   @added(Versions.v2025_08_01)
   connections?: string[];
+
+  /**
+   * Data Integrity validation to be updated
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation;
 }
 
 /**
