@@ -76,10 +76,10 @@ model PipelineJobBase {
 /** Pipeline job type */
 union PipelineJobType {
   /** Reference job type. */
-  Reference: "reference",
+  Reference: "Reference",
 
   /** Inline job type. */
-  Inline: "inline",
+  Inline: "Inline",
 
   string,
 }
