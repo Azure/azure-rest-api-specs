@@ -16,7 +16,7 @@ using Microsoft.StorageActions;
 @@clientName(OnSuccess, "OnSuccessAction", "csharp");
 @@clientName(OnFailure, "OnFailureAction", "csharp");
 @@clientName(ElseCondition, "StorageTaskElseCondition", "csharp");
-@@clientName(IfCondition, "StorageTaskIfCondition", "csharp");
+@@clientName(IfCondition, "StorageTaskIfCondition2", "csharp");
 @@clientName(ProvisioningState, "StorageTaskProvisioningState", "csharp");
 @@clientName(RunResult, "StorageTaskRunResult", "csharp");
 @@clientName(RunStatusEnum, "StorageTaskRunStatus", "csharp");
