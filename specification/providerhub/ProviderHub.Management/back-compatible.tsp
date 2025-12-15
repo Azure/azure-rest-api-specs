@@ -99,6 +99,6 @@ using Microsoft.ProviderHub;
 @@clientLocation(ProviderRegistrations.checkinManifest, "Client", "go");
 @@clientLocation(ProviderRegistrations.generateManifest, "Client", "go");
 @@clientLocation(OperationsPutContents.createOrUpdate
-  , "Operations", "go");
-@@clientLocation(OperationsPutContents.delete, "Operations", "go");
-@@clientLocation(OperationsPutContents.listByProviderRegistration, "Operations", "go");
+  , "OperationsClient", "go");
+@@clientLocation(OperationsPutContents.delete, "OperationsClient", "go");
+@@clientLocation(OperationsPutContents.listByProviderRegistration, "OperationsClient", "go");
