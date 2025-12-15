@@ -1106,13 +1106,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/mongoSites/{siteName}/mongoDatabases/{databaseName}/mongoCollections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/mongoSites/{siteName}/mongoCollections": {
       "get": {
-        "operationId": "MongoCollections_ListByDatabase",
+        "operationId": "MongoCollections_ListBySite",
         "tags": [
           "MongoCollections"
         ],
-        "description": "Lists the MongoCollection resources in MongoDatabase.",
+        "description": "Lists the MongoCollection resources in MongoSite.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1127,16 +1127,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of Site",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of Database",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1159,8 +1149,8 @@
           }
         },
         "x-ms-examples": {
-          "MongoCollections_ListByDatabase_MaximumSet": {
-            "$ref": "./examples/MongoCollections_ListByDatabase_MaximumSet_Gen.json"
+          "MongoCollections_ListBySite_MaximumSet": {
+            "$ref": "./examples/MongoCollections_ListBySite_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1168,7 +1158,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/mongoSites/{siteName}/mongoDatabases/{databaseName}/mongoCollections/{collectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/mongoSites/{siteName}/mongoCollections/{collectionName}": {
       "get": {
         "operationId": "MongoCollections_Get",
         "tags": [
@@ -1189,16 +1179,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of Site",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of Database",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1256,16 +1236,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of Site",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of Database",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1345,16 +1315,6 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of Database",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
             "name": "collectionName",
             "in": "path",
             "description": "The name of Collection",
@@ -1414,16 +1374,6 @@
             "name": "siteName",
             "in": "path",
             "description": "The name of Site",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of Database",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2117,6 +2067,22 @@
           "type": "string",
           "description": "The collection name."
         },
+        "mongoDatabaseArmIds": {
+          "type": "array",
+          "description": "discovered Mongo Database Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/mongoSites/mongoDatabases"
+                }
+              ]
+            }
+          }
+        },
         "sizeInMb": {
           "type": "number",
           "format": "float",
@@ -2212,6 +2178,22 @@
           "type": "string",
           "description": "The collection name."
         },
+        "mongoDatabaseArmIds": {
+          "type": "array",
+          "description": "discovered Mongo Database Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/mongoSites/mongoDatabases"
+                }
+              ]
+            }
+          }
+        },
         "sizeInMb": {
           "type": "number",
           "format": "float",
@@ -2295,6 +2277,22 @@
         "databaseDisplayName": {
           "type": "string",
           "description": "The database name."
+        },
+        "mongoInstanceArmIds": {
+          "type": "array",
+          "description": "discovered Mongo Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/mongoSites/mongoInstances"
+                }
+              ]
+            }
+          }
         },
         "sizeInMb": {
           "type": "number",
@@ -2414,6 +2412,22 @@
         "databaseDisplayName": {
           "type": "string",
           "description": "The database name."
+        },
+        "mongoInstanceArmIds": {
+          "type": "array",
+          "description": "discovered Mongo Instance Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ApplicationMigration/mongoSites/mongoInstances"
+                }
+              ]
+            }
+          }
         },
         "sizeInMb": {
           "type": "number",
