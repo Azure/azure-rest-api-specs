@@ -38,6 +38,16 @@ options:
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-migrate"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/migrate"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmigrate"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmigrate"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
   "@azure-tools/typespec-client-generator-cli":
     "additionalDirectories":
       - "specification/migrate/AssessmentProjects.Management/AvsAssessments.Management"
