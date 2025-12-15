@@ -87,3 +87,9 @@ op getDeletedAccountCustomized(
   "kerb",
   "python"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(StorageAccountFailoverParameters.failoverType,
+  "Planned",
+  "python"
+);

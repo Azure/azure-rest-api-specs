@@ -65,6 +65,14 @@ alias StorageAccountListKeysParameters = {
   $expand?: "kerb";
 };
 
+alias StorageAccountFailoverParameters = {
+  /**
+   * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
+   */
+  @query("failoverType")
+  failoverType?: "Planned";
+};
+
 @armResourceOperations
 interface StorageAccounts {
   /**
@@ -193,13 +201,7 @@ interface StorageAccounts {
     {
       @body body: void;
     },
-    Parameters = {
-      /**
-       * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
-       */
-      @query("failoverType")
-      failoverType?: "Planned";
-    },
+    Parameters = StorageAccountFailoverParameters,
     Error = ErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader<FinalResult = void>
