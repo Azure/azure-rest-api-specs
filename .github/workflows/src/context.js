@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { isFullGitSha } from "../../shared/src/git.js";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { CoreLogger } from "./core-logger.js";
@@ -22,7 +23,15 @@ export async function extractInputs(github, context, core) {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
   core.info(`  payload.action: ${context.payload.action}`);
-  core.info(`  payload.workflow_run.event: ${context.payload.workflow_run?.event || "undefined"}`);
+
+  let workflowRunEvent = "undefined";
+  if (context.eventName === "workflow_run") {
+    const payload = /** @type {import("@octokit/webhooks-types").WorkflowRunEvent} */ (
+      context.payload
+    );
+    workflowRunEvent = payload.workflow_run?.event;
+  }
+  core.info(`  payload.workflow_run.event: ${workflowRunEvent}`);
 
   // Log full context when debug is enabled.  Most workflows should be idempotent and can be re-run
   // with debug enabled to replay the previous context.
@@ -164,7 +173,7 @@ export async function extractInputs(github, context, core) {
           core.info(`Error: ${error instanceof Error ? error.message : "unknown"}`);
 
           // Long message only in debug
-          core.debug(`Error: ${error}`);
+          core.debug(`Error: ${inspect(error)}`);
         }
 
         if (pullRequests.length === 0) {
@@ -270,10 +279,10 @@ export async function extractInputs(github, context, core) {
       run_id: payload.workflow_run.id,
     };
   } else if (context.eventName === "check_run") {
-    let checkRun = context.payload.check_run;
     const payload = /** @type {import("@octokit/webhooks-types").CheckRunEvent} */ (
       context.payload
     );
+    const checkRun = payload.check_run;
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
       owner: repositoryInfo.owner,

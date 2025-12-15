@@ -126,5 +126,5 @@ model CdcEventSchemaSetCloudEventsConfig extends CloudEventsConfig {
   authentication: Models.Auth.Authentication;
 
   @doc("Configuration for register")
-  autoRegisterConfig: AutoRegisterConfig;
+  autoRegisterConfig: CdcAutoRegisterConfig;
 }

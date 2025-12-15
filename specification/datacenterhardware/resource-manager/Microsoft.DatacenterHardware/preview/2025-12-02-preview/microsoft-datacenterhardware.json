@@ -1,0 +1,331 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DatacenterHardware management service",
+    "version": "2025-12-02-preview",
+    "description": "Microsoft.DatacenterHardware Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "HardwareAssets"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DatacenterHardware/hardwareAssets": {
+      "get": {
+        "operationId": "HardwareAssets_List",
+        "tags": [
+          "HardwareAssets"
+        ],
+        "description": "List HardwareAsset resources by tenant",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HardwareAssetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareAssets_List": {
+            "$ref": "./examples/HardwareAssets_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.DatacenterHardware/hardwareAssets/{assetTag}": {
+      "get": {
+        "operationId": "HardwareAssets_Get",
+        "tags": [
+          "HardwareAssets"
+        ],
+        "description": "Get a HardwareAsset",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "assetTag",
+            "in": "path",
+            "description": "The name of the HardwareAsset",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HardwareAsset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareAssets_Get": {
+            "$ref": "./examples/HardwareAssets_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DatacenterHardware/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HardwareAsset": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HardwareAssetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HardwareAssetListResult": {
+      "type": "object",
+      "description": "The response of a HardwareAsset list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HardwareAsset items on this page",
+          "items": {
+            "$ref": "#/definitions/HardwareAsset"
+          },
+          "x-ms-identifiers": [
+            "properties/assetTag",
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HardwareAssetProperties": {
+      "type": "object",
+      "description": "Asset properties",
+      "properties": {
+        "assetId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The unique identifier for the asset",
+          "readOnly": true
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "The asset tag associated with the asset",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number associated with the asset",
+          "readOnly": true
+        },
+        "assetName": {
+          "type": "string",
+          "description": "The name of the asset",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the asset",
+          "readOnly": true
+        },
+        "dataCenterCode": {
+          "type": "string",
+          "description": "The data center code where the asset is located",
+          "readOnly": true
+        },
+        "colocation": {
+          "type": "string",
+          "description": "The colocation the asset is in",
+          "readOnly": true
+        },
+        "tile": {
+          "type": "string",
+          "description": "The tile the asset is located at",
+          "readOnly": true
+        },
+        "bomSkuMsf": {
+          "type": "string",
+          "description": "The BOM SKU MSF for the asset",
+          "readOnly": true
+        },
+        "discreteSkuMsf": {
+          "type": "string",
+          "description": "The discrete SKU MSF for the asset",
+          "readOnly": true
+        },
+        "itemSkuMsf": {
+          "type": "string",
+          "description": "The item SKU MSF for the asset",
+          "readOnly": true
+        },
+        "itemType": {
+          "type": "string",
+          "description": "The item type for the asset",
+          "readOnly": true
+        },
+        "networkDeviceType": {
+          "type": "string",
+          "description": "The network device type for the asset",
+          "readOnly": true
+        },
+        "propertyGroup": {
+          "type": "string",
+          "description": "The property group for the asset",
+          "readOnly": true
+        },
+        "propertyDimension": {
+          "type": "string",
+          "description": "The property dimension for the asset",
+          "readOnly": true
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the asset",
+          "readOnly": true
+        },
+        "maxWarrantyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The maximum warranty date of the asset",
+          "readOnly": true
+        },
+        "deviceState": {
+          "type": "string",
+          "description": "The device state of the asset",
+          "readOnly": true
+        },
+        "environment": {
+          "type": "string",
+          "description": "The environment of the asset",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "assetId",
+        "assetTag",
+        "serialNumber",
+        "assetName",
+        "location",
+        "dataCenterCode",
+        "colocation",
+        "tile",
+        "bomSkuMsf",
+        "discreteSkuMsf",
+        "itemSkuMsf",
+        "itemType",
+        "propertyGroup",
+        "propertyDimension",
+        "created",
+        "maxWarrantyDate",
+        "deviceState",
+        "environment"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -27,6 +27,10 @@ model PlannedQuotaResourceProperties {
   @doc("Stage name")
   stage?: string;
 
+  @doc("Blueprint name")
+  @added(Versions.v2025_12_04_preview)
+  blueprint?: string;
+
   @doc("Region name")
   @added(Versions.v2023_08_22)
   @removed(Versions.v2024_06_24_preview)

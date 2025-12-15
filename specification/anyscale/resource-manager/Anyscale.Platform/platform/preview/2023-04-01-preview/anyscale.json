@@ -1,0 +1,1020 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Anyscale.Platform management service",
+    "version": "2023-04-01-preview",
+    "description": "Anyscale.Platform Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Clouds"
+    },
+    {
+      "name": "CloudResources"
+    }
+  ],
+  "paths": {
+    "/providers/Anyscale.Platform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/clouds": {
+      "get": {
+        "operationId": "Clouds_ListBySubscription",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "List cloud resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_ListBySubscription": {
+            "$ref": "./examples/Clouds_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Anyscale.Platform/clouds/{cloudName}/cloudResources": {
+      "get": {
+        "operationId": "CloudResources_ListBySubscription",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "List cloud resources by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_ListBySubscription": {
+            "$ref": "./examples/CloudResources_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Anyscale.Platform/clouds": {
+      "get": {
+        "operationId": "Clouds_ListByResourceGroup",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "List cloud resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_ListByResourceGroup": {
+            "$ref": "./examples/Clouds_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Anyscale.Platform/clouds/{cloudName}": {
+      "get": {
+        "operationId": "Clouds_Get",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "Get a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Get": {
+            "$ref": "./examples/Clouds_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clouds_CreateOrUpdate",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "Create or update a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Cloud' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "201": {
+            "description": "Resource 'Cloud' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_CreateOrUpdate": {
+            "$ref": "./examples/Clouds_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Clouds_Update",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "Update a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cloud"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Update": {
+            "$ref": "./examples/Clouds_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Clouds_Delete",
+        "tags": [
+          "Clouds"
+        ],
+        "description": "Delete a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clouds_Delete": {
+            "$ref": "./examples/Clouds_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Anyscale.Platform/clouds/{cloudName}/cloudResources": {
+      "get": {
+        "operationId": "CloudResources_ListByResourceGroup",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "List cloud resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_ListByResourceGroup": {
+            "$ref": "./examples/CloudResources_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Anyscale.Platform/clouds/{cloudName}/cloudResources/{cloudResourceName}": {
+      "get": {
+        "operationId": "CloudResources_Get",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "Get a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "The name of the cloud resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_Get": {
+            "$ref": "./examples/CloudResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudResources_CreateOrUpdate",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "Create or update a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "The name of the cloud resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_CreateOrUpdate": {
+            "$ref": "./examples/CloudResources_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudResources_Update",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "Update a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "The name of the cloud resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_Update": {
+            "$ref": "./examples/CloudResources_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CloudResources_Delete",
+        "tags": [
+          "CloudResources"
+        ],
+        "description": "Delete a cloud resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudName",
+            "in": "path",
+            "description": "The name of the cloud",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          },
+          {
+            "name": "cloudResourceName",
+            "in": "path",
+            "description": "The name of the cloud resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudResources_Delete": {
+            "$ref": "./examples/CloudResources_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Cloud": {
+      "type": "object",
+      "description": "Anyscale cloud resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudListResult": {
+      "type": "object",
+      "description": "The response of a Cloud list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cloud items on this page",
+          "items": {
+            "$ref": "#/definitions/Cloud"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudProperties": {
+      "type": "object",
+      "description": "Properties of the cloud resource",
+      "properties": {
+        "ssoUrl": {
+          "type": "string",
+          "description": "The SSO URL for the cloud",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cloud resource",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudResource": {
+      "type": "object",
+      "description": "Anyscale cloud resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudResourceListResult": {
+      "type": "object",
+      "description": "The response of a CloudResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudResource items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudResourceProperties": {
+      "type": "object",
+      "description": "Properties of the cloud resource",
+      "properties": {
+        "cloudResourceId": {
+          "type": "string",
+          "description": "The cloud resource ID which is used during Anyscale operator bootstrap,\ngenerated by Anyscale control plane.",
+          "readOnly": true
+        },
+        "provider": {
+          "$ref": "#/definitions/Provider",
+          "description": "Provider of the cloud resource"
+        },
+        "computeStack": {
+          "$ref": "#/definitions/ComputeStack",
+          "description": "Compute stack of the cloud resource"
+        },
+        "cloudStorageBucketName": {
+          "type": "string",
+          "description": "A fully qualified storage bucket name for cloud storage,\ne.g. s3://bucket-name, gs://bucket-name, or\nabfss://bucket-name"
+        },
+        "cloudStorageBucketEndpoint": {
+          "type": "string",
+          "description": "The cloud storage bucket endpoint"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cloud resource",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "provider",
+        "computeStack",
+        "cloudStorageBucketName",
+        "cloudStorageBucketEndpoint"
+      ]
+    },
+    "CloudResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the CloudResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CloudResourceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "CloudResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the CloudResource.",
+      "properties": {
+        "provider": {
+          "$ref": "#/definitions/Provider",
+          "description": "Provider of the cloud resource"
+        },
+        "computeStack": {
+          "$ref": "#/definitions/ComputeStack",
+          "description": "Compute stack of the cloud resource"
+        },
+        "cloudStorageBucketName": {
+          "type": "string",
+          "description": "A fully qualified storage bucket name for cloud storage,\ne.g. s3://bucket-name, gs://bucket-name, or\nabfss://bucket-name"
+        },
+        "cloudStorageBucketEndpoint": {
+          "type": "string",
+          "description": "The cloud storage bucket endpoint"
+        }
+      }
+    },
+    "CloudUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Cloud.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ComputeStack": {
+      "type": "string",
+      "description": "Compute stack associated with the cloud resource",
+      "enum": [
+        "K8S"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeStack",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "K8S",
+            "value": "K8S",
+            "description": "Kubernetes"
+          }
+        ]
+      }
+    },
+    "Provider": {
+      "type": "string",
+      "description": "Cloud provider for the cloud resources",
+      "enum": [
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "Provider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Microsoft Azure"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

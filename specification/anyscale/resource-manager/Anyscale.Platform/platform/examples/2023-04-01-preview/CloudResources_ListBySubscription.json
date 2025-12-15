@@ -1,0 +1,44 @@
+{
+  "title": "CloudResources_ListBySubscription",
+  "operationId": "CloudResources_ListBySubscription",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "cloudName": "AnyscaleCloud",
+    "cloudResourceName": "AnyscaleCloudResourceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "cloudResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloudResourceId",
+              "provider": "Anyscale",
+              "computeStack": "AnyscaleComputeStack",
+              "cloudStorageBucketName": "AnyscaleCloudStorageBucket",
+              "cloudStorageBucketEndpoint": "https://anyscalecloudstoragebucket.blob.core.windows.net",
+              "provisioningState": "Succeeded"
+            },
+            "tags": {
+              "test": "AnyscaleTag"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/AnyscaleResourceGroup/providers/Anyscale.Platform/cloudResources/AnyscaleCloud",
+            "name": "AnyscaleCloud",
+            "type": "Anyscale.Platform/cloudResources",
+            "systemData": {
+              "createdBy": "AnyscaleUser",
+              "createdByType": "User",
+              "createdAt": "2025-11-01T10:30:45.678Z",
+              "lastModifiedBy": "Anyscale",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-11-20T10:23:45.678Z"
+            }
+          }
+        ],
+        "nextLink": "https://anyscale.com/nextLink"
+      }
+    }
+  }
+}

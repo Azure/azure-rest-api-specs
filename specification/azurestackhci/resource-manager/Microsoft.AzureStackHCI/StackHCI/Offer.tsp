@@ -29,7 +29,6 @@ interface Offers {
   /**
    * Get Offer resource details within a publisher of HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<
     Offer,
     Parameters = {
@@ -44,7 +43,6 @@ interface Offers {
   /**
    * List Offers available for a publisher within the HCI Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByPublisher is ArmResourceListByParent<
     Offer,
     Parameters = {
@@ -60,43 +58,3 @@ interface Offers {
 
 @@doc(Offer.name, "The name of the offer available within HCI cluster.");
 @@doc(Offer.properties, "Offer properties.");
-
-// Models
-
-/**
- * List of Offer proxy resources for the HCI cluster.
- */
-model OfferList is Azure.Core.Page<Offer>;
-
-/**
- * Publisher properties.
- */
-model OfferProperties {
-  /**
-   * Provisioning State
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-
-  /**
-   * Identifier of the Publisher for the offer
-   */
-  publisherId?: string;
-
-  /**
-   * JSON serialized catalog content of the offer
-   */
-  content?: string;
-
-  /**
-   * The API version of the catalog service used to serve the catalog content
-   */
-  contentVersion?: string;
-
-  /**
-   * Array of SKU mappings
-   */
-  @identifiers(#[])
-  skuMappings?: SkuMappings[];
-}

@@ -1,0 +1,1715 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BedrockDataAutomationProjects"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/bedrockDataAutomationProjects": {
+      "get": {
+        "operationId": "BedrockDataAutomationProjects_ListBySubscription",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "List BedrockDataAutomationProject resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockDataAutomationProjects": {
+      "get": {
+        "operationId": "BedrockDataAutomationProjects_ListByResourceGroup",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "List BedrockDataAutomationProject resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProjectListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/bedrockDataAutomationProjects/{name}": {
+      "get": {
+        "operationId": "BedrockDataAutomationProjects_Get",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "Get a BedrockDataAutomationProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataAutomationProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProject"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_Get_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BedrockDataAutomationProjects_CreateOrReplace",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "Create a BedrockDataAutomationProject. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataAutomationProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BedrockDataAutomationProject' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProject"
+            }
+          },
+          "201": {
+            "description": "Resource 'BedrockDataAutomationProject' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProject"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_CreateOrReplace_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "BedrockDataAutomationProjects_Update",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "Update a BedrockDataAutomationProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataAutomationProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProjectTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BedrockDataAutomationProject"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_Update_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "BedrockDataAutomationProjects_Delete",
+        "tags": [
+          "BedrockDataAutomationProjects"
+        ],
+        "description": "Delete a BedrockDataAutomationProject",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of BedrockDataAutomationProject",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BedrockDataAutomationProjects_Delete_MaximumSet": {
+            "$ref": "./examples/BedrockDataAutomationProjects_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AudioExtractionCategory": {
+      "type": "object",
+      "description": "Definition of AudioExtractionCategory",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AudioExtractionCategoryState",
+          "description": "Property state"
+        },
+        "typeConfiguration": {
+          "$ref": "#/definitions/AudioExtractionCategoryTypeConfiguration",
+          "description": "Property typeConfiguration"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AudioExtractionCategoryState": {
+      "type": "string",
+      "description": "AudioExtractionCategoryState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AudioExtractionCategoryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "AudioExtractionCategoryState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "AudioExtractionCategoryState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "AudioExtractionCategoryTypeConfiguration": {
+      "type": "object",
+      "description": "Definition of AudioExtractionCategoryTypeConfiguration",
+      "properties": {
+        "transcript": {
+          "$ref": "#/definitions/TranscriptConfiguration",
+          "description": "Property transcript"
+        }
+      }
+    },
+    "AudioOverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of AudioOverrideConfiguration",
+      "properties": {
+        "modalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration",
+          "description": "Property modalityProcessing"
+        }
+      }
+    },
+    "AudioStandardExtraction": {
+      "type": "object",
+      "description": "Definition of AudioStandardExtraction",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/AudioExtractionCategory",
+          "description": "Property category"
+        }
+      }
+    },
+    "AudioStandardGenerativeField": {
+      "type": "object",
+      "description": "Definition of AudioStandardGenerativeField",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AudioStandardGenerativeFieldState",
+          "description": "Property state"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AudioStandardGenerativeFieldState": {
+      "type": "string",
+      "description": "AudioStandardGenerativeFieldState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AudioStandardGenerativeFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "AudioStandardGenerativeFieldState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "AudioStandardGenerativeFieldState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "AudioStandardOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of AudioStandardOutputConfiguration",
+      "properties": {
+        "extraction": {
+          "$ref": "#/definitions/AudioStandardExtraction",
+          "description": "Property extraction"
+        },
+        "generativeField": {
+          "$ref": "#/definitions/AudioStandardGenerativeField",
+          "description": "Property generativeField"
+        }
+      }
+    },
+    "AwsBedrockDataAutomationProjectProperties": {
+      "type": "object",
+      "description": "Definition of awsBedrockDataAutomationProject",
+      "properties": {
+        "creationTime": {
+          "type": "string",
+          "description": "Time Stamp"
+        },
+        "customOutputConfiguration": {
+          "$ref": "#/definitions/CustomOutputConfiguration",
+          "description": "Custom output configuration"
+        },
+        "kmsEncryptionContext": {
+          "type": "object",
+          "description": "KMS encryption context",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "kmsKeyId": {
+          "type": "string",
+          "description": "KMS key identifier"
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Time Stamp"
+        },
+        "overrideConfiguration": {
+          "$ref": "#/definitions/OverrideConfiguration",
+          "description": "Override configuration"
+        },
+        "projectArn": {
+          "type": "string",
+          "description": "ARN of a DataAutomationProject"
+        },
+        "projectDescription": {
+          "type": "string",
+          "description": "Description of the DataAutomationProject"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the DataAutomationProject"
+        },
+        "projectStage": {
+          "$ref": "#/definitions/ProjectStage",
+          "description": "Stage of the Project"
+        },
+        "standardOutputConfiguration": {
+          "$ref": "#/definitions/StandardOutputConfiguration",
+          "description": "Standard output configuration"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "Property status"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of Tags",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "BedrockDataAutomationProject": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BedrockDataAutomationProjectProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "BedrockDataAutomationProjectListResult": {
+      "type": "object",
+      "description": "The response of a BedrockDataAutomationProject list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BedrockDataAutomationProject items on this page",
+          "items": {
+            "$ref": "#/definitions/BedrockDataAutomationProject"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BedrockDataAutomationProjectProperties": {
+      "type": "object",
+      "description": "Definition of BedrockDataAutomationProject",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsBedrockDataAutomationProjectProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "BedrockDataAutomationProjectTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in BedrockDataAutomationProject resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BlueprintItem": {
+      "type": "object",
+      "description": "Definition of BlueprintItem",
+      "properties": {
+        "blueprintArn": {
+          "type": "string",
+          "description": "ARN of a Blueprint"
+        },
+        "blueprintStage": {
+          "$ref": "#/definitions/BlueprintItemBlueprintStage",
+          "description": "Stage of the Blueprint"
+        },
+        "blueprintVersion": {
+          "type": "string",
+          "description": "Blueprint Version"
+        }
+      }
+    },
+    "BlueprintItemBlueprintStage": {
+      "type": "string",
+      "description": "BlueprintItemBlueprintStage enum",
+      "enum": [
+        "DEVELOPMENT",
+        "LIVE"
+      ],
+      "x-ms-enum": {
+        "name": "BlueprintItemBlueprintStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEVELOPMENT",
+            "value": "DEVELOPMENT",
+            "description": "BlueprintItemBlueprintStage enum DEVELOPMENT"
+          },
+          {
+            "name": "LIVE",
+            "value": "LIVE",
+            "description": "BlueprintItemBlueprintStage enum LIVE"
+          }
+        ]
+      }
+    },
+    "ChannelLabelingConfiguration": {
+      "type": "object",
+      "description": "Definition of ChannelLabelingConfiguration",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ChannelLabelingConfigurationState",
+          "description": "Property state"
+        }
+      }
+    },
+    "ChannelLabelingConfigurationState": {
+      "type": "string",
+      "description": "ChannelLabelingConfigurationState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ChannelLabelingConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ChannelLabelingConfigurationState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ChannelLabelingConfigurationState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "CustomOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of CustomOutputConfiguration",
+      "properties": {
+        "blueprints": {
+          "type": "array",
+          "description": "Property blueprints",
+          "items": {
+            "$ref": "#/definitions/BlueprintItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DocumentBoundingBox": {
+      "type": "object",
+      "description": "Definition of DocumentBoundingBox",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DocumentBoundingBoxState",
+          "description": "Property state"
+        }
+      }
+    },
+    "DocumentBoundingBoxState": {
+      "type": "string",
+      "description": "DocumentBoundingBoxState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentBoundingBoxState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "DocumentBoundingBoxState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "DocumentBoundingBoxState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "DocumentExtractionGranularity": {
+      "type": "object",
+      "description": "Definition of DocumentExtractionGranularity",
+      "properties": {
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DocumentOutputAdditionalFileFormat": {
+      "type": "object",
+      "description": "Definition of DocumentOutputAdditionalFileFormat",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DocumentOutputAdditionalFileFormatState",
+          "description": "Property state"
+        }
+      }
+    },
+    "DocumentOutputAdditionalFileFormatState": {
+      "type": "string",
+      "description": "DocumentOutputAdditionalFileFormatState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentOutputAdditionalFileFormatState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "DocumentOutputAdditionalFileFormatState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "DocumentOutputAdditionalFileFormatState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "DocumentOutputFormat": {
+      "type": "object",
+      "description": "Definition of DocumentOutputFormat",
+      "properties": {
+        "additionalFileFormat": {
+          "$ref": "#/definitions/DocumentOutputAdditionalFileFormat",
+          "description": "Property additionalFileFormat"
+        },
+        "textFormat": {
+          "$ref": "#/definitions/DocumentOutputTextFormat",
+          "description": "Property textFormat"
+        }
+      }
+    },
+    "DocumentOutputTextFormat": {
+      "type": "object",
+      "description": "Definition of DocumentOutputTextFormat",
+      "properties": {
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DocumentOverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of DocumentOverrideConfiguration",
+      "properties": {
+        "modalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration",
+          "description": "Property modalityProcessing"
+        },
+        "splitter": {
+          "$ref": "#/definitions/SplitterConfiguration",
+          "description": "Property splitter"
+        }
+      }
+    },
+    "DocumentStandardExtraction": {
+      "type": "object",
+      "description": "Definition of DocumentStandardExtraction",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/DocumentBoundingBox",
+          "description": "Property boundingBox"
+        },
+        "granularity": {
+          "$ref": "#/definitions/DocumentExtractionGranularity",
+          "description": "Property granularity"
+        }
+      }
+    },
+    "DocumentStandardGenerativeField": {
+      "type": "object",
+      "description": "Definition of DocumentStandardGenerativeField",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/DocumentStandardGenerativeFieldState",
+          "description": "Property state"
+        }
+      }
+    },
+    "DocumentStandardGenerativeFieldState": {
+      "type": "string",
+      "description": "DocumentStandardGenerativeFieldState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentStandardGenerativeFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "DocumentStandardGenerativeFieldState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "DocumentStandardGenerativeFieldState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "DocumentStandardOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of DocumentStandardOutputConfiguration",
+      "properties": {
+        "extraction": {
+          "$ref": "#/definitions/DocumentStandardExtraction",
+          "description": "Property extraction"
+        },
+        "generativeField": {
+          "$ref": "#/definitions/DocumentStandardGenerativeField",
+          "description": "Property generativeField"
+        },
+        "outputFormat": {
+          "$ref": "#/definitions/DocumentOutputFormat",
+          "description": "Property outputFormat"
+        }
+      }
+    },
+    "ImageBoundingBox": {
+      "type": "object",
+      "description": "Definition of ImageBoundingBox",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ImageBoundingBoxState",
+          "description": "Property state"
+        }
+      }
+    },
+    "ImageBoundingBoxState": {
+      "type": "string",
+      "description": "ImageBoundingBoxState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ImageBoundingBoxState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ImageBoundingBoxState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ImageBoundingBoxState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "ImageExtractionCategory": {
+      "type": "object",
+      "description": "Definition of ImageExtractionCategory",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ImageExtractionCategoryState",
+          "description": "Property state"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageExtractionCategoryState": {
+      "type": "string",
+      "description": "ImageExtractionCategoryState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ImageExtractionCategoryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ImageExtractionCategoryState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ImageExtractionCategoryState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "ImageOverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of ImageOverrideConfiguration",
+      "properties": {
+        "modalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration",
+          "description": "Property modalityProcessing"
+        }
+      }
+    },
+    "ImageStandardExtraction": {
+      "type": "object",
+      "description": "Definition of ImageStandardExtraction",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/ImageBoundingBox",
+          "description": "Property boundingBox"
+        },
+        "category": {
+          "$ref": "#/definitions/ImageExtractionCategory",
+          "description": "Property category"
+        }
+      }
+    },
+    "ImageStandardGenerativeField": {
+      "type": "object",
+      "description": "Definition of ImageStandardGenerativeField",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ImageStandardGenerativeFieldState",
+          "description": "Property state"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImageStandardGenerativeFieldState": {
+      "type": "string",
+      "description": "ImageStandardGenerativeFieldState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ImageStandardGenerativeFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ImageStandardGenerativeFieldState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ImageStandardGenerativeFieldState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "ImageStandardOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of ImageStandardOutputConfiguration",
+      "properties": {
+        "extraction": {
+          "$ref": "#/definitions/ImageStandardExtraction",
+          "description": "Property extraction"
+        },
+        "generativeField": {
+          "$ref": "#/definitions/ImageStandardGenerativeField",
+          "description": "Property generativeField"
+        }
+      }
+    },
+    "ModalityProcessingConfiguration": {
+      "type": "object",
+      "description": "Definition of ModalityProcessingConfiguration",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/ModalityProcessingConfigurationState",
+          "description": "Property state"
+        }
+      }
+    },
+    "ModalityProcessingConfigurationState": {
+      "type": "string",
+      "description": "ModalityProcessingConfigurationState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "ModalityProcessingConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "ModalityProcessingConfigurationState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "ModalityProcessingConfigurationState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "ModalityRoutingConfiguration": {
+      "type": "object",
+      "description": "Definition of ModalityRoutingConfiguration",
+      "properties": {
+        "jpeg": {
+          "$ref": "#/definitions/ModalityRoutingConfigurationjpeg",
+          "description": "Property jpeg"
+        },
+        "mov": {
+          "$ref": "#/definitions/ModalityRoutingConfigurationmov",
+          "description": "Property mov"
+        },
+        "mp4": {
+          "$ref": "#/definitions/ModalityRoutingConfigurationmp4",
+          "description": "Property mp4"
+        },
+        "png": {
+          "$ref": "#/definitions/ModalityRoutingConfigurationpng",
+          "description": "Property png"
+        }
+      }
+    },
+    "ModalityRoutingConfigurationjpeg": {
+      "type": "string",
+      "description": "ModalityRoutingConfigurationjpeg enum",
+      "enum": [
+        "AUDIO",
+        "DOCUMENT",
+        "IMAGE",
+        "VIDEO"
+      ],
+      "x-ms-enum": {
+        "name": "ModalityRoutingConfigurationjpeg",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AUDIO",
+            "value": "AUDIO",
+            "description": "ModalityRoutingConfigurationjpeg enum AUDIO"
+          },
+          {
+            "name": "DOCUMENT",
+            "value": "DOCUMENT",
+            "description": "ModalityRoutingConfigurationjpeg enum DOCUMENT"
+          },
+          {
+            "name": "IMAGE",
+            "value": "IMAGE",
+            "description": "ModalityRoutingConfigurationjpeg enum IMAGE"
+          },
+          {
+            "name": "VIDEO",
+            "value": "VIDEO",
+            "description": "ModalityRoutingConfigurationjpeg enum VIDEO"
+          }
+        ]
+      }
+    },
+    "ModalityRoutingConfigurationmov": {
+      "type": "string",
+      "description": "ModalityRoutingConfigurationmov enum",
+      "enum": [
+        "AUDIO",
+        "DOCUMENT",
+        "IMAGE",
+        "VIDEO"
+      ],
+      "x-ms-enum": {
+        "name": "ModalityRoutingConfigurationmov",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AUDIO",
+            "value": "AUDIO",
+            "description": "ModalityRoutingConfigurationmov enum AUDIO"
+          },
+          {
+            "name": "DOCUMENT",
+            "value": "DOCUMENT",
+            "description": "ModalityRoutingConfigurationmov enum DOCUMENT"
+          },
+          {
+            "name": "IMAGE",
+            "value": "IMAGE",
+            "description": "ModalityRoutingConfigurationmov enum IMAGE"
+          },
+          {
+            "name": "VIDEO",
+            "value": "VIDEO",
+            "description": "ModalityRoutingConfigurationmov enum VIDEO"
+          }
+        ]
+      }
+    },
+    "ModalityRoutingConfigurationmp4": {
+      "type": "string",
+      "description": "ModalityRoutingConfigurationmp4 enum",
+      "enum": [
+        "AUDIO",
+        "DOCUMENT",
+        "IMAGE",
+        "VIDEO"
+      ],
+      "x-ms-enum": {
+        "name": "ModalityRoutingConfigurationmp4",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AUDIO",
+            "value": "AUDIO",
+            "description": "ModalityRoutingConfigurationmp4 enum AUDIO"
+          },
+          {
+            "name": "DOCUMENT",
+            "value": "DOCUMENT",
+            "description": "ModalityRoutingConfigurationmp4 enum DOCUMENT"
+          },
+          {
+            "name": "IMAGE",
+            "value": "IMAGE",
+            "description": "ModalityRoutingConfigurationmp4 enum IMAGE"
+          },
+          {
+            "name": "VIDEO",
+            "value": "VIDEO",
+            "description": "ModalityRoutingConfigurationmp4 enum VIDEO"
+          }
+        ]
+      }
+    },
+    "ModalityRoutingConfigurationpng": {
+      "type": "string",
+      "description": "ModalityRoutingConfigurationpng enum",
+      "enum": [
+        "AUDIO",
+        "DOCUMENT",
+        "IMAGE",
+        "VIDEO"
+      ],
+      "x-ms-enum": {
+        "name": "ModalityRoutingConfigurationpng",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AUDIO",
+            "value": "AUDIO",
+            "description": "ModalityRoutingConfigurationpng enum AUDIO"
+          },
+          {
+            "name": "DOCUMENT",
+            "value": "DOCUMENT",
+            "description": "ModalityRoutingConfigurationpng enum DOCUMENT"
+          },
+          {
+            "name": "IMAGE",
+            "value": "IMAGE",
+            "description": "ModalityRoutingConfigurationpng enum IMAGE"
+          },
+          {
+            "name": "VIDEO",
+            "value": "VIDEO",
+            "description": "ModalityRoutingConfigurationpng enum VIDEO"
+          }
+        ]
+      }
+    },
+    "OverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of OverrideConfiguration",
+      "properties": {
+        "audio": {
+          "$ref": "#/definitions/AudioOverrideConfiguration",
+          "description": "Property audio"
+        },
+        "document": {
+          "$ref": "#/definitions/DocumentOverrideConfiguration",
+          "description": "Property document"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageOverrideConfiguration",
+          "description": "Property image"
+        },
+        "modalityRouting": {
+          "$ref": "#/definitions/ModalityRoutingConfiguration",
+          "description": "Modality routing configuration"
+        },
+        "video": {
+          "$ref": "#/definitions/VideoOverrideConfiguration",
+          "description": "Property video"
+        }
+      }
+    },
+    "ProjectStage": {
+      "type": "string",
+      "description": "ProjectStage enum",
+      "enum": [
+        "DEVELOPMENT",
+        "LIVE"
+      ],
+      "x-ms-enum": {
+        "name": "ProjectStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DEVELOPMENT",
+            "value": "DEVELOPMENT",
+            "description": "ProjectStage enum DEVELOPMENT"
+          },
+          {
+            "name": "LIVE",
+            "value": "LIVE",
+            "description": "ProjectStage enum LIVE"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SpeakerLabelingConfiguration": {
+      "type": "object",
+      "description": "Definition of SpeakerLabelingConfiguration",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/SpeakerLabelingConfigurationState",
+          "description": "Property state"
+        }
+      }
+    },
+    "SpeakerLabelingConfigurationState": {
+      "type": "string",
+      "description": "SpeakerLabelingConfigurationState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "SpeakerLabelingConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "SpeakerLabelingConfigurationState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "SpeakerLabelingConfigurationState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "SplitterConfiguration": {
+      "type": "object",
+      "description": "Definition of SplitterConfiguration",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/SplitterConfigurationState",
+          "description": "Property state"
+        }
+      }
+    },
+    "SplitterConfigurationState": {
+      "type": "string",
+      "description": "SplitterConfigurationState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "SplitterConfigurationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "SplitterConfigurationState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "SplitterConfigurationState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "StandardOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of StandardOutputConfiguration",
+      "properties": {
+        "audio": {
+          "$ref": "#/definitions/AudioStandardOutputConfiguration",
+          "description": "Property audio"
+        },
+        "document": {
+          "$ref": "#/definitions/DocumentStandardOutputConfiguration",
+          "description": "Property document"
+        },
+        "image": {
+          "$ref": "#/definitions/ImageStandardOutputConfiguration",
+          "description": "Property image"
+        },
+        "video": {
+          "$ref": "#/definitions/VideoStandardOutputConfiguration",
+          "description": "Property video"
+        }
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "IN_PROGRESS"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "COMPLETED",
+            "value": "COMPLETED",
+            "description": "Status enum COMPLETED"
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "Status enum FAILED"
+          },
+          {
+            "name": "IN_PROGRESS",
+            "value": "IN_PROGRESS",
+            "description": "Status enum IN_PROGRESS"
+          }
+        ]
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key for the tag"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for the tag"
+        }
+      }
+    },
+    "TranscriptConfiguration": {
+      "type": "object",
+      "description": "Definition of TranscriptConfiguration",
+      "properties": {
+        "channelLabeling": {
+          "$ref": "#/definitions/ChannelLabelingConfiguration",
+          "description": "Property channelLabeling"
+        },
+        "speakerLabeling": {
+          "$ref": "#/definitions/SpeakerLabelingConfiguration",
+          "description": "Property speakerLabeling"
+        }
+      }
+    },
+    "VideoBoundingBox": {
+      "type": "object",
+      "description": "Definition of VideoBoundingBox",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/VideoBoundingBoxState",
+          "description": "Property state"
+        }
+      }
+    },
+    "VideoBoundingBoxState": {
+      "type": "string",
+      "description": "VideoBoundingBoxState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "VideoBoundingBoxState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "VideoBoundingBoxState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "VideoBoundingBoxState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "VideoExtractionCategory": {
+      "type": "object",
+      "description": "Definition of VideoExtractionCategory",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/VideoExtractionCategoryState",
+          "description": "Property state"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VideoExtractionCategoryState": {
+      "type": "string",
+      "description": "VideoExtractionCategoryState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "VideoExtractionCategoryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "VideoExtractionCategoryState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "VideoExtractionCategoryState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "VideoOverrideConfiguration": {
+      "type": "object",
+      "description": "Definition of VideoOverrideConfiguration",
+      "properties": {
+        "modalityProcessing": {
+          "$ref": "#/definitions/ModalityProcessingConfiguration",
+          "description": "Property modalityProcessing"
+        }
+      }
+    },
+    "VideoStandardExtraction": {
+      "type": "object",
+      "description": "Definition of VideoStandardExtraction",
+      "properties": {
+        "boundingBox": {
+          "$ref": "#/definitions/VideoBoundingBox",
+          "description": "Property boundingBox"
+        },
+        "category": {
+          "$ref": "#/definitions/VideoExtractionCategory",
+          "description": "Property category"
+        }
+      }
+    },
+    "VideoStandardGenerativeField": {
+      "type": "object",
+      "description": "Definition of VideoStandardGenerativeField",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/VideoStandardGenerativeFieldState",
+          "description": "Property state"
+        },
+        "types": {
+          "type": "array",
+          "description": "Property types",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VideoStandardGenerativeFieldState": {
+      "type": "string",
+      "description": "VideoStandardGenerativeFieldState enum",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ],
+      "x-ms-enum": {
+        "name": "VideoStandardGenerativeFieldState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "VideoStandardGenerativeFieldState enum DISABLED"
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "VideoStandardGenerativeFieldState enum ENABLED"
+          }
+        ]
+      }
+    },
+    "VideoStandardOutputConfiguration": {
+      "type": "object",
+      "description": "Definition of VideoStandardOutputConfiguration",
+      "properties": {
+        "extraction": {
+          "$ref": "#/definitions/VideoStandardExtraction",
+          "description": "Property extraction"
+        },
+        "generativeField": {
+          "$ref": "#/definitions/VideoStandardGenerativeField",
+          "description": "Property generativeField"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

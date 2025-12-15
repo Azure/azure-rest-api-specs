@@ -95,7 +95,7 @@ model JsonConvertedRecord {
   @doc("Header of DataPreview result")
   headers: DataHeader[];
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "not a secret"
   @doc("Key of DataPreview result")
   key: string;
 
@@ -109,22 +109,22 @@ model JsonConvertedRecord {
 @doc("Result Code of DataPreview request")
 union DataPreviewResultCode {
   @doc("Represents DataPreview Timeout.")
-  Timeout: "TIMEOUT",
+  Timeout: "Timeout",
 
   @doc("Represents No Data of DataPreview.")
-  NoData: "NO_DATA",
+  NoData: "NoData",
 
   @doc("Represents Succeeded of DataPreview.")
-  Succeeded: "SUCCEEDED",
+  Succeeded: "Succeeded",
 
   @doc("Represents DataPreview Succeeded with skipped data due to up limit.")
-  SucceededWithSkippedDataUpLimit: "SUCCEEDED_WITH_SKIPPED_DATA_UP_LIMIT",
+  SucceededWithSkippedDataUpLimit: "SucceededWithSkippedDataUpLimit",
 
   @doc("Represents DataPreview Succeeded with skipped data due to down limit")
-  SucceededWithSkippedDataDownLimit: "SUCCEEDED_WITH_SKIPPED_DATA",
+  SucceededWithSkippedDataDownLimit: "SucceededWithSkippedDataDownLimit",
 
   @doc("Represents DataPreview No data with skipped data due to up limit")
-  NoDataWithSkippedDataUpLimit: "NO_DATA_WITH_SKIPPED_DATA",
+  NoDataWithSkippedDataUpLimit: "NoDataWithSkippedDataUpLimit",
 
   string,
 }

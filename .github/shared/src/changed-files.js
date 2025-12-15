@@ -174,6 +174,15 @@ export function json(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function markdown(file) {
+  // Extension ".md" with any case is a valid markdown file
+  return typeof file === "string" && file.toLowerCase().endsWith(".md");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function readme(file) {
   // Filename "readme.md" with any case is a valid README file
   return typeof file === "string" && file.toLowerCase().endsWith("readme.md");

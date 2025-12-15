@@ -64,7 +64,7 @@ model ConfluentAvroSourceDataFormat extends SourceDataFormat {
   @doc("Registry url for Confluent.")
   schemaRegistryUrl: url;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "not a secret"
   @doc("Access key for Confluent.")
   key: string;
 

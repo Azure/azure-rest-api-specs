@@ -49,7 +49,7 @@ model SignalSource {
   spatialAggregation: SpatialAggregation;
 
   @doc("Defines how measurements are aggregated over a specific time window within the same time series.")
-  temporalAggregation?: TemporalAggregation;
+  temporalAggregation: TemporalAggregation;
 }
 
 @doc("Represents a filtering condition.")
@@ -238,5 +238,5 @@ model TemporalAggregation {
   type: TemporalAggregationType;
 
   @doc("Time window size for aggregation, in minutes.")
-  windowSizeMinutes: int32;
+  windowSizeMinutes?: int32;
 }
