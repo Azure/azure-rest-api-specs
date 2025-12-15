@@ -4823,14 +4823,6 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
-        },
-        "dedicatedHubList": {
-          "type": "array",
-          "description": "DedicatedHub List.",
-          "items": {
-            "$ref": "#/definitions/DedicatedHubBaseModel"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -4951,6 +4943,7 @@
           "items": {
             "$ref": "#/definitions/DedicatedHubResource"
           },
+          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
@@ -5008,40 +5001,6 @@
         "value"
       ]
     },
-    "DedicatedHubBaseModel": {
-      "type": "object",
-      "description": "Dedicated Hub Base Properties",
-      "properties": {
-        "vHubResourceId": {
-          "$ref": "#/definitions/VirtualHubResourceId",
-          "description": "Virtual Hub Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "firewallResourceId": {
-          "$ref": "#/definitions/FirewallResourceId",
-          "description": "Firewall Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "firewallPolicyResourceId": {
-          "$ref": "#/definitions/FirewallPolicyResourceId",
-          "description": "Firewall Policy Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "designation": {
-          "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
-        }
-      }
-    },
     "DedicatedHubPatchModel": {
       "type": "object",
       "description": "Dedicated Hub Patch Resource",
@@ -5065,7 +5024,7 @@
       "properties": {
         "designation": {
           "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
+          "description": "Designation of hub resource allocation (Pooled or Reserved)"
         }
       }
     },
@@ -5076,30 +5035,21 @@
         "vHubResourceId": {
           "$ref": "#/definitions/VirtualHubResourceId",
           "description": "Virtual Hub Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "firewallResourceId": {
           "$ref": "#/definitions/FirewallResourceId",
           "description": "Firewall Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "firewallPolicyResourceId": {
           "$ref": "#/definitions/FirewallPolicyResourceId",
           "description": "Firewall Policy Resource ID",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "designation": {
           "$ref": "#/definitions/Designation",
-          "description": "Designation of hub resource allocation (Communal or Allocated)"
+          "description": "Designation of hub resource allocation (Pooled or Reserved)"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -5160,22 +5110,22 @@
       "type": "string",
       "description": "Specifies the designation of the dedicated hub.",
       "enum": [
-        "Communal",
-        "Allocated"
+        "Pooled",
+        "Reserved"
       ],
       "x-ms-enum": {
         "name": "Designation",
         "modelAsString": true,
         "values": [
           {
-            "name": "Communal",
-            "value": "Communal",
-            "description": "Designation Type Communal"
+            "name": "Pooled",
+            "value": "Pooled",
+            "description": "Designation Type Pooled"
           },
           {
-            "name": "Allocated",
-            "value": "Allocated",
-            "description": "Designation Type Allocated"
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "Designation Type Reserved"
           }
         ]
       }
