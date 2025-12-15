@@ -239,6 +239,7 @@ using Azure.ResourceManager;
 @@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
 @@clientName(SubmitStartRequest, "SubmitStartContent");
 @@clientName(SubmitHibernateRequest, "SubmitHibernateContent");
-@@clientName(ScheduledActionProperties, "ScheduledActionPatchProperties");
-@@clientName(ScheduledActionsExtensionProperties, "ScheduledActionsExtensionProperties");
-@@clientName(ScheduledActionResources, "ScheduledActionResources");
+@@clientName(ScheduledActionsExtensionProperties,
+  "ScheduledActionsExtensionProperties"
+);
+@@clientName(ScheduledActionResources, "ScheduledActionResourcesModified");
