@@ -615,12 +615,12 @@ union MonitoredComputeResourceType {
 }
 
 /**
- * Request body for listing monitored compute resources.
+ * Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model MonitoredComputeResourcesRequest {
   /**
-   * Optional filter to get resources of a specific type. If not provided or set to "All", returns all monitored compute resources.
+   * The type of compute resources to filter by. Use "All" to get all resource types, or specify a specific type like "managedClusters".
    */
   resourceType?: MonitoredComputeResourceType;
 }
@@ -630,7 +630,12 @@ model MonitoredComputeResourcesRequest {
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model MonitoredComputeResourceListResponse
-  is Azure.Core.Page<MonitoredComputeResourceInfo>;
+  is Azure.Core.Page<MonitoredComputeResourceInfo> {
+  /**
+   * The list of compute resource types included in this response.
+   */
+  resourceType?: string[];
+}
 
 /**
  * Details of a monitored compute resource monitored by the Dynatrace monitor.

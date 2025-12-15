@@ -104,7 +104,7 @@ interface MonitorResources {
   >;
 
   /**
-   * Gets the list of monitored compute resources by the Dynatrace monitor.
+   * Lists the compute resources monitored by current monitor.
    */
   @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
   @list
@@ -198,7 +198,7 @@ interface MonitorResources {
   "List of resources and action"
 );
 @@doc(MonitorResources.listMonitoredComputeResources::parameters.body,
-  "The details of the list monitored compute resources request."
+  "Request body to filter compute resources by resource type."
 );
 @@doc(MonitorResources.getMetricStatus::parameters.body,
   "The details of the metric status request."

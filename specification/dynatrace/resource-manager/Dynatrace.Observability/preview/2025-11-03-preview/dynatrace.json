@@ -949,7 +949,7 @@
         "tags": [
           "MonitorResources"
         ],
-        "description": "Gets the list of monitored compute resources by the Dynatrace monitor.",
+        "description": "Lists the compute resources monitored by current monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -971,7 +971,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The details of the list monitored compute resources request.",
+            "description": "Request body to filter compute resources by resource type.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/MonitoredComputeResourcesRequest"
@@ -2958,6 +2958,13 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        },
+        "resourceType": {
+          "type": "array",
+          "description": "The list of compute resource types included in this response.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2990,11 +2997,11 @@
     },
     "MonitoredComputeResourcesRequest": {
       "type": "object",
-      "description": "Request body for listing monitored compute resources.",
+      "description": "Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.",
       "properties": {
         "resourceType": {
           "$ref": "#/definitions/MonitoredComputeResourceType",
-          "description": "Optional filter to get resources of a specific type. If not provided or set to \"All\", returns all monitored compute resources."
+          "description": "The type of compute resources to filter by. Use \"All\" to get all resource types, or specify a specific type like \"managedClusters\"."
         }
       }
     },
