@@ -18,7 +18,7 @@ namespace SdkCustomizations;
 @@clientName(getKeyValue, "GetConfigurationSetting", "csharp");
 @@clientName(getKeyValues, "GetConfigurationSettings", "csharp");
 @@clientName(putKeyValue, "SetConfigurationSettingInternal", "csharp");
-@@clientName(deleteKeyValue, "DeleteConfigurationSetting", "csharp");
+@@clientName(deleteKeyValue, "DeleteKeyValueSetting", "csharp");
 @@clientName(updateSnapshot, "UpdateSnapshotStatus", "csharp");
 @@clientName(putLock, "CreateReadOnlyLock", "csharp");
 @@clientName(deleteLock, "DeleteReadOnlyLock", "csharp");
