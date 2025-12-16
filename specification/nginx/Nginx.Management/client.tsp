@@ -94,10 +94,7 @@ using Azure.Core;
   "NginxConfigurationCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(NginxConfigurationRequest.type,
-  "ResourceType",
-  "csharp"
-);
+@@clientName(NginxConfigurationRequest.type, "ResourceType", "csharp");
 @@clientName(NginxConfigurationRequestProperties,
   "NginxConfigurationCreateOrUpdateProperties",
   "csharp"
@@ -106,10 +103,7 @@ using Azure.Core;
   "NginxDeploymentApiKeyCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(NginxDeploymentApiKeyRequest.type,
-  "ResourceType",
-  "csharp"
-);
+@@clientName(NginxDeploymentApiKeyRequest.type, "ResourceType", "csharp");
 @@clientName(NginxDeploymentDefaultWafPolicyListResponse,
   "NginxDeploymentDefaultWafPolicyListResult",
   "csharp"
