@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-12-04` is specified on the co
 
 ```yaml $(tag) == 'package-2025-12-04'
 input-file:
-  - Microsoft.Hardware/preview/2025-12-04/hardware.json
+  - Microsoft.Hardware/stable/2025-12-04/hardware.json
 suppressions:
   - code: TrackedResourcePatchOperation
     reason: This is a false positive.
