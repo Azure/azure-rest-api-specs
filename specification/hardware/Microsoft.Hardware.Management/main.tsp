@@ -14,7 +14,6 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{
   title: "Hardware Resource Provider",
-  //version: "2023-07-12-preview",
 })
 @versioned(Versions)
 
@@ -24,9 +23,14 @@ namespace Microsoft.Hardware;
 
 enum Versions {
   /**
-   * The 2025-12-04-preview API version.
+   * The 2023-07-12-preview API version.
    */
-  v2025_12_04_preview: "2025-12-04-preview",
+  v2023_07_12_preview: "2023-07-12-preview",
+
+  /**
+   * The 2025-12-04 API version.
+   */
+  v2025_12_04: "2025-12-04",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -145,8 +149,8 @@ model OrderLineQuantity {
 
   @doc("Order lineId cancelled Quantity")
   @visibility(Lifecycle.Read)
-  cancelled?:int64;
-  
+  cancelled?: int64;
+
   @doc("Order lineId returned Quantity")
   @visibility(Lifecycle.Read)
   returned?: int64;
@@ -205,7 +209,7 @@ model Tax {
 
   @doc("Categorization of the taxation system")
   class?: string;
-  
+
   @doc("Specific title assigned to the tax entity")
   name?: string;
 
@@ -254,7 +258,7 @@ union ProductIdType {
   @doc("MS product identifier (3x5 SKU)")
   FulfillmentProductId: "fulfillmentProductId",
 
-  string
+  string,
 }
 
 @doc("Shipping method")
@@ -277,7 +281,7 @@ union ShippingMethod {
   @doc("APO FPO shipping")
   ApoFpo: "apoFpo",
 
-  string
+  string,
 }
 
 @doc("Ship-To-Id Type")
@@ -288,7 +292,7 @@ union ShipToIdType {
   @doc("Partner External-Id")
   ExternalId: "externalId",
 
-  string
+  string,
 }
 
 @doc("Fee type")
@@ -296,7 +300,7 @@ union FeeType {
   @doc("Recycling fee")
   Recycling: "recycling",
 
-  string
+  string,
 }
 
 @doc("Tax Type")
@@ -307,7 +311,7 @@ union TaxType {
   @doc("Tax on shipping cost")
   Shipping: "shipping",
 
-  string
+  string,
 }
 
 @doc("Order Status")
@@ -336,8 +340,7 @@ union OrderStatus {
   @doc("Order is cancelled")
   Cancelled: "cancelled",
 
-  string
-
+  string,
 }
 
 @doc("Order Line Status")
@@ -360,13 +363,12 @@ union OrderLineStatus {
   @doc("Order is returned")
   Returned: "returned",
 
-  string
+  string,
 }
 
 @doc("Provisioning State")
 @lroStatus
 union ProvisioningState {
-
   @doc("Order is pending")
   Pending: "pending",
 
@@ -379,7 +381,7 @@ union ProvisioningState {
   @doc("Order is canceled")
   Canceled: "canceled",
 
-  string
+  string,
 }
 
 alias DefaultProviderNamespace = {

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Hardware Resource Provider",
-    "version": "2025-12-04-preview",
+    "version": "2023-07-12-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -58,21 +58,26 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -89,13 +94,13 @@
         "description": "Enables preview of hardware order for passed order lines by populating fees, taxes, shipping estimates.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "bodyRoot",
+            "name": "body",
             "in": "body",
             "description": "The orderPreview request",
             "required": true,
@@ -114,8 +119,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OrderPreview": {
+            "$ref": "./examples/Orders_Preview.json"
           }
         }
       }
@@ -129,15 +139,15 @@
         "description": "List Order resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrderListResult"
             }
@@ -145,8 +155,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetBySubscription": {
+            "$ref": "./examples/Orders_ListBySubscription.json"
+          },
+          "Orders_ListBySubscription": {
+            "$ref": "./examples/Orders_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -163,18 +181,18 @@
         "description": "List Order resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrderListResult"
             }
@@ -182,8 +200,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetByResourceGroup": {
+            "$ref": "./examples/Orders_ListByResourceGroup.json"
+          },
+          "Orders_ListByResourceGroup": {
+            "$ref": "./examples/Orders_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -191,7 +217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/orders/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Hardware/orders/{orderId}": {
       "get": {
         "operationId": "Orders_Get",
         "tags": [
@@ -200,25 +226,25 @@
         "description": "Get a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "orderId",
             "in": "path",
-            "description": "The name of the Order",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
@@ -226,8 +252,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "OrderById": {
+            "$ref": "./examples/Orders_Get.json"
+          },
+          "Orders_Get": {
+            "$ref": "./examples/Orders_Get.json"
           }
         }
       },
@@ -239,18 +273,18 @@
         "description": "Create a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "orderId",
             "in": "path",
-            "description": "The name of the Order",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           },
@@ -277,10 +311,6 @@
               "$ref": "#/definitions/Order"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -291,8 +321,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrder": {
+            "$ref": "./examples/Orders_Create.json"
+          },
+          "Orders_Create": {
+            "$ref": "./examples/Orders_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -308,18 +346,18 @@
         "description": "Update a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "orderId",
             "in": "path",
-            "description": "The name of the Order",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           },
@@ -335,7 +373,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
@@ -343,8 +381,16 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Orders_Update": {
+            "$ref": "./examples/Orders_Update.json"
+          },
+          "UpdateOrder": {
+            "$ref": "./examples/Orders_Update.json"
           }
         }
       },
@@ -356,18 +402,18 @@
         "description": "Delete a Order",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "orderId",
             "in": "path",
-            "description": "The name of the Order",
+            "description": "Order Id",
             "required": true,
             "type": "string"
           }
@@ -377,38 +423,27 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteOrder": {
+            "$ref": "./examples/Orders_Delete.json"
+          },
+          "Orders_Delete": {
+            "$ref": "./examples/Orders_Delete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "CustomerOrder": {
       "type": "object",
       "description": "Customer PurchaseOrder",
@@ -417,15 +452,15 @@
           "type": "string",
           "description": "Customer PurchaseOrder Id"
         },
-        "createdDateTime": {
+        "createdDate": {
           "type": "string",
-          "format": "date-time",
-          "description": "Customer PurchaseOrder Date Time"
+          "format": "date",
+          "description": "Customer PurchaseOrder Date"
         }
       },
       "required": [
         "id",
-        "createdDateTime"
+        "createdDate"
       ]
     },
     "CustomerOrderUpdate": {
@@ -436,10 +471,10 @@
           "type": "string",
           "description": "Customer PurchaseOrder Id"
         },
-        "createdDateTime": {
+        "createdDate": {
           "type": "string",
-          "format": "date-time",
-          "description": "Customer PurchaseOrder Date Time"
+          "format": "date",
+          "description": "Customer PurchaseOrder Date"
         }
       }
     },
@@ -466,7 +501,7 @@
       "type": "string",
       "description": "Fee type",
       "enum": [
-        "recycling"
+        "Recycling"
       ],
       "x-ms-enum": {
         "name": "FeeType",
@@ -474,29 +509,10 @@
         "values": [
           {
             "name": "Recycling",
-            "value": "recycling",
+            "value": "Recycling",
             "description": "Recycling fee"
           }
         ]
-      }
-    },
-    "LineFulfillmentInstruction": {
-      "type": "object",
-      "description": "Order line fulfillment instructions",
-      "properties": {
-        "referenceDeviceLine": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Device line referred to by the warranty line."
-        },
-        "serialNumbers": {
-          "type": "array",
-          "description": "Serial Numbers",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
       }
     },
     "Order": {
@@ -505,12 +521,17 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/OrderProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -554,10 +575,10 @@
           "$ref": "#/definitions/ShippingMethod",
           "description": "Shipping Method"
         },
-        "requestedDeliveryDateTime": {
+        "requestedDeliveryDate": {
           "type": "string",
-          "format": "date-time",
-          "description": "Requested Delivery Date Time"
+          "format": "date",
+          "description": "Requested Delivery Date"
         },
         "cancellationReason": {
           "type": "string",
@@ -567,16 +588,16 @@
           "type": "string",
           "description": "Cancelled By User details"
         },
-        "estimatedDeliveryDateTime": {
+        "estimatedDeliveryDate": {
           "type": "string",
-          "format": "date-time",
-          "description": "Estimated Deliver Date Time",
+          "format": "date",
+          "description": "Estimated Deliver Date",
           "readOnly": true
         },
-        "estimatedShippedDateTime": {
+        "estimatedShippedDate": {
           "type": "string",
-          "format": "date-time",
-          "description": "Estimated Shipped Date Time",
+          "format": "date",
+          "description": "Estimated Shipped Date",
           "readOnly": true
         }
       },
@@ -592,50 +613,46 @@
       "type": "object",
       "description": "Order line quantity",
       "properties": {
-        "pending": {
+        "ordered": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId pending Quantity"
+          "description": "Order lineId Ordered Quantity"
         },
-        "inProgress": {
+        "confirmed": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId in-progress quantity",
+          "description": "Order lineId Confirmed Quantity",
           "readOnly": true
         },
-        "fulfilled": {
+        "shipped": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId fulfilled Quantity",
-          "readOnly": true
-        },
-        "cancelled": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Order lineId cancelled Quantity",
+          "description": "Order lineId Shipped Quantity",
           "readOnly": true
         },
         "returned": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId returned Quantity",
+          "description": "Order lineId Returned Quantity",
           "readOnly": true
         }
       },
       "required": [
-        "pending"
+        "ordered"
       ]
     },
     "OrderLineStatus": {
       "type": "string",
       "description": "Order Line Status",
       "enum": [
-        "pending",
-        "inProgress",
-        "confirmed",
-        "fulfilled",
-        "cancelled",
-        "returned"
+        "Pending",
+        "Created",
+        "Confirmed",
+        "PartiallyConfirmed",
+        "PendingCancel",
+        "PendingShipment",
+        "PartiallyShipped",
+        "Shipped"
       ],
       "x-ms-enum": {
         "name": "OrderLineStatus",
@@ -643,33 +660,43 @@
         "values": [
           {
             "name": "Pending",
-            "value": "pending",
+            "value": "Pending",
             "description": "Order is pending"
           },
           {
-            "name": "InProgress",
-            "value": "inProgress",
-            "description": "Order is in-progress"
+            "name": "Created",
+            "value": "Created",
+            "description": "Order is created"
           },
           {
             "name": "Confirmed",
-            "value": "confirmed",
+            "value": "Confirmed",
             "description": "Order is confirmed"
           },
           {
-            "name": "Fulfilled",
-            "value": "fulfilled",
-            "description": "Order is fulfilled"
+            "name": "PartiallyConfirmed",
+            "value": "PartiallyConfirmed",
+            "description": "Order is partially confirmed"
           },
           {
-            "name": "Cancelled",
-            "value": "cancelled",
-            "description": "Order is cancelled"
+            "name": "PendingCancel",
+            "value": "PendingCancel",
+            "description": "Order is pending cancellation"
           },
           {
-            "name": "Returned",
-            "value": "returned",
-            "description": "Order is returned"
+            "name": "PendingShipment",
+            "value": "PendingShipment",
+            "description": "Order is ready to ship cannot be cancelled"
+          },
+          {
+            "name": "PartiallyShipped",
+            "value": "PartiallyShipped",
+            "description": "Order is partially shipped"
+          },
+          {
+            "name": "Shipped",
+            "value": "Shipped",
+            "description": "Order is shipped"
           }
         ]
       }
@@ -713,11 +740,6 @@
           "description": "Order status",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Order provisioning state",
-          "readOnly": true
-        },
         "orderLines": {
           "type": "array",
           "description": "Order line details",
@@ -743,6 +765,11 @@
         "reservationId": {
           "type": "string",
           "description": "Reservation for order if applicable"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
         }
       },
       "required": [
@@ -750,9 +777,86 @@
         "currency"
       ]
     },
-    "OrderPropertiesUpdate": {
+    "OrderStatus": {
+      "type": "string",
+      "description": "Order Status",
+      "enum": [
+        "Pending",
+        "Created",
+        "Confirmed",
+        "PartiallyConfirmed",
+        "PendingCancel",
+        "PendingShipment",
+        "PartiallyShipped",
+        "Shipped"
+      ],
+      "x-ms-enum": {
+        "name": "OrderStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Order is pending"
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Order is created"
+          },
+          {
+            "name": "Confirmed",
+            "value": "Confirmed",
+            "description": "Order is confirmed"
+          },
+          {
+            "name": "PartiallyConfirmed",
+            "value": "PartiallyConfirmed",
+            "description": "Order is PartiallyConfirmed"
+          },
+          {
+            "name": "PendingCancel",
+            "value": "PendingCancel",
+            "description": "Order is pending cancellation"
+          },
+          {
+            "name": "PendingShipment",
+            "value": "PendingShipment",
+            "description": "Order is ready to ship cannot be cancelled"
+          },
+          {
+            "name": "PartiallyShipped",
+            "value": "PartiallyShipped",
+            "description": "Order is partially shipped"
+          },
+          {
+            "name": "Shipped",
+            "value": "Shipped",
+            "description": "Order is shipped"
+          }
+        ]
+      }
+    },
+    "OrderUpdate": {
       "type": "object",
-      "description": "Forward Order",
+      "description": "The type used for update operations of the Order.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/OrderUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OrderUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Order.",
       "properties": {
         "customerOrder": {
           "$ref": "#/definitions/CustomerOrderUpdate",
@@ -786,81 +890,6 @@
         }
       }
     },
-    "OrderStatus": {
-      "type": "string",
-      "description": "Order Status",
-      "enum": [
-        "pending",
-        "created",
-        "confirmed",
-        "partiallyConfirmed",
-        "partiallyShipped",
-        "shipped",
-        "returned",
-        "cancelled"
-      ],
-      "x-ms-enum": {
-        "name": "OrderStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "pending",
-            "description": "Order is pending"
-          },
-          {
-            "name": "Created",
-            "value": "created",
-            "description": "Order is created"
-          },
-          {
-            "name": "Confirmed",
-            "value": "confirmed",
-            "description": "Order is confirmed"
-          },
-          {
-            "name": "PartiallyConfirmed",
-            "value": "partiallyConfirmed",
-            "description": "Order is PartiallyConfirmed"
-          },
-          {
-            "name": "PartiallyShipped",
-            "value": "partiallyShipped",
-            "description": "Order is partially shipped"
-          },
-          {
-            "name": "Shipped",
-            "value": "shipped",
-            "description": "Order is shipped"
-          },
-          {
-            "name": "Returned",
-            "value": "returned",
-            "description": "Order is returned"
-          },
-          {
-            "name": "Cancelled",
-            "value": "cancelled",
-            "description": "Order is cancelled"
-          }
-        ]
-      }
-    },
-    "OrderUpdate": {
-      "type": "object",
-      "description": "A Hardware Resource Provider Order resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/OrderPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
-    },
     "Price": {
       "type": "object",
       "description": "Order line price",
@@ -880,7 +909,8 @@
           "description": "Tax for this line",
           "items": {
             "$ref": "#/definitions/Tax"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "fees": {
           "type": "array",
@@ -919,9 +949,9 @@
       "type": "string",
       "description": "Product-Id type",
       "enum": [
-        "upn",
-        "psa",
-        "fulfillmentProductId"
+        "UPN",
+        "PSA",
+        "FulfillmentProductId"
       ],
       "x-ms-enum": {
         "name": "ProductIdType",
@@ -929,17 +959,17 @@
         "values": [
           {
             "name": "UPN",
-            "value": "upn",
+            "value": "UPN",
             "description": "UPN in Big-Catalog"
           },
           {
             "name": "PSA",
-            "value": "psa",
+            "value": "PSA",
             "description": "Product, SKU, Availability in Big-Catalog"
           },
           {
             "name": "FulfillmentProductId",
-            "value": "fulfillmentProductId",
+            "value": "FulfillmentProductId",
             "description": "MS product identifier (3x5 SKU)"
           }
         ]
@@ -949,34 +979,34 @@
       "type": "string",
       "description": "Provisioning State",
       "enum": [
-        "pending",
-        "succeeded",
-        "failed",
-        "canceled"
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Pending",
-            "value": "pending",
-            "description": "Order is pending"
-          },
-          {
             "name": "Succeeded",
-            "value": "succeeded",
-            "description": "Order succeeded"
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
-            "value": "failed",
-            "description": "Order failed"
+            "value": "Failed",
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
-            "value": "canceled",
-            "description": "Order is canceled"
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Order is pending"
           }
         ]
       }
@@ -1003,8 +1033,8 @@
       "type": "string",
       "description": "Ship-To-Id Type",
       "enum": [
-        "businessLocation",
-        "externalId"
+        "BusinessLocation",
+        "ExternalId"
       ],
       "x-ms-enum": {
         "name": "ShipToIdType",
@@ -1012,12 +1042,12 @@
         "values": [
           {
             "name": "BusinessLocation",
-            "value": "businessLocation",
+            "value": "BusinessLocation",
             "description": "Modern Commerce API business location"
           },
           {
             "name": "ExternalId",
-            "value": "externalId",
+            "value": "ExternalId",
             "description": "Partner External-Id"
           }
         ]
@@ -1027,12 +1057,12 @@
       "type": "string",
       "description": "Shipping method",
       "enum": [
-        "ground",
-        "twoDay",
-        "threeDay",
-        "sustainable",
-        "streetDate",
-        "apoFpo"
+        "Ground",
+        "TwoDay",
+        "ThreeDay",
+        "Sustainable",
+        "StreetDate",
+        "ApoFpo"
       ],
       "x-ms-enum": {
         "name": "ShippingMethod",
@@ -1040,32 +1070,32 @@
         "values": [
           {
             "name": "Ground",
-            "value": "ground",
+            "value": "Ground",
             "description": "Ground shipping"
           },
           {
             "name": "TwoDay",
-            "value": "twoDay",
+            "value": "TwoDay",
             "description": "Two day shipping"
           },
           {
             "name": "ThreeDay",
-            "value": "threeDay",
+            "value": "ThreeDay",
             "description": "Three day shipping"
           },
           {
             "name": "Sustainable",
-            "value": "sustainable",
+            "value": "Sustainable",
             "description": "Sustainable shipping"
           },
           {
             "name": "StreetDate",
-            "value": "streetDate",
+            "value": "StreetDate",
             "description": "Street date shipping"
           },
           {
             "name": "ApoFpo",
-            "value": "apoFpo",
+            "value": "ApoFpo",
             "description": "APO FPO shipping"
           }
         ]
@@ -1083,27 +1113,6 @@
         "type": {
           "$ref": "#/definitions/TaxType",
           "description": "Tax type"
-        },
-        "class": {
-          "type": "string",
-          "description": "Categorization of the taxation system"
-        },
-        "name": {
-          "type": "string",
-          "description": "Specific title assigned to the tax entity"
-        },
-        "jurisdictionEntity": {
-          "type": "string",
-          "description": "Level of governing authority"
-        },
-        "jurisdictionName": {
-          "type": "string",
-          "description": "Name of the jurisdiction"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double",
-          "description": "Tax Rate"
         }
       },
       "required": [
@@ -1115,8 +1124,8 @@
       "type": "string",
       "description": "Tax Type",
       "enum": [
-        "unit",
-        "shipping"
+        "Unit",
+        "Shipping"
       ],
       "x-ms-enum": {
         "name": "TaxType",
@@ -1124,12 +1133,12 @@
         "values": [
           {
             "name": "Unit",
-            "value": "unit",
+            "value": "Unit",
             "description": "Tax on unit amount for product cost"
           },
           {
             "name": "Shipping",
-            "value": "shipping",
+            "value": "Shipping",
             "description": "Tax on shipping cost"
           }
         ]
