@@ -67,7 +67,7 @@ All other requirements must still be met (proper labels, passing status checks, 
 When trivial changes are detected and auto sign-off is applied, the following labels may be added:
 
 - `DocumentationOnlyChanges` - For documentation-only PRs
-- `ExamplesOnlyChanges` - For examples-only PRs  
+- `ExamplesOnlyChanges` - For examples-only PRs
 - `NonFunctionalChanges` - For non-functional JSON changes
 
 ## Files Changed
