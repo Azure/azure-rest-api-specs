@@ -35,6 +35,12 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
 
-@@clientName(Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired, "ActionRequired", "go");
-@@clientName(Microsoft.Batch.NetworkConfiguration.dynamicVnetAssignmentScope, "DynamicVNetAssignmentScope", "go");
+@@clientName(Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
+  "ActionRequired",
+  "go"
+);
+@@clientName(Microsoft.Batch.NetworkConfiguration.dynamicVnetAssignmentScope,
+  "DynamicVNetAssignmentScope",
+  "go"
+);
 @@clientName(Microsoft.Batch.CifsMountConfiguration.userName, "Username", "go");
