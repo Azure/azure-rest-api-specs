@@ -20,69 +20,42 @@ namespace Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
-@added(Versions.v2024_07_01)
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.NspConfiguration;
 
-alias NetworkSecurityPerimeterConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** The name of the Batch account. */
-    @path
-    @segment("batchAccounts")
-    @key
-    @pattern("^[a-zA-Z0-9]+$")
-    @maxLength(24)
-    @minLength(3)
-    accountName: string;
-  },
-  {
-    /** The name for Network Security Perimeter configuration */
-    @path
-    @segment("networkSecurityPerimeterConfigurations")
-    @key
-    @pattern("^.*$")
-    networkSecurityPerimeterConfigurationName: string;
-  },
-  ErrorType = CloudError
->;
+alias NspConfigurationOperations = Azure.ResourceManager.NspConfigurations<NetworkSecurityPerimeterConfiguration>;
 
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
    */
-  @added(Versions.v2024_07_01)
-  getConfiguration is NetworkSecurityPerimeterConfigurationOps.Read<
-    NetworkSecurityPerimeterConfiguration,
-    Response = CommonTypes.NetworkSecurityPerimeterConfiguration
+  getConfiguration is NspConfigurationOperations.Read<
+    ParentResource = BatchAccount,
+    Resource = NetworkSecurityPerimeterConfiguration,
+    Response = CommonTypes.NetworkSecurityPerimeterConfiguration,
+    Error = ErrorResponse
   >;
 
   /**
    * Lists all of the NSP configurations in the specified account.
    */
   @list
-  @added(Versions.v2024_07_01)
-  listConfigurations is NetworkSecurityPerimeterConfigurationOps.List<
-    NetworkSecurityPerimeterConfiguration,
+  listConfigurations is NspConfigurationOperations.ListByParent<
+    ParentResource = BatchAccount,
+    Resource = NetworkSecurityPerimeterConfiguration,
     Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult
   >;
 
   /**
    * Reconciles the specified NSP configuration.
    */
+  @post
   @action("reconcile")
-  @added(Versions.v2024_07_01)
-  reconcileConfiguration is NetworkSecurityPerimeterConfigurationOps.ActionAsync<
-    NetworkSecurityPerimeterConfiguration,
-    void,
-    void,
-    Response = ArmAcceptedLroResponse,
-    OverrideErrorType = ErrorResponse
+  reconcileConfiguration is NspConfigurationOperations.Read<
+    ParentResource = BatchAccount,
+    Resource = NetworkSecurityPerimeterConfiguration,
+    Response = ArmAcceptedLroResponse
   >;
 }
 
