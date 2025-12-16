@@ -349,11 +349,6 @@ suppressions:
     reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
-  - code: ResourceNameRestriction
-    reason: Gallery resources follow ARM resource naming requirements; no additional gallery name pattern is enforced beyond ARM.
-    from: GalleryRP.json
-    where:
-      - $.parameters.galleryName
 ```
 
 ### Tag: package-2025-03-03
