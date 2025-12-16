@@ -1102,6 +1102,7 @@ union TrafficCongestionEnum {
  * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
  * GeometryCollection, Feature and FeatureCollection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API contract"
 enum GeoJsonObjectType {
   /**
    * `GeoJSON Point` geometry.
@@ -3297,6 +3298,9 @@ model GeoJsonFeature extends GeoJsonObject {
   type: GeoJsonObjectType.GeoJsonFeature;
 }
 
+/**
+ * GeoJson Feature data.
+ */
 model GeoJsonFeatureData {
   /**
    * A valid `GeoJSON` geometry object. The type must be one of the seven valid
