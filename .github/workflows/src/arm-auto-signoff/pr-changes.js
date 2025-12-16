@@ -1,9 +1,9 @@
 /**
  * Represents the types of changes present in a pull request.
- * 
+ *
  * All properties are boolean flags that indicate presence of a change type.
  * An empty PR would have all properties set to false.
- * 
+ *
  * @typedef {Object} PullRequestChanges
  * @property {boolean} documentation - True if PR contains documentation (.md) file changes
  * @property {boolean} examples - True if PR contains example file changes (/examples/*.json)
@@ -32,7 +32,7 @@ export function createEmptyPullRequestChanges() {
  * And does NOT contain:
  * - Functional spec changes
  * - Other file types
- * 
+ *
  * @param {PullRequestChanges} changes - The PR changes object
  * @returns {boolean} - True if PR is trivial
  */
@@ -41,7 +41,7 @@ export function isTrivialPullRequest(changes) {
   // Must have at least one of: documentation, examples
   const hasNoBlockingChanges = !changes.functional && !changes.other;
   const hasTrivialChanges = changes.documentation || changes.examples;
-  
+
   return hasNoBlockingChanges && hasTrivialChanges;
 }
 
@@ -51,10 +51,7 @@ export function isTrivialPullRequest(changes) {
  * @returns {boolean} - True if only documentation changed
  */
 export function isDocumentationOnly(changes) {
-  return changes.documentation && 
-    !changes.examples && 
-    !changes.functional &&
-    !changes.other;
+  return changes.documentation && !changes.examples && !changes.functional && !changes.other;
 }
 
 /**
@@ -63,8 +60,5 @@ export function isDocumentationOnly(changes) {
  * @returns {boolean} - True if only examples changed
  */
 export function isExamplesOnly(changes) {
-  return !changes.documentation && 
-    changes.examples && 
-    !changes.functional &&
-    !changes.other;
+  return !changes.documentation && changes.examples && !changes.functional && !changes.other;
 }

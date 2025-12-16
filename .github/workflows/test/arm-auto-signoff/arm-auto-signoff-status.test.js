@@ -1,9 +1,76 @@
 import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../../shared/src/github.js";
 import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-auto-signoff-status.js";
+import { LabelAction } from "../../src/label.js";
 import { createMockCore, createMockGithub as createMockGithubBase } from "../mocks.js";
 
 const core = createMockCore();
+
+const managedLabels = Object.freeze({
+  armSignedOff: "ARMSignedOff",
+  autoSignedOffIncrementalTsp: "ARMAutoSignedOff-IncrementalTSP",
+  autoSignedOffTrivialTest: "ARMAutoSignedOff-Trivial-Test",
+});
+
+function createNoneLabelActions() {
+  return {
+    [managedLabels.armSignedOff]: LabelAction.None,
+    [managedLabels.autoSignedOffIncrementalTsp]: LabelAction.None,
+    [managedLabels.autoSignedOffTrivialTest]: LabelAction.None,
+  };
+}
+
+/**
+ * @param {string} headSha
+ * @param {number} issueNumber
+ */
+function createNoneResult(headSha, issueNumber) {
+  return {
+    headSha,
+    issueNumber,
+    labelActions: createNoneLabelActions(),
+  };
+}
+
+/**
+ * @param {string} headSha
+ * @param {number} issueNumber
+ */
+function createRemoveManagedLabelsResult(headSha, issueNumber) {
+  return {
+    headSha,
+    issueNumber,
+    labelActions: {
+      ...createNoneLabelActions(),
+      [managedLabels.armSignedOff]: LabelAction.Remove,
+      [managedLabels.autoSignedOffIncrementalTsp]: LabelAction.Remove,
+      [managedLabels.autoSignedOffTrivialTest]: LabelAction.Remove,
+    },
+  };
+}
+
+/**
+ * @param {{
+ *   headSha: string,
+ *   issueNumber: number,
+ *   incrementalTypeSpec: boolean,
+ *   isTrivial: boolean,
+ * }} params
+ */
+function createSuccessResult({ headSha, issueNumber, incrementalTypeSpec, isTrivial }) {
+  return {
+    headSha,
+    issueNumber,
+    labelActions: {
+      ...createNoneLabelActions(),
+      [managedLabels.armSignedOff]: incrementalTypeSpec ? LabelAction.Add : LabelAction.None,
+      [managedLabels.autoSignedOffIncrementalTsp]: incrementalTypeSpec
+        ? LabelAction.Add
+        : LabelAction.Remove,
+      [managedLabels.autoSignedOffTrivialTest]: isTrivial ? LabelAction.Add : LabelAction.Remove,
+    },
+  };
+}
 
 /**
  * @param {Object} param0
@@ -32,10 +99,15 @@ function createMockGithub({ incrementalTypeSpec }) {
   });
 
   // Return artifact in the format: arm-auto-signoff-code-results=incrementalTypeSpec-VALUE,isTrivial-VALUE,qualifies-VALUE
+  const incremental = incrementalTypeSpec ? "true" : "false";
   const qualifies = incrementalTypeSpec ? "true" : "false";
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
-      artifacts: [{ name: `arm-auto-signoff-code-results=incrementalTypeSpec-${qualifies},isTrivial-false,qualifies-${qualifies}` }],
+      artifacts: [
+        {
+          name: `arm-auto-signoff-code-results=incrementalTypeSpec-${incremental},isTrivial-false,qualifies-${qualifies}`,
+        },
+      ],
     },
   });
 
@@ -49,7 +121,7 @@ describe("getLabelActionImpl", () => {
     ).rejects.toThrow();
   });
 
-  it("throws if no artifact from incremental typespec", async () => {
+  it("no-ops if no artifact from incremental typespec", async () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
@@ -64,7 +136,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).rejects.toThrow();
+    ).resolves.toEqual(createNoneResult("abc123", 123));
   });
 
   it("no-ops if no current label ARMAutoSignedOff", async () => {
@@ -82,7 +154,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
+    ).resolves.toEqual(createNoneResult("abc123", 123));
   });
 
   it("removes label if not incremental typespec", async () => {
@@ -100,7 +172,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
   it("no-ops if incremental typespec in progress", async () => {
@@ -127,7 +199,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
+    ).resolves.toEqual(createNoneResult("abc123", 123));
   });
 
   it("removes label if no runs of incremental typespec", async () => {
@@ -150,7 +222,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
   it("uses latest run of incremental typespec", async () => {
@@ -188,7 +260,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
   it.each([
@@ -211,7 +283,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
   it.each(["Swagger Avocado", "Swagger LintDiff"])(
@@ -240,16 +312,33 @@ describe("getLabelActionImpl", () => {
           github: github,
           core: core,
         }),
-      ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: [] });
+      ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
     },
   );
 
   it.each([
-    [CommitStatusState.ERROR, ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"], []],
-    [CommitStatusState.FAILURE, ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"], []],
-    [CommitStatusState.PENDING, ["ARMReview"], undefined],
-    [CommitStatusState.SUCCESS, ["ARMReview"], ["ARMAutoSignedOff-IncrementalTSP"]],
-  ])("uses latest status if multiple (%o)", async (state, labels, expectedAutoSignOffLabels) => {
+    [
+      CommitStatusState.ERROR,
+      ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"],
+      createRemoveManagedLabelsResult("abc123", 123),
+    ],
+    [
+      CommitStatusState.FAILURE,
+      ["ARMReview", "ARMAutoSignedOff-IncrementalTSP"],
+      createRemoveManagedLabelsResult("abc123", 123),
+    ],
+    [CommitStatusState.PENDING, ["ARMReview"], createNoneResult("abc123", 123)],
+    [
+      CommitStatusState.SUCCESS,
+      ["ARMReview"],
+      createSuccessResult({
+        headSha: "abc123",
+        issueNumber: 123,
+        incrementalTypeSpec: true,
+        isTrivial: false,
+      }),
+    ],
+  ])("uses latest status if multiple (%o)", async (state, labels, expectedResult) => {
     const github = createMockGithub({ incrementalTypeSpec: true });
 
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
@@ -287,7 +376,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: expectedAutoSignOffLabels });
+    ).resolves.toEqual(expectedResult);
   });
 
   it("no-ops if check not found or not completed", async () => {
@@ -309,7 +398,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
+    ).resolves.toEqual(createNoneResult("abc123", 123));
 
     github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
       data: [{ context: "Swagger LintDiff", state: CommitStatusState.PENDING }],
@@ -323,7 +412,7 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: undefined });
+    ).resolves.toEqual(createNoneResult("abc123", 123));
   });
 
   it("adds label if incremental tsp, labels match, and check succeeded", async () => {
@@ -354,6 +443,13 @@ describe("getLabelActionImpl", () => {
         github: github,
         core: core,
       }),
-    ).resolves.toEqual({ headSha: "abc123", issueNumber: 123, autoSignOffLabels: ["ARMAutoSignedOff-IncrementalTSP"] });
+    ).resolves.toEqual(
+      createSuccessResult({
+        headSha: "abc123",
+        issueNumber: 123,
+        incrementalTypeSpec: true,
+        isTrivial: false,
+      }),
+    );
   });
 });

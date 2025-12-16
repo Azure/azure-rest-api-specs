@@ -2,20 +2,14 @@
 import debug from "debug";
 import { simpleGit } from "simple-git";
 import {
-  getChangedFiles,
+  example,
   getChangedFilesStatuses,
   json,
-  example,
   markdown,
   resourceManager,
 } from "../../../shared/src/changed-files.js";
-import {
-  createEmptyPullRequestChanges,
-  isTrivialPullRequest,
-  isDocumentationOnly,
-  isExamplesOnly,
-} from "./pr-changes.js";
 import { CoreLogger } from "../core-logger.js";
+import { createEmptyPullRequestChanges, isTrivialPullRequest } from "./pr-changes.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -24,45 +18,85 @@ debug.enable("simple-git");
  * Non-functional JSON property keys that are safe to change without affecting API behavior
  */
 const NON_FUNCTIONAL_PROPERTIES = new Set([
-  'description',
-  'title',
-  'summary',
-  'x-ms-summary',
-  'x-ms-description',
-  'externalDocs',
-  'x-ms-examples',
-  'x-example',
-  'example',
-  'examples',
-  'x-ms-client-name',
-  'tags'
+  "description",
+  "title",
+  "summary",
+  "x-ms-summary",
+  "x-ms-description",
+  "externalDocs",
+  "x-ms-examples",
+  "x-example",
+  "example",
+  "examples",
+  "x-ms-client-name",
+  "tags",
 ]);
 
 /**
+ * @param {unknown} error
+ * @returns {string}
+ */
+function getErrorMessage(error) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return String(error);
+}
+
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
+function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
+ * @param {string} text
+ * @returns {unknown}
+ */
+function parseJsonUnknown(text) {
+  return /** @type {unknown} */ (JSON.parse(text));
+}
+
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
+function formatForLog(value) {
+  if (typeof value === "string") return value;
+  if (typeof value === "number" || typeof value === "boolean" || typeof value === "bigint") {
+    return String(value);
+  }
+  if (value === null) return "null";
+  if (value === undefined) return "undefined";
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return "[unserializable]";
+  }
+}
+
+/**
  * Analyzes a PR to determine what types of changes it contains
- * @param {{ core: import('@actions/core'), context: import('@actions/github').context }} args
+ * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "core"> & Partial<Pick<import("@actions/github-script").AsyncFunctionArguments, "context">>} args
  * @returns {Promise<string>} JSON string with categorized change types
  */
-export default async function checkTrivialChanges({ core, context }) {
+export default async function checkTrivialChanges(args) {
+  const { core } = args;
   // Create result object once at the top
   const changes = createEmptyPullRequestChanges();
-  
-  // Get the actual PR base branch from GitHub context
-  // This works for any target branch (main, dev, release/*, etc.)
-  const baseBranch = context.payload.pull_request?.base?.ref || "main";
-  const baseRef = `origin/${baseBranch}`;
-  
-  core.info(`Comparing against base branch: ${baseRef}`);
-  
+
+  // Compare the pull request merge commit (HEAD) against its first parent (HEAD^).
+  core.info("Comparing against base commit: HEAD^");
+
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     logger: new CoreLogger(core),
-    // Compare against the actual PR base branch
-    baseCommitish: baseRef,
   };
 
-  const changedFiles = await getChangedFiles(options);
   const changedFilesStatuses = await getChangedFilesStatuses(options);
+  const changedFiles = getFlatChangedFilesFromStatuses(changedFilesStatuses);
   const git = simpleGit(options.cwd);
 
   // Filter to only resource-manager files for ARM auto-signoff
@@ -71,7 +105,9 @@ export default async function checkTrivialChanges({ core, context }) {
     additions: changedFilesStatuses.additions.filter(resourceManager),
     modifications: changedFilesStatuses.modifications.filter(resourceManager),
     deletions: changedFilesStatuses.deletions.filter(resourceManager),
-    renames: changedFilesStatuses.renames.filter(r => resourceManager(r.to) || resourceManager(r.from))
+    renames: changedFilesStatuses.renames.filter(
+      (r) => resourceManager(r.to) || resourceManager(r.from),
+    ),
   };
 
   // Early exit if no resource-manager changes
@@ -83,11 +119,15 @@ export default async function checkTrivialChanges({ core, context }) {
   }
 
   // Check if PR contains non-resource-manager changes
-  const hasNonRmChanges = changedFiles.length > changedRmFiles.length;
+  const hasNonRmChanges = changedFiles.some((file) => !resourceManager(file));
   if (hasNonRmChanges) {
-    const nonRmFiles = changedFiles.filter(file => !resourceManager(file));
-    core.info(`PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff`);
-    core.info(`Non-RM files: ${nonRmFiles.slice(0, 5).join(', ')}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ''}`);
+    const nonRmFiles = changedFiles.filter((file) => !resourceManager(file));
+    core.info(
+      `PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff`,
+    );
+    core.info(
+      `Non-RM files: ${nonRmFiles.slice(0, 5).join(", ")}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ""}`,
+    );
     changes.other = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
@@ -95,7 +135,10 @@ export default async function checkTrivialChanges({ core, context }) {
   }
 
   // Check for non-trivial file operations (additions, deletions, renames)
-  const hasNonTrivialFileOperations = checkForNonTrivialFileOperations(changedRmFilesStatuses, core);
+  const hasNonTrivialFileOperations = checkForNonTrivialFileOperations(
+    changedRmFilesStatuses,
+    core,
+  );
   if (hasNonTrivialFileOperations) {
     core.info("Non-trivial file operations detected (new spec files, deletions, or renames)");
     // These are functional changes by policy
@@ -106,11 +149,11 @@ export default async function checkTrivialChanges({ core, context }) {
   }
 
   // Analyze what types of changes are present and update the changes object
-  await analyzePullRequestChanges(changedRmFiles, git, core, baseRef, changes);
+  await analyzePullRequestChanges(changedRmFiles, git, core, changes);
 
   core.info(`PR Changes: ${JSON.stringify(changes)}`);
   core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
-  
+
   return JSON.stringify(changes);
 }
 
@@ -122,26 +165,28 @@ export default async function checkTrivialChanges({ core, context }) {
  */
 function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
   // New spec files (non-example JSON) are non-trivial
-  const newSpecFiles = changedFilesStatuses.additions.filter(file => 
-    json(file) && !example(file) && !markdown(file)
+  const newSpecFiles = changedFilesStatuses.additions.filter(
+    (file) => json(file) && !example(file) && !markdown(file),
   );
   if (newSpecFiles.length > 0) {
-    core.info(`Non-trivial: New spec files detected: ${newSpecFiles.join(', ')}`);
+    core.info(`Non-trivial: New spec files detected: ${newSpecFiles.join(", ")}`);
     return true;
   }
 
   // Deleted spec files (non-example JSON) are non-trivial
-  const deletedSpecFiles = changedFilesStatuses.deletions.filter(file => 
-    json(file) && !example(file) && !markdown(file)
+  const deletedSpecFiles = changedFilesStatuses.deletions.filter(
+    (file) => json(file) && !example(file) && !markdown(file),
   );
   if (deletedSpecFiles.length > 0) {
-    core.info(`Non-trivial: Deleted spec files detected: ${deletedSpecFiles.join(', ')}`);
+    core.info(`Non-trivial: Deleted spec files detected: ${deletedSpecFiles.join(", ")}`);
     return true;
   }
 
   // Any file renames/moves are non-trivial (conservative approach)
   if (changedFilesStatuses.renames.length > 0) {
-    core.info(`Non-trivial: File renames detected: ${changedFilesStatuses.renames.map(r => `${r.from} → ${r.to}`).join(', ')}`);
+    core.info(
+      `Non-trivial: File renames detected: ${changedFilesStatuses.renames.map((r) => `${r.from} → ${r.to}`).join(", ")}`,
+    );
     return true;
   }
 
@@ -154,18 +199,19 @@ function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
  * @param {string[]} changedFiles - Array of changed file paths
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {typeof import("@actions/core")} core - Core logger
- * @param {string} baseRef - The base branch reference (e.g., "origin/main")
  * @param {import('./pr-changes.js').PullRequestChanges} changes - Changes object to update
  * @returns {Promise<void>}
  */
-async function analyzePullRequestChanges(changedFiles, git, core, baseRef, changes) {
+async function analyzePullRequestChanges(changedFiles, git, core, changes) {
   // Categorize files by type
   const documentationFiles = changedFiles.filter(markdown);
   const exampleFiles = changedFiles.filter(example);
-  const specFiles = changedFiles.filter(json).filter(file => !example(file));
-  const otherFiles = changedFiles.filter(file => !json(file) && !markdown(file));
+  const specFiles = changedFiles.filter(json).filter((file) => !example(file));
+  const otherFiles = changedFiles.filter((file) => !json(file) && !markdown(file));
 
-  core.info(`File breakdown: ${documentationFiles.length} docs, ${exampleFiles.length} examples, ${specFiles.length} specs, ${otherFiles.length} other`);
+  core.info(
+    `File breakdown: ${documentationFiles.length} docs, ${exampleFiles.length} examples, ${specFiles.length} specs, ${otherFiles.length} other`,
+  );
 
   // Set flags for file types present
   if (documentationFiles.length > 0) {
@@ -183,14 +229,14 @@ async function analyzePullRequestChanges(changedFiles, git, core, baseRef, chang
   // Analyze spec files to determine if functional or non-functional
   if (specFiles.length > 0) {
     core.info(`Analyzing ${specFiles.length} spec files...`);
-    
+
     let hasFunctionalChanges = false;
 
     for (const file of specFiles) {
       core.info(`Analyzing file: ${file}`);
-      
+
       try {
-        const isNonFunctional = await analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef);
+        const isNonFunctional = await analyzeSpecFileForNonFunctionalChanges(file, git, core);
         if (isNonFunctional) {
           core.info(`File ${file} contains only non-functional changes`);
         } else {
@@ -200,7 +246,7 @@ async function analyzePullRequestChanges(changedFiles, git, core, baseRef, chang
           break;
         }
       } catch (error) {
-        core.warning(`Failed to analyze ${file}: ${error.message}`);
+        core.warning(`Failed to analyze ${file}: ${getErrorMessage(error)}`);
         // On error, treat as functional to be conservative
         hasFunctionalChanges = true;
         break;
@@ -217,15 +263,14 @@ async function analyzePullRequestChanges(changedFiles, git, core, baseRef, chang
  * @param {string} file - The file path
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {typeof import("@actions/core")} core - Core logger
- * @param {string} baseRef - The base branch reference (e.g., "origin/main")
  * @returns {Promise<boolean>} - True if changes are non-functional only, false if any functional changes detected
  */
-async function analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef) {
+async function analyzeSpecFileForNonFunctionalChanges(file, git, core) {
   let baseContent, headContent;
-  
+
   try {
-    // Get file content from PR base branch
-    baseContent = await git.show([`${baseRef}:${file}`]);
+    // Get file content from base commit (merge commit parent)
+    baseContent = await git.show([`HEAD^:${file}`]);
   } catch (e) {
     if (e instanceof Error && e.message.includes("does not exist")) {
       // New file - should have been caught earlier, but treat as functional to be safe
@@ -235,7 +280,7 @@ async function analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef) 
       throw e;
     }
   }
-  
+
   try {
     headContent = await git.show([`HEAD:${file}`]);
   } catch (e) {
@@ -249,24 +294,49 @@ async function analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef) 
   }
 
   let baseJson, headJson;
-  
+
   try {
-    baseJson = JSON.parse(baseContent);
-    headJson = JSON.parse(headContent);
+    baseJson = parseJsonUnknown(baseContent);
+    headJson = parseJsonUnknown(headContent);
   } catch (error) {
-    core.warning(`Failed to parse JSON for ${file}: ${error.message}`);
+    core.warning(`Failed to parse JSON for ${file}: ${getErrorMessage(error)}`);
     return false;
   }
 
   return analyzeJsonDifferences(baseJson, headJson, "", core);
 }
 
+/**
+ * Creates a flat, de-duplicated list of changed files from the status results.
+ * Includes both rename endpoints (`from` and `to`) to ensure path-based filters work as expected.
+ * @param {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[]}} statuses
+ * @returns {string[]}
+ */
+function getFlatChangedFilesFromStatuses(statuses) {
+  /** @type {Set<string>} */
+  const seen = new Set();
 
+  /** @param {string} file */
+  const add = (file) => {
+    if (typeof file !== "string" || file.length === 0) return;
+    seen.add(file);
+  };
+
+  for (const file of statuses.additions) add(file);
+  for (const file of statuses.modifications) add(file);
+  for (const file of statuses.deletions) add(file);
+  for (const rename of statuses.renames) {
+    add(rename.from);
+    add(rename.to);
+  }
+
+  return Array.from(seen);
+}
 
 /**
  * Recursively analyzes differences between two JSON objects
- * @param {any} baseObj - Base object
- * @param {any} headObj - Head object  
+ * @param {unknown} baseObj - Base object
+ * @param {unknown} headObj - Head object
  * @param {string} path - Current path in the object
  * @param {typeof import("@actions/core")} core - Core logger
  * @returns {boolean} - True if all differences are non-functional
@@ -274,14 +344,14 @@ async function analyzeSpecFileForNonFunctionalChanges(file, git, core, baseRef) 
 function analyzeJsonDifferences(baseObj, headObj, path, core) {
   // If types differ, it's a functional change
   if (typeof baseObj !== typeof headObj) {
-    core.info(`Type change at ${path || 'root'}: ${typeof baseObj} -> ${typeof headObj}`);
+    core.info(`Type change at ${path || "root"}: ${typeof baseObj} -> ${typeof headObj}`);
     return false;
   }
 
   // Handle null values
   if (baseObj === null || headObj === null) {
     if (baseObj !== headObj) {
-      core.info(`Null value change at ${path || 'root'}`);
+      core.info(`Null value change at ${path || "root"}`);
       return false;
     }
     return true;
@@ -292,10 +362,10 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
     // For arrays, we need to be careful about order and additions/removals
     if (baseObj.length !== headObj.length) {
       // Check if the change is just adding/removing non-functional properties
-      const arrayPath = path || 'root';
+      const arrayPath = path || "root";
       // For now, treat any array length change as functional unless we can prove otherwise
       core.info(`Array length change at ${arrayPath}: ${baseObj.length} -> ${headObj.length}`);
-      
+
       // Special case: if arrays contain only strings and changes are in non-functional properties like tags
       if (isNonFunctionalArrayChange(baseObj, headObj, path)) {
         return true;
@@ -313,10 +383,10 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
   }
 
   // Handle objects
-  if (typeof baseObj === 'object' && typeof headObj === 'object') {
+  if (isRecord(baseObj) && isRecord(headObj)) {
     const baseKeys = new Set(Object.keys(baseObj));
     const headKeys = new Set(Object.keys(headObj));
-    
+
     // Check for added or removed keys
     for (const key of baseKeys) {
       if (!headKeys.has(key)) {
@@ -328,7 +398,7 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
         core.info(`Property removed at ${fullPath} (non-functional)`);
       }
     }
-    
+
     for (const key of headKeys) {
       if (!baseKeys.has(key)) {
         const fullPath = path ? `${path}.${key}` : key;
@@ -354,18 +424,22 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
         }
       }
     }
-    
+
     return true;
   }
 
   // Handle primitive values
   if (baseObj !== headObj) {
-    const currentProperty = path.split('.').pop() || path.split('[')[0];
+    const currentProperty = path.split(".").pop() || path.split("[")[0];
     if (NON_FUNCTIONAL_PROPERTIES.has(currentProperty)) {
-      core.info(`Value changed at ${path || 'root'} (non-functional): "${baseObj}" -> "${headObj}"`);
+      core.info(
+        `Value changed at ${path || "root"} (non-functional): "${formatForLog(baseObj)}" -> "${formatForLog(headObj)}"`,
+      );
       return true;
     }
-    core.info(`Value changed at ${path || 'root'} (functional): "${baseObj}" -> "${headObj}"`);
+    core.info(
+      `Value changed at ${path || "root"} (functional): "${formatForLog(baseObj)}" -> "${formatForLog(headObj)}"`,
+    );
     return false;
   }
 
@@ -380,6 +454,6 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
  * @returns {boolean} - True if non-functional
  */
 function isNonFunctionalArrayChange(baseArray, headArray, path) {
-  const currentProperty = path.split('.').pop() || path;
+  const currentProperty = path.split(".").pop() || path;
   return NON_FUNCTIONAL_PROPERTIES.has(currentProperty);
 }

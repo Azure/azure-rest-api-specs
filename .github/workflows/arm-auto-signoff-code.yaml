@@ -28,10 +28,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Fetch full PR history including base branch for proper diff comparison
-          fetch-depth: 0
-          # Checkout PR head commit
-          ref: ${{ github.event.pull_request.head.sha }}
+          # We compare HEAD (PR merge commit) against HEAD^ (base) via git diff,
+          # so we only need enough history to include the merge commit and its parent.
+          fetch-depth: 2
           # Check only needs to view contents of changed files as a string, so can use
           # "git show" on specific files instead of cloning whole repo
           sparse-checkout: |

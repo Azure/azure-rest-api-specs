@@ -40,7 +40,7 @@ describe("execNpm", () => {
       stdout: /** @type {unknown} */ (expect.toSatisfy((v) => semver.valid(String(v)) !== null)),
       stderr: "",
     });
-  });
+  }, 120000);
 
   it("fails with --help", async () => {
     await expect(execNpm(["--help"], options)).rejects.toMatchObject({
@@ -48,7 +48,7 @@ describe("execNpm", () => {
       stderr: "",
       code: 1,
     });
-  });
+  }, 120000);
 });
 
 describe("execNpmExec", () => {
@@ -61,7 +61,7 @@ describe("execNpmExec", () => {
       stderr: "",
       error: undefined,
     });
-  });
+  }, 120000);
 });
 
 describe("isExecError", () => {

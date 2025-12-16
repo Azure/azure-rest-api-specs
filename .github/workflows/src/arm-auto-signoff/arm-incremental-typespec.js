@@ -17,10 +17,11 @@ import { CoreLogger } from "../core-logger.js";
 debug.enable("simple-git");
 
 /**
- * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "core">} args
  * @returns {Promise<boolean>}
  */
-export default async function incrementalTypeSpec({ core }) {
+export default async function incrementalTypeSpec(args) {
+  const { core } = args;
   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     paths: ["specification"],
