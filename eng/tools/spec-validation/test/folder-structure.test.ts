@@ -332,16 +332,41 @@ options:
       });
       normalizePathSpy.mockReturnValue("/gitroot");
 
+      // Clear any environment variables that might interfere
+      const originalGitHub = process.env.GITHUB_BASE_REF;
+      const originalAzure = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+      delete process.env.GITHUB_BASE_REF;
+      delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+
       // Mock git to simulate target branch having v2 structure
       const mockGit = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
-        branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
-        getRemotes: vi.fn().mockResolvedValue([
-          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
-        ]),
+        branch: vi.fn().mockResolvedValue({
+          current: "test-branch",
+          all: [{ name: "test-branch", upstream: "origin/feature/v2-structure" }],
+        }),
+        getRemotes: vi
+          .fn()
+          .mockResolvedValue([
+            {
+              name: "origin",
+              refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+            },
+          ]),
         raw: vi.fn().mockImplementation((args) => {
-          if (args.includes("ls-tree")) {
+          if (args.includes("config") && args.includes("remote.origin.url")) {
+            return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+          }
+          if (
+            args.includes("ls-tree") &&
+            (args.includes("feature/v2-structure") || args.includes("origin/feature/v2-structure"))
+          ) {
+            // Target branch uses V2 structure (has data-plane/resource-manager under org folder)
             return Promise.resolve("data-plane\nresource-manager");
+          }
+          if (args.includes("ls-tree")) {
+            // Default case - could be current branch or other
+            return Promise.resolve("");
           }
           if (args.includes("merge-base")) {
             return Promise.resolve("abc123");
@@ -352,6 +377,11 @@ options:
       simpleGitSpy.mockReturnValue(mockGit as any);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+      // Restore environment
+      if (originalGitHub !== undefined) process.env.GITHUB_BASE_REF = originalGitHub;
+      if (originalAzure !== undefined) process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = originalAzure;
+
       assert(!result.success);
       assert(result.errorOutput?.includes("must use v2 structure"));
     });
@@ -366,9 +396,11 @@ options:
       const mockGit = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
-        getRemotes: vi.fn().mockResolvedValue([
-          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
-        ]),
+        getRemotes: vi
+          .fn()
+          .mockResolvedValue([
+            { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
+          ]),
         raw: vi.fn().mockImplementation((args) => {
           if (args.includes("ls-tree")) {
             return Promise.resolve("Service1\nService2\nShared");
@@ -398,9 +430,11 @@ options:
       const mockGit = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
-        getRemotes: vi.fn().mockResolvedValue([
-          { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } }
-        ]),
+        getRemotes: vi
+          .fn()
+          .mockResolvedValue([
+            { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
+          ]),
         raw: vi.fn().mockImplementation((args) => {
           if (args.includes("ls-tree")) {
             return Promise.resolve("data-plane\nresource-manager");
@@ -411,7 +445,7 @@ options:
       simpleGitSpy.mockReturnValue(mockGit as any);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-      
+
       // Restore environment
       if (originalEnv !== undefined) {
         process.env.GITHUB_BASE_REF = originalEnv;
@@ -430,7 +464,7 @@ options:
     beforeEach(async () => {
       const { simpleGit } = await import("simple-git");
       simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
-      
+
       // Mock git for v2 structure tests
       const mockGit = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
@@ -449,7 +483,7 @@ options:
         "/gitroot/specification/foo/data-plane",
       );
       assert(!result.success);
-      assert(result.errorOutput?.includes("exactly 4 levels deep"));
+      assert(result.errorOutput?.includes("exactly one level under 'data-plane'"));
     });
 
     it("should fail v2 resource-manager with incorrect depth", async function () {
@@ -462,7 +496,7 @@ options:
         "/gitroot/specification/foo/resource-manager/Microsoft.Foo",
       );
       assert(!result.success);
-      assert(result.errorOutput?.includes("exactly 5 levels deep"));
+      assert(result.errorOutput?.includes("exactly two levels under 'resource-manager'"));
     });
 
     it("should fail v2 with invalid service name (not PascalCase)", async function () {
@@ -506,11 +540,29 @@ options:
   });
 
   describe("TypeSpec project detection", function () {
+    let simpleGitSpy: MockInstance;
+
+    beforeEach(async () => {
+      const { simpleGit } = await import("simple-git");
+      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+    });
+
     it("should detect TypeSpec project with tspconfig.yaml", async function () {
       vi.mocked(globby.globby).mockImplementation(async (patterns) => {
-        return patterns[0].includes("tspconfig") ? ["tspconfig.yaml"] : [];
+        if (Array.isArray(patterns)) {
+          return patterns.some((p) => p.includes("tspconfig")) ? ["tspconfig.yaml"] : [];
+        }
+        return patterns.includes("tspconfig") ? ["tspconfig.yaml"] : [];
       });
       normalizePathSpy.mockReturnValue("/gitroot");
+      fileExistsSpy.mockResolvedValue(false); // No main.tsp, client.tsp, examples files
+
+      // Mock git for import validation
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "main" }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should apply TypeSpec-specific validations
@@ -519,12 +571,21 @@ options:
 
     it("should detect TypeSpec project with main.tsp", async function () {
       vi.mocked(globby.globby).mockImplementation(async () => {
-        return [];
+        return []; // No tspconfig files
       });
       fileExistsSpy.mockImplementation(async (path) => {
-        return path.includes("main.tsp");
+        if (path.includes("main.tsp")) return true;
+        if (path.includes("examples")) return false; // No examples folder
+        return false;
       });
       normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Mock git for import validation
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "main" }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as any);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should require examples folder when main.tsp exists
@@ -533,10 +594,18 @@ options:
 
     it("should not apply TypeSpec validations to non-TypeSpec projects", async function () {
       vi.mocked(globby.globby).mockImplementation(async () => {
-        return [];
+        return []; // No tspconfig files
       });
-      fileExistsSpy.mockResolvedValue(false);
+      fileExistsSpy.mockResolvedValue(false); // No TypeSpec files
       normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Mock git operations for import validation
+      const mockGit = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "main" }),
+      };
+      const { simpleGit } = await import("simple-git");
+      vi.spyOn({ simpleGit }, "simpleGit").mockReturnValue(mockGit as any);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should succeed for non-TypeSpec projects

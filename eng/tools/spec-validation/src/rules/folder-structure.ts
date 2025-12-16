@@ -2,7 +2,7 @@ import debug from "debug";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
-import { simpleGit } from "simple-git";
+import { simpleGit, SimpleGit } from "simple-git";
 import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
@@ -56,7 +56,7 @@ export class FolderStructureRule implements Rule {
    * Determines if a folder is intended to be a TypeSpec project.
    * A folder is considered a TypeSpec project if it has:
    * - tspconfig.yaml file, OR
-   * - main.tsp file, OR  
+   * - main.tsp file, OR
    * - client.tsp file
    */
   private async isTypeSpecProject(folder: string, configStdOutput: string): Promise<boolean> {
@@ -64,11 +64,11 @@ export class FolderStructureRule implements Rule {
     if (configStdOutput.includes("tspconfig.yaml")) {
       return true;
     }
-    
+
     // Check for TypeSpec source files
     const mainExists = await fileExists(path.join(folder, "main.tsp"));
     const clientExists = await fileExists(path.join(folder, "client.tsp"));
-    
+
     return mainExists || clientExists;
   }
 
@@ -207,7 +207,7 @@ export class FolderStructureRule implements Rule {
         success = false;
         errorOutput += `Invalid folder name. '${secondLevelFolder}' does not match regex for package folders.\n`;
       }
-    }    // Verify second level folder is capitalized after each '.'
+    } // Verify second level folder is capitalized after each '.'
     if (/(^|\. *)([a-z])/g.test(packageFolder)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/${folderStruct[1]} must be capitalized after each '.'\n`;
@@ -228,19 +228,23 @@ export class FolderStructureRule implements Rule {
 
     if (tspConfigExists) {
       const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
-      const rpFolder =
-        config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
+      const config = yamlParse(configText) as Record<string, unknown>;
+      const options = config?.options as Record<string, unknown> | undefined;
+      const autorestConfig = options?.["@azure-tools/typespec-autorest"] as
+        | Record<string, unknown>
+        | undefined;
+      const rpFolder = autorestConfig?.["azure-resource-provider-folder"] as string | undefined;
       stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
 
       if (
-        rpFolder?.trim()?.endsWith("resource-manager") &&
+        typeof rpFolder === "string" &&
+        rpFolder.trim().endsWith("resource-manager") &&
         !packageFolder.endsWith(".Management")
       ) {
         errorOutput += `Invalid folder structure: TypeSpec for resource-manager specs must be in a folder ending with '.Management'`;
         success = false;
       } else if (
-        !rpFolder?.trim()?.endsWith("resource-manager") &&
+        (typeof rpFolder !== "string" || !rpFolder.trim().endsWith("resource-manager")) &&
         packageFolder.endsWith(".Management")
       ) {
         errorOutput += `Invalid folder structure: TypeSpec for data-plane specs or shared code must be in a folder NOT ending with '.Management'`;
@@ -253,16 +257,16 @@ export class FolderStructureRule implements Rule {
 
   /**
    * Determines structure version (1 or 2) based on analyzing all files in the folder.
-   * 
+   *
    * The logic analyzes actual file locations:
    * - For TypeSpec files: V2 requires main.tsp/client.tsp/tspconfig.yaml in serviceName folder
    *   * Data-plane V2: specification/{orgName}/data-plane/{serviceName}/ <- files here
    *   * Resource-manager V2: specification/{orgName}/resource-manager/{rpNamespace}/{serviceName}/ <- files here
-   * 
-   * - For Swagger files: V2 requires stable/preview folders in serviceName folder  
+   *
+   * - For Swagger files: V2 requires stable/preview folders in serviceName folder
    *   * Data-plane V2: specification/{orgName}/data-plane/{serviceName}/stable|preview/ <- files here
    *   * Resource-manager V2: specification/{orgName}/resource-manager/{rpNamespace}/{serviceName}/stable|preview/ <- files here
-   * 
+   *
    * V1 structure: everything else, including Swagger organized as:
    *   * specification/{org}/data-plane/{RP.Namespace}/stable/{version}/ <- files here
    *   * specification/{org}/resource-manager/{RP.Namespace}/stable/{version}/ <- files here
@@ -278,20 +282,21 @@ export class FolderStructureRule implements Rule {
 
     try {
       const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
-      
+
       // Check TypeSpec files first
       const typespecFiles = await globby(["**/*.tsp", "**/tspconfig.yaml"], { cwd: folder });
       for (const typespecFile of typespecFiles) {
         const fullPath = path.join(folder, typespecFile);
         const relativePath = path.relative(gitRoot, fullPath).split(path.sep).join("/");
         const filePathSegments = relativePath.split("/");
-        
+
         // Check if this TypeSpec file follows V2 pattern
         if (hasDataPlane) {
           const dataPlaneIndex = filePathSegments.indexOf("data-plane");
           if (dataPlaneIndex === 2) {
             // V2 data-plane: specification/{orgName}/data-plane/{serviceName}/ <- TypeSpec files here
-            if (filePathSegments.length === dataPlaneIndex + 3) { // serviceName/file.tsp
+            if (filePathSegments.length === dataPlaneIndex + 3) {
+              // serviceName/file.tsp
               return 2;
             }
           }
@@ -299,7 +304,8 @@ export class FolderStructureRule implements Rule {
           const resourceManagerIndex = filePathSegments.indexOf("resource-manager");
           if (resourceManagerIndex === 2) {
             // V2 resource-manager: specification/{orgName}/resource-manager/{rpNamespace}/{serviceName}/ <- TypeSpec files here
-            if (filePathSegments.length === resourceManagerIndex + 4) { // rpNamespace/serviceName/file.tsp
+            if (filePathSegments.length === resourceManagerIndex + 4) {
+              // rpNamespace/serviceName/file.tsp
               return 2;
             }
           }
@@ -312,22 +318,26 @@ export class FolderStructureRule implements Rule {
         const fullPath = path.join(folder, jsonFile);
         const relativePath = path.relative(gitRoot, fullPath).split(path.sep).join("/");
         const filePathSegments = relativePath.split("/");
-        
+
         // Check if this JSON file follows V2 pattern
         if (hasDataPlane) {
           const dataPlaneIndex = filePathSegments.indexOf("data-plane");
           if (dataPlaneIndex === 2) {
             // V2 data-plane: specification/{orgName}/data-plane/{serviceName}/stable|preview/{version}/ <- JSON files here
             const versionTypeIndex = dataPlaneIndex + 2; // stable or preview
-            if (filePathSegments.length >= versionTypeIndex + 2 && // serviceName/stable|preview/version/...
-                filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)) {
+            if (
+              filePathSegments.length >= versionTypeIndex + 2 && // serviceName/stable|preview/version/...
+              filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)
+            ) {
               return 2;
             }
-            
+
             // Also check for V1 swagger pattern: specification/{org}/data-plane/{RP.Namespace}/stable/{version}/
             // In V1, the RP.Namespace is at the service position and stable comes right after
-            if (filePathSegments.length >= versionTypeIndex + 3 && // RP.Namespace/stable/version/...
-                filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)) {
+            if (
+              filePathSegments.length >= versionTypeIndex + 3 && // RP.Namespace/stable/version/...
+              filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)
+            ) {
               return 1; // This is V1 swagger structure
             }
           }
@@ -336,16 +346,20 @@ export class FolderStructureRule implements Rule {
           if (resourceManagerIndex === 2) {
             // V2 resource-manager: specification/{orgName}/resource-manager/{rpNamespace}/{serviceName}/stable|preview/{version}/ <- JSON files here
             const versionTypeIndex = resourceManagerIndex + 3; // stable or preview
-            if (filePathSegments.length >= versionTypeIndex + 2 && // serviceName/stable|preview/version/...
-                filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)) {
+            if (
+              filePathSegments.length >= versionTypeIndex + 2 && // serviceName/stable|preview/version/...
+              filePathSegments[versionTypeIndex].match(/^(stable|preview)$/)
+            ) {
               return 2;
             }
-            
+
             // Also check for V1 swagger pattern: specification/{org}/resource-manager/{RP.Namespace}/stable/{version}/
-            // In V1, the RP.Namespace is at rpNamespace position and stable comes right after  
+            // In V1, the RP.Namespace is at rpNamespace position and stable comes right after
             const potentialStableIndex = resourceManagerIndex + 2;
-            if (filePathSegments.length >= potentialStableIndex + 3 && // RP.Namespace/stable/version/...
-                filePathSegments[potentialStableIndex].match(/^(stable|preview)$/)) {
+            if (
+              filePathSegments.length >= potentialStableIndex + 3 && // RP.Namespace/stable/version/...
+              filePathSegments[potentialStableIndex].match(/^(stable|preview)$/)
+            ) {
               return 1; // This is V1 swagger structure
             }
           }
@@ -353,7 +367,7 @@ export class FolderStructureRule implements Rule {
       }
     } catch (error) {
       // If we can't analyze files, fall back to folder-based detection
-      console.warn(`Could not analyze files for structure detection: ${error}`);
+      console.warn(`Could not analyze files for structure detection: ${String(error)}`);
     }
 
     // If we found data-plane or resource-manager in path but couldn't determine from files,
@@ -379,41 +393,35 @@ export class FolderStructureRule implements Rule {
    * @param git The simple-git instance
    * @returns Promise<string> The target branch name
    */
-  private async getTargetBranch(git: any): Promise<string> {
+  private async getTargetBranch(git: SimpleGit): Promise<string> {
     try {
       // Method 1: Check if we're in a GitHub Actions environment
       if (process.env.GITHUB_BASE_REF) {
-        console.log(`Found target branch from GITHUB_BASE_REF: ${process.env.GITHUB_BASE_REF}`);
         return process.env.GITHUB_BASE_REF;
       }
 
       // Method 2: Check if we're in an Azure DevOps environment
       if (process.env.SYSTEM_PULLREQUEST_TARGETBRANCH) {
-        console.log(
-          `Found target branch from SYSTEM_PULLREQUEST_TARGETBRANCH: ${process.env.SYSTEM_PULLREQUEST_TARGETBRANCH}`,
-        );
         return process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
       }
 
       // Method 3: Try to get target branch from GitHub CLI
       try {
         const ghOutput = await git.raw(["config", "--get", "remote.origin.url"]);
-        if (ghOutput.includes("github.com")) {
+        if (typeof ghOutput === "string" && ghOutput.includes("github.com")) {
           // Try to use gh CLI if available
-          const { execSync } = require("child_process");
+          const { execSync } = await import("child_process");
           const prInfo = execSync("gh pr view --json baseRefName", {
             encoding: "utf8",
-            cwd: git._baseDir,
+            cwd: (git as SimpleGit & { _baseDir: string })._baseDir,
           });
-          const prData = JSON.parse(prInfo);
+          const prData = JSON.parse(String(prInfo)) as { baseRefName?: string };
           if (prData.baseRefName) {
-            console.log(`Found target branch from GitHub CLI: ${prData.baseRefName}`);
             return prData.baseRefName;
           }
         }
-      } catch (error) {
+      } catch {
         // GitHub CLI not available or not in a PR, continue with other methods
-        console.log("GitHub CLI not available or not in a PR context");
       }
 
       // Method 4: Find the remote tracking branch
@@ -421,7 +429,7 @@ export class FolderStructureRule implements Rule {
       const currentBranch = branchInfo.current;
 
       // Parse the verbose branch output to find upstream
-      const branches = branchInfo.all;
+      const branches = branchInfo.all as Array<{ name: string; upstream?: string }>;
       for (const branch of branches) {
         if (branch.name === currentBranch && branch.upstream) {
           // Extract the remote branch name (e.g., "origin/main" -> "main")
@@ -445,7 +453,7 @@ export class FolderStructureRule implements Rule {
             await git.raw(["merge-base", "HEAD", `${remote}/${branch}`]);
             console.log(`Found target branch from merge-base: ${remote}/${branch}`);
             return branch;
-          } catch (error) {
+          } catch {
             // Branch doesn't exist or no common ancestor, try next
           }
         }
@@ -454,7 +462,7 @@ export class FolderStructureRule implements Rule {
       // Method 6: Fallback to main
       console.log("Using fallback target branch: main");
       return "main";
-    } catch (error) {
+    } catch {
       // Fallback to main if all methods fail
       console.log("Error determining target branch, using fallback: main");
       return "main";
@@ -468,32 +476,32 @@ export class FolderStructureRule implements Rule {
    * @param git The simple-git instance
    * @returns Promise<string> The remote name to use (upstream, origin, etc.)
    */
-  private async getTargetRemote(git: any): Promise<string> {
+  private async getTargetRemote(git: SimpleGit): Promise<string> {
     try {
       // Get all remotes
-      const remotes = await git.getRemotes(true);
+      const remotes = (await git.getRemotes(true)) as Array<{
+        name: string;
+        refs: { fetch: string };
+      }>;
 
       // Look for upstream remote first (common in forks)
-      const upstreamRemote = remotes.find((remote: any) => remote.name === "upstream");
+      const upstreamRemote = remotes.find((remote) => remote.name === "upstream");
       if (upstreamRemote) {
-        console.log(`Using upstream remote: ${upstreamRemote.refs.fetch}`);
         return "upstream";
       }
 
       // Look for a remote pointing to Azure/azure-rest-api-specs
-      const azureRemote = remotes.find((remote: any) =>
+      const azureRemote = remotes.find((remote) =>
         remote.refs.fetch.includes("Azure/azure-rest-api-specs"),
       );
       if (azureRemote) {
-        console.log(`Using Azure remote '${azureRemote.name}': ${azureRemote.refs.fetch}`);
         return azureRemote.name;
       }
 
       // Fallback to origin
-      console.log("Using origin remote");
+
       return "origin";
-    } catch (error) {
-      console.log("Error determining remote, using origin");
+    } catch {
       return "origin";
     }
   }
@@ -510,14 +518,17 @@ export class FolderStructureRule implements Rule {
    *
    * @param gitRoot The git repository root path
    * @param folder The folder being validated
-   * @returns Promise<{shouldEnforce: boolean, validationResult?: {success: boolean, errorOutput: string}}> 
+   * @returns Promise<{shouldEnforce: boolean, validationResult?: {success: boolean, errorOutput: string}}>
    *   shouldEnforce: true if v2 compliance should be enforced
-   *   validationResult: validation result if enforcement is needed, undefined otherwise 
+   *   validationResult: validation result if enforcement is needed, undefined otherwise
    */
   private async shouldEnforceV2Compliance(
-    gitRoot: string, 
-    folder: string
-  ): Promise<{shouldEnforce: boolean, validationResult?: {success: boolean, errorOutput: string}}> {
+    gitRoot: string,
+    folder: string,
+  ): Promise<{
+    shouldEnforce: boolean;
+    validationResult?: { success: boolean; errorOutput: string };
+  }> {
     try {
       const git = simpleGit(gitRoot);
 
@@ -531,14 +542,14 @@ export class FolderStructureRule implements Rule {
 
       // Don't enforce if we're already on the target branch
       if (currentBranch === targetBranch) {
-        return {shouldEnforce: false};
+        return { shouldEnforce: false };
       }
 
       // Get service directory relative to specification folder
       const relativePath = path.relative(gitRoot, folder);
       const pathSegments = relativePath.split("/");
       if (pathSegments.length < 2 || pathSegments[0] !== "specification") {
-        return {shouldEnforce: false};
+        return { shouldEnforce: false };
       }
 
       const serviceDir = `specification/${pathSegments[1]}`;
@@ -557,30 +568,28 @@ export class FolderStructureRule implements Rule {
           .trim()
           .split("\n")
           .filter((dir) => dir.trim());
-        
+
         const hasV2Structure = directories.some(
           (dir) => dir.trim() === "data-plane" || dir.trim() === "resource-manager",
         );
 
-        console.log(`Target branch ${targetRemote}/${targetBranch} v2 structure: ${hasV2Structure}`);
-        
         if (hasV2Structure) {
           // Target branch uses v2, so validate current folder against v2 compliance
           const folderStruct = relativePath.split("/").filter(Boolean);
-          const validationResult = await this.validateV2Compliance(folderStruct);
-          return {shouldEnforce: true, validationResult};
+          const validationResult = this.validateV2Compliance(folderStruct);
+          return { shouldEnforce: true, validationResult };
         } else {
-          return {shouldEnforce: false};
+          return { shouldEnforce: false };
         }
       } catch (error) {
         // If we can't check the target branch, don't enforce v2 compliance
-        console.log(`Error checking target branch structure: ${error}`);
-        return {shouldEnforce: false};
+
+        return { shouldEnforce: false };
       }
     } catch (error) {
       // If git operations fail, don't enforce v2 compliance
-      console.log(`Error checking v2 compliance: ${error}`);
-      return {shouldEnforce: false};
+
+      return { shouldEnforce: false };
     }
   }
 
@@ -597,9 +606,7 @@ export class FolderStructureRule implements Rule {
    * @param folderStruct The folder structure array (path segments)
    * @returns Promise<{success: boolean, errorOutput: string}> Validation result
    */
-  private async validateV2Compliance(
-    folderStruct: string[],
-  ): Promise<{ success: boolean; errorOutput: string }> {
+  private validateV2Compliance(folderStruct: string[]): { success: boolean; errorOutput: string } {
     let success = true;
     let errorOutput = "";
 
@@ -751,12 +758,10 @@ export class FolderStructureRule implements Rule {
     // 8. Apply structure-specific validation
 
     if (structureVersion === 1) {
-
       const v1Result = await this.validateV1Structure(folder, folderStruct, isTypeSpecProject);
       success = success && v1Result.success;
       errorOutput += v1Result.errorOutput;
       stdOutput += v1Result.stdOutput;
-
     } else if (structureVersion === 2) {
       // For v2 structure, validate tspconfig.yaml requirement
       const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));
@@ -764,10 +769,10 @@ export class FolderStructureRule implements Rule {
         success = false;
         errorOutput += `Invalid folder structure: Spec folder must contain tspconfig.yaml.`;
       }
-      
+
       // Only validate v2 compliance if not already validated in step 7
       if (!v2ComplianceCheck.shouldEnforce) {
-        const v2Result = await this.validateV2Compliance(folderStruct);
+        const v2Result = this.validateV2Compliance(folderStruct);
         success = success && v2Result.success;
         errorOutput += v2Result.errorOutput;
       }

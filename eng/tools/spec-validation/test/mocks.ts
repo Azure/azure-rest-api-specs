@@ -58,9 +58,16 @@ export function mockSimpleGit() {
 
   // Mock the GitHub CLI commands to avoid actual API calls
   vi.mock("child_process", async (importOriginal) => {
-    const actual = await importOriginal() as any;
+    const actual = (await importOriginal()) as any;
     return {
       ...actual,
+      execSync: vi.fn().mockImplementation((command: string) => {
+        if (command.includes("gh pr view")) {
+          // For the V2 enforcement test, return a branch that has V2 structure
+          return JSON.stringify({ baseRefName: "feature/v2-structure" });
+        }
+        return "";
+      }),
       spawn: vi.fn().mockImplementation(() => ({
         stdout: {
           on: vi.fn((event, callback) => {
