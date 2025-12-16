@@ -71,11 +71,6 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.generate-sample
-    - options.@azure-tools/typespec-python.generate-test
-    - options.@azure-tools/typespec-ts.package-details.name
-    - options.@azure-tools/typespec-ts.package-dir
-    - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
     - ai/Azure.AI.Agents/tspconfig.yaml
 
@@ -86,15 +81,6 @@
     - options.@azure-tools/typespec-java.namespace
   paths:
     - ai/Azure.AI.Projects/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    - ai/ContentUnderstanding/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -122,11 +108,7 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.package-details.name
-    - options.@azure-tools/typespec-ts.package-dir
-    - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
     - ai/OpenAI.Assistants/tspconfig.yaml
 
