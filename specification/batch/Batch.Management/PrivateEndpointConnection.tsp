@@ -14,56 +14,44 @@ namespace Microsoft.Batch;
 /**
  * Contains information about a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
-model PrivateEndpointConnection extends AzureProxyResource {
-  properties?: PrivateEndpointConnectionProperties;
+model PrivateEndpointConnection
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
+  ...ResourceNameParameter<
+    Resource = PrivateEndpointConnection,
+    KeyName = "privateEndpointConnectionName",
+    SegmentName = "privateEndpointConnections",
+    NamePattern = "^[a-zA-Z0-9_-]+\\.?[a-fA-F0-9-]*$"
+  >;
+
+  /**
+   * The ETag of the resource, used for concurrency statements.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
-
-alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider<PrivateEndpointConnection>;
-
-    /** The name of the Batch account. */
-    @path
-    @segment("batchAccounts")
-    @key
-    @pattern("^[a-zA-Z0-9]+$")
-    @maxLength(24)
-    @minLength(3)
-    accountName: string;
-  },
-  {
-    /** The private endpoint connection name. This must be unique within the account. */
-    @path
-    @segment("privateEndpointConnections")
-    @key
-    @minLength(1)
-    @maxLength(101)
-    @pattern("^[a-zA-Z0-9_-]+\\.?[a-fA-F0-9-]*$")
-    privateEndpointConnectionName: string;
-  },
-  ErrorType = CloudError
->;
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets information about the specified private endpoint connection.
    */
-  get is PrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
+  get is ArmResourceRead<PrivateEndpointConnection, Error = CloudError>;
 
   /**
    * Updates the properties of an existing private endpoint connection.
    */
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
-  update is PrivateEndpointConnectionOps.CustomPatchAsync<
+  update is ArmCustomPatchAsync<
     PrivateEndpointConnection,
     PatchModel = PrivateEndpointConnection,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
@@ -75,7 +63,8 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -83,15 +72,17 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
    * Lists all of the private endpoint connections in the specified account.
    */
-  listByBatchAccount is PrivateEndpointConnectionOps.List<
+  listByBatchAccount is ArmResourceListByParent<
     PrivateEndpointConnection,
     Parameters = {
       /**
@@ -100,10 +91,16 @@ interface PrivateEndpointConnections {
       @query("maxresults")
       maxresults?: int32;
     },
-    Response = ArmResponse<ListPrivateEndpointConnectionsResult>
+    Response = ArmResponse<ListPrivateEndpointConnectionsResult>,
+    Error = CloudError
   >;
 }
 
+@@maxLength(PrivateEndpointConnection.name, 101);
+@@minLength(PrivateEndpointConnection.name, 1);
+@@doc(PrivateEndpointConnection.name,
+  "The private endpoint connection name. This must be unique within the account."
+);
 @@doc(PrivateEndpointConnection.properties,
   "The properties associated with the private endpoint connection."
 );

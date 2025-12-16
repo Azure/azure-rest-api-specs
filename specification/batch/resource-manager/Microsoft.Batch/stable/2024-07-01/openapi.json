@@ -1974,10 +1974,11 @@
           {
             "name": "networkSecurityPerimeterConfigurationName",
             "in": "path",
-            "description": "The name for Network Security Perimeter configuration",
+            "description": "The name for a network security perimeter configuration",
             "required": true,
             "type": "string",
-            "pattern": "^.*$"
+            "minLength": 1,
+            "maxLength": 512
           }
         ],
         "responses": {
@@ -2031,10 +2032,11 @@
           {
             "name": "networkSecurityPerimeterConfigurationName",
             "in": "path",
-            "description": "The name for Network Security Perimeter configuration",
+            "description": "The name for a network security perimeter configuration",
             "required": true,
             "type": "string",
-            "pattern": "^.*$"
+            "minLength": 1,
+            "maxLength": 512
           }
         ],
         "responses": {
@@ -3295,11 +3297,23 @@
           "$ref": "#/definitions/ApplicationProperties",
           "description": "The properties associated with the Application.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3311,11 +3325,23 @@
           "$ref": "#/definitions/ApplicationPackageProperties",
           "description": "The properties associated with the Application Package.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3758,40 +3784,6 @@
         }
       }
     },
-    "AzureResource": {
-      "type": "object",
-      "description": "A definition of an Azure resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ID of the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the Batch account.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "BatchAccount": {
       "type": "object",
       "description": "Contains information about an Azure Batch account.",
@@ -3801,6 +3793,17 @@
           "description": "The properties associated with the account.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the Batch account.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the Batch account."
+        },
         "identity": {
           "$ref": "#/definitions/BatchAccountIdentity",
           "description": "The identity of the Batch account."
@@ -3808,7 +3811,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4340,11 +4343,23 @@
           "$ref": "#/definitions/CertificateProperties",
           "description": "The properties associated with the certificate.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5007,11 +5022,23 @@
           "$ref": "#/definitions/DetectorResponseProperties",
           "description": "The properties associated with the detector.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6225,11 +6252,23 @@
         "identity": {
           "$ref": "#/definitions/BatchPoolIdentity",
           "description": "The type of identity used for the Batch Pool."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6545,11 +6584,23 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The properties associated with the private endpoint connection.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6641,11 +6692,23 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The properties associated with the private link resource.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The ETag of the resource, used for concurrency statements.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AzureProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },

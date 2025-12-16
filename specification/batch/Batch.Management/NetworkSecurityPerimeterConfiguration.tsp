@@ -9,16 +9,12 @@ import "./BatchAccount.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Batch;
 /**
  * Network security perimeter (NSP) configuration resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.NspConfiguration;
@@ -34,7 +30,7 @@ interface NetworkSecurityPerimeterConfigurations {
     ParentResource = BatchAccount,
     Resource = NetworkSecurityPerimeterConfiguration,
     Response = CommonTypes.NetworkSecurityPerimeterConfiguration,
-    Error = ErrorResponse
+    Error = CloudError
   >;
 
   /**
@@ -44,7 +40,8 @@ interface NetworkSecurityPerimeterConfigurations {
   listConfigurations is NspConfigurationOperations.ListByParent<
     ParentResource = BatchAccount,
     Resource = NetworkSecurityPerimeterConfiguration,
-    Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult
+    Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult,
+    Error = CloudError
   >;
 
   /**
@@ -59,6 +56,9 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
+  "Network security configuration properties."
+);
 @@pageItems(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.value);
 @@nextLink(CommonTypes.NetworkSecurityPerimeterConfigurationListResult.nextLink
 );

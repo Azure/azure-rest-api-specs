@@ -1374,46 +1374,6 @@ model VirtualMachineFamilyCoreQuota {
 }
 
 /**
- * A definition of an Azure resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
-model AzureResource {
-  /**
-   * The ID of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-}
-
-/**
  * An error response from the Batch service.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3705,46 +3665,6 @@ model AccessRulePropertiesSubscriptionsItem {
 }
 
 /**
- * Provisioning state of NetworkSecurityPerimeter configuration propagation
- */
-union NetworkSecurityPerimeterConfigurationProvisioningState {
-  string,
-
-  /** Unknown provisioning state */
-  Unknown: "Unknown",
-
-  /** Configuration is being created */
-  Creating: "Creating",
-
-  /** Configuration is being updated */
-  Updating: "Updating",
-
-  /** Configuration has been accepted */
-  Accepted: "Accepted",
-
-  /** Invalid response received */
-  InvalidResponse: "InvalidResponse",
-
-  /** Configuration succeeded */
-  Succeeded: "Succeeded",
-
-  /** Configuration succeeded with issues */
-  SucceededWithIssues: "SucceededWithIssues",
-
-  /** Configuration failed */
-  Failed: "Failed",
-
-  /** Configuration is being deleted */
-  Deleting: "Deleting",
-
-  /** Configuration has been deleted */
-  Deleted: "Deleted",
-
-  /** Configuration was canceled */
-  Canceled: "Canceled",
-}
-
-/**
  * Access Mode of the resource association
  */
 union ResourceAssociationAccessMode {
@@ -3767,12 +3687,6 @@ union ResourceAssociationAccessMode {
  * Properties of NetworkSecurityPerimeterConfiguration
  */
 model NetworkSecurityPerimeterConfigurationProperties {
-  /**
-   * Provisioning state of NetworkSecurityPerimeter configuration propagation
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: NetworkSecurityPerimeterConfigurationProvisioningState;
-
   /**
    * List of Provisioning Issues if any
    */
