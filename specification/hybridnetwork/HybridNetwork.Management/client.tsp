@@ -4,6 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.HybridNetwork;
+using Azure.ResourceManager;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+
 
 @@clientName(HelmInstallOptions.wait, "waitOption", "java");
 @@clientName(HelmUpgradeOptions.wait, "waitOption", "java");
@@ -41,3 +45,57 @@ namespace Microsoft.HybridNetwork;
   "python"
 );
 @@clientName(NfviType, "NFVIType", "go");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op ProxyArtifactUpdateState(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  /**
+   * The name of the publisher.
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+  @segment("publishers")
+  publisherName: string,
+
+  /**
+   * The name of the artifact store.
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
+  @segment("artifactStores")
+  artifactStoreName: string,
+
+  /**
+   * The name of the artifact.
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @maxLength(64)
+  @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
+  @query("artifactName")
+  artifactName: string,
+
+  /**
+   * The name of the artifact version.
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @maxLength(64)
+  @pattern("^[^\\s]*[^\\s]+[^\\s]*$")
+  @segment("artifactVersions")
+  artifactVersionName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  parameters: ArtifactChangeState,
+): ProxyArtifact;
+
+@@override(ProxyArtifact.updateState, ProxyArtifactUpdateState, "go");
