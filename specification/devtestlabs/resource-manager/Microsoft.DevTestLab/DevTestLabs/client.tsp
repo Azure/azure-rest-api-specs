@@ -8,6 +8,7 @@ using Microsoft.DevTestLab;
 @@scope(Operations.get, "!csharp");
 @@scope(ProviderOperations.list, "!csharp");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
 @@clientName(ArmTemplate, "DevTestLabArmTemplate", "csharp");
 @@clientName(Artifact, "DevTestLabArtifact", "csharp");
 @@clientName(ArtifactSource, "DevTestLabArtifactSource", "csharp");
