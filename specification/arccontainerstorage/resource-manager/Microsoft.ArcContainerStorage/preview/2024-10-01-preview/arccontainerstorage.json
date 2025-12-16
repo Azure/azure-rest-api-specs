@@ -1958,7 +1958,7 @@
         "spaceAvailable": {
           "type": "string",
           "description": "The amount of space available (string format, e.g., '500Mi').",
-          "pattern": "^[0-9][0-9]*([.][0-9]+)?[KMGTP]i?$"
+          "pattern": "^(|[0-9.]+[eEinumkKMGTP]*[-+]?[0-9]*)$"
         },
         "persistentVolume": {
           "type": "string",
@@ -2149,7 +2149,13 @@
           "description": "Read only object to reflect changes that have occurred on the Edge. Similar to Kubernetes status property for custom resources.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "path",
+        "authentication",
+        "storageAccountEndpoint",
+        "containerName"
+      ]
     },
     "IngestSubvolumePropertiesUpdate": {
       "type": "object",
