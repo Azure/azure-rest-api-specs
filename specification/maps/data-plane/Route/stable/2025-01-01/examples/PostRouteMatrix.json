@@ -3,6 +3,10 @@
     "api-version": "2025-01-01",
     "routeMatrixRequest": {
       "type": "FeatureCollection",
+      "avoid": [
+        "unpavedRoads"
+      ],
+      "departAt": "2022-12-19T16:39:57+01:00",
       "features": [
         {
           "type": "Feature",
@@ -43,13 +47,9 @@
           }
         }
       ],
-      "departAt": "2022-12-19T16:39:57+01:00",
       "optimizeRoute": "fastest",
       "traffic": "historical",
-      "travelMode": "truck",
-      "avoid": [
-        "unpavedRoads"
-      ]
+      "travelMode": "truck"
     }
   },
   "responses": {
@@ -58,54 +58,56 @@
         "type": "Feature",
         "geometry": null,
         "properties": {
-          "summary": {
-            "totalCount": 4,
-            "successfulCount": 4
-          },
           "matrix": [
             {
-              "statusCode": 200,
-              "originIndex": 0,
+              "arrivalAt": "2022-12-19T22:30:03+01:00",
+              "departureAt": "2022-12-19T16:39:57+01:00",
               "destinationIndex": 0,
-              "durationTrafficInSeconds": 21007,
-              "durationInSeconds": 21007,
               "distanceInMeters": 492466,
-              "departureAt": "2022-12-19T16:39:57+01:00",
-              "arrivalAt": "2022-12-19T22:30:03+01:00"
-            },
-            {
-              "statusCode": 200,
+              "durationInSeconds": 21007,
+              "durationTrafficInSeconds": 21007,
               "originIndex": 0,
+              "statusCode": 200
+            },
+            {
+              "arrivalAt": "2022-12-20T02:00:19+01:00",
+              "departureAt": "2022-12-19T16:39:57+01:00",
               "destinationIndex": 1,
-              "durationTrafficInSeconds": 33623,
-              "durationInSeconds": 33623,
               "distanceInMeters": 877028,
-              "departureAt": "2022-12-19T16:39:57+01:00",
-              "arrivalAt": "2022-12-20T02:00:19+01:00"
+              "durationInSeconds": 33623,
+              "durationTrafficInSeconds": 33623,
+              "originIndex": 0,
+              "statusCode": 200
             },
             {
-              "statusCode": 200,
-              "originIndex": 1,
+              "arrivalAt": "2022-12-19T22:05:16+01:00",
+              "departureAt": "2022-12-19T16:39:57+01:00",
               "destinationIndex": 0,
-              "durationTrafficInSeconds": 19520,
-              "durationInSeconds": 19520,
               "distanceInMeters": 427769,
-              "departureAt": "2022-12-19T16:39:57+01:00",
-              "arrivalAt": "2022-12-19T22:05:16+01:00"
+              "durationInSeconds": 19520,
+              "durationTrafficInSeconds": 19520,
+              "originIndex": 1,
+              "statusCode": 200
             },
             {
-              "statusCode": 200,
-              "originIndex": 1,
-              "destinationIndex": 1,
-              "durationTrafficInSeconds": 32070,
-              "durationInSeconds": 32070,
-              "distanceInMeters": 836080,
+              "arrivalAt": "2022-12-20T01:34:27+01:00",
               "departureAt": "2022-12-19T16:39:57+01:00",
-              "arrivalAt": "2022-12-20T01:34:27+01:00"
+              "destinationIndex": 1,
+              "distanceInMeters": 836080,
+              "durationInSeconds": 32070,
+              "durationTrafficInSeconds": 32070,
+              "originIndex": 1,
+              "statusCode": 200
             }
-          ]
+          ],
+          "summary": {
+            "successfulCount": 4,
+            "totalCount": 4
+          }
         }
       }
     }
-  }
+  },
+  "operationId": "Route_PostRouteMatrix",
+  "title": "Successfully retrieve a route matrix with additional parameters in the body"
 }

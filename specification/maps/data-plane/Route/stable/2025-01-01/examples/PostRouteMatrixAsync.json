@@ -3,6 +3,10 @@
     "api-version": "2025-01-01",
     "routeMatrixAsyncRequest": {
       "type": "FeatureCollection",
+      "avoid": [
+        "unpavedRoads"
+      ],
+      "departAt": "2022-12-19T16:39:57+01:00",
       "features": [
         {
           "type": "Feature",
@@ -43,13 +47,9 @@
           }
         }
       ],
-      "departAt": "2022-12-19T16:39:57+01:00",
       "optimizeRoute": "fastest",
       "traffic": "historical",
-      "travelMode": "truck",
-      "avoid": [
-        "unpavedRoads"
-      ]
+      "travelMode": "truck"
     }
   },
   "responses": {
@@ -58,5 +58,7 @@
         "Operation-Location": "https://atlas.microsoft.com/route/operations/bc3f9365-3ee0-4564-aa27-825016325557?api-version=2025-01-01"
       }
     }
-  }
+  },
+  "operationId": "Route_PostRouteMatrixAsync",
+  "title": "Submit an asynchronous request for matrix"
 }
