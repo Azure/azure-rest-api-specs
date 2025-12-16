@@ -1,11 +1,40 @@
 {
-  "title": "Orders_Get",
-  "operationId": "Orders_Get",
+  "title": "Orders_Update",
+  "operationId": "Orders_Update",
   "parameters": {
-    "api-version": "2023-07-12-preview",
+    "api-version": "2025-12-04",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "orderId": "order1"
+    "orderId": "order1",
+    "properties": {
+      "properties": {
+        "customerOrder": {
+          "id": "Customer_ORDER_Number",
+          "createdDateTime": "2022-06-06T17:18:21.373+00:00"
+        },
+        "orderLines": [
+          {
+            "id": 1,
+            "quantity": {
+              "pending": 10
+            },
+            "product": {
+              "type": "UPN",
+              "id": "1234567890"
+            },
+            "price": {
+              "unitAmount": 636.99
+            },
+            "shipTo": {
+              "type": "BusinessLocation",
+              "id": "054321456"
+            },
+            "shippingMethod": "Ground",
+            "requestedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00"
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
@@ -18,7 +47,7 @@
           "provisioningState": "Pending",
           "customerOrder": {
             "id": "Customer_ORDER_Number",
-            "createdDate": "2022-06-06"
+            "createdDateTime": "2022-06-06T17:18:21.373+00:00"
           },
           "status": "Pending",
           "orderLines": [
@@ -27,9 +56,10 @@
               "createdDateTime": "2022-06-06T17:18:21.373+00:00",
               "status": "Pending",
               "quantity": {
-                "ordered": 10,
-                "confirmed": 0,
-                "shipped": 0,
+                "pending": 10,
+                "inProgress": 0,
+                "fulfilled": 0,
+                "cancelled": 0,
                 "returned": 0
               },
               "product": {
@@ -55,10 +85,10 @@
                 "type": "BusinessLocation",
                 "id": "054321456"
               },
-              "shippingMethod": "shipment",
-              "requestedDeliveryDate": "2022-06-27",
-              "estimatedDeliveryDate": "2022-06-27",
-              "estimatedShippedDate": "2022-06-27"
+              "shippingMethod": "Ground",
+              "requestedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
+              "estimatedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
+              "estimatedShippedDateTime": "2022-06-27T17:18:21.373+00:00"
             }
           ],
           "currency": "USD"

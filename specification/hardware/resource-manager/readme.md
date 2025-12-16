@@ -27,16 +27,28 @@ These are the global settings for the hardware.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-07-12-preview
+tag: package-2025-12-04
 ```
 
-### Tag: package-2025-12-04-preview
+### Tag: package-2025-12-04
 
-These settings apply only when `--tag=package-2025-12-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-12-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-12-04-preview'
+```yaml $(tag) == 'package-2025-12-04'
 input-file:
-  - Microsoft.Hardware/preview/2025-12-04-preview/hardware.json
+  - Microsoft.Hardware/preview/2025-12-04/hardware.json
+suppressions:
+  - code: TrackedResourcePatchOperation
+    reason: This is a false positive.
+```
+
+### Tag: package-2023-07-12-preview
+
+These settings apply only when `--tag=package-2023-07-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-07-12-preview'
+input-file:
+  - Microsoft.Hardware/preview/2023-07-12-preview/hardware.json
 suppressions:
   - code: TrackedResourcePatchOperation
     reason: This is a false positive.
