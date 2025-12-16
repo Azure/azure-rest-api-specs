@@ -335,6 +335,7 @@
           "RegistryManagement"
         ],
         "summary": "Called by end-users to get all PE connections.",
+        "operationId": "Registries_ListPrivateEndpointConnections",
         "produces": [
           "application/json"
         ],
@@ -353,6 +354,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -368,6 +375,7 @@
           "RegistryManagement"
         ],
         "summary": "Called by end-users to delete a PE connection.",
+        "operationId": "Registries_DeletePrivateEndpointConnection",
         "produces": [
           "application/json"
         ],
@@ -393,8 +401,17 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success"
+          },
+          "204": {
+            "description": "No content"
           }
         }
       },
@@ -403,6 +420,7 @@
           "RegistryManagement"
         ],
         "summary": "Called by end-users to get a PE connection.",
+        "operationId": "Registries_GetPrivateEndpointConnection",
         "produces": [
           "application/json"
         ],
@@ -427,6 +445,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -440,6 +464,7 @@
           "RegistryManagement"
         ],
         "summary": "Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.",
+        "operationId": "Registries_CreateOrUpdatePrivateEndpointConnection",
         "consumes": [
           "application/json"
         ],
@@ -476,6 +501,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -703,74 +734,37 @@
     "PrivateEndpointConnection": {
       "type": "object",
       "properties": {
-        "connectionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectionDetails"
-          },
-          "x-nullable": true
-        },
-        "etag": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "id": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "isApproved": {
-          "type": "boolean"
-        },
-        "location": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "notebookCustomerVisibleFqdns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "notebookInternalFqdn": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "peConnectionProxyName": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "peName": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "plsConnectionName": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "plsProxyName": {
-          "type": "string",
-          "x-nullable": true
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-nullable": true
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
         },
-        "requestDescription": {
-          "type": "string",
-          "x-nullable": true
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the resource."
         },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
+          "description": "The sku of the workspace."
         }
       },
-      "additionalProperties": false
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
     },
     "PrivateEndpointConnectionProperties": {
       "type": "object",
