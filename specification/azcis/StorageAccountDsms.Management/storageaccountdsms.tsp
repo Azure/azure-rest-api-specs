@@ -70,6 +70,7 @@ model StorageAccountDsmsResourceProperties {
   @Azure.ResourceManager.identifiers(#[])
   accountSasInfos?: Array<AccountSasInfo>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Residency boundary. Acceptable values: 'Worldwide', 'National'.")
   residencyBoundary?: "Worldwide" | "National" | string;
 
@@ -165,6 +166,7 @@ union AccountReplicationType {
 
 @doc("Whitelist element defines the whitelist for a secret.")
 model Whitelist {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Type of the whitelist: 'ServiceID': whitelisting a service; 'SubscriptionID': whitelisting subscription ID for creating Storage Account objects; 'DnsDomain': whitelisting a DNS domain for creating chained certificates; 'ServiceTreeID': whitelisting a service tree ID.")
   type: "ServiceID" | "SubscriptionID" | "DnsDomain" | "ServiceTreeID" | string;
 
@@ -181,6 +183,7 @@ model Whitelists {
 
 @doc("Replicate element defines where the secret should be replicated to.")
 model Replicate {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Replication type. 'Local': This secret is not replicated to other dSMS instance. 'AllDsmsRegions': This secret can be replicated to all dSMS instances. 'SpecifiedDsmsRegions': This secret can only be replicated to the specified dSMS instances.")
   type: "Local" | "AllDsmsRegions" | "SpecifiedDsmsRegions" | string;
 
@@ -263,6 +266,7 @@ model LifecycleManagementPolicyRule {
   @Azure.ResourceManager.identifiers(#[])
   versionPolicy?: Array<LcmActionPolicy>;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("A string, containing BlobTypes to filter, separated with a semicolon. Acceptable values: 'blockBlob', 'appendBlob'.")
   blobTypesFilter?: "blockBlob" | "appendBlob" | string;
 
@@ -276,6 +280,7 @@ model LifecycleManagementPolicyRule {
 
 @doc("Lifecycle Management Policy details for a specific action in a rule.")
 model LcmActionPolicy {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Action to be performed. Acceptable values: 'tierToCool', 'tierToArchive', 'tierToCold', 'tierToHot', 'delete'.")
   action:
     | "tierToCool"
@@ -305,6 +310,7 @@ model BlobIndexMatch {
   @maxLength(128)
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Comparison operator used for object comparison and filtering. Currently only equality operator (\"==\") is supported.")
   operator: "==" | string;
 

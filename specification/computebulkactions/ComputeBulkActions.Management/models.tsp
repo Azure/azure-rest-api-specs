@@ -6,9 +6,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./virtualMachineProfile.tsp";
 import "./virtualMachines.tsp";
 import "./virtualMachineExtension.tsp";
+import "./scheduledactionmodel.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
+using Http;
+using Rest;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -28,6 +30,26 @@ alias LocationParameter = {
   @segment("locations")
   @key
   location: azureLocation;
+};
+
+alias OperationParameter = {
+  /** The async operation id. */
+  @path
+  @minLength(1)
+  @segment("operations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  id: string;
+};
+
+alias LaunchBulkInstancesOperationId = {
+  /** The name of the LaunchBulkInstancesOperation. */
+  @path
+  @minLength(1)
+  @segment("launchBulkInstancesOperations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
 };
 
 alias SubscriptionParams = {
@@ -278,16 +300,7 @@ model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
 @doc("A LaunchBulkInstancesOperation resource")
-model LaunchBulkInstancesOperation
-  is ProxyResource<LaunchBulkInstancesOperationProperties> {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
-  @doc("The ID of the LaunchBulkInstancesOperation")
-  @segment("launchBulkInstancesOperations")
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @path
-  @key
-  name: string;
-
+model LaunchBulkInstancesOperation {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
   @doc("Zones in which the LaunchBulkInstancesOperation is available")
   zones?: Array<string>;
@@ -296,12 +309,66 @@ model LaunchBulkInstancesOperation
   ...ResourcePlanProperty;
 }
 
+@doc("Location based type.")
+model LocationBasedLaunchBulkInstancesOperation
+  is ProxyResource<LaunchBulkInstancesOperationProperties> {
+  @doc("The location name.")
+  @path
+  @minLength(1)
+  @segment("locations")
+  @key
+  @visibility(Lifecycle.Read)
+  location: azureLocation;
+
+  ...LaunchBulkInstancesOperation;
+}
+
+// model OperationStatus is OmitProperties<ArmOperationStatus, "name"> {
+//   ...ResourceNameParameter<OperationStatus>;
+// }
+
+@doc("Status of a long-running operation.")
+model OperationStatus {
+  /** The operation status */
+  @Azure.Core.lroStatus
+  status: Azure.ResourceManager.ResourceProvisioningState;
+
+  /** The unique identifier for the operationStatus resource */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The name of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** The type of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** Operation start time */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /** Operation complete time */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /** The progress made toward completing the operation */
+  @visibility(Lifecycle.Read)
+  percentComplete?: float64;
+
+  /** Errors that occurred if the operation ended with Canceled or Failed status */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
 // ------------------ Models --------------- //
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
   @pageItems
   @doc("The list of LaunchBulkInstancesOperation resources.")
-  value: LaunchBulkInstancesOperation[];
+  // @OpenAPI.extension("x-ms-identifiers", #[])
+  value: LocationBasedLaunchBulkInstancesOperation[];
 
   @doc("The URL to get the next set of results.")
   @nextLink
@@ -413,15 +480,6 @@ model ZonePreference {
   @minValue(0)
   @maxValue(65535)
   rank?: int32;
-}
-
-@doc("The retry policy for the operation")
-model RetryPolicy {
-  @doc("Retry count for operation")
-  retryCount?: int32;
-
-  @doc("Retry window in minutes for the operation")
-  retryWindowInMinutes?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
