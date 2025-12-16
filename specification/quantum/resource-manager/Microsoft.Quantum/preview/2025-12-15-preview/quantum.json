@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quantum Management API",
-    "version": "2025-11-01-preview",
+    "version": "2025-12-15-preview",
     "description": "Microsoft.Quantum Resource Provider Management API",
     "x-typespec-generated": [
       {
@@ -808,6 +808,10 @@
         "resourceUsageId": {
           "type": "string",
           "description": "Id to track resource usage for the provider."
+        },
+        "quotas": {
+          "$ref": "#/definitions/QuotaAllocations",
+          "description": "Quota allocations associated with this provider. Available only for special providers."
         }
       }
     },
@@ -1430,10 +1434,6 @@
           "$ref": "#/definitions/StorageAccountResourceId",
           "description": "ARM Resource Id of the managed storage account associated with this workspace.",
           "readOnly": true
-        },
-        "quotas": {
-          "$ref": "#/definitions/QuotaAllocations",
-          "description": "DEPRECATED: This field is deprecated and will be removed in future versions. Please use the quotas under providers instead."
         }
       }
     }
