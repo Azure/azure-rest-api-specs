@@ -5,8 +5,7 @@
     "registryName": "testreigstry",
     "privateEndpointConnectionName": "{privateEndpointConnectionName}",
     "api-version": "2025-09-01",
-    "monitor": "true",
-    "properties": {
+    "body": {
       "properties": {
         "privateLinkServiceConnectionState": {
           "status": "Approved",
@@ -17,6 +16,24 @@
   },
   "responses": {
     "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/registries/testreigstry/privateEndpointConnections/{privateEndpointConnectionName}",
+        "name": "{privateEndpointConnectionName}",
+        "type": "Microsoft.MachineLearningServices/registries/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-Approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    },
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/registries/testreigstry/privateEndpointConnections/{privateEndpointConnectionName}",
         "name": "{privateEndpointConnectionName}",
