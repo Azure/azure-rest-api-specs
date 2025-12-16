@@ -67,6 +67,10 @@ using Microsoft.Devices;
   "CertificateVerificationCodeResult",
   "csharp"
 );
+@@clientName(PrivateEndpoint,
+  "DeviceProvisioningServicesPrivateEndpoint",
+  "csharp"
+);
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
 
 @@alternateType(VerificationCodeResponseProperties.certificate,
@@ -100,6 +104,10 @@ using Microsoft.Devices;
   "CertificateVerificationCodeContent",
   "csharp"
 );
+@@clientName(PrivateEndpointConnection,
+  "DeviceProvisioningServicesPrivateEndpointConnection",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnectionProperties,
   "DeviceProvisioningServicesPrivateEndpointConnectionProperties",
   "csharp"
@@ -122,6 +130,10 @@ using Microsoft.Devices;
   "csharp"
 );
 @@alternateType(ProvisioningServiceDescription.etag, eTag, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
