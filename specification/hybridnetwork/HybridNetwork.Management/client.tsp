@@ -40,3 +40,4 @@ namespace Microsoft.HybridNetwork;
   "AzureArcK8SClusterNFVIDetails",
   "python"
 );
+@@clientName(NfviType, "NFVIType", "go");
