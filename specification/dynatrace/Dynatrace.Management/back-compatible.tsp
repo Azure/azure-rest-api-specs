@@ -24,6 +24,10 @@ using Dynatrace.Observability;
 @@clientName(MonitorResources.manageAgentInstallation::parameters.body,
   "request"
 );
+@@clientLocation(MonitorResources.manageSreAgentConnectors, "Monitors");
+@@clientName(MonitorResources.manageSreAgentConnectors::parameters.body,
+  "request"
+);
 @@clientLocation(MonitorResources.listHosts, "Monitors");
 @@clientLocation(MonitorResources.getMetricStatus, "Monitors");
 @@clientName(MonitorResources.getMetricStatus::parameters.body, "request");
@@ -36,16 +40,16 @@ using Dynatrace.Observability;
 @@clientName(MonitorResources.listLinkableEnvironments::parameters.body,
   "request"
 );
-#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MonitorResource.properties);
 
-#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
 @@clientLocation(DynatraceSingleSignOnResources.get, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.createOrUpdate, "SingleSignOn");
 @@clientLocation(DynatraceSingleSignOnResources.list, "SingleSignOn");
-#suppress "deprecated" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DynatraceSingleSignOnResource.properties
 );
 

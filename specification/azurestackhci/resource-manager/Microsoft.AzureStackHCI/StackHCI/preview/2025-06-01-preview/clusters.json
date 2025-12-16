@@ -928,7 +928,7 @@
         },
         "sdnProperties": {
           "description": "Software Defined Networking Properties of the cluster",
-          "$ref": "./hciCommon.json#/definitions/SdnProperties"
+          "$ref": "#/definitions/ClusterSdnProperties"
         },
         "arcGatewayProperties": {
           "description": "Azure Arc Gateway properties of the cluster.",
@@ -1807,13 +1807,72 @@
         }
       }
     },
+    "ClusterSdnProperties": {
+      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./hciCommon.json#/definitions/SdnProperties"
+        }
+      ],
+      "properties": {
+        "sdnIntegrationIntent": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SdnIntegrationIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Enable SDN integration for the deployment."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Disable SDN integration for the deployment."
+              }
+            ]
+          },
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment."
+        }
+      }
+    },
     "ConfidentialVmProperties": {
       "type": "object",
       "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
       "properties": {
         "confidentialVmIntent": {
-          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
-          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N)."
+          "type": "string",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "default": "Disable",
+          "readOnly": true,
+          "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable confidential VM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable confidential VM support on the cluster."
+              }
+            ]
+          }
         },
         "confidentialVmStatus": {
           "type": "string",
@@ -1845,6 +1904,11 @@
               }
             ]
           }
+        },
+        "confidentialVmStatusSummary": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Additional context about confidential VM support on the cluster, such as reasons for partial enablement or hardware constraints."
         }
       }
     }

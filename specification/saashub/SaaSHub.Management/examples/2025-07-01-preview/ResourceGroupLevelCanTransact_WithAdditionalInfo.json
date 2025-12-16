@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "body": {
+      "items": [
+        {
+          "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.SaaSHub/cloudServices/myCloudService1",
+          "operationType": "canCreate",
+          "properties": {
+            "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+            "quantity": 15
+          },
+          "additionalInfo": [
+            {
+              "type": "header",
+              "key": "x-ms-correlation-id",
+              "value": "660f9500-f30c-52e5-b827-557766551111"
+            }
+          ]
+        },
+        {
+          "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.SaaSHub/cloudServices/myCloudService2",
+          "operationType": "canCancel",
+          "additionalInfo": [
+            {
+              "type": "header",
+              "key": "x-ms-correlation-id",
+              "value": "660f9500-f30c-52e5-b827-557766552222"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.SaaSHub/cloudServices/myCloudService1",
+            "approvalCode": "token",
+            "operationType": "canCreate",
+            "dependsOn": [],
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          },
+          {
+            "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.SaaSHub/cloudServices/myCloudService2",
+            "approvalCode": "token",
+            "operationType": "canCancel",
+            "dependsOn": [],
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ResourceGroupLevelProviderActions_CanTransact",
+  "title": "ResourceGroupLevelCanTransact with AdditionalInfo - CloudServices"
+}

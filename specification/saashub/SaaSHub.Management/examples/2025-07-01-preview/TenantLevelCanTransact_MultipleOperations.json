@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "items": [
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/newSaasResource",
+          "approvalCode": "89012345-67f2-3456-8901-2345f2345689",
+          "operationType": "canCreate",
+          "properties": {
+            "displayName": "My New SaaS Resource",
+            "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+            "quantity": 100,
+            "autoRenew": "On",
+            "billingScope": "/providers/Microsoft.Billing/billingAccounts/12345/billingProfiles/67890/invoiceSections/11111",
+            "term": {
+              "startDate": "2025-01-01T00:00:00Z"
+            }
+          }
+        },
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/targetSaasResource",
+          "operationType": "canMerge",
+          "mergeRequest": {
+            "sourceResources": [
+              {
+                "id": "/providers/Microsoft.SaaSHub/saasResources/sourceSaasResource1",
+                "quantity": 25
+              }
+            ]
+          }
+        },
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/existingSaasResource",
+          "operationType": "canUpdate",
+          "properties": {
+            "quantity": 150
+          }
+        },
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/cancelSaasResource",
+          "operationType": "canCancel"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/newSaasResource",
+            "approvalCode": "b8c9d0e1-f2a3-4567-1234-678901234567",
+            "operationType": "canCreate",
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          },
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/targetSaasResource",
+            "approvalCode": "c9d0e1f2-a3b4-5678-2345-789012345678",
+            "operationType": "canMerge",
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": [
+                {
+                  "id": "/providers/Microsoft.SaaSHub/saasResources/sourceSaasResource1",
+                  "quantity": 25,
+                  "validationError": null
+                }
+              ]
+            }
+          },
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/existingSaasResource",
+            "operationType": "canUpdate",
+            "result": {
+              "evaluateResult": "Failed",
+              "reasonCode": "FailedToSatisfyRefundableQuantityConstraints",
+              "reason": "Failed to satisfy refundable quantity constraints",
+              "updateScenario": "ChangeQuantity",
+              "additionalInfo": {
+                "refundableQuantity": {
+                  "totalRefundableQuantity": 50,
+                  "refundableQuantities": [
+                    {
+                      "quantity": 50,
+                      "returnWindowEndDateTime": "2025-12-31T23:59:59Z"
+                    }
+                  ]
+                },
+                "coTermDates": null
+              }
+            }
+          },
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/cancelSaasResource",
+            "operationType": "canCancel",
+            "result": {
+              "evaluateResult": "Failed",
+              "reasonCode": "CancellationWindowExpired",
+              "reason": "The cancellation window has expired",
+              "additionalInfo": {
+                "cancellationWindowEndTimestamp": "2025-10-15T23:59:59Z"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.SaaSHub/tenantLevelCanTransact?api-version=2025-07-01-preview&$skiptoken=bmV4dFBhZ2VUb2tlbg"
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanTransact",
+  "title": "Evaluates multiple transaction operations for SaasResources at tenant level"
+}

@@ -1,19 +1,19 @@
 {
-  "title": "Post Update",
-  "operationId": "Updates_Post",
   "parameters": {
     "api-version": "2025-09-22-preview",
-    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
-    "resourceGroupName": "test-rg",
-    "clusterName": "myCluster",
-    "updateName": "update-1"
+    "clusterName": "testcluster",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "b8d594e5-51f3-4c11-9c54-a7771b81c712",
+    "updateName": "Microsoft4.2203.2.32"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/operationStatuses/operation-id"
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "Updates_Post",
+  "title": "List available updates"
 }

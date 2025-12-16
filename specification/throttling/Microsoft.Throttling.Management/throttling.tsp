@@ -164,14 +164,15 @@ model RuleProperties {
   depthMultiplier: int32;
 
   @doc("Window duration")
-  // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
-  //@minValue("?")
-  //@maxValue("?")
+  @minValue(duration.fromISO("PT5M"))
+  @maxValue(duration.fromISO("PT1H"))
   windowDuration: duration;
 
   @doc("Minimal enforcement duration")
-  // TODO: define, see task #27581502 which is blocked by https://github.com/Microsoft/typespec/issues/3318
-  //@minValue("?")
-  //@maxValue("?")
+  @minValue(duration.fromISO("PT5M"))
+  @maxValue(duration.fromISO("PT1H"))
   minEnforcementDuration?: duration;
+
+  @doc("Whether the rule is disabled what means that counters will be accepted but no enforcements will be rendered")
+  disabled?: boolean;
 }
