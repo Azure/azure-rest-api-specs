@@ -630,7 +630,12 @@ model MonitoredComputeResourcesRequest {
  */
 @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
 model MonitoredComputeResourceListResponse
-  is Azure.Core.Page<MonitoredComputeResourceInfo>;
+  is Azure.Core.Page<MonitoredComputeResourceInfo> {
+  /**
+   * The type of compute resources in this response. Returns the filter value used in the request (e.g., "managedClusters" or "All").
+   */
+  resourceType?: string;
+}
 
 /**
  * Details of a monitored compute resource monitored by the Dynatrace monitor.
@@ -641,11 +646,6 @@ model MonitoredComputeResourceInfo {
    * The full ARM resource ID of the monitored resource.
    */
   monitoredResourceId?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The type of the compute resource.
-   */
-  resourceType?: string;
 
   /**
    * Flag indicating if the resource is currently being monitored.
