@@ -692,7 +692,8 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
+- Microsoft.Security/stable/2026-01-01/defenderForStorageSettings.json
+- Microsoft.Security/stable/2026-01-01/operations.json
 - Microsoft.Security/stable/2026-01-01/privateLinks.json
 
 # Autorest suppressions
