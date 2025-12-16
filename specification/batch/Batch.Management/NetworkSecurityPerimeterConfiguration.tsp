@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./BatchAccount.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Batch;
 /**
@@ -18,7 +20,9 @@ namespace Microsoft.Batch;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(BatchAccount)
-model NetworkSecurityPerimeterConfiguration extends AzureProxyResource {}
+@added(Versions.v2024_07_01)
+model NetworkSecurityPerimeterConfiguration
+  is Azure.ResourceManager.NspConfiguration;
 
 alias NetworkSecurityPerimeterConfigurationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -52,6 +56,7 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
    */
+  @added(Versions.v2024_07_01)
   getConfiguration is NetworkSecurityPerimeterConfigurationOps.Read<
     NetworkSecurityPerimeterConfiguration,
     Response = CommonTypes.NetworkSecurityPerimeterConfiguration
@@ -61,6 +66,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Lists all of the NSP configurations in the specified account.
    */
   @list
+  @added(Versions.v2024_07_01)
   listConfigurations is NetworkSecurityPerimeterConfigurationOps.List<
     NetworkSecurityPerimeterConfiguration,
     Response = CommonTypes.NetworkSecurityPerimeterConfigurationListResult
@@ -70,6 +76,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Reconciles the specified NSP configuration.
    */
   @action("reconcile")
+  @added(Versions.v2024_07_01)
   reconcileConfiguration is NetworkSecurityPerimeterConfigurationOps.ActionAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
