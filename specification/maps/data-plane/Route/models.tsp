@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
@@ -122,6 +121,11 @@ union RouteDirectionOptimizeRouteEnum {
   FastestWithTraffic: "fastestWithTraffic",
 }
 
+/**
+ * Specifies restrictions that the route calculation should honor when determining the route.
+ * Avoid supports multiple values in a request and is only supported for the driving and truck
+ * travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]
+ */
 union AvoidEnum {
   string,
 
@@ -161,6 +165,7 @@ union AvoidEnum {
   unpavedRoads: "unpavedRoads",
 }
 
+/** The desired route information from the response. */
 union RouteOutputOptionEnum {
   string,
 
@@ -184,6 +189,7 @@ union RouteOutputOptionEnum {
   itinerary: "itinerary",
 }
 
+/** Types of cargo that may be classified as hazardous materials and restricted from some roads. */
 union VehicleLoadTypeEnum {
   string,
 
@@ -352,6 +358,11 @@ union RouteRangeOptimizeRouteEnum {
   FastestWithTraffic: "fastestWithTraffic",
 }
 
+/**
+ * Specifies restrictions that the route calculation should honor when determining the
+ * reachable locations. Avoid supports multiple values in a request.
+ * \n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tollRoads\"]
+ */
 union RouteRangeAvoidEnum {
   string,
 
