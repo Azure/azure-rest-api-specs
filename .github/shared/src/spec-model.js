@@ -26,6 +26,7 @@ import { SpecModelError } from "./spec-model-error.js";
 /**
  * @typedef {Object} ToJSONOptions
  * @prop {boolean} [embedErrors]
+ * @prop {boolean} [includeOperations] Whether to include the operations in each swagger. Increases runtime about 20x, from 6s to 120s for whole specs repo.
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  */

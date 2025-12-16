@@ -1,16 +1,15 @@
+import {
+  APIViewRequestData,
+  SdkName,
+  SdkNameSchema,
+  SpecGenSdkArtifactInfo,
+} from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import { groupSpecConfigPaths } from "./spec-helpers.js";
-import {
-  APIViewRequestData,
-  SdkName,
-  SpecGenSdkArtifactInfo,
-  SpecGenSdkCmdInput,
-  SpecGenSdkRequiredSettings,
-  VsoLogs,
-} from "./types.js";
+import { SpecGenSdkCmdInput, SpecGenSdkRequiredSettings, VsoLogs } from "./types.js";
 import {
   findReadmeFiles,
   getAllTypeSpecPaths,
@@ -93,7 +92,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
-    sdkLanguage: sdkRepoName.replace("-pr", ""),
+    sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),

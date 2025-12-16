@@ -200,7 +200,14 @@ export class FolderStructureRule implements Rule {
       errorOutput += `Please limit TypeSpec folder depth to 3 levels or less for v1 structure (specification/service/package)`;
     }
 
-    // Verify second level folder is capitalized after each '.'
+    // Check for reserved folder names at second level (after specification/orgName)
+    if (folderStruct.length >= 3) {
+      const secondLevelFolder = folderStruct[2];
+      if (secondLevelFolder === "data-plane" || secondLevelFolder === "resource-manager") {
+        success = false;
+        errorOutput += `Invalid folder name. '${secondLevelFolder}' does not match regex for package folders.\n`;
+      }
+    }    // Verify second level folder is capitalized after each '.'
     if (/(^|\. *)([a-z])/g.test(packageFolder)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/${folderStruct[1]} must be capitalized after each '.'\n`;
@@ -619,7 +626,7 @@ export class FolderStructureRule implements Rule {
         if (folderStruct.length !== dataPlaneIndex + 2) {
           success = false;
           errorOutput +=
-            `Invalid folder structure: TypeSpec for data-plane specs must be exactly 4 levels deep. ` +
+            `Invalid folder structure: TypeSpec for data-plane specs must be exactly one level under 'data-plane'. ` +
             `Required structure: 'specification/{orgName}/data-plane/{serviceName}/'. ` +
             `Current path has ${folderStruct.length} levels: '${folderStruct.join("/")}'.\n`;
         } else {
@@ -644,7 +651,7 @@ export class FolderStructureRule implements Rule {
         if (folderStruct.length !== resourceManagerIndex + 3) {
           success = false;
           errorOutput +=
-            `Invalid folder structure: TypeSpec for resource-manager specs must be exactly 5 levels deep. ` +
+            `Invalid folder structure: TypeSpec for resource-manager specs must be exactly two levels under 'resource-manager'. ` +
             `Required structure: 'specification/{orgName}/resource-manager/{rpNamespace}/{serviceName}/'. ` +
             `Current path has ${folderStruct.length} levels: '${folderStruct.join("/")}'.\n`;
         } else {
@@ -742,11 +749,14 @@ export class FolderStructureRule implements Rule {
     }
 
     // 8. Apply structure-specific validation
+
     if (structureVersion === 1) {
+
       const v1Result = await this.validateV1Structure(folder, folderStruct, isTypeSpecProject);
       success = success && v1Result.success;
       errorOutput += v1Result.errorOutput;
       stdOutput += v1Result.stdOutput;
+
     } else if (structureVersion === 2) {
       // For v2 structure, validate tspconfig.yaml requirement
       const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));

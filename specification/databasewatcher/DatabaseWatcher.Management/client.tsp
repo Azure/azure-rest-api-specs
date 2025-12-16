@@ -58,6 +58,10 @@ using Microsoft.DatabaseWatcher;
   "DatabaseWatcherResourceProvisioningState",
   "csharp"
 );
+@@clientName(alertRuleCreationProperties,
+  "alertRuleCreationProperty",
+  "csharp"
+);
 @@alternateType(Datastore.kustoClusterUri, url, "csharp");
 @@alternateType(Datastore.kustoDataIngestionUri, url, "csharp");
 @@alternateType(Datastore.kustoManagementUrl, url, "csharp");
