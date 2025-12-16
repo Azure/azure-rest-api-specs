@@ -329,6 +329,162 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Called by end-users to get all PE connections.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/privateEndpointConnections/{peConnectionName}": {
+      "delete": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Called by end-users to delete a PE connection.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "peConnectionName",
+            "description": "NRP Private Endpoint Connection Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Called by end-users to get a PE connection.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "peConnectionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RegistryManagement"
+        ],
+        "summary": "Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "peConnectionName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Details required to create the registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/removeRegions": {
       "post": {
         "tags": [
@@ -437,6 +593,32 @@
       },
       "additionalProperties": false
     },
+    "ConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "memberName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "EndpointServiceConnectionStatus": {
       "description": "Connection status of the service consumer with the service provider",
       "enum": [
@@ -514,6 +696,116 @@
         "tier": {
           "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectionDetails"
+          },
+          "x-nullable": true
+        },
+        "etag": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "isApproved": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "notebookCustomerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "notebookInternalFqdn": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "peConnectionProxyName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "peName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "plsConnectionName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "plsProxyName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-nullable": true
+        },
+        "requestDescription": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointResource",
+          "x-nullable": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/RegistryPrivateLinkServiceConnectionState",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrivateEndpointConnectionResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "x-nullable": true
         }
       },
       "additionalProperties": false
