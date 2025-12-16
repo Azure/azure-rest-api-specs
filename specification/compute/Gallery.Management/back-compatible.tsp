@@ -80,8 +80,20 @@ using Microsoft.Compute;
 @@clientName(GalleryApplications.update::parameters.properties,
   "galleryApplication"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+
+@@clientName(GalleryScripts.createOrUpdate::parameters.resource,
+  "galleryScript"
+);
+@@clientName(GalleryScripts.update::parameters.properties, "galleryScript");
+
+@@clientName(GalleryScriptVersions.createOrUpdate::parameters.resource,
+  "galleryScriptVersion"
+);
+@@clientName(GalleryScriptVersions.update::parameters.properties,
+  "galleryScriptVersion"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten retained for backward compatibility."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplication.properties
 );
 
