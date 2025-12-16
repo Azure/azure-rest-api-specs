@@ -130,6 +130,10 @@ using Microsoft.Devices;
   "csharp"
 );
 @@alternateType(ProvisioningServiceDescription.etag, eTag, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
