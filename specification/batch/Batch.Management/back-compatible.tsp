@@ -129,8 +129,9 @@ using Microsoft.Batch;
 );
 @@alternateType(IPRule.action, "Allow", "go");
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessRulePropertiesSubscriptionsItem {
-    /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
-    id?: Azure.Core.armResourceIdentifier;
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
 }
 @@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions, AccessRulePropertiesSubscriptionsItem[], "go");
