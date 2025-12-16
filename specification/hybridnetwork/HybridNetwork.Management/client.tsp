@@ -29,7 +29,7 @@ namespace Microsoft.HybridNetwork;
 );
 @@clientName(VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
   "VirtualNetworkFunctionDefinitionVersion",
-  "java,python"
+  "java,python,go"
 );
 
 @@clientName(Microsoft.HybridNetwork,
