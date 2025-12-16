@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-12-03",
+    "galleryName": "myGalleryName",
+    "galleryScriptName": "myGalleryScriptName",
+    "galleryScript": {
+      "location": "West US",
+      "properties": {
+        "description": "This is the gallery script description.",
+        "eula": "This is the gallery script EULA.",
+        "privacyStatementUri": "{myPrivacyStatementUri}",
+        "releaseNoteUri": "{myReleaseNoteUri}",
+        "supportedOSType": "Windows"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/000000-8de3-42e7-b00e-8970003527749a/providers/Microsoft.Compute/locations/westus/capsOperations/0012b61c-2d36-40bc-b7ed-1f0e48757277?api-version=2025-12-03"
+      },
+      "body": {
+        "properties": {
+          "description": "This is the gallery script description.",
+          "eula": "This is the gallery script EULA.",
+          "privacyStatementUri": "{myPrivacyStatementUri}",
+          "releaseNoteUri": "{myReleaseNoteUri}",
+          "supportedOSType": "Windows",
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myGalleryScriptName",
+        "type": "Microsoft.Compute/galleries",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/000000-8de3-42e7-b00e-8970003527749a/providers/Microsoft.Compute/locations/westus/capsOperations/0012b61c-2d36-40bc-b7ed-1f0e48757277?api-version=2025-12-03"
+      },
+      "body": {
+        "properties": {
+          "description": "This is the gallery script description.",
+          "eula": "This is the gallery script EULA.",
+          "privacyStatementUri": "{myPrivacyStatementUri}",
+          "releaseNoteUri": "{myReleaseNoteUri}",
+          "supportedOSType": "Windows",
+          "provisioningState": "Creating"
+        },
+        "location": "West US",
+        "name": "myGalleryApplicationName",
+        "type": "Microsoft.Compute/galleries",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName"
+      }
+    }
+  },
+  "operationId": "GalleryScripts_CreateOrUpdate",
+  "title": "Create or update a simple gallery Script."
+}
