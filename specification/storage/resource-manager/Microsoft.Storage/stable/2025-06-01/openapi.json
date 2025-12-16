@@ -104,6 +104,12 @@
     },
     {
       "name": "StorageTaskAssignments"
+    },
+    {
+      "name": "Connectors"
+    },
+    {
+      "name": "DataShares"
     }
   ],
   "paths": {
@@ -2057,6 +2063,750 @@
             "$ref": "./examples/BlobContainersSetLegalHoldAllowProtectedAppendWritesAll.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/connectors": {
+      "get": {
+        "operationId": "Connectors_ListByStorageAccount",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "List all Storage Connectors in a Storage Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/connectors/{connectorName}": {
+      "get": {
+        "operationId": "Connectors_Get",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Get the specified Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the Storage Connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Connectors_Create",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Create a Storage Connector if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the Storage Connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Create a Storage Connector if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Connector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "201": {
+            "description": "Resource 'Connector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Connector"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Connectors_Update",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Update a Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the Storage Connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updated properties of the Storage Connector.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectorUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Connector"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Connector"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Connectors_Delete",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "Delete a Storage Connector.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the Storage Connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/connectors/{connectorName}/testExistingConnection": {
+      "post": {
+        "operationId": "Connectors_TestExistingConnection",
+        "tags": [
+          "Connectors"
+        ],
+        "description": "This method is used to verify that the connection to the backing data store works.\nThis API is designed to be used for monitoring and debugging purposes. From the caller’s perspective,\nthis method does the following: Calls List on the backing data store, attempting to list up to one blob/object/etc.\nIf the above succeeds, and if a blob/object/etc is found, calls Get on that object, attempting to download one byte.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the Storage Connector.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "This method is used to verify that the connection to the backing data store works. This API is designed to be used for monitoring and debugging purposes. From the caller’s perspective, this method does the following: Calls List on the backing data store, attempting to list up to one blob/object/etc. If the above succeeds, and if a blob/object/etc is found, calls Get on that object, attempting to download one byte.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestExistingConnectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestConnectionResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TestConnectionResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/dataShares": {
+      "get": {
+        "operationId": "DataShares_ListByStorageAccount",
+        "tags": [
+          "DataShares"
+        ],
+        "description": "List all Storage DataShares in a Storage Account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataShareListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/dataShares/{dataShareName}": {
+      "get": {
+        "operationId": "DataShares_Get",
+        "tags": [
+          "DataShares"
+        ],
+        "description": "Get the specified Storage DataShare.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "dataShareName",
+            "in": "path",
+            "description": "The name of the Storage DataShare.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataShares_Create",
+        "tags": [
+          "DataShares"
+        ],
+        "description": "Create a Storage DataShare if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "dataShareName",
+            "in": "path",
+            "description": "The name of the Storage DataShare.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Create a Storage DataShare if it does not already exist; otherwise, error out. This API will not allow you to replace an already existing resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataShare"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataShare' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataShare"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataShare' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataShare"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DataShare"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DataShares_Update",
+        "tags": [
+          "DataShares"
+        ],
+        "description": "Update a Storage DataShare.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "dataShareName",
+            "in": "path",
+            "description": "The name of the Storage DataShare.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updated properties of the Storage DataShare.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataShareUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataShare"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DataShare"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DataShares_Delete",
+        "tags": [
+          "DataShares"
+        ],
+        "description": "Delete a Storage DataShare.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9]+$"
+          },
+          {
+            "name": "dataShareName",
+            "in": "path",
+            "description": "The name of the Storage DataShare.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes": {
@@ -7174,6 +7924,25 @@
         ]
       }
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "AzureEntityResource": {
       "type": "object",
       "title": "Entity Resource",
@@ -7697,6 +8466,57 @@
       },
       "x-ms-external": true
     },
+    "Connector": {
+      "type": "object",
+      "description": "A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageConnectorProperties",
+          "description": "The properties of the Storage Connector."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ConnectorListResult": {
+      "type": "object",
+      "description": "The response of a Connector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Connector items on this page",
+          "items": {
+            "$ref": "#/definitions/Connector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectorUpdate": {
+      "type": "object",
+      "description": "A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageConnectorPropertiesUpdate",
+          "description": "The properties of the Storage Connector."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
     "ContainerProperties": {
       "type": "object",
       "description": "The properties of a container.",
@@ -7873,6 +8693,121 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "DataShare": {
+      "type": "object",
+      "description": "A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDataShareProperties",
+          "description": "The properties of the Storage DataShare."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataShareConnection": {
+      "type": "object",
+      "description": "The connection details for Data Share source",
+      "properties": {
+        "dataShareUri": {
+          "type": "string",
+          "description": "The URI of the backing DataShare. Must be in the format: azds://<region>:<DataShareName>:<DataShareIdentifier>",
+          "pattern": "^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        }
+      },
+      "required": [
+        "dataShareUri"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageConnectorConnection"
+        }
+      ],
+      "x-ms-discriminator-value": "DataShare"
+    },
+    "DataShareListResult": {
+      "type": "object",
+      "description": "The response of a DataShare list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataShare items on this page",
+          "items": {
+            "$ref": "#/definitions/DataShare"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataShareSource": {
+      "type": "object",
+      "description": "The properties of data share source",
+      "properties": {
+        "connection": {
+          "$ref": "#/definitions/StorageConnectorConnection",
+          "description": "Details for how to connect to the backing data store.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "authProperties": {
+          "$ref": "#/definitions/StorageConnectorAuthProperties",
+          "description": "Details for how to authenticate to the backing data store."
+        }
+      },
+      "required": [
+        "connection",
+        "authProperties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageConnectorSource"
+        }
+      ],
+      "x-ms-discriminator-value": "DataShare"
+    },
+    "DataShareSourceUpdate": {
+      "type": "object",
+      "description": "The properties of data share source",
+      "properties": {
+        "authProperties": {
+          "$ref": "#/definitions/StorageConnectorAuthPropertiesUpdate",
+          "description": "Details for how to authenticate to the backing data store."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageConnectorSourceUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "DataShare"
+    },
+    "DataShareUpdate": {
+      "type": "object",
+      "description": "A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageDataSharePropertiesUpdate",
+          "description": "The properties of the Storage DataShare."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
       ]
     },
     "DateAfterCreation": {
@@ -10213,6 +11148,38 @@
         "value"
       ]
     },
+    "ManagedIdentityAuthProperties": {
+      "type": "object",
+      "description": "The managed identity auth properties for dataShare connection.",
+      "properties": {
+        "identityResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of the managed identity that should be used to authenticate to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageConnectorAuthProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "ManagedIdentityAuthPropertiesUpdate": {
+      "type": "object",
+      "description": "The managed identity auth properties for dataShare connection.",
+      "properties": {
+        "identityResourceId": {
+          "type": "string",
+          "description": "ARM ResourceId of the managed identity that should be used to authenticate to the backing data source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageConnectorAuthPropertiesUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
     "ManagementPolicy": {
       "type": "object",
       "description": "The Get Storage Account ManagementPolicies operation response.",
@@ -10560,6 +11527,48 @@
           {
             "name": "AccessTimeTracking",
             "value": "AccessTimeTracking"
+          }
+        ]
+      }
+    },
+    "NativeDataSharingProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource at the time the operation was called.",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Succeeded",
+        "Deleting",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NativeDataSharingProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
           }
         ]
       }
@@ -13479,6 +14488,416 @@
         }
       }
     },
+    "StorageConnectorAuthProperties": {
+      "type": "object",
+      "description": "The authentication properties of the backing data source",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StorageConnectorAuthType",
+          "description": "Type of the authentication properties. Controls the type of the authProperties object"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StorageConnectorAuthPropertiesUpdate": {
+      "type": "object",
+      "description": "The authentication properties of the backing data source",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StorageConnectorAuthType",
+          "description": "Type of the authentication properties. Controls the type of the authProperties object"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StorageConnectorAuthType": {
+      "type": "string",
+      "description": "The auth type supported for bucket connection in storage connector.",
+      "enum": [
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "StorageConnectorAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Managed Identity auth type"
+          }
+        ]
+      }
+    },
+    "StorageConnectorConnection": {
+      "type": "object",
+      "description": "The connection properties of the backing data source",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StorageConnectorConnectionType",
+          "description": "Type of the connection. Controls the type of the connection object. Not mutable once the Storage Connector is created."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StorageConnectorConnectionType": {
+      "type": "string",
+      "description": "The connection type for bucket connection in storage connector.",
+      "enum": [
+        "DataShare"
+      ],
+      "x-ms-enum": {
+        "name": "StorageConnectorConnectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataShare",
+            "value": "DataShare",
+            "description": "DataShare connection type"
+          }
+        ]
+      }
+    },
+    "StorageConnectorDataSourceType": {
+      "type": "string",
+      "description": "The type of the backing data source for storage connector",
+      "enum": [
+        "Azure_DataShare"
+      ],
+      "x-ms-enum": {
+        "name": "StorageConnectorDataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure_DataShare",
+            "value": "Azure_DataShare",
+            "description": "Azure DataShare data source type."
+          }
+        ]
+      }
+    },
+    "StorageConnectorProperties": {
+      "type": "object",
+      "description": "The storage connector properties",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "System-generated identifier for the Storage Connector. Not a valid input parameter when creating.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)\n(While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.",
+          "default": "Active",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "StorageConnectorState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Active",
+                "value": "Active",
+                "description": "Whether the connector is active"
+              },
+              {
+                "name": "Inactive",
+                "value": "Inactive",
+                "description": "Whether the connector is inactive"
+              }
+            ]
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "description": "System-generated creation time for the Storage Connector. Not a valid input parameter when creating.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
+          "maxLength": 250
+        },
+        "testConnection": {
+          "type": "boolean",
+          "description": "Test connection to backing data source before creating the storage connector.",
+          "default": false,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "dataSourceType": {
+          "$ref": "#/definitions/StorageConnectorDataSourceType",
+          "description": "The type of backing data source for this Storage Connector.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/StorageConnectorSource",
+          "description": "Information about how to communicate with and authenticate to the backing data store."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/NativeDataSharingProvisioningState",
+          "description": "Represents the provisioning state of the storage connector.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataSourceType",
+        "source"
+      ]
+    },
+    "StorageConnectorPropertiesUpdate": {
+      "type": "object",
+      "description": "The storage connector properties",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)\n(While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.",
+          "default": "Active",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "StorageConnectorState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Active",
+                "value": "Active",
+                "description": "Whether the connector is active"
+              },
+              {
+                "name": "Inactive",
+                "value": "Inactive",
+                "description": "Whether the connector is inactive"
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Storage Connector. Max 250 characters.",
+          "maxLength": 250
+        },
+        "testConnection": {
+          "type": "boolean",
+          "description": "Test connection to backing data source before creating the storage connector.",
+          "default": false,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/StorageConnectorSourceUpdate",
+          "description": "Information about how to communicate with and authenticate to the backing data store."
+        }
+      }
+    },
+    "StorageConnectorSource": {
+      "type": "object",
+      "description": "The storage connector backing data source information",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StorageConnectorSourceType",
+          "description": "Type of the Storage Connector. Not mutable once the Storage Connector is created.\""
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StorageConnectorSourceType": {
+      "type": "string",
+      "description": "The type of the backing data source for storage connector",
+      "enum": [
+        "DataShare"
+      ],
+      "x-ms-enum": {
+        "name": "StorageConnectorSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataShare",
+            "value": "DataShare",
+            "description": "Source type - DataShare"
+          }
+        ]
+      }
+    },
+    "StorageConnectorSourceUpdate": {
+      "type": "object",
+      "description": "The storage connector backing data source information",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StorageConnectorSourceType",
+          "description": "Type of the Storage Connector. Not mutable once the Storage Connector is created.\""
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "StorageDataShareAccessPolicy": {
+      "type": "object",
+      "description": "Policy that specify the permission allowed to a managed identity",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The AAD principal ID of the Managed Identity.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD tenant ID of the Managed Identity.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+        },
+        "permission": {
+          "$ref": "#/definitions/StorageDataShareAccessPolicyPermission",
+          "description": "Allowed permissions. Currently, only supported value is Read."
+        }
+      },
+      "required": [
+        "principalId",
+        "tenantId",
+        "permission"
+      ]
+    },
+    "StorageDataShareAccessPolicyPermission": {
+      "type": "string",
+      "description": "The permissions supported in access policies for storage data share",
+      "enum": [
+        "None",
+        "Read"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDataShareAccessPolicyPermission",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No permission"
+          },
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read permission"
+          }
+        ]
+      }
+    },
+    "StorageDataShareAsset": {
+      "type": "object",
+      "description": "Properties of a shared resource.",
+      "properties": {
+        "assetPath": {
+          "type": "string",
+          "description": "Source Path to be shared. It can be a folder or a blob.\nThe asset path should contain container name followed by path within the container, e.g. /container1/logs/external."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Consumer visible name of the original path."
+        }
+      },
+      "required": [
+        "assetPath",
+        "displayName"
+      ]
+    },
+    "StorageDataShareProperties": {
+      "type": "object",
+      "description": "The storage datashare properties",
+      "properties": {
+        "dataShareIdentifier": {
+          "type": "string",
+          "description": "System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Data Share. Max 250 characters.",
+          "maxLength": 250
+        },
+        "dataShareUri": {
+          "type": "string",
+          "description": "The DataShare URI to be shared with the consumer.\nURI Format - 'azds://<location>:<dataShareName>:<dataShareIdentifier>'.",
+          "pattern": "^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        },
+        "accessPolicies": {
+          "type": "array",
+          "description": "List of access policies that specify the permission allowed to a managed identity.",
+          "items": {
+            "$ref": "#/definitions/StorageDataShareAccessPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "assets": {
+          "type": "array",
+          "description": "List of assets that specify the properties of the shared resources.",
+          "items": {
+            "$ref": "#/definitions/StorageDataShareAsset"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/NativeDataSharingProvisioningState",
+          "description": "Represents the provisioning state of the storage datashare.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataShareUri",
+        "accessPolicies",
+        "assets"
+      ]
+    },
+    "StorageDataSharePropertiesUpdate": {
+      "type": "object",
+      "description": "The storage datashare properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Arbitrary description of this Data Share. Max 250 characters.",
+          "maxLength": 250
+        },
+        "accessPolicies": {
+          "type": "array",
+          "description": "List of access policies that specify the permission allowed to a managed identity.",
+          "items": {
+            "$ref": "#/definitions/StorageDataShareAccessPolicy"
+          },
+          "x-ms-identifiers": []
+        },
+        "assets": {
+          "type": "array",
+          "description": "List of assets that specify the properties of the shared resources.",
+          "items": {
+            "$ref": "#/definitions/StorageDataShareAsset"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "StorageQueue": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -14044,6 +15463,43 @@
           "readOnly": true
         }
       }
+    },
+    "TestConnectionResponse": {
+      "type": "object",
+      "description": "Test connection response properties",
+      "properties": {
+        "storageConnectorMethodName": {
+          "type": "string",
+          "description": "Indicates the method used to validate the connection to the backing data store.\nValid values are `GetBlob` and `ListBlobs` for failure, and `TestExistingConnection` for success.",
+          "minLength": 1
+        },
+        "storageConnectorErrorMessage": {
+          "type": "string",
+          "description": "A string representing the error received from the backing data store.\nFormat will vary depending on the data store type and will be capped at 1 MB in size.\nThe error message will be empty if the connection was successful."
+        },
+        "storageConnectorRequestId": {
+          "type": "string",
+          "description": "The request Id associated with the request sent to the backing data store for validation.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "storageConnectorMethodName",
+        "storageConnectorRequestId"
+      ]
+    },
+    "TestExistingConnectionRequest": {
+      "type": "object",
+      "description": "Test existing connection request properties",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "The uniqueId of the storage connector as returned by the server."
+        }
+      },
+      "required": [
+        "uniqueId"
+      ]
     },
     "TriggerParameters": {
       "type": "object",
