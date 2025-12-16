@@ -136,6 +136,18 @@ interface StacSearch {
   create is Azure.Core.Foundations.Operation<
     {
       /**
+       * Whether to sign asset URLs in the response.
+       */
+      @query("sign")
+      sign?: StacAssetUrlSigningMode;
+
+      /**
+       * URL signature duration in minutes.
+       */
+      @query("duration")
+      durationInMinutes?: int32;
+
+      /**
        * Request body
        */
       @body

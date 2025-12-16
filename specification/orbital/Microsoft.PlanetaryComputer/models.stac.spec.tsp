@@ -218,17 +218,6 @@ model StacSearchParameters {
   conformanceClass?: Record<unknown>;
 
   /**
-   * Whether to sign asset URLs in the response.
-   */
-  sign?: StacAssetUrlSigningMode;
-
-  /**
-   * URL signature duration in minutes.
-   */
-  @encodedName("application/json", "duration")
-  durationInMinutes?: int32;
-
-  /**
    * STAC Query
    *
    * See the [STAC Query Extension](https://github.com/stac-api-extensions/query).

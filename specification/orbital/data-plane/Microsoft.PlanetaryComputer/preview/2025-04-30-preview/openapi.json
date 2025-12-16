@@ -10768,6 +10768,42 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "sign",
+            "in": "query",
+            "description": "Whether to sign asset URLs in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "StacAssetUrlSigningMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "True",
+                  "value": "true",
+                  "description": "Sign asset URLs in the response."
+                },
+                {
+                  "name": "False",
+                  "value": "false",
+                  "description": "Do not sign asset URLs in the response."
+                }
+              ]
+            }
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "URL signature duration in minutes.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "x-ms-client-name": "durationInMinutes"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Request body",
@@ -12864,7 +12900,11 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Ingestion source id"
+          "description": "Ingestion source id",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "created": {
           "type": "string",
@@ -15730,16 +15770,6 @@
           "description": "Conf\n\nOverrides datetime validation from the base request model.",
           "additionalProperties": {},
           "x-ms-client-name": "conformanceClass"
-        },
-        "sign": {
-          "$ref": "#/definitions/StacAssetUrlSigningMode",
-          "description": "Whether to sign asset URLs in the response."
-        },
-        "duration": {
-          "type": "integer",
-          "format": "int32",
-          "description": "URL signature duration in minutes.",
-          "x-ms-client-name": "durationInMinutes"
         },
         "query": {
           "type": "object",

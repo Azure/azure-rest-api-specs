@@ -622,6 +622,7 @@ model IngestionSourceSummary {
 @discriminator("kind")
 model IngestionSource {
   @doc("Ingestion source id")
+  @visibility(Lifecycle.Read, Lifecycle.Update)
   id: uuid;
 
   @doc("Created time in UTC format")
