@@ -96,6 +96,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/serviceTags.json
   - Microsoft.Network/stable/2025-05-01/usage.json
   - Microsoft.Network/stable/2025-05-01/virtualNetwork.json
+  - Microsoft.Network/stable/2025-05-01/virtualNetworkAppliance.json
   - Microsoft.Network/stable/2025-05-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2025-05-01/virtualNetworkTap.json
   - Microsoft.Network/stable/2025-05-01/virtualRouter.json
