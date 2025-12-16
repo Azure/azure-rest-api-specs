@@ -374,7 +374,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/privateEndpointConnections/{peConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "delete": {
         "tags": [
           "RegistryManagement"
@@ -401,7 +401,7 @@
           },
           {
             "in": "path",
-            "name": "peConnectionName",
+            "name": "privateEndpointConnectionName",
             "description": "NRP Private Endpoint Connection Name",
             "required": true,
             "type": "string"
@@ -451,7 +451,7 @@
           },
           {
             "in": "path",
-            "name": "peConnectionName",
+            "name": "privateEndpointConnectionName",
             "required": true,
             "type": "string"
           },
@@ -503,7 +503,7 @@
           },
           {
             "in": "path",
-            "name": "peConnectionName",
+            "name": "privateEndpointConnectionName",
             "required": true,
             "type": "string"
           },
@@ -529,6 +529,12 @@
           },
           "200": {
             "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -806,7 +812,9 @@
         },
         "provisioningState": {
           "type": "string",
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true,
+          "description": "The provisioning state of the resource."
         }
       },
       "additionalProperties": false
@@ -829,7 +837,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}",
+          "description": "This is the private endpoint connection name created on SRP\r\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{privateEndpointConnectionName}",
           "type": "string",
           "x-nullable": true
         },
@@ -876,7 +884,8 @@
         "provisioningState": {
           "description": "One of null, \"Succeeded\", \"Provisioning\", \"Failed\". While not approved, it's null.",
           "type": "string",
-          "x-nullable": true
+          "x-nullable": true,
+          "readOnly": true
         }
       },
       "additionalProperties": false
