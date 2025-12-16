@@ -552,7 +552,7 @@ model BlobItemInternal {
   @Xml.name("ObjectReplicationMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
-  /** Whether the blog has versions only. */
+  /** Whether the blob has versions only. */
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
 }
 
@@ -571,7 +571,7 @@ model BlobPropertiesInternal {
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
 
-  /** The blog ETag. */
+  /** The blob ETag. */
   @Xml.name("Etag") eTag: string;
 
   /** The content length of the blob. */
@@ -631,10 +631,10 @@ model BlobPropertiesInternal {
   /** The copy status description of the blob. */
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
-  /** Whether the blog is encrypted on the server. */
+  /** Whether the blob is encrypted on the server. */
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
-  /** Whether the blog is incremental copy. */
+  /** Whether the blob is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */

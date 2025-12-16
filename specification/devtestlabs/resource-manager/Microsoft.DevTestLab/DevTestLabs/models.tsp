@@ -865,6 +865,7 @@ model ArtifactSourceProperties {
   /**
    * The security token to authenticate to the artifact source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   securityToken?: string;
 
   /**
@@ -1571,8 +1572,8 @@ model LabVirtualMachineCreationParameter {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: LabVirtualMachineCreationParameterProperties;
 
   /**
@@ -1640,11 +1641,13 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
@@ -1945,8 +1948,8 @@ model ScheduleCreationParameter {
   /**
    * The properties of the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleCreationParameterProperties;
 
   /**
@@ -2711,8 +2714,8 @@ model ApplicableSchedule extends CommonTypes.Resource {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ApplicableScheduleProperties;
 }
 
@@ -2810,11 +2813,13 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**

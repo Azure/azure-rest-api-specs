@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringName": "peeringName",
+    "registeredPrefix": {
+      "properties": {
+        "prefix": "10.22.20.0/24"
+      }
+    },
+    "registeredPrefixName": "registeredPrefixName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "registeredPrefixName",
+        "type": "Microsoft.Peering/registeredPrefixes",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName",
+        "properties": {
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+          "prefix": "10.22.20.0/24",
+          "prefixValidationState": "Verified",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "registeredPrefixName",
+        "type": "Microsoft.Peering/registeredPrefixes",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName",
+        "properties": {
+          "prefix": "10.22.20.0/24",
+          "prefixValidationState": "Pending",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "RegisteredPrefixes_CreateOrUpdate",
+  "title": "Create or update a registered prefix for the peering"
+}

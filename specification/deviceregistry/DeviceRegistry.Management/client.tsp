@@ -16,7 +16,7 @@ using Microsoft.DeviceRegistry;
 );
 
 // Python Client configuration
-@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
+@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmtClient", "python");
 
 // CSharp Client configuration
 @@scope(OperationStatus.get, "!csharp");

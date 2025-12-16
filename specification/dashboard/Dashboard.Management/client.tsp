@@ -57,8 +57,6 @@ using Microsoft.Dashboard;
 );
 @@clientName(StartTLSPolicy.MandatoryStartTLS, "MandatoryStartTls", "csharp");
 @@clientName(StartTLSPolicy.NoStartTLS, "NoStartTls", "csharp");
-@@clientName(CreatorCanAdmin, "GrafanaCreatorCanAdmin", "csharp");
-@@clientName(Size, "GrafanaSize", "csharp");
 
 @@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
 @@clientName(StartTLSPolicy, "StartTlsPolicy", "java");

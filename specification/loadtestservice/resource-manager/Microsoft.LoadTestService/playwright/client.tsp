@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Playwright.Management;
 
-@@clientName(Playwright.Management, "PlaywrightMgmt", "python");
+@@clientName(Playwright.Management, "PlaywrightMgmtClient", "python");
 @@clientName(Playwright.Management, "PlaywrightManagementClient", "javascript");
 
 @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
