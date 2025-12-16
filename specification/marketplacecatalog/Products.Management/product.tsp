@@ -390,16 +390,16 @@ model PlanDetails {
   @identifiers(#[])
   offeringProperties?: OfferingProperties[];
 
-  @doc("Indicates if this SKU has a consumable feature")
+  @doc("Indicates if this SKU has consumption components")
   hasConsumptionComponents?: boolean;
 
   @doc("Indicates if this SKU is available for end users")
   isEndUserEligible?: boolean;
 
-  @doc("Indicates if this SKU is available for admins to buy for their organizations")
+  @doc("Indicates if this SKU is available for admins")
   isAdminEligible?: boolean;
 
-  @doc("The Microsoft Entra ID version")
+  @doc("The entra id version for products that come with entra id support")
   entraIdVersion?: string;
 
   @doc("Technical Requirements")
