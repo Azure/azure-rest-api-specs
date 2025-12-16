@@ -3334,3 +3334,39 @@ model GeoJsonFeatureCollectionData {
    */
   features: GeoJsonFeature[];
 }
+
+alias AcceptLanguageHeader = {
+  /**
+   * Language in which routing results should be returned.
+   *
+   * For more information, see [Localization support in Azure
+   * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
+   */
+  @header("Accept-Language")
+  acceptLanguage?: string;
+};
+
+alias OperationIdPathParameter = {
+  /**
+   * System generated unique identifier for the asynchronous operation after it has
+   * been submitted.
+   */
+  @maxLength(36)
+  @minLength(36)
+  @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
+  @path
+  id: string;
+};
+
+alias ClientIdHeader = {
+  /**
+   * Indicates the account intended for use with the Microsoft Entra ID security
+   * model. This unique ID for the Azure Maps account can be obtained from the
+   * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
+   * For more information on using Microsoft Entra ID security in Azure Maps, see
+   * [Manage authentication in Azure
+   * Maps](/azure/azure-maps/how-to-manage-authentication).
+   */
+  @header("x-ms-client-id")
+  clientId?: string;
+};

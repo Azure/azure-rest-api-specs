@@ -1,15 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace MapsRoute;
 
-interface RouteOperationGroup {
+interface Route {
   /**
    *
    *
@@ -49,30 +46,12 @@ interface RouteOperationGroup {
     Use to get the best route between an origin and destination for automobile,
     commercial trucks and walking routes.
     """)
-  @operationId("Route_PostRouteDirections")
   @route("/route/directions")
   @post
-  route_PostRouteDirections is Azure.Core.Foundations.Operation<
+  postRouteDirections is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
-
-      /**
-       * Language in which routing results should be returned.
-       *
-       * For more information, see [Localization support in Azure
-       * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
-       */
-      @header
-      `Accept-Language`?: string;
+      ...ClientIdHeader;
+      ...AcceptLanguageHeader;
 
       /**
        * Request body of RouteDirections API in GeoJSON format.
@@ -231,30 +210,12 @@ interface RouteOperationGroup {
     Directions](/rest/api/maps/route/post-route-directions?view=rest-maps-2025-01-01)
     API in a single synchronous request.
     """)
-  @operationId("Route_PostRouteDirectionsBatch")
   @route("/route/directions:batch")
   @post
-  route_PostRouteDirectionsBatch is Azure.Core.Foundations.Operation<
+  postRouteDirectionsBatch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
-
-      /**
-       * Language in which routing results should be returned.
-       *
-       * For more information, see [Localization support in Azure
-       * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
-       */
-      @header
-      `Accept-Language`?: string;
+      ...ClientIdHeader;
+      ...AcceptLanguageHeader;
 
       /**
        * The list of route directions queries/requests to process. The list can contain
@@ -291,30 +252,12 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostSnapToRoads")
   @route("/route/snapToRoads")
   @post
-  route_PostSnapToRoads is Azure.Core.Foundations.Operation<
+  postSnapToRoads is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
-
-      /**
-       * Language in which routing results should be returned.
-       *
-       * For more information, see [Localization support in Azure
-       * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
-       */
-      @header
-      `Accept-Language`?: string;
+      ...ClientIdHeader;
+      ...AcceptLanguageHeader;
 
       /**
        * Request body of SnapToRoads API in GeoJSON format.
@@ -418,30 +361,12 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostSnapToRoadsBatch")
   @route("/route/snapToRoads:batch")
   @post
-  route_PostSnapToRoadsBatch is Azure.Core.Foundations.Operation<
+  postSnapToRoadsBatch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
-
-      /**
-       * Language in which routing results should be returned.
-       *
-       * For more information, see [Localization support in Azure
-       * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
-       */
-      @header
-      `Accept-Language`?: string;
+      ...ClientIdHeader;
+      ...AcceptLanguageHeader;
 
       /**
        * The list of Snap To Roads queries/requests to process. The list can contain a
@@ -472,21 +397,11 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostRouteRange")
   @route("/route/range")
   @post
-  route_PostRouteRange is Azure.Core.Foundations.Operation<
+  postRouteRange is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...ClientIdHeader;
 
       /**
        * Request body of RouteRange API in GeoJSON format.
@@ -586,21 +501,11 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostRouteRangeBatch")
   @route("/route/range:batch")
   @post
-  route_PostRouteRangeBatch is Azure.Core.Foundations.Operation<
+  postRouteRangeBatch is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...ClientIdHeader;
 
       /**
        * The list of route directions queries/requests to process. The list can contain
@@ -683,21 +588,11 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostRouteMatrix")
   @route("/route/matrix")
   @post
-  route_PostRouteMatrix is Azure.Core.Foundations.Operation<
+  postRouteMatrix is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...ClientIdHeader;
 
       /**
        * Request body of RouteMatrix API in GeoJSON format.
@@ -813,21 +708,11 @@ interface RouteOperationGroup {
    *
    *
    */
-  @operationId("Route_PostRouteMatrixAsync")
   @route("/route/matrix:async")
   @post
-  route_PostRouteMatrixAsync is Azure.Core.Foundations.Operation<
+  postRouteMatrixAsync is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
+      ...ClientIdHeader;
 
       /**
        * Request body of RouteMatrix API in GeoJSON format.
@@ -841,20 +726,11 @@ interface RouteOperationGroup {
   /**
    * Get the status of an asynchronous operation by its operation ID.
    */
-  @operationId("Route_GetRouteOperationsStatus")
   @route("/route/operations/{id}")
   @get
   getRouteOperationsStatus is Azure.Core.Foundations.Operation<
     {
-      /**
-       * System generated unique identifier for the asynchronous operation after it has
-       * been submitted.
-       */
-      @maxLength(36)
-      @minLength(36)
-      @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
-      @path
-      id: string;
+      ...OperationIdPathParameter;
     },
     RouteOperation
   >;
@@ -862,40 +738,13 @@ interface RouteOperationGroup {
   /**
    * Get the result of an asynchronous operation by its operation ID.
    */
-  @operationId("Route_GetRouteOperationsResult")
   @route("/route/operations/{id}/result")
   @get
-  route_GetOperationResult is Azure.Core.Foundations.Operation<
+  getOperationResult is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Indicates the account intended for use with the Microsoft Entra ID security
-       * model. This unique ID for the Azure Maps account can be obtained from the
-       * [Azure Maps management plane Account API](/rest/api/maps-management/accounts).
-       * For more information on using Microsoft Entra ID security in Azure Maps, see
-       * [Manage authentication in Azure
-       * Maps](/azure/azure-maps/how-to-manage-authentication).
-       */
-      @header
-      clientId?: string;
-
-      /**
-       * Language in which routing results should be returned.
-       *
-       * For more information, see [Localization support in Azure
-       * Maps](https://learn.microsoft.com/azure/azure-maps/supported-languages#routing-v2-services-preview-supported-languages).
-       */
-      @header
-      `Accept-Language`?: string;
-
-      /**
-       * System generated unique identifier for the asynchronous operation after it has
-       * been submitted.
-       */
-      @maxLength(36)
-      @minLength(36)
-      @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
-      @path
-      id: string;
+      ...ClientIdHeader;
+      ...AcceptLanguageHeader;
+      ...OperationIdPathParameter;
     },
     RouteOperationResponse
   >;
