@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-12-03",
+    "galleryName": "myGalleryName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName",
+            "properties": {
+              "description": "This is the gallery script description.",
+              "eula": "This is the gallery script EULA.",
+              "privacyStatementUri": "{myPrivacyStatementUri}",
+              "releaseNoteUri": "{myReleaseNoteUri}",
+              "supportedOSType": "Windows",
+              "provisioningState": "Succeeded"
+            },
+            "location": "West US",
+            "name": "myGalleryScriptName"
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName2",
+            "properties": {
+              "description": "This is the gallery script description.",
+              "eula": "This is the gallery script EULA.",
+              "privacyStatementUri": "{myPrivacyStatementUri}",
+              "releaseNoteUri": "{myReleaseNoteUri}",
+              "supportedOSType": "Windows",
+              "provisioningState": "Succeeded"
+            },
+            "location": "West US",
+            "name": "myGalleryScriptName2"
+          }
+        ],
+        "nextLink": "https://microsoft.com/nextLinkExample"
+      }
+    }
+  },
+  "operationId": "GalleryScripts_ListByGallery",
+  "title": "List gallery Scripts in a gallery."
+}
