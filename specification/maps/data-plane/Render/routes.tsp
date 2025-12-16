@@ -5,6 +5,19 @@ using TypeSpec.Http;
 
 namespace MapsRender;
 
+op MapsRenderOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TError extends TypeSpec.Reflection.Model = ErrorResponse
+> is Azure.Core.Foundations.Operation<
+  {
+    ...clientId;
+    ...TParams;
+  },
+  TResponse,
+  TError
+>;
+
 interface Render {
   /**
    *
@@ -19,10 +32,8 @@ interface Render {
   @summary("Use to request map tiles in vector or raster format.")
   @route("/map/tile")
   @get
-  getMapTile is Azure.Core.Foundations.Operation<
+  getMapTile is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
        * grid of square tiles at preset zoom levels. Every tileset has a **tilesetId**
@@ -150,10 +161,8 @@ interface Render {
   @summary("Use to get metadata for a tileset.")
   @route("/map/tileset")
   @get
-  getMapTileset is Azure.Core.Foundations.Operation<
+  getMapTileset is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
        * grid of square tiles at preset zoom levels. Every tileset has a **tilesetId**
@@ -176,10 +185,8 @@ interface Render {
   @summary("Use to get map copyright attribution information.")
   @route("/map/attribution")
   @get
-  getMapAttribution is Azure.Core.Foundations.Operation<
+  getMapAttribution is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * A tileset is a collection of raster or vector data broken up into a uniform
        * grid of square tiles at preset zoom levels. Every tileset has a **tilesetId**
@@ -223,10 +230,8 @@ interface Render {
     """)
   @route("/map/statetile")
   @get
-  getMapStateTile is Azure.Core.Foundations.Operation<
+  getMapStateTile is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Zoom level for the desired tile.
        *
@@ -294,10 +299,8 @@ interface Render {
   @summary("Use to get copyright information to use when rendering a tile.")
   @route("/map/copyright/caption/{format}")
   @get
-  getCopyrightCaption is Azure.Core.Foundations.Operation<
+  getCopyrightCaption is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Desired format of the response. Value can be either _json_ or _xml_.
        */
@@ -359,10 +362,8 @@ interface Render {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @route("/map/static")
   @get
-  getMapStaticImage is Azure.Core.Foundations.Operation<
+  getMapStaticImage is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Map style to be returned. Possible values are microsoft.base.road,
        * microsoft.base.darkgrey, and microsoft.imagery.  Default value is set to be
@@ -762,10 +763,8 @@ interface Render {
   @summary("Use to get copyright information for the specified bounding box.")
   @route("/map/copyright/bounding/{format}")
   @get
-  getCopyrightFromBoundingBox is Azure.Core.Foundations.Operation<
+  getCopyrightFromBoundingBox is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Minimum coordinates (south-west point) of bounding box in latitude longitude
        * coordinate system. E.g. 52.41064,4.84228
@@ -811,10 +810,8 @@ interface Render {
   @summary("Use to get copyright information.")
   @route("/map/copyright/tile/{format}")
   @get
-  getCopyrightForTile is Azure.Core.Foundations.Operation<
+  getCopyrightForTile is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Zoom level for the desired tile.
        *
@@ -878,10 +875,8 @@ interface Render {
   @summary("Use to get copyright information for for the world.")
   @route("/map/copyright/world/{format}")
   @get
-  getCopyrightForWorld is Azure.Core.Foundations.Operation<
+  getCopyrightForWorld is MapsRenderOperation<
     {
-      ...clientId;
-
       /**
        * Desired format of the response. Value can be either _json_ or _xml_.
        */
