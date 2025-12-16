@@ -6,6 +6,19 @@ using TypeSpec.Http;
 
 namespace MapsRoute;
 
+op MapsRouteOperation<
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  TError extends TypeSpec.Reflection.Model = ErrorResponse
+> is Azure.Core.Foundations.Operation<
+  {
+    ...ClientIdHeader;
+    ...TParams;
+  },
+  TResponse,
+  TError
+>;
+
 interface Route {
   /**
    *
@@ -42,15 +55,16 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API behavior"
   @summary("""
     Use to get the best route between an origin and destination for automobile,
     commercial trucks and walking routes.
     """)
   @route("/route/directions")
   @post
-  postRouteDirections is Azure.Core.Foundations.Operation<
+  postRouteDirections is MapsRouteOperation<
     {
-      ...ClientIdHeader;
       ...AcceptLanguageHeader;
 
       /**
@@ -205,6 +219,7 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @summary("""
     Use to send a batch of queries to the [Route
     Directions](/rest/api/maps/route/post-route-directions?view=rest-maps-2025-01-01)
@@ -212,9 +227,8 @@ interface Route {
     """)
   @route("/route/directions:batch")
   @post
-  postRouteDirectionsBatch is Azure.Core.Foundations.Operation<
+  postRouteDirectionsBatch is MapsRouteOperation<
     {
-      ...ClientIdHeader;
       ...AcceptLanguageHeader;
 
       /**
@@ -252,11 +266,12 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API behavior"
   @route("/route/snapToRoads")
   @post
-  postSnapToRoads is Azure.Core.Foundations.Operation<
+  postSnapToRoads is MapsRouteOperation<
     {
-      ...ClientIdHeader;
       ...AcceptLanguageHeader;
 
       /**
@@ -361,11 +376,11 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/snapToRoads:batch")
   @post
-  postSnapToRoadsBatch is Azure.Core.Foundations.Operation<
+  postSnapToRoadsBatch is MapsRouteOperation<
     {
-      ...ClientIdHeader;
       ...AcceptLanguageHeader;
 
       /**
@@ -397,12 +412,11 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/range")
   @post
-  postRouteRange is Azure.Core.Foundations.Operation<
+  postRouteRange is MapsRouteOperation<
     {
-      ...ClientIdHeader;
-
       /**
        * Request body of RouteRange API in GeoJSON format.
        */
@@ -501,12 +515,11 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/range:batch")
   @post
-  postRouteRangeBatch is Azure.Core.Foundations.Operation<
+  postRouteRangeBatch is MapsRouteOperation<
     {
-      ...ClientIdHeader;
-
       /**
        * The list of route directions queries/requests to process. The list can contain
        * a max of 100 queries for sync version and must contain at least 1 query.
@@ -588,12 +601,11 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/matrix")
   @post
-  postRouteMatrix is Azure.Core.Foundations.Operation<
+  postRouteMatrix is MapsRouteOperation<
     {
-      ...ClientIdHeader;
-
       /**
        * Request body of RouteMatrix API in GeoJSON format.
        */
@@ -708,12 +720,11 @@ interface Route {
    *
    *
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/matrix:async")
   @post
-  postRouteMatrixAsync is Azure.Core.Foundations.Operation<
+  postRouteMatrixAsync is MapsRouteOperation<
     {
-      ...ClientIdHeader;
-
       /**
        * Request body of RouteMatrix API in GeoJSON format.
        */
@@ -726,9 +737,10 @@ interface Route {
   /**
    * Get the status of an asynchronous operation by its operation ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/operations/{id}")
   @get
-  getRouteOperationsStatus is Azure.Core.Foundations.Operation<
+  getRouteOperationsStatus is MapsRouteOperation<
     {
       ...OperationIdPathParameter;
     },
@@ -738,11 +750,11 @@ interface Route {
   /**
    * Get the result of an asynchronous operation by its operation ID.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/operations/{id}/result")
   @get
-  getOperationResult is Azure.Core.Foundations.Operation<
+  getOperationResult is MapsRouteOperation<
     {
-      ...ClientIdHeader;
       ...AcceptLanguageHeader;
       ...OperationIdPathParameter;
     },
