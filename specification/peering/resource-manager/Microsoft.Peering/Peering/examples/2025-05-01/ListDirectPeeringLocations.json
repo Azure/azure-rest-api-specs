@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "kind": "Direct",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "peeringLocation1",
+            "type": "Microsoft.Peering/peeringLocations",
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peeringLocations/peeringLocation1",
+            "kind": "Direct",
+            "properties": {
+              "country": "country1",
+              "direct": {
+                "bandwidthOffers": [
+                  {
+                    "offerName": "10Gbps",
+                    "valueInMbps": 10000
+                  },
+                  {
+                    "offerName": "100Gbps",
+                    "valueInMbps": 100000
+                  }
+                ],
+                "peeringFacilities": [
+                  {
+                    "address": "address1",
+                    "directPeeringType": "Edge",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/fac/99999"
+                  },
+                  {
+                    "address": "address3",
+                    "directPeeringType": "Cdn",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/fac/99999"
+                  }
+                ]
+              },
+              "peeringLocation": "peeringLocation1"
+            }
+          },
+          {
+            "name": "peeringLocation2",
+            "type": "Microsoft.Peering/peeringLocations",
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peeringLocations/peeringLocation2",
+            "kind": "Direct",
+            "properties": {
+              "country": "country2",
+              "direct": {
+                "bandwidthOffers": [
+                  {
+                    "offerName": "10Gbps",
+                    "valueInMbps": 10000
+                  },
+                  {
+                    "offerName": "100Gbps",
+                    "valueInMbps": 100000
+                  }
+                ],
+                "peeringFacilities": [
+                  {
+                    "address": "address2",
+                    "directPeeringType": "Edge",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/fac/99999"
+                  }
+                ]
+              },
+              "peeringLocation": "peeringLocation2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PeeringLocations_List",
+  "title": "List direct peering locations"
+}

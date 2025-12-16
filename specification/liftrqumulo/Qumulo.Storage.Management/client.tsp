@@ -9,7 +9,7 @@ using LiftrBase.Storage;
 
 namespace LiftrBase;
 
-@@clientName(Qumulo.Storage, "QumuloMgmt", "python");
+@@clientName(Qumulo.Storage, "QumuloMgmtClient", "python");
 @@clientName(FileSystemResource, "QumuloFileSystemResource", "csharp");
 @@clientName(FileSystemResourceProperties.storageSku,
   "StorageSkuName",
@@ -44,6 +44,7 @@ namespace LiftrBase;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
   "csharp"
 );

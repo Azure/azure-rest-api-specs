@@ -1,5 +1,7 @@
-import pluginJs from "@eslint/js";
-import globals from "globals";
+import { defineBaseConfig } from "./eslint.base.config.js";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [{ languageOptions: { globals: globals.node } }, pluginJs.configs.recommended];
+export default defineBaseConfig({
+  // ensures the tsconfig path resolves relative to this file (so cannot be defined in base file)
+  // default is process.cwd() when running eslint, which may be incorrect
+  tsconfigRootDir: import.meta.dirname,
+});

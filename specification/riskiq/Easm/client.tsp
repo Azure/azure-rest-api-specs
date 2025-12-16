@@ -127,3 +127,31 @@ interface EasmClient {
   "DiscoveryGroupNameParameter",
   "csharp"
 );
+@@clientName(Easm.DeltaTypeResponse, "DeltaTypeResult", "csharp");
+@@clientName(Easm.ActionParameters, "ActionParametersContent", "csharp");
+@@clientName(Easm.AssetChainRequest, "AssetChainRequestContent", "csharp");
+@@clientName(Easm.AssetsExportRequest, "AssetsExportRequestContent", "csharp");
+@@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
+@@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
+@@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
+@@clientName(Easm.DiscoGroupSummaryResult,
+  "DiscoveryGroupSummaryResult",
+  "csharp"
+);
+@@clientName(Easm.Policy, "EasmPolicy", "csharp");
+@@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
+@@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
+@@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
+@@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
+@@clientName(EasmClient.createOrReplaceDiscoGroup,
+  "CreateOrReplaceDiscoveryGroup",
+  "csharp"
+);
+@@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listAssetResource, "GetAssetResources", "csharp");
+@@clientName(EasmClient.listDataConnection, "GetDataConnections", "csharp");
+@@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
+@@clientName(EasmClient.listPolicy, "GetPolicies", "csharp");
+@@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
+@@clientName(EasmClient.listTask, "GetTasks", "csharp");
+@@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");

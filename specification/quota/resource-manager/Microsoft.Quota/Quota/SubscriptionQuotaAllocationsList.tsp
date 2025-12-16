@@ -13,9 +13,8 @@ namespace Microsoft.Quota;
 /**
  * Subscription quota list.
  */
-@tenantResource
 model SubscriptionQuotaAllocationsList
-  is Azure.ResourceManager.ProxyResource<SubscriptionQuotaAllocationsListProperties> {
+  is Azure.ResourceManager.ExtensionResource<SubscriptionQuotaAllocationsListProperties> {
   ...ResourceNameParameter<
     Resource = SubscriptionQuotaAllocationsList,
     KeyName = "location",

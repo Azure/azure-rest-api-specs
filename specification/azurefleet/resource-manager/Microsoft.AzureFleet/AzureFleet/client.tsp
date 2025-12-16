@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureFleet;
 
-@@clientName(Microsoft.AzureFleet, "ComputeFleetMgmt", "python");
+@@clientName(Microsoft.AzureFleet, "ComputeFleetMgmtClient", "python");
 @@clientName(Microsoft.AzureFleet, "ComputeFleetManagementClient", "java");
 
 @@access(Operations.list, Access.internal, "csharp");
@@ -386,3 +386,19 @@ using Microsoft.AzureFleet;
   "csharp"
 );
 @@clientName(VMCategory, "ComputeFleetVmCategory", "csharp");
+@@clientName(CapacityType, "ComputeFleetCapacityType", "csharp");
+@@clientName(FleetMode, "ComputeFleetMode", "csharp");
+@@clientName(VirtualMachine, "ComputeFleetVirtualMachine", "csharp");
+@@clientName(VMOperationStatus, "ComputeFleetVmOperationStatus", "csharp");
+@@clientName(ZoneAllocationPolicy,
+  "ComputeFleetZoneAllocationPolicy",
+  "csharp"
+);
+@@clientName(ZoneDistributionStrategy,
+  "ComputeFleetZoneDistributionStrategy",
+  "csharp"
+);
+@@clientName(Fleets.listVirtualMachines::parameters.$skiptoken,
+  "skipToken",
+  "csharp"
+);
