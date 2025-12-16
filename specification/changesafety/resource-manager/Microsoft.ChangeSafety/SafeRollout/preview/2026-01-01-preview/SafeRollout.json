@@ -777,6 +777,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The end time of the stage."
+        },
+        "retryAttempt": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retry attempt."
         }
       },
       "required": [
@@ -1157,7 +1162,11 @@
           "items": {
             "$ref": "#/definitions/Action"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name",
+            "retryAttempt"
+          ]
         },
         "startTime": {
           "type": "string",

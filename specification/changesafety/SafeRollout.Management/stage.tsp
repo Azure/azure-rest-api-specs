@@ -47,6 +47,7 @@ model StageProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Stage actions array.")
+  @identifiers(#["name", "retryAttempt"])
   actions?: Action[];
 
   @visibility(Lifecycle.Read)
@@ -78,6 +79,9 @@ model Action {
 
   @doc("The end time of the stage.")
   endTime?: utcDateTime;
+
+  @doc("The retry attempt.")
+  retryAttempt?: int32;
 }
 
 @doc("The action name.")
