@@ -18,4 +18,7 @@ namespace Microsoft.Discovery.Shared;
 enum Versions {
   @doc("The 2025-07-01-preview version of the Microsoft.Discovery.Shared.")
   `2025-07-01-preview`,
+
+  @doc("The 2025-12-01-preview version of the Microsoft.Discovery.Shared.")
+  `2025-12-01-preview`,
 }

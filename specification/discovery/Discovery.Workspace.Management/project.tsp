@@ -25,6 +25,14 @@ model Project is TrackedResource<ProjectProperties> {
   ...ResourceNameParameter<Project>;
 }
 
+@doc("Settings schema for the project")
+@added(Microsoft.Discovery.Versions.v2025_12_01_preview)
+model ProjectSettings {
+  @maxLength(5000)
+  @doc("Default preferences to guide AI behaviors in this project.")
+  behaviorPreferences?: string;
+}
+
 @doc("Project properties")
 model ProjectProperties {
   @doc("The status of the last operation.")
@@ -53,6 +61,11 @@ model ProjectProperties {
   @doc("Allowed DataContainers (Control plane resource references).")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   dataContainerIds: DataContainerId[];
+
+  @doc("Settings for the project.")
+  @added(Microsoft.Discovery.Versions.v2025_12_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  settings?: ProjectSettings;
 }
 
 @armResourceOperations

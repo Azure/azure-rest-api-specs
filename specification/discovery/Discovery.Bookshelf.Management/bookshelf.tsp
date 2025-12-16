@@ -27,6 +27,11 @@ model BookshelfProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @doc("System Subnet ID associated with managed resources for the bookshelf.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Microsoft.Discovery.Versions.v2025_12_01_preview)
+  subnetId?: Microsoft.Discovery.Shared.SubnetId;
+
   ...MoboConfigurationWithMrg;
 
   /** The bookshelf data plane API URI */
