@@ -15,7 +15,6 @@ import {
   TspConfigCsharpAzNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
-  TspConfigGoAzInjectSpansTrueSubRule,
   TspConfigGoContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
@@ -23,6 +22,7 @@ import {
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
+  TspConfigGoMgmtInjectSpansTrueSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoModuleMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
@@ -250,6 +250,8 @@ const tsDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/arm-aaa-rest",
   "{output-dir}/{service-dir}/aaa--rest",
   [new TspConfigTsDpEmitterOutputDirSubRule()],
+  false,
+  { "is-modular-library": false },
 );
 
 const tsDpPackageNameTestCases = createEmitterOptionTestCases(
@@ -259,6 +261,8 @@ const tsDpPackageNameTestCases = createEmitterOptionTestCases(
   "@azure-rest/aaa-bbb",
   "@azure/aaa-bbb",
   [new TspConfigTsRlcDpPackageNameMatchPatternSubRule()],
+  false,
+  { "is-modular-library": false },
 );
 
 const tsDpModularPackageNameTestCases = createEmitterOptionTestCases(
@@ -344,16 +348,7 @@ const goManagementInjectSpansTestCases = createEmitterOptionTestCases(
   "inject-spans",
   true,
   false,
-  [new TspConfigGoAzInjectSpansTrueSubRule()],
-);
-
-const goDpInjectSpansTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-go",
-  "",
-  "inject-spans",
-  true,
-  false,
-  [new TspConfigGoAzInjectSpansTrueSubRule()],
+  [new TspConfigGoMgmtInjectSpansTrueSubRule()],
 );
 
 const goDpModuleTestCases = createEmitterOptionTestCases(
@@ -615,6 +610,19 @@ options:
     success: false,
     subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
   },
+  {
+    description: "Validate Ts mgmt recursive variable resolution (namespace -> package-name)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-ts":
+    package-name: "arm-aaa-bbb"
+    namespace: "{package-name}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+`,
+    success: true,
+    subRules: [new TspConfigTsMgmtModularEmitterOutputDirSubRule()],
+  },
 ];
 
 const suppressEntireRuleTestCase: Case = {
@@ -705,7 +713,6 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpContainingModuleTestCases,
     ...goDpEmitterOutputDirTestCases,
