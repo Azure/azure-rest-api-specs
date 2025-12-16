@@ -40,6 +40,7 @@ import "./ConfigTemplateSchema.tsp";
 import "./ConfigTemplateMetadata.tsp";
 import "./HierarchyConfigurationMetadata.tsp";
 import "./HierarchyConfigurationMetadataVersion.tsp";
+import "./InternalState.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

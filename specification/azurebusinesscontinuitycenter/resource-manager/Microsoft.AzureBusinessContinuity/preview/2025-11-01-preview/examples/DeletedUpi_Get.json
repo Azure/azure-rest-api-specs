@@ -1,0 +1,146 @@
+{
+  "title": "DeletedUnifiedProtectedItem_Get",
+  "operationId": "DeletedUnifiedProtectedItem_Get",
+  "parameters": {
+    "deletedUnifiedProtectedItemsName": "AzureVirtualMachine;testvm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "api-version": "2025-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.AzureBusinessContinuity/DeletedUnifiedProtectedItems/AzureVirtualMachine;testvm",
+        "type": "microsoft.azurebusinesscontinuity/deletedunifiedprotecteditems",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "primaryRegionProtectionDetails": {
+            "oldestRecoveryPoint": {
+              "propertyValue": "2024-01-31T05:43:45.0000000Z",
+              "isAvailable": true
+            },
+            "configuredRpoInMinutes": 120,
+            "latestRecoveryPoint": {
+              "propertyValue": "2024-01-31T13:56:11.0000000Z",
+              "isAvailable": true
+            },
+            "maximumConfiguredRetentionInDays": {
+              "propertyValue": 3660,
+              "isAvailable": true
+            },
+            "minimumConfiguredRetentionInDays": {
+              "propertyValue": 3660,
+              "isAvailable": true
+            }
+          },
+          "solutionSpecificProtectionProperties": {
+            "Azure Backup": {
+              "allowedOperationsPerSolution": [
+                "BackupNow",
+                "Restore",
+                "StopBackup"
+              ]
+            }
+          },
+          "distinctBcdrSolutionProviderNames": [
+            "Microsoft"
+          ],
+          "protectionStatusInSecondaryRegion": "NotProtected",
+          "protectionStatusInPrimaryRegion": "Protected",
+          "isProtectedInSecondaryRegion": false,
+          "isProtectedInPrimaryRegion": true,
+          "linkedResourceInformation": {
+            "isAzureManagedLinkedResource": true,
+            "resourceLocation": "centraluseuap",
+            "linkedResourceType": "Microsoft.Compute/virtualMachines",
+            "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.Compute/virtualMachines/myvm",
+            "clusterNodes": null,
+            "clusterType": "NotAvailable",
+            "clusterName": null,
+            "isCluster": false
+          },
+          "deletedPiLastEventTimeMap": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.RecoveryServices/vaults/myrsv/backupFabrics/Azure/protectionContainers/VMAppContainer;compute;myrg;myvm/protectedItems/SQLDataBase;mssqlserver;newdb4": "2024-01-31T11:44:21.8490000Z"
+          },
+          "maximumBcdrDataSecurity": "None",
+          "sourceSideScanInfo": {
+            "sourceSideScanStatus": "NotConfigured",
+            "sourceSideScanSummary": "NotApplicable"
+          },
+          "friendlyName": "MSSQLSERVER\\newdb4",
+          "dataSourceInformation": {
+            "dataSourceId": "MSSQLSERVER\\NewDB4",
+            "dataSourceType": "AzureVmSQL"
+          },
+          "distinctSolutionNames": [
+            "Azure Backup"
+          ],
+          "upiSchemaVersion": "V1",
+          "protectedItems": [
+            {
+              "primaryRegionProtectionDetails": {
+                "oldestRecoveryPoint": {
+                  "propertyValue": "2024-01-31T05:43:45.0000000Z",
+                  "isAvailable": true
+                },
+                "configuredRpoInMinutes": 120,
+                "latestRecoveryPoint": {
+                  "propertyValue": "2024-01-31T13:56:11.0000000Z",
+                  "isAvailable": true
+                },
+                "configuredMaximumRetentionInDays": {
+                  "propertyValue": 3660,
+                  "isAvailable": true
+                },
+                "protectionStatus": "Protected",
+                "protectedItemState": "Protected"
+              },
+              "secondaryRegionProtectionDetails": null,
+              "dictionaryOfResourceTypeToLastEventTime": {
+                "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems": "2024-04-05T08:48:38.8480000Z"
+              },
+              "allowedOperations": [
+                "BackupNow",
+                "Restore",
+                "StopBackup"
+              ],
+              "protectedItemSecondaryRegion": null,
+              "providerSpecificProperties": {
+                "deferredDeleteTimeRemaining": "-",
+                "backupManagementType": "AzureStorage",
+                "deferredDeleteSyncTime": "-",
+                "workloadType": "AzureFileShare",
+                "policyId": "/subscriptions/00eaee86-c801-4f5b-b027-3994f10a4dcc/resourceGroups/afsbvtrgnzn/providers/Microsoft.RecoveryServices/vaults/afsbvtvaultnzn/backupPolicies/KailaniP0BVT_V1_OLR_E2ESimplePolicyV117225298",
+                "vaultLocation": "newzealandnorth",
+                "type": "AzureBackupAzureFilesharePropertyBag"
+              },
+              "protectedItemPrimaryRegion": "eastasia",
+              "protectedItemFriendlyName": "testvm",
+              "bcdrDataSecurityLevel": "None",
+              "sourceSideScanInfo": {
+                "sourceSideScanStatus": "NotConfigured",
+                "sourceSideScanSummary": "NotApplicable"
+              },
+              "solutionProviderName": "Microsoft",
+              "solutionDisplayName": "Azure Backup",
+              "isDeletedResource": null,
+              "referencedObjects": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.RecoveryServices/vaults/myrsv": {
+                  "Location": [
+                    "eastasia"
+                  ],
+                  "Path": [
+                    "BCDRDataSecurityLevel:properties.secureScore"
+                  ]
+                }
+              },
+              "lastUpdatedTime": "2024-04-05T08:48:38.8480000Z",
+              "protectedItemId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.RecoveryServices/vaults/myrsv/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;myrg;myvm/protectedItems/SQLDataBase;MSSQLSERVER;NewDB4"
+            }
+          ],
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  }
+}
