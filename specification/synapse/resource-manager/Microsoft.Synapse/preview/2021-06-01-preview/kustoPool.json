@@ -354,6 +354,11 @@
             "description": "Accepted the Kusto Pool creation request.",
             "schema": {
               "$ref": "#/definitions/KustoPool"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -398,7 +403,12 @@
             "description": "OK -- Kusto Pool deleted successfully."
           },
           "202": {
-            "description": "Accepted Kusto Pool deletion request."
+            "description": "Accepted Kusto Pool deletion request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Kusto Pool does not exist in the subscription."
@@ -447,7 +457,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -493,7 +508,75 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/migrate": {
+      "post": {
+        "tags": [
+          "KustoPools"
+        ],
+        "operationId": "KustoPools_Migrate",
+        "x-ms-examples": {
+          "KustoPoolMigrate": {
+            "$ref": "./examples/KustoPoolMigrate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Migrate data from a Kusto pool to another cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "kustoPoolMigrateRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KustoPoolMigrateRequest"
+            },
+            "description": "The kusto pool migrate request parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -702,7 +785,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -757,7 +845,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -860,7 +953,12 @@
             "description": "OK."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1023,6 +1121,11 @@
             "description": "Accepted the create database request.",
             "schema": {
               "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1070,7 +1173,12 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified database does not exist."
@@ -1293,6 +1401,11 @@
             "description": "Accepted the database update request.",
             "schema": {
               "$ref": "#/definitions/Database"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1340,7 +1453,12 @@
             "description": "Successfully deleted the database."
           },
           "202": {
-            "description": "Accepted database delete request."
+            "description": "Accepted database delete request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified database does not exist."
@@ -1465,7 +1583,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1696,6 +1819,11 @@
             "description": "Accepted the data connection update request.",
             "schema": {
               "$ref": "#/definitions/DataConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1746,7 +1874,12 @@
             "description": "Successfully deleted the data connection."
           },
           "202": {
-            "description": "Accepted data connection deletion request."
+            "description": "Accepted data connection deletion request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified data connection does not exist."
@@ -2009,10 +2142,72 @@
             "description": "OK -- principalAssignments deleted successfully."
           },
           "202": {
-            "description": "Accepted the delete principalAssignments request."
+            "description": "Accepted the delete principalAssignments request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- principalAssignments does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/databases/{databaseName}/inviteFollower": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "KustoPoolDatabase_InviteFollower",
+        "x-ms-examples": {
+          "KustoPoolDatabaseInviteFollower": {
+            "$ref": "./examples/KustoPoolDatabaseInviteFollower.json"
+          }
+        },
+        "description": "Generates an invitation token that allows attaching a follower database to this database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseInviteFollowerRequest"
+            },
+            "description": "The follower invitation request parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInviteFollowerResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2286,7 +2481,12 @@
             "description": "OK -- principalAssignments deleted successfully."
           },
           "202": {
-            "description": "Accepted the delete principalAssignments request."
+            "description": "Accepted the delete principalAssignments request.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- principalAssignments does not exist in the subscription."
@@ -2618,7 +2818,8 @@
             "Stopping",
             "Stopped",
             "Starting",
-            "Updating"
+            "Updating",
+            "Migrated"
           ],
           "x-ms-enum": {
             "name": "State",
@@ -2672,6 +2873,12 @@
             "create",
             "read"
           ]
+        },
+        "migrationCluster": {
+          "description": "Properties of the peer cluster involved in a migration to/from this cluster.",
+          "type": "object",
+          "$ref": "#/definitions/MigrationClusterProperties",
+          "readOnly": true
         }
       },
       "description": "Class representing the Kusto pool properties."
@@ -2906,6 +3113,20 @@
             "type": "string"
           },
           "description": "List of materialized views exclude from the follower database"
+        },
+        "functionsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of functions to include in the follower database"
+        },
+        "functionsToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of functions to exclude from the follower database"
         }
       },
       "description": "Tables that will be included and excluded in the follower database"
@@ -3528,6 +3749,39 @@
       },
       "description": "The list of language extension objects."
     },
+    "MigrationClusterProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the cluster.",
+          "readOnly": true
+        },
+        "uri": {
+          "type": "string",
+          "description": "The public URL of the cluster.",
+          "readOnly": true
+        },
+        "dataIngestionUri": {
+          "type": "string",
+          "description": "The public data ingestion URL of the cluster.",
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the cluster in the migration process.",
+          "readOnly": true,
+          "enum": [
+            "Source",
+            "Destination"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationClusterRole",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Represents a properties of a cluster that is part of a migration."
+    },
     "ResourceProvisioningState": {
       "type": "string",
       "readOnly": true,
@@ -3680,6 +3934,19 @@
         "type"
       ],
       "description": "A principal assignment check name availability request."
+    },
+    "KustoPoolMigrateRequest": {
+      "type": "object",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource ID of the destination cluster or kusto pool."
+        }
+      },
+      "required": [
+        "clusterResourceId"
+      ],
+      "description": "A kusto pool migrate request."
     },
     "DatabasePrincipalAssignmentListResult": {
       "type": "object",
@@ -3914,6 +4181,35 @@
       },
       "description": "The result returned from a check name availability request."
     },
+    "DatabaseInviteFollowerRequest": {
+      "type": "object",
+      "properties": {
+        "inviteeEmail": {
+          "type": "string",
+          "description": "The email of the invited user for which the follower invitation is generated.",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+        },
+        "tableLevelSharingProperties": {
+          "type": "object",
+          "$ref": "#/definitions/TableLevelSharingProperties",
+          "description": "Table level sharing specifications"
+        }
+      },
+      "required": [
+        "inviteeEmail"
+      ],
+      "description": "The request to invite a follower to a database."
+    },
+    "DatabaseInviteFollowerResult": {
+      "type": "object",
+      "properties": {
+        "generatedInvitation": {
+          "type": "string",
+          "description": "The generated invitation token."
+        }
+      },
+      "description": "The result returned from a follower invitation generation request."
+    },
     "ListResourceSkusResult": {
       "description": "List of available SKUs for a Kusto Pool.",
       "type": "object",
@@ -4001,7 +4297,8 @@
       "description": "The name of the Kusto pool.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]{3,21}$"
     },
     "OperationIdParameter": {
       "name": "operationId",
@@ -4025,7 +4322,8 @@
       "description": "The name of the database in the Kusto pool.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_\\-\\. ]{1,260}$"
     },
     "DataConnectionNameParameter": {
       "name": "dataConnectionName",
