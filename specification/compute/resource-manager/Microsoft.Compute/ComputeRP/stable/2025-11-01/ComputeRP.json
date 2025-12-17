@@ -17915,11 +17915,13 @@
         "values": [
           {
             "name": "Unaligned",
-            "value": "Unaligned"
+            "value": "Unaligned",
+            "description": "Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile."
           },
           {
             "name": "Aligned",
-            "value": "Aligned"
+            "value": "Aligned",
+            "description": "Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain."
           }
         ]
       }
@@ -17937,11 +17939,13 @@
         "values": [
           {
             "name": "Aligned",
-            "value": "Aligned"
+            "value": "Aligned",
+            "description": "Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains."
           },
           {
             "name": "BestEffortAligned",
-            "value": "BestEffortAligned"
+            "value": "BestEffortAligned",
+            "description": "Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains."
           }
         ]
       }
@@ -23444,7 +23448,8 @@
           },
           {
             "name": "BestEffortAligned",
-            "value": "BestEffortAligned"
+            "value": "BestEffortAligned",
+            "description": "Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned."
           }
         ]
       }

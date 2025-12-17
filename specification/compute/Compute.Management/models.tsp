@@ -439,7 +439,7 @@ union ZonalPlatformFaultDomainAlignMode {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /** Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned. */
   @added(Versions.v2025_11_01)
   BestEffortAligned: "BestEffortAligned",
 }
@@ -912,9 +912,11 @@ union DiskControllerTypes {
 @added(Versions.v2025_11_01)
 union StorageFaultDomainAlignmentType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains. */
   Aligned: "Aligned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains. */
   BestEffortAligned: "BestEffortAligned",
 }
 
@@ -924,9 +926,11 @@ union StorageFaultDomainAlignmentType {
 @added(Versions.v2025_11_01)
 union StorageAlignmentStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile. */
   Unaligned: "Unaligned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /** Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain. */
   Aligned: "Aligned",
 }
 
