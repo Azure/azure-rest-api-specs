@@ -207,11 +207,18 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zoneId?: Ocid;
 
+  @removed(Versions.v20251201_preview)
   @doc("The hostname for the cloud VM cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(23)
   hostname: string;
+
+  @added(Versions.v20251201_preview)
+  @doc("The hostname for the cloud VM cluster.")
+  @encodedName("application/json", "hostname")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  hostnameV2: string;
 
   @doc("The domain name for the cloud VM cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -378,6 +385,11 @@ model CloudVmClusterProperties {
   @doc("Specifies whether the type of storage management for the VM cluster is ASM or Exascale.")
   @visibility(Lifecycle.Read)
   storageManagementType?: ExadataVmClusterStorageManagementType;
+
+  @added(Versions.v20251201_preview)
+  @doc("Indicates if the Accelerated Networking feature is enabled or disabled for provisioning an Exadata VM cluster. The default value is: false.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAcceleratedNetworkEnabled?: boolean = false;
 }
 
 @doc("Add/Remove (Virtual Machine) DbNode model")
