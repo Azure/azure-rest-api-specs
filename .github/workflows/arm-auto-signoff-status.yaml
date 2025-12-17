@@ -90,22 +90,22 @@ jobs:
 
       # Add/remove specific auto sign-off labels based on analysis results.
       # The action is explicit: 'add' | 'remove' | 'none'.
-      - name: Upload artifact for ARMSignedOff label
-        if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
+        name: Upload artifact for ARMSignedOff label
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMSignedOff"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] == 'add' }}"
 
-      - name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
-        if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] != 'none'
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-IncrementalTSP"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
 
-      - name: Upload artifact for ARMAutoSignedOff-Trivial-Test label
-        if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] != 'none'
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-Trivial-Test label
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-Trivial-Test"
