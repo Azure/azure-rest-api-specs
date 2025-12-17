@@ -35,10 +35,10 @@ namespace Microsoft.Authorization {
   /**
    * This operation creates or updates the policy assignment with the given ID. Policy assignments made on a scope apply to all resources contained in that scope. For example, when you assign a policy to a resource group that policy applies to all resources in the group. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For "
   @summary("Creates or updates a policy assignment.")
   @scope("java")
-  @clientLocation(PolicyAssignments)
+  @Location(PolicyAssignments)
   @put
   @route("/{+policyAssignmentId}")
   op createById(
@@ -87,5 +87,4 @@ namespace Microsoft.Authorization {
     ...Azure.Core.Foundations.ApiVersionParameter,
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
 }
-@@clientName(Microsoft.Authorization, "PolicyClient", "javascript");
-@@clientName(Microsoft.Authorization, "PolicyMgmtClient", "python");
+@@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
