@@ -4308,6 +4308,9 @@ input-file:
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkAppliance.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerConnectivityConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
