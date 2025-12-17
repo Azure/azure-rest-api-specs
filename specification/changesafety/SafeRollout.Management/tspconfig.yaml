@@ -1,6 +1,3 @@
-parameters:
-  "service-dir":
-    default: "sdk/saferollout"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,16 +5,10 @@ options:
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/changeSafety"
-    emitter-output-dir: "{output-dir}/{service-dir}/armchangeSafety"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armchangeSafety"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/SafeRollout/{version-status}/{version}/ChangeControl.json"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  service-dir:
+    default: sdk/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
