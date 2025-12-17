@@ -1073,6 +1073,7 @@ union StorageConnectorSourceType {
   /**
    * Source type - DataShare
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataShare: "DataShare",
 
   string,
@@ -1081,15 +1082,18 @@ union StorageConnectorSourceType {
 /**
  * The state of the storage connector
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorState {
   /**
    * Whether the connector is active
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Active: "Active",
 
   /**
    * Whether the connector is inactive
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inactive: "Inactive",
 
   string,
@@ -1098,10 +1102,12 @@ union StorageConnectorState {
 /**
  * The auth type supported for bucket connection in storage connector.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorAuthType {
   /**
    * Managed Identity auth type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
 
   string,
@@ -1110,10 +1116,12 @@ union StorageConnectorAuthType {
 /**
  * The connection type for bucket connection in storage connector.
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorConnectionType {
   /**
    * DataShare connection type
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataShare: "DataShare",
 
   string,
@@ -1122,10 +1130,12 @@ union StorageConnectorConnectionType {
 /**
  * The type of the backing data source for storage connector
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageConnectorDataSourceType {
   /**
    * Azure DataShare data source type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Azure_DataShare: "Azure_DataShare",
 
   string,
@@ -1134,15 +1144,18 @@ union StorageConnectorDataSourceType {
 /**
  * The permissions supported in access policies for storage data share
  */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union StorageDataShareAccessPolicyPermission {
   /**
    * No permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 
   /**
    * Read permission
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Read: "Read",
 
   string,
@@ -6350,7 +6363,7 @@ model StorageDataShareProperties {
    */
   @visibility(Lifecycle.Read)
   @pattern("^azds://[a-zA-Z0-9-]+:[a-zA-Z0-9-_]+:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  dataShareUri: string;
+  dataShareUri?: string;
 
   /**
    * List of access policies that specify the permission allowed to a managed identity.
