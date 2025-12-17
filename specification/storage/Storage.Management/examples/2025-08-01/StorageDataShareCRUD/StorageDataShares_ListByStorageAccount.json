@@ -1,0 +1,68 @@
+{
+  "operationId": "DataShares_ListByStorageAccount",
+  "title": "ListDataSharesByStorageAccount",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "api-version": "2025-08-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/dataShares/testdatashare1",
+            "name": "testdatashare1",
+            "type": "Microsoft.Storage/storageAccounts/dataShares",
+            "location": "eastus",
+            "properties": {
+              "dataShareIdentifier": "00000000-0000-0000-0000-000000000000",
+              "description": "Dummy data share",
+              "dataShareUri": "azds://eastus:testdatashare1:00000000-0000-0000-0000-000000000000",
+              "accessPolicies": [
+                {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "tenantId": "00000000-0000-0000-0000-000000000000",
+                  "permission": "Read"
+                }
+              ],
+              "assets": [
+                {
+                  "assetPath": "/container/folder/foo",
+                  "displayName": "virtualFoo"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/dataShares/testdatashare2",
+            "name": "testdatashare2",
+            "type": "Microsoft.Storage/storageAccounts/dataShares",
+            "location": "westus",
+            "properties": {
+              "dataShareIdentifier": "00000000-0000-0000-0000-000000000000",
+              "description": "Dummy data share",
+              "dataShareUri": "azds://eastus:testdatashare2:00000000-0000-0000-0000-000000000000",
+              "accessPolicies": [
+                {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "tenantId": "00000000-0000-0000-0000-000000000000",
+                  "permission": "Read"
+                }
+              ],
+              "assets": [
+                {
+                  "assetPath": "/container/folder/foo",
+                  "displayName": "virtualFoo"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
