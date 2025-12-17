@@ -303,33 +303,6 @@ union NodeArcState {
 }
 
 /**
- * The type of identity that created the resource.
- */
-union CreatedByType {
-  string,
-
-  /**
-   * User
-   */
-  User: "User",
-
-  /**
-   * Application
-   */
-  Application: "Application",
-
-  /**
-   * ManagedIdentity
-   */
-  ManagedIdentity: "ManagedIdentity",
-
-  /**
-   * Key
-   */
-  Key: "Key",
-}
-
-/**
  * Status of the cluster agent. Indicates the current connectivity, validation, and deployment state of the agent within the cluster.
  */
 union Status {
