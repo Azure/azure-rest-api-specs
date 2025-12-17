@@ -36,12 +36,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.Communication/stable/2025-09-01/CommunicationServices.json
-  - Microsoft.Communication/stable/2025-09-01/Domains.json
-  - Microsoft.Communication/stable/2025-09-01/EmailServices.json
-  - Microsoft.Communication/stable/2025-09-01/SenderUsernames.json
-  - Microsoft.Communication/stable/2025-09-01/SmtpUsernames.json
-  - Microsoft.Communication/stable/2025-09-01/SuppressionLists.json
+  - Microsoft.Communication/stable/2025-09-01/openapi.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -52,7 +47,10 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.Communication/stable/2025-05-01/openapi.json
+  - Microsoft.Communication/stable/2025-05-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2025-05-01/Domains.json
+  - Microsoft.Communication/stable/2025-05-01/EmailServices.json
+  - Microsoft.Communication/stable/2025-05-01/SenderUsernames.json
 ```
 
 ### Tag: package-preview-2025-05-01-preview
