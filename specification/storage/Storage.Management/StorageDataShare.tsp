@@ -9,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
  * A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account.
  */
 @parentResource(StorageAccount)
+@added(Versions.v2025_08_01)
 model DataShare
   is Azure.ResourceManager.TrackedResource<StorageDataShareProperties> {
   ...ResourceNameParameter<
@@ -26,6 +28,7 @@ model DataShare
 }
 
 @armResourceOperations
+@added(Versions.v2025_08_01)
 interface DataShares {
   /**
    * Get the specified Storage DataShare.
