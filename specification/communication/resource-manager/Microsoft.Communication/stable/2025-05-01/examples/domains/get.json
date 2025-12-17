@@ -1,39 +1,39 @@
 {
   "parameters": {
-    "api-version": "2025-05-01",
-    "domainName": "mydomain.com",
-    "emailServiceName": "MyEmailServiceResource",
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
     "resourceGroupName": "MyResourceGroup",
-    "subscriptionId": "11112222-3333-4444-5555-666677778888"
+    "emailServiceName": "MyEmailServiceResource",
+    "domainName": "mydomain.com",
+    "api-version": "2025-05-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource/Domains/mydomain.com",
         "name": "mydomain.com",
         "type": "Microsoft.Communication/EmailServices/Domains",
-        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/EmailServices/MyEmailServiceResource/Domains/mydomain.com",
         "location": "Global",
         "properties": {
           "dataLocation": "United States",
-          "domainManagement": "CustomerManaged",
+          "provisioningState": "Running",
           "fromSenderDomain": "mydomain.com",
           "mailFromSenderDomain": "mydomain.com",
-          "provisioningState": "Running",
-          "userEngagementTracking": "Disabled",
-          "verificationRecords": {
-            "Domain": {
-              "name": "recordName",
-              "type": "TXT",
-              "ttl": 3600,
-              "value": "recordValue"
-            }
-          },
+          "domainManagement": "CustomerManaged",
           "verificationStates": {
             "Domain": {
-              "errorCode": "",
-              "status": "Verified"
+              "status": "Verified",
+              "errorCode": ""
             }
-          }
+          },
+          "verificationRecords": {
+            "Domain": {
+              "type": "TXT",
+              "name": "recordName",
+              "value": "recordValue",
+              "ttl": 3600
+            }
+          },
+          "userEngagementTracking": "Disabled"
         }
       }
     },
@@ -45,7 +45,5 @@
         }
       }
     }
-  },
-  "operationId": "Domains_Get",
-  "title": "Get Domains resource"
+  }
 }

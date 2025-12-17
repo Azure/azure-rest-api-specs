@@ -1,40 +1,40 @@
 {
   "parameters": {
-    "api-version": "2025-05-01",
-    "domainName": "contoso.com",
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "contosoResourceGroup",
     "emailServiceName": "contosoEmailService",
+    "domainName": "contoso.com",
+    "senderUsername": "contosoNewsAlerts",
+    "api-version": "2025-05-01",
     "parameters": {
       "properties": {
-        "displayName": "Contoso News Alerts",
-        "username": "contosoNewsAlerts"
+        "username": "contosoNewsAlerts",
+        "displayName": "Contoso News Alerts"
       }
-    },
-    "resourceGroupName": "contosoResourceGroup",
-    "senderUsername": "contosoNewsAlerts",
-    "subscriptionId": "11112222-3333-4444-5555-666677778888"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNewsAlerts",
         "name": "contoso.com",
         "type": "Microsoft.Communication/EmailServices/Domains",
-        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNewsAlerts",
         "properties": {
           "dataLocation": "United States",
-          "displayName": "Contoso News Alerts",
-          "username": "contosoNewsAlerts"
+          "username": "contosoNewsAlerts",
+          "displayName": "Contoso News Alerts"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNewsAlerts",
         "name": "contoso.com",
         "type": "Microsoft.Communication/EmailServices/Domains",
-        "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNewsAlerts",
         "properties": {
           "dataLocation": "United States",
-          "displayName": "Contoso News Alerts",
-          "username": "contosoNewsAlerts"
+          "username": "contosoNewsAlerts",
+          "displayName": "Contoso News Alerts"
         }
       }
     },
@@ -46,7 +46,5 @@
         }
       }
     }
-  },
-  "operationId": "SenderUsernames_CreateOrUpdate",
-  "title": "Create or update SenderUsernames resource"
+  }
 }

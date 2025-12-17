@@ -1,21 +1,19 @@
 {
   "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
     "api-version": "2025-05-01",
     "nameAvailabilityParameters": {
-      "name": "MyCommunicationService",
-      "type": "Microsoft.Communication/CommunicationServices"
-    },
-    "subscriptionId": "11112222-3333-4444-5555-666677778888"
+      "type": "Microsoft.Communication/CommunicationServices",
+      "name": "MyCommunicationService"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "message": "Requested name is available for the requested type",
         "nameAvailable": true,
-        "reason": "NameAvailable"
+        "reason": "NameAvailable",
+        "message": "Requested name is available for the requested type"
       }
     }
-  },
-  "operationId": "CommunicationServices_CheckNameAvailability",
-  "title": "Check name availability available"
+  }
 }
