@@ -38,4 +38,7 @@ enum Versions {
 
   @doc("The 2026-02-06 version of the Azure.Storage.Blob service.")
   v2026_02_06: "2026-02-06",
+
+  @doc("The 2026-04-06 version of the Azure.Storage.Blob service.")
+  v2026_04_06: "2026-04-06",
 }
