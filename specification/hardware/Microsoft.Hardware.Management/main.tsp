@@ -12,9 +12,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{
-  title: "Hardware Resource Provider",
-})
+@service(#{ title: "Hardware Resource Provider" })
 @versioned(Versions)
 
 //@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
