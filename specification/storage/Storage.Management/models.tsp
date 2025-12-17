@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 
@@ -53,6 +54,26 @@ model Resource {
 model GeoPriorityReplicationStatus {
   /** Indicates whether Blob Geo Priority Replication is enabled for the storage account. */
   isBlobEnabled?: boolean;
+}
+
+/**
+ * The data collaboration policy properties for the storage account.
+ */
+model DataCollaborationPolicyProperties {
+  /**
+   * Indicates whether storage connectors are allowed to be created or managed on the storage account.
+   */
+  allowStorageConnectors?: boolean;
+
+  /**
+   * Indicates whether data shares are allowed to be created or managed on the storage account.
+   */
+  allowStorageDataShares?: boolean;
+
+  /**
+   * Indicates whether cross-entra tenant data sharing is allowed on the storage account.
+   */
+  allowCrossTenantDataSharing?: boolean;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1539,6 +1560,12 @@ model ContainerProperties {
    * Enable NFSv3 all squash on blob container.
    */
   enableNfsV3AllSquash?: boolean;
+
+  /**
+   * The storage connector properties on the container
+   */
+  @added(Versions.v2025_08_01)
+  storageConnector: ContainerStorageConnectorProperties;
 }
 
 /**
@@ -1740,6 +1767,21 @@ model ImmutableStorageWithVersioning {
    */
   @visibility(Lifecycle.Read)
   migrationState?: MigrationState;
+}
+
+/**
+ * The storage connector properties on the container
+ */
+model ContainerStorageConnectorProperties {
+  /**
+   * The name of the storage connector associated with the container.
+   */
+  connectorName: string;
+
+  /**
+   * The ID of the storage connector associated with the container.
+   */
+  connectorUniqueId: string;
 }
 
 @minLength(3)
@@ -3105,6 +3147,12 @@ model StorageAccountPropertiesCreateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**
@@ -3760,6 +3808,12 @@ model StorageAccountProperties {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**
@@ -4301,6 +4355,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * The data collaboration policy properties for the storage account.
+   */
+  @added(Versions.v2025_08_01)
+  dataCollaborationPolicyProperties?: DataCollaborationPolicyProperties;
 }
 
 /**

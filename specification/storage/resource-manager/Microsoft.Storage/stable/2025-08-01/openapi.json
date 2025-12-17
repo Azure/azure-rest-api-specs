@@ -8670,8 +8670,33 @@
         "enableNfsV3AllSquash": {
           "type": "boolean",
           "description": "Enable NFSv3 all squash on blob container."
+        },
+        "storageConnector": {
+          "$ref": "#/definitions/ContainerStorageConnectorProperties",
+          "description": "The storage connector properties on the container"
         }
-      }
+      },
+      "required": [
+        "storageConnector"
+      ]
+    },
+    "ContainerStorageConnectorProperties": {
+      "type": "object",
+      "description": "The storage connector properties on the container",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "The name of the storage connector associated with the container."
+        },
+        "connectorUniqueId": {
+          "type": "string",
+          "description": "The ID of the storage connector associated with the container."
+        }
+      },
+      "required": [
+        "connectorName",
+        "connectorUniqueId"
+      ]
     },
     "CorsRule": {
       "type": "object",
@@ -8749,6 +8774,24 @@
       "required": [
         "name"
       ]
+    },
+    "DataCollaborationPolicyProperties": {
+      "type": "object",
+      "description": "The data collaboration policy properties for the storage account.",
+      "properties": {
+        "allowStorageConnectors": {
+          "type": "boolean",
+          "description": "Indicates whether storage connectors are allowed to be created or managed on the storage account."
+        },
+        "allowStorageDataShares": {
+          "type": "boolean",
+          "description": "Indicates whether data shares are allowed to be created or managed on the storage account."
+        },
+        "allowCrossTenantDataSharing": {
+          "type": "boolean",
+          "description": "Indicates whether cross-entra tenant data sharing is allowed on the storage account."
+        }
+      }
     },
     "DataShare": {
       "type": "object",
@@ -14231,6 +14274,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/DataCollaborationPolicyProperties",
+          "description": "The data collaboration policy properties for the storage account."
         }
       }
     },
@@ -14351,6 +14398,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/DataCollaborationPolicyProperties",
+          "description": "The data collaboration policy properties for the storage account."
         }
       }
     },
@@ -14461,6 +14512,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "dataCollaborationPolicyProperties": {
+          "$ref": "#/definitions/DataCollaborationPolicyProperties",
+          "description": "The data collaboration policy properties for the storage account."
         }
       }
     },
