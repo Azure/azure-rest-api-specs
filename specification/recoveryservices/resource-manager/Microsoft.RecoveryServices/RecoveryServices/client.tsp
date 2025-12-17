@@ -147,6 +147,7 @@ namespace Microsoft.RecoveryServices;
 @@scope(Operations.list, "!csharp");
 @@scope(getOperationStatus, "!csharp");
 @@scope(getOperationResult, "!csharp");
+@@scope(DeletedVaults.getOperationStatus, "!csharp");
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
 @@clientName(AssociatedIdentity,
   "RecoveryServicesAssociatedIdentity",
@@ -167,6 +168,11 @@ namespace Microsoft.RecoveryServices;
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
 @@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
+@@clientName(DeletedVaultUndeleteInput, "DeletedVaultUndeleteContent", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
 
