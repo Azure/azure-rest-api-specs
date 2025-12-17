@@ -44,6 +44,25 @@ model BatchAccount
   identity?: BatchAccountIdentity;
 }
 
+alias BatchAccountOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/. */
+    @path
+    @minLength(3)
+    @maxLength(24)
+    @pattern("^[a-z0-9]+$")
+    @segment("batchAccounts")
+    @key
+    accountName: string;
+  }
+>;
+
 @armResourceOperations
 interface BatchAccounts {
   /**
@@ -55,12 +74,12 @@ interface BatchAccounts {
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  create is BatchAccountOps.CreateOrUpdateAsync<
     BatchAccount,
     Request = BatchAccountCreateParameters,
     Response = ArmResourceUpdatedResponse<BatchAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchAccount> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+    OverrideErrorType = CloudError
   >;
 
   /**
