@@ -8,7 +8,6 @@ using Azure.ResourceManager;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-
 @@clientName(HelmInstallOptions.wait, "waitOption", "java");
 @@clientName(HelmUpgradeOptions.wait, "waitOption", "java");
 
