@@ -166,6 +166,8 @@ namespace Microsoft.RecoveryServices;
 );
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
+@@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
+
 @@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
 
 // Java SDK backward compatibility fixes

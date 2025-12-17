@@ -84,11 +84,12 @@ interface DeletedVaults {
 
   /**
    * Get the operation status of a deleted vault.
+   * NOTE: Commenting out this method has resolved the errors occurring during the new code generation process.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @get
-  getOperationStatus is DeletedVaultsOperationStatus.Read<
-    DeletedVault,
-    Response = ArmResponse<OperationResource>
-  >;
+  // #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  // @get
+  // getOperationStatus is DeletedVaultsOperationStatus.Read<
+  //   DeletedVault,
+  //   Response = ArmResponse<OperationResource>
+  // >;
 }
