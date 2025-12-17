@@ -27,9 +27,10 @@ function isPullRequestChanges(value) {
   /** @type {Record<string, unknown>} */
   const obj = /** @type {Record<string, unknown>} */ (value);
   return (
-    typeof obj.documentation === "boolean" &&
-    typeof obj.examples === "boolean" &&
-    typeof obj.functional === "boolean" &&
+    typeof obj.rmDocumentation === "boolean" &&
+    typeof obj.rmExamples === "boolean" &&
+    typeof obj.rmFunctional === "boolean" &&
+    typeof obj.rmOther === "boolean" &&
     typeof obj.other === "boolean"
   );
 }
@@ -79,9 +80,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: false,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
       other: false,
     });
   });
@@ -106,9 +108,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: false,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
       other: true,
     });
   });
@@ -132,10 +135,11 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: false,
-      other: false, // No RM files at all, so returns empty
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
+      other: true, // Non-RM changes block ARM auto-signoff even when there are no RM changes
     });
   });
 
@@ -156,9 +160,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true, // New spec files are functional
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true, // New spec files are functional
+      rmOther: false,
       other: false,
     });
   });
@@ -180,9 +185,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true, // Deleted spec files are functional
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true, // Deleted spec files are functional
+      rmOther: false,
       other: false,
     });
   });
@@ -205,9 +211,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true, // Renamed spec files are functional
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true, // Renamed spec files are functional
+      rmOther: false,
       other: false,
     });
   });
@@ -230,9 +237,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: true,
-      examples: false,
-      functional: false,
+      rmDocumentation: true,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
       other: false,
     });
   });
@@ -255,9 +263,36 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: true,
-      functional: false,
+      rmDocumentation: false,
+      rmExamples: true,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("marks rmOther when other resource-manager files are changed", async () => {
+    const rmOtherFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/readme.md",
+      "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/notes.txt",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: rmOtherFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges({ core, context });
+    const parsed = parsePullRequestChanges(result);
+
+    expect(parsed).toEqual({
+      rmDocumentation: true,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: true,
       other: false,
     });
   });
@@ -304,9 +339,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: false,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
       other: false,
     });
 
@@ -354,9 +390,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
       other: false,
     });
   });
@@ -405,9 +442,10 @@ describe("checkTrivialChanges", () => {
 
     // Should detect functional changes, so overall not trivial
     expect(parsed).toEqual({
-      documentation: true,
-      examples: true,
-      functional: true,
+      rmDocumentation: true,
+      rmExamples: true,
+      rmFunctional: true,
+      rmOther: false,
       other: false,
     });
   });
@@ -441,9 +479,10 @@ describe("checkTrivialChanges", () => {
 
     // Should treat JSON parsing errors as non-trivial changes
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
       other: false,
     });
   });
@@ -468,9 +507,10 @@ describe("checkTrivialChanges", () => {
 
     // Should treat git errors as non-trivial changes
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
       other: false,
     });
   });
@@ -533,9 +573,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: false,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: false,
+      rmOther: false,
       other: false,
     });
   });
@@ -593,9 +634,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: false,
-      examples: false,
-      functional: true,
+      rmDocumentation: false,
+      rmExamples: false,
+      rmFunctional: true,
+      rmOther: false,
       other: false,
     });
   });
@@ -619,9 +661,10 @@ describe("checkTrivialChanges", () => {
     const parsed = parsePullRequestChanges(result);
 
     expect(parsed).toEqual({
-      documentation: true,
-      examples: true,
-      functional: false,
+      rmDocumentation: true,
+      rmExamples: true,
+      rmFunctional: false,
+      rmOther: false,
       other: false,
     });
   });

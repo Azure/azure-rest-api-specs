@@ -17,9 +17,10 @@ function isPullRequestChanges(value) {
   const obj = /** @type {Record<string, unknown>} */ (value);
 
   return (
-    typeof obj.documentation === "boolean" &&
-    typeof obj.examples === "boolean" &&
-    typeof obj.functional === "boolean" &&
+    typeof obj.rmDocumentation === "boolean" &&
+    typeof obj.rmExamples === "boolean" &&
+    typeof obj.rmFunctional === "boolean" &&
+    typeof obj.rmOther === "boolean" &&
     typeof obj.other === "boolean"
   );
 }
@@ -42,14 +43,14 @@ export default async function armAutoSignoffCode(args) {
 
   // Run incremental TypeSpec check
   core.startGroup("Checking for incremental TypeSpec changes");
-  const incrementalTypeSpecResult = await incrementalTypeSpec({ core });
+  const incrementalTypeSpecResult = await incrementalTypeSpec(args);
   core.info(`Incremental TypeSpec result: ${incrementalTypeSpecResult}`);
   core.endGroup();
 
   // Run trivial changes check
   core.startGroup("Checking for trivial changes");
   const trivialChangesResultString = await checkTrivialChanges({ core, context });
-  const parsedTrivialChanges = /** @type {unknown} */ (JSON.parse(trivialChangesResultString));
+  /** @type {unknown} */ const parsedTrivialChanges =  (JSON.parse(trivialChangesResultString));
   if (!isPullRequestChanges(parsedTrivialChanges)) {
     throw new Error("Unexpected trivial changes result shape");
   }
@@ -69,7 +70,6 @@ export default async function armAutoSignoffCode(args) {
   };
 
   core.info(`Combined result: ${JSON.stringify(combined, null, 2)}`);
-  core.info(`Qualifies for auto sign-off: ${combined.qualifiesForAutoSignoff}`);
 
   // Return key-value format: incrementalTypeSpec-true,isTrivial-false,qualifies-true
   return `incrementalTypeSpec-${incrementalTypeSpecResult},isTrivial-${isTrivial},qualifies-${qualifiesForAutoSignoff}`;

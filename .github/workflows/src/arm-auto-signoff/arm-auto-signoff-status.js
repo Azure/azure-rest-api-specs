@@ -10,8 +10,6 @@ const LABEL_ARM_AUTO_SIGNED_OFF = "ARMAutoSignedOff";
 const LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP = "ARMAutoSignedOff-IncrementalTSP";
 const LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST = "ARMAutoSignedOff-Trivial-Test";
 
-const ENV_TRIVIAL_DRYRUN = "ARM_AUTO_SIGNOFF_TRIVIAL_DRYRUN";
-
 /**
  * The workflow contract is intentionally a fixed set of keys.
  * @typedef {{
@@ -53,18 +51,6 @@ function createNoneLabelActions() {
  */
 
 /** @typedef {{ name: string }} Artifact */
-
-/**
- * @param {typeof import("@actions/core")} core
- * @returns {boolean}
- */
-function isTrivialDryRunEnabled(core) {
-  const raw = process.env[ENV_TRIVIAL_DRYRUN];
-  const value = (raw ?? "").trim().toLowerCase();
-  const enabled = value === "true";
-  core.info(`${ENV_TRIVIAL_DRYRUN}=${raw ?? ""} (enabled=${enabled})`);
-  return enabled;
-}
 
 /**
  * @param {string} artifactName
@@ -133,8 +119,6 @@ export default async function getLabelAction({ github, context, core }) {
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
-  const trivialDryRun = isTrivialDryRunEnabled(core);
-
   // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
   // permissions: { issues: read, pull-requests: read }
   const labels = /** @type {IssueLabel[]} */ (
@@ -193,7 +177,6 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       return noneResult;
     }
 
-    // Only remove ARMSignedOff if it was auto-managed.
     return {
       ...noneResult,
       labelActions: {
@@ -277,14 +260,16 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     core.info("All requirements met for auto-signoff");
 
     const autoIncremental = armAnalysisResult.incrementalTypeSpec;
-    const autoTrivialTest = trivialDryRun && armAnalysisResult.isTrivial;
+    const autoTrivialTest = armAnalysisResult.isTrivial;
 
-    // Trivial auto-signoff is supported ONLY in dryrun/test mode.
-    // Outside of dryrun, trivial results are ignored.
-    if (!autoIncremental && !autoTrivialTest) {
-      return removeAutoSignedOffLabelsIfPresent();
-    }
-
+    // Add ARMAutoSignOff label only when the PR is identified as an incremental typespec
+    // As the trivial changes sign-off is being released in test mode
+    const autoSignOffAction = autoIncremental
+      ? LabelAction.Add
+      : hasAutoSignedOffLabels
+        ? LabelAction.Remove
+        : LabelAction.None;
+    const autoIncrementalAction = autoIncremental ? LabelAction.Add : LabelAction.Remove;
     const testTrivialAction = autoTrivialTest ? LabelAction.Add : LabelAction.Remove;
 
     // Keep labels in sync with current analysis results.
@@ -293,14 +278,8 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       ...baseResult,
       labelActions: {
         ...labelActions,
-        [LABEL_ARM_SIGNED_OFF]: autoIncremental
-          ? LabelAction.Add
-          : hasAutoSignedOffLabels
-            ? LabelAction.Remove
-            : LabelAction.None,
-        [LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP]: autoIncremental
-          ? LabelAction.Add
-          : LabelAction.Remove,
+        [LABEL_ARM_SIGNED_OFF]: autoSignOffAction,
+        [LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP]: autoIncrementalAction,
         [LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST]: testTrivialAction,
       },
     };
@@ -412,10 +391,10 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
 
     const reason = [
       incrementalTypeSpec ? LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP : null,
-      isTrivial ? "trivial" : null,
+      isTrivial ? LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST : null,
     ]
-      .filter(Boolean)
-      .join(", ");
+    .filter(Boolean)
+    .join(", ");
 
     core.info(`PR qualifies for auto sign-off: ${reason}`);
     return {

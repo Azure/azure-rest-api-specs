@@ -36,11 +36,6 @@ jobs:
   arm-auto-signoff-status:
     name: ARM Auto SignOff - Set Status
 
-    env:
-      # When enabled, trivial auto-signoff is routed to the "-Test" label and
-      # ARMSignedOff is only auto-managed for IncrementalTSP.
-      ARM_AUTO_SIGNOFF_TRIVIAL_DRYRUN: "true"
-
     # workflow_run - already filtered by triggers above
     # pull_request_target:labeled - filter to only the input and output labels
     if: |

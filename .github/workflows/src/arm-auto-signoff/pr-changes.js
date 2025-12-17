@@ -5,10 +5,11 @@
  * An empty PR would have all properties set to false.
  *
  * @typedef {Object} PullRequestChanges
- * @property {boolean} documentation - True if PR contains documentation (.md) file changes
- * @property {boolean} examples - True if PR contains example file changes (/examples/*.json)
- * @property {boolean} functional - True if PR contains functional spec changes (API-impacting)
- * @property {boolean} other - True if PR contains other file types (config, scripts, etc.)
+ * @property {boolean} rmDocumentation - True if PR contains resource-manager scoped documentation (.md) changes
+ * @property {boolean} rmExamples - True if PR contains resource-manager scoped example changes (/examples/*.json)
+ * @property {boolean} rmFunctional - True if PR contains resource-manager scoped functional spec changes (API-impacting)
+ * @property {boolean} rmOther - True if PR contains other resource-manager scoped changes (non-trivial)
+ * @property {boolean} other - True if PR contains changes outside resource-manager (blocks ARM auto-signoff)
  */
 
 /**
@@ -17,9 +18,10 @@
  */
 export function createEmptyPullRequestChanges() {
   return {
-    documentation: false,
-    examples: false,
-    functional: false,
+    rmDocumentation: false,
+    rmExamples: false,
+    rmFunctional: false,
+    rmOther: false,
     other: false,
   };
 }
@@ -39,8 +41,9 @@ export function createEmptyPullRequestChanges() {
 export function isTrivialPullRequest(changes) {
   // Trivial if no functional changes and no other files
   // Must have at least one of: documentation, examples
-  const hasNoBlockingChanges = !changes.functional && !changes.other;
-  const hasTrivialChanges = changes.documentation || changes.examples;
+  const hasNoBlockingChanges =
+    !changes.rmFunctional && !changes.rmOther && !changes.other;
+  const hasTrivialChanges = changes.rmDocumentation || changes.rmExamples;
 
   return hasNoBlockingChanges && hasTrivialChanges;
 }
@@ -51,7 +54,13 @@ export function isTrivialPullRequest(changes) {
  * @returns {boolean} - True if only documentation changed
  */
 export function isDocumentationOnly(changes) {
-  return changes.documentation && !changes.examples && !changes.functional && !changes.other;
+  return (
+    changes.rmDocumentation &&
+    !changes.rmExamples &&
+    !changes.rmFunctional &&
+    !changes.rmOther &&
+    !changes.other
+  );
 }
 
 /**
@@ -60,5 +69,11 @@ export function isDocumentationOnly(changes) {
  * @returns {boolean} - True if only examples changed
  */
 export function isExamplesOnly(changes) {
-  return !changes.documentation && changes.examples && !changes.functional && !changes.other;
+  return (
+    !changes.rmDocumentation &&
+    changes.rmExamples &&
+    !changes.rmFunctional &&
+    !changes.rmOther &&
+    !changes.other
+  );
 }

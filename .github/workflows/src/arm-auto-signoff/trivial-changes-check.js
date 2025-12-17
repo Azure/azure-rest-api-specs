@@ -79,11 +79,10 @@ function formatForLog(value) {
 
 /**
  * Analyzes a PR to determine what types of changes it contains
- * @param {Pick<import("@actions/github-script").AsyncFunctionArguments, "core"> & Partial<Pick<import("@actions/github-script").AsyncFunctionArguments, "context">>} args
+ * @param {{ core: typeof import("@actions/core"), context?: import("@actions/github-script").AsyncFunctionArguments["context"] }} args
  * @returns {Promise<string>} JSON string with categorized change types
  */
-export default async function checkTrivialChanges(args) {
-  const { core } = args;
+export default async function checkTrivialChanges({ core }) {
   // Create result object once at the top
   const changes = createEmptyPullRequestChanges();
 
@@ -110,14 +109,6 @@ export default async function checkTrivialChanges(args) {
     ),
   };
 
-  // Early exit if no resource-manager changes
-  if (changedRmFiles.length === 0) {
-    core.info("No resource-manager changes detected in PR");
-    core.info(`PR Changes: ${JSON.stringify(changes)}`);
-    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
-    return JSON.stringify(changes);
-  }
-
   // Check if PR contains non-resource-manager changes
   const hasNonRmChanges = changedFiles.some((file) => !resourceManager(file));
   if (hasNonRmChanges) {
@@ -128,7 +119,17 @@ export default async function checkTrivialChanges(args) {
     core.info(
       `Non-RM files: ${nonRmFiles.slice(0, 5).join(", ")}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ""}`,
     );
+    // This workflow reports resource-manager scoped change categories.
+    // Mark as non-trivial/blocked because the PR touches files outside resource-manager.
     changes.other = true;
+    core.info(`PR Changes: ${JSON.stringify(changes)}`);
+    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    return JSON.stringify(changes);
+  }
+
+  // Early exit if no resource-manager changes
+  if (changedRmFiles.length === 0) {
+    core.info("No resource-manager changes detected in PR");
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
     return JSON.stringify(changes);
@@ -142,7 +143,7 @@ export default async function checkTrivialChanges(args) {
   if (hasNonTrivialFileOperations) {
     core.info("Non-trivial file operations detected (new spec files, deletions, or renames)");
     // These are functional changes by policy
-    changes.functional = true;
+    changes.rmFunctional = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
     return JSON.stringify(changes);
@@ -215,15 +216,15 @@ async function analyzePullRequestChanges(changedFiles, git, core, changes) {
 
   // Set flags for file types present
   if (documentationFiles.length > 0) {
-    changes.documentation = true;
+    changes.rmDocumentation = true;
   }
 
   if (exampleFiles.length > 0) {
-    changes.examples = true;
+    changes.rmExamples = true;
   }
 
   if (otherFiles.length > 0) {
-    changes.other = true;
+    changes.rmOther = true;
   }
 
   // Analyze spec files to determine if functional or non-functional
@@ -253,7 +254,7 @@ async function analyzePullRequestChanges(changedFiles, git, core, changes) {
       }
     }
 
-    changes.functional = hasFunctionalChanges;
+    changes.rmFunctional = hasFunctionalChanges;
   }
 }
 
