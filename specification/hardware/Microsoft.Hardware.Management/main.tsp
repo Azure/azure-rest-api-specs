@@ -250,13 +250,13 @@ interface Orders {
 @doc("Product-Id type")
 union ProductIdType {
   @doc("UPN in Big-Catalog")
-  UPN: "upn",
+  UPN: "UPN",
 
   @doc("Product, SKU, Availability in Big-Catalog")
-  PSA: "psa",
+  PSA: "PSA",
 
   @doc("MS product identifier (3x5 SKU)")
-  FulfillmentProductId: "fulfillmentProductId",
+  FulfillmentProductId: "FulfillmentProductId",
 
   string,
 }
@@ -264,22 +264,22 @@ union ProductIdType {
 @doc("Shipping method")
 union ShippingMethod {
   @doc("Ground shipping")
-  Ground: "ground",
+  Ground: "Ground",
 
   @doc("Two day shipping")
-  TwoDay: "twoDay",
+  TwoDay: "TwoDay",
 
   @doc("Three day shipping")
-  ThreeDay: "threeDay",
+  ThreeDay: "ThreeDay",
 
   @doc("Sustainable shipping")
-  Sustainable: "sustainable",
+  Sustainable: "Sustainable",
 
   @doc("Street date shipping")
-  StreetDate: "streetDate",
+  StreetDate: "StreetDate",
 
   @doc("APO FPO shipping")
-  ApoFpo: "apoFpo",
+  ApoFpo: "ApoFpo",
 
   string,
 }
@@ -287,10 +287,10 @@ union ShippingMethod {
 @doc("Ship-To-Id Type")
 union ShipToIdType {
   @doc("Modern Commerce API business location")
-  BusinessLocation: "businessLocation",
+  BusinessLocation: "BusinessLocation",
 
   @doc("Partner External-Id")
-  ExternalId: "externalId",
+  ExternalId: "ExternalId",
 
   string,
 }
@@ -298,7 +298,7 @@ union ShipToIdType {
 @doc("Fee type")
 union FeeType {
   @doc("Recycling fee")
-  Recycling: "recycling",
+  Recycling: "Recycling",
 
   string,
 }
@@ -306,10 +306,10 @@ union FeeType {
 @doc("Tax Type")
 union TaxType {
   @doc("Tax on unit amount for product cost")
-  Unit: "unit",
+  Unit: "Unit",
 
   @doc("Tax on shipping cost")
-  Shipping: "shipping",
+  Shipping: "Shipping",
 
   string,
 }
@@ -317,28 +317,28 @@ union TaxType {
 @doc("Order Status")
 union OrderStatus {
   @doc("Order is pending")
-  Pending: "pending",
+  Pending: "Pending",
 
   @doc("Order is created")
-  Created: "created",
+  Created: "Created",
 
   @doc("Order is confirmed")
-  Confirmed: "confirmed",
+  Confirmed: "Confirmed",
 
   @doc("Order is PartiallyConfirmed")
-  PartiallyConfirmed: "partiallyConfirmed",
+  PartiallyConfirmed: "PartiallyConfirmed",
 
   @doc("Order is partially shipped")
-  PartiallyShipped: "partiallyShipped",
+  PartiallyShipped: "PartiallyShipped",
 
   @doc("Order is shipped")
-  Shipped: "shipped",
+  Shipped: "Shipped",
 
   @doc("Order is returned")
-  Returned: "returned",
+  Returned: "Returned",
 
   @doc("Order is cancelled")
-  Cancelled: "cancelled",
+  Cancelled: "Cancelled",
 
   string,
 }
@@ -346,22 +346,22 @@ union OrderStatus {
 @doc("Order Line Status")
 union OrderLineStatus {
   @doc("Order is pending")
-  Pending: "pending",
+  Pending: "Pending",
 
   @doc("Order is in-progress")
-  InProgress: "inProgress",
+  InProgress: "InProgress",
 
   @doc("Order is confirmed")
-  Confirmed: "confirmed",
+  Confirmed: "Confirmed",
 
   @doc("Order is fulfilled")
-  Fulfilled: "fulfilled",
+  Fulfilled: "Fulfilled",
 
   @doc("Order is cancelled")
-  Cancelled: "cancelled",
+  Cancelled: "Cancelled",
 
   @doc("Order is returned")
-  Returned: "returned",
+  Returned: "Returned",
 
   string,
 }

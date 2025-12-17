@@ -3,7 +3,7 @@
   "operationId": "Orders_ListBySubscription",
   "parameters": {
     "api-version": "2025-12-04",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -14,44 +14,44 @@
             "name": "order1",
             "location": "eus2",
             "properties": {
-              "provisioningState": "pending",
+              "provisioningState": "Pending",
               "customerOrder": {
                 "id": "Customer_ORDER_Number",
                 "createdDateTime": "2022-06-06T17:18:21.373+00:00"
               },
-              "status": "pending",
+              "status": "Pending",
               "orderLines": [
                 {
                   "id": 1,
                   "createdDateTime": "2022-06-06T17:18:21.373+00:00",
-                  "status": "pending",
+                  "status": "Pending",
                   "quantity": {
                     "pending": 10
                   },
                   "product": {
-                    "type": "upn",
+                    "type": "UPN",
                     "id": "1234567890"
                   },
                   "price": {
                     "unitAmount": 636.99,
                     "taxes": [
                       {
-                        "type": "unit",
+                        "type": "Unit",
                         "amount": 63.699
                       }
                     ],
                     "fees": [
                       {
-                        "type": "recycling",
+                        "type": "Recycling",
                         "amount": 6
                       }
                     ]
                   },
                   "shipTo": {
-                    "type": "businessLocation",
+                    "type": "BusinessLocation",
                     "id": "054321456"
                   },
-                  "shippingMethod": "ground",
+                  "shippingMethod": "Ground",
                   "requestedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
                   "estimatedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
                   "estimatedShippedDateTime": "2022-06-27T17:18:21.373+00:00"
