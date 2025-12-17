@@ -150,6 +150,176 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+
+  - code: PutResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"].put
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: PutResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].put
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: hci.json
+    where: $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}"].put
+    reason: already working without the properties section, adding it will break polymorphism
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: hci.json
+    where: $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}"].put
+    reason: already working without the properties section, adding it will break polymorphism
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"]
+    reason: ClusterName, arcSettingName and extensionName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade"]
+    reason: ClusterName, arcSettingName and extensionName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/generatePassword"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/reconcile"]
+    reason: ClusterName and arcSettingName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/changeRing"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/configureRemoteSupport"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/createClusterIdentity"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/extendSoftwareAssuranceBenefit"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/offers"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers"]
+    reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}"]
+    reason: ClusterName and publisherName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers"]
+    reason: ClusterName and publisherName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}"]
+    reason: ClusterName and publisherName didn't have a pattern initially, adding the constraint now will cause a breaking change
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"].delete
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].delete
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"].delete
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: ConsistentPatchProperties
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].patch
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: LroLocationHeader
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].delete
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: LroLocationHeader
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"].patch
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: LroLocationHeader
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade"].post
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: PostResponseCodes
+    from: hci.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess"].post
+    reason: already used in GA api version, fixing it will cause breaking change
     
   - code: ConsistentPatchProperties
     reason: already used in GA api version, fixing it will cause breaking change
