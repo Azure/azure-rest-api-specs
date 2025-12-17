@@ -1,7 +1,7 @@
 # Managed centrally by the Azure SDK Team
 # Remove suppressions as specs are fixed
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   rules: [Compile]
   sub-rules: [ExtraSwagger]
   reason: Extra swaggers left behind when versions were removed from *.tsp files
@@ -55,7 +55,7 @@
     - splitio/resource-manager/SplitIO.Experimentation/preview/2024-03-01-preview/splitio.json
     - translation/data-plane/DocumentTranslation/preview/2023-11-01-preview/openapi.json
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until we know the awsconnector folder uses these settings
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -66,7 +66,7 @@
   paths:
     - awsconnector/**/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -79,7 +79,7 @@
   paths:
     - ai/Azure.AI.Agents/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -87,7 +87,7 @@
   paths:
     - ai/Azure.AI.Projects/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -96,7 +96,7 @@
   paths:
     - ai/ContentUnderstanding/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -107,7 +107,7 @@
     - ai/HealthInsights/HealthInsights.RadiologyInsights/tspconfig.yaml
     - ai/ImageAnalysis/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -118,7 +118,7 @@
     - ai/HealthInsights/HealthInsights.OpenAPI/tspconfig.yaml
     - ai/ModelInference/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -130,7 +130,7 @@
   paths:
     - ai/OpenAI.Assistants/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -142,7 +142,7 @@
   paths:
     - apicenter/ApiCenter.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -152,7 +152,7 @@
   paths:
     - app/data-plane/DynamicSessions/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -160,7 +160,7 @@
   paths:
     - appcomplianceautomation/AppComplianceAutomation.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -168,7 +168,7 @@
   paths:
     - appconfiguration/data-plane/AppConfiguration/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -176,7 +176,7 @@
   paths:
     - applicationinsights/ApplicationInsights.LiveMetrics/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -188,7 +188,7 @@
   paths:
     - azuredatatransfer/AzureDataTransfer.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -200,19 +200,7 @@
   paths:
     - azurelargeinstance/resource-manager/Microsoft.AzureLargeInstance/AzureLargeInstance/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-go.*
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
-  paths:
-    - azurestackhci/AzureStackHCI.StackHCIVM.Management/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -224,7 +212,7 @@
   paths:
     - azurestackhci/Operations.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -234,7 +222,7 @@
   paths:
     - batch/Azure.Batch/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -243,7 +231,7 @@
   paths:
     - cognitiveservices/AnomalyDetector/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -251,7 +239,7 @@
   paths:
     - cognitiveservices/ContentSafety/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -268,7 +256,7 @@
     - cognitiveservices/Language.QuestionAnswering-authoring/tspconfig.yaml
     - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -280,7 +268,7 @@
   paths:
     - cognitiveservices/OpenAI.Inference/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -289,7 +277,7 @@
     - communication/Communication.JobRouter/tspconfig.yaml
     - communication/Communication.Messages/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -301,7 +289,7 @@
   paths:
     - communitytraining/Community.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -309,7 +297,7 @@
   paths:
     - confidentialledger/Microsoft.CodeTransparency/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -320,35 +308,7 @@
   paths:
     - confidentialledger/Microsoft.ManagedCcf/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    # Casing "Confidentialledger" is not a typo.  This needs to match until the folder name is corrected in the repo.
-    - confidentialledger/Confidentialledger.Management/tspconfig.yaml
-
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.experimental-extensible-enums
-    - options.@azure-tools/typespec-ts.package-details.name
-  paths:
-    - connectedcache/ConnectedCache.Management/tspconfig.yaml
-
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.*
-  paths:
-    - containerservice/resource-manager/Microsoft.ContainerService/fleet/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -360,15 +320,7 @@
   paths:
     - containerstorage/resource-manager/Microsoft.ContainerStorage/ContainerStorage/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.namespace
-  paths:
-    - dell/Dell.Storage.Management/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -380,7 +332,7 @@
   paths:
     - desktopvirtualization/resource-manager/Microsoft.DesktopVirtualization/DesktopVirtualization/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -388,25 +340,16 @@
   paths:
     - devcenter/DevCenter/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.service-name
-  paths:
-    - edge/Microsoft.Edge.Management/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-csharp.*
     - options.@azure-tools/typespec-ts.*
   paths:
-    - edge/Microsoft.Edge.ConfigurationManager.Management/tspconfig.yaml
     - edge/Microsoft.Edge.Configurations.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -418,15 +361,7 @@
     - eventgrid/Azure.Messaging.EventGrid/tspconfig.yaml
     - eventgrid/Azure.Messaging.EventGrid.SystemEvents/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.service-name
-  paths:
-    - fabric/resource-manager/Microsoft.Fabric/Fabric/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -438,7 +373,7 @@
   paths:
     - github-network/GitHub.Network.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -450,7 +385,7 @@
   paths:
     - healthdataaiservices/HealthDataAIServices.DeidServices/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -462,7 +397,7 @@
   paths:
     - iotoperationsdataprocessor/IoTOperationsDataProcessor.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -474,7 +409,7 @@
   paths:
     - iotoperationsmq/IoTOperationsMQ.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -486,7 +421,7 @@
   paths:
     - iotoperationsorchestrator/IoTOperationsOrchestrator.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -499,7 +434,7 @@
   paths:
     - keyvault/Security.KeyVault.Administration/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -511,7 +446,7 @@
     - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
     - keyvault/Security.KeyVault.Settings/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -526,7 +461,7 @@
     - keyvault/Security.KeyVault.Keys/tspconfig.yaml
     - keyvault/Security.KeyVault.Secrets/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -537,7 +472,7 @@
   paths:
     - keyvault/Security.KeyVault.SecurityDomain/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -545,15 +480,7 @@
   paths:
     - liftrastronomer/Astronomer.Astro.Management/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-  paths:
-    - liftrqumulo/Qumulo.Storage.Management/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -561,7 +488,7 @@
   paths:
     - loadtestservice/LoadTestService/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -572,7 +499,7 @@
   paths:
     - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -580,7 +507,7 @@
   paths:
     - machinelearningservices/AzureAI.Assets/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -590,11 +517,10 @@
   paths:
     - marketplacecatalog/data-plane/Products/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
@@ -602,23 +528,7 @@
   paths:
     - manufacturingplatform/Manufacturingplatform.Management/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.namespace
-  paths:
-    - migrate/AssessmentProjects.Management/AKSAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/AvsAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/BusinessCases.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/Collectors.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/SqlAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/WebAppAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/WebAppCompoundAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/HeterogeneousAssessments.Management/tspconfig.yaml
-    - migrate/AssessmentProjects.Management/MachineAssessments.Management/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -626,7 +536,7 @@
   paths:
     - monitor/Microsoft.Monitor.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -639,7 +549,7 @@
     - monitor/Microsoft.Monitor.Operations.Management/tspconfig.yaml
     - monitor/Microsoft.Monitor.PipelineGroups.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -649,7 +559,7 @@
   paths:
     - onlineexperimentation/Azure.Analytics.OnlineExperimentation/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -658,7 +568,7 @@
   paths:
     - orbital/Microsoft.PlanetaryComputer/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -668,7 +578,7 @@
   paths:
     - playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -681,7 +591,7 @@
     - portal/Dashboard.Management/tspconfig.yaml
     - portal/TenantConfiguration.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -693,7 +603,7 @@
   paths:
     - portalservices/Extension.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -701,7 +611,7 @@
   paths:
     - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -709,7 +619,7 @@
   paths:
     - purview/data-plane/datamap/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -721,7 +631,7 @@
   paths:
     - purviewpolicy/resource-manager/Microsoft.Purview/PurviewPolicy/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -733,7 +643,7 @@
   paths:
     - quantum/Microsoft.Quantum.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -744,7 +654,7 @@
   paths:
     - quantum/Quantum.Workspace/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -752,15 +662,7 @@
   paths:
     - relationships/Relationships.Management/tspconfig.yaml
 
-- tool: SpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.namespace
-  paths:
-    - resources/resource-manager/Microsoft.Resources/bicep/tspconfig.yaml
-
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -769,7 +671,7 @@
   paths:
     - riskiq/Easm/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -780,16 +682,15 @@
   paths:
     - schemaregistry/data-plane/SchemaRegistry/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-java.*
   paths:
     - scvmm/ScVmm.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -797,7 +698,7 @@
   paths:
     - servicebus/ServiceBus.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -809,7 +710,7 @@
   paths:
     - sovereign/Sovereign.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -817,7 +718,7 @@
   paths:
     - sphere/Sphere.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -829,7 +730,7 @@
   paths:
     - splitio/SplitIO.Experimentation.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -839,7 +740,7 @@
   paths:
     - translation/data-plane/DocumentTranslation/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -847,7 +748,7 @@
   paths:
     - translation/data-plane/TextTranslation/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -855,7 +756,7 @@
   paths:
     - trustedsigning/data-plane/TrustedSigning/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -863,7 +764,7 @@
   paths:
     - verifiedid/Microsoft.VerifiedId.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -873,7 +774,7 @@
   paths:
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -885,7 +786,7 @@
   paths:
     - workloads/Workloads.Operations.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -894,7 +795,7 @@
     - workloads/Workloads.SAPDiscoverySite.Management/tspconfig.yaml
     - workloads/Workloads.SAPMonitor.Management/tspconfig.yaml
 
-- tool: SpecValidation
+- tool: TypeSpecValidation
   reason: Suppress until Go needs to generate SDK
   rules: [SdkTspConfigValidation]
   sub-rules:

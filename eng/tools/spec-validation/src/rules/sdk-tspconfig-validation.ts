@@ -636,6 +636,34 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+export class TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "namespace", "derived from emitter-output-dir");
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+  protected validate(config: any): RuleResult {
+    const resolvedSegmentResult = this.getPackageDirFromEmitterOutputDir(config);
+    if (resolvedSegmentResult.error) {
+      return this.createFailedResult(
+        resolvedSegmentResult.error,
+        `Please add "options.${this.emitterName}.emitter-output-dir" with a path matching the SDK naming convention`,
+      );
+    }
+    const derivedNamespace = resolvedSegmentResult.resolved.replace(/-/g, ".");
+    const namespaceOption = this.tryFindOption(config);
+    const namespace = namespaceOption as unknown as undefined | string;
+    if (derivedNamespace !== namespace)
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.namespace "${namespace}" does not match the value derived from options.${this.emitterName}.emitter-output-dir "${derivedNamespace}"`,
+        `Please update "options.${this.emitterName}.namespace" to "${derivedNamespace}" or adjust "options.${this.emitterName}.emitter-output-dir" so the derived namespace matches`,
+      );
+
+    return { success: true };
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
@@ -715,6 +743,7 @@ export const defaultRules = [
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpEmitterOutputDirSubRule(),
+  new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
   new TspConfigCsharpAzNamespaceSubRule(),

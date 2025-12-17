@@ -425,21 +425,27 @@ export class FolderStructureRule implements Rule {
       }
 
       // Method 4: Find the remote tracking branch
-      const branchInfo = await git.branch(["-vv"]);
-      const currentBranch = branchInfo.current;
-
       // Parse the verbose branch output to find upstream
-      const branches = branchInfo.all as Array<{ name: string; upstream?: string }>;
-      for (const branch of branches) {
-        if (branch.name === currentBranch && branch.upstream) {
-          // Extract the remote branch name (e.g., "origin/main" -> "main")
-          const upstream = branch.upstream.split("/");
-          if (upstream.length > 1) {
-            const targetBranch = upstream.slice(1).join("/");
-            console.log(`Found target branch from upstream tracking: ${targetBranch}`);
-            return targetBranch;
+      // Use raw git branch command to get upstream info
+      try {
+        const rawBranchOutput = await git.raw(["branch", "-vv"]);
+        const lines = rawBranchOutput.split('\n');
+        for (const line of lines) {
+          if (line.includes('*') && line.includes('[')) {
+            // Current branch line format: "* branch-name commit-hash [remote/branch] commit message"
+            const match = line.match(/\[([^\]]+)\]/);
+            if (match) {
+              const upstream = match[1].split("/");
+              if (upstream.length > 1) {
+                const targetBranch = upstream.slice(1).join("/");
+                console.log(`Found target branch from upstream tracking: ${targetBranch}`);
+                return targetBranch;
+              }
+            }
           }
         }
+      } catch {
+        // If parsing fails, continue to next method
       }
 
       // Method 5: Use merge-base to find common ancestor with common default branches
