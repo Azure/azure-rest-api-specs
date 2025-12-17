@@ -27,16 +27,7 @@ using Microsoft.AzureStackHCI;
 @@Legacy.flattenProperty(UpdateRunProperties.progress);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateProperties.healthCheckResult);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateProperties.updateStateProperties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.packageVersions);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.healthState);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.healthCheckResult);
 
 @@clientName(ArcSettings.create::parameters.resource, "arcSetting");
 @@clientName(ArcSettings.update::parameters.properties, "arcSetting");
