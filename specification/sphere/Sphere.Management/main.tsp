@@ -10,6 +10,7 @@ import "./product.tsp";
 import "./deviceGroup.tsp";
 import "./deployment.tsp";
 import "./device.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

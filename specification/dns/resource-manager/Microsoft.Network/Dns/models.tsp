@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Network;
 
@@ -51,7 +48,7 @@ model DnssecProperties {
    * The list of signing keys.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   signingKeys?: SigningKey[];
 }
 
@@ -63,7 +60,7 @@ model SigningKey {
    * The delegation signer information.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   delegationSignerInfo?: DelegationSignerInfo[];
 
   /**
@@ -87,6 +84,7 @@ model SigningKey {
   /**
    * The public key, represented as a Base64 encoding.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   publicKey?: string;
 
@@ -153,7 +151,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: CloudErrorBody[];
 }
 
@@ -200,49 +198,49 @@ model RecordSetProperties {
    * The list of A records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ARecords?: ARecord[];
 
   /**
    * The list of AAAA records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   AAAARecords?: AaaaRecord[];
 
   /**
    * The list of MX records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   MXRecords?: MxRecord[];
 
   /**
    * The list of NS records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   NSRecords?: NsRecord[];
 
   /**
    * The list of PTR records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   PTRRecords?: PtrRecord[];
 
   /**
    * The list of SRV records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   SRVRecords?: SrvRecord[];
 
   /**
    * The list of TXT records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   TXTRecords?: TxtRecord[];
 
   /**
@@ -260,28 +258,28 @@ model RecordSetProperties {
   /**
    * The list of CAA records in the record set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   caaRecords?: CaaRecord[];
 
   /**
    * The list of DS records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   DSRecords?: DsRecord[];
 
   /**
    * The list of TLSA records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   TLSARecords?: TlsaRecord[];
 
   /**
    * The list of NAPTR records in the record set.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   NAPTRRecords?: NaptrRecord[];
 }
 
@@ -383,7 +381,6 @@ model TxtRecord {
   /**
    * The text value of this TXT record.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   value?: string[];
 }
 
@@ -580,7 +577,6 @@ model ZoneProperties {
    * The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   nameServers?: string[];
 
   /**
@@ -591,20 +587,20 @@ model ZoneProperties {
   /**
    * A list of references to virtual networks that register hostnames in this DNS zone. This is a only when ZoneType is Private.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   registrationVirtualNetworks?: SubResource[];
 
   /**
    * A list of references to virtual networks that resolve records in this DNS zone. This is a only when ZoneType is Private.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resolutionVirtualNetworks?: SubResource[];
 
   /**
    * The list of signing keys.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   signingKeys?: SigningKey[];
 }
 
@@ -691,7 +687,7 @@ model DnsResourceReferenceResultProperties {
   /**
    * The result of dns resource reference request. A list of dns resource references for each of the azure resource in the request
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsResourceReferences?: DnsResourceReference[];
 }
 

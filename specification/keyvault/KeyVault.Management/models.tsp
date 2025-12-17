@@ -3,11 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 
 namespace Microsoft.KeyVault;
 
@@ -715,7 +712,7 @@ model RotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifetimeActions?: LifetimeAction[];
 }
 
@@ -909,7 +906,7 @@ model ManagedHsmRotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifetimeActions?: ManagedHsmLifetimeAction[];
 }
 
@@ -1019,10 +1016,7 @@ model VaultProperties {
   /**
    * An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies?: AccessPolicyEntry[];
 
   /**
@@ -1097,6 +1091,7 @@ model VaultProperties {
   /**
    * Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "enabled";
 }
 
@@ -1182,13 +1177,13 @@ model NetworkRuleSet {
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 
   /**
    * The list of virtual network rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   virtualNetworkRules?: VirtualNetworkRule[];
 }
 
@@ -1352,10 +1347,7 @@ model VaultPatchProperties {
   /**
    * An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies?: AccessPolicyEntry[];
 
   /**
@@ -1450,10 +1442,7 @@ model VaultAccessPolicyProperties {
   /**
    * An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies: AccessPolicyEntry[];
 }
 
@@ -1658,7 +1647,7 @@ model ManagedHsmProperties {
   /**
    * List of all regions associated with the managed hsm pool.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   regions?: MhsmGeoReplicatedRegion[];
 
   /**
@@ -1703,13 +1692,13 @@ model MhsmNetworkRuleSet {
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   ipRules?: MhsmipRule[];
 
   /**
    * The list of service tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["tag"])
+  @identifiers(#["tag"])
   serviceTags?: MhsmServiceTagRule[];
 
   /**
@@ -2104,13 +2093,13 @@ model ServiceSpecification {
   /**
    * Log specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -2181,7 +2170,7 @@ model MetricSpecification {
   /**
    * The dimensions of metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: DimensionProperties[];
 
   /**
@@ -2439,7 +2428,7 @@ model OperationListResult {
    * List of Storage operations supported by the Storage resource provider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: Operation[];
 
   /**

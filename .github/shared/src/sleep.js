@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @param {number} ms Number of milliseconds to sleep
  * @returns {Promise<void>}

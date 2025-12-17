@@ -365,7 +365,7 @@ model ClusterProperties {
    * The list of server names in the cluster
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @uniqueItems
   serverNames?: ServerNameItem[];
 
@@ -694,7 +694,7 @@ model ConfigurationProperties {
   /**
    * The list of server role group configuration values.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @uniqueItems
   serverRoleGroupConfigurations: ServerRoleGroupConfiguration[];
 

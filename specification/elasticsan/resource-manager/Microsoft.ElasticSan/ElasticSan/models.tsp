@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ElasticSan;
 
@@ -53,7 +55,9 @@ union ProvisioningStates {
   Deleted: "Deleted",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Restoring: "Restoring",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_09_01)
   SoftDeleting: "SoftDeleting",
 }
 
@@ -97,6 +101,7 @@ union AutoScalePolicyEnforcement {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_09_01)
 union `x-ms-access-soft-deleted-resources` {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -223,6 +228,7 @@ union `x-ms-force-delete` {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_09_01)
 union DeleteType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -265,14 +271,14 @@ model SkuInformation {
    * Availability of the SKU for the location/zone
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationInfo?: SkuLocationInfo[];
 
   /**
    * The capability information in the specified SKU.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: SKUCapability[];
 }
 
@@ -654,6 +660,7 @@ model VolumeGroupProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources.
    */
+  @removed(Versions.v2025_09_01)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -750,6 +757,7 @@ model VirtualNetworkRule {
 /**
  * Response for Delete Retention Policy object
  */
+@removed(Versions.v2025_09_01)
 model DeleteRetentionPolicy {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policyState?: PolicyState;
@@ -810,6 +818,7 @@ model VolumeGroupUpdateProperties {
   /**
    * The retention policy for the soft deleted volume group and its associated resources
    */
+  @removed(Versions.v2025_09_01)
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 }
 
@@ -966,8 +975,8 @@ model PrivateLinkResource extends Azure.ResourceManager.Foundations.Resource {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: PrivateLinkResourceProperties;
 }
 

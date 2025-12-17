@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/managednetworkfabric"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/managednetworkfabric.json"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ManagedNetworkFabric"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-managednetworkfabric"
+    namespace: "azure.mgmt.managednetworkfabric"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-managednetworkfabric"
+    namespace: "com.azure.resourcemanager.managednetworkfabric"
+    service-name: "fileshares"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/managednetworkfabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmanagednetworkfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmanagednetworkfabric"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-managednetworkfabric"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-managednetworkfabric"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

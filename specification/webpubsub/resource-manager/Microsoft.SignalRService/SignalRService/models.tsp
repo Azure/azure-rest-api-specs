@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.SignalRService;
 
 /**
@@ -303,13 +305,13 @@ model ServiceSpecification {
   /**
    * Specifications of the Metrics for Azure Monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "unit"])
+  @identifiers(#["name", "unit"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Specifications of the Logs for Azure Monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -357,7 +359,7 @@ model MetricSpecification {
   /**
    * The dimensions of the metrics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 }
 
@@ -582,14 +584,14 @@ model WebPubSubProperties {
    * Private endpoint connections to the resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
    * The list of shared private link resources.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -629,6 +631,7 @@ model WebPubSubProperties {
    * When it's Enabled, network ACLs still apply.
    * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "Enabled";
 
   /**
@@ -685,7 +688,6 @@ model PrivateEndpointConnectionProperties {
    * Group IDs
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   groupIds?: string[];
 
   /**
@@ -752,7 +754,6 @@ model SharedPrivateLinkResourceProperties {
   /**
    * A list of FQDNs for third party private link service
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   fqdns?: string[];
 
   /**
@@ -788,7 +789,7 @@ model LiveTraceConfiguration {
   /**
    * Gets or sets the list of category configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   categories?: LiveTraceCategory[];
 }
 
@@ -818,7 +819,7 @@ model ResourceLogConfiguration {
   /**
    * Gets or sets the list of category configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   categories?: ResourceLogCategory[];
 }
 
@@ -859,14 +860,14 @@ model WebPubSubNetworkACLs {
   /**
    * ACLs for requests from private endpoints
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privateEndpoints?: PrivateEndpointACL[];
 
   /**
    * IP rules for filtering public traffic
    */
   @maxItems(30)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 }
 
@@ -878,13 +879,11 @@ model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   allow?: WebPubSubRequestType[];
 
   /**
    * Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   deny?: WebPubSubRequestType[];
 }
 
@@ -923,14 +922,14 @@ model ApplicationFirewallSettings {
    * Rules to control the client connection count
    */
   @maxItems(10)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clientConnectionCountRules?: ClientConnectionCountRule[];
 
   /**
    * Rules to control the client traffic
    */
   @maxItems(10)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clientTrafficControlRules?: ClientTrafficControlRule[];
 
   /**
@@ -1102,7 +1101,7 @@ model WebPubSubHubProperties {
   /**
    * Event handler of a hub.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eventHandlers?: EventHandler[];
 
   /**
@@ -1111,7 +1110,7 @@ model WebPubSubHubProperties {
    * One event can be sent to multiple listeners, as long as it matches the filters in those listeners. The order of the array elements doesn't matter.
    * Maximum count of event listeners among all hubs is 10.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eventListeners?: EventListener[];
 
   /**
@@ -1151,7 +1150,6 @@ model EventHandler {
   /**
    * Gets or sets the list of system events.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   systemEvents?: string[];
 
   /**
@@ -1283,19 +1281,17 @@ model PrivateLinkResourceProperties {
   /**
    * Required members of the private link resource
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   requiredMembers?: string[];
 
   /**
    * Required private DNS zone names
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   requiredZoneNames?: string[];
 
   /**
    * The list of resources that are onboarded to private link service
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   shareablePrivateLinkResourceTypes?: ShareablePrivateLinkResourceType[];
 }
 
@@ -1383,10 +1379,11 @@ model SkuList {
    * The list of skus available for the resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["resourceType", "/sku/name", "/sku/tier"]
-  )
+  @Azure.ResourceManager.identifiers(#[
+    "resourceType",
+    "/sku/name",
+    "/sku/tier"
+  ])
   value?: Sku[];
 
   /**
@@ -1447,7 +1444,6 @@ model SkuCapacity {
    * Allows capacity value list.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   allowedValues?: int32[];
 
   /**
@@ -1482,7 +1478,6 @@ model EventNameFilter extends EventListenerFilter {
   /**
    * Gets or sets a list of system events. Supported events: "connected" and "disconnected". Blocking event "connect" is not supported because it requires a response.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   systemEvents?: string[];
 
   /**
@@ -1608,4 +1603,4 @@ model TrafficThrottleByUserIdRule extends ClientTrafficControlRule {
 
   type: "TrafficThrottleByUserIdRule";
 }
-@@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);
+@@identifiers(OperationList.value, #["name"]);

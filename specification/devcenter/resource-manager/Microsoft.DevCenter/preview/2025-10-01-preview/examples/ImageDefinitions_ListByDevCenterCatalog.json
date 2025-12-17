@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "catalogName": "TeamCatalog",
+    "devCenterName": "ContosoDevCenter",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "WebDevBox",
+            "type": "Microsoft.DevCenter/devcenters/catalogs/imagedefinitions",
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter/catalogs/TeamCatalog/imagedefinitions/WebDevBox",
+            "properties": {
+              "activeImageReference": {
+                "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
+              },
+              "autoImageBuild": "Enabled",
+              "imageReference": {
+                "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
+              },
+              "imageValidationErrorDetails": {
+                "code": "400",
+                "message": "Validation failed"
+              },
+              "imageValidationStatus": "Failed",
+              "latestBuild": {
+                "name": "0a28fc61-6f87-4611-8fe2-32df44ab93b7",
+                "endTime": "2020-11-18T18:25:12.952Z",
+                "startTime": "2020-11-18T18:25:02.224Z",
+                "status": "Running"
+              },
+              "validationStatus": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2020-11-18T18:00:36.993Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+              "lastModifiedBy": "user1",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DevCenterCatalogImageDefinitions_ListByDevCenterCatalog",
+  "title": "ImageDefinitions_ListByDevCenterCatalog"
+}

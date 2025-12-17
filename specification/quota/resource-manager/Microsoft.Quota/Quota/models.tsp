@@ -862,7 +862,7 @@ model ServiceError {
    * List of error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: ServiceErrorDetail[];
 }
 
@@ -986,7 +986,7 @@ model QuotaRequestProperties {
   /**
    * Quota request details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["subRequestId"])
+  @identifiers(#["subRequestId"])
   value?: SubRequest[];
 }
 
@@ -1079,7 +1079,7 @@ model SubscriptionQuotaAllocationRequestList {
   /**
    * Allocated Group Quota to subscriptions.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: QuotaAllocationRequestStatus[];
 
   /**
@@ -1432,7 +1432,7 @@ model OperationList {
    * The list of connected cluster API operations.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: OperationResponse[];
 
   /**

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "privateEndpointConnection": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "test",
+          "status": "Approved"
+        }
+      }
+    },
+    "privateEndpointConnectionName": "myConnection",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myConnection",
+        "type": "Microsoft.Dashboard/grafana/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/privateEndpointConnections/myConnection",
+        "properties": {
+          "groupIds": [
+            "grafana"
+          ],
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Network/privateEndpoint/myEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "test",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Accepted"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Dashboard/locations/eastus2/operationStatuses/sample-op-status?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Approve",
+  "title": "PrivateEndpointConnections_Approve"
+}

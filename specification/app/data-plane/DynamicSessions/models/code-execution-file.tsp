@@ -1,32 +1,37 @@
 import "./common.tsp";
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
-@doc("Code execution file resource collection.")
+/** Code execution file resource collection. */
 model SessionResourceFileCollection {
-  @doc("The files uploaded.")
+  /** The files uploaded. */
   value: SessionResourceFile[];
 }
 
-@doc("Code execution file resource.")
+/** Code execution file resource. */
 @resource("files")
 model SessionResourceFile {
+  /** The name of the file. */
   @key("name")
   @segment("files")
-  @doc("The name of the file.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 
-  @doc("The type of the session resource file.")
+  /** The type of the session resource file. */
   type: string;
 
-  @doc("The type of the content of this file.")
+  /** The type of the content of this file. */
   contentType?: string;
 
-  @doc("The size of the file.")
+  /** The size of the file. */
   sizeInBytes?: int64;
 
-  @doc("The date time in RFC3339 format when the file was last modified.")
+  /** The date time in RFC3339 format when the file was last modified. */
   lastModifiedAt: utcDateTime;
+
+  /** The directory path of the session resource file. */
+  @added(Versions.v2025_10_02_preview)
+  directory?: string;
 }
