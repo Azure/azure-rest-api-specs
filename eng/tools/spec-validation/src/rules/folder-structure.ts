@@ -424,31 +424,7 @@ export class FolderStructureRule implements Rule {
         // GitHub CLI not available or not in a PR, continue with other methods
       }
 
-      // Method 4: Find the remote tracking branch
-      // Parse the verbose branch output to find upstream
-      // Use raw git branch command to get upstream info
-      try {
-        const rawBranchOutput = await git.raw(["branch", "-vv"]);
-        const lines = rawBranchOutput.split('\n');
-        for (const line of lines) {
-          if (line.includes('*') && line.includes('[')) {
-            // Current branch line format: "* branch-name commit-hash [remote/branch] commit message"
-            const match = line.match(/\[([^\]]+)\]/);
-            if (match) {
-              const upstream = match[1].split("/");
-              if (upstream.length > 1) {
-                const targetBranch = upstream.slice(1).join("/");
-                console.log(`Found target branch from upstream tracking: ${targetBranch}`);
-                return targetBranch;
-              }
-            }
-          }
-        }
-      } catch {
-        // If parsing fails, continue to next method
-      }
-
-      // Method 5: Use merge-base to find common ancestor with common default branches
+      // Method 4: Use merge-base to find common ancestor with common default branches
       // Try with different remotes (upstream first, then origin)
       const remotes = ["upstream", "origin"];
       const commonBranches = ["main", "master", "develop"];
@@ -465,7 +441,7 @@ export class FolderStructureRule implements Rule {
         }
       }
 
-      // Method 6: Fallback to main
+      // Method 5: Fallback to main
       console.log("Using fallback target branch: main");
       return "main";
     } catch {
@@ -587,12 +563,11 @@ export class FolderStructureRule implements Rule {
         } else {
           return { shouldEnforce: false };
         }
-      } catch (error) {
+      } catch {
         // If we can't check the target branch, don't enforce v2 compliance
-
         return { shouldEnforce: false };
       }
-    } catch (error) {
+    } catch {
       // If git operations fail, don't enforce v2 compliance
 
       return { shouldEnforce: false };

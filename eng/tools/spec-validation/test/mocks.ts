@@ -23,7 +23,7 @@ export function mockSimpleGit() {
         not_added: [],
         isClean: () => true,
       }),
-      branch: vi.fn().mockImplementation((args) => {
+      branch: vi.fn().mockImplementation((args: string[]) => {
         if (args && args[0] === "-vv") {
           return Promise.resolve({
             current: "main",
@@ -41,7 +41,7 @@ export function mockSimpleGit() {
           },
         });
       }),
-      raw: vi.fn().mockImplementation((args) => {
+      raw: vi.fn().mockImplementation((args: string[]) => {
         if (args.includes("config") && args.includes("remote.origin.url")) {
           return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
         }
@@ -58,7 +58,7 @@ export function mockSimpleGit() {
 
   // Mock the GitHub CLI commands to avoid actual API calls
   vi.mock("child_process", async (importOriginal) => {
-    const actual = (await importOriginal()) as any;
+    const actual: object = await importOriginal();
     return {
       ...actual,
       execSync: vi.fn().mockImplementation((command: string) => {
@@ -70,7 +70,7 @@ export function mockSimpleGit() {
       }),
       spawn: vi.fn().mockImplementation(() => ({
         stdout: {
-          on: vi.fn((event, callback) => {
+          on: vi.fn((event: string, callback: (data: string) => void) => {
             if (event === "data") {
               callback("main");
             }
@@ -79,7 +79,7 @@ export function mockSimpleGit() {
         stderr: {
           on: vi.fn(),
         },
-        on: vi.fn((event, callback) => {
+        on: vi.fn((event: string, callback: (code: number) => void) => {
           if (event === "close") {
             callback(0);
           }
