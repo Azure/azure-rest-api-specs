@@ -14,8 +14,6 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service(#{ title: "Hardware Resource Provider" })
 @versioned(Versions)
-
-//@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Hardware;
 
@@ -56,10 +54,6 @@ model OrderProperties {
   @visibility(Lifecycle.Read)
   status?: OrderStatus;
 
-  @doc("Order provisioning state")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   @doc("Order line details")
   @identifiers(#["id"])
   orderLines: OrderLine[];
@@ -75,6 +69,10 @@ model OrderProperties {
 
   @doc("Reservation for order if applicable")
   reservationId?: string;
+
+  @doc("Order provisioning state")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Customer PurchaseOrder")
@@ -95,6 +93,10 @@ model OrderLine {
   @visibility(Lifecycle.Read)
   status?: OrderLineStatus;
 
+  @doc("Billing State")
+  @visibility(Lifecycle.Read)
+  billingState?: BillingState;
+
   @doc("Order line date")
   @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
@@ -104,6 +106,9 @@ model OrderLine {
 
   @doc("order line Product")
   product: Product;
+
+  @doc("order line fulfillment instructions")
+  lineFulfillmentInstruction?: LineFulfillmentInstruction;
 
   @doc("line level Price")
   price: Price;
@@ -161,6 +166,15 @@ model Product {
 
   @doc("ProductId Type")
   type: ProductIdType;
+
+  @doc("BundleProductId")
+  bundleProductId?: string;
+
+  @doc("BundleInstanceId")
+  bundleInstanceId?: string;
+
+  @doc("BundleSlotId")
+  bundleSlotId?: int64;
 }
 
 @doc("Order line fulfillment instructions")
@@ -349,9 +363,6 @@ union OrderLineStatus {
   @doc("Order is in-progress")
   InProgress: "InProgress",
 
-  @doc("Order is confirmed")
-  Confirmed: "Confirmed",
-
   @doc("Order is fulfilled")
   Fulfilled: "Fulfilled",
 
@@ -360,6 +371,29 @@ union OrderLineStatus {
 
   @doc("Order is returned")
   Returned: "Returned",
+
+  string,
+}
+
+@doc("Billing State")
+union BillingState {
+  @doc("The default state, initialized or reset after a failed operation")
+  Pending: "Pending",
+
+  @doc("The payment is pending capture.")
+  PendingCapture: "PendingCapture",
+
+  @doc("The payment has been captured successfully.")
+  Captured: "Captured",
+
+  @doc("The payment capture failed.")
+  CaptureFailed: "CaptureFailed",
+
+  @doc("The payment is pending a refund.")
+  PendingRefund: "PendingRefund",
+
+  @doc("The payment has been refunded.")
+  Refunded: "Refunded",
 
   string,
 }

@@ -444,6 +444,54 @@
         }
       ]
     },
+    "BillingState": {
+      "type": "string",
+      "description": "Billing State",
+      "enum": [
+        "Pending",
+        "PendingCapture",
+        "Captured",
+        "CaptureFailed",
+        "PendingRefund",
+        "Refunded"
+      ],
+      "x-ms-enum": {
+        "name": "BillingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The default state, initialized or reset after a failed operation"
+          },
+          {
+            "name": "PendingCapture",
+            "value": "PendingCapture",
+            "description": "The payment is pending capture."
+          },
+          {
+            "name": "Captured",
+            "value": "Captured",
+            "description": "The payment has been captured successfully."
+          },
+          {
+            "name": "CaptureFailed",
+            "value": "CaptureFailed",
+            "description": "The payment capture failed."
+          },
+          {
+            "name": "PendingRefund",
+            "value": "PendingRefund",
+            "description": "The payment is pending a refund."
+          },
+          {
+            "name": "Refunded",
+            "value": "Refunded",
+            "description": "The payment has been refunded."
+          }
+        ]
+      }
+    },
     "CustomerOrder": {
       "type": "object",
       "description": "Customer PurchaseOrder",
@@ -563,6 +611,11 @@
           "description": "Order line status",
           "readOnly": true
         },
+        "billingState": {
+          "$ref": "#/definitions/BillingState",
+          "description": "Billing State",
+          "readOnly": true
+        },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
@@ -576,6 +629,10 @@
         "product": {
           "$ref": "#/definitions/Product",
           "description": "order line Product"
+        },
+        "lineFulfillmentInstruction": {
+          "$ref": "#/definitions/LineFulfillmentInstruction",
+          "description": "order line fulfillment instructions"
         },
         "price": {
           "$ref": "#/definitions/Price",
@@ -667,7 +724,6 @@
       "enum": [
         "Pending",
         "InProgress",
-        "Confirmed",
         "Fulfilled",
         "Cancelled",
         "Returned"
@@ -685,11 +741,6 @@
             "name": "InProgress",
             "value": "InProgress",
             "description": "Order is in-progress"
-          },
-          {
-            "name": "Confirmed",
-            "value": "Confirmed",
-            "description": "Order is confirmed"
           },
           {
             "name": "Fulfilled",
@@ -748,11 +799,6 @@
           "description": "Order status",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Order provisioning state",
-          "readOnly": true
-        },
         "orderLines": {
           "type": "array",
           "description": "Order line details",
@@ -778,6 +824,11 @@
         "reservationId": {
           "type": "string",
           "description": "Reservation for order if applicable"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Order provisioning state",
+          "readOnly": true
         }
       },
       "required": [
@@ -943,6 +994,19 @@
         "type": {
           "$ref": "#/definitions/ProductIdType",
           "description": "ProductId Type"
+        },
+        "bundleProductId": {
+          "type": "string",
+          "description": "BundleProductId"
+        },
+        "bundleInstanceId": {
+          "type": "string",
+          "description": "BundleInstanceId"
+        },
+        "bundleSlotId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "BundleSlotId"
         }
       },
       "required": [
