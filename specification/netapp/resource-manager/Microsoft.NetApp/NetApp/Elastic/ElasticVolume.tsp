@@ -379,7 +379,9 @@ interface ElasticVolumes {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticVolume,
       ElasticVolumePatchProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticVolume> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Delete the specified Elastic Volume */

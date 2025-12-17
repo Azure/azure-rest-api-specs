@@ -64,7 +64,9 @@ interface ElasticBackupVaults {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticBackupVault,
       ElasticBackupVaultProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticBackupVault> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
