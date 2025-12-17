@@ -85,6 +85,7 @@ namespace Microsoft.HybridConnectivity;
 );
 @@clientName(ServiceConfigurationResources, "ServiceConfigurations", "java");
 @@clientName(EndpointResources, "Endpoints", "java");
+@@clientName(AADProfileProperties, "AadProfileProperties", "java");
 
 @@clientName(Microsoft.HybridConnectivity,
   "HybridConnectivityManagementAPI",
