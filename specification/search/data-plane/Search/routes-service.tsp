@@ -16,6 +16,7 @@ interface DataSources {
   @put
   createOrUpdate is SearchDataSourceOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -41,6 +42,7 @@ interface DataSources {
   @delete
   delete is SearchDataSourceOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -55,14 +57,25 @@ interface DataSources {
   @doc("Retrieves a datasource definition.")
   @route("/datasources('{dataSourceName}')")
   @get
-  get is SearchDataSourceOperation<{}, SearchIndexerDataSource>;
+  get is SearchDataSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchIndexerDataSource
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all datasources available for a search service.")
   @route("/datasources")
   @get
-  list is SearchOperation<selectQuery, ListDataSourcesResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+    },
+    ListDataSourcesResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new datasource.")
@@ -70,6 +83,8 @@ interface DataSources {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the datasource to create.")
       @clientName("dataSourceConnection")
       @body
@@ -89,7 +104,9 @@ interface Indexers {
   @route("/indexers('{indexerName}')/search.reset")
   @post
   reset is SearchIndexerOperation<
-    {},
+    {
+      ...acceptHeaderMinimal;
+    },
     {
       @doc("A process exit code.")
       @statusCode
@@ -103,6 +120,8 @@ interface Indexers {
   @post
   resync is SearchIndexerOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the indexer resync options.")
       @body
       indexerResync: IndexerResyncBody;
@@ -120,6 +139,8 @@ interface Indexers {
   @post
   resetDocs is SearchIndexerOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("If false, keys or ids will be appended to existing ones. If true, only the keys or ids in this payload will be queued to be re-ingested.")
       @query
       overwrite?: boolean = false;
@@ -140,7 +161,9 @@ interface Indexers {
   @route("/indexers('{indexerName}')/search.run")
   @post
   run is SearchIndexerOperation<
-    {},
+    {
+      ...acceptHeaderMinimal;
+    },
     {
       @doc("A process exit code.")
       @statusCode
@@ -155,6 +178,7 @@ interface Indexers {
   @put
   createOrUpdate is SearchIndexerOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -184,6 +208,7 @@ interface Indexers {
   @delete
   delete is SearchIndexerOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -199,14 +224,25 @@ interface Indexers {
   @doc("Retrieves an indexer definition.")
   @route("/indexers('{indexerName}')")
   @get
-  get is SearchIndexerOperation<{}, SearchIndexer>;
+  get is SearchIndexerOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchIndexer
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all indexers available for a search service.")
   @route("/indexers")
   @get
-  list is SearchOperation<selectQuery, ListIndexersResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+    },
+    ListIndexersResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -215,6 +251,8 @@ interface Indexers {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the indexer to create.")
       @body
       indexer: SearchIndexer;
@@ -230,7 +268,12 @@ interface Indexers {
   @doc("Returns the current status and execution history of an indexer.")
   @route("/indexers('{indexerName}')/search.status")
   @get
-  getStatus is SearchIndexerOperation<{}, SearchIndexerStatus>;
+  getStatus is SearchIndexerOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchIndexerStatus
+  >;
 }
 
 interface Skillsets {
@@ -241,6 +284,7 @@ interface Skillsets {
   @put
   createOrUpdate is SearchSkillsetOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -271,6 +315,7 @@ interface Skillsets {
   @delete
   delete is SearchSkillsetOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -285,14 +330,25 @@ interface Skillsets {
   @doc("Retrieves a skillset in a search service.")
   @route("/skillsets('{skillsetName}')")
   @get
-  get is SearchSkillsetOperation<{}, SearchIndexerSkillset>;
+  get is SearchSkillsetOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchIndexerSkillset
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("List all skillsets in a search service.")
   @route("/skillsets")
   @get
-  list is SearchOperation<selectQuery, ListSkillsetsResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+    },
+    ListSkillsetsResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new skillset in a search service.")
@@ -300,6 +356,8 @@ interface Skillsets {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The skillset containing one or more skills to create in a search service.")
       @body
       skillset: SearchIndexerSkillset;
@@ -317,6 +375,8 @@ interface Skillsets {
   @post
   resetSkills is SearchSkillsetOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The names of the skills to reset. If not specified, all skills in the skillset will be reset.")
       @body
       skillNames: SkillNames;
@@ -333,6 +393,7 @@ interface SynonymMaps {
   @put
   createOrUpdate is SearchSynonymMapOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -354,6 +415,7 @@ interface SynonymMaps {
   @delete
   delete is SearchSynonymMapOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -369,14 +431,25 @@ interface SynonymMaps {
   @doc("Retrieves a synonym map definition.")
   @route("/synonymmaps('{synonymMapName}')")
   @get
-  get is SearchSynonymMapOperation<{}, SynonymMap>;
+  get is SearchSynonymMapOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SynonymMap
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @doc("Lists all synonym maps available for a search service.")
   @route("/synonymmaps")
   @get
-  list is SearchOperation<selectQuery, ListSynonymMapsResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+    },
+    ListSynonymMapsResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Creates a new synonym map.")
@@ -384,6 +457,8 @@ interface SynonymMaps {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the synonym map to create.")
       @body
       synonymMap: SynonymMap;
@@ -403,6 +478,8 @@ interface Indexes {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the index to create.")
       @body
       index: SearchIndex;
@@ -420,7 +497,13 @@ interface Indexes {
   @route("/indexes")
   @list
   @get
-  list is SearchOperation<selectQuery, ListIndexesResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+    },
+    ListIndexesResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -429,6 +512,7 @@ interface Indexes {
   @put
   createOrUpdate is SearchIndexOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
 
       @doc("Allows new analyzers, tokenizers, token filters, or char filters to be added to an index by taking the index offline for at least a few seconds. This temporarily causes indexing and query requests to fail. Performance and write availability of the index can be impaired for several minutes after the index is updated, or longer for very large indexes.")
@@ -455,6 +539,7 @@ interface Indexes {
   @delete
   delete is SearchIndexOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -469,13 +554,23 @@ interface Indexes {
   @doc("Retrieves an index definition.")
   @route("/indexes('{indexName}')")
   @get
-  get is SearchIndexOperation<{}, SearchIndex>;
+  get is SearchIndexOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchIndex
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Returns statistics for the given index, including a document count and storage usage.")
   @route("/indexes('{indexName}')/search.stats")
   @get
-  getStatistics is SearchIndexOperation<{}, GetIndexStatisticsResult>;
+  getStatistics is SearchIndexOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    GetIndexStatisticsResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Shows how an analyzer breaks text into tokens.")
@@ -483,6 +578,8 @@ interface Indexes {
   @post
   analyze is SearchIndexOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The text and analyzer or analysis components to test.")
       @body
       request: AnalyzeRequest;
@@ -498,6 +595,8 @@ interface Aliases {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the alias to create.")
       @body
       `alias`: SearchAlias;
@@ -514,7 +613,12 @@ interface Aliases {
   @route("/aliases")
   @list
   @get
-  list is SearchOperation<{}, ListAliasesResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    ListAliasesResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -523,6 +627,7 @@ interface Aliases {
   @put
   createOrUpdate is SearchAliasOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -544,6 +649,7 @@ interface Aliases {
   @delete
   delete is SearchAliasOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -559,7 +665,12 @@ interface Aliases {
   @doc("Retrieves an alias definition.")
   @route("/aliases('{aliasName}')")
   @get
-  get is SearchAliasOperation<{}, SearchAlias>;
+  get is SearchAliasOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    SearchAlias
+  >;
 }
 
 interface KnowledgeBases {
@@ -569,6 +680,8 @@ interface KnowledgeBases {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the knowledge base to create.")
       @body
       knowledgeBase: KnowledgeBase;
@@ -586,7 +699,12 @@ interface KnowledgeBases {
   @route("/knowledgebases")
   @list
   @get
-  list is SearchOperation<{}, ListKnowledgeBasesResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    ListKnowledgeBasesResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -595,6 +713,7 @@ interface KnowledgeBases {
   @put
   createOrUpdate is SearchKnowledgeBaseOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -616,6 +735,7 @@ interface KnowledgeBases {
   @delete
   delete is SearchKnowledgeBaseOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -630,7 +750,12 @@ interface KnowledgeBases {
   @doc("Retrieves a knowledge base definition.")
   @route("/knowledgebases('{knowledgeBaseName}')")
   @get
-  get is SearchKnowledgeBaseOperation<{}, KnowledgeBase>;
+  get is SearchKnowledgeBaseOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    KnowledgeBase
+  >;
 }
 
 interface KnowledgeSources {
@@ -640,6 +765,8 @@ interface KnowledgeSources {
   @post
   create is SearchOperation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The definition of the knowledge source to create.")
       @body
       knowledgeSource: KnowledgeSource;
@@ -657,7 +784,12 @@ interface KnowledgeSources {
   @route("/knowledgesources")
   @list
   @get
-  list is SearchOperation<{}, ListKnowledgeSourcesResult>;
+  list is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    ListKnowledgeSourcesResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -666,6 +798,7 @@ interface KnowledgeSources {
   @put
   createOrUpdate is SearchSourceOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
       ...preferHeader;
 
@@ -687,6 +820,7 @@ interface KnowledgeSources {
   @delete
   delete is SearchSourceOperation<
     {
+      ...acceptHeaderMinimal;
       ...matchingHeader;
     },
     {
@@ -701,20 +835,35 @@ interface KnowledgeSources {
   @doc("Retrieves a knowledge source definition.")
   @route("/knowledgesources('{sourceName}')")
   @get
-  get is SearchSourceOperation<{}, KnowledgeSource>;
+  get is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    KnowledgeSource
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @doc("Retrieves the status of a knowledge source.")
   @route("/knowledgesources('{sourceName}')/status")
   @get
-  getStatus is SearchSourceOperation<{}, KnowledgeSourceStatus>;
+  getStatus is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+    },
+    KnowledgeSourceStatus
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @doc("Gets service level statistics for a search service.")
 @route("/servicestats")
 @get
-op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
+op getServiceStatistics is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+  },
+  SearchServiceStatistics
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -722,4 +871,9 @@ op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
 @route("/indexstats")
 @list
 @get
-op getIndexStatsSummary is SearchOperation<{}, ListIndexStatsSummary>;
+op getIndexStatsSummary is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+  },
+  ListIndexStatsSummary
+>;
