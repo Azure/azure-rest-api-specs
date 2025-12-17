@@ -23,11 +23,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.BillingBenefits, "BillingBenefitsRP", "python");
 @@clientName(Microsoft.BillingBenefits.Term.P1Y, "P1_Y", "python");
-@@clientName(Microsoft.BillingBenefits.Term.P1Y, "P3_Y", "python");
-@@clientName(Microsoft.BillingBenefits.Term.P1Y, "P5_Y", "python");
+@@clientName(Microsoft.BillingBenefits.Term.P3Y, "P3_Y", "python");
+@@clientName(Microsoft.BillingBenefits.Term.P5Y, "P5_Y", "python");
 @@clientName(Microsoft.BillingBenefits.BillingPlan.P1M, "P1_M", "python");
-@@clientName(Microsoft.BillingBenefits.SavingsPlanModels.update,
-  "begin_update",
-  "python"
-);
-
