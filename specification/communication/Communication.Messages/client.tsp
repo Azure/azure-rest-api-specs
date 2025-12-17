@@ -37,13 +37,7 @@ interface MessageTemplateClient
   service: Azure.Communication.MessagesService,
 })
 interface ConversationAdministrationClient
-  extends Azure.Communication.MessagesService.ConversationAdministrationOperations {
-  listConversations is Azure.Communication.MessagesService.ConversationThreadOperations.listConversations;
-  listMessages is Azure.Communication.MessagesService.ConversationThreadOperations.listMessages;
-  addParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.addParticipants;
-  removeParticipants is Azure.Communication.MessagesService.ConversationThreadOperations.removeParticipants;
-  analyzeConversation is Azure.Communication.MessagesService.ConversationThreadOperations.analyzeConversation;
-}
+  extends Azure.Communication.MessagesService.ConversationAdministrationOperations {}
 
 @added(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
 @client({
