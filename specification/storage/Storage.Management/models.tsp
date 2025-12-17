@@ -6168,6 +6168,7 @@ alias ETagHeader = {
 /**
  * The storage connector properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageConnectorProperties {
   /**
    * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
@@ -6343,6 +6344,7 @@ model TestConnectionResponse {
 /**
  * The storage datashare properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageDataShareProperties {
   /**
    * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
