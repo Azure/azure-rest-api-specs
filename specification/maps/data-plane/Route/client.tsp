@@ -11,34 +11,22 @@ using MapsRoute;
 @@clientName(VehicleSpec.maxSpeed, "maxSpeedInKilometersPerHour");
 @@clientName(VehicleSpec.axleWeight, "axleWeightInKilograms");
 
-@@clientLocation(RouteOperationGroup.route_PostRouteDirections, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteDirections,
-  "PostRouteDirections"
-);
-@@clientLocation(RouteOperationGroup.route_PostRouteDirectionsBatch, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteDirectionsBatch,
-  "PostRouteDirectionsBatch"
-);
-@@clientLocation(RouteOperationGroup.route_PostSnapToRoads, "Route");
-@@clientName(RouteOperationGroup.route_PostSnapToRoads, "PostSnapToRoads");
-@@clientLocation(RouteOperationGroup.route_PostSnapToRoadsBatch, "Route");
-@@clientName(RouteOperationGroup.route_PostSnapToRoadsBatch,
-  "PostSnapToRoadsBatch"
-);
-@@clientLocation(RouteOperationGroup.route_PostRouteRange, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteRange, "PostRouteRange");
-@@clientLocation(RouteOperationGroup.route_PostRouteRangeBatch, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteRangeBatch,
-  "PostRouteRangeBatch"
-);
-@@clientLocation(RouteOperationGroup.route_PostRouteMatrix, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteMatrix, "PostRouteMatrix");
-@@clientLocation(RouteOperationGroup.route_PostRouteMatrixAsync, "Route");
-@@clientName(RouteOperationGroup.route_PostRouteMatrixAsync,
-  "PostRouteMatrixAsync"
-);
-@@clientLocation(RouteOperationGroup.getRouteOperationsStatus, "Route");
-@@clientLocation(RouteOperationGroup.route_GetOperationResult, "Route");
-@@clientName(RouteOperationGroup.route_GetOperationResult,
-  "GetRouteOperationsResult"
-);
+@@clientLocation(Route.postRouteDirections, "Route");
+@@clientName(Route.postRouteDirections, "PostRouteDirections");
+@@clientLocation(Route.postRouteDirectionsBatch, "Route");
+@@clientName(Route.postRouteDirectionsBatch, "PostRouteDirectionsBatch");
+@@clientLocation(Route.postSnapToRoads, "Route");
+@@clientName(Route.postSnapToRoads, "PostSnapToRoads");
+@@clientLocation(Route.postSnapToRoadsBatch, "Route");
+@@clientName(Route.postSnapToRoadsBatch, "PostSnapToRoadsBatch");
+@@clientLocation(Route.postRouteRange, "Route");
+@@clientName(Route.postRouteRange, "PostRouteRange");
+@@clientLocation(Route.postRouteRangeBatch, "Route");
+@@clientName(Route.postRouteRangeBatch, "PostRouteRangeBatch");
+@@clientLocation(Route.postRouteMatrix, "Route");
+@@clientName(Route.postRouteMatrix, "PostRouteMatrix");
+@@clientLocation(Route.postRouteMatrixAsync, "Route");
+@@clientName(Route.postRouteMatrixAsync, "PostRouteMatrixAsync");
+@@clientLocation(Route.getRouteOperationsStatus, "Route");
+@@clientLocation(Route.getOperationResult, "Route");
+@@clientName(Route.getOperationResult, "GetRouteOperationsResult");
