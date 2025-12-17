@@ -44,4 +44,4 @@ using Microsoft.Edge;
   "DisconnectedOperationsResourceProvisioningState",
   "csharp"
 );
-@@clientName(DisconnectedOperations, "DisconnectedOperationsOprs", "csharp");
+@@clientName(DisconnectedOperations, "Disconnected", "csharp");
