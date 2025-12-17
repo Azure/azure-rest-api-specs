@@ -9,6 +9,11 @@ using Microsoft.StorageSync;
 @@scope(OperationStatusOperationGroup.get, "!csharp");
 @@scope(Operations.list, "!csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "csharp"
+);
+
 @@clientName(RestoreFileSpec.isdir, "IsDirectory", "csharp");
 @@clientName(CloudEndpointProperties.backupEnabled,
   "IsBackupEnabled",
