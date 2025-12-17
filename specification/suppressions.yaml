@@ -107,18 +107,6 @@
     - voiceservices/VoiceServices.Management
 
 - tool: TypeSpecValidation
-  reason: Temporary suppressions to unblock merge from main (https://github.com/Azure/azure-rest-api-specs-pr/pull/25938)
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-python.namespace
-  paths:
-    - contosowidgetmanager/Contoso.Management/tspconfig.yaml
-    - databasefleetmanager/DatabaseFleetManager.Management/tspconfig.yaml
-    - edgezones/EdgeZones.Management/tspconfig.yaml
-    - footprintmonitoring/FootprintMonitoring.Management/tspconfig.yaml
-    - quantum/Microsoft.Quantum.Management/tspconfig.yaml
-
-- tool: TypeSpecValidation
   reason: Suppress until we know the awsconnector folder uses these settings
   rules: [SdkTspConfigValidation]
   sub-rules:
