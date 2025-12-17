@@ -190,11 +190,78 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].delete
 
   - code: PostResponseCodes
     from: hci.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess"].post
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply"].post
     reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: ParametersInPointGet
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause a breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}"].get
+
+  - code: PutResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].delete
+
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: hci.json
+    reason: these are not tracked resources, so tags are not needed
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+
+  - code: TrackedResourcePatchOperation
+    from: hci.json
+    reason: these are not tracked resources, so no tags and corresponding patch operation is needed
+    where:
+      - $.definitions.UpdateSummaries
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: hci.json
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
+    where:
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
+      - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
+
+  - code: AvoidAdditionalProperties
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.definitions.UpdateProperties.properties
+
+  - code: DescriptionMustNotBeNodeName
+    from: hci.json
+    reason: CreatedByType enum values use their names as descriptions which is a common pattern inherited from common-types
+    where:
+      - $.definitions.CreatedByType.x-ms-enum.values[0].description
+      - $.definitions.CreatedByType.x-ms-enum.values[1].description
+      - $.definitions.CreatedByType.x-ms-enum.values[2].description
+      - $.definitions.CreatedByType.x-ms-enum.values[3].description
     
   - code: ConsistentPatchProperties
     reason: already used in GA api version, fixing it will cause breaking change
