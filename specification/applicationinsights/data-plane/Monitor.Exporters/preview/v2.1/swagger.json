@@ -56,6 +56,23 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://monitor.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://monitor.azure.com/.default": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/track": {

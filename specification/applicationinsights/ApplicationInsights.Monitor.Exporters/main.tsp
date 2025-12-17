@@ -9,7 +9,15 @@ using TypeSpec.Versioning;
  * OpenTelemetry Exporter for Azure Monitor
  */
 #suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth is supported"
-@useAuth(NoAuth)
+@useAuth(
+  NoAuth | OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit,
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+      scopes: ["https://monitor.azure.com/.default"],
+    }
+  ]>
+)
 @service(#{ title: "Azure Monitor Exporter" })
 @versioned(Versions)
 @server(
