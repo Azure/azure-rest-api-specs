@@ -64,7 +64,7 @@ union CheckNameAvailabilityReason {
 /**
  * Provisioning state of the resource.
  */
-union CommunicationServicesProvisioningState {
+union CommunicationServices_ProvisioningState {
   string,
 
   /**
@@ -496,7 +496,7 @@ model CommunicationServiceProperties {
    * Provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: CommunicationServicesProvisioningState;
+  provisioningState?: CommunicationServices_ProvisioningState;
 
   /**
    * FQDN of the CommunicationService instance.
@@ -601,11 +601,13 @@ model CommunicationServiceKeys {
   /**
    * The primary access key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   primaryKey?: string;
 
   /**
    * The secondary access key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   secondaryKey?: string;
 
   /**
@@ -892,6 +894,112 @@ model SenderUsernameProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * Collection of SmtpUsername resources. Response will include a nextLink if response contains more pages.
+ */
+model SmtpUsernameResourceCollection is Azure.Core.Page<SmtpUsernameResource>;
+
+/**
+ * A class that describes the properties of a SmtpUsername resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SmtpUsernameProperties {
+  /**
+   * The SMTP username. Could be free form or in the email address format.
+   */
+  username: string;
+
+  /**
+   * The application Id for the linked Entra Application.
+   */
+  entraApplicationId: string;
+
+  /**
+   * The tenant of the linked Entra Application.
+   */
+  tenantId: string;
+}
+
+/**
+ * A class representing a Domains SuppressionListResource collection.
+ */
+model SuppressionListResourceCollection
+  is Azure.Core.Page<SuppressionListResource>;
+
+/**
+ * A class that describes the properties of a SuppressionList resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SuppressionListProperties {
+  /**
+   * The name of the suppression list. This value must match one of the valid sender usernames of the sending domain.
+   */
+  listName?: string;
+
+  /**
+   * The date the resource was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdatedTimeStamp?: string;
+
+  /**
+   * The date the resource was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTimeStamp?: string;
+
+  /**
+   * The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.
+   */
+  @visibility(Lifecycle.Read)
+  dataLocation?: string;
+}
+
+/**
+ * Collection of addresses in a suppression list. Response will include a nextLink if response contains more pages.
+ */
+model SuppressionListAddressResourceCollection
+  is Azure.Core.Page<SuppressionListAddressResource>;
+
+/**
+ * A class that describes the properties of a SuppressionListAddress resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model SuppressionListAddressProperties {
+  /**
+   * Email address of the recipient.
+   */
+  email: string;
+
+  /**
+   * The first name of the email recipient.
+   */
+  firstName?: string;
+
+  /**
+   * The last name of the email recipient.
+   */
+  lastName?: string;
+
+  /**
+   * An optional property to provide contextual notes or a description for an address.
+   */
+  notes?: string;
+
+  /**
+   * The date the address was last updated in a suppression list.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModified?: utcDateTime;
+
+  /**
+   * The location where the SuppressionListAddress data is stored at rest. This value is inherited from the parent Domains resource.
+   */
+  @visibility(Lifecycle.Read)
+  dataLocation?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

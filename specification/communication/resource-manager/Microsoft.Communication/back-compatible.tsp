@@ -6,16 +6,6 @@ using Microsoft.Communication;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CommunicationServiceResourceUpdate.properties);
 
-@@clientName(DomainPropertiesVerificationStates.Domain, "domain");
-@@clientName(DomainPropertiesVerificationStates.DKIM, "dkim");
-@@clientName(DomainPropertiesVerificationStates.DKIM2, "dkim2");
-@@clientName(DomainPropertiesVerificationStates.DMARC, "dmarc");
-
-@@clientName(DomainPropertiesVerificationRecords.Domain, "domain");
-@@clientName(DomainPropertiesVerificationRecords.DKIM, "dkim");
-@@clientName(DomainPropertiesVerificationRecords.DKIM2, "dkim2");
-@@clientName(DomainPropertiesVerificationRecords.DMARC, "dmarc");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateDomainRequestParameters.properties);
 
@@ -47,6 +37,22 @@ using Microsoft.Communication;
 @@clientName(SenderUsernames.createOrUpdate::parameters.resource, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SenderUsernameResource.properties);
+
+@@clientName(SmtpUsernames.createOrUpdate::parameters.resource, "parameters");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(SmtpUsernameResource.properties);
+
+@@clientName(SuppressionLists.createOrUpdate::parameters.resource,
+  "parameters"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(SuppressionListResource.properties);
+
+@@clientName(SuppressionListAddresses.createOrUpdate::parameters.resource,
+  "parameters"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(SuppressionListAddressResource.properties);
 
 @@clientName(CommunicationServices.checkNameAvailability::parameters.body,
   "nameAvailabilityParameters"
