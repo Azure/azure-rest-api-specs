@@ -587,15 +587,7 @@
             "description": "The updatable fields of the Private Endpoint Connection resource.",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tags": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/PrivateEndpointConnectionUpdate"
             }
           }
         ],
@@ -1230,6 +1222,18 @@
         }
       },
       "additionalProperties": false
+    },
+    "PrivateEndpointConnectionUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "The updatable fields of the Private Endpoint Connection resource."
     }
   },
   "securityDefinitions": {
