@@ -22,7 +22,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 @server(
   "{host}/{apiVersion}",
-  "Azure Monitor Logs Query Service",
+  "Azure Monitor OpenTelemetry Exporter Service",
   {
     /** Application Insights' Breeze endpoint. */
     host: url = "https://dc.services.visualstudio.com",
