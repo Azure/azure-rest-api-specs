@@ -2997,13 +2997,57 @@
           "description": "Describes how a Domains resource is being managed."
         },
         "verificationStates": {
-          "$ref": "#/definitions/DomainPropertiesVerificationStates",
+          "type": "object",
           "description": "List of VerificationStatusRecord",
+          "properties": {
+            "Domain": {
+              "$ref": "#/definitions/VerificationStatusRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "SPF": {
+              "$ref": "#/definitions/VerificationStatusRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DKIM": {
+              "$ref": "#/definitions/VerificationStatusRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DKIM2": {
+              "$ref": "#/definitions/VerificationStatusRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DMARC": {
+              "$ref": "#/definitions/VerificationStatusRecord",
+              "description": "A class that represents a VerificationStatus record."
+            }
+          },
           "readOnly": true
         },
         "verificationRecords": {
-          "$ref": "#/definitions/DomainPropertiesVerificationRecords",
+          "type": "object",
           "description": "List of DnsRecord",
+          "properties": {
+            "Domain": {
+              "$ref": "#/definitions/DnsRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "SPF": {
+              "$ref": "#/definitions/DnsRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DKIM": {
+              "$ref": "#/definitions/DnsRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DKIM2": {
+              "$ref": "#/definitions/DnsRecord",
+              "description": "A class that represents a VerificationStatus record."
+            },
+            "DMARC": {
+              "$ref": "#/definitions/DnsRecord",
+              "description": "A class that represents a VerificationStatus record."
+            }
+          },
           "readOnly": true
         },
         "userEngagementTracking": {
@@ -3014,58 +3058,6 @@
       "required": [
         "domainManagement"
       ]
-    },
-    "DomainPropertiesVerificationRecords": {
-      "type": "object",
-      "description": "List of DnsRecord",
-      "properties": {
-        "Domain": {
-          "$ref": "#/definitions/DnsRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "SPF": {
-          "$ref": "#/definitions/DnsRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DKIM": {
-          "$ref": "#/definitions/DnsRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DKIM2": {
-          "$ref": "#/definitions/DnsRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DMARC": {
-          "$ref": "#/definitions/DnsRecord",
-          "description": "A class that represents a VerificationStatus record."
-        }
-      }
-    },
-    "DomainPropertiesVerificationStates": {
-      "type": "object",
-      "description": "List of VerificationStatusRecord",
-      "properties": {
-        "Domain": {
-          "$ref": "#/definitions/VerificationStatusRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "SPF": {
-          "$ref": "#/definitions/VerificationStatusRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DKIM": {
-          "$ref": "#/definitions/VerificationStatusRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DKIM2": {
-          "$ref": "#/definitions/VerificationStatusRecord",
-          "description": "A class that represents a VerificationStatus record."
-        },
-        "DMARC": {
-          "$ref": "#/definitions/VerificationStatusRecord",
-          "description": "A class that represents a VerificationStatus record."
-        }
-      }
     },
     "DomainResource": {
       "type": "object",
