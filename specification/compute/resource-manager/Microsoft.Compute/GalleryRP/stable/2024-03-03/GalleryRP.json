@@ -77,9 +77,147 @@
     },
     {
       "name": "CommunityGalleryImageVersions"
+    },
+    {
+      "name": "SharedGalleryInvites"
+    },
+    {
+      "name": "TenantLevelSharedGalleryInvites"
     }
   ],
   "paths": {
+    "/providers/Microsoft.Compute/locations/{location}/tenantLevelSharedGallerySubscriptions/{sharedGallerySubscriptionId}/sharedGalleries/{sharedGalleryName}/accept": {
+      "post": {
+        "operationId": "TenantLevelGallerySharing_Accept",
+        "tags": [
+          "TenantLevelSharedGalleryInvites"
+        ],
+        "description": "Accept sharing of a subscription-level shared gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "sharedGallerySubscriptionId",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelSharedGalleryInvite"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelSharedGalleryInvite"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Compute/locations/{location}/tenantLevelSharedGallerySubscriptions/{sharedGallerySubscriptionId}/sharedGalleries/{sharedGalleryName}/reject": {
+      "post": {
+        "operationId": "TenantLevelGallerySharing_Reject",
+        "tags": [
+          "TenantLevelSharedGalleryInvites"
+        ],
+        "description": "Reject sharing of a subscription-level shared gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "sharedGallerySubscriptionId",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelSharedGalleryInvite"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/TenantLevelSharedGalleryInvite"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/galleries": {
       "get": {
         "operationId": "Galleries_List",
@@ -747,6 +885,144 @@
             "$ref": "./examples/sharedGalleryExamples/SharedGalleryImageVersion_Get.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGallerySubscriptions/{sharedGallerySubscriptionId}/sharedGalleries/{sharedGalleryName}/accept": {
+      "post": {
+        "operationId": "GallerySharing_Accept",
+        "tags": [
+          "SharedGalleryInvites"
+        ],
+        "description": "Accept sharing of a subscription-level shared gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "sharedGallerySubscriptionId",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryInvite"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryInvite"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGallerySubscriptions/{sharedGallerySubscriptionId}/sharedGalleries/{sharedGalleryName}/reject": {
+      "post": {
+        "operationId": "GallerySharing_Reject",
+        "tags": [
+          "SharedGalleryInvites"
+        ],
+        "description": "Reject sharing of a subscription-level shared gallery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "sharedGallerySubscriptionId",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedGalleryName",
+            "in": "path",
+            "description": "The name of the SharedGallerySubscription",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryInvite"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SharedGalleryInvite"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries": {

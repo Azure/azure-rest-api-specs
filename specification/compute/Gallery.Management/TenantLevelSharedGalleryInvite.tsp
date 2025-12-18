@@ -29,7 +29,40 @@ model TenantLevelSharedGalleryInvite
 @armResourceOperations
 interface TenantLevelSharedGalleryInvites {
   /**
-   * No operation supported at this level.
-   * This is only needed to form the route with the expected segments
+   * Accept sharing of a subscription-level shared gallery.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
+  @action("accept")
+  @operationId("TenantLevelGallerySharing_Accept")
+  tenantLevelGallerySharingAccept is ComputeResourceActionAsyncBase<
+    TenantLevelSharedGalleryInvite,
+    void,
+    ArmResponse<TenantLevelSharedGalleryInvite> | (ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = TenantLevelSharedGalleryInvite> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot _: TenantLevelSharedGalleryInvite;
+    })
+  >;
+
+  /**
+   * Reject sharing of a subscription-level shared gallery.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
+  @action("reject")
+  @operationId("TenantLevelGallerySharing_Reject")
+  tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
+    TenantLevelSharedGalleryInvite,
+    void,
+    ArmResponse<TenantLevelSharedGalleryInvite> | (ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader<FinalResult = TenantLevelSharedGalleryInvite> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot _: TenantLevelSharedGalleryInvite;
+    })
+  >;
 }
