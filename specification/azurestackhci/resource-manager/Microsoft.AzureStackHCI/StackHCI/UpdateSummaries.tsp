@@ -12,7 +12,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 /**
- * Get the update summaries for the clusters
+ * Get the update summaries for the cluster
  */
 @singleton("default")
 @parentResource(Cluster)
