@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "$filter": "ProblemClassificationId eq 'compute_vm_problemClassification_guid'",
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "132d901f-189d-4381-9214-fe68e27e05a1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testTicket1",
+            "type": "Microsoft.Support/supportTickets",
+            "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testTicket1",
+            "properties": {
+              "description": "my description",
+              "advancedDiagnosticConsent": "Yes",
+              "contactDetails": {
+                "country": "usa",
+                "firstName": "abc",
+                "lastName": "xyz",
+                "preferredContactMethod": "email",
+                "preferredSupportLanguage": "en-US",
+                "preferredTimeZone": "Pacific Standard Time",
+                "primaryEmailAddress": "abc@contoso.com"
+              },
+              "createdDate": "2022-05-04T21:52:10Z",
+              "enrollmentId": "",
+              "fileWorkspaceName": "testTicket1",
+              "modifiedDate": "2022-05-12T23:05:19Z",
+              "problemClassificationDisplayName": "Compute-VM (cores-vCPUs) subscription limit increases",
+              "problemClassificationId": "/providers/Microsoft.Support/services/service_guid/problemClassifications/compute_vm_problemClassification_guid",
+              "require24X7Response": false,
+              "serviceDisplayName": "service_displayName",
+              "serviceId": "/providers/Microsoft.Support/services/service_guid",
+              "severity": "minimal",
+              "status": "Open",
+              "supportEngineer": {
+                "emailAddress": "xyz@contoso.com"
+              },
+              "supportPlanDisplayName": "Premier",
+              "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+              "supportPlanType": "Premier",
+              "supportTicketId": "2205060010000072",
+              "title": "my title"
+            }
+          },
+          {
+            "name": "testTicket2",
+            "type": "Microsoft.Support/supportTickets",
+            "id": "/subscriptions/132d901f-189d-4381-9214-fe68e27e05a1/providers/Microsoft.Support/supportTickets/testTicket2",
+            "properties": {
+              "description": "This is a test - please ignore",
+              "advancedDiagnosticConsent": "Yes",
+              "contactDetails": {
+                "country": "USA",
+                "firstName": "abc",
+                "lastName": "xyz",
+                "preferredContactMethod": "email",
+                "preferredSupportLanguage": "en-US",
+                "preferredTimeZone": "Pacific Standard Time",
+                "primaryEmailAddress": "abc@contoso.com"
+              },
+              "createdDate": "2022-05-04T21:38:42Z",
+              "fileWorkspaceName": "testTicket2",
+              "modifiedDate": "2022-05-04T21:39:14Z",
+              "problemClassificationDisplayName": "Compute-VM (cores-vCPUs) subscription limit increases",
+              "problemClassificationId": "/providers/Microsoft.Support/services/service_guid/problemClassifications/compute_vm_problemClassification_guid",
+              "require24X7Response": false,
+              "serviceDisplayName": "service_displayName",
+              "serviceId": "/providers/Microsoft.Support/services/service_guid",
+              "severity": "minimal",
+              "status": "Open",
+              "supportEngineer": {
+                "emailAddress": "xyz@contoso.com"
+              },
+              "supportPlanDisplayName": "Premier",
+              "supportPlanId": "U291cmNlOlNDTSxDbGFyaWZ5SW5zdGFsbGF0aW9uU2l0ZUlkOjcsTGluZUl0ZW1JZDo5ODY1NzIyOSxDb250cmFjdElkOjk4NjU5MTk0LFN1YnNjcmlwdGlvbklkOjc2Y2I3N2ZhLThiMTctNGVhYi05NDkzLWI2NWRhY2U5OTgxMyw=",
+              "supportPlanType": "Premier",
+              "supportTicketId": "2205040010000077",
+              "title": "Test - please ignore"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SupportTickets_List",
+  "title": "List support tickets with a certain problem classification id for a subscription"
+}
