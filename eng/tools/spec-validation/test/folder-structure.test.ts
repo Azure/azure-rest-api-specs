@@ -4,6 +4,7 @@ mockAll();
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
+import type { SimpleGit } from "simple-git";
 import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
@@ -322,15 +323,23 @@ options:
     let simpleGitSpy: MockInstance;
 
     beforeEach(async () => {
-      const { simpleGit } = await import("simple-git");
-      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+      const simpleGitModule = await import("simple-git");
+      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      simpleGitSpy.mockReset();
     });
 
     it("should enforce v2 compliance when target branch uses v2 structure", async function () {
       vi.mocked(globby.globby).mockImplementation(() => {
-        return Promise.resolve(["/foo/bar/tspconfig.yaml"]);
+        return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
       });
       normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Ensure V1 validation passes so we know failure is due to V2 enforcement
+      readTspConfigSpy.mockResolvedValue(`
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`);
 
       // Set environment variable to specify target branch
       const originalGitHub = process.env.GITHUB_BASE_REF;
@@ -369,7 +378,7 @@ options:
           return Promise.resolve("main");
         }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
 
@@ -409,7 +418,7 @@ options:
           return Promise.resolve("main");
         }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should succeed with v1 validation since target branch is v1
@@ -449,7 +458,7 @@ options:
           return Promise.resolve("main");
         }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
 
@@ -469,15 +478,16 @@ options:
     let simpleGitSpy: MockInstance;
 
     beforeEach(async () => {
-      const { simpleGit } = await import("simple-git");
-      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+      const simpleGitModule = await import("simple-git");
+      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      simpleGitSpy.mockReset();
 
       // Mock git for v2 structure tests
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({ current: "main" }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
     });
 
     it("should fail v2 data-plane with incorrect depth", async function () {
@@ -529,7 +539,8 @@ options:
         "/gitroot/specification/foo/resource-manager/Microsoft.Foo",
       );
       assert(!result.success);
-      assert(result.errorOutput?.includes("must be in format 'A.B' where A and B are PascalCase"));
+      // This path has only 2 levels under resource-manager, so it should fail for depth, not RP namespace format
+      assert(result.errorOutput?.includes("exactly two levels under 'resource-manager'"));
     });
 
     it("should fail v2 with uppercase org name", async function () {
@@ -550,8 +561,9 @@ options:
     let simpleGitSpy: MockInstance;
 
     beforeEach(async () => {
-      const { simpleGit } = await import("simple-git");
-      simpleGitSpy = vi.spyOn({ simpleGit }, "simpleGit");
+      const simpleGitModule = await import("simple-git");
+      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      simpleGitSpy.mockReset();
     });
 
     it("should detect TypeSpec project with tspconfig.yaml", async function () {
@@ -570,7 +582,15 @@ options:
         return Promise.resolve([]);
       });
       normalizePathSpy.mockReturnValue("/gitroot");
-      fileExistsSpy.mockResolvedValue(false); // No main.tsp, client.tsp, examples files
+      // Mock fileExists to allow folder existence but fail on main.tsp, client.tsp, examples
+      fileExistsSpy.mockImplementation((file: string) => {
+        if (file === "/gitroot/specification/foo/Foo") return Promise.resolve(true); // Folder exists
+        if (file.includes("main.tsp")) return Promise.resolve(false);
+        if (file.includes("client.tsp")) return Promise.resolve(false);
+        if (file.includes("examples")) return Promise.resolve(false);
+        if (file.includes("tspconfig.yaml")) return Promise.resolve(true); // tspconfig exists
+        return Promise.resolve(true);
+      });
 
       // Mock git for import validation
       const mockGit: Record<string, unknown> = {
@@ -586,10 +606,14 @@ options:
           if (args[0] === "branch" && args[1] === "-vv") {
             return Promise.resolve("* main abc123 Commit message");
           }
+          if (args.includes("ls-tree")) {
+            // Target branch doesn't have v2 structure
+            return Promise.resolve("");
+          }
           return Promise.resolve("main");
         }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should apply TypeSpec-specific validations
@@ -601,6 +625,7 @@ options:
         return Promise.resolve([]); // No tspconfig files
       });
       fileExistsSpy.mockImplementation((path: string) => {
+        if (path === "/gitroot/specification/foo/Foo") return Promise.resolve(true); // Folder exists
         if (path.includes("main.tsp")) return Promise.resolve(true);
         if (path.includes("examples")) return Promise.resolve(false); // No examples folder
         return Promise.resolve(false);
@@ -621,10 +646,14 @@ options:
           if (args[0] === "branch" && args[1] === "-vv") {
             return Promise.resolve("* main abc123 Commit message");
           }
+          if (args.includes("ls-tree")) {
+            // Target branch doesn't have v2 structure
+            return Promise.resolve("");
+          }
           return Promise.resolve("main");
         }),
       };
-      simpleGitSpy.mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should require examples folder when main.tsp exists
@@ -635,7 +664,10 @@ options:
       vi.mocked(globby.globby).mockImplementation(() => {
         return Promise.resolve([]); // No tspconfig files
       });
-      fileExistsSpy.mockResolvedValue(false); // No TypeSpec files
+      fileExistsSpy.mockImplementation((path: string) => {
+        if (path === "/gitroot/specification/foo/Foo") return Promise.resolve(true); // Folder exists
+        return Promise.resolve(false); // No TypeSpec files
+      });
       normalizePathSpy.mockReturnValue("/gitroot");
 
       // Mock git operations for import validation
@@ -652,12 +684,14 @@ options:
           if (args[0] === "branch" && args[1] === "-vv") {
             return Promise.resolve("* main abc123 Commit message");
           }
+          if (args.includes("ls-tree")) {
+            // Target branch doesn't have v2 structure
+            return Promise.resolve("");
+          }
           return Promise.resolve("main");
         }),
       };
-      const { simpleGit } = await import("simple-git");
-      // @ts-expect-error - Mock object is intentionally loose typed
-      vi.spyOn({ simpleGit }, "simpleGit").mockReturnValue(mockGit);
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should succeed for non-TypeSpec projects
