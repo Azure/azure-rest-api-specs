@@ -1054,6 +1054,34 @@ model SignalTimeSeriesPoint {
   healthState: HealthState;
 }
 
+@added(Versions.v2026_01_01_preview)
+@doc("Health report that's submitted for a specific signal")
+model HealthReportRequest {
+  @doc("Name of the entity signal to report health for")
+  signalName: signalName;
+
+  @doc("Reported value of the signal")
+  value: float64;
+
+  @doc("Health state to report for the signal")
+  healthState: HealthState;
+
+  @doc("Evaluation rules that were used to determine the reported health state")
+  evaluationRules?: HealthReportEvaluationRule;
+
+  @doc("Timestamp when the health report expires. If not specified, default is used")
+  expiresAt?: utcDateTime;
+
+  @doc("Optional additional context or description for the health report")
+  additionalContext?: string4096;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Evaluation rules for the health report")
+model HealthReportEvaluationRule {
+  ...OmitProperties<EvaluationRule, "dynamicDetectionRule">;
+}
+
 alias TimestampQueryParam = {
   @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
   @query
@@ -1129,6 +1157,15 @@ interface Entities {
     Entity,
     SignalHistoryRequest,
     SignalHistoryResponse
+  >;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Ingest a health report for a specific signal on an entity")
+  @post
+  @action("ingestHealthReport")
+  ingestHealthReport is ArmResourceActionNoContentSync<
+    Entity,
+    HealthReportRequest
   >;
 }
 

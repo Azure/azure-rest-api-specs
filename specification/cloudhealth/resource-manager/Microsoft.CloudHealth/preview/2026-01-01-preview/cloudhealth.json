@@ -1254,6 +1254,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/entities/{entityName}/ingestHealthReport": {
+      "post": {
+        "operationId": "Entities_IngestHealthReport",
+        "tags": [
+          "Entities"
+        ],
+        "description": "Ingest a health report for a specific signal on an entity",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "healthModelName",
+            "in": "path",
+            "description": "Name of health model resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,42}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "entityName",
+            "in": "path",
+            "description": "Name of the entity. Must be unique within a health model.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{1,258}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HealthReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_IngestHealthReport": {
+            "$ref": "./examples/Entities_IngestHealthReport.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudHealth/healthmodels/{healthModelName}/relationships": {
       "get": {
         "operationId": "Relationships_ListByHealthModel",
@@ -2613,6 +2674,57 @@
           "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
+    },
+    "HealthReportEvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rules for the health report",
+      "properties": {
+        "degradedRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Degraded rule with static threshold. When used, dynamicDetectionRule must not be set."
+        },
+        "unhealthyRule": {
+          "$ref": "#/definitions/ThresholdRule",
+          "description": "Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set."
+        }
+      }
+    },
+    "HealthReportRequest": {
+      "type": "object",
+      "description": "Health report that's submitted for a specific signal",
+      "properties": {
+        "signalName": {
+          "$ref": "#/definitions/signalName",
+          "description": "Name of the entity signal to report health for"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "Reported value of the signal"
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state to report for the signal"
+        },
+        "evaluationRules": {
+          "$ref": "#/definitions/HealthReportEvaluationRule",
+          "description": "Evaluation rules that were used to determine the reported health state"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the health report expires. If not specified, default is used"
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/string4096",
+          "description": "Optional additional context or description for the health report"
+        }
+      },
+      "required": [
+        "signalName",
+        "value",
+        "healthState"
+      ]
     },
     "HealthState": {
       "type": "string",
