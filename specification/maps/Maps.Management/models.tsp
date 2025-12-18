@@ -219,7 +219,7 @@ model MapsAccountProperties {
   /**
    * Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage.
    */
-  disableLocalAuth?: boolean;
+  disableLocalAuth?: boolean = false;
 
   /**
    * The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`
@@ -246,6 +246,7 @@ model MapsAccountProperties {
   /**
    * List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope).
    */
+  @identifiers(#["locationName"])
   locations?: LocationsItem[];
 
   /**
@@ -284,6 +285,7 @@ model CorsRules {
    * The list of CORS rules. You can include up to five CorsRule elements in the request.
    */
   @identifiers(#[])
+  @maxItems(5)
   corsRules?: CorsRule[];
 }
 
@@ -410,6 +412,7 @@ model AccountSasParameters {
    * Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement.
    */
   @maxValue(500)
+  @minValue(0)
   maxRatePerSecond: int32 = 500;
 
   /**

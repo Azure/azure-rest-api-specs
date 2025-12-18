@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   create is PrivateEndpointOperations.CreateOrReplaceAsync<
     MapsAccount,
     PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -39,7 +39,8 @@ interface PrivateEndpointConnections {
    */
   delete is PrivateEndpointOperations.DeleteAsync<
     MapsAccount,
-    PrivateEndpointConnection
+    PrivateEndpointConnection,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -52,8 +53,10 @@ interface PrivateEndpointConnections {
   >;
 }
 
-// @@maxLength(PrivateEndpointConnection.name, 98);
-// @@minLength(PrivateEndpointConnection.name, 3);
+@@maxLength(CommonTypes.PrivateEndpointConnection.name, 98);
+@@minLength(CommonTypes.PrivateEndpointConnection.name, 3);
+@@pattern(CommonTypes.PrivateEndpointConnection.name, "^[^%&:\\\\/#?]+$");
+
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."
