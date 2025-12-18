@@ -63,3 +63,8 @@ using Microsoft.Impact;
   "csharp"
 );
 @@alternateType(ImpactDetails.impactId, armResourceIdentifier, "csharp");
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);

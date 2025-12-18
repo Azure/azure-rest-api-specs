@@ -50,11 +50,8 @@ interface CloudEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
-  create is ArmCreateOperation<
-    ResourceInstanceParameters<
-      CloudEndpoint,
-      DefaultBaseParameters<CloudEndpoint>
-    >,
+  create is Legacy.CreateOrReplaceAsync<
+    CloudEndpoint,
     CloudEndpointCreateParameters,
     Response = (ArmResourceUpdatedResponse<CloudEndpoint> & {
       @header("x-ms-correlation-request-id")
@@ -74,7 +71,7 @@ interface CloudEndpoints {
       @doc("Request id")
       requestId?: string;
     }),
-    ErrorResponse = StorageSyncError
+    Error = StorageSyncError
   >;
 
   /**
@@ -92,7 +89,7 @@ interface CloudEndpoints {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudEndpoint> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
