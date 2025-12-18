@@ -2,7 +2,10 @@ import { relative, resolve } from "path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { repoRoot } from "../../../shared/test/repo.js";
 
+/**  @type {import("vitest").MockedFunction<import("simple-git").SimpleGit["raw"]>} */
 const mockRaw = vi.hoisted(() => vi.fn().mockResolvedValue(""));
+
+/**  @type {import("vitest").MockedFunction<import("simple-git").SimpleGit["show"]>} */
 const mockShow = vi.hoisted(() => vi.fn().mockResolvedValue(""));
 
 vi.mock("simple-git", () => ({
