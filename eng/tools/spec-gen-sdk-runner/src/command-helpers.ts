@@ -54,7 +54,9 @@ export function setPipelineVariables(
     setVsoVariable("PrTitle", prTitle);
     setVsoVariable("PrBody", prBody);
   }
-  setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder ?? "");
+  if (stagedArtifactsFolder) {
+    setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
+  }
 }
 
 /**
