@@ -31,6 +31,8 @@ import "./CommunityGalleryImage.tsp";
 import "./CommunityGalleryImageVersion.tsp";
 import "./SharedGallerySubscription.tsp";
 import "./TenantLevelSharedGallerySubscription.tsp";
+import "./SharedGalleryInvite.tsp";
+import "./TenantLevelSharedGalleryInvite.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;

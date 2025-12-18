@@ -2813,6 +2813,17 @@ model SharedGallerySubscriptionProperties {
 }
 
 /**
+ * The shared gallery invite's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model SharedGalleryInviteProperties {
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  id?: string;
+}
+
+/**
  * Concrete proxy resource types can be created by aliasing this type using a specific property type.
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)

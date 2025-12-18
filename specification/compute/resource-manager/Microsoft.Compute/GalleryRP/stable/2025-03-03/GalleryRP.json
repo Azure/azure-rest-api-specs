@@ -7395,6 +7395,31 @@
         }
       }
     },
+    "SharedGalleryInvite": {
+      "type": "object",
+      "description": "Specifies information about the Shared Gallery Subscription that hosts shared galleries shared at subscription level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedGalleryInviteProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirSharedGalleryResource"
+        }
+      ]
+    },
+    "SharedGalleryInviteProperties": {
+      "type": "object",
+      "description": "The shared gallery invite's properties",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the subscription that hosts the shared gallery."
+        }
+      }
+    },
     "SharedGalleryList": {
       "type": "object",
       "description": "The List Shared Galleries operation response.",
@@ -7444,7 +7469,7 @@
     },
     "SharedGallerySubscription": {
       "type": "object",
-      "description": "Specifies information about the Shared Gallery Subscription that hosts shared galleries shared at subscription level.",
+      "description": "Specifies information about the Invite for a Shared Gallery shared at subscription level.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SharedGallerySubscriptionProperties",
@@ -7755,6 +7780,21 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "TenantLevelSharedGalleryInvite": {
+      "type": "object",
+      "description": "Specifies information about the Invite for a Shared Gallery shared at tenant level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedGalleryInviteProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirSharedGalleryResource"
+        }
       ]
     },
     "TenantLevelSharedGallerySubscription": {
