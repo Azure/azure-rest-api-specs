@@ -3,22 +3,22 @@
   "operationId": "Orders_Get",
   "parameters": {
     "api-version": "2023-07-12-preview",
-    "subscriptionId": "subid",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
-    "orderId": "order1"
+    "name": "order1"
   },
   "responses": {
     "200": {
       "description": "",
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Hardware/orders/order1",
         "name": "order1",
         "location": "eus2",
         "properties": {
           "provisioningState": "Pending",
           "customerOrder": {
             "id": "Customer_ORDER_Number",
-            "createdDate": "2022-06-06"
+            "createdDateTime": "2022-06-06T17:18:21.373+00:00"
           },
           "status": "Pending",
           "orderLines": [
@@ -27,10 +27,7 @@
               "createdDateTime": "2022-06-06T17:18:21.373+00:00",
               "status": "Pending",
               "quantity": {
-                "ordered": 10,
-                "confirmed": 0,
-                "shipped": 0,
-                "returned": 0
+                "pending": 10
               },
               "product": {
                 "type": "UPN",
@@ -55,10 +52,10 @@
                 "type": "BusinessLocation",
                 "id": "054321456"
               },
-              "shippingMethod": "shipment",
-              "requestedDeliveryDate": "2022-06-27",
-              "estimatedDeliveryDate": "2022-06-27",
-              "estimatedShippedDate": "2022-06-27"
+              "shippingMethod": "Ground",
+              "requestedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
+              "estimatedDeliveryDateTime": "2022-06-27T17:18:21.373+00:00",
+              "estimatedShippedDateTime": "2022-06-27T17:18:21.373+00:00"
             }
           ],
           "currency": "USD"
