@@ -23,3 +23,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_01_01_preview: "2026-01-01-preview",
 }
+
+@added(Versions.v2026_01_01_preview)
+interface Operations extends Azure.ResourceManager.Operations {}

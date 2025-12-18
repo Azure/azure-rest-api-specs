@@ -71,13 +71,13 @@ model Action {
   @doc("The deployment name.")
   deploymentName?: string;
 
-  @doc("Operation error.")
+  @doc("Action error.")
   error?: Error;
 
-  @doc("The start time of the stage.")
+  @doc("The start time of the action.")
   startTime?: utcDateTime;
 
-  @doc("The end time of the stage.")
+  @doc("The end time of the action.")
   endTime?: utcDateTime;
 
   @doc("The retry attempt.")

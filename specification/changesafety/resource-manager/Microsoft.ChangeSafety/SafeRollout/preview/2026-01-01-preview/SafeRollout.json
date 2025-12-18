@@ -39,6 +39,9 @@
   },
   "tags": [
     {
+      "name": "Operations"
+    },
+    {
       "name": "SafeRollouts"
     },
     {
@@ -46,6 +49,37 @@
     }
   ],
   "paths": {
+    "/providers/Microsoft.ChangeSafety/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/safeRollouts": {
       "get": {
         "operationId": "SafeRollouts_ListBySubscription",
@@ -766,17 +800,17 @@
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Operation error."
+          "description": "Action error."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start time of the stage."
+          "description": "The start time of the action."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end time of the stage."
+          "description": "The end time of the action."
         },
         "retryAttempt": {
           "type": "integer",
