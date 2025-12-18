@@ -1,41 +1,43 @@
 {
   "parameters": {
+    "accountName": "myMapsAccount",
     "api-version": "2025-10-01-preview",
-    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
     "resourceGroupName": "myResourceGroup",
-    "accountName": "myMapsAccount"
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "name": "myMapsAccount",
         "type": "Microsoft.Maps/accounts",
-        "location": "eastus",
+        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "kind": "Gen2",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-07-02T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z"
-        },
-        "tags": {
-          "test": "true"
+        "location": "eastus",
+        "properties": {
+          "disableLocalAuth": false,
+          "linkedResources": [],
+          "locations": [],
+          "provisioningState": "Succeeded",
+          "uniqueId": "string"
         },
         "sku": {
           "name": "G2",
           "tier": "Standard"
         },
-        "properties": {
-          "uniqueId": "string",
-          "disableLocalAuth": false,
-          "provisioningState": "Succeeded",
-          "linkedResources": [],
-          "locations": []
+        "systemData": {
+          "createdAt": "2021-07-02T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "test": "true"
         }
       }
     }
-  }
+  },
+  "operationId": "Accounts_Get",
+  "title": "GetAccount"
 }

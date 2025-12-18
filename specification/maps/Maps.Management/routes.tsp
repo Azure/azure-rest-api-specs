@@ -56,5 +56,5 @@ interface OperationStatusOperationGroup {
     @minLength(1)
     @path
     operationId: string,
-  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 }

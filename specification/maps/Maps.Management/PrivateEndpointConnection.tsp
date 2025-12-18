@@ -52,8 +52,8 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@maxLength(PrivateEndpointConnection.name, 98);
-@@minLength(PrivateEndpointConnection.name, 3);
+// @@maxLength(PrivateEndpointConnection.name, 98);
+// @@minLength(PrivateEndpointConnection.name, 3);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.create::parameters.resource,
   "The private endpoint connection properties."

@@ -1,20 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-10-01-preview",
-    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0",
-    "resourceGroupName": "myResourceGroup",
-    "accountName": "myMapsAccount",
     "MapsAccount": {
-      "location": "eastus",
-      "sku": {
-        "name": "G2"
-      },
       "kind": "Gen2",
-      "tags": {
-        "test": "true"
-      },
+      "location": "eastus",
       "properties": {
-        "disableLocalAuth": true,
         "cors": {
           "corsRules": [
             {
@@ -25,41 +14,34 @@
             }
           ]
         },
+        "disableLocalAuth": true,
         "locations": [
           {
             "locationName": "northeurope"
           }
         ]
+      },
+      "sku": {
+        "name": "G2"
+      },
+      "tags": {
+        "test": "true"
       }
-    }
+    },
+    "accountName": "myMapsAccount",
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "name": "myMapsAccount",
         "type": "Microsoft.Maps/accounts",
+        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "kind": "Gen2",
         "location": "eastus",
-        "tags": {
-          "test": "true"
-        },
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-07-02T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z"
-        },
-        "sku": {
-          "name": "G2",
-          "tier": "Standard"
-        },
         "properties": {
-          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
-          "provisioningState": "Succeeded",
-          "disableLocalAuth": true,
           "cors": {
             "corsRules": [
               {
@@ -70,40 +52,40 @@
               }
             ]
           },
+          "disableLocalAuth": true,
           "locations": [
             {
               "locationName": "northeurope"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593"
+        },
+        "sku": {
+          "name": "G2",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2021-07-02T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "test": "true"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "name": "myMapsAccount",
         "type": "Microsoft.Maps/accounts",
+        "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
         "kind": "Gen2",
         "location": "eastus",
-        "tags": {
-          "test": "true"
-        },
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-07-02T01:01:01.1075056Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z"
-        },
-        "sku": {
-          "name": "G2",
-          "tier": "Standard"
-        },
         "properties": {
-          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593",
-          "provisioningState": "Succeeded",
-          "disableLocalAuth": true,
           "cors": {
             "corsRules": [
               {
@@ -114,13 +96,33 @@
               }
             ]
           },
+          "disableLocalAuth": true,
           "locations": [
             {
               "locationName": "northeurope"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded",
+          "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593"
+        },
+        "sku": {
+          "name": "G2",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2021-07-02T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-07-02T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        },
+        "tags": {
+          "test": "true"
         }
       }
     }
-  }
+  },
+  "operationId": "Accounts_CreateOrUpdate",
+  "title": "Create Gen2 Account"
 }
