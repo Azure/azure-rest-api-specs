@@ -2684,8 +2684,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/deploy": {
       "post": {
-        "description": "Deploy the cluster to the provided rack.",
-        "summary": "Deploy the cluster to the rack.",
+        "description": "Deploy the cluster using the rack configuration provided during creation.",
+        "summary": "Deploy the cluster.",
         "operationId": "Clusters_Deploy",
         "parameters": [
           {
@@ -6020,6 +6020,9 @@
           "minLength": 1,
           "x-ms-secret": true
         },
+        "passwordRef": {
+          "$ref": "#/definitions/PasswordReference"
+        },
         "username": {
           "description": "The username of the administrator of the device used during initialization.",
           "type": "string",
@@ -6319,18 +6322,15 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "AgentPoolDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "kubernetesVersion": {
           "description": "The Kubernetes version running in this agent pool.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "labels": {
           "description": "The labels applied to the nodes in this agent pool.",
@@ -6375,8 +6375,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "AgentPoolProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "taints": {
           "description": "The taints applied to the nodes in this agent pool.",
@@ -6467,13 +6466,33 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "AvailabilityLifecycle"
-          },
-          "readOnly": true
+          }
         },
         "version": {
           "description": "The version available for upgrading.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        }
+      }
+    },
+    "BareMetalHost": {
+      "type": "object",
+      "title": "BareMetalHost represents the details of the bare metal host.",
+      "properties": {
+        "bmcCredentialsSecretName": {
+          "description": "The name of the secret containing the BMC credentials.",
+          "type": "string"
+        },
+        "bmcCredentialsSecretNamespace": {
+          "description": "The namespace of the secret containing the BMC credentials.",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "The name of the bare metal host that implements this bare metal machine in Metal3.",
+          "type": "string"
+        },
+        "hostNamespace": {
+          "description": "The namespace of the bare metal host that implements this bare metal machine in Metal3.",
+          "type": "string"
         }
       }
     },
@@ -6535,8 +6554,7 @@
       "properties": {
         "bmcConnectionString": {
           "description": "The connection string for the baseboard management controller including IP address and protocol.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "bmcCredentials": {
           "$ref": "#/definitions/AdministrativeCredentials",
@@ -6592,6 +6610,19 @@
             "modelAsString": true,
             "name": "BareMetalMachineEvacuate"
           }
+        }
+      }
+    },
+    "BareMetalMachineInternalMetadata": {
+      "type": "object",
+      "title": "BareMetalMachineInternalMetadata represents the configuration details of the bare metal machine that are NOT exposed to the customer.",
+      "properties": {
+        "bareMetalHost": {
+          "$ref": "#/definitions/BareMetalHost"
+        },
+        "tpmEndorsementKey": {
+          "description": "The thumbprint or SHA of the TPM endorsement key that ensures authenticity of the bare metal machine.",
+          "type": "string"
         }
       }
     },
@@ -6714,13 +6745,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineKeySetDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "expiration": {
           "description": "The date and time after which the users in this key set will be removed from the bare metal machines.",
@@ -6737,8 +6766,7 @@
         "lastValidation": {
           "description": "The last time this key set was validated.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "osGroupName": {
           "description": "The name of the group that users will be assigned to on the operating system of the machines.",
@@ -6779,8 +6807,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineKeySetProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "userList": {
           "description": "The unique list of permitted users.",
@@ -6800,8 +6827,7 @@
           },
           "x-ms-identifiers": [
             "azureUserName"
-          ],
-          "readOnly": true
+          ]
         }
       }
     },
@@ -6891,8 +6917,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "bmcConnectionString": {
           "description": "The connection string for the baseboard management controller including IP address and protocol.",
@@ -6914,8 +6939,7 @@
         },
         "clusterId": {
           "description": "The resource ID of the cluster this bare metal machine is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "cordonStatus": {
           "description": "The cordon status of the bare metal machine.",
@@ -6927,8 +6951,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineCordonStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatus": {
           "description": "The more detailed status of the bare metal machine.",
@@ -6944,13 +6967,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hardwareInventory": {
           "$ref": "#/definitions/HardwareInventory",
@@ -6967,18 +6988,18 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/BareMetalMachineInternalMetadata"
         },
         "kubernetesNodeName": {
           "description": "The name of this machine represented by the host object in the Cluster's Kubernetes control plane.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "kubernetesVersion": {
           "description": "The version of Kubernetes running on this machine.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "machineDetails": {
           "description": "The custom details provided by the customer.",
@@ -6996,18 +7017,15 @@
         },
         "oamIpv4Address": {
           "description": "The IPv4 address that is assigned to the bare metal machine during the cluster deployment.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "oamIpv6Address": {
           "description": "The IPv6 address that is assigned to the bare metal machine during the cluster deployment.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "osImage": {
           "description": "The image that is currently provisioned to the OS disk.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "powerState": {
           "description": "The power state derived from the baseboard management controller.",
@@ -7019,8 +7037,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachinePowerState"
-          },
-          "readOnly": true
+          }
         },
         "provisioningState": {
           "description": "The provisioning state of the bare metal machine.",
@@ -7035,8 +7052,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "rackId": {
           "description": "The resource ID of the rack where this bare metal machine resides.",
@@ -7059,8 +7075,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineReadyState"
-          },
-          "readOnly": true
+          }
         },
         "serialNumber": {
           "description": "The serial number of the bare metal machine.",
@@ -7070,16 +7085,14 @@
         },
         "serviceTag": {
           "description": "The discovered value of the machine's service tag.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "virtualMachinesAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of the resource IDs for the VirtualMachines that are hosted on this bare metal machine.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -7423,13 +7436,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BmcKeySetDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "expiration": {
           "description": "The date and time after which the users in this key set will be removed from the baseboard management controllers.",
@@ -7439,8 +7450,7 @@
         "lastValidation": {
           "description": "The last time this key set was validated.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "privilegeLevel": {
           "description": "The access level allowed for the users in this key set.",
@@ -7471,8 +7481,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BmcKeySetProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "userList": {
           "description": "The unique list of permitted users.",
@@ -7492,8 +7501,7 @@
           },
           "x-ms-identifiers": [
             "azureUserName"
-          ],
-          "readOnly": true
+          ]
         }
       }
     },
@@ -7601,13 +7609,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this cloud services network is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The more detailed status of the cloud services network.",
@@ -7620,13 +7626,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "CloudServicesNetworkDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "enableDefaultEgressEndpoints": {
           "description": "The indicator of whether the platform default endpoints are allowed for the egress traffic.",
@@ -7647,8 +7651,7 @@
           "items": {
             "$ref": "#/definitions/EgressEndpoint"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "hybridAksClustersAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of Hybrid AKS cluster resource IDs that are associated with this cloud services network.",
@@ -7660,8 +7663,7 @@
         },
         "interfaceName": {
           "description": "The name of the interface that will be present in the virtual machine to represent this network.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the cloud services network.",
@@ -7676,8 +7678,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "CloudServicesNetworkProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "virtualMachinesAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of virtual machine resource IDs, excluding any Hybrid AKS virtual machines, that are currently using this cloud services network.",
@@ -7728,28 +7729,23 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ControlImpact"
-          },
-          "readOnly": true
+          }
         },
         "expectedDuration": {
           "description": "The expected duration needed for this upgrade.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "impactDescription": {
           "description": "The impact description including the specific details and release notes.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "supportExpiryDate": {
           "description": "The last date the version of the platform is supported.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "targetClusterVersion": {
           "description": "The target version this cluster will be upgraded to.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "workloadImpact": {
           "description": "The indicator of whether the workload will be impacted during the upgrade.",
@@ -7761,8 +7757,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "WorkloadImpact"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -7772,13 +7767,11 @@
       "properties": {
         "supportExpiryDate": {
           "description": "The last date the version of the platform is supported.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "targetClusterVersion": {
           "description": "The version of the cluster to be deployed.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -7841,6 +7834,46 @@
         }
       }
     },
+    "ClusterInternalMetadata": {
+      "type": "object",
+      "title": "ClusterInternalMetadata is a separate struct to exclude from the public API.",
+      "properties": {
+        "afoManagementVersion": {
+          "description": "Depicts the version of the set of the cluster extension(s) that are upgraded when a new version of the cluster manager indicates a new version being available.\nThe cluster manager will walk the clusters it controls and perform the upgrades needed to bring this to current.\nThe management version implies a set of versions of the cluster extensions used by the cluster.",
+          "type": "string"
+        },
+        "clusterConnectionStatusLastChanged": {
+          "description": "The timestamp of the last time the cluster connection status changed.",
+          "type": "string"
+        },
+        "clusterToClusterManagerLastHeartBeat": {
+          "description": "The timestamp of the last heartbeat to the cluster manager.",
+          "type": "string"
+        },
+        "connectedClusterId": {
+          "description": "The resource ID of the connected cluster that references this cluster, after the cluster is deployed.",
+          "type": "string"
+        },
+        "managementBundleUpdateHistory": {
+          "description": "The history of the management bundle upgrades that have been attempted for this cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementBundleUpdateHistory"
+          }
+        },
+        "msiVerifiedAuthIdentity": {
+          "description": "The MSI of the cluster that is captured at the time of deploying the platform operator.",
+          "type": "string"
+        },
+        "networkFabricExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
+        },
+        "storageAccountId": {
+          "description": "A reference to a storage account created with the cluster manager.\nThis is used to store the output from invocation of Extract System Information against BareMetalMachines.",
+          "type": "string"
+        }
+      }
+    },
     "ClusterList": {
       "type": "object",
       "title": "ClusterList represents a list of clusters.",
@@ -7878,6 +7911,208 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ClusterManagerInternalMetadata": {
+      "type": "object",
+      "title": "ClusterManagerInternalMetadata represents configuration details of cluster manager that are NOT exposed to the customer.",
+      "properties": {
+        "aksClusterId": {
+          "description": "The resource ID of the AKS cluster created to run the cluster manager.",
+          "type": "string"
+        },
+        "aksMrgId": {
+          "description": "AksMrgId is the ID of the AKS cluster's managed resource group.",
+          "type": "string"
+        },
+        "aksUserAssignedIdentityId": {
+          "description": "The resource ID of the UAMI used by the AKS cluster created to run the cluster manager.",
+          "type": "string"
+        },
+        "aksUserAssignedIdentityObjectId": {
+          "description": "The object ID of the UAMI used by the AKS cluster created to run the cluster manager.",
+          "type": "string"
+        },
+        "clusterOperatorExtensionId": {
+          "description": "The resource ID of the Cluster Operator Extension",
+          "type": "string"
+        },
+        "connectedClusterId": {
+          "description": "The resource ID of the connected cluster resource created by the cluster manager.",
+          "type": "string"
+        },
+        "currentVersion": {
+          "description": "The cluster manager extension current version",
+          "type": "string"
+        },
+        "desiredVersion": {
+          "description": "The cluster manager extension desired version",
+          "type": "string"
+        },
+        "hoboResourceGroupId": {
+          "description": "The resource ID of the HOBO resource group containing component resources for the cluster manager.",
+          "type": "string"
+        },
+        "hoboSubscriptionId": {
+          "description": "The subscription ID where the HOBO resources for the cluster manager will be housed.",
+          "type": "string"
+        },
+        "keyVaultId": {
+          "description": "The resource ID of the key vault created and used by the cluster manager.",
+          "type": "string"
+        },
+        "kubernetesCurrentVersion": {
+          "description": "The cluster manager kubernetes current version",
+          "type": "string"
+        },
+        "kubernetesDesiredVersion": {
+          "description": "The cluster manager kubernetes desired version",
+          "type": "string"
+        },
+        "managedResourceGroupId": {
+          "description": "The resource ID of the managed resource group containing component resources for the cluster manager.",
+          "type": "string"
+        },
+        "nfcInfrastructureConfiguration": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadataNfcInfrastructureConfiguration"
+        },
+        "publicIpPrefix": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadataPublicIpPrefix"
+        },
+        "registryCredentials": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadataRegistryCredentials"
+        },
+        "relay": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadataRelay"
+        },
+        "storageAccountId": {
+          "description": "The resource ID of the storage account created and used to store bootstrap images, command execution results, etc.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The Tenant ID used by cluster manager",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterManagerInternalMetadataNfcInfrastructureConfiguration": {
+      "description": "ClusterManagerInternalMetadataNfcInfrastructureConfiguration represents a cache of the\nNFC Provided and owned InfrastructureConfiguration data.",
+      "type": "object",
+      "properties": {
+        "aksDockerCidrPrefix": {
+          "description": "The Docker CIDR for both the NFA and NC AKS's",
+          "type": "string"
+        },
+        "aksServiceCidrPrefix": {
+          "description": "The Service CIDR for both the NFA and NC AKS's",
+          "type": "string"
+        },
+        "networkCloudSubnetIPv4Prefix": {
+          "description": "The Subnet Ipv4 Prefix for the NC AKS",
+          "type": "string"
+        },
+        "networkCloudSubnetId": {
+          "description": "The SubnetId for the NC AKS",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterManagerInternalMetadataPublicIpPrefix": {
+      "type": "object",
+      "title": "ClusterManagerInternalMetadataPublicIpPrefix represents details about the per ClusterManager Public IP Prefix.",
+      "properties": {
+        "id": {
+          "description": "The resource ID of the Public IP Prefix created for this cluster manager.",
+          "type": "string"
+        },
+        "ipPrefix": {
+          "description": "The IP Prefix in CIDR format",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterManagerInternalMetadataRegistryCredentials": {
+      "description": "ClusterManagerInternalMetadataRegistryCredentials represents details about the per ClusterManager\nACR Credentials generated by the RP.",
+      "type": "object",
+      "properties": {
+        "activeTokenPasswordName": {
+          "$ref": "#/definitions/TokenPasswordName"
+        },
+        "password1": {
+          "description": "ACR Password1",
+          "type": "string"
+        },
+        "password2": {
+          "description": "ACR Password2",
+          "type": "string"
+        },
+        "tokenId": {
+          "description": "Token ID",
+          "type": "string"
+        },
+        "tokenName": {
+          "description": "Token Name",
+          "type": "string"
+        },
+        "username": {
+          "description": "ACR Username",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterManagerInternalMetadataRelay": {
+      "type": "object",
+      "title": "ClusterManagerInternalMetadataRelay represents details about the per ClusterManager Arc Relay.",
+      "properties": {
+        "authRuleManageId": {
+          "description": "The resource ID of the \"manage\" Auth Rule.",
+          "type": "string"
+        },
+        "authRuleSenderId": {
+          "description": "The resource ID of the \"sender\" Auth Rule.",
+          "type": "string"
+        },
+        "desiredStampName": {
+          "description": "The desired relay stamp name. This will be set when the update is required on the running cluster manager.",
+          "type": "string"
+        },
+        "namespaceId": {
+          "description": "The resource ID of the Relay Namespace created for this cluster manager.",
+          "type": "string"
+        },
+        "networkRuleSetsCustomIpRules": {
+          "description": "custom IP Rules injected into the Relays NetworkRuleSet.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterManagerInternalMetadataRelayNetworkRuleSetsCustomIpRules"
+          }
+        },
+        "serviceBusEndpoint": {
+          "description": "The Azure Service Bus FQDN for this Relay Namespace.",
+          "type": "string"
+        },
+        "stampName": {
+          "description": "The Relay Stamp Name in use. This will be set to \"public\" for usage of the default public stamp.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterManagerInternalMetadataRelayNetworkRuleSetsCustomIpRules": {
+      "description": "ClusterManagerInternalMetadataRelayNetworkRuleSetsCustomIpRules custom IP Rules injected\ninto this Cluster Managers Relay NetworkRuleSet.",
+      "type": "object",
+      "required": [
+        "action",
+        "ipMask"
+      ],
+      "properties": {
+        "action": {
+          "description": "The Network Rule Set Action. Currently this must be \"Allow\".",
+          "type": "string"
+        },
+        "ipMask": {
+          "description": "The Network Rule Set IP Mask in CIDR format.",
+          "type": "string"
+        }
+      }
+    },
     "ClusterManagerList": {
       "type": "object",
       "title": "ClusterManagerList represents a list of cluster manager objects.",
@@ -7899,12 +8134,118 @@
       "type": "object",
       "title": "ClusterManagerPatchParameters represents the body of the request to patch the cluster properties.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterManagerPatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
         "tags": {
           "description": "The Azure resource tags that will replace the existing ones.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ClusterManagerPatchProperties": {
+      "type": "object",
+      "title": "ClusterManagerPatchProperties represents the properties of the cluster for internal patching.",
+      "required": [
+        "fabricControllerId"
+      ],
+      "properties": {
+        "analyticsWorkspaceId": {
+          "description": "The resource ID of the Log Analytics workspace that is used for the logs collection.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "availabilityZones": {
+          "description": "Field deprecated, this value will no longer influence the cluster manager allocation process and will be removed in a future version. The Azure availability zones within the region that will be used to support the cluster manager resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "clusterVersions": {
+          "description": "The list of the cluster versions the manager supports. It is used as input in clusterVersion property of a cluster resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableVersion"
+          },
+          "x-ms-identifiers": [
+            "targetClusterVersion"
+          ]
+        },
+        "detailedStatus": {
+          "description": "The detailed status that provides additional information about the cluster manager.",
+          "type": "string",
+          "enum": [
+            "Error",
+            "Available",
+            "Provisioning",
+            "ProvisioningFailed",
+            "Updating",
+            "UpdateFailed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterManagerDetailedStatus"
+          }
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message about the current detailed status.",
+          "type": "string"
+        },
+        "fabricControllerId": {
+          "description": "The resource ID of the fabric controller that has one to one mapping with the cluster manager.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadata"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "The configuration of the managed resource group associated with the resource."
+        },
+        "managerExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the cluster manager.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterManagerProvisioningState"
+          }
+        },
+        "vmSize": {
+          "description": "Field deprecated, this value will no longer influence the cluster manager allocation process and will be removed in a future version. The size of the Azure virtual machines to use for hosting the cluster manager resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -7943,8 +8284,7 @@
           },
           "x-ms-identifiers": [
             "targetClusterVersion"
-          ],
-          "readOnly": true
+          ]
         },
         "detailedStatus": {
           "description": "The detailed status that provides additional information about the cluster manager.",
@@ -7960,13 +8300,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterManagerDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "fabricControllerId": {
           "description": "The resource ID of the fabric controller that has one to one mapping with the cluster manager.",
@@ -7975,6 +8313,9 @@
             "read",
             "create"
           ]
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/ClusterManagerInternalMetadata"
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
@@ -7999,8 +8340,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterManagerProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "vmSize": {
           "description": "Field deprecated, this value will no longer influence the cluster manager allocation process and will be removed in a future version. The size of the Azure virtual machines to use for hosting the cluster manager resource.",
@@ -8117,21 +8457,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterMetricsConfigurationDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "disabledMetrics": {
           "description": "The list of metrics that are available for the cluster but disabled at the moment.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "enabledMetrics": {
           "description": "The list of metric names that have been chosen to be enabled in addition to the core set of enabled metrics.",
@@ -8153,8 +8490,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterMetricsConfigurationProvisioningState"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -8205,6 +8541,9 @@
           "x-ms-identifiers": [
             "networkRackId"
           ]
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/ClusterInternalMetadata"
         }
       }
     },
@@ -8238,8 +8577,7 @@
           },
           "x-ms-identifiers": [
             "targetClusterVersion"
-          ],
-          "readOnly": true
+          ]
         },
         "clusterCapacity": {
           "$ref": "#/definitions/ClusterCapacity",
@@ -8257,8 +8595,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterConnectionStatus"
-          },
-          "readOnly": true
+          }
         },
         "clusterExtendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -8280,13 +8617,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterManagerConnectionStatus"
-          },
-          "readOnly": true
+          }
         },
         "clusterManagerId": {
           "description": "The resource ID of the cluster manager that manages this cluster. This is set by the Cluster Manager when the cluster is created.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "clusterServicePrincipal": {
           "$ref": "#/definitions/ServicePrincipalInformation",
@@ -8346,18 +8681,19 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hybridAksExtendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Field Deprecated. This field will not be populated in an upcoming version. The extended location (custom location) that represents the Hybrid AKS control plane location. This extended location is used when creating provisioned clusters (Hybrid AKS clusters).",
           "readOnly": true
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/ClusterInternalMetadata"
         },
         "managedResourceGroupConfiguration": {
           "$ref": "#/definitions/ManagedResourceGroupConfiguration",
@@ -8366,8 +8702,7 @@
         "manualActionCount": {
           "description": "The count of Manual Action Taken (MAT) events that have not been validated.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "networkFabricId": {
           "description": "The resource ID of the Network Fabric associated with the cluster.",
@@ -8391,21 +8726,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ClusterProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "supportExpiryDate": {
           "description": "The support end date of the runtime version of the cluster.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "workloadResourceIds": {
           "description": "The list of workload resource IDs that are hosted within this cluster.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -8447,6 +8779,16 @@
       ],
       "x-ms-azure-resource": true
     },
+    "ConsoleInternalMetadata": {
+      "type": "object",
+      "title": "ClusterInternalMetadata is a separate struct to exclude from the public API.",
+      "properties": {
+        "clusterId": {
+          "description": "The cluster ID of the cluster this virtual machine is created on.",
+          "type": "string"
+        }
+      }
+    },
     "ConsoleList": {
       "type": "object",
       "title": "ConsoleList represents a list of virtual machine consoles.",
@@ -8487,7 +8829,7 @@
       "title": "ConsolePatchProperties represents the properties of the virtual machine console that can be patched.",
       "properties": {
         "enabled": {
-          "description": "The credentials used to login to the image repository that has access to the specified image.",
+          "description": "The indicator of whether the console access is enabled.",
           "type": "string",
           "enum": [
             "True",
@@ -8527,13 +8869,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ConsoleDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "enabled": {
           "description": "The indicator of whether the console access is enabled.",
@@ -8552,10 +8892,12 @@
           "type": "string",
           "format": "date-time"
         },
+        "internalMetadata": {
+          "$ref": "#/definitions/ConsoleInternalMetadata"
+        },
         "privateLinkServiceId": {
           "description": "The resource ID of the private link service that is used to provide virtual machine console access.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the virtual machine console.",
@@ -8570,8 +8912,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ConsoleProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "sshPublicKey": {
           "$ref": "#/definitions/SshPublicKey",
@@ -8579,8 +8920,7 @@
         },
         "virtualMachineAccessId": {
           "description": "The unique identifier for the virtual machine that is used to access the console.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -8723,23 +9063,19 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "FeatureDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the feature.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "version": {
           "description": "The version of the feature.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -8749,8 +9085,7 @@
       "properties": {
         "additionalHostInformation": {
           "description": "Freeform data extracted from the environment about this machine. This information varies depending on the specific hardware and configuration.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "interfaces": {
           "description": "The list of network interfaces and associated details for the bare metal machine.",
@@ -8760,8 +9095,7 @@
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "readOnly": true
+          ]
         },
         "nics": {
           "description": "Field Deprecated. Will be removed in an upcoming version. The list of network interface cards and associated details for the bare metal machine.",
@@ -8771,8 +9105,7 @@
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "readOnly": true
+          ]
         }
       }
     },
@@ -8782,23 +9115,19 @@
       "properties": {
         "linkStatus": {
           "description": "The current status of the link.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "macAddress": {
           "description": "The MAC address associated with this interface.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the interface.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "networkInterfaceId": {
           "description": "The resource ID of the network interface for the port on the switch that this machine's interface is connected to.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -8809,8 +9138,7 @@
         "lastValidationTime": {
           "description": "The timestamp of the hardware validation execution.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "result": {
           "description": "The outcome of the hardware validation.",
@@ -8822,8 +9150,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineHardwareValidationResult"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -8841,6 +9168,9 @@
           "type": "string",
           "minLength": 1,
           "x-ms-secret": true
+        },
+        "passwordRef": {
+          "$ref": "#/definitions/PasswordReference"
         },
         "registryUrl": {
           "description": "The URL of the authentication server used to validate the repository credentials.",
@@ -9062,8 +9392,7 @@
       "properties": {
         "azureUserName": {
           "description": "The user name that will be used for access.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "status": {
           "description": "The indicator of whether the user is currently deployed for access.",
@@ -9075,14 +9404,12 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BareMetalMachineKeySetUserSetupStatus"
-          },
-          "readOnly": true
+          }
         },
         "statusMessage": {
           "description": "The additional information describing the current status of this user, if any available.",
           "type": "string",
-          "maxLength": 256,
-          "readOnly": true
+          "maxLength": 256
         }
       }
     },
@@ -9134,24 +9461,20 @@
       "properties": {
         "agentPoolId": {
           "description": "The resource ID of the agent pool that this node belongs to. This value is not represented on control plane nodes.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "availabilityZone": {
           "description": "The availability zone this node is running within.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "bareMetalMachineId": {
           "description": "The resource ID of the bare metal machine that hosts this node.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "cpuCores": {
           "description": "The number of CPU cores configured for this node, derived from the VM SKU specified.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "detailedStatus": {
           "description": "The detailed state of this node.",
@@ -9169,29 +9492,24 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "KubernetesClusterNodeDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "diskSizeGB": {
           "description": "The size of the disk configured for this node.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "image": {
           "description": "The machine image used to deploy this node.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "kubernetesVersion": {
           "description": "The currently running version of Kubernetes and bundled features running on this node.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "labels": {
           "description": "The list of labels on this node that have been assigned to the agent pool containing this node.",
@@ -9201,14 +9519,12 @@
           },
           "x-ms-identifiers": [
             "key"
-          ],
-          "readOnly": true
+          ]
         },
         "memorySizeGB": {
           "description": "The amount of memory configured for this node, derived from the vm SKU specified.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "mode": {
           "description": "The mode of the agent pool containing this node. Not applicable for control plane nodes.",
@@ -9221,13 +9537,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "AgentPoolMode"
-          },
-          "readOnly": true
+          }
         },
         "name": {
           "description": "The name of this node, as realized in the Kubernetes cluster.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "networkAttachments": {
           "description": "The NetworkAttachments made to this node.",
@@ -9237,8 +9551,7 @@
           },
           "x-ms-identifiers": [
             "networkAttachmentName"
-          ],
-          "readOnly": true
+          ]
         },
         "powerState": {
           "description": "The power state of this node.",
@@ -9251,8 +9564,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "KubernetesNodePowerState"
-          },
-          "readOnly": true
+          }
         },
         "role": {
           "description": "The role of this node in the cluster.",
@@ -9264,8 +9576,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "KubernetesNodeRole"
-          },
-          "readOnly": true
+          }
         },
         "taints": {
           "description": "The list of taints that have been assigned to the agent pool containing this node.",
@@ -9275,13 +9586,11 @@
           },
           "x-ms-identifiers": [
             "key"
-          ],
-          "readOnly": true
+          ]
         },
         "vmSkuName": {
           "description": "The VM SKU name that was used to create this cluster node.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -9348,8 +9657,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "availableUpgrades": {
           "description": "The list of versions that this Kubernetes cluster can be upgraded to.",
@@ -9357,23 +9665,19 @@
           "items": {
             "$ref": "#/definitions/AvailableUpgrade"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "connectedClusterId": {
           "description": "The resource ID of the connected cluster set up when this Kubernetes cluster is created.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "controlPlaneKubernetesVersion": {
           "description": "The current running version of Kubernetes on the control plane.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "controlPlaneNodeConfiguration": {
           "$ref": "#/definitions/ControlPlaneNodeConfiguration",
@@ -9394,13 +9698,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "KubernetesClusterDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "featureStatuses": {
           "description": "The current feature settings.",
@@ -9410,8 +9712,7 @@
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "readOnly": true
+          ]
         },
         "initialAgentPoolConfigurations": {
           "description": "The agent pools that are created with this Kubernetes cluster for running critical system services and workloads. This data in this field is only used during creation, and the field will be empty following the creation of the Kubernetes Cluster. After creation, the management of agent pools is done using the agentPools sub-resource.",
@@ -9452,8 +9753,7 @@
           },
           "x-ms-identifiers": [
             "name"
-          ],
-          "readOnly": true
+          ]
         },
         "provisioningState": {
           "description": "The provisioning state of the Kubernetes cluster resource.",
@@ -9471,8 +9771,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "KubernetesClusterProvisioningState"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -9619,13 +9918,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this L2 network is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The more detailed status of the L2 network.",
@@ -9638,21 +9935,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "L2NetworkDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hybridAksClustersAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of Hybrid AKS cluster resource ID(s) that are associated with this L2 network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "hybridAksPluginType": {
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
@@ -9703,16 +9997,14 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "L2NetworkProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "virtualMachinesAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of virtual machine resource ID(s), excluding any Hybrid AKS virtual machines, that are currently using this L2 network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -9838,13 +10130,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this L3 network is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The more detailed status of the L3 network.",
@@ -9857,21 +10147,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "L3NetworkDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hybridAksClustersAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of Hybrid AKS cluster resource IDs that are associated with this L3 network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "hybridAksIpamEnabled": {
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The indicator of whether or not to disable IPAM allocation on the network attachment definition injected into the Hybrid AKS Cluster.",
@@ -9969,16 +10256,14 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "L3NetworkProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "virtualMachinesAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of virtual machine resource IDs, excluding any Hybrid AKS virtual machines, that are currently using this L3 network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "vlan": {
           "description": "The VLAN from the l3IsolationDomain that is used for this network.",
@@ -9997,23 +10282,19 @@
       "properties": {
         "portDescription": {
           "description": "The descriptive information about the port on the connected device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "portName": {
           "description": "The system-assigned name of the port on the connected device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "systemDescription": {
           "description": "The descriptive information about the connected device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "systemName": {
           "description": "The system-assigned name of the connected device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -10024,8 +10305,7 @@
         "capacityGB": {
           "description": "The maximum amount of storage in GB.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "connection": {
           "description": "The connection type of the rack SKU resource.",
@@ -10039,8 +10319,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "MachineSkuDiskConnectionType"
-          },
-          "readOnly": true
+          }
         },
         "type": {
           "description": "The disk type of rack SKU resource.",
@@ -10052,8 +10331,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "DiskType"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -10070,20 +10348,17 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "BootstrapProtocol"
-          },
-          "readOnly": true
+          }
         },
         "cpuCores": {
           "description": "The count of CPU cores for this machine.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "cpuSockets": {
           "description": "The count of CPU sockets for this machine.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "disks": {
           "description": "The list of disks.",
@@ -10091,29 +10366,24 @@
           "items": {
             "$ref": "#/definitions/MachineDisk"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "generation": {
           "description": "The generation of the architecture.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hardwareVersion": {
           "description": "The hardware version of the machine.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "memoryCapacityGB": {
           "description": "The maximum amount of memory in GB.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "model": {
           "description": "The model of the machine.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "networkInterfaces": {
           "description": "The list of network interfaces.",
@@ -10121,19 +10391,16 @@
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "totalThreads": {
           "description": "The count of SMT and physical core threads for this machine.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "vendor": {
           "description": "The make of the machine.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -10149,8 +10416,7 @@
         "rackSlot": {
           "description": "The position in the rack for the machine.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         }
       }
     },
@@ -10176,6 +10442,56 @@
           ]
         }
       }
+    },
+    "ManagementBundleUpdateHistory": {
+      "type": "object",
+      "title": "ManagementBundleUpdateHistory represents the details of the cluster management bundle upgrade.",
+      "properties": {
+        "attempt": {
+          "description": "The upgrade attempt number that increments each time an update is attempted for the same target management version.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
+        },
+        "endTime": {
+          "description": "The time when the update attempt ended.",
+          "type": "string"
+        },
+        "messages": {
+          "description": "The list of messages associated with the result.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resultStatus": {
+          "$ref": "#/definitions/ManagementBundleUpdateHistoryResultStatus"
+        },
+        "startTime": {
+          "description": "The time when the update attempt started.",
+          "type": "string"
+        },
+        "startingDetailedStatus": {
+          "description": "The detailed status of the cluster at the time this attempt to update was started.",
+          "type": "string"
+        },
+        "startingManagementBundleVersion": {
+          "description": "The management bundle version that the cluster has at the beginning of the attempt.",
+          "type": "string"
+        },
+        "startingProvisioningState": {
+          "description": "The provisioning state of the cluster at the time this attempt to update was started.",
+          "type": "string"
+        },
+        "targetManagementBundleVersion": {
+          "description": "The management bundle version that the cluster is being updated to.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagementBundleUpdateHistoryResultStatus": {
+      "type": "string",
+      "title": "ManagementBundleUpdateHistoryResultStatus indicates the result status of the cluster management bundle update."
     },
     "NetworkAttachment": {
       "type": "object",
@@ -10240,8 +10556,7 @@
         },
         "macAddress": {
           "description": "The MAC address of the interface for the virtual machine that corresponds to this network attachment.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "networkAttachmentName": {
           "description": "The associated network's interface name.\nIf specified, the network attachment name has a maximum length of 15 characters and must be unique to this virtual machine.\nIf the user doesn’t specify this value, the default interface name of the network resource will be used.\nFor a CloudServicesNetwork resource, this name will be ignored.",
@@ -10332,8 +10647,7 @@
       "properties": {
         "address": {
           "description": "The partial address of Peripheral Component Interconnect (PCI).",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "deviceConnectionType": {
           "description": "The connection type of the device.",
@@ -10344,36 +10658,30 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "DeviceConnectionType"
-          },
-          "readOnly": true
+          }
         },
         "model": {
           "description": "The model name of the device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "physicalSlot": {
           "description": "The physical slot for this device.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "portCount": {
           "description": "The number of ports on the device.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "portSpeed": {
           "description": "The maximum amount of data in GB that the line card transmits through a port at any given second.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "vendor": {
           "description": "The vendor name of the device.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -10388,13 +10696,11 @@
         },
         "macAddress": {
           "description": "The MAC address associated with this NIC.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the NIC/interface.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -10433,6 +10739,21 @@
           "description": "The size of the disk in gigabytes. Required if the createOption is Ephemeral.",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "PasswordReference": {
+      "type": "object",
+      "title": "PasswordReference contains the reference to the source of a password.",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
         }
       }
     },
@@ -10564,8 +10885,7 @@
         },
         "clusterId": {
           "description": "The resource ID of the cluster the rack is created for. This value is set when the rack is created by the cluster.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The more detailed status of the rack.",
@@ -10578,13 +10898,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RackDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the rack resource.",
@@ -10599,8 +10917,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RackProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "rackLocation": {
           "description": "The free-form description of the rack location. (e.g. “DTN Datacenter, Floor 3, Isle 9, Rack 2B”)",
@@ -10666,8 +10983,7 @@
           "items": {
             "$ref": "#/definitions/MachineSkuSlot"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "controllerMachines": {
           "description": "The list of machine SKUs and associated rack slot for the control-plane dedicated machines in this rack model.",
@@ -10675,19 +10991,16 @@
           "items": {
             "$ref": "#/definitions/MachineSkuSlot"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "description": {
           "description": "The free-form text describing the rack.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "maxClusterSlots": {
           "description": "The maximum number of compute racks supported by an aggregator rack. 0 if this is a compute rack or a rack for a single rack cluster(rackType=\"Single\").",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "provisioningState": {
           "description": "The provisioning state of the rack SKU resource.",
@@ -10698,8 +11011,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RackSkuProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "rackType": {
           "description": "The type of the rack.",
@@ -10712,8 +11024,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RackSkuType"
-          },
-          "readOnly": true
+          }
         },
         "storageAppliances": {
           "description": "The list of appliance SKUs and associated rack slot for the storage appliance(s) in this rack model.",
@@ -10721,16 +11032,14 @@
           "items": {
             "$ref": "#/definitions/StorageApplianceSkuSlot"
           },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "x-ms-identifiers": []
         },
         "supportedRackSkuIds": {
           "description": "The list of supported SKUs if the rack is an aggregator.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -10840,6 +11149,9 @@
           ],
           "x-ms-secret": true
         },
+        "passwordRef": {
+          "$ref": "#/definitions/PasswordReference"
+        },
         "peerAddress": {
           "description": "The IPv4 or IPv6 address used to connect this BGP session.",
           "type": "string",
@@ -10889,6 +11201,9 @@
           "description": "The password of the service principal.",
           "type": "string",
           "x-ms-secret": true
+        },
+        "passwordRef": {
+          "$ref": "#/definitions/PasswordReference"
         },
         "principalId": {
           "description": "The principal ID, also known as the object ID, of the service principal.",
@@ -10983,6 +11298,67 @@
         }
       }
     },
+    "StorageApplianceInternalMetadata": {
+      "type": "object",
+      "title": "StorageApplianceInternalMetadata represents the configuration details of the storage appliance that are NOT exposed to the customer.",
+      "properties": {
+        "deviceManagerCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials"
+        },
+        "deviceManagerToken": {
+          "description": "The user token of the Device Manager User",
+          "type": "string"
+        },
+        "remoteAssistExpiryTime": {
+          "description": "The connection Expiry Time when RemoteVendorManagement is Enabled",
+          "type": "string"
+        },
+        "remoteAssistStartTime": {
+          "description": "The connection Start Time when RemoteVendorManagement is Enabled",
+          "type": "string"
+        },
+        "remoteAssistStatus": {
+          "description": "The connection Status when RemoteVendorManagement is Enabled",
+          "type": "string"
+        },
+        "storageApplianceName": {
+          "description": "The Storage Appliance Name",
+          "type": "string"
+        },
+        "storageApplianceNtpServers": {
+          "description": "The Storage Appliance NTP servers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageApplianceProxyServer": {
+          "description": "The Storage Appliance Proxy Server",
+          "type": "string"
+        },
+        "storageApplianceSyslogServers": {
+          "description": "The Storage Appliance Syslog Server",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "storageUserCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials"
+        },
+        "storageUserToken": {
+          "description": "The user token of the Storage User",
+          "type": "string"
+        },
+        "telemetryCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials"
+        },
+        "telemetryToken": {
+          "description": "The user token of the Telemetry User",
+          "type": "string"
+        }
+      }
+    },
     "StorageApplianceList": {
       "type": "object",
       "title": "StorageApplianceList represents a list of storage appliances.",
@@ -11050,19 +11426,16 @@
         "capacity": {
           "description": "The total capacity of the storage appliance.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "capacityUsed": {
           "description": "The amount of storage consumed.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "clusterId": {
           "description": "The resource ID of the cluster this storage appliance is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The detailed status of the storage appliance.",
@@ -11075,18 +11448,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "StorageApplianceDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "internalMetadata": {
+          "$ref": "#/definitions/StorageApplianceInternalMetadata"
         },
         "managementIpv4Address": {
           "description": "The endpoint for the management interface of the storage appliance.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the storage appliance.",
@@ -11101,8 +11474,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "StorageApplianceProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "rackId": {
           "description": "The resource ID of the rack where this storage appliance resides.",
@@ -11133,8 +11505,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RemoteVendorManagementFeature"
-          },
-          "readOnly": true
+          }
         },
         "remoteVendorManagementStatus": {
           "description": "The indicator of whether the remote vendor management feature is enabled or disabled, or unsupported if it is an unsupported feature.",
@@ -11147,8 +11518,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RemoteVendorManagementStatus"
-          },
-          "readOnly": true
+          }
         },
         "serialNumber": {
           "description": "The serial number for the storage appliance.",
@@ -11171,13 +11541,11 @@
         "capacityGB": {
           "description": "The maximum capacity of the storage appliance.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         },
         "model": {
           "description": "The model of the storage appliance.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -11193,8 +11561,7 @@
         "rackSlot": {
           "description": "The position in the rack for the storage appliance.",
           "type": "integer",
-          "format": "int64",
-          "readOnly": true
+          "format": "int64"
         }
       }
     },
@@ -11230,6 +11597,10 @@
           }
         }
       }
+    },
+    "TokenPasswordName": {
+      "type": "string",
+      "title": "TokenPasswordName - The password name \"password1\" or \"password2\"."
     },
     "TrunkedNetwork": {
       "type": "object",
@@ -11336,13 +11707,11 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "clusterId": {
           "description": "The resource ID of the Network Cloud cluster this trunked network is associated with.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "detailedStatus": {
           "description": "The more detailed status of the trunked network.",
@@ -11355,21 +11724,18 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "TrunkedNetworkDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "hybridAksClustersAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of Hybrid AKS cluster resource IDs that are associated with this trunked network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "hybridAksPluginType": {
           "description": "Field Deprecated. The field was previously optional, now it will have no defined behavior and will be ignored. The network plugin type for Hybrid AKS.",
@@ -11424,16 +11790,14 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "TrunkedNetworkProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "virtualMachinesAssociatedIds": {
           "description": "Field Deprecated. These fields will be empty/omitted. The list of virtual machine resource IDs, excluding any Hybrid AKS virtual machines, that are currently using this trunked network.",
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "vlans": {
           "description": "The list of vlans that are selected from the isolation domains for trunking.",
@@ -11674,13 +12038,11 @@
         },
         "availabilityZone": {
           "description": "The cluster availability zone containing this virtual machine.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "bareMetalMachineId": {
           "description": "The resource ID of the bare metal machine the virtual machine has landed to.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "bootMethod": {
           "description": "Selects the boot method for the virtual machine.",
@@ -11709,8 +12071,7 @@
         },
         "clusterId": {
           "description": "The resource ID of the cluster the virtual machine is created for.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "cpuCores": {
           "description": "The number of CPU cores in the virtual machine.",
@@ -11738,13 +12099,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VirtualMachineDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "isolateEmulatorThread": {
           "description": "Field Deprecated, the value will be ignored if provided. The indicator of whether one of the specified CPU cores is isolated to run the emulator thread for this virtual machine.",
@@ -11816,8 +12175,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VirtualMachinePowerState"
-          },
-          "readOnly": true
+          }
         },
         "provisioningState": {
           "description": "The provisioning state of the virtual machine.",
@@ -11832,8 +12190,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VirtualMachineProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "sshPublicKeys": {
           "description": "The list of ssh public keys. Each key will be added to the virtual machine using the cloud-init ssh_authorized_keys mechanism for the adminUsername.",
@@ -11914,8 +12271,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -11986,8 +12342,7 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatus": {
           "description": "The more detailed status of the volume.",
@@ -12000,13 +12355,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VolumeDetailedStatus"
-          },
-          "readOnly": true
+          }
         },
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the volume.",
@@ -12021,13 +12374,11 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "VolumeProvisioningState"
-          },
-          "readOnly": true
+          }
         },
         "serialNumber": {
           "description": "The unique identifier of the volume.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "sizeMiB": {
           "description": "The size of the allocation for this volume in Mebibytes.",
