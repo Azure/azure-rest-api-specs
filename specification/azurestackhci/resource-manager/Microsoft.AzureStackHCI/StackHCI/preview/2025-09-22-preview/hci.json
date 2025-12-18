@@ -11812,24 +11812,28 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
-          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process."
+          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process.",
+          "x-ms-client-flatten": true
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks."
+          "description": "Overall health state for update-specific health checks.",
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
           "description": "An array of PrecheckResult objects.",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "healthCheckDate": {
           "type": "string",
@@ -12083,6 +12087,7 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -12107,7 +12112,8 @@
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks."
+          "description": "Overall health state for update-specific health checks.",
+          "x-ms-client-flatten": true
         },
         "healthCheckResult": {
           "type": "array",
@@ -12115,6 +12121,7 @@
           "items": {
             "$ref": "#/definitions/PrecheckResult"
           },
+          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]
