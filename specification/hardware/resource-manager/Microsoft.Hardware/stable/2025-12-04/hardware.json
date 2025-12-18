@@ -1002,16 +1002,16 @@
         },
         "bundleProductId": {
           "type": "string",
-          "description": "BundleProductId"
+          "description": "Bundle Product Id"
         },
         "bundleInstanceId": {
           "type": "string",
-          "description": "BundleInstanceId"
+          "description": "Bundle Instance Id"
         },
         "bundleSlotId": {
           "type": "integer",
           "format": "int64",
-          "description": "BundleSlotId"
+          "description": "Bundle Slot Id"
         }
       },
       "required": [
@@ -1053,34 +1053,28 @@
       "type": "string",
       "description": "Provisioning State",
       "enum": [
-        "pending",
-        "succeeded",
-        "failed",
-        "canceled"
+        "Succeeded",
+        "Failed",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "name": "Pending",
-            "value": "pending",
-            "description": "Order is pending"
-          },
-          {
             "name": "Succeeded",
-            "value": "succeeded",
-            "description": "Order succeeded"
+            "value": "Succeeded",
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
-            "value": "failed",
-            "description": "Order failed"
+            "value": "Failed",
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
-            "value": "canceled",
-            "description": "Order is canceled"
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           }
         ]
       }

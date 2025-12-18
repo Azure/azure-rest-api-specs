@@ -171,13 +171,13 @@ model Product {
   @doc("ProductId Type")
   type: ProductIdType;
 
-  @doc("BundleProductId")
+  @doc("Bundle Product Id")
   bundleProductId?: string;
 
-  @doc("BundleInstanceId")
+  @doc("Bundle Instance Id")
   bundleInstanceId?: string;
 
-  @doc("BundleSlotId")
+  @doc("Bundle Slot Id")
   bundleSlotId?: int64;
 }
 
@@ -403,19 +403,8 @@ union BillingState {
 }
 
 @doc("Provisioning State")
-@lroStatus
 union ProvisioningState {
-  @doc("Order is pending")
-  Pending: "pending",
-
-  @doc("Order succeeded")
-  Succeeded: "succeeded",
-
-  @doc("Order failed")
-  Failed: "failed",
-
-  @doc("Order is canceled")
-  Canceled: "canceled",
+  Azure.ResourceManager.ResourceProvisioningState,
 
   string,
 }
