@@ -344,9 +344,6 @@
             "$ref": "./examples/Registry/PrivateEndpointConnection/list.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -540,68 +537,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "RegistryManagement"
-        ],
-        "summary": "Update tags and properties of a Private Endpoint Connection.",
-        "operationId": "Registries_UpdatePrivateEndpointConnection",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Registries_UpdatePrivateEndpointConnection": {
-            "$ref": "./examples/Registry/PrivateEndpointConnection/update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RegistryNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "NRP Private Endpoint Connection Name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The updatable fields of the Private Endpoint Connection resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -887,10 +822,6 @@
     "PrivateEndpointConnectionResponse": {
       "type": "object",
       "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Registry PrivateEndpointConnection objects. If null, there are no additional pages.",
-          "type": "string"
-        },
         "value": {
           "type": "array",
           "items": {
@@ -1221,22 +1152,6 @@
         }
       },
       "additionalProperties": false
-    },
-    "PrivateEndpointConnectionUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
-        }
-      },
-      "description": "The updatable fields of the Private Endpoint Connection resource."
     }
   },
   "securityDefinitions": {
