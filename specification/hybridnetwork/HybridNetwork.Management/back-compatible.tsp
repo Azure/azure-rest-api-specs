@@ -6,11 +6,11 @@ using Microsoft.HybridNetwork;
 @@clientName(ResourceElementTemplate.type, "ResourceElementType");
 @@clientName(NetworkFunctionDefinitionResourceElementTemplateDetails.type,
   "ResourceElementType",
-  "go"
+  "go, javascript"
 );
 @@clientName(ArmResourceDefinitionResourceElementTemplateDetails.type,
   "ResourceElementType",
-  "go"
+  "go, javascript"
 );
 
 @@clientName(ConfigurationGroupSchemas.createOrUpdate::parameters.resource,
