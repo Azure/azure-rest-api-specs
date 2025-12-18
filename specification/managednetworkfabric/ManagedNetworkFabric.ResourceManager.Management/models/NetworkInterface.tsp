@@ -29,7 +29,14 @@ model NetworkInterfaceProperties {
   ipv6Address?: string;
 
   @added(Versions.v2024_06_15_preview)
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "description")
   @doc("Description of the interface.")
+  descriptionDeprecated?: string;
+
+  @added(Versions.v2025_07_15)
+  @doc("Description of the interface.")
+  @visibility(Lifecycle.Read)
   description?: string;
 
   @added(Versions.v2024_06_15_preview)
@@ -41,6 +48,15 @@ model NetworkInterfaceProperties {
   @added(Versions.v2024_06_15_preview)
   lastOperation?: LastOperationProperties;
 
+  @doc("Associated Network Fabric Resource ID")
+  @added(Versions.v2025_07_15)
+  @visibility(Lifecycle.Read)
+  networkFabricId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkFabrics";
+    }
+  ]>;
+
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -48,12 +64,29 @@ model NetworkInterfaceProperties {
   @doc("Administrative state of the resource.")
   @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
+
+  @added(Versions.v2025_07_15)
+  @doc("Configuration state of the resource.")
+  @visibility(Lifecycle.Read)
+  configurationState?: ConfigurationState;
 }
 
 @doc("The NetworkInterfacePatch resource definition.")
 model NetworkInterfacePatch {
   @doc("Network Interface Patch properties.")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated?: NetworkInterfacePatchProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("Network Interface Patch properties.")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkInterfacePatchProperties;
+
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: ManagedServiceIdentityPatch;
 }
 
 @doc("Network Interface Patch properties.")
@@ -61,6 +94,7 @@ model NetworkInterfacePatchProperties {
   ...AnnotationResource;
 
   @added(Versions.v2024_06_15_preview)
+  @removed(Versions.v2025_07_15)
   @doc("Description of the interface.")
   description?: string;
 

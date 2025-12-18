@@ -1,9 +1,8 @@
 import "../models/common.tsp";
-
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
@@ -20,7 +19,20 @@ model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   name: string;
 
   /** The NetworkTapRule Properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: NetworkTapRuleProperties;
+
+  /** The NetworkTapRule Properties */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkTapRuleProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations
@@ -52,10 +64,24 @@ interface NetworkTapRules {
   >;
 
   @doc("Implements the operation to the underlying resources.")
-  resync is ArmResourceActionAsync<
+  @action("resync")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "resync")
+  @sharedRoute
+  resyncDeprecated is ArmResourceActionAsync<
     NetworkTapRule,
     void,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("resync")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  resync is ArmResourceActionAsync<
+    NetworkTapRule,
+    void,
+    NetworkTapRuleResyncResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")

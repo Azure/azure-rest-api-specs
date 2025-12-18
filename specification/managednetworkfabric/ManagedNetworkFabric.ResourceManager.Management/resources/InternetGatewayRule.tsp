@@ -3,7 +3,7 @@ import "../models/InternetGatewayRule.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -22,6 +22,14 @@ model InternetGatewayRule
   name: string;
 
   /** The Internet Gateway Rule properties */
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: InternetGatewayRuleProperties;
+
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @doc("The Internet Gateway Rule properties")
+  @added(Versions.v2025_07_15)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: InternetGatewayRuleProperties;
 }
 
