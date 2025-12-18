@@ -3793,19 +3793,6 @@
           "description": "The properties associated with the account.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource.",
-          "readOnly": true
-        },
         "identity": {
           "$ref": "#/definitions/BatchAccountIdentity",
           "description": "The identity of the Batch account."
@@ -3813,7 +3800,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },

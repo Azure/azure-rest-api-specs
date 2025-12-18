@@ -14,28 +14,13 @@ namespace Microsoft.Batch;
  * Contains information about an Azure Batch account.
  */
 model BatchAccount
-  is Azure.ResourceManager.ProxyResource<BatchAccountProperties> {
+  is Azure.ResourceManager.TrackedResource<BatchAccountProperties> {
   ...ResourceNameParameter<
     Resource = BatchAccount,
     KeyName = "accountName",
     SegmentName = "batchAccounts",
     NamePattern = "^[a-z0-9]+$"
   >;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-
-  /**
-   * The location of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  location?: string;
 
   /**
    * The identity of the Batch account.
