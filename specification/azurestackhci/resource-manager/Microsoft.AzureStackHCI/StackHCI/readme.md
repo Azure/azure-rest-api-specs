@@ -239,15 +239,6 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     where:
       - $.definitions.UpdateProperties.properties
-
-  - code: DescriptionMustNotBeNodeName
-    from: hci.json
-    reason: CreatedByType enum values use their names as descriptions which is a common pattern inherited from common-types
-    where:
-      - $.definitions.CreatedByType.x-ms-enum.values[0].description
-      - $.definitions.CreatedByType.x-ms-enum.values[1].description
-      - $.definitions.CreatedByType.x-ms-enum.values[2].description
-      - $.definitions.CreatedByType.x-ms-enum.values[3].description
     
   - code: ConsistentPatchProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -271,7 +262,6 @@ suppressions:
       - updates.json
       - updateSummaries.json
       - edgeDevices.json
-      - hci.json
   
   - code: LroLocationHeader
     reason: already used in GA api version, fixing it will cause breaking change
@@ -282,13 +272,11 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
-      - hci.json
 
   - code: ProvisioningStateSpecifiedForLROPut
     reason: already working without the properties section, adding it will break polymorphism
     from:
       - edgeDevices.json
-      - hci.json
       - updates.json
       - deploymentSettings.json
       - securitySettings.json
@@ -334,7 +322,6 @@ suppressions:
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - updates.json
-      - hci.json
 
   - code: EvenSegmentedPathForPutOperation
     reason: already used in GA api version, fixing it will cause breaking change
