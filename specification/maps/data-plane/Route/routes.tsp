@@ -74,7 +74,7 @@ interface Route {
       routeDirectionsRequest: DirectionsRequest;
     },
     RouteDirectionsResponse & {
-      @header
+      @header("Content-Type")
       contentType: "application/geo+json" | "application/json";
     }
   >;
@@ -267,7 +267,6 @@ interface Route {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API behavior"
   @route("/route/snapToRoads")
   @post
   postSnapToRoads is MapsRouteOperation<
@@ -281,7 +280,8 @@ interface Route {
       snapToRoadsRequest: SnapToRoadsRequest;
     },
     SnapToRoadsResponse & {
-      @header
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+      @header("Content-Type")
       contentType: "application/geo+json" | "application/json";
     }
   >;
@@ -424,7 +424,8 @@ interface Route {
       routeRangeRequest: RouteRangeRequest;
     },
     RouteRangeResponse & {
-      @header
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+      @header("Content-Type")
       contentType: "application/geo+json" | "application/json";
     }
   >;
@@ -613,7 +614,7 @@ interface Route {
       routeMatrixRequest: RouteMatrixRequest;
     },
     RouteMatrixResponse & {
-      @header
+      @header("Content-Type")
       contentType: "application/geo+json";
     }
   >;
