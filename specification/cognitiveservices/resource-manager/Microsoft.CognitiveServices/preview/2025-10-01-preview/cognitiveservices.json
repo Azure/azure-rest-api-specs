@@ -5413,7 +5413,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResourceArmPaginatedResult"
+              "$ref": "#/definitions/CapabilityHostArmPaginatedResult"
             }
           },
           "default": {
@@ -5659,7 +5659,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ProjectCapabilityHostResourceArmPaginatedResult"
+              "$ref": "#/definitions/ProjectCapabilityHostArmPaginatedResult"
             }
           },
           "default": {
@@ -6919,7 +6919,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           },
           "default": {
@@ -6977,7 +6977,7 @@
             "description": "Agent Application definition object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           }
         ],
@@ -6985,13 +6985,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/AgentApplicationResource"
+              "$ref": "#/definitions/AgentApplication"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -7250,7 +7250,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgentDeploymentResourceArmPaginatedResult"
+              "$ref": "#/definitions/AgentDeploymentArmPaginatedResult"
             }
           },
           "default": {
@@ -11929,7 +11929,7 @@
         }
       }
     },
-    "CapabilityHostResourceArmPaginatedResult": {
+    "CapabilityHostArmPaginatedResult": {
       "description": "A paginated list of Capability Host entities.",
       "type": "object",
       "properties": {
@@ -11949,7 +11949,7 @@
       },
       "additionalProperties": false
     },
-    "ProjectCapabilityHostResourceArmPaginatedResult": {
+    "ProjectCapabilityHostArmPaginatedResult": {
       "description": "A paginated list of Project Capability Host entities.",
       "type": "object",
       "properties": {
@@ -11962,7 +11962,7 @@
           "description": "An array of objects of type Project Capability Host.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectCapabilityHostResource"
+            "$ref": "#/definitions/ProjectCapabilityHost"
           },
           "x-nullable": true
         }
@@ -12869,7 +12869,7 @@
       },
       "additionalProperties": false
     },
-    "AgentDeploymentResourceArmPaginatedResult": {
+    "AgentDeploymentArmPaginatedResult": {
       "description": "A paginated list of Agent Deployment entities.",
       "type": "object",
       "properties": {
