@@ -1069,8 +1069,8 @@ model HealthReportRequest {
   @doc("Evaluation rules that were used to determine the reported health state")
   evaluationRules?: HealthReportEvaluationRule;
 
-  @doc("Timestamp when the health report expires. If not specified, default is used")
-  expiresAt?: utcDateTime;
+  @doc("Number of seconds until the health report expires. Defaults to 3600 (1 hour) if not specified.")
+  expiresIn?: int32 = 3600;
 
   @doc("Optional additional context or description for the health report")
   additionalContext?: string4096;
