@@ -36,6 +36,7 @@ model Watcher is TrackedResource<WatcherProperties> {
   @segment("watchers")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 

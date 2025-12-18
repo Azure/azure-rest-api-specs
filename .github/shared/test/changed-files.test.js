@@ -16,6 +16,7 @@ import {
   getChangedFiles,
   getChangedFilesStatuses,
   json,
+  markdown,
   preview,
   quickstartTemplate,
   readme,
@@ -60,9 +61,11 @@ describe("changedFiles", () => {
   });
 
   const files = [
+    "CONTRIBUTING.MD",
     "cspell.json",
     "cspell.yaml",
     "MixedCase.jSoN",
+    "MixedCase.mD",
     "README.MD",
     "not-spec/contosowidgetmanager/data-plane/readme.md",
     "not-spec/contosowidgetmanager/resource-manager/readme.md",
@@ -114,6 +117,21 @@ describe("changedFiles", () => {
 
     expect(files.filter(json)).toEqual(expected);
     expect(filesResolved.filter(json)).toEqual(expected.map((f) => resolve(f)));
+  });
+
+  it("filter:markdown", () => {
+    const expected = [
+      "CONTRIBUTING.MD",
+      "MixedCase.mD",
+      "README.MD",
+      "not-spec/contosowidgetmanager/data-plane/readme.md",
+      "not-spec/contosowidgetmanager/resource-manager/readme.md",
+      "specification/contosowidgetmanager/data-plane/readme.md",
+      "specification/contosowidgetmanager/resource-manager/readme.md",
+    ];
+
+    expect(files.filter(markdown)).toEqual(expected);
+    expect(filesResolved.filter(markdown)).toEqual(expected.map((f) => resolve(f)));
   });
 
   it("filter:readme", () => {

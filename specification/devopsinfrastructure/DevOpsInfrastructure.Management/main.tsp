@@ -27,6 +27,7 @@ model Pool is TrackedResource<PoolProperties> {
   @doc("Name of the pool. It needs to be globally unique.")
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 }
 

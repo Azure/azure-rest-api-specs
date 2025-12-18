@@ -377,6 +377,18 @@
           "type": "string",
           "description": "The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob."
         },
+        "sourceSas": {
+          "type": "string",
+          "format": "password",
+          "description": "The SAS token for the source object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.",
+          "x-ms-secret": true
+        },
+        "destinationSas": {
+          "type": "string",
+          "format": "password",
+          "description": "The SAS token for the destination object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.",
+          "x-ms-secret": true
+        },
         "fromTo": {
           "$ref": "#/definitions/FromToType",
           "description": "Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob)."
