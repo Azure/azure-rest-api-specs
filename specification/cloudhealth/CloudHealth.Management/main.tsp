@@ -179,9 +179,8 @@ model ThresholdRule {
   operator: SignalOperator;
 
   @doc("Threshold value")
-  @minLength(1)
-  @maxLength(100)
-  threshold: string;
+  @typeChangedFrom(Versions.v2026_01_01_preview, string)
+  threshold: float64;
 }
 
 @removed(Versions.v2026_01_01_preview)
