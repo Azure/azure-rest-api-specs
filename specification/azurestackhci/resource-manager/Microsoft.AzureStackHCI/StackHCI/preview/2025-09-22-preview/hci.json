@@ -94,9 +94,6 @@
       "name": "UpdateSummariesOperationGroup"
     },
     {
-      "name": "ValidatedSolutionRecipes"
-    },
-    {
       "name": "ClusterJobs"
     }
   ],
@@ -1064,95 +1061,6 @@
         "x-ms-examples": {
           "UpdateContents_Get_MaximumSet": {
             "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes": {
-      "get": {
-        "operationId": "ValidatedSolutionRecipes_ListBySubscriptionLocationResource",
-        "tags": [
-          "ValidatedSolutionRecipes"
-        ],
-        "description": "List all validated solution recipes.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidatedSolutionRecipeListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
-            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes/{validatedSolutionRecipeName}": {
-      "get": {
-        "operationId": "ValidatedSolutionRecipes_Get",
-        "tags": [
-          "ValidatedSolutionRecipes"
-        ],
-        "description": "Get a validated solution recipe.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "validatedSolutionRecipeName",
-            "in": "path",
-            "description": "The name of the ValidatedSolutionRecipe",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidatedSolutionRecipe"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ValidatedSolutionRecipes_Get": {
-            "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
           }
         }
       }
@@ -5989,6 +5897,16 @@
           "description": "Supported Storage Type for HCI Cluster",
           "readOnly": true
         },
+        "confidentialVmProperties": {
+          "$ref": "#/definitions/ConfidentialVmProperties",
+          "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+          "readOnly": true
+        },
+        "sdnProperties": {
+          "$ref": "#/definitions/ClusterSdnProperties",
+          "description": "Software Defined Networking Properties of the cluster",
+          "readOnly": true
+        },
         "localAvailabilityZones": {
           "type": "array",
           "description": "Local Availability Zone information for HCI cluster",
@@ -6132,6 +6050,22 @@
         }
       }
     },
+    "ClusterSdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "properties": {
+        "sdnIntegrationIntent": {
+          "$ref": "#/definitions/SdnIntegrationIntent",
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SdnProperties"
+        }
+      ]
+    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -6213,6 +6147,150 @@
             "name": "Pending",
             "value": "Pending",
             "description": "The resource compliance status is pending"
+          }
+        ]
+      }
+    },
+    "ConfidentialVmIntent": {
+      "type": "string",
+      "description": "Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Indicates that the customer intends to enable CVM support on the cluster."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Indicates that the customer intends to disable CVM support on the cluster."
+          }
+        ]
+      }
+    },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "array",
+          "description": "Provides detailed status entries for IGVM-related components, including deployment status, compatibility checks, and error diagnostics.",
+          "items": {
+            "$ref": "#/definitions/IgvmStatusDetail"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      }
+    },
+    "ConfidentialVmProperties": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+      "properties": {
+        "confidentialVmIntent": {
+          "type": "string",
+          "description": "Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "default": "Disable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable CVM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable CVM support on the cluster."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatus": {
+          "type": "string",
+          "description": "Captures the current status of CVM support on the cluster.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "PartiallyEnabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
+              },
+              {
+                "name": "PartiallyEnabled",
+                "value": "PartiallyEnabled",
+                "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatusSummary": {
+          "type": "string",
+          "description": "Additional context about CVM support on the cluster, such as reasons for partial enablement or hardware constraints.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialVmStatus": {
+      "type": "string",
+      "description": "Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.",
+      "enum": [
+        "Enabled",
+        "PartiallyEnabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
+          },
+          {
+            "name": "PartiallyEnabled",
+            "value": "PartiallyEnabled",
+            "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
           }
         ]
       }
@@ -8383,6 +8461,11 @@
           "$ref": "#/definitions/HciEdgeDeviceHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster.",
           "readOnly": true
+        },
+        "sdnProperties": {
+          "$ref": "#/definitions/SdnProperties",
+          "description": "oftware Defined Networking Properties of the cluster",
+          "readOnly": true
         }
       }
     },
@@ -8676,6 +8759,52 @@
             "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
           }
         ]
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "Represents the IGVM support status for the device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The IGVM status could not be determined due to a query failure or inconsistent system state."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM support is enabled, indicating that confidential VM features are available on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disabled, indicating that confidential VM features are not supported on this device."
+          }
+        ]
+      }
+    },
+    "IgvmStatusDetail": {
+      "type": "object",
+      "description": "Provides component-level status information related to IGVM enablement on the device.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing context or explanation for the associated status code.",
+          "readOnly": true
+        }
       }
     },
     "ImdsAttestation": {
@@ -10665,6 +10794,17 @@
           "$ref": "#/definitions/ExtensionProfile",
           "description": "Extensions details for edge device.",
           "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent edge device sync timestamp in UTC.",
+          "readOnly": true
+        },
+        "confidentialVmProfile": {
+          "$ref": "#/definitions/ConfidentialVmProfile",
+          "description": "CVM support details for edge device.",
+          "readOnly": true
         }
       }
     },
@@ -10806,6 +10946,81 @@
           "$ref": "#/definitions/NetworkController",
           "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
         }
+      }
+    },
+    "SdnIntegrationIntent": {
+      "type": "string",
+      "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SdnIntegrationIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable SDN integration for the deployment."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable SDN integration for the deployment."
+          }
+        ]
+      }
+    },
+    "SdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state.",
+      "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "SdnStatus": {
+      "type": "string",
+      "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+      "enum": [
+        "Unknown",
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "SdnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "SDN is not enabled on the resource. The domain name will be null. This is the default state when SDN has not been configured."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution."
+          }
+        ]
       }
     },
     "SecretsLocationDetails": {
@@ -11812,28 +12027,24 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
-          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process.",
-          "x-ms-client-flatten": true
+          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process."
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks.",
-          "x-ms-client-flatten": true
+          "description": "Overall health state for update-specific health checks."
         },
         "healthCheckResult": {
           "type": "array",
           "description": "An array of PrecheckResult objects.",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "healthCheckDate": {
           "type": "string",
@@ -12087,7 +12298,6 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -12112,8 +12322,7 @@
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks.",
-          "x-ms-client-flatten": true
+          "description": "Overall health state for update-specific health checks."
         },
         "healthCheckResult": {
           "type": "array",
@@ -12121,7 +12330,6 @@
           "items": {
             "$ref": "#/definitions/PrecheckResult"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -12235,21 +12443,6 @@
           "readOnly": true
         }
       }
-    },
-    "ValidatedSolutionRecipe": {
-      "type": "object",
-      "description": "Represents a validated solution recipe resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ValidatedSolutionRecipeProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ValidatedSolutionRecipeCapabilities": {
       "type": "object",
@@ -12457,27 +12650,6 @@
       "required": [
         "solutionType",
         "version"
-      ]
-    },
-    "ValidatedSolutionRecipeListResult": {
-      "type": "object",
-      "description": "The response of a ValidatedSolutionRecipe list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ValidatedSolutionRecipe items on this page",
-          "items": {
-            "$ref": "#/definitions/ValidatedSolutionRecipe"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "ValidatedSolutionRecipeProperties": {
