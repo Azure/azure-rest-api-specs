@@ -3,8 +3,8 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@clientNamespace("Azure.AI.Projects.OpenAI")
-namespace Azure.AI.Projects;
+@clientNamespace("Foundry.OpenAI")
+namespace Foundry;
 
 // ------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate OpenAI operations that we'll use the OpenAI client for

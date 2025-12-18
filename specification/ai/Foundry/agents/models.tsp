@@ -6,7 +6,7 @@ import "../responses/models.tsp";
 
 using TypeSpec.Http;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 model CreateAgentVersionRequest {
   ...OpenAI.MetadataPropertyForRequest;
@@ -36,7 +36,7 @@ model CreateAgentVersionFromManifestRequest {
 model CreateAgentFromManifestRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
-    - Must start and end with alphanumeric characters, 
+    - Must start and end with alphanumeric characters,
     - Can contain hyphens in the middle
     - Must not exceed 63 characters.
     """)
@@ -53,7 +53,7 @@ model UpdateAgentFromManifestRequest {
 model CreateAgentRequest {
   @doc("""
     The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
-    - Must start and end with alphanumeric characters, 
+    - Must start and end with alphanumeric characters,
     - Can contain hyphens in the middle
     - Must not exceed 63 characters.
     """)

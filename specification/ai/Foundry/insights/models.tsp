@@ -10,7 +10,7 @@ using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("The response body for cluster insights.")
 @added(Versions.v2025_11_15_preview)

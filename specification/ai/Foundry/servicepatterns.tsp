@@ -5,7 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("Defines the request parameters for the createOrUpdateVersion operations.")
 model InputParameters<

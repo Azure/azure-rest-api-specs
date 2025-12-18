@@ -6,7 +6,7 @@ import "@typespec/openapi";
 
 using TypeSpec.Http;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 alias ItemTypeQueryParameter = {
   @query

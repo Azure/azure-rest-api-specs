@@ -22,7 +22,7 @@ import "./memory_stores/routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 // --------------------------------------------------------------------------------
 // Root client

@@ -9,7 +9,7 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("Enum to determine the type of data.")
 union DatasetType {

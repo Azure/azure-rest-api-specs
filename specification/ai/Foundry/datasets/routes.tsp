@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 alias ListDatasetVersionsParameters = {};
 

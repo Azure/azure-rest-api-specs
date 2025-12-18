@@ -10,7 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core.Foundations;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)

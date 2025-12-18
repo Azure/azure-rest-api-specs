@@ -10,7 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core.Experimental;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.CreateResponse,

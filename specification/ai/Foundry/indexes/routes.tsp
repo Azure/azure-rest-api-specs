@@ -8,7 +8,7 @@ import "../common/models.tsp";
 
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 alias ListIndexVersionParameters = {};
 

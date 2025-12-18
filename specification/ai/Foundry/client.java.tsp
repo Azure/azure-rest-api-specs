@@ -16,7 +16,7 @@ import "./insights/routes.tsp";
 import "./schedules/routes.tsp";
 
 using Azure.ClientGenerator.Core;
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 // --------------------------------------------------------------------------------
 // Root client

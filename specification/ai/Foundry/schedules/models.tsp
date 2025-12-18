@@ -10,7 +10,7 @@ import "../insights/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("Schedule provisioning status.")
 @added(Versions.v2025_11_15_preview)

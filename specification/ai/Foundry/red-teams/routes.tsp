@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 alias RedTeamServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &

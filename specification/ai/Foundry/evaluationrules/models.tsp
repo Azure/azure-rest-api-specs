@@ -9,7 +9,7 @@ import "../common/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("Type of the evaluation action.")
 @added(Versions.v2025_11_15_preview)

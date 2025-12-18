@@ -7,7 +7,7 @@ import "../common/service.tsp";
 
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Projects;
+namespace Foundry;
 
 @doc("Index resource Definition")
 @discriminator("type")
