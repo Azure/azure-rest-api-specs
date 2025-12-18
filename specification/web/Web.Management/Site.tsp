@@ -532,7 +532,14 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    File<"application/octet-stream"> | NoContentResponse,
+    {
+      @header("Content-Type")
+      contentType: "application/octet-stream";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -545,7 +552,14 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    File<"application/zip"> | NoContentResponse,
+    {
+      @header("Content-Type")
+      contentType: "application/zip";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1060,7 +1074,14 @@ interface Sites {
   listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    File<"application/xml">,
+    {
+      @header("Content-Type")
+      contentType: "application/xml";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1820,7 +1841,14 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    File<"application/octet-stream"> | NoContentResponse,
+    {
+      @header("Content-Type")
+      contentType: "application/octet-stream";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1834,7 +1862,14 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    File<"application/zip"> | NoContentResponse,
+    {
+      @header("Content-Type")
+      contentType: "application/zip";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    } | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2271,7 +2306,14 @@ interface WebApps {
   listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    File<"application/xml">,
+    {
+      @header("Content-Type")
+      contentType: "application/xml";
+
+      @doc("Receipt body in COSE format")
+      @bodyRoot
+      body: bytes;
+    },
     OverrideErrorType = DefaultErrorResponse
   >;
 
