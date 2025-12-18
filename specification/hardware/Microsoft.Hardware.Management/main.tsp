@@ -405,7 +405,6 @@ union BillingState {
 @doc("Provisioning State")
 union ProvisioningState {
   Azure.ResourceManager.ResourceProvisioningState,
-
   string,
 }
 
