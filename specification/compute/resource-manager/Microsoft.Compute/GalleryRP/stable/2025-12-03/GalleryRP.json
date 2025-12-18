@@ -7442,6 +7442,31 @@
         }
       }
     },
+    "SharedGallerySubscription": {
+      "type": "object",
+      "description": "Specifies information about the Shared Gallery Subscription that hosts shared galleries shared at subscription level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedGallerySubscriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirSharedGalleryResource"
+        }
+      ]
+    },
+    "SharedGallerySubscriptionProperties": {
+      "type": "object",
+      "description": "The shared gallery hosting subscription's properties",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id of the subscription that hosts the shared gallery."
+        }
+      }
+    },
     "SharingProfile": {
       "type": "object",
       "description": "Profile for gallery sharing to subscription or tenant",
@@ -7730,6 +7755,21 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "TenantLevelSharedGallerySubscription": {
+      "type": "object",
+      "description": "Specifies information about the Shared Gallery Subscription that that hosts shared galleries shared at tenant level.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedGallerySubscriptionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirSharedGalleryResource"
+        }
       ]
     },
     "UefiKey": {

@@ -27,7 +27,7 @@ model TenantLevelSharedGallerySubscription
 }
 
 @armResourceOperations
-interface SharedGallerySubscriptions {
+interface TenantLevelSharedGallerySubscriptions {
   /**
    * No operation supported at this level.
    * This is only needed to form the route with the expected segments
