@@ -38,12 +38,12 @@ interface TenantLevelSharedGalleryInvites {
   tenantLevelGallerySharingAccept is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
-    ArmResponse<TenantLevelSharedGalleryInvite> | (ArmAcceptedLroResponse<
+    ArmResponse<SharedGalleryInviteProperties> | (ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = TenantLevelSharedGalleryInvite> &
+      ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
     > & {
-      @bodyRoot _: TenantLevelSharedGalleryInvite;
+      @bodyRoot _: SharedGalleryInviteProperties;
     })
   >;
 
@@ -57,12 +57,12 @@ interface TenantLevelSharedGalleryInvites {
   tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
-    ArmResponse<TenantLevelSharedGalleryInvite> | (ArmAcceptedLroResponse<
+    ArmResponse<SharedGalleryInviteProperties> | (ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = TenantLevelSharedGalleryInvite> &
+      ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
     > & {
-      @bodyRoot _: TenantLevelSharedGalleryInvite;
+      @bodyRoot _: SharedGalleryInviteProperties;
     })
   >;
 }
