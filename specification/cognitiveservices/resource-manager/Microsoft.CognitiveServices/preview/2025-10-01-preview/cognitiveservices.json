@@ -5532,7 +5532,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           },
           "default": {
@@ -5582,7 +5582,7 @@
             "description": "CapabilityHost definition.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           }
         ],
@@ -5590,13 +5590,13 @@
           "200": {
             "description": "Create or update request is successful.",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/CapabilityHostResource"
+              "$ref": "#/definitions/CapabilityHost"
             },
             "headers": {
               "x-ms-async-operation-timeout": {
@@ -12912,7 +12912,7 @@
           "description": "The list of agent definitions comprising this application, returned as references to the objects under the parent project; use this to obtain a flat list of all agent-version pairs represented by this application.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentReference"
+            "$ref": "#/definitions/AgentReferenceProperties"
           },
           "x-nullable": true
         },
@@ -13017,7 +13017,7 @@
       "x-ms-discriminator-value": "Managed",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentDeployment"
+          "$ref": "#/definitions/AgentDeploymentProperties"
         }
       ],
       "additionalProperties": false
@@ -13028,7 +13028,7 @@
       "x-ms-discriminator-value": "Hosted",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentDeployment"
+          "$ref": "#/definitions/AgentDeploymentProperties"
         }
       ],
       "properties": {
@@ -13069,7 +13069,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AgentReference"
+          "$ref": "#/definitions/AgentReferenceProperties"
         }
       ],
       "properties": {
