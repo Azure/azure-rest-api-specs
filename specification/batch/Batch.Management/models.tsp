@@ -1016,7 +1016,7 @@ model EndpointAccessProfile {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum IPRuleAction {
   /**
-   * Deny client access.
+   * Allow access for the matched client IP address.
    */
   Allow: "Allow",
 }
@@ -2737,7 +2737,7 @@ model NetworkConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs(
-    "https://learn.microsoft.com/azure/batch/batch-virtual-networks",
+    "https://learn.microsoft.com/azure/batch/batch-virtual-network",
     "Create an Azure Batch pool in a virtual network"
   )
   @summary("The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.")
