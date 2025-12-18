@@ -7403,6 +7403,33 @@
         "scriptLink"
       ]
     },
+    "ShareInviteStatus": {
+      "type": "string",
+      "description": "This property specifies the share invite status. Possible values are: **Pending,** **Accepted,** **Rejected.**",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "ShareInviteStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          }
+        ]
+      }
+    },
     "SharedGallery": {
       "type": "object",
       "description": "Specifies information about the Shared Gallery that you want to create or update.",
@@ -7713,6 +7740,22 @@
         "type": {
           "$ref": "#/definitions/SharingProfileGroupTypes",
           "description": "The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**"
+        },
+        "sharedGallerySubscriptionId": {
+          "type": "string",
+          "description": "id of the subscription that hosts the shared gallery."
+        },
+        "sharedGalleryName": {
+          "type": "string",
+          "description": "shared gallery name that was originally shared."
+        },
+        "location": {
+          "type": "string",
+          "description": "location of the shared gallery."
+        },
+        "status": {
+          "$ref": "#/definitions/ShareInviteStatus",
+          "description": "The status of the invite. Possible values are: **Pending,** **Accepted,** **Rejected.**"
         }
       }
     },

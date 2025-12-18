@@ -2813,6 +2813,19 @@ model SharedGallerySubscriptionProperties {
 }
 
 /**
+ * This property specifies the share invite status. Possible values are: **Pending,** **Accepted,** **Rejected.**
+ */
+union ShareInviteStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
+}
+
+/**
  * The shared gallery invite's properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2821,6 +2834,26 @@ model SharedGalleryInviteProperties {
    * The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**
    */
   type?: SharingProfileGroupTypes;
+
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  sharedGallerySubscriptionId?: string;
+
+  /**
+   * shared gallery name that was originally shared.
+   */
+  sharedGalleryName?: string;
+
+  /**
+   * location of the shared gallery.
+   */
+  location?: string;
+
+  /**
+   * The status of the invite. Possible values are: **Pending,** **Accepted,** **Rejected.**
+   */
+  status?: ShareInviteStatus;
 }
 
 /**
