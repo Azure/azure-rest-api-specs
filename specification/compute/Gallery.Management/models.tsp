@@ -2818,9 +2818,9 @@ model SharedGallerySubscriptionProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model SharedGalleryInviteProperties {
   /**
-   * id of the subscription that hosts the shared gallery.
+   * The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**
    */
-  id?: string;
+  type?: SharingProfileGroupTypes;
 }
 
 /**
