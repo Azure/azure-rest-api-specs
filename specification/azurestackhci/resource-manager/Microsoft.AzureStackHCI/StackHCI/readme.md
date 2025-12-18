@@ -40,7 +40,6 @@ directive:
     from:
       - arcSettings.json
       - clusters.json
-      - hci.json
       - extensions.json
       - operations.json
       - offers.json
@@ -83,7 +82,6 @@ suppressions:
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
     from:
-      - hci.json
       - deploymentSettings.json
       - clusters.json
       - securitySettings.json
@@ -102,17 +100,11 @@ suppressions:
     from: 
       - offers.json
       - skus.json
-      - hci.json
 
   - code: PatchPropertiesCorrespondToPutProperties
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - clusters.json
-  
-  - code: PatchBodyParametersSchema
-    reason: already used in GA api version, fixing it will cause breaking change
-    from:
-      - hci.json
 
   - code: PatchBodyParametersSchema
     from: hci.json
@@ -134,7 +126,6 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
-      - hci.json
 
   - code: PutResponseCodes
     from: hci.json
@@ -250,7 +241,6 @@ suppressions:
     from:
       - arcSettings.json
       - updates.json
-      - hci.json
   
   - code: DeleteResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -300,11 +290,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
-  
-  - code: DescriptionMustNotBeNodeName
-    reason: backward compatible
-    from:
-      - hci.json
   
   - code: TrackedResourcePatchOperation
     reason: these are not tracked resources, so no tags and corresponding patch operation is needed
