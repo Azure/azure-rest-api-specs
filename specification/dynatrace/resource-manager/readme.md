@@ -30,6 +30,34 @@ openapi-subtype: rpaas
 tag: package-2024-04-24
 ```
 
+### Tag: package-2025-11-03-preview
+
+These settings apply only when `--tag=package-2025-11-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-03-preview'
+input-file:
+  - Dynatrace.Observability/preview/2025-11-03-preview/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
+    - code: RequiredPropertiesMissingInResourceModel
+      from: dynatrace.json
+      reason: It is similar to any other model. We believe this is a false positive.
+```
+
 ### Tag: package-2024-04-24
 
 These settings apply only when `--tag=package-2024-04-24` is specified on the command line.
