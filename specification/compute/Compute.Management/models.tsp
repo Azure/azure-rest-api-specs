@@ -438,6 +438,10 @@ union ZonalPlatformFaultDomainAlignMode {
   Aligned: "Aligned",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Unaligned: "Unaligned",
+
+  /** Offload Alignment to VMSS. VMSS aligns disks that support enough Storage Fault Domains, while keeping others unaligned. */
+  @added(Versions.v2025_11_01)
+  BestEffortAligned: "BestEffortAligned",
 }
 
 /**
@@ -900,6 +904,34 @@ union DiskControllerTypes {
   SCSI: "SCSI",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NVMe: "NVMe",
+}
+
+/**
+ * Specifies the storage fault domain alignment type for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageFaultDomainAlignmentType {
+  string,
+
+  /** Disk Storage Fault Domains are mapped to Compute Fault Domains. Deployment fails if disk does not support enough Fault Domains. */
+  Aligned: "Aligned",
+
+  /** Attempt to map Storage Fault Domains to Compute Fault Domains. Disks are unaligned if disk does not support enough Fault Domains. */
+  BestEffortAligned: "BestEffortAligned",
+}
+
+/**
+ * Specifies the storage alignment status for the disk.
+ */
+@added(Versions.v2025_11_01)
+union StorageAlignmentStatus {
+  string,
+
+  /** Disk does not have Storage Fault Domain to Compute Fault Domain mapping. A single Storage Fault Domain failure may impact all VMs that reference this disk profile. */
+  Unaligned: "Unaligned",
+
+  /** Disk has Storage Fault Domain to Compute Fault Domain mapping. Storage Fault Domain failure is contained to VMs in a single Compute Fault Domain. */
+  Aligned: "Aligned",
 }
 
 /**
@@ -2501,6 +2533,12 @@ model VirtualMachineScaleSetOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**
    */
   osType?: OperatingSystemTypes;
@@ -2632,6 +2670,12 @@ model VirtualMachineScaleSetDataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
@@ -3852,6 +3896,12 @@ model VirtualMachineScaleSetUpdateOSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
    */
   image?: VirtualHardDisk;
@@ -5012,6 +5062,12 @@ model DiskInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * Specifies the storage alignment status for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageAlignmentStatus?: StorageAlignmentStatus;
 }
 
 /**
@@ -5216,6 +5272,12 @@ model OSDisk {
   diskSizeGB?: int32;
 
   /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
+
+  /**
    * The managed disk parameters.
    */
   managedDisk?: ManagedDiskParameters;
@@ -5290,6 +5352,12 @@ model DataDisk {
    * Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB' is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023.
    */
   diskSizeGB?: int32;
+
+  /**
+   * Specifies the storage fault domain alignment type for the disk.
+   */
+  @added(Versions.v2025_11_01)
+  storageFaultDomainAlignment?: StorageFaultDomainAlignmentType;
 
   /**
    * The managed disk parameters.
