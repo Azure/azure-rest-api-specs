@@ -2653,7 +2653,7 @@ model FixedScaleSettings {
   /**
    * If omitted, the default value is Requeue.
    */
-  @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
+  @summary("Determines what to do with a node and its running task(s) if the pool size is decreasing.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
   nodeDeallocationOption?: ComputeNodeDeallocationOption;
 }
