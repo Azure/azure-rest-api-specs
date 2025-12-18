@@ -116,12 +116,6 @@ union PipelineDependencyCondition {
   /** Succeeded condition. */
   Succeeded: "Succeeded",
 
-  /** Failed condition. */
-  Failed: "Failed",
-
-  /** Skipped condition. */
-  Skipped: "Skipped",
-
   string,
 }
 
