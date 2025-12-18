@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Microsoft Foundry",
+    "title": "Azure AI",
     "version": "2025-11-15-preview"
   },
   "tags": [
@@ -6803,8 +6803,7 @@
                       },
                       "user": {
                         "type": "string",
-                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
-                        "deprecated": true
+                        "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
                       },
                       "safety_identifier": {
                         "type": "string",
@@ -6815,7 +6814,12 @@
                         "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
                       },
                       "service_tier": {
-                        "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ServiceTier"
+                          }
+                        ],
+                        "description": "Note: service_tier is not applicable to Azure OpenAI."
                       },
                       "prompt_cache_retention": {
                         "type": "string",
@@ -6868,7 +6872,8 @@
                         "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
                       },
                       "tools": {
-                        "$ref": "#/components/schemas/OpenAI.ToolsArray"
+                        "$ref": "#/components/schemas/OpenAI.ToolsArray",
+                        "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter.\n\nThe two categories of tools you can provide the model are:\n\n- **Built-in tools**: Tools that are provided by OpenAI that extend the\n  model's capabilities, like file search.\n- **Function calls (custom tools)**: Functions that are defined by you,\n  enabling the model to call your own code."
                       },
                       "tool_choice": {
                         "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -8638,7 +8643,7 @@
               "caesar",
               "character_space",
               "jailbreak",
-              "ansi_attack",
+              "ansii_attack",
               "character_swap",
               "suffix_append",
               "string_join",
@@ -12500,7 +12505,7 @@
           "image": {
             "type": "string",
             "description": "The image for the hosted agent.",
-            "example": "my-registry.azurecr.io/my-hosted-agent:latest"
+            "example": "myregistry.azurecr.io/my-hosted-agent:latest"
           }
         },
         "allOf": [
@@ -13888,8 +13893,7 @@
             "container_file_citation": "#/components/schemas/OpenAI.ContainerFileCitationBody",
             "file_path": "#/components/schemas/OpenAI.FilePath"
           }
-        },
-        "description": "An annotation that applies to a span of output text."
+        }
       },
       "OpenAI.AnnotationType": {
         "anyOf": [
@@ -14596,8 +14600,7 @@
           },
           "encrypted_content": {
             "type": "string",
-            "maxLength": 10485760,
-            "description": "The encrypted content of the compaction summary."
+            "maxLength": 10485760
           }
         },
         "allOf": [
@@ -15570,8 +15573,7 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
+            "type": "string"
           }
         },
         "allOf": [
@@ -15579,7 +15581,7 @@
             "$ref": "#/components/schemas/OpenAI.ConversationItem"
           }
         ],
-        "description": "The output of a shell tool call that was emitted.",
+        "description": "The output of a shell tool call.",
         "title": "Shell call output"
       },
       "OpenAI.ConversationItemFunctionToolCallOutputResource": {
@@ -16316,10 +16318,10 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The unique ID of the conversation that this response was associated with."
+            "description": "The unique ID of the conversation."
           }
         },
-        "description": "The conversation that this response belonged to. Input items and output items from this response were automatically added to this conversation.",
+        "description": "The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.",
         "title": "Conversation"
       },
       "OpenAI.ConversationResource": {
@@ -16899,7 +16901,6 @@
         },
         "description": "Deprecated in favor of LogsDataSourceConfig.",
         "title": "StoredCompletionsDataSourceConfig",
-        "deprecated": true,
         "x-oaiMeta": {
           "name": "The stored completions data source object for evals",
           "group": "evals",
@@ -16941,8 +16942,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateFineTuningJobRequestHyperparameters"
               }
             ],
-            "description": "The hyperparameters used for the fine-tuning job.\n  This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter.",
-            "deprecated": true
+            "description": "The hyperparameters used for the fine-tuning job.\n  This value is now deprecated in favor of `method`, and should be passed in under the `method` parameter."
           },
           "suffix": {
             "type": "string",
@@ -17123,8 +17123,7 @@
           },
           "user": {
             "type": "string",
-            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
-            "deprecated": true
+            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
           },
           "safety_identifier": {
             "type": "string",
@@ -17135,7 +17134,12 @@
             "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
           },
           "service_tier": {
-            "$ref": "#/components/schemas/OpenAI.ServiceTier"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ServiceTier"
+              }
+            ],
+            "description": "Note: service_tier is not applicable to Azure OpenAI."
           },
           "prompt_cache_retention": {
             "type": "string",
@@ -17188,7 +17192,8 @@
             "$ref": "#/components/schemas/OpenAI.ResponseTextParam"
           },
           "tools": {
-            "$ref": "#/components/schemas/OpenAI.ToolsArray"
+            "$ref": "#/components/schemas/OpenAI.ToolsArray",
+            "description": "An array of tools the model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter.\n\nThe two categories of tools you can provide the model are:\n\n- **Built-in tools**: Tools that are provided by OpenAI that extend the\n  model's capabilities, like file search.\n- **Function calls (custom tools)**: Functions that are defined by you,\n  enabling the model to call your own code."
           },
           "tool_choice": {
             "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
@@ -19966,12 +19971,10 @@
         ],
         "properties": {
           "stdout": {
-            "type": "string",
-            "description": "The standard output that was captured."
+            "type": "string"
           },
           "stderr": {
-            "type": "string",
-            "description": "The standard error output that was captured."
+            "type": "string"
           },
           "outcome": {
             "allOf": [
@@ -19982,11 +19985,10 @@
             "description": "Represents either an exit outcome (with an exit code) or a timeout outcome for a shell call output chunk."
           },
           "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
+            "type": "string"
           }
         },
-        "description": "The content of a shell tool call output that was emitted.",
+        "description": "The content of a shell call output.",
         "title": "Shell call output content"
       },
       "OpenAI.FunctionShellCallOutputContentParam": {
@@ -21380,7 +21382,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam",
             "message": "#/components/schemas/OpenAI.InputMessage",
             "computer_call_output": "#/components/schemas/OpenAI.ComputerCallOutputItemParam",
             "function_call_output": "#/components/schemas/OpenAI.FunctionCallOutputItemParam",
@@ -21404,7 +21405,8 @@
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemMcpApprovalRequest",
             "mcp_call": "#/components/schemas/OpenAI.ItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.ItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall"
+            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam"
           }
         },
         "description": "Content item used to generate a response."
@@ -22177,7 +22179,6 @@
             "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
             "workflow_action": "#/components/schemas/WorkflowActionOutputItemResource",
             "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
@@ -22197,7 +22198,8 @@
             "mcp_list_tools": "#/components/schemas/OpenAI.ItemResourceMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemResourceMcpApprovalRequest",
             "mcp_approval_response": "#/components/schemas/OpenAI.ItemResourceMcpApprovalResponseResource",
-            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall"
+            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource"
           }
         },
         "description": "Content item used to generate a response."
@@ -22636,8 +22638,7 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
+            "type": "string"
           }
         },
         "allOf": [
@@ -22645,7 +22646,7 @@
             "$ref": "#/components/schemas/OpenAI.ItemResource"
           }
         ],
-        "description": "The output of a shell tool call that was emitted.",
+        "description": "The output of a shell tool call.",
         "title": "Shell call output"
       },
       "OpenAI.ItemResourceFunctionToolCallOutputResource": {
@@ -23160,11 +23161,7 @@
               "mcp_list_tools",
               "mcp_approval_request",
               "mcp_approval_response",
-              "mcp_call",
-              "structured_outputs",
-              "workflow_action",
-              "memory_search_call",
-              "oauth_consent_request"
+              "mcp_call"
             ]
           }
         ]
@@ -24186,12 +24183,10 @@
             "description": "The unique ID of the compaction item."
           },
           "encrypted_content": {
-            "type": "string",
-            "description": "The encrypted content that was produced by compaction."
+            "type": "string"
           },
           "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
+            "type": "string"
           }
         },
         "allOf": [
@@ -24454,8 +24449,7 @@
             "nullable": true
           },
           "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
+            "type": "string"
           }
         },
         "allOf": [
@@ -24463,7 +24457,7 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
-        "description": "The output of a shell tool call that was emitted.",
+        "description": "The output of a shell tool call.",
         "title": "Shell call output"
       },
       "OpenAI.OutputItemFunctionToolCall": {
@@ -25306,8 +25300,7 @@
           },
           "user": {
             "type": "string",
-            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers).",
-            "deprecated": true
+            "description": "This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.\n  A stable identifier for your end-users.\n  Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](https://platform.openai.com/docs/guides/safety-best-practices#safety-identifiers)."
           },
           "safety_identifier": {
             "type": "string",
@@ -25318,7 +25311,12 @@
             "description": "Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](https://platform.openai.com/docs/guides/prompt-caching)."
           },
           "service_tier": {
-            "$ref": "#/components/schemas/OpenAI.ServiceTier"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ServiceTier"
+              }
+            ],
+            "description": "Note: service_tier is not applicable to Azure OpenAI."
           },
           "prompt_cache_retention": {
             "type": "string",
@@ -25416,11 +25414,6 @@
             "type": "integer",
             "format": "unixtime",
             "description": "Unix timestamp (in seconds) of when this Response was created."
-          },
-          "completed_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "nullable": true
           },
           "error": {
             "type": "object",
@@ -25906,7 +25899,7 @@
         "x-oaiMeta": {
           "name": "response.completed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"completed_at\": 1740855870,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.completed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"completed\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"input\": [],\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [\n      {\n        \"id\": \"msg_123\",\n        \"type\": \"message\",\n        \"role\": \"assistant\",\n        \"content\": [\n          {\n            \"type\": \"output_text\",\n            \"text\": \"In a shimmering forest under a sky full of stars, a lonely unicorn named Lila discovered a hidden pond that glowed with moonlight. Every night, she would leave sparkling, magical flowers by the water's edge, hoping to share her beauty with others. One enchanting evening, she woke to find a group of friendly animals gathered around, eager to be friends and share in her magic.\",\n            \"annotations\": []\n          }\n        ]\n      }\n    ],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": {\n      \"input_tokens\": 0,\n      \"output_tokens\": 0,\n      \"output_tokens_details\": {\n        \"reasoning_tokens\": 0\n      },\n      \"total_tokens\": 0\n    },\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseContentPartAddedEvent": {
@@ -26072,7 +26065,7 @@
         "x-oaiMeta": {
           "name": "response.created",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.created\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseCustomToolCallInputDeltaEvent": {
@@ -26301,7 +26294,7 @@
         "x-oaiMeta": {
           "name": "response.failed",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"completed_at\": null,\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
+          "example": "{\n  \"type\": \"response.failed\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"failed\",\n    \"error\": {\n      \"code\": \"server_error\",\n      \"message\": \"The model failed to generate a response.\"\n    },\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  }\n}\n"
         }
       },
       "OpenAI.ResponseFileSearchCallCompletedEvent": {
@@ -26874,7 +26867,7 @@
         "x-oaiMeta": {
           "name": "response.in_progress",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.in_progress\",\n  \"response\": {\n    \"id\": \"resp_67ccfcdd16748190a91872c75d38539e09e4d4aac714747c\",\n    \"object\": \"response\",\n    \"created_at\": 1741487325,\n    \"status\": \"in_progress\",\n    \"error\": null,\n    \"incomplete_details\": null,\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"output\": [],\n    \"parallel_tool_calls\": true,\n    \"previous_response_id\": null,\n    \"reasoning\": {\n      \"effort\": null,\n      \"summary\": null\n    },\n    \"store\": true,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseIncompleteDetails": {
@@ -26926,7 +26919,7 @@
         "x-oaiMeta": {
           "name": "response.incomplete",
           "group": "responses",
-          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"completed_at\": null,\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
+          "example": "{\n  \"type\": \"response.incomplete\",\n  \"response\": {\n    \"id\": \"resp_123\",\n    \"object\": \"response\",\n    \"created_at\": 1740855869,\n    \"status\": \"incomplete\",\n    \"error\": null,\n    \"incomplete_details\": {\n      \"reason\": \"max_tokens\"\n    },\n    \"instructions\": null,\n    \"max_output_tokens\": null,\n    \"model\": \"gpt-4o-mini-2024-07-18\",\n    \"output\": [],\n    \"previous_response_id\": null,\n    \"reasoning_effort\": null,\n    \"store\": false,\n    \"temperature\": 1,\n    \"text\": {\n      \"format\": {\n        \"type\": \"text\"\n      }\n    },\n    \"tool_choice\": \"auto\",\n    \"tools\": [],\n    \"top_p\": 1,\n    \"truncation\": \"disabled\",\n    \"usage\": null,\n    \"user\": null,\n    \"metadata\": {}\n  },\n  \"sequence_number\": 1\n}\n"
         }
       },
       "OpenAI.ResponseLogProb": {
@@ -28822,17 +28815,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
-            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
-            "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
-            "azure_ai_search": "#/components/schemas/AzureAISearchAgentTool",
-            "openapi": "#/components/schemas/OpenApiAgentTool",
-            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchAgentTool",
-            "browser_automation_preview": "#/components/schemas/BrowserAutomationAgentTool",
-            "azure_function": "#/components/schemas/AzureFunctionAgentTool",
-            "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
-            "a2a_preview": "#/components/schemas/A2ATool",
-            "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -28844,7 +28826,18 @@
             "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
             "custom": "#/components/schemas/OpenAI.CustomToolParam",
             "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam"
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
+            "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
+            "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
+            "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
+            "azure_ai_search": "#/components/schemas/AzureAISearchAgentTool",
+            "openapi": "#/components/schemas/OpenApiAgentTool",
+            "bing_custom_search_preview": "#/components/schemas/BingCustomSearchAgentTool",
+            "browser_automation_preview": "#/components/schemas/BrowserAutomationAgentTool",
+            "azure_function": "#/components/schemas/AzureFunctionAgentTool",
+            "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
+            "a2a_preview": "#/components/schemas/A2ATool",
+            "memory_search": "#/components/schemas/MemorySearchTool"
           }
         },
         "description": "A tool that can be used to generate a response."
@@ -29379,7 +29372,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "find_in_page"
+              "find"
             ],
             "description": "The action type.",
             "x-stainless-const": true
@@ -29438,16 +29431,7 @@
           },
           "query": {
             "type": "string",
-            "description": "[DEPRECATED] The search query.",
-            "deprecated": true
-          },
-          "queries": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The search queries.",
-            "title": "Search queries"
+            "description": "The search query."
           },
           "sources": {
             "type": "array",
@@ -29543,6 +29527,14 @@
               }
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+          },
+          "custom_search_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchConfiguration"
+              }
+            ],
+            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
           }
         },
         "allOf": [
@@ -29594,14 +29586,6 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
-          },
-          "custom_search_configuration": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/WebSearchConfiguration"
-              }
-            ],
-            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
           }
         },
         "allOf": [
@@ -31637,7 +31621,7 @@
   "servers": [
     {
       "url": "{endpoint}",
-      "description": "Microsoft Foundry",
+      "description": "Azure AI",
       "variables": {
         "endpoint": {
           "default": "",

@@ -39,6 +39,7 @@ alias AcceptJsonHeader = {
   @header accept: "application/json";
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-response-body" "Streaming responses have a body but the linter doesn't recognize it"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
 op AgentOperation<
   Params extends Reflection.Model,
