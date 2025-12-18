@@ -139,22 +139,26 @@ model OrderLine {
 
 @doc("Order line quantity")
 model OrderLineQuantity {
-  @doc("Order lineId pending Quantity")
+  @doc("Order lineId pending quantity")
   pending: int64;
 
   @doc("Order lineId in-progress quantity")
   @visibility(Lifecycle.Read)
   inProgress?: int64;
 
-  @doc("Order lineId fulfilled Quantity")
+  @doc("Order lineId fulfilled quantity")
   @visibility(Lifecycle.Read)
   fulfilled?: int64;
 
-  @doc("Order lineId cancelled Quantity")
+  @doc("Order lineId quantity pending cancellation")
+  @visibility(Lifecycle.Read)
+  pendingCancel?: int64;
+
+  @doc("Order lineId cancelled quantity")
   @visibility(Lifecycle.Read)
   cancelled?: int64;
 
-  @doc("Order lineId returned Quantity")
+  @doc("Order lineId returned quantity")
   @visibility(Lifecycle.Read)
   returned?: int64;
 }
@@ -183,7 +187,7 @@ model LineFulfillmentInstruction {
   referenceDeviceLine?: int64;
 
   @doc("Serial Numbers")
-  serialNumbers?: int64[];
+  serialNumbers?: string[];
 }
 
 @doc("Order line price")

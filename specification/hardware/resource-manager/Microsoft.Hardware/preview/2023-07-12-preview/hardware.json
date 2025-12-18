@@ -576,8 +576,7 @@
           "type": "array",
           "description": "Serial Numbers",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         }
       }
@@ -687,7 +686,7 @@
         "pending": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId pending Quantity"
+          "description": "Order lineId pending quantity"
         },
         "inProgress": {
           "type": "integer",
@@ -698,19 +697,25 @@
         "fulfilled": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId fulfilled Quantity",
+          "description": "Order lineId fulfilled quantity",
+          "readOnly": true
+        },
+        "pendingCancel": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Order lineId quantity pending cancellation",
           "readOnly": true
         },
         "cancelled": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId cancelled Quantity",
+          "description": "Order lineId cancelled quantity",
           "readOnly": true
         },
         "returned": {
           "type": "integer",
           "format": "int64",
-          "description": "Order lineId returned Quantity",
+          "description": "Order lineId returned quantity",
           "readOnly": true
         }
       },
