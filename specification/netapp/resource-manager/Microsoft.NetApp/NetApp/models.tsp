@@ -746,11 +746,11 @@ model NetworkSiblingSet {
 }
 
 /**
- * NIC information and list of volumes for which the NIC has the primary mount ip address.
+ * NIC information and list of volumes for which the NIC has the primary mount IP Address.
  */
 model NicInfo {
   /**
-   * ipAddress
+   * IP Address
    */
   @visibility(Lifecycle.Read)
   ipAddress?: string;

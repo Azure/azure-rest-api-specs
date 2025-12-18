@@ -2,9 +2,11 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ResourceConnector;
 
@@ -189,6 +191,7 @@ union AccessProfileType {
 /**
  * Appliance ArtifactType definition.
  */
+@usage(Usage.output)
 union ArtifactType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -198,6 +201,7 @@ union ArtifactType {
 /**
  * Appliance SSHKeyType definition.
  */
+@usage(Usage.output)
 union SSHKeyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
