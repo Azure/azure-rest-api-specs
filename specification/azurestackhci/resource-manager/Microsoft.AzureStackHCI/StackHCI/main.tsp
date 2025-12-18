@@ -32,7 +32,7 @@ import "./Sku.tsp";
 import "./UpdateRun.tsp";
 import "./Update.tsp";
 import "./UpdateSummaries.tsp";
-// import "./ValidatedSolutionRecipe.tsp";
+import "./ValidatedSolutionRecipe.tsp";
 // import "./edgeMachine.tsp";
 // import "./edgeMachineJobs.tsp";
 // import "./validateOwnershipVouchers.tsp";

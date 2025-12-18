@@ -94,6 +94,9 @@
       "name": "UpdateSummariesOperationGroup"
     },
     {
+      "name": "ValidatedSolutionRecipes"
+    },
+    {
       "name": "ClusterJobs"
     }
   ],
@@ -1061,6 +1064,95 @@
         "x-ms-examples": {
           "UpdateContents_Get_MaximumSet": {
             "$ref": "./examples/UpdateContents_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes": {
+      "get": {
+        "operationId": "ValidatedSolutionRecipes_ListBySubscriptionLocationResource",
+        "tags": [
+          "ValidatedSolutionRecipes"
+        ],
+        "description": "List all validated solution recipes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidatedSolutionRecipeListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_ListBySubscriptionLocationResource": {
+            "$ref": "./examples/ValidatedSolutionRecipes_ListBySubscriptionLocationResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/locations/{location}/validatedSolutionRecipes/{validatedSolutionRecipeName}": {
+      "get": {
+        "operationId": "ValidatedSolutionRecipes_Get",
+        "tags": [
+          "ValidatedSolutionRecipes"
+        ],
+        "description": "Get a validated solution recipe.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "validatedSolutionRecipeName",
+            "in": "path",
+            "description": "The name of the ValidatedSolutionRecipe",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-.]{3,50}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidatedSolutionRecipe"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidatedSolutionRecipes_Get": {
+            "$ref": "./examples/ValidatedSolutionRecipes_Get.json"
           }
         }
       }
@@ -12444,6 +12536,21 @@
         }
       }
     },
+    "ValidatedSolutionRecipe": {
+      "type": "object",
+      "description": "Represents a validated solution recipe resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidatedSolutionRecipeProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ValidatedSolutionRecipeCapabilities": {
       "type": "object",
       "description": "Represents capabilities available in a validated solution recipe.",
@@ -12650,6 +12757,27 @@
       "required": [
         "solutionType",
         "version"
+      ]
+    },
+    "ValidatedSolutionRecipeListResult": {
+      "type": "object",
+      "description": "The response of a ValidatedSolutionRecipe list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ValidatedSolutionRecipe items on this page",
+          "items": {
+            "$ref": "#/definitions/ValidatedSolutionRecipe"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ValidatedSolutionRecipeProperties": {
