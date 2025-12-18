@@ -1069,8 +1069,10 @@ model HealthReportRequest {
   @doc("Evaluation rules that were used to determine the reported health state")
   evaluationRules?: HealthReportEvaluationRule;
 
-  @doc("Number of seconds until the health report expires. Defaults to 3600 (1 hour) if not specified.")
-  expiresIn?: int32 = 3600;
+  @doc("Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.")
+  @minValue(1)
+  @maxValue(10080) // = 1 week
+  expiresIn?: int32 = 60;
 
   @doc("Optional additional context or description for the health report")
   additionalContext?: string4096;

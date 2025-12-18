@@ -2710,10 +2710,13 @@
           "$ref": "#/definitions/HealthReportEvaluationRule",
           "description": "Evaluation rules that were used to determine the reported health state"
         },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the health report expires. If not specified, default is used"
+        "expiresIn": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of minutes until the health report expires. Defaults to 60 (1 hour) if not specified.",
+          "default": 60,
+          "minimum": 1,
+          "maximum": 10080
         },
         "additionalContext": {
           "$ref": "#/definitions/string4096",
