@@ -49,6 +49,8 @@ stages:
         value: 'packages'
       - name: SpecRepoCommit
         value: $(Build.SourceVersion)
+      - name: system.debug
+        value: 'true'
 
     pool:
       name: $(LINUXPOOL)
@@ -267,7 +269,7 @@ stages:
         parameters:
           ArtifactName: $(PipelineArtifactsName)
           ArtifactPath: $(StagedArtifactsFolder)
-          CustomCondition: and(succeededOrFailed(), ne([variables.StagedArtifactsFolder], ''))
+          CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
         - pwsh: |
