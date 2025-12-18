@@ -15,7 +15,7 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
-@parentResource(SubscriptionLocationResource)
+@parentResource(TenantLocationResource)
 model TenantLevelSharedGallerySubscription
   is ProxyResourceShared<SharedGallerySubscriptionProperties> {
   ...Azure.ResourceManager.Legacy.ResourceNameParameter<
