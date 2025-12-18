@@ -29,7 +29,7 @@ model TenantLevelSharedGalleryInvite
 @armResourceOperations
 interface TenantLevelSharedGalleryInvites {
   /**
-   * Accept sharing of a subscription-level shared gallery.
+   * Accept sharing of a tenant-level shared gallery.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
@@ -48,7 +48,7 @@ interface TenantLevelSharedGalleryInvites {
   >;
 
   /**
-   * Reject sharing of a subscription-level shared gallery.
+   * Reject sharing of a tenant-level shared gallery.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
