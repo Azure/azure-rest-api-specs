@@ -19,7 +19,7 @@ namespace Microsoft.Compute;
 model TenantLevelSharedGalleryInvite
   is ProxyResourceShared<SharedGalleryInviteProperties> {
   ...Azure.ResourceManager.Legacy.ResourceNameParameter<
-    Resource = SharedGallerySubscription,
+    Resource = TenantLevelSharedGallerySubscription,
     KeyName = "sharedGalleryName",
     SegmentName = "sharedGalleries",
     NamePattern = ""
