@@ -50,5 +50,3 @@ using Azure.ClientGenerator.Core;
   "AzureResource",
   "python"
 );
-
-
