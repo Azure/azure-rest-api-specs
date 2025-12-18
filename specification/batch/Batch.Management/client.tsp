@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -44,3 +45,6 @@ using Azure.ClientGenerator.Core;
   "go"
 );
 @@clientName(Microsoft.Batch.CifsMountConfiguration.userName, "Username", "go");
+
+@@clientName(Azure.ResourceManager.CommonTypes.TrackedResource, "AzureResource", "python");
+
