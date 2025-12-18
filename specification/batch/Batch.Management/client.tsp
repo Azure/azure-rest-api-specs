@@ -46,5 +46,9 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.Batch.CifsMountConfiguration.userName, "Username", "go");
 
-@@clientName(Azure.ResourceManager.CommonTypes.TrackedResource, "AzureResource", "python");
+@@clientName(Azure.ResourceManager.CommonTypes.TrackedResource,
+  "AzureResource",
+  "python"
+);
+
 
