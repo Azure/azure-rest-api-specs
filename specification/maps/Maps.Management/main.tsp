@@ -26,10 +26,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Maps
+ * Resource Provider
  */
 @armProviderNamespace
-@service(#{ title: "AzureMapsManagementClient" })
+@service(#{ title: "Azure Maps Resource Provider" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Maps;
@@ -45,3 +45,7 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list,
+  "List operations available for the Maps Resource Provider"
+);

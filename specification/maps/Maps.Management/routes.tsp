@@ -33,7 +33,7 @@ interface OperationResultOperationGroup {
     @minLength(1)
     @path
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | ErrorResponse;
+  ): OkResponse | (ArmAcceptedResponse & ArmLroLocationHeader) | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

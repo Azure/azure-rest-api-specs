@@ -31,3 +31,6 @@ using Microsoft.Maps;
 @@clientLocation(OperationResultOperationGroup.get, "OperationResult");
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
+
+@@clientLocation(Operations.list, "Maps");
+@@clientName(Operations.list, "ListOperations");

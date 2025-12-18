@@ -1,0 +1,371 @@
+{
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Maps/locations/{location}/operationResults/{operationId}": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter",
+              "name__added": "operationId",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 1
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Maps/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "$ref__deleted": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter",
+              "name__added": "operationId",
+              "in__added": "path",
+              "required__added": true,
+              "type__added": "string",
+              "minLength__added": 1
+            }
+          ]
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/listSas": {
+      "post": {
+        "description": {
+          "__old": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed.",
+          "__new": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token.\n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account.\n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed."
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name__deleted": "privateEndpointConnectionName",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "minLength__deleted": 3,
+              "maxLength__deleted": 98,
+              "pattern__deleted": "^[^%&:\\\\/#?]+$",
+              "$ref__added": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ]
+        ]
+      },
+      "put": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name__deleted": "privateEndpointConnectionName",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "minLength__deleted": 3,
+              "maxLength__deleted": 98,
+              "pattern__deleted": "^[^%&:\\\\/#?]+$",
+              "$ref__added": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "name__deleted": "privateEndpointConnectionName",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "minLength__deleted": 3,
+              "maxLength__deleted": 98,
+              "pattern__deleted": "^[^%&:\\\\/#?]+$",
+              "$ref__added": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Azure-AsyncOperation__deleted": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
+              "Location": {
+                "description": {
+                  "__old": "Operation Results Location URI",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource",
+                "__new": "#/definitions/PrivateLinkResource"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkedResources__deleted": {
+      "type": "array",
+      "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/LinkedResource"
+      }
+    },
+    "Locations__deleted": {
+      "type": "array",
+      "description": "The list of data processing locations for the Maps Account.",
+      "items": {
+        "type": "object",
+        "description": "Data processing location.",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The location name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
+      },
+      "x-ms-identifiers": [
+        "locationName"
+      ]
+    },
+    "Azure.ResourceManager.EncryptionProperty__added": {
+      "type": "object",
+      "description": "Model used only to spread in the `encryption` envelope property for a resource.All encryption configuration for a resource.",
+      "properties": {
+        "encryption": {
+          "$ref": "../../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/encryption",
+          "description": "All encryption configuration for a resource."
+        }
+      },
+      "required": [
+        "encryption"
+      ]
+    },
+    "LocationsItem__added": {
+      "type": "object",
+      "description": "Data processing location.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "description": "The location name."
+        }
+      },
+      "required": [
+        "locationName"
+      ]
+    },
+    "PrivateLinkResource__added": {
+      "type": "object",
+      "description": "A private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AccountSasParameters": {
+      "properties": {
+        "maxRatePerSecond": {
+          "minimum__deleted": 0,
+          "exclusiveMinimum__deleted": true
+        }
+      }
+    },
+    "CorsRules": {
+      "description": {
+        "__old": "Sets the CORS rules. You can include up to five CorsRule elements in the request. ",
+        "__new": "Sets the CORS rules. You can include up to five CorsRule elements in the request."
+      },
+      "properties": {
+        "corsRules": {
+          "maxItems__deleted": 5,
+          "description": {
+            "__old": "The list of CORS rules. You can include up to five CorsRule elements in the request. ",
+            "__new": "The list of CORS rules. You can include up to five CorsRule elements in the request."
+          },
+          "items": {
+            "description__deleted": "Specifies a CORS rule for the Maps Account."
+          }
+        }
+      }
+    },
+    "Creator": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "CreatorList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "MapsAccount": {
+      "properties": {
+        "systemData__deleted": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
+        },
+        "identity": {
+          "description__added": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "MapsAccountProperties": {
+      "properties": {
+        "disableLocalAuth": {
+          "default__deleted": false
+        },
+        "linkedResources": {
+          "$ref__deleted": "#/definitions/LinkedResources",
+          "type__added": "array",
+          "description__added": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).",
+          "items__added": {
+            "$ref": "#/definitions/LinkedResource"
+          }
+        },
+        "encryption": {
+          "description__added": "All encryption configuration for a resource.",
+          "$ref": {
+            "__old": "../../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption",
+            "__new": "#/definitions/Azure.ResourceManager.EncryptionProperty"
+          }
+        },
+        "locations": {
+          "$ref__deleted": "#/definitions/Locations",
+          "type__added": "array",
+          "items__added": {
+            "$ref": "#/definitions/LocationsItem"
+          }
+        }
+      }
+    },
+    "MapsAccountUpdateParameters": {
+      "properties": {
+        "identity": {
+          "description__added": "Managed service identity (system assigned and/or user assigned identities)"
+        }
+      }
+    },
+    "MapsAccounts": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "readOnly__deleted": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "nextLink": {
+          "x-nullable__deleted": true
+        }
+      }
+    },
+    "PrivateLinkResourceList": {
+      "required__added": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": {
+              "__old": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource",
+              "__new": "#/definitions/PrivateLinkResource"
+            }
+          }
+        }
+      }
+    }
+  }
+}

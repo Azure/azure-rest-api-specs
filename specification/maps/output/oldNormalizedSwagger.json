@@ -3,80 +3,29 @@
   "info": {
     "title": "Azure Maps Resource Provider",
     "version": "2025-10-01-preview",
-    "description": "Resource Provider",
-    "x-typespec-generated": [
-      {
-        "emitter": "@azure-tools/typespec-autorest"
-      }
-    ]
+    "description": "Resource Provider"
   },
-  "schemes": [
-    "https"
-  ],
-  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "tags": [
-    {
-      "name": "Operations"
-    },
-    {
-      "name": "Accounts"
-    },
-    {
-      "name": "Creators"
-    },
-    {
-      "name": "PrivateLinkResources"
-    },
-    {
-      "name": "PrivateEndpointConnections"
-    }
-  ],
   "paths": {
-    "/providers/Microsoft.Maps/operations": {
+    "/providers/microsoft.Maps/operations": {
       "get": {
         "operationId": "Maps_ListOperations",
-        "tags": [
-          "Operations"
-        ],
         "description": "List operations available for the Maps Resource Provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -92,30 +41,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/accounts": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Maps/accounts": {
       "get": {
         "operationId": "Accounts_ListBySubscription",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Get all Maps Accounts in a Subscription",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccounts"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -131,49 +70,33 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationResults/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Maps/locations/{location}/operationResults/{operationId}": {
       "get": {
         "operationId": "OperationResult_Get",
         "description": "Get the result of a long running azure asynchronous operation.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of an ongoing async operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "ignore"
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "ignore",
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": ""
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -186,38 +109,27 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Maps/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatus_Get",
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of an ongoing async operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -230,33 +142,20 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts": {
       "get": {
         "operationId": "Accounts_ListByResourceGroup",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Get all Maps Accounts in a Resource Group",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccounts"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -272,27 +171,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}": {
       "get": {
         "operationId": "Accounts_Get",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Get a Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -301,13 +187,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccount"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -321,24 +207,11 @@
       },
       "put": {
         "operationId": "Accounts_CreateOrUpdate",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -347,7 +220,6 @@
           {
             "name": "MapsAccount",
             "in": "body",
-            "description": "The new or updated parameters for the Maps Account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MapsAccount"
@@ -356,19 +228,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'MapsAccount' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccount"
             }
           },
           "201": {
-            "description": "Resource 'MapsAccount' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccount"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -388,24 +260,11 @@
       },
       "patch": {
         "operationId": "Accounts_Update",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -414,7 +273,6 @@
           {
             "name": "MapsAccountUpdateParameters",
             "in": "body",
-            "description": "The updated parameters for the Maps Account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MapsAccountUpdateParameters"
@@ -423,13 +281,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccount"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -452,24 +310,11 @@
       },
       "delete": {
         "operationId": "Accounts_Delete",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Delete a Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -478,13 +323,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -497,27 +342,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/creators": {
       "get": {
         "operationId": "Creators_ListByAccount",
-        "tags": [
-          "Creators"
-        ],
         "description": "Get all Creator instances for an Azure Maps Account",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -526,13 +358,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/CreatorList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -548,27 +380,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/creators/{creatorName}": {
       "get": {
         "operationId": "Creators_Get",
-        "tags": [
-          "Creators"
-        ],
         "description": "Get a Maps Creator resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -577,7 +396,6 @@
           {
             "name": "creatorName",
             "in": "path",
-            "description": "The name of the Maps Creator instance.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -586,13 +404,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -606,24 +424,11 @@
       },
       "put": {
         "operationId": "Creators_CreateOrUpdate",
-        "tags": [
-          "Creators"
-        ],
         "description": "Create or update a Maps Creator resource. Creator resource will manage Azure resources required to populate a custom set of mapping data. It requires an account to exist before it can be created.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -632,7 +437,6 @@
           {
             "name": "creatorName",
             "in": "path",
-            "description": "The name of the Maps Creator instance.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -641,7 +445,6 @@
           {
             "name": "CreatorResource",
             "in": "body",
-            "description": "The new or updated parameters for the Creator resource.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Creator"
@@ -650,19 +453,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Creator' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
           },
           "201": {
-            "description": "Resource 'Creator' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -676,24 +479,11 @@
       },
       "patch": {
         "operationId": "Creators_Update",
-        "tags": [
-          "Creators"
-        ],
         "description": "Updates the Maps Creator resource. Only a subset of the parameters may be updated after creation, such as Tags.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -702,7 +492,6 @@
           {
             "name": "creatorName",
             "in": "path",
-            "description": "The name of the Maps Creator instance.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -711,7 +500,6 @@
           {
             "name": "CreatorUpdateParameters",
             "in": "body",
-            "description": "The update parameters for Maps Creator.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreatorUpdateParameters"
@@ -720,13 +508,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/Creator"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -740,24 +528,11 @@
       },
       "delete": {
         "operationId": "Creators_Delete",
-        "tags": [
-          "Creators"
-        ],
         "description": "Delete a Maps Creator resource.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -766,7 +541,6 @@
           {
             "name": "creatorName",
             "in": "path",
-            "description": "The name of the Maps Creator instance.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -775,13 +549,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
+            "description": "ignore"
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -794,27 +568,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/listKeys": {
       "post": {
         "operationId": "Accounts_ListKeys",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Get the keys to use with the Maps APIs. A key is used to authenticate and authorize access to the Maps REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -823,13 +584,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccountKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -842,27 +603,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listSas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/listSas": {
       "post": {
         "operationId": "Accounts_ListSas",
-        "tags": [
-          "Accounts"
-        ],
-        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token.\n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account.\n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed.",
+        "description": "Create and list an account shared access signature token. Use this SAS token for authentication to Azure Maps REST APIs through various Azure Maps SDKs. As prerequisite to create a SAS Token. \n\nPrerequisites:\n1. Create or have an existing User Assigned Managed Identity in the same Azure region as the account. \n2. Create or update an Azure Maps account with the same Azure region as the User Assigned Managed Identity is placed.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -871,7 +619,6 @@
           {
             "name": "MapsAccountSasParameters",
             "in": "body",
-            "description": "The updated parameters for the Maps Account.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AccountSasParameters"
@@ -880,13 +627,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccountSasToken"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -899,27 +646,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_ListByAccount",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
         "description": "Get a private endpoint connections on the Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -928,13 +662,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -950,45 +684,38 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_Get",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
         "description": "Gets the specified private endpoint connection associated with the Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1002,36 +729,28 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnections_Create",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
         "description": "Create or update the state of specified private endpoint connection associated with the Maps account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
             "name": "properties",
             "in": "body",
-            "description": "The private endpoint connection properties.",
             "required": true,
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
@@ -1040,30 +759,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "Operation Status Location URI"
               }
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1074,61 +788,49 @@
             "$ref": "./examples/PrivateEndpointConnections_Update.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-        },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
         "description": "Deletes the specified private endpoint connection associated with the Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
             "pattern": "^[^%&:\\\\/#?]+$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 98,
+            "pattern": "^[^%&:\\\\/#?]+$"
           }
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Operation Status Location URI"
+              },
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "Operation Results Location URI"
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "ignore"
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1139,33 +841,17 @@
             "$ref": "./examples/PrivateEndpointConnections_Delete.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_ListByAccount",
-        "tags": [
-          "PrivateLinkResources"
-        ],
         "description": "Gets the private link resources that are available to be used for the Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1174,13 +860,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1196,27 +882,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateLinkResources/{privateLinkResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "operationId": "PrivateLinkResources_Get",
-        "tags": [
-          "PrivateLinkResources"
-        ],
         "description": "Gets a private link resource by name which can be used for the Maps Account.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1225,7 +898,6 @@
           {
             "name": "privateLinkResourceName",
             "in": "path",
-            "description": "The name of the private link resource.",
             "required": true,
             "type": "string",
             "pattern": "^.*$"
@@ -1233,13 +905,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1252,27 +924,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Maps/accounts/{accountName}/regenerateKey": {
       "post": {
         "operationId": "Accounts_RegenerateKeys",
-        "tags": [
-          "Accounts"
-        ],
         "description": "Regenerate either the primary or secondary key for use with the Maps APIs. The old key will stop working immediately.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
             "name": "accountName",
             "in": "path",
-            "description": "The name of the Maps Account.",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1281,7 +940,6 @@
           {
             "name": "keySpecification",
             "in": "body",
-            "description": "Which key to regenerate:  primary or secondary.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MapsKeySpecification"
@@ -1290,13 +948,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ignore",
             "schema": {
               "$ref": "#/definitions/MapsAccountKeys"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "ignore",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
@@ -1316,8 +974,17 @@
       "description": "Parameters used to create an account Shared Access Signature (SAS) token. The REST API access control is provided by Azure Maps Role Based Access (RBAC) identity and access.",
       "properties": {
         "signingKey": {
-          "$ref": "#/definitions/SigningKey",
-          "description": "The Maps account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Maps account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS."
+          "type": "string",
+          "description": "The Maps account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Maps account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
+          "enum": [
+            "primaryKey",
+            "secondaryKey",
+            "managedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "SigningKey",
+            "modelAsString": true
+          }
         },
         "principalId": {
           "type": "string",
@@ -1335,6 +1002,8 @@
           "format": "int32",
           "description": "Required parameter which represents the desired maximum request per second to allowed for the given SAS token. This does not guarantee perfect accuracy in measurements but provides application safe guards of abuse with eventual enforcement.",
           "default": 500,
+          "minimum": 0,
+          "exclusiveMinimum": true,
           "maximum": 500
         },
         "start": {
@@ -1347,24 +1016,11 @@
         }
       },
       "required": [
-        "signingKey",
-        "principalId",
+        "expiry",
         "maxRatePerSecond",
-        "start",
-        "expiry"
-      ]
-    },
-    "Azure.ResourceManager.EncryptionProperty": {
-      "type": "object",
-      "description": "Model used only to spread in the `encryption` envelope property for a resource.All encryption configuration for a resource.",
-      "properties": {
-        "encryption": {
-          "$ref": "../../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/encryption",
-          "description": "All encryption configuration for a resource."
-        }
-      },
-      "required": [
-        "encryption"
+        "principalId",
+        "signingKey",
+        "start"
       ]
     },
     "CorsRule": {
@@ -1385,15 +1041,16 @@
     },
     "CorsRules": {
       "type": "object",
-      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request.",
+      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. ",
       "properties": {
         "corsRules": {
           "type": "array",
-          "description": "The list of CORS rules. You can include up to five CorsRule elements in the request.",
+          "description": "The list of CORS rules. You can include up to five CorsRule elements in the request. ",
+          "maxItems": 5,
           "items": {
-            "$ref": "#/definitions/CorsRule"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/CorsRule",
+            "description": "Specifies a CORS rule for the Maps Account."
+          }
         }
       }
     },
@@ -1404,6 +1061,11 @@
         "properties": {
           "$ref": "#/definitions/CreatorProperties",
           "description": "The Creator resource properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "The system meta data relating to this resource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1417,24 +1079,22 @@
     },
     "CreatorList": {
       "type": "object",
-      "description": "A list of Creator resources.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Creator items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/Creator"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "CreatorProperties": {
       "type": "object",
@@ -1485,48 +1145,6 @@
         }
       }
     },
-    "KeyType": {
-      "type": "string",
-      "description": "Whether the operation refers to the primary or secondary key.",
-      "enum": [
-        "primary",
-        "secondary"
-      ],
-      "x-ms-enum": {
-        "name": "KeyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "primary",
-            "value": "primary",
-            "description": "primary"
-          },
-          {
-            "name": "secondary",
-            "value": "secondary",
-            "description": "secondary"
-          }
-        ]
-      }
-    },
-    "Kind": {
-      "type": "string",
-      "description": "The Kind of the Maps Account.",
-      "enum": [
-        "Gen2"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Gen2",
-            "value": "Gen2",
-            "description": "Gen2"
-          }
-        ]
-      }
-    },
     "LinkedResource": {
       "type": "object",
       "description": "Linked resource is reference to a resource deployed in an Azure subscription, add the linked resource `uniqueName` value as an optional parameter for operations on Azure Maps Geospatial REST APIs.",
@@ -1541,20 +1159,35 @@
         }
       },
       "required": [
-        "uniqueName",
-        "id"
+        "id",
+        "uniqueName"
       ]
     },
-    "LocationsItem": {
-      "type": "object",
-      "description": "Data processing location.",
-      "properties": {
-        "locationName": {
-          "type": "string",
-          "description": "The location name."
-        }
+    "LinkedResources": {
+      "type": "array",
+      "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).",
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/definitions/LinkedResource"
+      }
+    },
+    "Locations": {
+      "type": "array",
+      "description": "The list of data processing locations for the Maps Account.",
+      "items": {
+        "type": "object",
+        "description": "Data processing location.",
+        "properties": {
+          "locationName": {
+            "type": "string",
+            "description": "The location name."
+          }
+        },
+        "required": [
+          "locationName"
+        ]
       },
-      "required": [
+      "x-ms-identifiers": [
         "locationName"
       ]
     },
@@ -1562,21 +1195,30 @@
       "type": "object",
       "description": "An Azure resource which represents access to a suite of Maps REST APIs.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/MapsAccountProperties",
-          "description": "The map account properties."
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of this account."
         },
         "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "Get or Set Kind property."
+          "type": "string",
+          "description": "The Kind of the Maps Account.",
+          "enum": [
+            "Gen2"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData"
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/MapsAccountProperties",
+          "description": "The map account properties."
         }
       },
       "required": [
@@ -1625,7 +1267,8 @@
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage."
+          "description": "Allows toggle functionality on Azure Policy to disable Azure Maps local authentication support. This will disable Shared Keys and Shared Access Signature Token authentication from any usage.",
+          "default": false
         },
         "provisioningState": {
           "type": "string",
@@ -1633,26 +1276,18 @@
           "readOnly": true
         },
         "linkedResources": {
-          "type": "array",
-          "description": "The array of associated resources to the Maps account. Linked resource in the array cannot individually update, you must update all linked resources in the array together. These resources may be used on operations on the Azure Maps REST API. Access is controlled by the Maps Account Managed Identity(s) permissions to those resource(s).",
-          "items": {
-            "$ref": "#/definitions/LinkedResource"
-          }
+          "$ref": "#/definitions/LinkedResources"
         },
         "cors": {
           "$ref": "#/definitions/CorsRules",
           "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
         },
         "encryption": {
-          "$ref": "#/definitions/Azure.ResourceManager.EncryptionProperty",
-          "description": "All encryption configuration for a resource."
+          "$ref": "../../../../../../common-types/resource-management/v5/customermanagedkeys.json#/definitions/encryption"
         },
         "locations": {
-          "type": "array",
-          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope).",
-          "items": {
-            "$ref": "#/definitions/LocationsItem"
-          }
+          "$ref": "#/definitions/Locations",
+          "description": "List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope)."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -1666,8 +1301,16 @@
           ]
         },
         "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked."
+          "type": "string",
+          "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1694,16 +1337,22 @@
           }
         },
         "kind": {
-          "$ref": "#/definitions/Kind",
-          "description": "Get or Set Kind property."
+          "type": "string",
+          "description": "The Kind of the Maps Account.",
+          "enum": [
+            "Gen2"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of this account."
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "$ref": "#/definitions/MapsAccountProperties",
@@ -1714,63 +1363,51 @@
     },
     "MapsAccounts": {
       "type": "object",
-      "description": "A list of Maps Accounts.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The MapsAccount items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "#/definitions/MapsAccount"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "MapsKeySpecification": {
       "type": "object",
       "description": "Whether the operation refers to the primary or secondary key.",
       "properties": {
         "keyType": {
-          "$ref": "#/definitions/KeyType",
-          "description": "Whether the operation refers to the primary or secondary key."
+          "type": "string",
+          "description": "Whether the operation refers to the primary or secondary key.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
         "keyType"
       ]
     },
-    "Name": {
-      "type": "string",
-      "description": "The name of the SKU, in standard format (such as G2).",
-      "enum": [
-        "G2"
-      ],
-      "x-ms-enum": {
-        "name": "Name",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "G2",
-            "value": "G2",
-            "description": "G2"
-          }
-        ]
-      }
-    },
     "PrivateEndpointConnectionList": {
       "type": "object",
-      "description": "A list of private endpoint connections",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
@@ -1778,102 +1415,27 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property",
+          "x-nullable": true
         }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "PrivateLinkResourceList": {
       "type": "object",
-      "description": "A list of private link resources for a Maps Account resource type.",
+      "description": "[Placeholder] Discription for page model",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResource items on this page",
+          "description": "[Placeholder] Discription for value property",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "[Placeholder] Discription for nextLink property"
         }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PublicNetworkAccess": {
-      "type": "string",
-      "description": "Property to specify whether the Maps Account will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked.",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "PublicNetworkAccess",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "enabled",
-            "value": "enabled",
-            "description": "enabled"
-          },
-          {
-            "name": "disabled",
-            "value": "disabled",
-            "description": "disabled"
-          }
-        ]
-      }
-    },
-    "SigningKey": {
-      "type": "string",
-      "description": "The Maps account key to use for signing. Picking `primaryKey` or `secondaryKey` will use the Maps account Shared Keys, and using `managedIdentity` will use the auto-renewed private key to sign the SAS.",
-      "enum": [
-        "primaryKey",
-        "secondaryKey",
-        "managedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "SigningKey",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "primaryKey",
-            "value": "primaryKey",
-            "description": "primaryKey"
-          },
-          {
-            "name": "secondaryKey",
-            "value": "secondaryKey",
-            "description": "secondaryKey"
-          },
-          {
-            "name": "managedIdentity",
-            "value": "managedIdentity",
-            "description": "managedIdentity"
-          }
-        ]
       }
     },
     "Sku": {
@@ -1881,8 +1443,15 @@
       "description": "The SKU of the Maps Account.",
       "properties": {
         "name": {
-          "$ref": "#/definitions/Name",
-          "description": "The name of the SKU, in standard format (such as G2)."
+          "type": "string",
+          "description": "The name of the SKU, in standard format (such as G2).",
+          "enum": [
+            "G2"
+          ],
+          "x-ms-enum": {
+            "name": "Name",
+            "modelAsString": true
+          }
         },
         "tier": {
           "type": "string",
