@@ -1060,11 +1060,11 @@ model HealthReportRequest {
   @doc("Name of the entity signal to report health for")
   signalName: signalName;
 
-  @doc("Reported value of the signal")
-  value: float64;
-
   @doc("Health state to report for the signal")
   healthState: HealthState;
+
+  @doc("Reported value of the signal")
+  value?: float64;
 
   @doc("Evaluation rules that were used to determine the reported health state")
   evaluationRules?: HealthReportEvaluationRule;

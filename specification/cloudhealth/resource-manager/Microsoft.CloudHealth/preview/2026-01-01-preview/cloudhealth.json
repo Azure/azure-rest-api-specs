@@ -2697,14 +2697,14 @@
           "$ref": "#/definitions/signalName",
           "description": "Name of the entity signal to report health for"
         },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state to report for the signal"
+        },
         "value": {
           "type": "number",
           "format": "double",
           "description": "Reported value of the signal"
-        },
-        "healthState": {
-          "$ref": "#/definitions/HealthState",
-          "description": "Health state to report for the signal"
         },
         "evaluationRules": {
           "$ref": "#/definitions/HealthReportEvaluationRule",
@@ -2722,7 +2722,6 @@
       },
       "required": [
         "signalName",
-        "value",
         "healthState"
       ]
     },
