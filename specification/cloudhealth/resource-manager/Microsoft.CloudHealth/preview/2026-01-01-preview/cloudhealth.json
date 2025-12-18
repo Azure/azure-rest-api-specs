@@ -2539,11 +2539,11 @@
       "description": "Evaluation rule for a signal definition",
       "properties": {
         "degradedRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Degraded rule with static threshold. When used, dynamicDetectionRule must not be set."
         },
         "unhealthyRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set."
         }
       }
@@ -2680,11 +2680,11 @@
       "description": "Evaluation rules for the health report",
       "properties": {
         "degradedRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Degraded rule with static threshold. When used, dynamicDetectionRule must not be set."
         },
         "unhealthyRule": {
-          "$ref": "#/definitions/ThresholdRule",
+          "$ref": "#/definitions/ThresholdRuleV2",
           "description": "Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set."
         }
       }
@@ -3704,7 +3704,7 @@
         "healthState"
       ]
     },
-    "ThresholdRule": {
+    "ThresholdRuleV2": {
       "type": "object",
       "description": "Threshold-based evaluation rule for a signal definition",
       "properties": {
@@ -3713,10 +3713,9 @@
           "description": "Operator how to compare the signal value with the threshold"
         },
         "threshold": {
-          "type": "string",
-          "description": "Threshold value",
-          "minLength": 1,
-          "maxLength": 100
+          "type": "number",
+          "format": "double",
+          "description": "Threshold value"
         }
       },
       "required": [

@@ -167,12 +167,15 @@ model EvaluationRule {
   dynamicDetectionRule?: DynamicDetectionRule;
 
   @doc("Degraded rule with static threshold. When used, dynamicDetectionRule must not be set.")
-  degradedRule?: ThresholdRule;
+  @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
+  degradedRule?: ThresholdRuleV2;
 
   @doc("Unhealthy rule with static threshold. When used, dynamicDetectionRule must not be set.")
-  unhealthyRule?: ThresholdRule;
+  @typeChangedFrom(Versions.v2026_01_01_preview, ThresholdRule)
+  unhealthyRule?: ThresholdRuleV2;
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Threshold-based evaluation rule for a signal definition")
 model ThresholdRule {
   @doc("Operator how to compare the signal value with the threshold")
@@ -182,6 +185,16 @@ model ThresholdRule {
   @minLength(1)
   @maxLength(100)
   threshold: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Threshold-based evaluation rule for a signal definition")
+model ThresholdRuleV2 {
+  @doc("Operator how to compare the signal value with the threshold")
+  operator: SignalOperator;
+
+  @doc("Threshold value")
+  threshold: float64;
 }
 
 @removed(Versions.v2026_01_01_preview)
