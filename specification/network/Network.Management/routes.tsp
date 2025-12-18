@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available server variables.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableServerVariables")
   @autoRoute
   @get
@@ -32,7 +32,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available request headers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableRequestHeaders")
   @autoRoute
   @get
@@ -46,7 +46,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available response headers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableResponseHeaders")
   @autoRoute
   @get
@@ -60,7 +60,7 @@ interface ApplicationGatewaysOperationGroup {
   /**
    * Lists all available web application firewall rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableWafRuleSets")
   @autoRoute
   @get
@@ -72,12 +72,12 @@ interface ApplicationGatewaysOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableDelegationsOperationGroup {
   /**
    * Gets all of the available subnet delegations for this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailableDelegations_List")
   @autoRoute
   @list
@@ -90,12 +90,12 @@ interface AvailableDelegationsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableResourceGroupDelegationsOperationGroup {
   /**
    * Gets all of the available subnet delegations for this resource group in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailableResourceGroupDelegations_List")
   @autoRoute
   @list
@@ -108,12 +108,12 @@ interface AvailableResourceGroupDelegationsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableServiceAliasesOperationGroup {
   /**
    * Gets all available service aliases for this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailableServiceAliases_List")
   @autoRoute
   @list
@@ -128,7 +128,7 @@ interface AvailableServiceAliasesOperationGroup {
   /**
    * Gets all available service aliases for this resource group in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailableServiceAliases_ListByResourceGroup")
   @autoRoute
   @list
@@ -141,12 +141,12 @@ interface AvailableServiceAliasesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AzureFirewallFqdnTagsOperationGroup {
   /**
    * Gets all the Azure Firewall FQDN Tags in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AzureFirewallFqdnTags_ListAll")
   @autoRoute
   @get
@@ -162,7 +162,7 @@ interface AzureFirewallFqdnTagsOperationGroup {
 /**
  * Checks whether a domain name in the cloudapp.azure.com zone is available for use.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @get
 @action("CheckDnsNameAvailability")
@@ -189,6 +189,7 @@ alias RoutesNetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
     @path
     @segment("providers")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -214,6 +215,7 @@ alias CloudServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
     @path
     @segment("providers")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -231,12 +233,12 @@ alias CloudServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NetworkInterfacesOperationGroup {
   /**
    * Gets all network interfaces in a cloud service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_ListCloudServiceNetworkInterfaces")
   @autoRoute
   @get
@@ -247,15 +249,17 @@ interface NetworkInterfacesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PublicIPAddressesOperationGroup {
   /**
    * Gets information about all public IP addresses on a cloud service level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_ListCloudServicePublicIPAddresses")
   @autoRoute
   @get
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listCloudServicePublicIPAddresses is CloudServicesOps.List<
     PublicIPAddress,
     Response = ResourceListResult<PublicIPAddress>,
@@ -263,12 +267,12 @@ interface PublicIPAddressesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableEndpointServicesOperationGroup {
   /**
    * List what values of endpoint services are available for use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailableEndpointServices_List")
   @autoRoute
   @list
@@ -281,12 +285,12 @@ interface AvailableEndpointServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ExpressRouteServiceProvidersOperationGroup {
   /**
    * Gets all the available express route service providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteServiceProviders_List")
   @autoRoute
   @list
@@ -298,12 +302,12 @@ interface ExpressRouteServiceProvidersOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LoadBalancersOperationGroup {
   /**
    * Swaps VIPs between two load balancers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancers_SwapPublicIpAddresses")
   @post
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses")
@@ -311,16 +315,17 @@ interface LoadBalancersOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @body body: LoadBalancerVipSwapRequest,
   ): OkResponse | ArmAcceptedLroResponse | CloudError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NetworkSecurityPerimeterAssociableResourceTypesOperationGroup {
   /**
    * Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterAssociableResourceTypes_List")
   @autoRoute
   @list
@@ -333,12 +338,12 @@ interface NetworkSecurityPerimeterAssociableResourceTypesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NetworkSecurityPerimeterOperationStatusesOperationGroup {
   /**
    * Gets the operation status for the given operation id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterOperationStatuses_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}")
   @get
@@ -355,12 +360,12 @@ interface NetworkSecurityPerimeterOperationStatusesOperationGroup {
   ): ArmResponse<CommonTypes.OperationStatusResult> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface NetworkSecurityPerimeterServiceTagsOperationGroup {
   /**
    * Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterServiceTags_List")
   @autoRoute
   @list
@@ -373,12 +378,12 @@ interface NetworkSecurityPerimeterServiceTagsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailablePrivateEndpointTypesOperationGroup {
   /**
    * Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailablePrivateEndpointTypes_List")
   @autoRoute
   @get
@@ -392,7 +397,7 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   /**
    * Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailablePrivateEndpointTypes_ListByResourceGroup")
   @autoRoute
   @list
@@ -405,12 +410,12 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateLinkServicesOperationGroup {
   /**
    * Checks whether the subscription is visible to private link service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkServices_CheckPrivateLinkServiceVisibility")
   @autoRoute
   checkPrivateLinkServiceVisibility is ArmProviderActionAsync<
@@ -423,7 +428,7 @@ interface PrivateLinkServicesOperationGroup {
   /**
    * Checks whether the subscription is visible to private link service in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkServices_CheckPrivateLinkServiceVisibilityByResourceGroup")
   @autoRoute
   @action("checkPrivateLinkServiceVisibility")
@@ -437,7 +442,7 @@ interface PrivateLinkServicesOperationGroup {
   /**
    * Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServices")
   @autoRoute
   @list
@@ -452,7 +457,7 @@ interface PrivateLinkServicesOperationGroup {
   /**
    * Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup")
   @autoRoute
   @list
@@ -465,12 +470,12 @@ interface PrivateLinkServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BgpServiceCommunitiesOperationGroup {
   /**
    * Gets all the available bgp service communities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BgpServiceCommunities_List")
   @autoRoute
   @get
@@ -482,12 +487,12 @@ interface BgpServiceCommunitiesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServiceTagsOperationGroup {
   /**
    * Gets a list of service tag information resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ServiceTags_List")
   @autoRoute
   @get
@@ -500,12 +505,12 @@ interface ServiceTagsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ServiceTagInformationOperationGroup {
   /**
    * Gets a list of service tag information resources with pagination.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ServiceTagInformation_List")
   @autoRoute
   @list
@@ -532,12 +537,12 @@ interface ServiceTagInformationOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * List network usages for a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Usages_List")
   @autoRoute
   @list

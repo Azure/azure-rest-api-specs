@@ -25,20 +25,24 @@ model CustomIpPrefix
   /**
    * The extended location of the custom IP prefix.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   /** Resource tags. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** Resource location. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /** A list of availability zones denoting where the resource needs to come from. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 }
 
@@ -47,7 +51,7 @@ interface CustomIpPrefixes {
   /**
    * Gets the specified custom IP prefix in a specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_Get")
   get is ArmResourceRead<
     CustomIpPrefix,
@@ -64,7 +68,7 @@ interface CustomIpPrefixes {
   /**
    * Creates or updates a custom IP prefix.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CustomIpPrefix,
@@ -75,7 +79,7 @@ interface CustomIpPrefixes {
   /**
    * Updates custom IP prefix tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -87,8 +91,8 @@ interface CustomIpPrefixes {
   /**
    * Deletes the specified custom IP prefix.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     CustomIpPrefix,
@@ -99,14 +103,14 @@ interface CustomIpPrefixes {
   /**
    * Gets all custom IP prefixes in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_List")
   list is ArmResourceListByParent<CustomIpPrefix, Error = CloudError>;
 
   /**
    * Gets all the custom IP prefixes in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CustomIPPrefixes_ListAll")
   listAll is ArmListBySubscription<CustomIpPrefix, Error = CloudError>;
 }

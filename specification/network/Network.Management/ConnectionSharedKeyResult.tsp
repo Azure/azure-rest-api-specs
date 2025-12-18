@@ -65,7 +65,7 @@ interface ConnectionSharedKeyResults {
   /**
    * Gets the shared key of VpnLink connection specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_GetDefaultSharedKey")
   getDefaultSharedKey is VpnLinkConnectionSharedKeyOps.Read<ConnectionSharedKeyResult,
     OverrideErrorType = CloudError
@@ -74,14 +74,14 @@ interface ConnectionSharedKeyResults {
   /**
    * Sets or auto generates the shared key based on the user input. If users give a shared key value, it does the set operation. If key length is given, the operation creates a random key of the pre-defined length.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_SetOrInitDefaultSharedKey")
   setOrInitDefaultSharedKey is VpnLinkConnectionSharedKeyOps.CreateOrUpdateAsync<ConnectionSharedKeyResult,  OverrideErrorType = CloudError>;
 
   /**
    * Lists all shared keys of VpnLink connection specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_GetAllSharedKeys")
   getAllSharedKeys is VpnLinkConnectionSharedKeyOps.List<
     ConnectionSharedKeyResult,
@@ -92,7 +92,7 @@ interface ConnectionSharedKeyResults {
   /**
    * Gets the value of the shared key of VpnLink connection specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_ListDefaultSharedKey")
   @action("listSharedKey")
   listDefaultSharedKey is VpnLinkConnectionSharedKeyOps.ActionSync<

@@ -29,14 +29,14 @@ interface NspProfiles {
   /**
    * Gets the specified NSP profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterProfiles_Get")
   get is ArmResourceRead<NspProfile, Error = CloudError>;
 
   /**
    * Creates or updates a network profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterProfiles_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NspProfile,
@@ -46,14 +46,14 @@ interface NspProfiles {
   /**
    * Deletes an NSP profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterProfiles_Delete")
   delete is ArmResourceDeleteSync<NspProfile, Error = CloudError>;
 
   /**
    * Lists the NSP profiles in the specified network security perimeter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeterProfiles_List")
   list is ArmResourceListByParent<
     NspProfile,

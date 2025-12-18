@@ -24,17 +24,17 @@ model VpnGateway is Azure.ResourceManager.ProxyResource<VpnGatewayProperties> {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -102,6 +102,7 @@ interface VpnGateways {
    * Updates virtual wan vpn gateway tags.
    */
   @patch(#{ implicitOptionality: false })
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     VpnGateway,
     PatchModel = TagsObject,
@@ -113,7 +114,7 @@ interface VpnGateways {
   /**
    * Deletes a virtual wan vpn gateway.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGateway,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -182,7 +183,7 @@ interface VpnGateways {
   /**
    * Retrieves the details of a vpn connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_Get")
   @get
   vpnConnectionsGet is VpnConnectionOps.Read<
@@ -194,10 +195,11 @@ interface VpnGateways {
   /**
    * Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
+#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
     VpnGateway,
     Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
@@ -208,7 +210,7 @@ interface VpnGateways {
   /**
    * Deletes a vpn connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_Delete")
   @delete
   vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
@@ -220,7 +222,7 @@ interface VpnGateways {
   /**
    * Starts packet capture on Vpn connection in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_StartPacketCapture")
   @action("startpacketcapture")
   vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
@@ -233,7 +235,7 @@ interface VpnGateways {
   /**
    * Stops packet capture on Vpn connection in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_StopPacketCapture")
   @action("stoppacketcapture")
   vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
@@ -247,7 +249,7 @@ interface VpnGateways {
   /**
    * Retrieves all vpn connections for a particular virtual wan vpn gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_ListByVpnGateway")
   @list
   @get

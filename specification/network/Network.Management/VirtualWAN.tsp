@@ -13,6 +13,7 @@ namespace Microsoft.Network;
 /**
  * VirtualWAN Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualWAN is Azure.ResourceManager.ProxyResource<VirtualWanProperties> {
   ...ResourceNameParameter<
     Resource = VirtualWAN,
@@ -24,17 +25,17 @@ model VirtualWAN is Azure.ResourceManager.ProxyResource<VirtualWanProperties> {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tag?: TagsObject;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -51,23 +52,25 @@ alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("virtualWans")
     @key
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     virtualWANName: string;
   }
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface VirtualWANS {
   /**
    * Retrieves the details of a VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_Get")
   get is ArmResourceRead<VirtualWAN, Error = CloudError>;
 
   /**
    * Creates a VirtualWAN resource if it doesn't exist else updates the existing VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualWAN,
@@ -77,9 +80,10 @@ interface VirtualWANS {
   /**
    * Updates a VirtualWAN tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_UpdateTags")
   @patch(#{ implicitOptionality: false })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchSync<
     VirtualWAN,
     PatchModel = TagsObject,
@@ -89,8 +93,8 @@ interface VirtualWANS {
   /**
    * Deletes a VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualWAN,
@@ -101,7 +105,7 @@ interface VirtualWANS {
   /**
    * Lists all the VirtualWANs in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     VirtualWAN,
@@ -112,7 +116,7 @@ interface VirtualWANS {
   /**
    * Lists all the VirtualWANs in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_List")
   list is ArmListBySubscription<
     VirtualWAN,
@@ -123,7 +127,7 @@ interface VirtualWANS {
   /**
    * Gives the supported security providers for the virtual wan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SupportedSecurityProviders")
   @get
   supportedSecurityProviders is VirtualWanOps.ActionSync<
@@ -136,7 +140,7 @@ interface VirtualWANS {
   /**
    * Generates a unique VPN profile for P2S clients for VirtualWan and associated VpnServerConfiguration combination in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("generatevirtualwanvpnserverconfigurationvpnprofile")
   @action("GenerateVpnProfile")
   generatevirtualwanvpnserverconfigurationvpnprofile is VirtualWanOps.ActionAsync<
@@ -149,7 +153,7 @@ interface VirtualWANS {
   /**
    * Gives the sas-url to download the configurations for vpn-sites in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnSitesConfiguration_Download")
   @action("vpnConfiguration")
   download is VirtualWanOps.ActionAsync<
@@ -162,7 +166,7 @@ interface VirtualWANS {
   /**
    * Gives the list of VpnServerConfigurations associated with Virtual Wan in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnServerConfigurationsAssociatedWithVirtualWan_List")
   @action("vpnServerConfigurations")
   vpnServerConfigurationsAssociatedWithVirtualWanList is VirtualWanOps.ActionAsync<

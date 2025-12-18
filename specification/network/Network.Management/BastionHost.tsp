@@ -23,22 +23,26 @@ model BastionHost
   >;
 
   /** Resource tags. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** Resource location. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /** A list of availability zones denoting where the resource needs to come from. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The sku of this Bastion Host.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -61,6 +65,7 @@ interface BastionHosts {
    * Updates Tags for BastionHost resource
    */
   @patch(#{ implicitOptionality: false })
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     BastionHost,
     PatchModel = TagsObject,
@@ -72,7 +77,7 @@ interface BastionHosts {
   /**
    * Deletes the specified Bastion Host.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     BastionHost,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -95,7 +100,7 @@ interface BastionHosts {
   /**
    * Creates a Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PutBastionShareableLink")
   @list
   @action("createShareableLinks")
@@ -109,7 +114,7 @@ interface BastionHosts {
   /**
    * Deletes the Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DeleteBastionShareableLink")
   @action("deleteShareableLinks")
   deleteBastionShareableLink is ArmResourceActionAsync<
@@ -122,7 +127,7 @@ interface BastionHosts {
   /**
    * Deletes the Bastion Shareable Links for all the tokens specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DeleteBastionShareableLinkByToken")
   @action("deleteShareableLinksByToken")
   deleteBastionShareableLinkByToken is ArmResourceActionAsyncBase<
@@ -136,7 +141,7 @@ interface BastionHosts {
   /**
    * Return the Bastion Shareable Links for all the VMs specified in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GetBastionShareableLink")
   @list
   @action("getShareableLinks")
@@ -150,7 +155,7 @@ interface BastionHosts {
   /**
    * Returns the list of currently active sessions on the Bastion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GetActiveSessions")
   @list
   getActiveSessions is ArmResourceActionAsync<
@@ -163,7 +168,7 @@ interface BastionHosts {
   /**
    * Returns the list of currently active sessions on the Bastion.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DisconnectActiveSessions")
   @list
   disconnectActiveSessions is ArmResourceActionSync<

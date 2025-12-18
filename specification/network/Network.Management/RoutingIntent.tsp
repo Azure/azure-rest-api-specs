@@ -27,7 +27,7 @@ model RoutingIntent
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -37,14 +37,14 @@ interface RoutingIntents {
   /**
    * Retrieves the details of a RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RoutingIntent_Get")
   get is ArmResourceRead<RoutingIntent, Error = CloudError>;
 
   /**
    * Creates a RoutingIntent resource if it doesn't exist else updates the existing RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RoutingIntent_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RoutingIntent,
@@ -54,8 +54,8 @@ interface RoutingIntents {
   /**
    * Deletes a RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RoutingIntent_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RoutingIntent,
@@ -66,7 +66,7 @@ interface RoutingIntents {
   /**
    * Retrieves the details of all RoutingIntent child resources of the VirtualHub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RoutingIntent_List")
   list is ArmResourceListByParent<
     RoutingIntent,

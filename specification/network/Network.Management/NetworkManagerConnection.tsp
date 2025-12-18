@@ -24,7 +24,7 @@ model NetworkManagerConnection
   >;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -55,7 +55,7 @@ interface NetworkManagerConnections {
   /**
    * Get a specified connection created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SubscriptionNetworkManagerConnections_Get")
   get is NetworkManagerConnectionOps.Read<
     NetworkManagerConnection,
@@ -65,14 +65,14 @@ interface NetworkManagerConnections {
   /**
    * Create a network manager connection on this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SubscriptionNetworkManagerConnections_CreateOrUpdate")
   createOrUpdate is NetworkManagerConnectionOps.CreateOrUpdateSync<NetworkManagerConnection>;
 
   /**
    * Delete specified connection created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SubscriptionNetworkManagerConnections_Delete")
   delete is NetworkManagerConnectionOps.DeleteSync<
     NetworkManagerConnection,
@@ -82,7 +82,7 @@ interface NetworkManagerConnections {
   /**
    * List all network manager connections created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SubscriptionNetworkManagerConnections_List")
   list is NetworkManagerConnectionOps.List<
     NetworkManagerConnection,

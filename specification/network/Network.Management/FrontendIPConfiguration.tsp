@@ -25,13 +25,13 @@ model FrontendIPConfiguration
   >;
   
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * A list of availability zones denoting the IP allocated for the resource needs to come from.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 }
 
@@ -40,14 +40,14 @@ interface FrontendIPConfigurations {
   /**
    * Gets load balancer frontend IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancerFrontendIPConfigurations_Get")
   get is ArmResourceRead<FrontendIPConfiguration, Error = CloudError>;
 
   /**
    * Gets all the load balancer frontend IP configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancerFrontendIPConfigurations_List")
   list is ArmResourceListByParent<
     FrontendIPConfiguration,

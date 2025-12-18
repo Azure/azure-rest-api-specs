@@ -26,12 +26,15 @@ model ConnectionMonitorResult
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /** Connection monitor location. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /** Connection monitor tags. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 }
 
@@ -40,14 +43,14 @@ interface ConnectionMonitorResults {
   /**
    * Gets a connection monitor by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_Get")
   get is ArmResourceRead<ConnectionMonitorResult, Error = ErrorResponse>;
 
   /**
    * Create or update a connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ConnectionMonitorResult,
@@ -64,7 +67,7 @@ interface ConnectionMonitorResults {
   /**
    * Update tags of the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -76,7 +79,7 @@ interface ConnectionMonitorResults {
   /**
    * Deletes the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectionMonitorResult,
@@ -86,7 +89,7 @@ interface ConnectionMonitorResults {
   /**
    * Lists all connection monitors for the specified Network Watcher.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_List")
   list is ArmResourceListByParent<
     ConnectionMonitorResult,
@@ -97,7 +100,7 @@ interface ConnectionMonitorResults {
   /**
    * Stops the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionMonitors_Stop")
   stop is ArmResourceActionAsync<
     ConnectionMonitorResult,

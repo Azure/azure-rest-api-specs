@@ -51,7 +51,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Lists available Ssl options for configuring Ssl policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableSslOptions")
   listAvailableSslOptions is ArmResourceRead<
     ApplicationGatewayAvailableSslOptions,
@@ -62,7 +62,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Lists all SSL predefined policies for configuring Ssl policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableSslPredefinedPolicies")
   @list
   @get
@@ -78,7 +78,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Gets Ssl predefined policy with the specified policy name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_GetSslPredefinedPolicy")
   @get
   getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.Read<

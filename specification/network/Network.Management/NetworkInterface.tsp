@@ -25,17 +25,19 @@ model NetworkInterface
   /**
    * The extended location of the network interface.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   /** Resource tags. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** The geo-location where the resource lives */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -48,6 +50,7 @@ alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
     @path
     @segment("providers")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -117,7 +120,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Gets information about the specified network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_Get")
   get is NetworkInterfaceOperationGroupOps.Read<
     NetworkInterface,
@@ -134,7 +137,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Creates or updates a network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_CreateOrUpdate")
   createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<
     NetworkInterface,
@@ -144,7 +147,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Updates a network interface tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is NetworkInterfaceOperationGroupOps.CustomPatchSync<
@@ -156,8 +159,8 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Deletes the specified network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_Delete")
   delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
     NetworkInterface,
@@ -168,7 +171,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Gets all network interfaces in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_List")
   list is NetworkInterfaceOperationGroupOps.List<
     NetworkInterface,
@@ -178,14 +181,14 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Gets all network interfaces in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_ListAll")
   listAll is ArmListBySubscription<NetworkInterface, Error = CloudError>;
 
   /**
    * Gets all route tables applied to a network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_GetEffectiveRouteTable")
   @post
   @action("effectiveRouteTable")
@@ -198,7 +201,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * Gets all network security groups applied to a network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaces_ListEffectiveNetworkSecurityGroups")
   @post
   @action("effectiveNetworkSecurityGroups")
@@ -211,7 +214,7 @@ interface NetworkInterfaceOperationGroup {
   /**
    * List all load balancers in a network interface.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkInterfaceLoadBalancers_List")
   @list
   @get

@@ -27,7 +27,7 @@ model BgpConnection
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -59,14 +59,14 @@ interface BgpConnections {
   /**
    * Retrieves the details of a Virtual Hub Bgp Connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnection_Get")
   get is ArmResourceRead<BgpConnection, Error = CloudError>;
 
   /**
    * Creates a VirtualHubBgpConnection resource if it doesn't exist else updates the existing VirtualHubBgpConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnection_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BgpConnection,
@@ -76,8 +76,8 @@ interface BgpConnections {
   /**
    * Deletes a VirtualHubBgpConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BgpConnection,
@@ -88,7 +88,7 @@ interface BgpConnections {
   /**
    * Retrieves the details of all VirtualHubBgpConnections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnections_List")
   list is ArmResourceListByParent<
     BgpConnection,
@@ -99,7 +99,7 @@ interface BgpConnections {
   /**
    * Retrieves a list of routes the virtual hub bgp connection has learned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnections_ListLearnedRoutes")
   @action("learnedRoutes")
   listLearnedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
@@ -112,7 +112,7 @@ interface BgpConnections {
   /**
    * Retrieves a list of routes the virtual hub bgp connection is advertising to the specified peer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubBgpConnections_ListAdvertisedRoutes")
   @action("advertisedRoutes")
   listAdvertisedRoutes is VirtualHubBgpConnectionOps.ActionAsync<

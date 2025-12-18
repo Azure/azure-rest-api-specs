@@ -25,7 +25,7 @@ model LoadBalancingRule
   >;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -38,6 +38,7 @@ alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOper
     @path
     @segment("resourceGroups")
     @pattern("^[a-zA-Z0-9_.-]*$")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     groupName: string;
 
     ...Azure.ResourceManager.Legacy.Provider;
@@ -64,14 +65,14 @@ interface LoadBalancingRules {
   /**
    * Gets the specified load balancer load balancing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancerLoadBalancingRules_Get")
   get is ArmResourceRead<LoadBalancingRule, Error = CloudError>;
 
   /**
    * Gets all the load balancing rules in a load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancerLoadBalancingRules_List")
   list is ArmResourceListByParent<
     LoadBalancingRule,
@@ -82,7 +83,7 @@ interface LoadBalancingRules {
   /**
    * Get health details of a load balancing rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancerLoadBalancingRules_Health")
   health is LoadBalancerLoadBalancingRuleOps.ActionAsync<
     LoadBalancingRule,

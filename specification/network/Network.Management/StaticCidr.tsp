@@ -35,6 +35,7 @@ alias StaticCidrOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("networkManagers")
     @key
     @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     networkManagerName: string;
 
     /** The name of the IPAM pool. */

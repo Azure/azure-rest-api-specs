@@ -26,6 +26,7 @@ model ExpressRouteCircuitPeering
   
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -131,7 +132,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Deletes the specified peering from the specified express route circuit.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuitPeering,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -149,7 +150,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets the currently advertised ARP table associated with the express route circuit in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListArpTable")
   @post
   listArpTable is ArpTablesgOps.Read<
@@ -160,7 +161,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets the currently advertised routes table associated with the express route circuit in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListRoutesTable")
   @post
   listRoutesTable is RouteTablesOps.Read<
@@ -171,7 +172,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets the currently advertised routes table summary associated with the express route circuit in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
   @post
   listRoutesTableSummary is RouteTablesSummaryOps.Read<
@@ -182,7 +183,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets all stats from an express route circuit in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_GetPeeringStats")
   @get
   @action("stats")

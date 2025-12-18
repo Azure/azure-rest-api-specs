@@ -27,7 +27,7 @@ model VpnGatewayNatRule
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -37,14 +37,14 @@ interface VpnGatewayNatRules {
   /**
    * Retrieves the details of a nat ruleGet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NatRules_Get")
   get is ArmResourceRead<VpnGatewayNatRule, Error = CloudError>;
 
   /**
    * Creates a nat rule to a scalable vpn gateway if it doesn't exist else updates the existing nat rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NatRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VpnGatewayNatRule,
@@ -54,8 +54,8 @@ interface VpnGatewayNatRules {
   /**
    * Deletes a nat rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NatRules_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGatewayNatRule,
@@ -66,7 +66,7 @@ interface VpnGatewayNatRules {
   /**
    * Retrieves all nat rules for a particular virtual wan vpn gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NatRules_ListByVpnGateway")
   listByVpnGateway is ArmResourceListByParent<
     VpnGatewayNatRule,

@@ -17,6 +17,8 @@ namespace Microsoft.Network;
  */
 @parentResource(AdminRuleCollection)
 @discriminator("kind")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BaseAdminRule is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = BaseAdminRule,
@@ -26,12 +28,13 @@ model BaseAdminRule is Azure.ResourceManager.ProxyResource<{}> {
   >;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Whether the rule is custom or default.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind: AdminRuleKind;
 }
 
@@ -40,14 +43,14 @@ interface BaseAdminRules {
   /**
    * Gets a network manager security configuration admin rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminRules_Get")
   get is ArmResourceRead<BaseAdminRule, Error = CommonErrorResponse>;
 
   /**
    * Creates or updates an admin rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     BaseAdminRule,
@@ -57,8 +60,8 @@ interface BaseAdminRules {
   /**
    * Deletes an admin rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminRules_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BaseAdminRule,
@@ -76,7 +79,7 @@ interface BaseAdminRules {
   /**
    * List all network manager security configuration admin rules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AdminRules_List")
   list is ArmResourceListByParent<
     BaseAdminRule,

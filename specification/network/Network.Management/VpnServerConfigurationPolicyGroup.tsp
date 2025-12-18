@@ -27,7 +27,7 @@ model VpnServerConfigurationPolicyGroup
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -37,14 +37,14 @@ interface VpnServerConfigurationPolicyGroups {
   /**
    * Retrieves the details of a ConfigurationPolicyGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationPolicyGroups_Get")
   get is ArmResourceRead<VpnServerConfigurationPolicyGroup, Error = CloudError>;
 
   /**
    * Creates a ConfigurationPolicyGroup if it doesn't exist else updates the existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationPolicyGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VpnServerConfigurationPolicyGroup,
@@ -54,8 +54,8 @@ interface VpnServerConfigurationPolicyGroups {
   /**
    * Deletes a ConfigurationPolicyGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConfigurationPolicyGroups_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnServerConfigurationPolicyGroup,
@@ -66,7 +66,7 @@ interface VpnServerConfigurationPolicyGroups {
   /**
    * Lists all the configurationPolicyGroups in a resource group for a vpnServerConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("configurationPolicyGroups_ListByVpnServerConfiguration")
   listByVpnServerConfiguration is ArmResourceListByParent<
     VpnServerConfigurationPolicyGroup,

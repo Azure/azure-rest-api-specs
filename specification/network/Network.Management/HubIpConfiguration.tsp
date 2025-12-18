@@ -25,7 +25,7 @@ model HubIpConfiguration
   >;
   
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -35,14 +35,14 @@ interface HubIpConfigurations {
   /**
    * Retrieves the details of a Virtual Hub Ip configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubIpConfiguration_Get")
   get is ArmResourceRead<HubIpConfiguration, Error = CloudError>;
 
   /**
    * Creates a VirtualHubIpConfiguration resource if it doesn't exist else updates the existing VirtualHubIpConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubIpConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     HubIpConfiguration,
@@ -52,8 +52,8 @@ interface HubIpConfigurations {
   /**
    * Deletes a VirtualHubIpConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubIpConfiguration_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HubIpConfiguration,
@@ -64,7 +64,7 @@ interface HubIpConfigurations {
   /**
    * Retrieves the details of all VirtualHubIpConfigurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubIpConfiguration_List")
   list is ArmResourceListByParent<
     HubIpConfiguration,

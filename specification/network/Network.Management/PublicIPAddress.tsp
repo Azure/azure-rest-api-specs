@@ -25,36 +25,36 @@ model PublicIPAddress
   >;
 
   /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
    * The extended location of the public ip address.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   /**
    * The public IP address SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: PublicIPAddressSku;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * A list of availability zones denoting the IP allocated for the resource needs to come from.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 
   zones?: string[];
 }
@@ -67,6 +67,7 @@ alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
     @path
     @segment("providers")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -122,6 +123,7 @@ interface PublicIPAddresses {
   /**
    * Get the specified public IP address in a cloud service.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getCloudServicePublicIPAddress is PublicIPAddressOps.Read<
     PublicIPAddress,
     Parameters = {
@@ -137,6 +139,7 @@ interface PublicIPAddresses {
   /**
    * Gets information about all public IP addresses in a role instance IP configuration in a cloud service.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listCloudServiceRoleInstancePublicIPAddresses is PublicIPAddressOps.List<
     PublicIPAddress,
     OverrideErrorType = CloudError
@@ -159,11 +162,12 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PublicIPAddressOperationGroup {
   /**
    * Gets the specified public IP address in a specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_Get")
   get is PublicIPAddressOperationGroupOps.Read<
     PublicIPAddress,
@@ -180,7 +184,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Creates or updates a static or dynamic public IP address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_CreateOrUpdate")
   createOrUpdate is PublicIPAddressOperationGroupOps.CreateOrUpdateAsync<
     PublicIPAddress,
@@ -190,7 +194,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Updates public IP address tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is PublicIPAddressOperationGroupOps.CustomPatchSync<
@@ -202,8 +206,8 @@ interface PublicIPAddressOperationGroup {
   /**
    * Deletes the specified public IP address.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_Delete")
   delete is PublicIPAddressOperationGroupOps.DeleteWithoutOkAsync<
     PublicIPAddress,
@@ -214,7 +218,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Gets all public IP addresses in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_List")
   list is PublicIPAddressOperationGroupOps.List<
     PublicIPAddress,
@@ -224,7 +228,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Gets all the public IP addresses in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_ListAll")
   listAll is PublicIPAddressSubscriptionOps.List<
     PublicIPAddress,
@@ -234,7 +238,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Gets the Ddos Protection Status of a Public IP Address
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_DdosProtectionStatus")
   ddosProtectionStatus is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
@@ -246,7 +250,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Reserves the specified Cloud Service Public IP by switching its allocation method to Static. If rollback is requested, reverts the allocation method to Dynamic.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_ReserveCloudServicePublicIpAddress")
   reserveCloudServicePublicIpAddress is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
@@ -260,7 +264,7 @@ interface PublicIPAddressOperationGroup {
   /**
    * Disassociates the Cloud Service reserved Public IP and associates the specified Standalone Public IP to the same Cloud Service frontend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_DisassociateCloudServiceReservedPublicIp")
   disassociateCloudServiceReservedPublicIp is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,

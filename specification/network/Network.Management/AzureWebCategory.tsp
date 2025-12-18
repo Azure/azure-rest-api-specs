@@ -24,6 +24,7 @@ model AzureWebCategory
   >;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -32,7 +33,7 @@ interface AzureWebCategories {
   /**
    * Gets the specified Azure Web Category.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebCategories_Get")
   get is ArmResourceRead<
     AzureWebCategory,
@@ -50,7 +51,7 @@ interface AzureWebCategories {
   /**
    * Gets all the Azure Web Categories in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("WebCategories_ListBySubscription")
   listBySubscription is ArmResourceListByParent<
     AzureWebCategory,

@@ -400,6 +400,33 @@ union ProvisioningState {
 }
 
 /**
+ * The current provisioning state.
+ */
+union NetworkProvisioningState{
+  string, 
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Updating
+   */
+  Updating: "Updating",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+}
+
+/**
  * IP address allocation method.
  */
 union IPAllocationMethod {
@@ -1338,7 +1365,7 @@ union ApplicationGatewayWafRuleSensitivityTypes {
   High: "High",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ApplicationGatewayTierTypes {
   string,
 
@@ -3169,7 +3196,7 @@ union SecurityConfigurationRuleDirection {
 /**
  * The current provisioning state.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NspProvisioningState {
   string,
 
@@ -3246,7 +3273,7 @@ union AssociationAccessMode {
 /**
  * The current provisioning state of NSP Link/LinkReference.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NspLinkProvisioningState {
   string,
 
@@ -3379,7 +3406,7 @@ union NicTypeInRequest {
   PrivateNic: "PrivateNic",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NvaNicType {
   string,
 
@@ -3597,7 +3624,7 @@ union PcStatus {
   Unknown: "Unknown",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PcError {
   string,
 
@@ -4245,7 +4272,7 @@ union PrivateEndpointVNetPolicies {
   Basic: "Basic",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SyncRemoteAddressSpace {
   string,
 
@@ -6560,7 +6587,7 @@ union HubVirtualNetworkConnectionStatus {
 /**
  * The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -6586,7 +6613,7 @@ enum ResourceIdentityType {
 /**
  * The domain name label scope. If a domain name label and a domain name label scope are specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system with a hashed value includes in FQDN.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum PublicIpAddressDnsSettingsDomainNameLabelScope {
   /**
    * TenantReuse
@@ -6612,7 +6639,7 @@ enum PublicIpAddressDnsSettingsDomainNameLabelScope {
 /**
  * Specifies slot info on a cloud service
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SlotType {
   /**
    * Production
@@ -6628,7 +6655,7 @@ enum SlotType {
 /**
  * The current mode enforced, 0 - Disabled, 1 - Alert, 2 -Deny
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FirewallPolicyIdpsSignatureMode {
   /**
    * 0
@@ -6649,7 +6676,7 @@ enum FirewallPolicyIdpsSignatureMode {
 /**
  * Describes the severity of signature: 1 - High, 2 - Medium, 3 - Low
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FirewallPolicyIdpsSignatureSeverity {
   /**
    * 1
@@ -6670,7 +6697,7 @@ enum FirewallPolicyIdpsSignatureSeverity {
 /**
  * Describes in which direction signature is being enforced: 0 - OutBound, 1 - InBound, 2 - Any, 3 - Internal, 4 - InternalOutbound, 5 - InternalInbound
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum FirewallPolicyIdpsSignatureDirection {
   /**
    * 0
@@ -6706,7 +6733,7 @@ enum FirewallPolicyIdpsSignatureDirection {
 /**
  * Target type of the resource provided.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum PacketCaptureTargetType {
   /**
    * AzureVM
@@ -6722,6 +6749,7 @@ enum PacketCaptureTargetType {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.armExternalType
 @error
 model CloudError {
@@ -6734,6 +6762,7 @@ model CloudError {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -6754,6 +6783,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: CloudErrorBody[];
 }
 
@@ -6780,6 +6810,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Subnets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gatewayIPConfigurations?: ApplicationGatewayIPConfiguration[];
 
   /**
@@ -6805,6 +6836,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Frontend IP addresses of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: ApplicationGatewayFrontendIPConfiguration[];
 
   /**
@@ -6918,11 +6950,12 @@ model ApplicationGatewayPropertiesFormat {
    * The provisioning state of the application gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Custom error configurations of the application gateway resource.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customErrorConfigurations?: ApplicationGatewayCustomError[];
 
   /**
@@ -6938,6 +6971,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Entra JWT validation configurations for the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entraJWTValidationConfigs?: ApplicationGatewayEntraJWTValidationConfig[];
 
   /**
@@ -7010,7 +7044,7 @@ model ApplicationGatewaySslPolicy {
 /**
  * IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayIPConfiguration extends SubResource {
   /**
    * Properties of the application gateway IP configuration.
@@ -7038,6 +7072,7 @@ model ApplicationGatewayIPConfiguration extends SubResource {
 /**
  * Properties of IP configuration of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayIPConfigurationPropertiesFormat {
   /**
    * Reference to the subnet resource. A subnet from where application gateway gets its private address.
@@ -7048,7 +7083,7 @@ model ApplicationGatewayIPConfigurationPropertiesFormat {
    * The provisioning state of the application gateway IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -7064,7 +7099,7 @@ model SubResource {
 /**
  * Authentication certificates of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayAuthenticationCertificate extends SubResource {
   /**
    * Properties of the application gateway authentication certificate.
@@ -7102,13 +7137,13 @@ model ApplicationGatewayAuthenticationCertificatePropertiesFormat {
    * The provisioning state of the authentication certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Trusted Root certificates of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayTrustedRootCertificate extends SubResource {
   /**
    * Properties of the application gateway trusted root certificate.
@@ -7151,13 +7186,13 @@ model ApplicationGatewayTrustedRootCertificatePropertiesFormat {
    * The provisioning state of the trusted root certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Trusted client certificates of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayTrustedClientCertificate extends SubResource {
   /**
    * Properties of the application gateway trusted client certificate.
@@ -7201,19 +7236,20 @@ model ApplicationGatewayTrustedClientCertificatePropertiesFormat {
    * Distinguished name of client certificate issuer.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCertIssuerDN?: string;
 
   /**
    * The provisioning state of the trusted client certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * SSL certificates of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewaySslCertificate extends SubResource {
   /**
    * Properties of the application gateway SSL certificate.
@@ -7250,6 +7286,7 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
   /**
    * Password for the pfx file specified in data. Only applicable in PUT request.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -7267,13 +7304,13 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
    * The provisioning state of the SSL certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Frontend IP configuration of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayFrontendIPConfiguration extends SubResource {
   /**
    * Properties of the application gateway frontend IP configuration.
@@ -7301,15 +7338,18 @@ model ApplicationGatewayFrontendIPConfiguration extends SubResource {
 /**
  * Properties of Frontend IP configuration of an application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
   /**
    * PrivateIPAddress of the network interface IP Configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -7320,6 +7360,7 @@ model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
   /**
    * Reference to the PublicIP resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
@@ -7331,13 +7372,13 @@ model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
    * The provisioning state of the frontend IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Frontend port of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayFrontendPort extends SubResource {
   /**
    * Properties of the application gateway frontend port.
@@ -7375,13 +7416,13 @@ model ApplicationGatewayFrontendPortPropertiesFormat {
    * The provisioning state of the frontend port resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Probe of the application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayProbe extends SubResource {
   /**
    * Properties of the application gateway probe.
@@ -7469,7 +7510,7 @@ model ApplicationGatewayProbePropertiesFormat {
    * The provisioning state of the probe resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from http settings will be used. This property is valid for Basic, Standard_v2 and WAF_v2 only.
@@ -7497,7 +7538,7 @@ model ApplicationGatewayProbeHealthResponseMatch {
 /**
  * Backend Address Pool of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayBackendAddressPool extends SubResource {
   /**
    * Properties of the application gateway backend address pool.
@@ -7530,23 +7571,26 @@ model ApplicationGatewayBackendAddressPoolPropertiesFormat {
    * Collection of references to IPs defined in network interfaces.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfigurations?: NetworkInterfaceIPConfiguration[];
 
   /**
    * Backend addresses.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendAddresses?: ApplicationGatewayBackendAddress[];
 
   /**
    * The provisioning state of the backend address pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Properties of IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * The reference to gateway load balancer frontend IP.
@@ -7576,6 +7620,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * Private IP address of the IP configuration. It can be a single IP address or a CIDR block in the format <address>/<prefix-length>.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
@@ -7583,16 +7628,20 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
    */
   @maxValue(128)
   @minValue(1)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 
   /**
@@ -7608,6 +7657,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * Public IP address bound to the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
@@ -7619,7 +7669,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
    * The provisioning state of the network interface IP configuration.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * PrivateLinkConnection properties for the network interface.
@@ -7648,16 +7698,18 @@ model VirtualNetworkTapPropertiesFormat {
    * The provisioning state of the virtual network tap resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The reference to the private IP Address of the collector nic that will receive the tap.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationNetworkInterfaceIPConfiguration?: NetworkInterfaceIPConfiguration;
 
   /**
    * The reference to the private IP address on the internal Load Balancer that will receive the tap.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationLoadBalancerFrontEndIPConfiguration?: FrontendIPConfiguration;
 
   /**
@@ -7679,12 +7731,13 @@ model NetworkInterfaceTapConfigurationPropertiesFormat {
    * The provisioning state of the network interface tap configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Properties of Frontend IP Configuration of the load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FrontendIPConfigurationPropertiesFormat {
   /**
    * An array of references to inbound rules that use this frontend IP.
@@ -7713,16 +7766,19 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The Private IP allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 
   /**
@@ -7733,11 +7789,13 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The reference to the Public IP resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
    * The reference to the Public IP Prefix resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPPrefix?: SubResource;
 
   /**
@@ -7749,7 +7807,7 @@ model FrontendIPConfigurationPropertiesFormat {
    * The provisioning state of the frontend IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -7784,6 +7842,7 @@ model SubnetPropertiesFormat {
   /**
    * An array of service endpoints.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceEndpoints?: ServiceEndpointPropertiesFormat[];
 
   /**
@@ -7841,7 +7900,7 @@ model SubnetPropertiesFormat {
    * The provisioning state of the subnet resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Enable or Disable apply network policies on private end point in the subnet.
@@ -7856,6 +7915,7 @@ model SubnetPropertiesFormat {
   /**
    * Application gateway IP configurations of virtual network resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   applicationGatewayIPConfigurations?: ApplicationGatewayIPConfiguration[];
 
   /**
@@ -7871,6 +7931,7 @@ model SubnetPropertiesFormat {
   /**
    * A list of IPAM Pools for allocating IP address prefixes.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
 }
 
@@ -7922,7 +7983,7 @@ model NetworkSecurityGroupPropertiesFormat {
    * The provisioning state of the network security group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -8008,7 +8069,7 @@ model SecurityRulePropertiesFormat {
    * The provisioning state of the security rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -8025,7 +8086,7 @@ model ApplicationSecurityGroupPropertiesFormat {
    * The provisioning state of the application security group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -8117,6 +8178,7 @@ model NetworkInterfacePropertiesFormat {
   /**
    * Indicates whether IP forwarding is enabled on this network interface.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableIPForwarding?: boolean;
 
   /**
@@ -8141,7 +8203,7 @@ model NetworkInterfacePropertiesFormat {
    * The provisioning state of the network interface resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * WorkloadType of the NetworkInterface for BareMetal resources
@@ -8193,7 +8255,7 @@ model PrivateEndpointProperties {
    * The provisioning state of the private endpoint resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Specifies the IP version type for the private IPs of the private endpoint. If not defined, this defaults to IPv4.
@@ -8213,6 +8275,7 @@ model PrivateEndpointProperties {
   /**
    * An array of custom dns configurations.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customDnsConfigs?: CustomDnsConfigPropertiesFormat[];
 
   /**
@@ -8234,7 +8297,7 @@ model PrivateEndpointProperties {
 /**
  * PrivateLinkServiceConnection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkServiceConnection extends SubResource {
   /**
    * Properties of the private link service connection.
@@ -8267,7 +8330,7 @@ model PrivateLinkServiceConnectionProperties {
    * The provisioning state of the private link service connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The resource id of private link service.
@@ -8355,6 +8418,7 @@ model PrivateEndpointIPConfiguration {
 /**
  * Properties of an IP Configuration of the private endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateEndpointIPConfigurationProperties {
   /**
    * The ID of a group obtained from the remote resource that this private endpoint should connect to.
@@ -8369,6 +8433,7 @@ model PrivateEndpointIPConfigurationProperties {
   /**
    * A private ip address obtained from the private endpoint's subnet.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 }
 
@@ -8422,6 +8487,7 @@ model PrivateLinkServiceProperties {
   /**
    * The destination IP address of the private link service.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIPAddress?: string;
 
   /**
@@ -8439,7 +8505,7 @@ model PrivateLinkServiceProperties {
    * The provisioning state of the private link service resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * An array of list about connections to the private endpoint.
@@ -8477,7 +8543,7 @@ model PrivateLinkServiceProperties {
 /**
  * The private link service ip configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkServiceIpConfiguration extends SubResource {
   /**
    * Properties of the private link service ip configuration.
@@ -8509,11 +8575,13 @@ model PrivateLinkServiceIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -8530,11 +8598,12 @@ model PrivateLinkServiceIpConfigurationProperties {
    * The provisioning state of the private link service IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 }
 
@@ -8557,7 +8626,7 @@ model PrivateEndpointConnectionProperties {
    * The provisioning state of the private endpoint connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The consumer link id.
@@ -8575,7 +8644,8 @@ model PrivateEndpointConnectionProperties {
 /**
  * The visibility list of the private link service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkServicePropertiesVisibility extends ResourceSet {}
 
 /**
@@ -8591,7 +8661,8 @@ model ResourceSet {
 /**
  * The auto-approval list of the private link service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkServicePropertiesAutoApproval extends ResourceSet {}
 
 /**
@@ -8648,7 +8719,7 @@ model FlowLogPropertiesFormat {
    * The provisioning state of the flow log.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -8745,11 +8816,12 @@ model ManagedServiceIdentity {
   /**
    * The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties {
   /**
    * The principal id of user assigned identity.
@@ -8788,7 +8860,7 @@ model RouteTablePropertiesFormat {
    * The provisioning state of the route table resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The resource GUID property of the route table.
@@ -8820,7 +8892,7 @@ model RoutePropertiesFormat {
    * The provisioning state of the route resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * A value indicating whether this route overrides overlapping BGP routes regardless of LPM.
@@ -8852,7 +8924,7 @@ model ServiceEndpointPropertiesFormat {
    * The provisioning state of the service endpoint resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -8880,7 +8952,7 @@ model ServiceEndpointPolicyPropertiesFormat {
    * The provisioning state of the service endpoint policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The alias indicating if the policy belongs to a service
@@ -8916,13 +8988,13 @@ model ServiceEndpointPolicyDefinitionPropertiesFormat {
    * The provisioning state of the service endpoint policy definition resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * IP configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfiguration extends SubResource {
   /**
    * Properties of the IP configuration.
@@ -8944,15 +9016,18 @@ model IPConfiguration extends SubResource {
 /**
  * Properties of IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Dynamic;
 
   /**
@@ -8963,18 +9038,20 @@ model IPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
    * The provisioning state of the IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * SKU of a public IP address.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PublicIPAddressSku {
   /**
    * Name of a public IP address SKU.
@@ -8990,15 +9067,18 @@ model PublicIPAddressSku {
 /**
  * Public IP address properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PublicIPAddressPropertiesFormat {
   /**
    * The public IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * The public IP address version.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddressVersion?: IPVersion;
 
   /**
@@ -9020,6 +9100,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The list of tags associated with the public IP address.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipTags?: IpTag[];
 
   /**
@@ -9030,6 +9111,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The Public IP Prefix this Public IP Address should be allocated from.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPPrefix?: SubResource;
 
   /**
@@ -9047,11 +9129,12 @@ model PublicIPAddressPropertiesFormat {
    * The provisioning state of the public IP address resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The service public IP address of the public IP address resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   servicePublicIPAddress?: PublicIPAddress;
 
   /**
@@ -9067,6 +9150,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The linked public IP address of the public IP address resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   linkedPublicIPAddress?: PublicIPAddress;
 
   /**
@@ -9078,6 +9162,7 @@ model PublicIPAddressPropertiesFormat {
 /**
  * Contains FQDN of the DNS record associated with the public IP address.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PublicIPAddressDnsSettings {
   /**
    * The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
@@ -9190,13 +9275,14 @@ model NatGatewayPropertiesFormat {
    * The provisioning state of the NAT gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * IP configuration profile child resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigurationProfile extends SubResource {
   /**
    * Properties of the IP configuration profile.
@@ -9224,6 +9310,7 @@ model IPConfigurationProfile extends SubResource {
 /**
  * IP configuration profile properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigurationProfilePropertiesFormat {
   /**
    * The reference to the subnet resource to create a container network interface ip configuration.
@@ -9234,13 +9321,13 @@ model IPConfigurationProfilePropertiesFormat {
    * The provisioning state of the IP configuration profile resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * ResourceNavigationLink resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceNavigationLink extends SubResource {
   /**
    * Resource navigation link properties format.
@@ -9283,13 +9370,13 @@ model ResourceNavigationLinkFormat {
    * The provisioning state of the resource navigation link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * ServiceAssociationLink resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServiceAssociationLink extends SubResource {
   /**
    * Resource navigation link properties format.
@@ -9332,7 +9419,7 @@ model ServiceAssociationLinkPropertiesFormat {
    * The provisioning state of the service association link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * If true, the resource can be deleted.
@@ -9348,7 +9435,7 @@ model ServiceAssociationLinkPropertiesFormat {
 /**
  * Details the service to which the subnet is delegated.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Delegation extends SubResource {
   /**
    * Properties of the subnet.
@@ -9391,14 +9478,14 @@ model ServiceDelegationPropertiesFormat {
    * The provisioning state of the service delegation resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * IpamPool prefix allocation reference.
  */
 model IpamPoolPrefixAllocation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   pool?: IpamPoolPrefixAllocationPool;
 
   /**
@@ -9413,7 +9500,7 @@ model IpamPoolPrefixAllocation {
   allocatedAddressPrefixes?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IpamPoolPrefixAllocationPool {
   /**
    * Resource id of the associated Azure IpamPool resource.
@@ -9433,6 +9520,7 @@ model BackendAddressPoolPropertiesFormat {
   /**
    * An array of gateway load balancer tunnel interfaces.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelInterfaces?: GatewayLoadBalancerTunnelInterface[];
 
   /**
@@ -9444,6 +9532,7 @@ model BackendAddressPoolPropertiesFormat {
    * An array of references to IP addresses defined in network interfaces.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfigurations?: NetworkInterfaceIPConfiguration[];
 
   /**
@@ -9474,7 +9563,7 @@ model BackendAddressPoolPropertiesFormat {
    * The provisioning state of the backend address pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Amount of seconds Load Balancer waits for before sending RESET to client and backend address.
@@ -9555,17 +9644,20 @@ model LoadBalancerBackendAddressPropertiesFormat {
    * Reference to IP address defined in network interfaces.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkInterfaceIPConfiguration?: SubResource;
 
   /**
    * Reference to the frontend ip address configuration defined in regional loadbalancer.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   loadBalancerFrontendIPConfiguration?: SubResource;
 
   /**
    * Collection of inbound NAT rule port mappings.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inboundNatRulesPortMapping?: NatRulePortMapping[];
 
   /**
@@ -9601,12 +9693,14 @@ model InboundNatRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
    * A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfiguration?: NetworkInterfaceIPConfiguration;
 
   /**
@@ -9632,6 +9726,7 @@ model InboundNatRulePropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -9658,12 +9753,13 @@ model InboundNatRulePropertiesFormat {
    * The provisioning state of the inbound NAT rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * PrivateLinkConnection properties for the network interface.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties {
   /**
    * The group ID for current private link connection.
@@ -9702,7 +9798,7 @@ model ApplicationGatewayBackendAddress {
 /**
  * Backend address pool settings of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayBackendHttpSettings extends SubResource {
   /**
    * Properties of the application gateway backend HTTP settings.
@@ -9809,6 +9905,7 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * When enabled, verifies if the Common Name of the certificate provided by the backend server matches the Server Name Indication (SNI) value. Default value is true.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validateSNI?: boolean = true;
 
   /**
@@ -9820,7 +9917,7 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
    * The provisioning state of the backend HTTP settings resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -9843,7 +9940,7 @@ model ApplicationGatewayConnectionDraining {
 /**
  * Backend address pool settings of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayBackendSettings extends SubResource {
   /**
    * Properties of the application gateway backend settings.
@@ -9916,13 +10013,13 @@ model ApplicationGatewayBackendSettingsPropertiesFormat {
    * The provisioning state of the backend HTTP settings resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Http listener of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayHttpListener extends SubResource {
   /**
    * Properties of the application gateway HTTP listener.
@@ -9954,6 +10051,7 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -9990,11 +10088,12 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
    * The provisioning state of the HTTP listener resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Custom error configurations of the HTTP listener.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customErrorConfigurations?: ApplicationGatewayCustomError[];
 
   /**
@@ -10026,7 +10125,7 @@ model ApplicationGatewayCustomError {
 /**
  * Listener of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayListener extends SubResource {
   /**
    * Properties of the application gateway listener.
@@ -10058,6 +10157,7 @@ model ApplicationGatewayListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -10084,7 +10184,7 @@ model ApplicationGatewayListenerPropertiesFormat {
    * The provisioning state of the listener resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * List of Server Name Indications(SNI) for TLS Multi-site Listener that allows special wildcard characters as well.
@@ -10095,7 +10195,7 @@ model ApplicationGatewayListenerPropertiesFormat {
 /**
  * SSL profile of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewaySslProfile extends SubResource {
   /**
    * Properties of the application gateway SSL profile.
@@ -10143,7 +10243,7 @@ model ApplicationGatewaySslProfilePropertiesFormat {
    * The provisioning state of the HTTP listener resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -10153,6 +10253,7 @@ model ApplicationGatewayClientAuthConfiguration {
   /**
    * Verify client certificate issuer name on the application gateway.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   verifyClientCertIssuerDN?: boolean;
 
   /**
@@ -10169,7 +10270,7 @@ model ApplicationGatewayClientAuthConfiguration {
 /**
  * UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayUrlPathMap extends SubResource {
   /**
    * Properties of the application gateway URL path map.
@@ -10232,13 +10333,13 @@ model ApplicationGatewayUrlPathMapPropertiesFormat {
    * The provisioning state of the URL path map resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Path rule of URL path map of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayPathRule extends SubResource {
   /**
    * Properties of the application gateway path rule.
@@ -10301,7 +10402,7 @@ model ApplicationGatewayPathRulePropertiesFormat {
    * The provisioning state of the path rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Reference to the FirewallPolicy resource.
@@ -10312,7 +10413,7 @@ model ApplicationGatewayPathRulePropertiesFormat {
 /**
  * Request routing rule of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayRequestRoutingRule extends SubResource {
   /**
    * Properties of the application gateway request routing rule.
@@ -10391,19 +10492,20 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   /**
    * Entra JWT validation configuration resource of the application gateway.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entraJWTValidationConfig?: SubResource;
 
   /**
    * The provisioning state of the request routing rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Routing rule of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayRoutingRule extends SubResource {
   /**
    * Properties of the application gateway routing rule.
@@ -10463,13 +10565,13 @@ model ApplicationGatewayRoutingRulePropertiesFormat {
    * The provisioning state of the request routing rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Rewrite rule set of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayRewriteRuleSet extends SubResource {
   /**
    * Properties of the application gateway rewrite rule set.
@@ -10501,7 +10603,7 @@ model ApplicationGatewayRewriteRuleSetPropertiesFormat {
    * The provisioning state of the rewrite rule set resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -10521,6 +10623,7 @@ model ApplicationGatewayRewriteRule {
   /**
    * Conditions based on which the action set execution will be evaluated.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   conditions?: ApplicationGatewayRewriteRuleCondition[];
 
   /**
@@ -10561,11 +10664,13 @@ model ApplicationGatewayRewriteRuleActionSet {
   /**
    * Request Header Actions in the Action Set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestHeaderConfigurations?: ApplicationGatewayHeaderConfiguration[];
 
   /**
    * Response Header Actions in the Action Set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   responseHeaderConfigurations?: ApplicationGatewayHeaderConfiguration[];
 
   /**
@@ -10637,7 +10742,7 @@ model ApplicationGatewayUrlConfiguration {
 /**
  * Redirect configuration of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayRedirectConfiguration extends SubResource {
   /**
    * Properties of the application gateway redirect configuration.
@@ -10734,6 +10839,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * The disabled rule groups.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disabledRuleGroups?: ApplicationGatewayFirewallDisabledRuleGroup[];
 
   /**
@@ -10763,6 +10869,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * The exclusion list.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: ApplicationGatewayFirewallExclusion[];
 }
 
@@ -10820,7 +10927,7 @@ model ApplicationGatewayAutoscaleConfiguration {
 /**
  * Private Link Configuration on an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayPrivateLinkConfiguration extends SubResource {
   /**
    * Properties of the application gateway private link configuration.
@@ -10858,13 +10965,13 @@ model ApplicationGatewayPrivateLinkConfigurationProperties {
    * The provisioning state of the application gateway private link configuration.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * The application gateway private link ip configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayPrivateLinkIpConfiguration extends SubResource {
   /**
    * Properties of an application gateway private link ip configuration.
@@ -10896,11 +11003,13 @@ model ApplicationGatewayPrivateLinkIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -10917,7 +11026,7 @@ model ApplicationGatewayPrivateLinkIpConfigurationProperties {
    * The provisioning state of the application gateway private link IP configuration.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -10939,7 +11048,7 @@ model ApplicationGatewayPrivateEndpointConnectionProperties {
    * The provisioning state of the application gateway private endpoint connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The consumer link id.
@@ -10951,7 +11060,7 @@ model ApplicationGatewayPrivateEndpointConnectionProperties {
 /**
  * Load Distribution Policy of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayLoadDistributionPolicy extends SubResource {
   /**
    * Properties of the application gateway load distribution policy.
@@ -10994,13 +11103,13 @@ model ApplicationGatewayLoadDistributionPolicyPropertiesFormat {
    * The provisioning state of the Load Distribution Policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Load Distribution Target of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayLoadDistributionTarget extends SubResource {
   /**
    * Properties of the application gateway load distribution target.
@@ -11025,7 +11134,7 @@ model ApplicationGatewayLoadDistributionTarget extends SubResource {
   type?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayLoadDistributionTargetPropertiesFormat {
   /**
    * Weight per server. Range between 1 and 100.
@@ -11043,7 +11152,8 @@ model ApplicationGatewayLoadDistributionTargetPropertiesFormat {
 /**
  * Entra JWT Validation Configuration of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayEntraJWTValidationConfig extends SubResource {
   /**
    * Properties of the application gateway entra jwt validation configuration.
@@ -11065,6 +11175,7 @@ model ApplicationGatewayEntraJWTValidationConfig extends SubResource {
 /**
  * Properties of entra jwt validation configuration of the application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
   /**
    * Unauthorized request action.
@@ -11090,7 +11201,7 @@ model ApplicationGatewayEntraJWTValidationConfigPropertiesFormat {
    * The provisioning state of the entra jwt validation configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -11111,11 +11222,12 @@ model ApplicationGatewayGlobalConfiguration {
 /**
  * Tags object for patch operations.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -11126,6 +11238,7 @@ model ApplicationGatewayBackendHealth {
   /**
    * A list of ApplicationGatewayBackendHealthPool resources.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendAddressPools?: ApplicationGatewayBackendHealthPool[];
 }
 
@@ -11141,6 +11254,7 @@ model ApplicationGatewayBackendHealthPool {
   /**
    * List of ApplicationGatewayBackendHealthHttpSettings resources.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendHttpSettingsCollection?: ApplicationGatewayBackendHealthHttpSettings[];
 }
 
@@ -11156,6 +11270,7 @@ model ApplicationGatewayBackendHealthHttpSettings {
   /**
    * List of ApplicationGatewayBackendHealthServer resources.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   servers?: ApplicationGatewayBackendHealthServer[];
 }
 
@@ -11252,7 +11367,7 @@ model ApplicationGatewayBackendHealthOnDemand {
 /**
  * PrivateLink Resource of an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayPrivateLinkResource extends SubResource {
   /**
    * Properties of the application gateway private link resource.
@@ -11322,6 +11437,7 @@ model Error {
   /**
    * Error details.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: ErrorDetails[];
 
   /**
@@ -11363,7 +11479,7 @@ model ApplicationGatewayAvailableWafRuleSetsResult {
 /**
  * A web application firewall rule set.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayFirewallRuleSet
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -11380,7 +11496,7 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
    * The provisioning state of the web application firewall rule set.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The type of the web application firewall rule set.
@@ -11395,6 +11511,7 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
   /**
    * The rule groups of the web application firewall rule set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroups: ApplicationGatewayFirewallRuleGroup[];
 
   /**
@@ -11420,6 +11537,7 @@ model ApplicationGatewayFirewallRuleGroup {
   /**
    * The rules of the web application firewall rule group.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules: ApplicationGatewayFirewallRule[];
 }
 
@@ -11461,7 +11579,7 @@ model ApplicationGatewayFirewallRule {
 /**
  * Properties of ApplicationGatewayAvailableSslOptions.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayAvailableSslOptionsPropertiesFormat {
   /**
    * List of available Ssl predefined policy.
@@ -11493,7 +11611,7 @@ model ApplicationGatewayAvailableSslPredefinedPolicies
 /**
  * An Ssl predefined policy.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewaySslPredefinedPolicy extends SubResource {
   /**
    * Name of the Ssl predefined policy.
@@ -11524,7 +11642,7 @@ model ApplicationGatewaySslPredefinedPolicyPropertiesFormat {
 /**
  * Properties of ApplicationGatewayWafDynamicManifest.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayWafDynamicManifestPropertiesResult {
   /**
    * The default ruleset.
@@ -11688,7 +11806,7 @@ model AzureFirewallPropertiesFormat {
    * The provisioning state of the Azure firewall resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The operation mode for Threat Intelligence.
@@ -11708,6 +11826,7 @@ model AzureFirewallPropertiesFormat {
   /**
    * IP addresses associated with AzureFirewall.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hubIPAddresses?: HubIPAddresses;
 
   /**
@@ -11724,7 +11843,7 @@ model AzureFirewallPropertiesFormat {
   /**
    * The additional properties used to further config this azure firewall.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   additionalProperties?: Record<string>;
 
   /**
@@ -11736,7 +11855,7 @@ model AzureFirewallPropertiesFormat {
 /**
  * Application rule collection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallApplicationRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall application rule collection.
@@ -11780,12 +11899,13 @@ model AzureFirewallApplicationRuleCollectionPropertiesFormat {
    * The provisioning state of the application rule collection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Properties of the AzureFirewallRCAction.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallRCAction {
   /**
    * The type of action.
@@ -11815,6 +11935,7 @@ model AzureFirewallApplicationRule {
   /**
    * Array of ApplicationRuleProtocols.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols?: AzureFirewallApplicationRuleProtocol[];
 
   /**
@@ -11853,7 +11974,7 @@ model AzureFirewallApplicationRuleProtocol {
 /**
  * NAT rule collection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallNatRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall NAT rule collection.
@@ -11897,12 +12018,13 @@ model AzureFirewallNatRuleCollectionProperties {
    * The provisioning state of the NAT rule collection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * AzureFirewall NAT Rule Collection Action.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallNatRCAction {
   /**
    * The type of action.
@@ -11968,7 +12090,7 @@ model AzureFirewallNatRule {
 /**
  * Network rule collection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallNetworkRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall network rule collection.
@@ -12012,7 +12134,7 @@ model AzureFirewallNetworkRuleCollectionPropertiesFormat {
    * The provisioning state of the network rule collection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -12068,7 +12190,7 @@ model AzureFirewallNetworkRule {
 /**
  * IP configuration of an Azure Firewall.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallIPConfiguration extends SubResource {
   /**
    * Properties of the azure firewall IP configuration.
@@ -12096,11 +12218,13 @@ model AzureFirewallIPConfiguration extends SubResource {
 /**
  * Properties of IP configuration of an Azure Firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallIPConfigurationPropertiesFormat {
   /**
    * The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
@@ -12111,13 +12235,14 @@ model AzureFirewallIPConfigurationPropertiesFormat {
   /**
    * Reference to the PublicIP resource. This field is a mandatory input if subnet is not null.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
    * The provisioning state of the Azure firewall IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -12127,11 +12252,13 @@ model HubIPAddresses {
   /**
    * Public IP addresses associated with azure firewall.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPs?: HubPublicIPAddresses;
 
   /**
    * Private IP Address associated with azure firewall.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 }
 
@@ -12142,6 +12269,7 @@ model HubPublicIPAddresses {
   /**
    * The list of Public IP addresses associated with azure firewall or IP addresses to be retained.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   addresses?: AzureFirewallPublicIPAddress[];
 
   /**
@@ -12200,18 +12328,21 @@ model AzureFirewallAutoscaleConfiguration {
    * The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
   @minValue(2)
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minCapacity?: int32 | null;
 
   /**
    * The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
   @minValue(2)
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxCapacity?: int32 | null;
 }
 
 /**
  * List of SNAT IP Prefixes learnt by firewall to not SNAT
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPPrefixesList {
   /**
    * IP Prefix value.
@@ -12318,7 +12449,7 @@ model AzureFirewallPacketCaptureResponse {
 /**
  * Azure Firewall FQDN Tag Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureFirewallFqdnTag extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the azure firewall FQDN tag.
@@ -12340,7 +12471,7 @@ model AzureFirewallFqdnTagPropertiesFormat {
    * The provisioning state of the Azure firewall FQDN tag resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The name of this FQDN Tag.
@@ -12352,7 +12483,7 @@ model AzureFirewallFqdnTagPropertiesFormat {
 /**
  * Azure Web Category Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureWebCategoryPropertiesFormat {
   /**
    * The name of the group that the category belongs to.
@@ -12380,14 +12511,14 @@ model BastionHostPropertiesFormat {
    */
   virtualNetwork?: SubResource;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkAcls?: BastionHostPropertiesFormatNetworkAcls;
 
   /**
    * The provisioning state of the bastion host resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The scale units for the Bastion Host resource.
@@ -12440,7 +12571,7 @@ model BastionHostPropertiesFormat {
 /**
  * IP configuration of an Bastion Host.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BastionHostIPConfiguration extends SubResource {
   /**
    * Represents the ip configuration associated with the resource.
@@ -12468,6 +12599,7 @@ model BastionHostIPConfiguration extends SubResource {
 /**
  * Properties of IP configuration of an Bastion Host.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BastionHostIPConfigurationPropertiesFormat {
   /**
    * Reference of the subnet resource.
@@ -12477,29 +12609,32 @@ model BastionHostIPConfigurationPropertiesFormat {
   /**
    * Reference of the PublicIP resource. Null for private only bastion
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
    * The provisioning state of the bastion host IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Private IP allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BastionHostPropertiesFormatNetworkAcls {
   /**
    * Sets the IP ACL rules for Developer Bastion Host.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipRules?: IPRule[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPRule {
   /**
    * Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
@@ -12524,6 +12659,7 @@ model BastionShareableLinkListRequest {
   /**
    * List of VM references.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vms?: BastionShareableLink[];
 }
 
@@ -12558,7 +12694,8 @@ model BastionShareableLink {
 /**
  * Describes a Virtual Machine.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VM extends Azure.ResourceManager.CommonTypes.Resource {}
 
 /**
@@ -12595,6 +12732,7 @@ model BastionActiveSession {
    * The time when the session started.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: unknown;
 
   /**
@@ -12659,6 +12797,7 @@ model SessionIds {
   /**
    * List of session IDs.
    */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sessionIds?: string[];
 }
 
@@ -12703,7 +12842,7 @@ model DnsNameAvailabilityResult {
 /**
  * Swap resource properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SwapResourceProperties {
   /**
    * Specifies slot info on a cloud service
@@ -12715,7 +12854,7 @@ model SwapResourceProperties {
  * SwapResource List with single entry to represent slot type on the specified cloud service.
  */
 model SwapResourceListResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
   value?: SwapResource[];
 }
@@ -12802,7 +12941,7 @@ model CustomIpPrefixPropertiesFormat {
    * The provisioning state of the custom IP prefix resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -12819,7 +12958,7 @@ model DdosCustomPolicyPropertiesFormat {
    * The provisioning state of the DDoS custom policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The list of DDoS detection rules associated with the custom policy.
@@ -12835,7 +12974,7 @@ model DdosCustomPolicyPropertiesFormat {
 /**
  * A DDoS detection rule resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DdosDetectionRule extends SubResource {
   /**
    * The name of the DDoS detection rule.
@@ -12874,7 +13013,7 @@ model DdosDetectionRulePropertiesFormat {
    * The provisioning state of the DDoS detection rule.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The detection mode for the DDoS detection rule.
@@ -12916,12 +13055,13 @@ model DdosProtectionPlanPropertiesFormat {
    * The provisioning state of the DDoS protection plan resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The list of public IPs associated with the DDoS protection plan resource. This list is read-only.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddresses?: SubResource[];
 
   /**
@@ -12943,21 +13083,25 @@ model DscpConfigurationPropertiesFormat {
   /**
    * Source IP ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIpRanges?: QosIpRange[];
 
   /**
    * Destination IP ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIpRanges?: QosIpRange[];
 
   /**
    * Sources port ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourcePortRanges?: QosPortRange[];
 
   /**
    * Destination port ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationPortRanges?: QosPortRange[];
 
   /**
@@ -12968,6 +13112,7 @@ model DscpConfigurationPropertiesFormat {
   /**
    * QoS object definitions
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   qosDefinitionCollection?: QosDefinition[];
 
   /**
@@ -12992,7 +13137,7 @@ model DscpConfigurationPropertiesFormat {
    * The provisioning state of the DSCP Configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -13002,11 +13147,13 @@ model QosIpRange {
   /**
    * Start IP Address.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startIP?: string;
 
   /**
    * End IP Address.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endIP?: string;
 }
 
@@ -13037,21 +13184,25 @@ model QosDefinition {
   /**
    * Source IP ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIpRanges?: QosIpRange[];
 
   /**
    * Destination IP ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIpRanges?: QosIpRange[];
 
   /**
    * Sources port ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourcePortRanges?: QosPortRange[];
 
   /**
    * Destination port ranges.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationPortRanges?: QosPortRange[];
 
   /**
@@ -13063,7 +13214,7 @@ model QosDefinition {
 /**
  * Endpoint service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EndpointServiceResult extends SubResource {
   /**
    * Name of the endpoint service.
@@ -13085,6 +13236,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13102,7 +13254,7 @@ model AuthorizationPropertiesFormat {
    * The provisioning state of the authorization resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -13122,6 +13274,7 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
   /**
    * The Azure ASN.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureASN?: int32;
 
   /**
@@ -13129,6 +13282,7 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
    */
   @maxValue(4294967295)
   @minValue(1)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   peerASN?: int64;
 
   /**
@@ -13154,6 +13308,7 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
   /**
    * The shared key.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -13175,7 +13330,7 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
    * The provisioning state of the express route circuit peering resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The GatewayManager Etag.
@@ -13243,6 +13398,7 @@ model ExpressRouteCircuitPeeringConfig {
   /**
    * The CustomerASN of the peering.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customerASN?: int32;
 
   /**
@@ -13371,6 +13527,7 @@ model ExpressRouteCircuitConnectionPropertiesFormat {
   /**
    * The authorization key.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13388,7 +13545,7 @@ model ExpressRouteCircuitConnectionPropertiesFormat {
    * The provisioning state of the express route circuit connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -13446,7 +13603,7 @@ model PeerExpressRouteCircuitConnectionPropertiesFormat {
    * The provisioning state of the peer express route circuit connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -13501,6 +13658,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * The ServiceKey.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceKey?: string;
 
   /**
@@ -13533,7 +13691,7 @@ model ExpressRouteCircuitPropertiesFormat {
    * The provisioning state of the express route circuit resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The GatewayManager Etag.
@@ -13548,6 +13706,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * The authorizationKey.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13688,7 +13847,7 @@ model ExpressRouteCircuitRoutesTableSummary {
 /**
  * A ExpressRouteResourceProvider object.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteServiceProvider
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -13709,13 +13868,14 @@ model ExpressRouteServiceProviderPropertiesFormat {
   /**
    * A list of bandwidths offered.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bandwidthsOffered?: ExpressRouteServiceProviderBandwidthsOffered[];
 
   /**
    * The provisioning state of the express route service provider resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -13786,7 +13946,7 @@ model ExpressRouteCrossConnectionProperties {
    * The provisioning state of the express route cross connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The list of peerings.
@@ -13807,7 +13967,7 @@ model ExpressRouteCircuitReference {
 /**
  * Peering in an ExpressRoute Cross Connection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteCrossConnectionPeering extends SubResource {
   /**
    * Properties of the express route cross connection peering.
@@ -13844,6 +14004,7 @@ model ExpressRouteCrossConnectionPeeringProperties {
    * The Azure ASN.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureASN?: int32;
 
   /**
@@ -13851,6 +14012,7 @@ model ExpressRouteCrossConnectionPeeringProperties {
    */
   @maxValue(4294967295)
   @minValue(1)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   peerASN?: int64;
 
   /**
@@ -13878,6 +14040,7 @@ model ExpressRouteCrossConnectionPeeringProperties {
   /**
    * The shared key.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -13894,7 +14057,7 @@ model ExpressRouteCrossConnectionPeeringProperties {
    * The provisioning state of the express route cross connection peering resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The GatewayManager Etag.
@@ -13970,13 +14133,14 @@ model ExpressRoutePortsLocationPropertiesFormat {
   /**
    * The inventory of available ExpressRoutePort bandwidths.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableBandwidths?: ExpressRoutePortsLocationBandwidths[];
 
   /**
    * The provisioning state of the express route port location resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -14057,7 +14221,7 @@ model ExpressRoutePortPropertiesFormat {
    * The provisioning state of the express route port resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The resource GUID property of the express route port resource.
@@ -14074,7 +14238,7 @@ model ExpressRoutePortPropertiesFormat {
 /**
  * ExpressRouteLink child resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRouteLink")
 model ExpressRouteLink extends SubResource {
   /**
@@ -14144,7 +14308,7 @@ model ExpressRouteLinkPropertiesFormat {
    * The provisioning state of the express route link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * MacSec configuration.
@@ -14187,6 +14351,7 @@ model ExpressRouteLinkListResult is Azure.Core.Page<ExpressRouteLink>;
 /**
  * The customer name to be printed on a letter of authorization.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GenerateExpressRoutePortsLOARequest {
   /**
    * The customer name.
@@ -14197,6 +14362,7 @@ model GenerateExpressRoutePortsLOARequest {
 /**
  * Response for GenerateExpressRoutePortsLOA API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GenerateExpressRoutePortsLOAResult {
   /**
    * The content as a base64 encoded string.
@@ -14213,6 +14379,7 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
    * The authorization key.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -14231,13 +14398,13 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
    * The provisioning state of the authorization resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Properties of ExpressRouteProviderPort.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteProviderPortProperties {
   /**
    * The name of the port pair.
@@ -14303,7 +14470,7 @@ model FirewallPolicyPropertiesFormat {
    * The provisioning state of the firewall policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The parent firewall policy from which rules are inherited.
@@ -14457,6 +14624,7 @@ model FirewallPolicySnat {
 /**
  * SQL Settings in Firewall Policy.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FirewallPolicySQL {
   /**
    * A flag to indicate if SQL Redirect traffic filtering is enabled. Turning on the flag requires no rule using port 11000-11999.
@@ -14481,6 +14649,7 @@ model DnsSettings {
   /**
    * FQDNs in Network Rules are supported when set to true.
    */
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requireProxyForNetworkRules?: boolean | null;
 }
 
@@ -14491,6 +14660,7 @@ model ExplicitProxy {
   /**
    * When set to true, explicit proxy mode is enabled.
    */
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableExplicitProxy?: boolean | null;
 
   /**
@@ -14510,6 +14680,7 @@ model ExplicitProxy {
   /**
    * When set to true, pac file port and url needs to be provided.
    */
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enablePacFile?: boolean | null;
 
   /**
@@ -14688,7 +14859,7 @@ model FirewallPolicyRuleCollectionGroupProperties {
    * The provisioning state of the firewall policy rule collection group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -14793,7 +14964,7 @@ model QueryResults {
   signatures?: SingleQueryResult[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SingleQueryResult {
   /**
    * The ID of the signature
@@ -14854,12 +15025,12 @@ model SingleQueryResult {
 /**
  * Will contain the properties of the resource (the actual signature overrides)
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SignaturesOverridesProperties {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   signatures?: Record<string>;
 }
 
@@ -14894,8 +15065,8 @@ model SignaturesOverridesList {
   value?: SignaturesOverrides[];
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FirewallPolicyDraftProperties {
   /**
    * The parent firewall policy from which rules are inherited.
@@ -14946,7 +15117,7 @@ model FirewallPolicyDraftProperties {
 /**
  * Properties of the rule collection group draft.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FirewallPolicyRuleCollectionGroupDraftProperties {
   /**
    * A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
@@ -14977,7 +15148,7 @@ model IpamPoolList is Azure.Core.Page<IpamPool>;
  * Properties of IpamPool resource properties which are specific to the Pool resource.
  */
 model IpamPoolProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -15011,12 +15182,12 @@ model IpamPoolProperties {
 /**
  * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CommonTrackedResource extends CommonResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -15119,6 +15290,7 @@ model CommonErrorAdditionalInfo {
    * The additional info.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: unknown;
 }
 
@@ -15129,7 +15301,7 @@ model IpamPoolUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -15142,7 +15314,7 @@ model IpamPoolUpdate {
  * Represents the IpamPool update properties.
  */
 model IpamPoolUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -15190,24 +15362,28 @@ model PoolUsage {
    * Total number of IP addresses managed in the IpamPool.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
    * Total number of assigned IP addresses in the IpamPool.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfAllocatedIPAddresses?: string;
 
   /**
    * Total number of reserved IP addresses in the IpamPool.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfReservedIPAddresses?: string;
 
   /**
    * Total number of available IP addresses in the IpamPool.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfAvailableIPAddresses?: string;
 }
 
@@ -15245,7 +15421,7 @@ model PoolAssociation {
    */
   poolId?: Azure.Core.armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -15264,12 +15440,14 @@ model PoolAssociation {
    * Total number of assigned IP addresses of the association.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
    * Total number of reserved IP addresses of the association.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfReservedIPAddresses?: string;
 
   /**
@@ -15296,12 +15474,13 @@ model StaticCidrList is Azure.Core.Page<StaticCidr>;
  * Properties of static CIDR resource.
  */
 model StaticCidrProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
    * Number of IP addresses to allocate for a static CIDR resource. The IP addresses will be assigned based on IpamPools available space.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfIPAddressesToAllocate?: string;
 
   /**
@@ -15313,6 +15492,7 @@ model StaticCidrProperties {
    * Total number of IP addresses allocated for the static CIDR resource.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
@@ -15324,13 +15504,14 @@ model StaticCidrProperties {
 /**
  * The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CommonProxyResource extends CommonResource {}
 
 /**
  * Properties of the IpAllocation.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IpAllocationPropertiesFormat {
   /**
    * The Subnet that using the prefix of this IpAllocation resource.
@@ -15347,6 +15528,7 @@ model IpAllocationPropertiesFormat {
   /**
    * The type for the IpAllocation.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: IpAllocationType;
 
   /**
@@ -15357,6 +15539,7 @@ model IpAllocationPropertiesFormat {
   /**
    * The address prefix length for the IpAllocation.
    */
+#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prefixLength?: int32 | null = 0;
 
   /**
@@ -15372,7 +15555,7 @@ model IpAllocationPropertiesFormat {
   /**
    * IpAllocation tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   allocationTags?: Record<string>;
 }
 
@@ -15384,7 +15567,7 @@ model IpGroupPropertiesFormat {
    * The provisioning state of the IpGroups resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * IpAddresses/IpAddressPrefixes in the IpGroups resource.
@@ -15426,6 +15609,7 @@ model LoadBalancerPropertiesFormat {
   /**
    * Object representing the frontend IPs to be used for the load balancer.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: FrontendIPConfiguration[];
 
   /**
@@ -15468,7 +15652,7 @@ model LoadBalancerPropertiesFormat {
    * The provisioning state of the load balancer resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Indicates the scope of the load balancer: external (Public) or internal (Private).
@@ -15483,6 +15667,7 @@ model LoadBalancingRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -15528,6 +15713,7 @@ model LoadBalancingRulePropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -15549,7 +15735,7 @@ model LoadBalancingRulePropertiesFormat {
    * The provisioning state of the load balancing rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -15601,13 +15787,13 @@ model ProbePropertiesFormat {
    * The provisioning state of the probe resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Inbound NAT pool of the load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InboundNatPool extends SubResource {
   /**
    * Properties of load balancer inbound nat pool.
@@ -15639,6 +15825,7 @@ model InboundNatPoolPropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -15669,6 +15856,7 @@ model InboundNatPoolPropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -15680,7 +15868,7 @@ model InboundNatPoolPropertiesFormat {
    * The provisioning state of the inbound NAT pool resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -15695,6 +15883,7 @@ model OutboundRulePropertiesFormat {
   /**
    * The Frontend IP addresses of the load balancer.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations: SubResource[];
 
   /**
@@ -15706,7 +15895,7 @@ model OutboundRulePropertiesFormat {
    * The provisioning state of the outbound rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The protocol for the outbound rule in load balancer.
@@ -15731,6 +15920,7 @@ model LoadBalancerVipSwapRequest {
   /**
    * A list of frontend IP configuration resources that should swap VIPs.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: LoadBalancerVipSwapRequestFrontendIPConfiguration[];
 }
 
@@ -15752,10 +15942,12 @@ model LoadBalancerVipSwapRequestFrontendIPConfiguration {
 /**
  * The properties of VIP swap request's frontend IP configuration object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LoadBalancerVipSwapRequestFrontendIPConfigurationProperties {
   /**
    * A reference to public IP address resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 }
 
@@ -15781,6 +15973,7 @@ model BackendAddressInboundNatRulePortMappings {
   /**
    * Collection of inbound NAT rule port mappings.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inboundNatRulePortMappings?: InboundNatRulePortMapping[];
 }
 
@@ -15830,6 +16023,7 @@ model LoadBalancerHealthPerRule {
   /**
    * Information about the health per rule of the backend addresses.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   loadBalancerBackendAddresses?: LoadBalancerHealthPerRulePerBackendAddress[];
 }
 
@@ -15845,6 +16039,7 @@ model LoadBalancerHealthPerRulePerBackendAddress {
   /**
    * Resource ID of the Network Interface IP Configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkInterfaceIPConfigurationId?: string;
 
   /**
@@ -15875,6 +16070,7 @@ model MigratedPools {
   /**
    * A list of pools migrated from Nic based to IP based pool
    */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migratedPools?: string[];
 }
 
@@ -15951,6 +16147,7 @@ model EffectiveNetworkSecurityGroup {
   /**
    * Mapping of tags to list of IP Addresses included within the tag.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tagMap?: Record<string[]>;
 }
 
@@ -16077,7 +16274,7 @@ model NetworkManagerProperties {
    * The provisioning state of the network manager resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16138,7 +16335,7 @@ model PatchObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -16202,6 +16399,7 @@ model NetworkManagerDeploymentStatusListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16269,13 +16467,14 @@ model ActiveConnectivityConfigurationsListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
 /**
  * Active connectivity configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ActiveConnectivityConfiguration
   extends EffectiveConnectivityConfiguration {
   /**
@@ -16350,7 +16549,7 @@ model ConnectivityConfigurationProperties {
    * The provisioning state of the connectivity configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Flag if need to remove current existing peerings.
@@ -16457,7 +16656,7 @@ model NetworkGroupProperties {
    * The provisioning state of the scope assignment resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16479,6 +16678,7 @@ model ActiveSecurityAdminRulesListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16543,7 +16743,7 @@ model NetworkManagerSecurityGroupItem {
 /**
  * Information about the network manager connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkManagerConnectionProperties {
   /**
    * Network Manager Id.
@@ -16618,6 +16818,7 @@ model NetworkManagerEffectiveConnectivityConfigurationListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16634,6 +16835,7 @@ model NetworkManagerEffectiveSecurityAdminRulesListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16693,7 +16895,7 @@ model StaticMemberProperties {
    * The provisioning state of the scope assignment resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -16709,7 +16911,7 @@ model NetworkManagerRoutingConfigurationPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16736,7 +16938,7 @@ model RoutingRuleCollectionPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16779,7 +16981,7 @@ model RoutingRulePropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16831,7 +17033,7 @@ model RoutingRuleNextHop {
 /**
  * Scope connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScopeConnectionProperties {
   /**
    * Tenant ID.
@@ -16928,7 +17130,7 @@ model SecurityUserConfigurationPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -16956,7 +17158,7 @@ model SecurityUserRuleCollectionPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -17020,7 +17222,7 @@ model SecurityUserRulePropertiesFormat {
    * The provisioning state of the security configuration user rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Unique identifier for this resource.
@@ -17069,13 +17271,13 @@ model NetworkProfilePropertiesFormat {
    * The provisioning state of the network profile resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Container network interface child resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContainerNetworkInterface extends SubResource {
   /**
    * Container network interface properties.
@@ -17125,13 +17327,13 @@ model ContainerNetworkInterfacePropertiesFormat {
    * The provisioning state of the container network interface resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Container network interface configuration child resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContainerNetworkInterfaceConfiguration extends SubResource {
   /**
    * Container network interface configuration properties.
@@ -17174,13 +17376,14 @@ model ContainerNetworkInterfaceConfigurationPropertiesFormat {
    * The provisioning state of the container network interface configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Reference to container resource in remote resource provider.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Container extends SubResource {}
 
 /**
@@ -17218,7 +17421,7 @@ model ContainerNetworkInterfaceIpConfigurationPropertiesFormat {
    * The provisioning state of the container network interface IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -17321,14 +17524,14 @@ model UpdateTagsRequest {
   /**
    * List of tags for Network Security Perimeter
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Properties of NSP profile.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NspProfileProperties {
   /**
    * Version number that increases with every update to access rules within the profile.
@@ -17346,7 +17549,8 @@ model NspProfileProperties {
 /**
  * The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SecurityPerimeterProxyResource extends SecurityPerimeterResource {}
 
 /**
@@ -17401,7 +17605,7 @@ model NspAccessRuleProperties {
   serviceTags?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SubscriptionId {
   /**
    * Subscription id in the ARM id format.
@@ -17413,7 +17617,7 @@ model SubscriptionId {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PerimeterBasedAccessRule {
   /**
    * NSP id in the ARM id format.
@@ -17438,7 +17642,7 @@ model PerimeterBasedAccessRule {
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NspAssociationProperties {
   /**
    * The provisioning state of the resource  association resource.
@@ -17660,7 +17864,7 @@ model NspLinkReferenceProperties {
 /**
  * The NSP logging configuration properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NspLoggingConfigurationProperties {
   /**
    * The log categories to enable in the NSP logging configuration.
@@ -17698,7 +17902,7 @@ model ReachabilityAnalysisIntentProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -17741,7 +17945,7 @@ model IPTraffic {
    */
   destinationPorts: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols: NetworkProtocol[];
 }
 
@@ -17749,7 +17953,7 @@ model IPTraffic {
  * Represents the Reachability Analysis Run properties.
  */
 model ReachabilityAnalysisRunProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -17763,11 +17967,11 @@ model ReachabilityAnalysisRunProperties {
   @visibility(Lifecycle.Read)
   intentContent?: IntentContent;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   analysisResult?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   errorMessage?: string;
 
@@ -17782,7 +17986,7 @@ model ReachabilityAnalysisRunProperties {
  * Intent information.
  */
 model IntentContent {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -17805,7 +18009,7 @@ model IntentContent {
  * Properties of Verifier Workspace resource.
  */
 model VerifierWorkspaceProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 
   /**
@@ -17822,7 +18026,7 @@ model VerifierWorkspaceUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -17835,7 +18039,7 @@ model VerifierWorkspaceUpdate {
  * Represents the VerifierWorkspace update properties.
  */
 model VerifierWorkspaceUpdateProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   description?: string;
 }
 
@@ -17931,7 +18135,7 @@ model NetworkVirtualAppliancePropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The deployment type. PartnerManaged for the SaaS NVA
@@ -18021,7 +18225,7 @@ model VirtualApplianceNicProperties {
  * Network Profile containing configurations for Public and Private NIC.
  */
 model NetworkVirtualAppliancePropertiesFormatNetworkProfile {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   networkInterfaceConfigurations?: VirtualApplianceNetworkInterfaceConfiguration[];
 }
@@ -18045,7 +18249,7 @@ model VirtualApplianceNetworkInterfaceConfiguration {
  * Represents a single NIC configuration properties.
  */
 model VirtualApplianceNetworkInterfaceConfigurationProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   ipConfigurations?: VirtualApplianceIPConfiguration[];
 }
@@ -18068,6 +18272,7 @@ model VirtualApplianceIPConfiguration {
 /**
  * Represents a single IP configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualApplianceIPConfigurationProperties {
   /**
    * Whether or not this is primary IP configuration of the NIC.
@@ -18119,7 +18324,7 @@ model DelegationProperties {
    * Provisioning states of a resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -18223,7 +18428,7 @@ model NetworkVirtualApplianceBootDiagnosticParameters {
   consoleScreenshotStorageSasUrl?: url;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkVirtualApplianceInstanceId {
   /**
    * The network virtual appliance instance id for which boot diagnostic logs is being requested
@@ -18249,7 +18454,7 @@ model VirtualApplianceSiteProperties {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -18285,7 +18490,7 @@ model BreakOutCategoryPolicies {
 /**
  * Properties specific to NetworkVirtualApplianceSkus.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Network Virtual Appliance Sku Properties")
 model NetworkVirtualApplianceSkuPropertiesFormat {
   /**
@@ -18303,6 +18508,7 @@ model NetworkVirtualApplianceSkuPropertiesFormat {
   /**
    * The list of scale units available.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableScaleUnits?: NetworkVirtualApplianceSkuInstances[];
 }
 
@@ -18342,7 +18548,7 @@ model InboundSecurityRuleProperties {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -18390,7 +18596,7 @@ model NetworkWatcherPropertiesFormat {
    * The provisioning state of the network watcher resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -18520,6 +18726,7 @@ model TopologyAssociation {
 /**
  * Parameters that define the IP flow to be verified.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VerificationIPFlowParameters {
   /**
    * The ID of the target resource to perform next-hop on.
@@ -18549,11 +18756,13 @@ model VerificationIPFlowParameters {
   /**
    * The local IP address. Acceptable values are valid IPv4 addresses.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localIPAddress: string;
 
   /**
    * The remote IP address. Acceptable values are valid IPv4 addresses.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteIPAddress: string;
 
   /**
@@ -18565,6 +18774,7 @@ model VerificationIPFlowParameters {
 /**
  * Results of IP flow verification on the target resource.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VerificationIPFlowResult {
   /**
    * Indicates whether the traffic is allowed or denied.
@@ -18589,11 +18799,13 @@ model NextHopParameters {
   /**
    * The source IP address.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIPAddress: string;
 
   /**
    * The destination IP address.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIPAddress: string;
 
   /**
@@ -18772,6 +18984,7 @@ model PacketCaptureParameters {
   /**
    * A list of packet capture filters.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   filters?: PacketCaptureFilter[];
 
   /**
@@ -18837,11 +19050,13 @@ model PacketCaptureFilter {
   /**
    * Local IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localIPAddress?: string;
 
   /**
    * Local IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteIPAddress?: string;
 
   /**
@@ -18912,13 +19127,13 @@ model PacketCaptureResult {
 /**
  * The properties of a packet capture session.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PacketCaptureResultProperties extends PacketCaptureParameters {
   /**
    * The provisioning state of the packet capture session.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -19058,6 +19273,7 @@ model TroubleshootingDetails {
   /**
    * List of recommended actions.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recommendedActions?: TroubleshootingRecommendedActions[];
 }
 
@@ -19193,6 +19409,7 @@ model ConnectivityParameters {
   /**
    * Preferred IP version of the connection.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredIPVersion?: IPVersion;
 }
 
@@ -19242,6 +19459,7 @@ model ProtocolConfiguration {
   /**
    * HTTP configuration of the connectivity check.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTPConfiguration?: HttpConfiguration;
 }
 
@@ -19371,18 +19589,21 @@ model ConnectivityHop {
    * List of hop links.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   links?: HopLink[];
 
   /**
    * List of previous hop links.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   previousLinks?: HopLink[];
 
   /**
    * List of issues.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issues?: ConnectivityIssue[];
 }
 
@@ -19411,12 +19632,13 @@ model HopLink {
    * List of issues.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issues?: ConnectivityIssue[];
 
   /**
    * Provides additional context on links.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   context?: Record<string>;
 
@@ -19482,6 +19704,7 @@ model ConnectivityIssue {
    * Provides additional context on the issue.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   context?: Record<string>[];
 }
 
@@ -19554,6 +19777,7 @@ model AzureReachabilityReport {
   /**
    * List of Azure reachability report items.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reachabilityReport: AzureReachabilityReportItem[];
 }
 
@@ -19574,6 +19798,7 @@ model AzureReachabilityReportItem {
   /**
    * List of latency details for each of the time series.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   latencies?: AzureReachabilityReportLatencyInfo[];
 }
 
@@ -19627,6 +19852,7 @@ model AvailableProvidersList {
   /**
    * List of available countries.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   countries: AvailableProvidersListCountry[];
 }
 
@@ -19647,6 +19873,7 @@ model AvailableProvidersListCountry {
   /**
    * List of available states in the country.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   states?: AvailableProvidersListState[];
 }
 
@@ -19667,6 +19894,7 @@ model AvailableProvidersListState {
   /**
    * List of available cities or towns in the state.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cities?: AvailableProvidersListCity[];
 }
 
@@ -19702,6 +19930,7 @@ model NetworkConfigurationDiagnosticParameters {
   /**
    * List of network configuration diagnostic profiles.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   profiles: NetworkConfigurationDiagnosticProfile[];
 }
 
@@ -19743,6 +19972,7 @@ model NetworkConfigurationDiagnosticResponse {
    * List of network configuration diagnostic results.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results?: NetworkConfigurationDiagnosticResult[];
 }
 
@@ -19774,6 +20004,7 @@ model NetworkSecurityGroupResult {
    * List of results network security groups diagnostic.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   evaluatedNetworkSecurityGroups?: EvaluatedNetworkSecurityGroup[];
 }
 
@@ -19865,7 +20096,7 @@ model ConnectionMonitor {
   /**
    * Connection monitor tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -19918,6 +20149,7 @@ model ConnectionMonitorParameters {
   /**
    * List of connection monitor outputs.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   outputs?: ConnectionMonitorOutput[];
 
   /**
@@ -20027,6 +20259,7 @@ model ConnectionMonitorEndpointFilter {
   /**
    * List of items in the filter.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   items?: ConnectionMonitorEndpointFilterItem[];
 }
 
@@ -20052,11 +20285,13 @@ model ConnectionMonitorEndpointScope {
   /**
    * List of items which needs to be included to the endpoint scope.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   include?: ConnectionMonitorEndpointScopeItem[];
 
   /**
    * List of items which needs to be excluded from the endpoint scope.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclude?: ConnectionMonitorEndpointScopeItem[];
 }
 
@@ -20102,6 +20337,7 @@ model ConnectionMonitorTestConfiguration {
   /**
    * The preferred IP version to use in test evaluation. The connection monitor may choose to use a different version depending on other parameters.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredIPVersion?: PreferredIPVersion;
 
   /**
@@ -20159,6 +20395,7 @@ model ConnectionMonitorHttpConfiguration {
   /**
    * Value indicating whether HTTPS is preferred over HTTP in cases where the choice is not explicit.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferHTTPS?: boolean;
 }
 
@@ -20267,13 +20504,13 @@ model ConnectionMonitorWorkspaceSettings {
 /**
  * Describes the properties of a connection monitor.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionMonitorResultProperties extends ConnectionMonitorParameters {
   /**
    * The provisioning state of the connection monitor.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The date and time when the connection monitor was started.
@@ -20421,6 +20658,7 @@ model MetricSpecification {
   /**
    * List of availability.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availabilities?: Availability[];
 
   /**
@@ -20563,7 +20801,7 @@ model AvailablePrivateEndpointType {
 /**
  * Private dns zone group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateDnsZoneGroup extends SubResource {
   /**
    * Name of the resource that is unique within a resource group. This name can be used to access the resource.
@@ -20590,7 +20828,7 @@ model PrivateDnsZoneGroupPropertiesFormat {
    * The provisioning state of the private dns zone group resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * A collection of private dns zone configurations of the private dns zone group.
@@ -20626,6 +20864,7 @@ model PrivateDnsZonePropertiesFormat {
    * A collection of information regarding a recordSet, holding information to identify private resources.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recordSets?: RecordSet[];
 }
 
@@ -20652,7 +20891,7 @@ model RecordSet {
    * The provisioning state of the recordset.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Recordset time to live.
@@ -20758,6 +20997,7 @@ model DisassociateCloudServicePublicIpRequest {
 /**
  * SKU of a public IP prefix.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PublicIPPrefixSku {
   /**
    * Name of a public IP prefix SKU.
@@ -20773,15 +21013,18 @@ model PublicIPPrefixSku {
 /**
  * Public IP prefix properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PublicIPPrefixPropertiesFormat {
   /**
    * The public IP address version.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddressVersion?: IPVersion;
 
   /**
    * The list of tags associated with the public IP prefix.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipTags?: IpTag[];
 
   /**
@@ -20799,6 +21042,7 @@ model PublicIPPrefixPropertiesFormat {
    * The list of all referenced PublicIPAddresses.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddresses?: ReferencedPublicIpAddress[];
 
   /**
@@ -20810,6 +21054,7 @@ model PublicIPPrefixPropertiesFormat {
   /**
    * The customIpPrefix that this prefix is associated with.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customIPPrefix?: SubResource;
 
   /**
@@ -20822,7 +21067,7 @@ model PublicIPPrefixPropertiesFormat {
    * The provisioning state of the public IP prefix resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * NatGateway of Public IP Prefix.
@@ -20865,13 +21110,13 @@ model RouteFilterPropertiesFormat {
    * The provisioning state of the route filter resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Route Filter Rule Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RouteFilterRule extends SubResource {
   /**
    * Properties of the route filter rule.
@@ -20918,7 +21163,7 @@ model RouteFilterRulePropertiesFormat {
    * The provisioning state of the route filter rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -20934,7 +21179,7 @@ model SecurityPartnerProviderPropertiesFormat {
    * The provisioning state of the Security Partner Provider resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The security provider name.
@@ -20956,7 +21201,7 @@ model SecurityPartnerProviderPropertiesFormat {
 /**
  * Service Community Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BgpServiceCommunity extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the BGP service community.
@@ -20982,12 +21227,14 @@ model BgpServiceCommunityPropertiesFormat {
   /**
    * A list of bgp communities.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bgpCommunities?: BGPCommunity[];
 }
 
 /**
  * Contains bgp community information offered in Service Community resources.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BGPCommunity {
   /**
    * The region which the service support. e.g. For O365, region is Global.
@@ -21226,7 +21473,7 @@ model VirtualNetworkPropertiesFormat {
    * The provisioning state of the virtual network resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource.
@@ -21267,6 +21514,7 @@ model VirtualNetworkPropertiesFormat {
   /**
    * Private Endpoint VNet Policies.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointVNetPolicies?: PrivateEndpointVNetPolicies;
 
   /**
@@ -21288,6 +21536,7 @@ model AddressSpace {
   /**
    * A list of IPAM Pools allocating IP address prefixes.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
 }
 
@@ -21375,7 +21624,7 @@ model VirtualNetworkPeeringPropertiesFormat {
    * The provisioning state of the virtual network peering resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * If we need to verify the provisioning state of the remote gateway.
@@ -21396,6 +21645,7 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether only Ipv6 address space is peered for subnet peering.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableOnlyIPv6Peering?: boolean;
 
   /**
@@ -21452,6 +21702,7 @@ model PrepareNetworkPoliciesRequest {
   /**
    * A list of NetworkIntentPolicyConfiguration.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkIntentPolicyConfigurations?: NetworkIntentPolicyConfiguration[];
 }
 
@@ -21473,7 +21724,7 @@ model NetworkIntentPolicyConfiguration {
 /**
  * Network Intent Policy resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkIntentPolicy extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -21495,6 +21746,7 @@ model UnprepareNetworkPoliciesRequest {
 /**
  * Response for CheckIPAddressAvailability API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPAddressAvailabilityResult {
   /**
    * Private IP address availability.
@@ -21504,6 +21756,7 @@ model IPAddressAvailabilityResult {
   /**
    * Contains other available private IP addresses if the asked for address is taken.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableIPAddresses?: string[];
 
   /**
@@ -21632,6 +21885,7 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * disableIPSecReplayProtection flag.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableIPSecReplayProtection?: boolean;
 
   /**
@@ -21674,7 +21928,7 @@ model VirtualNetworkGatewayPropertiesFormat {
    * The provisioning state of the virtual network gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Whether dns forwarding is enabled or not.
@@ -21733,7 +21987,7 @@ model VirtualNetworkGatewayAutoScaleConfiguration {
   bounds?: VirtualNetworkGatewayAutoScaleBounds;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayAutoScaleBounds {
   /**
    * Minimum scale Units for Autoscale configuration
@@ -21749,7 +22003,7 @@ model VirtualNetworkGatewayAutoScaleBounds {
 /**
  * IP configuration for virtual network gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayIPConfiguration extends SubResource {
   /**
    * Properties of the virtual network gateway ip configuration.
@@ -21771,10 +22025,12 @@ model VirtualNetworkGatewayIPConfiguration extends SubResource {
 /**
  * Properties of VirtualNetworkGatewayIPConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -21785,19 +22041,21 @@ model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
    * Private IP Address for this gateway.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The provisioning state of the virtual network gateway IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -21873,6 +22131,7 @@ model VpnClientConfiguration {
   /**
    * VpnClientIpsecPolicies for virtual network gateway P2S client.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnClientIpsecPolicies?: IpsecPolicy[];
 
   /**
@@ -21889,6 +22148,7 @@ model VpnClientConfiguration {
   /**
    * The radiusServers property for multiple radius server configuration.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServers?: RadiusServer[];
 
   /**
@@ -21915,7 +22175,7 @@ model VpnClientConfiguration {
 /**
  * VPN client root certificate of virtual network gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VpnClientRootCertificate extends SubResource {
   /**
    * Properties of the vpn client root certificate.
@@ -21947,13 +22207,13 @@ model VpnClientRootCertificatePropertiesFormat {
    * The provisioning state of the VPN client root certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * VPN client revoked certificate of virtual network gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VpnClientRevokedCertificate extends SubResource {
   /**
    * Properties of the vpn client revoked certificate.
@@ -21985,7 +22245,7 @@ model VpnClientRevokedCertificatePropertiesFormat {
    * The provisioning state of the VPN client revoked certificate resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -22050,13 +22310,14 @@ model RadiusServer {
   /**
    * The secret used for this radius server. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServerSecret?: string;
 }
 
 /**
  * A vpn client connection configuration for client connection configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VngClientConnectionConfiguration extends SubResource {
   /**
    * Properties of the vpn client root certificate.
@@ -22093,13 +22354,13 @@ model VngClientConnectionConfigurationProperties {
    * The provisioning state of the VngClientConnectionConfiguration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
  * Parameters for VirtualNetworkGatewayPolicyGroup.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayPolicyGroup extends SubResource {
   /**
    * Properties of tVirtualNetworkGatewayPolicyGroup.
@@ -22148,7 +22409,7 @@ model VirtualNetworkGatewayPolicyGroupProperties {
    * The provisioning state of the VirtualNetworkGatewayPolicyGroup resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -22194,12 +22455,14 @@ model BgpSettings {
   /**
    * BGP peering address with IP configuration ID for virtual network gateway.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bgpPeeringAddresses?: IPConfigurationBgpPeeringAddress[];
 }
 
 /**
  * Properties of IPConfigurationBgpPeeringAddress.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IPConfigurationBgpPeeringAddress {
   /**
    * The ID of IP configuration which belongs to gateway.
@@ -22232,11 +22495,12 @@ model VirtualNetworkGatewayNatRuleProperties {
    * The provisioning state of the NAT Rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The type of NAT rule for VPN NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: VpnNatRuleType;
 
   /**
@@ -22247,11 +22511,13 @@ model VirtualNetworkGatewayNatRuleProperties {
   /**
    * The private IP address internal mapping for NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalMappings?: VpnNatRuleMapping[];
 
   /**
    * The private IP address external mapping for NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   externalMappings?: VpnNatRuleMapping[];
 
   /**
@@ -22284,17 +22550,17 @@ model VirtualNetworkGatewayListConnectionsResult
 /**
  * A common class for general resource information.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayConnectionListEntity
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: TagsObject;
 
   /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
@@ -22316,6 +22582,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The authorizationKey.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -22356,6 +22623,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The IPSec shared key. We will no longer return sharedKey in VirtualNetworkGatewayConnection Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGatewayConnection GetSharedKey API to fetch connection sharedKey.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -22368,6 +22636,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * Collection of all tunnels' connection health status.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelConnectionStatus?: TunnelConnectionHealth[];
 
   /**
@@ -22406,11 +22675,13 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The IPSec Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -22423,7 +22694,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * The provisioning state of the virtual network gateway connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Bypass ExpressRoute Gateway for data forwarding.
@@ -22544,6 +22815,7 @@ model BgpPeerStatusListResult {
    * List of BGP peers.
    */
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: BgpPeerStatus[];
 }
 
@@ -22631,6 +22903,7 @@ model GatewayRouteListResult {
    * List of gateway routes.
    */
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: GatewayRoute[];
 }
 
@@ -22745,6 +23018,7 @@ model ResiliencyRecommendationComponents {
   /**
    * List of Gateway Resiliency based Recommendations
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recommendations?: GatewayResiliencyRecommendation[];
 }
 
@@ -22812,11 +23086,11 @@ model GatewayRouteSetsInformation {
   /**
    * Dictionary containing map of the circuit id and circuit details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   circuitsMetadataMap?: Record<CircuitMetadataMap>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayRouteSet {
   /**
    * Route Set name
@@ -22831,11 +23105,11 @@ model GatewayRouteSet {
   /**
    * List of different Route Sources
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: Record<RouteSourceDetails[]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RouteSourceDetails {
   /**
    * Express Route Circuit identifier
@@ -22853,7 +23127,7 @@ model RouteSourceDetails {
   sec?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CircuitMetadataMap {
   /**
    * Express Route Circuit Name
@@ -22874,6 +23148,7 @@ model CircuitMetadataMap {
 /**
  * An IPSec parameters for a virtual network gateway P2S connection.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VpnClientIPsecParameters {
   /**
    * The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for P2S client.
@@ -23006,7 +23281,7 @@ model ExpressRouteFailoverTestDetails {
   issues?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteFailoverCircuitResourceDetails {
   /**
    * NRP Resource URI of the circuit
@@ -23024,7 +23299,7 @@ model ExpressRouteFailoverCircuitResourceDetails {
   connectionName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteFailoverConnectionResourceDetails {
   /**
    * NRP Resource URI of the connection
@@ -23074,6 +23349,7 @@ model ExpressRouteFailoverSingleTestDetails {
   /**
    * List of routes received from this peering as well as some other peering location
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   redundantRoutes?: ExpressRouteFailoverRedundantRoute[];
 
   /**
@@ -23089,10 +23365,11 @@ model ExpressRouteFailoverSingleTestDetails {
   /**
    * List of all the failover connections for this peering location
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failoverConnectionDetails?: FailoverConnectionDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteFailoverRedundantRoute {
   /**
    * A list of all the peering locations for the redundant routes
@@ -23105,7 +23382,7 @@ model ExpressRouteFailoverRedundantRoute {
   routes?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailoverConnectionDetails {
   /**
    * Name of the failover connection
@@ -23140,6 +23417,7 @@ model ExpressRouteFailoverStopApiParameters {
   /**
    * List of all the failover connections for this peering location
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: FailoverConnectionDetails[];
 }
 
@@ -23150,6 +23428,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The authorizationKey.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -23205,6 +23484,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * Tunnel properties for virtual network gateway connection
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelProperties?: VirtualNetworkGatewayConnectionTunnelProperties[];
 
   /**
@@ -23223,6 +23503,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * Collection of all tunnels' connection health status.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelConnectionStatus?: TunnelConnectionHealth[];
 
   /**
@@ -23266,11 +23547,13 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The IPSec Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -23283,7 +23566,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * The provisioning state of the virtual network gateway connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Bypass ExpressRoute Gateway for data forwarding.
@@ -23340,10 +23623,10 @@ model LocalNetworkGatewayPropertiesFormat {
    * The provisioning state of the local network gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayConnectionTunnelProperties {
   /**
    * Tunnel remote IP address
@@ -23379,7 +23662,7 @@ model CertificateAuthentication {
 /**
  * Response for GetConnectionSharedKey API service call.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionSharedKey extends SubResource {
   /**
    * The virtual network connection shared key value.
@@ -23407,6 +23690,7 @@ model VpnClientConnectionHealthDetailListResult {
    * List of vpn client connection health.
    */
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: VpnClientConnectionHealthDetail[];
 }
 
@@ -23490,6 +23774,7 @@ model VpnClientConnectionHealthDetail {
 /**
  * List of p2s vpn connections to be disconnected.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SVpnConnectionRequest {
   /**
    * List of p2s vpn connection Ids.
@@ -23554,7 +23839,7 @@ model VirtualRouterPropertiesFormat {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -23577,7 +23862,7 @@ model VirtualRouterPeeringProperties {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -23621,17 +23906,19 @@ model VirtualWanProperties {
    * The provisioning state of the virtual WAN resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The type of the VirtualWAN.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
 }
 
 /**
  * Result of the request to list VirtualWANs. It contains a list of VirtualWANs and a URL nextLink to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListVirtualWANsResult is Azure.Core.Page<VirtualWAN>;
 
 /**
@@ -23656,6 +23943,7 @@ model VpnSiteProperties {
   /**
    * The key for vpn-site that can be used for connections.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   siteKey?: string;
 
   /**
@@ -23672,7 +23960,7 @@ model VpnSiteProperties {
    * The provisioning state of the VPN site resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * IsSecuritySite flag.
@@ -23738,7 +24026,7 @@ model VpnSiteLinkProperties {
    * The provisioning state of the VPN site link resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -23864,6 +24152,7 @@ model VpnServerConfigurationProperties {
   /**
    * The name of the VpnServerConfiguration that is unique within a resource group.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -23899,6 +24188,7 @@ model VpnServerConfigurationProperties {
   /**
    * VpnClientIpsecPolicies for VpnServerConfiguration.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnClientIpsecPolicies?: IpsecPolicy[];
 
   /**
@@ -23915,6 +24205,7 @@ model VpnServerConfigurationProperties {
   /**
    * Multiple Radius Server configuration for VpnServerConfiguration.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServers?: RadiusServer[];
 
   /**
@@ -23925,7 +24216,7 @@ model VpnServerConfigurationProperties {
   /**
    * The provisioning state of the VpnServerConfiguration resource. Possible values are: 'Updating', 'Deleting', and 'Failed'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -23933,6 +24224,7 @@ model VpnServerConfigurationProperties {
    * List of references to P2SVpnGateways.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SVpnGateways?: P2SVpnGateway[];
 
   /**
@@ -23944,6 +24236,7 @@ model VpnServerConfigurationProperties {
    * A unique read-only string that changes whenever the resource is updated.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -24030,6 +24323,7 @@ model AadAuthenticationParameters {
 /**
  * Parameters for P2SVpnGateway.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SVpnGatewayProperties {
   /**
    * The VirtualHub to which the gateway belongs.
@@ -24039,13 +24333,14 @@ model P2SVpnGatewayProperties {
   /**
    * List of all p2s connection configurations of the gateway.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SConnectionConfigurations?: P2SConnectionConfiguration[];
 
   /**
    * The provisioning state of the P2S VPN gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The scale unit for this p2s vpn gateway.
@@ -24077,7 +24372,8 @@ model P2SVpnGatewayProperties {
 /**
  * P2SConnectionConfiguration Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SConnectionConfiguration extends SubResource {
   /**
    * Properties of the P2S connection configuration.
@@ -24099,6 +24395,7 @@ model P2SConnectionConfiguration extends SubResource {
 /**
  * Parameters for P2SConnectionConfiguration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SConnectionConfigurationProperties {
   /**
    * The reference to the address space resource which represents Address space for P2S VpnClient.
@@ -24130,7 +24427,7 @@ model P2SConnectionConfigurationProperties {
    * The provisioning state of the P2SConnectionConfiguration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -24259,13 +24556,14 @@ model VpnServerConfigurationPolicyGroupProperties {
    * List of references to P2SConnectionConfigurations.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SConnectionConfigurations?: SubResource[];
 
   /**
    * The provisioning state of the VpnServerConfigurationPolicyGroup resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -24344,6 +24642,7 @@ model VirtualHubProperties {
   /**
    * The P2SVpnGateway associated with this VirtualHub.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SVpnGateway?: SubResource;
 
   /**
@@ -24375,7 +24674,7 @@ model VirtualHubProperties {
    * The provisioning state of the virtual hub resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The Security Provider name.
@@ -24456,6 +24755,7 @@ model VirtualHubRouteTable {
   /**
    * List of all routes.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   routes?: VirtualHubRoute[];
 }
 
@@ -24477,7 +24777,7 @@ model VirtualHubRoute {
 /**
  * VirtualHubRouteTableV2 Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualHubRouteTableV2 extends SubResource {
   /**
    * Properties of the virtual hub route table v2.
@@ -24503,6 +24803,7 @@ model VirtualHubRouteTableV2Properties {
   /**
    * List of all routes.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   routes?: VirtualHubRouteV2[];
 
   /**
@@ -24514,7 +24815,7 @@ model VirtualHubRouteTableV2Properties {
    * The provisioning state of the virtual hub route table v2 resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -24582,7 +24883,7 @@ model RouteMapProperties {
    * The provisioning state of the RouteMap resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -24681,7 +24982,7 @@ model ListRouteMapsResult is Azure.Core.Page<RouteMap>;
 /**
  * HubVirtualNetworkConnection Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HubVirtualNetworkConnection extends SubResource {
   /**
    * Properties of the hub virtual network connection.
@@ -24733,7 +25034,7 @@ model HubVirtualNetworkConnectionProperties {
    * The provisioning state of the hub virtual network connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -24765,7 +25066,7 @@ model VpnGatewayProperties {
    * The provisioning state of the VPN gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The scale unit for this vpn gateway.
@@ -24797,7 +25098,7 @@ model VpnGatewayProperties {
 /**
  * VpnConnection Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VpnConnection extends SubResource {
   /**
    * Properties of the VPN connection.
@@ -24866,6 +25167,7 @@ model VpnConnectionProperties {
   /**
    * Deprecated: SharedKey for the vpn connection. This is no more used.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -24881,11 +25183,13 @@ model VpnConnectionProperties {
   /**
    * The IPSec Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -24907,7 +25211,7 @@ model VpnConnectionProperties {
    * The provisioning state of the VPN connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * List of all vpn site link connections to the gateway.
@@ -24992,6 +25296,7 @@ model VpnSiteLinkConnectionProperties {
   /**
    * The IPSec Policies to be considered by this connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
@@ -25008,7 +25313,7 @@ model VpnSiteLinkConnectionProperties {
    * The provisioning state of the VPN site link connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * List of ingress NatRules.
@@ -25054,11 +25359,12 @@ model VpnGatewayNatRuleProperties {
    * The provisioning state of the NAT Rule resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The type of NAT rule for VPN NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: VpnNatRuleType;
 
   /**
@@ -25069,11 +25375,13 @@ model VpnGatewayNatRuleProperties {
   /**
    * The private IP address internal mapping for NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalMappings?: VpnNatRuleMapping[];
 
   /**
    * The private IP address external mapping for NAT.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   externalMappings?: VpnNatRuleMapping[];
 
   /**
@@ -25141,7 +25449,7 @@ model SharedKeyProperties {
    * The provisioning state of the SharedKey resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -25198,11 +25506,13 @@ model ListVpnGatewayNatRulesResult is Azure.Core.Page<VpnGatewayNatRule>;
 /**
  * Result of the request to list P2SVpnGateways. It contains a list of P2SVpnGateways and a URL nextLink to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListP2SVpnGatewaysResult is Azure.Core.Page<P2SVpnGateway>;
 
 /**
  * Vpn Client Parameters for package generation.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SVpnProfileParameters {
   /**
    * VPN client authentication method.
@@ -25223,6 +25533,7 @@ model VpnProfileResponse {
 /**
  * List of P2S Vpn connection health request.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SVpnConnectionHealthRequest {
   /**
    * The list of p2s vpn user names whose p2s vpn connection detailed health to retrieve for.
@@ -25238,6 +25549,7 @@ model P2SVpnConnectionHealthRequest {
 /**
  * P2S Vpn connection detailed health written to sas url.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model P2SVpnConnectionHealth {
   /**
    * Returned sas url of the blob to which the p2s vpn connection detailed health will be written.
@@ -25273,6 +25585,7 @@ model VirtualWanVpnProfileParameters {
 /**
  * List of VirtualHubRouteTableV2s and a URL nextLink to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListVirtualHubRouteTableV2SResult
   is Azure.Core.Page<VirtualHubRouteTableV2>;
 
@@ -25305,7 +25618,7 @@ model ExpressRouteGatewayProperties {
    * The provisioning state of the express route gateway resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The Virtual Hub where the ExpressRoute gateway is or will be deployed.
@@ -25346,7 +25659,7 @@ model ExpressRouteGatewayPropertiesAutoScaleConfigurationBounds {
 /**
  * ExpressRouteConnection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteConnection extends SubResource {
   /**
    * Properties of the express route connection.
@@ -25367,7 +25680,7 @@ model ExpressRouteConnectionProperties {
    * The provisioning state of the express route connection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The ExpressRoute circuit peering.
@@ -25377,6 +25690,7 @@ model ExpressRouteConnectionProperties {
   /**
    * Authorization key to establish the connection.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -25439,7 +25753,7 @@ model ExpressRouteConnectionList {
 /**
  * NetworkVirtualApplianceConnection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NetworkVirtualApplianceConnection extends SubResource {
   /**
    * Properties of the express route connection.
@@ -25465,7 +25779,7 @@ model NetworkVirtualApplianceConnectionProperties {
    * The provisioning state of the NetworkVirtualApplianceConnection resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Network Virtual Appliance ASN.
@@ -25528,7 +25842,7 @@ model BgpConnectionProperties {
    * The provisioning state of the resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * The current state of the VirtualHub to Peer.
@@ -25597,15 +25911,18 @@ alias PeerRouteList = Record<PeerRoute[]>;
 /**
  * Properties of IP configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HubIPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -25616,13 +25933,14 @@ model HubIPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
    * The provisioning state of the IP configuration resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -25661,7 +25979,7 @@ model HubRouteTableProperties {
    * The provisioning state of the RouteTable resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -25722,6 +26040,7 @@ model VirtualHubEffectiveRouteList {
    * The list of effective routes configured on the virtual hub or the specified resource.
    */
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: VirtualHubEffectiveRoute[];
 }
 
@@ -25830,7 +26149,7 @@ model RoutingIntentProperties {
    * The provisioning state of the RoutingIntent resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 }
 
 /**
@@ -25882,7 +26201,7 @@ model WebApplicationFirewallPolicyPropertiesFormat {
    * The provisioning state of the web application firewall policy resource.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+  provisioningState?: NetworkProvisioningState;
 
   /**
    * Resource status of the policy.
@@ -25937,6 +26256,7 @@ model PolicySettings {
   /**
    * Max inspection limit in KB for request body inspection for WAF.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestBodyInspectLimitInKB?: int32;
 
   /**
@@ -26070,6 +26390,7 @@ model WebApplicationFirewallCustomRule {
   /**
    * List of match conditions.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchConditions: MatchCondition[];
 
   /**
@@ -26091,6 +26412,7 @@ model MatchCondition {
   /**
    * List of match variables.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchVariables: MatchVariable[];
 
   /**
@@ -26157,16 +26479,19 @@ model ManagedRulesDefinition {
   /**
    * The exceptions that are applied on the policy.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exceptions?: ExceptionEntry[];
 
   /**
    * The Exclusions that are applied on the policy.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: OwaspCrsExclusionEntry[];
 
   /**
    * The managed rule sets that are associated with the policy.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedRuleSets: ManagedRuleSet[];
 }
 
@@ -26202,6 +26527,7 @@ model ExceptionEntry {
   /**
    * The managed rule sets that are associated with the exception.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exceptionManagedRuleSets?: ExclusionManagedRuleSet[];
 }
 
@@ -26222,6 +26548,7 @@ model ExclusionManagedRuleSet {
   /**
    * Defines the rule groups to apply to the rule set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroups?: ExclusionManagedRuleGroup[];
 }
 
@@ -26237,6 +26564,7 @@ model ExclusionManagedRuleGroup {
   /**
    * List of rules that will be excluded. If none specified, all rules in the group will be excluded.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ExclusionManagedRule[];
 }
 
@@ -26272,6 +26600,7 @@ model OwaspCrsExclusionEntry {
   /**
    * The managed rule sets that are associated with the exclusion.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusionManagedRuleSets?: ExclusionManagedRuleSet[];
 }
 
@@ -26292,12 +26621,14 @@ model ManagedRuleSet {
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroupOverrides?: ManagedRuleGroupOverride[];
 
   /**
    * Stores the final list of disabled rule groups
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   computedDisabledRules?: ManagedRuleSetRuleGroup[];
 }
 
@@ -26313,6 +26644,7 @@ model ManagedRuleGroupOverride {
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ManagedRuleOverride[];
 }
 
@@ -26470,6 +26802,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * Array of Application Protocols.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols?: FirewallPolicyRuleApplicationProtocol[];
 
   /**
@@ -26495,6 +26828,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * Terminate TLS connections for this rule.
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   terminateTLS?: boolean;
 
   /**
@@ -26505,6 +26839,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * List of HTTP/S headers to insert.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpHeadersToInsert?: FirewallPolicyHttpHeaderToInsert[];
 
   /**
@@ -26964,13 +27299,14 @@ model ConnectionMonitorQueryResult {
   /**
    * Information about connection states.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   states?: ConnectionStateSnapshot[];
 }
 
 /**
  * Route Filter Rule Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchRouteFilterRule extends SubResource {
   /**
    * Properties of the route filter rule.
@@ -26993,7 +27329,7 @@ model PatchRouteFilterRule extends SubResource {
 /**
  * Route Filter Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchRouteFilter extends SubResource {
   /**
    * Properties of the route filter.
@@ -27021,7 +27357,7 @@ model PatchRouteFilter extends SubResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -27041,6 +27377,7 @@ model VpnSiteId {
  */
 model ApplicationGatewayAvailableServerVariablesResult {
   @pageItems
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27049,6 +27386,7 @@ model ApplicationGatewayAvailableServerVariablesResult {
  */
 model ApplicationGatewayAvailableRequestHeadersResult {
   @pageItems
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27057,6 +27395,7 @@ model ApplicationGatewayAvailableRequestHeadersResult {
  */
 model ApplicationGatewayAvailableResponseHeadersResult {
   @pageItems
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27065,6 +27404,8 @@ model ApplicationGatewayAvailableResponseHeadersResult {
  */
 model ExpressRouteFailoverAllTestDetails {
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: ExpressRouteFailoverTestDetails[];
 }
 
@@ -27073,6 +27414,8 @@ model ExpressRouteFailoverAllTestDetails {
  */
 model ExpressRouteFailoverSingleTestDetailsObject {
   @pageItems
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: ExpressRouteFailoverSingleTestDetails[];
 }
 
@@ -27081,7 +27424,7 @@ model PerimeterAssociableResourcesListResult
 
 model EndpointServicesListResult is Azure.Core.Page<EndpointServiceResult>;
 
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SingletonResource {
   swap,
 }
@@ -27095,6 +27438,7 @@ model AuthorizationListResult
 model LoadBalancerBackendAddressPoolListResult
   is Azure.Core.Page<BackendAddressPool>;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LoadBalancerFrontendIPConfigurationListResult
   is Azure.Core.Page<FrontendIPConfiguration>;
 
