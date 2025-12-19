@@ -11,6 +11,8 @@ import {
 import { CoreLogger } from "../core-logger.js";
 import { createEmptyPullRequestChanges, isTrivialPullRequest } from "./pr-changes.js";
 
+/** @typedef {import("./pr-changes.js").PullRequestChanges} PullRequestChanges */
+
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
@@ -79,10 +81,10 @@ function formatForLog(value) {
 
 /**
  * Analyzes a PR to determine what types of changes it contains
- * @param {{ core: typeof import("@actions/core"), context?: import("@actions/github-script").AsyncFunctionArguments["context"] }} args
- * @returns {Promise<string>} JSON string with categorized change types
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<PullRequestChanges>} Object with categorized change types
  */
-export default async function checkTrivialChanges({ core }) {
+export async function checkTrivialChanges(core) {
   // Create result object once at the top
   const changes = createEmptyPullRequestChanges();
 
@@ -124,7 +126,7 @@ export default async function checkTrivialChanges({ core }) {
     changes.other = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
-    return JSON.stringify(changes);
+    return changes;
   }
 
   // Early exit if no resource-manager changes
@@ -132,7 +134,7 @@ export default async function checkTrivialChanges({ core }) {
     core.info("No resource-manager changes detected in PR");
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
-    return JSON.stringify(changes);
+    return changes;
   }
 
   // Check for non-trivial file operations (additions, deletions, renames)
@@ -146,7 +148,7 @@ export default async function checkTrivialChanges({ core }) {
     changes.rmFunctional = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
     core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
-    return JSON.stringify(changes);
+    return changes;
   }
 
   // Analyze what types of changes are present and update the changes object
@@ -155,13 +157,13 @@ export default async function checkTrivialChanges({ core }) {
   core.info(`PR Changes: ${JSON.stringify(changes)}`);
   core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
 
-  return JSON.stringify(changes);
+  return changes;
 }
 
 /**
  * Checks for non-trivial file operations: additions/deletions of spec files, or any renames
  * @param {{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[]}} changedFilesStatuses - File status information
- * @param {typeof import("@actions/core")} core - Core logger
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
  * @returns {boolean} - True if non-trivial operations detected
  */
 function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
@@ -199,7 +201,7 @@ function checkForNonTrivialFileOperations(changedFilesStatuses, core) {
  * Analyzes a PR to determine what types of changes it contains and updates the changes object
  * @param {string[]} changedFiles - Array of changed file paths
  * @param {import('simple-git').SimpleGit} git - Git instance
- * @param {typeof import("@actions/core")} core - Core logger
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
  * @param {import('./pr-changes.js').PullRequestChanges} changes - Changes object to update
  * @returns {Promise<void>}
  */
@@ -263,7 +265,7 @@ async function analyzePullRequestChanges(changedFiles, git, core, changes) {
  * Note: New files and deletions should already be filtered by checkForNonTrivialFileOperations
  * @param {string} file - The file path
  * @param {import('simple-git').SimpleGit} git - Git instance
- * @param {typeof import("@actions/core")} core - Core logger
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
  * @returns {Promise<boolean>} - True if changes are non-functional only, false if any functional changes detected
  */
 async function analyzeSpecFileForNonFunctionalChanges(file, git, core) {
@@ -339,7 +341,7 @@ function getFlatChangedFilesFromStatuses(statuses) {
  * @param {unknown} baseObj - Base object
  * @param {unknown} headObj - Head object
  * @param {string} path - Current path in the object
- * @param {typeof import("@actions/core")} core - Core logger
+ * * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
  * @returns {boolean} - True if all differences are non-functional
  */
 function analyzeJsonDifferences(baseObj, headObj, path, core) {

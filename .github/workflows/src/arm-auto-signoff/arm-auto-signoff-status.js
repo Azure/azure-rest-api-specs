@@ -3,12 +3,13 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { equals } from "../../../shared/src/set.js";
 import { byDate, invert } from "../../../shared/src/sort.js";
 import { extractInputs } from "../context.js";
-import { LabelAction } from "../label.js";
+import { ArmAutoSignoffLabel, LabelAction } from "../label.js";
 
-const LABEL_ARM_SIGNED_OFF = "ARMSignedOff";
-const LABEL_ARM_AUTO_SIGNED_OFF = "ARMAutoSignedOff";
-const LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP = "ARMAutoSignedOff-IncrementalTSP";
-const LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST = "ARMAutoSignedOff-Trivial-Test";
+/** @typedef {import('@octokit/plugin-rest-endpoint-methods').RestEndpointMethodTypes} RestEndpointMethodTypes */
+/** @typedef {RestEndpointMethodTypes["issues"]["listLabelsOnIssue"]["response"]["data"][number]} IssueLabel */
+/** @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunsForRepo"]["response"]["data"]["workflow_runs"][number]} WorkflowRun */
+/** @typedef {RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"][number]} CommitStatus */
+/** @typedef {RestEndpointMethodTypes["actions"]["listWorkflowRunArtifacts"]["response"]["data"]["artifacts"][number]} Artifact */
 
 /**
  * The workflow contract is intentionally a fixed set of keys.
@@ -22,70 +23,29 @@ const LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST = "ARMAutoSignedOff-Trivial-Test";
 /** @returns {ManagedLabelActions} */
 function createNoneLabelActions() {
   return {
-    [LABEL_ARM_SIGNED_OFF]: LabelAction.None,
-    [LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP]: LabelAction.None,
-    [LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: LabelAction.None,
   };
 }
 
-/** @typedef {{ name: string }} IssueLabel */
-
 /**
- * Minimal subset of workflow run fields used by this workflow.
- * @typedef {{
- *   id: number,
- *   name: string,
- *   status: string,
- *   conclusion: string | null,
- *   updated_at: string,
- * }} WorkflowRun
+ * The analyze-code workflow uploads empty artifacts named `${name}=${value}`.
+ * We treat missing artifacts or non-boolean values as a failure (no auto-signoff).
+ *
+ * @param {string[]} artifactNames
+ * @param {string} key
+ * @returns {boolean | null}
  */
-
-/**
- * Minimal subset of commit status fields used by this workflow.
- * @typedef {{
- *   context: string,
- *   state: string,
- *   updated_at: string,
- * }} CommitStatus
- */
-
-/** @typedef {{ name: string }} Artifact */
-
-/**
- * @param {string} artifactName
- * @returns {{ incrementalTypeSpec: boolean, isTrivial: boolean, qualifiesForAutoSignoff: boolean } | null}
- */
-function parseArmAnalysisArtifact(artifactName) {
-  const prefix = "arm-auto-signoff-code-results=";
-  if (!artifactName.startsWith(prefix)) {
+function readBooleanArtifactValue(artifactNames, key) {
+  const prefix = `${key}=`;
+  const match = artifactNames.find((name) => name.startsWith(prefix));
+  if (!match) {
     return null;
   }
 
-  const value = artifactName.substring(prefix.length);
-
-  // Parse key-value format: incrementalTypeSpec-true,isTrivial-false,qualifies-true
-  // Split by comma, then parse each key-value pair.
-  /** @type {Record<string, string>} */
-  const pairs = Object.fromEntries(
-    value
-      .split(",")
-      .map((p) => p.trim())
-      .filter(Boolean)
-      .map((p) => {
-        const lastDash = p.lastIndexOf("-");
-        if (lastDash === -1) {
-          return [p, ""]; // will be treated as false
-        }
-        return [p.substring(0, lastDash), p.substring(lastDash + 1)];
-      }),
-  );
-
-  return {
-    incrementalTypeSpec: pairs.incrementalTypeSpec === "true",
-    isTrivial: pairs.isTrivial === "true",
-    qualifiesForAutoSignoff: pairs.qualifies === "true",
-  };
+  const value = match.substring(prefix.length).trim().toLowerCase();
+  return value === "true" ? true : value === "false" ? false : null;
 }
 
 // TODO: Add tests
@@ -119,45 +79,40 @@ export default async function getLabelAction({ github, context, core }) {
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
 export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, github, core }) {
-  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
-  // permissions: { issues: read, pull-requests: read }
-  const labels = /** @type {IssueLabel[]} */ (
-    await github.paginate(github.rest.issues.listLabelsOnIssue, {
-      owner: owner,
-      repo: repo,
-      issue_number: issue_number,
-      per_page: PER_PAGE_MAX,
-    })
-  );
-  const labelNames = labels.map((label) => label.name);
-
   /** @type {{headSha: string, issueNumber: number}} */
   const baseResult = {
     headSha: head_sha,
     issueNumber: issue_number,
   };
 
-  const labelActions = createNoneLabelActions();
+  const noneLabelActions = createNoneLabelActions();
+
+  // TODO: Try to extract labels from context (when available) to avoid unnecessary API call
+  // permissions: { issues: read, pull-requests: read }
+  /** @type {IssueLabel[]} */
+  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+    owner: owner,
+    repo: repo,
+    issue_number: issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  const labelNames = labels.map((label) => label.name);
 
   // Check if any auto sign-off labels are currently present
   // Only proceed with auto sign-off logic if auto labels exist or we're about to add them
-  const hasAutoSignedOffLabels =
-    labelNames.includes(LABEL_ARM_AUTO_SIGNED_OFF) ||
-    labelNames.includes(LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP);
-
+  const hasAutoSignedOffLabels = labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP);
   core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
 
   // permissions: { actions: read }
-  const workflowRuns = /** @type {WorkflowRun[]} */ (
-    await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
-      owner,
-      repo,
-      event: "pull_request",
-      head_sha,
-      per_page: PER_PAGE_MAX,
-    })
-  );
+  /** @type {WorkflowRun[]} */
+  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
+    owner,
+    repo,
+    event: "pull_request",
+    head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   core.info("Workflow Runs:");
   workflowRuns.forEach((wf) => {
@@ -169,7 +124,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
   const noneResult = {
     ...baseResult,
-    labelActions,
+    labelActions: noneLabelActions,
   };
 
   const removeAutoSignedOffLabelsIfPresent = () => {
@@ -180,10 +135,10 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return {
       ...noneResult,
       labelActions: {
-        ...labelActions,
-        [LABEL_ARM_SIGNED_OFF]: LabelAction.Remove,
-        [LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP]: LabelAction.Remove,
-        [LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST]: LabelAction.Remove,
+        ...noneLabelActions,
+        [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Remove,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.Remove,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: LabelAction.Remove,
       },
     };
   };
@@ -205,14 +160,13 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   }
 
   // permissions: { statuses: read }
-  const statuses = /** @type {CommitStatus[]} */ (
-    await github.paginate(github.rest.repos.listCommitStatusesForRef, {
-      owner: owner,
-      repo: repo,
-      ref: head_sha,
-      per_page: PER_PAGE_MAX,
-    })
-  );
+  /** @type {CommitStatus[]} */
+  const statuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
+    owner: owner,
+    repo: repo,
+    ref: head_sha,
+    per_page: PER_PAGE_MAX,
+  });
 
   core.info("Statuses:");
   statuses.forEach((status) => {
@@ -258,18 +212,17 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     requiredStatuses.every((status) => status.state === CommitStatusState.SUCCESS)
   ) {
     core.info("All requirements met for auto-signoff");
-
-    const autoIncremental = armAnalysisResult.incrementalTypeSpec;
+    const autoIncrementalTSP = armAnalysisResult.incrementalTypeSpec;
     const autoTrivialTest = armAnalysisResult.isTrivial;
 
     // Add ARMAutoSignOff label only when the PR is identified as an incremental typespec
     // As the trivial changes sign-off is being released in test mode
-    const autoSignOffAction = autoIncremental
+    const armSignOffAction = autoIncrementalTSP
       ? LabelAction.Add
       : hasAutoSignedOffLabels
         ? LabelAction.Remove
         : LabelAction.None;
-    const autoIncrementalAction = autoIncremental ? LabelAction.Add : LabelAction.Remove;
+    const autoIncrementalTSPAction = autoIncrementalTSP ? LabelAction.Add : LabelAction.Remove;
     const testTrivialAction = autoTrivialTest ? LabelAction.Add : LabelAction.Remove;
 
     // Keep labels in sync with current analysis results.
@@ -277,10 +230,10 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     return {
       ...baseResult,
       labelActions: {
-        ...labelActions,
-        [LABEL_ARM_SIGNED_OFF]: autoSignOffAction,
-        [LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP]: autoIncrementalAction,
-        [LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST]: testTrivialAction,
+        ...noneLabelActions,
+        [ArmAutoSignoffLabel.ArmSignedOff]: armSignOffAction,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: autoIncrementalTSPAction,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: testTrivialAction,
       },
     };
   }
@@ -295,11 +248,11 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
  * Check ARM Analysis workflow results (combines incremental TypeSpec and trivial changes).
  *
  * @param {WorkflowRun[]} workflowRuns
- * @param {(import("@octokit/core").Octokit & import("@octokit/plugin-rest-endpoint-methods/dist-types/types.js").Api & { paginate: import("@octokit/plugin-paginate-rest").PaginateInterface; })} github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} github
  * @param {string} owner
  * @param {string} repo
- * @param {typeof import("@actions/core")} core
- * @returns {Promise<{qualifiesForAutoSignoff: boolean, incrementalTypeSpec: boolean, isTrivial: boolean, reason: string}>}
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<{qualifiesForAutoSignoff: boolean, incrementalTypeSpec: boolean, isTrivial: boolean}>}
  */
 async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core) {
   const wfName = "ARM Auto SignOff - Analyze Code";
@@ -316,7 +269,6 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
       qualifiesForAutoSignoff: false,
       incrementalTypeSpec: false,
       isTrivial: false,
-      reason: `No '${wfName}' workflow runs found`,
     };
   }
 
@@ -329,7 +281,6 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
       qualifiesForAutoSignoff: false,
       incrementalTypeSpec: false,
       isTrivial: false,
-      reason: `'${wfName}' workflow still in progress`,
     };
   }
 
@@ -339,77 +290,61 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
       qualifiesForAutoSignoff: false,
       incrementalTypeSpec: false,
       isTrivial: false,
-      reason: `'${wfName}' workflow failed`,
     };
   }
 
   // permissions: { actions: read }
-  const artifacts = /** @type {Artifact[]} */ (
-    await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-      owner,
-      repo,
-      run_id: run.id,
-      per_page: PER_PAGE_MAX,
-    })
-  );
+  /** @type {Artifact[]} */
+  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+    owner,
+    repo,
+    run_id: run.id,
+    per_page: PER_PAGE_MAX,
+  });
+  
   /** @type {string[]} */
   const artifactNames = artifacts.map((a) => a.name);
-
   core.info(`${wfName} artifactNames: ${JSON.stringify(artifactNames)}`);
 
-  /** @type {{ incrementalTypeSpec: boolean, isTrivial: boolean, qualifiesForAutoSignoff: boolean } | null} */
-  const parsed = artifactNames.map(parseArmAnalysisArtifact).find((r) => r !== null) ?? null;
+  const incrementalTypeSpec = readBooleanArtifactValue(artifactNames, "incremental-typespec");
+  const isTrivial = readBooleanArtifactValue(artifactNames, "trivial-changes");
 
-  if (parsed) {
-    const { incrementalTypeSpec, isTrivial, qualifiesForAutoSignoff } = parsed;
-
-    core.info(
-      `ARM analysis results: incrementalTypeSpec=${incrementalTypeSpec}, isTrivial=${isTrivial}, qualifiesForAutoSignoff=${qualifiesForAutoSignoff}`,
-    );
-
-    if (!qualifiesForAutoSignoff) {
-      core.info("PR does not qualify for auto sign-off based on ARM analysis");
-      return {
-        qualifiesForAutoSignoff: false,
-        incrementalTypeSpec,
-        isTrivial,
-        reason: "No qualifying changes detected",
-      };
-    }
-
-    if (!incrementalTypeSpec && !isTrivial) {
-      core.warning(
-        `Invalid ARM analysis result: qualifies=true but both incrementalTypeSpec and isTrivial are false.`,
-      );
-      return {
-        qualifiesForAutoSignoff: false,
-        incrementalTypeSpec,
-        isTrivial,
-        reason: "Invalid qualifying result",
-      };
-    }
-
-    const reason = [
-      incrementalTypeSpec ? LABEL_AUTO_SIGNED_OFF_INCREMENTAL_TSP : null,
-      isTrivial ? LABEL_AUTO_SIGNED_OFF_TRIVIAL_TEST : null,
+  // ARM-Auto-SignOff-Code uploads 2 distinct artifacts.
+  // If either artifact is missing (or invalid), fail closed: no auto-signoff.
+  if (incrementalTypeSpec === null || isTrivial === null) {
+    const missing = [
+      incrementalTypeSpec === null ? "incremental-typespec" : null,
+      isTrivial === null ? "trivial-changes" : null,
     ]
-    .filter(Boolean)
-    .join(", ");
+      .filter(Boolean)
+      .join(", ");
 
-    core.info(`PR qualifies for auto sign-off: ${reason}`);
+    core.info(`Missing/invalid ARM analysis artifact(s): ${missing}`);
     return {
-      qualifiesForAutoSignoff: true,
-      incrementalTypeSpec,
-      isTrivial,
-      reason,
+      qualifiesForAutoSignoff: false,
+      incrementalTypeSpec: false,
+      isTrivial: false,
     };
   }
 
-  // If we get here, no combined artifact found - treat as not qualifying
+  core.info(
+    `ARM analysis results: incrementalTypeSpec=${incrementalTypeSpec}, isTrivial=${isTrivial}`,
+  );
+
+  const qualifiesForAutoSignoff = incrementalTypeSpec || isTrivial;
+  if (!qualifiesForAutoSignoff) {
+    core.info("PR does not qualify for auto sign-off based on ARM analysis");
+    return {
+      qualifiesForAutoSignoff: false,
+      incrementalTypeSpec: false,
+      isTrivial: false,
+    };
+  }
+
+  core.info(`PR qualifies for auto sign-off based on ARM analysis.`);
   return {
-    qualifiesForAutoSignoff: false,
-    incrementalTypeSpec: false,
-    isTrivial: false,
-    reason: "No combined analysis artifact found",
+    qualifiesForAutoSignoff: true,
+    incrementalTypeSpec: incrementalTypeSpec,
+    isTrivial: isTrivial,
   };
 }

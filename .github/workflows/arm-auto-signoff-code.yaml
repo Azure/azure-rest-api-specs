@@ -43,15 +43,21 @@ jobs:
         name: ARM Auto SignOff - Analyze Code
         uses: actions/github-script@v8
         with:
-          result-encoding: string
+          result-encoding: json
           script: |
-            const { default: armAutoSignoffCode } =
+            const { armAutoSignoffCode } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.js');
             return await armAutoSignoffCode({ github, context, core });
 
-      # Upload artifact with all results
-      - name: Upload artifact - ARM Auto Signoff Code Results
+      # Upload artifacts with individual results
+      - name: Upload artifact - ARM Auto Signoff Code Result (incremental)
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "arm-auto-signoff-code-results"
-          value: ${{ steps.arm-auto-signoff-code.outputs.result }}
+          name: "incremental-typespec"
+          value: ${{ fromJSON(steps.arm-auto-signoff-code.outputs.result).incremental }}
+
+      - name: Upload artifact - ARM Auto Signoff Code Result (trivial)
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "trivial-changes"
+          value: ${{ fromJSON(steps.arm-auto-signoff-code.outputs.result).trivial }}

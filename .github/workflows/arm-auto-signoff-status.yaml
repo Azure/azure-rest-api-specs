@@ -88,8 +88,8 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
             return await getLabelAction({ github, context, core });
 
-      # Add/remove specific auto sign-off labels based on analysis results.
-      # The action is explicit: 'add' | 'remove' | 'none'.
+        # Add/remove specific auto sign-off labels based on analysis results.
+        # The action is explicit: 'add' | 'remove' | 'none'.
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
         name: Upload artifact for ARMSignedOff label
         uses: ./.github/actions/add-label-artifact
@@ -103,14 +103,14 @@ jobs:
         with:
           name: "ARMAutoSignedOff-IncrementalTSP"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
-
+      
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-Trivial-Test label
         uses: ./.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-Trivial-Test"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] == 'add' }}"
-
+ 
       # Required for consumers to identify the head SHA associated with this workflow run.
       # Output can be trusted, because it was uploaded from a workflow that is trusted,
       # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
