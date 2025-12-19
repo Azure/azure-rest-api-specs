@@ -1,14 +1,13 @@
-#!/usr/bin/env node
-
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
+import { Readme } from "@azure-tools/specs-shared/readme";
+import { Octokit } from "@octokit/rest";
+import * as commonmark from "commonmark";
 import { existsSync, readFileSync } from "fs";
 import { glob } from "glob";
-import { dirname, join, resolve } from "path";
-
-import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import pkg from "lodash";
-const { isEqual } = pkg;
-
+import { isEqual } from "lodash";
+import { dirname, join, resolve } from "path";
+import { inspect } from "util";
 import {
   ChangeHandler,
   ChangeTypes,
@@ -17,15 +16,9 @@ import {
   PRChange,
   ReadmeTag,
 } from "./diff-types.js";
-
-import { Label, LabelContext, PRType } from "./labelling-types.js";
-
 import { ImpactAssessment } from "./ImpactAssessment.js";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-
-import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
-import { Readme } from "@azure-tools/specs-shared/readme";
-import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -166,7 +159,7 @@ export function isDataPlanePR(filePaths: string[]): boolean {
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
   const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
-  console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder}`);
+  console.log(`allSwaggerFilesFromRPFolder: ${inspect(allSwaggerFilesFromRPFolder)}`);
 
   const apiVersions: Set<string> = new Set();
   for (const it of allSwaggerFilesFromRPFolder) {
@@ -183,7 +176,7 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
   const swagger = readFileSync(swaggerFile).toString();
-  const swaggerObject = JSON.parse(swagger);
+  const swaggerObject = JSON.parse(swagger) as { info?: { version?: string } };
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
     return swaggerObject["info"]["version"];
   }
