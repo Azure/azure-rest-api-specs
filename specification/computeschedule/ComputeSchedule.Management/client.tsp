@@ -242,4 +242,3 @@ using Azure.ResourceManager;
 @@clientName(ScheduledActionsExtensionProperties,
   "ScheduledActionsExtensionProperties"
 );
-@@clientName(ScheduledActionResources, "ScheduledActionResourcesModified");
