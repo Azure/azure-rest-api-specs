@@ -190,8 +190,8 @@ export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefi
     return undefined;
   }
 
-  const lastIdx = swaggerFile.lastIndexOf(resourceProvider!);
-  return swaggerFile.substring(0, lastIdx + resourceProvider!.length);
+  const lastIdx = swaggerFile.lastIndexOf(resourceProvider);
+  return swaggerFile.substring(0, lastIdx + resourceProvider.length);
 }
 
 export const getResourceProviderFromFilePath = (filePath: string): string | undefined => {
