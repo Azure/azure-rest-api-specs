@@ -1220,14 +1220,12 @@ model BatchAccountProperties {
    * The pool quota for the Batch account.
    */
   @visibility(Lifecycle.Read)
-  @summary("The pool quota for the Batch account.")
   poolQuota?: int32;
 
   /**
    * The active job and job schedule quota for the Batch account.
    */
   @visibility(Lifecycle.Read)
-  @summary("The active job and job schedule quota for the Batch account.")
   activeJobAndJobScheduleQuota?: int32;
 
   /**
@@ -1245,15 +1243,14 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private endpoint connection.
    */
-  @summary("The provisioning state of the private endpoint connection.")
   @visibility(Lifecycle.Read)
   provisioningState?: PrivateEndpointConnectionProvisioningState;
 
   /**
    * The private endpoint of the private endpoint connection.
    */
-  @summary("The ARM resource identifier of the private endpoint.")
   @visibility(Lifecycle.Read)
+  @summary("The ARM resource identifier of the private endpoint.")
   privateEndpoint?: PrivateEndpoint;
 
   /**
@@ -1266,7 +1263,6 @@ model PrivateEndpointConnectionProperties {
   /**
    * The private link service connection state of the private endpoint connection.
    */
-  @summary("The private link service connection state of the private endpoint connection.")
   privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
 
@@ -1277,7 +1273,6 @@ model PrivateEndpoint {
   /**
    * The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.
    */
-  @summary("The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.")
   @visibility(Lifecycle.Read)
   id?: string;
 }
@@ -1289,19 +1284,16 @@ model PrivateLinkServiceConnectionState {
   /**
    * The status of the Batch private endpoint connection
    */
-  @summary("The status of the Batch private endpoint connection")
   status: PrivateLinkServiceConnectionStatus;
 
   /**
    * Description of the private Connection state
    */
-  @summary("Description of the private Connection state")
   description?: string;
 
   /**
    * Action required on the private connection state
    */
-  @summary("Action required on the private connection state")
   @visibility(Lifecycle.Read)
   actionsRequired?: string;
 }
@@ -1646,7 +1638,6 @@ model SkuCapability {
 /**
  * A REST API operation
  */
-@summary("A REST API operation")
 model Operation {
   /**
    * This is of the format {provider}/{resource}/{operation}
@@ -1662,13 +1653,11 @@ model Operation {
   /**
    * The object that describes the operation.
    */
-  @summary("The object that describes the operation.")
   display?: OperationDisplay;
 
   /**
    * The intended executor of the operation.
    */
-  @summary("The intended executor of the operation.")
   origin?: string;
 
   /**
@@ -1676,7 +1665,6 @@ model Operation {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Properties of the operation.")
   properties?: unknown;
 }
 
@@ -1687,7 +1675,6 @@ model OperationDisplay {
   /**
    * Friendly name of the resource provider.
    */
-  @summary("Friendly name of the resource provider.")
   provider?: string;
 
   /**
@@ -1699,13 +1686,11 @@ model OperationDisplay {
   /**
    * The resource type on which the operation is performed.
    */
-  @summary("The resource type on which the operation is performed.")
   resource?: string;
 
   /**
    * The friendly name of the operation
    */
-  @summary("The friendly name of the operation")
   description?: string;
 }
 
@@ -1777,7 +1762,6 @@ model CertificateProperties extends CertificateBaseProperties {
    * The time at which the certificate entered its current state.
    */
   @visibility(Lifecycle.Read)
-  @summary("The time at which the certificate entered its current state.")
   provisioningStateTransitionTime?: utcDateTime;
 
   /**
@@ -1790,7 +1774,6 @@ model CertificateProperties extends CertificateBaseProperties {
    * The time at which the certificate entered its previous state.
    */
   @visibility(Lifecycle.Read)
-  @summary("The time at which the certificate entered its previous state.")
   previousProvisioningStateTransitionTime?: utcDateTime;
 
   /**
@@ -1920,14 +1903,12 @@ model PrivateLinkResourceProperties {
   /**
    * The list of required members that are used to establish the private link connection.
    */
-  @summary("The list of required members that are used to establish the private link connection.")
   @visibility(Lifecycle.Read)
   requiredMembers?: string[];
 
   /**
    * The list of required zone names for the private DNS resource name
    */
-  @summary("The list of required zone names for the private DNS resource name.")
   @visibility(Lifecycle.Read)
   requiredZoneNames?: string[];
 }
@@ -1963,35 +1944,30 @@ model PoolProperties {
   /**
    * The creation time of the pool.
    */
-  @summary("The creation time of the pool.")
   @visibility(Lifecycle.Read)
   creationTime?: utcDateTime;
 
   /**
    * The current state of the pool.
    */
-  @summary("The current state of the pool.")
   @visibility(Lifecycle.Read)
   provisioningState?: PoolProvisioningState;
 
   /**
    * The time at which the pool entered its current state.
    */
-  @summary("The time at which the pool entered its current state.")
   @visibility(Lifecycle.Read)
   provisioningStateTransitionTime?: utcDateTime;
 
   /**
    * Whether the pool is resizing.
    */
-  @summary("Whether the pool is resizing.")
   @visibility(Lifecycle.Read)
   allocationState?: AllocationState;
 
   /**
    * The time at which the pool entered its current allocation state.
    */
-  @summary("The time at which the pool entered its current allocation state.")
   @visibility(Lifecycle.Read)
   allocationStateTransitionTime?: utcDateTime;
 
@@ -2010,14 +1986,12 @@ model PoolProperties {
   /**
    * The number of dedicated compute nodes currently in the pool.
    */
-  @summary("The number of dedicated compute nodes currently in the pool.")
   @visibility(Lifecycle.Read)
   currentDedicatedNodes?: int32;
 
   /**
    * The number of Spot/low-priority compute nodes currently in the pool.
    */
-  @summary("The number of Spot/low-priority compute nodes currently in the pool.")
   @visibility(Lifecycle.Read)
   currentLowPriorityNodes?: int32;
 
@@ -2061,7 +2035,6 @@ model PoolProperties {
   /**
    * The list of user accounts to be created on each node in the pool.
    */
-  @summary("The list of user accounts to be created on each node in the pool.")
   @identifiers(#["name"])
   userAccounts?: UserAccount[];
 
@@ -2123,7 +2096,6 @@ model PoolProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Determines how a pool communicates with the Batch service.")
   @visibility(Lifecycle.Read)
   currentNodeCommunicationMode?: NodeCommunicationMode | null;
 
@@ -2144,7 +2116,6 @@ model PoolProperties {
 /**
  * Deployment configuration properties.
  */
-@summary("Deployment configuration properties.")
 model DeploymentConfiguration {
   /**
    * The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.
@@ -2156,7 +2127,6 @@ model DeploymentConfiguration {
 /**
  * The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.
  */
-@summary("The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.")
 model VirtualMachineConfiguration {
   /**
    * A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.
@@ -2227,7 +2197,6 @@ model VirtualMachineConfiguration {
   /**
    * Specifies the security profile settings for the virtual machine or virtual machine scale set.
    */
-  @summary("Specifies the security profile settings for the virtual machine or virtual machine scale set.")
   securityProfile?: SecurityProfile;
 
   /**
@@ -2240,7 +2209,6 @@ model VirtualMachineConfiguration {
 /**
  * A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.
  */
-@summary("A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.")
 model ImageReference {
   /**
    * For example, Canonical or MicrosoftWindowsServer.
@@ -2288,7 +2256,6 @@ model ImageReference {
 /**
  * Windows operating system settings to apply to the virtual machine.
  */
-@summary("Windows operating system settings to apply to the virtual machine.")
 model WindowsConfiguration {
   /**
    * If omitted, the default value is true.
@@ -2323,7 +2290,6 @@ model DataDisk {
    * The initial disk size in GB when creating new data disk.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("The initial disk size in GB when creating new data disk.")
   diskSizeGB: int32;
 
   /**
@@ -2339,12 +2305,10 @@ model DataDisk {
 /**
  * The configuration for container-enabled pools.
  */
-@summary("The configuration for container-enabled pools.")
 model ContainerConfiguration {
   /**
    * The container technology to be used.
    */
-  @summary("The container technology to be used.")
   type: ContainerType;
 
   /**
@@ -2364,18 +2328,15 @@ model ContainerConfiguration {
 /**
  * A private container registry.
  */
-@summary("A private container registry.")
 model ContainerRegistry {
   /**
    * The user name to log into the registry server.
    */
-  @summary("The user name to log into the registry server.")
   username?: string;
 
   /**
    * The password to log into the registry server.
    */
-  @summary("The password to log into the registry server.")
   @secret
   password?: string;
 
@@ -2418,30 +2379,25 @@ model NodePlacementConfiguration {
 /**
  * The configuration for virtual machine extensions.
  */
-@summary("The configuration for virtual machine extensions.")
 model VMExtension {
   /**
    * The name of the virtual machine extension.
    */
-  @summary("The name of the virtual machine extension.")
   name: string;
 
   /**
    * The name of the extension handler publisher.
    */
-  @summary("The name of the extension handler publisher.")
   publisher: string;
 
   /**
    * The type of the extensions.
    */
-  @summary("The type of the extensions.")
   type: string;
 
   /**
    * The version of script handler.
    */
-  @summary("The version of script handler.")
   typeHandlerVersion?: string;
 
   /**
@@ -2458,7 +2414,6 @@ model VMExtension {
    * JSON formatted public settings for the extension.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("JSON formatted public settings for the extension.")
   settings?: unknown;
 
   /**
@@ -2478,19 +2433,16 @@ model VMExtension {
 /**
  * Settings for the operating system disk of the virtual machine.
  */
-@summary("Settings for the operating system disk of the virtual machine.")
 model OSDisk {
   /**
    * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.")
   ephemeralOSDiskSettings?: DiffDiskSettings;
 
   /**
    * The type of caching to enable for the disk.
    */
-  @summary("The type of caching to enable for the disk.")
   caching?: CachingType;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2501,13 +2453,11 @@ model OSDisk {
    * The initial disk size in GB when creating new OS disk.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("The initial disk size in GB when creating new OS disk.")
   diskSizeGB?: int32;
 
   /**
    * Specifies whether writeAccelerator should be enabled or disabled on the disk.
    */
-  @summary("Specifies whether writeAccelerator should be enabled or disabled on the disk.")
   writeAcceleratorEnabled?: boolean;
 }
 
@@ -2525,7 +2475,6 @@ enum DiffDiskPlacement {
 /**
  * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
  */
-@summary("Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.")
 model DiffDiskSettings {
   /**
    * This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.
@@ -2539,7 +2488,6 @@ model ManagedDisk {
   /**
    * The storage account type for use in creating data disks or OS disk.
    */
-  @summary("The storage account type for use in creating data disks or OS disk.")
   storageAccountType?: StorageAccountType;
 
   /**
@@ -2557,7 +2505,6 @@ model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
    */
-  @summary("Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.")
   securityEncryptionType?: SecurityEncryptionTypes;
 }
 
@@ -2568,7 +2515,6 @@ model SecurityProfile {
   /**
    * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.
    */
-  @summary("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
   securityType?: SecurityTypes;
 
   /**
@@ -2579,7 +2525,6 @@ model SecurityProfile {
   /**
    * Specifies the security settings like secure boot and vTPM used while creating the virtual machine.
    */
-  @summary("Specifies the security settings like secure boot and vTPM used while creating the virtual machine.")
   uefiSettings?: UefiSettings;
 }
 
@@ -2630,7 +2575,6 @@ model ScaleSettings {
 /**
  * Fixed scale settings for the pool.
  */
-@summary("Fixed scale settings for the pool.")
 model FixedScaleSettings {
   /**
    * The default value is 15 minutes. Timeout values use ISO 8601 format. For example, use PT10M for 10 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).
@@ -2661,13 +2605,11 @@ model FixedScaleSettings {
 /**
  * AutoScale settings for the pool.
  */
-@summary("AutoScale settings for the pool.")
 model AutoScaleSettings {
   /**
    * A formula for the desired number of compute nodes in the pool.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("A formula for the desired number of compute nodes in the pool.")
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/batch/batch-automatic-scaling",
     "Create an automatic scaling formula for scaling compute nodes in a Batch pool"
@@ -2684,12 +2626,10 @@ model AutoScaleSettings {
 /**
  * The results and errors from an execution of a pool autoscale formula.
  */
-@summary("The results and errors from an execution of a pool autoscale formula.")
 model AutoScaleRun {
   /**
    * The time at which the autoscale formula was last evaluated.
    */
-  @summary("The time at which the autoscale formula was last evaluated.")
   evaluationTime: utcDateTime;
 
   /**
@@ -2708,7 +2648,6 @@ model AutoScaleRun {
 /**
  * An error that occurred when autoscaling a pool.
  */
-@summary("An error that occurred when autoscaling a pool.")
 model AutoScaleRunError {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -2723,7 +2662,6 @@ model AutoScaleRunError {
   /**
    * Additional details about the error.
    */
-  @summary("Additional details about the error.")
   @identifiers(#["code"])
   details?: AutoScaleRunError[];
 }
@@ -2746,7 +2684,6 @@ model NetworkConfiguration {
   /**
    * The scope of dynamic vnet assignment.
    */
-  @summary("The scope of dynamic vnet assignment.")
   dynamicVnetAssignmentScope?: DynamicVNetAssignmentScope = DynamicVNetAssignmentScope.none;
 
   /**
@@ -2777,7 +2714,6 @@ model NetworkConfiguration {
 /**
  * The endpoint configuration for a pool.
  */
-@summary("The endpoint configuration for a pool.")
 model PoolEndpointConfiguration {
   /**
    * The maximum number of inbound NAT pools per Batch pool is 5. If the maximum number of inbound NAT pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.
@@ -2790,7 +2726,6 @@ model PoolEndpointConfiguration {
 /**
  * A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.
  */
-@summary("A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.")
 model InboundNatPool {
   /**
    * The name must be unique within a Batch pool, can contain letters, numbers, underscores, periods, and hyphens. Names must start with a letter or number, must end with a letter, number, or underscore, and cannot exceed 77 characters.  If any invalid values are provided the request fails with HTTP status code 400.
@@ -2801,7 +2736,6 @@ model InboundNatPool {
   /**
    * The protocol of the endpoint.
    */
-  @summary("The protocol of the endpoint.")
   protocol: InboundEndpointProtocol;
 
   /**
@@ -2833,7 +2767,6 @@ model InboundNatPool {
 /**
  * A network security group rule to apply to an inbound endpoint.
  */
-@summary("A network security group rule to apply to an inbound endpoint.")
 model NetworkSecurityGroupRule {
   /**
    * Priorities within a pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400.
@@ -2844,7 +2777,6 @@ model NetworkSecurityGroupRule {
   /**
    * The action that should be taken for a specified IP address, subnet range or tag.
    */
-  @summary("The action that should be taken for a specified IP address, subnet range or tag.")
   access: NetworkSecurityGroupRuleAccess;
 
   /**
@@ -2881,30 +2813,25 @@ model PublicIPAddressConfiguration {
 /**
  * Specifies how tasks should be distributed across compute nodes.
  */
-@summary("Specifies how tasks should be distributed across compute nodes.")
 model TaskSchedulingPolicy {
   /**
    * How tasks should be distributed across compute nodes.
    */
-  @summary("How tasks should be distributed across compute nodes.")
   nodeFillType: ComputeNodeFillType = ComputeNodeFillType.Spread;
 }
 
 /**
  * Properties used to create a user on an Azure Batch node.
  */
-@summary("Properties used to create a user on an Azure Batch node.")
 model UserAccount {
   /**
    * The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.
    */
-  @summary("The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
 
   /**
    * The password for the user account.
    */
-  @summary("The password for the user account.")
   @secret
   password: string;
 
@@ -2930,7 +2857,6 @@ model UserAccount {
 /**
  * Properties used to create a user account on a Linux node.
  */
-@summary("Properties used to create a user account on a Linux node.")
 model LinuxUserConfiguration {
   /**
    * The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the uid.
@@ -2955,7 +2881,6 @@ model LinuxUserConfiguration {
 /**
  * Properties used to create a user account on a Windows node.
  */
-@summary("Properties used to create a user account on a Windows node.")
 model WindowsUserConfiguration {
   /**
    * Specifies login mode for the user. The default value is Interactive.
@@ -2972,13 +2897,11 @@ model MetadataItem {
   /**
    * The name of the metadata item.
    */
-  @summary("The name of the metadata item.")
   name: string;
 
   /**
    * The value of the metadata item.
    */
-  @summary("The value of the metadata item.")
   value: string;
 }
 
@@ -2996,14 +2919,12 @@ model StartTask {
   /**
    * A list of files that the Batch service will download to the compute node before running the command line.
    */
-  @summary("A list of files that the Batch service will download to the compute node before running the command line.")
   @identifiers(#["httpUrl"])
   resourceFiles?: ResourceFile[];
 
   /**
    * A list of environment variable settings for the start task.
    */
-  @summary("A list of environment variable settings for the start task.")
   @identifiers(#["name"])
   environmentSettings?: EnvironmentSetting[];
 
@@ -3035,7 +2956,6 @@ model StartTask {
 /**
  * A single file or multiple files to be downloaded to a compute node.
  */
-@summary("A single file or multiple files to be downloaded to a compute node.")
 model ResourceFile {
   /**
    * The autoStorageContainerName, storageContainerUrl and httpUrl properties are mutually exclusive and one of them must be specified.
@@ -3083,18 +3003,15 @@ model ResourceFile {
 /**
  * An environment variable to be set on a task process.
  */
-@summary("An environment variable to be set on a task process.")
 model EnvironmentSetting {
   /**
    * The name of the environment variable.
    */
-  @summary("The name of the environment variable.")
   name: string;
 
   /**
    * The value of the environment variable.
    */
-  @summary("The value of the environment variable.")
   value?: string;
 }
 
@@ -3119,7 +3036,6 @@ model UserIdentity {
 /**
  * Specifies the parameters for the auto user that runs a task on the Batch service.
  */
-@summary("Specifies the parameters for the auto user that runs a task on the Batch service.")
 model AutoUserSpecification {
   /**
    * The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks.
@@ -3137,7 +3053,6 @@ model AutoUserSpecification {
 /**
  * The container settings for a task.
  */
-@summary("The container settings for a task.")
 model TaskContainerSettings {
   /**
    * These additional options are supplied as arguments to the "docker create" command, in addition to those controlled by the Batch Service.
@@ -3160,7 +3075,6 @@ model TaskContainerSettings {
   /**
    * A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.
    */
-  @summary("A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.")
   workingDirectory?: ContainerWorkingDirectory;
 
   /**
@@ -3174,12 +3088,10 @@ model TaskContainerSettings {
 /**
  * The entry of path and mount mode you want to mount into task container.
  */
-@summary("The entry of path and mount mode you want to mount into task container.")
 model ContainerHostBatchBindMountEntry {
   /**
    * The paths which will be mounted to container task's container.
    */
-  @summary("The paths which will be mounted to container task's container.")
   source?: ContainerHostDataPath;
 
   /**
@@ -3197,7 +3109,6 @@ model CertificateReference {
   /**
    * The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.
    */
-  @summary("The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.")
   id: string;
 
   /**
@@ -3215,19 +3126,16 @@ model CertificateReference {
   /**
    * Which user accounts on the compute node should have access to the private data of the certificate.
    */
-  @summary("Which user accounts on the compute node should have access to the private data of the certificate.")
   visibility?: CertificateVisibility[];
 }
 
 /**
  * Link to an application package inside the batch account
  */
-@summary("Link to an application package inside the batch account")
 model ApplicationPackageReference {
   /**
    * The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
    */
-  @summary("The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.")
   id: string;
 
   /**
@@ -3245,13 +3153,11 @@ model ResizeOperationStatus {
   /**
    * The desired number of dedicated compute nodes in the pool.
    */
-  @summary("The desired number of dedicated compute nodes in the pool.")
   targetDedicatedNodes?: int32;
 
   /**
    * The desired number of Spot/low-priority compute nodes in the pool.
    */
-  @summary("The desired number of Spot/low-priority compute nodes in the pool.")
   targetLowPriorityNodes?: int32;
 
   /**
@@ -3269,7 +3175,6 @@ model ResizeOperationStatus {
   /**
    * The time when this resize operation was started.
    */
-  @summary("The time when this resize operation was started.")
   startTime?: utcDateTime;
 
   /**
@@ -3283,7 +3188,6 @@ model ResizeOperationStatus {
 /**
  * An error that occurred when resizing a pool.
  */
-@summary("An error that occurred when resizing a pool.")
 model ResizeError {
   /**
    * An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
@@ -3298,7 +3202,6 @@ model ResizeError {
   /**
    * Additional details about the error.
    */
-  @summary("Additional details about the error.")
   @identifiers(#["code"])
   details?: ResizeError[];
 }
@@ -3306,7 +3209,6 @@ model ResizeError {
 /**
  * The file system to mount on each node.
  */
-@summary("The file system to mount on each node.")
 model MountConfiguration {
   /**
    * This property is mutually exclusive with all other properties.
@@ -3336,18 +3238,15 @@ model MountConfiguration {
 /**
  * Information used to connect to an Azure Storage Container using Blobfuse.
  */
-@summary("Information used to connect to an Azure Storage Container using Blobfuse.")
 model AzureBlobFileSystemConfiguration {
   /**
    * The Azure Storage Account name.
    */
-  @summary("The Azure Storage Account name.")
   accountName: string;
 
   /**
    * The Azure Blob Storage Container name.
    */
-  @summary("The Azure Blob Storage Container name.")
   containerName: string;
 
   /**
@@ -3387,12 +3286,10 @@ model AzureBlobFileSystemConfiguration {
  * Information used to connect to an NFS file system.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@summary("Information used to connect to an NFS file system.")
 model NFSMountConfiguration {
   /**
    * The URI of the file system to mount.
    */
-  @summary("The URI of the file system to mount.")
   source: string;
 
   /**
@@ -3411,18 +3308,15 @@ model NFSMountConfiguration {
 /**
  * Information used to connect to a CIFS file system.
  */
-@summary("Information used to connect to a CIFS file system.")
 model CifsMountConfiguration {
   /**
    * The user to use for authentication against the CIFS file system.
    */
-  @summary("The user to use for authentication against the CIFS file system.")
   userName: string;
 
   /**
    * The URI of the file system to mount.
    */
-  @summary("The URI of the file system to mount.")
   source: string;
 
   /**
@@ -3440,7 +3334,6 @@ model CifsMountConfiguration {
   /**
    * The password to use for authentication against the CIFS file system.
    */
-  @summary("The password to use for authentication against the CIFS file system.")
   @secret
   password: string;
 }
@@ -3448,12 +3341,10 @@ model CifsMountConfiguration {
 /**
  * Information used to connect to an Azure Fileshare.
  */
-@summary("Information used to connect to an Azure Fileshare.")
 model AzureFileShareConfiguration {
   /**
    * The Azure Storage account name.
    */
-  @summary("The Azure Storage account name.")
   accountName: string;
 
   /**
@@ -3465,7 +3356,6 @@ model AzureFileShareConfiguration {
   /**
    * The Azure Storage account key.
    */
-  @summary("The Azure Storage account key.")
   @secret
   accountKey: string;
 
@@ -3489,20 +3379,17 @@ model UpgradePolicy {
   /**
    * Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.
    */
-  @summary("Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.")
   mode: UpgradeMode;
 
   /**
    * The configuration parameters used for performing automatic OS upgrade.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Configuration parameters used for performing automatic OS Upgrade.")
   automaticOSUpgradePolicy?: AutomaticOSUpgradePolicy;
 
   /**
    * The configuration parameters used while performing a rolling upgrade.
    */
-  @summary("The configuration parameters used while performing a rolling upgrade.")
   rollingUpgradePolicy?: RollingUpgradePolicy;
 }
 
