@@ -266,6 +266,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.createOrUpdate::parameters.resource, "body");
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
@@ -278,11 +279,13 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "body"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
