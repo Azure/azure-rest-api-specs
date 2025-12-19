@@ -1423,10 +1423,6 @@ model ConnectionProperties {
   /** The PrivateLinkServiceId for the connection. */
   privateLinkServiceId: Azure.Core.armResourceIdentifier;
 
-  /** The PrivateEndpointName associated with the connection. */
-  @visibility(Lifecycle.Read)
-  privateEndpointName?: string;
-
   /** The privateEndpoint resource Id */
   @visibility(Lifecycle.Read)
   privateEndpointResourceId?: Azure.Core.armResourceIdentifier;
