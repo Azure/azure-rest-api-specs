@@ -274,13 +274,15 @@ function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
 export async function processPrChanges(ctx: PRContext, Handlers: ChangeHandler[]) {
   console.log("ENTER definition processPrChanges");
   const prChanges = await getPRChanges(ctx);
-  prChanges.forEach((prChange) => {
-    Handlers.forEach((handler) => {
+
+  for (const prChange of prChanges) {
+    for (const handler of Handlers) {
       if (prChange.fileType in handler) {
-        handler?.[prChange.fileType]?.(prChange);
+        await handler?.[prChange.fileType]?.(prChange);
       }
-    });
-  });
+    }
+  }
+
   console.log("RETURN definition processPrChanges");
 }
 
