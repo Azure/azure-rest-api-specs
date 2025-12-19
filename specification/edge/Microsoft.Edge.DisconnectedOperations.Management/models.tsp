@@ -236,6 +236,30 @@ union ReleaseType {
   string,
 }
 
+@added(Microsoft.Edge.Versions.v2026_01_01)
+@doc("The update properties of the Update Release type Image")
+model ImageUpdateProperties {
+  @visibility(Lifecycle.Read)
+  @doc("Indicates if a system reboot is required after applying the update.")
+  systemRebootRequired: boolean;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of security updates included in this image release.")
+  securityUpdates: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The operating system version provided by this image update.")
+  osVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The version(s) of the agent software included in this image update.")
+  agentVersion: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Details of feature updates included in this image release.")
+  featureUpdates: string;
+}
+
 @doc("The image properties")
 model ImageProperties {
   @visibility(Lifecycle.Read)
@@ -265,6 +289,11 @@ model ImageProperties {
   @visibility(Lifecycle.Read)
   @doc("The versions that are compatible for this update package.")
   compatibleVersions?: Array<string>;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  @visibility(Lifecycle.Read)
+  @doc("Image update properties for update release type image.")
+  updateProperties?: ImageUpdateProperties;
 }
 
 @doc("The image download properties")
