@@ -115,6 +115,28 @@
     - awsconnector/**/tspconfig.yaml
 
 - tool: TypeSpecValidation
+  reason: Suppress until we know the awsconnector folder uses these settings
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - awsconnector/Awsconnector.Management/tspconfig.yaml
+    - awsconnector/BedrockAgent.Management/tspconfig.yaml
+    - awsconnector/BedrockAgentAlias.Management/tspconfig.yaml
+    - awsconnector/BedrockApplicationInferenceProfile.Management/tspconfig.yaml
+    - awsconnector/BedrockBlueprint.Management/tspconfig.yaml
+    - awsconnector/BedrockDataAutomationProject.Management/tspconfig.yaml
+    - awsconnector/BedrockDataSource.Management/tspconfig.yaml
+    - awsconnector/BedrockFlow.Management/tspconfig.yaml
+    - awsconnector/BedrockFlowAlias.Management/tspconfig.yaml
+    - awsconnector/BedrockGuardrail.Management/tspconfig.yaml
+    - awsconnector/BedrockKnowledgeBase.Management/tspconfig.yaml
+    - awsconnector/BedrockPrompt.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
