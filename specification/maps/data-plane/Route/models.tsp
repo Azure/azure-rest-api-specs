@@ -1315,13 +1315,14 @@ model InputWaypointFeaturesItem {
  * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
  */
-@discriminator("type")
 model GeoJsonGeometry extends GeoJsonObject {}
 
 /**
  * A valid `GeoJSON` object. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3) for details.
  */
+// FIXME The warning for type looks like a bug
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
 @discriminator("type")
 model GeoJsonObject {
   /**
@@ -1464,12 +1465,12 @@ model VehicleSpec {
 /**
  * The number of axles on the vehicle.
  */
-model AxleCount {
+alias AxleCount = {
   /**
    * The number of axles on the vehicle.
    */
   axleCount?: int64;
-}
+};
 
 /**
  * Alternative route.
@@ -1541,6 +1542,8 @@ model FeaturesItem {
  * A valid `GeoJSON` Geometry object. For more information, see [RFC
  * 7946](https://www.rfc-editor.org/rfc/rfc7946).
  */
+// FIXME: The warning for type looks like a bug
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
 @discriminator("type")
 model RouteDirectionsGeometry {
   /**
@@ -1652,12 +1655,12 @@ model DirectionsBatchRequestItem {
 /**
  * optional Id
  */
-model OptionalId {
+alias OptionalId = {
   /**
    * Id of the request which would show in corresponding batchItem.
    */
   optionalId?: string;
-}
+};
 
 /**
  * This object is returned from a successful Directions Batch service call.
@@ -1752,8 +1755,9 @@ model ErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
   @visibility(Lifecycle.Read)
-  info?: unknown;
+  info?: Record<unknown>;
 }
 
 /**
@@ -1824,7 +1828,8 @@ model InputSnapToRoadsFeaturesItem {
    * The properties object is required in a valid GeoJSON but it can be empty since
    * the metadata is not used for snapping to road.
    */
-  properties: unknown;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
+  properties: Record<unknown>;
 }
 
 /**
@@ -2010,6 +2015,8 @@ model RouteRangePointGeometry extends RouteRangeGeometry {
  * A valid `GeoJSON` Geometry object. Please refer to [RFC
  * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
  */
+// FIXME is the warning for type a bug?
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
 @discriminator("type")
 model RouteRangeGeometry {
   /**
@@ -2377,6 +2384,7 @@ model InputRouteMatrixFeaturesItem {
  * A valid `GeoJSON MultiPoint` geometry type. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3.1.3) for details.
  */
+// FIXME: the discriminator is deeply nested, probably incorrectly reported warning
 model GeoJsonMultiPoint extends GeoJsonGeometry {
   ...GeoJsonMultiPointData;
 
@@ -2432,7 +2440,10 @@ model RouteMatrixResponse {
   /**
    * The geometry object is null
    */
-  geometry: unknown;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
+  // FIXME: should this be specified as optional?
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract"
+  geometry: Record<unknown> | null;
 
   /**
    * Route Matrix properties.
@@ -2748,6 +2759,7 @@ model MultiLineStringGeometry extends RouteDirectionsGeometry {
   ...GeoJsonMultiLineString;
 }
 
+/** GeoJson MultiLineString data */
 model GeoJsonMultiLineStringData {
   /**
    * Coordinates for the `GeoJson MultiLineString` geometry.
@@ -2763,6 +2775,7 @@ model RouteRangePolygonGeometry extends RouteRangeGeometry {
   ...GeoJsonPolygon;
 }
 
+/** GeoJson Polygon data */
 model GeoJsonPolygonData {
   /**
    * Coordinates for the `GeoJson Polygon` geometry type.
@@ -2986,6 +2999,7 @@ model CountryRegion {
    * ISO of country/region represents an [ISO 3166-1 Alpha-2 region/country
    * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   ISO?: string;
 }
 
@@ -3167,7 +3181,8 @@ model InputRouteRangeFeaturesItem {
   /**
    * Route Ranges properties.
    */
-  properties: unknown;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API contract"
+  properties: Record<unknown>;
 }
 
 /**
@@ -3200,6 +3215,7 @@ model GeoJsonLineString extends GeoJsonGeometry {
   type: GeoJsonObjectType.GeoJsonLineString;
 }
 
+/** GeoJson LineString data */
 model GeoJsonLineStringData {
   /**
    * Coordinates for the `GeoJson LineString` geometry.
@@ -3252,6 +3268,7 @@ model GeoJsonMultiPolygon extends GeoJsonGeometry {
   type: GeoJsonObjectType.GeoJsonMultiPolygon;
 }
 
+/** GeoJson MultiPolygon data */
 model GeoJsonMultiPolygonData {
   /**
    * Contains a list of valid `GeoJSON Polygon` objects. **Note** that coordinates
@@ -3275,6 +3292,9 @@ model GeoJsonGeometryCollection extends GeoJsonGeometry {
   type: GeoJsonObjectType.GeoJsonGeometryCollection;
 }
 
+/**
+ * GeoJson GeometryCollection data.
+ */
 model GeoJsonGeometryCollectionData {
   /**
    * Contains a list of valid `GeoJSON` geometry objects. **Note** that coordinates
@@ -3314,7 +3334,9 @@ model GeoJsonFeatureData {
    * Properties can contain any additional metadata about the `Feature`. Value can
    * be any JSON object or a JSON null value
    */
-  properties?: unknown;
+  // FIXME: should this be specified as optional?
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract"
+  properties?: Record<unknown> | null;
 
   /**
    * Identifier for the feature.
@@ -3343,6 +3365,9 @@ model GeoJsonFeatureCollection extends GeoJsonObject {
   type: GeoJsonObjectType.GeoJsonFeatureCollection;
 }
 
+/**
+ * GeoJson FeatureCollection data.
+ */
 model GeoJsonFeatureCollectionData {
   /**
    * Contains a list of valid `GeoJSON Feature` objects.

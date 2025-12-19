@@ -763,17 +763,6 @@
         ]
       }
     },
-    "AxleCount": {
-      "type": "object",
-      "description": "The number of axles on the vehicle.",
-      "properties": {
-        "axleCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number of axles on the vehicle."
-        }
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1238,7 +1227,9 @@
           "readOnly": true
         },
         "info": {
+          "type": "object",
           "description": "The additional info.",
+          "additionalProperties": {},
           "readOnly": true
         }
       }
@@ -1394,7 +1385,10 @@
           "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
         },
         "properties": {
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value"
+          "type": "object",
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
+          "x-nullable": true,
+          "additionalProperties": {}
         },
         "id": {
           "type": "string",
@@ -1439,6 +1433,7 @@
     },
     "GeoJsonFeatureCollectionData": {
       "type": "object",
+      "description": "GeoJson FeatureCollection data.",
       "properties": {
         "features": {
           "type": "array",
@@ -1461,7 +1456,10 @@
           "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
         },
         "properties": {
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value"
+          "type": "object",
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can\nbe any JSON object or a JSON null value",
+          "x-nullable": true,
+          "additionalProperties": {}
         },
         "id": {
           "type": "string",
@@ -1479,16 +1477,6 @@
     "GeoJsonGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Discriminator property for GeoJsonGeometry."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/GeoJsonObject"
@@ -1505,10 +1493,18 @@
           "items": {
             "$ref": "#/definitions/GeoJsonGeometry"
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "GeometryCollection"
+          ]
         }
       },
       "required": [
-        "geometries"
+        "geometries",
+        "type"
       ],
       "allOf": [
         {
@@ -1519,6 +1515,7 @@
     },
     "GeoJsonGeometryCollectionData": {
       "type": "object",
+      "description": "GeoJson GeometryCollection data.",
       "properties": {
         "geometries": {
           "type": "array",
@@ -1546,10 +1543,18 @@
               "format": "double"
             }
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "LineString"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1560,6 +1565,7 @@
     },
     "GeoJsonLineStringData": {
       "type": "object",
+      "description": "GeoJson LineString data",
       "properties": {
         "coordinates": {
           "type": "array",
@@ -1594,10 +1600,18 @@
               }
             }
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "MultiLineString"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1608,6 +1622,7 @@
     },
     "GeoJsonMultiLineStringData": {
       "type": "object",
+      "description": "GeoJson MultiLineString data",
       "properties": {
         "coordinates": {
           "type": "array",
@@ -1642,10 +1657,18 @@
               "format": "double"
             }
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "MultiPoint"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1694,10 +1717,18 @@
               }
             }
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "MultiPolygon"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1708,6 +1739,7 @@
     },
     "GeoJsonMultiPolygonData": {
       "type": "object",
+      "description": "GeoJson MultiPolygon data",
       "properties": {
         "coordinates": {
           "type": "array",
@@ -1822,10 +1854,18 @@
             "type": "number",
             "format": "double"
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "Point"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1868,10 +1908,18 @@
               }
             }
           }
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+          "enum": [
+            "Polygon"
+          ]
         }
       },
       "required": [
-        "coordinates"
+        "coordinates",
+        "type"
       ],
       "allOf": [
         {
@@ -1882,6 +1930,7 @@
     },
     "GeoJsonPolygonData": {
       "type": "object",
+      "description": "GeoJson Polygon data",
       "properties": {
         "coordinates": {
           "type": "array",
@@ -1948,7 +1997,9 @@
           "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
         },
         "properties": {
-          "description": "Route Ranges properties."
+          "type": "object",
+          "description": "Route Ranges properties.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -2065,7 +2116,9 @@
           "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details."
         },
         "properties": {
-          "description": "The properties object is required in a valid GeoJSON but it can be empty since\nthe metadata is not used for snapping to road."
+          "type": "object",
+          "description": "The properties object is required in a valid GeoJSON but it can be empty since\nthe metadata is not used for snapping to road.",
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -2951,16 +3004,6 @@
         }
       }
     },
-    "OptionalId": {
-      "type": "object",
-      "description": "optional Id",
-      "properties": {
-        "optionalId": {
-          "type": "string",
-          "description": "Id of the request which would show in corresponding batchItem."
-        }
-      }
-    },
     "Order": {
       "type": "object",
       "description": "Sequence for visiting waypoints.",
@@ -3349,7 +3392,10 @@
           "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. For\nmore information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "geometry": {
-          "description": "The geometry object is null"
+          "type": "object",
+          "description": "The geometry object is null",
+          "x-nullable": true,
+          "additionalProperties": {}
         },
         "properties": {
           "$ref": "#/definitions/RouteMatrixFeatureProperties",
@@ -3603,7 +3649,10 @@
           "description": "Specifies the `GeoJSON` type. The only supported object type is Feature. For\nmore information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "geometry": {
-          "description": "The geometry object is null"
+          "type": "object",
+          "description": "The geometry object is null",
+          "x-nullable": true,
+          "additionalProperties": {}
         },
         "properties": {
           "$ref": "#/definitions/RouteMatrixFeatureProperties",
