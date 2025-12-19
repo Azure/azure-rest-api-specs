@@ -237,9 +237,7 @@ test("suppression path relative to suppressions file", () => {
 test("yaml not array", () => {
   expect(() =>
     getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", "foo"),
-  ).toThrowErrorMatchingInlineSnapshot(
-    `[Error: ✖ Invalid input: expected array, received string]`,
-  );
+  ).toThrowErrorMatchingInlineSnapshot(`[Error: ✖ Invalid input: expected array, received string]`);
 });
 
 test("yaml array not suppression", () => {

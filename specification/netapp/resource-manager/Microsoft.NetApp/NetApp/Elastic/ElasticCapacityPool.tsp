@@ -255,7 +255,9 @@ interface ElasticCapacityPools {
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ElasticCapacityPool,
       ElasticCapacityPoolProperties
-    >
+    >,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ElasticCapacityPool> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** Delete the specified NetApp Elastic Capacity Pool */
