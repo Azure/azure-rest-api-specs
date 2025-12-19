@@ -284,6 +284,7 @@ model CorsRules {
   /**
    * The list of CORS rules. You can include up to five CorsRule elements in the request.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   @maxItems(5)
   corsRules?: CorsRule[];
@@ -433,6 +434,7 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
 }
@@ -450,12 +452,14 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 
