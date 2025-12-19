@@ -1,0 +1,7 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  reason: Maps doesn't ship a Go SDK currently.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
