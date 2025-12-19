@@ -19,7 +19,7 @@ model BatchAccount
     Resource = BatchAccount,
     KeyName = "accountName",
     SegmentName = "batchAccounts",
-    NamePattern = "^[a-z0-9]+$"
+    NamePattern = "^[a-zA-Z0-9]+$"
   >;
 
   /**
