@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 /**
- * Details of a particular GPU in EdgeMachine.
+ * Details of a particular GPU in an EdgeMachine.
  */
 @parentResource(EdgeMachine)
 model EdgeMachineGpu
