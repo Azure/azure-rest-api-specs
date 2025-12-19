@@ -416,7 +416,10 @@ using Microsoft.Workloads;
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@clientName(EnqueueReplicationServerProperties.ipAddress, "IPAddress", "csharp");
+@@clientName(EnqueueReplicationServerProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
 @@alternateType(EnqueueReplicationServerProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
@@ -469,9 +472,18 @@ using Microsoft.Workloads;
   "csharp"
 );
 
-@@alternateType(CentralServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
-@@alternateType(DatabaseVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
-@@alternateType(ApplicationServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
+@@alternateType(CentralServerVmDetails.storageDetails,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(DatabaseVmDetails.storageDetails,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(ApplicationServerVmDetails.storageDetails,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
