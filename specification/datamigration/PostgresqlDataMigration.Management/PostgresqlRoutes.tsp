@@ -24,9 +24,6 @@ interface PostgresqlMigrationServices {
   @doc("Deletes a migration service.")
   delete is ArmResourceDeleteSync<MigrationService>;
 
-  @doc("Lists migration services by resource group.")
-  listByResourceGroup is ArmResourceListByParent<MigrationService>;
-
   @doc("Tests connectivity to source and target databases.")
   testConnectivity is ArmResourceActionAsync<
     MigrationService,
@@ -58,7 +55,4 @@ interface PostgresqlDatabaseMigrations {
 
   @doc("Deletes a database migration.")
   delete is ArmResourceDeleteWithoutOkAsync<DatabaseMigration>;
-
-  @doc("Lists database migrations by migration service.")
-  listByMigrationService is ArmResourceListByParent<DatabaseMigration>;
 }
