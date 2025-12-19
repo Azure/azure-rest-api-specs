@@ -57,6 +57,12 @@ using Microsoft.Dashboard;
 );
 @@clientName(StartTLSPolicy.MandatoryStartTLS, "MandatoryStartTls", "csharp");
 @@clientName(StartTLSPolicy.NoStartTLS, "NoStartTls", "csharp");
+@@clientName(CreatorCanAdmin, "GrafanaCreatorCanAdmin", "csharp");
+@@clientName(Size, "GrafanaSize", "csharp");
+@@clientName(PrivateEndpointConnection,
+  "GrafanaPrivateEndpointConnection",
+  "csharp"
+);
 
 @@clientName(DeterministicOutboundIP, "DeterministicOutboundIp", "java");
 @@clientName(StartTLSPolicy, "StartTlsPolicy", "java");
@@ -75,3 +81,15 @@ using Microsoft.Dashboard;
 @@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "javascript");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "python");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(GrafanaAvailablePluginListResponse,
+  "GrafanaAvailablePluginListResult",
+  "csharp"
+);
