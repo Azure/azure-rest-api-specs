@@ -823,6 +823,13 @@ model CloudEndpointCreateParametersProperties {
    * Friendly Name
    */
   friendlyName?: string;
+
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**
@@ -881,6 +888,13 @@ model CloudEndpointProperties {
    */
   @visibility(Lifecycle.Read)
   changeEnumerationStatus?: CloudEndpointChangeEnumerationStatus;
+
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**
@@ -1065,6 +1079,28 @@ model CloudEndpointArray {
    */
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * The parameters used when updating a cloud endpoint.
+ */
+model CloudEndpointUpdateParameters {
+  /**
+   * The properties of the cloud endpoint.
+   */
+  properties?: CloudEndpointUpdateProperties;
+}
+
+/**
+ * CloudEndpoint Update Properties object.
+ */
+model CloudEndpointUpdateProperties {
+  /**
+   * The interval for enumerating changes on the cloud endpoint.
+   */
+  @minValue(1)
+  @maxValue(20)
+  changeEnumerationIntervalDays?: int32;
 }
 
 /**
