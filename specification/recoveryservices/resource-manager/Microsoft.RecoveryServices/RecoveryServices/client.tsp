@@ -62,6 +62,7 @@ namespace Microsoft.RecoveryServices;
   "RecoveryServicesPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
+@@clientName(DNSZone, "DnsZone", "csharp");
 @@clientName(DNSZoneResponse, "DnsZoneResult", "csharp");
 @@alternateType(CmkKekIdentity.userAssignedIdentity,
   armResourceIdentifier,
@@ -88,6 +89,10 @@ namespace Microsoft.RecoveryServices;
   "csharp"
 );
 @@alternateType(UpgradeDetails.upgradedResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PrivateEndpoint.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -126,6 +131,18 @@ namespace Microsoft.RecoveryServices;
 @@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
 @@clientName(Vaults.registeredIdentitiesDelete,
   "DeleteRegisteredIdentity",
+  "csharp"
+);
+@@clientName(Vaults.list,
+  "GetReplicationUsages",
+  "csharp"
+);
+@@clientName(Vaults.listByVaults,
+  "GetUsagesByVaults",
+  "csharp"
+);
+@@clientName(Vaults.create,
+  "CreateVaultCertificate",
   "csharp"
 );
 @@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
@@ -171,6 +188,16 @@ namespace Microsoft.RecoveryServices;
 @@clientName(DeletedVaultUndeleteInput, "DeletedVaultUndeleteContent", "csharp");
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RawCertificateData.certificate, TypeSpec.bytes[], "csharp");
+@@alternateType(ResourceCertificateDetails.certificate, TypeSpec.bytes[], "csharp");
+@@alternateType(PatchVault.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Vault.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 

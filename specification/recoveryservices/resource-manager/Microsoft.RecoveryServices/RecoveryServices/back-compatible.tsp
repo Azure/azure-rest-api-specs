@@ -66,11 +66,11 @@ using Microsoft.RecoveryServices;
 );
 
 // Vaults operations
-@@clientLocation(Vaults.create, "VaultCertificates");
-@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
-@@clientName(Vaults.registeredIdentitiesDelete, "Delete");
-@@clientLocation(Vaults.list, "ReplicationUsages");
-@@clientLocation(Vaults.listByVaults, "Usages");
+@@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
+@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities", "!csharp");
+@@clientName(Vaults.registeredIdentitiesDelete, "Delete", "!csharp");
+@@clientLocation(Vaults.list, "ReplicationUsages", "!csharp");
+@@clientLocation(Vaults.listByVaults, "Usages", "!csharp");
 
 // GetOperationResult operations
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
