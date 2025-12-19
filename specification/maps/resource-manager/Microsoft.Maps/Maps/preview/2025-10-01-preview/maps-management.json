@@ -1360,19 +1360,6 @@
         "expiry"
       ]
     },
-    "Azure.ResourceManager.EncryptionProperty": {
-      "type": "object",
-      "description": "Model used only to spread in the `encryption` envelope property for a resource.All encryption configuration for a resource.",
-      "properties": {
-        "encryption": {
-          "$ref": "../../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/encryption",
-          "description": "All encryption configuration for a resource."
-        }
-      },
-      "required": [
-        "encryption"
-      ]
-    },
     "CorsRule": {
       "type": "object",
       "description": "Specifies a CORS rule for the Map Account.",
@@ -1652,7 +1639,7 @@
           "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
         },
         "encryption": {
-          "$ref": "#/definitions/Azure.ResourceManager.EncryptionProperty",
+          "$ref": "../../../../../../common-types/resource-management/v6/customermanagedkeys.json#/definitions/encryption",
           "description": "All encryption configuration for a resource."
         },
         "locations": {

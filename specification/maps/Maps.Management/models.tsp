@@ -241,7 +241,7 @@ model MapsAccountProperties {
   /**
    * All encryption configuration for a resource.
    */
-  encryption?: Encryption;
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
 
   /**
    * List of additional data processing regions for the Maps Account, which may result in requests being processed in another geography. Some features or results may be restricted to specific regions. By default, Maps REST APIs process requests according to the account location or the [geographic scope](https://learn.microsoft.com/azure/azure-maps/geographic-scope).
