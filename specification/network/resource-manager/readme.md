@@ -4317,6 +4317,9 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: virtualNetworkAppliance.json
+    reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkAppliance.json
     reason: name, id and type properties are inherited from the upper level
