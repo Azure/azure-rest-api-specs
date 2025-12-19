@@ -1,0 +1,16 @@
+- tool: TypeSpecValidation
+  reason: Suppress until Go needs to generate SDK
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+  paths:
+    - ApplicationInsights.Monitor.Exporters/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: 'Emitter path needs to deviate from formatting convention due to nested structure.'
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - ApplicationInsights.Monitor.Exporters/tspconfig.yaml
