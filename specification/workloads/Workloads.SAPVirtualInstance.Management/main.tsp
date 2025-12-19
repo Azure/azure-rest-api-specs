@@ -27,21 +27,16 @@ using TypeSpec.Versioning;
 @service(#{ title: "Workloads Client" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-namespace Microsoft.Workloads {
+namespace Microsoft.Workloads;
 
-  interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations extends Azure.ResourceManager.Operations {}
 
+/**
+ * The available API versions.
+ */
+enum Versions {
   /**
-   * The available API versions.
+   * The 2024-09-01 API version.
    */
-  enum Versions {
-    /**
-     * The 2024-09-01 API version.
-     */
-    v2024_09_01: "2024-09-01",
-  }
-}
-
-namespace Azure.ResourceManager.Models {
-  model SubResource { }
+  v2024_09_01: "2024-09-01",
 }

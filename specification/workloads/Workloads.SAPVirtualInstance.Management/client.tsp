@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.Workloads;
 
 @@clientName(Microsoft.Workloads,
@@ -471,3 +472,12 @@ using Microsoft.Workloads;
 @@alternateType(CentralServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
 @@alternateType(DatabaseVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
 @@alternateType(ApplicationServerVmDetails.storageDetails, Azure.ResourceManager.Models.SubResource[], "csharp");
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
