@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { CommitStatusState } from "../../shared/src/github.js";
-import { getLabelActionImpl } from "../src/arm-auto-signoff.js";
-import { LabelAction } from "../src/label.js";
-import { createMockCore, createMockGithub as createMockGithubBase } from "./mocks.js";
+import { CommitStatusState } from "../../../shared/src/github.js";
+import { getLabelActionImpl } from "../../src/arm-auto-signoff/arm-auto-signoff-status.js";
+import { LabelAction } from "../../src/label.js";
+import { createMockCore, createMockGithub as createMockGithubBase } from "../mocks.js";
 
 const core = createMockCore();
 
@@ -23,7 +23,7 @@ function createMockGithub({ incrementalTypeSpec }) {
           conclusion: null,
         },
         {
-          name: "ARM Incremental TypeSpec",
+          name: "ARM Auto SignOff - Analyze Code",
           id: 456,
           status: "completed",
           conclusion: "success",
@@ -108,7 +108,7 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 456,
             status: "in_progress",
             conclusion: null,
@@ -161,14 +161,14 @@ describe("getLabelActionImpl", () => {
       data: {
         workflow_runs: [
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 456,
             status: "completed",
             conclusion: "success",
             updated_at: "2020-01-22T19:33:08Z",
           },
           {
-            name: "ARM Incremental TypeSpec",
+            name: "ARM Auto SignOff - Analyze Code",
             id: 789,
             status: "completed",
             conclusion: "failure",

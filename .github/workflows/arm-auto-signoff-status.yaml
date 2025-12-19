@@ -1,4 +1,4 @@
-name: ARM Auto SignOff
+name: ARM Auto SignOff - Set Status
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -12,7 +12,11 @@ on:
       - unlabeled
   workflow_run:
     workflows:
-      ["ARM Incremental TypeSpec", "Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+      [
+        "ARM Auto SignOff - Analyze Code",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
     types: [completed]
 
 permissions:
@@ -29,8 +33,8 @@ permissions:
   statuses: read
 
 jobs:
-  arm-auto-signoff:
-    name: ARM Auto SignOff
+  arm-auto-signoff-status:
+    name: ARM Auto SignOff - Set Status
 
     # workflow_run - already filtered by triggers above
     # pull_request_target:labeled - filter to only the input and output labels
@@ -53,7 +57,7 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
@@ -69,12 +73,12 @@ jobs:
       #   issueNumber: number
       # }
       - id: get-label-action
-        name: ARM Auto SignOff
-        uses: actions/github-script@v7
+        name: ARM Auto SignOff - Set Status
+        uses: actions/github-script@v8
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
             return await getLabelAction({ github, context, core });
 
       - if: |
