@@ -55225,7 +55225,6 @@
         },
         "provisioningState": {
           "type": "string",
-          "format": "password",
           "description": "Provisioning states of a resource.",
           "enum": [
             "Failed",
@@ -55239,7 +55238,7 @@
             "name": "ProvisioningState",
             "modelAsString": true
           },
-          "x-ms-secret": true
+          "readOnly": true
         }
       },
       "required": [
@@ -57928,7 +57927,8 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         }
       }
     },

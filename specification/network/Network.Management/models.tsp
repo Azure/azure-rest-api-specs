@@ -16765,6 +16765,43 @@ model NetworkManagerConnectionProperties {
 }
 
 /**
+ * Base resource model for all Azure resources.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model Resource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: TagsObject;
+}
+
+/**
  * Proxy resource representation.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -27479,6 +27516,8 @@ model ExpressRoutePortAuthorizationListResult
 @summary("ExpressRoutePorts Location List Result")
 model ExpressRoutePortsLocationListResult
   is Azure.Core.Page<ExpressRoutePortsLocation>;
+
+model BastionHostListResult is Azure.Core.Page<BastionHost>;
 
 @@Azure.ClientGenerator.Core.clientName(ListVirtualHubRouteTableV2SResult,
   "ListVirtualHubRouteTableV2sResult"
