@@ -236,7 +236,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
-    return (_: PRChange) => {
+    return () => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
       typeSpecLabel.shouldBePresent = true;
@@ -265,7 +265,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
+    const swagger = JSON.parse(readFileSync(swaggerFilePath).toString()) as {
+      info?: { "x-typespec-generated"?: unknown };
+    };
+    return !!swagger?.info?.["x-typespec-generated"];
   } catch {
     return false;
   }
@@ -309,7 +312,7 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
     fileType: FileTypes,
     changeType: ChangeTypes,
     filePath?: string,
-    additionalInfo?: any,
+    additionalInfo?: unknown,
   ) {
     if (filePath) {
       results.push({
@@ -484,14 +487,17 @@ function getSuppressions(readmePath: string) {
     }
     return result;
   };
-  let suppressionResult: any[] = [];
+  let suppressionResult: unknown[] = [];
   try {
     const readme = readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as any;
+          const blockObject = yaml.load(block.literal) as {
+            directive?: { suppress: unknown }[];
+            suppressions?: unknown[];
+          };
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
@@ -500,10 +506,14 @@ function getSuppressions(readmePath: string) {
           if (suppressions && Array.isArray(suppressions)) {
             suppressionResult = suppressionResult.concat(suppressions);
           }
-        } catch (e) {}
+        } catch {
+          /* empty */
+        }
       }
     }
-  } catch (e) {}
+  } catch {
+    /* empty */
+  }
   return suppressionResult;
 }
 
