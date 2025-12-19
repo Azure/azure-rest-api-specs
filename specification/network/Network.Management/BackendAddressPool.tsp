@@ -25,7 +25,7 @@ model BackendAddressPool
   >;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -34,9 +34,9 @@ alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOpe
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("resourceGroups")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     groupName: string;
 
     ...Azure.ResourceManager.Legacy.Provider;
@@ -106,7 +106,8 @@ interface BackendAddressPools {
   listInboundNatRulePortMappings is ListInboundNatRulePortMappingsOps.ActionAsync<
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,
-    ArmResponse<BackendAddressInboundNatRulePortMappings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
+    void,
+    Response = ArmResponse<BackendAddressInboundNatRulePortMappings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 }

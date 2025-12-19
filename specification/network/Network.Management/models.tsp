@@ -402,8 +402,9 @@ union ProvisioningState {
 /**
  * The current provisioning state.
  */
-union NetworkProvisioningState{
-  string, 
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union NetworkProvisioningState {
+  string,
 
   /**
    * Succeeded
@@ -6783,7 +6784,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: CloudErrorBody[];
 }
 
@@ -6810,7 +6811,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Subnets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gatewayIPConfigurations?: ApplicationGatewayIPConfiguration[];
 
   /**
@@ -6836,7 +6837,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Frontend IP addresses of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: ApplicationGatewayFrontendIPConfiguration[];
 
   /**
@@ -6955,7 +6956,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Custom error configurations of the application gateway resource.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customErrorConfigurations?: ApplicationGatewayCustomError[];
 
   /**
@@ -6971,7 +6972,7 @@ model ApplicationGatewayPropertiesFormat {
   /**
    * Entra JWT validation configurations for the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entraJWTValidationConfigs?: ApplicationGatewayEntraJWTValidationConfig[];
 
   /**
@@ -7235,8 +7236,8 @@ model ApplicationGatewayTrustedClientCertificatePropertiesFormat {
   /**
    * Distinguished name of client certificate issuer.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCertIssuerDN?: string;
 
   /**
@@ -7286,7 +7287,7 @@ model ApplicationGatewaySslCertificatePropertiesFormat {
   /**
    * Password for the pfx file specified in data. Only applicable in PUT request.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   password?: string;
 
   /**
@@ -7343,13 +7344,13 @@ model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
   /**
    * PrivateIPAddress of the network interface IP Configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -7360,7 +7361,7 @@ model ApplicationGatewayFrontendIPConfigurationPropertiesFormat {
   /**
    * Reference to the PublicIP resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
@@ -7570,14 +7571,14 @@ model ApplicationGatewayBackendAddressPoolPropertiesFormat {
   /**
    * Collection of references to IPs defined in network interfaces.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfigurations?: NetworkInterfaceIPConfiguration[];
 
   /**
    * Backend addresses.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendAddresses?: ApplicationGatewayBackendAddress[];
 
   /**
@@ -7620,28 +7621,28 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * Private IP address of the IP configuration. It can be a single IP address or a CIDR block in the format <address>/<prefix-length>.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(128)
   @minValue(1)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 
   /**
@@ -7657,7 +7658,7 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
   /**
    * Public IP address bound to the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
@@ -7703,13 +7704,13 @@ model VirtualNetworkTapPropertiesFormat {
   /**
    * The reference to the private IP Address of the collector nic that will receive the tap.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationNetworkInterfaceIPConfiguration?: NetworkInterfaceIPConfiguration;
 
   /**
    * The reference to the private IP address on the internal Load Balancer that will receive the tap.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationLoadBalancerFrontEndIPConfiguration?: FrontendIPConfiguration;
 
   /**
@@ -7766,19 +7767,19 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The Private IP allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 
   /**
@@ -7789,13 +7790,13 @@ model FrontendIPConfigurationPropertiesFormat {
   /**
    * The reference to the Public IP resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
    * The reference to the Public IP Prefix resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPPrefix?: SubResource;
 
   /**
@@ -7842,7 +7843,7 @@ model SubnetPropertiesFormat {
   /**
    * An array of service endpoints.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceEndpoints?: ServiceEndpointPropertiesFormat[];
 
   /**
@@ -7915,7 +7916,7 @@ model SubnetPropertiesFormat {
   /**
    * Application gateway IP configurations of virtual network resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   applicationGatewayIPConfigurations?: ApplicationGatewayIPConfiguration[];
 
   /**
@@ -7931,7 +7932,7 @@ model SubnetPropertiesFormat {
   /**
    * A list of IPAM Pools for allocating IP address prefixes.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
 }
 
@@ -8178,7 +8179,7 @@ model NetworkInterfacePropertiesFormat {
   /**
    * Indicates whether IP forwarding is enabled on this network interface.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableIPForwarding?: boolean;
 
   /**
@@ -8275,7 +8276,7 @@ model PrivateEndpointProperties {
   /**
    * An array of custom dns configurations.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customDnsConfigs?: CustomDnsConfigPropertiesFormat[];
 
   /**
@@ -8433,7 +8434,7 @@ model PrivateEndpointIPConfigurationProperties {
   /**
    * A private ip address obtained from the private endpoint's subnet.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 }
 
@@ -8487,7 +8488,7 @@ model PrivateLinkServiceProperties {
   /**
    * The destination IP address of the private link service.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIPAddress?: string;
 
   /**
@@ -8575,13 +8576,13 @@ model PrivateLinkServiceIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -8603,7 +8604,7 @@ model PrivateLinkServiceIpConfigurationProperties {
   /**
    * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddressVersion?: IPVersion;
 }
 
@@ -9021,13 +9022,13 @@ model IPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod = IPAllocationMethod.Dynamic;
 
   /**
@@ -9038,7 +9039,7 @@ model IPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
@@ -9072,13 +9073,13 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The public IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAllocationMethod?: IPAllocationMethod;
 
   /**
    * The public IP address version.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddressVersion?: IPVersion;
 
   /**
@@ -9100,7 +9101,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The list of tags associated with the public IP address.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipTags?: IpTag[];
 
   /**
@@ -9111,7 +9112,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The Public IP Prefix this Public IP Address should be allocated from.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPPrefix?: SubResource;
 
   /**
@@ -9134,7 +9135,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The service public IP address of the public IP address resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   servicePublicIPAddress?: PublicIPAddress;
 
   /**
@@ -9150,7 +9151,7 @@ model PublicIPAddressPropertiesFormat {
   /**
    * The linked public IP address of the public IP address resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   linkedPublicIPAddress?: PublicIPAddress;
 
   /**
@@ -9520,7 +9521,7 @@ model BackendAddressPoolPropertiesFormat {
   /**
    * An array of gateway load balancer tunnel interfaces.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelInterfaces?: GatewayLoadBalancerTunnelInterface[];
 
   /**
@@ -9531,8 +9532,8 @@ model BackendAddressPoolPropertiesFormat {
   /**
    * An array of references to IP addresses defined in network interfaces.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfigurations?: NetworkInterfaceIPConfiguration[];
 
   /**
@@ -9643,21 +9644,21 @@ model LoadBalancerBackendAddressPropertiesFormat {
   /**
    * Reference to IP address defined in network interfaces.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkInterfaceIPConfiguration?: SubResource;
 
   /**
    * Reference to the frontend ip address configuration defined in regional loadbalancer.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   loadBalancerFrontendIPConfiguration?: SubResource;
 
   /**
    * Collection of inbound NAT rule port mappings.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inboundNatRulesPortMapping?: NatRulePortMapping[];
 
   /**
@@ -9693,14 +9694,14 @@ model InboundNatRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
    * A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendIPConfiguration?: NetworkInterfaceIPConfiguration;
 
   /**
@@ -9726,7 +9727,7 @@ model InboundNatRulePropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -9905,7 +9906,7 @@ model ApplicationGatewayBackendHttpSettingsPropertiesFormat {
   /**
    * When enabled, verifies if the Common Name of the certificate provided by the backend server matches the Server Name Indication (SNI) value. Default value is true.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validateSNI?: boolean = true;
 
   /**
@@ -10051,7 +10052,7 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -10093,7 +10094,7 @@ model ApplicationGatewayHttpListenerPropertiesFormat {
   /**
    * Custom error configurations of the HTTP listener.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customErrorConfigurations?: ApplicationGatewayCustomError[];
 
   /**
@@ -10157,7 +10158,7 @@ model ApplicationGatewayListenerPropertiesFormat {
   /**
    * Frontend IP configuration resource of an application gateway.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -10253,7 +10254,7 @@ model ApplicationGatewayClientAuthConfiguration {
   /**
    * Verify client certificate issuer name on the application gateway.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   verifyClientCertIssuerDN?: boolean;
 
   /**
@@ -10492,7 +10493,7 @@ model ApplicationGatewayRequestRoutingRulePropertiesFormat {
   /**
    * Entra JWT validation configuration resource of the application gateway.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   entraJWTValidationConfig?: SubResource;
 
   /**
@@ -10623,7 +10624,7 @@ model ApplicationGatewayRewriteRule {
   /**
    * Conditions based on which the action set execution will be evaluated.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   conditions?: ApplicationGatewayRewriteRuleCondition[];
 
   /**
@@ -10664,13 +10665,13 @@ model ApplicationGatewayRewriteRuleActionSet {
   /**
    * Request Header Actions in the Action Set.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestHeaderConfigurations?: ApplicationGatewayHeaderConfiguration[];
 
   /**
    * Response Header Actions in the Action Set.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   responseHeaderConfigurations?: ApplicationGatewayHeaderConfiguration[];
 
   /**
@@ -10839,7 +10840,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * The disabled rule groups.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disabledRuleGroups?: ApplicationGatewayFirewallDisabledRuleGroup[];
 
   /**
@@ -10869,7 +10870,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * The exclusion list.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: ApplicationGatewayFirewallExclusion[];
 }
 
@@ -11003,13 +11004,13 @@ model ApplicationGatewayPrivateLinkIpConfigurationProperties {
   /**
    * The private IP address of the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -11238,7 +11239,7 @@ model ApplicationGatewayBackendHealth {
   /**
    * A list of ApplicationGatewayBackendHealthPool resources.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendAddressPools?: ApplicationGatewayBackendHealthPool[];
 }
 
@@ -11254,7 +11255,7 @@ model ApplicationGatewayBackendHealthPool {
   /**
    * List of ApplicationGatewayBackendHealthHttpSettings resources.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backendHttpSettingsCollection?: ApplicationGatewayBackendHealthHttpSettings[];
 }
 
@@ -11270,7 +11271,7 @@ model ApplicationGatewayBackendHealthHttpSettings {
   /**
    * List of ApplicationGatewayBackendHealthServer resources.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   servers?: ApplicationGatewayBackendHealthServer[];
 }
 
@@ -11437,7 +11438,7 @@ model Error {
   /**
    * Error details.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: ErrorDetails[];
 
   /**
@@ -11511,7 +11512,7 @@ model ApplicationGatewayFirewallRuleSetPropertiesFormat {
   /**
    * The rule groups of the web application firewall rule set.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroups: ApplicationGatewayFirewallRuleGroup[];
 
   /**
@@ -11537,7 +11538,7 @@ model ApplicationGatewayFirewallRuleGroup {
   /**
    * The rules of the web application firewall rule group.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules: ApplicationGatewayFirewallRule[];
 }
 
@@ -11826,7 +11827,7 @@ model AzureFirewallPropertiesFormat {
   /**
    * IP addresses associated with AzureFirewall.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hubIPAddresses?: HubIPAddresses;
 
   /**
@@ -11935,7 +11936,7 @@ model AzureFirewallApplicationRule {
   /**
    * Array of ApplicationRuleProtocols.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols?: AzureFirewallApplicationRuleProtocol[];
 
   /**
@@ -12223,8 +12224,8 @@ model AzureFirewallIPConfigurationPropertiesFormat {
   /**
    * The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
@@ -12235,7 +12236,7 @@ model AzureFirewallIPConfigurationPropertiesFormat {
   /**
    * Reference to the PublicIP resource. This field is a mandatory input if subnet is not null.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
@@ -12252,13 +12253,13 @@ model HubIPAddresses {
   /**
    * Public IP addresses associated with azure firewall.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPs?: HubPublicIPAddresses;
 
   /**
    * Private IP Address associated with azure firewall.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 }
 
@@ -12269,7 +12270,7 @@ model HubPublicIPAddresses {
   /**
    * The list of Public IP addresses associated with azure firewall or IP addresses to be retained.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   addresses?: AzureFirewallPublicIPAddress[];
 
   /**
@@ -12327,15 +12328,15 @@ model AzureFirewallAutoscaleConfiguration {
   /**
    * The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(2)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   minCapacity?: int32 | null;
 
   /**
    * The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minValue(2)
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   maxCapacity?: int32 | null;
 }
 
@@ -12609,7 +12610,7 @@ model BastionHostIPConfigurationPropertiesFormat {
   /**
    * Reference of the PublicIP resource. Null for private only bastion
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
@@ -12621,7 +12622,7 @@ model BastionHostIPConfigurationPropertiesFormat {
   /**
    * Private IP allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 }
 
@@ -12630,7 +12631,7 @@ model BastionHostPropertiesFormatNetworkAcls {
   /**
    * Sets the IP ACL rules for Developer Bastion Host.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipRules?: IPRule[];
 }
 
@@ -12659,7 +12660,7 @@ model BastionShareableLinkListRequest {
   /**
    * List of VM references.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vms?: BastionShareableLink[];
 }
 
@@ -12731,8 +12732,8 @@ model BastionActiveSession {
   /**
    * The time when the session started.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startTime?: unknown;
 
   /**
@@ -12797,7 +12798,7 @@ model SessionIds {
   /**
    * List of session IDs.
    */
-#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sessionIds?: string[];
 }
 
@@ -13060,8 +13061,8 @@ model DdosProtectionPlanPropertiesFormat {
   /**
    * The list of public IPs associated with the DDoS protection plan resource. This list is read-only.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddresses?: SubResource[];
 
   /**
@@ -13083,25 +13084,25 @@ model DscpConfigurationPropertiesFormat {
   /**
    * Source IP ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIpRanges?: QosIpRange[];
 
   /**
    * Destination IP ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIpRanges?: QosIpRange[];
 
   /**
    * Sources port ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourcePortRanges?: QosPortRange[];
 
   /**
    * Destination port ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationPortRanges?: QosPortRange[];
 
   /**
@@ -13112,7 +13113,7 @@ model DscpConfigurationPropertiesFormat {
   /**
    * QoS object definitions
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   qosDefinitionCollection?: QosDefinition[];
 
   /**
@@ -13147,13 +13148,13 @@ model QosIpRange {
   /**
    * Start IP Address.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startIP?: string;
 
   /**
    * End IP Address.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endIP?: string;
 }
 
@@ -13184,25 +13185,25 @@ model QosDefinition {
   /**
    * Source IP ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIpRanges?: QosIpRange[];
 
   /**
    * Destination IP ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIpRanges?: QosIpRange[];
 
   /**
    * Sources port ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourcePortRanges?: QosPortRange[];
 
   /**
    * Destination port ranges.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationPortRanges?: QosPortRange[];
 
   /**
@@ -13236,7 +13237,7 @@ model AuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13274,15 +13275,15 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
   /**
    * The Azure ASN.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureASN?: int32;
 
   /**
    * The peer ASN.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(4294967295)
   @minValue(1)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   peerASN?: int64;
 
   /**
@@ -13308,7 +13309,7 @@ model ExpressRouteCircuitPeeringPropertiesFormat {
   /**
    * The shared key.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -13398,7 +13399,7 @@ model ExpressRouteCircuitPeeringConfig {
   /**
    * The CustomerASN of the peering.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customerASN?: int32;
 
   /**
@@ -13527,7 +13528,7 @@ model ExpressRouteCircuitConnectionPropertiesFormat {
   /**
    * The authorization key.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13658,7 +13659,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * The ServiceKey.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   serviceKey?: string;
 
   /**
@@ -13706,7 +13707,7 @@ model ExpressRouteCircuitPropertiesFormat {
   /**
    * The authorizationKey.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -13868,7 +13869,7 @@ model ExpressRouteServiceProviderPropertiesFormat {
   /**
    * A list of bandwidths offered.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bandwidthsOffered?: ExpressRouteServiceProviderBandwidthsOffered[];
 
   /**
@@ -14003,16 +14004,16 @@ model ExpressRouteCrossConnectionPeeringProperties {
   /**
    * The Azure ASN.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureASN?: int32;
 
   /**
    * The peer ASN.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxValue(4294967295)
   @minValue(1)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   peerASN?: int64;
 
   /**
@@ -14040,7 +14041,7 @@ model ExpressRouteCrossConnectionPeeringProperties {
   /**
    * The shared key.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -14133,7 +14134,7 @@ model ExpressRoutePortsLocationPropertiesFormat {
   /**
    * The inventory of available ExpressRoutePort bandwidths.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableBandwidths?: ExpressRoutePortsLocationBandwidths[];
 
   /**
@@ -14378,8 +14379,8 @@ model ExpressRoutePortAuthorizationPropertiesFormat {
   /**
    * The authorization key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -14649,7 +14650,7 @@ model DnsSettings {
   /**
    * FQDNs in Network Rules are supported when set to true.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requireProxyForNetworkRules?: boolean | null;
 }
 
@@ -14660,7 +14661,7 @@ model ExplicitProxy {
   /**
    * When set to true, explicit proxy mode is enabled.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableExplicitProxy?: boolean | null;
 
   /**
@@ -14680,7 +14681,7 @@ model ExplicitProxy {
   /**
    * When set to true, pac file port and url needs to be provided.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enablePacFile?: boolean | null;
 
   /**
@@ -15289,8 +15290,8 @@ model CommonErrorAdditionalInfo {
   /**
    * The additional info.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   info?: unknown;
 }
 
@@ -15361,29 +15362,29 @@ model PoolUsage {
   /**
    * Total number of IP addresses managed in the IpamPool.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
    * Total number of assigned IP addresses in the IpamPool.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfAllocatedIPAddresses?: string;
 
   /**
    * Total number of reserved IP addresses in the IpamPool.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfReservedIPAddresses?: string;
 
   /**
    * Total number of available IP addresses in the IpamPool.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfAvailableIPAddresses?: string;
 }
 
@@ -15439,15 +15440,15 @@ model PoolAssociation {
   /**
    * Total number of assigned IP addresses of the association.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
    * Total number of reserved IP addresses of the association.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfReservedIPAddresses?: string;
 
   /**
@@ -15480,7 +15481,7 @@ model StaticCidrProperties {
   /**
    * Number of IP addresses to allocate for a static CIDR resource. The IP addresses will be assigned based on IpamPools available space.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   numberOfIPAddressesToAllocate?: string;
 
   /**
@@ -15491,13 +15492,14 @@ model StaticCidrProperties {
   /**
    * Total number of IP addresses allocated for the static CIDR resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   totalNumberOfIPAddresses?: string;
 
   /**
    * Provisioning states of a resource.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -15528,7 +15530,7 @@ model IpAllocationPropertiesFormat {
   /**
    * The type for the IpAllocation.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: IpAllocationType;
 
   /**
@@ -15539,7 +15541,7 @@ model IpAllocationPropertiesFormat {
   /**
    * The address prefix length for the IpAllocation.
    */
-#suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   prefixLength?: int32 | null = 0;
 
   /**
@@ -15609,7 +15611,7 @@ model LoadBalancerPropertiesFormat {
   /**
    * Object representing the frontend IPs to be used for the load balancer.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: FrontendIPConfiguration[];
 
   /**
@@ -15667,7 +15669,7 @@ model LoadBalancingRulePropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -15713,7 +15715,7 @@ model LoadBalancingRulePropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -15825,7 +15827,7 @@ model InboundNatPoolPropertiesFormat {
   /**
    * A reference to frontend IP addresses.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfiguration?: SubResource;
 
   /**
@@ -15856,7 +15858,7 @@ model InboundNatPoolPropertiesFormat {
   /**
    * Configures a virtual machine's endpoint for the floating IP capability required to configure a SQL AlwaysOn Availability Group. This setting is required when using the SQL AlwaysOn Availability Groups in SQL server. This setting can't be changed after you create the endpoint.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableFloatingIP?: boolean;
 
   /**
@@ -15883,7 +15885,7 @@ model OutboundRulePropertiesFormat {
   /**
    * The Frontend IP addresses of the load balancer.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations: SubResource[];
 
   /**
@@ -15920,7 +15922,7 @@ model LoadBalancerVipSwapRequest {
   /**
    * A list of frontend IP configuration resources that should swap VIPs.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   frontendIPConfigurations?: LoadBalancerVipSwapRequestFrontendIPConfiguration[];
 }
 
@@ -15947,7 +15949,7 @@ model LoadBalancerVipSwapRequestFrontendIPConfigurationProperties {
   /**
    * A reference to public IP address resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 }
 
@@ -15973,7 +15975,7 @@ model BackendAddressInboundNatRulePortMappings {
   /**
    * Collection of inbound NAT rule port mappings.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inboundNatRulePortMappings?: InboundNatRulePortMapping[];
 }
 
@@ -16023,7 +16025,7 @@ model LoadBalancerHealthPerRule {
   /**
    * Information about the health per rule of the backend addresses.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   loadBalancerBackendAddresses?: LoadBalancerHealthPerRulePerBackendAddress[];
 }
 
@@ -16039,7 +16041,7 @@ model LoadBalancerHealthPerRulePerBackendAddress {
   /**
    * Resource ID of the Network Interface IP Configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkInterfaceIPConfigurationId?: string;
 
   /**
@@ -16070,7 +16072,7 @@ model MigratedPools {
   /**
    * A list of pools migrated from Nic based to IP based pool
    */
-#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   migratedPools?: string[];
 }
 
@@ -16147,7 +16149,7 @@ model EffectiveNetworkSecurityGroup {
   /**
    * Mapping of tags to list of IP Addresses included within the tag.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tagMap?: Record<string[]>;
 }
 
@@ -16399,7 +16401,7 @@ model NetworkManagerDeploymentStatusListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16467,7 +16469,7 @@ model ActiveConnectivityConfigurationsListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16678,7 +16680,7 @@ model ActiveSecurityAdminRulesListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16818,7 +16820,7 @@ model NetworkManagerEffectiveConnectivityConfigurationListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -16835,7 +16837,7 @@ model NetworkManagerEffectiveSecurityAdminRulesListResult {
   /**
    * When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   skipToken?: string;
 }
 
@@ -17978,7 +17980,7 @@ model ReachabilityAnalysisRunProperties {
   /**
    * Provisioning states of a resource.
    */
-  @secret
+  @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
 
@@ -18508,7 +18510,7 @@ model NetworkVirtualApplianceSkuPropertiesFormat {
   /**
    * The list of scale units available.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableScaleUnits?: NetworkVirtualApplianceSkuInstances[];
 }
 
@@ -18756,13 +18758,13 @@ model VerificationIPFlowParameters {
   /**
    * The local IP address. Acceptable values are valid IPv4 addresses.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localIPAddress: string;
 
   /**
    * The remote IP address. Acceptable values are valid IPv4 addresses.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteIPAddress: string;
 
   /**
@@ -18799,13 +18801,13 @@ model NextHopParameters {
   /**
    * The source IP address.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sourceIPAddress: string;
 
   /**
    * The destination IP address.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   destinationIPAddress: string;
 
   /**
@@ -18984,7 +18986,7 @@ model PacketCaptureParameters {
   /**
    * A list of packet capture filters.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   filters?: PacketCaptureFilter[];
 
   /**
@@ -19050,13 +19052,13 @@ model PacketCaptureFilter {
   /**
    * Local IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5"? for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   localIPAddress?: string;
 
   /**
    * Local IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Default = null.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteIPAddress?: string;
 
   /**
@@ -19273,7 +19275,7 @@ model TroubleshootingDetails {
   /**
    * List of recommended actions.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recommendedActions?: TroubleshootingRecommendedActions[];
 }
 
@@ -19409,7 +19411,7 @@ model ConnectivityParameters {
   /**
    * Preferred IP version of the connection.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredIPVersion?: IPVersion;
 }
 
@@ -19459,7 +19461,7 @@ model ProtocolConfiguration {
   /**
    * HTTP configuration of the connectivity check.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTPConfiguration?: HttpConfiguration;
 }
 
@@ -19588,22 +19590,22 @@ model ConnectivityHop {
   /**
    * List of hop links.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   links?: HopLink[];
 
   /**
    * List of previous hop links.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   previousLinks?: HopLink[];
 
   /**
    * List of issues.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issues?: ConnectivityIssue[];
 }
 
@@ -19631,8 +19633,8 @@ model HopLink {
   /**
    * List of issues.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   issues?: ConnectivityIssue[];
 
   /**
@@ -19703,8 +19705,8 @@ model ConnectivityIssue {
   /**
    * Provides additional context on the issue.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   context?: Record<string>[];
 }
 
@@ -19777,7 +19779,7 @@ model AzureReachabilityReport {
   /**
    * List of Azure reachability report items.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reachabilityReport: AzureReachabilityReportItem[];
 }
 
@@ -19798,7 +19800,7 @@ model AzureReachabilityReportItem {
   /**
    * List of latency details for each of the time series.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   latencies?: AzureReachabilityReportLatencyInfo[];
 }
 
@@ -19852,7 +19854,7 @@ model AvailableProvidersList {
   /**
    * List of available countries.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   countries: AvailableProvidersListCountry[];
 }
 
@@ -19873,7 +19875,7 @@ model AvailableProvidersListCountry {
   /**
    * List of available states in the country.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   states?: AvailableProvidersListState[];
 }
 
@@ -19894,7 +19896,7 @@ model AvailableProvidersListState {
   /**
    * List of available cities or towns in the state.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cities?: AvailableProvidersListCity[];
 }
 
@@ -19930,7 +19932,7 @@ model NetworkConfigurationDiagnosticParameters {
   /**
    * List of network configuration diagnostic profiles.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   profiles: NetworkConfigurationDiagnosticProfile[];
 }
 
@@ -19971,8 +19973,8 @@ model NetworkConfigurationDiagnosticResponse {
   /**
    * List of network configuration diagnostic results.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   results?: NetworkConfigurationDiagnosticResult[];
 }
 
@@ -20003,8 +20005,8 @@ model NetworkSecurityGroupResult {
   /**
    * List of results network security groups diagnostic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   evaluatedNetworkSecurityGroups?: EvaluatedNetworkSecurityGroup[];
 }
 
@@ -20149,7 +20151,7 @@ model ConnectionMonitorParameters {
   /**
    * List of connection monitor outputs.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   outputs?: ConnectionMonitorOutput[];
 
   /**
@@ -20259,7 +20261,7 @@ model ConnectionMonitorEndpointFilter {
   /**
    * List of items in the filter.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   items?: ConnectionMonitorEndpointFilterItem[];
 }
 
@@ -20285,13 +20287,13 @@ model ConnectionMonitorEndpointScope {
   /**
    * List of items which needs to be included to the endpoint scope.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   include?: ConnectionMonitorEndpointScopeItem[];
 
   /**
    * List of items which needs to be excluded from the endpoint scope.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclude?: ConnectionMonitorEndpointScopeItem[];
 }
 
@@ -20337,7 +20339,7 @@ model ConnectionMonitorTestConfiguration {
   /**
    * The preferred IP version to use in test evaluation. The connection monitor may choose to use a different version depending on other parameters.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredIPVersion?: PreferredIPVersion;
 
   /**
@@ -20395,7 +20397,7 @@ model ConnectionMonitorHttpConfiguration {
   /**
    * Value indicating whether HTTPS is preferred over HTTP in cases where the choice is not explicit.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferHTTPS?: boolean;
 }
 
@@ -20658,7 +20660,7 @@ model MetricSpecification {
   /**
    * List of availability.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availabilities?: Availability[];
 
   /**
@@ -20863,8 +20865,8 @@ model PrivateDnsZonePropertiesFormat {
   /**
    * A collection of information regarding a recordSet, holding information to identify private resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recordSets?: RecordSet[];
 }
 
@@ -21018,13 +21020,13 @@ model PublicIPPrefixPropertiesFormat {
   /**
    * The public IP address version.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddressVersion?: IPVersion;
 
   /**
    * The list of tags associated with the public IP prefix.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipTags?: IpTag[];
 
   /**
@@ -21041,8 +21043,8 @@ model PublicIPPrefixPropertiesFormat {
   /**
    * The list of all referenced PublicIPAddresses.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddresses?: ReferencedPublicIpAddress[];
 
   /**
@@ -21054,7 +21056,7 @@ model PublicIPPrefixPropertiesFormat {
   /**
    * The customIpPrefix that this prefix is associated with.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customIPPrefix?: SubResource;
 
   /**
@@ -21227,7 +21229,7 @@ model BgpServiceCommunityPropertiesFormat {
   /**
    * A list of bgp communities.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bgpCommunities?: BGPCommunity[];
 }
 
@@ -21514,7 +21516,7 @@ model VirtualNetworkPropertiesFormat {
   /**
    * Private Endpoint VNet Policies.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateEndpointVNetPolicies?: PrivateEndpointVNetPolicies;
 
   /**
@@ -21536,7 +21538,7 @@ model AddressSpace {
   /**
    * A list of IPAM Pools allocating IP address prefixes.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
 }
 
@@ -21645,7 +21647,7 @@ model VirtualNetworkPeeringPropertiesFormat {
   /**
    * Whether only Ipv6 address space is peered for subnet peering.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableOnlyIPv6Peering?: boolean;
 
   /**
@@ -21702,7 +21704,7 @@ model PrepareNetworkPoliciesRequest {
   /**
    * A list of NetworkIntentPolicyConfiguration.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   networkIntentPolicyConfigurations?: NetworkIntentPolicyConfiguration[];
 }
 
@@ -21756,7 +21758,7 @@ model IPAddressAvailabilityResult {
   /**
    * Contains other available private IP addresses if the asked for address is taken.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   availableIPAddresses?: string[];
 
   /**
@@ -21885,7 +21887,7 @@ model VirtualNetworkGatewayPropertiesFormat {
   /**
    * disableIPSecReplayProtection flag.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableIPSecReplayProtection?: boolean;
 
   /**
@@ -22030,7 +22032,7 @@ model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -22041,14 +22043,14 @@ model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: SubResource;
 
   /**
    * Private IP Address for this gateway.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
@@ -22131,7 +22133,7 @@ model VpnClientConfiguration {
   /**
    * VpnClientIpsecPolicies for virtual network gateway P2S client.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnClientIpsecPolicies?: IpsecPolicy[];
 
   /**
@@ -22148,7 +22150,7 @@ model VpnClientConfiguration {
   /**
    * The radiusServers property for multiple radius server configuration.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServers?: RadiusServer[];
 
   /**
@@ -22310,7 +22312,7 @@ model RadiusServer {
   /**
    * The secret used for this radius server. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServerSecret?: string;
 }
 
@@ -22455,7 +22457,7 @@ model BgpSettings {
   /**
    * BGP peering address with IP configuration ID for virtual network gateway.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bgpPeeringAddresses?: IPConfigurationBgpPeeringAddress[];
 }
 
@@ -22500,7 +22502,7 @@ model VirtualNetworkGatewayNatRuleProperties {
   /**
    * The type of NAT rule for VPN NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: VpnNatRuleType;
 
   /**
@@ -22511,13 +22513,13 @@ model VirtualNetworkGatewayNatRuleProperties {
   /**
    * The private IP address internal mapping for NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalMappings?: VpnNatRuleMapping[];
 
   /**
    * The private IP address external mapping for NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   externalMappings?: VpnNatRuleMapping[];
 
   /**
@@ -22582,7 +22584,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The authorizationKey.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -22623,7 +22625,7 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The IPSec shared key. We will no longer return sharedKey in VirtualNetworkGatewayConnection Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGatewayConnection GetSharedKey API to fetch connection sharedKey.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -22635,8 +22637,8 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * Collection of all tunnels' connection health status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelConnectionStatus?: TunnelConnectionHealth[];
 
   /**
@@ -22675,13 +22677,13 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The IPSec Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -22814,8 +22816,8 @@ model BgpPeerStatusListResult {
   /**
    * List of BGP peers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: BgpPeerStatus[];
 }
 
@@ -22902,8 +22904,8 @@ model GatewayRouteListResult {
   /**
    * List of gateway routes.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: GatewayRoute[];
 }
 
@@ -23018,7 +23020,7 @@ model ResiliencyRecommendationComponents {
   /**
    * List of Gateway Resiliency based Recommendations
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recommendations?: GatewayResiliencyRecommendation[];
 }
 
@@ -23349,7 +23351,7 @@ model ExpressRouteFailoverSingleTestDetails {
   /**
    * List of routes received from this peering as well as some other peering location
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   redundantRoutes?: ExpressRouteFailoverRedundantRoute[];
 
   /**
@@ -23365,7 +23367,7 @@ model ExpressRouteFailoverSingleTestDetails {
   /**
    * List of all the failover connections for this peering location
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failoverConnectionDetails?: FailoverConnectionDetails[];
 }
 
@@ -23417,7 +23419,7 @@ model ExpressRouteFailoverStopApiParameters {
   /**
    * List of all the failover connections for this peering location
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: FailoverConnectionDetails[];
 }
 
@@ -23428,7 +23430,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The authorizationKey.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -23484,7 +23486,7 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * Tunnel properties for virtual network gateway connection
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelProperties?: VirtualNetworkGatewayConnectionTunnelProperties[];
 
   /**
@@ -23502,8 +23504,8 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * Collection of all tunnels' connection health status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tunnelConnectionStatus?: TunnelConnectionHealth[];
 
   /**
@@ -23547,13 +23549,13 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
   /**
    * The IPSec Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -23689,8 +23691,8 @@ model VpnClientConnectionHealthDetailListResult {
   /**
    * List of vpn client connection health.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: VpnClientConnectionHealthDetail[];
 }
 
@@ -23911,7 +23913,7 @@ model VirtualWanProperties {
   /**
    * The type of the VirtualWAN.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: string;
 }
 
@@ -23943,7 +23945,7 @@ model VpnSiteProperties {
   /**
    * The key for vpn-site that can be used for connections.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   siteKey?: string;
 
   /**
@@ -24152,7 +24154,7 @@ model VpnServerConfigurationProperties {
   /**
    * The name of the VpnServerConfiguration that is unique within a resource group.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -24188,7 +24190,7 @@ model VpnServerConfigurationProperties {
   /**
    * VpnClientIpsecPolicies for VpnServerConfiguration.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnClientIpsecPolicies?: IpsecPolicy[];
 
   /**
@@ -24205,7 +24207,7 @@ model VpnServerConfigurationProperties {
   /**
    * Multiple Radius Server configuration for VpnServerConfiguration.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   radiusServers?: RadiusServer[];
 
   /**
@@ -24223,8 +24225,8 @@ model VpnServerConfigurationProperties {
   /**
    * List of references to P2SVpnGateways.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SVpnGateways?: P2SVpnGateway[];
 
   /**
@@ -24235,8 +24237,8 @@ model VpnServerConfigurationProperties {
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -24333,7 +24335,7 @@ model P2SVpnGatewayProperties {
   /**
    * List of all p2s connection configurations of the gateway.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SConnectionConfigurations?: P2SConnectionConfiguration[];
 
   /**
@@ -24555,8 +24557,8 @@ model VpnServerConfigurationPolicyGroupProperties {
   /**
    * List of references to P2SConnectionConfigurations.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SConnectionConfigurations?: SubResource[];
 
   /**
@@ -24642,7 +24644,7 @@ model VirtualHubProperties {
   /**
    * The P2SVpnGateway associated with this VirtualHub.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   p2SVpnGateway?: SubResource;
 
   /**
@@ -24755,7 +24757,7 @@ model VirtualHubRouteTable {
   /**
    * List of all routes.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   routes?: VirtualHubRoute[];
 }
 
@@ -24803,7 +24805,7 @@ model VirtualHubRouteTableV2Properties {
   /**
    * List of all routes.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   routes?: VirtualHubRouteV2[];
 
   /**
@@ -25167,7 +25169,7 @@ model VpnConnectionProperties {
   /**
    * Deprecated: SharedKey for the vpn connection. This is no more used.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sharedKey?: string;
 
   /**
@@ -25183,13 +25185,13 @@ model VpnConnectionProperties {
   /**
    * The IPSec Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
    * The Traffic Selector Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   trafficSelectorPolicies?: TrafficSelectorPolicy[];
 
   /**
@@ -25296,7 +25298,7 @@ model VpnSiteLinkConnectionProperties {
   /**
    * The IPSec Policies to be considered by this connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipsecPolicies?: IpsecPolicy[];
 
   /**
@@ -25364,7 +25366,7 @@ model VpnGatewayNatRuleProperties {
   /**
    * The type of NAT rule for VPN NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: VpnNatRuleType;
 
   /**
@@ -25375,13 +25377,13 @@ model VpnGatewayNatRuleProperties {
   /**
    * The private IP address internal mapping for NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   internalMappings?: VpnNatRuleMapping[];
 
   /**
    * The private IP address external mapping for NAT.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   externalMappings?: VpnNatRuleMapping[];
 
   /**
@@ -25690,7 +25692,7 @@ model ExpressRouteConnectionProperties {
   /**
    * Authorization key to establish the connection.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationKey?: string;
 
   /**
@@ -25916,13 +25918,13 @@ model HubIPConfigurationPropertiesFormat {
   /**
    * The private IP address of the IP configuration.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 
   /**
    * The private IP address allocation method.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAllocationMethod?: IPAllocationMethod;
 
   /**
@@ -25933,7 +25935,7 @@ model HubIPConfigurationPropertiesFormat {
   /**
    * The reference to the public IP resource.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   publicIPAddress?: PublicIPAddress;
 
   /**
@@ -26039,8 +26041,8 @@ model VirtualHubEffectiveRouteList {
   /**
    * The list of effective routes configured on the virtual hub or the specified resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: VirtualHubEffectiveRoute[];
 }
 
@@ -26256,7 +26258,7 @@ model PolicySettings {
   /**
    * Max inspection limit in KB for request body inspection for WAF.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestBodyInspectLimitInKB?: int32;
 
   /**
@@ -26390,7 +26392,7 @@ model WebApplicationFirewallCustomRule {
   /**
    * List of match conditions.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchConditions: MatchCondition[];
 
   /**
@@ -26412,7 +26414,7 @@ model MatchCondition {
   /**
    * List of match variables.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchVariables: MatchVariable[];
 
   /**
@@ -26479,19 +26481,19 @@ model ManagedRulesDefinition {
   /**
    * The exceptions that are applied on the policy.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exceptions?: ExceptionEntry[];
 
   /**
    * The Exclusions that are applied on the policy.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: OwaspCrsExclusionEntry[];
 
   /**
    * The managed rule sets that are associated with the policy.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedRuleSets: ManagedRuleSet[];
 }
 
@@ -26527,7 +26529,7 @@ model ExceptionEntry {
   /**
    * The managed rule sets that are associated with the exception.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exceptionManagedRuleSets?: ExclusionManagedRuleSet[];
 }
 
@@ -26548,7 +26550,7 @@ model ExclusionManagedRuleSet {
   /**
    * Defines the rule groups to apply to the rule set.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroups?: ExclusionManagedRuleGroup[];
 }
 
@@ -26564,7 +26566,7 @@ model ExclusionManagedRuleGroup {
   /**
    * List of rules that will be excluded. If none specified, all rules in the group will be excluded.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ExclusionManagedRule[];
 }
 
@@ -26600,7 +26602,7 @@ model OwaspCrsExclusionEntry {
   /**
    * The managed rule sets that are associated with the exclusion.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusionManagedRuleSets?: ExclusionManagedRuleSet[];
 }
 
@@ -26621,14 +26623,14 @@ model ManagedRuleSet {
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroupOverrides?: ManagedRuleGroupOverride[];
 
   /**
    * Stores the final list of disabled rule groups
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   computedDisabledRules?: ManagedRuleSetRuleGroup[];
 }
 
@@ -26644,7 +26646,7 @@ model ManagedRuleGroupOverride {
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ManagedRuleOverride[];
 }
 
@@ -26802,7 +26804,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * Array of Application Protocols.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   protocols?: FirewallPolicyRuleApplicationProtocol[];
 
   /**
@@ -26828,7 +26830,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * Terminate TLS connections for this rule.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   terminateTLS?: boolean;
 
   /**
@@ -26839,7 +26841,7 @@ model ApplicationRule extends FirewallPolicyRule {
   /**
    * List of HTTP/S headers to insert.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   httpHeadersToInsert?: FirewallPolicyHttpHeaderToInsert[];
 
   /**
@@ -27299,7 +27301,7 @@ model ConnectionMonitorQueryResult {
   /**
    * Information about connection states.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   states?: ConnectionStateSnapshot[];
 }
 
@@ -27376,8 +27378,8 @@ model VpnSiteId {
  * Response for ApplicationGatewayAvailableServerVariables API service call.
  */
 model ApplicationGatewayAvailableServerVariablesResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27385,8 +27387,8 @@ model ApplicationGatewayAvailableServerVariablesResult {
  * Response for ApplicationGatewayAvailableRequestHeaders API service call.
  */
 model ApplicationGatewayAvailableRequestHeadersResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27394,8 +27396,8 @@ model ApplicationGatewayAvailableRequestHeadersResult {
  * Response for ApplicationGatewayAvailableResponseHeaders API service call.
  */
 model ApplicationGatewayAvailableResponseHeadersResult {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -27403,9 +27405,9 @@ model ApplicationGatewayAvailableResponseHeadersResult {
  * Gateway Failover All Test Details
  */
 model ExpressRouteFailoverAllTestDetails {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: ExpressRouteFailoverTestDetails[];
 }
 
@@ -27413,9 +27415,9 @@ model ExpressRouteFailoverAllTestDetails {
  * Gateway Failover Single Test Details Object
  */
 model ExpressRouteFailoverSingleTestDetailsObject {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @pageItems
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: ExpressRouteFailoverSingleTestDetails[];
 }
 

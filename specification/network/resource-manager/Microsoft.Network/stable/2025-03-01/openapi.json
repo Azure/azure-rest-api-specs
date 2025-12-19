@@ -14253,7 +14253,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmAcceptedLroResponse%3C%22Resource%20operation%20accepted.%22%2C%20Azure.ResourceManager.Legacy.%7B%20location%3A%20string%2C%20retryAfter%3A%20int32%20%7D%3E"
+          "final-state-schema": "#/definitions/BackendAddressInboundNatRulePortMappings"
         },
         "x-ms-long-running-operation": true
       }
@@ -49561,10 +49561,6 @@
         "value"
       ]
     },
-    "Azure.ResourceManager.ArmAcceptedLroResponse<\"Resource operation accepted.\", Azure.ResourceManager.Legacy.{ location: string, retryAfter: int32 }>": {
-      "type": "object",
-      "description": "Resource operation accepted."
-    },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -65103,6 +65099,7 @@
     },
     "NetworkProvisioningState": {
       "type": "string",
+      "description": "The current provisioning state.",
       "enum": [
         "Succeeded",
         "Updating",
@@ -70459,9 +70456,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "format": "password",
           "description": "Provisioning states of a resource.",
-          "x-ms-secret": true
+          "readOnly": true
         }
       },
       "required": [
@@ -73543,7 +73539,8 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning states of a resource."
+          "description": "Provisioning states of a resource.",
+          "readOnly": true
         }
       }
     },
