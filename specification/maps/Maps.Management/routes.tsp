@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maps;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationResultOperationGroup {
   /**
    * Get the result of a long running azure asynchronous operation.
@@ -35,7 +35,7 @@ interface OperationResultOperationGroup {
   ): OkResponse | (ArmAcceptedResponse & ArmLroLocationHeader) | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.
