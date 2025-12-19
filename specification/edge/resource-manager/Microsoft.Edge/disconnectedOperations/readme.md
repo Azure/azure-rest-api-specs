@@ -72,7 +72,7 @@ These settings apply only when `--tag=disconnectedOperations-package-2026-01-01-
  
 ```yaml $(tag) == 'disconnectedOperations-package-2026-01-01-preview'
 input-file:
-  - preview/2025-06-01-preview/disconnectedOperations.json
+  - preview/2026-01-01-preview/disconnectedOperations.json
 ```
 
 # Code Generation
