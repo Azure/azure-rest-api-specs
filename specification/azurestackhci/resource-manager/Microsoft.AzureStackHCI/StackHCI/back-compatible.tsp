@@ -27,26 +27,7 @@ using Microsoft.AzureStackHCI;
 @@Legacy.flattenProperty(UpdateRunProperties.progress);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateProperties.componentVersions, "!javascript");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateProperties.rebootRequired, "!javascript");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateProperties.healthState, "!javascript");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateProperties.healthCheckResult, "!javascript");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(UpdateProperties.updateStateProperties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.packageVersions,
-  "!javascript"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.healthState, "!javascript");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(UpdateSummariesProperties.healthCheckResult,
-  "!javascript"
-);
 
 @@clientName(ArcSettings.create::parameters.resource, "arcSetting");
 @@clientName(ArcSettings.update::parameters.properties, "arcSetting");
