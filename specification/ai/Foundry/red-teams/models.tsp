@@ -9,7 +9,7 @@ import "../common/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @doc("Strategies for attacks.")
 union AttackStrategy {

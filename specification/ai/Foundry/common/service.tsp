@@ -33,7 +33,7 @@ using TypeSpec.Versioning;
   }
 )
 @versioned(Versions)
-namespace Foundry {
+namespace Azure.AI.Projects {
   @doc("Azure AI Projects API versions")
   enum Versions {
     @doc("Azure AI API version 2025-05-01.")

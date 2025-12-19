@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.Core.Traits;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 alias ConnectionServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &

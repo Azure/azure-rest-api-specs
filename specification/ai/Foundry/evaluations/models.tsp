@@ -10,7 +10,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)

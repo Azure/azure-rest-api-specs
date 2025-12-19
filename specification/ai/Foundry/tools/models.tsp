@@ -7,7 +7,7 @@ import "../memory_stores/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 //
 // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
@@ -31,7 +31,7 @@ union _AgentToolType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyVariants(OpenAI.ToolType, Foundry._AgentToolType);
+@@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
@@ -40,7 +40,7 @@ union _AgentIncludable {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyVariants(OpenAI.Includable, Foundry._AgentIncludable);
+@@copyVariants(OpenAI.Includable, Azure.AI.Projects._AgentIncludable);
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.MCPTool,

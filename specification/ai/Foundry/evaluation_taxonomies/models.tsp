@@ -10,7 +10,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @doc("Evaluation Taxonomy Definition")
 @added(Versions.v2025_11_15_preview)

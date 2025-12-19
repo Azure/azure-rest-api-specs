@@ -28,7 +28,7 @@ namespace OpenAI {
   scalar numeric extends TypeSpec.float64;
 }
 
-namespace Foundry {
+namespace Azure.AI.Projects {
   scalar integer extends OpenAI.integer;
   scalar numeric extends OpenAI.numeric;
 }

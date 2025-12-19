@@ -12,7 +12,7 @@ import "../red-teams/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 /** A deleted evaluation Object */
 model DeleteEvalResponse {

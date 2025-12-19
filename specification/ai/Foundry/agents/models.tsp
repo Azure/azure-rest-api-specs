@@ -6,7 +6,7 @@ import "../responses/models.tsp";
 
 using TypeSpec.Http;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 model CreateAgentVersionRequest {
   ...OpenAI.MetadataPropertyForRequest;

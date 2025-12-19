@@ -7,7 +7,7 @@ import "../responses/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)

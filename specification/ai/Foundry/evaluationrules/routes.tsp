@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core.Traits;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 alias EvaluationRuleTraits = SupportsClientRequestId &
   NoRepeatableRequests &

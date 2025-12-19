@@ -9,7 +9,7 @@ import "../servicepatterns.tsp";
 
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 alias ListEvaluatorVersionsParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."

@@ -8,7 +8,7 @@ import "@typespec/versioning";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @doc("Response from the list and get connections operations")
 @resource("connections")

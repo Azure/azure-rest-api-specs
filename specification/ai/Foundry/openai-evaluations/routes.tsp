@@ -6,7 +6,7 @@ import "../.external-readonly/openai.external.typespec/evals/models.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 alias EvalQueryParameters = {
   @query

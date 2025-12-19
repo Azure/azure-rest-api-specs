@@ -9,7 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @doc("Model Deployment Definition")
 @resource("deployments")

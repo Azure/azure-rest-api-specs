@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.Core.Foundations;
 
-namespace Foundry;
+namespace Azure.AI.Projects;
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
