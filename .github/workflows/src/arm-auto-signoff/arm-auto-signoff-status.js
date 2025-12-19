@@ -1,9 +1,9 @@
 import { inspect } from "util";
-import { CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
-import { equals } from "../../shared/src/set.js";
-import { byDate, invert } from "../../shared/src/sort.js";
-import { extractInputs } from "./context.js";
-import { LabelAction } from "./label.js";
+import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.js";
+import { equals } from "../../../shared/src/set.js";
+import { byDate, invert } from "../../../shared/src/sort.js";
+import { extractInputs } from "../context.js";
+import { LabelAction } from "../label.js";
 
 // TODO: Add tests
 /* v8 ignore start */
@@ -86,7 +86,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Incremental TypeSpec";
+  const wfName = "ARM Auto SignOff - Analyze Code";
   const incrementalTspRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending
