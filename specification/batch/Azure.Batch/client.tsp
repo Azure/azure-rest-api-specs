@@ -134,8 +134,15 @@ interface BatchClient {
 @@clientName(BatchClient.disableJob, "disableJobInternal", "csharp");
 @@access(Azure.Batch.Jobs.enableJob, Access.internal, "csharp");
 @@clientName(BatchClient.enableJob, "enableJobInternal", "csharp");
+@@convenientAPI(Azure.Batch.Pools.poolExists, false, "csharp");
 @@access(Azure.Batch.Pools.poolExists, Access.internal, "csharp");
+@@clientName(BatchClient.poolExists, "poolExistsInternal", "csharp");
 @@access(Azure.Batch.JobSchedules.jobScheduleExists, Access.internal, "csharp");
+@@convenientAPI(Azure.Batch.JobSchedules.jobScheduleExists, false, "csharp");
+@@clientName(BatchClient.jobScheduleExists,
+  "jobScheduleExistsInternal",
+  "csharp"
+);
 @@access(Azure.Batch.Tasks.getTaskFileProperties, Access.internal, "csharp");
 @@clientName(BatchClient.getTaskFileProperties,
   "getTaskFilePropertiesInternal",
@@ -144,6 +151,20 @@ interface BatchClient {
 @@access(Azure.Batch.Nodes.getNodeFileProperties, Access.internal, "csharp");
 @@clientName(BatchClient.getNodeFileProperties,
   "getNodeFilePropertiesInternal",
+  "csharp"
+);
+
+@@clientName(BatchClient.listJobsFromSchedule,
+  "listJobsFromSchedules",
+  "csharp"
+);
+@@clientName(BatchClient.listJobPreparationAndReleaseTaskStatus,
+  "listJobPreparationAndReleaseTaskStatuses",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(Azure.Batch.CommonParameters.returnClientRequestId,
+  true,
   "csharp"
 );
 
