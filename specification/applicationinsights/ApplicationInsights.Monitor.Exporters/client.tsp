@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AzureMonitorExporter;
 
+@@clientName(AzureMonitorExporter, "ApplicationInsightsClient", "javascript");
+
 @@clientName(Base, "MonitorBase");
 @@clientName(Domain, "MonitorDomain");
 @@clientName(EventData, "TelemetryEventData");
