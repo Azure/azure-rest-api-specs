@@ -1477,10 +1477,15 @@
     "GeoJsonGeometry": {
       "type": "object",
       "description": "A valid `GeoJSON` geometry object. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GeoJsonObject"
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/GeoJsonGeometryObjectType",
+          "description": "Specifies the `GeoJSON` geometry type. The type must be one of the seven valid\nGeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,\nPolygon, MultiPolygon and GeometryCollection. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details."
         }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
       ]
     },
     "GeoJsonGeometryCollection": {
@@ -1493,18 +1498,10 @@
           "items": {
             "$ref": "#/definitions/GeoJsonGeometry"
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "GeometryCollection"
-          ]
         }
       },
       "required": [
-        "geometries",
-        "type"
+        "geometries"
       ],
       "allOf": [
         {
@@ -1529,6 +1526,60 @@
         "geometries"
       ]
     },
+    "GeoJsonGeometryObjectType": {
+      "type": "string",
+      "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
+      "enum": [
+        "Point",
+        "MultiPoint",
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+        "GeometryCollection"
+      ],
+      "x-ms-enum": {
+        "name": "GeoJsonGeometryObjectType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "GeoJsonPoint",
+            "value": "Point",
+            "description": "`GeoJSON Point` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPoint",
+            "value": "MultiPoint",
+            "description": "`GeoJSON MultiPoint` geometry."
+          },
+          {
+            "name": "GeoJsonLineString",
+            "value": "LineString",
+            "description": "`GeoJSON LineString` geometry."
+          },
+          {
+            "name": "GeoJsonMultiLineString",
+            "value": "MultiLineString",
+            "description": "`GeoJSON MultiLineString` geometry."
+          },
+          {
+            "name": "GeoJsonPolygon",
+            "value": "Polygon",
+            "description": "`GeoJSON Polygon` geometry."
+          },
+          {
+            "name": "GeoJsonMultiPolygon",
+            "value": "MultiPolygon",
+            "description": "`GeoJSON MultiPolygon` geometry."
+          },
+          {
+            "name": "GeoJsonGeometryCollection",
+            "value": "GeometryCollection",
+            "description": "`GeoJSON GeometryCollection` geometry."
+          }
+        ]
+      }
+    },
     "GeoJsonLineString": {
       "type": "object",
       "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC\n7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
@@ -1543,18 +1594,10 @@
               "format": "double"
             }
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "LineString"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -1600,18 +1643,10 @@
               }
             }
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "MultiLineString"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -1657,18 +1692,10 @@
               "format": "double"
             }
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "MultiPoint"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -1717,18 +1744,10 @@
               }
             }
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "MultiPolygon"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -1854,18 +1873,10 @@
             "type": "number",
             "format": "double"
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "Point"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -1908,18 +1919,10 @@
               }
             }
           }
-        },
-        "type": {
-          "type": "string",
-          "description": "Specifies the `GeoJSON` type. Must be one of the nine valid GeoJSON object\ntypes - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,\nGeometryCollection, Feature and FeatureCollection.",
-          "enum": [
-            "Polygon"
-          ]
         }
       },
       "required": [
-        "coordinates",
-        "type"
+        "coordinates"
       ],
       "allOf": [
         {
@@ -3176,7 +3179,7 @@
       "description": "A valid `GeoJSON` Geometry object. For more information, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "properties": {
         "type": {
-          "$ref": "#/definitions/GeoJsonObjectType",
+          "$ref": "#/definitions/GeoJsonGeometryObjectType",
           "description": "Specifies the geometry type for the `GeoJSON` Geometry object. For more\ninformation, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         }
       },
@@ -4208,7 +4211,7 @@
       "description": "A valid `GeoJSON` Geometry object. Please refer to [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/GeoJsonObjectType",
+          "$ref": "#/definitions/GeoJsonGeometryObjectType",
           "description": "Specifies the geometry type for the `GeoJSON` Geometry object. Refer to [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946) for details."
         }
       },
