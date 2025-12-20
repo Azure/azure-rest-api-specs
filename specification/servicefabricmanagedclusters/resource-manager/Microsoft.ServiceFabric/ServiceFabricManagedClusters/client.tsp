@@ -153,6 +153,11 @@ using Microsoft.ServiceFabric;
  */
 @@scope(Operations.list, "!csharp");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(ManagedAzResiliencyStatus.get,
   "GetManagedAzResiliencyStatus",
   "csharp"
@@ -497,3 +502,29 @@ using Microsoft.ServiceFabric;
 );
 @@alternateType(ClusterMonitoringPolicy.upgradeDomainTimeout, string, "csharp");
 @@alternateType(ClusterMonitoringPolicy.upgradeTimeout, string, "csharp");
+
+@@clientName(ManagedMaintenanceWindowStatus.get,
+  "GetManagedMaintenanceWindowStatus",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.list, "GetManagedClusterVersions", "csharp");
+@@clientName(ManagedClusterVersion.listByEnvironment,
+  "GetManagedClusterVersionsByEnvironment",
+  "csharp"
+);
+@@clientName(RuntimeUpdateApplicationUpgradeParameters,
+  "RuntimeUpdateApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(RestartDeployedCodePackageRequest,
+  "RestartDeployedCodePackageContent",
+  "csharp"
+);
+@@clientName(RuntimeResumeApplicationUpgradeParameters,
+  "RuntimeResumeApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(ApplicationFetchHealthRequest,
+  "ApplicationFetchHealthContent",
+  "csharp"
+);
