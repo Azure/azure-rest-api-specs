@@ -224,6 +224,10 @@ using Microsoft.ServiceFabric;
   "IsHttpGatewayExclusiveAuthModeEnabled",
   "csharp"
 );
+@@clientName(ManagedClusterProperties.ipTags, "IPTags", "csharp");
+@@clientName(ManagedClusterProperties.ipv4Address, "IPv4Address", "csharp");
+@@clientName(ManagedClusterProperties.ipv6Address, "IPv6Address", "csharp");
+@@clientName(ManagedClusterProperties.VMImage, "VmImage", "csharp");
 
 @@clientName(OsType, "ServiceFabricManagedClusterOSType", "csharp");
 @@clientName(Subnet, "ManagedClusterSubnet", "csharp");
@@ -526,5 +530,30 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(ApplicationFetchHealthRequest,
   "ApplicationFetchHealthContent",
+  "csharp"
+);
+@@clientName(ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindow",
+  "csharp"
+);
+@@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(Applications.updateUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.resumeUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypes.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypeVersions.update::parameters.properties,
+  "patch",
+  "csharp"
+);
+@@clientName(ManagedClusters.getFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ManagedClusters.stopFaultSimulation::parameters.body,
+  "content",
   "csharp"
 );
