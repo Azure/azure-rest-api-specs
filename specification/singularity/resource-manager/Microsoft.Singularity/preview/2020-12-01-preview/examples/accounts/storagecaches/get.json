@@ -1,0 +1,30 @@
+{
+  "operationId": "StorageCache_Get",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "storageCacheResourceName": "mystorageCacheResourceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/storagecaches",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/storagecaches/mystorageCacheResourceName",
+        "name": "myStorageCacheResourceDescription",
+        "properties": {
+          "cacheProperties": {
+            "kind": "Blob",
+            "description": "Description of the storage cache resource (not interpreted by platform).",
+            "region": "Optional region for managed storage resources (if any).",
+            "provisioningState": "Succeeded",
+            "status": "Unknown",
+            "usageInGB": 1
+          }
+        }
+      }
+    }
+  }
+}

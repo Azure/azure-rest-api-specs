@@ -1,0 +1,294 @@
+{
+  "operationId": "Job_CreateOrUpdate",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "jobName": "myjobName",
+    "body": {
+      "properties": {
+        "placementPolicies": [
+          {
+            "instanceTypes": [
+              {
+                "instanceType": "The instance type belonging to the same series.",
+                "scalePolicy": {
+                  "minInstanceTypeCount": 1,
+                  "maxInstanceTypeCount": 1,
+                  "instanceTypeCountSet": [
+                    1
+                  ],
+                  "autoScaleIntervalInSecondsHint": 1
+                }
+              }
+            ],
+            "location": "An optional location for instance type placement. If specified, this must be one of the account resource locations."
+          }
+        ],
+        "slaTier": "Premium",
+        "schedulingPriority": "Low",
+        "dataLocation": [
+          {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          }
+        ],
+        "codeLocation": {
+          "source": {
+            "kind": {
+              "storageContainerName": "myStorageAccount"
+            }
+          },
+          "storageCacheContainerName": "Name of the managed storage resource to mount.",
+          "mount": {
+            "path": "The target mountpoint path."
+          }
+        },
+        "outputLocation": {
+          "source": {
+            "kind": {
+              "storageContainerName": "myStorageAccount"
+            }
+          },
+          "storageCacheContainerName": "Name of the managed storage resource to mount.",
+          "mount": {
+            "path": "The target mountpoint path."
+          }
+        },
+        "networkResourceRef": {
+          "name": "Name of the network resource to reference."
+        },
+        "containerImage": {
+          "kind": "Platform"
+        },
+        "groupPolicyName": "Group policy name associated with the training job.",
+        "checkpointPolicy": {
+          "enableCheckpoint": true,
+          "checkpointRelativePath": "The relative path in the platform storage.",
+          "checkpointInterval": "Maximum elapsed duration between subsequent checkpoints. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "checkpointIterationCount": 1,
+          "checkpointRetentionPolicy": {
+            "mode": "Ttl",
+            "ttl": "Minimum elapsed duration before deleting checkpoint. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+            "maxStorage": 1
+          }
+        },
+        "maxJobExecutionTime": 1,
+        "suspendOnIdleTime": 1,
+        "program": "The entry script for your Job in the codeLocation. For interactive jobs, specify null.",
+        "programArgs": "Command line arguments to be passed to the program.",
+        "tensorBoardLogDirectory": "The directory which TensorBoard will be configured to use as the log directory.",
+        "description": "User-friendly description of the job.",
+        "environmentVariables": { }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/jobs",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/jobs/myjobName",
+        "name": "myJobResourceDescription",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobId": "System generated globally unique id for the job. This property is read only.",
+          "placementPolicies": [
+            {
+              "instanceTypes": [
+                {
+                  "instanceType": "The instance type belonging to the same series.",
+                  "scalePolicy": {
+                    "minInstanceTypeCount": 1,
+                    "maxInstanceTypeCount": 1,
+                    "currentInstanceTypeCount": 1,
+                    "instanceTypeCountSet": [
+                      1
+                    ],
+                    "autoScaleIntervalInSecondsHint": 1
+                  }
+                }
+              ],
+              "location": "An optional location for instance type placement. If specified, this must be one of the account resource locations."
+            }
+          ],
+          "slaTier": "Premium",
+          "schedulingPriority": "Low",
+          "dataLocation": [
+            {
+              "source": {
+                "kind": {
+                  "storageContainerName": "myStorageAccount"
+                }
+              },
+              "storageCacheContainerName": "Name of the managed storage resource to mount.",
+              "mount": {
+                "path": "The target mountpoint path."
+              }
+            }
+          ],
+          "codeLocation": {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          },
+          "outputLocation": {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          },
+          "networkResourceRef": {
+            "name": "Name of the network resource to reference."
+          },
+          "containerImage": {
+            "kind": "Platform"
+          },
+          "groupPolicyName": "Group policy name associated with the training job.",
+          "checkpointPolicy": {
+            "enableCheckpoint": true,
+            "checkpointRelativePath": "The relative path in the platform storage.",
+            "checkpointInterval": "Maximum elapsed duration between subsequent checkpoints. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+            "checkpointIterationCount": 1,
+            "checkpointRetentionPolicy": {
+              "mode": "Ttl",
+              "ttl": "Minimum elapsed duration before deleting checkpoint. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+              "maxStorage": 1
+            }
+          },
+          "maxJobExecutionTime": 1,
+          "suspendOnIdleTime": 1,
+          "program": "The entry script for your Job in the codeLocation. For interactive jobs, specify null.",
+          "programArgs": "Command line arguments to be passed to the program.",
+          "tensorBoardLogDirectory": "The directory which TensorBoard will be configured to use as the log directory.",
+          "status": "Initialized",
+          "description": "User-friendly description of the job.",
+          "statusDetails": "Gives additional information about the current status of the job.",
+          "notebookEndpoint": "Url to access Jupyter notebook endpoint of the job.",
+          "tensorBoardEndpoint": "Url to access TensorBoard endpoint of the job.",
+          "grafanaEndpoint": "Url to access Grafana endpoint of the job.",
+          "jobLogsEndpoint": "Url to access logs of the job.",
+          "environmentVariables": { }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/jobs",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/jobs/myjobName",
+        "name": "myJobResourceDescription",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobId": "System generated globally unique id for the job. This property is read only.",
+          "placementPolicies": [
+            {
+              "instanceTypes": [
+                {
+                  "instanceType": "The instance type belonging to the same series.",
+                  "scalePolicy": {
+                    "minInstanceTypeCount": 1,
+                    "maxInstanceTypeCount": 1,
+                    "currentInstanceTypeCount": 1,
+                    "instanceTypeCountSet": [
+                      1
+                    ],
+                    "autoScaleIntervalInSecondsHint": 1
+                  }
+                }
+              ],
+              "location": "An optional location for instance type placement. If specified, this must be one of the account resource locations."
+            }
+          ],
+          "slaTier": "Premium",
+          "schedulingPriority": "Low",
+          "dataLocation": [
+            {
+              "source": {
+                "kind": {
+                  "storageContainerName": "myStorageAccount"
+                }
+              },
+              "storageCacheContainerName": "Name of the managed storage resource to mount.",
+              "mount": {
+                "path": "The target mountpoint path."
+              }
+            }
+          ],
+          "codeLocation": {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          },
+          "outputLocation": {
+            "source": {
+              "kind": {
+                "storageContainerName": "myStorageAccount"
+              }
+            },
+            "storageCacheContainerName": "Name of the managed storage resource to mount.",
+            "mount": {
+              "path": "The target mountpoint path."
+            }
+          },
+          "networkResourceRef": {
+            "name": "Name of the network resource to reference."
+          },
+          "containerImage": {
+            "kind": "Platform"
+          },
+          "groupPolicyName": "Group policy name associated with the training job.",
+          "checkpointPolicy": {
+            "enableCheckpoint": true,
+            "checkpointRelativePath": "The relative path in the platform storage.",
+            "checkpointInterval": "Maximum elapsed duration between subsequent checkpoints. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+            "checkpointIterationCount": 1,
+            "checkpointRetentionPolicy": {
+              "mode": "Ttl",
+              "ttl": "Minimum elapsed duration before deleting checkpoint. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+              "maxStorage": 1
+            }
+          },
+          "maxJobExecutionTime": 1,
+          "suspendOnIdleTime": 1,
+          "program": "The entry script for your Job in the codeLocation. For interactive jobs, specify null.",
+          "programArgs": "Command line arguments to be passed to the program.",
+          "tensorBoardLogDirectory": "The directory which TensorBoard will be configured to use as the log directory.",
+          "status": "Initialized",
+          "description": "User-friendly description of the job.",
+          "statusDetails": "Gives additional information about the current status of the job.",
+          "notebookEndpoint": "Url to access Jupyter notebook endpoint of the job.",
+          "tensorBoardEndpoint": "Url to access TensorBoard endpoint of the job.",
+          "grafanaEndpoint": "Url to access Grafana endpoint of the job.",
+          "jobLogsEndpoint": "Url to access logs of the job.",
+          "environmentVariables": { }
+        }
+      }
+    },
+    "202": { }
+  }
+}
