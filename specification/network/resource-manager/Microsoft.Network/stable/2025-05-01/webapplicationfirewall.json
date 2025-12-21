@@ -541,6 +541,13 @@
           "format": "int32",
           "minimum": 5,
           "maximum": 1440
+        },
+        "captchaCookieExpirationInMins": {
+          "description": "Web Application Firewall JavaScript Challenge Cookie Expiration time in minutes.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440
         }
       }
     },
@@ -631,7 +638,8 @@
             "Allow",
             "Block",
             "Log",
-            "JSChallenge"
+            "JSChallenge",
+            "CAPTCHA"
           ],
           "x-ms-enum": {
             "name": "WebApplicationFirewallAction",
@@ -1082,7 +1090,8 @@
         "Allow",
         "Block",
         "Log",
-        "JSChallenge"
+        "JSChallenge",
+        "CAPTCHA"
       ],
       "x-ms-enum": {
         "name": "ActionType",
