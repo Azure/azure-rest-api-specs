@@ -68,6 +68,8 @@ using Microsoft.DocumentDB;
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress");
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
