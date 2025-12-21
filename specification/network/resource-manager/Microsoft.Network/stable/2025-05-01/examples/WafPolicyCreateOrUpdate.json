@@ -320,40 +320,40 @@
             "action": "JSChallenge"
           },
           {
-              "name": "Rule5",
-              "priority": 5,
-              "state": "Enabled",
-              "ruleType": "MatchRule",
-              "matchConditions": [
-                {
-                  "matchVariables": [
-                    {
-                      "variableName": "RemoteAddr",
-                      "selector": null
-                    }
-                  ],
-                  "operator": "IPMatch",
-                  "negationConditon": false,
-                  "matchValues": [
-                    "192.168.2.0/24"
-                  ]
-                },
-                {
-                  "matchVariables": [
-                    {
-                      "variableName": "RequestHeaders",
-                      "selector": "UserAgent"
-                    }
-                  ],
-                  "operator": "Contains",
-                  "negationConditon": false,
-                  "matchValues": [
-                    "Bot"
-                  ]
-                }
-              ],
-              "action": "CAPTCHA"
-            }
+            "name": "Rule5",
+            "priority": 5,
+            "state": "Enabled",
+            "ruleType": "MatchRule",
+            "matchConditions": [
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RemoteAddr",
+                    "selector": null
+                  }
+                ],
+                "operator": "IPMatch",
+                "negationConditon": false,
+                "matchValues": [
+                  "192.168.2.0/24"
+                ]
+              },
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RequestHeaders",
+                    "selector": "UserAgent"
+                  }
+                ],
+                "operator": "Contains",
+                "negationConditon": false,
+                "matchValues": [
+                  "Bot"
+                ]
+              }
+            ],
+            "action": "CAPTCHA"
+          }
         ]
       }
     }
