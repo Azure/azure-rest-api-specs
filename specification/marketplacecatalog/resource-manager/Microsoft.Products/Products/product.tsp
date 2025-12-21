@@ -801,7 +801,7 @@ model Benefit {
   @doc("Billing plan")
   billingPlan?: string;
 
-  @doc("Term duration")
+  @doc("Term duration. Examples: 'P1M' (1 month), 'P30D' (30 days)")
   termDuration?: string;
 }
 
@@ -899,7 +899,7 @@ model MeterTypeDescriptionValue {
 
 @doc("Defines lifecycle management policy")
 model LifecyclePolicy {
-  @doc("Grace period duration where customers retain access to their product")
+  @doc("Grace period duration where customers retain access to their product. Examples: 'P1M' (1 month), 'P30D' (30 days), 'P0D' (0 days)")
   graceDuration?: string;
 
   @doc("Inactive period duration")
