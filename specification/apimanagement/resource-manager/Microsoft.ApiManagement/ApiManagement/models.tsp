@@ -3897,6 +3897,7 @@ model ToolCollection {
    * Next page link if any.
    */
   @visibility(Lifecycle.Read)
+  @nextLink
   nextLink?: string;
 }
 
