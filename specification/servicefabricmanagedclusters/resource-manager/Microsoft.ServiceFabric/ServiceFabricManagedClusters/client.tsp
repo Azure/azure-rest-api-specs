@@ -373,6 +373,7 @@ using Microsoft.ServiceFabric;
   "IsSecureBootEnabled",
   "csharp"
 );
+@@clientName(NodeTypeProperties.isSpotVM, "IsSpotVm", "csharp");
 @@clientName(EvictionPolicyType, "SpotNodeVmEvictionPolicyType", "csharp");
 @@clientName(SecurityType, "ServiceFabricManagedClusterSecurityType", "csharp");
 @@clientName(UpdateType, "ServiceFabricManagedClusterUpdateType", "csharp");
@@ -516,6 +517,7 @@ using Microsoft.ServiceFabric;
   "GetManagedClusterVersionsByEnvironment",
   "csharp"
 );
+@@clientName(ManagedClusterVersion.get, "GetManagedClusterVersion", "csharp");
 @@clientName(RuntimeUpdateApplicationUpgradeParameters,
   "RuntimeUpdateApplicationUpgradeContent",
   "csharp"
@@ -557,3 +559,4 @@ using Microsoft.ServiceFabric;
   "content",
   "csharp"
 );
+@@clientName(ManagedClusters.update::parameters.properties, "patch", "csharp");
