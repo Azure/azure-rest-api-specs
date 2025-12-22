@@ -20,8 +20,8 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    namespace: "Azure.Analytics.PlanetaryComputer"
-    generate-protocol-methods: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Analytics.PlanetaryComputer
     model-namespace: false
   "@azure-tools/typespec-ts":
     package-dir: "planetarycomputer"
@@ -42,13 +42,6 @@ options:
     # generate-samples: false
     # generate-tests: false
     flavor: azure
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.PlanetaryComputer"
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.Analytics.PlanetaryComputer"
-    flavor: azure
-    package-dir: "Azure.Analytics.PlanetaryComputer"
   # "@azure-tools/typespec-go":
   #   module: "github.com/Azure/azure-sdk-for-go/{emitter-output-dir}"
   #   service-dir: "sdk/planetarycomputer"
