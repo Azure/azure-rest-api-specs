@@ -1,6 +1,6 @@
 parameters:
   service-dir:
-    default: "/^(\\{output-dir\\}\\/)?sdk\\/[^\\/]*$/"
+    default: "sdk/hardware"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -13,31 +13,32 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/hardware.json"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{service-dir}/azure-hardware"
-    namespace: "com.azure.hardware"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hardware"
+    namespace: "com.azure.resourcemanager.hardware"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     flavor: "azure"
-    emitter-output-dir: "{service-dir}/azure-hardware"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hardware"
     package-details:
-      name: "@azure-rest/azure-hardware-rest"
-      description: "azure.Hardware ResourceProvider`"
+      name: "@azure/arm-hardware"
   "@azure-tools/typespec-go":
-    emitter-output-dir: "{service-dir}/armhardware"
+    service-dir: "sdk/resourcemanager/hardware"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhardware"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhardware"
+    fix-const-stuttering: true
+    flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{service-dir}/azure-hardware"
-    namespace: "azure.hardware"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hardware"
+    namespace: "azure.mgmt.hardware"
     generate-sample: true
     generate-test: true
     flavor: "azure"
   "@azure-tools/typespec-csharp":
-    namespace: "Azure.Hardware"
+    namespace: "Azure.ResourceManager.Hardware"
     flavor: "azure"
-    clear-output-folder: true
-    emitter-output-dir: "{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
