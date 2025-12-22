@@ -1628,6 +1628,10 @@ model ConnectionProperties {
   @visibility(Lifecycle.Read)
   privateEndpointName?: string;
 
+  /** The privateEndpoint resource Id */
+  @visibility(Lifecycle.Read)
+  privateEndpointResourceId?: Azure.Core.armResourceIdentifier;
+
   /** List of job definitions associated with this connection. */
   jobList?: Azure.Core.armResourceIdentifier[];
 
