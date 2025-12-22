@@ -452,6 +452,10 @@ model Test {
   @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("Preferences for the test.")
+  preferences?: TestPreferences;
+
   ...SystemMetaData;
 }
 
@@ -663,6 +667,13 @@ model TestInputArtifacts {
   @doc("Additional supported files for the test run")
   @visibility(Lifecycle.Read)
   additionalFileInfo?: TestFileInfo[];
+}
+
+@doc("Preferences for the test.")
+@added(APIVersions.v2025_11_01_preview)
+model TestPreferences {
+  @doc("Enable or disable AI based insights on Test Run Errors.")
+  enableAIErrorInsights?: boolean = true;
 }
 
 @doc("File info")

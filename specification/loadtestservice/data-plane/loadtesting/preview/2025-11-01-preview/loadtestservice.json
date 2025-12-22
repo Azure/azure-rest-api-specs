@@ -5235,6 +5235,10 @@
           "description": "Estimated virtual user hours for the test.",
           "readOnly": true
         },
+        "preferences": {
+          "$ref": "#/definitions/TestPreferences",
+          "description": "Preferences for the test."
+        },
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
@@ -5426,6 +5430,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "preferences": {
+          "$ref": "#/definitions/TestPreferences",
+          "description": "Preferences for the test."
         }
       }
     },
@@ -5531,6 +5539,17 @@
             "description": "Locust Test"
           }
         ]
+      }
+    },
+    "TestPreferences": {
+      "type": "object",
+      "description": "Preferences for the test.",
+      "properties": {
+        "enableAIErrorInsights": {
+          "type": "boolean",
+          "description": "Enable or disable AI based insights on Test Run Errors.",
+          "default": true
+        }
       }
     },
     "TestProfile": {
