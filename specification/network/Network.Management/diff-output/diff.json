@@ -18089,37 +18089,6 @@
         }
       }
     },
-    "Resource__deleted": {
-      "type": "object",
-      "description": "Common resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "Signatures__deleted": {
       "type": "object",
       "additionalProperties": {
@@ -18583,14 +18552,6 @@
     },
     "ApplicationGateway": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -18604,7 +18565,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -18714,7 +18675,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -18967,7 +18928,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20174,7 +20135,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20256,14 +20217,6 @@
     },
     "AzureFirewall": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -20277,7 +20230,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20337,7 +20290,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20716,23 +20669,13 @@
       ]
     },
     "BastionHost": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20922,10 +20865,6 @@
         "location__added": {
           "type": "string",
           "description": "Resource location."
-        },
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
         }
       },
       "allOf": [
@@ -20934,7 +20873,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -20978,6 +20917,23 @@
           "$ref": {
             "__old": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
             "__new": "#/definitions/NetworkGroupProperties"
+          }
+        }
+      }
+    },
+    "ConnectionMonitor": {
+      "properties": {
+        "tags__deleted": {
+          "type": "object",
+          "description": "Connection monitor tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": {
+            "__old": "Properties of the connection monitor.",
+            "__new": "Connection monitor tags.Properties of the connection monitor."
           }
         }
       }
@@ -21387,14 +21343,6 @@
     },
     "CustomIpPrefix": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -21414,7 +21362,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -21470,23 +21418,13 @@
       }
     },
     "DdosCustomPolicy": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -21559,12 +21497,11 @@
     },
     "DdosProtectionPlan": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -21583,12 +21520,12 @@
           "description": "Resource type.",
           "readOnly": true
         },
-        "tags": {
-          "type__deleted": "object",
-          "additionalProperties__deleted": {
+        "tags__deleted": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
             "type": "string"
-          },
-          "$ref__added": "#/definitions/TagsObject"
+          }
         },
         "etag": {
           "description": {
@@ -21703,17 +21640,12 @@
     },
     "DscpConfiguration": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "readOnly__deleted": true
@@ -21725,7 +21657,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -21956,8 +21888,7 @@
     },
     "ExpressRouteCircuit": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
         "etag__deleted": {
@@ -21965,13 +21896,9 @@
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         },
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "allOf": [
@@ -21980,7 +21907,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22227,17 +22154,12 @@
     },
     "ExpressRouteCrossConnection": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "allOf": [
@@ -22246,7 +22168,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22422,17 +22344,12 @@
     },
     "ExpressRouteGateway": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "allOf": [
@@ -22441,7 +22358,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22530,17 +22447,12 @@
     },
     "ExpressRoutePort": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "identity": {
           "$ref": {
@@ -22555,7 +22467,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22658,17 +22570,12 @@
     },
     "ExpressRoutePortsLocation": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "allOf": [
@@ -22677,7 +22584,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22748,7 +22655,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22766,7 +22673,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22822,17 +22729,12 @@
     },
     "FirewallPolicy": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "identity": {
           "$ref": {
@@ -22847,7 +22749,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -22855,17 +22757,12 @@
     },
     "FirewallPolicyDraft": {
       "required__added": [
-        "location",
-        "tags"
+        "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "allOf": [
@@ -22874,7 +22771,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -23107,18 +23004,7 @@
       }
     },
     "FlowLog": {
-      "required__added": [
-        "tags"
-      ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -23132,7 +23018,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -23792,10 +23678,6 @@
     },
     "IpAllocation": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -23807,7 +23689,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -23855,23 +23737,13 @@
       }
     },
     "IpGroup": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -23966,11 +23838,14 @@
     },
     "IpamPoolUpdate": {
       "properties": {
-        "tags": {
-          "description__added": "Dictionary of <string>"
+        "tags__deleted": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
-          "description__added": "Represents the IpamPool update properties."
+          "description__added": "Dictionary of <string>Represents the IpamPool update properties."
         }
       }
     },
@@ -24081,10 +23956,6 @@
     },
     "LoadBalancer": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -24102,7 +23973,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -24275,13 +24146,16 @@
       }
     },
     "LocalNetworkGateway": {
+      "required__deleted": [
+        "properties"
+      ],
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -24344,10 +24218,6 @@
     },
     "NatGateway": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -24365,7 +24235,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -24503,7 +24373,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -24511,10 +24381,6 @@
     },
     "NetworkInterface": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -24532,7 +24398,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -24826,10 +24692,6 @@
           "description": "The system metadata related to this resource.",
           "readOnly": true
         },
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -24841,7 +24703,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25005,23 +24867,13 @@
       }
     },
     "NetworkProfile": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25055,23 +24907,13 @@
       }
     },
     "NetworkSecurityGroup": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25168,14 +25010,6 @@
     },
     "NetworkVirtualAppliance": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -25189,7 +25023,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25351,23 +25185,13 @@
       ]
     },
     "NetworkVirtualApplianceSku": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25380,10 +25204,6 @@
     },
     "NetworkWatcher": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -25395,7 +25215,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25818,10 +25638,6 @@
         "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -25833,7 +25649,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -25937,7 +25753,27 @@
         }
       }
     },
+    "PatchObject": {
+      "properties__deleted": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PatchRouteFilter": {
+      "properties": {
+        "tags__deleted": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "allOf": [
         [
           "~",
@@ -26118,10 +25954,6 @@
     },
     "PrivateEndpoint": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -26139,7 +25971,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -26253,10 +26085,6 @@
     },
     "PrivateLinkService": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -26274,7 +26102,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -26524,10 +26352,6 @@
     },
     "PublicIPAddress": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -26545,7 +26369,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -26630,10 +26454,6 @@
     },
     "PublicIPPrefix": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -26657,7 +26477,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -26924,13 +26744,9 @@
     },
     "RouteFilter": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -26939,7 +26755,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -27125,10 +26941,6 @@
     },
     "RouteTable": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -27140,7 +26952,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -27416,13 +27228,9 @@
         "location"
       ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -27431,7 +27239,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -27843,10 +27651,6 @@
     },
     "ServiceEndpointPolicy": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -27858,7 +27662,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28332,6 +28136,17 @@
         }
       }
     },
+    "TagsObject": {
+      "properties__deleted": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "TopologyParameters": {
       "properties": {
         "targetVirtualNetwork": {
@@ -28344,6 +28159,17 @@
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
             "__new": "#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "UpdateTagsRequest": {
+      "properties": {
+        "tags__deleted": {
+          "type": "object",
+          "description": "List of tags for Network Security Perimeter",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -28361,7 +28187,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28423,11 +28249,14 @@
     },
     "VerifierWorkspaceUpdate": {
       "properties": {
-        "tags": {
-          "description__added": "Dictionary of <string>"
+        "tags__deleted": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
-          "description__added": "Represents the VerifierWorkspace update properties."
+          "description__added": "Dictionary of <string>Represents the VerifierWorkspace update properties."
         }
       }
     },
@@ -28532,23 +28361,16 @@
       }
     },
     "VirtualHub": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
+      "required__deleted": [
+        "location"
+      ],
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28682,10 +28504,6 @@
     },
     "VirtualNetwork": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -28703,7 +28521,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28725,14 +28543,13 @@
       }
     },
     "VirtualNetworkGateway": {
+      "required__deleted": [
+        "properties"
+      ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "extendedLocation": {
           "$ref": {
@@ -28753,7 +28570,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28770,14 +28587,13 @@
       }
     },
     "VirtualNetworkGatewayConnection": {
+      "required__deleted": [
+        "properties"
+      ],
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -28786,7 +28602,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -28794,13 +28610,9 @@
     },
     "VirtualNetworkGatewayConnectionListEntity": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -28809,7 +28621,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29247,10 +29059,6 @@
     },
     "VirtualNetworkTap": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -29262,7 +29070,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29321,13 +29129,9 @@
     },
     "VirtualRouter": {
       "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location__added": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -29336,7 +29140,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29455,15 +29259,12 @@
       }
     },
     "VirtualWAN": {
-      "properties": {
-        "tag__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
+      "required__deleted": [
+        "location"
+      ],
+      "description": {
+        "__old": "VirtualWAN Resource.",
+        "__new": "VirtualWAN Resource.VirtualWAN Resource."
       },
       "allOf": [
         [
@@ -29471,7 +29272,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29765,23 +29566,16 @@
       }
     },
     "VpnGateway": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
+      "required__deleted": [
+        "location"
+      ],
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29896,7 +29690,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -29997,23 +29791,16 @@
       }
     },
     "VpnSite": {
-      "properties": {
-        "tags__added": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
+      "required__deleted": [
+        "location"
+      ],
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -30225,7 +30012,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]

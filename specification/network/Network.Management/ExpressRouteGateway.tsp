@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * ExpressRoute gateway resource.
  */
-model ExpressRouteGateway
-  is Azure.ResourceManager.ProxyResource<ExpressRouteGatewayProperties> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteGateway,
-    KeyName = "expressRouteGatewayName",
-    SegmentName = "expressRouteGateways",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteGateway extends Resource {
+  properties?: ExpressRouteGatewayProperties;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("expressRouteGatewayName")
+  @segment("expressRouteGateways")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -45007,14 +45007,6 @@
           "description": "Properties of the application gateway.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -45034,7 +45026,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -45151,7 +45143,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -46059,7 +46051,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -49054,7 +49046,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -49587,14 +49579,6 @@
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of type local virtual network gateway."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "zones": {
           "type": "array",
           "description": "A list of availability zones denoting where the resource needs to come from.",
@@ -49610,7 +49594,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -49801,7 +49785,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -51094,14 +51078,6 @@
           "description": "Represents the bastion host resource.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "zones": {
           "type": "array",
           "description": "A list of availability zones denoting where the resource needs to come from.",
@@ -51121,7 +51097,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -51578,15 +51554,11 @@
         "location": {
           "type": "string",
           "description": "Resource location."
-        },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -52016,16 +51988,9 @@
           "type": "string",
           "description": "Connection monitor location."
         },
-        "tags": {
-          "type": "object",
-          "description": "Connection monitor tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/ConnectionMonitorParameters",
-          "description": "Properties of the connection monitor.",
+          "description": "Connection monitor tags.Properties of the connection monitor.",
           "x-ms-client-flatten": true
         }
       },
@@ -53440,14 +53405,6 @@
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the custom IP prefix."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -53463,7 +53420,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -53604,14 +53561,6 @@
           "description": "Properties of the DDoS custom policy.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -53620,7 +53569,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -53739,10 +53688,6 @@
           "type": "string",
           "description": "Resource location."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "etag": {
           "type": "string",
           "description": "The ETag of the DDoS protection plan.",
@@ -53750,12 +53695,11 @@
         }
       },
       "required": [
-        "location",
-        "tags"
+        "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -54373,13 +54317,9 @@
           "description": "Properties of the network interface.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "type": "string",
@@ -54387,12 +54327,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -55416,13 +55355,9 @@
           "description": "Properties of the express route circuit.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "sku": {
           "$ref": "#/definitions/ExpressRouteCircuitSku",
@@ -55430,12 +55365,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -56276,13 +56210,9 @@
           "description": "Properties of the express route cross connection.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "type": "string",
@@ -56291,12 +56221,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -56755,13 +56684,9 @@
           "description": "Properties of the express route gateway.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "type": "string",
@@ -56770,12 +56695,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -57144,13 +57068,9 @@
           "description": "ExpressRoutePort properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "type": "string",
@@ -57163,12 +57083,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -57418,22 +57337,17 @@
           "description": "ExpressRoutePort peering location properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -57530,7 +57444,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -57612,7 +57526,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -58019,13 +57933,9 @@
           "description": "Properties of the firewall policy.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         },
         "etag": {
           "type": "string",
@@ -58038,12 +57948,11 @@
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -58070,22 +57979,17 @@
           "description": "Properties of the firewall policy.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource tags.Resource location."
         }
       },
       "required": [
-        "tags",
         "location"
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -59156,14 +59060,6 @@
           "description": "Properties of the flow log.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -59174,12 +59070,9 @@
           "description": "FlowLog resource Managed Identity"
         }
       },
-      "required": [
-        "tags"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -61273,10 +61166,6 @@
           "description": "Properties of the IpAllocation.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -61289,7 +61178,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -61417,14 +61306,6 @@
           "description": "Properties of the IpGroups.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -61433,7 +61314,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -61650,16 +61531,9 @@
       "type": "object",
       "description": "Represents the IpamPool update API request interface.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Dictionary of <string>",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/IpamPoolUpdateProperties",
-          "description": "Represents the IpamPool update properties."
+          "description": "Dictionary of <string>Represents the IpamPool update properties."
         }
       }
     },
@@ -62427,10 +62301,6 @@
           "description": "Properties of load balancer.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -62451,7 +62321,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -63078,12 +62948,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -63515,10 +63382,6 @@
           "$ref": "#/definitions/NatGatewaySku",
           "description": "The nat gateway SKU."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -63538,7 +63401,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -63901,7 +63764,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -63962,10 +63825,6 @@
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the network interface."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -63978,7 +63837,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -64558,10 +64417,6 @@
           "description": "The network manager properties",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -64574,7 +64429,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -64989,14 +64844,6 @@
           "description": "Network profile properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -65005,7 +64852,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -65203,14 +65050,6 @@
           "description": "Properties of the network security group.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -65219,7 +65058,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -65413,14 +65252,6 @@
           "description": "Properties of the Network Virtual Appliance.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
           "description": "The service principal that has read access to cloud-init and config blob."
@@ -65433,7 +65264,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -65762,14 +65593,6 @@
           "description": "NetworkVirtualApplianceSku properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -65778,7 +65601,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -65857,10 +65680,6 @@
           "description": "Properties of the network watcher.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -65873,7 +65692,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -67381,10 +67200,6 @@
           "description": "Properties of the P2SVpnGateway.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -67397,7 +67212,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -67853,16 +67668,7 @@
     },
     "PatchObject": {
       "type": "object",
-      "description": "Object for patch operations.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
+      "description": "Object for patch operations."
     },
     "PatchRouteFilter": {
       "type": "object",
@@ -67887,13 +67693,6 @@
           "type": "string",
           "description": "Resource type.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
@@ -68710,10 +68509,6 @@
           "$ref": "#/definitions/ExtendedLocation",
           "description": "The extended location of the load balancer."
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -68726,7 +68521,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -68992,10 +68787,6 @@
           "description": "Properties of the private link service.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -69012,7 +68803,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -69620,10 +69411,6 @@
           "description": "Public IP address properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -69651,7 +69438,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -69894,10 +69681,6 @@
           "description": "Public IP prefix properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -69925,7 +69708,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -70580,6 +70363,38 @@
         }
       }
     },
+    "Resource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "ResourceBasics": {
       "type": "object",
       "description": "Representation of basic resource information.",
@@ -70764,13 +70579,9 @@
           "description": "Properties of the route filter.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -70783,7 +70594,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -71229,10 +71040,6 @@
           "description": "Properties of the route table.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -71245,7 +71052,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -72066,13 +71873,9 @@
           "description": "Properties of the Security Partner Provider.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -72085,7 +71888,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -72863,10 +72666,6 @@
           "description": "Properties of the service end point policy.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -72884,7 +72683,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -73983,16 +73782,7 @@
     },
     "TagsObject": {
       "type": "object",
-      "description": "Tags object for patch operations.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
+      "description": "Tags object for patch operations."
     },
     "Topology": {
       "type": "object",
@@ -74375,13 +74165,6 @@
               }
             ]
           }
-        },
-        "tags": {
-          "type": "object",
-          "description": "List of tags for Network Security Perimeter",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -74502,7 +74285,7 @@
       "description": "Describes a Virtual Machine.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -74656,16 +74439,9 @@
       "type": "object",
       "description": "Represents the VerifierWorkspace update API request interface.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Dictionary of <string>",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/VerifierWorkspaceUpdateProperties",
-          "description": "Represents the VerifierWorkspace update properties."
+          "description": "Dictionary of <string>Represents the VerifierWorkspace update properties."
         }
       }
     },
@@ -74842,14 +74618,6 @@
           "description": "Properties of the virtual hub.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
@@ -74861,12 +74629,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -75159,10 +74924,6 @@
           "description": "Properties of the virtual network.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -75179,7 +74940,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -75285,13 +75046,9 @@
           "description": "Properties of the virtual network gateway.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -75307,12 +75064,9 @@
           "description": "The identity of the virtual network gateway, if configured."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -75350,13 +75104,9 @@
           "description": "Properties of the virtual network gateway connection.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -75364,12 +75114,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -75377,13 +75124,9 @@
       "type": "object",
       "description": "A common class for general resource information.",
       "properties": {
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat",
@@ -75401,7 +75144,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -77007,10 +76750,6 @@
           "description": "Virtual Network Tap Properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
           "description": "The geo-location where the resource lives"
@@ -77023,7 +76762,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -77143,13 +76882,9 @@
           "description": "Properties of the Virtual Router.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
         "location": {
           "type": "string",
-          "description": "The geo-location where the resource lives"
+          "description": "Resource tags.The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -77159,7 +76894,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -77303,20 +77038,12 @@
     },
     "VirtualWAN": {
       "type": "object",
-      "description": "VirtualWAN Resource.",
+      "description": "VirtualWAN Resource.VirtualWAN Resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualWanProperties",
           "description": "Properties of the virtual WAN.",
           "x-ms-client-flatten": true
-        },
-        "tag": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
         },
         "etag": {
           "type": "string",
@@ -77324,12 +77051,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -78191,26 +77915,15 @@
           "description": "Properties of the VPN gateway.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -78689,7 +78402,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -78895,26 +78608,15 @@
           "description": "Properties of the VPN site.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -79475,7 +79177,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },

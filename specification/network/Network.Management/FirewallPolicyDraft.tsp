@@ -16,20 +16,15 @@ namespace Microsoft.Network;
  */
 @singleton("default")
 @parentResource(FirewallPolicy)
-model FirewallPolicyDraft
-  is Azure.ResourceManager.ProxyResource<FirewallPolicyDraftProperties> {
-  ...ResourceNameParameter<
-    Resource = FirewallPolicyDraft,
-    KeyName = "firewallPolicyDraft",
-    SegmentName = "firewallPolicyDrafts",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FirewallPolicyDraft extends Resource {
+  properties?: FirewallPolicyDraftProperties;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("firewallPolicyDraft")
+  @segment("firewallPolicyDrafts")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

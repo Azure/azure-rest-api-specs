@@ -11228,8 +11228,6 @@ model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**
@@ -11482,7 +11480,7 @@ model ApplicationGatewayAvailableWafRuleSetsResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayFirewallRuleSet
-  extends Azure.ResourceManager.CommonTypes.Resource {
+  extends Resource {
   /**
    * Properties of the application gateway firewall rule set.
    */
@@ -12451,7 +12449,7 @@ model AzureFirewallPacketCaptureResponse {
  * Azure Firewall FQDN Tag Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AzureFirewallFqdnTag extends Azure.ResourceManager.CommonTypes.Resource {
+model AzureFirewallFqdnTag extends Resource {
   /**
    * Properties of the azure firewall FQDN tag.
    */
@@ -12697,7 +12695,7 @@ model BastionShareableLink {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model VM extends Azure.ResourceManager.CommonTypes.Resource {}
+model VM extends Resource {}
 
 /**
  * Response for all the Bastion Shareable Link endpoints.
@@ -13850,7 +13848,7 @@ model ExpressRouteCircuitRoutesTableSummary {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExpressRouteServiceProvider
-  extends Azure.ResourceManager.CommonTypes.Resource {
+  extends Resource {
   /**
    * Properties of the express route service provider.
    */
@@ -15302,8 +15300,6 @@ model IpamPoolUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * Represents the IpamPool update properties.
@@ -16337,8 +16333,6 @@ model PatchObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**
@@ -16765,40 +16759,36 @@ model NetworkManagerConnectionProperties {
 }
 
 /**
- * Base resource model for all Azure resources.
+ * Common resource representation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * Resource ID.
    */
-  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
-   * The name of the resource
+   * Resource name.
    */
   @visibility(Lifecycle.Read)
   name?: string;
 
   /**
-   * The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.
+   * Resource type.
    */
   @visibility(Lifecycle.Read)
   type?: string;
 
   /**
-   * The geo-location where the resource lives
+   * Resource location.
    */
   location?: string;
 
   /**
    * Resource tags.
    */
-  tags?: TagsObject;
+  tags?: Record<string>;
 }
 
 /**
@@ -17563,8 +17553,6 @@ model UpdateTagsRequest {
   /**
    * List of tags for Network Security Perimeter
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**
@@ -18065,8 +18053,6 @@ model VerifierWorkspaceUpdate {
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * Represents the VerifierWorkspace update properties.
@@ -20135,8 +20121,6 @@ model ConnectionMonitor {
   /**
    * Connection monitor tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 
   /**
    * Properties of the connection monitor.
@@ -21241,7 +21225,7 @@ model SecurityPartnerProviderPropertiesFormat {
  * Service Community Properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BgpServiceCommunity extends Azure.ResourceManager.CommonTypes.Resource {
+model BgpServiceCommunity extends Resource {
   /**
    * Properties of the BGP service community.
    */
@@ -21249,9 +21233,6 @@ model BgpServiceCommunity extends Azure.ResourceManager.CommonTypes.Resource {
 
   /** Resource location. */
   location?: string;
-
-  /** Resource tags. */
-  tags?: TagsObject;
 }
 
 /**
@@ -21764,7 +21745,7 @@ model NetworkIntentPolicyConfiguration {
  * Network Intent Policy resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model NetworkIntentPolicy extends Azure.ResourceManager.CommonTypes.Resource {
+model NetworkIntentPolicy extends Resource {
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
@@ -22591,12 +22572,10 @@ model VirtualNetworkGatewayListConnectionsResult
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayConnectionListEntity
-  extends Azure.ResourceManager.CommonTypes.Resource {
+  extends Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -27396,8 +27375,6 @@ model PatchRouteFilter extends SubResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 /**

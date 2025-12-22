@@ -13,26 +13,19 @@ namespace Microsoft.Network;
 /**
  * Private endpoint resource.
  */
-model PrivateEndpoint
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpoint,
-    KeyName = "privateEndpointName",
-    SegmentName = "privateEndpoints",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateEndpoint extends Resource {
+  properties?: PrivateEndpointProperties;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("privateEndpointName")
+  @segment("privateEndpoints")
+  name: string;  /**
    * The extended location of the load balancer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+  extendedLocation?: ExtendedLocation;  /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

@@ -14,21 +14,18 @@ namespace Microsoft.Network;
  * P2SVpnGateway Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model P2SVpnGateway
-  is Azure.ResourceManager.ProxyResource<P2SVpnGatewayProperties> {
-  ...ResourceNameParameter<
-    Resource = P2SVpnGateway,
-    KeyName = "gatewayName",
-    SegmentName = "p2svpnGateways",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model P2SVpnGateway extends Resource {
+  properties?: P2SVpnGatewayProperties;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("gatewayName")
+  @segment("p2svpnGateways")
+  name: string;
 
   /** The geo-location where the resource lives */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
@@ -55,8 +52,8 @@ alias P2SVpnGatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface P2SVpnGateways {
   /**
    * Retrieves the details of a virtual wan p2s vpn gateway.
@@ -79,9 +76,9 @@ interface P2SVpnGateways {
    * Updates virtual wan p2s vpn gateway tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("P2sVpnGateways_UpdateTags")
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     P2SVpnGateway,
     PatchModel = TagsObject,

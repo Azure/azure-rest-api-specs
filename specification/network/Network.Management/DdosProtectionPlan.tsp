@@ -13,26 +13,21 @@ namespace Microsoft.Network;
 /**
  * A DDoS protection plan in a resource group.
  */
-model DdosProtectionPlan
-  is Azure.ResourceManager.ProxyResource<DdosProtectionPlanPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = DdosProtectionPlan,
-    KeyName = "ddosProtectionPlanName",
-    SegmentName = "ddosProtectionPlans",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model DdosProtectionPlan extends Resource {
+  properties?: DdosProtectionPlanPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ddosProtectionPlanName")
+  @segment("ddosProtectionPlans")
+  name: string;
 
   /**
    * Resource location.
    */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
-
-  /**
-   * Resource tags.
-   */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
 
   /**
    * The ETag of the DDoS protection plan.

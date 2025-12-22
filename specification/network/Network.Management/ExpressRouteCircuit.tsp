@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * ExpressRouteCircuit resource.
  */
-model ExpressRouteCircuit
-  is Azure.ResourceManager.ProxyResource<ExpressRouteCircuitPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteCircuit,
-    KeyName = "circuitName",
-    SegmentName = "expressRouteCircuits",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCircuit extends Resource {
+  properties?: ExpressRouteCircuitPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("circuitName")
+  @segment("expressRouteCircuits")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

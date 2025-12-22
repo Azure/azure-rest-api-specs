@@ -15,20 +15,15 @@ namespace Microsoft.Network;
  * Public IP address resource.
  */
 @parentResource(NetworkInterface)
-model PublicIPAddress
-  is Azure.ResourceManager.ProxyResource<PublicIPAddressPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = PublicIPAddress,
-    KeyName = "publicIpAddressName",
-    SegmentName = "publicipaddresses",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PublicIPAddress extends Resource {
+  properties?: PublicIPAddressPropertiesFormat;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("publicIpAddressName")
+  @segment("publicIPAddresses")
+  name: string;  /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

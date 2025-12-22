@@ -13,26 +13,19 @@ namespace Microsoft.Network;
 /**
  * A network interface in a resource group.
  */
-model NetworkInterface
-  is Azure.ResourceManager.ProxyResource<NetworkInterfacePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkInterface,
-    KeyName = "networkInterfaceName",
-    SegmentName = "networkInterfaces",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkInterface extends Resource {
+  properties?: NetworkInterfacePropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkInterfaceName")
+  @segment("networkInterfaces")
+  name: string;  /**
    * The extended location of the network interface.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+  extendedLocation?: ExtendedLocation;  /** The geo-location where the resource lives */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

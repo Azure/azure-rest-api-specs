@@ -13,30 +13,23 @@ namespace Microsoft.Network;
 /**
  * Application gateway resource.
  */
-model ApplicationGateway
-  is Azure.ResourceManager.ProxyResource<ApplicationGatewayPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ApplicationGateway,
-    KeyName = "applicationGatewayName",
-    SegmentName = "applicationGateways",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ApplicationGateway extends Resource {
+  properties?: ApplicationGatewayPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationGatewayName")
+  @segment("applicationGateways")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /** A list of availability zones denoting where the resource needs to come from. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 
   /**

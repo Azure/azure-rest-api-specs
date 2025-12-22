@@ -13,30 +13,19 @@ namespace Microsoft.Network;
 /**
  * Azure Firewall resource.
  */
-model AzureFirewall
-  is Azure.ResourceManager.ProxyResource<AzureFirewallPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = AzureFirewall,
-    KeyName = "azureFirewallName",
-    SegmentName = "azureFirewalls",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model AzureFirewall extends Resource {
+  properties?: AzureFirewallPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("azureFirewallName")
+  @segment("azureFirewalls")
+  name: string;  /**
    * The extended location of type local virtual network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** A list of availability zones denoting where the resource needs to come from. */
+  extendedLocation?: ExtendedLocation;  /** A list of availability zones denoting where the resource needs to come from. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 

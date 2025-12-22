@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Differentiated Services Code Point configuration for any given network interface
  */
-model DscpConfiguration
-  is Azure.ResourceManager.ProxyResource<DscpConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = DscpConfiguration,
-    KeyName = "dscpConfigurationName",
-    SegmentName = "dscpConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model DscpConfiguration extends Resource {
+  properties?: DscpConfigurationPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("dscpConfigurationName")
+  @segment("dscpConfigurations")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * FirewallPolicy Resource.
  */
-model FirewallPolicy
-  is Azure.ResourceManager.ProxyResource<FirewallPolicyPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = FirewallPolicy,
-    KeyName = "firewallPolicyName",
-    SegmentName = "firewallPolicies",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FirewallPolicy extends Resource {
+  properties?: FirewallPolicyPropertiesFormat;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("firewallPolicyName")
+  @segment("firewallPolicies")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -13,24 +13,15 @@ namespace Microsoft.Network;
 /**
  * NetworkVirtualAppliance Resource.
  */
-model NetworkVirtualAppliance
-  is Azure.ResourceManager.ProxyResource<NetworkVirtualAppliancePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkVirtualAppliance,
-    KeyName = "networkVirtualApplianceName",
-    SegmentName = "networkVirtualAppliances",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkVirtualAppliance extends Resource {
+  properties?: NetworkVirtualAppliancePropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkVirtualApplianceName")
+  @segment("networkVirtualAppliances")
+  name: string;  /**
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

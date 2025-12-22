@@ -13,24 +13,19 @@ namespace Microsoft.Network;
 /**
  * VirtualWAN Resource.
  */
+/**
+ * VirtualWAN Resource.
+ */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model VirtualWAN is Azure.ResourceManager.ProxyResource<VirtualWanProperties> {
-  ...ResourceNameParameter<
-    Resource = VirtualWAN,
-    KeyName = "VirtualWANName",
-    SegmentName = "virtualWans",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualWAN extends Resource {
+  properties?: VirtualWanProperties;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tag?: TagsObject;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("VirtualWANName")
+  @segment("virtualWans")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

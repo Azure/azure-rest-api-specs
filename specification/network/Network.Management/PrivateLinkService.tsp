@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Private link service resource.
  */
-model PrivateLinkService
-  is Azure.ResourceManager.ProxyResource<PrivateLinkServiceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkService,
-    KeyName = "serviceName",
-    SegmentName = "privateLinkServices",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateLinkService extends Resource {
+  properties?: PrivateLinkServiceProperties;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("serviceName")
+  @segment("privateLinkServices")
+  name: string;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * IpAllocation resource.
  */
-model IpAllocation
-  is Azure.ResourceManager.ProxyResource<IpAllocationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = IpAllocation,
-    KeyName = "ipAllocationName",
-    SegmentName = "IpAllocations",
-    NamePattern = ""
-  >;
-  
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model IpAllocation extends Resource {
+  properties?: IpAllocationPropertiesFormat;
 
-  /** The geo-location where the resource lives */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ipAllocationName")
+  @segment("IpAllocations")
+  name: string;  /** The geo-location where the resource lives */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

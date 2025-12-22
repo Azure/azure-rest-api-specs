@@ -13,21 +13,15 @@ namespace Microsoft.Network;
 /**
  * The IpGroups resource information.
  */
-model IpGroup is Azure.ResourceManager.ProxyResource<IpGroupPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = IpGroup,
-    KeyName = "ipGroupsName",
-    SegmentName = "ipGroups",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model IpGroup extends Resource {
+  properties?: IpGroupPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ipGroupsName")
+  @segment("ipGroups")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

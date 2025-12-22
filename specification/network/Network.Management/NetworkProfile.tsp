@@ -13,24 +13,15 @@ namespace Microsoft.Network;
 /**
  * Network profile resource.
  */
-model NetworkProfile
-  is Azure.ResourceManager.ProxyResource<NetworkProfilePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkProfile,
-    KeyName = "networkProfileName",
-    SegmentName = "networkProfiles",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkProfile extends Resource {
+  properties?: NetworkProfilePropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkProfileName")
+  @segment("networkProfiles")
+  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;

@@ -13,25 +13,17 @@ namespace Microsoft.Network;
 /**
  * A common class for general resource information.
  */
-model VirtualNetworkGatewayConnection
-  is Azure.ResourceManager.ProxyResource<
-    VirtualNetworkGatewayConnectionPropertiesFormat,
-    false
-  > {
-  ...ResourceNameParameter<
-    Resource = VirtualNetworkGatewayConnection,
-    KeyName = "virtualNetworkGatewayConnectionName",
-    SegmentName = "connections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetworkGatewayConnection extends Resource {
+  properties?: VirtualNetworkGatewayConnectionPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("virtualNetworkGatewayConnectionName")
+  @segment("connections")
+  name: string;  /**
    * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+   *//** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

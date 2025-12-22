@@ -15,23 +15,15 @@ namespace Microsoft.Network;
  * A flow log resource.
  */
 @parentResource(NetworkWatcher)
-model FlowLog is Azure.ResourceManager.ProxyResource<FlowLogPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = FlowLog,
-    KeyName = "flowLogName",
-    SegmentName = "flowLogs",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FlowLog extends Resource {
+  properties?: FlowLogPropertiesFormat;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
-   * Resource location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("flowLogName")
+  @segment("flowLogs")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

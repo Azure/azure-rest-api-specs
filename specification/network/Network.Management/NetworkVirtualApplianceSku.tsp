@@ -15,24 +15,15 @@ namespace Microsoft.Network;
  */
 @subscriptionResource
 @summary("Available NetworkVirtualApplianceSkus")
-model NetworkVirtualApplianceSku
-  is Azure.ResourceManager.ProxyResource<NetworkVirtualApplianceSkuPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkVirtualApplianceSku,
-    KeyName = "skuName",
-    SegmentName = "networkVirtualApplianceSkus",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkVirtualApplianceSku extends Resource {
+  properties?: NetworkVirtualApplianceSkuPropertiesFormat;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("skuName")
+  @segment("networkVirtualApplianceSkus")
+  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;

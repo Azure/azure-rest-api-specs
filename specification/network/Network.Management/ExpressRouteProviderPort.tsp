@@ -14,16 +14,15 @@ namespace Microsoft.Network;
  * ExpressRouteProviderPort resource.
  */
 @subscriptionResource
-model ExpressRouteProviderPort
-  is Azure.ResourceManager.ProxyResource<ExpressRouteProviderPortProperties> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteProviderPort,
-    KeyName = "providerport",
-    SegmentName = "expressRouteProviderPorts",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteProviderPort extends Resource {
+  properties?: ExpressRouteProviderPortProperties;
 
-  /** Resource tags. */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("providerport")
+  @segment("expressRouteProviderPorts")
+  name: string;  /** Resource tags. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
 

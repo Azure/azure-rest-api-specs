@@ -13,23 +13,15 @@ namespace Microsoft.Network;
 /**
  * VpnGateway Resource.
  */
-model VpnGateway is Azure.ResourceManager.ProxyResource<VpnGatewayProperties> {
-  ...ResourceNameParameter<
-    Resource = VpnGateway,
-    KeyName = "gatewayName",
-    SegmentName = "vpnGateways",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnGateway extends Resource {
+  properties?: VpnGatewayProperties;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("gatewayName")
+  @segment("vpnGateways")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

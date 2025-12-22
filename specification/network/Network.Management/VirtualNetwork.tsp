@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Virtual Network resource.
  */
-model VirtualNetwork
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = VirtualNetwork,
-    KeyName = "virtualNetworkName",
-    SegmentName = "virtualNetworks",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetwork extends Resource {
+  properties?: VirtualNetworkPropertiesFormat;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("virtualNetworkName")
+  @segment("virtualNetworks")
+  name: string;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

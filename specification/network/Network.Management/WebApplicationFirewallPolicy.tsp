@@ -13,16 +13,15 @@ namespace Microsoft.Network;
 /**
  * Defines web application firewall policy.
  */
-model WebApplicationFirewallPolicy
-  is Azure.ResourceManager.ProxyResource<WebApplicationFirewallPolicyPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = WebApplicationFirewallPolicy,
-    KeyName = "policyName",
-    SegmentName = "ApplicationGatewayWebApplicationFirewallPolicies",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model WebApplicationFirewallPolicy extends Resource {
+  properties?: WebApplicationFirewallPolicyPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("policyName")
+  @segment("ApplicationGatewayWebApplicationFirewallPolicies")
+  name: string;  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

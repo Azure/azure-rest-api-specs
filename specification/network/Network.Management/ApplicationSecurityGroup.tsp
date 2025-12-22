@@ -13,16 +13,15 @@ namespace Microsoft.Network;
 /**
  * An application security group in a resource group.
  */
-model ApplicationSecurityGroup
-  is Azure.ResourceManager.ProxyResource<ApplicationSecurityGroupPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ApplicationSecurityGroup,
-    KeyName = "applicationSecurityGroupName",
-    SegmentName = "applicationSecurityGroups",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ApplicationSecurityGroup extends Resource {
+  properties?: ApplicationSecurityGroupPropertiesFormat;
 
-  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationSecurityGroupName")
+  @segment("applicationSecurityGroups")
+  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;

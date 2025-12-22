@@ -15,23 +15,21 @@ namespace Microsoft.Network;
  */
 @subscriptionResource
 @summary("ExpressRoutePorts Peering Location")
-model ExpressRoutePortsLocation
-  is Azure.ResourceManager.ProxyResource<ExpressRoutePortsLocationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRoutePortsLocation,
-    KeyName = "locationName",
-    SegmentName = "ExpressRoutePortsLocations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRoutePortsLocation extends Resource {
+  properties?: ExpressRoutePortsLocationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("locationName")
+  @segment("ExpressRoutePortsLocations")
+  name: string;
 
   /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
   /**
    * Resource location.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
 }
 

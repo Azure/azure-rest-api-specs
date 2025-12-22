@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * LoadBalancer resource.
  */
-model LoadBalancer
-  is Azure.ResourceManager.ProxyResource<LoadBalancerPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = LoadBalancer,
-    KeyName = "loadBalancerName",
-    SegmentName = "loadBalancers",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LoadBalancer extends Resource {
+  properties?: LoadBalancerPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("loadBalancerName")
+  @segment("loadBalancers")
+  name: string;  /** The geo-location where the resource lives */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  */
 @singleton("default")
 @subscriptionResource
-model ApplicationGatewayAvailableSslOptions
-  is Azure.ResourceManager.ProxyResource<ApplicationGatewayAvailableSslOptionsPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ApplicationGatewayAvailableSslOptions,
-    KeyName = "applicationGatewayAvailableSslOption",
-    SegmentName = "applicationGatewayAvailableSslOptions",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ApplicationGatewayAvailableSslOptions extends Resource {
+  properties?: ApplicationGatewayAvailableSslOptionsPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationGatewayAvailableSslOption")
+  @segment("applicationGatewayAvailableSslOptions")
+  name: string;
 }
 
 alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.LegacyOperations<

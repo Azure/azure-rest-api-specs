@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Route table resource.
  */
-model RouteTable
-  is Azure.ResourceManager.ProxyResource<RouteTablePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = RouteTable,
-    KeyName = "routeTableName",
-    SegmentName = "routeTables",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RouteTable extends Resource {
+  properties?: RouteTablePropertiesFormat;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeTableName")
+  @segment("routeTables")
+  name: string;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

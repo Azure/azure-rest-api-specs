@@ -13,19 +13,15 @@ namespace Microsoft.Network;
 /**
  * A common class for general resource information.
  */
-model LocalNetworkGateway
-  is Azure.ResourceManager.ProxyResource<
-    LocalNetworkGatewayPropertiesFormat,
-    false
-  > {
-  ...ResourceNameParameter<
-    Resource = LocalNetworkGateway,
-    KeyName = "localNetworkGatewayName",
-    SegmentName = "localNetworkGateways",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LocalNetworkGateway extends Resource {
+  properties?: LocalNetworkGatewayPropertiesFormat;
 
-  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("localNetworkGatewayName")
+  @segment("localNetworkGateways")
+  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;

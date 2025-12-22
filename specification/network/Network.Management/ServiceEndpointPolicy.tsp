@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Service End point policy resource.
  */
-model ServiceEndpointPolicy
-  is Azure.ResourceManager.ProxyResource<ServiceEndpointPolicyPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ServiceEndpointPolicy,
-    KeyName = "serviceEndpointPolicyName",
-    SegmentName = "serviceEndpointPolicies",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ServiceEndpointPolicy extends Resource {
+  properties?: ServiceEndpointPolicyPropertiesFormat;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("serviceEndpointPolicyName")
+  @segment("serviceEndpointPolicies")
+  name: string;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -13,22 +13,17 @@ namespace Microsoft.Network;
 /**
  * VirtualRouter Resource.
  */
-model VirtualRouter
-  is Azure.ResourceManager.ProxyResource<VirtualRouterPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = VirtualRouter,
-    KeyName = "virtualRouterName",
-    SegmentName = "virtualRouters",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualRouter extends Resource {
+  properties?: VirtualRouterPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("virtualRouterName")
+  @segment("virtualRouters")
+  name: string;  /**
    * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+   *//** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

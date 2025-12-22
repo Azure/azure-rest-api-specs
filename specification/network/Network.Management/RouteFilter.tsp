@@ -13,22 +13,17 @@ namespace Microsoft.Network;
 /**
  * Route Filter Resource.
  */
-model RouteFilter
-  is Azure.ResourceManager.ProxyResource<RouteFilterPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = RouteFilter,
-    KeyName = "routeFilterName",
-    SegmentName = "routeFilters",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RouteFilter extends Resource {
+  properties?: RouteFilterPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeFilterName")
+  @segment("routeFilters")
+  name: string;  /**
    * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+   *//** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location: string;
 

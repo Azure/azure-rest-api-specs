@@ -13,30 +13,19 @@ namespace Microsoft.Network;
 /**
  * Custom IP prefix resource.
  */
-model CustomIpPrefix
-  is Azure.ResourceManager.ProxyResource<CustomIpPrefixPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = CustomIpPrefix,
-    KeyName = "customIpPrefixName",
-    SegmentName = "customIpPrefixes",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model CustomIpPrefix extends Resource {
+  properties?: CustomIpPrefixPropertiesFormat;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("customIpPrefixName")
+  @segment("customIpPrefixes")
+  name: string;  /**
    * The extended location of the custom IP prefix.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;
-
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** A unique read-only string that changes whenever the resource is updated. */
+  extendedLocation?: ExtendedLocation;  /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;

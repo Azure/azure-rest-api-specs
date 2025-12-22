@@ -13,21 +13,19 @@ namespace Microsoft.Network;
 /**
  * The Managed Network resource
  */
-model NetworkManager
-  is Azure.ResourceManager.ProxyResource<NetworkManagerProperties> {
-  ...ResourceNameParameter<
-    Resource = NetworkManager,
-    KeyName = "networkManagerName",
-    SegmentName = "networkManagers",
-    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkManager extends Resource {
+  properties?: NetworkManagerProperties;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkManagerName")
+  @segment("networkManagers")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
 
   /** The geo-location where the resource lives */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
@@ -172,9 +170,9 @@ interface NetworkManagers {
    * Post a Network Manager Commit.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkManagerCommits_Post")
   @action("commit")
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   post is ArmResourceActionAsyncBase<
     NetworkManager,
     Request = NetworkManagerCommit,

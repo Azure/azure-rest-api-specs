@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * ExpressRouteCrossConnection resource.
  */
-model ExpressRouteCrossConnection
-  is Azure.ResourceManager.ProxyResource<ExpressRouteCrossConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteCrossConnection,
-    KeyName = "crossConnectionName",
-    SegmentName = "expressRouteCrossConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCrossConnection extends Resource {
+  properties?: ExpressRouteCrossConnectionProperties;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags: TagsObject;
-
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("crossConnectionName")
+  @segment("expressRouteCrossConnections")
+  name: string;  /** Resource tags. *//**
    * Resource location.
    */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

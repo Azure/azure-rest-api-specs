@@ -13,30 +13,23 @@ namespace Microsoft.Network;
 /**
  * Bastion Host resource.
  */
-model BastionHost
-  is Azure.ResourceManager.ProxyResource<BastionHostPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = BastionHost,
-    KeyName = "bastionHostName",
-    SegmentName = "bastionHosts",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BastionHost extends Resource {
+  properties?: BastionHostPropertiesFormat;
 
-  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** Resource location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("bastionHostName")
+  @segment("bastionHosts")
+  name: string;
 
   /** A list of availability zones denoting where the resource needs to come from. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
@@ -64,8 +57,8 @@ interface BastionHosts {
   /**
    * Updates Tags for BastionHost resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     BastionHost,
     PatchModel = TagsObject,

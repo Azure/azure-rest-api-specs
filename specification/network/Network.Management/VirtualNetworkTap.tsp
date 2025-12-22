@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Virtual Network Tap resource.
  */
-model VirtualNetworkTap
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkTapPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = VirtualNetworkTap,
-    KeyName = "tapName",
-    SegmentName = "virtualNetworkTaps",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetworkTap extends Resource {
+  properties?: VirtualNetworkTapPropertiesFormat;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("tapName")
+  @segment("virtualNetworkTaps")
+  name: string;
 
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

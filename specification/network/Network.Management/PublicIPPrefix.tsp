@@ -13,20 +13,15 @@ namespace Microsoft.Network;
 /**
  * Public IP prefix resource.
  */
-model PublicIPPrefix
-  is Azure.ResourceManager.ProxyResource<PublicIPPrefixPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = PublicIPPrefix,
-    KeyName = "publicIpPrefixName",
-    SegmentName = "publicIPPrefixes",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PublicIPPrefix extends Resource {
+  properties?: PublicIPPrefixPropertiesFormat;
 
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("publicIpPrefixName")
+  @segment("publicIPPrefixes")
+  name: string;  /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 

@@ -13,23 +13,15 @@ namespace Microsoft.Network;
 /**
  * VirtualHub Resource.
  */
-model VirtualHub is Azure.ResourceManager.ProxyResource<VirtualHubProperties> {
-  ...ResourceNameParameter<
-    Resource = VirtualHub,
-    KeyName = "virtualHubName",
-    SegmentName = "virtualHubs",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualHub extends Resource {
+  properties?: VirtualHubProperties;
 
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("virtualHubName")
+  @segment("virtualHubs")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

@@ -13,16 +13,15 @@ namespace Microsoft.Network;
 /**
  * VpnServerConfiguration Resource.
  */
-model VpnServerConfiguration
-  is Azure.ResourceManager.ProxyResource<VpnServerConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = VpnServerConfiguration,
-    KeyName = "vpnServerConfigurationName",
-    SegmentName = "vpnServerConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnServerConfiguration extends Resource {
+  properties?: VpnServerConfigurationProperties;
 
-  /**
+  @visibility(Lifecycle.Read)
+  @path
+  @key("vpnServerConfigurationName")
+  @segment("vpnServerConfigurations")
+  name: string;  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
