@@ -158,6 +158,14 @@ union FileType {
   @added(APIVersions.v2024_03_01_preview)
   @doc("If the file is a test script.")
   TestScript: "TEST_SCRIPT",
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("If the file is a browser recording of interactions with web applications.")
+  BrowserRecording: "BROWSER_RECORDING",
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("If the file is an AI Recommendations file created by the system containing recommendations to create a load test plan from browser recording.")
+  TestPlanRecommendations: "TEST_PLAN_RECOMMENDATIONS",
 }
 
 @doc("File status.")
