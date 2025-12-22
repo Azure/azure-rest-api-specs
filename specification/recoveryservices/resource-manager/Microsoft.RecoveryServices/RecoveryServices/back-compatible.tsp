@@ -6,6 +6,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
@@ -30,6 +31,7 @@ using Microsoft.RecoveryServices;
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties
 );
 @@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
