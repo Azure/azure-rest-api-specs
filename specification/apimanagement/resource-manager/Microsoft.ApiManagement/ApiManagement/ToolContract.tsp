@@ -30,8 +30,6 @@ interface ToolContracts {
   /**
    * Gets the details of the API Tool specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_Get")
   get is ArmResourceRead<
     ToolContract,
     Response = ArmResponse<ToolContract> & {
@@ -46,8 +44,6 @@ interface ToolContracts {
   /**
    * Gets the entity state (Etag) version of the API tool specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_GetEntityTag")
   getEntityTag is ArmResourceCheckExistence<
     ToolContract,
     Response = OkResponse & {
@@ -62,8 +58,6 @@ interface ToolContracts {
   /**
    * Creates a new tool in the API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ToolContract,
     Response = (ArmResponse<ToolContract> & {
@@ -84,8 +78,6 @@ interface ToolContracts {
   /**
    * Updates the details of the tool in the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ToolContract,
@@ -102,15 +94,11 @@ interface ToolContracts {
   /**
    * Deletes the specified tool in the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_Delete")
   delete is ArmResourceDeleteSync<ToolContract>;
 
   /**
    * Lists a collection of the MCP tools for the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiTool_ListByApi")
   listByApi is ArmResourceListByParent<
     ToolContract,
     Parameters = {

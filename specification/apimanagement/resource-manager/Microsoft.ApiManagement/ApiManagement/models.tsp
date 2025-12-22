@@ -426,6 +426,7 @@ union DataMaskingMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LlmDiagnosticSettings {
   string,
 
@@ -1882,7 +1883,7 @@ model GatewayResourceSkuResults {
    * The list of skus available for the gateway.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["resourceType", "sku/name"])
+  @identifiers(#["resourceType", "sku/name"])
   value: GatewayResourceSkuResult[];
 
   /**
@@ -2212,13 +2213,13 @@ model AuthenticationSettingsContract {
   /**
    * Collection of OAuth2 authentication settings included into this API.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["authorizationServerId"])
+  @identifiers(#["authorizationServerId"])
   oAuth2AuthenticationSettings?: OAuth2AuthenticationSettingsContract[];
 
   /**
    * Collection of Open ID Connect authentication settings included into this API.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["openidProviderId"])
+  @identifiers(#["openidProviderId"])
   openidAuthenticationSettings?: OpenIdAuthenticationSettingsContract[];
 }
 
@@ -2415,7 +2416,7 @@ model ApiRevisionCollection {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["apiId"])
+  @identifiers(#["apiId"])
   value?: ApiRevisionContract[];
 
   /**
@@ -2605,7 +2606,7 @@ model OperationEntityBaseContract {
   /**
    * Collection of URL template parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   templateParameters?: ParameterContract[];
 
   /**
@@ -2622,7 +2623,7 @@ model OperationEntityBaseContract {
   /**
    * Array of Operation responses.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   responses?: ResponseContract[];
 
   /**
@@ -2720,19 +2721,19 @@ model RequestContract {
   /**
    * Collection of operation request query parameters.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   queryParameters?: ParameterContract[];
 
   /**
    * Collection of operation request headers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   headers?: ParameterContract[];
 
   /**
    * Collection of operation request representations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   representations?: RepresentationContract[];
 }
 
@@ -2758,7 +2759,7 @@ model RepresentationContract {
   /**
    * Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'..
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   formParameters?: ParameterContract[];
 
   /**
@@ -2785,13 +2786,13 @@ model ResponseContract {
   /**
    * Collection of operation response representations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   representations?: RepresentationContract[];
 
   /**
    * Collection of operation response headers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "type"])
+  @identifiers(#["name", "type"])
   headers?: ParameterContract[];
 }
 
@@ -3328,13 +3329,13 @@ model DataMasking {
   /**
    * Masking settings for Url query parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   queryParams?: DataMaskingEntity[];
 
   /**
    * Masking settings for headers
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   headers?: DataMaskingEntity[];
 }
 
@@ -3355,6 +3356,7 @@ model DataMaskingEntity {
  * Diagnostic settings for Large Language Models
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LLMDiagnosticSettings {
   /**
    * Specifies whether default diagnostic should be enabled for Large Language Models or not.
@@ -3659,7 +3661,7 @@ model TagResourceCollection {
    * Page values.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["tag/id"])
+  @identifiers(#["tag/id"])
   value?: TagResourceContract[];
 
   /**
@@ -3836,7 +3838,7 @@ model WikiContractProperties {
   /**
    * Collection wiki documents included into this wiki.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["documentationId"])
+  @identifiers(#["documentationId"])
   documents?: WikiDocumentationContract[];
 }
 
@@ -3868,7 +3870,7 @@ model WikiCollection {
    * Page values.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @visibility(Lifecycle.Read)
   value?: WikiContract[];
 
@@ -4391,7 +4393,7 @@ model AuthorizationServerContractBaseProperties {
   /**
    * Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {"name" : "name value", "value": "a value"}.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   tokenBodyParameters?: TokenBodyParameterContract[];
 
   /**
@@ -4530,6 +4532,7 @@ model AuthorizationServerSecretsContract {
   /**
    * Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resourceOwnerPassword?: string;
 }
 
@@ -4684,7 +4687,7 @@ model BackendServiceFabricClusterProperties {
   /**
    * Server X509 Certificate Names Collection
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   serverX509Names?: X509CertificateName[];
 }
 
@@ -4807,7 +4810,7 @@ model BackendTlsProperties {
   /**
    * Server X509 Certificate Names of the Backend Host.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   serverX509Names?: X509CertificateName[];
 }
 
@@ -4818,7 +4821,7 @@ model BackendCircuitBreaker {
   /**
    * The rules for tripping the backend.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   rules?: CircuitBreakerRule[];
 }
 
@@ -4874,14 +4877,13 @@ model CircuitBreakerFailureCondition {
   /**
    * The status code ranges which are considered as failure.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(10)
   statusCodeRanges?: FailureStatusCodeRange[];
 
   /**
    * The error reasons which are considered as failure.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(10)
   errorReasons?: string[];
 }
@@ -4929,7 +4931,7 @@ model BackendPool {
   /**
    * The list of backend entities belonging to a pool.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @minItems(1)
   services?: BackendPoolItem[];
 
@@ -5356,7 +5358,7 @@ model ConnectivityCheckRequestProtocolConfigurationHttpConfiguration {
   /**
    * List of headers to be included in the request.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   headers?: HttpHeader[];
 }
 
@@ -5460,7 +5462,7 @@ model ConnectivityHop {
    * List of issues.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   issues?: ConnectivityIssue[];
 }
 
@@ -5490,7 +5492,7 @@ model ConnectivityIssue {
    * Provides additional context on the issue.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   context?: Record<string>[];
 }
 
@@ -5663,7 +5665,7 @@ model ResourceSkuResults {
    * The list of skus available for the service.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["resourceType", "sku/name"])
+  @identifiers(#["resourceType", "sku/name"])
   value: ResourceSkuResult[];
 
   /**
@@ -5861,7 +5863,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Custom hostname configuration of the API Management service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["hostName", "type"])
+  @identifiers(#["hostName", "type"])
   hostnameConfigurations?: HostnameConfiguration[];
 
   /**
@@ -5901,7 +5903,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Additional datacenter locations of the API Management service.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["location", "sku"])
+  @identifiers(#["location", "sku"])
   additionalLocations?: AdditionalLocation[];
 
   /**
@@ -5913,7 +5915,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["certificate/thumbprint"])
+  @identifiers(#["certificate/thumbprint"])
   certificates?: CertificateConfiguration[];
 
   /**
@@ -6466,7 +6468,7 @@ model DocumentationCollection {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: DocumentationContract[];
 
   /**
@@ -6562,7 +6564,7 @@ model EmailTemplateContractProperties {
   /**
    * Email Template Parameter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["title"])
+  @identifiers(#["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -6634,7 +6636,7 @@ model EmailTemplateUpdateParameterProperties {
   /**
    * Email Template Parameter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["title"])
+  @identifiers(#["title"])
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
@@ -7220,7 +7222,7 @@ model UserContractProperties extends UserEntityBaseParameters {
    * Collection of groups user is part of.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["displayName"])
+  @identifiers(#["displayName"])
   groups?: GroupContractProperties[];
 }
 
@@ -7734,7 +7736,7 @@ model NetworkStatusContract {
   /**
    * Gets the list of Connectivity Status to the Resources on which the service depends upon.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "resourceType"])
+  @identifiers(#["name", "resourceType"])
   connectivityStatus: ConnectivityStatusContract[];
 }
 
@@ -8051,7 +8053,7 @@ model OutboundEnvironmentEndpointList {
   /**
    * Collection of resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: OutboundEnvironmentEndpoint[];
 
   /**
@@ -8073,7 +8075,7 @@ model OutboundEnvironmentEndpoint {
   /**
    * The endpoints that the Api Management Service reaches the service at.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -8089,7 +8091,7 @@ model EndpointDependency {
   /**
    * The Ports used when connecting to DomainName.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["region", "port"])
+  @identifiers(#["region", "port"])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -8326,7 +8328,7 @@ model OperationResultContractProperties {
    * This property if only provided as part of the TenantConfiguration_Validate operation. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy operation.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["objectKey"])
+  @identifiers(#["objectKey"])
   actionLog?: OperationResultLogItemContract[];
 }
 
@@ -8347,7 +8349,7 @@ model ErrorResponseBody {
   /**
    * The list of invalid fields send in request, in case of validation error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["message", "target"])
+  @identifiers(#["message", "target"])
   details?: ErrorFieldContract[];
 }
 
@@ -8388,6 +8390,7 @@ model OperationResultLogItemContract {
   /**
    * Identifier of the entity being created/updated/deleted.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   objectKey?: string;
 }
 
@@ -9107,7 +9110,7 @@ model QuotaCounterCollection {
   /**
    * Quota counter values.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["counterKey", "periodKey"])
+  @identifiers(#["counterKey", "periodKey"])
   value?: QuotaCounterContract[];
 
   /**
@@ -9128,12 +9131,14 @@ model QuotaCounterContract {
   /**
    * The Key value of the Counter. Must not be empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minLength(1)
   counterKey: string;
 
   /**
    * Identifier of the Period for which the counter was collected. Must not be empty.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @minLength(1)
   periodKey: string;
 
@@ -9190,7 +9195,7 @@ model RegionListResult {
    * Lists of Regions.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value?: RegionContract[];
 
   /**
@@ -9234,7 +9239,7 @@ model ReportCollection {
    * Page values.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name", "userId"])
+  @identifiers(#["name", "userId"])
   value?: ReportRecordContract[];
 
   /**
@@ -9396,7 +9401,7 @@ model RequestReportCollection {
    * Page values.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["url"])
+  @identifiers(#["url"])
   value?: RequestReportRecordContract[];
 
   /**
@@ -9606,7 +9611,7 @@ model ApiManagementSkusResult {
    * The list of skus available for the subscription.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name", "resourceType"])
+  @identifiers(#["name", "resourceType"])
   value: ApiManagementSku[];
 
   /**
@@ -9673,7 +9678,7 @@ model ApiManagementSku {
    * A list of locations and availability zones in those locations where the SKU is available.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["location"])
+  @identifiers(#["location"])
   locationInfo?: ApiManagementSkuLocationInfo[];
 
   /**
@@ -9686,21 +9691,21 @@ model ApiManagementSku {
    * Metadata for retrieving price info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["meterID"])
+  @identifiers(#["meterID"])
   costs?: ApiManagementSkuCosts[];
 
   /**
    * A name value pair to describe the capability.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 
   /**
    * The restrictions because of which SKU cannot be used. This is empty if there are no restrictions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restrictions?: ApiManagementSkuRestrictions[];
 }
 
@@ -9751,7 +9756,7 @@ model ApiManagementSkuLocationInfo {
    * Details of capabilities available to a SKU in specific zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   zoneDetails?: ApiManagementSkuZoneDetails[];
 }
 
@@ -9769,7 +9774,7 @@ model ApiManagementSkuZoneDetails {
    * A list of capabilities that are available for the SKU in the specified list of zones.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   capabilities?: ApiManagementSkuCapabilities[];
 }
 
@@ -9986,6 +9991,7 @@ model SubscriptionKeysContract {
   /**
    * Subscription primary key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxLength(256)
   @minLength(1)
   primaryKey?: string;
@@ -9993,6 +9999,7 @@ model SubscriptionKeysContract {
   /**
    * Subscription secondary key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @maxLength(256)
   @minLength(1)
   secondaryKey?: string;
@@ -10792,7 +10799,7 @@ model ResolverResultContractProperties {
    * This property if only provided as part of the TenantConfiguration_Validate resolver. It contains the log the entities which will be updated/created/deleted as part of the TenantConfiguration_Deploy resolver.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["objectKey"])
+  @identifiers(#["objectKey"])
   actionLog?: ResolverResultLogItemContract[];
 }
 
@@ -10830,7 +10837,7 @@ model OperationListResult {
   /**
    * List of operations supported by the resource provider.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @pageItems
   value?: Operation[];
 

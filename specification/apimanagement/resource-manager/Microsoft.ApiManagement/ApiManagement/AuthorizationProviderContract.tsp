@@ -116,8 +116,6 @@ interface AuthorizationProviderContracts {
   /**
    * Refreshes the Key Vault reference secret for the specified authorization provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationProvider_RefreshSecret")
   refreshSecret is ArmResourceActionSync<
     AuthorizationProviderContract,
     void,

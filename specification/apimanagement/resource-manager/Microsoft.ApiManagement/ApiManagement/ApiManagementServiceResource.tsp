@@ -237,8 +237,8 @@ interface ApiManagementServiceResources {
    * Performs a connectivity check between the API Management service and a given destination, and returns metrics for the connection, as well as errors encountered while trying to establish it.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PerformConnectivityCheckAsync")
   @action("connectivityCheck")
+  @operationId("PerformConnectivityCheckAsync")
   performConnectivityCheckAsync is ArmResourceActionAsync<
     ApiManagementServiceResource,
     ConnectivityCheckRequest,
@@ -309,8 +309,6 @@ interface ApiManagementServiceResources {
   /**
    * Force Refresh the SSL certificate attached to the Custom Hostnames configured using secret from KeyVault on the Api Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementService_RefreshHostnames")
   refreshHostnames is ArmResourceActionAsync<
     ApiManagementServiceResource,
     void,
