@@ -1,58 +1,56 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "",
         "value": [
           {
-            "name": "testAppId",
-            "type": "Microsoft.ApiManagement/service/clientApplications",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId",
+            "type": "Microsoft.ApiManagement/service/clientApplications",
+            "name": "testAppId",
             "properties": {
-              "description": "This is just an example application",
               "displayName": "Test Application",
+              "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userID1",
+              "state": "active",
+              "description": "This is just an example application",
               "entraApplicationId": "00000000-0000-0000-0000-000000000000",
-              "entraTenantId": "00000000-0000-0000-0000-000000000010",
-              "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userID1",
-              "state": "active"
+              "entraTenantId": "00000000-0000-0000-0000-000000000010"
             }
           },
           {
-            "name": "testAppId2",
-            "type": "Microsoft.ApiManagement/service/clientApplications",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId2",
+            "type": "Microsoft.ApiManagement/service/clientApplications",
+            "name": "testAppId2",
             "properties": {
-              "description": "This is just an example application 2",
               "displayName": "Test Application 2",
-              "entraApplicationId": "00000000-0000-0000-0000-000000000001",
-              "entraTenantId": "00000000-0000-0000-0000-000000000011",
               "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userID2",
-              "state": "active"
+              "state": "active",
+              "description": "This is just an example application 2",
+              "entraApplicationId": "00000000-0000-0000-0000-000000000001",
+              "entraTenantId": "00000000-0000-0000-0000-000000000011"
             }
           },
           {
-            "name": "testAppId3",
-            "type": "Microsoft.ApiManagement/service/clientApplications",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/clientApplications/testAppId3",
+            "type": "Microsoft.ApiManagement/service/clientApplications",
+            "name": "testAppId3",
             "properties": {
-              "description": "This is just an example application 3",
               "displayName": "Test Application 3",
-              "entraApplicationId": "00000000-0000-0000-0000-000000000002",
-              "entraTenantId": "00000000-0000-0000-0000-000000000012",
               "ownerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/userID1",
-              "state": "active"
+              "state": "active",
+              "description": "This is just an example application 3",
+              "entraApplicationId": "00000000-0000-0000-0000-000000000002",
+              "entraTenantId": "00000000-0000-0000-0000-000000000012"
             }
           }
-        ]
+        ],
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "ClientApplication_ListByService",
-  "title": "ApiManagementListProducts"
+  }
 }

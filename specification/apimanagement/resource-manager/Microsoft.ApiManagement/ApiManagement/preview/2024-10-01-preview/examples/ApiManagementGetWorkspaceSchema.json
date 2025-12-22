@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
-    "schemaId": "schema1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "schemaId": "schema1"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "schema1",
-        "type": "Microsoft.ApiManagement/service/workspaces/schemas",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/schemas/schema1",
+        "type": "Microsoft.ApiManagement/service/workspaces/schemas",
+        "name": "schema1",
         "properties": {
           "description": "sample schema description",
           "schemaType": "xml",
@@ -20,7 +20,5 @@
         }
       }
     }
-  },
-  "operationId": "WorkspaceGlobalSchema_Get",
-  "title": "ApiManagementGetWorkspaceSchema"
+  }
 }

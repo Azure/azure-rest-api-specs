@@ -1,27 +1,25 @@
 {
   "parameters": {
-    "If-Match": "*",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "userId": "5931a75ae4bbd512288c680b",
+    "If-Match": "*",
     "parameters": {
       "properties": {
+        "url": "http://contoso.com/delegation",
+        "validationKey": "<validationKey>",
         "subscriptions": {
           "enabled": true
         },
-        "url": "http://contoso.com/delegation",
         "userRegistration": {
           "enabled": true
-        },
-        "validationKey": "<validationKey>"
+        }
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "userId": "5931a75ae4bbd512288c680b"
+    }
   },
   "responses": {
     "204": {}
-  },
-  "operationId": "DelegationSettings_Update",
-  "title": "ApiManagementPortalSettingsUpdateDelegation"
+  }
 }

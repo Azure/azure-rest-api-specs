@@ -1,34 +1,32 @@
 {
   "parameters": {
-    "If-Match": "*",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1",
+    "versionSetId": "vs1",
+    "If-Match": "*",
     "parameters": {
       "properties": {
-        "description": "Version configuration",
         "displayName": "api set 1",
-        "versioningScheme": "Segment"
+        "versioningScheme": "Segment",
+        "description": "Version configuration"
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "versionSetId": "vs1",
-    "workspaceId": "wks1"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "vs1",
-        "type": "Microsoft.ApiManagement/service/workspaces.api-version-sets",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apiVersionSets/vs1",
+        "type": "Microsoft.ApiManagement/service/workspaces.api-version-sets",
+        "name": "vs1",
         "properties": {
-          "description": "Version configuration",
           "displayName": "api set 1",
-          "versioningScheme": "Segment"
+          "versioningScheme": "Segment",
+          "description": "Version configuration"
         }
       }
     }
-  },
-  "operationId": "WorkspaceApiVersionSet_Update",
-  "title": "ApiManagementUpdateWorkspaceApiVersionSet"
+  }
 }

@@ -1,6 +1,9 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "backendId": "simple-load-balancer",
     "parameters": {
       "properties": {
@@ -16,19 +19,19 @@
           ]
         }
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "simple-load-balancer",
-        "type": "Microsoft.ApiManagement/service/backends",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/simple-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "simple-load-balancer",
         "properties": {
+          "title": null,
           "type": "Pool",
+          "url": null,
+          "protocol": null,
           "pool": {
             "services": [
               {
@@ -38,20 +41,20 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-2"
               }
             ]
-          },
-          "title": null,
-          "url": null,
-          "protocol": null
+          }
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "simple-load-balancer",
-        "type": "Microsoft.ApiManagement/service/backends",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/simple-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "simple-load-balancer",
         "properties": {
+          "title": null,
           "type": "Pool",
+          "url": null,
+          "protocol": null,
           "pool": {
             "services": [
               {
@@ -61,14 +64,9 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/backend-2"
               }
             ]
-          },
-          "title": null,
-          "url": null,
-          "protocol": null
+          }
         }
       }
     }
-  },
-  "operationId": "Backend_CreateOrUpdate",
-  "title": "ApiManagementCreateBackendWithSimpleLoadBalancer"
+  }
 }

@@ -1,31 +1,29 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "privateEndpointConnectionName": "privateEndpointConnectionName",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "privateEndpointConnectionName": "privateEndpointConnectionName"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "privateEndpointProxyName",
-        "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/privateEndpointConnections/privateEndpointConnectionName",
+        "type": "Microsoft.ApiManagement/service/privateEndpointConnections",
+        "name": "privateEndpointProxyName",
         "properties": {
+          "provisioningState": "Pending",
           "privateEndpoint": {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/privateEndpointName"
           },
           "privateLinkServiceConnectionState": {
+            "status": "Pending",
             "description": "Please approve my request, thanks",
-            "actionsRequired": "None",
-            "status": "Pending"
-          },
-          "provisioningState": "Pending"
+            "actionsRequired": "None"
+          }
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnection_GetByName",
-  "title": "ApiManagementGetPrivateEndpointConnection"
+  }
 }

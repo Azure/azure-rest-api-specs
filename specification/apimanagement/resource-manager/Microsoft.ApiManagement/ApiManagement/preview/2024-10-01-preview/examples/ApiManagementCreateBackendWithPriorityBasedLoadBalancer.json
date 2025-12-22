@@ -1,6 +1,9 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "backendId": "priority-based-load-balancer",
     "parameters": {
       "properties": {
@@ -26,19 +29,19 @@
           ]
         }
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "priority-based-load-balancer",
-        "type": "Microsoft.ApiManagement/service/backends",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/priority-based-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "priority-based-load-balancer",
         "properties": {
+          "title": null,
           "type": "Pool",
+          "url": null,
+          "protocol": null,
           "pool": {
             "services": [
               {
@@ -58,20 +61,20 @@
                 "priority": 2
               }
             ]
-          },
-          "title": null,
-          "url": null,
-          "protocol": null
+          }
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "priority-based-load-balancer",
-        "type": "Microsoft.ApiManagement/service/backends",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/priority-based-load-balancer",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "name": "priority-based-load-balancer",
         "properties": {
+          "title": null,
           "type": "Pool",
+          "url": null,
+          "protocol": null,
           "pool": {
             "services": [
               {
@@ -91,14 +94,9 @@
                 "priority": 2
               }
             ]
-          },
-          "title": null,
-          "url": null,
-          "protocol": null
+          }
         }
       }
     }
-  },
-  "operationId": "Backend_CreateOrUpdate",
-  "title": "ApiManagementCreateBackendWithPriorityBasedLoadBalancer"
+  }
 }

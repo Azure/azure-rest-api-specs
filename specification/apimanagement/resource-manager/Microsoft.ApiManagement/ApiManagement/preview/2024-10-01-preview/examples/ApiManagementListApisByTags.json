@@ -1,33 +1,31 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 1,
         "value": [
           {
-            "api": {
-              "name": "Echo API",
-              "path": "echo",
-              "apiRevision": "1",
-              "id": "/apis/echo-api",
-              "isCurrent": true,
-              "serviceUrl": "http://echoapi.cloudapp.net/api"
-            },
             "tag": {
-              "name": "awesomeTag",
-              "id": "/tags/apitag123"
+              "id": "/tags/apitag123",
+              "name": "awesomeTag"
+            },
+            "api": {
+              "id": "/apis/echo-api",
+              "name": "Echo API",
+              "apiRevision": "1",
+              "serviceUrl": "http://echoapi.cloudapp.net/api",
+              "path": "echo",
+              "isCurrent": true
             }
           }
-        ]
+        ],
+        "count": 1
       }
     }
-  },
-  "operationId": "Api_ListByTags",
-  "title": "ApiManagementListApisByTags"
+  }
 }

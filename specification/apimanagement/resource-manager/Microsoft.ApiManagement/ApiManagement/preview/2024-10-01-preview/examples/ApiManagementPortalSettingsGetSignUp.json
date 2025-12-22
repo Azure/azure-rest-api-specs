@@ -1,27 +1,25 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "signup",
-        "type": "Microsoft.ApiManagement/service/portalsettings",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signup",
+        "type": "Microsoft.ApiManagement/service/portalsettings",
+        "name": "signup",
         "properties": {
           "enabled": true,
           "termsOfService": {
-            "consentRequired": true,
+            "text": "Terms of service text.",
             "enabled": true,
-            "text": "Terms of service text."
+            "consentRequired": true
           }
         }
       }
     }
-  },
-  "operationId": "SignUpSettings_Get",
-  "title": "ApiManagementPortalSettingsGetSignUp"
+  }
 }

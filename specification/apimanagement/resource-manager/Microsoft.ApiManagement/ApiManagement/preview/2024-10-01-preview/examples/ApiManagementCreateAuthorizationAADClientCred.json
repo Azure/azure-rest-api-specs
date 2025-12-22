@@ -1,8 +1,11 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "authorizationId": "authz1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "authorizationProviderId": "aadwithclientcred",
+    "authorizationId": "authz1",
     "parameters": {
       "properties": {
         "authorizationType": "OAuth2",
@@ -12,17 +15,14 @@
           "clientSecret": "clientsecretvalue"
         }
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "authz1",
-        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz1",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz1",
         "properties": {
           "authorizationType": "OAuth2",
           "oauth2grantType": "ClientCredentials",
@@ -33,11 +33,11 @@
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "authz1",
-        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithclientcred/authorizations/authz1",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz1",
         "properties": {
           "authorizationType": "OAuth2",
           "oauth2grantType": "ClientCredentials",
@@ -48,7 +48,5 @@
         }
       }
     }
-  },
-  "operationId": "Authorization_CreateOrUpdate",
-  "title": "ApiManagementCreateAuthorizationAADClientCred"
+  }
 }

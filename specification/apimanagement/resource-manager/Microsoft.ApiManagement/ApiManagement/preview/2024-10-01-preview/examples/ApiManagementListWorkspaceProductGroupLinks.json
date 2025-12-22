@@ -1,30 +1,28 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "productId": "product1",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "productId": "product1"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 1,
-        "nextLink": "",
         "value": [
           {
-            "name": "link1",
-            "type": "Microsoft.ApiManagement/service/workspaces.products/groupLinks",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/product1/groupLinks/link1",
+            "type": "Microsoft.ApiManagement/service/workspaces.products/groupLinks",
+            "name": "link1",
             "properties": {
               "groupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/groups/group1"
             }
           }
-        ]
+        ],
+        "count": 1,
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "WorkspaceProductGroupLink_ListByProduct",
-  "title": "ApiManagementListWorkspaceProductGroupLinks"
+  }
 }

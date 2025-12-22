@@ -1,33 +1,31 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
     "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 1,
-        "nextLink": "",
         "value": [
           {
-            "name": "templateOpenIdConnect2",
-            "type": "Microsoft.ApiManagement/service/openidconnectproviders",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/openidConnectProviders/templateOpenIdConnect2",
+            "type": "Microsoft.ApiManagement/service/openidconnectproviders",
+            "name": "templateOpenIdConnect2",
             "properties": {
-              "description": "open id provider template2",
-              "clientId": "oidprovidertemplate2",
               "displayName": "templateoidprovider2",
+              "description": "open id provider template2",
               "metadataEndpoint": "https://oidprovider-template2.net",
-              "useInApiDocumentation": true,
-              "useInTestConsole": false
+              "clientId": "oidprovidertemplate2",
+              "useInTestConsole": false,
+              "useInApiDocumentation": true
             }
           }
-        ]
+        ],
+        "count": 1,
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "OpenIdConnectProvider_ListByService",
-  "title": "ApiManagementListOpenIdConnectProviders"
+  }
 }

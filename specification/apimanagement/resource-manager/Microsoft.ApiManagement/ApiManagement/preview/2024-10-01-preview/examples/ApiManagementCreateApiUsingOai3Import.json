@@ -1,72 +1,70 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "apiId": "petstore",
     "parameters": {
       "properties": {
         "format": "openapi-link",
-        "path": "petstore",
-        "value": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml"
-      }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "petstoreapi",
-        "type": "Microsoft.ApiManagement/service/apis",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
-        "properties": {
-          "path": "petstore",
-          "apiRevision": "1",
-          "displayName": "Swagger Petstore",
-          "isCurrent": true,
-          "protocols": [
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://petstore.swagger.io/v1",
-          "subscriptionKeyParameterNames": {
-            "header": "Ocp-Apim-Subscription-Key",
-            "query": "subscription-key"
-          }
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
-      }
-    },
-    "201": {
-      "body": {
-        "name": "petstoreapi",
-        "type": "Microsoft.ApiManagement/service/apis",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
-        "properties": {
-          "path": "petstore",
-          "apiRevision": "1",
-          "displayName": "Swagger Petstore",
-          "isCurrent": true,
-          "protocols": [
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://petstore.swagger.io/v1",
-          "subscriptionKeyParameterNames": {
-            "header": "Ocp-Apim-Subscription-Key",
-            "query": "subscription-key"
-          }
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+        "value": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml",
+        "path": "petstore"
       }
     }
   },
-  "operationId": "Api_CreateOrUpdate",
-  "title": "ApiManagementCreateApiUsingOai3Import"
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "petstoreapi",
+        "properties": {
+          "displayName": "Swagger Petstore",
+          "apiRevision": "1",
+          "serviceUrl": "http://petstore.swagger.io/v1",
+          "path": "petstore",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "petstoreapi",
+        "properties": {
+          "displayName": "Swagger Petstore",
+          "apiRevision": "1",
+          "serviceUrl": "http://petstore.swagger.io/v1",
+          "path": "petstore",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
 }

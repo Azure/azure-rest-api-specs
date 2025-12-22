@@ -1,35 +1,33 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "email": "foobar@live.com",
-    "notificationName": "RequestPublisherNotificationMessage",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "notificationName": "RequestPublisherNotificationMessage",
+    "email": "foobar@live.com"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "foobar@live.com",
-        "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar@live.com",
+        "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
+        "name": "foobar@live.com",
         "properties": {
           "email": "foobar@live.com"
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "foobar@live.com",
-        "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage/recipientEmails/foobar@live.com",
+        "type": "Microsoft.ApiManagement/service/workspaces/notifications/recipientEmails",
+        "name": "foobar@live.com",
         "properties": {
           "email": "foobar@live.com"
         }
       }
     }
-  },
-  "operationId": "WorkspaceNotificationRecipientEmail_CreateOrUpdate",
-  "title": "ApiManagementCreateWorkspaceNotificationRecipientEmail"
+  }
 }

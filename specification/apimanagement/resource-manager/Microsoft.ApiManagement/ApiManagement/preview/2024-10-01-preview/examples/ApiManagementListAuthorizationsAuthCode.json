@@ -1,20 +1,19 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "authorizationProviderId": "aadwithauthcode",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "authorizationProviderId": "aadwithauthcode"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "",
         "value": [
           {
-            "name": "authz1",
-            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz1",
+            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+            "name": "authz1",
             "properties": {
               "authorizationType": "OAuth2",
               "oauth2grantType": "AuthorizationCode",
@@ -22,23 +21,22 @@
             }
           },
           {
-            "name": "authz2",
-            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz2",
+            "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+            "name": "authz2",
             "properties": {
               "authorizationType": "OAuth2",
+              "oauth2grantType": "AuthorizationCode",
+              "status": "Error",
               "error": {
                 "code": "Unauthenticated",
                 "message": "This connection is not authenticated."
-              },
-              "oauth2grantType": "AuthorizationCode",
-              "status": "Error"
+              }
             }
           }
-        ]
+        ],
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "Authorization_ListByAuthorizationProvider",
-  "title": "ApiManagementListAuthorizationsAuthCode"
+  }
 }

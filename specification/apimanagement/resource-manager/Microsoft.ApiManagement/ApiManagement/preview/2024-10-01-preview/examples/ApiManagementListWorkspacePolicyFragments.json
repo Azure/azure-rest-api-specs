@@ -1,31 +1,29 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "workspaceId": "wks1"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 1,
-        "nextLink": "",
         "value": [
           {
-            "name": "policyFragment1",
-            "type": "Microsoft.ApiManagement/service/workspaces/policyFragments",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/policyFragments/policyFragment1",
+            "type": "Microsoft.ApiManagement/service/workspaces/policyFragments",
+            "name": "policyFragment1",
             "properties": {
               "format": "xml",
               "description": "A policy fragment example",
               "value": "<fragment><json-to-xml apply=\"always\" consider-accept-header=\"false\" /></fragment>"
             }
           }
-        ]
+        ],
+        "count": 1,
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "WorkspacePolicyFragment_ListByService",
-  "title": "ApiManagementListWorkspacePolicyFragments"
+  }
 }

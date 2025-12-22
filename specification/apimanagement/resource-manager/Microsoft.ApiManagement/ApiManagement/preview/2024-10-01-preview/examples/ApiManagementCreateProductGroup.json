@@ -1,40 +1,38 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "groupId": "templateGroup",
-    "productId": "testproduct",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "productId": "testproduct",
+    "groupId": "templateGroup"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "templateGroup",
-        "type": "Microsoft.ApiManagement/service/products/groups",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "name": "templateGroup",
         "properties": {
-          "type": "custom",
+          "displayName": "Template Group",
           "description": "group created via Template",
           "builtIn": false,
-          "displayName": "Template Group"
+          "type": "custom"
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "templateGroup",
-        "type": "Microsoft.ApiManagement/service/products/groups",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "name": "templateGroup",
         "properties": {
-          "type": "custom",
+          "displayName": "Template Group",
           "description": "group created via Template",
           "builtIn": false,
-          "displayName": "Template Group"
+          "type": "custom"
         }
       }
     }
-  },
-  "operationId": "ProductGroup_CreateOrUpdate",
-  "title": "ApiManagementCreateProductGroup"
+  }
 }

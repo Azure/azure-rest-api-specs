@@ -1,21 +1,19 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "workspaceId": "wks1"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 2,
-        "nextLink": "",
         "value": [
           {
-            "name": "schema1",
-            "type": "Microsoft.ApiManagement/service/workspaces/schemas",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/schemas/schema1",
+            "type": "Microsoft.ApiManagement/service/workspaces/schemas",
+            "name": "schema1",
             "properties": {
               "description": "sample schema description",
               "schemaType": "xml",
@@ -23,21 +21,18 @@
             }
           },
           {
-            "name": "schema2",
-            "type": "Microsoft.ApiManagement/service/workspaces/schemas",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/schemas/schema2",
+            "type": "Microsoft.ApiManagement/service/workspaces/schemas",
+            "name": "schema2",
             "properties": {
               "description": "sample schema description",
+              "schemaType": "json",
               "document": {
-                "type": "object",
                 "$id": "https://example.com/person.schema.json",
                 "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "title": "Person",
+                "type": "object",
                 "properties": {
-                  "age": {
-                    "type": "integer",
-                    "description": "Age in years which must be equal to or greater than zero.",
-                    "minimum": 0
-                  },
                   "firstName": {
                     "type": "string",
                     "description": "The person's first name."
@@ -45,17 +40,20 @@
                   "lastName": {
                     "type": "string",
                     "description": "The person's last name."
+                  },
+                  "age": {
+                    "description": "Age in years which must be equal to or greater than zero.",
+                    "type": "integer",
+                    "minimum": 0
                   }
-                },
-                "title": "Person"
-              },
-              "schemaType": "json"
+                }
+              }
             }
           }
-        ]
+        ],
+        "count": 2,
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "WorkspaceGlobalSchema_ListByService",
-  "title": "ApiManagementListWorkspaceSchemas"
+  }
 }

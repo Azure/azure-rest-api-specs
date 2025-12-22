@@ -1,14 +1,10 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "parameters": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {}
-        }
-      },
-      "location": "West US",
       "properties": {
         "publisherEmail": "apim@autorestsdk.com",
         "publisherName": "autorestsdk"
@@ -17,138 +13,140 @@
         "name": "Consumption",
         "capacity": 0
       },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {}
+        }
+      },
+      "location": "West US",
       "tags": {
         "tag1": "value1",
         "tag2": "value2",
         "tag3": "value3"
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-10-01-preview&asyncResponse",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-10-01-preview&asyncResponse"
+      },
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
-        "etag": "AAAAAAAFzyk=",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
-        "identity": {
-          "type": "UserAssigned",
-          "tenantId": "00000000-86f1-41af-0000-2d7cd011db47",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {
-              "clientId": "5a2c6b8e-0905-0000-a772-993c9418137f",
-              "principalId": "00000000-6e62-4649-9f54-a119fc1ba85e"
-            }
-          }
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
         },
         "location": "West US",
+        "etag": "AAAAAAAFzyQ=",
         "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Created",
+          "targetProvisioningState": "Activating",
           "createdAtUtc": "2020-03-12T01:05:33.4573398Z",
-          "customProperties": {
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
-            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False"
-          },
-          "disableGateway": false,
-          "gatewayUrl": "https://apimService1.azure-api.net",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
-              "certificateSource": "BuiltIn",
-              "defaultSslBinding": true,
               "hostName": "apimService1.azure-api.net",
-              "negotiateClientCertificate": false
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true,
+              "certificateSource": "BuiltIn"
             }
           ],
-          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
-          "platformVersion": "mtv1",
-          "provisioningState": "Succeeded",
-          "publisherEmail": "apim@autorestsdk.com",
-          "publisherName": "autorestsdk",
-          "targetProvisioningState": "",
-          "virtualNetworkType": "None"
+          "virtualNetworkType": "None",
+          "platformVersion": "mtv1"
         },
         "sku": {
           "name": "Consumption",
           "capacity": 0
         },
-        "systemData": {
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
-          "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "apimService1",
-        "type": "Microsoft.ApiManagement/service",
-        "etag": "AAAAAAAFzyQ=",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {}
           }
         },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
         "location": "West US",
+        "etag": "AAAAAAAFzyk=",
         "properties": {
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
           "createdAtUtc": "2020-03-12T01:05:33.4573398Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
-              "certificateSource": "BuiltIn",
-              "defaultSslBinding": true,
               "hostName": "apimService1.azure-api.net",
-              "negotiateClientCertificate": false
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true,
+              "certificateSource": "BuiltIn"
             }
           ],
-          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
-          "platformVersion": "mtv1",
-          "provisioningState": "Created",
-          "publisherEmail": "apim@autorestsdk.com",
-          "publisherName": "autorestsdk",
-          "targetProvisioningState": "Activating",
-          "virtualNetworkType": "None"
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "platformVersion": "mtv1"
         },
         "sku": {
           "name": "Consumption",
           "capacity": 0
         },
+        "identity": {
+          "type": "UserAssigned",
+          "tenantId": "00000000-86f1-41af-0000-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {
+              "principalId": "00000000-6e62-4649-9f54-a119fc1ba85e",
+              "clientId": "5a2c6b8e-0905-0000-a772-993c9418137f"
+            }
+          }
+        },
         "systemData": {
-          "createdAt": "2020-02-01T01:01:01.1075056Z",
           "createdBy": "string",
           "createdByType": "Application",
-          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z",
+          "createdAt": "2020-02-01T01:01:01.1075056Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-02-02T02:03:01.1974346Z"
         }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-10-01-preview&asyncResponse",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/ZWFzdHVzOmFuZHktdGVzdGluZy0yMDIyLTA0LTAxLXByZXZpZXctNF9BY3RfODQ2ZWE4Ng==?api-version=2024-10-01-preview&asyncResponse"
       }
     }
-  },
-  "operationId": "ApiManagementService_CreateOrUpdate",
-  "title": "ApiManagementCreateServiceWithUserAssignedIdentity"
+  }
 }

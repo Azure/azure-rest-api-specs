@@ -1,41 +1,39 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1",
     "groupId": "tempgroup",
     "parameters": {
       "properties": {
         "displayName": "temp group"
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "tempgroup",
-        "type": "Microsoft.ApiManagement/service/workspaces/groups",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/groups/tempgroup",
+        "type": "Microsoft.ApiManagement/service/workspaces/groups",
+        "name": "tempgroup",
         "properties": {
-          "type": "custom",
-          "displayName": "temp group"
+          "displayName": "temp group",
+          "type": "custom"
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "tempgroup",
-        "type": "Microsoft.ApiManagement/service/workspaces/groups",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/groups/tempgroup",
+        "type": "Microsoft.ApiManagement/service/workspaces/groups",
+        "name": "tempgroup",
         "properties": {
-          "type": "custom",
-          "displayName": "temp group"
+          "displayName": "temp group",
+          "type": "custom"
         }
       }
     }
-  },
-  "operationId": "WorkspaceGroup_CreateOrUpdate",
-  "title": "ApiManagementCreateWorkspaceGroup"
+  }
 }

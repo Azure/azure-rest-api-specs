@@ -1,52 +1,50 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "authorizationId": "authz2",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "authorizationProviderId": "aadwithauthcode",
+    "authorizationId": "authz2",
     "parameters": {
       "properties": {
         "authorizationType": "OAuth2",
         "oauth2grantType": "AuthorizationCode"
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "authz2",
-        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz2",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz2",
         "properties": {
           "authorizationType": "OAuth2",
+          "oauth2grantType": "AuthorizationCode",
+          "status": "Error",
           "error": {
             "code": "Unauthenticated",
             "message": "This connection is not authenticated."
-          },
-          "oauth2grantType": "AuthorizationCode",
-          "status": "Error"
+          }
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "authz2",
-        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationProviders/aadwithauthcode/authorizations/authz2",
+        "type": "Microsoft.ApiManagement/service/authorizationProviders/authorizations",
+        "name": "authz2",
         "properties": {
           "authorizationType": "OAuth2",
+          "oauth2grantType": "AuthorizationCode",
+          "status": "Error",
           "error": {
             "code": "Unauthenticated",
             "message": "This connection is not authenticated."
-          },
-          "oauth2grantType": "AuthorizationCode",
-          "status": "Error"
+          }
         }
       }
     }
-  },
-  "operationId": "Authorization_CreateOrUpdate",
-  "title": "ApiManagementCreateAuthorizationAADAuthCode"
+  }
 }

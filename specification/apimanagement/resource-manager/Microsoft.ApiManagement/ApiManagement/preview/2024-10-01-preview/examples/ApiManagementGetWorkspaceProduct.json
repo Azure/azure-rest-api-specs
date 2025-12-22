@@ -1,29 +1,27 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "productId": "unlimited",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "productId": "unlimited"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "unlimited",
-        "type": "Microsoft.ApiManagement/service/workspaces/products",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/unlimited",
+        "type": "Microsoft.ApiManagement/service/workspaces/products",
+        "name": "unlimited",
         "properties": {
-          "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
-          "approvalRequired": true,
           "displayName": "Unlimited",
-          "state": "published",
+          "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
           "subscriptionRequired": true,
-          "subscriptionsLimit": 1
+          "approvalRequired": true,
+          "subscriptionsLimit": 1,
+          "state": "published"
         }
       }
     }
-  },
-  "operationId": "WorkspaceProduct_Get",
-  "title": "ApiManagementGetWorkspaceProduct"
+  }
 }

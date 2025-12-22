@@ -1,10 +1,12 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "apiId": "tempgroup",
     "parameters": {
       "properties": {
-        "path": "newapiPath",
         "description": "apidescription5200",
         "authenticationSettings": {
           "oAuth2AuthenticationSettings": [
@@ -18,32 +20,69 @@
             }
           ]
         },
-        "displayName": "apiname1463",
-        "protocols": [
-          "https",
-          "http"
-        ],
-        "serviceUrl": "http://newechoapi.cloudapp.net/api",
         "subscriptionKeyParameterNames": {
           "header": "header4520",
           "query": "query3037"
+        },
+        "displayName": "apiname1463",
+        "serviceUrl": "http://newechoapi.cloudapp.net/api",
+        "path": "newapiPath",
+        "protocols": [
+          "https",
+          "http"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apiid9419",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "apiid9419",
+        "properties": {
+          "displayName": "apiname1463",
+          "apiRevision": "1",
+          "description": "apidescription5200",
+          "serviceUrl": "http://newechoapi.cloudapp.net/api",
+          "path": "newapiPath",
+          "protocols": [
+            "http",
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "header4520",
+            "query": "query3037"
+          },
+          "isCurrent": true,
+          "isOnline": true,
+          "provisioningState": "InProgress"
         }
       }
     },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
-  },
-  "responses": {
     "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
       "body": {
-        "name": "apiid9419",
-        "type": "Microsoft.ApiManagement/service/apis",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apiid9419",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "apiid9419",
         "properties": {
-          "path": "newapiPath",
-          "description": "apidescription5200",
+          "displayName": "apiname1463",
           "apiRevision": "1",
+          "description": "apidescription5200",
+          "serviceUrl": "http://newechoapi.cloudapp.net/api",
+          "path": "newapiPath",
+          "protocols": [
+            "http",
+            "https"
+          ],
           "authenticationSettings": {
             "oAuth2": {
               "authorizationServerId": "authorizationServerId2283",
@@ -60,56 +99,15 @@
               }
             ]
           },
-          "displayName": "apiname1463",
-          "isCurrent": true,
-          "isOnline": true,
-          "protocols": [
-            "http",
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://newechoapi.cloudapp.net/api",
           "subscriptionKeyParameterNames": {
             "header": "header4520",
             "query": "query3037"
-          }
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
-      }
-    },
-    "201": {
-      "body": {
-        "name": "apiid9419",
-        "type": "Microsoft.ApiManagement/service/apis",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/apiid9419",
-        "properties": {
-          "path": "newapiPath",
-          "description": "apidescription5200",
-          "apiRevision": "1",
-          "displayName": "apiname1463",
+          },
           "isCurrent": true,
           "isOnline": true,
-          "protocols": [
-            "http",
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://newechoapi.cloudapp.net/api",
-          "subscriptionKeyParameterNames": {
-            "header": "header4520",
-            "query": "query3037"
-          }
+          "provisioningState": "InProgress"
         }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
       }
     }
-  },
-  "operationId": "Api_CreateOrUpdate",
-  "title": "ApiManagementCreateApiWithMultipleAuthServers"
+  }
 }

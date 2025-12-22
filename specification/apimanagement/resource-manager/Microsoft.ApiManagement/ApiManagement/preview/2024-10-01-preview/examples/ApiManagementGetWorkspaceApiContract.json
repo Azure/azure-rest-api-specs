@@ -1,22 +1,26 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "apiId": "57d1f7558aa04f15146d9d8a",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "apiId": "57d1f7558aa04f15146d9d8a"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "57d1f7558aa04f15146d9d8a",
-        "type": "Microsoft.ApiManagement/service/workspaces/apis",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apis/57d1f7558aa04f15146d9d8a",
+        "type": "Microsoft.ApiManagement/service/workspaces/apis",
+        "name": "57d1f7558aa04f15146d9d8a",
         "properties": {
-          "type": "soap",
-          "path": "schulte",
+          "displayName": "Service",
           "apiRevision": "1",
+          "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
+          "path": "schulte",
+          "protocols": [
+            "https"
+          ],
           "authenticationSettings": {
             "oAuth2": {
               "authorizationServerId": "authorizationServerId2283",
@@ -33,21 +37,15 @@
               }
             ]
           },
-          "displayName": "Service",
-          "isCurrent": true,
-          "isOnline": true,
-          "protocols": [
-            "https"
-          ],
-          "serviceUrl": "https://api.plexonline.com/DataSource/Service.asmx",
           "subscriptionKeyParameterNames": {
             "header": "Ocp-Apim-Subscription-Key",
             "query": "subscription-key"
-          }
+          },
+          "type": "soap",
+          "isCurrent": true,
+          "isOnline": true
         }
       }
     }
-  },
-  "operationId": "WorkspaceApi_Get",
-  "title": "ApiManagementGetWorkspaceApiContract"
+  }
 }

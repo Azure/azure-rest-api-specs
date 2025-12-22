@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "If-Match": "*",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "portalConfigId": "default",
+    "If-Match": "*",
     "parameters": {
       "properties": {
-        "cors": {
-          "allowedOrigins": [
-            "https://contoso.com"
-          ]
+        "enableBasicAuth": true,
+        "signin": {
+          "require": false
         },
-        "csp": {
-          "allowedSources": [
-            "*.contoso.com"
-          ],
-          "mode": "reportOnly",
-          "reportUri": [
-            "https://report.contoso.com"
-          ]
+        "signup": {
+          "termsOfService": {
+            "text": "I agree to the service terms and conditions.",
+            "requireConsent": false
+          }
         },
         "delegation": {
           "delegateRegistration": false,
@@ -24,43 +24,39 @@
           "delegationUrl": null,
           "validationKey": null
         },
-        "enableBasicAuth": true,
-        "signin": {
-          "require": false
+        "csp": {
+          "mode": "reportOnly",
+          "reportUri": [
+            "https://report.contoso.com"
+          ],
+          "allowedSources": [
+            "*.contoso.com"
+          ]
         },
-        "signup": {
-          "termsOfService": {
-            "requireConsent": false,
-            "text": "I agree to the service terms and conditions."
-          }
+        "cors": {
+          "allowedOrigins": [
+            "https://contoso.com"
+          ]
         }
       }
-    },
-    "portalConfigId": "default",
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "default",
-        "type": "Microsoft.ApiManagement/service/portalconfigs",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalconfigs/default",
+        "type": "Microsoft.ApiManagement/service/portalconfigs",
+        "name": "default",
         "properties": {
-          "cors": {
-            "allowedOrigins": [
-              "https://contoso.com"
-            ]
+          "enableBasicAuth": true,
+          "signin": {
+            "require": false
           },
-          "csp": {
-            "allowedSources": [
-              "*.contoso.com"
-            ],
-            "mode": "reportOnly",
-            "reportUri": [
-              "https://report.contoso.com"
-            ]
+          "signup": {
+            "termsOfService": {
+              "text": "I agree to the service terms and conditions.",
+              "requireConsent": false
+            }
           },
           "delegation": {
             "delegateRegistration": false,
@@ -68,20 +64,22 @@
             "delegationUrl": null,
             "validationKey": null
           },
-          "enableBasicAuth": true,
-          "signin": {
-            "require": false
+          "csp": {
+            "mode": "reportOnly",
+            "reportUri": [
+              "https://report.contoso.com"
+            ],
+            "allowedSources": [
+              "*.contoso.com"
+            ]
           },
-          "signup": {
-            "termsOfService": {
-              "requireConsent": false,
-              "text": "I agree to the service terms and conditions."
-            }
+          "cors": {
+            "allowedOrigins": [
+              "https://contoso.com"
+            ]
           }
         }
       }
     }
-  },
-  "operationId": "PortalConfig_Update",
-  "title": "ApiManagementUpdatePortalConfig"
+  }
 }

@@ -1,161 +1,159 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "diagnosticId": "applicationinsights",
     "parameters": {
       "properties": {
         "alwaysLog": "allErrors",
-        "backend": {
-          "response": {
-            "body": {
-              "bytes": 512
-            },
-            "headers": [
-              "Content-type"
-            ]
-          },
-          "request": {
-            "body": {
-              "bytes": 512
-            },
-            "headers": [
-              "Content-type"
-            ]
-          }
-        },
-        "frontend": {
-          "response": {
-            "body": {
-              "bytes": 512
-            },
-            "headers": [
-              "Content-type"
-            ]
-          },
-          "request": {
-            "body": {
-              "bytes": 512
-            },
-            "headers": [
-              "Content-type"
-            ]
-          }
-        },
         "loggerId": "/loggers/azuremonitor",
         "sampling": {
-          "percentage": 50,
-          "samplingType": "fixed"
-        }
-      }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "applicationinsights",
-        "type": "Microsoft.ApiManagement/service/diagnostics",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
-        "properties": {
-          "alwaysLog": "allErrors",
-          "backend": {
-            "response": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
-            },
-            "request": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
+          "samplingType": "fixed",
+          "percentage": 50
+        },
+        "frontend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
             }
           },
-          "frontend": {
-            "response": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
-            },
-            "request": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
             }
-          },
-          "loggerId": "/loggers/applicationinsights",
-          "sampling": {
-            "percentage": 50,
-            "samplingType": "fixed"
           }
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "applicationinsights",
-        "type": "Microsoft.ApiManagement/service/diagnostics",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
-        "properties": {
-          "alwaysLog": "allErrors",
-          "backend": {
-            "response": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
-            },
-            "request": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
+        },
+        "backend": {
+          "request": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
             }
           },
-          "frontend": {
-            "response": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
-            },
-            "request": {
-              "body": {
-                "bytes": 512
-              },
-              "headers": [
-                "Content-type"
-              ]
+          "response": {
+            "headers": [
+              "Content-type"
+            ],
+            "body": {
+              "bytes": 512
             }
-          },
-          "loggerId": "/loggers/azuremonitor",
-          "sampling": {
-            "percentage": 50,
-            "samplingType": "fixed"
           }
         }
       }
     }
   },
-  "operationId": "Diagnostic_CreateOrUpdate",
-  "title": "ApiManagementCreateDiagnostic"
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
+        "type": "Microsoft.ApiManagement/service/diagnostics",
+        "name": "applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "loggerId": "/loggers/azuremonitor",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 50
+          },
+          "frontend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/diagnostics/applicationinsights",
+        "type": "Microsoft.ApiManagement/service/diagnostics",
+        "name": "applicationinsights",
+        "properties": {
+          "alwaysLog": "allErrors",
+          "loggerId": "/loggers/applicationinsights",
+          "sampling": {
+            "samplingType": "fixed",
+            "percentage": 50
+          },
+          "frontend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            },
+            "response": {
+              "headers": [
+                "Content-type"
+              ],
+              "body": {
+                "bytes": 512
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

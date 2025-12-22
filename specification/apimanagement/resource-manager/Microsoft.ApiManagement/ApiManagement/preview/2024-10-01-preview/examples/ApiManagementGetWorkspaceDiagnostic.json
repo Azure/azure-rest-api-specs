@@ -1,59 +1,57 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "diagnosticId": "applicationinsights",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
+    "workspaceId": "wks1",
+    "diagnosticId": "applicationinsights"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "applicationinsights",
-        "type": "Microsoft.ApiManagement/service/workspaces/diagnostics",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/diagnostics/applicationinsights",
+        "type": "Microsoft.ApiManagement/service/workspaces/diagnostics",
+        "name": "applicationinsights",
         "properties": {
           "alwaysLog": "allErrors",
-          "backend": {
-            "response": {
-              "body": {
-                "bytes": 100
-              },
-              "headers": []
-            },
-            "request": {
-              "body": {
-                "bytes": 100
-              },
-              "headers": []
-            }
-          },
-          "frontend": {
-            "response": {
-              "body": {
-                "bytes": 100
-              },
-              "headers": []
-            },
-            "request": {
-              "body": {
-                "bytes": 100
-              },
-              "headers": []
-            }
-          },
           "httpCorrelationProtocol": "Legacy",
           "logClientIp": true,
           "loggerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/loggers/aisamplingtest",
           "sampling": {
-            "percentage": 100,
-            "samplingType": "fixed"
+            "samplingType": "fixed",
+            "percentage": 100
+          },
+          "frontend": {
+            "request": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            },
+            "response": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            }
+          },
+          "backend": {
+            "request": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            },
+            "response": {
+              "headers": [],
+              "body": {
+                "bytes": 100
+              }
+            }
           }
         }
       }
     }
-  },
-  "operationId": "WorkspaceDiagnostic_Get",
-  "title": "ApiManagementGetWorkspaceDiagnostic"
+  }
 }

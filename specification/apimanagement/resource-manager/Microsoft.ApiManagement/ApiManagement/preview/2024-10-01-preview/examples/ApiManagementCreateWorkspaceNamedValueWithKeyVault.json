@@ -1,6 +1,10 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1",
     "namedValueId": "testprop6",
     "parameters": {
       "properties": {
@@ -9,76 +13,70 @@
           "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
           "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
         },
-        "secret": true,
         "tags": [
           "foo",
           "bar"
-        ]
-      }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "testprop6",
-        "type": "Microsoft.ApiManagement/service/workspaces/namedValues",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6",
-        "properties": {
-          "displayName": "prop6namekv",
-          "keyVault": {
-            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
-            "lastStatus": {
-              "code": "Success",
-              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
-            },
-            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
-          },
-          "provisioningState": "InProgress",
-          "secret": true,
-          "tags": [
-            "foo",
-            "bar"
-          ]
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
-      }
-    },
-    "201": {
-      "body": {
-        "name": "testprop6",
-        "type": "Microsoft.ApiManagement/service/workspaces/namedValues",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6",
-        "properties": {
-          "displayName": "prop6namekv",
-          "keyVault": {
-            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
-            "lastStatus": {
-              "code": "Success",
-              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
-            },
-            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret"
-          },
-          "provisioningState": "InProgress",
-          "secret": true,
-          "tags": [
-            "foo",
-            "bar"
-          ]
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+        ],
+        "secret": true
       }
     }
   },
-  "operationId": "WorkspaceNamedValue_CreateOrUpdate",
-  "title": "ApiManagementCreateWorkspaceNamedValueWithKeyVault"
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6",
+        "type": "Microsoft.ApiManagement/service/workspaces/namedValues",
+        "name": "testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            }
+          },
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/namedValues/testprop6",
+        "type": "Microsoft.ApiManagement/service/workspaces/namedValues",
+        "name": "testprop6",
+        "properties": {
+          "displayName": "prop6namekv",
+          "keyVault": {
+            "secretIdentifier": "https://contoso.vault.azure.net/secrets/aadSecret",
+            "identityClientId": "ceaa6b06-c00f-43ef-99ac-f53d1fe876a0",
+            "lastStatus": {
+              "code": "Success",
+              "timeStampUtc": "2020-09-11T00:54:31.8024882Z"
+            }
+          },
+          "tags": [
+            "foo",
+            "bar"
+          ],
+          "secret": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
 }

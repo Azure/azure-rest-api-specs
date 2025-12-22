@@ -1,74 +1,72 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "apiId": "petstore",
     "parameters": {
       "properties": {
         "format": "wadl-link-json",
-        "path": "collector",
-        "value": "https://developer.cisco.com/media/wae-release-6-2-api-reference/wae-collector-rest-api/application.wadl"
-      }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "collectorwadl",
-        "type": "Microsoft.ApiManagement/service/apis",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
-        "properties": {
-          "path": "collector",
-          "description": "",
-          "apiRevision": "1",
-          "displayName": "http://localhost:8080/collector-northbound",
-          "isCurrent": true,
-          "protocols": [
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://localhost:8080/collector-northbound",
-          "subscriptionKeyParameterNames": {
-            "header": "Ocp-Apim-Subscription-Key",
-            "query": "subscription-key"
-          }
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
-      }
-    },
-    "201": {
-      "body": {
-        "name": "collectorwadl",
-        "type": "Microsoft.ApiManagement/service/apis",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
-        "properties": {
-          "path": "collector",
-          "description": "",
-          "apiRevision": "1",
-          "displayName": "http://localhost:8080/collector-northbound",
-          "isCurrent": true,
-          "protocols": [
-            "https"
-          ],
-          "provisioningState": "InProgress",
-          "serviceUrl": "http://localhost:8080/collector-northbound",
-          "subscriptionKeyParameterNames": {
-            "header": "Ocp-Apim-Subscription-Key",
-            "query": "subscription-key"
-          }
-        }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201"
+        "value": "https://developer.cisco.com/media/wae-release-6-2-api-reference/wae-collector-rest-api/application.wadl",
+        "path": "collector"
       }
     }
   },
-  "operationId": "Api_CreateOrUpdate",
-  "title": "ApiManagementCreateApiUsingWadlImport"
+  "responses": {
+    "201": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=201",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "collectorwadl",
+        "properties": {
+          "displayName": "http://localhost:8080/collector-northbound",
+          "apiRevision": "1",
+          "description": "",
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "path": "collector",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/tempgroup?api-version=2024-10-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2024-10-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/collectorwadl",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "name": "collectorwadl",
+        "properties": {
+          "displayName": "http://localhost:8080/collector-northbound",
+          "apiRevision": "1",
+          "description": "",
+          "serviceUrl": "http://localhost:8080/collector-northbound",
+          "path": "collector",
+          "protocols": [
+            "https"
+          ],
+          "subscriptionKeyParameterNames": {
+            "header": "Ocp-Apim-Subscription-Key",
+            "query": "subscription-key"
+          },
+          "isCurrent": true,
+          "provisioningState": "InProgress"
+        }
+      }
+    }
+  }
 }

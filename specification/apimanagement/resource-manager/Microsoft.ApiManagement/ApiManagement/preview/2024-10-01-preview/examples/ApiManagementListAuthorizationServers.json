@@ -1,80 +1,78 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "",
         "value": [
           {
-            "name": "newauthServer",
-            "type": "Microsoft.ApiManagement/service/authorizationServers",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer",
+            "type": "Microsoft.ApiManagement/service/authorizationServers",
+            "name": "newauthServer",
             "properties": {
+              "displayName": "test2",
+              "useInTestConsole": true,
+              "useInApiDocumentation": false,
               "description": "test server",
+              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
               "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
               "authorizationMethods": [
                 "GET"
+              ],
+              "tokenEndpoint": "https://www.contoso.com/oauth2/token",
+              "supportState": true,
+              "defaultScope": "read write",
+              "grantTypes": [
+                "authorizationCode",
+                "implicit"
               ],
               "bearerTokenSendingMethods": [
                 "authorizationHeader"
               ],
               "clientId": "1",
-              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
-              "defaultScope": "read write",
-              "displayName": "test2",
-              "grantTypes": [
-                "authorizationCode",
-                "implicit"
-              ],
-              "resourceOwnerPassword": "pwd",
               "resourceOwnerUsername": "un",
-              "supportState": true,
-              "tokenEndpoint": "https://www.contoso.com/oauth2/token",
-              "useInApiDocumentation": false,
-              "useInTestConsole": true
+              "resourceOwnerPassword": "pwd"
             }
           },
           {
-            "name": "newauthServer2",
-            "type": "Microsoft.ApiManagement/service/authorizationServers",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2",
+            "type": "Microsoft.ApiManagement/service/authorizationServers",
+            "name": "newauthServer2",
             "properties": {
+              "displayName": "test3",
+              "useInTestConsole": false,
+              "useInApiDocumentation": true,
               "description": "test server",
+              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
               "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
               "authorizationMethods": [
                 "GET"
-              ],
-              "bearerTokenSendingMethods": [
-                "authorizationHeader"
               ],
               "clientAuthenticationMethod": [
                 "Basic"
               ],
-              "clientId": "1",
-              "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+              "tokenEndpoint": "https://www.contoso.com/oauth2/token",
+              "supportState": true,
               "defaultScope": "read write",
-              "displayName": "test3",
               "grantTypes": [
                 "authorizationCode",
                 "implicit"
               ],
-              "resourceOwnerPassword": "pwd",
+              "bearerTokenSendingMethods": [
+                "authorizationHeader"
+              ],
+              "clientId": "1",
               "resourceOwnerUsername": "un",
-              "supportState": true,
-              "tokenEndpoint": "https://www.contoso.com/oauth2/token",
-              "useInApiDocumentation": true,
-              "useInTestConsole": false
+              "resourceOwnerPassword": "pwd"
             }
           }
-        ]
+        ],
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "AuthorizationServer_ListByService",
-  "title": "ApiManagementListAuthorizationServers"
+  }
 }

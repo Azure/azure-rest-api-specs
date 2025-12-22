@@ -1,18 +1,19 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "notificationName": "RequestPublisherNotificationMessage",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "notificationName": "RequestPublisherNotificationMessage"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "RequestPublisherNotificationMessage",
-        "type": "Microsoft.ApiManagement/service/notifications",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/notifications/RequestPublisherNotificationMessage",
+        "type": "Microsoft.ApiManagement/service/notifications",
+        "name": "RequestPublisherNotificationMessage",
         "properties": {
+          "title": "Subscription requests (requiring approval)",
           "description": "The following email recipients and users will receive email notifications about subscription requests for API products requiring approval.",
           "recipients": {
             "emails": [
@@ -23,12 +24,9 @@
             "users": [
               "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/576823d0a40f7e74ec07d642"
             ]
-          },
-          "title": "Subscription requests (requiring approval)"
+          }
         }
       }
     }
-  },
-  "operationId": "Notification_CreateOrUpdate",
-  "title": "ApiManagementCreateNotification"
+  }
 }

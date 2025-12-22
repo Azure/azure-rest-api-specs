@@ -1,19 +1,22 @@
 {
   "parameters": {
-    "operationId": "newoperations",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "apiId": "PetStoreTemplate2",
+    "operationId": "newoperations",
     "parameters": {
       "properties": {
-        "method": "POST",
-        "description": "This can only be done by the logged in user.",
         "displayName": "createUser2",
-        "templateParameters": [],
+        "method": "POST",
         "urlTemplate": "/user1",
+        "templateParameters": [],
+        "description": "This can only be done by the logged in user.",
         "request": {
           "description": "Created user object",
-          "headers": [],
           "queryParameters": [],
+          "headers": [],
           "representations": [
             {
               "contentType": "application/json",
@@ -24,8 +27,8 @@
         },
         "responses": [
           {
+            "statusCode": 200,
             "description": "successful operation",
-            "headers": [],
             "representations": [
               {
                 "contentType": "application/xml"
@@ -34,31 +37,28 @@
                 "contentType": "application/json"
               }
             ],
-            "statusCode": 200
+            "headers": []
           }
         ]
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "newoperations",
-        "type": "Microsoft.ApiManagement/service/apis/operations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/PetStoreTemplate2/operations/newoperations",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "name": "newoperations",
         "properties": {
-          "method": "POST",
-          "description": "This can only be done by the logged in user.",
           "displayName": "createUser2",
-          "templateParameters": [],
+          "method": "POST",
           "urlTemplate": "/user1",
+          "templateParameters": [],
+          "description": "This can only be done by the logged in user.",
           "request": {
             "description": "Created user object",
-            "headers": [],
             "queryParameters": [],
+            "headers": [],
             "representations": [
               {
                 "contentType": "application/json",
@@ -69,8 +69,8 @@
           },
           "responses": [
             {
+              "statusCode": 200,
               "description": "successful operation",
-              "headers": [],
               "representations": [
                 {
                   "contentType": "application/xml"
@@ -79,27 +79,27 @@
                   "contentType": "application/json"
                 }
               ],
-              "statusCode": 200
+              "headers": []
             }
           ]
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "newoperations",
-        "type": "Microsoft.ApiManagement/service/apis/operations",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/PetStoreTemplate2/operations/newoperations",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "name": "newoperations",
         "properties": {
-          "method": "POST",
-          "description": "This can only be done by the logged in user.",
           "displayName": "createUser2",
-          "templateParameters": [],
+          "method": "POST",
           "urlTemplate": "/user1",
+          "templateParameters": [],
+          "description": "This can only be done by the logged in user.",
           "request": {
             "description": "Created user object",
-            "headers": [],
             "queryParameters": [],
+            "headers": [],
             "representations": [
               {
                 "contentType": "application/json",
@@ -110,8 +110,8 @@
           },
           "responses": [
             {
+              "statusCode": 200,
               "description": "successful operation",
-              "headers": [],
               "representations": [
                 {
                   "contentType": "application/xml"
@@ -120,13 +120,11 @@
                   "contentType": "application/json"
                 }
               ],
-              "statusCode": 200
+              "headers": []
             }
           ]
         }
       }
     }
-  },
-  "operationId": "ApiOperation_CreateOrUpdate",
-  "title": "ApiManagementCreateApiOperation"
+  }
 }

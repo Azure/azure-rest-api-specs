@@ -1,58 +1,56 @@
 {
   "parameters": {
-    "api-version": "2024-10-01-preview",
-    "resourceGroupName": "rg1",
     "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2024-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "count": 3,
-        "nextLink": "",
         "value": [
           {
-            "name": "kjoshiarmtemplateCert1",
-            "type": "Microsoft.ApiManagement/service/products",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/kjoshiarmtemplateCert1",
+            "type": "Microsoft.ApiManagement/service/products",
+            "name": "kjoshiarmtemplateCert1",
             "properties": {
-              "description": "Development Product",
               "displayName": "Dev",
-              "state": "published",
-              "subscriptionRequired": false
+              "description": "Development Product",
+              "subscriptionRequired": false,
+              "state": "published"
             }
           },
           {
-            "name": "starter",
-            "type": "Microsoft.ApiManagement/service/products",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/starter",
+            "type": "Microsoft.ApiManagement/service/products",
+            "name": "starter",
             "properties": {
-              "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
-              "approvalRequired": false,
               "displayName": "Starter",
-              "state": "published",
+              "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
+              "terms": "",
               "subscriptionRequired": true,
+              "approvalRequired": false,
               "subscriptionsLimit": 1,
-              "terms": ""
+              "state": "published"
             }
           },
           {
-            "name": "unlimited",
-            "type": "Microsoft.ApiManagement/service/products",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/unlimited",
+            "type": "Microsoft.ApiManagement/service/products",
+            "name": "unlimited",
             "properties": {
-              "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
-              "approvalRequired": true,
               "displayName": "Unlimited",
-              "state": "published",
+              "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
               "subscriptionRequired": true,
-              "subscriptionsLimit": 1
+              "approvalRequired": true,
+              "subscriptionsLimit": 1,
+              "state": "published"
             }
           }
-        ]
+        ],
+        "count": 3,
+        "nextLink": ""
       }
     }
-  },
-  "operationId": "Product_ListByService",
-  "title": "ApiManagementListProducts"
+  }
 }

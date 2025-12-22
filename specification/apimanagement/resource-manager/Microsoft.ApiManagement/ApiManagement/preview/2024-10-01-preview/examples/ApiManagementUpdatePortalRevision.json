@@ -1,41 +1,39 @@
 {
   "parameters": {
-    "If-Match": "*",
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "portalRevisionId": "20201112101010",
+    "If-Match": "*",
     "parameters": {
       "properties": {
         "description": "portal revision update",
         "isCurrent": true
       }
-    },
-    "portalRevisionId": "20201112101010",
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalRevisions/20201112101010?api-version=2024-10-01-preview&asyncId=5faf16b81d9a028970d0bfbb&asyncCode=200",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5faf16b81d9a028970d0bfbb?api-version=2024-10-01-preview"
+      }
+    },
     "200": {
       "body": {
-        "name": "20201112101010",
-        "type": "Microsoft.ApiManagement/service/portalRevisions",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/namedValues/testprop2",
+        "type": "Microsoft.ApiManagement/service/portalRevisions",
+        "name": "20201112101010",
         "properties": {
           "description": "portal revision update",
-          "createdDateTime": "2020-11-13T22:47:13.397Z",
-          "isCurrent": true,
-          "status": "completed",
           "statusDetails": null,
+          "status": "completed",
+          "isCurrent": true,
+          "createdDateTime": "2020-11-13T22:47:13.397Z",
           "updatedDateTime": "2020-11-13T23:29:25.34Z"
         }
       }
-    },
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5faf16b81d9a028970d0bfbb?api-version=2024-10-01-preview",
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalRevisions/20201112101010?api-version=2024-10-01-preview&asyncId=5faf16b81d9a028970d0bfbb&asyncCode=200"
-      }
     }
-  },
-  "operationId": "PortalRevision_Update",
-  "title": "ApiManagementUpdatePortalRevision"
+  }
 }

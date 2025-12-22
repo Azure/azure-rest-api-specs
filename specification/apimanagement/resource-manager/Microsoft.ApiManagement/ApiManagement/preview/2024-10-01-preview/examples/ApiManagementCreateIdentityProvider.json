@@ -1,41 +1,39 @@
 {
   "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "identityProviderName": "facebook",
     "parameters": {
       "properties": {
         "clientId": "facebookid",
         "clientSecret": "facebookapplicationsecret"
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "apimService1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
-        "name": "Facebook",
-        "type": "Microsoft.ApiManagement/service/identityProviders",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Facebook",
+        "type": "Microsoft.ApiManagement/service/identityProviders",
+        "name": "Facebook",
         "properties": {
-          "type": "facebook",
-          "clientId": "facebookid"
+          "clientId": "facebookid",
+          "type": "facebook"
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
-        "name": "Facebook",
-        "type": "Microsoft.ApiManagement/service/identityProviders",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Facebook",
+        "type": "Microsoft.ApiManagement/service/identityProviders",
+        "name": "Facebook",
         "properties": {
-          "type": "facebook",
-          "clientId": "facebookid"
+          "clientId": "facebookid",
+          "type": "facebook"
         }
       }
     }
-  },
-  "operationId": "IdentityProvider_CreateOrUpdate",
-  "title": "ApiManagementCreateIdentityProvider"
+  }
 }
