@@ -54,6 +54,10 @@ using Microsoft.StandbyPool;
   "StandbyVirtualMachineInstanceCountSummary",
   "csharp"
 );
+@@clientName(DynamicSizing,
+  "StandbyContainerGroupPoolDynamicSizing",
+  "csharp"
+);
 @@clientName(ProvisioningState, "StandbyProvisioningState", "csharp");
 @@clientName(RefillPolicy, "StandbyRefillPolicy", "csharp");
 @@clientName(Microsoft.StandbyPool,
