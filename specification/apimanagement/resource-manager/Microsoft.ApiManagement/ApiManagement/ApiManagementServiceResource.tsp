@@ -307,6 +307,17 @@ interface ApiManagementServiceResources {
   >;
 
   /**
+   * Force Refresh the SSL certificate attached to the Custom Hostnames configured using secret from KeyVault on the Api Management service.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ApiManagementService_RefreshHostnames")
+  refreshHostnames is ArmResourceActionAsync<
+    ApiManagementServiceResource,
+    void,
+    ApiManagementServiceResource
+  >;
+
+  /**
    * Gets the Connectivity Status to the external resources on which the Api Management service depends from inside the Cloud Service. This also returns the DNS Servers as visible to the CloudService.
    */
   @get

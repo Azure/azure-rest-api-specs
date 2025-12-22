@@ -703,6 +703,38 @@ union BackendProtocol {
 }
 
 /**
+ * Scope 2 carbon emission preference for the backend. When specified, the load balancer will optimize traffic flow by routing to regions that have carbon emission less than or equal to the specified category. However, when all other backends are not available it will route traffic to these regions anyway. This requires the backend to be attributed with 'azureRegion' information.
+ */
+union CarbonEmissionCategory {
+  string,
+
+  /**
+   * Carbon intensity of less than or equal to 150 grams CO₂e per KWh
+   */
+  VeryLow: "VeryLow",
+
+  /**
+   * Carbon intensity between 151 & 300 (incl) grams CO₂e per KWh
+   */
+  Low: "Low",
+
+  /**
+   * Carbon intensity between 301 & 500 (incl) grams CO₂e per KWh
+   */
+  Medium: "Medium",
+
+  /**
+   * Carbon intensity between 501 & 700 (incl) grams CO₂e per KWh
+   */
+  High: "High",
+
+  /**
+   * Carbon intensity of more than 700 grams CO₂e per KWh
+   */
+  VeryHigh: "VeryHigh",
+}
+
+/**
  * Source from where the session id is extracted.
  */
 union BackendSessionIdSource {
@@ -873,6 +905,11 @@ union SkuType {
    * StandardV2 SKU of Api Management.
    */
   StandardV2: "StandardV2",
+
+  /**
+   * PremiumV2 SKU of Api Management.
+   */
+  PremiumV2: "PremiumV2",
 }
 
 /**
@@ -1549,6 +1586,15 @@ enum NameAvailabilityReason {
   Valid,
   Invalid,
   AlreadyExists,
+}
+
+/**
+ * The last status of the Key Vault certificate fetch process.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum KeyVaultFetchCode {
+  Success,
+  Failed,
 }
 
 /**
@@ -2466,6 +2512,7 @@ model ApiReleaseCollection {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
+
 /**
  * API Release details
  */
@@ -2519,6 +2566,7 @@ model OperationCollection {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
+
 /**
  * Operation Contract Properties
  */
@@ -3084,6 +3132,7 @@ model SchemaCollection {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
+
 /**
  * API Schema create or update contract Properties.
  */
@@ -3364,6 +3413,7 @@ model IssueCollection {
   @visibility(Lifecycle.Read)
   nextLink?: string;
 }
+
 /**
  * Issue contract Properties.
  */
@@ -3831,6 +3881,46 @@ model WikiCollection {
 }
 
 /**
+ * Paged Tool list representation.
+ */
+model ToolCollection {
+  /**
+   * Page values of Tools contract.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ToolContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ToolContractProperties {
+  /**
+   * Tool Name. MCP tool name must contain only letters, numbers, underscores, and hyphens.
+   */
+  @maxLength(300)
+  @minLength(1)
+  displayName?: string;
+
+  /**
+   * Description of the tool.
+   */
+  @maxLength(1000)
+  description?: string;
+
+  /**
+   * Identifier of the operation this MCP tool is associated with in the form of /apis/{apiId}/operations/{operationId}.
+   */
+  operationId?: string;
+}
+
+/**
  * API Export result.
  */
 model ApiExportResult {
@@ -4007,6 +4097,11 @@ model AuthorizationProviderOAuth2Settings {
    * OAuth2 settings
    */
   grantTypes?: AuthorizationProviderOAuth2GrantTypes;
+
+  /**
+   * Key Vault reference for client secret storage
+   */
+  keyVault?: AuthorizationProviderKeyVaultContract;
 }
 
 /**
@@ -4025,6 +4120,36 @@ model AuthorizationProviderOAuth2GrantTypes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCredentials?: Record<string>;
+}
+
+/**
+ * Authorization Provider KeyVault contract properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AuthorizationProviderKeyVaultContract
+  extends AuthorizationProviderKeyVaultCreateProperties {
+  /**
+   * When the secret was last updated in key vault.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
+
+  /**
+   * Last time sync and refresh of secret from key vault.
+   */
+  @visibility(Lifecycle.Read)
+  lastStatus?: KeyVaultLastAccessStatusContractProperties;
+}
+
+/**
+ * Authorization Provider KeyVault create contract properties.
+ */
+model AuthorizationProviderKeyVaultCreateProperties {
+  /**
+   * Key vault secret identifier for client secret. When provided, client secret will be retrieved from the provided key vault secret.
+   */
+  secretIdentifier?: string;
 }
 
 /**
@@ -4147,6 +4272,7 @@ model AuthorizationAccessPolicyCollection {
   @nextLink
   nextLink?: string;
 }
+
 /**
  * Authorization Access Policy details.
  */
@@ -4500,6 +4626,11 @@ model BackendBaseParameters {
   circuitBreaker?: BackendCircuitBreaker;
 
   /**
+   * Azure region in which the backend is deployed. Can be optionally specified to use features such as carbon-optimized load balancer.
+   */
+  azureRegion?: string;
+
+  /**
    * Backend Pool Properties
    */
   pool?: BackendBaseParametersPool;
@@ -4667,6 +4798,17 @@ model BackendTlsProperties {
    * Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.
    */
   validateCertificateName?: boolean = true;
+
+  /**
+   * Thumbprints of certificates used by the backend host for TLS communication.
+   */
+  serverCertificateThumbprints?: string[];
+
+  /**
+   * Server X509 Certificate Names of the Backend Host.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  serverX509Names?: X509CertificateName[];
 }
 
 /**
@@ -4775,11 +4917,9 @@ model BackendFailureResponse {
   statusCode?: int32;
 }
 
-/**
- * Backend Pool Properties
- */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendBaseParametersPool extends BackendPool {}
 
 /**
@@ -4826,6 +4966,11 @@ model BackendPoolItem {
   @maxValue(100)
   @minValue(0)
   priority?: int32;
+
+  /**
+   * Scope 2 carbon emission preference for the backend. When specified, the load balancer will optimize traffic flow by routing to regions that have carbon emission less than or equal to the specified category. However, when all other backends are not available it will route traffic to these regions anyway. This requires the backend to be attributed with 'azureRegion' information.
+   */
+  preferredCarbonEmission?: CarbonEmissionCategory;
 }
 
 /**
@@ -4869,14 +5014,14 @@ model BackendUpdateParameters {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendUpdateParameterProperties extends BackendBaseParameters {
   /**
-   * Runtime Url of the Backend. Required when backend type is 'Single'.
+   * Runtime Url of the Backend.
    */
   @maxLength(2000)
   @minLength(1)
   url?: string;
 
   /**
-   * Backend communication protocol. Required when backend type is 'Single'.
+   * Backend communication protocol.
    */
   protocol?: BackendProtocol;
 }
@@ -5833,6 +5978,11 @@ model ApiManagementServiceBaseProperties {
    * Release Channel of this API Management service.
    */
   releaseChannel?: ReleaseChannel;
+
+  /**
+   * Zone Redundant Requirement when creating StandardV2 and PremiumV2. If this flag is set to True, will return a APIM service with Zone redundant or fail the request if any underneath component cannot be zone redundant.
+   */
+  zoneRedundant?: boolean = false;
 }
 
 /**
@@ -6516,6 +6666,95 @@ model GatewayConfigConnectionBaseProperties {
    * The hostnames of the data-plane gateway to which requests can be sent.
    */
   hostnames?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model GatewayHostnameBindingBaseProperties {
+  /**
+   * The current provisioning state of the API Management gateway hostname binding.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The default hostname of the data-plane gateway.
+   */
+  hostname: string;
+
+  /**
+   * The link to the API Management service workspace.
+   */
+  keyVault: GatewayHostnameBindingKeyVault;
+
+  /**
+   * The hostnames of the data-plane gateway to which requests can be sent.
+   */
+  @visibility(Lifecycle.Read)
+  certificate?: GatewayHostnameBindingCertificate;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model GatewayHostnameBindingKeyVault {
+  /**
+   * The current provisioning state of the API Management gateway hostname binding.
+   */
+  secretId: string;
+
+  /**
+   * The default hostname of the data-plane gateway.
+   */
+  identityClientId?: string;
+
+  /**
+   * The last status of the Key Vault certificate fetch process.
+   */
+  lastStatus?: GatewayHostnameBindingKeyVaultLastStatus;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model GatewayHostnameBindingKeyVaultLastStatus {
+  /**
+   * The last status of the Key Vault certificate fetch process.
+   */
+  @visibility(Lifecycle.Read)
+  code?: KeyVaultFetchCode;
+
+  /**
+   * The last time the Key Vault certificate fetch process was attempted. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  timeStampUtc?: utcDateTime;
+
+  /**
+   * The last time the Key Vault certificate fetch process was successful. Only when the fetch process has succeeded at least once and current state is failed.  The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastSuccessTimeStampUtc?: utcDateTime;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model GatewayHostnameBindingCertificate {
+  /**
+   * The thumbprint of the certificate.
+   */
+  @visibility(Lifecycle.Read)
+  thumbprint?: string;
+
+  /**
+   * The subject of the certificate.
+   */
+  @visibility(Lifecycle.Read)
+  subject?: string;
+
+  /**
+   * The expiration date of the certificate.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expiry?: utcDateTime;
 }
 
 /**
@@ -10665,6 +10904,23 @@ model ApiManagementWorkspaceLinksListResult {
 
   /**
    * Link to the next set of results. Not empty if Value contains incomplete list of API Management services.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The response of the List API Management gateway hostname binding operation.
+ */
+model GatewayHostnameBindingListResult {
+  /**
+   * Result of the List API Management gateway hostname binding operation.
+   */
+  @pageItems
+  value: GatewayHostnameBindingResource[];
+
+  /**
+   * Link to the next set of results. Not empty if Value contains incomplete list of API Management gateway hostname bindings.
    */
   @nextLink
   nextLink?: string;

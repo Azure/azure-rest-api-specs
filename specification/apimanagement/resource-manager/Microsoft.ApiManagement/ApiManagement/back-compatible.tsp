@@ -84,6 +84,10 @@ using Microsoft.ApiManagement;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CertificateCreateOrUpdateParameters.properties
 );
 
+@@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
+  "httpConfiguration"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
@@ -515,6 +519,17 @@ using Microsoft.ApiManagement;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WikiContract.properties);
 
+@@clientLocation(ToolContracts.get, "ApiTool");
+@@clientLocation(ToolContracts.getEntityTag, "ApiTool");
+@@clientLocation(ToolContracts.createOrUpdate, "ApiTool");
+@@clientName(ToolContracts.createOrUpdate::parameters.resource, "parameters");
+@@clientLocation(ToolContracts.update, "ApiTool");
+@@clientName(ToolContracts.update::parameters.properties, "parameters");
+@@clientLocation(ToolContracts.delete, "ApiTool");
+@@clientLocation(ToolContracts.listByApi, "ApiTool");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ToolContract.properties);
+
 @@clientLocation(ApiVersionSetContracts.get, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.getEntityTag, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.createOrUpdate, "ApiVersionSet");
@@ -548,6 +563,9 @@ using Microsoft.ApiManagement;
   "AuthorizationProvider"
 );
 @@clientLocation(AuthorizationProviderContracts.listByService,
+  "AuthorizationProvider"
+);
+@@clientLocation(AuthorizationProviderContracts.refreshSecret,
   "AuthorizationProvider"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -742,6 +760,9 @@ using Microsoft.ApiManagement;
 @@clientName(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "parameters"
 );
+@@clientLocation(ApiManagementServiceResources.refreshHostnames,
+  "ApiManagementService"
+);
 @@clientLocation(ApiManagementServiceResources.networkStatusListByService,
   "NetworkStatus"
 );
@@ -783,6 +804,9 @@ using Microsoft.ApiManagement;
 );
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate, "Update");
 
+@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+  "parameters"
+);
 @@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysGet,
   "QuotaByPeriodKeys"
 );
@@ -865,6 +889,28 @@ using Microsoft.ApiManagement;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayConfigConnectionResource.properties
+);
+
+@@clientLocation(GatewayHostnameBindingResources.get,
+  "ApiGatewayHostnameBinding"
+);
+@@clientLocation(GatewayHostnameBindingResources.createOrUpdate,
+  "ApiGatewayHostnameBinding"
+);
+@@clientName(GatewayHostnameBindingResources.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientLocation(GatewayHostnameBindingResources.delete,
+  "ApiGatewayHostnameBinding"
+);
+@@clientLocation(GatewayHostnameBindingResources.listByGateway,
+  "ApiGatewayHostnameBinding"
+);
+@@clientLocation(GatewayHostnameBindingResources.refreshSecret,
+  "ApiGatewayHostnameBinding"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayHostnameBindingResource.properties
 );
 
 @@clientLocation(GatewayContracts.get, "Gateway");

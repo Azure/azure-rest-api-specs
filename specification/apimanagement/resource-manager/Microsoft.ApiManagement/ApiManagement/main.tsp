@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.5
- * Date: 2025-09-22T02:42:50.583Z
+ * Date: 2025-12-15T06:34:13.578Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -27,6 +27,7 @@ import "./IssueCommentContract.tsp";
 import "./IssueAttachmentContract.tsp";
 import "./TagDescriptionContract.tsp";
 import "./WikiContract.tsp";
+import "./ToolContract.tsp";
 import "./ApiVersionSetContract.tsp";
 import "./AuthorizationProviderContract.tsp";
 import "./AuthorizationContract.tsp";
@@ -42,6 +43,7 @@ import "./ApiManagementServiceResource.tsp";
 import "./DocumentationContract.tsp";
 import "./EmailTemplateContract.tsp";
 import "./ApiManagementGatewayConfigConnectionResource.tsp";
+import "./GatewayHostnameBindingResource.tsp";
 import "./GatewayContract.tsp";
 import "./GatewayHostnameConfigurationContract.tsp";
 import "./GatewayCertificateAuthorityContract.tsp";
@@ -99,10 +101,11 @@ namespace Microsoft.ApiManagement;
  */
 enum Versions {
   /**
-   * The 2024-10-01-preview API version.
+   * The 2025-03-01-preview API version.
    */
-  v2024_10_01_preview: "2024-10-01-preview",
+  v2025_03_01_preview: "2025-03-01-preview",
 }
+
 @armResourceOperations
 interface ApiManagementOperations
   extends Azure.ResourceManager.Legacy.Operations<

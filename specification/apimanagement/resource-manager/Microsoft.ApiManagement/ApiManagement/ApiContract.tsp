@@ -50,6 +50,7 @@ interface ApiContractOps
         @key
         @minLength(1)
         @maxLength(80)
+        @pattern("^[^*#&+:<>?]+$")
         apiId: string,
       }
     > {}

@@ -112,6 +112,23 @@ interface AuthorizationProviderContracts {
     },
     Response = ArmResponse<AuthorizationProviderCollection>
   >;
+
+  /**
+   * Refreshes the Key Vault reference secret for the specified authorization provider.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("AuthorizationProvider_RefreshSecret")
+  refreshSecret is ArmResourceActionSync<
+    AuthorizationProviderContract,
+    void,
+    Response = ArmResponse<AuthorizationProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 }
 
 @@maxLength(AuthorizationProviderContract.name, 256);

@@ -23,6 +23,7 @@ model GatewayContract
     SegmentName = "gateways",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
 alias GatewayApiParameter = {
