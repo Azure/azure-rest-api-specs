@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -31,6 +32,20 @@ model CredentialProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Request payload for revoking device access on a credential.")
+@added(Versions.v2026_04_01_preview)
+model CredentialsRevokeDeviceAccessRequest {
+  @doc("List of device ids from which access was revoked.")
+  deviceIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/devices";
+    }
+  ]>[];
+
+  @doc("Indicates whether to disable the device(s) after revoking access.")
+  disable?: boolean;
+}
+
 @added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface Credentials {
@@ -50,4 +65,9 @@ interface Credentials {
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
+  @added(Versions.v2026_04_01_preview)
+  revokeDeviceAccess is ArmResourceActionNoResponseContentAsync<
+    Credential,
+    CredentialsRevokeDeviceAccessRequest
+  >;
 }
