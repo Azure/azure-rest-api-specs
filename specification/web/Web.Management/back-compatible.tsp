@@ -2059,3 +2059,24 @@ using Microsoft.Web;
 @@clientName(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "staticSiteUserEnvelope"
 );
+
+
+@@clientLocation(checkNameAvailability, "WebSiteManagement", "go");
+@@clientLocation(Users.getPublishingUser, "WebSiteManagement", "go");
+@@clientLocation(SourceControls.getSourceControl, "WebSiteManagement", "go");
+@@clientLocation(getSubscriptionDeploymentLocations, "WebSiteManagement", "go");
+@@clientLocation(listAseRegions, "WebSiteManagement", "go");
+@@clientLocation(listBillingMeters, "WebSiteManagement", "go");
+@@clientLocation(listCustomHostNameSites, "WebSiteManagement", "go");
+@@clientLocation(listGeoRegions, "WebSiteManagement", "go");
+@@clientLocation(listPremierAddOnOffers, "WebSiteManagement", "go");
+@@clientLocation(listSkus, "WebSiteManagement", "go");
+@@clientLocation(listSiteIdentifiersAssignedToHostName, "WebSiteManagement", "go");
+@@clientLocation(SourceControls.listSourceControls, "WebSiteManagement", "go");
+@@clientLocation(move, "WebSiteManagement", "go");
+@@clientLocation(regionalCheckNameAvailability, "WebSiteManagement", "go");
+@@clientLocation(Users.updatePublishingUser, "WebSiteManagement", "go");
+@@clientLocation(SourceControls.updateSourceControl, "WebSiteManagement", "go");
+@@clientLocation(validate, "WebSiteManagement", "go");
+@@clientLocation(validateMove, "WebSiteManagement", "go");
+@@clientLocation(verifyHostingEnvironmentVnet, "WebSiteManagement", "go");
