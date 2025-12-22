@@ -13,7 +13,9 @@ interface Documents {
   @route("/indexes('{indexName}')/docs/$count")
   @get
   count is SearchIndexOperation<
-    {},
+    {
+      ...acceptHeaderNone;
+    },
     {
       @header contentType: "application/json";
       @body body: int64;
@@ -27,6 +29,7 @@ interface Documents {
   @get
   searchGet is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
       ...querySourceAuthorizationHeader;
       ...enableElevatedReadHeader;
 
@@ -51,6 +54,7 @@ interface Documents {
   @post
   searchPost is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
       ...querySourceAuthorizationHeader;
       ...enableElevatedReadHeader;
       ...SearchRequest;
@@ -69,6 +73,7 @@ interface Documents {
   @get
   get is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
       ...querySourceAuthorizationHeader;
       ...enableElevatedReadHeader;
 
@@ -90,6 +95,8 @@ interface Documents {
   @get
   suggestGet is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
+
       @doc("The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters.")
       @query("search")
       searchText: string;
@@ -109,6 +116,7 @@ interface Documents {
   @post
   suggestPost is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
       ...SuggestRequest;
     },
     SuggestDocumentsResult
@@ -120,6 +128,8 @@ interface Documents {
   @post
   index is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
+
       @doc("The batch of index actions.")
       @body
       batch: IndexBatch;
@@ -134,6 +144,8 @@ interface Documents {
   @get
   autocompleteGet is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
+
       @doc("The incomplete term which should be auto-completed.")
       @query("search")
       searchText: string;
@@ -183,6 +195,7 @@ interface Documents {
   @post
   autocompletePost is SearchIndexOperation<
     {
+      ...acceptHeaderNone;
       ...AutocompleteRequest;
     },
     AutocompleteResult
