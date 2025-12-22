@@ -26,6 +26,7 @@ import "@azure-tools/typespec-azure-core";
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge?api-Version={apiVersion}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}&releaseDelayInSeconds={delay}
 // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:reject?api-version={apiVersion}
+// POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:isEmpty?api-version={apiVersion}
 @server(
   "{endpoint}",
   "The host name of the namespace",
@@ -45,7 +46,10 @@ namespace Microsoft.EventGrid {
   using Azure;
 
   enum ServiceApiVersions {
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
+
+    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2024_06_01: "2024-06-01",
   }
 
@@ -185,6 +189,13 @@ namespace Microsoft.EventGrid {
     @doc("Array of lock tokens for the successfully renewed locks.")
     @visibility(Lifecycle.Read)
     succeededLockTokens: string[];
+  }
+
+  @doc("The result of the IsEmpty operation.")
+  model IsEmptyResult {
+    @doc("Indicates whether the subscription has no events currently available to be received.")
+    @visibility(Lifecycle.Read)
+    isEmpty: boolean;
   }
 
   alias ReleaseOptions = {
@@ -345,5 +356,16 @@ namespace Microsoft.EventGrid {
       ...RenewLockOptions;
     },
     RenewCloudEventLocksResult
+  >;
+
+  // IsEmpty Operation:
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:isEmpty?api-version={apiVersion}
+  @added(ServiceApiVersions.v2024_06_01)
+  @doc("Checks whether an event subscription currently has any events available to be received.")
+  @action("isEmpty")
+  op isEmpty is StandardOperations.ResourceAction<
+    EventSubscription,
+    {},
+    IsEmptyResult
   >;
 }
