@@ -18,6 +18,7 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid"'
     package-version: 4.20.0
+    package-dir: "azure-eventgrid"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-eventgrid"
     namespace: "azure.eventgrid"
     flavor: azure
@@ -26,15 +27,18 @@ options:
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     model-namespace: false
-    namespace: Azure.Messaging.EventGrid.Namespaces
+    package-dir: "Azure.Messaging.EventGrid.Namespaces"
+    namespace: "{package-dir}"
+    clear-output-folder: true
     flavor: azure
     generate-sample-project: false
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-name: Azure.Messaging.EventGrid.Namespaces
-    namespace: Azure.Messaging.EventGrid.Namespaces
+    package-name: "Azure.Messaging.EventGrid.Namespaces"
+    namespace: "Azure.Messaging.EventGrid.Namespaces"
     model-namespace: false
   "@azure-tools/typespec-java":
+    package-dir: "azure-messaging-eventgrid-namespaces"
     namespace: "com.azure.messaging.eventgrid.namespaces"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-eventgrid-namespaces"
     partial-update: true
@@ -54,8 +58,11 @@ options:
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/aznamespaces"
     service-dir: "sdk/messaging/eventgrid"
-    emitter-output-dir: "{output-dir}/{service-dir}/aznamespaces"
+    package-dir: "aznamespaces"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    generate-fakes: true
+    inject-spans: true
     slice-elements-byval: true
     flavor: "azure"
