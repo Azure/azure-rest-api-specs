@@ -53,33 +53,6 @@ interface AccessInformationContractOps
       }
     > {}
 
-@armResourceOperations
-interface AccessInformationContractsOperationGroup
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        @minLength(1)
-        @maxLength(50)
-        serviceName: string,
-      },
-      {
-        /** The identifier of the Access configuration. */
-        @path
-        @segment("tenant")
-        @key
-        accessName: AccessIdName,
-      }
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AccessInformationContracts {
@@ -115,7 +88,7 @@ interface AccessInformationContracts {
    * Update tenant access information details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is AccessInformationContractsOperationGroup.CreateOrUpdateSync<
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AccessInformationContract,
     Request = AccessInformationCreateParameters,
     Parameters = {

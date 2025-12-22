@@ -27,33 +27,6 @@ model IdentityProviderContract
 }
 
 @armResourceOperations
-interface IdentityProviderContractsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        @minLength(1)
-        @maxLength(50)
-        serviceName: string,
-      },
-      {
-        /** Identity Provider Type identifier. */
-        @path
-        @segment("identityProviders")
-        @key
-        identityProviderName: IdentityProviderType,
-      }
-    > {}
-
-@armResourceOperations
 interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
@@ -86,7 +59,7 @@ interface IdentityProviderContracts {
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
-  createOrUpdate is IdentityProviderContractsOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     IdentityProviderContract,
     Request = IdentityProviderCreateContract,
     Parameters = {

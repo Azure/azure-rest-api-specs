@@ -26,9 +26,32 @@ model GatewayContract
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-alias GatewayApiParameter = {
-  ...ResourceInstanceParameters<GatewayContract>;
+alias GatewayApiParentParameter = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
 
+  /**
+   * The name of the API Management service.
+   */
+  @path
+  @segment("service")
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  @minLength(1)
+  @maxLength(50)
+  serviceName: string;
+
+  /**
+   * Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed'
+   */
+  @path
+  @segment("gateways")
+  @minLength(1)
+  @maxLength(80)
+  gatewayId: string;
+};
+
+alias GatewayApiParameter = {
   /**
    * API identifier. Must be unique in the current API Management service instance.
    */
@@ -39,7 +62,15 @@ alias GatewayApiParameter = {
   apiId: string;
 };
 
-@armResourceOperations
+alias GatewayApiOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  GatewayApiParentParameter,
+  GatewayApiParameter,
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface GatewayContracts {
   /**
    * Gets the details of the Gateway specified by its identifier.
@@ -262,34 +293,43 @@ interface GatewayContracts {
    * Checks that API entity specified by identifier is associated with the Gateway entity.
    */
   @head
-  gatewayApiGetEntityTag(...GatewayApiParameter): (OkResponse & {
-    /**
-     * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-     */
-    @header("ETag") etag: string;
-  }) | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}")
+  gatewayApiGetEntityTag is GatewayApiOps.ActionSync<
+    GatewayContract,
+    void,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an API to the specified Gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  gatewayApiCreateOrUpdate(
-    ...GatewayApiParameter,
-
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @body
-    body?: AssociationContract,
-  ): ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract> | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}")
+  gatewayApiCreateOrUpdate is GatewayApiOps.ActionSync<
+    GatewayContract,
+    AssociationContract,
+    Response = ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Deletes the specified API from the specified Gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  gatewayApiDelete(
-    ...GatewayApiParameter,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/apis/{apiId}")
+  gatewayApiDelete is GatewayApiOps.ActionSync<
+    GatewayContract,
+    void,
+    Response = OkResponse | NoContentResponse
+  >;
 }
 
 @@maxLength(GatewayContract.name, 80);

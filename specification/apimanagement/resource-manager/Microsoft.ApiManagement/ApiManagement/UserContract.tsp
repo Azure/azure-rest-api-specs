@@ -26,35 +26,6 @@ model UserContract
 }
 
 @armResourceOperations
-interface UserContractOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the API Management service. */
-        @path
-        @segment("service")
-        @key
-        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
-        @minLength(1)
-        @maxLength(50)
-        serviceName: string,
-      },
-      {
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
-        @path
-        @segment("users")
-        @key
-        @minLength(1)
-        @maxLength(80)
-        userId: string,
-      }
-    > {}
-
-@armResourceOperations
 interface UserContracts {
   /**
    * Gets the details of the user specified by its identifier.
@@ -87,7 +58,7 @@ interface UserContracts {
   /**
    * Creates or Updates a user.
    */
-  createOrUpdate is UserContractOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     UserContract,
     Request = UserCreateParameters,
     Parameters = {
