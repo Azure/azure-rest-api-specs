@@ -363,11 +363,18 @@ options:
             return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
           }
           if (args.includes("ls-tree")) {
-            // Check if the ls-tree command is for the v2 branch
-            const lsTreeArg = args.find((arg) => arg.includes("feature/v2-structure"));
-            if (lsTreeArg) {
-              // Target branch uses V2 structure (has data-plane/resource-manager under org folder)
-              return Promise.resolve("data-plane\nresource-manager");
+            // Check if the ls-tree command is for any branch containing v2-structure
+            // and the service directory is specification/foo
+            const hasLsTree = args.includes("ls-tree");
+            const hasNameOnly = args.includes("--name-only");
+            const refArg = args.find((arg) => arg.includes(":"));
+            if (hasLsTree && hasNameOnly && refArg) {
+              // Extract the ref and path from something like "origin/feature/v2-structure:specification/foo"
+              const [ref, servicePath] = refArg.split(":");
+              if (ref.includes("feature/v2-structure") && servicePath === "specification/foo") {
+                // Target branch uses V2 structure (has data-plane/resource-manager under org folder)
+                return Promise.resolve("data-plane\nresource-manager");
+              }
             }
             // Default case - other branches don't have v2 structure
             return Promise.resolve("");
