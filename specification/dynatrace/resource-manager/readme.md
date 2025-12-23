@@ -50,15 +50,25 @@ suppressions:
         - $.definitions.DynatraceSingleSignOnResource.properties.properties
         - $.definitions.MonitorResource.properties.properties
         - $.definitions.TagRule.properties.properties
+        - $.definitions.CreateResourceSupportedResponse.properties.value
       reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: OperationIdNounVerb
       from: dynatrace.json
+      where:
+        - $.paths["/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getCreationSupported"].post.operationId
       reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: PatchBodyParametersSchema
       from: dynatrace.json
+      where:
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}"].patch.parameters[?(@.name == 'body')]
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}"].patch.parameters[?(@.name == 'body')]
       reason: Empty object can still be passed, properties are not mandatory for the update schema.
     - code: RequiredPropertiesMissingInResourceModel
       from: dynatrace.json
+      where:
+        - $.definitions.DynatraceSingleSignOnResource
+        - $.definitions.MonitorResource
+        - $.definitions.TagRule
       reason: It is similar to any other model. We believe this is a false positive.
 ```
 
