@@ -1,0 +1,55 @@
+parameters:
+  "service-dir":
+    default: "sdk/managementgroups"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/management.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ManagementGroups"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ManagementGroups"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-managementgroups"
+    namespace: "azure.mgmt.managementgroups"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-managementgroups"
+    namespace: "com.azure.resourcemanager.managementgroups"
+    service-name: "ManagementGroups" # human-readable service name, whitespace allowed
+    flavor: azure
+    rename-model:
+      CheckNameAvailabilityRequestType: Type
+    add-inner: HierarchySettingsInfo
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-managementgroups"
+    flavor: azure
+    typespec-title-map:
+      ManagementClient: ManagementGroupsAPI
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-managementgroups"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/managementgroups"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmanagementgroups"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmanagementgroups"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
