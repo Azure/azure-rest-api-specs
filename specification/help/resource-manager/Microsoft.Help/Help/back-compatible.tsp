@@ -255,7 +255,7 @@ using Microsoft.Help;
   "csharp"
 );
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
-  "DiscoverSolutionsNlpXXX",
+  "DiscoverSolutionsNlp",
   "csharp"
 );
 @@usage(SolutionResourceSelfHelp, Usage.input);
