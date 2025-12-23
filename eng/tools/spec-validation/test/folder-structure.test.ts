@@ -366,14 +366,19 @@ options:
           if (args.includes("ls-tree")) {
             // Look for the ref argument which should contain branch:path format
             const refArg = args.find((arg) => arg.includes(":"));
-            
+
             if (refArg) {
               // Extract the ref and path from something like "origin/feature/v2-structure:specification/foo"
               const [ref, servicePath] = refArg.split(":");
-              
+
               // Check if this is for the v2 branch and the correct service path
               // Be flexible with remote names (origin, upstream, etc.) and whitespace
-              if (ref && ref.includes("feature/v2-structure") && servicePath && servicePath.trim() === "specification/foo") {
+              if (
+                ref &&
+                ref.includes("feature/v2-structure") &&
+                servicePath &&
+                servicePath.trim() === "specification/foo"
+              ) {
                 return Promise.resolve("data-plane\nresource-manager");
               }
             }
@@ -530,7 +535,10 @@ options:
             if (refArg) {
               const [ref, servicePath] = refArg.split(":");
               // Should use upstream remote for target branch
-              if (ref.includes("upstream/feature/v2-structure") && servicePath === "specification/foo") {
+              if (
+                ref.includes("upstream/feature/v2-structure") &&
+                servicePath === "specification/foo"
+              ) {
                 return Promise.resolve("data-plane\nresource-manager");
               }
             }
