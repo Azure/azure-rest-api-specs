@@ -157,10 +157,11 @@ model DisconnectedOperationProperties {
   @doc("The unique Id of the stamp")
   stampId: string;
 
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("The billing model")
   billingModel: BillingModel;
 
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
 
@@ -177,8 +178,9 @@ model DisconnectedOperationProperties {
   deviceVersion?: string;
 
   @doc("The billing configuration")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @added(Microsoft.Edge.Versions.v2025_08_01)
-  billingConfiguration?: BillingConfiguration;
+  billingConfiguration: BillingConfiguration;
 }
 
 @doc("The disconnected operation manifest")
@@ -215,6 +217,11 @@ model DisconnectedOperationDeploymentManifest {
   @doc("The cloud in which the resource is registered")
   @added(Microsoft.Edge.Versions.v2025_06_01)
   cloud?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2026_01_01)
+  billingConfiguration: BillingConfiguration;
 }
 
 /**

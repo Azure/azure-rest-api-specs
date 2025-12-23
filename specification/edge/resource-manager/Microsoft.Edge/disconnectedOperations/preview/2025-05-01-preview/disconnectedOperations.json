@@ -1150,11 +1150,19 @@
         "billingModel": {
           "$ref": "#/definitions/BillingModel",
           "description": "The billing model",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "connectionIntent": {
           "$ref": "#/definitions/ConnectionIntent",
-          "description": "The connection intent"
+          "description": "The connection intent",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "connectionStatus": {
           "$ref": "#/definitions/ConnectionStatus",
@@ -1207,7 +1215,12 @@
       "properties": {
         "connectionIntent": {
           "$ref": "#/definitions/ConnectionIntent",
-          "description": "The connection intent"
+          "description": "The connection intent",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "registrationStatus": {
           "$ref": "#/definitions/RegistrationStatus",
