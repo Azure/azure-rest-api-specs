@@ -37,7 +37,7 @@ using TypeSpec.Http;
 
 @@clientName(Microsoft.HybridNetwork,
   "HybridNetworkManagementClient",
-  "python"
+  "python,javascript"
 );
 @@clientName(AzureArcK8sClusterNFVIDetails,
   "AzureArcK8SClusterNFVIDetails",
