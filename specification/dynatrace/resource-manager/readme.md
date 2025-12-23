@@ -50,8 +50,7 @@ suppressions:
         - $.definitions.DynatraceSingleSignOnResource.properties.properties
         - $.definitions.MonitorResource.properties.properties
         - $.definitions.TagRule.properties.properties
-        - $.definitions.CreateResourceSupportedResponse.properties.value
-        - $.definitions.CreateResourceSupportedResponse.properties.nextLink
+        - $.definitions.CreateResourceSupportedResponse
         - $.definitions.CreateResourceSupportedProperties.properties.creationSupported
       reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: OperationIdNounVerb
@@ -75,16 +74,11 @@ suppressions:
         - $.definitions.TagRule
         - $.definitions.CreateResourceSupportedResponse
       reason: It is similar to any other model. We believe this is a false positive.
-    - code: XMSSecretInResponse
-      from: dynatrace.json
-      where:
-        - $.definitions.DynatraceEnvironmentProperties.properties.ingestionKey
-      reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: PostResponseCodes
       from: dynatrace.json
       where:
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/upgradePlan"].post
-      reason: Existing long-running operation design. The operation returns 202 with no final response schema. Fixing this causes breaking changes.
+      reason: By design - operation returns only 202 for async plan upgrade processing. No final response schema is required as the upgrade status is reflected in the monitor resource state.
 ```
 
 ### Tag: package-2024-04-24
