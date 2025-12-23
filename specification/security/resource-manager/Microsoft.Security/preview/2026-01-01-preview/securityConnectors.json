@@ -6,20 +6,12 @@
     "version": "2026-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -41,9 +33,7 @@
             "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsSubscription_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "description": "Lists all the security connectors in the specified subscription. Use the 'nextLink' property in the response to get the next page of security connectors for the specified subscription.",
         "operationId": "SecurityConnectors_List",
         "parameters": [
@@ -80,9 +70,7 @@
             "$ref": "./examples/SecurityConnectors/GetSecurityConnectorsResourceGroup_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "description": "Lists all the security connectors in the specified resource group. Use the 'nextLink' property in the response to get the next page of security connectors for the specified resource group.",
         "operationId": "SecurityConnectors_ListByResourceGroup",
         "parameters": [
@@ -122,9 +110,7 @@
             "$ref": "./examples/SecurityConnectors/GetSecurityConnectorSingleResource_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "description": "Retrieves details of a specific security connector",
         "operationId": "SecurityConnectors_Get",
         "parameters": [
@@ -162,9 +148,7 @@
             "$ref": "./examples/SecurityConnectors/PutSecurityConnector_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "description": "Creates or updates a security connector. If a security connector is already created and a subsequent request is issued for the same security connector id, then it will be updated.",
         "operationId": "SecurityConnectors_CreateOrUpdate",
         "parameters": [
@@ -211,9 +195,7 @@
             "$ref": "./examples/SecurityConnectors/PatchSecurityConnector_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "description": "Updates a security connector",
         "operationId": "SecurityConnectors_Update",
         "parameters": [
@@ -254,9 +236,7 @@
             "$ref": "./examples/SecurityConnectors/DeleteSecurityConnector_example.json"
           }
         },
-        "tags": [
-          "SecurityConnectors"
-        ],
+        "tags": ["SecurityConnectors"],
         "operationId": "SecurityConnectors_Delete",
         "description": "Deletes a security connector.",
         "parameters": [
@@ -294,9 +274,7 @@
     "SecurityConnectorsList": {
       "type": "object",
       "description": "List of security connectors response.",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "properties": {
         "value": {
           "type": "array",
@@ -351,14 +329,7 @@
         "environmentName": {
           "type": "string",
           "description": "The multi cloud resource's cloud name.",
-          "enum": [
-            "Azure",
-            "AWS",
-            "GCP",
-            "Github",
-            "AzureDevOps",
-            "GitLab"
-          ],
+          "enum": ["Azure", "AWS", "GCP", "Github", "AzureDevOps", "GitLab"],
           "x-ms-enum": {
             "name": "cloudName",
             "modelAsString": true
@@ -383,9 +354,7 @@
       "type": "object",
       "description": "The security connector environment data.",
       "discriminator": "environmentType",
-      "required": [
-        "environmentType"
-      ],
+      "required": ["environmentType"],
       "properties": {
         "environmentType": {
           "type": "string",
@@ -443,17 +412,12 @@
       "type": "object",
       "description": "The AWS organization data",
       "discriminator": "organizationMembershipType",
-      "required": [
-        "organizationMembershipType"
-      ],
+      "required": ["organizationMembershipType"],
       "properties": {
         "organizationMembershipType": {
           "type": "string",
           "description": "The multi cloud account's membership type in the organization",
-          "enum": [
-            "Member",
-            "Organization"
-          ],
+          "enum": ["Member", "Organization"],
           "x-ms-enum": {
             "name": "organizationMembershipType",
             "modelAsString": true
@@ -556,17 +520,12 @@
       "type": "object",
       "description": "The gcpOrganization data",
       "discriminator": "organizationMembershipType",
-      "required": [
-        "organizationMembershipType"
-      ],
+      "required": ["organizationMembershipType"],
       "properties": {
         "organizationMembershipType": {
           "type": "string",
           "description": "The multi cloud account's membership type in the organization",
-          "enum": [
-            "Member",
-            "Organization"
-          ],
+          "enum": ["Member", "Organization"],
           "x-ms-enum": {
             "name": "organizationMembershipType",
             "modelAsString": true
@@ -664,9 +623,7 @@
       "type": "object",
       "description": "The security offering details",
       "discriminator": "offeringType",
-      "required": [
-        "offeringType"
-      ],
+      "required": ["offeringType"],
       "properties": {
         "offeringType": {
           "type": "string",
@@ -880,10 +837,7 @@
                 "type": {
                   "type": "string",
                   "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
-                  "enum": [
-                    "Qualys",
-                    "TVM"
-                  ],
+                  "enum": ["Qualys", "TVM"],
                   "x-ms-enum": {
                     "name": "type",
                     "modelAsString": true
@@ -915,10 +869,7 @@
             "type": {
               "type": "string",
               "description": "The available sub plans",
-              "enum": [
-                "P1",
-                "P2"
-              ],
+              "enum": ["P1", "P2"],
               "x-ms-enum": {
                 "name": "subPlan",
                 "modelAsString": true
@@ -1063,10 +1014,7 @@
                 "type": {
                   "type": "string",
                   "description": "The Vulnerability Assessment solution to be provisioned. Can be either 'TVM' or 'Qualys'",
-                  "enum": [
-                    "Qualys",
-                    "TVM"
-                  ],
+                  "enum": ["Qualys", "TVM"],
                   "x-ms-enum": {
                     "name": "type",
                     "modelAsString": true
@@ -1098,10 +1046,7 @@
             "type": {
               "type": "string",
               "description": "The available sub plans",
-              "enum": [
-                "P1",
-                "P2"
-              ],
+              "enum": ["P1", "P2"],
               "x-ms-enum": {
                 "name": "subPlan",
                 "modelAsString": true
@@ -1509,9 +1454,7 @@
             "scanningMode": {
               "type": "string",
               "description": "The scanning mode for the VM scan.",
-              "enum": [
-                "Default"
-              ],
+              "enum": ["Default"],
               "x-ms-enum": {
                 "name": "scanningMode",
                 "modelAsString": true
