@@ -95,6 +95,12 @@ op ProxyArtifactUpdateState(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   parameters: ArtifactChangeState,
-): Azure.ResourceManager.ArmResponse<Microsoft.HybridNetwork.ProxyArtifactVersionsListOverview> | Azure.ResourceManager.ArmAcceptedLroResponse<"Request of updating artifact state is accepted.", Azure.ResourceManager.ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<Azure.ResourceManager.ArmOperationStatus<never, Azure.ResourceManager.ResourceProvisioningState>, never, never>, Microsoft.HybridNetwork.ProxyArtifactVersionsListOverview, string>> | Azure.ResourceManager.CommonTypes.ErrorResponse;
+): ArmResponse<ProxyArtifactVersionsListOverview> | ArmAcceptedLroResponse<
+  "Request of updating artifact state is accepted.",
+  ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
+> | ErrorResponse;
 
-@@override(ProxyArtifact.updateState, ProxyArtifactUpdateState, "go");
+@@override(ProxyArtifact.updateState,
+  ProxyArtifactUpdateState,
+  "go,jsavascript"
+);
