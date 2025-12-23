@@ -940,7 +940,8 @@
             "description": "The workflow name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1001,14 +1002,16 @@
             "description": "The workflow name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "name": "draftName",
             "description": "The workflow draft name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1056,14 +1059,16 @@
             "description": "The workflow name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "name": "draftName",
             "description": "The workflow draft name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1126,14 +1131,16 @@
             "description": "The workflow name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "name": "draftName",
             "description": "The workflow draft name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1162,6 +1169,7 @@
         ],
         "operationId": "WorkflowDrafts_Run",
         "description": "Runs a workflow draft.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Run a workflow draft": {
             "$ref": "./examples/WorkflowDrafts_Run.json"
@@ -1183,14 +1191,16 @@
             "description": "The workflow name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "name": "draftName",
             "description": "The workflow draft name.",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,78}[a-zA-Z0-9])?$"
           },
           {
             "$ref": "#/parameters/api-version"
@@ -1201,7 +1211,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -6991,16 +7007,80 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkflowProperties",
+          "$ref": "#/definitions/WorkflowDraftProperties",
           "description": "The workflow draft properties."
         }
       },
       "description": "The workflow draft.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResource"
         }
       ]
+    },
+    "WorkflowDraftProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "readOnly": true,
+          "description": "Gets the provisioning state."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the created time."
+        },
+        "changedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Gets the changed time."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The state."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the version."
+        },
+        "accessEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the access endpoint."
+        },
+        "endpointsConfiguration": {
+          "$ref": "#/definitions/FlowEndpointsConfiguration",
+          "description": "The endpoints configuration."
+        },
+        "accessControl": {
+          "$ref": "#/definitions/FlowAccessControlConfiguration",
+          "description": "The access control configuration."
+        },
+        "integrationAccount": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration account."
+        },
+        "integrationServiceEnvironment": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration service environment."
+        },
+        "definition": {
+          "$ref": "#/definitions/Object",
+          "description": "The definition."
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/WorkflowParameter"
+          },
+          "description": "The parameters."
+        }
+      },
+      "description": "The workflow draft properties."
     },
     "WorkflowDraftListResult": {
       "type": "object",
