@@ -51,11 +51,14 @@ suppressions:
         - $.definitions.MonitorResource.properties.properties
         - $.definitions.TagRule.properties.properties
         - $.definitions.CreateResourceSupportedResponse.properties.value
+        - $.definitions.CreateResourceSupportedProperties.properties.creationSupported
       reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: OperationIdNounVerb
       from: dynatrace.json
       where:
         - $.paths["/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getCreationSupported"].post.operationId
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredComputeResources"].post.operationId
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredResources"].post.operationId
       reason: Existing service design behavior. Fixing this causes breaking changes.
     - code: PatchBodyParametersSchema
       from: dynatrace.json
@@ -69,6 +72,7 @@ suppressions:
         - $.definitions.DynatraceSingleSignOnResource
         - $.definitions.MonitorResource
         - $.definitions.TagRule
+        - $.definitions.CreateResourceSupportedResponse
       reason: It is similar to any other model. We believe this is a false positive.
 ```
 
