@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Defines the admin rule collection.
  */
 @parentResource(SecurityAdminConfiguration)
-model AdminRuleCollection
-  is Azure.ResourceManager.ProxyResource<AdminRuleCollectionPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = AdminRuleCollection,
-    KeyName = "ruleCollectionName",
-    SegmentName = "ruleCollections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model AdminRuleCollection extends ChildResource {
+  properties?: AdminRuleCollectionPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleCollectionName")
+  @segment("ruleCollections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

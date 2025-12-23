@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * Network security user rule.
  */
 @parentResource(SecurityUserRuleCollection)
-model SecurityUserRule
-  is Azure.ResourceManager.ProxyResource<SecurityUserRulePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = SecurityUserRule,
-    KeyName = "ruleName",
-    SegmentName = "rules",
-    NamePattern = "^[a-zA-Z0-9_.-]*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SecurityUserRule extends ChildResource {
+  properties?: SecurityUserRulePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleName")
+  @segment("rules")
+  @pattern("^[a-zA-Z0-9_.-]*$")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

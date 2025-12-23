@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * The network group resource
  */
 @parentResource(NetworkManager)
-model NetworkGroup
-  is Azure.ResourceManager.ProxyResource<NetworkGroupProperties> {
-  ...ResourceNameParameter<
-    Resource = NetworkGroup,
-    KeyName = "networkGroupName",
-    SegmentName = "networkGroups",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkGroup extends ChildResource {
+  properties?: NetworkGroupProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkGroupName")
+  @segment("networkGroups")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

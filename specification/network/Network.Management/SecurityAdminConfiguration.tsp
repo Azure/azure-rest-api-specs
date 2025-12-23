@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Defines the security admin configuration
  */
 @parentResource(NetworkManager)
-model SecurityAdminConfiguration
-  is Azure.ResourceManager.ProxyResource<SecurityAdminConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = SecurityAdminConfiguration,
-    KeyName = "configurationName",
-    SegmentName = "securityAdminConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SecurityAdminConfiguration extends ChildResource {
+  properties?: SecurityAdminConfigurationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("configurationName")
+  @segment("securityAdminConfigurations")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

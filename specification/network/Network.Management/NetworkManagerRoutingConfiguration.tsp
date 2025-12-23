@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * Defines the routing configuration
  */
 @parentResource(NetworkManager)
-model NetworkManagerRoutingConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkManagerRoutingConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkManagerRoutingConfiguration,
-    KeyName = "configurationName",
-    SegmentName = "routingConfigurations",
-    NamePattern = "^[a-zA-Z0-9_.-]*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkManagerRoutingConfiguration extends ChildResource {
+  properties?: NetworkManagerRoutingConfigurationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("configurationName")
+  @segment("routingConfigurations")
+  @pattern("^[a-zA-Z0-9_.-]*$")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

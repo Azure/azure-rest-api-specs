@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * Defines the security user configuration
  */
 @parentResource(NetworkManager)
-model SecurityUserConfiguration
-  is Azure.ResourceManager.ProxyResource<SecurityUserConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = SecurityUserConfiguration,
-    KeyName = "configurationName",
-    SegmentName = "securityUserConfigurations",
-    NamePattern = "^[a-zA-Z0-9_.-]*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SecurityUserConfiguration extends ChildResource {
+  properties?: SecurityUserConfigurationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("configurationName")
+  @segment("securityUserConfigurations")
+  @pattern("^[a-zA-Z0-9_.-]*$")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

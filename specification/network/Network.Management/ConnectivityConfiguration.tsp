@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * The network manager connectivity configuration resource
  */
 @parentResource(NetworkManager)
-model ConnectivityConfiguration
-  is Azure.ResourceManager.ProxyResource<ConnectivityConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = ConnectivityConfiguration,
-    KeyName = "configurationName",
-    SegmentName = "connectivityConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ConnectivityConfiguration extends ChildResource {
+  properties?: ConnectivityConfigurationProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("configurationName")
+  @segment("connectivityConfigurations")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

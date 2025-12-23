@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * Defines the routing rule collection.
  */
 @parentResource(NetworkManagerRoutingConfiguration)
-model RoutingRuleCollection
-  is Azure.ResourceManager.ProxyResource<RoutingRuleCollectionPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = RoutingRuleCollection,
-    KeyName = "ruleCollectionName",
-    SegmentName = "ruleCollections",
-    NamePattern = "^[a-zA-Z0-9_.-]*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RoutingRuleCollection extends ChildResource {
+  properties?: RoutingRuleCollectionPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleCollectionName")
+  @segment("ruleCollections")
+  @pattern("^[a-zA-Z0-9_.-]*$")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

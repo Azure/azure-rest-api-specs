@@ -11479,8 +11479,7 @@ model ApplicationGatewayAvailableWafRuleSetsResult {
  * A web application firewall rule set.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ApplicationGatewayFirewallRuleSet
-  extends Resource {
+model ApplicationGatewayFirewallRuleSet extends Resource {
   /**
    * Properties of the application gateway firewall rule set.
    */
@@ -13847,8 +13846,7 @@ model ExpressRouteCircuitRoutesTableSummary {
  * A ExpressRouteResourceProvider object.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ExpressRouteServiceProvider
-  extends Resource {
+model ExpressRouteServiceProvider extends Resource {
   /**
    * Properties of the express route service provider.
    */
@@ -15300,7 +15298,6 @@ model IpamPoolUpdate {
   /**
    * Dictionary of <string>
    */
-
   /**
    * Represents the IpamPool update properties.
    */
@@ -16797,7 +16794,7 @@ model Resource {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model ChildResource {
   /**
    * Resource ID.
@@ -18053,7 +18050,6 @@ model VerifierWorkspaceUpdate {
   /**
    * Dictionary of <string>
    */
-
   /**
    * Represents the VerifierWorkspace update properties.
    */
@@ -20121,7 +20117,6 @@ model ConnectionMonitor {
   /**
    * Connection monitor tags.
    */
-
   /**
    * Properties of the connection monitor.
    */
@@ -22571,12 +22566,10 @@ model VirtualNetworkGatewayListConnectionsResult
  * A common class for general resource information.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model VirtualNetworkGatewayConnectionListEntity
-  extends Resource {
+model VirtualNetworkGatewayConnectionListEntity extends Resource {
   /**
    * Resource tags.
    */
-
   /** The geo-location where the resource lives */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;

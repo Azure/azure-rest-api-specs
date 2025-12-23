@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * The Scope Connections resource
  */
 @parentResource(NetworkManager)
-model ScopeConnection
-  is Azure.ResourceManager.ProxyResource<ScopeConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = ScopeConnection,
-    KeyName = "scopeConnectionName",
-    SegmentName = "scopeConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ScopeConnection extends ChildResource {
+  properties?: ScopeConnectionProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("scopeConnectionName")
+  @segment("scopeConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

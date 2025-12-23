@@ -1516,12 +1516,6 @@
 |------|------------|-------|
 | `definitions.AzureFirewallAdditionalProperties__deleted` | deleted | `{"type":"object","description":"The additional properties of azure firewall.","additionalProperties"...` |
 
-### Changes for `ChildResource`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ChildResource__deleted` | deleted | `{"type":"object","description":"Proxy resource representation.","properties":{"id":{"type":"string",...` |
-
 ### Changes for `CommonProxyResource`
 
 | Path | Change Type | Value |
@@ -2208,7 +2202,6 @@
 | `definitions.ApplicationGatewayAvailableRequestHeadersResult.properties__added` | added | `{"value":{"type":"array","items":{"type":"string"}}}` |
 | `definitions.ApplicationGatewayAvailableResponseHeadersResult.properties__added` | added | `{"value":{"type":"array","items":{"type":"string"}}}` |
 | `definitions.ApplicationGatewayAvailableServerVariablesResult.properties__added` | added | `{"value":{"type":"array","items":{"type":"string"}}}` |
-| `definitions.BaseAdminRule.properties.properties__added` | added | `{"type":"object","description":"The resource-specific properties for this resource."}` |
 | `definitions.BastionHostPropertiesFormat.properties.networkAcls.properties__deleted` | deleted | `{"ipRules":{"type":"array","description":"Sets the IP ACL rules for Developer Bastion Host.","items"...` |
 | `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.properties__deleted` | deleted | `{"connectedGroupPrivateEndpointsScale":{"type":"string","description":"Option indicating the scale o...` |
 | `definitions.Container.properties__deleted` | deleted | `{}` |
@@ -2407,7 +2400,7 @@
 | `definitions.ActiveConnectivityConfiguration.allOf[0].$ref` | `./networkManagerEffectiveConfiguration.json#/definitions/EffectiveConnectivityConfiguration` | `#/definitions/EffectiveConnectivityConfiguration` |
 | `definitions.ActiveDefaultSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/DefaultAdminPropertiesFormat` | `#/definitions/DefaultAdminPropertiesFormat` |
 | `definitions.ActiveSecurityAdminRule.properties.properties.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AdminPropertiesFormat` | `#/definitions/AdminPropertiesFormat` |
-| `definitions.AdminRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.AdminRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.ApplicationGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ApplicationGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.ApplicationGatewayAuthenticationCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2555,7 +2548,7 @@
 | `definitions.BackendAddressPoolPropertiesFormat.properties.outboundRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the backend address pool resource.` | `The current provisioning state.` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.BaseAdminRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.BaseAdminRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.BastionHost.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.BastionHostIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BastionHostIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.description` | `Private IP allocation method.` | `IP address allocation method.` |
@@ -2575,7 +2568,7 @@
 | `definitions.ConnectionMonitorResultProperties.properties.provisioningState.description` | `The provisioning state of the connection monitor.` | `The current provisioning state.` |
 | `definitions.ConnectionSharedKey.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ConnectionSharedKeyResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ConnectivityConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ConnectivityConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.ConnectivityConfigurationProperties.properties.provisioningState.description` | `The provisioning state of the connectivity configuration resource.` | `The current provisioning state.` |
 | `definitions.connectivityGroupItem.properties.isGlobal.description` | `Flag if global is supported.` | `Flag if global mesh is supported.` |
 | `definitions.ConnectivityParameters.properties.preferredIPVersion.description` | `Preferred IP version of the connection.` | `IP address version.` |
@@ -2755,7 +2748,7 @@
 | `definitions.NatGatewayPropertiesFormat.properties.publicIpPrefixesV6.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.sourceVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.subnets.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.NetworkGroup.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkGroup.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.NetworkGroupProperties.properties.provisioningState.description` | `The provisioning state of the scope assignment resource.` | `The current provisioning state.` |
 | `definitions.NetworkIntentPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.NetworkInterface.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
@@ -2784,10 +2777,10 @@
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network interface tap configuration resource.` | `The current provisioning state.` |
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.virtualNetworkTap.$ref` | `./virtualNetworkTap.json#/definitions/VirtualNetworkTap` | `#/definitions/VirtualNetworkTap` |
 | `definitions.NetworkManager.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.NetworkManagerConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkManagerConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.NetworkManagerConnectionProperties.properties.connectionState.description` | `Connection state.` | `The current scope connection state.` |
 | `definitions.NetworkManagerProperties.properties.provisioningState.description` | `The provisioning state of the network manager resource.` | `The current provisioning state.` |
-| `definitions.NetworkManagerRoutingConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkManagerRoutingConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.NetworkManagerRoutingConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.NetworkProfile.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.NetworkProfilePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network profile resource.` | `The current provisioning state.` |
@@ -2913,12 +2906,12 @@
 | `definitions.RoutingConfiguration.properties.outboundRouteMap.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.RoutingIntent.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.RoutingIntentProperties.properties.provisioningState.description` | `The provisioning state of the RoutingIntent resource.` | `The current provisioning state.` |
-| `definitions.RoutingRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.RoutingRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.RoutingRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
+| `definitions.RoutingRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.RoutingRuleCollectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.RoutingRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
-| `definitions.ScopeConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.SecurityAdminConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ScopeConnection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
+| `definitions.SecurityAdminConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.SecurityPartnerProvider.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.SecurityPartnerProviderPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the Security Partner Provider resource.` | `The current provisioning state.` |
 | `definitions.SecurityPartnerProviderPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2928,10 +2921,10 @@
 | `definitions.SecurityRulePropertiesFormat.properties.destinationApplicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
 | `definitions.SecurityRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the security rule resource.` | `The current provisioning state.` |
 | `definitions.SecurityRulePropertiesFormat.properties.sourceApplicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
-| `definitions.SecurityUserConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.SecurityUserConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.SecurityUserConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
-| `definitions.SecurityUserRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.SecurityUserRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.SecurityUserRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
+| `definitions.SecurityUserRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.SecurityUserRuleCollectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.SecurityUserRulePropertiesFormat.properties.destinations.items.$ref` | `./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem` | `#/definitions/AddressPrefixItem` |
 | `definitions.SecurityUserRulePropertiesFormat.properties.direction.description` | `Indicates if the traffic matched against the rule in inbound or outbound.` | `The direction of the rule. The direction specifies if the rule will be evaluated on incoming or outgoing traffic.` |
@@ -2953,7 +2946,7 @@
 | `definitions.SingleQueryResult.properties.severity.type` | `integer` | `number` |
 | `definitions.SingleQueryResult.properties.severity['x-ms-enum'].name` | `FirewallPolicyIDPSSignatureSeverity` | `FirewallPolicyIdpsSignatureSeverity` |
 | `definitions.StaticCidr.allOf[0].$ref` | `./network.json#/definitions/CommonProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.StaticMember.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.StaticMember.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.StaticMemberProperties.properties.provisioningState.description` | `The provisioning state of the scope assignment resource.` | `The current provisioning state.` |
 | `definitions.Subnet.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.SubnetAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `#/definitions/SecurityRule` |

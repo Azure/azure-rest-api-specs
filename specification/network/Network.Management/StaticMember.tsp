@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * StaticMember Item.
  */
 @parentResource(NetworkGroup)
-model StaticMember
-  is Azure.ResourceManager.ProxyResource<StaticMemberProperties> {
-  ...ResourceNameParameter<
-    Resource = StaticMember,
-    KeyName = "staticMemberName",
-    SegmentName = "staticMembers",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model StaticMember extends ChildResource {
+  properties?: StaticMemberProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("staticMemberName")
+  @segment("staticMembers")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.

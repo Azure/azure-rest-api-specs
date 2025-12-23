@@ -18,14 +18,13 @@ namespace Microsoft.Network;
 @parentResource(AdminRuleCollection)
 @discriminator("kind")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model BaseAdminRule is Azure.ResourceManager.ProxyResource<{}> {
-  ...ResourceNameParameter<
-    Resource = BaseAdminRule,
-    KeyName = "ruleName",
-    SegmentName = "rules",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BaseAdminRule extends ChildResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleName")
+  @segment("rules")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
