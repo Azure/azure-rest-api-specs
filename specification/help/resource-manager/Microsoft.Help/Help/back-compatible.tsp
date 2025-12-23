@@ -155,7 +155,7 @@ using Microsoft.Help;
 @@clientName(DiagnosticResource, "SelfHelpDiagnostic", "csharp");
 @@clientName(SolutionResource, "SelfHelpSolution", "csharp");
 @@clientName(SimplifiedSolutionsResource,
-  "SelfHelpSimplifiedSolutions",
+  "SelfHelpSimplifiedSolution",
   "csharp"
 );
 @@clientName(TroubleshooterResource, "SelfHelpTroubleshooter", "csharp");
@@ -255,7 +255,7 @@ using Microsoft.Help;
   "csharp"
 );
 @@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
-  "DiscoverSolutionsNlp",
+  "DiscoverSolutionsNlpXXX",
   "csharp"
 );
 @@usage(SolutionResourceSelfHelp, Usage.input);
