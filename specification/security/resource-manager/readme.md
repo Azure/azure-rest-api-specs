@@ -68,15 +68,6 @@ directive:
 
 ``` yaml
 suppressions:
-  - code: ResourceNameRestriction
-    from: Microsoft.Security\stable\2024-01-01\pricings.json
-    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
-  - code: PutRequestResponseSchemeArm
-    from: Microsoft.Security\stable\2024-01-01\pricings.json
-    reason: The models are the same, but one is a parameter and the other is a definition! old versions of this API have the same configurations.
-  - code: GetCollectionOnlyHasValueAndNextLink
-    from: Microsoft.Security\stable\2024-01-01\pricings.json
-    reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
   - code: AvoidAdditionalProperties
     from: Microsoft.Security\preview\2026-01-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
