@@ -38,12 +38,6 @@ These settings apply only when `--tag=package-2025-11-03-preview` is specified o
 input-file:
   - Dynatrace.Observability/preview/2025-11-03-preview/dynatrace.json
 suppressions:
-    - code: ProvisioningStateMustBeReadOnly
-      from: dynatrace.json
-      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
-    - code: UnSupportedPatchProperties
-      from: dynatrace.json
-      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
     - code: BodyTopLevelProperties
       from: dynatrace.json
       reason: Existing service design behavior. Fixing this causes breaking changes.
