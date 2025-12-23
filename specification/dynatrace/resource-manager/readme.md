@@ -79,6 +79,11 @@ suppressions:
       where:
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/upgradePlan"].post
       reason: By design - operation returns only 202 for async plan upgrade processing. No final response schema is required as the upgrade status is reflected in the monitor resource state.
+    - code: SECRET_PROPERTY
+      from: dynatrace.json
+      where:
+        - $.definitions.EnvironmentInfo.properties.ingestionKey
+      reason: By design - ingestionKey must be returned in Monitor resource responses to enable customers to configure Dynatrace agents for sending telemetry data to the Dynatrace environment.
 ```
 
 ### Tag: package-2024-04-24
