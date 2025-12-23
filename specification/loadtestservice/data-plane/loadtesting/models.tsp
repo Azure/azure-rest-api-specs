@@ -673,6 +673,7 @@ model TestInputArtifacts {
 @added(APIVersions.v2025_11_01_preview)
 model TestPreferences {
   @doc("Enable or disable AI based insights on Test Run Errors.")
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is an abbervation and should be all caps"
   enableAIErrorInsights?: boolean = true;
 }
 
@@ -1510,6 +1511,10 @@ union OperationKind {
 
   @doc("Operation represents a test run insights generation operation")
   GenerateTestRunInsights: "GenerateTestRunInsights",
+
+  @doc("Operation represents a test plan recommendations generation operation")
+  @added(APIVersions.v2025_11_01_preview)
+  TestPlanRecommendations: "TestPlanRecommendations",
 }
 
 @added(APIVersions.v2025_03_01_preview)

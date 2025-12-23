@@ -2026,6 +2026,83 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/tests/{testId}:generateTestPlanRecommendations": {
+      "post": {
+        "operationId": "LoadTestAdministration_GenerateTestPlanRecommendations",
+        "tags": [
+          "Test"
+        ],
+        "summary": "Generate load test plan recommendations.",
+        "description": "Generate AI Recommendations to author a load test plan using the uploaded browser recording file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "testId",
+            "in": "path",
+            "description": "Unique test identifier for the load test, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate recommendations for given load test.": {
+            "$ref": "./examples/GenerateTestPlanRecommendations.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/tests/{testId}/app-components": {
       "get": {
         "operationId": "LoadTestAdministration_GetAppComponents",
@@ -4095,7 +4172,8 @@
       "description": "Kind of the long running operation.",
       "enum": [
         "CloneTest",
-        "GenerateTestRunInsights"
+        "GenerateTestRunInsights",
+        "TestPlanRecommendations"
       ],
       "x-ms-enum": {
         "name": "OperationKind",
@@ -4110,6 +4188,11 @@
             "name": "GenerateTestRunInsights",
             "value": "GenerateTestRunInsights",
             "description": "Operation represents a test run insights generation operation"
+          },
+          {
+            "name": "TestPlanRecommendations",
+            "value": "TestPlanRecommendations",
+            "description": "Operation represents a test plan recommendations generation operation"
           }
         ]
       }
