@@ -47,7 +47,7 @@ using TypeSpec.Http;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ProxyArtifactUpdateState(
+op proxyArtifactUpdateState(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
@@ -101,6 +101,6 @@ op ProxyArtifactUpdateState(
 > | ErrorResponse;
 
 @@override(ProxyArtifact.updateState,
-  ProxyArtifactUpdateState,
+  proxyArtifactUpdateState,
   "go,javascript"
 );
