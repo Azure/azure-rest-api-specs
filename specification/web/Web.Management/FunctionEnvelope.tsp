@@ -166,7 +166,8 @@ interface FunctionEnvelopes {
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
       FunctionEnvelope,
-      ArmLroLocationHeader<FinalResult = FunctionEnvelope> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = FunctionEnvelope> &
+        Azure.Core.Foundations.RetryAfterHeader
     >,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -304,7 +305,8 @@ interface FunctionEnvelopeOperationGroup {
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
       FunctionEnvelope,
-      ArmLroLocationHeader<FinalResult = FunctionEnvelope> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = FunctionEnvelope> &
+        Azure.Core.Foundations.RetryAfterHeader
     >,
     OverrideErrorType = DefaultErrorResponse
   >;

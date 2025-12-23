@@ -82,7 +82,8 @@ interface MSDeployStatuses {
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
@@ -156,7 +157,8 @@ interface MSDeployStatusOperationGroup {
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
@@ -229,7 +231,8 @@ interface MSDeployStatusSlotOperationGroup {
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
@@ -309,7 +312,8 @@ interface InstanceMSDeployStatusOperationGroup {
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<
       MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse

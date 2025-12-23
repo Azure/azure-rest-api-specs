@@ -139,8 +139,7 @@ using Microsoft.Web;
 @@flattenProperty(SiteAuthSettings.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AzureStoragePropertyDictionaryResource.properties
-);
+@@flattenProperty(AzureStoragePropertyDictionaryResource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ConnectionStringDictionary.properties);
@@ -2060,7 +2059,6 @@ using Microsoft.Web;
   "staticSiteUserEnvelope"
 );
 
-
 @@clientLocation(checkNameAvailability, "WebSiteManagement", "go");
 @@clientLocation(Users.getPublishingUser, "WebSiteManagement", "go");
 @@clientLocation(SourceControls.getSourceControl, "WebSiteManagement", "go");
@@ -2071,7 +2069,10 @@ using Microsoft.Web;
 @@clientLocation(listGeoRegions, "WebSiteManagement", "go");
 @@clientLocation(listPremierAddOnOffers, "WebSiteManagement", "go");
 @@clientLocation(listSkus, "WebSiteManagement", "go");
-@@clientLocation(listSiteIdentifiersAssignedToHostName, "WebSiteManagement", "go");
+@@clientLocation(listSiteIdentifiersAssignedToHostName,
+  "WebSiteManagement",
+  "go"
+);
 @@clientLocation(SourceControls.listSourceControls, "WebSiteManagement", "go");
 @@clientLocation(move, "WebSiteManagement", "go");
 @@clientLocation(regionalCheckNameAvailability, "WebSiteManagement", "go");
