@@ -193,6 +193,16 @@ input-file:
   - Microsoft.Security/preview/2025-07-01-preview/operations.json
 ```
 
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08'
+input-file:
+  - Microsoft.Security/stable/2025-08-01/defenderForStorageSettings.json
+  - Microsoft.Security/stable/2025-08-01/operations.json
+```
+
 ### Tag: package-2025-06
 These settings apply only when `--tag=package-2025-06` is specified on the command line.
 
@@ -690,7 +700,7 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
+- Microsoft.Security/stable/2025-08-01/defenderForStorageSettings.json
 - Microsoft.Security/stable/2026-01-01/privateLinks.json
 
 # Autorest suppressions
