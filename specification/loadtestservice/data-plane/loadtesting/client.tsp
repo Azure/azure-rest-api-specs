@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Microsoft.LoadTestService;
 
-@useDependency(APIVersions.v2025_03_01_preview)
+@useDependency(APIVersions.v2025_11_01_preview)
 namespace Customizations;
 
 // Client customizations should be kept in this file only and not in other files
@@ -217,6 +217,9 @@ interface AdministrationOperations {
 
   @action("clone")
   cloneTest is LoadTestAdministration.cloneTest;
+
+  @action("generateTestPlanRecommendations")
+  generateTestPlanRecommendations is LoadTestAdministration.generateTestPlanRecommendations;
 
   getOperationStatus is Operations.getStatus;
 }
