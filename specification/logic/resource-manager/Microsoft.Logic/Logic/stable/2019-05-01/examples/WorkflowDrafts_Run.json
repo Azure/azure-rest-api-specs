@@ -8,71 +8,9 @@
   },
   "responses": {
     "202": {
+      "description": "Accepted - Draft execution has been started",
       "headers": {
         "Location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/drafts/draft-v1/runs/08586676746934337772206998657DR01"
-      }
-    }
-  }
-      "description": "Draft run completed successfully",
-      "body": {
-        "properties": {
-          "startTime": "2025-12-23T12:30:00.0000000Z",
-          "endTime": "2025-12-23T12:30:05.2340000Z",
-          "status": "Succeeded",
-          "correlation": {
-            "clientTrackingId": "08586676746934337772206998657DR01"
-          },
-          "workflow": {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/drafts/draft-v1",
-            "name": "draft-v1",
-            "type": "Microsoft.Logic/workflows/drafts"
-          },
-          "trigger": {
-            "name": "manual",
-            "startTime": "2025-12-23T12:30:00.0000000Z",
-            "endTime": "2025-12-23T12:30:00.1234567Z",
-            "correlation": {
-              "clientTrackingId": "08586676746934337772206998657DR01"
-            },
-            "code": "OK",
-            "status": "Succeeded"
-          },
-          "outputs": {
-            "result": "Hello from workflow draft!",
-            "timestamp": "2025-12-23T12:30:05.2340000Z"
-          }
-        },
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/drafts/draft-v1/runs/08586676746934337772206998657DR01",
-        "name": "08586676746934337772206998657DR01",
-        "type": "Microsoft.Logic/workflows/drafts/runs"
-      }
-    },
-    "202": {
-      "description": "Draft run accepted and is being processed asynchronously",
-      "body": {
-        "properties": {
-          "startTime": "2025-12-23T12:30:00.0000000Z",
-          "status": "Running",
-          "correlation": {
-            "clientTrackingId": "08586676746934337772206998657DR02"
-          },
-          "workflow": {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/drafts/draft-v1",
-            "name": "draft-v1",
-            "type": "Microsoft.Logic/workflows/drafts"
-          },
-          "trigger": {
-            "name": "manual",
-            "startTime": "2025-12-23T12:30:00.0000000Z",
-            "correlation": {
-              "clientTrackingId": "08586676746934337772206998657DR02"
-            },
-            "status": "Running"
-          }
-        },
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/workflows/test-workflow/drafts/draft-v1/runs/08586676746934337772206998657DR02",
-        "name": "08586676746934337772206998657DR02",
-        "type": "Microsoft.Logic/workflows/drafts/runs"
       }
     }
   }
