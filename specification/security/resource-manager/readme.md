@@ -681,7 +681,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
-- Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2026-01-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
