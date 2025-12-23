@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * VpnServerConfigurationPolicyGroup Resource.
  */
 @parentResource(VpnServerConfiguration)
-model VpnServerConfigurationPolicyGroup
-  is Azure.ResourceManager.ProxyResource<VpnServerConfigurationPolicyGroupProperties> {
-  ...ResourceNameParameter<
-    Resource = VpnServerConfigurationPolicyGroup,
-    KeyName = "configurationPolicyGroupName",
-    SegmentName = "configurationPolicyGroups",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnServerConfigurationPolicyGroup extends SubResourceModel {
+  properties?: VpnServerConfigurationPolicyGroupProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("configurationPolicyGroupName")
+  @segment("configurationPolicyGroups")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model VpnServerConfigurationPolicyGroup
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(VpnServerConfigurationPolicyGroup.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VpnServerConfigurationPolicyGroups {

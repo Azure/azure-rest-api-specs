@@ -15,19 +15,24 @@ namespace Microsoft.Network;
  * Pool of backend IP addresses.
  */
 @parentResource(LoadBalancer)
-model BackendAddressPool
-  is Azure.ResourceManager.ProxyResource<BackendAddressPoolPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = BackendAddressPool,
-    KeyName = "backendAddressPoolName",
-    SegmentName = "backendAddressPools",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BackendAddressPool extends SubResourceModel {
+  properties?: BackendAddressPoolPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("backendAddressPoolName")
+  @segment("backendAddressPools")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+
+@@doc(BackendAddressPool.name,
+  "The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource."
+);
 
 alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

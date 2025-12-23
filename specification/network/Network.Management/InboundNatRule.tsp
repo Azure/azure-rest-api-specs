@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Inbound NAT rule of the load balancer.
  */
 @parentResource(LoadBalancer)
-model InboundNatRule
-  is Azure.ResourceManager.ProxyResource<InboundNatRulePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = InboundNatRule,
-    KeyName = "inboundNatRuleName",
-    SegmentName = "inboundNatRules",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model InboundNatRule extends SubResourceModel {
+  properties?: InboundNatRulePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("inboundNatRuleName")
+  @segment("inboundNatRules")
+  name: string;
   
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(InboundNatRule.name,
+  "The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface InboundNatRules {

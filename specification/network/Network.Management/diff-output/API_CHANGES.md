@@ -1714,6 +1714,12 @@
 |------|------------|-------|
 | `definitions.SignaturesOverridesProperties__added` | added | `{"type":"object","description":"Will contain the properties of the resource (the actual signature ov...` |
 
+### Changes for `SubResourceModel`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.SubResourceModel__added` | added | `{"type":"object","description":"Reference to another subresource.","properties":{"id":{"type":"strin...` |
+
 ### Changes for `TypeSpec.Http.OkResponse`
 
 | Path | Change Type | Value |
@@ -2466,7 +2472,7 @@
 | `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the path rule resource.` | `The current provisioning state.` |
 | `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.redirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayPathRulePropertiesFormat.properties.rewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.ApplicationGatewayPrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ApplicationGatewayPrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateEndpoint.$ref` | `./privateEndpoint.json#/definitions/PrivateEndpoint` | `#/definitions/PrivateEndpoint` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.privateLinkServiceConnectionState.$ref` | `./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState` | `#/definitions/PrivateLinkServiceConnectionState` |
 | `definitions.ApplicationGatewayPrivateEndpointConnectionProperties.properties.provisioningState.description` | `The provisioning state of the application gateway private endpoint connection resource.` | `The current provisioning state.` |
@@ -2540,7 +2546,7 @@
 | `definitions.AzureFirewallPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the Azure firewall resource.` | `The current provisioning state.` |
 | `definitions.AzureFirewallPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.BackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.BackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2557,7 +2563,7 @@
 | `definitions.BastionHostIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BastionHostPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the bastion host resource.` | `The current provisioning state.` |
 | `definitions.BastionHostPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.BgpConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.BgpConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.BgpConnectionProperties.properties.hubVirtualNetworkConnection.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BgpConnectionProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.BgpServiceCommunity.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
@@ -2567,7 +2573,7 @@
 | `definitions.ConnectionMonitorListResult.properties.value.description` | `Information about connection monitors.` | `[Placeholder] Discription for value property` |
 | `definitions.ConnectionMonitorResultProperties.properties.provisioningState.description` | `The provisioning state of the connection monitor.` | `The current provisioning state.` |
 | `definitions.ConnectionSharedKey.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.ConnectionSharedKeyResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ConnectionSharedKeyResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ConnectivityConfiguration.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.ConnectivityConfigurationProperties.properties.provisioningState.description` | `The provisioning state of the connectivity configuration resource.` | `The current provisioning state.` |
 | `definitions.connectivityGroupItem.properties.isGlobal.description` | `Flag if global is supported.` | `Flag if global mesh is supported.` |
@@ -2613,12 +2619,12 @@
 | `definitions.EndpointServiceResult.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ErrorResponse.properties.error.$ref` | `./network.json#/definitions/ErrorDetails` | `#/definitions/ErrorDetails` |
 | `definitions.ExpressRouteCircuit.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.ExpressRouteCircuitAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.ExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ExpressRouteCircuitAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
+| `definitions.ExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route circuit connection resource.` | `The current provisioning state.` |
-| `definitions.ExpressRouteCircuitPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ExpressRouteCircuitPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.expressRouteConnection.$ref` | `./virtualWan.json#/definitions/ExpressRouteConnectionId` | `#/definitions/ExpressRouteConnectionId` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route circuit peering resource.` | `The current provisioning state.` |
 | `definitions.ExpressRouteCircuitPeeringPropertiesFormat.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2642,7 +2648,7 @@
 | `definitions.ExpressRouteLinkPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route link resource.` | `The current provisioning state.` |
 | `definitions.ExpressRoutePort.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ExpressRoutePort.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
-| `definitions.ExpressRoutePortAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ExpressRoutePortAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ExpressRoutePortAuthorizationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the authorization resource.` | `The current provisioning state.` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.circuits.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the express route port resource.` | `The current provisioning state.` |
@@ -2664,14 +2670,14 @@
 | `definitions.FirewallPolicyPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the firewall policy resource.` | `The current provisioning state.` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.ruleCollectionGroups.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.threatIntelMode.description` | `The operation mode for Threat Intelligence.` | `The operation mode for Threat Intel.` |
-| `definitions.FirewallPolicyRuleCollectionGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.FirewallPolicyRuleCollectionGroupDraft.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.FirewallPolicyRuleCollectionGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
+| `definitions.FirewallPolicyRuleCollectionGroupDraft.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.FirewallPolicyRuleCollectionGroupProperties.properties.provisioningState.description` | `The provisioning state of the firewall policy rule collection group resource.` | `The current provisioning state.` |
 | `definitions.FlowLog.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.FlowLog.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.FlowLogInformation.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.FlowLogPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the flow log.` | `The current provisioning state.` |
-| `definitions.FrontendIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.FrontendIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.gatewayLoadBalancer.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatPools.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2683,12 +2689,12 @@
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `#/definitions/PublicIPAddress` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.publicIPPrefix.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
-| `definitions.HubIpConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.HubIpConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.privateIPAllocationMethod.description` | `The private IP address allocation method.` | `IP address allocation method.` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the IP configuration resource.` | `The current provisioning state.` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `#/definitions/PublicIPAddress` |
 | `definitions.HubIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
-| `definitions.HubRouteTable.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.HubRouteTable.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.HubRouteTableProperties.properties.provisioningState.description` | `The provisioning state of the RouteTable resource.` | `The current provisioning state.` |
 | `definitions.HubVirtualNetworkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.HubVirtualNetworkConnectionProperties.properties.provisioningState.description` | `The provisioning state of the hub virtual network connection resource.` | `The current provisioning state.` |
@@ -2697,12 +2703,12 @@
 | `definitions.InboundNatPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the inbound NAT pool resource.` | `The current provisioning state.` |
-| `definitions.InboundNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.InboundNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.InboundNatRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatRulePropertiesFormat.properties.backendIPConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.InboundNatRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the inbound NAT rule resource.` | `The current provisioning state.` |
-| `definitions.InboundSecurityRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.InboundSecurityRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.InboundSecurityRuleProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.IpAllocation.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.IpAllocationPropertiesFormat.properties.prefixType.description` | `The address prefix Type for the IpAllocation.` | `IP address version.` |
@@ -2730,7 +2736,7 @@
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancerPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the load balancer resource.` | `The current provisioning state.` |
 | `definitions.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.LoadBalancingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.LoadBalancingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPools.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2754,7 +2760,7 @@
 | `definitions.NetworkInterface.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.NetworkInterface.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
 | `definitions.NetworkInterfaceAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `#/definitions/SecurityRule` |
-| `definitions.NetworkInterfaceIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkInterfaceIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.applicationGatewayBackendAddressPools.items.$ref` | `./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool` | `#/definitions/ApplicationGatewayBackendAddressPool` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.applicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
 | `definitions.NetworkInterfaceIPConfigurationPropertiesFormat.properties.gatewayLoadBalancer.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2773,7 +2779,7 @@
 | `definitions.NetworkInterfacePropertiesFormat.properties.privateLinkService.$ref` | `./privateLinkService.json#/definitions/PrivateLinkService` | `#/definitions/PrivateLinkService` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network interface resource.` | `The current provisioning state.` |
 | `definitions.NetworkInterfacePropertiesFormat.properties.virtualMachine.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.NetworkInterfaceTapConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.NetworkInterfaceTapConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the network interface tap configuration resource.` | `The current provisioning state.` |
 | `definitions.NetworkInterfaceTapConfigurationPropertiesFormat.properties.virtualNetworkTap.$ref` | `./virtualNetworkTap.json#/definitions/VirtualNetworkTap` | `#/definitions/VirtualNetworkTap` |
 | `definitions.NetworkManager.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
@@ -2814,7 +2820,7 @@
 | `definitions.NspLinkReferenceProperties.properties.status.description` | `The NSP linkReference state. It cannot be changed if link is created in auto-approval mode.` | `The NSP link state.` |
 | `definitions.NspLoggingConfiguration.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.NspProfile.allOf[0].$ref` | `../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.OutboundRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.OutboundRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.OutboundRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.frontendIPConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the outbound rule resource.` | `The current provisioning state.` |
@@ -2831,7 +2837,7 @@
 | `definitions.PacketCaptureResultProperties.properties.provisioningState.description` | `The provisioning state of the packet capture session.` | `The current provisioning state.` |
 | `definitions.PatchRouteFilter.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.PatchRouteFilterRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.PeerExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.PeerExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the peer express route circuit connection resource.` | `The current provisioning state.` |
@@ -2839,7 +2845,7 @@
 | `definitions.PrivateDnsZoneGroupPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the private dns zone group resource.` | `The current provisioning state.` |
 | `definitions.PrivateEndpoint.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.PrivateEndpoint.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `#/definitions/ExtendedLocation` |
-| `definitions.PrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.PrivateEndpointConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.PrivateEndpointConnectionProperties.properties.privateEndpoint.$ref` | `./privateEndpoint.json#/definitions/PrivateEndpoint` | `#/definitions/PrivateEndpoint` |
 | `definitions.PrivateEndpointConnectionProperties.properties.provisioningState.description` | `The provisioning state of the private endpoint connection resource.` | `The current provisioning state.` |
 | `definitions.PrivateEndpointProperties.properties.applicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
@@ -2859,7 +2865,7 @@
 | `definitions.PrivateLinkServiceProperties.properties.loadBalancerFrontendIpConfigurations.items.$ref` | `./loadBalancer.json#/definitions/FrontendIPConfiguration` | `#/definitions/FrontendIPConfiguration` |
 | `definitions.PrivateLinkServiceProperties.properties.networkInterfaces.items.$ref` | `./networkInterface.json#/definitions/NetworkInterface` | `#/definitions/NetworkInterface` |
 | `definitions.PrivateLinkServiceProperties.properties.provisioningState.description` | `The provisioning state of the private link service resource.` | `The current provisioning state.` |
-| `definitions.Probe.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.Probe.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ProbePropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ProbePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the probe resource.` | `The current provisioning state.` |
 | `definitions.PropagatedRouteTable.properties.ids.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2887,7 +2893,7 @@
 | `definitions.RecordSet.properties.provisioningState.description` | `The provisioning state of the recordset.` | `The current provisioning state.` |
 | `definitions.ResourceNavigationLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ResourceNavigationLinkFormat.properties.provisioningState.description` | `The provisioning state of the resource navigation link resource.` | `The current provisioning state.` |
-| `definitions.Route.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.Route.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.RouteFilter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.RouteFilterPropertiesFormat.properties.ipv6Peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
 | `definitions.RouteFilterPropertiesFormat.properties.peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
@@ -2895,7 +2901,7 @@
 | `definitions.RouteFilterRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.RouteFilterRulePropertiesFormat.properties.access.description` | `The access type of the rule.` | `Access to be allowed or denied.` |
 | `definitions.RouteFilterRulePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the route filter rule resource.` | `The current provisioning state.` |
-| `definitions.RouteMap.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.RouteMap.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.RouteMapProperties.properties.provisioningState.description` | `The provisioning state of the RouteMap resource.` | `The current provisioning state.` |
 | `definitions.RoutePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the route resource.` | `The current provisioning state.` |
 | `definitions.RouteTable.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
@@ -2904,7 +2910,7 @@
 | `definitions.RoutingConfiguration.properties.associatedRouteTable.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.RoutingConfiguration.properties.inboundRouteMap.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.RoutingConfiguration.properties.outboundRouteMap.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.RoutingIntent.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.RoutingIntent.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.RoutingIntentProperties.properties.provisioningState.description` | `The provisioning state of the RoutingIntent resource.` | `The current provisioning state.` |
 | `definitions.RoutingRule.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.RoutingRuleCollection.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
@@ -2915,7 +2921,7 @@
 | `definitions.SecurityPartnerProvider.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.SecurityPartnerProviderPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the Security Partner Provider resource.` | `The current provisioning state.` |
 | `definitions.SecurityPartnerProviderPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.SecurityRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.SecurityRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.SecurityRuleAssociations.properties.defaultSecurityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `#/definitions/SecurityRule` |
 | `definitions.SecurityRuleAssociations.properties.effectiveSecurityRules.items.$ref` | `./networkInterface.json#/definitions/EffectiveNetworkSecurityRule` | `#/definitions/EffectiveNetworkSecurityRule` |
 | `definitions.SecurityRulePropertiesFormat.properties.destinationApplicationSecurityGroups.items.$ref` | `./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup` | `#/definitions/ApplicationSecurityGroup` |
@@ -2934,7 +2940,7 @@
 | `definitions.ServiceAssociationLinkPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the service association link resource.` | `The current provisioning state.` |
 | `definitions.ServiceDelegationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the service delegation resource.` | `The current provisioning state.` |
 | `definitions.ServiceEndpointPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.ServiceEndpointPolicyDefinition.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.ServiceEndpointPolicyDefinition.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the service endpoint policy definition resource.` | `The current provisioning state.` |
 | `definitions.ServiceEndpointPolicyPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the service endpoint policy resource.` | `The current provisioning state.` |
 | `definitions.ServiceEndpointPolicyPropertiesFormat.properties.subnets.items.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `#/definitions/Subnet` |
@@ -2948,7 +2954,7 @@
 | `definitions.StaticCidr.allOf[0].$ref` | `./network.json#/definitions/CommonProxyResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
 | `definitions.StaticMember.allOf[0].$ref` | `./network.json#/definitions/ChildResource` | `#/definitions/ChildResource` |
 | `definitions.StaticMemberProperties.properties.provisioningState.description` | `The provisioning state of the scope assignment resource.` | `The current provisioning state.` |
-| `definitions.Subnet.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.Subnet.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.SubnetAssociation.properties.securityRules.items.$ref` | `./networkSecurityGroup.json#/definitions/SecurityRule` | `#/definitions/SecurityRule` |
 | `definitions.SubnetPropertiesFormat.properties.applicationGatewayIPConfigurations.items.$ref` | `./applicationGateway.json#/definitions/ApplicationGatewayIPConfiguration` | `#/definitions/ApplicationGatewayIPConfiguration` |
 | `definitions.SubnetPropertiesFormat.properties.ipAllocations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2965,7 +2971,7 @@
 | `definitions.VerificationIPFlowResult.properties.access.description` | `Indicates whether the traffic is allowed or denied.` | `Access to be allowed or denied.` |
 | `definitions.VerifierWorkspace.allOf[0].$ref` | `./network.json#/definitions/CommonTrackedResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource` |
 | `definitions.VerifierWorkspace.properties.etag.description` | `String representing unique etag for the resource document.` | `A unique read-only string that changes whenever the resource is updated.` |
-| `definitions.VirtualApplianceSite.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VirtualApplianceSite.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VirtualApplianceSiteProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.VirtualHub.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.VirtualHubProperties.properties.azureFirewall.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2999,7 +3005,7 @@
 | `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the virtual network gateway IP configuration resource.` | `The current provisioning state.` |
 | `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VirtualNetworkGatewayIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.VirtualNetworkGatewayNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VirtualNetworkGatewayNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VirtualNetworkGatewayNatRuleProperties.properties.externalMappings.items.$ref` | `./virtualWan.json#/definitions/VpnNatRuleMapping` | `#/definitions/VpnNatRuleMapping` |
 | `definitions.VirtualNetworkGatewayNatRuleProperties.properties.internalMappings.items.$ref` | `./virtualWan.json#/definitions/VpnNatRuleMapping` | `#/definitions/VpnNatRuleMapping` |
 | `definitions.VirtualNetworkGatewayNatRuleProperties.properties.provisioningState.description` | `The provisioning state of the NAT Rule resource.` | `The current provisioning state.` |
@@ -3009,7 +3015,7 @@
 | `definitions.VirtualNetworkGatewayPropertiesFormat.properties.customRoutes.$ref` | `./virtualNetwork.json#/definitions/AddressSpace` | `#/definitions/AddressSpace` |
 | `definitions.VirtualNetworkGatewayPropertiesFormat.properties.gatewayDefaultSite.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VirtualNetworkGatewayPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the virtual network gateway resource.` | `The current provisioning state.` |
-| `definitions.VirtualNetworkPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VirtualNetworkPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VirtualNetworkPeeringPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the virtual network peering resource.` | `The current provisioning state.` |
 | `definitions.VirtualNetworkPeeringPropertiesFormat.properties.remoteVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VirtualNetworkPropertiesFormat.properties.ddosProtectionPlan.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -3023,7 +3029,7 @@
 | `definitions.VirtualNetworkTapPropertiesFormat.properties.networkInterfaceTapConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration` | `#/definitions/NetworkInterfaceTapConfiguration` |
 | `definitions.VirtualNetworkTapPropertiesFormat.properties.provisioningState.description` | `The provisioning state of the virtual network tap resource.` | `The current provisioning state.` |
 | `definitions.VirtualRouter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.VirtualRouterPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VirtualRouterPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VirtualRouterPeeringProperties.properties.provisioningState.description` | `The provisioning state of the resource.` | `The current provisioning state.` |
 | `definitions.VirtualRouterPropertiesFormat.properties.hostedGateway.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VirtualRouterPropertiesFormat.properties.hostedSubnet.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -3052,7 +3058,7 @@
 | `definitions.VpnConnectionProperties.properties.trafficSelectorPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/TrafficSelectorPolicy` | `#/definitions/TrafficSelectorPolicy` |
 | `definitions.VpnConnectionProperties.properties.vpnConnectionProtocolType.description` | `Connection protocol used for this connection.` | `Gateway connection protocol.` |
 | `definitions.VpnGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.VpnGatewayNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VpnGatewayNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VpnGatewayNatRuleProperties.properties.egressVpnSiteLinkConnections.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnGatewayNatRuleProperties.properties.ingressVpnSiteLinkConnections.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnGatewayNatRuleProperties.properties.provisioningState.description` | `The provisioning state of the NAT Rule resource.` | `The current provisioning state.` |
@@ -3060,15 +3066,15 @@
 | `definitions.VpnGatewayProperties.properties.provisioningState.description` | `The provisioning state of the VPN gateway resource.` | `The current provisioning state.` |
 | `definitions.VpnGatewayProperties.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnServerConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.VpnServerConfigurationPolicyGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VpnServerConfigurationPolicyGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VpnServerConfigurationPolicyGroupProperties.properties.p2SConnectionConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnServerConfigurationPolicyGroupProperties.properties.provisioningState.description` | `The provisioning state of the VpnServerConfigurationPolicyGroup resource.` | `The current provisioning state.` |
 | `definitions.VpnServerConfigurationProperties.properties.radiusServers.items.$ref` | `./virtualNetworkGateway.json#/definitions/RadiusServer` | `#/definitions/RadiusServer` |
 | `definitions.VpnServerConfigurationProperties.properties.vpnAuthenticationTypes.items.description` | `VPN authentication types enabled for the VpnServerConfiguration.` | `VPN authentication types enabled for the virtual network gateway.` |
 | `definitions.VpnServerConfigurationProperties.properties.vpnClientIpsecPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/IpsecPolicy` | `#/definitions/IpsecPolicy` |
 | `definitions.VpnSite.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.VpnSiteLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
-| `definitions.VpnSiteLinkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource` |
+| `definitions.VpnSiteLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
+| `definitions.VpnSiteLinkConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VpnSiteLinkConnectionProperties.properties.egressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnSiteLinkConnectionProperties.properties.ingressNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnSiteLinkConnectionProperties.properties.ipsecPolicies.items.$ref` | `./virtualNetworkGateway.json#/definitions/IpsecPolicy` | `#/definitions/IpsecPolicy` |

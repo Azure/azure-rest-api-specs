@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * Service Endpoint policy definitions.
  */
 @parentResource(ServiceEndpointPolicy)
-model ServiceEndpointPolicyDefinition
-  is Azure.ResourceManager.ProxyResource<ServiceEndpointPolicyDefinitionPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ServiceEndpointPolicyDefinition,
-    KeyName = "serviceEndpointPolicyDefinitionName",
-    SegmentName = "serviceEndpointPolicyDefinitions",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ServiceEndpointPolicyDefinition extends SubResourceModel {
+  properties?: ServiceEndpointPolicyDefinitionPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("serviceEndpointPolicyDefinitionName")
+  @segment("serviceEndpointPolicyDefinitions")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model ServiceEndpointPolicyDefinition
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(ServiceEndpointPolicyDefinition.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface ServiceEndpointPolicyDefinitions {

@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Express Route Circuit Connection in an ExpressRouteCircuitPeering resource.
  */
 @parentResource(ExpressRouteCircuitPeering)
-model ExpressRouteCircuitConnection
-  is Azure.ResourceManager.ProxyResource<ExpressRouteCircuitConnectionPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteCircuitConnection,
-    KeyName = "connectionName",
-    SegmentName = "connections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCircuitConnection extends SubResourceModel {
+  properties?: ExpressRouteCircuitConnectionPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("connections")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+@@doc(ExpressRouteCircuitConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface ExpressRouteCircuitConnections {

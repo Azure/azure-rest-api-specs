@@ -14,20 +14,25 @@ namespace Microsoft.Network;
  * ExpressRoutePort Authorization resource definition.
  */
 @summary("ExpressRoute Port Authorization")
-model ExpressRoutePortAuthorization
-  is Azure.ResourceManager.ProxyResource<ExpressRoutePortAuthorizationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRoutePortAuthorization,
-    KeyName = "authorizationName",
-    SegmentName = "authorizations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRoutePortAuthorization extends SubResourceModel {
+  properties?: ExpressRoutePortAuthorizationPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("authorizationName")
+  @segment("authorizations")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+@@doc(ExpressRoutePortAuthorization.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

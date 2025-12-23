@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Network security rule.
  */
 @parentResource(NetworkSecurityGroup)
-model SecurityRule
-  is Azure.ResourceManager.ProxyResource<SecurityRulePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = SecurityRule,
-    KeyName = "securityRuleName",
-    SegmentName = "securityRules",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model SecurityRule extends SubResourceModel {
+  properties?: SecurityRulePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("securityRuleName")
+  @segment("securityRules")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +32,10 @@ model SecurityRule
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(SecurityRule.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 
 alias SecurityRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

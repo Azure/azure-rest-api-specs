@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * The routing intent child resource of a Virtual hub.
  */
 @parentResource(VirtualHub)
-model RoutingIntent
-  is Azure.ResourceManager.ProxyResource<RoutingIntentProperties> {
-  ...ResourceNameParameter<
-    Resource = RoutingIntent,
-    KeyName = "routingIntentName",
-    SegmentName = "routingIntent",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RoutingIntent extends SubResourceModel {
+  properties?: RoutingIntentProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routingIntentName")
+  @segment("routingIntent")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model RoutingIntent
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(RoutingIntent.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface RoutingIntents {

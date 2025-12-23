@@ -7098,6 +7098,28 @@ model SubResource {
 }
 
 /**
+ * Reference to another subresource.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model SubResourceModel {
+  /**
+   * Resource ID.
+   */
+  id?: string;
+
+  /**
+   * Name of the resource.
+   */
+  name?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
  * Authentication certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

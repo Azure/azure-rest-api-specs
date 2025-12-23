@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * Peer Express Route Circuit Connection in an ExpressRouteCircuitPeering resource.
  */
 @parentResource(ExpressRouteCircuitPeering)
-model PeerExpressRouteCircuitConnection
-  is Azure.ResourceManager.ProxyResource<PeerExpressRouteCircuitConnectionPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = PeerExpressRouteCircuitConnection,
-    KeyName = "connectionName",
-    SegmentName = "peerConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PeerExpressRouteCircuitConnection extends SubResourceModel {
+  properties?: PeerExpressRouteCircuitConnectionPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("peerConnections")
+  name: string;
   
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model PeerExpressRouteCircuitConnection
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(PeerExpressRouteCircuitConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface PeerExpressRouteCircuitConnections {

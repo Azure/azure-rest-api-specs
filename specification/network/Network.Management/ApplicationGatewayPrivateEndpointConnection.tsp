@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Private Endpoint connection on an application gateway.
  */
 @parentResource(ApplicationGateway)
-model ApplicationGatewayPrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<ApplicationGatewayPrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = ApplicationGatewayPrivateEndpointConnection,
-    KeyName = "connectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
+  properties?: ApplicationGatewayPrivateEndpointConnectionProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("privateEndpointConnections")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+
+@@doc(ApplicationGatewayPrivateEndpointConnection.name,
+  "Name of the private endpoint connection on an application gateway."
+);
 
 @armResourceOperations
 interface ApplicationGatewayPrivateEndpointConnections {

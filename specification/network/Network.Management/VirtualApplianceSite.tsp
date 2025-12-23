@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * Virtual Appliance Site resource.
  */
 @parentResource(NetworkVirtualAppliance)
-model VirtualApplianceSite
-  is Azure.ResourceManager.ProxyResource<VirtualApplianceSiteProperties> {
-  ...ResourceNameParameter<
-    Resource = VirtualApplianceSite,
-    KeyName = "siteName",
-    SegmentName = "virtualApplianceSites",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualApplianceSite extends SubResourceModel {
+  properties?: VirtualApplianceSiteProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("siteName")
+  @segment("virtualApplianceSites")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model VirtualApplianceSite
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(VirtualApplianceSite.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VirtualApplianceSites {

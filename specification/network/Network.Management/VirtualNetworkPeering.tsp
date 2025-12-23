@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Peerings in a virtual network resource.
  */
 @parentResource(VirtualNetwork)
-model VirtualNetworkPeering
-  is Azure.ResourceManager.ProxyResource<VirtualNetworkPeeringPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = VirtualNetworkPeering,
-    KeyName = "virtualNetworkPeeringName",
-    SegmentName = "virtualNetworkPeerings",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualNetworkPeering extends SubResourceModel {
+  properties?: VirtualNetworkPeeringPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("virtualNetworkPeeringName")
+  @segment("virtualNetworkPeerings")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +32,10 @@ model VirtualNetworkPeering
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(VirtualNetworkPeering.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface VirtualNetworkPeerings {

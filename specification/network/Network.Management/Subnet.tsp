@@ -15,13 +15,15 @@ namespace Microsoft.Network;
  * Subnet in a virtual network resource.
  */
 @parentResource(VirtualNetwork)
-model Subnet is Azure.ResourceManager.ProxyResource<SubnetPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = Subnet,
-    KeyName = "subnetName",
-    SegmentName = "subnets",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Subnet extends SubResourceModel {
+  properties?: SubnetPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("subnetName")
+  @segment("subnets")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -30,6 +32,10 @@ model Subnet is Azure.ResourceManager.ProxyResource<SubnetPropertiesFormat> {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(Subnet.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface Subnets {

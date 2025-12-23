@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * A load balancing rule for a load balancer.
  */
 @parentResource(LoadBalancer)
-model LoadBalancingRule
-  is Azure.ResourceManager.ProxyResource<LoadBalancingRulePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = LoadBalancingRule,
-    KeyName = "loadBalancingRuleName",
-    SegmentName = "loadBalancingRules",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model LoadBalancingRule extends SubResourceModel {
+  properties?: LoadBalancingRulePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("loadBalancingRuleName")
+  @segment("loadBalancingRules")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(LoadBalancingRule.name,
+  "The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource."
+);
 
 alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

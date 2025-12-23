@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * NVA Inbound Security Rule resource.
  */
 @parentResource(NetworkVirtualAppliance)
-model InboundSecurityRule
-  is Azure.ResourceManager.ProxyResource<InboundSecurityRuleProperties> {
-  ...ResourceNameParameter<
-    Resource = InboundSecurityRule,
-    KeyName = "ruleCollectionName",
-    SegmentName = "inboundSecurityRules",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model InboundSecurityRule extends SubResourceModel {
+  properties?: InboundSecurityRuleProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleCollectionName")
+  @segment("inboundSecurityRules")
+  name: string;
   
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(InboundSecurityRule.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

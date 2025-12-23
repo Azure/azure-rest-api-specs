@@ -16,15 +16,20 @@ namespace Microsoft.Network;
  */
 @singleton("default")
 @parentResource(VpnSiteLinkConnection)
-model ConnectionSharedKeyResult
-  is Azure.ResourceManager.ProxyResource<SharedKeyProperties> {
-  ...ResourceNameParameter<
-    Resource = ConnectionSharedKeyResult,
-    KeyName = "sharedKey",
-    SegmentName = "sharedKeys",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ConnectionSharedKeyResult extends SubResourceModel {
+  properties?: SharedKeyProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("sharedKey")
+  @segment("sharedKeys")
+  name: string;
 }
+@@doc(ConnectionSharedKeyResult.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 alias VpnLinkConnectionSharedKeyOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * RouteTable resource in a virtual hub.
  */
 @parentResource(VirtualHub)
-model HubRouteTable
-  is Azure.ResourceManager.ProxyResource<HubRouteTableProperties> {
-  ...ResourceNameParameter<
-    Resource = HubRouteTable,
-    KeyName = "routeTableName",
-    SegmentName = "hubRouteTables",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model HubRouteTable extends SubResourceModel {
+  properties?: HubRouteTableProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeTableName")
+  @segment("hubRouteTables")
+  name: string;
     
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
   }
+@@doc(HubRouteTable.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface HubRouteTables {

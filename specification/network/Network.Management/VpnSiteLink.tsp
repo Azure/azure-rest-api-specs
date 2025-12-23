@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * VpnSiteLink Resource.
  */
 @parentResource(VpnSite)
-model VpnSiteLink
-  is Azure.ResourceManager.ProxyResource<VpnSiteLinkProperties> {
-  ...ResourceNameParameter<
-    Resource = VpnSiteLink,
-    KeyName = "vpnSiteLinkName",
-    SegmentName = "vpnSiteLinks",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnSiteLink extends SubResourceModel {
+  properties?: VpnSiteLinkProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("vpnSiteLinkName")
+  @segment("vpnSiteLinks")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model VpnSiteLink
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(VpnSiteLink.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VpnSiteLinks {

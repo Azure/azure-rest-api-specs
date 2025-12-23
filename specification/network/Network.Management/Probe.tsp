@@ -15,13 +15,15 @@ namespace Microsoft.Network;
  * A load balancer probe.
  */
 @parentResource(LoadBalancer)
-model Probe is Azure.ResourceManager.ProxyResource<ProbePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = Probe,
-    KeyName = "probeName",
-    SegmentName = "probes",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Probe extends SubResourceModel {
+  properties?: ProbePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("probeName")
+  @segment("probes")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -30,6 +32,10 @@ model Probe is Azure.ResourceManager.ProxyResource<ProbePropertiesFormat> {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(Probe.name,
+  "The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface Probes {

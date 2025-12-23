@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * VpnSiteLinkConnection Resource.
  */
 @parentResource(VpnGateway)
-model VpnSiteLinkConnection
-  is Azure.ResourceManager.ProxyResource<VpnSiteLinkConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = VpnSiteLinkConnection,
-    KeyName = "linkConnectionName",
-    SegmentName = "vpnLinkConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VpnSiteLinkConnection extends SubResourceModel {
+  properties?: VpnSiteLinkConnectionProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("linkConnectionName")
+  @segment("vpnLinkConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model VpnSiteLinkConnection
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(VpnSiteLinkConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

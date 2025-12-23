@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Peering in an ExpressRouteCircuit resource.
  */
 @parentResource(ExpressRouteCircuit)
-model ExpressRouteCircuitPeering
-  is Azure.ResourceManager.ProxyResource<ExpressRouteCircuitPeeringPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteCircuitPeering,
-    KeyName = "peeringName",
-    SegmentName = "peerings",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCircuitPeering extends SubResourceModel {
+  properties?: ExpressRouteCircuitPeeringPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peeringName")
+  @segment("peerings")
+  name: string;
   
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+
+@@doc(ExpressRouteCircuitPeering.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 
 alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

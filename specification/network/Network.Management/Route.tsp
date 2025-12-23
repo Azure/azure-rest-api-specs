@@ -15,13 +15,15 @@ namespace Microsoft.Network;
  * Route resource.
  */
 @parentResource(RouteTable)
-model Route is Azure.ResourceManager.ProxyResource<RoutePropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = Route,
-    KeyName = "routeName",
-    SegmentName = "routes",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Route extends SubResourceModel {
+  properties?: RoutePropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeName")
+  @segment("routes")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -30,6 +32,11 @@ model Route is Azure.ResourceManager.ProxyResource<RoutePropertiesFormat> {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(Route.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+@@doc(Route.type, "Resource type.");
 
 @armResourceOperations
 interface Routes {

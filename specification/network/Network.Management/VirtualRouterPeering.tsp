@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * Virtual Router Peering resource.
  */
 @parentResource(VirtualRouter)
-model VirtualRouterPeering
-  is Azure.ResourceManager.ProxyResource<VirtualRouterPeeringProperties> {
-  ...ResourceNameParameter<
-    Resource = VirtualRouterPeering,
-    KeyName = "peeringName",
-    SegmentName = "peerings",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model VirtualRouterPeering extends SubResourceModel {
+  properties?: VirtualRouterPeeringProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peeringName")
+  @segment("peerings")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model VirtualRouterPeering
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(VirtualRouterPeering.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VirtualRouterPeerings {

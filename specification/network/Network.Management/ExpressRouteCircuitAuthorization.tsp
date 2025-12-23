@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Authorization in an ExpressRouteCircuit resource.
  */
 @parentResource(ExpressRouteCircuit)
-model ExpressRouteCircuitAuthorization
-  is Azure.ResourceManager.ProxyResource<AuthorizationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = ExpressRouteCircuitAuthorization,
-    KeyName = "authorizationName",
-    SegmentName = "authorizations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCircuitAuthorization extends SubResourceModel {
+  properties?: AuthorizationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("authorizationName")
+  @segment("authorizations")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
+
+@@doc(ExpressRouteCircuitAuthorization.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface ExpressRouteCircuitAuthorizations {

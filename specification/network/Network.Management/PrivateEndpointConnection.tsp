@@ -15,14 +15,18 @@ namespace Microsoft.Network;
  * PrivateEndpointConnection resource.
  */
 @parentResource(PrivateLinkService)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "peConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateEndpointConnection extends SubResourceModel {
+  properties?: PrivateEndpointConnectionProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peConnectionName")
+  @segment("privateEndpointConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +35,7 @@ model PrivateEndpointConnection
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(PrivateEndpointConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface PrivateEndpointConnections {

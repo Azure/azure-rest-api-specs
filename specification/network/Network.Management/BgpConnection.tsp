@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Virtual Appliance Site resource.
  */
 @parentResource(VirtualHub)
-model BgpConnection
-  is Azure.ResourceManager.ProxyResource<BgpConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = BgpConnection,
-    KeyName = "connectionName",
-    SegmentName = "bgpConnections",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model BgpConnection extends SubResourceModel {
+  properties?: BgpConnectionProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("connectionName")
+  @segment("bgpConnections")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -31,6 +32,10 @@ model BgpConnection
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+
+@@doc(BgpConnection.name,
+  "Name of the connection."
+);
 
 alias VirtualHubBgpConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

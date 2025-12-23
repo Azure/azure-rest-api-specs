@@ -15,14 +15,15 @@ namespace Microsoft.Network;
  * Frontend IP address of the load balancer.
  */
 @parentResource(LoadBalancer)
-model FrontendIPConfiguration
-  is Azure.ResourceManager.ProxyResource<FrontendIPConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = FrontendIPConfiguration,
-    KeyName = "frontendIPConfigurationName",
-    SegmentName = "frontendIPConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FrontendIPConfiguration extends SubResourceModel {
+  properties?: FrontendIPConfigurationPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("frontendIPConfigurationName")
+  @segment("frontendIPConfigurations")
+  name: string;
   
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -34,6 +35,10 @@ model FrontendIPConfiguration
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 }
+
+@@doc(FrontendIPConfiguration.name,
+  "The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource."
+);
 
 @armResourceOperations
 interface FrontendIPConfigurations {

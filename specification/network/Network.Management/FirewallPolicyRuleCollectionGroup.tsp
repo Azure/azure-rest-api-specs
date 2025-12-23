@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Rule Collection Group resource.
  */
 @parentResource(FirewallPolicy)
-model FirewallPolicyRuleCollectionGroup
-  is Azure.ResourceManager.ProxyResource<FirewallPolicyRuleCollectionGroupProperties> {
-  ...ResourceNameParameter<
-    Resource = FirewallPolicyRuleCollectionGroup,
-    KeyName = "ruleCollectionGroupName",
-    SegmentName = "ruleCollectionGroups",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FirewallPolicyRuleCollectionGroup extends SubResourceModel {
+  properties?: FirewallPolicyRuleCollectionGroupProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleCollectionGroupName")
+  @segment("ruleCollectionGroups")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(FirewallPolicyRuleCollectionGroup.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface FirewallPolicyRuleCollectionGroups {

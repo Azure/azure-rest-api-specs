@@ -15,13 +15,18 @@ namespace Microsoft.Network;
  * The RouteMap child resource of a Virtual hub.
  */
 @parentResource(VirtualHub)
-model RouteMap is Azure.ResourceManager.ProxyResource<RouteMapProperties> {
-  ...ResourceNameParameter<
-    Resource = RouteMap,
-    KeyName = "routeMapName",
-    SegmentName = "routeMaps",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RouteMap extends SubResourceModel {
+  properties?: RouteMapProperties;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("routeMapName")
+  @segment("routeMaps")
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -30,6 +35,7 @@ model RouteMap is Azure.ResourceManager.ProxyResource<RouteMapProperties> {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(RouteMap.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface RouteMaps {

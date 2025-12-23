@@ -15,20 +15,25 @@ namespace Microsoft.Network;
  * Tap configuration in a Network Interface.
  */
 @parentResource(NetworkInterface)
-model NetworkInterfaceTapConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkInterfaceTapConfigurationPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = NetworkInterfaceTapConfiguration,
-    KeyName = "tapConfigurationName",
-    SegmentName = "tapConfigurations",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkInterfaceTapConfiguration extends SubResourceModel {
+  properties?: NetworkInterfaceTapConfigurationPropertiesFormat;
+
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("tapConfigurationName")
+  @segment("tapConfigurations")
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
 }
+@@doc(NetworkInterfaceTapConfiguration.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface NetworkInterfaceTapConfigurations {
