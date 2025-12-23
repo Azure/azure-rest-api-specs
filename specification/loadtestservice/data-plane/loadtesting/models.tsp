@@ -672,8 +672,8 @@ model TestInputArtifacts {
 @doc("Preferences for the test.")
 @added(APIVersions.v2025_11_01_preview)
 model TestPreferences {
-  @doc("Enable or disable AI based insights on Test Run Errors.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "AI is an abbervation and should be all caps"
+  @doc("Enable or disable AI based insights on Test Run Errors.")
   enableAIErrorInsights?: boolean = true;
 }
 
