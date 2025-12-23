@@ -102,5 +102,5 @@ op ProxyArtifactUpdateState(
 
 @@override(ProxyArtifact.updateState,
   ProxyArtifactUpdateState,
-  "go,jsavascript"
+  "go,javascript"
 );
