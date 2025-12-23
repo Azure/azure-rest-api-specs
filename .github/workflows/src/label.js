@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @readonly
  * @enum {"none" | "add" | "remove"}

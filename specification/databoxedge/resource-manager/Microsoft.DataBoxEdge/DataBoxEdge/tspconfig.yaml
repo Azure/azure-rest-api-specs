@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/databoxedge"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/databoxedge.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databoxedge"
+    namespace: "azure.mgmt.databoxedge"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databoxedge"
+    namespace: "com.azure.resourcemanager.databoxedge"
+    service-name: "DataBoxEdge" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databoxedge"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-databoxedge"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/databoxedge"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdataboxedge"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdataboxedge"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

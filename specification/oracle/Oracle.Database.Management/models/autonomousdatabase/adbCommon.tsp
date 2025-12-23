@@ -1,4 +1,3 @@
-using OpenAPI;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 using Azure.ResourceManager;

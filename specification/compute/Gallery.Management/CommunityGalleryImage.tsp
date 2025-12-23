@@ -36,7 +36,7 @@ interface CommunityGalleryImages {
   /**
    * List community gallery images inside a gallery.
    */
-  list is Azure.ResourceManager.Legacy.ComputeLegacyOperations.ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
     CommunityGalleryImage,
     Response = CommunityGalleryImageList
   >;

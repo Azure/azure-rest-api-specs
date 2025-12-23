@@ -31,8 +31,8 @@ namespace Storage.Blob {
     contentType: RequestMediaType,
 
     ...ApiVersionHeader,
-    ...TParams,
     ...ClientRequestIdHeader,
+    ...TParams,
   ): (TResponse & {
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -50,7 +50,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     TError = StorageError
-  >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
@@ -915,6 +915,9 @@ namespace Storage.Blob {
           @query
           @clientName("blobDeleteType")
           deletetype?: BlobDeleteType;
+
+          ...AccessTierIfModifiedSinceParameter;
+          ...AccessTierIfUnmodifiedSinceParameter;
         },
         {
           @statusCode statusCode: 202;
@@ -1718,6 +1721,9 @@ namespace Storage.Blob {
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
             ...PageWriteParameter<"update">;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2034,6 +2040,9 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2190,6 +2199,9 @@ namespace Storage.Blob {
             blobType: "BlockBlob";
 
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;
@@ -2272,6 +2284,9 @@ namespace Storage.Blob {
             ...SourceIfNoneMatchParameter;
             ...CopySourceAuthorizationParameter;
             ...FileRequestIntentParameter;
+            ...SourceEncryptionKeyParameter;
+            ...SourceEncryptionKeySha256Parameter;
+            ...SourceEncryptionAlgorithmParameter;
           },
           {
             @statusCode statusCode: 201;

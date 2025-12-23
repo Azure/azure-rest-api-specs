@@ -1,0 +1,78 @@
+{
+  "operationId": "Profile",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111",
+    "request": {
+      "type": "Delta",
+      "typeProperties": {
+        "location": [
+          {
+            "type": "AdlsGen2FileLocation",
+            "typeProperties": {
+              "fileSystem": "smallsized",
+              "folderPath": "formatmatch/regex1QA"
+            }
+          }
+        ]
+      },
+      "dataSourceId": "DataAssetADLSG2",
+      "configuration": {
+        "keyColumns": [
+          {
+            "name": "AlphaNumHash"
+          },
+          {
+            "name": "BankTransitNumber"
+          },
+          {
+            "name": "Email"
+          },
+          {
+            "name": "Guid"
+          },
+          {
+            "name": "IP_Address"
+          },
+          {
+            "name": "IpvSix"
+          },
+          {
+            "name": "ISODate"
+          },
+          {
+            "name": "NumericBalance"
+          },
+          {
+            "name": "Url"
+          },
+          {
+            "name": "Zipcode"
+          }
+        ]
+      }
+    }
+  },
+  "title": "Profile_Create",
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.api.purview.azure.com/dataquality/business-domains/76be16f9-5cb3-4839-83d6-4e3829a8ab0c/status/12345678-abcd-1234-ef00-123456abcdeg",
+        "Operation-Id": "12345678-abcd-1234-ef00-123456abcdeg"
+      },
+      "body": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "status": "InProgress",
+        "kind": "Update",
+        "lastUpdated": "2025-11-13T08:45:30.123Z",
+        "statusMessage": "Observation job initiated successfully",
+        "progressPercentage": 10,
+        "result": {
+          "value": "d6d2d488-3473-4ee5-8d14-93f1004e5c98"
+        }
+      }
+    }
+  }
+}

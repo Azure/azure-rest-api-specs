@@ -11,28 +11,47 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+
+// Common models and types
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./Archive.tsp";
-import "./ArchiveVersion.tsp";
-import "./CacheRule.tsp";
-import "./ConnectedRegistry.tsp";
-import "./CredentialSet.tsp";
-import "./ExportPipeline.tsp";
-import "./Registry.tsp";
-import "./PrivateLinkResource.tsp";
-import "./ImportPipeline.tsp";
-import "./PipelineRun.tsp";
-import "./PrivateEndpointConnection.tsp";
-import "./Replication.tsp";
-import "./ScopeMap.tsp";
-import "./Token.tsp";
-import "./Webhook.tsp";
 import "./client.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
+// Registry core
+import "./Registry.tsp";
+
+// Features
+
+// Archive feature
+import "./Archive.tsp";
+import "./ArchiveVersion.tsp";
+
+// Artifact Cache feature
+import "./CacheRule.tsp";
+import "./CredentialSet.tsp";
+
+// Connected Registry feature
+import "./ConnectedRegistry.tsp";
+
+// Private endpoint feature
+import "./PrivateLinkResource.tsp";
+import "./PrivateEndpointConnection.tsp";
+
+// Replication feature
+import "./Replication.tsp";
+
+// Scope map and Tokens feature
+import "./ScopeMap.tsp";
+import "./Token.tsp";
+
+// Transfer feature
+import "./ExportPipeline.tsp";
+import "./ImportPipeline.tsp";
+import "./PipelineRun.tsp";
+
+// Webhook feature
+import "./Webhook.tsp";
+
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -50,31 +69,16 @@ namespace Microsoft.ContainerRegistry;
  */
 enum Versions {
   /**
-   * The 2025-05-01-preview API version.
-   */
-  v2025_06_01_preview: "2025-06-01-preview",
-
-  /**
    * The 2025-11-01 API version.
    */
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The latest preview API version.
+   */
+  @previewVersion
+  vLatestPreview: "2025-06-01-preview",
 }
 
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @list
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationListResult> | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<Response = ArmResponse<OperationListResult>> {}

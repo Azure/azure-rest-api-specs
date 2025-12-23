@@ -321,8 +321,7 @@ using Microsoft.AzureStackHCI;
   "HciVmInstanceProvisioningStatus",
   "csharp"
 );
-@@clientName(VmImageRepositoryCredentials,
-  "HciVmImageRepositoryCredentials",
-  "csharp"
-);
 @@clientName(VmSizeEnum, "HciVmSize", "csharp");
+
+// Java
+@@clientName(Update, "HciUpdate", "java");
