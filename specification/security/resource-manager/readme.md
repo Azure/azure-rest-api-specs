@@ -89,6 +89,18 @@ suppressions:
   - code: AvoidAdditionalProperties
     from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
     reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Security\preview\2026-01-01\securityConnectors.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
+  - code: UnSupportedPatchProperties
+    from: Microsoft.Security\preview\2026-01-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2026-01-01\securityConnectors.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PatchBodyParametersSchema
+    from: Microsoft.Security\preview\2026-01-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
 ```
 
 ### Basic Information
