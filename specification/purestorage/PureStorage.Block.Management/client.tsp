@@ -138,4 +138,4 @@ using PureStorage.Block;
   "csharp"
 );
 @@clientName(VolumeType, "PureStorageAvsVmVolumeType", "csharp");
-@@clientName(ServiceInitializationData.vSphereIp, "vSphereIP");
+@@clientName(ServiceInitializationData.vSphereIp, "vSphereIP", "csharp");
