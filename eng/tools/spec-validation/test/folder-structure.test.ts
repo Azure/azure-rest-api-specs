@@ -349,8 +349,9 @@ options:
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({
-          current: "test-branch",
-          all: ["test-branch"],
+          current: "pr-test-branch", // Use a clearly different branch name
+          all: ["pr-test-branch"],
+          detached: false, // Explicitly set for CI compatibility
         }),
         getRemotes: vi.fn().mockResolvedValue([
           {
@@ -363,16 +364,22 @@ options:
             return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
           }
           if (args.includes("ls-tree")) {
-            // Check if the ls-tree command is for any branch containing v2-structure
-            // and the service directory is specification/foo
-            const hasLsTree = args.includes("ls-tree");
-            const hasNameOnly = args.includes("--name-only");
+            // Look for the ref argument which should contain branch:path format
             const refArg = args.find((arg) => arg.includes(":"));
-            if (hasLsTree && hasNameOnly && refArg) {
+            
+            if (refArg) {
               // Extract the ref and path from something like "origin/feature/v2-structure:specification/foo"
               const [ref, servicePath] = refArg.split(":");
-              if (ref.includes("feature/v2-structure") && servicePath === "specification/foo") {
-                // Target branch uses V2 structure (has data-plane/resource-manager under org folder)
+              
+              // Check if this is for the v2 branch and the correct service path
+              // Be flexible with remote names (origin, upstream, etc.) and whitespace
+              if (ref && ref.includes("feature/v2-structure") && servicePath && servicePath.trim() === "specification/foo") {
+                return Promise.resolve("data-plane\nresource-manager");
+              }
+            }
+            // Also check individual args for the ref pattern (alternative format)
+            for (const arg of args) {
+              if (arg.includes("feature/v2-structure:specification/foo")) {
                 return Promise.resolve("data-plane\nresource-manager");
               }
             }
@@ -472,6 +479,76 @@ options:
       // Restore environment
       if (originalEnv !== undefined) {
         process.env.GITHUB_BASE_REF = originalEnv;
+      } else {
+        delete process.env.GITHUB_BASE_REF;
+      }
+
+      assert(!result.success);
+      assert(result.errorOutput?.includes("must use v2 structure"));
+    });
+
+    it("should enforce v2 compliance with upstream remote (CI scenario)", async function () {
+      vi.mocked(globby.globby).mockImplementation(() => {
+        return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Ensure V1 validation passes so we know failure is due to V2 enforcement
+      readTspConfigSpy.mockResolvedValue(`
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`);
+
+      // Set environment variable to specify target branch
+      const originalGitHub = process.env.GITHUB_BASE_REF;
+      process.env.GITHUB_BASE_REF = "feature/v2-structure";
+
+      // Mock git to simulate CI environment with upstream remote
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({
+          current: "HEAD", // Detached HEAD common in CI
+          all: ["HEAD"],
+        }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/user/azure-rest-api-specs.git" },
+          },
+          {
+            name: "upstream",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args.includes("config") && args.includes("remote.origin.url")) {
+            return Promise.resolve("https://github.com/user/azure-rest-api-specs.git");
+          }
+          if (args.includes("ls-tree")) {
+            const refArg = args.find((arg) => arg.includes(":"));
+            if (refArg) {
+              const [ref, servicePath] = refArg.split(":");
+              // Should use upstream remote for target branch
+              if (ref.includes("upstream/feature/v2-structure") && servicePath === "specification/foo") {
+                return Promise.resolve("data-plane\nresource-manager");
+              }
+            }
+            return Promise.resolve("");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.reject(new Error("No common ancestor"));
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+      // Restore environment
+      if (originalGitHub !== undefined) {
+        process.env.GITHUB_BASE_REF = originalGitHub;
       } else {
         delete process.env.GITHUB_BASE_REF;
       }
