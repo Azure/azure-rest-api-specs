@@ -1,0 +1,132 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "api-version": "2026-01-01",
+    "agentSpaceEnvelope": {
+      "tags": {
+        "environment": "production",
+        "team": "platform",
+        "version": "v2.0"
+      },
+      "properties": {
+        "description": "Updated production agent space with enhanced capabilities",
+        "maxAgentCount": 20,
+        "policies": {
+          "genevaActionsConfiguration": {
+            "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+            "authenticationMode": "OAuth",
+            "allowedActions": [
+              {
+                "actionName": "RestartService",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "serviceName",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": true
+              },
+              {
+                "actionName": "GetMetrics",
+                "extension": "GenevaActions",
+                "actionParameters": [
+                  {
+                    "name": "metricName",
+                    "type": "string"
+                  },
+                  {
+                    "name": "timeRange",
+                    "type": "string"
+                  }
+                ],
+                "approvalRequired": false
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+        "name": "testAgentSpace",
+        "type": "Microsoft.App/agentSpaces",
+        "location": "East US",
+        "tags": {
+          "environment": "production",
+          "team": "platform",
+          "version": "v2.0"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "currentAgentCount": 3,
+          "maxAgentCount": 20,
+          "memberAgents": [
+            "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/chatAgent",
+            "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/dataAgent",
+            "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/supportAgent"
+          ],
+          "lastPolicyPropagation": "2025-10-28T12:00:00Z",
+          "description": "Updated production agent space with enhanced capabilities",
+          "serviceTreeId": "12345678-1234-1234-1234-123456789012",
+          "complianceStatus": {
+            "isCompliant": true,
+            "complianceIssues": [],
+            "lastComplianceCheck": "2025-10-28T12:00:00Z"
+          },
+          "policies": {
+            "genevaActionsConfiguration": {
+              "acisEndpoint": "https://acis.eastus.monitoring.azure.com",
+              "authenticationMode": "OAuth",
+              "extensionName": "GenevaActions",
+              "allowedActions": [
+                {
+                  "actionName": "RestartService",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "serviceName",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": true
+                },
+                {
+                  "actionName": "GetMetrics",
+                  "extension": "GenevaActions",
+                  "actionParameters": [
+                    {
+                      "name": "metricName",
+                      "type": "string"
+                    },
+                    {
+                      "name": "timeRange",
+                      "type": "string"
+                    }
+                  ],
+                  "approvalRequired": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/abcdef12-3456-7890-abcd-ef1234567890",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/abcdef12-3456-7890-abcd-ef1234567890"
+      }
+    }
+  }
+}
