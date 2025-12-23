@@ -28,3 +28,41 @@ model StatusConfig {
 @doc("Defines the status config error properties.")
 @added(Versions.v2025_07_01_preview)
 model StatusError is Error;
+
+@doc("Defines the health state of the resource.")
+@added(Versions.v2026_02_01_preview)
+union HealthState {
+  @doc("Resource state is unknown.")
+  Unknown: "Unknown",
+
+  @doc("Resource is Available and functioning as expected.")
+  Available: "Available",
+
+  @doc("Resource health is degraded.")
+  Degraded: "Degraded",
+
+  @doc("Resource is not functioning as expected.")
+  Unavailable: "Unavailable",
+
+  string,
+}
+
+@doc("Describes the current runtime health of the resource.")
+@added(Versions.v2026_02_01_preview)
+model HealthDetails {
+  @doc("The timestamp (RFC3339) when the health status last changed.")
+  @visibility(Lifecycle.Read)
+  lastTransitionTime?: string;
+
+  @doc("The timestamp (RFC3339) when the health status was last updated, even if the status did not change.")
+  @visibility(Lifecycle.Read)
+  lastUpdateTime?: string;
+
+  @doc("A human-readable message describing the last transition.")
+  @visibility(Lifecycle.Read)
+  message?: string;
+
+  @doc("Unique, CamelCase reason code describing the cause of the last health state transition.")
+  @visibility(Lifecycle.Read)
+  reasonCode?: string;
+}
