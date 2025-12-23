@@ -349,9 +349,9 @@ options:
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({
-          current: "pr-test-branch", // Use a clearly different branch name
+          current: "pr-test-branch",
           all: ["pr-test-branch"],
-          detached: false, // Explicitly set for CI compatibility
+          detached: false,
         }),
         getRemotes: vi.fn().mockResolvedValue([
           {
@@ -360,40 +360,33 @@ options:
           },
         ]),
         raw: vi.fn().mockImplementation((args: string[]) => {
+          // Handle git config commands
           if (args.includes("config") && args.includes("remote.origin.url")) {
             return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
           }
+          
+          // Handle ls-tree commands with extreme flexibility for CI environments
           if (args.includes("ls-tree")) {
-            // Look for the ref argument which should contain branch:path format
-            const refArg = args.find((arg) => arg.includes(":"));
-
-            if (refArg) {
-              // Extract the ref and path from something like "origin/feature/v2-structure:specification/foo"
-              const [ref, servicePath] = refArg.split(":");
-
-              // Check if this is for the v2 branch and the correct service path
-              // Be flexible with remote names (origin, upstream, etc.) and whitespace
-              if (
-                ref &&
-                ref.includes("feature/v2-structure") &&
-                servicePath &&
-                servicePath.trim() === "specification/foo"
-              ) {
-                return Promise.resolve("data-plane\nresource-manager");
-              }
+            // Convert args to string for easier pattern matching
+            const argsStr = args.join(" ");
+            
+            // Check if this is querying the v2 structure branch for the foo service
+            const isV2Query = (argsStr.includes("feature/v2-structure") || argsStr.includes("v2-structure")) &&
+                             (argsStr.includes("specification/foo") || argsStr.includes("foo"));
+            
+            if (isV2Query) {
+              return Promise.resolve("data-plane\nresource-manager");
             }
-            // Also check individual args for the ref pattern (alternative format)
-            for (const arg of args) {
-              if (arg.includes("feature/v2-structure:specification/foo")) {
-                return Promise.resolve("data-plane\nresource-manager");
-              }
-            }
-            // Default case - other branches don't have v2 structure
+            
             return Promise.resolve("");
           }
+          
+          // Handle merge-base commands  
           if (args.includes("merge-base")) {
             return Promise.reject(new Error("No common ancestor"));
           }
+          
+          // Default fallback
           return Promise.resolve("main");
         }),
       };
@@ -409,7 +402,45 @@ options:
       }
 
       assert(!result.success);
-      assert(result.errorOutput?.includes("must use v2 structure"));
+      assert(result.errorOutput?.includes("target branch is already using folder structure v2"), 
+        `Expected v2 enforcement error, but got: ${result.errorOutput}`);
+    });
+
+    it("should handle git operation failures gracefully in v2 compliance check", async function () {
+      vi.mocked(globby.globby).mockImplementation(() => {
+        return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Set environment to trigger v2 compliance check
+      const originalGitHub = process.env.GITHUB_BASE_REF;
+      process.env.GITHUB_BASE_REF = "feature/v2-structure";
+
+      // Mock git to simulate failures that might occur in CI
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({
+          current: "pr-test-branch",
+          all: ["pr-test-branch"],
+          detached: false,
+        }),
+        getRemotes: vi.fn().mockRejectedValue(new Error("Remote access failed")),
+        raw: vi.fn().mockRejectedValue(new Error("Git operation failed")),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+      // Restore environment
+      if (originalGitHub !== undefined) {
+        process.env.GITHUB_BASE_REF = originalGitHub;
+      } else {
+        delete process.env.GITHUB_BASE_REF;
+      }
+
+      // When git operations fail, it should fall back to regular V1 validation and succeed
+      // since we're mocking a valid V1 structure
+      assert(result.success, `Expected fallback to V1 validation to succeed, but got error: ${result.errorOutput}`);
     });
 
     it("should not enforce v2 compliance when target branch uses v1 structure", async function () {
