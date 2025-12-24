@@ -81,6 +81,20 @@ interface LoadTestAdministration {
     never
   >;
 
+  @summary("Generate load test plan recommendations.")
+  @doc("""
+    Generate AI Recommendations to author a load test plan using the uploaded browser recording file.
+    """)
+  @pollingOperation(Operations.getStatus)
+  @finalOperation(LoadTestAdministration.getTest)
+  @added(APIVersions.v2025_11_01_preview)
+  @action("generateTestPlanRecommendations")
+  generateTestPlanRecommendations is StandardResourceOperations.LongRunningResourceAction<
+    Test,
+    {},
+    never
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Our operation is not following the standard put behavior https://github.com/Azure/typespec-azure/issues/3743"
   #suppress "@azure-tools/typespec-azure-core/byos" "It is limiting for users to have storage first before creating a load test also it will be breaking change for us."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
