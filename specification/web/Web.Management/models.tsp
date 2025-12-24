@@ -6089,8 +6089,9 @@ model DiagnosticDetectorResponseProperties {
   /**
    * Additional Data that detector wants to send.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
-  data?: NameValuePair[];
+  data?: NameValuePair[][];
 
   /**
    * Meta Data
