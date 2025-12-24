@@ -2877,3 +2877,5 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@clientName(Certificate, "AppCertificate", "go");
 @@clientName(CertificateCollection, "AppCertificateCollection", "go");
 @@clientName(CertificatePatchResource, "AppCertificatePatchResource", "go");
+@@clientName(CertificateProperties, "AppCertificateProperties", "go");
+@@clientName(CertificatePatchResourceProperties, "AppCertificatePatchResourceProperties", "go");
