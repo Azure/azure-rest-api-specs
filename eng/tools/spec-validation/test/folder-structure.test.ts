@@ -372,9 +372,57 @@ options:
   });
 
   describe("v2 compliance enforcement", function () {
+    let originalGlobalMock: unknown;
+    
     beforeEach(() => {
+      // Save the global mock before modifying it
+      originalGlobalMock = simpleGitSpy.getMockImplementation();
+      
       // Reset the mock for these specific tests
       simpleGitSpy.mockReset();
+    });
+
+    afterEach(() => {
+      // Restore the original global mock to prevent state pollution
+      if (originalGlobalMock && typeof originalGlobalMock === 'function') {
+        simpleGitSpy.mockImplementation(originalGlobalMock);
+      } else {
+        // Fallback: re-setup the global mock
+        const defaultMockGit: Record<string, unknown> = {
+          revparse: vi.fn().mockResolvedValue("/gitroot"),
+          branch: vi.fn().mockImplementation((args?: string[]) => {
+            if (args && args.includes("-vv")) {
+              return Promise.resolve({
+                current: "test-branch",
+                all: ["test-branch"],
+              });
+            }
+            return Promise.resolve({
+              current: "test-branch",
+              all: ["test-branch"],
+              detached: false,
+            });
+          }),
+          status: vi.fn().mockResolvedValue({
+            modified: ["specification/foo/bar.ts"],
+            not_added: [],
+            created: [],
+            deleted: [],
+          }),
+          getRemotes: vi
+            .fn()
+            .mockResolvedValue([
+              { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
+            ]),
+          raw: vi.fn().mockImplementation((args: string[]) => {
+            if (args.includes("diff") && args.includes("--name-only")) {
+              return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
+            }
+            return Promise.resolve("");
+          }),
+        };
+        simpleGitSpy.mockReturnValue(defaultMockGit as unknown as SimpleGit);
+      }
     });
 
     it("should enforce v2 compliance when target branch uses v2 structure", async function () {
