@@ -642,8 +642,7 @@
       "properties": {
         "kind": {
           "$ref": "#/definitions/AlertRuleKindEnum",
-          "description": "The kind of the alert rule",
-          "type": "string"
+          "description": "The kind of the alert rule"
         }
       },
       "required": [
@@ -662,8 +661,7 @@
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "type": "object"
@@ -820,8 +818,7 @@
           "items": {
             "$ref": "#/definitions/AlertRuleTemplate"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "type": "object",
@@ -856,8 +853,7 @@
           "items": {
             "$ref": "#/definitions/AlertRule"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "type": "object",
@@ -920,8 +916,7 @@
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "techniques": {
           "description": "The techniques of the alert rule",
@@ -1052,8 +1047,7 @@
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
           "readOnly": true,
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "techniques": {
           "description": "The techniques of the alert rule",
@@ -1288,7 +1282,8 @@
           "type": "array"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "FusionTemplateSourceSetting": {
       "description": "Represents a source signal consumed in Fusion detection.",
@@ -1496,16 +1491,14 @@
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "displayNamesExcludeFilter": {
           "description": "the alerts' displayNames on which the cases will not be generated",
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "productFilter": {
           "$ref": "#/definitions/MicrosoftSecurityProductName",
@@ -1516,8 +1509,7 @@
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "required": [
@@ -1618,16 +1610,14 @@
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "displayNamesExcludeFilter": {
           "description": "the alerts' displayNames on which the cases will not be generated",
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "productFilter": {
           "$ref": "#/definitions/MicrosoftSecurityProductName",
@@ -1638,11 +1628,11 @@
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AlertSeverityEnum"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "ScheduledAlertRuleProperties": {
       "allOf": [
@@ -1692,8 +1682,7 @@
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "techniques": {
           "description": "The techniques of the alert rule",
@@ -1726,7 +1715,8 @@
         "suppressionEnabled",
         "suppressionDuration"
       ],
-      "type": "object"
+      "type": "object",
+      "x-ms-client-flatten": true
     },
     "NrtAlertRuleProperties": {
       "description": "Nrt alert rule base property bag.",
@@ -2298,8 +2288,7 @@
           "items": {
             "$ref": "#/definitions/EntityMappingType"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "groupByAlertDetails": {
           "description": "A list of alert details to group by (when matchingMethod is Selected)",
@@ -2325,16 +2314,14 @@
               ]
             }
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         },
         "groupByCustomDetails": {
           "description": "A list of custom details keys to group by (when matchingMethod is Selected). Only keys defined in the current alert rule may be used.",
           "items": {
             "type": "string"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "type": "object",
@@ -2396,15 +2383,11 @@
     "ActionResponse": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Action for alert rule.",
       "properties": {
-        "etag": {
-          "description": "Etag of the action.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ActionResponseProperties",
           "description": "Action properties for get request",
@@ -2441,8 +2424,7 @@
           "items": {
             "$ref": "#/definitions/ActionResponse"
           },
-          "type": "array",
-          "x-ms-identifiers": []
+          "type": "array"
         }
       },
       "type": "object",
