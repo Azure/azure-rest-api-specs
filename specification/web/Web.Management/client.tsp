@@ -2872,3 +2872,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@override(VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
   webAppsUpdateVnetConnectionSlotCustomized
 );
+
+@@clientName(Certificate, "AppCertificate", "go");
+@@clientName(CertificateCollection, "AppCertificateCollection", "go");
+@@clientName(CertificatePatchResource, "AppCertificatePatchResource", "go");
