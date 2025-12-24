@@ -31,6 +31,7 @@
             "customBlockResponseStatusCode": 405,
             "customBlockResponseBody": "SGVsbG8=",
             "jsChallengeCookieExpirationInMins": 100,
+            "captchaCookieExpirationInMins": 100,
             "logScrubbing": {
               "state": "Enabled",
               "scrubbingRules": [
@@ -175,6 +176,41 @@
                 }
               ],
               "action": "JSChallenge"
+            },
+            {
+              "name": "Rule5",
+              "priority": 5,
+              "state": "Enabled",
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.2.0/24"
+                  ]
+                },
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RequestHeaders",
+                      "selector": "UserAgent"
+                    }
+                  ],
+                  "operator": "Contains",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "Bot"
+                  ]
+                }
+              ],
+              "action": "CAPTCHA"
             }
           ],
           "managedRules": {
@@ -255,9 +291,9 @@
                     "ruleGroupName": "UnknownBots",
                     "rules": [
                       {
-                        "ruleId": "300700",
+                        "ruleId": "300600",
                         "state": "Enabled",
-                        "action": "JSChallenge"
+                        "action": "CAPTCHA"
                       }
                     ]
                   }
