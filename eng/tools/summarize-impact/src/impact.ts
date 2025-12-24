@@ -1,14 +1,13 @@
-#!/usr/bin/env node
-
+import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
+import { Readme } from "@azure-tools/specs-shared/readme";
+import { Octokit } from "@octokit/rest";
+import * as commonmark from "commonmark";
 import { existsSync, readFileSync } from "fs";
 import { glob } from "glob";
-import { dirname, join, resolve } from "path";
-
-import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import pkg from "lodash";
-const { isEqual } = pkg;
-
+import { isEqual } from "lodash";
+import { dirname, join, resolve } from "path";
+import { inspect } from "util";
 import {
   ChangeHandler,
   ChangeTypes,
@@ -17,15 +16,9 @@ import {
   PRChange,
   ReadmeTag,
 } from "./diff-types.js";
-
-import { Label, LabelContext, PRType } from "./labelling-types.js";
-
 import { ImpactAssessment } from "./ImpactAssessment.js";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 import { PRContext } from "./PRContext.js";
-
-import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
-import { Readme } from "@azure-tools/specs-shared/readme";
-import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -166,7 +159,7 @@ export function isDataPlanePR(filePaths: string[]): boolean {
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
   const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
-  console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder}`);
+  console.log(`allSwaggerFilesFromRPFolder: ${inspect(allSwaggerFilesFromRPFolder)}`);
 
   const apiVersions: Set<string> = new Set();
   for (const it of allSwaggerFilesFromRPFolder) {
@@ -183,7 +176,7 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
   const swagger = readFileSync(swaggerFile).toString();
-  const swaggerObject = JSON.parse(swagger);
+  const swaggerObject = JSON.parse(swagger) as { info?: { version?: string } };
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
     return swaggerObject["info"]["version"];
   }
@@ -197,8 +190,8 @@ export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefi
     return undefined;
   }
 
-  const lastIdx = swaggerFile.lastIndexOf(resourceProvider!);
-  return swaggerFile.substring(0, lastIdx + resourceProvider!.length);
+  const lastIdx = swaggerFile.lastIndexOf(resourceProvider);
+  return swaggerFile.substring(0, lastIdx + resourceProvider.length);
 }
 
 export const getResourceProviderFromFilePath = (filePath: string): string | undefined => {
@@ -243,7 +236,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
-    return (_: PRChange) => {
+    return () => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
       typeSpecLabel.shouldBePresent = true;
@@ -272,7 +265,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
+    const swagger = JSON.parse(readFileSync(swaggerFilePath).toString()) as {
+      info?: { "x-typespec-generated"?: unknown };
+    };
+    return !!swagger?.info?.["x-typespec-generated"];
   } catch {
     return false;
   }
@@ -281,13 +277,15 @@ function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
 export async function processPrChanges(ctx: PRContext, Handlers: ChangeHandler[]) {
   console.log("ENTER definition processPrChanges");
   const prChanges = await getPRChanges(ctx);
-  prChanges.forEach((prChange) => {
-    Handlers.forEach((handler) => {
+
+  for (const prChange of prChanges) {
+    for (const handler of Handlers) {
       if (prChange.fileType in handler) {
-        handler?.[prChange.fileType]?.(prChange);
+        await handler?.[prChange.fileType]?.(prChange);
       }
-    });
-  });
+    }
+  }
+
   console.log("RETURN definition processPrChanges");
 }
 
@@ -314,7 +312,7 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
     fileType: FileTypes,
     changeType: ChangeTypes,
     filePath?: string,
-    additionalInfo?: any,
+    additionalInfo?: unknown,
   ) {
     if (filePath) {
       results.push({
@@ -489,14 +487,17 @@ function getSuppressions(readmePath: string) {
     }
     return result;
   };
-  let suppressionResult: any[] = [];
+  let suppressionResult: unknown[] = [];
   try {
     const readme = readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as any;
+          const blockObject = yaml.load(block.literal) as {
+            directive?: { suppress: unknown }[];
+            suppressions?: unknown[];
+          };
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
@@ -505,10 +506,14 @@ function getSuppressions(readmePath: string) {
           if (suppressions && Array.isArray(suppressions)) {
             suppressionResult = suppressionResult.concat(suppressions);
           }
-        } catch (e) {}
+        } catch {
+          /* empty */
+        }
       }
     }
-  } catch (e) {}
+  } catch {
+    /* empty */
+  }
   return suppressionResult;
 }
 

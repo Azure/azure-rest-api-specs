@@ -15,7 +15,7 @@ export type PRChange = {
   fileType: FileTypes;
   changeType: ChangeTypes;
   filePath: string;
-  additionalInfo?: any;
+  additionalInfo?: unknown;
 };
 
 export type ReadmeTag = {
@@ -25,9 +25,9 @@ export type ReadmeTag = {
 
 export type TagConfigDiff = {
   name: string;
-  oldConfig?: any;
-  newConfig?: any;
-  difference?: any;
+  oldConfig?: unknown;
+  newConfig?: unknown;
+  difference?: unknown;
   changedInputFiles?: string[];
 };
 
