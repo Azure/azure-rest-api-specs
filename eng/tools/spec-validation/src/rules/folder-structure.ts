@@ -16,6 +16,67 @@ export class FolderStructureRule implements Rule {
   readonly description = "Verify spec directory's folder structure and naming conventions.";
 
   /**
+   * Check if there are any changes in the specification folder that would require validation.
+   * Only run folder structure validation if there are actual changes in specification/
+   */
+  private async hasSpecificationFolderChanges(gitRoot: string, folder: string): Promise<boolean> {
+    try {
+      const git = simpleGit(gitRoot);
+
+      // Get current branch info using git.branch() as requested
+      const branchSummary = await git.branch(["-vv"]);
+      const currentBranch = branchSummary.current;
+
+      // Get target branch for comparison
+      const targetBranch = await this.getTargetBranch(git);
+      const targetRemote = await this.getTargetRemote(git);
+
+      if (currentBranch === targetBranch) {
+        // We're on the target branch, check for uncommitted changes
+        const status = await git.status();
+        const specChanges = [
+          ...status.modified,
+          ...status.not_added,
+          ...status.created,
+          ...status.deleted,
+        ].some((file) => file.startsWith("specification/"));
+        return specChanges;
+      }
+
+      // Get the diff between current branch and target branch
+      try {
+        const diffFiles = await git.raw([
+          "diff",
+          "--name-only",
+          `${targetRemote}/${targetBranch}...HEAD`,
+        ]);
+
+        const changedFiles = diffFiles.trim().split("\n").filter(Boolean);
+        const hasSpecChanges = changedFiles.some((file) => file.startsWith("specification/"));
+
+        if (hasSpecChanges) {
+          console.log(
+            `Found changes in specification folder: ${changedFiles
+              .filter((f) => f.startsWith("specification/"))
+              .slice(0, 5)
+              .join(", ")}${changedFiles.length > 5 ? "..." : ""}`,
+          );
+        }
+
+        return hasSpecChanges;
+      } catch {
+        // If diff fails, fall back to checking if the current folder is in specification/
+        const relativePath = path.relative(gitRoot, folder);
+        return relativePath.startsWith("specification/");
+      }
+    } catch (error) {
+      console.log(`Could not check for specification changes: ${error}`);
+      // If we can't determine changes, assume validation is needed to be safe
+      return true;
+    }
+  }
+
+  /**
    * Validates that a folder exists.
    */
   private async validateFolderExists(
@@ -514,9 +575,9 @@ export class FolderStructureRule implements Rule {
     try {
       const git = simpleGit(gitRoot);
 
-      // Get current branch info
-      const branchInfo = await git.branch();
-      const currentBranch = branchInfo.current;
+      // Get current branch info using git.branch() as requested
+      const branchSummary = await git.branch(["-vv"]);
+      const currentBranch = branchSummary.current;
 
       // Get the actual target branch and remote
       const targetBranch = await this.getTargetBranch(git);
@@ -695,7 +756,30 @@ export class FolderStructureRule implements Rule {
     const pathSegments = relativePath.split("/");
     const folderStruct = relativePath.split("/").filter(Boolean);
 
-    // 2. Validate general depth restrictions
+    // 2. Check if v2 compliance should be enforced FIRST (before other validations)
+    const v2ComplianceCheck = await this.shouldEnforceV2Compliance(gitRoot, folder);
+    if (v2ComplianceCheck.shouldEnforce && v2ComplianceCheck.validationResult) {
+      if (!v2ComplianceCheck.validationResult.success) {
+        return {
+          success: false,
+          stdOutput: stdOutput,
+          errorOutput: v2ComplianceCheck.validationResult.errorOutput,
+        };
+      }
+    }
+
+    // 3. Check if there are any changes in specification folder that require remaining validations
+    const hasSpecChanges = await this.hasSpecificationFolderChanges(gitRoot, folder);
+    if (!hasSpecChanges) {
+      return {
+        success: true,
+        stdOutput:
+          stdOutput + "No changes in specification folder, skipping folder structure validation\n",
+        errorOutput: "",
+      };
+    }
+
+    // 4. Validate general depth restrictions
     const depthResult = this.validateGeneralDepth(pathSegments);
     if (!depthResult.success) {
       return {
@@ -705,13 +789,13 @@ export class FolderStructureRule implements Rule {
       };
     }
 
-    // 3. Validate TSP config naming
+    // 5. Validate TSP config naming
     const configResult = await this.validateTspConfigNaming(folder);
     success = success && configResult.success;
     errorOutput += configResult.errorOutput;
     stdOutput += configResult.stdOutput;
 
-    // 4. Validate required files (only if this appears to be a TypeSpec project)
+    // 6. Validate required files (only if this appears to be a TypeSpec project)
     const isTypeSpecProject = await this.isTypeSpecProject(folder, configResult.stdOutput);
     if (isTypeSpecProject) {
       const requiredFilesResult = await this.validateRequiredFiles(folder);
@@ -719,24 +803,15 @@ export class FolderStructureRule implements Rule {
       errorOutput += requiredFilesResult.errorOutput;
     }
 
-    // 5. Validate top-level folder naming
+    // 7. Validate top-level folder naming
     const topLevelResult = this.validateTopLevelFolderNaming(folderStruct);
     success = success && topLevelResult.success;
     errorOutput += topLevelResult.errorOutput;
 
-    // 6. Determine structure version and apply appropriate validation
+    // 8. Determine structure version and apply appropriate validation
     const structureVersion = await this.determineStructureVersion(folder, pathSegments);
 
-    // 7. Check if v2 compliance should be enforced
-    const v2ComplianceCheck = await this.shouldEnforceV2Compliance(gitRoot, folder);
-    if (v2ComplianceCheck.shouldEnforce && v2ComplianceCheck.validationResult) {
-      if (!v2ComplianceCheck.validationResult.success) {
-        success = false;
-        errorOutput += v2ComplianceCheck.validationResult.errorOutput;
-      }
-    }
-
-    // 8. Apply structure-specific validation
+    // 9. Apply structure-specific validation
 
     if (structureVersion === 1) {
       const v1Result = await this.validateV1Structure(folder, folderStruct, isTypeSpecProject);
@@ -751,7 +826,7 @@ export class FolderStructureRule implements Rule {
         errorOutput += `Invalid folder structure: Spec folder must contain tspconfig.yaml.`;
       }
 
-      // Only validate v2 compliance if not already validated in step 7
+      // Only validate v2 compliance if not already validated in step 2
       if (!v2ComplianceCheck.shouldEnforce) {
         const v2Result = this.validateV2Compliance(folderStruct);
         success = success && v2Result.success;

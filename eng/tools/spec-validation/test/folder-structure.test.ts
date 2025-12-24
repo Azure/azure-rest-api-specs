@@ -14,11 +14,63 @@ describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
   let normalizePathSpy: MockInstance;
   let readTspConfigSpy: MockInstance;
+  let simpleGitSpy: MockInstance;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fileExistsSpy = vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     normalizePathSpy = vi.spyOn(utils, "normalizePath");
     readTspConfigSpy = vi.spyOn(utils, "readTspConfig").mockResolvedValue(contosoTspConfig);
+
+    // Setup global mock for simpleGit for the new hasSpecificationFolderChanges method
+    const simpleGitModule = await import("simple-git");
+    simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+    simpleGitSpy.mockReset();
+
+    // Default mock that allows most tests to pass by simulating changes in specification folder
+    const defaultMockGit: Record<string, unknown> = {
+      revparse: vi.fn().mockResolvedValue("/gitroot"),
+      branch: vi.fn().mockImplementation((args?: string[]) => {
+        if (args && args.includes("-vv")) {
+          return Promise.resolve({
+            current: "test-branch",
+            all: ["test-branch"],
+          });
+        }
+        return Promise.resolve({
+          current: "test-branch",
+          all: ["test-branch"],
+        });
+      }),
+      status: vi.fn().mockResolvedValue({
+        modified: ["specification/foo/bar.ts"],
+        not_added: [],
+        created: [],
+        deleted: [],
+      }),
+      getRemotes: vi
+        .fn()
+        .mockResolvedValue([
+          { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
+        ]),
+      raw: vi.fn().mockImplementation((args: string[]) => {
+        // Handle diff command for checking changes
+        if (args.includes("diff") && args.includes("--name-only")) {
+          return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
+        }
+        // Handle other git commands
+        if (args.includes("config")) {
+          return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+        }
+        if (args.includes("ls-tree")) {
+          return Promise.resolve("");
+        }
+        if (args.includes("merge-base")) {
+          return Promise.resolve("abc123");
+        }
+        return Promise.resolve("main");
+      }),
+    };
+    simpleGitSpy.mockReturnValue(defaultMockGit as unknown as SimpleGit);
   });
 
   afterEach(() => {
@@ -320,11 +372,8 @@ options:
   });
 
   describe("v2 compliance enforcement", function () {
-    let simpleGitSpy: MockInstance;
-
     beforeEach(async () => {
-      const simpleGitModule = await import("simple-git");
-      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      // Reset the mock for these specific tests
       simpleGitSpy.mockReset();
     });
 
@@ -359,6 +408,12 @@ options:
             refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
           },
         ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/Foo/tspconfig.yaml"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
         raw: vi.fn().mockImplementation((args: string[]) => {
           // Handle git config commands
           if (args.includes("config") && args.includes("remote.origin.url")) {
@@ -498,6 +553,12 @@ options:
           .mockResolvedValue([
             { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
           ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/Foo/tspconfig.yaml"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
         raw: vi.fn().mockImplementation((args: string[]) => {
           if (args && args[0] === "branch" && args[1] === "-vv") {
             // No upstream tracking for this branch
@@ -563,6 +624,12 @@ options:
             refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
           },
         ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/Foo/tspconfig.yaml"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
         raw: vi.fn().mockImplementation((args: string[]) => {
           if (args.includes("config") && args.includes("remote.origin.url")) {
             return Promise.resolve("https://github.com/user/azure-rest-api-specs.git");
@@ -604,17 +671,42 @@ options:
   });
 
   describe("v2 structure validation", function () {
-    let simpleGitSpy: MockInstance;
-
     beforeEach(async () => {
-      const simpleGitModule = await import("simple-git");
-      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      // Reset and setup mock for these tests to simulate being on main branch
       simpleGitSpy.mockReset();
 
-      // Mock git for v2 structure tests
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
-        branch: vi.fn().mockResolvedValue({ current: "main" }),
+        branch: vi.fn().mockImplementation((args?: string[]) => {
+          if (args && args.includes("-vv")) {
+            return Promise.resolve({
+              current: "main",
+              all: ["main"],
+            });
+          }
+          return Promise.resolve({
+            current: "main",
+            all: ["main"],
+          });
+        }),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/bar.ts"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/main.tsp");
+          }
+          return Promise.resolve("");
+        }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
     });
@@ -687,12 +779,50 @@ options:
   });
 
   describe("TypeSpec project detection", function () {
-    let simpleGitSpy: MockInstance;
-
     beforeEach(async () => {
-      const simpleGitModule = await import("simple-git");
-      simpleGitSpy = simpleGitModule.simpleGit as unknown as MockInstance;
+      // Reset and setup mock for these tests
       simpleGitSpy.mockReset();
+
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockImplementation((args?: string[]) => {
+          if (args && args.includes("-vv")) {
+            return Promise.resolve({
+              current: "test-branch",
+              all: ["test-branch"],
+            });
+          }
+          return Promise.resolve({
+            current: "test-branch",
+            all: ["test-branch"],
+          });
+        }),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/bar.ts"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/main.tsp");
+          }
+          if (args[0] === "branch" && args[1] === "-vv") {
+            return Promise.resolve("* test-branch abc123 [upstream/main] Commit message");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
     });
 
     it("should detect TypeSpec project with tspconfig.yaml", async function () {
