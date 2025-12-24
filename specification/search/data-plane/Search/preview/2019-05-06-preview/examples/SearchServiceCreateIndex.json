@@ -1,6 +1,7 @@
 {
   "parameters": {
-    "endpoint": "https://myservice.search.windows.net",
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
     "api-version": "2019-05-06-Preview",
     "index": {
       "name": "hotels",
@@ -120,11 +121,6 @@
           "applicationId": "00000000-0000-0000-0000-000000000000",
           "applicationSecret": "<applicationSecret>"
         }
-      },
-      "similarity": {
-        "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
-        "b": 0.5,
-        "k1": 1.3
       }
     }
   },
@@ -361,11 +357,6 @@
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": null
           }
-        },
-        "similarity": {
-          "@odata.type": "#Microsoft.Azure.Search.BM25Similarity",
-          "b": 0.5,
-          "k1": 1.3
         }
       }
     }
