@@ -373,19 +373,19 @@ options:
 
   describe("v2 compliance enforcement", function () {
     let originalGlobalMock: unknown;
-    
+
     beforeEach(() => {
       // Save the global mock before modifying it
       originalGlobalMock = simpleGitSpy.getMockImplementation();
-      
+
       // Reset the mock for these specific tests
       simpleGitSpy.mockReset();
     });
 
     afterEach(() => {
       // Restore the original global mock to prevent state pollution
-      if (originalGlobalMock && typeof originalGlobalMock === 'function') {
-        simpleGitSpy.mockImplementation(originalGlobalMock);
+      if (originalGlobalMock && typeof originalGlobalMock === "function") {
+        simpleGitSpy.mockImplementation(originalGlobalMock as (...args: unknown[]) => unknown);
       } else {
         // Fallback: re-setup the global mock
         const defaultMockGit: Record<string, unknown> = {
@@ -409,14 +409,17 @@ options:
             created: [],
             deleted: [],
           }),
-          getRemotes: vi
-            .fn()
-            .mockResolvedValue([
-              { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
-            ]),
+          getRemotes: vi.fn().mockResolvedValue([
+            {
+              name: "origin",
+              refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+            },
+          ]),
           raw: vi.fn().mockImplementation((args: string[]) => {
             if (args.includes("diff") && args.includes("--name-only")) {
-              return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
+              return Promise.resolve(
+                "specification/foo/main.tsp\nspecification/foo/tspconfig.yaml",
+              );
             }
             return Promise.resolve("");
           }),
