@@ -372,7 +372,7 @@ options:
   });
 
   describe("v2 compliance enforcement", function () {
-    beforeEach(async () => {
+    beforeEach(() => {
       // Reset the mock for these specific tests
       simpleGitSpy.mockReset();
     });
@@ -671,7 +671,7 @@ options:
   });
 
   describe("v2 structure validation", function () {
-    beforeEach(async () => {
+    beforeEach(() => {
       // Reset and setup mock for these tests to simulate being on main branch
       simpleGitSpy.mockReset();
 
@@ -779,7 +779,7 @@ options:
   });
 
   describe("TypeSpec project detection", function () {
-    beforeEach(async () => {
+    beforeEach(() => {
       // Reset and setup mock for these tests
       simpleGitSpy.mockReset();
 

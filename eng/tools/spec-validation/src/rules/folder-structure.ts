@@ -70,7 +70,7 @@ export class FolderStructureRule implements Rule {
         return relativePath.startsWith("specification/");
       }
     } catch (error) {
-      console.log(`Could not check for specification changes: ${error}`);
+      console.log(`Could not check for specification changes: ${String(error)}`);
       // If we can't determine changes, assume validation is needed to be safe
       return true;
     }
