@@ -43,3 +43,19 @@ using Microsoft.Search;
 @@clientName(ServicesOperationGroup.checkNameAvailability::parameters.body,
   "checkNameAvailabilityInput"
 );
+
+@@minLength(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+  38
+);
+@@maxLength(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+  100
+);
+@@pattern(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+  "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\.[a-z][a-z0-9]*$"
+);
+@@doc(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+  "The network security perimeter configuration name."
+);
+@@key(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
+  "nspConfigName"
+);

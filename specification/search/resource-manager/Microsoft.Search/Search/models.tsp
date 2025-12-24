@@ -614,12 +614,14 @@ model AdminKeyResult {
   /**
    * The primary admin API key of the search service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary admin API key of the search service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 }
@@ -637,6 +639,7 @@ model QueryKey {
   /**
    * The value of the query API key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   key?: string;
 }

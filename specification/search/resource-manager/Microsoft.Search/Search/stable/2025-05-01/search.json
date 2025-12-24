@@ -898,7 +898,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+              "$ref": "../../../../../../common-types/resource-management/v6/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
             }
           },
           "default": {
@@ -958,11 +958,6 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2352,21 +2347,6 @@
         }
       }
     },
-    "NetworkSecurityPerimeterConfiguration": {
-      "type": "object",
-      "description": "Network security perimeter (NSP) configuration resource",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "description": "Network security configuration properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "NetworkSecurityPerimeterConfigurationListResult": {
       "type": "object",
       "description": "The response of a NetworkSecurityPerimeterConfiguration list operation.",
@@ -2375,7 +2355,7 @@
           "type": "array",
           "description": "The NetworkSecurityPerimeterConfiguration items on this page",
           "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            "$ref": "../../../../../../common-types/resource-management/v6/networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
           }
         },
         "nextLink": {
