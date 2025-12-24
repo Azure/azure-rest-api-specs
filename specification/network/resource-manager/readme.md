@@ -97,6 +97,7 @@ input-file:
   - Microsoft.Network/stable/2025-05-01/serviceTags.json
   - Microsoft.Network/stable/2025-05-01/usage.json
   - Microsoft.Network/stable/2025-05-01/virtualNetwork.json
+  - Microsoft.Network/stable/2025-05-01/virtualNetworkAppliance.json
   - Microsoft.Network/stable/2025-05-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2025-05-01/virtualNetworkTap.json
   - Microsoft.Network/stable/2025-05-01/virtualRouter.json
@@ -4316,6 +4317,12 @@ input-file:
 
 ```yaml
 directive:
+  - suppress: PutRequestResponseSchemeArm
+    from: virtualNetworkAppliance.json
+    reason: Known issue. Github link https://github.com/Azure/azure-openapi-validator/issues/752
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualNetworkAppliance.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerConnectivityConfiguration.json
     reason: name, id and type properties are inherited from the upper level
