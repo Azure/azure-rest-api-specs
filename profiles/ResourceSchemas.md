@@ -210,7 +210,6 @@ batch:
       - ../specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/2017-04-01/notificationhubs.json
       - ../specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/2015-03-20/OperationalInsights.json
       - ../specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/2015-11-01-preview/OperationalInsights.json
-      - ../specification/powerbiembedded/resource-manager/Microsoft.PowerBI/2016-01-29/powerbiembedded.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/registeredidentities.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/replicationusages.json
       - ../specification/recoveryservices/resource-manager/Microsoft.RecoveryServices/2016-06-01/vaults.json
