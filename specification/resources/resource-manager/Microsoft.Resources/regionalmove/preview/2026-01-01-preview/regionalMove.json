@@ -1,0 +1,700 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Regional Move Service Client",
+    "version": "2026-01-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RegionalMoveContainers"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/regionalMoveContainers": {
+      "get": {
+        "operationId": "RegionalMoveContainers_ListBySubscription",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "List RegionalMoveContainer resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List regional move containers at subscription scope": {
+            "$ref": "./examples/RegionalMoveContainers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/regionalMoveContainers": {
+      "get": {
+        "operationId": "RegionalMoveContainers_ListByResourceGroup",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "List RegionalMoveContainer resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List regional move containers at resource group scope": {
+            "$ref": "./examples/RegionalMoveContainers_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/regionalMoveContainers/{moveContainerName}": {
+      "get": {
+        "operationId": "RegionalMoveContainers_Get",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "Get a RegionalMoveContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get regional move container": {
+            "$ref": "./examples/RegionalMoveContainers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RegionalMoveContainers_CreateOrUpdate",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "Create a RegionalMoveContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RegionalMoveContainer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainer"
+            }
+          },
+          "201": {
+            "description": "Resource 'RegionalMoveContainer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update regional move container": {
+            "$ref": "./examples/RegionalMove_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RegionalMoveContainers_Update",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "Update a RegionalMoveContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainerTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveContainer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update regional move container tags": {
+            "$ref": "./examples/RegionalMoveContainers_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RegionalMoveContainers_Delete",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "Delete a RegionalMoveContainer",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete regional move container": {
+            "$ref": "./examples/RegionalMoveContainers_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/regionalMoveContainers/{moveContainerName}/finalizeMove": {
+      "post": {
+        "operationId": "RegionalMoveContainers_FinalizeMove",
+        "tags": [
+          "RegionalMoveContainers"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "moveContainerName",
+            "in": "path",
+            "description": "The name of the Regional Move Container resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RegionalMoveFinalizationRequestContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Finalize subset of resources in a regional move container": {
+            "$ref": "./examples/RegionalMoveContainers_FinalizeMove.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegionalMoveContainer": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionalMoveContainerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RegionalMoveContainerListResult": {
+      "type": "object",
+      "description": "The response of a RegionalMoveContainer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RegionalMoveContainer items on this page",
+          "items": {
+            "$ref": "#/definitions/RegionalMoveContainer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RegionalMoveContainerProperties": {
+      "type": "object",
+      "description": "The properties of a Regional Move Container",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/RegionalMoveProvisioningState",
+          "description": "The ARM provisioning state of the Regional Move Container.",
+          "readOnly": true
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The location from which resources will be copied."
+        },
+        "targetLocation": {
+          "type": "string",
+          "description": "The location to which resources will be copied."
+        },
+        "requestedResources": {
+          "type": "array",
+          "description": "The list of resources to be copied.",
+          "items": {
+            "$ref": "#/definitions/RegionalMoveRequestedResource"
+          },
+          "x-ms-identifiers": [
+            "sourceResourceId"
+          ]
+        },
+        "resourceStatusDetails": {
+          "type": "array",
+          "description": "Status of operations for each resource in the move container.",
+          "items": {
+            "$ref": "#/definitions/RegionalMoveResourceStatusDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "sourceResourceId"
+          ]
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "sourceLocation",
+        "targetLocation",
+        "requestedResources"
+      ]
+    },
+    "RegionalMoveContainerTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in RegionalMoveContainer resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionalMoveFinalizationRequestContent": {
+      "type": "object",
+      "description": "Represents the finalization request body.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "List of fully-qualified resource IDs to mark for finalization. Each resource ID specified should be part of the Regional Move Container.\nIf you set this to null, all resources in the move container will be marked for finalization.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RegionalMoveProvisioningState": {
+      "type": "string",
+      "description": "The regional move container provisioning state",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Created",
+        "InProgress",
+        "InProgressAwaitingFinalization"
+      ],
+      "x-ms-enum": {
+        "name": "RegionalMoveProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The regional move container has been successfully created but not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The regional move container operations are in progress."
+          },
+          {
+            "name": "InProgressAwaitingFinalization",
+            "value": "InProgressAwaitingFinalization",
+            "description": "The regional move container is awaiting the user to invoke finalization on one or more resources."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RegionalMoveRequestedResource": {
+      "type": "object",
+      "description": "Information about the resource to be copied",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource being copied"
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "Resource ID where the source will be copied/moved to. For copy operations, this cannot be the same as the source."
+        },
+        "resourceOverrides": {
+          "type": "object",
+          "description": "Properties to be overridden/modified on the resource during the copy operation. The resource provider will reject invalid modifications.",
+          "additionalProperties": {}
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use to perform the copy operation."
+        }
+      },
+      "required": [
+        "sourceResourceId",
+        "targetResourceId",
+        "apiVersion"
+      ]
+    },
+    "RegionalMoveResourceStatusDetail": {
+      "type": "object",
+      "description": "Represents the status details (state, errors, etc.) of a resource within a move container.",
+      "properties": {
+        "sourceResourceId": {
+          "type": "string",
+          "description": "Resource ID of the resource being moved/copied."
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceMoveStatus",
+          "description": "Status of the resource move/copy operation."
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "sourceResourceId",
+        "status"
+      ]
+    },
+    "ResourceMoveStatus": {
+      "type": "string",
+      "description": "Represents the status of the move or copy operation for an individual resource within a move container.",
+      "enum": [
+        "Queued",
+        "ValidatingPreMove",
+        "ValidatedPreMove",
+        "FailedPreMoveValidate",
+        "Moving",
+        "AwaitingMoveFinalization",
+        "MoveFinalizing",
+        "CleaningUp",
+        "MoveSucceeded",
+        "MoveFailed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceMoveStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The resource operation is queued."
+          },
+          {
+            "name": "ValidatingPreMove",
+            "value": "ValidatingPreMove",
+            "description": "Pre-move validation is in progress."
+          },
+          {
+            "name": "ValidatedPreMove",
+            "value": "ValidatedPreMove",
+            "description": "Pre-move validation has completed."
+          },
+          {
+            "name": "FailedPreMoveValidate",
+            "value": "FailedPreMoveValidate",
+            "description": "Pre-move validation failed."
+          },
+          {
+            "name": "Moving",
+            "value": "Moving",
+            "description": "The resource move is in progress."
+          },
+          {
+            "name": "AwaitingMoveFinalization",
+            "value": "AwaitingMoveFinalization",
+            "description": "The resource is awaiting finalization."
+          },
+          {
+            "name": "MoveFinalizing",
+            "value": "MoveFinalizing",
+            "description": "The resource move is finalizing."
+          },
+          {
+            "name": "CleaningUp",
+            "value": "CleaningUp",
+            "description": "The resource move is cleaning up."
+          },
+          {
+            "name": "MoveSucceeded",
+            "value": "MoveSucceeded",
+            "description": "The resource move has succeeded."
+          },
+          {
+            "name": "MoveFailed",
+            "value": "MoveFailed",
+            "description": "The resource move has failed."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
