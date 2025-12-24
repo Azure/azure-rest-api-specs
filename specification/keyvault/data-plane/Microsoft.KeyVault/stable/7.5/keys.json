@@ -2031,7 +2031,8 @@
         },
         "enc": {
           "$ref": "#/definitions/KeyEncryptionAlgorithm",
-          "description": "The encryption algorithm to use to protected the exported key material"
+          "description": "The encryption algorithm to use to protected the exported key material",
+          "minLength": 1
         }
       }
     },
@@ -2199,6 +2200,7 @@
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
           "description": "The type of key pair to be used for the certificate.",
+          "minLength": 1,
           "x-ms-client-name": "keyType"
         },
         "key_size": {
