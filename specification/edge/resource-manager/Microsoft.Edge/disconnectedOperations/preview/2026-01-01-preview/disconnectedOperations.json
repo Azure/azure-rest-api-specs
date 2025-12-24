@@ -1521,10 +1521,7 @@
         "billingModel": {
           "$ref": "#/definitions/BillingModel",
           "description": "The billing model",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "connectionIntent": {
           "$ref": "#/definitions/ConnectionIntent",
@@ -1902,8 +1899,8 @@
       "type": "object",
       "description": "The update properties of the Update Release type Image",
       "properties": {
-        "systemRebootRequired": {
-          "type": "boolean",
+        "systemReboot": {
+          "$ref": "#/definitions/SystemReboot",
           "description": "Indicates if a system reboot is required after applying the update.",
           "readOnly": true
         },
@@ -1929,7 +1926,7 @@
         }
       },
       "required": [
-        "systemRebootRequired",
+        "systemReboot",
         "securityUpdates",
         "osVersion",
         "agentVersion",
@@ -2004,6 +2001,30 @@
             "name": "Update",
             "value": "Update",
             "description": "Release is update."
+          }
+        ]
+      }
+    },
+    "SystemReboot": {
+      "type": "string",
+      "description": "System Reboot",
+      "enum": [
+        "Required",
+        "NotRequired"
+      ],
+      "x-ms-enum": {
+        "name": "SystemReboot",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "System reboot is required."
+          },
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "System reboot is not required."
           }
         ]
       }

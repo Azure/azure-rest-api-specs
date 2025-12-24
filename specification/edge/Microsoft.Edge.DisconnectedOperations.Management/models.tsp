@@ -157,7 +157,7 @@ model DisconnectedOperationProperties {
   @doc("The unique Id of the stamp")
   stampId: string;
 
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @visibility(Lifecycle.Read)
   @doc("The billing model")
   billingModel: BillingModel;
 
@@ -243,12 +243,32 @@ union ReleaseType {
   string,
 }
 
+/**
+ * System Reboot
+ */
+@added(Microsoft.Edge.Versions.v2026_01_01)
+union SystemReboot {
+  /**
+   * System reboot is required.
+   */
+  Required: "Required",
+
+  string,
+
+  /**
+   * System reboot is not required.
+   */
+  NotRequired: "NotRequired",
+
+  string,
+}
+
 @added(Microsoft.Edge.Versions.v2026_01_01)
 @doc("The update properties of the Update Release type Image")
 model ImageUpdateProperties {
   @visibility(Lifecycle.Read)
   @doc("Indicates if a system reboot is required after applying the update.")
-  systemRebootRequired: boolean;
+  systemReboot: SystemReboot;
 
   @visibility(Lifecycle.Read)
   @doc("Details of security updates included in this image release.")
