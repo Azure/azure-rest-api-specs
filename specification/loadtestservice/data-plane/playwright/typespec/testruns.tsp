@@ -1,81 +1,9 @@
 import "@typespec/rest";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 
 namespace Playwright;
-
-// Models ////////////////////
-
-@doc("Model of an access token linked to a workspace.")
-@resource("access-tokens")
-@parentResource(Workspace)
-model AccessToken {
-  @key("accessTokenId")
-  @doc("The access token ID in GUID format.")
-  @minLength(3)
-  @maxLength(36)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  // Standard Azure Resource Name parameter regex pattern - https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.ResourceNameParameter
-  @minLength(3)
-  @maxLength(24)
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @doc("The access token name.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  name: string;
-
-  @doc("The access token value in JWT format.")
-  @visibility(Lifecycle.Read)
-  jwtToken?: string;
-
-  @doc("The access token creation timestamp in UTC.")
-  @visibility(Lifecycle.Read)
-  createdAt: utcDateTime;
-
-  @doc("The access token expiration timestamp in UTC.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  expiryAt: utcDateTime;
-
-  @doc("The access token state.")
-  @visibility(Lifecycle.Read)
-  state: AccessTokenState;
-}
-
-@doc("The access token state.")
-union AccessTokenState {
-  string,
-
-  @doc("The access token is active and can be used for authentication.")
-  Active: "Active",
-
-  @doc("The access token has expired and cannot be used for authentication.")
-  Expired: "Expired",
-}
-
-@doc("The operating system to configure for remote script execution.")
-union OS {
-  string,
-
-  @doc("Linux operating system.")
-  Linux: "Linux",
-
-  @doc("Windows operating system.")
-  Windows: "Windows",
-}
-
-@doc("Playwright workspace is the parent resource for most of the other service resources.")
-@resource("playwrightworkspaces")
-model Workspace {
-  @key("workspaceId")
-  @doc("The workspace ID in GUID format.")
-  @maxLength(36)
-  @minLength(3)
-  @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
-  @visibility(Lifecycle.Read)
-  id: string;
-}
 
 @doc("Model of a test run used for tracking purposes.")
 @resource("test-runs")
@@ -232,4 +160,15 @@ union RunStatus {
 
   @doc("The test run has completed on the server side.")
   SERVER_COMPLETE: "SERVER_COMPLETE",
+}
+
+// Operations ////////////////////
+
+interface TestRuns {
+  // TestRun Operations
+  @doc("Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
+  createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
+
+  @doc("Lists test runs for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
+  list is Operations.ResourceList<TestRun>;
 }
