@@ -73,6 +73,11 @@ using Microsoft.ServiceNetworking;
   "ServiceNetworkingIPAccessRuleAction",
   "csharp"
 );
+@@clientName(PolicyType.IpAccessRules, "IPAccessRules", "csharp");
+@@clientName(SecurityPolicyConfigurations.ipAccessRulesSecurityPolicy,
+  "IPAccessRulesSecurityPolicy",
+  "csharp"
+);
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -83,6 +88,14 @@ using Microsoft.ServiceNetworking;
 );
 @@alternateType(WafPolicy.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(AssociationSubnetUpdate.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(WafSecurityPolicy.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IpAccessRulesSecurityPolicy.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
