@@ -36,6 +36,10 @@ model ValidateOwnershipVouchersRequest {
   @minItems(1)
   ownershipVoucherDetails: OwnershipVoucherDetails[];
 }
+@@doc(OwnershipVouchers.validate::parameters.body,
+  "Ownership vouchers to be validated."
+);
+@@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
 
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
 
