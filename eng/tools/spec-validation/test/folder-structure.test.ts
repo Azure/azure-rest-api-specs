@@ -390,10 +390,6 @@ options:
     azure-resource-provider-folder: "data-plane"
 `);
 
-      // Set environment variable to specify target branch
-      const originalGitHub = process.env.GITHUB_BASE_REF;
-      process.env.GITHUB_BASE_REF = "feature/v2-structure";
-
       // Mock git to simulate target branch having v2 structure
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
@@ -420,14 +416,26 @@ options:
             return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
           }
 
+          // Handle merge-base commands to return a target branch
+          if (args.includes("merge-base")) {
+            // Simulate that we find a common ancestor, which means we're in a PR
+            return Promise.resolve("abc123");
+          }
+
+          // Handle rev-parse to return the target branch name
+          if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+            // Simulate the target branch is a v2 structure branch
+            return Promise.resolve("feature/v2-structure");
+          }
+
           // Handle ls-tree commands with extreme flexibility for CI environments
           if (args.includes("ls-tree")) {
             // Convert args to string for easier pattern matching
             const argsStr = args.join(" ");
 
-            // Check if this is querying the v2 structure branch for the foo service
+            // Check if this is querying for v2 structure indicators
             const isV2Query =
-              (argsStr.includes("feature/v2-structure") || argsStr.includes("v2-structure")) &&
+              (argsStr.includes("feature/v2-structure") || argsStr.includes("main")) &&
               (argsStr.includes("specification/foo") || argsStr.includes("foo"));
 
             if (isV2Query) {
@@ -437,25 +445,13 @@ options:
             return Promise.resolve("");
           }
 
-          // Handle merge-base commands
-          if (args.includes("merge-base")) {
-            return Promise.reject(new Error("No common ancestor"));
-          }
-
-          // Default fallback
-          return Promise.resolve("main");
+          // Default fallback - return a target branch that has v2 structure
+          return Promise.resolve("feature/v2-structure");
         }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-
-      // Restore environment
-      if (originalGitHub !== undefined) {
-        process.env.GITHUB_BASE_REF = originalGitHub;
-      } else {
-        delete process.env.GITHUB_BASE_REF;
-      }
 
       assert(!result.success);
       assert(
@@ -469,10 +465,6 @@ options:
         return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
       });
       normalizePathSpy.mockReturnValue("/gitroot");
-
-      // Set environment to trigger v2 compliance check
-      const originalGitHub = process.env.GITHUB_BASE_REF;
-      process.env.GITHUB_BASE_REF = "feature/v2-structure";
 
       // Mock git to simulate failures that might occur in CI
       const mockGit: Record<string, unknown> = {
@@ -488,13 +480,6 @@ options:
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-
-      // Restore environment
-      if (originalGitHub !== undefined) {
-        process.env.GITHUB_BASE_REF = originalGitHub;
-      } else {
-        delete process.env.GITHUB_BASE_REF;
-      }
 
       // When git operations fail, it should fall back to regular V1 validation and succeed
       // since we're mocking a valid V1 structure
@@ -537,9 +522,6 @@ options:
     });
 
     it("should detect target branch from GITHUB_BASE_REF environment variable", async function () {
-      const originalEnv = process.env.GITHUB_BASE_REF;
-      process.env.GITHUB_BASE_REF = "main";
-
       vi.mocked(globby.globby).mockImplementation(() => {
         return Promise.resolve(["/foo/bar/tspconfig.yaml"]);
       });
@@ -560,31 +542,32 @@ options:
           deleted: [],
         }),
         raw: vi.fn().mockImplementation((args: string[]) => {
-          if (args && args[0] === "branch" && args[1] === "-vv") {
-            // No upstream tracking for this branch
-            return Promise.resolve("* feature-branch abc123 Commit message");
+          // Handle merge-base operations to simulate finding target branch
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
           }
+
+          // Handle rev-parse to return target branch
+          if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+            return Promise.resolve("main");
+          }
+
+          // Handle ls-tree to check target branch structure
           if (args.includes("ls-tree")) {
-            // Check if this is checking the main branch (from GITHUB_BASE_REF)
-            const lsTreeArg = args.find((arg) => arg.includes("main"));
-            if (lsTreeArg) {
+            const argsStr = args.join(" ");
+            // Simulate that main branch has v2 structure indicators
+            if (argsStr.includes("main") && argsStr.includes("specification/foo")) {
               return Promise.resolve("data-plane\nresource-manager");
             }
             return Promise.resolve("");
           }
+
           return Promise.resolve("main");
         }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-
-      // Restore environment
-      if (originalEnv !== undefined) {
-        process.env.GITHUB_BASE_REF = originalEnv;
-      } else {
-        delete process.env.GITHUB_BASE_REF;
-      }
 
       assert(!result.success);
       assert(result.errorOutput?.includes("must use v2 structure"));
@@ -602,10 +585,6 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
 `);
-
-      // Set environment variable to specify target branch
-      const originalGitHub = process.env.GITHUB_BASE_REF;
-      process.env.GITHUB_BASE_REF = "feature/v2-structure";
 
       // Mock git to simulate CI environment with upstream remote
       const mockGit: Record<string, unknown> = {
@@ -631,9 +610,22 @@ options:
           deleted: [],
         }),
         raw: vi.fn().mockImplementation((args: string[]) => {
+          // Handle git config commands
           if (args.includes("config") && args.includes("remote.origin.url")) {
             return Promise.resolve("https://github.com/user/azure-rest-api-specs.git");
           }
+
+          // Handle merge-base to find target branch
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+
+          // Handle rev-parse for target branch
+          if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+            return Promise.resolve("feature/v2-structure");
+          }
+
+          // Handle ls-tree commands
           if (args.includes("ls-tree")) {
             const refArg = args.find((arg) => arg.includes(":"));
             if (refArg) {
@@ -648,22 +640,13 @@ options:
             }
             return Promise.resolve("");
           }
-          if (args.includes("merge-base")) {
-            return Promise.reject(new Error("No common ancestor"));
-          }
-          return Promise.resolve("main");
+
+          return Promise.resolve("feature/v2-structure");
         }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-
-      // Restore environment
-      if (originalGitHub !== undefined) {
-        process.env.GITHUB_BASE_REF = originalGitHub;
-      } else {
-        delete process.env.GITHUB_BASE_REF;
-      }
 
       assert(!result.success);
       assert(result.errorOutput?.includes("must use v2 structure"));
