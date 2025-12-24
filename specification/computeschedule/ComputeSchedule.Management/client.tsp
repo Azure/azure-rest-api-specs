@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ComputeSchedule;
+using Azure.ResourceManager;
 
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "python");
 @@clientName(Microsoft.ComputeSchedule, "ComputeScheduleMgmtClient", "java");
@@ -173,7 +174,7 @@ using Microsoft.ComputeSchedule;
   "ScheduledActionResourceOperationResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+@@clientName(ResourceProvisioningState,
   "OccurrenceResourceProvisioningState",
   "csharp"
 );
@@ -188,15 +189,15 @@ using Microsoft.ComputeSchedule;
 );
 @@clientName(OccurrenceState, "ScheduledActionOccurrenceState", "csharp");
 @@clientName(ResourceAttachRequest,
-  "ScheduledActionResourceAttachRequest",
+  "ScheduledActionResourceAttachContent",
   "csharp"
 );
 @@clientName(ResourceDetachRequest,
-  "ScheduledActionResourceDetachRequest",
+  "ScheduledActionResourceDetachContent",
   "csharp"
 );
 @@clientName(ResourcePatchRequest,
-  "ScheduledActionResourcePatchRequest",
+  "ScheduledActionResourcePatchContent",
   "csharp"
 );
 @@clientName(ResourceStatus, "ScheduledActionResourceStatus", "csharp");
@@ -226,3 +227,18 @@ using Microsoft.ComputeSchedule;
   "javascript"
 );
 @@clientName(Microsoft.ComputeSchedule.ActionType, "ScheduledActionType");
+
+@@clientName(SubmitDeallocateRequest, "SubmitDeallocateContent");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
+@@clientName(CancelOperationsRequest, "CancelOperationsContent");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
+@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent");
+@@clientName(GetOperationErrorsRequest, "GetOperationErrorsContent");
+@@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
+@@clientName(SubmitStartRequest, "SubmitStartContent");
+@@clientName(SubmitHibernateRequest, "SubmitHibernateContent");
+@@clientName(ScheduledActionsExtensionProperties,
+  "ScheduledActionsExtensionProperties"
+);
