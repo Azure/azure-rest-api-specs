@@ -2751,7 +2751,7 @@ op webAppsUpdateHybridConnectionSlotCustomized(
   slot: string,
 
   @body
-  connectionEnvelopeconnectionEnvelope: HybridConnection,
+  connectionEnvelope: HybridConnection,
 ): ArmResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
