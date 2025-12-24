@@ -5218,6 +5218,59 @@ model StorageProfile {
 }
 
 /**
+ * Describes periodic restore points configuration for a VM.
+ */
+@added(Versions.v2025_11_01)
+model PeriodicRestorePoints {
+  /**
+   * Time gap between creation of two restore points for a VM, in hours. Default: 24.
+   */
+  frequencyInHours?: int32;
+
+  /**
+   * Indicates if periodic restore points for the VM are enabled.
+   */
+  isEnabled?: boolean;
+
+  /**
+   * Restore point collection resourceID
+   */
+  restorePointCollectionId?: string;
+
+  /**
+   * Maximum restore points retained for the VM. Default: 10.
+   */
+  maxRestorePointsRetained?: int32;
+}
+
+/**
+ * Describes zone movement configuration for a VM.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Describes resiliency profile for a VM.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
+
+  /**
+   * Periodic restore points configuration.
+   */
+  periodicRestorePoints?: PeriodicRestorePoints;
+}
+
+/**
  * Specifies information about the operating system disk used by the virtual machine. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview).
  */
 model OSDisk {
@@ -6228,6 +6281,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**

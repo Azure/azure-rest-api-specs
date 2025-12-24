@@ -10113,6 +10113,9 @@
           "Create a vm with premium storage.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
           },
+          "Create a vm with resiliency profile.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithResiliencyProfile.json"
+          },
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
           },
@@ -15899,6 +15902,30 @@
         }
       }
     },
+    "PeriodicRestorePoints": {
+      "type": "object",
+      "description": "Describes periodic restore points configuration for a VM.",
+      "properties": {
+        "frequencyInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time gap between creation of two restore points for a VM, in hours. Default: 24."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if periodic restore points for the VM are enabled."
+        },
+        "restorePointCollectionId": {
+          "type": "string",
+          "description": "Restore point collection resourceID"
+        },
+        "maxRestorePointsRetained": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum restore points retained for the VM. Default: 10."
+        }
+      }
+    },
     "Placement": {
       "type": "object",
       "description": "Describes the user-defined constraints for resource hardware placement.",
@@ -16377,6 +16404,20 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The configuration parameters used while performing zone allocation."
+        }
+      }
+    },
+    "ResiliencyProfile": {
+      "type": "object",
+      "description": "Describes resiliency profile for a VM.",
+      "properties": {
+        "zoneMovement": {
+          "$ref": "#/definitions/ZoneMovement",
+          "description": "Zone movement configuration."
+        },
+        "periodicRestorePoints": {
+          "$ref": "#/definitions/PeriodicRestorePoints",
+          "description": "Periodic restore points configuration."
         }
       }
     },
@@ -19772,6 +19813,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "resiliencyProfile": {
+          "$ref": "#/definitions/ResiliencyProfile",
+          "description": "Resiliency profile for the virtual machine."
         }
       }
     },
@@ -23466,6 +23511,16 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
+    "ZoneMovement": {
+      "type": "object",
+      "description": "Describes zone movement configuration for a VM.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if zone movement is enabled."
         }
       }
     },
