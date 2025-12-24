@@ -85,10 +85,9 @@ using Azure.ResourceManager;
   "python"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsExecuteSiteAnalysisSlotCustomized(
+op diagnosticsExecuteSiteAnalysisSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -141,13 +140,12 @@ op DiagnosticsExecuteSiteAnalysisSlotCustomized(
 ): ArmResponse<DiagnosticAnalysis>;
 
 @@override(AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
-  DiagnosticsExecuteSiteAnalysisSlotCustomized
+  diagnosticsExecuteSiteAnalysisSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsExecuteSiteDetectorCustomized(
+op diagnosticsExecuteSiteDetectorCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -196,13 +194,12 @@ op DiagnosticsExecuteSiteDetectorCustomized(
 ): ArmResponse<DiagnosticDetectorResponse>;
 
 @@override(DetectorDefinitionResources.executeSiteDetector,
-  DiagnosticsExecuteSiteDetectorCustomized
+  diagnosticsExecuteSiteDetectorCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsExecuteSiteDetectorSlotCustomized(
+op diagnosticsExecuteSiteDetectorSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -255,13 +252,12 @@ op DiagnosticsExecuteSiteDetectorSlotCustomized(
 ): ArmResponse<DiagnosticDetectorResponse>;
 
 @@override(DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
-  DiagnosticsExecuteSiteDetectorSlotCustomized
+  diagnosticsExecuteSiteDetectorSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsGetSiteAnalysisSlotCustomized(
+op diagnosticsGetSiteAnalysisSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -292,13 +288,12 @@ op DiagnosticsGetSiteAnalysisSlotCustomized(
 ): ArmResponse<AnalysisDefinition>;
 
 @@override(AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
-  DiagnosticsGetSiteAnalysisSlotCustomized
+  diagnosticsGetSiteAnalysisSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsGetSiteDetectorResponseSlotCustomized(
+op diagnosticsGetSiteDetectorResponseSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -344,13 +339,12 @@ op DiagnosticsGetSiteDetectorResponseSlotCustomized(
 ): ArmResponse<DetectorResponse>;
 
 @@override(DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
-  DiagnosticsGetSiteDetectorResponseSlotCustomized
+  diagnosticsGetSiteDetectorResponseSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsGetSiteDetectorSlotCustomized(
+op diagnosticsGetSiteDetectorSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -381,13 +375,12 @@ op DiagnosticsGetSiteDetectorSlotCustomized(
 ): ArmResponse<DetectorDefinitionResource>;
 
 @@override(DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
-  DiagnosticsGetSiteDetectorSlotCustomized
+  diagnosticsGetSiteDetectorSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsGetSiteDiagnosticCategorySlotCustomized(
+op diagnosticsGetSiteDiagnosticCategorySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -414,13 +407,12 @@ op DiagnosticsGetSiteDiagnosticCategorySlotCustomized(
 ): ArmResponse<DiagnosticCategory>;
 
 @@override(DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
-  DiagnosticsGetSiteDiagnosticCategorySlotCustomized
+  diagnosticsGetSiteDiagnosticCategorySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsListSiteAnalysesSlotCustomized(
+op diagnosticsListSiteAnalysesSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -447,13 +439,12 @@ op DiagnosticsListSiteAnalysesSlotCustomized(
 ): ArmResponse<DiagnosticAnalysisCollection>;
 
 @@override(AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
-  DiagnosticsListSiteAnalysesSlotCustomized
+  diagnosticsListSiteAnalysesSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DiagnosticsListSiteDetectorsSlotCustomized(
+op diagnosticsListSiteDetectorsSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -480,13 +471,12 @@ op DiagnosticsListSiteDetectorsSlotCustomized(
 ): ArmResponse<DiagnosticDetectorCollection>;
 
 @@override(DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
-  DiagnosticsListSiteDetectorsSlotCustomized
+  diagnosticsListSiteDetectorsSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op RecommendationsDisableRecommendationForHostingEnvironmentCustomized(
+op recommendationsDisableRecommendationForHostingEnvironmentCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -518,13 +508,12 @@ op RecommendationsDisableRecommendationForHostingEnvironmentCustomized(
 };
 
 @@override(RecommendationRules.disableRecommendationForHostingEnvironment,
-  RecommendationsDisableRecommendationForHostingEnvironmentCustomized
+  recommendationsDisableRecommendationForHostingEnvironmentCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsAddPremierAddOnSlotCustomized(
+op webAppsAddPremierAddOnSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -554,14 +543,13 @@ op WebAppsAddPremierAddOnSlotCustomized(
 ): ArmResourceUpdatedResponse<PremierAddOn>;
 
 @@override(PremierAddOnOperationGroup.addPremierAddOnSlot,
-  WebAppsAddPremierAddOnSlotCustomized
+  webAppsAddPremierAddOnSlotCustomized
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
+op webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -594,13 +582,12 @@ op WebAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
 });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
-  WebAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized
+  webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateInstanceFunctionSlotCustomized(
+op webAppsCreateInstanceFunctionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -625,6 +612,7 @@ op WebAppsCreateInstanceFunctionSlotCustomized(
   @path
   slot: string,
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @body
   function_envelope: FunctionEnvelope,
 ): ArmResourceCreatedResponse<
@@ -634,13 +622,12 @@ op WebAppsCreateInstanceFunctionSlotCustomized(
 >;
 
 @@override(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
-  WebAppsCreateInstanceFunctionSlotCustomized
+  webAppsCreateInstanceFunctionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeletePrivateEndpointConnectionSlotCustomized(
+op webAppsDeletePrivateEndpointConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -675,13 +662,12 @@ op WebAppsDeletePrivateEndpointConnectionSlotCustomized(
 });
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  WebAppsDeletePrivateEndpointConnectionSlotCustomized
+  webAppsDeletePrivateEndpointConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsInstallSiteExtensionSlotCustomized(
+op webAppsInstallSiteExtensionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -715,13 +701,12 @@ op WebAppsInstallSiteExtensionSlotCustomized(
 > | ArmTooManyRequestsResponse;
 
 @@override(SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
-  WebAppsInstallSiteExtensionSlotCustomized
+  webAppsInstallSiteExtensionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsMigrateStorageCustomized(
+op webAppsMigrateStorageCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -747,12 +732,11 @@ op WebAppsMigrateStorageCustomized(
 ): ArmResponse<StorageMigrationResponse> &
   ArmLroLocationHeader<FinalResult = StorageMigrationResponse>;
 
-@@override(Sites.migrateStorage, WebAppsMigrateStorageCustomized);
+@@override(Sites.migrateStorage, webAppsMigrateStorageCustomized);
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsRestoreSlotCustomized(
+op webAppsRestoreSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -783,12 +767,11 @@ op WebAppsRestoreSlotCustomized(
   @body body: void;
 };
 
-@@override(BackupItemOperationGroup.restoreSlot, WebAppsRestoreSlotCustomized);
+@@override(BackupItemOperationGroup.restoreSlot, webAppsRestoreSlotCustomized);
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateDeploymentSlotCustomized(
+op webAppsCreateDeploymentSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -818,13 +801,12 @@ op WebAppsCreateDeploymentSlotCustomized(
 ): ArmResourceUpdatedResponse<Deployment>;
 
 @@override(DeploymentOperationGroup.createDeploymentSlot,
-  WebAppsCreateDeploymentSlotCustomized
+  webAppsCreateDeploymentSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
+op webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -854,13 +836,12 @@ op WebAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
 ): ArmResourceUpdatedResponse<Identifier>;
 
 @@override(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
-  WebAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized
+  webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateFunctionSecretSlotCustomized(
+op webAppsCreateOrUpdateFunctionSecretSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -894,13 +875,12 @@ op WebAppsCreateOrUpdateFunctionSecretSlotCustomized(
 ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
 
 @@override(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
-  WebAppsCreateOrUpdateFunctionSecretSlotCustomized
+  webAppsCreateOrUpdateFunctionSecretSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateHostNameBindingSlotCustomized(
+op webAppsCreateOrUpdateHostNameBindingSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -930,13 +910,12 @@ op WebAppsCreateOrUpdateHostNameBindingSlotCustomized(
 ): ArmResourceUpdatedResponse<HostNameBinding>;
 
 @@override(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
-  WebAppsCreateOrUpdateHostNameBindingSlotCustomized
+  webAppsCreateOrUpdateHostNameBindingSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateHostSecretSlotCustomized(
+op webAppsCreateOrUpdateHostSecretSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -967,13 +946,12 @@ op WebAppsCreateOrUpdateHostSecretSlotCustomized(
 ): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse;
 
 @@override(WebApps.createOrUpdateHostSecretSlot,
-  WebAppsCreateOrUpdateHostSecretSlotCustomized
+  webAppsCreateOrUpdateHostSecretSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateHybridConnectionSlotCustomized(
+op webAppsCreateOrUpdateHybridConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1006,13 +984,12 @@ op WebAppsCreateOrUpdateHybridConnectionSlotCustomized(
 ): ArmResourceUpdatedResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
-  WebAppsCreateOrUpdateHybridConnectionSlotCustomized
+  webAppsCreateOrUpdateHybridConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdatePublicCertificateSlotCustomized(
+op webAppsCreateOrUpdatePublicCertificateSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1041,13 +1018,12 @@ op WebAppsCreateOrUpdatePublicCertificateSlotCustomized(
 ): ArmResourceUpdatedResponse<PublicCertificate>;
 
 @@override(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
-  WebAppsCreateOrUpdatePublicCertificateSlotCustomized
+  webAppsCreateOrUpdatePublicCertificateSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
+op webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1076,13 +1052,12 @@ op WebAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
 ): ArmResourceUpdatedResponse<RelayServiceConnectionEntity>;
 
 @@override(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
-  WebAppsCreateOrUpdateRelayServiceConnectionSlotCustomized
+  webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
+op webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1115,13 +1090,12 @@ op WebAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
 ): ArmResourceUpdatedResponse<VnetGateway>;
 
 @@override(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
-  WebAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized
+  webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsCreateOrUpdateVnetConnectionSlotCustomized(
+op webAppsCreateOrUpdateVnetConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1150,13 +1124,12 @@ op WebAppsCreateOrUpdateVnetConnectionSlotCustomized(
 ): ArmResourceUpdatedResponse<VnetInfoResource>;
 
 @@override(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
-  WebAppsCreateOrUpdateVnetConnectionSlotCustomized
+  webAppsCreateOrUpdateVnetConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteBackupSlotCustomized(
+op webAppsDeleteBackupSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1182,13 +1155,12 @@ op WebAppsDeleteBackupSlotCustomized(
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
 @@override(BackupItemOperationGroup.deleteBackupSlot,
-  WebAppsDeleteBackupSlotCustomized
+  webAppsDeleteBackupSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteContinuousWebJobSlotCustomized(
+op webAppsDeleteContinuousWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1214,13 +1186,12 @@ op WebAppsDeleteContinuousWebJobSlotCustomized(
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
 @@override(ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
-  WebAppsDeleteContinuousWebJobSlotCustomized
+  webAppsDeleteContinuousWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteDeploymentSlotCustomized(
+op webAppsDeleteDeploymentSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1246,13 +1217,12 @@ op WebAppsDeleteDeploymentSlotCustomized(
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
 @@override(DeploymentOperationGroup.deleteDeploymentSlot,
-  WebAppsDeleteDeploymentSlotCustomized
+  webAppsDeleteDeploymentSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteDomainOwnershipIdentifierSlotCustomized(
+op webAppsDeleteDomainOwnershipIdentifierSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1278,13 +1248,12 @@ op WebAppsDeleteDomainOwnershipIdentifierSlotCustomized(
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
 @@override(IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
-  WebAppsDeleteDomainOwnershipIdentifierSlotCustomized
+  webAppsDeleteDomainOwnershipIdentifierSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteFunctionSecretSlotCustomized(
+op webAppsDeleteFunctionSecretSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1314,13 +1283,12 @@ op WebAppsDeleteFunctionSecretSlotCustomized(
 ): NoContentResponse | ArmNotFoundResponse;
 
 @@override(FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
-  WebAppsDeleteFunctionSecretSlotCustomized
+  webAppsDeleteFunctionSecretSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteHostSecretSlotCustomized(
+op webAppsDeleteHostSecretSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1350,12 +1318,11 @@ op WebAppsDeleteHostSecretSlotCustomized(
   body: void,
 ): NoContentResponse | ArmNotFoundResponse;
 
-@@override(WebApps.deleteHostSecretSlot, WebAppsDeleteHostSecretSlotCustomized);
+@@override(WebApps.deleteHostSecretSlot, webAppsDeleteHostSecretSlotCustomized);
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteHybridConnectionSlotCustomized(
+op webAppsDeleteHybridConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1385,13 +1352,12 @@ op WebAppsDeleteHybridConnectionSlotCustomized(
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
 @@override(HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
-  WebAppsDeleteHybridConnectionSlotCustomized
+  webAppsDeleteHybridConnectionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteInstanceFunctionSlotCustomized(
+op webAppsDeleteInstanceFunctionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1417,13 +1383,12 @@ op WebAppsDeleteInstanceFunctionSlotCustomized(
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
 @@override(FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
-  WebAppsDeleteInstanceFunctionSlotCustomized
+  webAppsDeleteInstanceFunctionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteInstanceProcessCustomized(
+op webAppsDeleteInstanceProcessCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1449,13 +1414,12 @@ op WebAppsDeleteInstanceProcessCustomized(
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
 @@override(ProcessInfos.deleteInstanceProcess,
-  WebAppsDeleteInstanceProcessCustomized
+  webAppsDeleteInstanceProcessCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteInstanceProcessSlotCustomized(
+op webAppsDeleteInstanceProcessSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1485,13 +1449,12 @@ op WebAppsDeleteInstanceProcessSlotCustomized(
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
-  WebAppsDeleteInstanceProcessSlotCustomized
+  webAppsDeleteInstanceProcessSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeletePremierAddOnSlotCustomized(
+op webAppsDeletePremierAddOnSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1517,13 +1480,12 @@ op WebAppsDeletePremierAddOnSlotCustomized(
 ): ArmDeletedResponse;
 
 @@override(PremierAddOnOperationGroup.deletePremierAddOnSlot,
-  WebAppsDeletePremierAddOnSlotCustomized
+  webAppsDeletePremierAddOnSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteProcessSlotCustomized(
+op webAppsDeleteProcessSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1549,13 +1511,12 @@ op WebAppsDeleteProcessSlotCustomized(
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.deleteProcessSlot,
-  WebAppsDeleteProcessSlotCustomized
+  webAppsDeleteProcessSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteRelayServiceConnectionSlotCustomized(
+op webAppsDeleteRelayServiceConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1581,13 +1542,12 @@ op WebAppsDeleteRelayServiceConnectionSlotCustomized(
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
 @@override(RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
-  WebAppsDeleteRelayServiceConnectionSlotCustomized
+  webAppsDeleteRelayServiceConnectionSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppDeleteSiteExtensionSlotCustomized(
+op webAppDeleteSiteExtensionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1613,13 +1573,12 @@ op WebAppDeleteSiteExtensionSlotCustomized(
 ): ArmDeletedNoContentResponse | ArmNotFoundResponse;
 
 @@override(SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
-  WebAppDeleteSiteExtensionSlotCustomized
+  webAppDeleteSiteExtensionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteTriggeredWebJobSlotCustomized(
+op webAppsDeleteTriggeredWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1645,13 +1604,12 @@ op WebAppsDeleteTriggeredWebJobSlotCustomized(
 ): ArmDeletedResponse | ArmDeletedNoContentResponse;
 
 @@override(TriggeredWebJobs.deleteTriggeredWebJobSlot,
-  WebAppsDeleteTriggeredWebJobSlotCustomized
+  webAppsDeleteTriggeredWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsDeleteVnetConnectionSlotCustomized(
+op webAppsDeleteVnetConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1677,13 +1635,12 @@ op WebAppsDeleteVnetConnectionSlotCustomized(
 ): ArmDeletedResponse | ArmNotFoundResponse;
 
 @@override(VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
-  WebAppsDeleteVnetConnectionSlotCustomized
+  webAppsDeleteVnetConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetAppSettingKeyVaultReferenceSlotCustomized(
+op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1711,13 +1668,12 @@ op WebAppsGetAppSettingKeyVaultReferenceSlotCustomized(
 ): ArmResponse<ApiKVReference>;
 
 @@override(AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
-  WebAppsGetAppSettingKeyVaultReferenceSlotCustomized
+  webAppsGetAppSettingKeyVaultReferenceSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetBackupStatusSlotCustomized(
+op webAppsGetBackupStatusSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1743,13 +1699,12 @@ op WebAppsGetBackupStatusSlotCustomized(
 ): ArmResponse<BackupItem>;
 
 @@override(BackupItemOperationGroup.getBackupStatusSlot,
-  WebAppsGetBackupStatusSlotCustomized
+  webAppsGetBackupStatusSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetConfigurationSnapshotSlotCustomized(
+op webAppsGetConfigurationSnapshotSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1777,13 +1732,12 @@ op WebAppsGetConfigurationSnapshotSlotCustomized(
 ): ArmResponse<SiteConfigResource>;
 
 @@override(SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
-  WebAppsGetConfigurationSnapshotSlotCustomized
+  webAppsGetConfigurationSnapshotSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetContinuousWebJobSlotCustomized(
+op webAppsGetContinuousWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1809,13 +1763,12 @@ op WebAppsGetContinuousWebJobSlotCustomized(
 ): ArmResponse<ContinuousWebJob> | ArmNotFoundResponse;
 
 @@override(ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
-  WebAppsGetContinuousWebJobSlotCustomized
+  webAppsGetContinuousWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetDeploymentSlotCustomized(
+op webAppsGetDeploymentSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1841,13 +1794,12 @@ op WebAppsGetDeploymentSlotCustomized(
 ): ArmResponse<Deployment>;
 
 @@override(DeploymentOperationGroup.getDeploymentSlot,
-  WebAppsGetDeploymentSlotCustomized
+  webAppsGetDeploymentSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetDomainOwnershipIdentifierSlotCustomized(
+op webAppsGetDomainOwnershipIdentifierSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1873,13 +1825,12 @@ op WebAppsGetDomainOwnershipIdentifierSlotCustomized(
 ): ArmResponse<Identifier>;
 
 @@override(IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
-  WebAppsGetDomainOwnershipIdentifierSlotCustomized
+  webAppsGetDomainOwnershipIdentifierSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetHybridConnectionSlotCustomized(
+op webAppsGetHybridConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1909,13 +1860,12 @@ op WebAppsGetHybridConnectionSlotCustomized(
 ): ArmResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
-  WebAppsGetHybridConnectionSlotCustomized
+  webAppsGetHybridConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceFunctionSlotCustomized(
+op webAppsGetInstanceFunctionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1941,13 +1891,12 @@ op WebAppsGetInstanceFunctionSlotCustomized(
 ): ArmResponse<FunctionEnvelope>;
 
 @@override(FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
-  WebAppsGetInstanceFunctionSlotCustomized
+  webAppsGetInstanceFunctionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceInfoSlotCustomized(
+op webAppsGetInstanceInfoSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -1973,13 +1922,12 @@ op WebAppsGetInstanceInfoSlotCustomized(
 ): ArmResponse<WebSiteInstanceStatus>;
 
 @@override(WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
-  WebAppsGetInstanceInfoSlotCustomized
+  webAppsGetInstanceInfoSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessCustomized(
+op webAppsGetInstanceProcessCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2005,13 +1953,12 @@ op WebAppsGetInstanceProcessCustomized(
 ): ArmResponse<ProcessInfo>;
 
 @@override(ProcessInfos.getInstanceProcess,
-  WebAppsGetInstanceProcessCustomized
+  webAppsGetInstanceProcessCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessDumpCustomized(
+op webAppsGetInstanceProcessDumpCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2047,13 +1994,12 @@ op WebAppsGetInstanceProcessDumpCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ProcessInfos.getInstanceProcessDump,
-  WebAppsGetInstanceProcessDumpCustomized
+  webAppsGetInstanceProcessDumpCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessDumpSlotCustomized(
+op webAppsGetInstanceProcessDumpSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2093,13 +2039,12 @@ op WebAppsGetInstanceProcessDumpSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
-  WebAppsGetInstanceProcessDumpSlotCustomized
+  webAppsGetInstanceProcessDumpSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessModuleCustomized(
+op webAppsGetInstanceProcessModuleCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2129,13 +2074,12 @@ op WebAppsGetInstanceProcessModuleCustomized(
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
 @@override(ProcessModuleInfos.getInstanceProcessModule,
-  WebAppsGetInstanceProcessModuleCustomized
+  webAppsGetInstanceProcessModuleCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessModuleSlotCustomized(
+op webAppsGetInstanceProcessModuleSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2169,13 +2113,12 @@ op WebAppsGetInstanceProcessModuleSlotCustomized(
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
 @@override(InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
-  WebAppsGetInstanceProcessModuleSlotCustomized
+  webAppsGetInstanceProcessModuleSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetInstanceProcessSlotCustomized(
+op webAppsGetInstanceProcessSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2205,14 +2148,13 @@ op WebAppsGetInstanceProcessSlotCustomized(
 ): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
-  WebAppsGetInstanceProcessSlotCustomized
+  webAppsGetInstanceProcessSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetNetworkTraceOperationSlotCustomized(
+op webAppsGetNetworkTraceOperationSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2243,14 +2185,13 @@ op WebAppsGetNetworkTraceOperationSlotCustomized(
 });
 
 @@override(WebApps.getNetworkTraceOperationSlot,
-  WebAppsGetNetworkTraceOperationSlotCustomized
+  webAppsGetNetworkTraceOperationSlotCustomized
 );
 #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetNetworkTraceOperationSlotV2Customized(
+op webAppsGetNetworkTraceOperationSlotV2Customized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2281,13 +2222,12 @@ op WebAppsGetNetworkTraceOperationSlotV2Customized(
 });
 
 @@override(WebApps.getNetworkTraceOperationSlotV2,
-  WebAppsGetNetworkTraceOperationSlotV2Customized
+  webAppsGetNetworkTraceOperationSlotV2Customized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetNetworkTracesSlotCustomized(
+op webAppsGetNetworkTracesSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2313,12 +2253,11 @@ op WebAppsGetNetworkTracesSlotCustomized(
   body: void,
 ): ArmResponse<NetworkTrace[]>;
 
-@@override(WebApps.getNetworkTracesSlot, WebAppsGetNetworkTracesSlotCustomized);
+@@override(WebApps.getNetworkTracesSlot, webAppsGetNetworkTracesSlotCustomized);
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetNetworkTracesSlotV2Customized(
+op webAppsGetNetworkTracesSlotV2Customized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2345,13 +2284,12 @@ op WebAppsGetNetworkTracesSlotV2Customized(
 ): ArmResponse<NetworkTrace[]>;
 
 @@override(WebApps.getNetworkTracesSlotV2,
-  WebAppsGetNetworkTracesSlotV2Customized
+  webAppsGetNetworkTracesSlotV2Customized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetPremierAddOnSlotCustomized(
+op webAppsGetPremierAddOnSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2378,13 +2316,12 @@ op WebAppsGetPremierAddOnSlotCustomized(
 ): ArmResponse<PremierAddOn>;
 
 @@override(PremierAddOnOperationGroup.getPremierAddOnSlot,
-  WebAppsGetPremierAddOnSlotCustomized
+  webAppsGetPremierAddOnSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetPrivateEndpointConnectionSlotCustomized(
+op webAppsGetPrivateEndpointConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2411,13 +2348,12 @@ op WebAppsGetPrivateEndpointConnectionSlotCustomized(
 ): ArmResponse<RemotePrivateEndpointConnectionARMResource>;
 
 @@override(PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
-  WebAppsGetPrivateEndpointConnectionSlotCustomized
+  webAppsGetPrivateEndpointConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetProcessDumpSlotCustomized(
+op webAppsGetProcessDumpSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2454,13 +2390,12 @@ op WebAppsGetProcessDumpSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.getProcessDumpSlot,
-  WebAppsGetProcessDumpSlotCustomized
+  webAppsGetProcessDumpSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetProcessModuleSlotCustomized(
+op webAppsGetProcessModuleSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2491,13 +2426,12 @@ op WebAppsGetProcessModuleSlotCustomized(
 ): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
 
 @@override(ProcessModuleSlotOperationGroup.getProcessModuleSlot,
-  WebAppsGetProcessModuleSlotCustomized
+  webAppsGetProcessModuleSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetProcessSlotCustomized(
+op webAppsGetProcessSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2524,13 +2458,12 @@ op WebAppsGetProcessSlotCustomized(
 ): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.getProcessSlot,
-  WebAppsGetProcessSlotCustomized
+  webAppsGetProcessSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetRelayServiceConnectionSlotCustomized(
+op webAppsGetRelayServiceConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2557,13 +2490,12 @@ op WebAppsGetRelayServiceConnectionSlotCustomized(
 ): ArmResponse<RelayServiceConnectionEntity>;
 
 @@override(RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
-  WebAppsGetRelayServiceConnectionSlotCustomized
+  webAppsGetRelayServiceConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
+op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2592,13 +2524,12 @@ op WebAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
 ): ArmResponse<ApiKVReference>;
 
 @@override(SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
-  WebAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized
+  webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetSiteExtensionSlotCustomized(
+op webAppsGetSiteExtensionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2625,13 +2556,12 @@ op WebAppsGetSiteExtensionSlotCustomized(
 ): ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse;
 
 @@override(SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
-  WebAppsGetSiteExtensionSlotCustomized
+  webAppsGetSiteExtensionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetTriggeredWebJobHistorySlotCustomized(
+op webAppsGetTriggeredWebJobHistorySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2662,13 +2592,12 @@ op WebAppsGetTriggeredWebJobHistorySlotCustomized(
 ): ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse;
 
 @@override(TriggeredJobHistories.getTriggeredWebJobHistorySlot,
-  WebAppsGetTriggeredWebJobHistorySlotCustomized
+  webAppsGetTriggeredWebJobHistorySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetTriggeredWebJobSlotCustomized(
+op webAppsGetTriggeredWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2695,13 +2624,12 @@ op WebAppsGetTriggeredWebJobSlotCustomized(
 ): ArmResponse<TriggeredWebJob> | ArmNotFoundResponse;
 
 @@override(TriggeredWebJobs.getTriggeredWebJobSlot,
-  WebAppsGetTriggeredWebJobSlotCustomized
+  webAppsGetTriggeredWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetVnetConnectionGatewaySlotCustomized(
+op webAppsGetVnetConnectionGatewaySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2732,13 +2660,12 @@ op WebAppsGetVnetConnectionGatewaySlotCustomized(
 ): ArmResponse<VnetGateway> | ArmNotFoundResponse;
 
 @@override(VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
-  WebAppsGetVnetConnectionGatewaySlotCustomized
+  webAppsGetVnetConnectionGatewaySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetVnetConnectionSlotCustomized(
+op webAppsGetVnetConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2765,13 +2692,12 @@ op WebAppsGetVnetConnectionSlotCustomized(
 ): ArmResponse<VnetInfoResource>;
 
 @@override(VnetInfoResourceOperationGroup.getVnetConnectionSlot,
-  WebAppsGetVnetConnectionSlotCustomized
+  webAppsGetVnetConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsGetWebJobSlotCustomized(
+op webAppsGetWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2797,12 +2723,11 @@ op WebAppsGetWebJobSlotCustomized(
   slot: string,
 ): ArmResponse<WebJob>;
 
-@@override(WebJobs.getWebJobSlot, WebAppsGetWebJobSlotCustomized);
+@@override(WebJobs.getWebJobSlot, webAppsGetWebJobSlotCustomized);
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListBackupStatusSecretsSlotCustomized(
+op webAppsListBackupStatusSecretsSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2832,13 +2757,12 @@ op WebAppsListBackupStatusSecretsSlotCustomized(
 ): ArmResponse<BackupItem>;
 
 @@override(BackupItemOperationGroup.listBackupStatusSecretsSlot,
-  WebAppsListBackupStatusSecretsSlotCustomized
+  webAppsListBackupStatusSecretsSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListDeploymentLogSlotCustomized(
+op webAppsListDeploymentLogSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2868,13 +2792,12 @@ op WebAppsListDeploymentLogSlotCustomized(
 ): ArmResponse<Deployment>;
 
 @@override(DeploymentOperationGroup.listDeploymentLogSlot,
-  WebAppsListDeploymentLogSlotCustomized
+  webAppsListDeploymentLogSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListFunctionKeysSlotCustomized(
+op webAppsListFunctionKeysSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2904,13 +2827,12 @@ op WebAppsListFunctionKeysSlotCustomized(
 ): ArmResponse<StringDictionary>;
 
 @@override(FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
-  WebAppsListFunctionKeysSlotCustomized
+  webAppsListFunctionKeysSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListFunctionSecretsSlotCustomized(
+op webAppsListFunctionSecretsSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2940,13 +2862,12 @@ op WebAppsListFunctionSecretsSlotCustomized(
 ): ArmResponse<FunctionSecrets>;
 
 @@override(FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
-  WebAppsListFunctionSecretsSlotCustomized
+  webAppsListFunctionSecretsSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListNetworkFeaturesSlotCustomized(
+op webAppsListNetworkFeaturesSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -2973,13 +2894,12 @@ op WebAppsListNetworkFeaturesSlotCustomized(
 ): ArmResponse<NetworkFeatures> | ArmNotFoundResponse;
 
 @@override(NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
-  WebAppsListNetworkFeaturesSlotCustomized
+  webAppsListNetworkFeaturesSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListInstanceProcessModulesCustomized(
+op webAppsListInstanceProcessModulesCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3006,13 +2926,12 @@ op WebAppsListInstanceProcessModulesCustomized(
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
 @@override(ProcessModuleInfos.listInstanceProcessModules,
-  WebAppsListInstanceProcessModulesCustomized
+  webAppsListInstanceProcessModulesCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListInstanceProcessModulesSlotCustomized(
+op webAppsListInstanceProcessModulesSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3043,13 +2962,12 @@ op WebAppsListInstanceProcessModulesSlotCustomized(
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
 @@override(InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
-  WebAppsListInstanceProcessModulesSlotCustomized
+  webAppsListInstanceProcessModulesSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListInstanceProcessThreadsCustomized(
+op webAppsListInstanceProcessThreadsCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3079,13 +2997,12 @@ op WebAppsListInstanceProcessThreadsCustomized(
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
 @@override(ProcessInfos.listInstanceProcessThreads,
-  WebAppsListInstanceProcessThreadsCustomized
+  webAppsListInstanceProcessThreadsCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListInstanceProcessThreadsSlotCustomized(
+op webAppsListInstanceProcessThreadsSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3119,13 +3036,12 @@ op WebAppsListInstanceProcessThreadsSlotCustomized(
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
 @@override(InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
-  WebAppsListInstanceProcessThreadsSlotCustomized
+  webAppsListInstanceProcessThreadsSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListProcessModulesSlotCustomized(
+op webAppsListProcessModulesSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3152,13 +3068,12 @@ op WebAppsListProcessModulesSlotCustomized(
 ): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
 
 @@override(ProcessModuleSlotOperationGroup.listProcessModulesSlot,
-  WebAppsListProcessModulesSlotCustomized
+  webAppsListProcessModulesSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListProcessThreadsSlotCustomized(
+op webAppsListProcessThreadsSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3188,13 +3103,12 @@ op WebAppsListProcessThreadsSlotCustomized(
 ): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
 
 @@override(ProcessSlotOperationGroup.listProcessThreadsSlot,
-  WebAppsListProcessThreadsSlotCustomized
+  webAppsListProcessThreadsSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsListTriggeredWebJobHistorySlotCustomized(
+op webAppsListTriggeredWebJobHistorySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3221,13 +3135,12 @@ op WebAppsListTriggeredWebJobHistorySlotCustomized(
 ): ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse;
 
 @@override(TriggeredJobHistories.listTriggeredWebJobHistorySlot,
-  WebAppsListTriggeredWebJobHistorySlotCustomized
+  webAppsListTriggeredWebJobHistorySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsRecoverSiteConfigurationSnapshotSlotCustomized(
+op webAppsRecoverSiteConfigurationSnapshotSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3259,13 +3172,12 @@ op WebAppsRecoverSiteConfigurationSnapshotSlotCustomized(
 ): NoContentResponse;
 
 @@override(SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
-  WebAppsRecoverSiteConfigurationSnapshotSlotCustomized
+  webAppsRecoverSiteConfigurationSnapshotSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsRunTriggeredWebJobSlotCustomized(
+op webAppsRunTriggeredWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3297,13 +3209,12 @@ op WebAppsRunTriggeredWebJobSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(TriggeredWebJobs.runTriggeredWebJobSlot,
-  WebAppsRunTriggeredWebJobSlotCustomized
+  webAppsRunTriggeredWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsStartContinuousWebJobSlotCustomized(
+op webAppsStartContinuousWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3335,13 +3246,12 @@ op WebAppsStartContinuousWebJobSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
-  WebAppsStartContinuousWebJobSlotCustomized
+  webAppsStartContinuousWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsStopContinuousWebJobSlotCustomized(
+op webAppsStopContinuousWebJobSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3373,13 +3283,12 @@ op WebAppsStopContinuousWebJobSlotCustomized(
 } | ArmNotFoundResponse;
 
 @@override(ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
-  WebAppsStopContinuousWebJobSlotCustomized
+  webAppsStopContinuousWebJobSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdateDomainOwnershipIdentifierSlotCustomized(
+op webAppsUpdateDomainOwnershipIdentifierSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3409,13 +3318,12 @@ op WebAppsUpdateDomainOwnershipIdentifierSlotCustomized(
 ): ArmResponse<Identifier>;
 
 @@override(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
-  WebAppsUpdateDomainOwnershipIdentifierSlotCustomized
+  webAppsUpdateDomainOwnershipIdentifierSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdateHybridConnectionSlotCustomized(
+op webAppsUpdateHybridConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3449,13 +3357,12 @@ op WebAppsUpdateHybridConnectionSlotCustomized(
 ): ArmResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
-  WebAppsUpdateHybridConnectionSlotCustomized
+  webAppsUpdateHybridConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdatePremierAddOnSlotCustomized(
+op webAppsUpdatePremierAddOnSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3485,13 +3392,12 @@ op WebAppsUpdatePremierAddOnSlotCustomized(
 ): ArmResponse<PremierAddOn>;
 
 @@override(PremierAddOnOperationGroup.updatePremierAddOnSlot,
-  WebAppsUpdatePremierAddOnSlotCustomized
+  webAppsUpdatePremierAddOnSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdateRelayServiceConnectionSlotCustomized(
+op webAppsUpdateRelayServiceConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3521,13 +3427,12 @@ op WebAppsUpdateRelayServiceConnectionSlotCustomized(
 ): ArmResponse<RelayServiceConnectionEntity>;
 
 @@override(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
-  WebAppsUpdateRelayServiceConnectionSlotCustomized
+  webAppsUpdateRelayServiceConnectionSlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdateVnetConnectionGatewaySlotCustomized(
+op webAppsUpdateVnetConnectionGatewaySlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3561,13 +3466,12 @@ op WebAppsUpdateVnetConnectionGatewaySlotCustomized(
 ): ArmResponse<VnetGateway>;
 
 @@override(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
-  WebAppsUpdateVnetConnectionGatewaySlotCustomized
+  webAppsUpdateVnetConnectionGatewaySlotCustomized
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op WebAppsUpdateVnetConnectionSlotCustomized(
+op webAppsUpdateVnetConnectionSlotCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query("api-version")
   apiVersion: string,
@@ -3597,5 +3501,5 @@ op WebAppsUpdateVnetConnectionSlotCustomized(
 ): ArmResponse<VnetInfoResource>;
 
 @@override(VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
-  WebAppsUpdateVnetConnectionSlotCustomized
+  webAppsUpdateVnetConnectionSlotCustomized
 );
