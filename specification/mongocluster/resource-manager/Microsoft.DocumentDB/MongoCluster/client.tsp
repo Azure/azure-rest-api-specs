@@ -42,6 +42,7 @@ using Microsoft.DocumentDB;
 @@clientName(PreviewFeature, "MongoClusterPreviewFeature", "csharp");
 @@clientName(PromoteMode, "MongoClusterPromoteMode", "csharp");
 @@clientName(PromoteOption, "MongoClusterPromoteOption", "csharp");
+@@clientName(PromoteReplicaRequest, "PromoteReplicaContent", "csharp");
 @@clientName(ProvisioningState, "MongoClusterProvisioningState", "csharp");
 @@clientName(Replica, "MongoClusterReplica", "csharp");
 @@clientName(ReplicationProperties,
@@ -67,12 +68,18 @@ using Microsoft.DocumentDB;
   "MongoClusterFirewallRuleProperties",
   "csharp"
 );
+@@clientName(FirewallRuleProperties.startIpAddress, "startIPAddress");
+@@clientName(FirewallRuleProperties.endIpAddress, "endIPAddress");
 @@clientName(PrivateEndpointConnectionResource,
   "MongoClusterPrivateEndpointConnectionResource",
   "csharp"
 );
 @@clientName(PrivateEndpointConnectionProperties,
   "MongoClusterPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(Microsoft.DocumentDB.PrivateLinkResource,
+  "MongoClusterPrivateLinkResourceData",
   "csharp"
 );
 @@clientName(ListConnectionStringsResult,
@@ -109,3 +116,17 @@ using Microsoft.DocumentDB;
 @@clientName(StorageProperties, "MongoClusterStorageProperties", "csharp");
 @@clientName(StorageType, "MongoClusterStorageType", "csharp");
 @@clientName(UserRole, "MongoClusterUserRole", "csharp");
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
+
+@@alternateType(PrivateEndpointConnectionProperties.privateEndpoint,
+  Azure.ResourceManager.Models.SubResource,
+  "csharp"
+);
