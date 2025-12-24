@@ -611,7 +611,7 @@ options:
         }),
         raw: vi.fn().mockImplementation((args: string[]) => {
           const argsStr = args.join(" ");
-          
+
           // Handle git config commands
           if (args.includes("config") && args.includes("remote.origin.url")) {
             return Promise.resolve("https://github.com/user/azure-rest-api-specs.git");
@@ -641,17 +641,17 @@ options:
               if (ref.includes("upstream/main") && servicePath === "specification/foo") {
                 return Promise.resolve("data-plane\nresource-manager");
               }
-              // Also handle the case where it checks just "main" 
+              // Also handle the case where it checks just "main"
               if (ref === "main" && servicePath === "specification/foo") {
                 return Promise.resolve("data-plane\nresource-manager");
               }
             }
-            
+
             // Fallback - if it's any reference to specification/foo, return v2 structure
             if (argsStr.includes("specification/foo")) {
               return Promise.resolve("data-plane\nresource-manager");
             }
-            
+
             return Promise.resolve("");
           }
 
