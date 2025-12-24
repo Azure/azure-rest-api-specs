@@ -601,6 +601,64 @@ model VMExtensionPayload {
 }
 
 /**
+ * Resource types for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union MonitoredComputeResourceType {
+  string,
+
+  /** All monitored compute resource types */
+  All: "All",
+
+  /** Azure Kubernetes Service managed clusters */
+  ManagedClusters: "managedClusters",
+}
+
+/**
+ * Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourcesRequest {
+  /**
+   * The type of compute resources to filter by. Use "All" to get all resource types, or specify a specific type like "managedClusters".
+   */
+  resourceType?: MonitoredComputeResourceType;
+}
+
+/**
+ * Response of a list operation for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourceListResponse
+  is Azure.Core.Page<MonitoredComputeResourceInfo> {
+  /**
+   * The type of compute resources in this response. Returns the filter value used in the request (e.g., "managedClusters" or "All").
+   */
+  resourceType?: string;
+}
+
+/**
+ * Details of a monitored compute resource monitored by the Dynatrace monitor.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourceInfo {
+  /**
+   * The full ARM resource ID of the monitored resource.
+   */
+  monitoredResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Flag indicating if the resource is currently being monitored.
+   */
+  isMonitored?: boolean;
+
+  /**
+   * Reason for monitoring status.
+   */
+  reasonForMonitoringStatus?: string;
+}
+
+/**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
 model ManageAgentInstallationRequest {

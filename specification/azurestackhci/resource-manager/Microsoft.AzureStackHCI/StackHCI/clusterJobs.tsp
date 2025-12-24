@@ -16,7 +16,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 @parentResource(Cluster)
 model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
   ...ResourceNameParameter<
@@ -30,7 +30,7 @@ model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
 /**
  * ClusterJobs operations
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface ClusterJobs {
   /** Get a ClusterJob */
@@ -50,7 +50,7 @@ interface ClusterJobs {
 }
 
 /** ClusterJob Type supported. */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 union HciJobType {
   string,
 
@@ -62,7 +62,7 @@ union HciJobType {
 }
 
 /** Cluster Job properties */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 @discriminator("jobType")
 model ClusterJobProperties {
   /** Job Type to support polymorphic resource. */
@@ -102,11 +102,11 @@ model ClusterJobProperties {
 /**
  * List of Cluster Job resources for the HCI cluster.
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
 
 /** Properties for configuring arc gateway to a cluster. */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureArcGateway;
@@ -115,7 +115,7 @@ model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
 /**
  * Properties for creating GPU partitions for virtualization and workload isolation.
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 model GpuCreatePartitionJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.GpuCreatePartition;
@@ -129,7 +129,7 @@ model GpuCreatePartitionJobProperties extends ClusterJobProperties {
 /**
  * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 model GpuSwitchModeJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.GpuSwitchMode;
@@ -143,7 +143,7 @@ model GpuSwitchModeJobProperties extends ClusterJobProperties {
 /**
  * GPU modes supported.
  */
-//@removed(Versions.v2025_11_01_preview)
+@removed(Versions.v2025_12_01_preview)
 union GpuMode {
   string,
 
