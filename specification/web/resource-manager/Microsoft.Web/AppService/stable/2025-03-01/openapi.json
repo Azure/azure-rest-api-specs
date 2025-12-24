@@ -38077,7 +38077,7 @@
             "description": "A JSON representation of the static site custom domain request properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
+              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesARMResource"
             }
           }
         ],
@@ -49790,7 +49790,7 @@
       "description": "MSDeploy ARM PUT information",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MSDeployProperties",
+          "$ref": "#/definitions/MSDeployCore",
           "description": "Core resource properties",
           "x-ms-client-flatten": true
         }
@@ -49906,29 +49906,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "MSDeployProperties": {
-      "type": "object",
-      "properties": {
-        "addOnPackages": {
-          "type": "array",
-          "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
-          "items": {
-            "$ref": "#/definitions/MSDeployCore"
-          },
-          "xml": {
-            "wrapped": true
-          },
-          "x-ms-identifiers": [
-            "packageUri"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/MSDeployCore"
-        }
-      ]
     },
     "MSDeployProvisioningState": {
       "type": "string",

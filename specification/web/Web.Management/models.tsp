@@ -11632,17 +11632,9 @@ model MSDeployStatusProperties {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MSDeploy extends ProxyOnlyResource {
   /** Core resource properties */
-  properties?: MSDeployProperties;
+  properties?: MSDeployCore;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model MSDeployProperties extends MSDeployCore {
-  /** List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule. */
-  @identifiers(#["packageUri"])
-  addOnPackages?: MSDeployCore[];
-}
 /**
  * MSDeploy ARM PUT core information
  */

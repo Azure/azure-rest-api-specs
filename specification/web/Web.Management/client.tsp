@@ -457,12 +457,12 @@ op webAppsAddPremierAddOnSlotCustomized(
   @path
   premierAddOnName: string,
 
-  @body
-  premierAddOn: PremierAddOn,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  premierAddOn: PremierAddOn,
 ): ArmResourceUpdatedResponse<PremierAddOn>;
 
 @@override(PremierAddOnOperationGroup.addPremierAddOnSlot,
@@ -486,12 +486,12 @@ op webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
   @path
   privateEndpointConnectionName: string,
 
-  @body
-  privateEndpointWrapper: RemotePrivateEndpointConnectionARMResource,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  privateEndpointWrapper: RemotePrivateEndpointConnectionARMResource,
 ): ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
   @bodyRoot
   _: RemotePrivateEndpointConnectionARMResource;
@@ -604,12 +604,13 @@ op webAppsInstallSiteExtensionSlotCustomized(
 op webAppsMigrateStorageCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
   ...Azure.ResourceManager.Legacy.Provider,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @query
   subscriptionName: string,
+
+  ...ResourceGroupParameter,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
@@ -638,12 +639,12 @@ op webAppsRestoreSlotCustomized(
   @path
   backupId: string,
 
-  @body
-  request: RestoreRequest,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  request: RestoreRequest,
 ): {
   @body body: void;
 };
@@ -694,12 +695,12 @@ op webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
   @path
   domainOwnershipIdentifierName: string,
 
-  @body
-  domainOwnershipIdentifier: Identifier,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  domainOwnershipIdentifier: Identifier,
 ): ArmResourceUpdatedResponse<Identifier>;
 
 @@override(IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
@@ -754,12 +755,12 @@ op webAppsCreateOrUpdateHostNameBindingSlotCustomized(
   @path
   hostName: string,
 
-  @body
-  hostNameBinding: HostNameBinding,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  hostNameBinding: HostNameBinding,
 ): ArmResourceUpdatedResponse<HostNameBinding>;
 
 @@override(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
@@ -817,12 +818,12 @@ op webAppsCreateOrUpdateHybridConnectionSlotCustomized(
   @path
   relayName: string,
 
-  @body
-  connectionEnvelope: HybridConnection,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: HybridConnection,
 ): ArmResourceUpdatedResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
@@ -845,12 +846,12 @@ op webAppsCreateOrUpdatePublicCertificateSlotCustomized(
   @path
   publicCertificateName: string,
 
-  @body
-  publicCertificate: PublicCertificate,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  publicCertificate: PublicCertificate,
 ): ArmResourceUpdatedResponse<PublicCertificate>;
 
 @@override(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
@@ -873,12 +874,12 @@ op webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
   @path
   entityName: string,
 
-  @body
-  connectionEnvelope: RelayServiceConnectionEntity,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: RelayServiceConnectionEntity,
 ): ArmResourceUpdatedResponse<RelayServiceConnectionEntity>;
 
 @@override(RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
@@ -905,12 +906,12 @@ op webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
   @path
   gatewayName: string,
 
-  @body
-  connectionEnvelope: VnetGateway,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: VnetGateway,
 ): ArmResourceUpdatedResponse<VnetGateway>;
 
 @@override(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
@@ -933,12 +934,12 @@ op webAppsCreateOrUpdateVnetConnectionSlotCustomized(
   @path
   vnetName: string,
 
-  @body
-  connectionEnvelope: VnetInfoResource,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: VnetInfoResource,
 ): ArmResourceUpdatedResponse<VnetInfoResource>;
 
 @@override(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
@@ -2264,12 +2265,12 @@ op webAppsListBackupStatusSecretsSlotCustomized(
   @path
   backupId: string,
 
-  @body
-  request: BackupRequest,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  request: BackupRequest,
 ): ArmResponse<BackupItem>;
 
 @@override(BackupItemOperationGroup.listBackupStatusSecretsSlot,
@@ -2713,12 +2714,12 @@ op webAppsUpdateDomainOwnershipIdentifierSlotCustomized(
   @path
   domainOwnershipIdentifierName: string,
 
-  @body
-  domainOwnershipIdentifier: Identifier,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  domainOwnershipIdentifier: Identifier,
 ): ArmResponse<Identifier>;
 
 @@override(IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
@@ -2745,12 +2746,12 @@ op webAppsUpdateHybridConnectionSlotCustomized(
   @path
   relayName: string,
 
-  @body
-  connectionEnvelopeconnectionEnvelope: HybridConnection,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelopeconnectionEnvelope: HybridConnection,
 ): ArmResponse<HybridConnection>;
 
 @@override(HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
@@ -2773,12 +2774,12 @@ op webAppsUpdatePremierAddOnSlotCustomized(
   @path
   premierAddOnName: string,
 
-  @body
-  premierAddOn: PremierAddOnPatchResource,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  premierAddOn: PremierAddOnPatchResource,
 ): ArmResponse<PremierAddOn>;
 
 @@override(PremierAddOnOperationGroup.updatePremierAddOnSlot,
@@ -2801,12 +2802,12 @@ op webAppsUpdateRelayServiceConnectionSlotCustomized(
   @path
   entityName: string,
 
-  @body
-  connectionEnvelope: RelayServiceConnectionEntity,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: RelayServiceConnectionEntity,
 ): ArmResponse<RelayServiceConnectionEntity>;
 
 @@override(RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
@@ -2833,12 +2834,12 @@ op webAppsUpdateVnetConnectionGatewaySlotCustomized(
   @path
   gatewayName: string,
 
-  @body
-  connectionEnvelope: VnetGateway,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: VnetGateway,
 ): ArmResponse<VnetGateway>;
 
 @@override(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
@@ -2861,12 +2862,12 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   @path
   vnetName: string,
 
-  @body
-  connectionEnvelope: VnetInfoResource,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @path
   slot: string,
+
+  @body
+  connectionEnvelope: VnetInfoResource,
 ): ArmResponse<VnetInfoResource>;
 
 @@override(VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
