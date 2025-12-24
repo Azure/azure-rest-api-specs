@@ -155,7 +155,7 @@ using Microsoft.Help;
 @@clientName(DiagnosticResource, "SelfHelpDiagnostic", "csharp");
 @@clientName(SolutionResource, "SelfHelpSolution", "csharp");
 @@clientName(SimplifiedSolutionsResource,
-  "SelfHelpSimplifiedSolutions",
+  "SelfHelpSimplifiedSolution",
   "csharp"
 );
 @@clientName(TroubleshooterResource, "SelfHelpTroubleshooter", "csharp");
