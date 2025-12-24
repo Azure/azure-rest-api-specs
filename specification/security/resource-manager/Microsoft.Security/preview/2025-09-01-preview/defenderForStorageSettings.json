@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2025-07-01-preview"
+    "version": "2025-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -131,7 +131,7 @@
           "Antimalware",
           "Scan"
         ],
-        "description": "Initiate a Defender for Storage malware scan for the specified storage account.",
+        "description": "Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.",
         "operationId": "DefenderForStorage_StartMalwareScan",
         "parameters": [
           {
@@ -292,7 +292,15 @@
         },
         "scanResultsEventGridTopicResourceId": {
           "type": "string",
-          "description": "Optional. Resource id of an Event Grid Topic to send scan results to."
+          "description": "Optional. Resource id of an Event Grid Topic to send scan results to.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventGrid/topics"
+              }
+            ]
+          }
         },
         "blobScanResultsOptions": {
           "type": "string",
@@ -474,6 +482,11 @@
           "$ref": "#/definitions/BlobsScanSummary",
           "description": "A summary of the scan results of the blobs that were scanned."
         },
+        "files": {
+          "type": "object",
+          "$ref": "#/definitions/FilesScanSummary",
+          "description": "A summary of the scan results of the files that were scanned."
+        },
         "estimatedScanCostUSD": {
           "type": "number",
           "format": "double",
@@ -506,6 +519,37 @@
           "description": "The number of failed blob scans."
         },
         "scannedBlobsInGB": {
+          "type": "number",
+          "format": "double",
+          "description": "The number of gigabytes of data that were scanned."
+        }
+      }
+    },
+    "FilesScanSummary": {
+      "type": "object",
+      "description": "A summary of the scan results of the files that were scanned.",
+      "properties": {
+        "totalFilesScanned": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of files that were scanned."
+        },
+        "maliciousFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of malicious files that were detected during the scan."
+        },
+        "skippedFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of files that were skipped."
+        },
+        "failedFilesCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of failed file scans."
+        },
+        "scannedFilesInGB": {
           "type": "number",
           "format": "double",
           "description": "The number of gigabytes of data that were scanned."
