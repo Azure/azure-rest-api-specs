@@ -1334,6 +1334,163 @@
         }
       }
     },
+    "AppInsightsConfiguration": {
+      "description": "Configuration of Application Insights ",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "Application Insights connection string",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OpenTelemetryConfiguration": {
+      "description": "Configuration of Open Telemetry",
+      "type": "object",
+      "properties": {
+        "destinationsConfiguration": {
+          "description": "Open telemetry destinations configuration",
+          "$ref": "#/definitions/DestinationsConfiguration"
+        },
+        "tracesConfiguration": {
+          "description": "Open telemetry trace configuration",
+          "$ref": "#/definitions/TracesConfiguration"
+        },
+        "logsConfiguration": {
+          "description": "Open telemetry logs configuration",
+          "$ref": "#/definitions/LogsConfiguration"
+        },
+        "metricsConfiguration": {
+          "description": "Open telemetry metrics configuration",
+          "$ref": "#/definitions/MetricsConfiguration"
+        }
+      }
+    },
+    "DestinationsConfiguration": {
+      "description": "Configuration of Open Telemetry destinations",
+      "type": "object",
+      "properties": {
+        "dataDogConfiguration": {
+          "description": "Open telemetry datadog destination configuration",
+          "$ref": "#/definitions/DataDogConfiguration"
+        },
+        "otlpConfigurations": {
+          "description": "Open telemetry otlp configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OtlpConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "DataDogConfiguration": {
+      "description": "Configuration of datadog ",
+      "type": "object",
+      "properties": {
+        "site": {
+          "description": "The data dog site",
+          "type": "string"
+        },
+        "key": {
+          "description": "The data dog api key",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "OtlpConfiguration": {
+      "description": "Configuration of otlp ",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of otlp configuration",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint of otlp configuration",
+          "type": "string"
+        },
+        "insecure": {
+          "description": "Boolean indicating if otlp configuration is insecure",
+          "type": "boolean"
+        },
+        "headers": {
+          "description": "Headers of otlp configurations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Header"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      }
+    },
+    "Header": {
+      "description": "Header of otlp configuration",
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "The key of otlp configuration header",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of otlp configuration header",
+          "type": "string"
+        }
+      }
+    },
+    "TracesConfiguration": {
+      "description": "Configuration of Open Telemetry traces",
+      "type": "object",
+      "properties": {
+        "includeDapr": {
+          "type": "boolean",
+          "description": "Boolean indicating if including dapr traces"
+        },
+        "destinations": {
+          "description": "Open telemetry traces destinations, ex: appInsights",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogsConfiguration": {
+      "description": "Configuration of Open Telemetry logs",
+      "type": "object",
+      "properties": {
+        "destinations": {
+          "description": "Open telemetry logs destinations, ex: appInsights",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricsConfiguration": {
+      "description": "Configuration of Open Telemetry metrics",
+      "type": "object",
+      "properties": {
+        "includeKeda": {
+          "type": "boolean",
+          "description": "Boolean indicating if including keda metrics"
+        },
+        "destinations": {
+          "description": "Open telemetry metrics destinations, ex: dataDog",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "KedaConfiguration": {
       "type": "object",
       "description": "Configuration properties Keda component",
@@ -1511,6 +1668,14 @@
             "appLogsConfiguration": {
               "$ref": "#/definitions/AppLogsConfiguration",
               "description": "Cluster configuration which enables the log daemon to export app logs to configured destination."
+            },
+            "appInsightsConfiguration": {
+              "$ref": "#/definitions/AppInsightsConfiguration",
+              "description": "Environment level Application Insights configuration"
+            },
+            "openTelemetryConfiguration": {
+              "$ref": "#/definitions/OpenTelemetryConfiguration",
+              "description": "Environment Open Telemetry configuration"
             },
             "zoneRedundant": {
               "description": "Whether or not this Managed Environment is zone-redundant.",
