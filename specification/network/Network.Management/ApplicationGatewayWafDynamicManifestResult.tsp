@@ -13,17 +13,26 @@ namespace Microsoft.Network;
 /**
  * Response for ApplicationGatewayWafDynamicManifest API service call.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("dafault")
 @subscriptionResource
-model ApplicationGatewayWafDynamicManifestResult
-  is Azure.ResourceManager.ProxyResource<ApplicationGatewayWafDynamicManifestPropertiesResult> {
-  ...ResourceNameParameter<
-    Resource = ApplicationGatewayWafDynamicManifestResult,
-    KeyName = "applicationGatewayWafDynamicManifest",
-    SegmentName = "applicationGatewayWafDynamicManifests",
-    NamePattern = ""
-  >;
+model ApplicationGatewayWafDynamicManifestResult extends ProxyResource {
+  /**
+   * Properties of the ApplicationGatewayWafDynamicManifest.
+   */
+  properties?: ApplicationGatewayWafDynamicManifestPropertiesResult;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationGatewayWafDynamicManifest")
+  @segment("applicationGatewayWafDynamicManifests")
+  name: string;
 }
+
+@@doc(ApplicationGatewayWafDynamicManifestResult.name, "Resource name.");
 
 alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

@@ -14,29 +14,26 @@ namespace Microsoft.Network;
 /**
  * Information about the connection monitor.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkWatcher)
-model ConnectionMonitorResult
-  is Azure.ResourceManager.ProxyResource<ConnectionMonitorResultProperties> {
-  ...ResourceNameParameter<
-    Resource = ConnectionMonitorResult,
-    KeyName = "connectionMonitorName",
-    SegmentName = "connectionMonitors",
-    NamePattern = ""
-  >;
+model ConnectionMonitorResult extends TrackedResourcewithOptionalLocation {
+  /**
+   * Properties of the connection monitor result.
+   */
+  properties?: ConnectionMonitorResultProperties;
 
-  /** A unique read-only string that changes whenever the resource is updated. */
+  /**
+   * The name of the resource.
+   */
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  etag?: string;
-
-  /** Connection monitor location. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /** Connection monitor tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: TagsObject;
+  @path
+  @key("connectionMonitorName")
+  @segment("connectionMonitors")
+  name: string;
 }
+
+@@doc(ConnectionMonitorResult.name, "Name of the connection monitor.");
+
 
 @armResourceOperations
 interface ConnectionMonitorResults {

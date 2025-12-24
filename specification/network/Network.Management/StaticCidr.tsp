@@ -14,15 +14,26 @@ namespace Microsoft.Network;
 /**
  * Instance of StaticCidr resource.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(IpamPool)
-model StaticCidr is Azure.ResourceManager.ProxyResource<StaticCidrProperties> {
-  ...ResourceNameParameter<
-    Resource = StaticCidr,
-    KeyName = "staticCidrName",
-    SegmentName = "staticCidrs",
-    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-  >;
+model StaticCidr extends CommonProxyResource {
+  /**
+   * Properties of the static CIDR.
+   */
+  properties?: StaticCidrProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("staticCidrName")
+  @segment("staticCidrs")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
 }
+
+@@doc(StaticCidr.name, "The name of the resource");
 
 alias StaticCidrOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

@@ -13,15 +13,25 @@ namespace Microsoft.Network;
 /**
  * The Network Security Perimeter resource
  */
-model NetworkSecurityPerimeter
-  is Azure.ResourceManager.TrackedResource<NetworkSecurityPerimeterProperties> {
-  ...ResourceNameParameter<
-    Resource = NetworkSecurityPerimeter,
-    KeyName = "networkSecurityPerimeterName",
-    SegmentName = "networkSecurityPerimeters",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkSecurityPerimeter extends CommonTrackedResource {
+  /**
+   * Properties of the network security perimeter.
+   */
+  properties?: NetworkSecurityPerimeterProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("networkSecurityPerimeterName")
+  @segment("networkSecurityPerimeters")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NetworkSecurityPerimeter.name, "The name of the resource");
 
 @armResourceOperations
 interface NetworkSecurityPerimeters {

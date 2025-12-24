@@ -14,15 +14,26 @@ namespace Microsoft.Network;
 /**
  * The network security perimeter link resource
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspLink is Azure.ResourceManager.ProxyResource<NspLinkProperties> {
-  ...ResourceNameParameter<
-    Resource = NspLink,
-    KeyName = "linkName",
-    SegmentName = "links",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+model NspLink extends CommonProxyResource {
+  /**
+   * Properties of the NSP link.
+   */
+  properties?: NspLinkProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("linkName")
+  @segment("links")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NspLink.name, "The name of the resource");
 
 @armResourceOperations
 interface NspLinks {

@@ -82,7 +82,7 @@ interface IpGroups {
   /**
    * Gets all IpGroups in a subscription.
    */
-  list is ArmListBySubscription<IpGroup, Error = CloudError>;
+  list is ArmListBySubscription<IpGroup, Error = Error>;
 }
 
 @@doc(IpGroup.name, "The name of the ipGroups.");

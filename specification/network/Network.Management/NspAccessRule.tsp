@@ -14,16 +14,26 @@ namespace Microsoft.Network;
 /**
  * The NSP access rule resource
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NspProfile)
-model NspAccessRule
-  is Azure.ResourceManager.ProxyResource<NspAccessRuleProperties> {
-  ...ResourceNameParameter<
-    Resource = NspAccessRule,
-    KeyName = "accessRuleName",
-    SegmentName = "accessRules",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+model NspAccessRule extends CommonProxyResource {
+  /**
+   * Properties of the NSP access rule.
+   */
+  properties?: NspAccessRuleProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("accessRuleName")
+  @segment("accessRules")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NspAccessRule.name, "The name of the resource");
 
 @armResourceOperations
 interface NspAccessRules {

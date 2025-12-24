@@ -14,19 +14,26 @@ namespace Microsoft.Network;
 /**
  * Configuration information or intent on which to do the analysis on.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(VerifierWorkspace)
-model ReachabilityAnalysisIntent
-  is Azure.ResourceManager.ProxyResource<
-    ReachabilityAnalysisIntentProperties,
-    false
-  > {
-  ...ResourceNameParameter<
-    Resource = ReachabilityAnalysisIntent,
-    KeyName = "reachabilityAnalysisIntentName",
-    SegmentName = "reachabilityAnalysisIntents",
-    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-  >;
+model ReachabilityAnalysisIntent extends CommonProxyResource {
+  /**
+   * Properties of the reachability analysis intent.
+   */
+  properties?: ReachabilityAnalysisIntentProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("reachabilityAnalysisIntentName")
+  @segment("reachabilityAnalysisIntents")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
 }
+
+@@doc(ReachabilityAnalysisIntent.name, "The name of the resource");
 
 @armResourceOperations
 interface ReachabilityAnalysisIntents {

@@ -7120,6 +7120,76 @@ model SubResourceModel {
 }
 
 /**
+ * Proxy resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ProxyResource {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+/**
+ * Tracked resource with optional location.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model TrackedResourcewithOptionalLocation {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+}
+
+/**
  * Authentication certificates of an application gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -15202,6 +15272,7 @@ model IpamPoolProperties {
  * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CommonTrackedResource extends CommonResource {
   /**
    * Resource tags.
@@ -15523,6 +15594,7 @@ model StaticCidrProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CommonProxyResource extends CommonResource {}
 
 /**

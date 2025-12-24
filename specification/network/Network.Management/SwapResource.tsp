@@ -13,16 +13,25 @@ namespace Microsoft.Network;
 /**
  * SwapResource to represent slot type on the specified cloud service.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("default")
-model SwapResource
-  is Azure.ResourceManager.ProxyResource<SwapResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = SwapResource,
-    KeyName = "singletonResource",
-    SegmentName = "cloudServiceSlots",
-    NamePattern = ""
-  >;
+model SwapResource extends ProxyResource {
+  /**
+   * Properties of the SwapResource.
+   */
+  properties?: SwapResourceProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("singletonResource")
+  @segment("cloudServiceSlots")
+  name: string;
 }
+
+@@doc(SwapResource.name, "Resource name.");
 
 alias CloudServiceOps = Legacy.ExtensionOperations<
   {

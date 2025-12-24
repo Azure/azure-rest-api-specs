@@ -14,16 +14,26 @@ namespace Microsoft.Network;
 /**
  * The NSP logging configuration
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspLoggingConfiguration
-  is Azure.ResourceManager.ProxyResource<NspLoggingConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = NspLoggingConfiguration,
-    KeyName = "loggingConfigurationName",
-    SegmentName = "loggingConfigurations",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+model NspLoggingConfiguration extends CommonProxyResource {
+  /**
+   * Properties of the NSP logging configuration.
+   */
+  properties?: NspLoggingConfigurationProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("loggingConfigurationName")
+  @segment("loggingConfigurations")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NspLoggingConfiguration.name, "The name of the resource");
 
 @armResourceOperations
 interface NspLoggingConfigurations {

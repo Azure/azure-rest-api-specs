@@ -677,6 +677,9 @@
           "ServiceCommunityList": {
             "$ref": "./examples/ServiceCommunityList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1017,7 +1020,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders": {
-      "post": {
+      "get": {
         "operationId": "ExpressRouteServiceProviders_List",
         "description": "Gets all the available express route service providers.",
         "parameters": [],
@@ -1118,7 +1121,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -1323,11 +1326,14 @@
           "Get available PrivateEndpoint types": {
             "$ref": "./examples/AvailablePrivateEndpointTypesGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases": {
-      "post": {
+      "get": {
         "operationId": "AvailableServiceAliases_List",
         "description": "Gets all available service aliases for this subscription in this region.",
         "parameters": [
@@ -1404,7 +1410,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -1468,7 +1474,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -36018,7 +36024,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -37658,15 +37664,11 @@
           "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
           "description": "Properties of the Azure Web Category.",
           "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -38759,6 +38761,76 @@
         }
       }
     },
+    "CommonProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonResource"
+        }
+      ]
+    },
+    "CommonResource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        }
+      }
+    },
+    "CommonTrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonResource"
+        }
+      ]
+    },
     "Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties": {
       "type": "object",
       "properties": {
@@ -39148,24 +39220,11 @@
           "$ref": "#/definitions/ConnectionMonitorResultProperties",
           "description": "Properties of the connection monitor result.",
           "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "Connection monitor location."
-        },
-        "tags": {
-          "$ref": "#/definitions/TagsObject",
-          "description": "Connection monitor tags."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/TrackedResourcewithOptionalLocation"
         }
       ]
     },
@@ -47012,12 +47071,9 @@
           "readOnly": true
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/CommonTrackedResource"
         }
       ]
     },
@@ -50589,7 +50645,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/CommonTrackedResource"
         }
       ]
     },
@@ -51250,7 +51306,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -51372,7 +51428,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -51457,7 +51513,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -51597,7 +51653,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -51733,7 +51789,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -51787,7 +51843,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -54233,6 +54289,32 @@
         }
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "Proxy resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      }
+    },
     "PublicIPAddress": {
       "type": "object",
       "description": "Public IP address resource.",
@@ -54890,12 +54972,9 @@
           "description": "Represents the Reachability Analysis Intent properties."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -54974,12 +55053,9 @@
           "description": "Represents the Reachability Analysis Run properties."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -57537,7 +57613,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -57685,7 +57761,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/CommonProxyResource"
         }
       ]
     },
@@ -58160,7 +58236,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -58293,6 +58369,43 @@
           "description": "Holds the associations the resource has with other resources in the resource group.",
           "items": {
             "$ref": "#/definitions/TopologyAssociation"
+          }
+        }
+      }
+    },
+    "TrackedResourcewithOptionalLocation": {
+      "type": "object",
+      "description": "Tracked resource with optional location.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -58760,7 +58873,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/CommonTrackedResource"
         }
       ]
     },

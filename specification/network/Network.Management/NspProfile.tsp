@@ -14,15 +14,26 @@ namespace Microsoft.Network;
 /**
  * The network security perimeter profile resource
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspProfile is Azure.ResourceManager.ProxyResource<NspProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = NspProfile,
-    KeyName = "profileName",
-    SegmentName = "profiles",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+model NspProfile extends CommonProxyResource {
+  /**
+   * Properties of the NSP profile.
+   */
+  properties?: NspProfileProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("profileName")
+  @segment("profiles")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NspProfile.name, "The name of the resource");
 
 @armResourceOperations
 interface NspProfiles {

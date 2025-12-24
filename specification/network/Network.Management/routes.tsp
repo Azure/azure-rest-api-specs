@@ -117,6 +117,7 @@ interface AvailableServiceAliasesOperationGroup {
   @operationId("AvailableServiceAliases_List")
   @autoRoute
   @list
+  @get
   @action("availableServiceAliases")
   list is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
@@ -187,9 +188,9 @@ alias RoutesNetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("providers")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -213,9 +214,9 @@ alias CloudServicesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("providers")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -256,10 +257,10 @@ interface PublicIPAddressesOperationGroup {
    * Gets information about all public IP addresses on a cloud service level.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PublicIPAddresses_ListCloudServicePublicIPAddresses")
   @autoRoute
   @get
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listCloudServicePublicIPAddresses is CloudServicesOps.List<
     PublicIPAddress,
     Response = ResourceListResult<PublicIPAddress>,
@@ -294,6 +295,7 @@ interface ExpressRouteServiceProvidersOperationGroup {
   @operationId("ExpressRouteServiceProviders_List")
   @autoRoute
   @list
+  @get
   @action("expressRouteServiceProviders")
   list is ArmProviderActionSync<
     Response = ResourceListResult<ExpressRouteServiceProvider>,
@@ -315,7 +317,7 @@ interface LoadBalancersOperationGroup {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...LocationResourceParameter,
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @body body: LoadBalancerVipSwapRequest,
   ): OkResponse | ArmAcceptedLroResponse | CloudError;
 }
@@ -357,7 +359,7 @@ interface NetworkSecurityPerimeterOperationStatusesOperationGroup {
      */
     @path
     operationId: string,
-  ): ArmResponse<CommonTypes.OperationStatusResult> | ErrorResponse;
+  ): ArmResponse<CommonTypes.OperationStatusResult> | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -386,6 +388,7 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AvailablePrivateEndpointTypes_List")
   @autoRoute
+  @list
   @get
   @action("availablePrivateEndpointTypes")
   list is ArmProviderActionSync<
@@ -478,6 +481,7 @@ interface BgpServiceCommunitiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BgpServiceCommunities_List")
   @autoRoute
+  @list
   @get
   @action("bgpServiceCommunities")
   list is ArmProviderActionSync<
@@ -557,5 +561,8 @@ interface UsagesOperationGroup {
 }
 
 @@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
+  "parameters"
+);
+@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.body,
   "parameters"
 );

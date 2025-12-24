@@ -14,16 +14,26 @@ namespace Microsoft.Network;
 /**
  * The NSP resource association resource
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityPerimeter)
-model NspAssociation
-  is Azure.ResourceManager.ProxyResource<NspAssociationProperties> {
-  ...ResourceNameParameter<
-    Resource = NspAssociation,
-    KeyName = "associationName",
-    SegmentName = "resourceAssociations",
-    NamePattern = "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-  >;
+model NspAssociation extends CommonProxyResource {
+  /**
+   * Properties of the NSP association.
+   */
+  properties?: NspAssociationProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("associationName")
+  @segment("resourceAssociations")
+  @pattern("(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)")
+  name: string;
 }
+
+@@doc(NspAssociation.name, "The name of the resource");
 
 @armResourceOperations
 interface NspAssociations {

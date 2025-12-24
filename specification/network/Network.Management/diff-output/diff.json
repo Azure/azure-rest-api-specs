@@ -389,9 +389,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "default": {
             "schema": {
@@ -562,58 +559,16 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders": {
-      "get__deleted": {
-        "operationId": "ExpressRouteServiceProviders_List",
-        "description": "Gets all the available express route service providers.",
-        "parameters": [],
+      "get": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "List ExpressRoute providers": {
-            "$ref": "./examples/ExpressRouteProviderList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "ExpressRouteServiceProviders_List",
-        "description": "Gets all the available express route service providers.",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List ExpressRoute providers": {
-            "$ref": "./examples/ExpressRouteProviderList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -652,7 +607,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -796,9 +751,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
       "get": {
-        "x-ms-pageable__deleted": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           [
             "~",
@@ -824,69 +776,28 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get__deleted": {
-        "operationId": "AvailableServiceAliases_List",
-        "description": "Gets all available service aliases for this subscription in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableServiceAliasesResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get available service aliases": {
-            "$ref": "./examples/AvailableServiceAliasesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailableServiceAliases_List",
-        "description": "Gets all available service aliases for this subscription in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableServiceAliasesResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available service aliases": {
-            "$ref": "./examples/AvailableServiceAliasesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -933,13 +844,7 @@
             }
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "parameters",
-                "__new": "body"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -1008,7 +913,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17795,79 +17700,6 @@
         "type": "string"
       }
     },
-    "CommonProxyResource__deleted": {
-      "type": "object",
-      "title": "Proxy Resource",
-      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommonResource"
-        }
-      ]
-    },
-    "CommonResource__deleted": {
-      "type": "object",
-      "title": "Resource",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
-    "CommonTrackedResource__deleted": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommonResource"
-        }
-      ]
-    },
     "ConnectionMonitorQueryResult__deleted": {
       "type": "object",
       "description": "List of connection states snapshots.",
@@ -18035,33 +17867,6 @@
     "PortsList__deleted": {
       "type": "string",
       "description": "Describes a port, port range, or negation of a port"
-    },
-    "ProxyResource__deleted": {
-      "type": "object",
-      "description": "Proxy resource representation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Resource ID.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        }
-      }
     },
     "Signatures__deleted": {
       "type": "object",
@@ -18422,6 +18227,43 @@
           "type": "string",
           "description": "Resource type.",
           "readOnly": true
+        }
+      }
+    },
+    "TrackedResourcewithOptionalLocation__added": {
+      "type": "object",
+      "description": "Tracked resource with optional location.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -20080,7 +19922,7 @@
     "ApplicationGatewayWafDynamicManifestResult": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -20497,7 +20339,7 @@
     "AzureWebCategory": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -20515,8 +20357,10 @@
           "description": "Resource type.",
           "readOnly": true
         },
-        "etag": {
-          "readOnly__deleted": true
+        "etag__deleted": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
         }
       }
     },
@@ -20900,6 +20744,23 @@
         }
       }
     },
+    "CommonProxyResource": {
+      "title__deleted": "Proxy Resource"
+    },
+    "CommonResource": {
+      "title__deleted": "Resource",
+      "properties": {
+        "systemData": {
+          "$ref": {
+            "__old": "#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
+        }
+      }
+    },
+    "CommonTrackedResource": {
+      "title__deleted": "Tracked Resource"
+    },
     "ConfigurationGroup": {
       "properties": {
         "properties": {
@@ -20949,7 +20810,7 @@
     "ConnectionMonitorResult": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/TrackedResourcewithOptionalLocation"
         }
       ],
       "properties": {
@@ -20963,17 +20824,26 @@
           "description": "ID of the connection monitor.",
           "readOnly": true
         },
+        "etag__deleted": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
         "type__deleted": {
           "type": "string",
           "description": "Connection monitor type.",
           "readOnly": true
         },
-        "tags": {
-          "type__deleted": "object",
-          "additionalProperties__deleted": {
+        "location__deleted": {
+          "type": "string",
+          "description": "Connection monitor location."
+        },
+        "tags__deleted": {
+          "type": "object",
+          "description": "Connection monitor tags.",
+          "additionalProperties": {
             "type": "string"
-          },
-          "$ref__added": "#/definitions/TagsObject"
+          }
         }
       }
     },
@@ -23782,6 +23652,9 @@
       }
     },
     "IpamPool": {
+      "required__deleted": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "description__added": "Properties of IpamPool resource properties which are specific to the Pool resource."
@@ -23799,7 +23672,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/CommonTrackedResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+              "__new": "#/definitions/CommonTrackedResource"
             }
           }
         ]
@@ -24986,7 +24859,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+              "__new": "#/definitions/CommonTrackedResource"
             }
           }
         ]
@@ -25258,7 +25131,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -25290,7 +25163,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -25324,7 +25197,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -25342,7 +25215,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -25370,7 +25243,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -25388,7 +25261,7 @@
           {
             "$ref": {
               "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -26339,6 +26212,13 @@
         }
       }
     },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "format__deleted": "arm-id"
+        }
+      }
+    },
     "PublicIPAddress": {
       "properties": {
         "location__added": {
@@ -26581,6 +26461,9 @@
       }
     },
     "ReachabilityAnalysisIntent": {
+      "required__deleted": [
+        "properties"
+      ],
       "properties": {
         "systemData__deleted": {
           "$ref": "./network.json#/definitions/SystemData",
@@ -26597,7 +26480,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/CommonProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -26609,6 +26492,9 @@
       ]
     },
     "ReachabilityAnalysisRun": {
+      "required__deleted": [
+        "properties"
+      ],
       "properties": {
         "systemData__deleted": {
           "$ref": "./network.json#/definitions/SystemData",
@@ -26625,7 +26511,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/CommonProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -27812,7 +27698,7 @@
     "SignaturesOverrides": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -27904,7 +27790,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/CommonProxyResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/CommonProxyResource"
             }
           }
         ]
@@ -28101,7 +27987,7 @@
     "SwapResource": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -28225,7 +28111,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/CommonTrackedResource",
-              "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+              "__new": "#/definitions/CommonTrackedResource"
             }
           }
         ]

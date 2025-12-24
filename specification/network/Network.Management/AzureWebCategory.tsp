@@ -13,20 +13,25 @@ namespace Microsoft.Network;
 /**
  * Azure Web Category Resource.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @subscriptionResource
-model AzureWebCategory
-  is Azure.ResourceManager.ProxyResource<AzureWebCategoryPropertiesFormat> {
-  ...ResourceNameParameter<
-    Resource = AzureWebCategory,
-    KeyName = "name",
-    SegmentName = "azureWebCategories",
-    NamePattern = ""
-  >;
+model AzureWebCategory extends ProxyResource {
+  /**
+   * Properties of the Azure Web Category.
+   */
+  properties?: AzureWebCategoryPropertiesFormat;
 
-  /** A unique read-only string that changes whenever the resource is updated. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  etag?: string;
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("name")
+  @segment("azureWebCategories")
+  name: string;
 }
+
+@@doc(AzureWebCategory.name, "Resource name.");
 
 @armResourceOperations
 interface AzureWebCategories {

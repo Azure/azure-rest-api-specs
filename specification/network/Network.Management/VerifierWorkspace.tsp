@@ -14,23 +14,32 @@ namespace Microsoft.Network;
 /**
  * Instance of Verifier Workspace.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkManager)
-model VerifierWorkspace
-  is Azure.ResourceManager.TrackedResource<VerifierWorkspaceProperties> {
-  ...ResourceNameParameter<
-    Resource = VerifierWorkspace,
-    KeyName = "workspaceName",
-    SegmentName = "verifierWorkspaces",
-    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-  >;
+model VerifierWorkspace extends CommonTrackedResource {
+  /**
+   * Properties of the Verifier Workspace resource.
+   */
+  properties?: VerifierWorkspaceProperties;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("workspaceName")
+  @segment("verifierWorkspaces")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
 }
+
+@@doc(VerifierWorkspace.name, "The name of the resource");
 
 @armResourceOperations
 interface VerifierWorkspaces {

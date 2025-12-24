@@ -14,21 +14,30 @@ namespace Microsoft.Network;
 /**
  * Instance of Pool resource.
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkManager)
-model IpamPool
-  is Azure.ResourceManager.TrackedResource<IpamPoolProperties, false> {
-  ...ResourceNameParameter<
-    Resource = IpamPool,
-    KeyName = "poolName",
-    SegmentName = "ipamPools",
-    NamePattern = "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-  >;
+model IpamPool extends CommonTrackedResource {
+  /**
+   * Properties of the Pool resource.
+   */
+  properties?: IpamPoolProperties;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("poolName")
+  @segment("ipamPools")
+  @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
+  name: string;
 }
+
+@@doc(IpamPool.name, "The name of the resource");
 
 @armResourceOperations
 interface IpamPools {

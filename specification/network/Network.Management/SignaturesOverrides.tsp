@@ -14,17 +14,26 @@ namespace Microsoft.Network;
 /**
  * Contains all specific policy signatures overrides for the IDPS
  */
+@Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("default")
 @parentResource(FirewallPolicy)
-model SignaturesOverrides
-  is Azure.ResourceManager.ProxyResource<SignaturesOverridesProperties> {
-  ...ResourceNameParameter<
-    Resource = SignaturesOverrides,
-    KeyName = "signatureOverride",
-    SegmentName = "signatureOverrides",
-    NamePattern = ""
-  >;
+model SignaturesOverrides extends ProxyResource {
+  /**
+   * Will contain the properties of the resource (the actual signature overrides)
+   */
+  properties?: SignaturesOverridesProperties;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  @path
+  @key("SignaturesOverridesName")
+  @segment("signatureOverrides")
+  name: string;
 }
+
+@@doc(SignaturesOverrides.name, "Contains the name of the resource (default)");
 
 @armResourceOperations
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
