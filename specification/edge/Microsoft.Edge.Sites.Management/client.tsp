@@ -10,6 +10,9 @@ using Microsoft.Edge;
 
 // CSharp
 @@clientName(Site, "EdgeSite", "csharp");
+@@clientName(Sites, "ResourceGroupEdgeSite", "csharp");
+@@clientName(SitesBySubscription, "SubscriptionEdgeSite", "csharp");
+@@clientName(SitesByServiceGroup, "ServiceGroupEdgeSite", "csharp");
 @@clientName(SiteProperties, "EdgeSiteProperties", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "EdgeSiteProvisioningState",
