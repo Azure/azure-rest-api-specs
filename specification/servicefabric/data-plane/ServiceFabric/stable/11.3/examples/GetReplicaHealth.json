@@ -1,0 +1,39 @@
+{
+    "operationId": "GetReplicaHealth",
+    "description": "Gets the health of a Service Fabric stateful service replica or stateless service instance.",
+    "parameters": {
+        "api-version": "6.0",
+        "partitionId": "65a03af-3718-4580-bef8-6f5f432ea092",
+        "replicaId": "133117243825817602"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ServiceKind": "Stateful",
+                "PartitionId": "365a03af-3718-4580-bef8-6f5f432ea092",
+                "ReplicaId": "133117243825817602",
+                "HealthEvents": [
+                    {
+                        "SourceId": "System.RA",
+                        "Property": "State",
+                        "HealthState": "Ok",
+                        "TimeToLiveInMilliSeconds": "P10675199DT2H48M5.4775807S",
+                        "Description": "Replica has been created on_Node_4.\r\nFor more information see: http:\/\/aka.ms\/sfhealth",
+                        "SequenceNumber": "133126558787008399",
+                        "RemoveWhenExpired": false,
+                        "HealthReportId": "RA_7.0_1002",
+                        "SourceUtcTimestamp": "2022-11-11T15:57:58.700Z",
+                        "LastModifiedUtcTimestamp": "2022-11-11T15:58:09.531Z",
+                        "IsExpired": false,
+                        "LastOkTransitionAt": "2022-11-11T15:58:09.531Z",
+                        "LastWarningTransitionAt": "0001-01-01T00:00:00.000Z",
+                        "LastErrorTransitionAt": "0001-01-01T00:00:00.000Z"
+                    }
+                ],
+                "AggregatedHealthState": "Ok",
+                "UnhealthyEvaluations": []
+            }
+        }
+    }
+}

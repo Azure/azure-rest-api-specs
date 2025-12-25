@@ -1,0 +1,64 @@
+{
+    "operationId": "ForceApproveRepairTask",
+    "description": "Forces the approval of the given repair task.",
+    "parameters": {
+        "api-version": "6.0",
+        "RepairTask": {
+            "Scope": {
+                "Kind": "Cluster"
+            },
+            "TaskId": "Azure/TenantUpdate/441efe72-c74d-4cfa-84df-515b44c89060/4/1555",
+            "Version": "3",
+            "Description": "",
+            "State": "Executing",
+            "Flags": 0,
+            "Action": "System.Azure.Job.TenantUpdate",
+            "Target": {
+                "Kind": "Node",
+                "NodeNames": [
+                    "_NS_24",
+                    "_NS_28"
+                ]
+            },
+            "Executor": "fabric:/System/InfrastructureService/NS",
+            "ExecutorData": "{\r\n  \"JobId\": \"441efe72-c74d-4cfa-84df-515b44c89060\",\r\n  \"UD\": 4,\r\n  \"StepId\": \"_NS_24\"\r\n}",
+            "Impact": {
+                "Kind": "Node",
+                "NodeImpactList": [
+                    {
+                        "NodeName": "_NS_24",
+                        "ImpactLevel": "Restart"
+                    }
+                ]
+            },
+            "ResultStatus": "Pending",
+            "ResultCode": 0,
+            "ResultDetails": "",
+            "History": {
+                "CreatedUtcTimestamp": "2020-06-10T00:13:40.520Z",
+                "ClaimedUtcTimestamp": "2020-06-10T00:13:40.520Z",
+                "PreparingUtcTimestamp": "2020-06-10T00:13:40.520Z",
+                "ApprovedUtcTimestamp": "2020-06-10T00:13:40.740Z",
+                "ExecutingUtcTimestamp": "2020-06-10T00:13:55.675Z",
+                "RestoringUtcTimestamp": "0001-01-01T00:00:00.000Z",
+                "CompletedUtcTimestamp": "0001-01-01T00:00:00.000Z",
+                "PreparingHealthCheckStartUtcTimestamp": "2020-06-10T00:13:40.580Z",
+                "PreparingHealthCheckEndUtcTimestamp": "2020-06-10T00:13:40.630Z",
+                "RestoringHealthCheckStartUtcTimestamp": "0001-01-01T00:00:00.000Z",
+                "RestoringHealthCheckEndUtcTimestamp": "0001-01-01T00:00:00.000Z"
+            },
+            "PreparingHealthCheckState": "Skipped",
+            "RestoringHealthCheckState": "NotStarted",
+            "PerformPreparingHealthCheck": false,
+            "PerformRestoringHealthCheck": false
+        }
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "Version": "3"
+            }
+        }
+    }
+}

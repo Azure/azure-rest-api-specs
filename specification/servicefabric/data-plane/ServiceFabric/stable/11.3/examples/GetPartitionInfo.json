@@ -1,0 +1,31 @@
+{
+    "operationId": "GetPartitionInfo",
+    "description": "Gets the information about a Service Fabric partition.",
+    "parameters": {
+        "api-version": "6.0",
+        "partitionId": "ea09316f-86a4-40c1-ba3b-bccf23646986"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ServiceKind": "Stateful",
+                "PartitionInformation": {
+                    "ServicePartitionKind": "Int64Range",
+                    "Id": "ea09316f-86a4-40c1-ba3b-bccf23646986",
+                    "LowKey": "-5534023222112865484",
+                    "HighKey": "-1844674407370955162"
+                },
+                "TargetReplicaSetSize": 3,
+                "MinReplicaSetSize": 2,
+                "HealthState": "Ok",
+                "PartitionStatus": "Ready",
+                "LastQuorumLossDurationInSeconds": "17",
+                "CurrentConfigurationEpoch": {
+                    "ConfigurationVersion": "17179869184",
+                    "DataLossVersion": "133117243740808225"
+                }
+            }
+        }
+    }
+}

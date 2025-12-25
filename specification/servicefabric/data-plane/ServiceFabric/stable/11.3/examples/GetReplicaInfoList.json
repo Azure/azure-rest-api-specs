@@ -1,0 +1,51 @@
+{
+    "operationId": "GetReplicaInfoList",
+    "description": "Gets the information about replicas of a Service Fabric service partition.",
+    "parameters": {
+        "api-version": "6.0",
+        "partitionId": "65a03af-3718-4580-bef8-6f5f432ea092"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ContinuationToken": "",
+                "Items": [
+                    {
+                        "ServiceKind": "Stateful",
+                        "ReplicaId": "133117243749608166",
+                        "ReplicaRole": "ActiveSecondary",
+                        "PreviousReplicaRole": "None",
+                        "ReplicaStatus": "Ready",
+                        "HealthState": "Ok",
+                        "Address": "",
+                        "NodeName": "_Node_2",
+                        "LastInBuildDurationInSeconds": "3"
+                    },
+                    {
+                        "ServiceKind": "Stateful",
+                        "ReplicaId": "133117243825817602",
+                        "ReplicaRole": "Primary",
+                        "PreviousReplicaRole": "None",
+                        "ReplicaStatus": "Ready",
+                        "HealthState": "Ok",
+                        "Address": "{\"Endpoints\":{\"\":\"jeff-desktop.redmond.corp.microsoft.com:34001+365a03af-3718-4580-bef8-6f5f432ea092-133117243825817602\"}}",
+                        "NodeName": "_Node_4",
+                        "LastInBuildDurationInSeconds": "6"
+                    },
+                    {
+                        "ServiceKind": "Stateful",
+                        "ReplicaId": "133117243825817603",
+                        "ReplicaRole": "ActiveSecondary",
+                        "PreviousReplicaRole": "None",
+                        "ReplicaStatus": "Ready",
+                        "HealthState": "Ok",
+                        "Address": "",
+                        "NodeName": "_Node_0",
+                        "LastInBuildDurationInSeconds": "3"
+                    }
+                ]
+            }
+        }
+    }
+}

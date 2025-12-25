@@ -1,0 +1,57 @@
+{
+  "operationId": "MeshServiceReplica_Get",
+  "description": "This example shows how to get information about given replica of a service. If the replica exists, its description is returned along with an OK (200) status code. If the replica does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication",
+    "serviceResourceName": "helloWorldService",
+    "replicaName": "0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "osType": "Linux",
+        "codePackages": [
+          {
+            "name": "helloWorldCode",
+            "image": "seabreeze/sbz-helloworld:1.0-alpine",
+            "endpoints": [
+              {
+                "name": "helloWorldListener",
+                "port": 80
+              }
+            ],
+            "resources": {
+              "requests": {
+                "memoryInGB": 1,
+                "cpu": 1
+              }
+            },
+            "instanceView": {
+              "restartCount": 1,
+              "currentState": {
+                "state": "Running",
+                "exitCode": "0"
+              },
+              "previousState": {
+                "state": "NotSpecified",
+                "exitCode": "0"
+              }
+            }
+          }
+        ],
+        "networkRefs": [
+          {
+            "name": "sampleNetwork",
+            "endpointRefs": [
+              {
+                "name": "helloWorldListener"
+              }
+            ]
+          }
+        ],
+        "replicaName": "0"
+      }
+    }
+  }
+}

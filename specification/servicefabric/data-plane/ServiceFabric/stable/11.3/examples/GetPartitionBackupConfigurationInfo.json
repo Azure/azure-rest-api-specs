@@ -1,0 +1,25 @@
+{
+  "operationId": "GetPartitionBackupConfigurationInfo",
+  "description": "This example shows how to get backup configuration for a partition.",
+  "parameters": {
+    "api-version": "6.4",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "Kind": "Partition",
+        "PolicyName": "BackupPolicy2",
+        "PolicyInheritedFrom": "Service",
+        "ServiceName": "fabric:/CalcApp/CalcService",
+        "PartitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+        "SuspensionInfo": {
+          "IsSuspended": true,
+          "SuspensionInheritedFrom": "Partition"
+        }
+      }
+    }
+  }
+}

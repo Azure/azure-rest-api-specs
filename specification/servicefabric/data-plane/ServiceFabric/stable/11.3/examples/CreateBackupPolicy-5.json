@@ -1,0 +1,39 @@
+{
+    "operationId": "CreateBackupPolicy",
+    "description": "This example shows how to create a backup policy with ZSTANDARD compression and quick recovery enabled. ZSTANDARD provides better compression ratios compared to ZIP, and quick recovery enables faster restore operations.",
+    "parameters": {
+      "api-version": "6.4",
+      "BackupPolicyDescription": {
+        "Name": "DailyAzureZstdBackupPolicy",
+        "AutoRestoreOnDataLoss": false,
+        "MaxIncrementalBackups": 3,
+        "Schedule": {
+          "ScheduleKind": "TimeBased",
+          "ScheduleFrequencyType": "Daily",
+          "RunTimes": [
+            "0001-01-01T09:00:00Z",
+            "0001-01-01T17:00:00Z"
+          ]
+        },
+        "Storage": {
+          "StorageKind": "ManagedIdentityAzureBlobStore",
+          "FriendlyName": "AzureMI_storagesample",
+          "BlobServiceUri": "https://managedidentitytest.blob.core.windows.net/",
+          "ContainerName": "BackupContainer",
+          "ManagedIdentityType": "VMSS",
+          "ManagedIdentityClientId": "00000000-0000-0000-0000-000000000000" 
+        },
+        "RetentionPolicy": {
+          "RetentionPolicyType": "Basic",
+          "MinimumNumberOfBackups": 20,
+          "RetentionDuration": "P3M"
+        },
+        "CompressionType": "ZSTANDARD",
+        "QuickRecovery": "FromPrimary"
+      }  
+    },
+    "responses": {
+      "201": {
+      }
+    }
+  }

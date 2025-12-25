@@ -1,0 +1,39 @@
+{
+  "operationId": "MeshApplication_Get",
+  "description": "This example shows how to get a application resource. If the application resource exists, its description is returned along with an OK (200) status code. If the application resource does not exist, an error is returned with an appropriate status code.",
+  "parameters": {
+    "api-version": "6.4-preview",
+    "applicationResourceName": "sampleApplication"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleApplication",
+        "properties": {
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Ok",
+          "status": "Ready"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "tokenServiceEndpoint": "http://tokenservice",
+          "tenantId": "D47A6CD5-E870-4ADF-8C00-1C0B758BC567",
+          "principalId": "84DFA616-1F44-4D63-BC08-43B5F758D16C",
+          "userAssignedIdentities": {
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity1": {
+              "clientId": "5287A675-78D2-4E49-BF09-D3BFE02493D4",
+              "principalId": "7D6F0B1C-AF9F-4E21-9B3C-AE22F4D926F8"
+            },
+            "/subscriptions/c1089427-83d3-4286-9f35-5af546a6eb67/resourcegroups/myGroup/providers/Microsoft.Identity/Identities/identity2": {
+              "clientId": "AF1509EC-9B5F-43CC-8A6F-FA7CC84AEBE1",
+              "principalId": "31144ACF-46F4-4639-A711-A257229EE0C0"
+            }
+          }
+        }
+      }
+    }
+  }
+}

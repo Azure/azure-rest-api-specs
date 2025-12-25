@@ -1,0 +1,78 @@
+{
+    "operationId": "GetClusterUpgradeProgress",
+    "description": "Gets the progress of the current cluster upgrade.",
+    "parameters": {
+        "api-version": "6.0"
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "CodeVersion": "9.1.1390.9590",
+                "ConfigVersion": "3",
+                "UpgradeDomains": [
+                    {
+                        "Name": "0",
+                        "State": "Completed"
+                    }
+                ],
+                "UpgradeUnits": [
+                    {
+                        "Name": "0",
+                        "State": "Completed"
+                    }
+                ],
+                "UpgradeState": "RollingForwardCompleted",
+                "NextUpgradeDomain": "",
+                "RollingUpgradeMode": "Monitored",
+                "UpgradeDescription": {
+                    "CodeVersion": "9.1.1390.9590",
+                    "ConfigVersion": "3",
+                    "UpgradeKind": "Rolling",
+                    "RollingUpgradeMode": "Monitored",
+                    "UpgradeReplicaSetCheckTimeoutInSeconds": 4294967295,
+                    "ForceRestart": false,
+                    "MonitoringPolicy": {
+                        "FailureAction": "Rollback",
+                        "HealthCheckWaitDurationInMilliseconds": "PT0H5M0S",
+                        "HealthCheckStableDurationInMilliseconds": "PT0H5M0S",
+                        "HealthCheckRetryTimeoutInMilliseconds": "PT2H30M0S",
+                        "UpgradeTimeoutInMilliseconds": "PT16H0M0S",
+                        "UpgradeDomainTimeoutInMilliseconds": "PT3H0M0S"
+                    },
+                    "ClusterHealthPolicy": {
+                        "ConsiderWarningAsError": false,
+                        "MaxPercentUnhealthyNodes": 100,
+                        "MaxPercentUnhealthyApplications": 0,
+                        "NodeTypeHealthPolicyMap": []
+                    },
+                    "EnableDeltaHealthEvaluation": true,
+                    "ClusterUpgradeHealthPolicy": {
+                        "MaxPercentDeltaUnhealthyNodes": 0,
+                        "MaxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+                    },
+                    "SortOrder": "Default"
+                },
+                "UpgradeDurationInMilliseconds": "PT0H10M0.1752S",
+                "UpgradeDomainDurationInMilliseconds": "PT0H0M0.0154527S",
+                "UnhealthyEvaluations": [],
+                "CurrentUpgradeDomainProgress": {
+                    "NodeUpgradeProgressList": []
+                },
+                "CurrentUpgradeUnitsProgress": {
+                    "NodeUpgradeProgressList": []
+                },
+                "StartTimestampUtc": "2022-10-31T18:48:39.781Z",
+                "FailureTimestampUtc": "0001-01-01T00:00:00.000Z",
+                "FailureReason": "None",
+                "UpgradeDomainProgressAtFailure": {
+                    "NodeUpgradeProgressList": []
+                },
+                "IsNodeByNode": false,
+                "HealthCheckElapsedTime": "PT0H0M0S",
+                "HealthCheckPhase": "Invalid",
+                "HealthCheckRetryFlips": 0
+            }
+        }
+    }
+}
