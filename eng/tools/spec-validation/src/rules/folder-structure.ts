@@ -454,16 +454,35 @@ export class FolderStructureRule implements Rule {
    * @param git The simple-git instance
    * @returns Promise<string> The target branch name
    */
+  private normalizeBranchName(branch?: string | null): string | undefined {
+    if (!branch) {
+      return undefined;
+    }
+
+    let normalized = branch.trim();
+    if (!normalized) {
+      return undefined;
+    }
+
+    normalized = normalized.replace(/^refs\/(heads|remotes)\//, "");
+    normalized = normalized.replace(/^remotes\//, "");
+    normalized = normalized.replace(/^(origin|upstream)\//, "");
+
+    return normalized || undefined;
+  }
+
   private async getTargetBranch(git: SimpleGit): Promise<string> {
     try {
       // Method 1: Check if we're in a GitHub Actions environment
-      if (process.env.GITHUB_BASE_REF) {
-        return process.env.GITHUB_BASE_REF;
+      const githubBaseRef = this.normalizeBranchName(process.env.GITHUB_BASE_REF);
+      if (githubBaseRef) {
+        return githubBaseRef;
       }
 
       // Method 2: Check if we're in an Azure DevOps environment
-      if (process.env.SYSTEM_PULLREQUEST_TARGETBRANCH) {
-        return process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+      const adoTargetBranch = this.normalizeBranchName(process.env.SYSTEM_PULLREQUEST_TARGETBRANCH);
+      if (adoTargetBranch) {
+        return adoTargetBranch;
       }
 
       // Method 3: Try to get target branch from GitHub CLI
@@ -477,8 +496,9 @@ export class FolderStructureRule implements Rule {
             cwd: (git as SimpleGit & { _baseDir: string })._baseDir,
           });
           const prData = JSON.parse(String(prInfo)) as { baseRefName?: string };
-          if (prData.baseRefName) {
-            return prData.baseRefName;
+          const normalizedBase = this.normalizeBranchName(prData.baseRefName);
+          if (normalizedBase) {
+            return normalizedBase;
           }
         }
       } catch {
@@ -504,7 +524,8 @@ export class FolderStructureRule implements Rule {
 
       // Method 5: Fallback to main
       console.log("Using fallback target branch: main");
-      return "main";
+      const fallbackBranch = this.normalizeBranchName("main") ?? "main";
+      return fallbackBranch;
     } catch {
       // Fallback to main if all methods fail
       console.log("Error determining target branch, using fallback: main");

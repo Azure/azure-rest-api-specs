@@ -5,7 +5,7 @@ import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
 import type { SimpleGit } from "simple-git";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterAll, afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
 import * as utils from "../src/utils.js";
@@ -53,6 +53,28 @@ function createGitMock(lsTreeOutput = "Foo\nFoo.Management\n"): Record<string, u
     }),
   };
 }
+
+const originalGithubBaseRef = process.env.GITHUB_BASE_REF;
+const originalSystemPullRequestTargetBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+
+beforeEach(() => {
+  delete process.env.GITHUB_BASE_REF;
+  delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+});
+
+afterAll(() => {
+  if (originalGithubBaseRef === undefined) {
+    delete process.env.GITHUB_BASE_REF;
+  } else {
+    process.env.GITHUB_BASE_REF = originalGithubBaseRef;
+  }
+
+  if (originalSystemPullRequestTargetBranch === undefined) {
+    delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+  } else {
+    process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = originalSystemPullRequestTargetBranch;
+  }
+});
 
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
@@ -751,7 +773,7 @@ options:
 
     it("should detect target branch from GITHUB_BASE_REF environment variable", async function () {
       const originalBaseRef = process.env.GITHUB_BASE_REF;
-      process.env.GITHUB_BASE_REF = "main";
+      process.env.GITHUB_BASE_REF = "refs/heads/main";
 
       try {
         vi.mocked(globby.globby).mockImplementation(() => {
@@ -811,6 +833,82 @@ options:
           delete process.env.GITHUB_BASE_REF;
         } else {
           process.env.GITHUB_BASE_REF = originalBaseRef;
+        }
+      }
+    });
+
+    it("should enforce v2 compliance when SYSTEM_PULLREQUEST_TARGETBRANCH has refs prefix", async function () {
+      const originalSystemBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+      process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = "refs/heads/main";
+
+      try {
+        vi.mocked(globby.globby).mockImplementation(() => {
+          return Promise.resolve(["/gitroot/specification/newservice/NewService/tspconfig.yaml"]);
+        });
+        normalizePathSpy.mockReturnValue("/gitroot");
+
+        readTspConfigSpy.mockResolvedValue(`
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`);
+
+        const mockGit: Record<string, unknown> = {
+          revparse: vi.fn().mockResolvedValue("/gitroot"),
+          branch: vi.fn().mockResolvedValue({
+            current: "feature-branch",
+            all: ["feature-branch"],
+            detached: false,
+          }),
+          getRemotes: vi.fn().mockResolvedValue([
+            {
+              name: "origin",
+              refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+            },
+          ]),
+          status: vi.fn().mockResolvedValue({
+            modified: ["specification/newservice/NewService/tspconfig.yaml"],
+            not_added: [],
+            created: [],
+            deleted: [],
+          }),
+          raw: vi.fn().mockImplementation((args: string[]) => {
+            if (args.includes("config") && args.includes("remote.origin.url")) {
+              return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+            }
+
+            if (args.includes("diff") && args.includes("--name-only")) {
+              return Promise.resolve("specification/newservice/NewService/tspconfig.yaml");
+            }
+
+            if (args.includes("ls-tree")) {
+              const refArg = args.find((arg) => arg.includes(":"));
+              if (refArg?.includes("specification/newservice/NewService")) {
+                return Promise.reject(new Error("Path not found"));
+              }
+            }
+
+            if (args.includes("merge-base")) {
+              return Promise.resolve("abc123");
+            }
+
+            return Promise.resolve("main");
+          }),
+        };
+
+        simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+        const result = await new FolderStructureRule().execute(
+          "/gitroot/specification/newservice/NewService",
+        );
+
+        assert(!result.success);
+        assert(result.errorOutput?.includes("must use v2 structure"));
+      } finally {
+        if (originalSystemBranch === undefined) {
+          delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+        } else {
+          process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = originalSystemBranch;
         }
       }
     });
