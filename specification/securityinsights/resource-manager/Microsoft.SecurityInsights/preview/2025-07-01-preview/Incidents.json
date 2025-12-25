@@ -36,7 +36,13 @@
             "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
           },
           {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+            "description": "Returns only the first n results. Optional.",
+            "format": "int32",
+            "in": "query",
+            "maximum": 1000,
+            "name": "$top",
+            "type": "integer",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
@@ -44,7 +50,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/IncidentList"
             }
@@ -71,7 +77,7 @@
         "tags": [
           "Incidents"
         ],
-        "description": "Gets an incident.",
+        "description": "Gets a given incident.",
         "operationId": "Incidents_Get",
         "produces": [
           "application/json"
@@ -95,7 +101,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/Incident"
             }
@@ -117,7 +123,7 @@
         "tags": [
           "Incidents"
         ],
-        "description": "Creates or updates the incident.",
+        "description": "Creates or updates an incident.",
         "operationId": "Incidents_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -144,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/Incident"
             }
@@ -172,7 +178,7 @@
         "tags": [
           "Incidents"
         ],
-        "description": "Delete the incident.",
+        "description": "Deletes a given incident.",
         "operationId": "Incidents_Delete",
         "produces": [
           "application/json"
@@ -196,7 +202,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK, Operation successfully completed"
           },
           "204": {
             "description": "No Content"
@@ -220,7 +226,7 @@
         "tags": [
           "IncidentAlerts"
         ],
-        "description": "Gets all incident alerts.",
+        "description": "Gets all alerts for an incident.",
         "operationId": "Incidents_ListAlerts",
         "produces": [
           "application/json"
@@ -268,7 +274,7 @@
         "tags": [
           "IncidentBookmarks"
         ],
-        "description": "Gets all incident bookmarks.",
+        "description": "Gets all bookmarks for an incident.",
         "operationId": "Incidents_ListBookmarks",
         "produces": [
           "application/json"
@@ -316,7 +322,7 @@
         "tags": [
           "IncidentComments"
         ],
-        "description": "Gets all incident comments.",
+        "description": "Gets all comments for a given incident.",
         "operationId": "IncidentComments_List",
         "produces": [
           "application/json"
@@ -352,7 +358,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/IncidentCommentList"
             }
@@ -364,6 +370,7 @@
             }
           }
         },
+        "x-ms-odata": "#/definitions/IncidentComment",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -406,7 +413,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK, Operation successfully completed",
             "schema": {
               "$ref": "#/definitions/IncidentComment"
             }
@@ -428,7 +435,7 @@
         "tags": [
           "IncidentComments"
         ],
-        "description": "Creates or updates the incident comment.",
+        "description": "Creates or updates a comment for a given incident.",
         "operationId": "IncidentComments_CreateOrUpdate",
         "produces": [
           "application/json"
@@ -458,7 +465,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Updated",
             "schema": {
               "$ref": "#/definitions/IncidentComment"
             }
@@ -486,7 +493,7 @@
         "tags": [
           "IncidentComments"
         ],
-        "description": "Delete the incident comment.",
+        "description": "Deletes a comment for a given incident.",
         "operationId": "IncidentComments_Delete",
         "produces": [
           "application/json"
@@ -537,7 +544,7 @@
         "tags": [
           "IncidentEntities"
         ],
-        "description": "Gets all incident related entities.",
+        "description": "Gets all entities for an incident.",
         "operationId": "Incidents_ListEntities",
         "produces": [
           "application/json"
@@ -590,7 +597,7 @@
         "tags": [
           "IncidentRelations"
         ],
-        "description": "Gets all incident relations.",
+        "description": "Gets all relations for a given incident.",
         "operationId": "IncidentRelations_List",
         "produces": [
           "application/json"
@@ -654,7 +661,7 @@
         "tags": [
           "IncidentRelations"
         ],
-        "description": "Gets an incident relation.",
+        "description": "Gets a relation for a given incident.",
         "operationId": "IncidentRelations_Get",
         "produces": [
           "application/json"
@@ -696,7 +703,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates an incident relation.": {
+          "Creates or updates a relation for a given incident.": {
             "$ref": "./examples/incidents/relations/CreateIncidentRelation.json"
           }
         },
@@ -761,7 +768,7 @@
         "tags": [
           "IncidentRelations"
         ],
-        "description": "Delete the incident relation.",
+        "description": "Deletes a relation for a given incident.",
         "operationId": "IncidentRelations_Delete",
         "produces": [
           "application/json"
@@ -1014,6 +1021,7 @@
   },
   "definitions": {
     "Incident": {
+      "description": "Represents an incident in Azure Security Insights.",
       "type": "object",
       "allOf": [
         {
@@ -1022,6 +1030,7 @@
       ],
       "properties": {
         "properties": {
+          "description": "Incident properties",
           "type": "object",
           "$ref": "#/definitions/IncidentProperties",
           "x-ms-client-flatten": true
@@ -1057,7 +1066,8 @@
             "description": "Alert product name",
             "type": "string"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "tactics": {
           "description": "The tactics associated with incident",
@@ -1065,7 +1075,8 @@
           "items": {
             "$ref": "./common/AlertTypes.json#/definitions/AttackTactic"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "techniques": {
           "description": "The techniques associated with incident's tactics",
@@ -1101,7 +1112,8 @@
           "type": "array",
           "items": {
             "$ref": "./common/EntityTypes.json#/definitions/SecurityAlert"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1117,7 +1129,8 @@
           "type": "array",
           "items": {
             "$ref": "./common/EntityTypes.json#/definitions/HuntingBookmark"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1142,15 +1155,19 @@
       }
     },
     "IncidentCommentList": {
+      "description": "List of incident comments.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of comments.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentComment"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
+          "description": "URL to fetch the next set of comments.",
           "type": "string",
           "readOnly": true
         }
@@ -1199,14 +1216,16 @@
           "type": "array",
           "items": {
             "$ref": "./common/EntityTypes.json#/definitions/Entity"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metaData": {
           "description": "The metadata from the incident related entities results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentEntitiesResultsMetadata"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1237,10 +1256,12 @@
       "type": "object",
       "properties": {
         "value": {
+          "description": "Array of incidents.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Incident"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "URL to fetch the next set of incidents.",
@@ -1250,6 +1271,7 @@
       }
     },
     "IncidentProperties": {
+      "description": "Describes incident properties",
       "required": [
         "severity",
         "status",
@@ -1266,9 +1288,11 @@
           "type": "string"
         },
         "severity": {
+          "description": "The severity of the incident",
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentSeverityEnum"
         },
         "status": {
+          "description": "The status of the incident",
           "$ref": "./common/IncidentTypes.json#/definitions/IncidentStatusEnum"
         },
         "classification": {
@@ -1293,7 +1317,8 @@
           "type": "array",
           "items": {
             "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "firstActivityTimeUtc": {
           "format": "date-time",
@@ -1347,7 +1372,8 @@
               ]
             }
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "incidentUrl": {
           "description": "The deep-link url to the incident in Azure portal",
@@ -1372,6 +1398,7 @@
       }
     },
     "IncidentTask": {
+      "description": "Describes incident task properties",
       "required": [
         "properties"
       ],
@@ -1390,6 +1417,7 @@
       }
     },
     "IncidentTaskList": {
+      "description": "List of incident tasks",
       "type": "object",
       "properties": {
         "value": {
@@ -1404,6 +1432,7 @@
       }
     },
     "IncidentTaskProperties": {
+      "description": "Describes the properties of an incident task",
       "required": [
         "status",
         "title"
@@ -1444,6 +1473,7 @@
       }
     },
     "IncidentTaskStatus": {
+      "description": "The status of the task",
       "enum": [
         "New",
         "Completed"
