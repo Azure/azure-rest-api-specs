@@ -590,49 +590,207 @@ export class FolderStructureRule implements Rule {
 
       // Get service directory relative to specification folder
       const relativePath = path.relative(gitRoot, folder);
-      const pathSegments = relativePath.split("/");
-      if (pathSegments.length < 2 || pathSegments[0] !== "specification") {
+      const folderStruct = relativePath.split("/").filter(Boolean);
+      if (folderStruct.length < 2 || folderStruct[0] !== "specification") {
         return { shouldEnforce: false };
       }
 
-      const serviceDir = `specification/${pathSegments[1]}`;
+      const currentStructureVersion = await this.determineStructureVersion(folder, folderStruct);
 
-      // Check if target branch already uses v2 structure for this service
-      // If the target branch has data-plane or resource-manager folders, it's using v2
-      try {
-        const output = await git.raw([
-          "ls-tree",
-          "-d",
-          "--name-only",
-          `${targetRemote}/${targetBranch}:${serviceDir}`,
-        ]);
+      const serviceFolderStructForLookup =
+        (await this.getServiceFolderStructFromChanges(
+          git,
+          targetRemote,
+          targetBranch,
+          folderStruct,
+        )) || folderStruct;
 
-        const directories = output
-          .trim()
-          .split("\n")
-          .filter((dir) => dir.trim());
+      // Identify if this service already exists in the target branch and capture its folder structure
+      const targetServiceFolderStruct = await this.findExistingServiceFolderStruct(
+        git,
+        targetRemote,
+        targetBranch,
+        serviceFolderStructForLookup,
+      );
 
-        const hasV2Structure = directories.some(
-          (dir) => dir.trim() === "data-plane" || dir.trim() === "resource-manager",
-        );
+      if (!targetServiceFolderStruct) {
+        // New service - must follow v2 structure
+        const validationResult = this.validateV2Compliance(folderStruct);
+        return { shouldEnforce: true, validationResult };
+      }
 
-        if (hasV2Structure) {
-          // Target branch uses v2, so validate current folder against v2 compliance
-          const folderStruct = relativePath.split("/").filter(Boolean);
-          const validationResult = this.validateV2Compliance(folderStruct);
-          return { shouldEnforce: true, validationResult };
-        } else {
+      const targetStructureVersion =
+        this.getStructureVersionFromFolderStruct(targetServiceFolderStruct);
+
+      if (targetStructureVersion === 1 && currentStructureVersion === 2) {
+        if (!this.isCompleteV2Structure(folderStruct)) {
           return { shouldEnforce: false };
         }
-      } catch {
-        // If we can't check the target branch, don't enforce v2 compliance
-        return { shouldEnforce: false };
+        return {
+          shouldEnforce: true,
+          validationResult: {
+            success: false,
+            errorOutput:
+              `Invalid folder structure: The target branch uses v1 structure, but this PR is trying to add v2 structure. ` +
+              `Please complete the migration by moving existing files to the v2 layout instead of mixing structures.\n`,
+          },
+        };
       }
+
+      // we don't block new PRs to use v2 if the target branch is still v1
+      if (targetStructureVersion === 2 || currentStructureVersion === 2) {
+        const validationResult = this.validateV2Compliance(folderStruct);
+        return { shouldEnforce: true, validationResult };
+      }
+
+      return { shouldEnforce: false };
     } catch {
       // If git operations fail, don't enforce v2 compliance
 
       return { shouldEnforce: false };
     }
+  }
+
+  private getStructureVersionFromFolderStruct(folderStruct: string[]): number {
+    const hasDataPlane = folderStruct.includes("data-plane");
+    const hasResourceManager = folderStruct.includes("resource-manager");
+    if (hasDataPlane || hasResourceManager) {
+      return 2;
+    }
+    return 1;
+  }
+
+  private isCompleteV2Structure(folderStruct: string[]): boolean {
+    const dataPlaneIndex = folderStruct.indexOf("data-plane");
+    if (dataPlaneIndex !== -1) {
+      return folderStruct.length === dataPlaneIndex + 2;
+    }
+
+    const resourceManagerIndex = folderStruct.indexOf("resource-manager");
+    if (resourceManagerIndex !== -1) {
+      return folderStruct.length === resourceManagerIndex + 3;
+    }
+
+    return false;
+  }
+
+  private async getServiceFolderStructFromChanges(
+    git: SimpleGit,
+    remote: string,
+    branch: string,
+    folderStruct: string[],
+  ): Promise<string[] | undefined> {
+    try {
+      const diffOutput = await git.raw(["diff", "--name-only", `${remote}/${branch}...HEAD`]);
+
+      const specificationFiles = diffOutput
+        .trim()
+        .split("\n")
+        .map((file) => file.trim())
+        .filter((file) => file.startsWith("specification/"));
+
+      if (specificationFiles.length === 0) {
+        return undefined;
+      }
+
+      const folderPath = folderStruct.join("/");
+      const matchingFiles = specificationFiles.filter((file) => file.startsWith(folderPath));
+      const searchFiles = matchingFiles.length > 0 ? matchingFiles : specificationFiles;
+
+      for (const file of searchFiles) {
+        const pathSegments = file.split("/").filter(Boolean);
+        const serviceStruct = this.extractServiceFolderStructFromPath(pathSegments);
+        if (serviceStruct) {
+          return serviceStruct;
+        }
+      }
+    } catch {
+      // Ignore errors and fall back to folderStruct
+    }
+
+    return undefined;
+  }
+
+  private extractServiceFolderStructFromPath(pathSegments: string[]): string[] | undefined {
+    if (pathSegments.length < 3 || pathSegments[0] !== "specification") {
+      return undefined;
+    }
+
+    const dataPlaneIndex = pathSegments.indexOf("data-plane");
+    if (dataPlaneIndex !== -1 && pathSegments.length > dataPlaneIndex + 1) {
+      return pathSegments.slice(0, dataPlaneIndex + 2);
+    }
+
+    const resourceManagerIndex = pathSegments.indexOf("resource-manager");
+    if (resourceManagerIndex !== -1 && pathSegments.length > resourceManagerIndex + 2) {
+      return pathSegments.slice(0, resourceManagerIndex + 3);
+    }
+
+    if (pathSegments.length >= 4) {
+      return pathSegments.slice(0, 3);
+    }
+    return undefined;
+  }
+
+  private getCandidateServicePaths(folderStruct: string[]): string[][] {
+    if (folderStruct.length < 3 || folderStruct[0] !== "specification") {
+      return [];
+    }
+
+    const candidates = new Map<string, string[]>();
+    const orgName = folderStruct[1];
+    const base = ["specification", orgName];
+    const packageFolder = folderStruct[folderStruct.length - 1];
+    const dataPlaneIndex = folderStruct.indexOf("data-plane");
+    const resourceManagerIndex = folderStruct.indexOf("resource-manager");
+
+    const addCandidate = (segments: string[]) => {
+      const key = segments.join("/");
+      if (!candidates.has(key)) {
+        candidates.set(key, segments);
+      }
+    };
+
+    if (dataPlaneIndex !== -1 && folderStruct.length > dataPlaneIndex + 1) {
+      const serviceName = folderStruct[dataPlaneIndex + 1];
+      addCandidate([...base, "data-plane", serviceName]);
+      addCandidate([...base, packageFolder]);
+      addCandidate([...base, serviceName]);
+    } else if (resourceManagerIndex !== -1 && folderStruct.length > resourceManagerIndex + 2) {
+      const rpNamespace = folderStruct[resourceManagerIndex + 1];
+      const serviceName = folderStruct[resourceManagerIndex + 2];
+      addCandidate([...base, "resource-manager", rpNamespace, serviceName]);
+      addCandidate([...base, packageFolder]);
+      if (serviceName.endsWith("Management")) {
+        const baseName = serviceName.replace(/Management$/, "");
+        addCandidate([...base, `${baseName}.Management`]);
+      }
+    } else {
+      addCandidate([...base, packageFolder]);
+    }
+
+    return Array.from(candidates.values());
+  }
+
+  private async findExistingServiceFolderStruct(
+    git: SimpleGit,
+    remote: string,
+    branch: string,
+    folderStruct: string[],
+  ): Promise<string[] | undefined> {
+    const candidates = this.getCandidateServicePaths(folderStruct);
+
+    for (const candidate of candidates) {
+      const candidatePath = candidate.join("/");
+      try {
+        await git.raw(["ls-tree", `${remote}/${branch}:${candidatePath}`]);
+        return candidate;
+      } catch {
+        // Candidate doesn't exist; try the next one
+        continue;
+      }
+    }
+    return undefined;
   }
 
   /**

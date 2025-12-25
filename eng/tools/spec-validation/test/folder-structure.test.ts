@@ -10,6 +10,50 @@ import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
 import * as utils from "../src/utils.js";
 
+function createGitMock(lsTreeOutput = "Foo\nFoo.Management\n"): Record<string, unknown> {
+  return {
+    revparse: vi.fn().mockResolvedValue("/gitroot"),
+    branch: vi.fn().mockImplementation((args?: string[]) => {
+      if (args && args.includes("-vv")) {
+        return Promise.resolve({
+          current: "test-branch",
+          all: ["test-branch"],
+        });
+      }
+      return Promise.resolve({
+        current: "test-branch",
+        all: ["test-branch"],
+      });
+    }),
+    status: vi.fn().mockResolvedValue({
+      modified: ["specification/foo/bar.ts"],
+      not_added: [],
+      created: [],
+      deleted: [],
+    }),
+    getRemotes: vi
+      .fn()
+      .mockResolvedValue([
+        { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
+      ]),
+    raw: vi.fn().mockImplementation((args: string[]) => {
+      if (args.includes("diff") && args.includes("--name-only")) {
+        return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
+      }
+      if (args.includes("config")) {
+        return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+      }
+      if (args.includes("ls-tree")) {
+        return Promise.resolve(lsTreeOutput);
+      }
+      if (args.includes("merge-base")) {
+        return Promise.resolve("abc123");
+      }
+      return Promise.resolve("main");
+    }),
+  };
+}
+
 describe("folder-structure", function () {
   let fileExistsSpy: MockInstance;
   let normalizePathSpy: MockInstance;
@@ -27,49 +71,7 @@ describe("folder-structure", function () {
     simpleGitSpy.mockReset();
 
     // Default mock that allows most tests to pass by simulating changes in specification folder
-    const defaultMockGit: Record<string, unknown> = {
-      revparse: vi.fn().mockResolvedValue("/gitroot"),
-      branch: vi.fn().mockImplementation((args?: string[]) => {
-        if (args && args.includes("-vv")) {
-          return Promise.resolve({
-            current: "test-branch",
-            all: ["test-branch"],
-          });
-        }
-        return Promise.resolve({
-          current: "test-branch",
-          all: ["test-branch"],
-        });
-      }),
-      status: vi.fn().mockResolvedValue({
-        modified: ["specification/foo/bar.ts"],
-        not_added: [],
-        created: [],
-        deleted: [],
-      }),
-      getRemotes: vi
-        .fn()
-        .mockResolvedValue([
-          { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
-        ]),
-      raw: vi.fn().mockImplementation((args: string[]) => {
-        // Handle diff command for checking changes
-        if (args.includes("diff") && args.includes("--name-only")) {
-          return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
-        }
-        // Handle other git commands
-        if (args.includes("config")) {
-          return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
-        }
-        if (args.includes("ls-tree")) {
-          return Promise.resolve("");
-        }
-        if (args.includes("merge-base")) {
-          return Promise.resolve("abc123");
-        }
-        return Promise.resolve("main");
-      }),
-    };
+    const defaultMockGit = createGitMock();
     simpleGitSpy.mockReturnValue(defaultMockGit as unknown as SimpleGit);
   });
 
@@ -134,6 +136,7 @@ describe("folder-structure", function () {
   it("should fail if second level folder is data-plane", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     const result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
     assert(result.errorOutput);
@@ -143,6 +146,7 @@ describe("folder-structure", function () {
   it("should fail if second level folder is resource-manager", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     const result = await new FolderStructureRule().execute(
       "/gitroot/specification/foo/resource-manager",
@@ -300,6 +304,7 @@ options:
   it("v2: should fail if no tspconfig.yaml", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["main.tsp"]));
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     fileExistsSpy.mockImplementation((file: string) => {
       if (file.includes("tspconfig.yaml")) {
@@ -318,6 +323,7 @@ options:
   it("v2: should fail if incorrect folder depth", async function () {
     vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["tspconfig.yaml"]));
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     let result = await new FolderStructureRule().execute("/gitroot/specification/foo/data-plane");
     assert(result.errorOutput?.includes("level under"));
@@ -338,7 +344,7 @@ options:
     result = await new FolderStructureRule().execute(
       "/gitroot/specification/foo/resource-manager/RP.Namespace/FooManagement/too-deep",
     );
-    assert(result.errorOutput?.includes("limit TypeSpec folder depth"));
+    assert(result.errorOutput?.includes("two levels under 'resource-manager'"));
   });
 
   it("v2: should succeed with data-plane", async function () {
@@ -348,6 +354,7 @@ options:
         : Promise.resolve(["main.tsp"]),
     );
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     const result = await new FolderStructureRule().execute(
       "/gitroot/specification/foo/data-plane/Foo",
@@ -363,6 +370,7 @@ options:
         : Promise.resolve(["main.tsp"]),
     );
     normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReturnValue(createGitMock("") as unknown as SimpleGit);
 
     const result = await new FolderStructureRule().execute(
       "/gitroot/specification/foo/resource-manager/Microsoft.Foo/FooManagement",
@@ -428,7 +436,85 @@ options:
       }
     });
 
-    it("should enforce v2 compliance when target branch uses v2 structure", async function () {
+    it("should enforce v2 compliance when adding new service (service doesn't exist in target branch)", async function () {
+      vi.mocked(globby.globby).mockImplementation(() => {
+        return Promise.resolve(["/gitroot/specification/newservice/NewService/tspconfig.yaml"]);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Ensure V1 validation passes so we know failure is due to V2 enforcement
+      readTspConfigSpy.mockResolvedValue(`
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`);
+
+      // Mock git to simulate new service being added (doesn't exist in target branch)
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({
+          current: "pr-test-branch",
+          all: ["pr-test-branch"],
+          detached: false,
+        }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/newservice/NewService/tspconfig.yaml"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          // Handle git config commands
+          if (args.includes("config") && args.includes("remote.origin.url")) {
+            return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+          }
+
+          // Handle merge-base commands to return a target branch
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+
+          // Handle rev-parse to return the target branch name
+          if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+            return Promise.resolve("main");
+          }
+
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/newservice/NewService/tspconfig.yaml");
+          }
+
+          // Handle ls-tree commands - service doesn't exist in target branch
+          if (args.includes("ls-tree")) {
+            const refArg = args.find((arg) => arg.includes(":"));
+            if (refArg?.includes("specification/newservice/NewService")) {
+              return Promise.reject(new Error("Path not found"));
+            }
+            return Promise.resolve("");
+          }
+
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/newservice/NewService",
+      );
+
+      assert(!result.success);
+      assert(
+        result.errorOutput?.includes("must use v2 structure"),
+        `Expected v2 enforcement error for new service, but got: ${result.errorOutput}`,
+      );
+    });
+
+    it("should enforce v2 compliance when existing service in target branch uses v2 structure", async function () {
       vi.mocked(globby.globby).mockImplementation(() => {
         return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
       });
@@ -441,7 +527,7 @@ options:
     azure-resource-provider-folder: "data-plane"
 `);
 
-      // Mock git to simulate target branch having v2 structure
+      // Mock git to simulate existing service with v2 structure in target branch
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({
@@ -469,35 +555,28 @@ options:
 
           // Handle merge-base commands to return a target branch
           if (args.includes("merge-base")) {
-            // Simulate that we find a common ancestor, which means we're in a PR
             return Promise.resolve("abc123");
           }
 
           // Handle rev-parse to return the target branch name
           if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
-            // Simulate the target branch is a v2 structure branch
-            return Promise.resolve("feature/v2-structure");
+            return Promise.resolve("main");
           }
 
-          // Handle ls-tree commands with extreme flexibility for CI environments
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/data-plane/Foo/tspconfig.yaml");
+          }
+
+          // Handle ls-tree commands - existing service has v2 structure
           if (args.includes("ls-tree")) {
-            // Convert args to string for easier pattern matching
             const argsStr = args.join(" ");
-
-            // Check if this is querying for v2 structure indicators
-            const isV2Query =
-              (argsStr.includes("feature/v2-structure") || argsStr.includes("main")) &&
-              (argsStr.includes("specification/foo") || argsStr.includes("foo"));
-
-            if (isV2Query) {
+            if (argsStr.includes("specification/foo")) {
               return Promise.resolve("data-plane\nresource-manager");
             }
-
             return Promise.resolve("");
           }
 
-          // Default fallback - return a target branch that has v2 structure
-          return Promise.resolve("feature/v2-structure");
+          return Promise.resolve("main");
         }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
@@ -506,8 +585,8 @@ options:
 
       assert(!result.success);
       assert(
-        result.errorOutput?.includes("target branch is already using folder structure v2"),
-        `Expected v2 enforcement error, but got: ${result.errorOutput}`,
+        result.errorOutput?.includes("must use v2 structure"),
+        `Expected v2 enforcement error for existing v2 service, but got: ${result.errorOutput}`,
       );
     });
 
@@ -527,57 +606,32 @@ options:
         }),
         getRemotes: vi.fn().mockRejectedValue(new Error("Remote access failed")),
         raw: vi.fn().mockRejectedValue(new Error("Git operation failed")),
-      };
-      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
-
-      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-
-      // When git operations fail, it should fall back to regular V1 validation and succeed
-      // since we're mocking a valid V1 structure
-      assert(
-        result.success,
-        `Expected fallback to V1 validation to succeed, but got error: ${result.errorOutput}`,
-      );
-    });
-
-    it("should not enforce v2 compliance when target branch uses v1 structure", async function () {
-      vi.mocked(globby.globby).mockImplementation(() => {
-        return Promise.resolve(["/foo/bar/tspconfig.yaml"]);
-      });
-      normalizePathSpy.mockReturnValue("/gitroot");
-
-      // Mock git to simulate target branch having v1 structure
-      const mockGit: Record<string, unknown> = {
-        revparse: vi.fn().mockResolvedValue("/gitroot"),
-        branch: vi.fn().mockResolvedValue({ current: "feature-branch" }),
-        getRemotes: vi
-          .fn()
-          .mockResolvedValue([
-            { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
-          ]),
-        raw: vi.fn().mockImplementation((args: string[]) => {
-          if (args.includes("ls-tree")) {
-            return Promise.resolve("Service1\nService2\nShared");
-          }
-          if (args.includes("merge-base")) {
-            return Promise.resolve("abc123");
-          }
-          return Promise.resolve("main");
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/bar.ts"],
+          not_added: [],
+          created: [],
+          deleted: [],
         }),
       };
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-      // Should succeed with v1 validation since target branch is v1
-      assert(result.success);
+
+      // When git operations fail completely, it should enforce v2 for new services (fallback behavior)
+      assert(!result.success);
+      assert(
+        result.errorOutput?.includes("must use v2 structure"),
+        `Expected v2 enforcement on git failure for potential new service, but got: ${result.errorOutput}`,
+      );
     });
 
-    it("should detect target branch from GITHUB_BASE_REF environment variable", async function () {
+    it("should allow v1 structure when existing service in target branch uses v1 structure", async function () {
       vi.mocked(globby.globby).mockImplementation(() => {
-        return Promise.resolve(["/foo/bar/tspconfig.yaml"]);
+        return Promise.resolve(["/gitroot/specification/foo/Foo/tspconfig.yaml"]);
       });
       normalizePathSpy.mockReturnValue("/gitroot");
 
+      // Mock git to simulate existing service with v1 structure in target branch
       const mockGit: Record<string, unknown> = {
         revparse: vi.fn().mockResolvedValue("/gitroot"),
         branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
@@ -593,22 +647,21 @@ options:
           deleted: [],
         }),
         raw: vi.fn().mockImplementation((args: string[]) => {
-          // Handle merge-base operations to simulate finding target branch
+          // Handle merge-base commands
           if (args.includes("merge-base")) {
             return Promise.resolve("abc123");
           }
 
-          // Handle rev-parse to return target branch
+          // Handle rev-parse commands
           if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
             return Promise.resolve("main");
           }
 
-          // Handle ls-tree to check target branch structure
+          // Handle ls-tree commands - existing service has v1 structure (no data-plane/resource-manager)
           if (args.includes("ls-tree")) {
             const argsStr = args.join(" ");
-            // Simulate that main branch has v2 structure indicators
-            if (argsStr.includes("main") && argsStr.includes("specification/foo")) {
-              return Promise.resolve("data-plane\nresource-manager");
+            if (argsStr.includes("specification/foo")) {
+              return Promise.resolve("Service1\nService2\nShared");
             }
             return Promise.resolve("");
           }
@@ -619,9 +672,147 @@ options:
       simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+      // Should succeed with v1 validation since existing service uses v1 structure
+      assert(result.success);
+    });
 
+    it("should prevent mixing v1 and v2 structures in the same service", async function () {
+      vi.mocked(globby.globby).mockImplementation(() => {
+        return Promise.resolve(["/gitroot/specification/foo/data-plane/FooData/tspconfig.yaml"]);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      // Mock git to simulate existing service with v1 structure in target branch
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+        getRemotes: vi
+          .fn()
+          .mockResolvedValue([
+            { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
+          ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/data-plane/FooData/tspconfig.yaml"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          // Handle merge-base commands
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+
+          // Handle rev-parse commands
+          if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+            return Promise.resolve("main");
+          }
+
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/data-plane/FooData/tspconfig.yaml");
+          }
+
+          // Handle ls-tree commands - existing service has v1 structure but PR tries to add v2
+          if (args.includes("ls-tree")) {
+            const refArg = args.find((arg) => arg.includes(":"));
+            if (!refArg) {
+              return Promise.resolve("");
+            }
+            const [, servicePath] = refArg.split(":");
+            if (servicePath === "specification/foo/data-plane/FooData") {
+              return Promise.reject(new Error("Path not found"));
+            }
+            if (servicePath === "specification/foo/FooData") {
+              return Promise.resolve("FooData");
+            }
+            if (servicePath === "specification/foo") {
+              return Promise.resolve("Service1\nService2\nShared");
+            }
+            return Promise.resolve("");
+          }
+
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/FooData",
+      );
+      // Should fail because PR is trying to add v2 structure to existing v1 service
       assert(!result.success);
-      assert(result.errorOutput?.includes("must use v2 structure"));
+      assert(
+        result.errorOutput?.includes(
+          "uses v1 structure, but this PR is trying to add v2 structure",
+        ),
+        `Expected mixed structure error, but got: ${result.errorOutput}`,
+      );
+    });
+
+    it("should detect target branch from GITHUB_BASE_REF environment variable", async function () {
+      const originalBaseRef = process.env.GITHUB_BASE_REF;
+      process.env.GITHUB_BASE_REF = "main";
+
+      try {
+        vi.mocked(globby.globby).mockImplementation(() => {
+          return Promise.resolve(["/foo/bar/tspconfig.yaml"]);
+        });
+        normalizePathSpy.mockReturnValue("/gitroot");
+
+        const mockGit: Record<string, unknown> = {
+          revparse: vi.fn().mockResolvedValue("/gitroot"),
+          branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+          getRemotes: vi
+            .fn()
+            .mockResolvedValue([
+              { name: "origin", refs: { fetch: "git@github.com:Azure/azure-rest-api-specs.git" } },
+            ]),
+          status: vi.fn().mockResolvedValue({
+            modified: ["specification/foo/Foo/tspconfig.yaml"],
+            not_added: [],
+            created: [],
+            deleted: [],
+          }),
+          raw: vi.fn().mockImplementation((args: string[]) => {
+            // Handle merge-base operations to simulate finding target branch
+            if (args.includes("merge-base")) {
+              return Promise.resolve("abc123");
+            }
+
+            // Handle rev-parse to return target branch
+            if (args.includes("rev-parse") && args.includes("--abbrev-ref")) {
+              return Promise.resolve("main");
+            }
+
+            if (args.includes("diff") && args.includes("--name-only")) {
+              return Promise.resolve("specification/foo/Foo/tspconfig.yaml");
+            }
+
+            // Handle ls-tree to check target branch structure
+            if (args.includes("ls-tree")) {
+              const refArg = args.find((arg) => arg.includes(":"));
+              if (refArg?.includes("specification/foo/Foo")) {
+                return Promise.reject(new Error("Path not found"));
+              }
+              return Promise.resolve("");
+            }
+
+            return Promise.resolve("main");
+          }),
+        };
+        simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+        const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+        assert(!result.success);
+        assert(result.errorOutput?.includes("must use v2 structure"));
+      } finally {
+        if (originalBaseRef === undefined) {
+          delete process.env.GITHUB_BASE_REF;
+        } else {
+          process.env.GITHUB_BASE_REF = originalBaseRef;
+        }
+      }
     });
 
     it("should enforce v2 compliance with upstream remote (CI scenario)", async function () {
@@ -676,12 +867,18 @@ options:
             return Promise.resolve("feature/v2-structure");
           }
 
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/Foo/tspconfig.yaml");
+          }
+
           // Handle ls-tree commands
           if (args.includes("ls-tree")) {
             const refArg = args.find((arg) => arg.includes(":"));
             if (refArg) {
               const [ref, servicePath] = refArg.split(":");
-              // Should use upstream remote for target branch
+              if (servicePath === "specification/foo/Foo") {
+                return Promise.reject(new Error("Path not found"));
+              }
               if (
                 ref.includes("upstream/feature/v2-structure") &&
                 servicePath === "specification/foo"
