@@ -3982,6 +3982,15 @@
             "minLength": 3,
             "maxLength": 48,
             "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedRegistrationTokenProperties"
+            }
           }
         ],
         "responses": {
@@ -3996,11 +4005,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SessionHosts_ListSingleRegistrationTokens": {
-            "$ref": "./examples/SessionHosts_ListSingleRegistrationTokens_POST.json"
           }
         }
       }
@@ -10556,6 +10560,20 @@
           "description": "Load balancing algorithm for off-peak period."
         }
       }
+    },
+    "ScopedRegistrationTokenProperties": {
+      "type": "object",
+      "description": "Request body for listing scoped registration tokens for a session host.",
+      "properties": {
+        "expirationTimeInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time of the registration token in UTC."
+        }
+      },
+      "required": [
+        "expirationTimeInUtc"
+      ]
     },
     "SecurityInfoPatchProperties": {
       "type": "object",

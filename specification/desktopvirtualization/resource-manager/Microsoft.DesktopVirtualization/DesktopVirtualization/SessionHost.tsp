@@ -115,7 +115,7 @@ interface SessionHosts {
   @added(Versions.v2026_01_01_preview)
   listSingleRegistrationTokens is ArmResourceActionSync<
     SessionHost,
-    void,
+    ScopedRegistrationTokenProperties,
     RegistrationTokenList
   >;
 }
