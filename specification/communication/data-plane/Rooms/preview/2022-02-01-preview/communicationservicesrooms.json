@@ -7,49 +7,44 @@
   },
   "paths": {
     "/rooms": {
-      "post": {
+      "patch": {
         "tags": [
           "Rooms"
         ],
-        "summary": "Creates a new room.",
-        "operationId": "Rooms_CreateRoom",
+        "summary": "Create a room with given id or Update the identified room if already exist.",
+        "operationId": "Rooms_PatchRoom",
         "consumes": [
-          "application/json"
+          "application/json",
+          "application/merge-patch+json"
         ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/roomId"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "Repeatability-Request-ID",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "header",
-            "name": "Repeatability-First-Sent",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
             "in": "body",
-            "name": "createRoomRequest",
-            "description": "The create room request body.",
+            "name": "RoomModel",
+            "description": "The patch room request",
             "schema": {
-              "$ref": "#/definitions/CreateRoomRequest"
-            },
-            "required": true
+              "$ref": "#/definitions/RoomModel"
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request successful. The action returns an updated room.",
+            "schema": {
+              "$ref": "#/definitions/RoomModel"
+            }
+          },
           "201": {
-            "description": "Request successful. The action returns a new room.",
+            "description": "Created. The action returns the created room.",
             "schema": {
               "$ref": "#/definitions/RoomModel"
             }
@@ -68,7 +63,10 @@
           }
         },
         "x-ms-examples": {
-          "Create a new meeting room.": {
+          "Update meeting room's properties.": {
+            "$ref": "./examples/Rooms_UpdateRoom.json"
+          },
+          "Create room.": {
             "$ref": "./examples/Rooms_CreateRoom.json"
           }
         }
@@ -148,10 +146,10 @@
           },
           {
             "in": "body",
-            "name": "patchRoomRequest",
+            "name": "RoomModel",
             "description": "The patch room request",
             "schema": {
-              "$ref": "#/definitions/UpdateRoomRequest"
+              "$ref": "#/definitions/RoomModel"
             }
           }
         ],
@@ -553,9 +551,19 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "User-provided identifier of a room. Represented as a GUID",
+          "type": "string",
+          "example": "0b7c9b97-c029-4c28-af36-aeed55d3800d"
+        },
+        "canonicalId": {
           "description": "Unique identifier of a room. This id is server generated.",
           "type": "string",
           "example": "999126454"
+        },
+        "roomDescription": {
+          "description": "User-provided room description.",
+          "type": "string",
+          "example": "Alice and Bob's sync-up"
         },
         "createdDateTime": {
           "format": "date-time",
