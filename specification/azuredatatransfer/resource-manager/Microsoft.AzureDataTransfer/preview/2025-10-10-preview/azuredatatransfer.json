@@ -134,6 +134,45 @@
         }
       }
     },
+    "/providers/Microsoft.AzureDataTransfer/listPipelineMetadata": {
+      "post": {
+        "operationId": "AzureDataTransfer_ListPipelineMetadata",
+        "description": "Retrieves a list of FlowProfile resources associated with a specified pipeline.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListPipelineMetadataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListPipelineMetadataResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureDataTransfer_ListPipelineMetadata": {
+            "$ref": "./examples/AzureDataTransfer_ListPipelineMetadata.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureDataTransfer/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -3752,6 +3791,19 @@
         ]
       }
     },
+    "Feature": {
+      "type": "object",
+      "description": "Defines a feature to be associated with a pipeline.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the feature"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "FilterType": {
       "type": "string",
       "description": "Specifies whether the filter applies an allow or deny policy.",
@@ -4374,6 +4426,10 @@
       "type": "object",
       "description": "The flows resource patch definition.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/FlowsPatchProperties",
+          "description": "Properties of flows patch body."
+        },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
@@ -4384,6 +4440,16 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "FlowsPatchProperties": {
+      "type": "object",
+      "description": "Properties of flows patch body.",
+      "properties": {
+        "streamProtocol": {
+          "$ref": "#/definitions/StreamProtocol",
+          "description": "The protocol of the stream"
         }
       }
     },
@@ -4575,6 +4641,39 @@
           ]
         }
       }
+    },
+    "ListPipelineMetadataRequest": {
+      "type": "object",
+      "description": "Defines the required request body for retrieving Pipeline metadata for a provided pipeline.",
+      "properties": {
+        "pipeline": {
+          "type": "string",
+          "description": "The name of the pipeline for which to retrieve associated metadata."
+        },
+        "direction": {
+          "$ref": "#/definitions/Direction",
+          "description": "Direction of data movement"
+        }
+      },
+      "required": [
+        "pipeline"
+      ]
+    },
+    "ListPipelineMetadataResult": {
+      "type": "object",
+      "description": "Defines the response body for retrieving Pipeline metadata for a provided pipeline.",
+      "properties": {
+        "features": {
+          "type": "array",
+          "description": "Returns the features associated with this pipeline.",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        }
+      },
+      "required": [
+        "features"
+      ]
     },
     "MessagingOptions": {
       "type": "object",
@@ -5317,6 +5416,14 @@
           "items": {
             "$ref": "#/definitions/FlowType"
           }
+        },
+        "quarantineDownloadStorageAccount": {
+          "type": "string",
+          "description": "Quarantine Download Storage Account"
+        },
+        "quarantineDownloadStorageContainer": {
+          "type": "string",
+          "description": "Quarantine Download Storage Container"
         }
       }
     },
