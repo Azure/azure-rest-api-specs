@@ -49,11 +49,8 @@ interface StorageSyncServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @Azure.Core.useFinalStateVia("location")
-  create is ArmCreateOperation<
-    ResourceInstanceParameters<
-      StorageSyncService,
-      DefaultBaseParameters<StorageSyncService>
-    >,
+  create is Legacy.CreateOrReplaceAsync<
+    StorageSyncService,
     StorageSyncServiceCreateParameters,
     Response = ArmResourceUpdatedResponse<StorageSyncService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
       Azure.Core.Foundations.RetryAfterHeader> & {
@@ -65,7 +62,7 @@ interface StorageSyncServices {
       @doc("Request id")
       requestId?: string;
     }),
-    ErrorResponse = StorageSyncError
+    Error = StorageSyncError
   >;
 
   /**
@@ -113,7 +110,7 @@ interface StorageSyncServices {
       @header("x-ms-request-id")
       @doc("request id.")
       requestId?: string;
-    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = StorageSyncService> &
+    }) | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")
