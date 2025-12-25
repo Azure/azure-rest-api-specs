@@ -11,22 +11,19 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
- * Profile of a lab user.
+ * A user profile.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model User extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("users")
-  name: string;
-
-  properties: UserProperties;
+model User
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    UserProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = User,
+    KeyName = "name",
+    SegmentName = "users",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

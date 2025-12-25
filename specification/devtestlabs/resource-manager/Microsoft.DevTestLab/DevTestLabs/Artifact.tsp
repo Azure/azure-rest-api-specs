@@ -7,26 +7,22 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Artifact extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("artifacts")
-  name: string;
-
-  properties: ArtifactProperties;
+model Artifact
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    ArtifactProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Artifact,
+    KeyName = "name",
+    SegmentName = "artifacts",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

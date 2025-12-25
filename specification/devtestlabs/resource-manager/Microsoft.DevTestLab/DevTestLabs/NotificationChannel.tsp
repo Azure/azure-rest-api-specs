@@ -12,20 +12,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NotificationChannel extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("notificationchannels")
-  name: string;
-
-  properties: NotificationChannelProperties;
+model NotificationChannel
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    NotificationChannelProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = NotificationChannel,
+    KeyName = "name",
+    SegmentName = "notificationchannels",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations

@@ -7,26 +7,22 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Disk extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("disks")
-  name: string;
-
-  properties: DiskProperties;
+model Disk
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    DiskProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Disk,
+    KeyName = "name",
+    SegmentName = "disks",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -129,12 +125,29 @@ interface Disks {
   /**
    * Attach and create the lease of the disk to the virtual machine. This operation can take a while to complete.
    */
-  attach is DiskOps.ActionAsync<Disk, AttachDiskProperties, OkResponse>;
-
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy non-standard usage of operation response codes. Consider revising in a future API version."
+  attach is DiskOps.ActionAsync<
+    Disk,
+    AttachDiskProperties,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
   /**
    * Detach and break the lease of the disk attached to the virtual machine. This operation can take a while to complete.
    */
-  detach is DiskOps.ActionAsync<Disk, DetachDiskProperties, OkResponse>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy non-standard usage of operation response codes. Consider revising in a future API version."
+  detach is DiskOps.ActionAsync<
+    Disk,
+    DetachDiskProperties,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(Disk.name, "The name of the disk.");

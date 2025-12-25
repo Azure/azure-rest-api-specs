@@ -13,20 +13,17 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Schedule extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("schedules")
-  name: string;
-
-  properties: ScheduleProperties;
+model Schedule
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    ScheduleProperties,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = Schedule,
+    KeyName = "name",
+    SegmentName = "schedules",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
@@ -158,7 +155,15 @@ interface GlobalSchedules {
    * Execute a schedule. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  execute is ScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is ScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Updates a schedule's target resource Id. This operation can take a while to complete.
@@ -167,7 +172,11 @@ interface GlobalSchedules {
   retarget is ScheduleOps.ActionAsync<
     Schedule,
     RetargetScheduleProperties,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 @armResourceOperations
@@ -267,7 +276,15 @@ interface Schedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ScheduleOperationGroupOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is ScheduleOperationGroupOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 
   /**
    * Lists all applicable schedules
@@ -377,7 +394,15 @@ interface ServiceFabricSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ServiceFabricScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is ServiceFabricScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 @armResourceOperations
 interface VirtualMachineScheduleOps
@@ -474,13 +499,21 @@ interface VirtualMachineSchedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is VirtualMachineScheduleOps.ActionAsync<Schedule, void, OkResponse>;
+  execute is VirtualMachineScheduleOps.ActionAsync<
+    Schedule,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(Schedule.name, "The name of the schedule.");
 @@doc(Schedule.properties, "The properties of the resource.");
-@@doc(Schedule.location, "The location of the resource.");
-@@doc(Schedule.tags, "The tags of the resource.");
+//@@doc(Schedule.location, "The location of the resource.");
+//@@doc(Schedule.tags, "The tags of the resource.");
 @@doc(GlobalSchedules.createOrUpdate::parameters.resource, "A schedule.");
 @@doc(GlobalSchedules.update::parameters.properties, "A schedule.");
 @@doc(GlobalSchedules.retarget::parameters.body,
