@@ -1,0 +1,282 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics": {
+      "get": {
+        "tags": [
+          "TopQueryStatistics"
+        ],
+        "description": "Get query statistics.",
+        "operationId": "TopQueryStatistics_ListByQuery",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "topQueryName",
+            "in": "path",
+            "description": "Placeholder for query ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "observationStartTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "observationEndTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "intervalType",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved query statistics.",
+            "schema": {
+              "$ref": "#/definitions/QueryStatisticsDatabase_ListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidObservationStartEndTime - The provided observation start and end times are not valid. The start time must be earlier than the end time.\n\n * 400 InvalidIntervalType - Provided interval type is not supported. Supported interval types are (PT1H, P1D).\n\n * 400 InvalidNumberOfTopQueries - The number of requested top queries must be greater than 0.\n\n * 400 InvalidAggregationFunction - Provided aggregation function is not supported. Supported aggregation functions are (avg, min, max, stdev, sum).\n\n * 400 InvalidObservedMetric - Provided observed metric is not supported. Supported observed metrics are (cpu, io, logIo, duration, dtu).\n\n * 400 InvalidExecutionType - Provided execution type is not supported. Supported execution types are (any, regular, irregular, aborted, exception)\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Obtain query execution statistics. Example with only mandatory request parameters.": {
+            "$ref": "./examples/GetQueryStatisticsMin.json"
+          },
+          "Obtain query execution statistics. Example with all request parameters.": {
+            "$ref": "./examples/GetQueryStatisticsMax.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IntervalQuery": {
+      "type": "object",
+      "properties": {
+        "intervalType": {
+          "description": "Interval type (length).",
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryTimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "intervalStartTime": {
+          "format": "date-time",
+          "description": "The start time for the metric (ISO-8601 format).",
+          "type": "string",
+          "readOnly": true
+        },
+        "executionCount": {
+          "format": "int32",
+          "description": "Execution count of a query in this interval.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "metrics": {
+          "description": "List of metric objects for one interval",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricQuery"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MetricQuery": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name information for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The UI appropriate name for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "enum": [
+            "percentage",
+            "KB",
+            "microseconds",
+            "count"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryMetricUnitType",
+            "modelAsString": true
+          }
+        },
+        "min": {
+          "format": "double",
+          "description": "Metric value when min() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "max": {
+          "format": "double",
+          "description": "Metric value when max() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "avg": {
+          "format": "double",
+          "description": "Metric value when avg() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "sum": {
+          "format": "double",
+          "description": "Metric value when sum() aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        },
+        "stdev": {
+          "format": "double",
+          "description": "Metric value when stdev aggregate function is used over the interval.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryStatistics_Database": {
+      "description": "A query execution statistics.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "queryId": {
+          "format": "int64",
+          "description": "Query id.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "intervals": {
+          "description": "List of interval objects",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntervalQuery"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryStatisticsDatabase_ListResult": {
+      "description": "A list of a query execution statistics",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryStatistics_Database"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

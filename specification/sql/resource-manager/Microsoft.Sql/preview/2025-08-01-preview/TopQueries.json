@@ -1,0 +1,396 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries": {
+      "get": {
+        "tags": [
+          "TopQueries"
+        ],
+        "description": "Get top resource consuming queries of a database",
+        "operationId": "TopQueries_ListByDatabase",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "observationStartTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "observationEndTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "intervalType",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values. Default value is PT1H",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "numberOfTopQueries",
+            "in": "query",
+            "description": "How many 'top queries' to return. Default is 5.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "aggregationFunction",
+            "in": "query",
+            "description": "Aggregation function to be used, default value is 'sum'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "avg",
+              "min",
+              "max",
+              "stdev",
+              "sum"
+            ],
+            "x-ms-enum": {
+              "name": "AggregationFunctionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "observedMetric",
+            "in": "query",
+            "description": "Metric to be used for ranking top queries. Default is 'cpu'",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "cpu",
+              "io",
+              "logIo",
+              "duration",
+              "dtu"
+            ],
+            "x-ms-enum": {
+              "name": "MetricType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "executionType",
+            "in": "query",
+            "description": "Execution type of top queries.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "any",
+              "regular",
+              "irregular",
+              "aborted",
+              "exception"
+            ],
+            "x-ms-enum": {
+              "name": "ExecutionType",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved top queries for a database.",
+            "schema": {
+              "$ref": "#/definitions/TopQueriesDatabase_ListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 400 InvalidObservationStartEndTime - The provided observation start and end times are not valid. The start time must be earlier than the end time.\n\n * 400 InvalidIntervalType - Provided interval type is not supported. Supported interval types are (PT1H, P1D).\n\n * 400 InvalidNumberOfTopQueries - The number of requested top queries must be greater than 0.\n\n * 400 InvalidAggregationFunction - Provided aggregation function is not supported. Supported aggregation functions are (avg, min, max, stdev, sum).\n\n * 400 InvalidObservedMetric - Provided observed metric is not supported. Supported observed metrics are (cpu, io, logIo, duration, dtu).\n\n * 400 InvalidExecutionType - Provided execution type is not supported. Supported execution types are (any, regular, irregular, aborted, exception)\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Obtain list of database's top resource consuming queries. Example with only mandatory request parameters.": {
+            "$ref": "./examples/GetTopQueriesMin.json"
+          },
+          "Obtain list of database's top resource consuming queries. Example with all request parameters.": {
+            "$ref": "./examples/GetTopQueriesMax.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QueryMetric": {
+      "description": "Properties of a topquery metric in one interval.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name information for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The UI appropriate name for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "enum": [
+            "percentage",
+            "KB",
+            "microseconds",
+            "count"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryMetricUnitType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "format": "double",
+          "description": "The value of the metric.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "QueryMetricIntervalDetails": {
+      "description": "Properties of a query metrics interval.",
+      "type": "object",
+      "properties": {
+        "intervalStartTime": {
+          "format": "date-time",
+          "description": "The start time for the metric interval.",
+          "type": "string",
+          "readOnly": true
+        },
+        "executionCount": {
+          "format": "int32",
+          "description": "Execution count of a query in this interval.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "metrics": {
+          "description": "List of metric objects for this interval",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetric"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "QueryMetrics": {
+      "description": "Metrics of a query execution.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "format": "int64",
+          "description": "Unique query id",
+          "type": "integer",
+          "readOnly": true
+        },
+        "intervals": {
+          "description": "List of intervals with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetricIntervalDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TopQueries_Database": {
+      "description": "A list of top resource consuming queries on database",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "numberOfTopQueries": {
+          "format": "int32",
+          "description": "Requested number of top queries.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "aggregationFunction": {
+          "description": "Aggregation function used to calculate query metrics.",
+          "enum": [
+            "avg",
+            "min",
+            "max",
+            "stdev",
+            "sum"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AggregationFunctionType",
+            "modelAsString": true
+          }
+        },
+        "executionType": {
+          "description": "Requested execution type of top queries.",
+          "enum": [
+            "any",
+            "regular",
+            "irregular",
+            "aborted",
+            "exception"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ExecutionType",
+            "modelAsString": true
+          }
+        },
+        "observedMetric": {
+          "description": "Metric used to rank queries.",
+          "enum": [
+            "cpu",
+            "io",
+            "logIo",
+            "duration",
+            "dtu"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MetricType",
+            "modelAsString": true
+          }
+        },
+        "intervalType": {
+          "description": "Interval type (length).",
+          "enum": [
+            "PT1H",
+            "P1D"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "QueryTimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "observationStartTime": {
+          "format": "date-time",
+          "description": "The start time for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "observationEndTime": {
+          "format": "date-time",
+          "description": "The end time for the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queries": {
+          "description": "List of top resource consuming queries with appropriate metric data",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryMetrics"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TopQueriesDatabase_ListResult": {
+      "description": "A list of top resource consuming queries on database",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopQueries_Database"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
