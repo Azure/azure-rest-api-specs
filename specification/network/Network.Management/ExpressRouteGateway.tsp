@@ -1,0 +1,179 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * ExpressRoute gateway resource.
+ */
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteGateway extends Resource {
+  properties?: ExpressRouteGatewayProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("expressRouteGatewayName")
+  @segment("expressRouteGateways")
+  name: string;  /** Resource tags. *//**
+   * Resource location.
+   */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: string;
+}
+
+alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route gateway. */
+    @path
+    @segment("expressRouteGateways")
+    @key
+    expressRouteGatewayName: string;
+  },
+  {
+    /** The name of the express route connection. */
+    @path
+    @segment("expressRouteConnections")
+    @key
+    connectionName: string;
+  }
+>;
+
+@armResourceOperations
+interface ExpressRouteGateways {
+  /**
+   * Fetches the details of a ExpressRoute gateway in a resource group.
+   */
+  get is ArmResourceRead<ExpressRouteGateway, Error = CloudError>;
+
+  /**
+   * Creates or updates a ExpressRoute gateway in a specified resource group.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteGateway,
+    Error = CloudError
+  >;
+
+  /**
+   * Updates express route gateway tags.
+   */
+  @patch(#{ implicitOptionality: false })
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  updateTags is ArmCustomPatchAsync<
+    ExpressRouteGateway,
+    PatchModel = TagsObject,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteGateway> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteGateway,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Lists ExpressRoute gateways in a given resource group.
+   */
+  listByResourceGroup is ArmResourceListByParent<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteGatewayList>,
+    Error = CloudError
+  >;
+
+  /**
+   * Lists ExpressRoute gateways under a given subscription.
+   */
+  listBySubscription is ArmListBySubscription<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteGatewayList>,
+    Error = CloudError
+  >;
+
+  /**
+   * Creates a connection between an ExpressRoute gateway and an ExpressRoute circuit.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteConnections_CreateOrUpdate")
+  @put
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
+    Request = ExpressRouteConnection,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Gets the specified ExpressRouteConnection.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteConnections_Get")
+  @get
+  expressRouteConnectionsGet is ExpressRouteConnectionOps.Read<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteConnection>,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Deletes a connection to a ExpressRoute circuit.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteConnections_Delete")
+  @delete
+  expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
+    ExpressRouteGateway,
+    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Lists ExpressRouteConnections.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteConnections_List")
+  @list
+  @get
+  list is ExpressRouteConnectionOps.List<
+    ExpressRouteGateway,
+    Response = ArmResponse<ExpressRouteConnectionList>,
+    OverrideErrorType = CloudError
+  >;
+}
+
+@@doc(ExpressRouteGateway.name, "The name of the ExpressRoute gateway.");
+@@doc(ExpressRouteGateway.properties,
+  "Properties of the express route gateway."
+);
+@@doc(ExpressRouteGateways.createOrUpdate::parameters.resource,
+  "Parameters required in an ExpressRoute gateway PUT operation."
+);
+@@doc(ExpressRouteGateways.updateTags::parameters.properties,
+  "Parameters supplied to update a virtual wan express route gateway tags."
+);
+@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.resource,
+  "Parameters required in an ExpressRouteConnection PUT operation."
+);

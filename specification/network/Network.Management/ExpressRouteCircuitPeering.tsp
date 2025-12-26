@@ -1,0 +1,209 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ExpressRouteCircuit.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Peering in an ExpressRouteCircuit resource.
+ */
+@parentResource(ExpressRouteCircuit)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model ExpressRouteCircuitPeering extends SubResourceModel {
+  properties?: ExpressRouteCircuitPeeringPropertiesFormat;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peeringName")
+  @segment("peerings")
+  name: string;
+  
+  /** A unique read-only string that changes whenever the resource is updated. */
+  @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  etag?: string;
+}
+
+@@doc(ExpressRouteCircuitPeering.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+
+alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the arpTables. */
+    @path
+    @segment("arpTables")
+    @key
+    devicePath: string;
+  }
+>;
+
+alias RouteTablesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the routeTables. */
+    @path
+    @segment("routeTables")
+    @key
+    devicePath: string;
+  }
+>;
+
+alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the express route port. */
+    @path
+    @segment("expressRouteCircuits")
+    @key
+    circuitName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The name of the routeTablesSummary. */
+    @path
+    @segment("routeTablesSummary")
+    @key
+    devicePath: string;
+  }
+>;
+
+@armResourceOperations
+interface ExpressRouteCircuitPeerings {
+  /**
+   * Gets the specified peering for the express route circuit.
+   */
+  get is ArmResourceRead<ExpressRouteCircuitPeering, Error = CloudError>;
+
+  /**
+   * Creates or updates a peering in the specified express route circuits.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteCircuitPeering,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified peering from the specified express route circuit.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteCircuitPeering,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets all peerings in a specified express route circuit.
+   */
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitPeering,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets the currently advertised ARP table associated with the express route circuit in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteCircuits_ListArpTable")
+  @post
+  listArpTable is ArpTablesgOps.Read<
+    ExpressRouteCircuitPeering,
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Gets the currently advertised routes table associated with the express route circuit in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteCircuits_ListRoutesTable")
+  @post
+  listRoutesTable is RouteTablesOps.Read<
+    ExpressRouteCircuitPeering,
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Gets the currently advertised routes table summary associated with the express route circuit in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
+  @post
+  listRoutesTableSummary is RouteTablesSummaryOps.Read<
+    ExpressRouteCircuitPeering,
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse
+  >;
+
+  /**
+   * Gets all stats from an express route circuit in a resource group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("ExpressRouteCircuits_GetPeeringStats")
+  @get
+  @action("stats")
+  getPeeringStats is ArmResourceActionSync<
+    ExpressRouteCircuitPeering,
+    void,
+    ArmResponse<ExpressRouteCircuitStats>,
+    Error = CloudError
+  >;
+}
+
+@@doc(ExpressRouteCircuitPeering.name, "The name of the peering.");
+@@doc(ExpressRouteCircuitPeering.properties,
+  "Properties of the express route circuit peering."
+);
+@@doc(ExpressRouteCircuitPeerings.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update express route circuit peering operation."
+);
