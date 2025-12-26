@@ -11,10 +11,10 @@ using Azure.ResourceManager;
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python");
 
-@@clientName(SupportedTlsVersions.`1.0`, "ONE0", "python");
-@@clientName(SupportedTlsVersions.`1.1`, "ONE1", "python");
-@@clientName(SupportedTlsVersions.`1.2`, "ONE2", "python");
-@@clientName(SupportedTlsVersions.`1.3`, "ONE3", "python");
+@@clientName(SupportedTlsVersions.`1.0`, "ONE0", "python,go");
+@@clientName(SupportedTlsVersions.`1.1`, "ONE1", "python,go");
+@@clientName(SupportedTlsVersions.`1.2`, "ONE2", "python,go");
+@@clientName(SupportedTlsVersions.`1.3`, "ONE3", "python,go");
 
 @@clientName(TlsCipherSuites.TLS_AES_256_GCM_SHA384,
   "TLS_AES256_GCM_SHA384",
