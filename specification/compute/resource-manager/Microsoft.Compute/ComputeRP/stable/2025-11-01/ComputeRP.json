@@ -10596,7 +10596,7 @@
           {
             "name": "forceDeallocate",
             "in": "query",
-            "description": "Optional parameter to force deallocate a virtual machine.",
+            "description": "Optional parameter to force deallocate a virtual machine. Default is false.",
             "required": false,
             "type": "boolean"
           }
@@ -10627,11 +10627,14 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachine_Deallocate_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_MaximumSet_Gen.json"
-          },
           "VirtualMachine_Deallocate_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_MinimumSet_Gen.json"
+          },
+          "VirtualMachine_Deallocate_WithForceDeallocate": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_WithForceDeallocate.json"
+          },
+          "VirtualMachine_Deallocate_WithHibernation": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_WithHibernation.json"
           }
         },
         "x-ms-long-running-operation-options": {

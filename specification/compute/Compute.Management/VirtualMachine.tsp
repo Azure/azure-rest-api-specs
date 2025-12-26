@@ -253,7 +253,7 @@ interface VirtualMachines {
       hibernate?: boolean;
 
       /**
-       * Optional parameter to force deallocate a virtual machine.
+       * Optional parameter to force deallocate a virtual machine. Default is false.
        */
       @added(Versions.v2025_11_01)
       @query("forceDeallocate")
