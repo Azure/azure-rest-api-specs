@@ -53,14 +53,12 @@ using Microsoft.ProviderHub;
   "properties"
 );
 
-@@clientLocation(OperationsPutContents.listByProviderRegistration,
-  "Operations"
-);
-@@clientLocation(OperationsPutContents.createOrUpdate, "Operations");
+@@clientLocation(OperationsPutContents.listByProviderRegistration, Operations);
+@@clientLocation(OperationsPutContents.createOrUpdate, Operations);
 @@clientName(OperationsPutContents.createOrUpdate::parameters.resource,
   "OperationsPutContent"
 );
-@@clientLocation(OperationsPutContents.delete, "Operations");
+@@clientLocation(OperationsPutContents.delete, Operations);
 
 @@clientLocation(SkuResources.get, Skus);
 @@clientLocation(SkuResources.createOrUpdate, Skus);
