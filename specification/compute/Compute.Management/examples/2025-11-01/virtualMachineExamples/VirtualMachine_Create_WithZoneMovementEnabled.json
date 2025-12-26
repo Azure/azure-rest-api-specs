@@ -24,7 +24,19 @@
             },
             "name": "myVMosdisk",
             "createOption": "FromImage"
-          }
+          },
+          "dataDisks": [
+            {
+              "diskSizeGB": 128,
+              "lun": 0,
+              "createOption": "Empty",
+              "managedDisk": {
+                "storageAccountType": "Premium_ZRS"
+              },
+              "name": "myVMdatadisk1",
+              "caching": "ReadWrite"
+            }
+          ]
         },
         "osProfile": {
           "adminUsername": "{your-username}",
@@ -44,12 +56,6 @@
         "resiliencyProfile": {
           "zoneMovement": {
             "isEnabled": true
-          },
-          "periodicRestorePoints": {
-            "frequencyInHours": 24,
-            "isEnabled": true,
-            "restorePointCollectionId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myrpc",
-            "maxRestorePointsRetained": 10
           }
         }
       }
@@ -96,19 +102,24 @@
                 "storageAccountType": "Premium_ZRS"
               }
             },
-            "dataDisks": []
+            "dataDisks": [
+              {
+                "diskSizeGB": 128,
+                "lun": 0,
+                "createOption": "Empty",
+                "managedDisk": {
+                  "storageAccountType": "Premium_ZRS"
+                },
+                "name": "myVMdatadisk1",
+                "caching": "ReadWrite"
+              }
+            ]
           },
           "vmId": "a149cd25-409f-41af-8088-275f5486bc93",
           "hardwareProfile": {
             "vmSize": "Standard_D2s_v3"
           },
           "resiliencyProfile": {
-            "periodicRestorePoints": {
-              "frequencyInHours": 24,
-              "isEnabled": true,
-              "restorePointCollectionId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myrpc",
-              "maxRestorePointsRetained": 10
-            },
             "zoneMovement": {
               "isEnabled": true
             }
@@ -159,19 +170,24 @@
                 "storageAccountType": "Premium_ZRS"
               }
             },
-            "dataDisks": []
+            "dataDisks": [
+              {
+                "diskSizeGB": 128,
+                "lun": 0,
+                "createOption": "Empty",
+                "managedDisk": {
+                  "storageAccountType": "Premium_ZRS"
+                },
+                "name": "myVMdatadisk1",
+                "caching": "ReadWrite"
+              }
+            ]
           },
           "vmId": "a149cd25-409f-41af-8088-275f5486bc93",
           "hardwareProfile": {
             "vmSize": "Standard_D2s_v3"
           },
           "resiliencyProfile": {
-            "periodicRestorePoints": {
-              "frequencyInHours": 24,
-              "isEnabled": true,
-              "restorePointCollectionId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/myrpc",
-              "maxRestorePointsRetained": 10
-            },
             "zoneMovement": {
               "isEnabled": true
             }
@@ -184,5 +200,5 @@
     }
   },
   "operationId": "VirtualMachines_CreateOrUpdate",
-  "title": "Create a vm with resiliency profile."
+  "title": "Create a vm with resiliency profile and zone movement enabled."
 }

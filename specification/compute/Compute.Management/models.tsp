@@ -5223,24 +5223,9 @@ model StorageProfile {
 @added(Versions.v2025_11_01)
 model PeriodicRestorePoints {
   /**
-   * Time gap between creation of two restore points for a VM, in hours. Default: 24.
-   */
-  frequencyInHours?: int32;
-
-  /**
    * Indicates if periodic restore points for the VM are enabled.
    */
-  isEnabled?: boolean;
-
-  /**
-   * Restore point collection resourceID
-   */
-  restorePointCollectionId?: string;
-
-  /**
-   * Maximum restore points retained for the VM. Default: 10.
-   */
-  maxRestorePointsRetained?: int32;
+  isEnabled: boolean;
 }
 
 /**
@@ -5251,7 +5236,7 @@ model ZoneMovement {
   /**
    * Indicates if zone movement is enabled.
    */
-  isEnabled?: boolean;
+  isEnabled: boolean;
 }
 
 /**

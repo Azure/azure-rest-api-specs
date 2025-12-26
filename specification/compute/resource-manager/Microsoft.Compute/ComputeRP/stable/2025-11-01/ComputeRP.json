@@ -10014,6 +10014,9 @@
           "Create a VM with network interface configuration with public ip address dns settings": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfigurationDnsSettings.json"
           },
+          "Create a VM with resiliency profile and Periodic Restore Points enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPeriodicRestorePointsEnabled.json"
+          },
           "Create a VM with securityType ConfidentialVM with Customer Managed Keys": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVMWithCustomerManagedKeys.json"
           },
@@ -10113,8 +10116,8 @@
           "Create a vm with premium storage.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
           },
-          "Create a vm with resiliency profile.": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithResiliencyProfile.json"
+          "Create a vm with resiliency profile and zone movement enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithZoneMovementEnabled.json"
           },
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
@@ -15906,25 +15909,14 @@
       "type": "object",
       "description": "Describes periodic restore points configuration for a VM.",
       "properties": {
-        "frequencyInHours": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time gap between creation of two restore points for a VM, in hours. Default: 24."
-        },
         "isEnabled": {
           "type": "boolean",
           "description": "Indicates if periodic restore points for the VM are enabled."
-        },
-        "restorePointCollectionId": {
-          "type": "string",
-          "description": "Restore point collection resourceID"
-        },
-        "maxRestorePointsRetained": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum restore points retained for the VM. Default: 10."
         }
-      }
+      },
+      "required": [
+        "isEnabled"
+      ]
     },
     "Placement": {
       "type": "object",
@@ -23522,7 +23514,10 @@
           "type": "boolean",
           "description": "Indicates if zone movement is enabled."
         }
-      }
+      },
+      "required": [
+        "isEnabled"
+      ]
     },
     "ZonePlacementPolicyType": {
       "type": "string",
