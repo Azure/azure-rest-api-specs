@@ -569,6 +569,9 @@
         "x-ms-examples": {
           "Create a chat completion.": {
             "$ref": "./examples/chat_completions.json"
+          },
+          "Creates a completion based on Azure Search data and system-assigned managed identity.": {
+            "$ref": "./examples/chat_completions_azure_search_minimum.json"
           }
         }
       }
@@ -647,9 +650,6 @@
           }
         },
         "x-ms-examples": {
-          "Create a chat completion with Azure OpenAI extensions.": {
-            "$ref": "./examples/extensions_chat_completions.json"
-          },
           "Create a chat completion with Azure OpenAI extensions using AML index.": {
             "$ref": "./examples/extensions_chat_completions_aml_index.json"
           },
@@ -1290,6 +1290,13 @@
                   }
                 }
               },
+              "data_sources": {
+                "type": "array",
+                "description": "The data sources configuration for Azure OpenAI on your data. This parameter requires API version 2023-12-01-preview and above.",
+                "items": {
+                  "$ref": "#/components/schemas/dataSource"
+                }
+              },
               "tools": {
                 "description": "A list of tools the model may call. Currently, only functions are supported as a tool. Use this to provide a list of functions the model may generate JSON inputs for.",
                 "type": "array",
@@ -1906,7 +1913,7 @@
                 "type": "array",
                 "description": "The data sources to be used for the Azure OpenAI on your data feature.",
                 "items": {
-                  "$ref": "#/components/schemas/dataSource"
+                  "$ref": "#/components/schemas/legacyDataSource"
                 }
               },
               "enhancements": {
@@ -1972,9 +1979,9 @@
           "temperature": 0.9
         }
       },
-      "dataSource": {
+      "legacyDataSource": {
         "type": "object",
-        "description": "The data source to be used for the Azure OpenAI on your data feature.",
+        "description": "The data source to be used for the Azure OpenAI on your data feature. Camel case is used. Deprecated. Use `dataSource` instead.",
         "properties": {
           "type": {
             "type": "string",
@@ -1988,6 +1995,874 @@
         },
         "required": [
           "type"
+        ]
+      },
+      "dataSource": {
+        "type": "object",
+        "description": "The data source to be used for the Azure OpenAI on your data feature. Snake case is used to be consistent with OpenAI.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/dataSourceType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "azure_search": "#/components/schemas/azureSearchDataSource",
+            "azure_ml_index": "#/components/schemas/azureMLIndexDataSource",
+            "azure_cosmos_db": "#/components/schemas/azureCosmosDBDataSource",
+            "elasticsearch": "#/components/schemas/elasticsearchDataSource",
+            "pinecone": "#/components/schemas/pineconeDataSource"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "dataSourceType": {
+        "type": "string",
+        "description": "The data source type.",
+        "enum": [
+          "azure_search",
+          "azure_ml_index",
+          "azure_cosmos_db",
+          "elasticsearch",
+          "pinecone"
+        ],
+        "x-ms-enum": {
+          "name": "DataSourceType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "azure_search",
+              "description": "Represents the use of Azure Search data source."
+            },
+            {
+              "value": "azure_ml_index",
+              "description": "Represents the use of Azure Machine Learning index data source."
+            },
+            {
+              "value": "azure_cosmos_db",
+              "description": "Represents the use of Azure Cosmos DB data source."
+            },
+            {
+              "value": "elasticsearch",
+              "description": "Represents the use of Elasticsearch index data source."
+            },
+            {
+              "value": "pinecone",
+              "description": "Represents the use of Pinecone index data source."
+            }
+          ]
+        }
+      },
+      "azureSearchDataSource": {
+        "type": "object",
+        "description": "The Azure Search data source.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/dataSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parameters": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/commonDataSourceParameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/azureSearchDataSourceParameters"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "parameters"
+        ]
+      },
+      "azureMLIndexDataSource": {
+        "type": "object",
+        "description": "The Azure Machine Learning index data source.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/dataSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parameters": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/commonDataSourceParameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/azureMLIndexDataSourceParameters"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "parameters"
+        ]
+      },
+      "azureCosmosDBDataSource": {
+        "type": "object",
+        "description": "The Azure Cosmos DB data source.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/dataSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parameters": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/commonDataSourceParameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/azureCosmosDBDataSourceParameters"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "parameters"
+        ]
+      },
+      "elasticsearchDataSource": {
+        "type": "object",
+        "description": "The Elasticsearch data source.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/dataSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parameters": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/commonDataSourceParameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/elasticsearchDataSourceParameters"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "parameters"
+        ]
+      },
+      "pineconeDataSource": {
+        "type": "object",
+        "description": "The Pinecone data source.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/dataSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "parameters": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/commonDataSourceParameters"
+                  },
+                  {
+                    "$ref": "#/components/schemas/pineconeDataSourceParameters"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "required": [
+          "parameters"
+        ]
+      },
+      "authenticationOption": {
+        "type": "object",
+        "description": "The authentication option for Azure OpenAI on your data.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/authenticationType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "api_key": "#/components/schemas/apiKeyAuthenticationOption",
+            "connection_string": "#/components/schemas/connectionStringAuthenticationOption",
+            "key_and_key_id": "#/components/schemas/keyAndKeyIdAuthenticationOption",
+            "encoded_api_key": "#/components/schemas/encodedApiKeyAuthenticationOption",
+            "access_token": "#/components/schemas/accessTokenAuthenticationOption",
+            "system_assigned_managed_identity": "#/components/schemas/systemAssignedManagedIdentityAuthenticationOption",
+            "user_assigned_managed_identity": "#/components/schemas/userAssignedManagedIdentityAuthenticationOption"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "authenticationType": {
+        "type": "string",
+        "description": "The authentication types supported with Azure OpenAI On Your Data.",
+        "enum": [
+          "api_key",
+          "connection_string",
+          "key_and_key_id",
+          "encoded_api_key",
+          "access_token",
+          "system_assigned_managed_identity",
+          "UserAssignedManagedIdentity"
+        ],
+        "x-ms-enum": {
+          "name": "AuthenticationType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "api_key",
+              "description": "Authentication via API key."
+            },
+            {
+              "value": "connection_string",
+              "description": "Authentication via connection string."
+            },
+            {
+              "value": "key_and_key_id",
+              "description": "Authentication via key and key ID pair."
+            },
+            {
+              "value": "encoded_api_key",
+              "description": "Authentication via encoded API key."
+            },
+            {
+              "value": "access_token",
+              "description": "Authentication via access token."
+            },
+            {
+              "value": "system_assigned_managed_identity",
+              "description": "Authentication via system-assigned managed identity."
+            },
+            {
+              "value": "user_assigned_managed_identity",
+              "description": "Authentication via user-assigned managed identity."
+            }
+          ]
+        }
+      },
+      "apiKeyAuthenticationOption": {
+        "description": "The authentication option using API key.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "api_key": {
+                "type": "string",
+                "description": "The API key to use for authentication."
+              }
+            },
+            "required": [
+              "api_key"
+            ]
+          }
+        ]
+      },
+      "connectionStringAuthenticationOption": {
+        "description": "The authentication option using connection string.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "connection_string": {
+                "type": "string",
+                "description": "The connection string to use for authentication."
+              }
+            },
+            "required": [
+              "connection_string"
+            ]
+          }
+        ]
+      },
+      "keyAndKeyIdAuthenticationOption": {
+        "description": "The authentication option using Elasticsearch key and keyId pair.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "The key to use for authentication."
+              },
+              "key_id": {
+                "type": "string",
+                "description": "The key ID to use for authentication."
+              }
+            },
+            "required": [
+              "key",
+              "key_id"
+            ]
+          }
+        ]
+      },
+      "encodedApiKeyAuthenticationOption": {
+        "description": "The authentication option using Elasticsearch encoded API key.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "encoded_api_key": {
+                "type": "string",
+                "description": "The encoded API key to use for authentication."
+              }
+            },
+            "required": [
+              "encoded_api_key"
+            ]
+          }
+        ]
+      },
+      "accessTokenAuthenticationOption": {
+        "description": "The authentication option using access token.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "access_token": {
+                "type": "string",
+                "description": "The access token to use for authentication."
+              }
+            },
+            "required": [
+              "access_token"
+            ]
+          }
+        ]
+      },
+      "systemAssignedManagedIdentityAuthenticationOption": {
+        "description": "The authentication option using system-assigned managed identity.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          }
+        ]
+      },
+      "userAssignedManagedIdentityAuthenticationOption": {
+        "description": "The authentication option using user-assigned managed identity.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/authenticationOption"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "managed_identity_resource_id": {
+                "type": "string",
+                "description": "The resource ID of the user-assigned managed identity to use for authentication."
+              }
+            },
+            "required": [
+              "managed_identity_resource_id"
+            ]
+          }
+        ]
+      },
+      "commonDataSourceParameters": {
+        "type": "object",
+        "description": "The common parameters for data sources.",
+        "required": [
+          "authentication"
+        ],
+        "properties": {
+          "authentication": {
+            "$ref": "#/components/schemas/authenticationOption",
+            "description": "The authentication option to access the data."
+          },
+          "top_n_documents": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The configured top number of documents to feature for the configured query."
+          },
+          "in_scope": {
+            "type": "boolean",
+            "description": "Whether queries should be restricted to use of indexed data."
+          },
+          "strictness": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The configured strictness of the search relevance filtering. The higher of strictness, the higher of the precision but lower recall of the answer.",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "role_information": {
+            "type": "string",
+            "description": "Give the model instructions about how it should behave and any context it should reference when generating a response. You can describe the assistant's personality and tell it how to format responses. There's a 100 token limit for it, and it counts against the overall token limit."
+          }
+        }
+      },
+      "azureSearchDataSourceParameters": {
+        "type": "object",
+        "description": "The Azure Search data source parameters.",
+        "required": [
+          "endpoint",
+          "index_name"
+        ],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "The absolute endpoint path for the Azure Search resource to use."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The name of the index to use as available in the referenced Azure Search resource."
+          },
+          "fields_mapping": {
+            "$ref": "#/components/schemas/azureSearchFieldsMapping",
+            "description": "Customized field mapping behavior to use when interacting with the search index."
+          },
+          "query_type": {
+            "$ref": "#/components/schemas/azureSearchQueryType",
+            "description": "The query type to use with Azure Search."
+          },
+          "semantic_configuration": {
+            "type": "string",
+            "description": "The additional semantic configuration for the query."
+          },
+          "filter": {
+            "type": "string",
+            "description": "Search filter."
+          },
+          "embedding_dependency": {
+            "$ref": "#/components/schemas/vectorizationSource",
+            "description": "The embedding dependency for vector search."
+          }
+        }
+      },
+      "azureMLIndexDataSourceParameters": {
+        "type": "object",
+        "description": "The Azure Machine Learning index data source parameters.",
+        "required": [
+          "project_resource_id",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "project_resource_id": {
+            "type": "string",
+            "description": "The resource id of the Azure Machine Learning project."
+          },
+          "name": {
+            "type": "string",
+            "description": "The Azure Machine Learning index name."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the Azure Machine Learning index."
+          },
+          "filter": {
+            "type": "string",
+            "description": "Search filter. Only supported if the MLIndex is of type AzureSearch."
+          }
+        }
+      },
+      "azureCosmosDBDataSourceParameters": {
+        "type": "object",
+        "description": "The Azure Cosmos DB data source parameters.",
+        "required": [
+          "database_name",
+          "container_name",
+          "index_name",
+          "fields_mapping",
+          "embedding_dependency"
+        ],
+        "properties": {
+          "database_name": {
+            "type": "string",
+            "description": "The database name of Azure Cosmos DB."
+          },
+          "container_name": {
+            "type": "string",
+            "description": "The container name name of Azure Cosmos DB."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The index name name of Azure Cosmos DB."
+          },
+          "fields_mapping": {
+            "$ref": "#/components/schemas/azureCosmosDBFieldsMapping",
+            "description": "Customized field mapping behavior to use when interacting with the search index."
+          },
+          "embedding_dependency": {
+            "$ref": "#/components/schemas/vectorizationSource",
+            "description": "The embedding dependency for vector search."
+          }
+        }
+      },
+      "pineconeDataSourceParameters": {
+        "type": "object",
+        "description": "The Pinecone data source parameters.",
+        "required": [
+          "environment",
+          "index_name",
+          "fields_mapping",
+          "embedding_dependency"
+        ],
+        "properties": {
+          "environment": {
+            "type": "string",
+            "description": "The environment name of Pinecone."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The name of the Pinecone database index."
+          },
+          "fields_mapping": {
+            "$ref": "#/components/schemas/pineconeFieldsMapping",
+            "description": "Customized field mapping behavior to use when interacting with the search index."
+          },
+          "embedding_dependency": {
+            "$ref": "#/components/schemas/vectorizationSource",
+            "description": "The embedding dependency for vector search."
+          }
+        }
+      },
+      "elasticsearchDataSourceParameters": {
+        "type": "object",
+        "description": "The Elasticsearch data source parameters.",
+        "required": [
+          "endpoint",
+          "index_name"
+        ],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "format": "uri",
+            "description": "The endpoint of Elasticsearch."
+          },
+          "index_name": {
+            "type": "string",
+            "description": "The index name of Elasticsearch."
+          },
+          "fields_mapping": {
+            "$ref": "#/components/schemas/elasticsearchIndexFieldsMapping",
+            "description": "The index fields mapping options of Elasticsearch."
+          },
+          "query_type": {
+            "$ref": "#/components/schemas/elasticsearchQueryType",
+            "description": "The query type of Elasticsearch."
+          },
+          "embedding_dependency": {
+            "$ref": "#/components/schemas/vectorizationSource",
+            "description": "The embedding dependency for vector search."
+          }
+        }
+      },
+      "commonFieldsMapping": {
+        "type": "object",
+        "description": "Common settings to control how your index fields are mapped to the standard properties.",
+        "properties": {
+          "title_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a title."
+          },
+          "url_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a URL."
+          },
+          "filepath_field": {
+            "type": "string",
+            "description": "The name of the index field to use as a filepath."
+          },
+          "content_fields": {
+            "type": "array",
+            "description": "The names of index fields that should be treated as content.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "content_fields_separator": {
+            "type": "string",
+            "description": "The separator pattern that content fields should use."
+          }
+        }
+      },
+      "vectorSupportedFieldsMapping": {
+        "type": "object",
+        "description": "Common settings to control how your index fields are mapped to the standard properties, including vector fields.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/commonFieldsMapping"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "vector_fields": {
+                "type": "array",
+                "description": "The names of fields that represent vector data.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "azureSearchFieldsMapping": {
+        "type": "object",
+        "description": "Optional settings to control how fields are processed when using a configured Azure Search resource.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorSupportedFieldsMapping"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "image_vector_fields": {
+                "type": "array",
+                "description": "The names of fields that represent image vector data.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "azureCosmosDBFieldsMapping": {
+        "type": "object",
+        "description": "The settings to control how fields are processed when using a configured Azure Cosmos DB resource.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorSupportedFieldsMapping"
+          }
+        ],
+        "required": [
+          "content_fields",
+          "vector_fields"
+        ]
+      },
+      "pineconeFieldsMapping": {
+        "type": "object",
+        "description": "The settings to control how fields are processed when using Pinecone.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/commonFieldsMapping"
+          }
+        ],
+        "required": [
+          "content_fields"
+        ]
+      },
+      "elasticsearchIndexFieldsMapping": {
+        "type": "object",
+        "description": "Optional settings to control how fields are processed when using a configured Elasticsearch resource.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorSupportedFieldsMapping"
+          }
+        ]
+      },
+      "azureSearchQueryType": {
+        "type": "string",
+        "description": "The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+        "enum": [
+          "simple",
+          "semantic",
+          "vector",
+          "vector_simple_hybrid",
+          "vector_semantic_hybrid"
+        ],
+        "x-ms-enum": {
+          "name": "AzureSearchQueryType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "simple",
+              "description": "Represents the default, simple query parser."
+            },
+            {
+              "value": "semantic",
+              "description": "Represents the semantic query parser for advanced semantic modeling."
+            },
+            {
+              "value": "vector",
+              "description": "Represents vector search over computed data."
+            },
+            {
+              "value": "vector_simple_hybrid",
+              "description": "Represents a combination of the simple query strategy with vector data."
+            },
+            {
+              "value": "vector_semantic_hybrid",
+              "description": "Represents a combination of semantic search and vector data querying."
+            }
+          ]
+        }
+      },
+      "elasticsearchQueryType": {
+        "type": "string",
+        "description": "The type of Elasticsearch retrieval query that should be executed when using it as an Azure OpenAI chat extension.",
+        "enum": [
+          "simple",
+          "vector"
+        ],
+        "x-ms-enum": {
+          "name": "ElasticsearchQueryType",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "simple",
+              "value": "simple",
+              "description": "Represents the default, simple query parser."
+            },
+            {
+              "name": "vector",
+              "value": "vector",
+              "description": "Represents vector search over computed data."
+            }
+          ]
+        }
+      },
+      "vectorizationSource": {
+        "type": "object",
+        "description": "Vectorization source for vector search.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/vectorizationSourceType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "endpoint": "#/components/schemas/endpointVectorizationSource",
+            "deployment_name": "#/components/schemas/deploymentNameVectorizationSource",
+            "model_id": "#/components/schemas/modelIdVectorizationSource"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "vectorizationSourceType": {
+        "type": "string",
+        "description": "Vectorization source types for vector search.",
+        "enum": [
+          "endpoint",
+          "deployment_name",
+          "model_id"
+        ],
+        "x-ms-enum": {
+          "name": "VectorizationSourceType",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "endpoint",
+              "description": "Azure OpenAI Embedding endpoint URL."
+            },
+            {
+              "value": "deployment_name",
+              "description": "Azure OpenAI Embedding deployment name."
+            },
+            {
+              "value": "model_id",
+              "description": "The embedding model id defined in the search service. Currently only supported by Elasticsearch."
+            }
+          ]
+        }
+      },
+      "endpointVectorizationSource": {
+        "description": "The vectorization source based on endpoint URL",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorizationSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "endpoint": {
+                "type": "string",
+                "format": "uri",
+                "description": "Specifies the resource endpoint URL from which embeddings should be retrieved. It should be in the format of https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/embeddings. The api-version query parameter is not allowed."
+              },
+              "authentication": {
+                "$ref": "#/components/schemas/authenticationOption",
+                "description": "Specifies the authentication option to use when retrieving embeddings from the specified endpoint."
+              }
+            },
+            "required": [
+              "endpoint",
+              "authentication"
+            ]
+          }
+        ]
+      },
+      "deploymentNameVectorizationSource": {
+        "description": "The vectorization source based on deployment name",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorizationSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "deployment_name": {
+                "type": "string",
+                "description": "The embedding model deployment name within the same Azure OpenAI resource. This enables you to use vector search without Azure OpenAI api-key and without Azure OpenAI public network access."
+              }
+            },
+            "required": [
+              "deployment_name"
+            ]
+          }
+        ]
+      },
+      "modelIdVectorizationSource": {
+        "description": "The vectorization source based on model id",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/vectorizationSource"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "model_id": {
+                "type": "string",
+                "description": "The embedding model id build inside the search service. Currently only supported by Elasticsearch."
+              }
+            },
+            "required": [
+              "model_id"
+            ]
+          }
         ]
       },
       "message": {
@@ -2026,15 +2901,6 @@
             "description": "The conversation context",
             "nullable": true,
             "properties": {
-              "messages": {
-                "type": "array",
-                "description": "Messages exchanged between model and extensions prior to final message from model",
-                "minItems": 1,
-                "items": {
-                  "$ref": "#/components/schemas/message"
-                },
-                "nullable": true
-              }
             }
           }
         },
@@ -2599,9 +3465,15 @@
             "type": "string",
             "description": "The base64 encoded image"
           },
+          "content_filter_results": {
+            "$ref": "#/components/schemas/contentFilterResultsBase"
+          },
           "revised_prompt": {
             "type": "string",
             "description": "The prompt that was used to generate the image, if there was any revision to the prompt."
+          },
+          "prompt_filter_results": {
+            "$ref": "#/components/schemas/contentFilterPromptResults"
           }
         }
       },
