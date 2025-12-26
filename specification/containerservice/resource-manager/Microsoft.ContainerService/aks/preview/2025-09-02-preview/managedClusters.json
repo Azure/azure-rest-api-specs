@@ -70,6 +70,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/vmSkus": {
+      "get": {
+        "tags": [
+          "Skus"
+        ],
+        "operationId": "ContainerServiceVmSkus_List",
+        "description": "Gets the list of VM SKUs accepted by AKS when creating node pools in a specified location. AKS will perform a best effort approach to provision the requested VM SKUs, but availability is not guaranteed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json#/parameters/IncludeExtendedLocationsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../../compute/resource-manager/Microsoft.Compute/Skus/stable/2021-07-01/skus.json#/definitions/ResourceSkusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all available Container Service VM SKUs for a location": {
+            "$ref": "./examples/vmSkus/ListAvailableContainerServiceVmSkus.json"
+          },
+          "Lists all available Container Service VM SKUs with Extended Location information": {
+            "$ref": "./examples/vmSkus/ListAvailableContainerServiceVmSkusWithExtendedLocations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/kubernetesVersions": {
       "get": {
         "tags": [
