@@ -5,7 +5,7 @@ import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import * as globby from "globby";
 import { strict as assert } from "node:assert";
 import type { SimpleGit } from "simple-git";
-import { afterAll, afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
 import { FolderStructureRule } from "../src/rules/folder-structure.js";
 
 import * as utils from "../src/utils.js";
@@ -54,15 +54,17 @@ function createGitMock(lsTreeOutput = "Foo\nFoo.Management\n"): Record<string, u
   };
 }
 
-const originalGithubBaseRef = process.env.GITHUB_BASE_REF;
-const originalSystemPullRequestTargetBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+let originalGithubBaseRef = process.env.GITHUB_BASE_REF;
+let originalSystemPullRequestTargetBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
 
 beforeEach(() => {
+  originalGithubBaseRef = process.env.GITHUB_BASE_REF;
+  originalSystemPullRequestTargetBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
   delete process.env.GITHUB_BASE_REF;
   delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
 });
 
-afterAll(() => {
+afterEach(() => {
   if (originalGithubBaseRef === undefined) {
     delete process.env.GITHUB_BASE_REF;
   } else {
@@ -904,6 +906,69 @@ options:
 
         assert(!result.success);
         assert(result.errorOutput?.includes("must use v2 structure"));
+      } finally {
+        if (originalSystemBranch === undefined) {
+          delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+        } else {
+          process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = originalSystemBranch;
+        }
+      }
+    });
+
+    it("should not enforce when current branch matches target branch even with refs prefix", async function () {
+      const originalSystemBranch = process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;
+      process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = "refs/heads/main";
+
+      try {
+        vi.mocked(globby.globby).mockImplementation((patterns) =>
+          patterns[0].includes("tspconfig")
+            ? Promise.resolve(["/gitroot/specification/foo/data-plane/Foo/tspconfig.yaml"])
+            : Promise.resolve(["/gitroot/specification/foo/data-plane/Foo/main.tsp"]),
+        );
+        normalizePathSpy.mockReturnValue("/gitroot");
+        readTspConfigSpy.mockResolvedValue(`
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+`);
+
+        const mockGit: Record<string, unknown> = {
+          revparse: vi.fn().mockResolvedValue("/gitroot"),
+          branch: vi.fn().mockResolvedValue({
+            current: "refs/heads/main",
+            all: ["refs/heads/main"],
+            detached: false,
+          }),
+          getRemotes: vi.fn().mockResolvedValue([
+            {
+              name: "origin",
+              refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+            },
+          ]),
+          status: vi.fn().mockResolvedValue({
+            modified: ["specification/foo/data-plane/Foo/tspconfig.yaml"],
+            not_added: [],
+            created: [],
+            deleted: [],
+          }),
+          raw: vi.fn().mockImplementation((args: string[]) => {
+            if (args.includes("config") && args.includes("remote.origin.url")) {
+              return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+            }
+            if (args.includes("diff") && args.includes("--name-only")) {
+              return Promise.resolve("specification/foo/data-plane/Foo/tspconfig.yaml");
+            }
+            return Promise.resolve("main");
+          }),
+        };
+
+        simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+        const result = await new FolderStructureRule().execute(
+          "/gitroot/specification/foo/data-plane/Foo",
+        );
+
+        assert(result.success);
       } finally {
         if (originalSystemBranch === undefined) {
           delete process.env.SYSTEM_PULLREQUEST_TARGETBRANCH;

@@ -15,6 +15,10 @@ export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
 
+  private normalizePathSeparators(filePath: string): string {
+    return filePath.replace(/\\/g, "/");
+  }
+
   /**
    * Check if there are any changes in the specification folder that would require validation.
    * Only run folder structure validation if there are actual changes in specification/
@@ -25,7 +29,8 @@ export class FolderStructureRule implements Rule {
 
       // Get current branch info using git.branch() as requested
       const branchSummary = await git.branch(["-vv"]);
-      const currentBranch = branchSummary.current;
+      const currentBranch =
+        this.normalizeBranchName(branchSummary.current) ?? branchSummary.current;
 
       // Get target branch for comparison
       const targetBranch = await this.getTargetBranch(git);
@@ -39,7 +44,7 @@ export class FolderStructureRule implements Rule {
           ...status.not_added,
           ...status.created,
           ...status.deleted,
-        ].some((file) => file.startsWith("specification/"));
+        ].some((file) => this.normalizePathSeparators(file).startsWith("specification/"));
         return specChanges;
       }
 
@@ -51,7 +56,11 @@ export class FolderStructureRule implements Rule {
           `${targetRemote}/${targetBranch}...HEAD`,
         ]);
 
-        const changedFiles = diffFiles.trim().split("\n").filter(Boolean);
+        const changedFiles = diffFiles
+          .trim()
+          .split("\n")
+          .filter(Boolean)
+          .map((file) => this.normalizePathSeparators(file.trim()));
         const hasSpecChanges = changedFiles.some((file) => file.startsWith("specification/"));
 
         if (hasSpecChanges) {
@@ -66,7 +75,7 @@ export class FolderStructureRule implements Rule {
         return hasSpecChanges;
       } catch {
         // If diff fails, fall back to checking if the current folder is in specification/
-        const relativePath = path.relative(gitRoot, folder);
+        const relativePath = this.normalizePathSeparators(path.relative(gitRoot, folder));
         return relativePath.startsWith("specification/");
       }
     } catch (error) {
@@ -464,9 +473,18 @@ export class FolderStructureRule implements Rule {
       return undefined;
     }
 
-    normalized = normalized.replace(/^refs\/(heads|remotes)\//, "");
-    normalized = normalized.replace(/^remotes\//, "");
-    normalized = normalized.replace(/^(origin|upstream)\//, "");
+    const patterns = [/^refs\/(heads|remotes)\//i, /^remotes\//i];
+
+    let previous: string;
+    do {
+      previous = normalized;
+      for (const pattern of patterns) {
+        normalized = normalized.replace(pattern, "");
+      }
+      normalized = normalized.replace(/^(origin|upstream)\//i, "");
+    } while (normalized !== previous);
+
+    normalized = normalized.replace(/^\/+/, "").replace(/\/+$/, "");
 
     return normalized || undefined;
   }
@@ -598,7 +616,8 @@ export class FolderStructureRule implements Rule {
 
       // Get current branch info using git.branch() as requested
       const branchSummary = await git.branch(["-vv"]);
-      const currentBranch = branchSummary.current;
+      const currentBranch =
+        this.normalizeBranchName(branchSummary.current) ?? branchSummary.current;
 
       // Get the actual target branch and remote
       const targetBranch = await this.getTargetBranch(git);
@@ -610,7 +629,7 @@ export class FolderStructureRule implements Rule {
       }
 
       // Get service directory relative to specification folder
-      const relativePath = path.relative(gitRoot, folder);
+      const relativePath = this.normalizePathSeparators(path.relative(gitRoot, folder));
       const folderStruct = relativePath.split("/").filter(Boolean);
       if (folderStruct.length < 2 || folderStruct[0] !== "specification") {
         return { shouldEnforce: false };
