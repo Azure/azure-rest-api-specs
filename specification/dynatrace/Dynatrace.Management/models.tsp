@@ -2,9 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Dynatrace.Observability;
 
@@ -140,6 +144,24 @@ union Action {
   Install: "Install",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uninstall: "Uninstall",
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
+
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
 }
 
 /**
@@ -579,6 +601,64 @@ model VMExtensionPayload {
 }
 
 /**
+ * Resource types for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+union MonitoredComputeResourceType {
+  string,
+
+  /** All monitored compute resource types */
+  All: "All",
+
+  /** Azure Kubernetes Service managed clusters */
+  ManagedClusters: "managedClusters",
+}
+
+/**
+ * Request body for listing monitored compute resources. If not provided, returns all monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourcesRequest {
+  /**
+   * The type of compute resources to filter by. Use "All" to get all resource types, or specify a specific type like "managedClusters".
+   */
+  resourceType?: MonitoredComputeResourceType;
+}
+
+/**
+ * Response of a list operation for monitored compute resources.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourceListResponse
+  is Azure.Core.Page<MonitoredComputeResourceInfo> {
+  /**
+   * The type of compute resources in this response. Returns the filter value used in the request (e.g., "managedClusters" or "All").
+   */
+  resourceType?: string;
+}
+
+/**
+ * Details of a monitored compute resource monitored by the Dynatrace monitor.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model MonitoredComputeResourceInfo {
+  /**
+   * The full ARM resource ID of the monitored resource.
+   */
+  monitoredResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Flag indicating if the resource is currently being monitored.
+   */
+  isMonitored?: boolean;
+
+  /**
+   * Reason for monitoring status.
+   */
+  reasonForMonitoringStatus?: string;
+}
+
+/**
  * Request for performing Dynatrace agent install/uninstall action through the Azure Dynatrace resource on the provided list of agent resources.
  */
 model ManageAgentInstallationRequest {
@@ -591,6 +671,23 @@ model ManageAgentInstallationRequest {
    * Install/Uninstall action.
    */
   action: Action;
+}
+
+/**
+ * Request for adding/removing Dynatrace MCP connectors on SRE Agent resource.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
 }
 
 /**
@@ -654,6 +751,14 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
+   */
+  @Azure.ResourceManager.identifiers(#["mcpConnectorResourceId"])
+  @added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -679,6 +784,24 @@ model DynatraceEnvironmentProperties {
    * The details of a Dynatrace single sign-on.
    */
   singleSignOnProperties?: DynatraceSingleSignOnProperties;
+}
+
+/**
+ * Response of a list operation.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
+ * SRE Agent configuration to connect to MCP server of Dynatrace for a given organization.
+ */
+@added(Dynatrace.Observability.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -713,7 +836,7 @@ model EnvironmentInfo {
   /**
    * Ingestion key of the environment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "If this is a value that should be kept private, mark as @secret"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: if this is a value that should be kept private, mark as @secret"
   ingestionKey?: string;
 
   /**
