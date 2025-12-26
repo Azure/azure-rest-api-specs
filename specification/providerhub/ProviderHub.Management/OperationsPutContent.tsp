@@ -15,7 +15,7 @@ namespace Microsoft.ProviderHub;
 @singleton("default")
 @parentResource(ProviderRegistration)
 model OperationsPutContent
-  is Azure.ResourceManager.ProxyResource<OperationsPutContentProperties> {
+  is Azure.ResourceManager.ProxyResource<OperationsContentProperties> {
   ...ResourceNameParameter<
     Resource = OperationsPutContent,
     KeyName = "operation",

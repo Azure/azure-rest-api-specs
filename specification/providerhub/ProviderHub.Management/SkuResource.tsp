@@ -13,8 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ProviderHub;
 
 @parentResource(ResourceTypeRegistration)
-model SkuResource
-  is Azure.ResourceManager.ProxyResource<SkuResourceProperties> {
+model SkuResource is Azure.ResourceManager.ProxyResource<ResourceTypeSku> {
   ...ResourceNameParameter<
     Resource = SkuResource,
     KeyName = "sku",
