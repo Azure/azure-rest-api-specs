@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -201,6 +203,7 @@ interface ApiContracts {
       /**
        * Include full ApiVersionSet resource in response
        */
+      @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
     },
@@ -496,6 +499,7 @@ interface WorkspaceApi {
       /**
        * Include full ApiVersionSet resource in response
        */
+      @apiVersion(false)
       @query("expandApiVersionSet")
       expandApiVersionSet?: boolean;
     },
