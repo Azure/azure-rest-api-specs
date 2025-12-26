@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python");
-@@clientName(WebApps.swapSlotSlot, "swapSlot", "python");
+@@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go");
 
 @@clientName(SupportedTlsVersions.`1.0`, "ONE0", "python,go");
 @@clientName(SupportedTlsVersions.`1.1`, "ONE1", "python,go");
@@ -2878,4 +2878,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@clientName(CertificateCollection, "AppCertificateCollection", "go");
 @@clientName(CertificatePatchResource, "AppCertificatePatchResource", "go");
 @@clientName(CertificateProperties, "AppCertificateProperties", "go");
-@@clientName(CertificatePatchResourceProperties, "AppCertificatePatchResourceProperties", "go");
+@@clientName(CertificatePatchResourceProperties,
+  "AppCertificatePatchResourceProperties",
+  "go"
+);
