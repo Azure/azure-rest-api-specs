@@ -67,6 +67,11 @@ using Azure.Core;
 @@clientName(PrivateLinkResource, "ElasticSanPrivateLinkResource", "csharp");
 @@usage(PrivateLinkResource, Usage.input, "csharp");
 @@clientName(restoreVolume, "RestoreVolume", "csharp");
+@@clientName(PrivateEndpointConnection, "ElasticSanPrivateEndpointConnection", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // Move restoreVolume operation to Management client for Go to maintain compatibility
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
