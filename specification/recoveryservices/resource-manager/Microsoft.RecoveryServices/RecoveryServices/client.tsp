@@ -62,6 +62,7 @@ namespace Microsoft.RecoveryServices;
   "RecoveryServicesPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
+@@clientName(DNSZone, "DnsZone", "csharp");
 @@clientName(DNSZoneResponse, "DnsZoneResult", "csharp");
 @@alternateType(CmkKekIdentity.userAssignedIdentity,
   armResourceIdentifier,
@@ -88,6 +89,10 @@ namespace Microsoft.RecoveryServices;
   "csharp"
 );
 @@alternateType(UpgradeDetails.upgradedResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PrivateEndpoint.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -128,6 +133,18 @@ namespace Microsoft.RecoveryServices;
   "DeleteRegisteredIdentity",
   "csharp"
 );
+@@clientName(Vaults.list,
+  "GetReplicationUsages",
+  "csharp"
+);
+@@clientName(Vaults.listByVaults,
+  "GetUsagesByVaults",
+  "csharp"
+);
+@@clientName(Vaults.create,
+  "CreateVaultCertificate",
+  "csharp"
+);
 @@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
   "CheckRecoveryServicesNameAvailability",
   "csharp"
@@ -147,6 +164,7 @@ namespace Microsoft.RecoveryServices;
 @@scope(Operations.list, "!csharp");
 @@scope(getOperationStatus, "!csharp");
 @@scope(getOperationResult, "!csharp");
+@@scope(DeletedVaults.getOperationStatus, "!csharp");
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "csharp");
 @@clientName(AssociatedIdentity,
   "RecoveryServicesAssociatedIdentity",
@@ -166,6 +184,23 @@ namespace Microsoft.RecoveryServices;
 );
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
+@@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
+@@clientName(DeletedVaultUndeleteInput, "DeletedVaultUndeleteContent", "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RawCertificateData.certificate, TypeSpec.bytes[], "csharp");
+@@alternateType(ResourceCertificateDetails.certificate, TypeSpec.bytes[], "csharp");
+@@alternateType(PatchVault.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Vault.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+
 @@clientName(Microsoft.RecoveryServices, "RecoveryServicesClient", "python");
 
 // Java SDK backward compatibility fixes
