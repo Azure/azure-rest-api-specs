@@ -5,6 +5,15 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model WritableSubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
+
 @@clientName(Microsoft.ServiceFabric,
   "ServiceFabricManagedClustersManagementClient",
   "python"
@@ -153,6 +162,11 @@ using Microsoft.ServiceFabric;
  */
 @@scope(Operations.list, "!csharp");
 
+@@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(ManagedAzResiliencyStatus.get,
   "GetManagedAzResiliencyStatus",
   "csharp"
@@ -176,6 +190,10 @@ using Microsoft.ServiceFabric;
 );
 
 @@clientName(ApplicationResource, "ServiceFabricManagedApplication", "csharp");
+@@alternateType(ApplicationResource.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(ApplicationTypeResource,
   "ServiceFabricManagedApplicationType",
   "csharp"
@@ -188,10 +206,17 @@ using Microsoft.ServiceFabric;
   "ApplicationUserAssignedIdentityInfo",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedClusterCodeVersionResult,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@clientName(ManagedClusterCodeVersionResult,
   "ServiceFabricManagedClusterVersion",
   "csharp"
 );
+@@clientName(ManagedClusterVersionDetails.osType, "OSType", "csharp");
 @@clientName(ManagedClusterVersionDetails.supportExpiryUtc,
   "VersionSupportExpireOn",
   "csharp"
@@ -219,6 +244,10 @@ using Microsoft.ServiceFabric;
   "IsHttpGatewayExclusiveAuthModeEnabled",
   "csharp"
 );
+@@clientName(ManagedClusterProperties.ipTags, "IPTags", "csharp");
+@@clientName(ManagedClusterProperties.ipv4Address, "IPv4Address", "csharp");
+@@clientName(ManagedClusterProperties.ipv6Address, "IPv6Address", "csharp");
+@@clientName(ManagedClusterProperties.VMImage, "VmImage", "csharp");
 
 @@clientName(OsType, "ServiceFabricManagedClusterOSType", "csharp");
 @@clientName(Subnet, "ManagedClusterSubnet", "csharp");
@@ -240,6 +269,7 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(IpTag, "ManagedClusterIPTag", "csharp");
+@@clientName(IpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(LoadBalancingRule, "ManagedClusterLoadBalancingRule", "csharp");
 @@clientName(NetworkSecurityRule,
   "ServiceFabricManagedNetworkSecurityRule",
@@ -291,9 +321,14 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(VaultSecretGroup, "NodeTypeVaultSecretGroup", "csharp");
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
 @@clientName(VaultCertificate, "NodeTypeVaultCertificate", "csharp");
 @@clientName(DiskType, "ServiceFabricManagedDataDiskType", "csharp");
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
+@@clientName(FrontendConfiguration.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
@@ -351,7 +386,14 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(ServicePlacementPolicy, "ManagedServicePlacementPolicy", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedVMSize,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@clientName(ManagedVMSize, "ServiceFabricManagedUnsupportedVmSize", "csharp");
+@@clientName(VMSize, "VmSize", "csharp");
 @@clientName(AddRemoveIncrementalNamedPartitionScalingMechanism,
   "NamedPartitionAddOrRemoveScalingMechanism",
   "csharp"
@@ -364,8 +406,10 @@ using Microsoft.ServiceFabric;
   "IsSecureBootEnabled",
   "csharp"
 );
+@@clientName(NodeTypeProperties.isSpotVM, "IsSpotVm", "csharp");
 @@clientName(EvictionPolicyType, "SpotNodeVmEvictionPolicyType", "csharp");
 @@clientName(SecurityType, "ServiceFabricManagedClusterSecurityType", "csharp");
+@@clientName(SecurityType.ConfidentialVM, "ConfidentialVm", "csharp");
 @@clientName(UpdateType, "ServiceFabricManagedClusterUpdateType", "csharp");
 @@clientName(ClusterHealthPolicy, "ManagedClusterHealthPolicy", "csharp");
 @@clientName(ClusterUpgradePolicy, "ManagedClusterUpgradePolicy", "csharp");
@@ -393,6 +437,7 @@ using Microsoft.ServiceFabric;
   "ServiceFabricManagedClusterPublicIPAddressConfiguration",
   "csharp"
 );
+@@clientName(PublicIPAddressConfiguration.ipTags, "IPTags", "csharp");
 @@clientName(ManagedMaintenanceWindowStatusContent.lastWindowStatusUpdateAtUTC,
   "LastWindowStatusUpdatedOn",
   "csharp"
@@ -418,6 +463,14 @@ using Microsoft.ServiceFabric;
 
 @@clientName(SecurityEncryptionType,
   "NodeTypeSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(SecurityEncryptionType.DiskWithVMGuestState,
+  "DiskWithVmGuestState",
+  "csharp"
+);
+@@clientName(SecurityEncryptionType.VMGuestStateOnly,
+  "VmGuestStateOnly",
   "csharp"
 );
 @@clientName(HealthFilter, "ApplicationFetchHealthFilter ", "csharp");
@@ -487,6 +540,10 @@ using Microsoft.ServiceFabric;
 @@alternateType(ClientCertificate.issuerThumbprint, unknown, "csharp");
 @@alternateType(VMSSExtensionProperties.settings, unknown, "csharp");
 @@alternateType(VMSSExtensionProperties.protectedSettings, unknown, "csharp");
+@@clientName(VmManagedIdentity.userAssignedIdentities,
+  "UserAssignedIdentities",
+  "csharp"
+);
 @@alternateType(VmManagedIdentity.userAssignedIdentities,
   armResourceIdentifier[],
   "csharp"
@@ -497,3 +554,80 @@ using Microsoft.ServiceFabric;
 );
 @@alternateType(ClusterMonitoringPolicy.upgradeDomainTimeout, string, "csharp");
 @@alternateType(ClusterMonitoringPolicy.upgradeTimeout, string, "csharp");
+@@alternateType(Microsoft.ServiceFabric.SubResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@clientName(AdditionalNetworkInterfaceConfiguration.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(ManagedMaintenanceWindowStatus.get,
+  "GetManagedMaintenanceWindowStatus",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.list, "GetManagedClusterVersions", "csharp");
+@@clientName(ManagedClusterVersion.listByEnvironment,
+  "GetManagedClusterVersionsByEnvironment",
+  "csharp"
+);
+@@clientName(ManagedClusterVersion.get, "GetManagedClusterVersion", "csharp");
+@@clientName(RuntimeUpdateApplicationUpgradeParameters,
+  "RuntimeUpdateApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(RestartDeployedCodePackageRequest,
+  "RestartDeployedCodePackageContent",
+  "csharp"
+);
+@@clientName(RuntimeResumeApplicationUpgradeParameters,
+  "RuntimeResumeApplicationUpgradeContent",
+  "csharp"
+);
+@@clientName(ApplicationFetchHealthRequest,
+  "ApplicationFetchHealthContent",
+  "csharp"
+);
+@@clientName(ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindow",
+  "csharp"
+);
+@@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(Applications.updateUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.resumeUpgrade::parameters.body, "content", "csharp");
+@@clientName(Applications.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypes.update::parameters.properties, "patch", "csharp");
+@@clientName(ApplicationTypeVersions.update::parameters.properties,
+  "patch",
+  "csharp"
+);
+@@clientName(ManagedClusters.getFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ManagedClusters.stopFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ManagedClusters.update::parameters.properties, "patch", "csharp");
+@@clientName(NodeTypes.deallocate::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.deleteNode::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.getFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(NodeTypes.redeploy::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.reimage::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.restart::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.start::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.stopFaultSimulation::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(NodeTypes.update::parameters.properties, "patch", "csharp");
+@@clientName(Services.update::parameters.properties, "patch", "csharp");
