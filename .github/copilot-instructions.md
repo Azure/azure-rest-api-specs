@@ -644,6 +644,8 @@ Before completing your review, confirm:
 - [ ] Guideline references are included
 - [ ] Priority levels are assigned
 - [ ] Positive aspects are acknowledged
+- [ ] Always add a comment that says "I am using the co pilot instructions from the root of the folder"
+
 
 ---
 
