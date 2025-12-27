@@ -5,6 +5,15 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceFabric;
 
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model WritableSubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
+
 @@clientName(Microsoft.ServiceFabric,
   "ServiceFabricManagedClustersManagementClient",
   "python"
@@ -181,6 +190,10 @@ using Microsoft.ServiceFabric;
 );
 
 @@clientName(ApplicationResource, "ServiceFabricManagedApplication", "csharp");
+@@alternateType(ApplicationResource.identity,
+  Azure.ResourceManager.Foundations.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(ApplicationTypeResource,
   "ServiceFabricManagedApplicationType",
   "csharp"
@@ -308,6 +321,10 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(VaultSecretGroup, "NodeTypeVaultSecretGroup", "csharp");
+@@alternateType(VaultSecretGroup.sourceVault,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
 @@clientName(VaultCertificate, "NodeTypeVaultCertificate", "csharp");
 @@clientName(DiskType, "ServiceFabricManagedDataDiskType", "csharp");
 @@clientName(FrontendConfiguration, "NodeTypeFrontendConfiguration", "csharp");
@@ -376,6 +393,7 @@ using Microsoft.ServiceFabric;
   "csharp"
 );
 @@clientName(ManagedVMSize, "ServiceFabricManagedUnsupportedVmSize", "csharp");
+@@clientName(VMSize, "VmSize", "csharp");
 @@clientName(AddRemoveIncrementalNamedPartitionScalingMechanism,
   "NamedPartitionAddOrRemoveScalingMechanism",
   "csharp"
