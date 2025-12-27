@@ -9,4 +9,54 @@ typescript:
   package-name: "@azure/arm-policyinsights"
   output-folder: "$(typescript-sdks-folder)/sdk/policyinsights/arm-policyinsights"
   generate-metadata: true
+
+directive:
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForManagementGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForSubscription
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForResourceGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForResource
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForPolicySetDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForPolicyDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForSubscriptionLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
+  - from: policyStates.json
+    where-operation: PolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForManagementGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForSubscription
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResourceGroup
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResource
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForPolicySetDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForPolicyDefinition
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForSubscriptionLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
+  - from: policyEvents.json
+    where-operation: PolicyEvents_ListQueryResultsForResourceGroupLevelPolicyAssignment
+    transform: delete $["x-ms-pageable"]
 ```
