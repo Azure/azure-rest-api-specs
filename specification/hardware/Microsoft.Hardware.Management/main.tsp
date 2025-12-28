@@ -107,7 +107,7 @@ model OrderLine {
   @doc("order line Product")
   product: Product;
 
-  @doc("order line fulfillment instructions")
+  @doc("Order line fulfillment instructions")
   lineFulfillmentInstruction?: LineFulfillmentInstruction;
 
   @doc("line level Price")
@@ -139,7 +139,7 @@ model OrderLine {
 
 @doc("Order line quantity")
 model OrderLineQuantity {
-  @doc("Order lineId pending quantity")
+  @doc("Order line pending quantity")
   pending: int64;
 
   @doc("Order lineId in-progress quantity")
