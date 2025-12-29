@@ -704,9 +704,9 @@ model VirtualMachineScaleSetOSDisk {
 
   /**
    * Specifies the size of an empty data disk in gigabytes. This element can be used
-   * to overwrite the size of the disk in a virtual machine image. The property 'diskSizeGB'
-   * is the number of bytes x 1024^3 for the disk and the value cannot
-   * be larger than 1023.
+   * to overwrite the size of the disk in a virtual machine image.
+   * <br>
+   * For details, please see [Expand virtual hard disks attached to a Windows virtual machine](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-disks)
    */
   diskSizeGB?: int32;
 
@@ -867,9 +867,9 @@ model VirtualMachineScaleSetDataDisk {
 
   /**
    * Specifies the size of an empty data disk in gigabytes. This element can be used
-   * to overwrite the size of the disk in a virtual machine image. The property
-   * diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be
-   * larger than 1023.
+   * to overwrite the size of the disk in a virtual machine image.
+   * <br>
+   * For details, please see [Expand virtual hard disks attached to a Windows virtual machine](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/expand-disks)
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   diskSizeGB?: int32;
