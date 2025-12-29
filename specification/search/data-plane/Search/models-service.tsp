@@ -3868,7 +3868,7 @@ model SynonymMap {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
   @encode(ArrayEncoding.newlineDelimited)
-  synonyms: string;
+  synonyms: string[];
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @doc("A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.")
@@ -4818,7 +4818,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   @doc("Regular expression flags.")
   @encode(ArrayEncoding.pipeDelimited)
-  flags?: RegexFlags;
+  flags?: RegexFlags[];
 
   @doc("A list of stopwords.")
   stopwords?: string[];
