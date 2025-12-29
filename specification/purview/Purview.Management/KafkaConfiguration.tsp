@@ -14,15 +14,22 @@ namespace Microsoft.Purview;
 /**
  * The configuration of the event streaming service resource attached to the Purview account for kafka notifications.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Account)
-model KafkaConfiguration
-  is Azure.ResourceManager.ProxyResource<KafkaConfigurationProperties> {
-  ...ResourceNameParameter<
-    Resource = KafkaConfiguration,
-    KeyName = "kafkaConfigurationName",
-    SegmentName = "kafkaConfigurations",
-    NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
-  >;
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model KafkaConfiguration extends ProxyResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key("kafkaConfigurationName")
+  @segment("kafkaConfigurations")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+  name: string;
+
+  properties?: KafkaConfigurationProperties;
 }
 
 @armResourceOperations

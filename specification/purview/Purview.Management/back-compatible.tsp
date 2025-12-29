@@ -9,9 +9,6 @@ using Microsoft.Purview;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Operation.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(Consent.properties);
-
 @@clientName(Accounts.createOrUpdate::parameters.resource, "account");
 @@clientName(Accounts.update::parameters.properties, "accountUpdateParameters");
 @@clientName(Accounts.addRootCollectionAdmin::parameters.body,

@@ -14,15 +14,19 @@ namespace Microsoft.Purview;
 /**
  * A privately linkable resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Account)
-model PrivateLinkResource
-  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "groupId",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model PrivateLinkResource extends ProxyResource {
+  @visibility(Lifecycle.Read)
+  @path
+  @key("groupId")
+  @segment("privateLinkResources")
+  name: string;
+
+  properties?: PrivateLinkResourceProperties;
 }
 
 @armResourceOperations

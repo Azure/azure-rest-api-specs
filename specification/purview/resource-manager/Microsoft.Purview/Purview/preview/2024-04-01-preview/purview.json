@@ -2447,7 +2447,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -2944,7 +2944,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -3071,7 +3071,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -3206,6 +3206,33 @@
           }
         ]
       }
+    },
+    "ProxyResource": {
+      "type": "object",
+      "description": "Proxy Azure Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "PublicNetworkAccess": {
       "type": "string",

@@ -462,77 +462,6 @@ union Reason {
 }
 
 /**
- * Gets or sets the consent kind.
- */
-union ConsentKind {
-  string,
-
-  /**
-   * Metadata
-   */
-  Metadata: "Metadata",
-
-  /**
-   * Governance
-   */
-  Governance: "Governance",
-}
-
-/**
- * Defines consent scope type.
- */
-union ConsentScopeType {
-  string,
-
-  /**
-   * Azure
-   */
-  Azure: "Azure",
-
-  /**
-   * Fabric
-   */
-  Fabric: "Fabric",
-
-  /**
-   * Databricks
-   */
-  Databricks: "Databricks",
-
-  /**
-   * Snowflake
-   */
-  Snowflake: "Snowflake",
-
-  /**
-   * S3
-   */
-  S3: "S3",
-}
-
-/**
- * Defines consent status.
- */
-union ConsentStatus {
-  string,
-
-  /**
-   * NotSpecified
-   */
-  NotSpecified: "NotSpecified",
-
-  /**
-   * Enabled
-   */
-  Enabled: "Enabled",
-
-  /**
-   * Disabled
-   */
-  Disabled: "Disabled",
-}
-
-/**
  * Paged list of Account resources
  */
 model AccountList is Azure.Core.Page<Account>;
@@ -869,6 +798,10 @@ model PrivateLinkServiceConnectionState {
 /**
  * Proxy Azure Resource
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model ProxyResource {
   /**
    * Gets or sets the identifier.
@@ -1266,7 +1199,7 @@ model Credentials {
  */
 model OperationList is Azure.Core.Page<Operation> {
   /**
-   * The item count.
+   * Total item count.
    */
   count?: int64;
 }
@@ -1580,41 +1513,4 @@ model QuotaName {
    * Gets or sets the name value.
    */
   value?: string;
-}
-
-/**
- * Consent extension resource
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model Consent extends ProxyResource {
-  /**
-   * Gets or sets the consent kind.
-   */
-  kind?: ConsentKind;
-
-  /**
-   * The consent properties
-   */
-  properties?: ConsentProperties;
-}
-
-/**
- * The consent properties
- */
-model ConsentProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @visibility(Lifecycle.Read)
-  scope?: string;
-
-  /**
-   * Defines consent scope type.
-   */
-  @visibility(Lifecycle.Read)
-  scopeType?: ConsentScopeType;
-
-  /**
-   * Defines consent status.
-   */
-  @visibility(Lifecycle.Read)
-  status?: ConsentStatus;
 }
