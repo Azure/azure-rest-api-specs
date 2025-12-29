@@ -15,7 +15,10 @@ namespace Microsoft.Network;
  */
 @singleton("default")
 @subscriptionResource
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApplicationGatewayAvailableSslOptions extends Resource {
   properties?: ApplicationGatewayAvailableSslOptionsPropertiesFormat;
 
@@ -23,6 +26,7 @@ model ApplicationGatewayAvailableSslOptions extends Resource {
   @path
   @key("applicationGatewayAvailableSslOption")
   @segment("applicationGatewayAvailableSslOptions")
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
 }
 

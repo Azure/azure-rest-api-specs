@@ -13,11 +13,13 @@ namespace Microsoft.Network;
 /**
  * Response for ApplicationGatewayWafDynamicManifest API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("dafault")
 @subscriptionResource
-model ApplicationGatewayWafDynamicManifestResult
-  extends ProxyResourcewithoutEtag {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ApplicationGatewayWafDynamicManifestResult extends ProxyResourcewithoutEtag {
   /**
    * Properties of the ApplicationGatewayWafDynamicManifest.
    */
@@ -26,6 +28,7 @@ model ApplicationGatewayWafDynamicManifestResult
   /**
    * The name of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("applicationGatewayWafDynamicManifest")
