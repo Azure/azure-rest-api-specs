@@ -43,7 +43,7 @@ model GenerateGcpTemplateRequest {
   gcpCloudProfile?: GcpCloudProfile;
 
   @doc("Optional template output format. Defaults to 'terraform' if not provided")
-  gcpTemplateFormat?: GCPTemplateFormat;
+  gcpTemplateFormat?: GcpTemplateFormat;
 }
 
 @doc("The properties of Solution Type")
@@ -505,7 +505,7 @@ interface GenerateGcpTemplate {
 }
 
 @doc("GCP template format.")
-union GCPTemplateFormat {
+union GcpTemplateFormat {
   string,
 
   @doc("Terraform template format")

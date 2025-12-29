@@ -1991,30 +1991,6 @@
         "value"
       ]
     },
-    "GCPTemplateFormat": {
-      "type": "string",
-      "description": "GCP template format.",
-      "enum": [
-        "terraform",
-        "shellscript"
-      ],
-      "x-ms-enum": {
-        "name": "GCPTemplateFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Terraform",
-            "value": "terraform",
-            "description": "Terraform template format"
-          },
-          {
-            "name": "ShellScript",
-            "value": "shellscript",
-            "description": "Shell script template format"
-          }
-        ]
-      }
-    },
     "GcpCloudProfile": {
       "type": "object",
       "description": "cloud profile for GCP.",
@@ -2159,6 +2135,30 @@
         "projectId"
       ]
     },
+    "GcpTemplateFormat": {
+      "type": "string",
+      "description": "GCP template format.",
+      "enum": [
+        "terraform",
+        "shellscript"
+      ],
+      "x-ms-enum": {
+        "name": "GcpTemplateFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Terraform",
+            "value": "terraform",
+            "description": "Terraform template format"
+          },
+          {
+            "name": "ShellScript",
+            "value": "shellscript",
+            "description": "Shell script template format"
+          }
+        ]
+      }
+    },
     "GenerateAwsTemplateRequest": {
       "type": "object",
       "description": "ConnectorId and SolutionTypes and their properties to Generate AWS CFT Template.",
@@ -2205,7 +2205,7 @@
           "description": "The GCP cloud profile."
         },
         "gcpTemplateFormat": {
-          "$ref": "#/definitions/GCPTemplateFormat",
+          "$ref": "#/definitions/GcpTemplateFormat",
           "description": "Optional template output format. Defaults to 'terraform' if not provided"
         }
       },
