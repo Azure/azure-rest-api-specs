@@ -960,19 +960,19 @@ using Microsoft.Web;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ResourceHealthMetadata.properties);
 
-@@clientLocation(Users.getPublishingUser, "");
-@@clientLocation(Users.updatePublishingUser, "");
+@@clientLocation(Users.getPublishingUser, Microsoft.Web);
+@@clientLocation(Users.updatePublishingUser, Microsoft.Web);
 @@clientName(Users.updatePublishingUser::parameters.resource, "userDetails");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(User.properties);
 
-@@clientLocation(SourceControls.getSourceControl, "");
-@@clientLocation(SourceControls.updateSourceControl, "");
+@@clientLocation(SourceControls.getSourceControl, Microsoft.Web);
+@@clientLocation(SourceControls.updateSourceControl, Microsoft.Web);
 @@clientName(SourceControls.updateSourceControl::parameters.resource,
   "requestMessage"
 );
-@@clientLocation(SourceControls.listSourceControls, "");
+@@clientLocation(SourceControls.listSourceControls, Microsoft.Web);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SourceControl.properties);
