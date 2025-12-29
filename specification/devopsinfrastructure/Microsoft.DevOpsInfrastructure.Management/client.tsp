@@ -114,6 +114,8 @@ using Microsoft.DevOpsInfrastructure;
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
 @@clientName(ResourceDetails.listByPool, "GetResourceDetails", "csharp");
+@@clientName(Sku.listByLocation, "GetSkusByLocation", "csharp");
+@@clientName(ImageVersions.listByImage, "GetImageVersionsByImage", "csharp");
 @@clientName(NetworkProfile.ipAddresses, "IPAddresses", "csharp");
 @@clientName(NetworkProfile.staticIpAddressCount,
   "StaticIPAddressCount",
