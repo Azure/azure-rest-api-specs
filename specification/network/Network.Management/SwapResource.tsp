@@ -14,10 +14,10 @@ namespace Microsoft.Network;
  * SwapResource to represent slot type on the specified cloud service.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@singleton("default")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@singleton("default")
 model SwapResource extends ProxyResourceWithReadOnlyID {
   /**
    * Properties of the SwapResource.
@@ -27,11 +27,11 @@ model SwapResource extends ProxyResourceWithReadOnlyID {
   /**
    * The name of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("singletonResource")
   @segment("cloudServiceSlots")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
 }
 

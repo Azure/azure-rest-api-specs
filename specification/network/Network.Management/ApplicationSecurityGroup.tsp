@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * An application security group in a resource group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model ApplicationSecurityGroup extends Resource {
   properties?: ApplicationSecurityGroupPropertiesFormat;
 
@@ -24,9 +24,11 @@ model ApplicationSecurityGroup extends Resource {
   @path
   @key("applicationSecurityGroupName")
   @segment("applicationSecurityGroups")
-  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -48,8 +50,8 @@ interface ApplicationSecurityGroups {
   /**
    * Updates an application security group's tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchSync<
     ApplicationSecurityGroup,
     PatchModel = TagsObject,

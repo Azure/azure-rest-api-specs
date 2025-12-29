@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * NetworkVirtualAppliance Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkVirtualAppliance extends Resource {
   properties?: NetworkVirtualAppliancePropertiesFormat;
 
@@ -24,7 +24,9 @@ model NetworkVirtualAppliance extends Resource {
   @path
   @key("networkVirtualApplianceName")
   @segment("networkVirtualAppliances")
-  name: string;  /**
+  name: string;
+
+  /**
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -50,10 +52,10 @@ alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.
     networkVirtualApplianceName: string;
   },
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("networkVirtualApplianceConnections")
     @key
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     connectionName: string;
   }
 >;

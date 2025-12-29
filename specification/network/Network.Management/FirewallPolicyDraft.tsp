@@ -14,20 +14,20 @@ namespace Microsoft.Network;
 /**
  * FirewallPolicy Resource.
  */
-@singleton("default")
-@parentResource(FirewallPolicy)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@singleton("default")
+@parentResource(FirewallPolicy)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model FirewallPolicyDraft extends Resource {
   properties?: FirewallPolicyDraftProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
   @key("firewallPolicyDraft")
   @segment("firewallPolicyDrafts")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name: string;
 }
 

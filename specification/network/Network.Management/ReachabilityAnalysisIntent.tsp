@@ -15,10 +15,10 @@ namespace Microsoft.Network;
  * Configuration information or intent on which to do the analysis on.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@parentResource(VerifierWorkspace)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@parentResource(VerifierWorkspace)
 model ReachabilityAnalysisIntent extends CommonProxyResource {
   /**
    * Properties of the reachability analysis intent.

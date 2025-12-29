@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * Pool of backend IP addresses.
  */
-@parentResource(LoadBalancer)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(LoadBalancer)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model BackendAddressPool extends SubResourceModel {
   properties?: BackendAddressPoolPropertiesFormat;
 
@@ -105,9 +105,9 @@ interface BackendAddressPools {
    * List of inbound NAT rule port mappings.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LoadBalancers_ListInboundNatRulePortMappings")
   @action("queryInboundNatRulePortMapping")
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listInboundNatRulePortMappings is ListInboundNatRulePortMappingsOps.ActionAsync<
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,

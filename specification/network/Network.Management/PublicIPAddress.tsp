@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * Public IP address resource.
  */
-@parentResource(NetworkInterface)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(NetworkInterface)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model PublicIPAddress extends Resource {
   properties?: PublicIPAddressPropertiesFormat;
 
@@ -51,7 +51,6 @@ model PublicIPAddress extends Resource {
    * A list of availability zones denoting the IP allocated for the resource needs to come from.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-
   zones?: string[];
 }
 
@@ -61,9 +60,9 @@ alias PublicIPAddressOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("providers")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -119,7 +118,7 @@ interface PublicIPAddresses {
   /**
    * Get the specified public IP address in a cloud service.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getCloudServicePublicIPAddress is PublicIPAddressOps.Read<
     PublicIPAddress,
     Parameters = {
@@ -135,7 +134,7 @@ interface PublicIPAddresses {
   /**
    * Gets information about all public IP addresses in a role instance IP configuration in a cloud service.
    */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listCloudServiceRoleInstancePublicIPAddresses is PublicIPAddressOps.List<
     PublicIPAddress,
     OverrideErrorType = CloudError
@@ -157,8 +156,8 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
   }
 >;
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface PublicIPAddressOperationGroup {
   /**
    * Gets the specified public IP address in a specified resource group.

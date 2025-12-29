@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * A load balancing rule for a load balancer.
  */
-@parentResource(LoadBalancer)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(LoadBalancer)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model LoadBalancingRule extends SubResourceModel {
   properties?: LoadBalancingRulePropertiesFormat;
 
@@ -39,10 +39,10 @@ alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOper
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("resourceGroups")
     @pattern("^[a-zA-Z0-9_.-]*$")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     groupName: string;
 
     ...Azure.ResourceManager.Legacy.Provider;

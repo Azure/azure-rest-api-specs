@@ -15,10 +15,10 @@ namespace Microsoft.Network;
  * Instance of Pool resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@parentResource(NetworkManager)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@parentResource(NetworkManager)
 model IpamPool extends CommonTrackedResource {
   /**
    * Properties of the Pool resource.
@@ -39,7 +39,6 @@ model IpamPool extends CommonTrackedResource {
   @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
   name: string;
 }
-
 
 @armResourceOperations
 interface IpamPools {

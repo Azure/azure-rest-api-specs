@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * Private Endpoint connection on an application gateway.
  */
-@parentResource(ApplicationGateway)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(ApplicationGateway)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
   properties?: ApplicationGatewayPrivateEndpointConnectionProperties;
 
@@ -29,8 +29,8 @@ model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -48,7 +48,7 @@ interface ApplicationGatewayPrivateEndpointConnections {
    * Updates the specified private endpoint connection on application gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   update is ArmResourceCreateOrReplaceAsync<
     ApplicationGatewayPrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<ApplicationGatewayPrivateEndpointConnection> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &

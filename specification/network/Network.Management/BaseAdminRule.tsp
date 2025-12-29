@@ -15,13 +15,13 @@ namespace Microsoft.Network;
 /**
  * Network base admin rule.
  */
-@parentResource(AdminRuleCollection)
-@discriminator("kind")
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(AdminRuleCollection)
+@discriminator("kind")
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model BaseAdminRule extends ChildResource {
   @visibility(Lifecycle.Read)
   @path

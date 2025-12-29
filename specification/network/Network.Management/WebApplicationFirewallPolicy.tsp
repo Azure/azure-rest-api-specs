@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * Defines web application firewall policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model WebApplicationFirewallPolicy extends Resource {
   properties?: WebApplicationFirewallPolicyPropertiesFormat;
 
@@ -24,7 +24,9 @@ model WebApplicationFirewallPolicy extends Resource {
   @path
   @key("policyName")
   @segment("ApplicationGatewayWebApplicationFirewallPolicies")
-  name: string;  /**
+  name: string;
+
+  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

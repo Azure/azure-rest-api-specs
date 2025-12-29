@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * Private endpoint resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model PrivateEndpoint extends Resource {
   properties?: PrivateEndpointProperties;
 
@@ -24,7 +24,9 @@ model PrivateEndpoint extends Resource {
   @path
   @key("privateEndpointName")
   @segment("privateEndpoints")
-  name: string;  /**
+  name: string;
+
+  /**
    * The extended location of the load balancer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -133,10 +135,10 @@ interface PrivateEndpoints {
    * Creates or updates a private dns zone group in the specified private endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateDnsZoneGroups_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.CreateOrUpdateAsync<
     PrivateEndpoint,
     Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<PrivateDnsZoneGroup>,

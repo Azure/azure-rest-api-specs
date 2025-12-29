@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * Defines the admin rule collection.
  */
-@parentResource(SecurityAdminConfiguration)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(SecurityAdminConfiguration)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model AdminRuleCollection extends ChildResource {
   properties?: AdminRuleCollectionPropertiesFormat;
 

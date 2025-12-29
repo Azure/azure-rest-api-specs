@@ -14,12 +14,12 @@ namespace Microsoft.Network;
 /**
  * SharedKey Resource .
  */
-@singleton("default")
-@parentResource(VpnSiteLinkConnection)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@singleton("default")
+@parentResource(VpnSiteLinkConnection)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model ConnectionSharedKeyResult extends SubResourceModel {
   properties?: SharedKeyProperties;
 
@@ -74,7 +74,8 @@ interface ConnectionSharedKeyResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_GetDefaultSharedKey")
-  getDefaultSharedKey is VpnLinkConnectionSharedKeyOps.Read<ConnectionSharedKeyResult,
+  getDefaultSharedKey is VpnLinkConnectionSharedKeyOps.Read<
+    ConnectionSharedKeyResult,
     OverrideErrorType = CloudError
   >;
 
@@ -83,7 +84,10 @@ interface ConnectionSharedKeyResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnLinkConnections_SetOrInitDefaultSharedKey")
-  setOrInitDefaultSharedKey is VpnLinkConnectionSharedKeyOps.CreateOrUpdateAsync<ConnectionSharedKeyResult,  OverrideErrorType = CloudError>;
+  setOrInitDefaultSharedKey is VpnLinkConnectionSharedKeyOps.CreateOrUpdateAsync<
+    ConnectionSharedKeyResult,
+    OverrideErrorType = CloudError
+  >;
 
   /**
    * Lists all shared keys of VpnLink connection specified.
