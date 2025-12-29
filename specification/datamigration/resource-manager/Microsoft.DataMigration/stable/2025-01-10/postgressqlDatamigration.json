@@ -783,6 +783,55 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/testConnectivity/{requestId}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/{requestId}": {
+      "get": {
+        "operationId": "PostgresqlMigrationServices_GetTestConnectivityStatus",
+        "tags": [
+          "PostgresqlMigrationServices"
+        ],
+        "description": "Gets the status of a connectivity test operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The migration service name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "Request ID returned from the test connectivity operation",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityTestStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1009,6 +1058,32 @@
       "required": [
         "requestId",
         "properties"
+      ]
+    },
+    "ConnectivityTestStatusResponse": {
+      "type": "object",
+      "description": "Status response for connectivity test operation.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "Request identifier for tracking the operation"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectivityTestProperties",
+          "description": "Connectivity test properties"
+        },
+        "error": {
+          "$ref": "#/definitions/MigrationError",
+          "description": "Error details if operation failed"
+        }
+      },
+      "required": [
+        "requestId",
+        "status"
       ]
     },
     "DatabaseCredentials": {
@@ -1836,6 +1911,43 @@
         "errors",
         "lastUpdatedAt"
       ]
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Operation status enum.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Operation is in progress"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operation completed successfully"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Operation was cancelled"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "ProvisioningState": {
       "type": "string",

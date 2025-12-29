@@ -588,3 +588,35 @@ model DatabaseDiscoveryResult {
   @doc("Target database objects discovered")
   target: DiscoveredDatabaseObjects;
 }
+
+@doc("Status response for connectivity test operation.")
+model ConnectivityTestStatusResponse {
+  @doc("Request identifier for tracking the operation")
+  requestId: string;
+
+  @doc("Operation status")
+  status: OperationStatus;
+
+  @doc("Connectivity test properties")
+  properties?: ConnectivityTestProperties;
+
+  @doc("Error details if operation failed")
+  error?: MigrationError;
+}
+
+@doc("Operation status enum.")
+union OperationStatus {
+  string,
+
+  @doc("Operation is in progress")
+  InProgress: "InProgress",
+
+  @doc("Operation completed successfully")
+  Succeeded: "Succeeded",
+
+  @doc("Operation failed")
+  Failed: "Failed",
+
+  @doc("Operation was cancelled")
+  Cancelled: "Cancelled",
+}

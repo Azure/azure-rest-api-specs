@@ -7,6 +7,8 @@ import "./PostgresqlMigrationService.tsp";
 import "./PostgresqlDatabaseMigration.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Microsoft.DataMigration;
 
@@ -33,6 +35,18 @@ interface PostgresqlMigrationServices {
     TestConnectivityRequest,
     ConnectivityTestResult
   >;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom GET operation for retrieving async operation status"
+  @doc("Gets the status of a connectivity test operation.")
+  @get
+  @route("/testConnectivity/{requestId}")
+  getTestConnectivityStatus(
+    ...ResourceInstanceParameters<MigrationService>,
+
+    @doc("Request ID returned from the test connectivity operation")
+    @path
+    requestId: string,
+  ): ConnectivityTestStatusResponse | ErrorResponse;
 
   @doc("Discovers database objects (databases and schemas) from source and target.")
   discoverDatabaseObjects is ArmResourceActionAsync<
