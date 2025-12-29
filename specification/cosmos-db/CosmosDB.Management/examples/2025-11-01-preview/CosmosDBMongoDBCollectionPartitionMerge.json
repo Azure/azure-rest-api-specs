@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "collectionName": "collectionName",
+    "databaseName": "databaseName",
+    "mergeParameters": {
+      "isDryRun": false
+    },
+    "resourceGroupName": "rgName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "physicalPartitionStorageInfoCollection": [
+          {
+            "id": "0",
+            "storageInKB": 333
+          },
+          {
+            "id": "1",
+            "storageInKB": 305
+          },
+          {
+            "id": "177",
+            "storageInKB": 368
+          },
+          {
+            "id": "178",
+            "storageInKB": 96313
+          },
+          {
+            "id": "5",
+            "storageInKB": 194
+          },
+          {
+            "id": "6",
+            "storageInKB": 331
+          },
+          {
+            "id": "7",
+            "storageInKB": 384
+          },
+          {
+            "id": "8",
+            "storageInKB": 246
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview"
+      }
+    }
+  },
+  "operationId": "MongoDBResources_ListMongoDBCollectionPartitionMerge",
+  "title": "CosmosDBMongoDBCollectionPartitionMerge"
+}

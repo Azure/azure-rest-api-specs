@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "fleetName": "fleet1",
+    "fleetspaceName": "fleetspace1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "db1",
+            "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db1",
+            "properties": {
+              "globalDatabaseAccountProperties": {
+                "armLocation": "West US",
+                "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db1"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "db2",
+            "type": "Microsoft.DocumentDB/fleets/fleetspaces/fleetspaceAccounts",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetspaces/fleetspace1/fleetspaceAccounts/db2",
+            "properties": {
+              "globalDatabaseAccountProperties": {
+                "armLocation": "North Central US",
+                "resourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/resourceGroup/rg1/databaseAccounts/db2"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FleetspaceAccount_List",
+  "title": "CosmosDB FleetspaceAccount List"
+}

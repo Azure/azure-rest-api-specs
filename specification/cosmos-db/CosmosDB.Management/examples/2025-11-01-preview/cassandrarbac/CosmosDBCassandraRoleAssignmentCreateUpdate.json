@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "accountName": "myAccountName",
+    "api-version": "2025-11-01-preview",
+    "createUpdateCassandraRoleAssignmentParameters": {
+      "properties": {
+        "principalId": "myPrincipalId",
+        "roleDefinitionId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/cassandraRoleDefinitions/myRoleDefinitionId",
+        "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases"
+      }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "roleAssignmentId": "myRoleAssignmentId",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRoleAssignmentId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/cassandraRoleAssignments",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/cassandraRoleAssignments/myRoleAssignmentId",
+        "properties": {
+          "principalId": "myPrincipalId",
+          "roleDefinitionId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/cassandraRoleDefinitions/myRoleDefinitionId",
+          "scope": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/purchases/colls/redmond-purchases"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview"
+      }
+    }
+  },
+  "operationId": "CassandraResources_CreateUpdateCassandraRoleAssignment",
+  "title": "CosmosDBCassandraRoleAssignmentCreateUpdate"
+}

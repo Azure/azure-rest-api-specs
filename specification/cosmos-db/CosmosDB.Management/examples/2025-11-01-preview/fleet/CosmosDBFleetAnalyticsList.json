@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "fleetName": "fleet1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "storageAccount",
+            "type": "Microsoft.DocumentDB/fleets/fleetAnalytics",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/storageAccount",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "storageLocationType": "StorageAccount",
+              "storageLocationUri": "/subscriptions/d1eb41bc-1b7f-4404-bd2a-868c222852d/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/testStorageAccount1"
+            }
+          },
+          {
+            "name": "fabricLakehouse",
+            "type": "Microsoft.DocumentDB/fleets/fleetAnalytics",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/rg1/providers/Microsoft.DocumentDB/fleets/fleet1/fleetAnalytics/fabricLakehouse",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "storageLocationType": "FabricLakehouse",
+              "storageLocationUri": "/tenantId/72f988bf-86f1-41af-91ab-2d7cd011db47/workspace/testFabricWorkspace/lakehouse/testLakehouse"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FleetAnalytics_List",
+  "title": "CosmosDB FleetAnalytics List"
+}

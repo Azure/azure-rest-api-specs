@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "keyspaceName": "keyspaceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "tableName",
+            "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraTables/tableName",
+            "location": "West US",
+            "properties": {
+              "resource": {
+                "schema": {
+                  "clusterKeys": [
+                    {
+                      "name": "columnA",
+                      "orderBy": "Asc"
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "name": "columnA",
+                      "type": "Ascii"
+                    }
+                  ],
+                  "partitionKeys": [
+                    {
+                      "name": "columnA"
+                    }
+                  ]
+                },
+                "analyticalStorageTtl": 500,
+                "defaultTtl": 100,
+                "id": "tableName"
+              }
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CassandraResources_ListCassandraTables",
+  "title": "CosmosDBCassandraTableList"
+}
