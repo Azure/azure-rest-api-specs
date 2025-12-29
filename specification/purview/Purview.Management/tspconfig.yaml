@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/purview"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,40 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/Purview/{version-status}/{version}/purview.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-purview"
+    namespace: "azure.mgmt.purview"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-purview"
+    namespace: "com.azure.resourcemanager.purview"
+    service-name: "Purview" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-purview"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-purview"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/purview"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpurview"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpurview"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.Maps"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
