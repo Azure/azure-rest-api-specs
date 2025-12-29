@@ -8,9 +8,6 @@ using Microsoft.ProviderHub;
 
 @@clientLocation(ProviderRegistrations.checkinManifest, "Client", "go");
 @@clientLocation(ProviderRegistrations.generateManifest, "Client", "go");
-@@clientLocation(OperationsPutContents.createOrUpdate, "OperationsClient", "go");
-@@clientLocation(OperationsPutContents.delete, "OperationsClient", "go");
-@@clientLocation(OperationsPutContents.listByProviderRegistration, "OperationsClient", "go");
 @@clientName(SkuCapacity, "SKUSettingCapacity", "go");
 @@clientName(ResourceTypeSku, "SKUResourceProperties", "go");
 @@clientName(IdentityManagementProperties, "ResourceTypeRegistrationPropertiesIdentityManagement", "go");
