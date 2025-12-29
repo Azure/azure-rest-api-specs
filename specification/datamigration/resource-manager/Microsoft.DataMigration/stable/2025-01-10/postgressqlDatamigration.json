@@ -784,7 +784,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/testConnectivity/{requestId}": {
+    "/testConnectivity/{requestId}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/{requestId}": {
       "get": {
         "operationId": "PostgresqlMigrationServices_GetTestConnectivityStatus",
         "tags": [
@@ -821,7 +821,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectivityTestStatusResponse"
+              "$ref": "#/definitions/CheckConnectivityResult"
             }
           },
           "default": {
@@ -899,6 +899,34 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
+      ]
+    },
+    "CheckConnectivityResult": {
+      "type": "object",
+      "description": "Status response for connectivity test operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectivityTestStatusProperties",
+          "description": "Status properties"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
       ]
     },
     "ComputeProfile": {
@@ -1065,9 +1093,9 @@
         "properties"
       ]
     },
-    "ConnectivityTestStatusResponse": {
+    "ConnectivityTestStatusProperties": {
       "type": "object",
-      "description": "Status response for connectivity test operation.",
+      "description": "Properties of connectivity test status response.",
       "properties": {
         "requestId": {
           "type": "string",
@@ -1077,7 +1105,7 @@
           "$ref": "#/definitions/OperationStatus",
           "description": "Operation status"
         },
-        "properties": {
+        "testResults": {
           "$ref": "#/definitions/ConnectivityTestProperties",
           "description": "Connectivity test properties"
         },

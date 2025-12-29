@@ -46,7 +46,7 @@ interface PostgresqlMigrationServices {
     @doc("Request ID returned from the test connectivity operation")
     @path
     requestId: string,
-  ): ConnectivityTestStatusResponse | ErrorResponse;
+  ): CheckConnectivityResult | ErrorResponse;
 
   @doc("Discovers database objects (databases and schemas) from source and target.")
   discoverDatabaseObjects is ArmResourceActionAsync<

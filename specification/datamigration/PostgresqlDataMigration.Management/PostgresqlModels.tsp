@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Rest;
+
 namespace Microsoft.DataMigration;
 
 @doc("The mode of the database migration.")
@@ -590,7 +592,22 @@ model DatabaseDiscoveryResult {
 }
 
 @doc("Status response for connectivity test operation.")
-model ConnectivityTestStatusResponse {
+model CheckConnectivityResult {
+  @doc("Resource ID")
+  id: string;
+
+  @doc("Resource name")
+  name: string;
+
+  @doc("Resource type")
+  type: string;
+
+  @doc("Status properties")
+  properties: ConnectivityTestStatusProperties;
+}
+
+@doc("Properties of connectivity test status response.")
+model ConnectivityTestStatusProperties {
   @doc("Request identifier for tracking the operation")
   requestId: string;
 
@@ -598,7 +615,7 @@ model ConnectivityTestStatusResponse {
   status: OperationStatus;
 
   @doc("Connectivity test properties")
-  properties?: ConnectivityTestProperties;
+  testResults?: ConnectivityTestProperties;
 
   @doc("Error details if operation failed")
   error?: MigrationError;
