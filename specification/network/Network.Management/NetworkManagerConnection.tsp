@@ -24,10 +24,11 @@ model NetworkManagerConnection extends ChildResource {
   @segment("networkManagerConnections")
   name: string;
 
-  /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The system metadata related to this resource.
+   */
   @visibility(Lifecycle.Read)
-  etag?: string;
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
 alias NetworkManagerConnectionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -68,7 +69,10 @@ interface NetworkManagerConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SubscriptionNetworkManagerConnections_CreateOrUpdate")
-  createOrUpdate is NetworkManagerConnectionOps.CreateOrUpdateSync<NetworkManagerConnection>;
+  createOrUpdate is NetworkManagerConnectionOps.CreateOrUpdateSync<
+    NetworkManagerConnection,
+    ErrorType = CloudError
+  >;
 
   /**
    * Delete specified connection created by this subscription.
@@ -101,7 +105,8 @@ interface NetworkManagerConnections {
        */
       @query("$skipToken")
       $skipToken?: string;
-    }
+    },
+    ErrorType = CloudError
   >;
 }
 

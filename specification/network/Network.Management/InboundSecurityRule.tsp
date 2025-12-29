@@ -33,7 +33,6 @@ model InboundSecurityRule extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(InboundSecurityRule.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -57,6 +56,9 @@ interface InboundSecurityRuleOperationGroup {
 }
 
 @@doc(InboundSecurityRule.name, "The name of security rule collection.");
+@@doc(InboundSecurityRule.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(InboundSecurityRule.properties,
   "The properties of the Inbound Security Rules."
 );

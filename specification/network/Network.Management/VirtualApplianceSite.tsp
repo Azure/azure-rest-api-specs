@@ -35,7 +35,6 @@ model VirtualApplianceSite extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(VirtualApplianceSite.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VirtualApplianceSites {
@@ -72,7 +71,9 @@ interface VirtualApplianceSites {
   >;
 }
 
-@@doc(VirtualApplianceSite.name, "The name of the site.");
+@@doc(VirtualApplianceSite.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(VirtualApplianceSite.properties,
   "The properties of the Virtual Appliance Sites."
 );

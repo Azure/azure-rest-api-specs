@@ -7120,6 +7120,30 @@ model SubResourceModel {
 }
 
 /**
+ * Reference to another subresource.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ReadOnlySubResourceModel {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
  * Proxy resource representation.
  */
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
@@ -7127,7 +7151,6 @@ model ProxyResource {
   /**
    * Resource ID.
    */
-  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -7150,10 +7173,10 @@ model ProxyResource {
 }
 
 /**
- * Tracked resource with optional location.
+ * Proxy resource representation.
  */
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
-model TrackedResourcewithOptionalLocation {
+model ProxyResourceWithReadOnlyID {
   /**
    * Resource ID.
    */
@@ -7171,6 +7194,53 @@ model TrackedResourcewithOptionalLocation {
    */
   @visibility(Lifecycle.Read)
   type?: string;
+}
+
+/**
+ * Proxy resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ProxyResourcewithoutEtag {
+  /**
+   * Resource ID.
+   */
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Tracked resource with optional location.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model TrackedResourcewithOptionalLocation {
+  /**
+   * ID of the connection monitor.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Name of the connection monitor.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Connection monitor type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -7179,12 +7249,12 @@ model TrackedResourcewithOptionalLocation {
   etag?: string;
 
   /**
-   * Resource location.
+   * Connection monitor location.
    */
   location?: string;
 
   /**
-   * Resource tags.
+   * Connection monitor tags.
    */
   tags?: Record<string>;
 }
@@ -9433,6 +9503,12 @@ model ResourceNavigationLink extends SubResource {
   name?: string;
 
   /**
+   * Resource navigation link identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   @visibility(Lifecycle.Read)
@@ -10957,6 +11033,7 @@ model ApplicationGatewayWebApplicationFirewallConfiguration {
   /**
    * Maximum file upload size in Mb for WAF.
    */
+  @minValue(0)
   fileUploadLimitInMb?: int32;
 
   /**
@@ -11008,6 +11085,7 @@ model ApplicationGatewayAutoscaleConfiguration {
   /**
    * Lower bound on number of Application Gateway capacity.
    */
+  @minValue(0)
   minCapacity: int32;
 
   /**
@@ -11320,6 +11398,7 @@ model TagsObject {
   /**
    * Resource tags.
    */
+  tags?: Record<string>;
 }
 
 /**
@@ -15272,6 +15351,7 @@ model IpamPoolProperties {
  * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Tracked Resource")
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CommonTrackedResource extends CommonResource {
   /**
@@ -15291,6 +15371,7 @@ model CommonTrackedResource extends CommonResource {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
+@summary("Resource")
 model CommonResource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -15391,6 +15472,9 @@ model IpamPoolUpdate {
   /**
    * Dictionary of <string>
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
   /**
    * Represents the IpamPool update properties.
    */
@@ -15594,6 +15678,7 @@ model StaticCidrProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Proxy Resource")
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model CommonProxyResource extends CommonResource {}
 
@@ -16424,6 +16509,8 @@ model PatchObject {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 /**
@@ -16857,6 +16944,107 @@ model Resource {
   /**
    * Resource ID.
    */
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ResourceWithRequiredLocation {
+  /**
+   * Resource ID.
+   */
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ResourceWithReadOnlyNameAndID {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  tags?: Record<string>;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ResourceWithReadOnlyID {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
   id?: string;
 
   /**
@@ -17644,6 +17832,8 @@ model UpdateTagsRequest {
   /**
    * List of tags for Network Security Perimeter
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 /**
@@ -17699,12 +17889,14 @@ model NspAccessRuleProperties {
   /**
    * List of subscription ids
    */
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   subscriptions?: SubscriptionId[];
 
   /**
    * Rule specified by the perimeter id.
    */
   @visibility(Lifecycle.Read)
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   networkSecurityPerimeters?: PerimeterBasedAccessRule[];
 
   /**
@@ -18144,6 +18336,9 @@ model VerifierWorkspaceUpdate {
   /**
    * Dictionary of <string>
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
   /**
    * Represents the VerifierWorkspace update properties.
    */
@@ -20211,6 +20406,8 @@ model ConnectionMonitor {
   /**
    * Connection monitor tags.
    */
+  tags?: Record<string>;
+
   /**
    * Properties of the connection monitor.
    */
@@ -21319,9 +21516,6 @@ model BgpServiceCommunity extends Resource {
    * Properties of the BGP service community.
    */
   properties?: BgpServiceCommunityPropertiesFormat;
-
-  /** Resource location. */
-  location?: string;
 }
 
 /**
@@ -21587,12 +21781,12 @@ model VirtualNetworkPropertiesFormat {
   /**
    * Indicates if DDoS protection is enabled for all the protected resources in the virtual network. It requires a DDoS protection plan associated with the resource.
    */
-  enableDdosProtection?: boolean;
+  enableDdosProtection?: boolean = false;
 
   /**
    * Indicates if VM protection is enabled for all the subnets in the virtual network.
    */
-  enableVmProtection?: boolean;
+  enableVmProtection?: boolean = false;
 
   /**
    * The DDoS protection plan associated with the virtual network.
@@ -22419,7 +22613,7 @@ model RadiusServer {
   /**
    * The secret used for this radius server. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   radiusServerSecret?: string;
 }
 
@@ -22548,6 +22742,7 @@ model BgpSettings {
   /**
    * The BGP speaker's ASN.
    */
+  @minValue(0)
   @maxValue(4294967295)
   asn?: int64;
 
@@ -22661,13 +22856,6 @@ model VirtualNetworkGatewayListConnectionsResult
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VirtualNetworkGatewayConnectionListEntity extends Resource {
-  /**
-   * Resource tags.
-   */
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
   /**
    * Properties of the virtual network gateway connection.
    */
@@ -26383,11 +26571,13 @@ model PolicySettings {
   /**
    * Maximum file upload size in Mb for WAF.
    */
+  @minValue(0)
   fileUploadLimitInMb?: int32;
 
   /**
    * If the action type is block, customer can override the response status code.
    */
+  @minValue(0)
   customBlockResponseStatusCode?: int32;
 
   /**
@@ -27462,6 +27652,8 @@ model PatchRouteFilter extends SubResource {
   /**
    * Resource tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 /**
@@ -27612,6 +27804,9 @@ model BastionHostListResult is Azure.Core.Page<BastionHost>;
 );
 @@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryState,
   "scrubbingRuleEntryState"
+);
+@@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureSeverity,
+  "FirewallPolicyIDPSSignatureSeverity"
 );
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(PacketCaptureListResult.value,

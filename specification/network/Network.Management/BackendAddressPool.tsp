@@ -30,10 +30,6 @@ model BackendAddressPool extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(BackendAddressPool.name,
-  "The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource."
-);
-
 alias ListInboundNatRulePortMappingsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -112,8 +108,12 @@ interface BackendAddressPools {
     BackendAddressPool,
     QueryInboundNatRulePortMappingRequest,
     void,
-    Response = ArmResponse<BackendAddressInboundNatRulePortMappings> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<BackendAddressInboundNatRulePortMappings> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackendAddressInboundNatRulePortMappings> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: BackendAddressInboundNatRulePortMappings;
+    }),
+    OverrideErrorType = CloudError
   >;
 }
 

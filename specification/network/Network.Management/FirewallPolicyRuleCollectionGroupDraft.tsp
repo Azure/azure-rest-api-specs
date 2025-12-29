@@ -29,7 +29,6 @@ model FirewallPolicyRuleCollectionGroupDraft extends SubResourceModel {
   @segment("ruleCollectionGroupDrafts")
   name: string;
 }
-@@doc(FirewallPolicyRuleCollectionGroupDraft.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface FirewallPolicyRuleCollectionGroupDrafts {
@@ -58,7 +57,9 @@ interface FirewallPolicyRuleCollectionGroupDrafts {
   >;
 }
 
-@@doc(FirewallPolicyRuleCollectionGroupDraft.name, "");
+@@doc(FirewallPolicyRuleCollectionGroupDraft.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(FirewallPolicyRuleCollectionGroupDraft.properties,
   "The properties of the firewall policy rule collection group."
 );

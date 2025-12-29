@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * VpnSite Resource.
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnSite extends Resource {
+model VpnSite extends ResourceWithRequiredLocation {
   properties?: VpnSiteProperties;
 
   @visibility(Lifecycle.Read)

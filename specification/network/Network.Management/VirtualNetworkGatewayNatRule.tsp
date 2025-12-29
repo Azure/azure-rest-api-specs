@@ -35,7 +35,6 @@ model VirtualNetworkGatewayNatRule extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(VirtualNetworkGatewayNatRule.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VirtualNetworkGatewayNatRules {
@@ -72,7 +71,9 @@ interface VirtualNetworkGatewayNatRules {
   >;
 }
 
-@@doc(VirtualNetworkGatewayNatRule.name, "The name of the nat rule.");
+@@doc(VirtualNetworkGatewayNatRule.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(VirtualNetworkGatewayNatRule.properties,
   "Properties of the Virtual Network Gateway NAT rule."
 );

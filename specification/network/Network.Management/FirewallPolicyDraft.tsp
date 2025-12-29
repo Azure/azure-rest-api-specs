@@ -24,11 +24,7 @@ model FirewallPolicyDraft extends Resource {
   @path
   @key("firewallPolicyDraft")
   @segment("firewallPolicyDrafts")
-  name: string;  /** Resource tags. *//**
-   * Resource location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  name: string;
 }
 
 @armResourceOperations

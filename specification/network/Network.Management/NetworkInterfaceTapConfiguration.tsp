@@ -33,7 +33,6 @@ model NetworkInterfaceTapConfiguration extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(NetworkInterfaceTapConfiguration.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface NetworkInterfaceTapConfigurations {
@@ -70,7 +69,7 @@ interface NetworkInterfaceTapConfigurations {
 }
 
 @@doc(NetworkInterfaceTapConfiguration.name,
-  "The name of the tap configuration."
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(NetworkInterfaceTapConfiguration.properties,
   "Properties of the Virtual Network Tap configuration."

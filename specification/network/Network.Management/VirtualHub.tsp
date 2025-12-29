@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * VirtualHub Resource.
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualHub extends Resource {
+model VirtualHub extends ResourceWithRequiredLocation {
   properties?: VirtualHubProperties;
 
   @visibility(Lifecycle.Read)
@@ -52,10 +52,10 @@ alias HubVirtualNetworkConnectionOps = Azure.ResourceManager.Legacy.LegacyOperat
     virtualHubName: string;
   },
   {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("hubVirtualNetworkConnections")
     @key
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     connectionName: string;
   }
 >;
@@ -176,10 +176,10 @@ interface VirtualHubs {
    * Creates a hub virtual network connection if it doesn't exist else updates the existing one.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("HubVirtualNetworkConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.CreateOrUpdateAsync<
     VirtualHub,
     Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<HubVirtualNetworkConnection>,
@@ -240,10 +240,10 @@ interface VirtualHubs {
    * Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubRouteTableV2s_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.CreateOrUpdateAsync<
     VirtualHub,
     Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<VirtualHubRouteTableV2>,

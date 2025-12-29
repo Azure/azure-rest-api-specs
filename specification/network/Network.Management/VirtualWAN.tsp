@@ -13,12 +13,9 @@ namespace Microsoft.Network;
 /**
  * VirtualWAN Resource.
  */
-/**
- * VirtualWAN Resource.
- */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualWAN extends Resource {
+model VirtualWAN extends ResourceWithRequiredLocation {
   properties?: VirtualWanProperties;
 
   @visibility(Lifecycle.Read)
@@ -44,16 +41,16 @@ alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
   },
   {
     /** The name of the VirtualWAN. */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("virtualWans")
     @key
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     virtualWANName: string;
   }
 >;
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface VirtualWANS {
   /**
    * Retrieves the details of a VirtualWAN.
@@ -76,9 +73,9 @@ interface VirtualWANS {
    * Updates a VirtualWAN tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualWans_UpdateTags")
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchSync<
     VirtualWAN,
     PatchModel = TagsObject,
@@ -154,7 +151,8 @@ interface VirtualWANS {
   download is VirtualWanOps.ActionAsync<
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
-    OkResponse,
+    Result = void,
+    Response = OkResponse,
     OverrideErrorType = CloudError
   >;
 

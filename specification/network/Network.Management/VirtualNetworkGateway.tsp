@@ -15,17 +15,13 @@ namespace Microsoft.Network;
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkGateway extends Resource {
-  properties?: VirtualNetworkGatewayPropertiesFormat;
+  properties: VirtualNetworkGatewayPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
   @key("virtualNetworkGatewayName")
   @segment("virtualNetworkGateways")
-  name: string;  /**
-   * Resource tags.
-   *//** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  name: string;
 
   /**
    * The extended location of type local virtual network gateway.
@@ -65,8 +61,8 @@ interface VirtualNetworkGateways {
   /**
    * Updates a virtual network gateway tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     VirtualNetworkGateway,
     PatchModel = TagsObject,
@@ -127,7 +123,7 @@ interface VirtualNetworkGateways {
   resetVpnClientSharedKey is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    OkResponse,
+    Response = OkResponse,
     Error = CloudError
   >;
 
@@ -280,8 +276,8 @@ interface VirtualNetworkGateways {
   /**
    * The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("getvpnclientipsecparameters")
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getVpnclientIpsecParameters is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
     void,
@@ -407,7 +403,7 @@ interface VirtualNetworkGateways {
   disconnectVirtualNetworkGatewayVpnConnections is ArmResourceActionAsync<
     VirtualNetworkGateway,
     P2SVpnConnectionRequest,
-    OkResponse,
+    Response = OkResponse,
     Error = CloudError
   >;
 

@@ -14,18 +14,14 @@ namespace Microsoft.Network;
  * Route Filter Resource.
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model RouteFilter extends Resource {
+model RouteFilter extends ResourceWithRequiredLocation {
   properties?: RouteFilterPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
   @key("routeFilterName")
   @segment("routeFilters")
-  name: string;  /**
-   * Resource tags.
-   *//** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -147,10 +143,10 @@ interface RouteFilters {
    * Creates or updates a route in the specified route filter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RouteFilterRules_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.CreateOrUpdateAsync<
     RouteFilter,
     Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,

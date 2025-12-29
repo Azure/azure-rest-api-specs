@@ -31,8 +31,6 @@ model AzureWebCategory extends ProxyResource {
   name: string;
 }
 
-@@doc(AzureWebCategory.name, "Resource name.");
-
 @armResourceOperations
 interface AzureWebCategories {
   /**

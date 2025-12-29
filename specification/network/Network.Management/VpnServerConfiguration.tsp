@@ -21,7 +21,9 @@ model VpnServerConfiguration extends Resource {
   @path
   @key("vpnServerConfigurationName")
   @segment("vpnServerConfigurations")
-  name: string;  /**
+  name: string;
+
+  /**
    * A unique read-only string that changes whenever the resource is updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -47,8 +49,8 @@ interface VpnServerConfigurations {
   /**
    * Updates VpnServerConfiguration tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchSync<
     VpnServerConfiguration,
     PatchModel = TagsObject,
@@ -96,7 +98,7 @@ interface VpnServerConfigurations {
 }
 
 @@doc(VpnServerConfiguration.name,
-  "The name of the VpnServerConfiguration being retrieved."
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnServerConfiguration.properties,
   "Properties of the P2SVpnServer configuration."

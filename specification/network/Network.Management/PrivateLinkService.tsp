@@ -23,10 +23,6 @@ model PrivateLinkService extends Resource {
   @segment("privateLinkServices")
   name: string;
 
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
   /**
    * The extended location of the load balancer.
    */

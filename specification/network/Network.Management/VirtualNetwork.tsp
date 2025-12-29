@@ -23,10 +23,6 @@ model VirtualNetwork extends Resource {
   @segment("virtualNetworks")
   name: string;
 
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
   /**
    * The extended location of the virtual network.
    */
@@ -143,9 +139,9 @@ interface VirtualNetworks {
   /**
    * Checks whether a private IP address is available for use.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("CheckIPAddressAvailability")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   checkIPAddressAvailability is ArmResourceActionSync<
     VirtualNetwork,
     void,
@@ -194,7 +190,8 @@ interface VirtualNetworks {
        */
       @query("skipToken")
       skipToken?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

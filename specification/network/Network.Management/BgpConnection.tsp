@@ -33,10 +33,6 @@ model BgpConnection extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(BgpConnection.name,
-  "Name of the connection."
-);
-
 alias VirtualHubBgpConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;

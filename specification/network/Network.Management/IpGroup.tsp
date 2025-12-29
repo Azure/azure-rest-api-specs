@@ -43,16 +43,13 @@ interface IpGroups {
       @query("$expand")
       $expand?: string;
     },
-    Error = CloudError
+    Error = Error
   >;
 
   /**
    * Creates or updates an ipGroups in a specified resource group.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    IpGroup,
-    Error = CloudError
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<IpGroup, Error = Error>;
 
   /**
    * Updates tags of an IpGroups resource.
@@ -61,7 +58,7 @@ interface IpGroups {
   updateGroups is ArmCustomPatchSync<
     IpGroup,
     PatchModel = TagsObject,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -71,13 +68,13 @@ interface IpGroups {
   delete is ArmResourceDeleteWithoutOkAsync<
     IpGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
    * Gets all IpGroups in a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<IpGroup, Error = CloudError>;
+  listByResourceGroup is ArmResourceListByParent<IpGroup, Error = Error>;
 
   /**
    * Gets all IpGroups in a subscription.

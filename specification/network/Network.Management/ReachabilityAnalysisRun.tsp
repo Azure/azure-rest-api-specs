@@ -20,7 +20,7 @@ model ReachabilityAnalysisRun extends CommonProxyResource {
   /**
    * Properties of the reachability analysis run.
    */
-  properties?: ReachabilityAnalysisRunProperties;
+  properties: ReachabilityAnalysisRunProperties;
 
   /**
    * The name of the resource.
@@ -31,9 +31,13 @@ model ReachabilityAnalysisRun extends CommonProxyResource {
   @segment("reachabilityAnalysisRuns")
   @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
   name: string;
-}
 
-@@doc(ReachabilityAnalysisRun.name, "The name of the resource");
+  /**
+   * The system metadata related to this resource.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
+}
 
 @armResourceOperations
 interface ReachabilityAnalysisRuns {

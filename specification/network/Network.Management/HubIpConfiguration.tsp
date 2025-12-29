@@ -33,7 +33,6 @@ model HubIpConfiguration extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(HubIpConfiguration.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface HubIpConfigurations {
@@ -79,6 +78,9 @@ interface HubIpConfigurations {
 }
 
 @@doc(HubIpConfiguration.name, "The name of the ipconfig.");
+@@doc(HubIpConfiguration.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(HubIpConfiguration.properties,
   "The properties of the Virtual Hub IPConfigurations."
 );

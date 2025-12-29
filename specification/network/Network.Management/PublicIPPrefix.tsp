@@ -21,9 +21,7 @@ model PublicIPPrefix extends Resource {
   @path
   @key("publicIpPrefixName")
   @segment("publicIPPrefixes")
-  name: string;  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  name: string;
 
   /**
    * The extended location of the public ip address.
@@ -45,7 +43,7 @@ model PublicIPPrefix extends Resource {
   etag?: string;
 
   /**
-   * A list of availability zones denoting the IPs allocated for the resource needs to come from.
+   * A list of availability zones denoting the IP allocated for the resource needs to come from.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];

@@ -31,10 +31,6 @@ model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(ApplicationGatewayPrivateEndpointConnection.name,
-  "Name of the private endpoint connection on an application gateway."
-);
-
 @armResourceOperations
 interface ApplicationGatewayPrivateEndpointConnections {
   /**

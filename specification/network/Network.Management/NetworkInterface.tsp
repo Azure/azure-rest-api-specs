@@ -21,13 +21,13 @@ model NetworkInterface extends Resource {
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")
-  name: string;  /**
+  name: string;
+
+  /**
    * The extended location of the network interface.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  extendedLocation?: ExtendedLocation;  /** The geo-location where the resource lives */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  extendedLocation?: ExtendedLocation;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -41,9 +41,9 @@ alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("providers")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -188,7 +188,8 @@ interface NetworkInterfaceOperationGroup {
   getEffectiveRouteTable is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,
     void,
-    EffectiveRouteListResult
+    EffectiveRouteListResult,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -201,7 +202,8 @@ interface NetworkInterfaceOperationGroup {
   listEffectiveNetworkSecurityGroups is NetworkInterfaceOperationGroupOps.ActionAsync<
     NetworkInterface,
     void,
-    EffectiveNetworkSecurityGroupListResult
+    EffectiveNetworkSecurityGroupListResult,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -215,7 +217,8 @@ interface NetworkInterfaceOperationGroup {
   networkInterfaceLoadBalancersList is NetworkInterfaceOperationGroupOps.ActionSync<
     NetworkInterface,
     void,
-    ArmResponse<NetworkInterfaceLoadBalancerListResult>
+    ArmResponse<NetworkInterfaceLoadBalancerListResult>,
+    OverrideErrorType = CloudError
   >;
 }
 

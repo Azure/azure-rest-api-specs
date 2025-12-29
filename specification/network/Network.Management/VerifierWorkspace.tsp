@@ -23,10 +23,16 @@ model VerifierWorkspace extends CommonTrackedResource {
   properties?: VerifierWorkspaceProperties;
 
   /**
-   * A unique read-only string that changes whenever the resource is updated.
+   * String representing unique etag for the resource document.
    */
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * The system metadata related to this resource.
+   */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
 
   /**
    * The name of the resource.
@@ -38,8 +44,6 @@ model VerifierWorkspace extends CommonTrackedResource {
   @pattern("^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$")
   name: string;
 }
-
-@@doc(VerifierWorkspace.name, "The name of the resource");
 
 @armResourceOperations
 interface VerifierWorkspaces {
@@ -59,8 +63,8 @@ interface VerifierWorkspaces {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `If-Match`?: string;
     },
     Error = CommonErrorResponse
@@ -78,8 +82,8 @@ interface VerifierWorkspaces {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `If-Match`?: string;
     },
     Error = CommonErrorResponse,
@@ -89,14 +93,15 @@ interface VerifierWorkspaces {
   /**
    * Deletes Verifier Workspace.
    */
+  @summary("Deletes Verifier Workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VerifierWorkspace,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header("If-Match")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       `If-Match`?: string;
     },
     Error = CommonErrorResponse
@@ -143,7 +148,7 @@ interface VerifierWorkspaces {
   >;
 }
 
-@@doc(VerifierWorkspace.name, "Workspace name.");
+@@doc(VerifierWorkspace.name, "The name of the resource");
 @@doc(VerifierWorkspace.properties,
   "Properties of Verifier Workspace resource."
 );

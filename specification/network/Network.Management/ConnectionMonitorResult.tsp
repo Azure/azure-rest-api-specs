@@ -32,8 +32,6 @@ model ConnectionMonitorResult extends TrackedResourcewithOptionalLocation {
   name: string;
 }
 
-@@doc(ConnectionMonitorResult.name, "Name of the connection monitor.");
-
 
 @armResourceOperations
 interface ConnectionMonitorResults {
@@ -58,7 +56,8 @@ interface ConnectionMonitorResults {
        */
       @query("migrate")
       migrate?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
@@ -102,7 +101,7 @@ interface ConnectionMonitorResults {
   stop is ArmResourceActionAsync<
     ConnectionMonitorResult,
     void,
-    OkResponse,
+    Response = OkResponse,
     Error = ErrorResponse
   >;
 }

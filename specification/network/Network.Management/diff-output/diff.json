@@ -683,69 +683,28 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations": {
-      "get__deleted": {
-        "operationId": "AvailableDelegations_List",
-        "description": "Gets all of the available subnet delegations for this subscription in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableDelegationsResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get available delegations": {
-            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailableDelegations_List",
-        "description": "Gets all of the available subnet delegations for this subscription in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableDelegationsResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available delegations": {
-            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -921,235 +880,86 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags": {
-      "get__deleted": {
-        "operationId": "NetworkSecurityPerimeterServiceTags_List",
-        "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NspServiceTagsListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "NSPServiceTagsList": {
-            "$ref": "./examples/NspServiceTagsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "NetworkSecurityPerimeterServiceTags_List",
-        "description": "Gets the list of service tags supported by NSP. These service tags can be used to create access rules in NSP.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/NspServiceTagsListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NSPServiceTagsList": {
-            "$ref": "./examples/NspServiceTagsList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
-      "get__deleted": {
-        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
-        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "NetworkSecurityPerimeterAssociableResourceTypes": {
-            "$ref": "./examples/PerimeterAssociableResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
-        "description": "Gets the list of resources that are onboarded with NSP. These resources can be associated with a network security perimeter",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/PerimeterAssociableResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkSecurityPerimeterAssociableResourceTypes": {
-            "$ref": "./examples/PerimeterAssociableResourcesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/serviceTagDetails": {
-      "get__deleted": {
-        "operationId": "ServiceTagInformation_List",
-        "description": "Gets a list of service tag information resources with pagination.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "noAddressPrefixes",
-            "in": "query",
-            "type": "boolean"
-          },
-          {
-            "name": "tagName",
-            "in": "query",
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            " "
+          ],
+          [
+            " "
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ServiceTagInformationListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get list of service tags": {
-            "$ref": "./examples/ServiceTagInformationListResult.json"
-          },
-          "Get list of service tags with no address prefixes": {
-            "$ref": "./examples/ServiceTagInformationListResultWithNoAddressPrefixes.json"
-          },
-          "Get list of service tags with tag name.": {
-            "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "ServiceTagInformation_List",
-        "description": "Gets a list of service tag information resources with pagination.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "noAddressPrefixes",
-            "in": "query",
-            "type": "boolean"
-          },
-          {
-            "name": "tagName",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ServiceTagInformationListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of service tags": {
-            "$ref": "./examples/ServiceTagInformationListResult.json"
-          },
-          "Get list of service tags with no address prefixes": {
-            "$ref": "./examples/ServiceTagInformationListResultWithNoAddressPrefixes.json"
-          },
-          "Get list of service tags with tag name.": {
-            "$ref": "./examples/ServiceTagInformationListResultWithTagname.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1244,69 +1054,28 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/virtualNetworkAvailableEndpointServices": {
-      "get__deleted": {
-        "operationId": "AvailableEndpointServices_List",
-        "description": "List what values of endpoint services are available for use.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointServicesListResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "EndpointServicesList": {
-            "$ref": "./examples/EndpointServicesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailableEndpointServices_List",
-        "description": "List what values of endpoint services are available for use.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/EndpointServicesListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "EndpointServicesList": {
-            "$ref": "./examples/EndpointServicesList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1368,7 +1137,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -1430,7 +1199,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -2973,7 +2742,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -2995,7 +2764,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -3079,7 +2848,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -3107,7 +2876,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -3175,7 +2944,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -3459,7 +3228,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -3742,7 +3511,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -3863,7 +3632,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -3961,7 +3730,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -4085,7 +3854,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -4115,7 +3884,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -5011,7 +4780,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -5161,7 +4930,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -5175,7 +4944,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -5195,7 +4964,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -5226,7 +4995,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -5246,7 +5015,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -5427,9 +5196,6 @@
       "post": {
         "responses": {
           "202": {
-            "schema__deleted": {
-              "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
-            },
             "headers__added": {
               "Location": {
                 "type": "string",
@@ -5441,7 +5207,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -5791,270 +5557,106 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
-      "get__deleted": {
-        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup",
-        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup",
-        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get list of private link service id that can be linked to a private end point with auto approved": {
-            "$ref": "./examples/AutoApprovedPrivateLinkServicesResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableDelegations": {
-      "get__deleted": {
-        "operationId": "AvailableResourceGroupDelegations_List",
-        "description": "Gets all of the available subnet delegations for this resource group in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableDelegationsResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get available delegations in the resource group": {
-            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailableResourceGroupDelegations_List",
-        "description": "Gets all of the available subnet delegations for this resource group in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableDelegationsResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available delegations in the resource group": {
-            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
-      "get__deleted": {
-        "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
-        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get available PrivateEndpoint types in the resource group": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailablePrivateEndpointTypes_ListByResourceGroup",
-        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available PrivateEndpoint types in the resource group": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/availableServiceAliases": {
-      "get__deleted": {
-        "operationId": "AvailableServiceAliases_ListByResourceGroup",
-        "description": "Gets all available service aliases for this resource group in this region.",
+      "get": {
         "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ]
         ],
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableServiceAliasesResult"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "Get available service aliases in the resource group": {
-            "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      },
-      "post__added": {
-        "operationId": "AvailableServiceAliases_ListByResourceGroup",
-        "description": "Gets all available service aliases for this resource group in this region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/AvailableServiceAliasesResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available service aliases in the resource group": {
-            "$ref": "./examples/AvailableServiceAliasesListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6308,7 +5910,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -6330,7 +5932,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -6372,7 +5974,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -6798,7 +6400,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools": {
       "get": {
-        "summary__deleted": "Gets list of Pool resources at Network Manager level.",
         "description__added": "Gets list of Pool resources at Network Manager level.",
         "parameters": [
           [
@@ -6821,10 +6422,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "default__deleted": 0
-            }
+            " "
           ],
           [
             " "
@@ -6841,7 +6439,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -6850,7 +6448,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}": {
       "get": {
-        "summary__deleted": "Gets the specific Pool resource.",
         "description__added": "Gets the specific Pool resource.",
         "parameters": [
           [
@@ -6878,14 +6475,13 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
         }
       },
       "put": {
-        "summary__deleted": "Creates/Updates the Pool resource.",
         "description__added": "Creates/Updates the Pool resource.",
         "parameters": [
           [
@@ -6910,10 +6506,9 @@
           [
             "+",
             {
-              "name": "if-match",
+              "name": "If-Match",
               "in": "header",
-              "type": "string",
-              "x-ms-client-name": "If-Match"
+              "type": "string"
             }
           ],
           [
@@ -6940,7 +6535,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -6950,7 +6545,6 @@
         }
       },
       "patch": {
-        "summary__deleted": "Updates the specific Pool resource.",
         "description__added": "Updates the specific Pool resource.",
         "parameters": [
           [
@@ -6975,10 +6569,9 @@
           [
             "+",
             {
-              "name": "if-match",
+              "name": "If-Match",
               "in": "header",
-              "type": "string",
-              "x-ms-client-name": "If-Match"
+              "type": "string"
             }
           ],
           [
@@ -6998,14 +6591,13 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
         }
       },
       "delete": {
-        "summary__deleted": "Delete the Pool resource.",
         "description__added": "Delete the Pool resource.",
         "parameters": [
           [
@@ -7028,14 +6620,7 @@
             " "
           ],
           [
-            "~",
-            {
-              "x-ms-client-name__added": "If-Match",
-              "name": {
-                "__old": "If-Match",
-                "__new": "if-match"
-              }
-            }
+            " "
           ]
         ],
         "responses": {
@@ -7050,7 +6635,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -7059,7 +6644,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/getPoolUsage": {
       "post": {
-        "summary__deleted": "Get the Pool Usage.",
         "description__added": "Get the Pool Usage.",
         "parameters": [
           [
@@ -7087,7 +6671,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -7096,7 +6680,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/ipamPools/{poolName}/listAssociatedResources": {
       "post": {
-        "summary__deleted": "List Associated Resource in the Pool.",
         "description__added": "List Associated Resource in the Pool.",
         "parameters": [
           [
@@ -7124,7 +6707,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -8641,7 +8224,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -8693,7 +8276,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -8729,7 +8312,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -8775,7 +8358,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CommonErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/CommonErrorResponse"
               }
             }
           }
@@ -10119,7 +9702,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes Verifier Workspace.",
         "description__added": "Deletes Verifier Workspace.",
         "parameters": [
           [
@@ -12580,7 +12162,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -12828,14 +12410,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop": {
       "post": {
+        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202": {
-            "headers__added": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+          "202__deleted": {
+            "description": "ignore"
           }
         }
       }
@@ -13008,20 +12586,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections": {
       "post": {
+        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202": {
-            "headers__added": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+          "202__deleted": {
+            "description": "ignore"
           },
           "default": {
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -16095,7 +15669,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -16778,14 +16352,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
       "post": {
+        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202": {
-            "headers__added": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
+          "202__deleted": {
+            "description": "ignore"
           },
           "default": {
             "schema": {
@@ -17163,7 +16733,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -17247,7 +16817,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkWatcher.json#/definitions/ErrorResponse",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/ErrorResponse"
               }
             }
           }
@@ -18189,6 +17759,68 @@
         }
       ]
     },
+    "ProxyResourceWithReadOnlyID__added": {
+      "type": "object",
+      "description": "Proxy resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResourcewithoutEtag__added": {
+      "type": "object",
+      "description": "Proxy resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReadOnlySubResourceModel__added": {
+      "type": "object",
+      "description": "Reference to another subresource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "Record<PeerRoute[]>__added": {
       "type": "object",
       "additionalProperties": {
@@ -18197,6 +17829,104 @@
         },
         "type": "array"
       }
+    },
+    "ResourceWithReadOnlyID__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceWithReadOnlyNameAndID__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceWithRequiredLocation__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
     },
     "SignaturesOverridesProperties__added": {
       "type": "object",
@@ -18236,17 +17966,17 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID.",
+          "description": "ID of the connection monitor.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Resource name.",
+          "description": "Name of the connection monitor.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Resource type.",
+          "description": "Connection monitor type.",
           "readOnly": true
         },
         "etag": {
@@ -18256,11 +17986,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Connection monitor location."
         },
         "tags": {
           "type": "object",
-          "description": "Resource tags.",
+          "description": "Connection monitor tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -18352,15 +18082,11 @@
     },
     "AdminRuleCollection": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -18444,7 +18170,6 @@
     "ApplicationGatewayAutoscaleConfiguration": {
       "properties": {
         "minCapacity": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         },
         "maxCapacity": {
@@ -19922,7 +19647,7 @@
     "ApplicationGatewayWafDynamicManifestResult": {
       "allOf__added": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResourcewithoutEtag"
         }
       ],
       "properties": {
@@ -19958,7 +19683,6 @@
           "exclusiveMaximum__deleted": false
         },
         "fileUploadLimitInMb": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
         }
       }
@@ -20464,14 +20188,11 @@
     },
     "BaseAdminRule": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -20694,12 +20415,6 @@
       }
     },
     "BgpServiceCommunity": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -20716,13 +20431,6 @@
       "required__added": [
         "value"
       ]
-    },
-    "BgpSettings": {
-      "properties": {
-        "asn": {
-          "minimum__deleted": 0
-        }
-      }
     },
     "BreakOutCategoryPolicies": {
       "properties": {
@@ -20744,11 +20452,7 @@
         }
       }
     },
-    "CommonProxyResource": {
-      "title__deleted": "Proxy Resource"
-    },
     "CommonResource": {
-      "title__deleted": "Resource",
       "properties": {
         "systemData": {
           "$ref": {
@@ -20758,32 +20462,12 @@
         }
       }
     },
-    "CommonTrackedResource": {
-      "title__deleted": "Tracked Resource"
-    },
     "ConfigurationGroup": {
       "properties": {
         "properties": {
           "$ref": {
             "__old": "./networkManagerGroup.json#/definitions/NetworkGroupProperties",
             "__new": "#/definitions/NetworkGroupProperties"
-          }
-        }
-      }
-    },
-    "ConnectionMonitor": {
-      "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "description": "Connection monitor tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": {
-            "__old": "Properties of the connection monitor.",
-            "__new": "Connection monitor tags.Properties of the connection monitor."
           }
         }
       }
@@ -20924,14 +20608,11 @@
     },
     "ConnectivityConfiguration": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -21355,12 +21036,9 @@
       }
     },
     "DdosProtectionPlan": {
-      "required__added": [
-        "location"
-      ],
       "allOf__added": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithReadOnlyID"
         }
       ],
       "properties": {
@@ -21379,17 +21057,15 @@
           "description": "Resource type.",
           "readOnly": true
         },
+        "location__deleted": {
+          "type": "string",
+          "description": "Resource location."
+        },
         "tags__deleted": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "etag": {
-          "description": {
-            "__old": "A unique read-only string that changes whenever the resource is updated.",
-            "__new": "The ETag of the DDoS protection plan."
           }
         }
       }
@@ -21498,14 +21174,7 @@
       }
     },
     "DscpConfiguration": {
-      "required__added": [
-        "location"
-      ],
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        },
         "etag": {
           "readOnly__deleted": true
         }
@@ -21746,20 +21415,6 @@
       }
     },
     "ExpressRouteCircuit": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "etag__deleted": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -22012,15 +21667,6 @@
       }
     },
     "ExpressRouteCrossConnection": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -22202,15 +21848,6 @@
       }
     },
     "ExpressRouteGateway": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -22305,14 +21942,7 @@
       }
     },
     "ExpressRoutePort": {
-      "required__added": [
-        "location"
-      ],
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -22428,15 +22058,6 @@
       }
     },
     "ExpressRoutePortsLocation": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -22484,9 +22105,6 @@
       }
     },
     "ExpressRouteProviderPort": {
-      "required__added": [
-        "location"
-      ],
       "properties": {
         "id__deleted": {
           "type": "string",
@@ -22502,10 +22120,6 @@
           "type": "string",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
           "readOnly": true
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags."
         }
       },
       "allOf": [
@@ -22514,7 +22128,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithReadOnlyNameAndID"
             }
           }
         ]
@@ -22587,14 +22201,7 @@
       }
     },
     "FirewallPolicy": {
-      "required__added": [
-        "location"
-      ],
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        },
         "identity": {
           "$ref": {
             "__old": "./network.json#/definitions/ManagedServiceIdentity",
@@ -22615,15 +22222,6 @@
       ]
     },
     "FirewallPolicyDraft": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
@@ -22930,9 +22528,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "readOnly__deleted": true
         }
       },
       "allOf": [
@@ -23536,12 +23131,6 @@
       }
     },
     "IpAllocation": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -23700,14 +23289,11 @@
     },
     "IpamPoolUpdate": {
       "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "tags": {
+          "description__added": "Dictionary of <string>"
         },
         "properties": {
-          "description__added": "Dictionary of <string>Represents the IpamPool update properties."
+          "description__added": "Represents the IpamPool update properties."
         }
       }
     },
@@ -23818,10 +23404,6 @@
     },
     "LoadBalancer": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -24008,9 +23590,6 @@
       }
     },
     "LocalNetworkGateway": {
-      "required__deleted": [
-        "properties"
-      ],
       "allOf": [
         [
           "~",
@@ -24079,18 +23658,6 @@
       }
     },
     "NatGateway": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
-        "zones": {
-          "description": {
-            "__old": "A list of availability zones denoting the zone in which Nat Gateway should be deployed.",
-            "__new": "The availability zones."
-          }
-        }
-      },
       "allOf": [
         [
           "~",
@@ -24178,15 +23745,11 @@
     },
     "NetworkGroup": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -24243,10 +23806,6 @@
     },
     "NetworkInterface": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -24549,14 +24108,12 @@
     },
     "NetworkManager": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
+        "systemData": {
+          "readOnly__deleted": true,
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -24573,10 +24130,16 @@
     },
     "NetworkManagerConnection": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
+        "etag__deleted": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -24678,15 +24241,11 @@
     },
     "NetworkManagerRoutingConfiguration": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -25065,12 +24624,6 @@
       ]
     },
     "NetworkWatcher": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -25145,11 +24698,13 @@
     "NspAccessRuleProperties": {
       "properties": {
         "subscriptions": {
+          "x-ms-client-flatten__added": true,
           "items": {
             "x-ms-client-flatten__deleted": true
           }
         },
         "networkSecurityPerimeters": {
+          "x-ms-client-flatten__added": true,
           "items": {
             "x-ms-client-flatten__deleted": true
           }
@@ -25499,19 +25054,13 @@
       "required__deleted": [
         "location"
       ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]
@@ -25615,27 +25164,7 @@
         }
       }
     },
-    "PatchObject": {
-      "properties__deleted": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "PatchRouteFilter": {
-      "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
       "allOf": [
         [
           "~",
@@ -25735,11 +25264,7 @@
           "exclusiveMinimum__deleted": false
         },
         "fileUploadLimitInMb": {
-          "minimum__deleted": 0,
           "exclusiveMinimum__deleted": false
-        },
-        "customBlockResponseStatusCode": {
-          "minimum__deleted": 0
         },
         "logScrubbing": {
           "type__deleted": "object",
@@ -25816,10 +25341,6 @@
     },
     "PrivateEndpoint": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -25947,10 +25468,6 @@
     },
     "PrivateLinkService": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -26215,16 +25732,13 @@
     "ProxyResource": {
       "properties": {
         "id": {
-          "format__deleted": "arm-id"
+          "format__deleted": "arm-id",
+          "readOnly__deleted": true
         }
       }
     },
     "PublicIPAddress": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -26323,20 +25837,10 @@
     },
     "PublicIPPrefix": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
             "__new": "#/definitions/ExtendedLocation"
-          }
-        },
-        "zones": {
-          "description": {
-            "__old": "A list of availability zones denoting the IP allocated for the resource needs to come from.",
-            "__new": "A list of availability zones denoting the IPs allocated for the resource needs to come from."
           }
         }
       },
@@ -26456,22 +25960,20 @@
     "RadiusServer": {
       "properties": {
         "radiusServerSecret": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
     },
     "ReachabilityAnalysisIntent": {
-      "required__deleted": [
-        "properties"
-      ],
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
         "properties": {
           "description__added": "Represents the Reachability Analysis Intent properties."
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -26492,17 +25994,15 @@
       ]
     },
     "ReachabilityAnalysisRun": {
-      "required__deleted": [
-        "properties"
-      ],
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
         "properties": {
           "description__added": "Represents the Reachability Analysis Run properties."
+        },
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -26548,13 +26048,6 @@
       }
     },
     "ResourceNavigationLink": {
-      "properties": {
-        "id__deleted": {
-          "type": "string",
-          "description": "Resource navigation link identifier.",
-          "readOnly": true
-        }
-      },
       "allOf": [
         [
           "~",
@@ -26618,19 +26111,16 @@
       ]
     },
     "RouteFilter": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        }
-      },
+      "required__deleted": [
+        "location"
+      ],
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]
@@ -26764,7 +26254,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "#/definitions/SubResourceModel"
+              "__new": "#/definitions/ReadOnlySubResourceModel"
             }
           }
         ]
@@ -26815,12 +26305,6 @@
       }
     },
     "RouteTable": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -26941,15 +26425,11 @@
     },
     "RoutingRule": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -26966,15 +26446,11 @@
     },
     "RoutingRuleCollection": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27045,10 +26521,11 @@
     },
     "ScopeConnection": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27070,15 +26547,11 @@
     },
     "SecurityAdminConfiguration": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27099,15 +26572,6 @@
       ]
     },
     "SecurityPartnerProvider": {
-      "required__added": [
-        "location"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -27251,15 +26715,11 @@
     },
     "SecurityUserConfiguration": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27303,15 +26763,11 @@
     },
     "SecurityUserRule": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27328,15 +26784,11 @@
     },
     "SecurityUserRuleCollection": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27525,12 +26977,6 @@
       }
     },
     "ServiceEndpointPolicy": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -27749,12 +27195,6 @@
           "type": {
             "__old": "integer",
             "__new": "number"
-          },
-          "x-ms-enum": {
-            "name": {
-              "__old": "FirewallPolicyIDPSSignatureSeverity",
-              "__new": "FirewallPolicyIdpsSignatureSeverity"
-            }
           }
         },
         "direction": {
@@ -27803,15 +27243,11 @@
     },
     "StaticMember": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
-        "etag__added": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+          }
         }
       },
       "allOf": [
@@ -27987,7 +27423,7 @@
     "SwapResource": {
       "allOf__added": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResourceWithReadOnlyID"
         }
       ],
       "properties": {
@@ -28011,17 +27447,6 @@
         }
       }
     },
-    "TagsObject": {
-      "properties__deleted": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "TopologyParameters": {
       "properties": {
         "targetVirtualNetwork": {
@@ -28034,17 +27459,6 @@
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
             "__new": "#/definitions/SubResource"
-          }
-        }
-      }
-    },
-    "UpdateTagsRequest": {
-      "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "description": "List of tags for Network Security Perimeter",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       }
@@ -28090,18 +27504,13 @@
     },
     "VerifierWorkspace": {
       "properties": {
-        "systemData__deleted": {
-          "$ref": "./network.json#/definitions/SystemData",
-          "description": "The system metadata related to this resource.",
-          "readOnly": true
-        },
         "properties": {
           "description__added": "Properties of Verifier Workspace resource."
         },
-        "etag": {
-          "description": {
-            "__old": "String representing unique etag for the resource document.",
-            "__new": "A unique read-only string that changes whenever the resource is updated."
+        "systemData": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SystemData",
+            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -28124,14 +27533,11 @@
     },
     "VerifierWorkspaceUpdate": {
       "properties": {
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "tags": {
+          "description__added": "Dictionary of <string>"
         },
         "properties": {
-          "description__added": "Dictionary of <string>Represents the VerifierWorkspace update properties."
+          "description__added": "Represents the VerifierWorkspace update properties."
         }
       }
     },
@@ -28245,7 +27651,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]
@@ -28379,10 +27785,6 @@
     },
     "VirtualNetwork": {
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -28418,14 +27820,7 @@
       }
     },
     "VirtualNetworkGateway": {
-      "required__deleted": [
-        "properties"
-      ],
       "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        },
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
@@ -28462,15 +27857,6 @@
       }
     },
     "VirtualNetworkGatewayConnection": {
-      "required__deleted": [
-        "properties"
-      ],
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -28484,12 +27870,6 @@
       ]
     },
     "VirtualNetworkGatewayConnectionListEntity": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -28886,12 +28266,6 @@
             "__new": "The current provisioning state."
           }
         },
-        "enableDdosProtection": {
-          "default__deleted": false
-        },
-        "enableVmProtection": {
-          "default__deleted": false
-        },
         "ddosProtectionPlan": {
           "default__deleted": null,
           "$ref": {
@@ -28933,12 +28307,6 @@
       }
     },
     "VirtualNetworkTap": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -29003,12 +28371,6 @@
       }
     },
     "VirtualRouter": {
-      "properties": {
-        "location__added": {
-          "type": "string",
-          "description": "Resource tags.The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         [
           "~",
@@ -29137,17 +28499,13 @@
       "required__deleted": [
         "location"
       ],
-      "description": {
-        "__old": "VirtualWAN Resource.",
-        "__new": "VirtualWAN Resource.VirtualWAN Resource."
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]
@@ -29450,7 +28808,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]
@@ -29675,7 +29033,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithRequiredLocation"
             }
           }
         ]

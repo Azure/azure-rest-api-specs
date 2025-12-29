@@ -15,13 +15,15 @@ namespace Microsoft.Network;
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model LocalNetworkGateway extends Resource {
-  properties?: LocalNetworkGatewayPropertiesFormat;
+  properties: LocalNetworkGatewayPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
   @key("localNetworkGatewayName")
   @segment("localNetworkGateways")
-  name: string;  /** A unique read-only string that changes whenever the resource is updated. */
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -45,8 +47,8 @@ interface LocalNetworkGateways {
   /**
    * Updates a local network gateway tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchSync<
     LocalNetworkGateway,
     PatchModel = TagsObject,

@@ -35,7 +35,6 @@ model VirtualRouterPeering extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(VirtualRouterPeering.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VirtualRouterPeerings {
@@ -68,7 +67,9 @@ interface VirtualRouterPeerings {
   list is ArmResourceListByParent<VirtualRouterPeering, Error = Error>;
 }
 
-@@doc(VirtualRouterPeering.name, "The name of the Virtual Router Peering.");
+@@doc(VirtualRouterPeering.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(VirtualRouterPeering.properties,
   "The properties of the Virtual Router Peering."
 );

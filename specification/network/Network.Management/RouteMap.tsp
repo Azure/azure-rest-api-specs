@@ -16,7 +16,7 @@ namespace Microsoft.Network;
  */
 @parentResource(VirtualHub)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model RouteMap extends SubResourceModel {
+model RouteMap extends ReadOnlySubResourceModel {
   properties?: RouteMapProperties;
 
   /**
@@ -35,7 +35,6 @@ model RouteMap extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(RouteMap.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface RouteMaps {
@@ -72,7 +71,9 @@ interface RouteMaps {
   >;
 }
 
-@@doc(RouteMap.name, "The name of the RouteMap.");
+@@doc(RouteMap.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(RouteMap.properties, "Properties of the RouteMap resource.");
 @@doc(RouteMaps.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a RouteMap."

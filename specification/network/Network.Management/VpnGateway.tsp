@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * VpnGateway Resource.
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnGateway extends Resource {
+model VpnGateway extends ResourceWithRequiredLocation {
   properties?: VpnGatewayProperties;
 
   @visibility(Lifecycle.Read)
@@ -93,8 +93,8 @@ interface VpnGateways {
   /**
    * Updates virtual wan vpn gateway tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     VpnGateway,
     PatchModel = TagsObject,
@@ -188,10 +188,10 @@ interface VpnGateways {
    * Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
     VpnGateway,
     Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
@@ -221,7 +221,8 @@ interface VpnGateways {
     VpnGateway,
     VpnConnectionPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    OverrideErrorType = CloudError
   >;
 
   /**

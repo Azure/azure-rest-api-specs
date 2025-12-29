@@ -15,20 +15,18 @@ namespace Microsoft.Network;
  */
 @subscriptionResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteProviderPort extends Resource {
+model ExpressRouteProviderPort extends ResourceWithReadOnlyNameAndID {
   properties?: ExpressRouteProviderPortProperties;
 
   @visibility(Lifecycle.Read)
   @path
   @key("providerport")
   @segment("expressRouteProviderPorts")
-  name: string;  /** Resource tags. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 

@@ -31,10 +31,6 @@ model InboundNatRule extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(InboundNatRule.name,
-  "The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource."
-);
-
 @armResourceOperations
 interface InboundNatRules {
   /**

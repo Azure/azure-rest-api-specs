@@ -15,7 +15,7 @@ namespace Microsoft.Network;
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("default")
-model SwapResource extends ProxyResource {
+model SwapResource extends ProxyResourceWithReadOnlyID {
   /**
    * Properties of the SwapResource.
    */
@@ -38,14 +38,14 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("resourceGroups")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     groupName: string;
 
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
     @segment("providers")
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     providerName: "microsoft.Compute";
 
     /** The name of the cloud service. */
@@ -85,8 +85,8 @@ interface SwapResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VipSwap_Create")
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is CloudServiceOps.CreateOrUpdateAsync<
     SwapResource,
     Response = OkResponse | ArmAcceptedLroResponse,

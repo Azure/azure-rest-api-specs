@@ -37,34 +37,36 @@ model IpamPool extends CommonTrackedResource {
   name: string;
 }
 
-@@doc(IpamPool.name, "The name of the resource");
 
 @armResourceOperations
 interface IpamPools {
   /**
    * Gets the specific Pool resource.
    */
-  get is ArmResourceRead<IpamPool, Error = CloudError>;
+  @summary("Gets the specific Pool resource.")
+  get is ArmResourceRead<IpamPool, Error = CommonErrorResponse>;
 
   /**
    * Creates/Updates the Pool resource.
    */
+  @summary("Creates/Updates the Pool resource.")
   create is ArmResourceCreateOrReplaceAsync<
     IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Updates the specific Pool resource.
    */
+  @summary("Updates the specific Pool resource.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     IpamPool,
@@ -73,32 +75,35 @@ interface IpamPools {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = CommonErrorResponse
   >;
 
   /**
    * Delete the Pool resource.
    */
+  @summary("Delete the Pool resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     IpamPool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * Gets list of Pool resources at Network Manager level.
    */
+  @summary("Gets list of Pool resources at Network Manager level.")
   list is ArmResourceListByParent<
     IpamPool,
     Parameters = {
@@ -112,7 +117,7 @@ interface IpamPools {
        * Optional num entries to skip.
        */
       @query("skip")
-      skip?: int32;
+      skip?: int32 = 0;
 
       /**
        * Optional num entries to show.
@@ -132,28 +137,31 @@ interface IpamPools {
       @query("sortValue")
       sortValue?: string;
     },
-    Response = ArmResponse<IpamPoolList>
+    Response = ArmResponse<IpamPoolList>,
+    Error = CommonErrorResponse
   >;
 
   /**
    * Get the Pool Usage.
    */
+  @summary("Get the Pool Usage.")
   getPoolUsage is ArmResourceActionSync<
     IpamPool,
     void,
     ArmResponse<PoolUsage>,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 
   /**
    * List Associated Resource in the Pool.
    */
+  @summary("List Associated Resource in the Pool.")
   @list
   listAssociatedResources is ArmResourceActionSync<
     IpamPool,
     void,
     ArmResponse<PoolAssociationList>,
-    Error = CloudError
+    Error = CommonErrorResponse
   >;
 }
 

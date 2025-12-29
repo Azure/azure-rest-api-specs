@@ -32,7 +32,6 @@ model ExpressRoutePortAuthorization extends SubResourceModel {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
-@@doc(ExpressRoutePortAuthorization.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

@@ -15,7 +15,7 @@ namespace Microsoft.Network;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model P2SVpnGateway extends Resource {
+model P2SVpnGateway extends ResourceWithRequiredLocation {
   properties?: P2SVpnGatewayProperties;
 
   @visibility(Lifecycle.Read)
@@ -23,10 +23,6 @@ model P2SVpnGateway extends Resource {
   @key("gatewayName")
   @segment("p2svpnGateways")
   name: string;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -176,7 +172,9 @@ interface P2SVpnGateways {
   disconnectP2sVpnConnections is P2SVpnGatewayOps.ActionAsync<
     P2SVpnGateway,
     P2SVpnConnectionRequest,
-    OkResponse
+    Result = void,
+    Response = OkResponse,
+    OverrideErrorType = CloudError
   >;
 }
 

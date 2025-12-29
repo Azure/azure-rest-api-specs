@@ -14,7 +14,7 @@ namespace Microsoft.Network;
  * A DDoS protection plan in a resource group.
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
-model DdosProtectionPlan extends Resource {
+model DdosProtectionPlan extends ResourceWithReadOnlyID {
   properties?: DdosProtectionPlanPropertiesFormat;
 
   @visibility(Lifecycle.Read)
@@ -24,16 +24,10 @@ model DdosProtectionPlan extends Resource {
   name: string;
 
   /**
-   * Resource location.
+   * A unique read-only string that changes whenever the resource is updated.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
-
-  /**
-   * The ETag of the DDoS protection plan.
-   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 

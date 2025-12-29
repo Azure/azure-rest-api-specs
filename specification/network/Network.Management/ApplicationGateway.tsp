@@ -90,7 +90,7 @@ interface ApplicationGateways {
   start is ArmResourceActionAsync<
     ApplicationGateway,
     void,
-    OkResponse,
+    Response = OkResponse,
     Error = CloudError
   >;
 
@@ -100,7 +100,7 @@ interface ApplicationGateways {
   stop is ArmResourceActionAsync<
     ApplicationGateway,
     void,
-    OkResponse,
+    Response = OkResponse,
     Error = CloudError
   >;
 

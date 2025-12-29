@@ -35,7 +35,6 @@ model PeerExpressRouteCircuitConnection extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(PeerExpressRouteCircuitConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface PeerExpressRouteCircuitConnections {
@@ -54,7 +53,7 @@ interface PeerExpressRouteCircuitConnections {
 }
 
 @@doc(PeerExpressRouteCircuitConnection.name,
-  "The name of the peer express route circuit connection."
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(PeerExpressRouteCircuitConnection.properties,
   "Properties of the peer express route circuit connection."

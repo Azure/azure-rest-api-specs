@@ -15,17 +15,13 @@ namespace Microsoft.Network;
  */
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkGatewayConnection extends Resource {
-  properties?: VirtualNetworkGatewayConnectionPropertiesFormat;
+  properties: VirtualNetworkGatewayConnectionPropertiesFormat;
 
   @visibility(Lifecycle.Read)
   @path
   @key("virtualNetworkGatewayConnectionName")
   @segment("connections")
-  name: string;  /**
-   * Resource tags.
-   *//** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  name: string;
 
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -53,8 +49,8 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Updates a virtual network gateway connection tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTags is ArmCustomPatchAsync<
     VirtualNetworkGatewayConnection,
     PatchModel = TagsObject,
@@ -142,7 +138,7 @@ interface VirtualNetworkGatewayConnections {
     VpnPacketCaptureStartParameters,
     ArmResponse<stringApplicationJson>,
     OptionalRequestBody = true,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -152,7 +148,7 @@ interface VirtualNetworkGatewayConnections {
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStopParameters,
     ArmResponse<stringApplicationJson>,
-    Error = CloudError
+    Error = Error
   >;
 
   /**
@@ -163,7 +159,7 @@ interface VirtualNetworkGatewayConnections {
     VirtualNetworkGatewayConnection,
     void,
     ArmResponse<stringApplicationJson>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**
@@ -175,7 +171,7 @@ interface VirtualNetworkGatewayConnections {
     Request = void,
     Response = ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 }
 

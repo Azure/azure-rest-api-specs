@@ -35,7 +35,6 @@ model VpnSiteLinkConnection extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(VpnSiteLinkConnection.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -117,11 +116,13 @@ interface VpnSiteLinkConnections {
     VpnSiteLinkConnection,
     void,
     ArmResponse<stringApplicationJson>,
-    OverrideErrorType = CloudError
+    OverrideErrorType = ErrorResponse
   >;
 }
 
-@@doc(VpnSiteLinkConnection.name, "The name of the vpn connection.");
+@@doc(VpnSiteLinkConnection.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
 @@doc(VpnSiteLinkConnection.properties,
   "Properties of the VPN site link connection."
 );

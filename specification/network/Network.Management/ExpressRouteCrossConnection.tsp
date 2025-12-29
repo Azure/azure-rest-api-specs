@@ -21,15 +21,11 @@ model ExpressRouteCrossConnection extends Resource {
   @path
   @key("crossConnectionName")
   @segment("expressRouteCrossConnections")
-  name: string;  /** Resource tags. *//**
-   * Resource location.
-   */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location: string;
+  name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -55,8 +51,8 @@ alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.Legac
   }
 >;
 
-@armResourceOperations
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@armResourceOperations
 interface ExpressRouteCrossConnections {
   /**
    * Gets details about the specified ExpressRouteCrossConnection.
@@ -70,7 +66,8 @@ interface ExpressRouteCrossConnections {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCrossConnection,
     Response = ArmResourceUpdatedResponse<ExpressRouteCrossConnection> &
-      ArmAsyncOperationHeader
+      ArmAsyncOperationHeader,
+    Error = CloudError
   >;
 
   /**
@@ -127,7 +124,8 @@ interface ExpressRouteCrossConnections {
       @segment("arpTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -175,7 +173,8 @@ interface ExpressRouteCrossConnections {
       @segment("routeTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**
@@ -219,10 +218,10 @@ interface ExpressRouteCrossConnections {
    * Creates or updates a peering in the specified ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCrossConnectionPeerings_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-#suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
     ExpressRouteCrossConnection,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,

@@ -24,16 +24,12 @@ model ExpressRouteCircuitPeering extends SubResourceModel {
   @key("peeringName")
   @segment("peerings")
   name: string;
-  
+
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
-
-@@doc(ExpressRouteCircuitPeering.name,
-  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
-);
 
 alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -160,7 +156,8 @@ interface ExpressRouteCircuitPeerings {
   @post
   listArpTable is ArpTablesgOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -171,7 +168,8 @@ interface ExpressRouteCircuitPeerings {
   @post
   listRoutesTable is RouteTablesOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**

@@ -81,6 +81,7 @@ interface AvailableDelegationsOperationGroup {
   @operationId("AvailableDelegations_List")
   @autoRoute
   @list
+  @get
   @action("availableDelegations")
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
@@ -99,6 +100,7 @@ interface AvailableResourceGroupDelegationsOperationGroup {
   @operationId("AvailableResourceGroupDelegations_List")
   @autoRoute
   @list
+  @get
   @action("availableDelegations")
   list is ArmProviderActionSync<
     Response = AvailableDelegationsResult,
@@ -133,6 +135,7 @@ interface AvailableServiceAliasesOperationGroup {
   @operationId("AvailableServiceAliases_ListByResourceGroup")
   @autoRoute
   @list
+  @get
   @action("availableServiceAliases")
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailableServiceAliasesResult,
@@ -277,6 +280,7 @@ interface AvailableEndpointServicesOperationGroup {
   @operationId("AvailableEndpointServices_List")
   @autoRoute
   @list
+  @get
   @action("virtualNetworkAvailableEndpointServices")
   list is ArmProviderActionSync<
     Response = EndpointServicesListResult,
@@ -331,6 +335,7 @@ interface NetworkSecurityPerimeterAssociableResourceTypesOperationGroup {
   @operationId("NetworkSecurityPerimeterAssociableResourceTypes_List")
   @autoRoute
   @list
+  @get
   @action("perimeterAssociableResourceTypes")
   list is ArmProviderActionSync<
     Response = PerimeterAssociableResourcesListResult,
@@ -371,6 +376,7 @@ interface NetworkSecurityPerimeterServiceTagsOperationGroup {
   @operationId("NetworkSecurityPerimeterServiceTags_List")
   @autoRoute
   @list
+  @get
   @action("nspServiceTags")
   list is ArmProviderActionSync<
     Response = NspServiceTagsListResult,
@@ -404,6 +410,7 @@ interface AvailablePrivateEndpointTypesOperationGroup {
   @operationId("AvailablePrivateEndpointTypes_ListByResourceGroup")
   @autoRoute
   @list
+  @get
   @action("availablePrivateEndpointTypes")
   listByResourceGroup is ArmProviderActionSync<
     Response = AvailablePrivateEndpointTypesResult,
@@ -464,6 +471,7 @@ interface PrivateLinkServicesOperationGroup {
   @operationId("PrivateLinkServices_ListAutoApprovedPrivateLinkServicesByResourceGroup")
   @autoRoute
   @list
+  @get
   @action("autoApprovedPrivateLinkServices")
   listAutoApprovedPrivateLinkServicesByResourceGroup is ArmProviderActionSync<
     Response = AutoApprovedPrivateLinkServicesResult,
@@ -518,6 +526,7 @@ interface ServiceTagInformationOperationGroup {
   @operationId("ServiceTagInformation_List")
   @autoRoute
   @list
+  @get
   @action("serviceTagDetails")
   list is ArmProviderActionSync<
     Response = ServiceTagInformationListResult,

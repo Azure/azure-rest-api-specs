@@ -23,9 +23,7 @@ model PublicIPAddress extends Resource {
   @path
   @key("publicIpAddressName")
   @segment("publicIPAddresses")
-  name: string;  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  name: string;
 
   /**
    * The extended location of the public ip address.

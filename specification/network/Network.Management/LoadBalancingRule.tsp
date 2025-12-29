@@ -31,10 +31,6 @@ model LoadBalancingRule extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(LoadBalancingRule.name,
-  "The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource."
-);
-
 alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;

@@ -21,18 +21,18 @@ model NatGateway extends Resource {
   @path
   @key("natGatewayName")
   @segment("natGateways")
-  name: string;  /**
+  name: string;
+
+  /**
    * The nat gateway SKU.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  sku?: NatGatewaySku;  /** The geo-location where the resource lives */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  sku?: NatGatewaySku;
 
   /**
-   * The availability zones.
+   * A list of availability zones denoting the zone in which Nat Gateway should be deployed.
    */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   zones?: string[];
 
   /** A unique read-only string that changes whenever the resource is updated. */
@@ -62,7 +62,7 @@ interface NatGateways {
    * Creates or updates a nat gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NatGateway,
     Response = ArmResourceUpdatedResponse<NatGateway> | ArmResourceCreatedResponse<NatGateway> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader> &

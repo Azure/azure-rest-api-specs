@@ -35,7 +35,6 @@ model VpnServerConfigurationPolicyGroup extends SubResourceModel {
   @visibility(Lifecycle.Read)
   etag?: string;
 }
-@@doc(VpnServerConfigurationPolicyGroup.name, "The name of the resource that is unique within a resource group. This name can be used to access the resource.");
 
 @armResourceOperations
 interface VpnServerConfigurationPolicyGroups {
@@ -81,7 +80,7 @@ interface VpnServerConfigurationPolicyGroups {
 }
 
 @@doc(VpnServerConfigurationPolicyGroup.name,
-  "The name of the ConfigurationPolicyGroup being retrieved."
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
 @@doc(VpnServerConfigurationPolicyGroup.properties,
   "Properties of the VpnServerConfigurationPolicyGroup."
