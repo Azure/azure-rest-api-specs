@@ -48,14 +48,20 @@ function isV1LikePath(specPath: string): boolean {
   if (segment2 === "data-plane") {
     // data-plane v2: specification/<org>/data-plane/<ServiceName>/...
     // data-plane v1 swagger: specification/<org>/data-plane/<RP.Namespace>/(stable|preview)/...
-    const candidate = parts[3];
+    // v2 service names must NOT contain namespace prefixes (no dots like Microsoft. or Azure.)
+    const serviceName = parts[3];
     const next = parts[4];
-    if (candidate && next && (next === "stable" || next === "preview")) {
-      // RP namespace typically contains '.', v2 service name must not.
-      if (candidate.includes(".")) {
-        return true;
-      }
+    
+    if (serviceName && next && (next === "stable" || next === "preview")) {
+      // v1 swagger pattern: RP namespace followed by stable/preview
+      return true;
     }
+    
+    // Service name with namespace prefix (contains dot) is not v2-compliant
+    if (serviceName && serviceName.includes(".")) {
+      return true;
+    }
+    
     return false;
   }
 
@@ -449,8 +455,23 @@ export async function main(): Promise<void> {
       } else {
         const parts = p.split("/").filter(Boolean);
         // v2 indicators: data-plane/Service or resource-manager/RP/Service structure
-        if (parts.length >= 4 && (parts[2] === "data-plane" || parts[2] === "resource-manager")) {
-          v2Folders.add(folderPath);
+        // Must have enough depth to actually be a service folder
+        if (parts[2] === "data-plane") {
+          // v2 data-plane: specification/<org>/data-plane/<ServiceName>/...
+          // Require at least 4 parts to be a real service path
+          if (parts.length >= 4) {
+            v2Folders.add(folderPath);
+          } else {
+            otherFolders.add(folderPath);
+          }
+        } else if (parts[2] === "resource-manager") {
+          // v2 resource-manager: specification/<org>/resource-manager/<RP>/<ServiceName>/...
+          // Require at least 5 parts to be a real service path
+          if (parts.length >= 5) {
+            v2Folders.add(folderPath);
+          } else {
+            otherFolders.add(folderPath);
+          }
         } else {
           otherFolders.add(folderPath);
         }
