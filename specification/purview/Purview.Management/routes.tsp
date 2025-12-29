@@ -1,0 +1,177 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Purview;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface AccountsOperationGroup {
+  /**
+   * Checks if account name is available.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Checks the account name availability.")
+  @operationId("Accounts_CheckNameAvailability")
+  @autoRoute
+  checkNameAvailability is ArmProviderActionSync<
+    Request = CheckNameAvailabilityRequest,
+    Response = CheckNameAvailabilityResult,
+    Scope = SubscriptionActionScope,
+    Error = ErrorResponseModel
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface DefaultAccountsOperationGroup {
+  /**
+   * Get the default account for the scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets the default account information set for the scope.")
+  @operationId("DefaultAccounts_Get")
+  @autoRoute
+  @get
+  @action("getDefaultAccount")
+  get is ArmProviderActionSync<
+    Response = DefaultAccountPayload,
+    Parameters = {
+      /**
+       * The tenant ID.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-format"
+      @format("uuid")
+      @query("scopeTenantId")
+      scopeTenantId: string;
+
+      /**
+       * The scope for the default account.
+       */
+      @query("scopeType")
+      scopeType: ScopeType;
+
+      /**
+       * The Id of the scope object, for example if the scope is "Subscription" then it is the ID of that subscription.
+       */
+      @query("scope")
+      scope?: string;
+    },
+    Error = ErrorResponseModel
+  >;
+  /**
+   * Removes the default account from the scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Removes the default account from the scope.")
+  @operationId("DefaultAccounts_Remove")
+  @autoRoute
+  @action("removeDefaultAccount")
+  remove is ArmProviderActionSync<
+    Parameters = {
+      /**
+       * The tenant ID.
+       */
+      #suppress "@azure-tools/typespec-azure-core/no-format"
+      @format("uuid")
+      @query("scopeTenantId")
+      scopeTenantId: string;
+
+      /**
+       * The scope for the default account.
+       */
+      @query("scopeType")
+      scopeType: ScopeType;
+
+      /**
+       * The Id of the scope object, for example if the scope is "Subscription" then it is the ID of that subscription.
+       */
+      @query("scope")
+      scope?: string;
+    },
+    Response = OkResponse | NoContentResponse,
+    Error = ErrorResponseModel
+  >;
+  /**
+   * Sets the default account for the scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Sets the default account for the scope.")
+  @operationId("DefaultAccounts_Set")
+  @autoRoute
+  @action("setDefaultAccount")
+  set is ArmProviderActionSync<
+    Request = DefaultAccountPayload,
+    Response = DefaultAccountPayload,
+    Error = ErrorResponseModel
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface FeaturesOperationGroup {
+  /**
+   * Gets details from a list of feature names.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("""
+    Gets a list of features and their status for the location and subscription.
+    Status of enabled features will be true. Status of disabled features will be false.
+    Features that don't exist will be excluded from the results.
+    """)
+  @operationId("Features_SubscriptionGet")
+  @autoRoute
+  @action("listFeatures")
+  subscriptionGet is ArmProviderActionSync<
+    Request = BatchFeatureRequest,
+    Response = BatchFeatureStatus,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * Location of feature.
+       */
+      @path
+      @segment("locations")
+      locations: string;
+    },
+    Error = ErrorResponseModel
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface UsagesOperationGroup {
+  /**
+   * Get the usage quota configuration
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets the Usage quota configuration.")
+  @operationId("Usages_Get")
+  @autoRoute
+  @get
+  @action("usages")
+  get is ArmProviderActionSync<
+    Response = UsageList,
+    Scope = SubscriptionActionScope,
+    Parameters = {
+      /**
+       * The region.
+       */
+      @segment("locations")
+      @path
+      location: string;
+
+      /**
+       * The filter, currently unused.
+       */
+      @query("$filter")
+      $filter?: string;
+    },
+    Error = ErrorResponseModel
+  >;
+}
