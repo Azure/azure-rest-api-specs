@@ -13,7 +13,6 @@ import "./SAPVirtualInstance.tsp";
 import "./SAPCentralServerInstance.tsp";
 import "./SAPDatabaseInstance.tsp";
 import "./SAPApplicationServerInstance.tsp";
-import "./SAPVirtualInstanceMetadata.tsp";
 import "./custom.tsp";
 import "./back-compatible.tsp";
 
