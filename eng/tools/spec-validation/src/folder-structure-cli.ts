@@ -3,7 +3,6 @@ import { stat } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { simpleGit } from "simple-git";
-import { FolderStructureRule } from "./rules/folder-structure.js";
 import { fileExists, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -342,10 +341,6 @@ async function validateNoV1RegressionPerOrg(
 export async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const options = {
-    folder: {
-      type: "string",
-      short: "f",
-    },
     context: {
       type: "string",
       short: "c",
@@ -362,6 +357,7 @@ export async function main(): Promise<void> {
 
   // Supported invocations:
   // - folder-structure <folder>
+  // - folder-structure --validate <folder>
   // - folder-structure <folder> '{"checkingAllSpecs":true}'
   // - folder-structure '{"checkingAllSpecs":true}'
   let folderArg: string | undefined;
@@ -395,26 +391,105 @@ export async function main(): Promise<void> {
 
   // Mode 1: folder arg provided.
   // - Default: output the folder structure version.
-  // - With --validate: run folder structure validation for that folder.
+  // - With --validate: analyze and report folder structure compliance.
   if (folderArg) {
     if (!validateFolder) {
       await printFolderVersion(gitRoot, folderAbs);
       return;
     }
 
-    // Ensure FolderStructureRule doesn't self-skip due to lack of diffs.
-    process.env.AZURE_SPEC_VALIDATION_FORCE_FOLDER_STRUCTURE = "true";
-    const result = await new FolderStructureRule().execute(folderAbs);
-    if (result.stdOutput) {
-      console.log(result.stdOutput);
+    // Validate mode: report which paths align with v2 and overall structure
+    const rel = normalizeRel(path.relative(gitRoot, folderAbs));
+    if (!rel.startsWith("specification/")) {
+      console.log(`Folder ${rel} is not under specification/`);
+      process.exit(1);
     }
-    if (!result.success) {
-      console.log("Rule FolderStructure failed");
-      if (result.errorOutput) {
-        console.log(result.errorOutput);
+
+    const org = getOrgFromSpecPath(rel);
+    if (!org) {
+      console.log(`Could not determine org from path ${rel}`);
+      process.exit(1);
+    }
+
+    console.log(`\nAnalyzing folder structure for org: ${org}`);
+    console.log(`Folder: ${rel}\n`);
+
+    const paths = await listSpecFilesInFolder(gitRoot, folderAbs);
+    const flavor = detectOrgFlavorFromPaths(paths, org);
+
+    // Group by unique folder paths (not individual files)
+    const v2Folders = new Set<string>();
+    const v1Folders = new Set<string>();
+    const otherFolders = new Set<string>();
+
+    for (const p of paths) {
+      if (!p.startsWith(`specification/${org}/`)) {
+        continue;
       }
-      process.exitCode = 1;
+
+      // Extract the folder path (parent directory)
+      let folderPath = p.substring(0, p.lastIndexOf("/"));
+
+      // If the path contains /preview/ or /stable/, truncate at that level
+      const previewIndex = folderPath.indexOf("/preview/");
+      const stableIndex = folderPath.indexOf("/stable/");
+
+      if (previewIndex !== -1) {
+        folderPath = folderPath.substring(0, previewIndex + "/preview".length);
+      } else if (stableIndex !== -1) {
+        folderPath = folderPath.substring(0, stableIndex + "/stable".length);
+      }
+
+      if (isV1LikePath(p)) {
+        v1Folders.add(folderPath);
+      } else {
+        const parts = p.split("/").filter(Boolean);
+        // v2 indicators: data-plane/Service or resource-manager/RP/Service structure
+        if (parts.length >= 4 && (parts[2] === "data-plane" || parts[2] === "resource-manager")) {
+          v2Folders.add(folderPath);
+        } else {
+          otherFolders.add(folderPath);
+        }
+      }
     }
+
+    console.log(`V2-aligned folders: ${v2Folders.size}`);
+    if (v2Folders.size > 0) {
+      const sorted = Array.from(v2Folders).sort();
+      for (const f of sorted.slice(0, 10)) {
+        console.log(`  ✓ ${f}`);
+      }
+      if (sorted.length > 10) {
+        console.log(`  ... and ${sorted.length - 10} more`);
+      }
+    }
+
+    console.log(`\nV1-like folders: ${v1Folders.size}`);
+    if (v1Folders.size > 0) {
+      const sorted = Array.from(v1Folders).sort();
+      for (const f of sorted.slice(0, 10)) {
+        console.log(`  ✗ ${f}`);
+      }
+      if (sorted.length > 10) {
+        console.log(`  ... and ${sorted.length - 10} more`);
+      }
+    }
+
+    if (otherFolders.size > 0) {
+      console.log(`\nOther folders (org-level, etc.): ${otherFolders.size}`);
+    }
+
+    console.log(`\nOverall org structure: ${flavor.toUpperCase()}`);
+
+    if (flavor === "v1" || flavor === "mixed") {
+      console.log(
+        `\n⚠ Warning: Org contains v1-like structure. New specs should follow v2 folder structure.`,
+      );
+      process.exitCode = 1;
+    } else if (flavor === "v2") {
+      console.log(`\n✓ Org follows v2 folder structure.`);
+    }
+
     return;
   }
 
