@@ -784,7 +784,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/testConnectivity/{requestId}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/{requestId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/testConnectivity/{requestId}": {
       "get": {
         "operationId": "PostgresqlMigrationServices_GetTestConnectivityStatus",
         "tags": [
@@ -829,6 +829,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get connectivity test operation status": {
+            "$ref": "./examples/MigrationServices_GetTestConnectivityStatus.json"
           }
         }
       }
