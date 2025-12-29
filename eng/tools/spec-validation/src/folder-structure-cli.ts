@@ -3,7 +3,8 @@ import { stat } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs, ParseArgsConfig } from "node:util";
 import { simpleGit } from "simple-git";
-import { fileExists, normalizePath } from "./utils.js";
+import { Suppression } from "suppressions";
+import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -47,21 +48,28 @@ function isV1LikePath(specPath: string): boolean {
 
   if (segment2 === "data-plane") {
     // data-plane v2: specification/<org>/data-plane/<ServiceName>/...
-    // data-plane v1 swagger: specification/<org>/data-plane/<RP.Namespace>/(stable|preview)/...
     // v2 service names must NOT contain namespace prefixes (no dots like Microsoft. or Azure.)
+    // data-plane v1 swagger: specification/<org>/data-plane/<RP.Namespace>/(stable|preview)/...
+    //   where RP.Namespace contains dots (e.g., Microsoft.BlobStorage)
+
+    // Need at least 4 parts to have a service name
+    if (parts.length < 4) {
+      return false;
+    }
+
     const serviceName = parts[3];
-    const next = parts[4];
-    
-    if (serviceName && next && (next === "stable" || next === "preview")) {
-      // v1 swagger pattern: RP namespace followed by stable/preview
+
+    // Ignore files (with extensions) - only check directory names
+    // Service name with namespace prefix (contains dot) is v1
+    if (
+      serviceName &&
+      !serviceName.includes("/") &&
+      !serviceName.match(/\.[a-z]{2,4}$/i) &&
+      serviceName.includes(".")
+    ) {
       return true;
     }
-    
-    // Service name with namespace prefix (contains dot) is not v2-compliant
-    if (serviceName && serviceName.includes(".")) {
-      return true;
-    }
-    
+
     return false;
   }
 
@@ -419,6 +427,21 @@ export async function main(): Promise<void> {
 
     console.log(`\nAnalyzing folder structure for org: ${org}`);
     console.log(`Folder: ${rel}\n`);
+
+    // Check for suppressions
+    const suppressions: Suppression[] = await getSuppressions(folderAbs);
+
+    // Check for folder structure specific suppressions (FolderStructure rule)
+    const folderStructureSuppressions = suppressions.filter(
+      (s) => !s.rules?.length || s.rules.includes("FolderStructure"),
+    );
+
+    if (folderStructureSuppressions.length > 0) {
+      const reason = folderStructureSuppressions[0].reason || "<no reason specified>";
+      console.log(`✓ Suppressed: ${reason}`);
+      process.exitCode = 0;
+      return;
+    }
 
     const paths = await listSpecFilesInFolder(gitRoot, folderAbs);
     const flavor = detectOrgFlavorFromPaths(paths, org);
