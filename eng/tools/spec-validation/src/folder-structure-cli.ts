@@ -430,14 +430,18 @@ export async function main(): Promise<void> {
       // Extract the folder path (parent directory)
       let folderPath = p.substring(0, p.lastIndexOf("/"));
 
-      // If the path contains /preview/ or /stable/, truncate at that level
+      // If the path contains /preview/, /stable/, or /examples/ followed by an API version,
+      // truncate at that level (preview, stable, or examples)
       const previewIndex = folderPath.indexOf("/preview/");
       const stableIndex = folderPath.indexOf("/stable/");
+      const examplesIndex = folderPath.indexOf("/examples/");
 
       if (previewIndex !== -1) {
         folderPath = folderPath.substring(0, previewIndex + "/preview".length);
       } else if (stableIndex !== -1) {
         folderPath = folderPath.substring(0, stableIndex + "/stable".length);
+      } else if (examplesIndex !== -1) {
+        folderPath = folderPath.substring(0, examplesIndex + "/examples".length);
       }
 
       if (isV1LikePath(p)) {
