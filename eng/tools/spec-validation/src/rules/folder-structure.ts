@@ -19,11 +19,54 @@ export class FolderStructureRule implements Rule {
     return filePath.replace(/\\/g, "/");
   }
 
+  private async ensureRemoteBranchRef(
+    git: SimpleGit,
+    remote: string,
+    branch: string,
+  ): Promise<string | undefined> {
+    const normalizedRemote = remote?.trim() || "origin";
+    const normalizedBranch = this.normalizeBranchName(branch) ?? branch;
+    const refName = `refs/remotes/${normalizedRemote}/${normalizedBranch}`;
+
+    const hasRemoteRef = async (): Promise<boolean> => {
+      try {
+        // `for-each-ref` exits with code 0 even when the ref doesn't exist.
+        const output = await git.raw(["for-each-ref", "--format=%(refname)", refName]);
+        return typeof output === "string" && output.trim().length > 0;
+      } catch {
+        return false;
+      }
+    };
+
+    if (await hasRemoteRef()) {
+      return `${normalizedRemote}/${normalizedBranch}`;
+    }
+
+    // GitHub Actions checkouts often don't fetch the base branch ref; try fetching it.
+    try {
+      await git.fetch(normalizedRemote, normalizedBranch, ["--depth=1", "--no-tags"]);
+    } catch {
+      // Ignore fetch errors; we'll fall back below.
+    }
+
+    if (await hasRemoteRef()) {
+      return `${normalizedRemote}/${normalizedBranch}`;
+    }
+
+    return undefined;
+  }
+
   /**
    * Check if there are any changes in the specification folder that would require validation.
    * Only run folder structure validation if there are actual changes in specification/
    */
   private async hasSpecificationFolderChanges(gitRoot: string, folder: string): Promise<boolean> {
+    // Standalone folder structure validation may need to validate structure even when
+    // there are no file diffs (e.g. validate an org folder like specification/widget).
+    if (process.env.AZURE_SPEC_VALIDATION_FORCE_FOLDER_STRUCTURE === "true") {
+      return true;
+    }
+
     try {
       const git = simpleGit(gitRoot);
 
@@ -50,11 +93,11 @@ export class FolderStructureRule implements Rule {
 
       // Get the diff between current branch and target branch
       try {
-        const diffFiles = await git.raw([
-          "diff",
-          "--name-only",
-          `${targetRemote}/${targetBranch}...HEAD`,
-        ]);
+        const targetRef = await this.ensureRemoteBranchRef(git, targetRemote, targetBranch);
+        if (!targetRef) {
+          throw new Error(`Could not resolve target ref ${targetRemote}/${targetBranch}`);
+        }
+        const diffFiles = await git.raw(["diff", "--name-only", `${targetRef}...HEAD`]);
 
         const changedFiles = diffFiles
           .trim()
@@ -109,7 +152,10 @@ export class FolderStructureRule implements Rule {
     let success = true;
     let errorOutput = "";
 
-    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
+    // Only validate config naming at the folder root.
+    // Org folders (e.g. specification/widget) can contain nested projects and should not
+    // be treated as a project root just because a nested tspconfig exists.
+    const tspConfigs = await globby([`${folder}/tspconfig.*`]);
     const stdOutput = `config files: ${JSON.stringify(tspConfigs)}\n`;
 
     tspConfigs.forEach((file: string) => {
@@ -129,16 +175,16 @@ export class FolderStructureRule implements Rule {
    * - main.tsp file, OR
    * - client.tsp file
    */
-  private async isTypeSpecProject(folder: string, configStdOutput: string): Promise<boolean> {
-    // Check if tspconfig files were found
-    if (configStdOutput.includes("tspconfig.yaml")) {
+  private async isTypeSpecProject(folder: string): Promise<boolean> {
+    // Only consider files at the folder root.
+    // Nested TypeSpec projects should not make a parent folder appear as a project.
+    const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));
+    if (tspConfigExists) {
       return true;
     }
 
-    // Check for TypeSpec source files
     const mainExists = await fileExists(path.join(folder, "main.tsp"));
     const clientExists = await fileExists(path.join(folder, "client.tsp"));
-
     return mainExists || clientExists;
   }
 
@@ -721,7 +767,12 @@ export class FolderStructureRule implements Rule {
     folderStruct: string[],
   ): Promise<string[] | undefined> {
     try {
-      const diffOutput = await git.raw(["diff", "--name-only", `${remote}/${branch}...HEAD`]);
+      const targetRef = await this.ensureRemoteBranchRef(git, remote, branch);
+      if (!targetRef) {
+        return undefined;
+      }
+
+      const diffOutput = await git.raw(["diff", "--name-only", `${targetRef}...HEAD`]);
 
       const specificationFiles = diffOutput
         .trim()
@@ -733,17 +784,28 @@ export class FolderStructureRule implements Rule {
         return undefined;
       }
 
-      const folderPath = folderStruct.join("/");
-      const matchingFiles = specificationFiles.filter((file) => file.startsWith(folderPath));
-      const searchFiles = matchingFiles.length > 0 ? matchingFiles : specificationFiles;
-
-      for (const file of searchFiles) {
-        const pathSegments = file.split("/").filter(Boolean);
-        const serviceStruct = this.extractServiceFolderStructFromPath(pathSegments);
-        if (serviceStruct) {
-          return serviceStruct;
-        }
+      const orgName = folderStruct[1];
+      const serviceName = folderStruct[folderStruct.length - 1];
+      const orgRoot = `specification/${orgName}/`;
+      const orgFiles = specificationFiles.filter((file) => file.startsWith(orgRoot));
+      if (orgFiles.length === 0) {
+        return undefined;
       }
+
+      // Only consider diff entries that match the service folder name, otherwise changes to other
+      // services under the same org could incorrectly influence enforcement.
+      const serviceStructs = orgFiles
+        .map((file) => this.extractServiceFolderStructFromPath(file.split("/").filter(Boolean)))
+        .filter(Boolean) as string[][];
+      const matchingServiceStructs = serviceStructs.filter(
+        (struct) => struct[struct.length - 1] === serviceName,
+      );
+      const searchStructs = matchingServiceStructs.length > 0 ? matchingServiceStructs : [];
+      if (searchStructs.length === 0) {
+        return undefined;
+      }
+
+      return searchStructs[0];
     } catch {
       // Ignore errors and fall back to folderStruct
     }
@@ -818,12 +880,17 @@ export class FolderStructureRule implements Rule {
     branch: string,
     folderStruct: string[],
   ): Promise<string[] | undefined> {
+    const targetRef = await this.ensureRemoteBranchRef(git, remote, branch);
+    if (!targetRef) {
+      return undefined;
+    }
+
     const candidates = this.getCandidateServicePaths(folderStruct);
 
     for (const candidate of candidates) {
       const candidatePath = candidate.join("/");
       try {
-        await git.raw(["ls-tree", `${remote}/${branch}:${candidatePath}`]);
+        await git.raw(["ls-tree", `${targetRef}:${candidatePath}`]);
         return candidate;
       } catch {
         // Candidate doesn't exist; try the next one
@@ -954,6 +1021,17 @@ export class FolderStructureRule implements Rule {
     const pathSegments = relativePath.split("/");
     const folderStruct = relativePath.split("/").filter(Boolean);
 
+    // Org-level folders like `specification/widget` are not a spec "project" and should not
+    // be subject to v2 compliance enforcement or required-file checks.
+    if (folderStruct.length === 2 && folderStruct[0] === "specification") {
+      return {
+        success: true,
+        stdOutput:
+          stdOutput + "Org-level specification folder; skipping folder structure validation\n",
+        errorOutput: "",
+      };
+    }
+
     // 2. Check if v2 compliance should be enforced FIRST (before other validations)
     const v2ComplianceCheck = await this.shouldEnforceV2Compliance(gitRoot, folder);
     if (v2ComplianceCheck.shouldEnforce && v2ComplianceCheck.validationResult) {
@@ -994,7 +1072,7 @@ export class FolderStructureRule implements Rule {
     stdOutput += configResult.stdOutput;
 
     // 6. Validate required files (only if this appears to be a TypeSpec project)
-    const isTypeSpecProject = await this.isTypeSpecProject(folder, configResult.stdOutput);
+    const isTypeSpecProject = await this.isTypeSpecProject(folder);
     if (isTypeSpecProject) {
       const requiredFilesResult = await this.validateRequiredFiles(folder);
       success = success && requiredFilesResult.success;

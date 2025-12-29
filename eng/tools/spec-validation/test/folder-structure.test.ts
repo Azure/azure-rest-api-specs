@@ -13,6 +13,7 @@ import * as utils from "../src/utils.js";
 function createGitMock(lsTreeOutput = "Foo\nFoo.Management\n"): Record<string, unknown> {
   return {
     revparse: vi.fn().mockResolvedValue("/gitroot"),
+    fetch: vi.fn().mockResolvedValue(undefined),
     branch: vi.fn().mockImplementation((args?: string[]) => {
       if (args && args.includes("-vv")) {
         return Promise.resolve({
@@ -42,6 +43,9 @@ function createGitMock(lsTreeOutput = "Foo\nFoo.Management\n"): Record<string, u
       }
       if (args.includes("config")) {
         return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+      }
+      if (args.includes("for-each-ref")) {
+        return Promise.resolve("refs/remotes/origin/main\n");
       }
       if (args.includes("ls-tree")) {
         return Promise.resolve(lsTreeOutput);
@@ -109,6 +113,106 @@ describe("folder-structure", function () {
     const result = await new FolderStructureRule().execute(mockFolder);
     assert(result.errorOutput);
     assert(result.errorOutput.includes("does not exist"));
+  });
+
+  it("should fetch target branch ref when missing", async function () {
+    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve(["/foo/bar/tspconfig.yaml"]));
+    normalizePathSpy.mockReturnValue("/gitroot");
+
+    type GitMock = {
+      raw: MockInstance<(args: string[]) => Promise<string>>;
+      fetch: MockInstance<
+        (remote?: string, branch?: string, options?: string[]) => Promise<void> | void
+      >;
+    };
+
+    const gitMock = createGitMock() as unknown as GitMock;
+
+    // First show-ref says missing, after fetch it exists.
+    let hasRef = false;
+    gitMock.fetch.mockImplementation(() => {
+      hasRef = true;
+    });
+    gitMock.raw.mockImplementation((args: string[]) => {
+      if (args.includes("for-each-ref")) {
+        return hasRef ? Promise.resolve("refs/remotes/origin/main\n") : Promise.resolve("");
+      }
+      if (args.includes("diff") && args.includes("--name-only")) {
+        return Promise.resolve("specification/foo/main.tsp\nspecification/foo/tspconfig.yaml");
+      }
+      if (args.includes("config")) {
+        return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+      }
+      if (args.includes("merge-base")) {
+        return Promise.resolve("abc123");
+      }
+      if (args.includes("ls-tree")) {
+        return Promise.resolve("Foo\n");
+      }
+      return Promise.resolve("main");
+    });
+
+    simpleGitSpy.mockReturnValue(gitMock as unknown as SimpleGit);
+    process.env.GITHUB_BASE_REF = "main";
+
+    const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+    assert(result.success);
+    assert(gitMock.fetch.mock.calls.length >= 1);
+  });
+
+  it("should not use unrelated diff changes for service lookup", async function () {
+    vi.mocked(globby.globby).mockImplementation((patterns) =>
+      Array.isArray(patterns) && String(patterns[0]).includes("tspconfig")
+        ? Promise.resolve(["/foo/bar/tspconfig.yaml"])
+        : Promise.resolve(["/foo/bar/main.tsp"]),
+    );
+    normalizePathSpy.mockReturnValue("/gitroot");
+    simpleGitSpy.mockReset();
+
+    const mockGit: Record<string, unknown> = {
+      revparse: vi.fn().mockResolvedValue("/gitroot"),
+      fetch: vi.fn().mockResolvedValue(undefined),
+      branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+      status: vi.fn().mockResolvedValue({ modified: [], not_added: [], created: [], deleted: [] }),
+      getRemotes: vi
+        .fn()
+        .mockResolvedValue([
+          { name: "origin", refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" } },
+        ]),
+      raw: vi.fn().mockImplementation((args: string[]) => {
+        if (args.includes("config")) {
+          return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+        }
+        if (args.includes("for-each-ref")) {
+          return Promise.resolve("refs/remotes/origin/main\n");
+        }
+        if (args.includes("merge-base")) {
+          return Promise.resolve("abc123");
+        }
+        if (args.includes("diff") && args.includes("--name-only")) {
+          // Diff contains changes under a different service, not the folder being validated.
+          return Promise.resolve("specification/other/data-plane/Other/main.tsp\n");
+        }
+        if (args.includes("ls-tree")) {
+          // Target branch has the validated service in v2 layout.
+          const refArg = args[1] ?? "";
+          if (refArg.includes("origin/main:specification/foo/data-plane/Foo")) {
+            return Promise.resolve("main.tsp\ntspconfig.yaml\n");
+          }
+          return Promise.reject(new Error("Path not found"));
+        }
+        return Promise.resolve("main");
+      }),
+    };
+
+    simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+    process.env.GITHUB_BASE_REF = "main";
+
+    const result = await new FolderStructureRule().execute(
+      "/gitroot/specification/foo/data-plane/Foo",
+    );
+
+    assert(result.success, `Expected success, got: ${result.errorOutput}`);
   });
 
   it("should fail if tspconfig has incorrect extension", async function () {
@@ -1349,6 +1453,65 @@ options:
       const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
       // Should succeed for non-TypeSpec projects
       assert(result.success);
+    });
+
+    it("should succeed when validating a specification org folder (not a project root)", async function () {
+      // This simulates invoking `tsv specification/widget` directly.
+      // The folder contains nested TypeSpec projects, but it is not itself a TypeSpec project root.
+
+      // No root tspconfig.* at /gitroot/specification/widget
+      vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([]));
+
+      fileExistsSpy.mockImplementation((p: string) => {
+        if (p === "/gitroot/specification/widget") return Promise.resolve(true);
+        if (p === "/gitroot/specification/widget/tspconfig.yaml") return Promise.resolve(false);
+        if (p === "/gitroot/specification/widget/main.tsp") return Promise.resolve(false);
+        if (p === "/gitroot/specification/widget/client.tsp") return Promise.resolve(false);
+        return Promise.resolve(false);
+      });
+
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        fetch: vi.fn().mockResolvedValue(undefined),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+        status: vi
+          .fn()
+          .mockResolvedValue({ modified: [], not_added: [], created: [], deleted: [] }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args.includes("for-each-ref")) {
+            return Promise.resolve("refs/remotes/origin/main\n");
+          }
+          if (args.includes("diff") && args.includes("--name-only")) {
+            // Any spec change elsewhere should not matter; this folder is not a project root.
+            return Promise.resolve("specification/ai/Azure.AI.Projects/suppressions.yaml\n");
+          }
+          if (args.includes("config")) {
+            return Promise.resolve("https://github.com/Azure/azure-rest-api-specs.git");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          if (args.includes("ls-tree")) {
+            // Pretend target branch has v2 under widget; shouldn't cause failure when validating org folder.
+            return Promise.resolve("resource-manager\n");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+      process.env.GITHUB_BASE_REF = "main";
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/widget");
+      assert(result.success, `Expected success, got: ${result.errorOutput}`);
     });
   });
 });
