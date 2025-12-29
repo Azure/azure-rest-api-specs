@@ -1,7 +1,7 @@
 namespace Microsoft.Migrate;
 
 @doc("Data model of Download URL for wave recommendation report.")
-model DownloadUrl {
+model DownloadWaveRecommendationUrl {
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)
   waveRecommendationReportUrl: string;

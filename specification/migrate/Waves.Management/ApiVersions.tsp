@@ -15,4 +15,3 @@ enum ApiVersions {
   @doc("2025-12-01-preview API Version.")
   v2025_12_01_preview: "2025-12-01-preview",
 }
-

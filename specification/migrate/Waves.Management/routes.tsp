@@ -8,6 +8,7 @@ import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
 import "./WebModels/Tasks/Tasks.tsp";
 import "./WebModels/Tasks/TaskSummary.tsp";
+import "./Common/ArmModels/MigrateProject.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -17,6 +18,16 @@ using Azure.ResourceManager;
 using OpenAPI;
 
 namespace Microsoft.Migrate;
+
+@armResourceOperations
+interface MigrateProjects {
+  @added(ApiVersions.v2025_12_01_preview)
+  generateWavePlan is ArmResourceActionAsync<
+    MigrateProject,
+    void,
+    DownloadWaveRecommendationUrl
+  >;
+}
 
 @armResourceOperations
 interface Waves {
@@ -36,11 +47,7 @@ interface Waves {
   @doc("Refresh operation to update wave")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "java")
   @Azure.ClientGenerator.Core.clientName("triggerRefresh", "csharp")
-  refresh is ArmResourceActionAsync<Wave, void, WaveProperties>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Download URL Post Action body is empty."
-  @added(ApiVersions.v2025_12_01_preview)
-  downloadUrl is ArmResourceActionAsync<Wave, {}, DownloadUrl>;
+  refresh is ArmResourceActionSync<Wave, void, WaveProperties>;
 }
 
 @armResourceOperations
