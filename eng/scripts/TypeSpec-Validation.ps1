@@ -74,7 +74,7 @@ if ($typespecFolders) {
     npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
-      $errorString = "Spec validation (tsv) failed for project $typespecFolder.\n"
+      $errorString = "TypeSpec validation failed for project $typespecFolder.\n"
       $errorString += "Run the following commands locally to validate."
       $errorString += "`n > npm ci"
       $errorString += "`n > npx tsv $typespecFolder"

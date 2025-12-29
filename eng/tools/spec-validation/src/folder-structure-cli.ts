@@ -339,7 +339,7 @@ async function validateNoV1RegressionPerOrg(
   }
 }
 
-export async function mainFolderStructure(): Promise<void> {
+export async function main(): Promise<void> {
   const args = process.argv.slice(2);
   const options = {
     folder: {
