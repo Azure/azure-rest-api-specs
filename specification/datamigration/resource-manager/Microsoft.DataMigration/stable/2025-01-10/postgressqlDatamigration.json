@@ -783,60 +783,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/testConnectivity/{requestId}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices/{serviceName}/{requestId}": {
-      "get": {
-        "operationId": "PostgresqlMigrationServices_GetTestConnectivityStatus",
-        "tags": [
-          "PostgresqlMigrationServices"
-        ],
-        "description": "Gets the status of a connectivity test operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "serviceName",
-            "in": "path",
-            "description": "The migration service name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "requestId",
-            "in": "path",
-            "description": "Request ID returned from the test connectivity operation",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CheckConnectivityResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get connectivity test operation status": {
-            "$ref": "./examples/MigrationServices_GetTestConnectivityStatus.json"
-          }
-        }
-      }
     }
   },
   "definitions": {

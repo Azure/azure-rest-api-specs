@@ -36,18 +36,6 @@ interface PostgresqlMigrationServices {
     ConnectivityTestResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom GET operation for retrieving async operation status"
-  @doc("Gets the status of a connectivity test operation.")
-  @get
-  @route("/testConnectivity/{requestId}")
-  getTestConnectivityStatus(
-    ...ResourceInstanceParameters<MigrationService>,
-
-    @doc("Request ID returned from the test connectivity operation")
-    @path
-    requestId: string,
-  ): CheckConnectivityResult | ErrorResponse;
-
   @doc("Discovers database objects (databases and schemas) from source and target.")
   discoverDatabaseObjects is ArmResourceActionAsync<
     MigrationService,
