@@ -328,6 +328,19 @@ model AttentionReason {
 
   @doc("Included resource in Drill.")
   includedResourceInDrill?: ExtensionObjectState;
+
+  @doc("Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources.")
+  drillRbacOnMonitoringResources?: RBACState;
+
+  @doc("Errors related to Drill Monitoring resources.")
+  drillMonitoringErrors?: string[];
+
+  @doc("Monitoring Resources created for Drill")
+  @visibility(Lifecycle.Read)
+  drillMonitoringResources?: ExtensionObjectState;
+
+  @doc("Monitoring RBAC required by Drill MSI not setup on the target resources.")
+  monitoringRbacOnDrillResources?: RBACState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
