@@ -93,3 +93,9 @@ using Microsoft.Dashboard;
   "GrafanaAvailablePluginListResult",
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedGrafana,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
