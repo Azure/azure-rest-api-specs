@@ -6,9 +6,8 @@ import "./PostgresqlModels.tsp";
 import "./PostgresqlMigrationService.tsp";
 import "./PostgresqlDatabaseMigration.tsp";
 
-using Azure.ResourceManager;
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 
 namespace Microsoft.DataMigration;
 

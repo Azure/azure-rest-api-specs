@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Http;
+
 namespace Microsoft.DataMigration;
 
 @doc("The mode of the database migration.")
@@ -595,7 +597,7 @@ model CheckConnectivityResult {
   requestId?: string;
 
   @doc("Status properties")
-  properties: ConnectivityTestStatusProperties;
+  properties?: ConnectivityTestStatusProperties;
 }
 
 @doc("Properties of connectivity test status response.")
