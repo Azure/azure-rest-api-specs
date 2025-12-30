@@ -27,7 +27,7 @@ These are the global settings for the ChangeSafety.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-09-01-preview
+tag: package-2026-01-01-preview
 openapi-subtype: providerHub
 ```
 
@@ -124,6 +124,17 @@ These settings apply only when `--tag=package-2025-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2025-09-01-preview/ChangeControl.json
+  - Microsoft.ChangeSafety/SafeRollout/preview/2025-03-01-preview/SafeRollout.json
+  - Microsoft.ChangeSafety/validation/preview/2025-01-15-preview/validation.json
+```
+
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - Microsoft.ChangeSafety/ChangeControl/preview/2026-01-01-preview/ChangeControl.json
   - Microsoft.ChangeSafety/SafeRollout/preview/2025-03-01-preview/SafeRollout.json
   - Microsoft.ChangeSafety/validation/preview/2025-01-15-preview/validation.json
 ```
