@@ -1502,7 +1502,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }
@@ -3654,7 +3654,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -3906,7 +3906,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -11489,7 +11489,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -12410,10 +12410,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop": {
       "post": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           }
         }
       }
@@ -12586,10 +12590,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections": {
       "post": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {
@@ -16352,10 +16360,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
       "post": {
-        "x-ms-long-running-operation__deleted": true,
         "responses": {
-          "202__deleted": {
-            "description": "ignore"
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "default": {
             "schema": {

@@ -342,7 +342,7 @@ interface NetworkWatchers {
     NetworkWatcher,
     void,
     Result = void,
-    Response = OkResponse,
+    Response = OkResponse | ArmAcceptedLroResponse,
     OverrideErrorType = ErrorResponse
   >;
 

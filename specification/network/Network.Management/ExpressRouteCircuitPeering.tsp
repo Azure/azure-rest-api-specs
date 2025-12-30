@@ -183,7 +183,8 @@ interface ExpressRouteCircuitPeerings {
   @post
   listRoutesTableSummary is RouteTablesSummaryOps.Read<
     ExpressRouteCircuitPeering,
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse,
+    OverrideErrorType = CloudError
   >;
 
   /**

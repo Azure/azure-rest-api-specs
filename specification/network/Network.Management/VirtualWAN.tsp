@@ -155,7 +155,7 @@ interface VirtualWANS {
     VirtualWAN,
     GetVpnSitesConfigurationRequest,
     Result = void,
-    Response = OkResponse,
+    Response = OkResponse | ArmAcceptedLroResponse,
     OverrideErrorType = CloudError
   >;
 

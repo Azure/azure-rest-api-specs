@@ -152,7 +152,8 @@ interface ExpressRouteCrossConnections {
       @segment("routeTablesSummary")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse
+    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse,
+    Error = CloudError
   >;
 
   /**

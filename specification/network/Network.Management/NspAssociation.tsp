@@ -61,7 +61,8 @@ interface NspAssociations {
       Azure.Core.Foundations.RetryAfterHeader & {
         @bodyRoot
         _: NspAssociation;
-      })
+      }),
+    Error = CloudError
   >;
 
   /**

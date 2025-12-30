@@ -176,7 +176,7 @@ interface P2SVpnGateways {
     P2SVpnGateway,
     P2SVpnConnectionRequest,
     Result = void,
-    Response = OkResponse,
+    Response = OkResponse | ArmAcceptedLroResponse,
     OverrideErrorType = CloudError
   >;
 }

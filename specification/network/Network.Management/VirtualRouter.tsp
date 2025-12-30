@@ -77,7 +77,7 @@ interface VirtualRouters {
   /**
    * Gets all the Virtual Routers in a subscription.
    */
-  list is ArmListBySubscription<VirtualRouter, Error = CloudError>;
+  list is ArmListBySubscription<VirtualRouter, Error = Error>;
 }
 
 @@doc(VirtualRouter.name, "The name of the Virtual Router.");
