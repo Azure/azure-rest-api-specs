@@ -529,10 +529,10 @@ model ConnectivityTestResult {
   requestId: string;
 
   @doc("Operation status")
-  status: OperationStatus;
+  status?: OperationStatus;
 
   @doc("Connectivity test properties")
-  properties: ConnectivityTestProperties;
+  properties?: ConnectivityTestProperties;
 
   @doc("Error details if operation failed")
   error?: MigrationError;
