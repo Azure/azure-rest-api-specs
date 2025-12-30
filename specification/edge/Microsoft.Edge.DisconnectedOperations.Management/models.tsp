@@ -162,7 +162,7 @@ model DisconnectedOperationProperties {
   billingModel: BillingModel;
 
   @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "connectionIntent")
-  @removed(Microsoft.Edge.Versions.v2026_01_01) 
+  @removed(Microsoft.Edge.Versions.v2026_01_01)
   @doc("The connection intent")
   oldConnectionIntent: ConnectionIntent;
 
