@@ -23,6 +23,7 @@ namespace Microsoft.Cdn;
 
 enum Versions {
   `2025-09-01-preview`,
+  `2025-12-01-preview`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
@@ -88,6 +89,8 @@ interface EdgeActions {
   delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
+
+  @removed(Versions.`2025-12-01-preview`)
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
     EdgeActionAttachment,
@@ -95,6 +98,7 @@ interface EdgeActions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
+  @removed(Versions.`2025-12-01-preview`)
   deleteAttachment is ArmResourceActionNoContentAsync<
     EdgeAction,
     EdgeActionAttachment
