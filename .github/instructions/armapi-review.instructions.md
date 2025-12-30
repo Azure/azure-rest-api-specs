@@ -4,17 +4,21 @@ applyTo: "specification/**/resource-manager/*.json"
 
 # ARM OpenAPI (Swagger) Review Instructions
 
-When reviewing Azure Resource Manager (ARM) OpenAPI specifications, ensure compliance with Microsoft API Guidelines and Azure RPC contracts. Prioritize Azure RPC requirements when conflicts arise.
+When reviewing Azure Resource Manager (ARM) OpenAPI specifications, ensure compliance with Microsoft API
+Guidelines and Azure RPC contracts. Prioritize Azure RPC requirements when conflicts arise.
 
 ## Critical Requirements
 
 ### 1. API Guidelines Compliance
-- **MUST** follow [Azure REST API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
-- **MUST** conform to [Azure RPC contracts](https://github.com/cloud-and-ai-microsoft/resource-provider-contract)
+- **MUST** follow [Azure REST API Guidelines]
+  (https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md)
+- **MUST** conform to [Azure RPC contracts]
+  (https://github.com/cloud-and-ai-microsoft/resource-provider-contract)
 - Azure RPC takes precedence over general guidelines in case of conflicts
 
 ### 2. Breaking Changes Prevention
-- **NO breaking changes** in GA (stable) API versions per [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy)
+- **NO breaking changes** in GA (stable) API versions per
+  [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy)
 - Verify no removal/renaming of properties, operations, or parameters in existing versions
 - Check property types remain unchanged (e.g., boolean → string is breaking)
 - Ensure enum values are not removed or renamed
@@ -37,7 +41,8 @@ When reviewing Azure Resource Manager (ARM) OpenAPI specifications, ensure compl
 
 ### 5. API Versioning
 - API version **MUST** follow `YYYY-MM-DD` format
-- Version **MUST** be in path: `/subscriptions/{subscriptionId}/providers/Microsoft.{Namespace}/...?api-version=YYYY-MM-DD`
+- Version **MUST** be in path:
+  `/subscriptions/{subscriptionId}/providers/Microsoft.{Namespace}/...?api-version=YYYY-MM-DD`
 - Stable versions in `/stable/` directory, preview in `/preview/`
 
 ### 6. Security & Authentication
@@ -88,13 +93,15 @@ When reviewing Azure Resource Manager (ARM) OpenAPI specifications, ensure compl
 - Use `x-ms-error-response: true` for error responses
 
 ### 13. Extensions & Special Features
-- **REQUIRED**: `x-ms-parameter-location: "method"` for common parameters (subscriptionId, resourceGroupName, apiVersion)
+- **REQUIRED**: `x-ms-parameter-location: "method"` for common parameters
+  (subscriptionId, resourceGroupName, apiVersion)
 - Use `x-ms-enum` with `modelAsString: true` for extensible enums (allows new values without breaking)
 - Use `x-ms-discriminator-value` for polymorphic types
 - Private/internal operations: mark with `x-ms-visibility: "internal"`
 
 ### 14. Customer Usability
-Think as a customer: Are parameter names intuitive? Is required vs. optional clear? Are default values documented? Can developers understand how to use this API from the specification alone?
+Think as a customer: Are parameter names intuitive? Is required vs. optional clear? Are default values
+documented? Can developers understand how to use this API from the specification alone?
 
 ### 15. Examples & Testing
 - **MUST** include `x-ms-examples` for all operations
