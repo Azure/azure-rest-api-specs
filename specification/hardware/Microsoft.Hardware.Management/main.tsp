@@ -12,21 +12,33 @@ using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{
-  title: "Hardware Resource Provider",
-  version: "2023-07-12-preview",
-})
+@service(#{ title: "Hardware Resource Provider" })
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
 namespace Microsoft.Hardware;
+
+enum Versions {
+  /**
+   * The 2023-07-12-preview API version.
+   */
+  v2023_07_12_preview: "2023-07-12-preview",
+
+  /**
+   * The 2025-12-04-preview API version.
+   */
+  v2025_12_04_preview: "2025-12-04-preview",
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A Hardware Resource Provider Order resource")
 model Order is TrackedResource<OrderProperties> {
-  @doc("Order Id")
-  @key("orderId")
-  @path
-  @segment("orders")
-  name: string;
+  ...ResourceNameParameter<
+    Resource = Order,
+    KeyName = "name",
+    SegmentName = "orders",
+    NamePattern = ""
+  >;
 }
 
 @doc("Forward Order")
@@ -58,8 +70,8 @@ model OrderProperties {
   @doc("Reservation for order if applicable")
   reservationId?: string;
 
+  @doc("Order provisioning state")
   @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
 
@@ -68,8 +80,8 @@ model CustomerOrder {
   @doc("Customer PurchaseOrder Id")
   id: string;
 
-  @doc("Customer PurchaseOrder Date")
-  createdDate: plainDate;
+  @doc("Customer PurchaseOrder Date Time")
+  createdDateTime: utcDateTime;
 }
 
 @doc("Order Line")
@@ -81,6 +93,10 @@ model OrderLine {
   @visibility(Lifecycle.Read)
   status?: OrderLineStatus;
 
+  @doc("Billing State")
+  @visibility(Lifecycle.Read)
+  billingState?: BillingState;
+
   @doc("Order line date")
   @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
@@ -91,6 +107,9 @@ model OrderLine {
   @doc("order line Product")
   product: Product;
 
+  @doc("Order line fulfillment instructions")
+  lineFulfillmentInstruction?: LineFulfillmentInstruction;
+
   @doc("line level Price")
   price: Price;
 
@@ -100,8 +119,8 @@ model OrderLine {
   @doc("Shipping Method")
   shippingMethod?: ShippingMethod;
 
-  @doc("Requested Delivery Date")
-  requestedDeliveryDate?: plainDate;
+  @doc("Requested Delivery Date Time")
+  requestedDeliveryDateTime?: utcDateTime;
 
   @doc("Cancellation Reason")
   cancellationReason?: string;
@@ -109,29 +128,37 @@ model OrderLine {
   @doc("Cancelled By User details")
   cancelledBy?: string;
 
-  @doc("Estimated Deliver Date")
+  @doc("Estimated Deliver Date Time")
   @visibility(Lifecycle.Read)
-  estimatedDeliveryDate?: plainDate;
+  estimatedDeliveryDateTime?: utcDateTime;
 
-  @doc("Estimated Shipped Date")
+  @doc("Estimated Shipped Date Time")
   @visibility(Lifecycle.Read)
-  estimatedShippedDate?: plainDate;
+  estimatedShippedDateTime?: utcDateTime;
 }
 
 @doc("Order line quantity")
 model OrderLineQuantity {
-  @doc("Order lineId Ordered Quantity")
-  ordered: int64;
+  @doc("Order line pending quantity")
+  pending: int64;
 
-  @doc("Order lineId Confirmed Quantity")
+  @doc("Order lineId in-progress quantity")
   @visibility(Lifecycle.Read)
-  confirmed?: int64;
+  inProgress?: int64;
 
-  @doc("Order lineId Shipped Quantity")
+  @doc("Order lineId fulfilled quantity")
   @visibility(Lifecycle.Read)
-  shipped?: int64;
+  fulfilled?: int64;
 
-  @doc("Order lineId Returned Quantity")
+  @doc("Order lineId quantity pending cancellation")
+  @visibility(Lifecycle.Read)
+  pendingCancel?: int64;
+
+  @doc("Order lineId cancelled quantity")
+  @visibility(Lifecycle.Read)
+  cancelled?: int64;
+
+  @doc("Order lineId returned quantity")
   @visibility(Lifecycle.Read)
   returned?: int64;
 }
@@ -143,6 +170,24 @@ model Product {
 
   @doc("ProductId Type")
   type: ProductIdType;
+
+  @doc("Bundle Product Id")
+  bundleProductId?: string;
+
+  @doc("Bundle Instance Id")
+  bundleInstanceId?: string;
+
+  @doc("Bundle Slot Id")
+  bundleSlotId?: int64;
+}
+
+@doc("Order line fulfillment instructions")
+model LineFulfillmentInstruction {
+  @doc("Device line referred to by the warranty line.")
+  referenceDeviceLine?: int64;
+
+  @doc("Serial Numbers")
+  serialNumbers?: string[];
 }
 
 @doc("Order line price")
@@ -177,6 +222,21 @@ model Tax {
 
   @doc("Tax type")
   type: TaxType;
+
+  @doc("Categorization of the taxation system")
+  class?: string;
+
+  @doc("Specific title assigned to the tax entity")
+  name?: string;
+
+  @doc("Level of governing authority")
+  jurisdictionEntity?: string;
+
+  @doc("Name of the jurisdiction")
+  jurisdictionName?: string;
+
+  @doc("Tax Rate")
+  rate?: float64;
 }
 
 @doc("Ship-To id")
@@ -190,149 +250,162 @@ model ShipTo {
 
 @armResourceOperations
 interface Orders {
-  @Autorest.example("./examples/Orders_Get.json", "OrderById")
   get is ArmResourceRead<Order>;
 
-  @Autorest.example("./examples/Orders_Create.json", "CreateOrder")
   create is ArmResourceCreateOrUpdateAsync<Order>;
 
-  @Autorest.example("./examples/Orders_Update.json", "UpdateOrder")
   update is ArmResourcePatchSync<Order, OrderProperties>;
 
-  @Autorest.example("./examples/Orders_Delete.json", "DeleteOrder")
   delete is ArmResourceDeleteSync<Order>;
 
-  @Autorest.example(
-    "./examples/Orders_ListByResourceGroup.json",
-    "GetByResourceGroup"
-  )
   listByResourceGroup is ArmResourceListByParent<Order>;
 
-  @Autorest.example(
-    "./examples/Orders_ListBySubscription.json",
-    "GetBySubscription"
-  )
   listBySubscription is ArmListBySubscription<Order>;
 }
 
 @doc("Product-Id type")
-enum ProductIdType {
+union ProductIdType {
   @doc("UPN in Big-Catalog")
-  UPN,
+  UPN: "UPN",
 
   @doc("Product, SKU, Availability in Big-Catalog")
-  PSA,
+  PSA: "PSA",
 
   @doc("MS product identifier (3x5 SKU)")
-  FulfillmentProductId,
+  FulfillmentProductId: "FulfillmentProductId",
+
+  string,
 }
 
 @doc("Shipping method")
-enum ShippingMethod {
+union ShippingMethod {
   @doc("Ground shipping")
-  Ground,
+  Ground: "Ground",
 
   @doc("Two day shipping")
-  TwoDay,
+  TwoDay: "TwoDay",
 
   @doc("Three day shipping")
-  ThreeDay,
+  ThreeDay: "ThreeDay",
 
   @doc("Sustainable shipping")
-  Sustainable,
+  Sustainable: "Sustainable",
 
   @doc("Street date shipping")
-  StreetDate,
+  StreetDate: "StreetDate",
 
   @doc("APO FPO shipping")
-  ApoFpo,
+  ApoFpo: "ApoFpo",
+
+  string,
 }
 
 @doc("Ship-To-Id Type")
-enum ShipToIdType {
+union ShipToIdType {
   @doc("Modern Commerce API business location")
-  BusinessLocation,
+  BusinessLocation: "BusinessLocation",
 
   @doc("Partner External-Id")
-  ExternalId,
+  ExternalId: "ExternalId",
+
+  string,
 }
 
 @doc("Fee type")
-enum FeeType {
+union FeeType {
   @doc("Recycling fee")
-  Recycling,
+  Recycling: "Recycling",
+
+  string,
 }
 
 @doc("Tax Type")
-enum TaxType {
+union TaxType {
   @doc("Tax on unit amount for product cost")
-  Unit,
+  Unit: "Unit",
 
   @doc("Tax on shipping cost")
-  Shipping,
+  Shipping: "Shipping",
+
+  string,
 }
 
 @doc("Order Status")
-enum OrderStatus {
+union OrderStatus {
   @doc("Order is pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("Order is created")
-  Created,
+  Created: "Created",
 
   @doc("Order is confirmed")
-  Confirmed,
+  Confirmed: "Confirmed",
 
   @doc("Order is PartiallyConfirmed")
-  PartiallyConfirmed,
-
-  @doc("Order is pending cancellation")
-  PendingCancel,
-
-  @doc("Order is ready to ship cannot be cancelled")
-  PendingShipment,
+  PartiallyConfirmed: "PartiallyConfirmed",
 
   @doc("Order is partially shipped")
-  PartiallyShipped,
+  PartiallyShipped: "PartiallyShipped",
 
   @doc("Order is shipped")
-  Shipped,
+  Shipped: "Shipped",
+
+  @doc("Order is returned")
+  Returned: "Returned",
+
+  @doc("Order is cancelled")
+  Cancelled: "Cancelled",
+
+  string,
 }
 
 @doc("Order Line Status")
-enum OrderLineStatus {
+union OrderLineStatus {
   @doc("Order is pending")
-  Pending,
+  Pending: "Pending",
 
-  @doc("Order is created")
-  Created,
+  @doc("Order is in-progress")
+  InProgress: "InProgress",
 
-  @doc("Order is confirmed")
-  Confirmed,
+  @doc("Order is fulfilled")
+  Fulfilled: "Fulfilled",
 
-  @doc("Order is partially confirmed")
-  PartiallyConfirmed,
+  @doc("Order is cancelled")
+  Cancelled: "Cancelled",
 
-  @doc("Order is pending cancellation")
-  PendingCancel,
+  @doc("Order is returned")
+  Returned: "Returned",
 
-  @doc("Order is ready to ship cannot be cancelled")
-  PendingShipment,
+  string,
+}
 
-  @doc("Order is partially shipped")
-  PartiallyShipped,
+@doc("Billing State")
+union BillingState {
+  @doc("The default state, initialized or reset after a failed operation")
+  Pending: "Pending",
 
-  @doc("Order is shipped")
-  Shipped,
+  @doc("The payment is pending capture.")
+  PendingCapture: "PendingCapture",
+
+  @doc("The payment has been captured successfully.")
+  Captured: "Captured",
+
+  @doc("The payment capture failed.")
+  CaptureFailed: "CaptureFailed",
+
+  @doc("The payment is pending a refund.")
+  PendingRefund: "PendingRefund",
+
+  @doc("The payment has been refunded.")
+  Refunded: "Refunded",
+
+  string,
 }
 
 @doc("Provisioning State")
-@lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-
-  @doc("Order is pending")
-  Pending,
+union ProvisioningState {
+  Azure.ResourceManager.ResourceProvisioningState,
+  string,
 }
 
 alias DefaultProviderNamespace = {
@@ -347,7 +420,6 @@ interface OrderPreviewInterface {
   @armResourceCollectionAction
   @armProviderNameValue
   @doc("Enables preview of hardware order for passed order lines by populating fees, taxes, shipping estimates.")
-  @Autorest.example("./examples/Orders_Preview.json", "OrderPreview")
   @TypeSpec.Rest.action("orderPreview")
   @post
   orderPreview(
@@ -356,7 +428,7 @@ interface OrderPreviewInterface {
     ...ApiVersionParameter,
 
     @doc("The orderPreview request")
-    @body
-    body: Order,
+    @bodyRoot
+    bodyRoot: Order,
   ): Order | ErrorResponse;
 }
