@@ -21,6 +21,10 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The 2025-12-01 version.")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2025_12_01_Preview: "2025-12-01-preview",
 }
 
 @doc("A widget.")
@@ -36,6 +40,10 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+
+  @doc("The Fake Widget ID")
+  @added(Versions.v2025_12_01_Preview)
+  widgetId: int32;
 }
 
 interface Widgets {
