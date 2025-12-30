@@ -161,6 +161,12 @@ model DisconnectedOperationProperties {
   @doc("The billing model")
   billingModel: BillingModel;
 
+  @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "connectionIntent")
+  @removed(Microsoft.Edge.Versions.v2026_01_01) 
+  @doc("The connection intent")
+  oldConnectionIntent: ConnectionIntent;
+
+  @added(Microsoft.Edge.Versions.v2026_01_01)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The connection intent")
   connectionIntent: ConnectionIntent;
@@ -177,9 +183,15 @@ model DisconnectedOperationProperties {
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
 
+  @renamedFrom(Microsoft.Edge.Versions.v2026_01_01, "billingConfiguration")
+  @removed(Microsoft.Edge.Versions.v2026_01_01)
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2025_08_01)
+  oldBillingConfiguration?: BillingConfiguration;
+
   @doc("The billing configuration")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @added(Microsoft.Edge.Versions.v2025_08_01)
+  @added(Microsoft.Edge.Versions.v2026_01_01)
   billingConfiguration: BillingConfiguration;
 }
 
