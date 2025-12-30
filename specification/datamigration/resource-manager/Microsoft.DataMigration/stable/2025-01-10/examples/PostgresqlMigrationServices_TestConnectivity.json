@@ -55,9 +55,26 @@
     }
   },
   "responses": {
-    "200": {
+    "202": {
+      "description": "Accepted - connectivity test is in progress",
       "body": {
         "requestId": "1234-abcd-1234-abcd1234abcd",
+        "status": "InProgress",
+        "properties": {
+          "source": [],
+          "target": []
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.DataMigration/locations/eastus2/operationTypes/testConnectivity/operationResults/1234-abcd-1234-abcd1234abcd?api-version=2025-01-10",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "description": "Success - connectivity test completed",
+      "body": {
+        "requestId": "1234-abcd-1234-abcd1234abcd",
+        "status": "Succeeded",
         "properties": {
           "source": [
             {
@@ -74,13 +91,6 @@
             }
           ]
         }
-      }
-    },
-    "202": {
-      "description": "Accepted - connectivity test is in progress",
-      "headers": {
-        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.DataMigration/locations/eastus2/operationTypes/testConnectivity/operationResults/1234-abcd-1234-abcd1234abcd?api-version=2025-01-10",
-        "Retry-After": "10"
       }
     }
   }
