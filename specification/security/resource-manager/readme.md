@@ -667,7 +667,6 @@ input-file:
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
 - Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
-- Microsoft.Security/preview/2025-09-01-preview/operations.json
 - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2025-10-01-preview/operations.json
 - Microsoft.Security/preview/2025-10-01-preview/operationResults.json
