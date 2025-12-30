@@ -1,0 +1,149 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroupName",
+    "api-version": "2025-03-03",
+    "galleryName": "myGalleryName",
+    "galleryScriptName": "myGalleryScriptName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "West US",
+            "name": "1.0.0",
+            "type": "Microsoft.Compute/galleries/script/versions",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName/versions/1.0.0",
+            "properties": {
+              "publishingProfile": {
+                "source": {
+                  "scriptLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/myScript1.ps1",
+                  "parameters": [
+                    {
+                      "name": "location",
+                      "required": true,
+                      "defaultValue": "westus",
+                      "type": "String"
+                    },
+                    {
+                      "name": "myGalleryScriptParameter1",
+                      "required": true,
+                      "type": "String",
+                      "defaultValue": "default value of parameter",
+                      "description": "description of the parameter"
+                    },
+                    {
+                      "name": "myGalleryScriptParameter2",
+                      "required": false,
+                      "type": "String",
+                      "defaultValue": "default value of parameter",
+                      "description": "description of the parameter"
+                    },
+                    {
+                      "name": "numberOfUnits",
+                      "required": true,
+                      "type": "Int",
+                      "defaultValue": "3",
+                      "description": "description of the parameter",
+                      "minValue": "1",
+                      "maxValue": "5"
+                    },
+                    {
+                      "name": "weightOfUnit",
+                      "required": true,
+                      "type": "Double",
+                      "defaultValue": "0.6",
+                      "description": "description of the parameter",
+                      "minValue": "0.1",
+                      "maxValue": "2"
+                    },
+                    {
+                      "name": "typeOfProduct",
+                      "required": false,
+                      "type": "Enum",
+                      "defaultValue": "Fruit",
+                      "description": "description of the parameter",
+                      "enumValues": [
+                        "Fruit",
+                        "Vegetable",
+                        "Greens",
+                        "Nuts"
+                      ]
+                    }
+                  ]
+                },
+                "targetRegions": [
+                  {
+                    "name": "West US",
+                    "regionalReplicaCount": 2,
+                    "storageAccountType": "Standard_LRS",
+                    "excludeFromLatest": false
+                  }
+                ],
+                "replicaCount": 2,
+                "excludeFromLatest": false,
+                "publishedDate": "2025-06-21T17:13:57.5972568+00:00",
+                "endOfLifeDate": "2027-07-01T07:00:00+00:00",
+                "storageAccountType": "Standard_LRS"
+              },
+              "safetyProfile": {
+                "allowDeletionOfReplicatedLocations": false
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "location": "West US",
+            "name": "1.0.1",
+            "type": "Microsoft.Compute/galleries/script/versions",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/galleries/myGalleryName/scripts/myGalleryScriptName/versions/1.0.1",
+            "properties": {
+              "publishingProfile": {
+                "source": {
+                  "scriptLink": "https://mystorageaccount.blob.core.windows.net/mycontainer/myScript2.ps1",
+                  "parameters": [
+                    {
+                      "name": "myGalleryScriptParameter1",
+                      "required": true,
+                      "type": "String",
+                      "defaultValue": "default value of parameter",
+                      "description": "description of the parameter"
+                    },
+                    {
+                      "name": "myGalleryScriptParameter2",
+                      "required": false,
+                      "type": "String",
+                      "defaultValue": "default value of parameter",
+                      "description": "description of the parameter"
+                    }
+                  ]
+                },
+                "targetRegions": [
+                  {
+                    "name": "West US",
+                    "regionalReplicaCount": 2,
+                    "storageAccountType": "Standard_LRS",
+                    "excludeFromLatest": false
+                  }
+                ],
+                "replicaCount": 2,
+                "excludeFromLatest": false,
+                "publishedDate": "2025-06-21T17:13:57.5972568+00:00",
+                "endOfLifeDate": "2027-07-01T07:00:00+00:00",
+                "storageAccountType": "Standard_LRS"
+              },
+              "safetyProfile": {
+                "allowDeletionOfReplicatedLocations": false
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/nextLinkExample"
+      }
+    }
+  },
+  "operationId": "GalleryScriptVersions_ListByGalleryScript",
+  "title": "List gallery Script Versions in a gallery Script Definition."
+}
