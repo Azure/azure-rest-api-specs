@@ -1029,13 +1029,22 @@
           "type": "string",
           "description": "Request identifier for tracking the operation"
         },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "Operation status"
+        },
         "properties": {
           "$ref": "#/definitions/ConnectivityTestProperties",
           "description": "Connectivity test properties"
+        },
+        "error": {
+          "$ref": "#/definitions/MigrationError",
+          "description": "Error details if operation failed"
         }
       },
       "required": [
         "requestId",
+        "status",
         "properties"
       ]
     },

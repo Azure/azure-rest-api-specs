@@ -528,8 +528,14 @@ model ConnectivityTestResult {
   @doc("Request identifier for tracking the operation")
   requestId: string;
 
+  @doc("Operation status")
+  status: OperationStatus;
+
   @doc("Connectivity test properties")
   properties: ConnectivityTestProperties;
+
+  @doc("Error details if operation failed")
+  error?: MigrationError;
 }
 
 @doc("Request body for discovering database objects.")
