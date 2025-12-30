@@ -290,8 +290,8 @@ describe("update labels", () => {
   ];
   it.each(testCases)(
     "$description",
-    async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-      const labelContext = await updateLabels(existingLabels, impactAssessment);
+    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
+      const labelContext = updateLabels(existingLabels, impactAssessment);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
@@ -361,14 +361,14 @@ describe("ARM review process labelling", () => {
 
   it.each(testCases)(
     "$description",
-    async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
       /** @type {import("../../src/summarize-checks/labelling.js").LabelContext} */
       const labelContext = {
         present: new Set(),
         toAdd: new Set(),
         toRemove: new Set(),
       };
-      await processArmReviewLabels(labelContext, existingLabels);
+      processArmReviewLabels(labelContext, existingLabels);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
