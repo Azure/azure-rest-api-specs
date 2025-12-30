@@ -851,17 +851,9 @@
       "type": "object",
       "description": "Status response for connectivity test operation.",
       "properties": {
-        "id": {
+        "requestId": {
           "type": "string",
-          "description": "Resource ID"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type"
+          "description": "Request identifier for tracking the operation"
         },
         "properties": {
           "$ref": "#/definitions/ConnectivityTestStatusProperties",
@@ -869,9 +861,6 @@
         }
       },
       "required": [
-        "id",
-        "name",
-        "type",
         "properties"
       ]
     },
@@ -1029,17 +1018,9 @@
           "type": "string",
           "description": "Request identifier for tracking the operation"
         },
-        "status": {
-          "$ref": "#/definitions/OperationStatus",
-          "description": "Operation status"
-        },
         "properties": {
           "$ref": "#/definitions/ConnectivityTestProperties",
           "description": "Connectivity test properties"
-        },
-        "error": {
-          "$ref": "#/definitions/MigrationError",
-          "description": "Error details if operation failed"
         }
       },
       "required": [
@@ -1050,10 +1031,6 @@
       "type": "object",
       "description": "Properties of connectivity test status response.",
       "properties": {
-        "requestId": {
-          "type": "string",
-          "description": "Request identifier for tracking the operation"
-        },
         "status": {
           "$ref": "#/definitions/OperationStatus",
           "description": "Operation status"
@@ -1068,7 +1045,6 @@
         }
       },
       "required": [
-        "requestId",
         "status"
       ]
     },

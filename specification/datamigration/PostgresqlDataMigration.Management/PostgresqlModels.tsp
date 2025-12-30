@@ -528,14 +528,8 @@ model ConnectivityTestResult {
   @doc("Request identifier for tracking the operation")
   requestId: string;
 
-  @doc("Operation status")
-  status?: OperationStatus;
-
   @doc("Connectivity test properties")
   properties?: ConnectivityTestProperties;
-
-  @doc("Error details if operation failed")
-  error?: MigrationError;
 }
 
 @doc("Request body for discovering database objects.")
@@ -597,14 +591,8 @@ model DatabaseDiscoveryResult {
 
 @doc("Status response for connectivity test operation.")
 model CheckConnectivityResult {
-  @doc("Resource ID")
-  id: string;
-
-  @doc("Resource name")
-  name: string;
-
-  @doc("Resource type")
-  type: string;
+  @doc("Request identifier for tracking the operation")
+  requestId?: string;
 
   @doc("Status properties")
   properties: ConnectivityTestStatusProperties;
@@ -612,9 +600,6 @@ model CheckConnectivityResult {
 
 @doc("Properties of connectivity test status response.")
 model ConnectivityTestStatusProperties {
-  @doc("Request identifier for tracking the operation")
-  requestId: string;
-
   @doc("Operation status")
   status: OperationStatus;
 
