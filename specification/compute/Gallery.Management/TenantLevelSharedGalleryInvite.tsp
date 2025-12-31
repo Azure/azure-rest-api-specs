@@ -43,13 +43,8 @@ interface TenantLevelSharedGalleryInvites {
     void,
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @added(Versions.v2025_12_03)
-      @bodyRoot
-      _: SharedGalleryInviteProperties;
-    }
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > & {}
   >;
 
   /**
@@ -65,12 +60,7 @@ interface TenantLevelSharedGalleryInvites {
     void,
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      @added(Versions.v2025_12_03)
-      @bodyRoot
-      _: SharedGalleryInviteProperties;
-    }
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > & {}
   >;
 }
