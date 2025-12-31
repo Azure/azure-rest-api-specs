@@ -11,7 +11,7 @@
             "properties": {
               "syncMode": "Automatic",
               "virtualNetwork": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
               }
             }
           }
@@ -21,7 +21,7 @@
             "name": "fe-lb",
             "properties": {
               "subnet": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
               }
             }
           }
@@ -34,7 +34,7 @@
               "backendPort": 3389,
               "enableFloatingIP": true,
               "frontendIPConfiguration": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
               },
               "frontendPort": 3389,
               "idleTimeoutInMinutes": 15,
@@ -47,18 +47,18 @@
             "name": "rulelb",
             "properties": {
               "backendAddressPool": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
               },
               "backendPort": 80,
               "enableFloatingIP": true,
               "frontendIPConfiguration": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
               },
               "frontendPort": 80,
               "idleTimeoutInMinutes": 15,
               "loadDistribution": "Default",
               "probe": {
-                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
               },
               "protocol": "Tcp"
             }
@@ -84,7 +84,7 @@
       }
     },
     "resourceGroupName": "rg1",
-    "subscriptionId": "subid"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -92,7 +92,7 @@
         "name": "lb",
         "type": "Microsoft.Network/loadBalancers",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "location": "eastus",
         "properties": {
           "backendAddressPools": [
@@ -100,17 +100,17 @@
               "name": "be-lb",
               "type": "Microsoft.Network/loadBalancers/backendAddressPools",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb",
               "properties": {
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "provisioningState": "Succeeded",
                 "syncMode": "Automatic",
                 "virtualNetwork": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
                 }
               }
             }
@@ -120,23 +120,23 @@
               "name": "fe-lb",
               "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
               "properties": {
                 "inboundNatRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
                   }
                 ],
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "privateIPAddress": "10.0.1.4",
                 "privateIPAllocationMethod": "Dynamic",
                 "provisioningState": "Succeeded",
                 "subnet": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
                 }
               }
             }
@@ -147,12 +147,12 @@
               "name": "in-nat-rule",
               "type": "Microsoft.Network/loadBalancers/inboundNatRules",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule",
               "properties": {
                 "backendPort": 3389,
                 "enableFloatingIP": true,
                 "frontendIPConfiguration": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
                 },
                 "frontendPort": 3389,
                 "idleTimeoutInMinutes": 15,
@@ -166,22 +166,22 @@
               "name": "rulelb",
               "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
               "properties": {
                 "backendAddressPool": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
                 },
                 "backendPort": 80,
                 "disableOutboundSnat": false,
                 "enableFloatingIP": true,
                 "frontendIPConfiguration": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
                 },
                 "frontendPort": 80,
                 "idleTimeoutInMinutes": 15,
                 "loadDistribution": "Default",
                 "probe": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
                 },
                 "provisioningState": "Succeeded",
                 "protocol": "Tcp"
@@ -194,12 +194,12 @@
               "name": "probe-lb",
               "type": "Microsoft.Network/loadBalancers/probes",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
               "properties": {
                 "intervalInSeconds": 15,
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "numberOfProbes": 2,
@@ -224,7 +224,7 @@
         "name": "lb",
         "type": "Microsoft.Network/loadBalancers",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "location": "eastus",
         "properties": {
           "backendAddressPools": [
@@ -232,17 +232,17 @@
               "name": "be-lb",
               "type": "Microsoft.Network/loadBalancers/backendAddressPools",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb",
               "properties": {
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "provisioningState": "Succeeded",
                 "syncMode": "Automatic",
                 "virtualNetwork": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb"
                 }
               }
             }
@@ -252,23 +252,23 @@
               "name": "fe-lb",
               "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
               "properties": {
                 "inboundNatRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule"
                   }
                 ],
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "privateIPAddress": "10.0.1.4",
                 "privateIPAllocationMethod": "Dynamic",
                 "provisioningState": "Succeeded",
                 "subnet": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
                 }
               }
             }
@@ -279,12 +279,12 @@
               "name": "in-nat-rule",
               "type": "Microsoft.Network/loadBalancers/inboundNatRules",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule",
               "properties": {
                 "backendPort": 3389,
                 "enableFloatingIP": true,
                 "frontendIPConfiguration": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
                 },
                 "frontendPort": 3389,
                 "idleTimeoutInMinutes": 15,
@@ -298,22 +298,22 @@
               "name": "rulelb",
               "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
               "properties": {
                 "backendAddressPool": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb"
                 },
                 "backendPort": 80,
                 "disableOutboundSnat": false,
                 "enableFloatingIP": true,
                 "frontendIPConfiguration": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
                 },
                 "frontendPort": 80,
                 "idleTimeoutInMinutes": 15,
                 "loadDistribution": "Default",
                 "probe": {
-                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
                 },
                 "provisioningState": "Succeeded",
                 "protocol": "Tcp"
@@ -326,12 +326,12 @@
               "name": "probe-lb",
               "type": "Microsoft.Network/loadBalancers/probes",
               "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
               "properties": {
                 "intervalInSeconds": 15,
                 "loadBalancingRules": [
                   {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
                   }
                 ],
                 "numberOfProbes": 2,
