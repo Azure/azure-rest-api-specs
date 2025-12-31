@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models-knowledgebase.tsp";
+import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using Azure.Core;
@@ -15,6 +16,8 @@ interface KnowledgeRetrieval {
   @post
   retrieve is Foundations.Operation<
     {
+      ...acceptHeaderMinimal;
+
       @doc("The name of the knowledge base.")
       @path
       knowledgeBaseName: string;

@@ -322,3 +322,6 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(VmSizeEnum, "HciVmSize", "csharp");
+
+// Java
+@@clientName(Update, "HciUpdate", "java");
