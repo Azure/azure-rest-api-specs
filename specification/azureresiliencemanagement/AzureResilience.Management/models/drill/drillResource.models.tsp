@@ -113,7 +113,7 @@ model DrillResourceAttentionReason {
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
 
-  @doc("RBAC required by Drill MIS on the target resource for monitoring.")
+  @doc("RBAC required by Drill MSI on the target resource for monitoring.")
   monitoringRbacOnTargets?: RBACState;
 
   @doc("Target extension resource is missing on the resource.")
