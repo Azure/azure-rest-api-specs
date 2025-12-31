@@ -341,6 +341,9 @@ model AttentionReason {
 
   @doc("Monitoring RBAC required by Drill MSI not setup on the target resources.")
   monitoringRbacOnDrillResources?: RBACState;
+
+  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
+  missingRequiredResourceProviders?: string[];
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")

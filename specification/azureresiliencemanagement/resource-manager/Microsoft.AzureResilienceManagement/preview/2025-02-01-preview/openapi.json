@@ -5256,6 +5256,13 @@
         "monitoringRbacOnDrillResources": {
           "$ref": "#/definitions/RBACState",
           "description": "Monitoring RBAC required by Drill MSI not setup on the target resources."
+        },
+        "missingRequiredResourceProviders": {
+          "type": "array",
+          "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
