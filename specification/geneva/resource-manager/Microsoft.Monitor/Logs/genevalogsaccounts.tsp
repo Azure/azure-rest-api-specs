@@ -335,7 +335,7 @@ model GenevaLogsAccountsResource
   @minLength(3)
   @maxLength(80)
   @key("resourceName")
-  @segment("logs") // start with lower case
+  @segment("genevaLogsAccounts") // start with lower case
   @visibility(Lifecycle.Read)
   @path
   name: string;
