@@ -58,6 +58,29 @@ interface FlexibleFederatedIdentityCredentials {
     FlexibleFederatedIdentityCredential,
     Error = CloudError
   >;
+
+  /**
+   * Lists all the flexible federated identity credentials under the specified user assigned identity.
+   */
+  list is ArmResourceListByParent<
+    FlexibleFederatedIdentityCredential,
+    Parameters = {
+      /**
+       * Number of records to return.
+       */
+      @minValue(1)
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.
+       */
+      @query("$skiptoken")
+      $skiptoken?: string;
+    },
+    Response = FederatedIdentityCredentialsListResult,
+    Error = CloudError
+  >;
 }
 
 @@clientName(FlexibleFederatedIdentityCredentials.createOrUpdate::parameters.resource,
