@@ -16,7 +16,6 @@ import "./models.tsp";
 import "./SystemAssignedIdentity.tsp";
 import "./Identity.tsp";
 import "./FederatedIdentityCredential.tsp";
-import "./FlexibleFederatedIdentityCredential.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;

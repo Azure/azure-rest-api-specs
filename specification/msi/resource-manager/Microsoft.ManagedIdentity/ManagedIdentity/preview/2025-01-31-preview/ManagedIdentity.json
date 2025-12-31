@@ -50,9 +50,6 @@
     },
     {
       "name": "FederatedIdentityCredentials"
-    },
-    {
-      "name": "FlexibleFederatedIdentityCredentials"
     }
   ],
   "paths": {
@@ -653,127 +650,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}/flexibleFederatedIdentityCredentials/{federatedIdentityCredentialResourceName}": {
-      "get": {
-        "operationId": "FlexibleFederatedIdentityCredentials_Get",
-        "tags": [
-          "FlexibleFederatedIdentityCredentials"
-        ],
-        "description": "Gets the flexible federated identity credential.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the identity resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "federatedIdentityCredentialResourceName",
-            "in": "path",
-            "description": "The name of the flexible federated identity credential resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FlexibleFederatedIdentityCredential"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FlexibleFederatedIdentityCredentialGet": {
-            "$ref": "./examples/FlexibleFederatedIdentityCredentialGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "FlexibleFederatedIdentityCredentials_CreateOrUpdate",
-        "tags": [
-          "FlexibleFederatedIdentityCredentials"
-        ],
-        "description": "Create or update a flexible federated identity credential under the specified user assigned identity.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the identity resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "federatedIdentityCredentialResourceName",
-            "in": "path",
-            "description": "The name of the flexible federated identity credential resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9]{1}[a-zA-Z0-9-_]{2,119}$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters to create or update the flexible federated identity credential.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FlexibleFederatedIdentityCredential"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'FlexibleFederatedIdentityCredential' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FlexibleFederatedIdentityCredential"
-            }
-          },
-          "201": {
-            "description": "Resource 'FlexibleFederatedIdentityCredential' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FlexibleFederatedIdentityCredential"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "FlexibleFederatedIdentityCredentialCreate": {
-            "$ref": "./examples/FlexibleFederatedIdentityCredentialCreate.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -910,21 +786,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "FlexibleFederatedIdentityCredential": {
-      "type": "object",
-      "description": "Describes a flexible federated identity credential.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FederatedIdentityCredentialProperties",
-          "description": "The properties associated with the flexible federated identity credential."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "Identity": {
