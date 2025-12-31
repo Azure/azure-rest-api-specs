@@ -24,7 +24,7 @@ model SharedGallerySubscription
     Resource = SharedGallerySubscription,
     KeyName = "sharedGallerySubscriptionId",
     SegmentName = "sharedGallerySubscriptions",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 }
 

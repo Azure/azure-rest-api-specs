@@ -47,7 +47,8 @@ interface TenantLevelSharedGalleryInvites {
         Azure.Core.Foundations.RetryAfterHeader
     > & {
       @added(Versions.v2025_12_03)
-      @bodyRoot _: SharedGalleryInviteProperties;
+      @bodyRoot
+      _: SharedGalleryInviteProperties;
     })
   >;
 
@@ -68,7 +69,8 @@ interface TenantLevelSharedGalleryInvites {
         Azure.Core.Foundations.RetryAfterHeader
     > & {
       @added(Versions.v2025_12_03)
-      @bodyRoot _: SharedGalleryInviteProperties;
+      @bodyRoot
+      _: SharedGalleryInviteProperties;
     })
   >;
 }
