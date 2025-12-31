@@ -1047,6 +1047,10 @@
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "ErrorDefinition": {
       "type": "object",
       "description": "The error definition.",
@@ -1151,6 +1155,23 @@
         "properties": {
           "$ref": "#/definitions/ValidationPropertiesExtended",
           "description": "The resource-specific properties for this resource."
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The location of the validation",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity for the validation to use.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -1317,6 +1338,15 @@
         "properties": {
           "$ref": "#/definitions/ValidationPropertiesExtendedUpdate",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity for the validation to use.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "allOf": [
