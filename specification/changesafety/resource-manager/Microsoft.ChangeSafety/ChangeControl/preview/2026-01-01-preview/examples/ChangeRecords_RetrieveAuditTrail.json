@@ -1,0 +1,42 @@
+{
+  "title": "ChangeRecords_RetrieveAuditTrail",
+  "operationId": "ChangeRecords_RetrieveAuditTrail",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "auditEntries": [
+          {
+            "timestamp": "2025-07-09T07:30:16.534Z",
+            "action": "Created",
+            "actor": "devops@contoso.com",
+            "details": "Change record created for web application deployment"
+          },
+          {
+            "timestamp": "2025-07-09T07:35:00.000Z",
+            "action": "StageStarted",
+            "actor": "system",
+            "details": "Development stage started"
+          },
+          {
+            "timestamp": "2025-07-09T08:00:00.000Z",
+            "action": "StageCompleted",
+            "actor": "system",
+            "details": "Development stage completed successfully"
+          },
+          {
+            "timestamp": "2025-07-09T08:05:00.000Z",
+            "action": "StageStarted",
+            "actor": "system",
+            "details": "Staging stage started"
+          }
+        ]
+      }
+    }
+  }
+}

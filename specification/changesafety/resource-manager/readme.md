@@ -98,6 +98,19 @@ directive:
       - $.definitions.StageProgressionProperties.properties.parameters
       - $.definitions.StageProgressionPropertiesUpdate.properties.parameters
       - $.definitions.NestedStageMap.properties.parameters
+      - $.definitions.ChangeRecordProperties.properties.parameters
+      - $.definitions.ChangeRecordPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordProperties.properties.additionalData
+      - $.definitions.ChangeRecordPropertiesUpdate.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
@@ -177,6 +190,19 @@ directive:
       - $.definitions.StageProgressionProperties.properties.parameters
       - $.definitions.StageProgressionPropertiesUpdate.properties.parameters
       - $.definitions.NestedStageMap.properties.parameters
+      - $.definitions.ChangeRecordProperties.properties.parameters
+      - $.definitions.ChangeRecordPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordProperties.properties.additionalData
+      - $.definitions.ChangeRecordPropertiesUpdate.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.stageVariables
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.additionalData
+      - $.definitions.ChangeRecordStageProgressionProperties.properties.parameters
+      - $.definitions.ChangeRecordStageProgressionPropertiesUpdate.properties.parameters
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.stageVariables
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.additionalData
+      - $.definitions.ChangeRecordRetrieveNextStagesResponseItem.properties.parameters
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.

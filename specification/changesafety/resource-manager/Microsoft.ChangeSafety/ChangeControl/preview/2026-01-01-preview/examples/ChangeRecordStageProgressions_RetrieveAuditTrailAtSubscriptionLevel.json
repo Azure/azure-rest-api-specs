@@ -1,0 +1,36 @@
+{
+  "title": "ChangeRecordStageProgressions_RetrieveAuditTrailAtSubscriptionLevel",
+  "operationId": "ChangeRecordStageProgressions_RetrieveAuditTrailAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionChangeRecord",
+    "stageProgressionName": "initialStage"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "auditEntries": [
+          {
+            "timestamp": "2025-07-08T10:05:00.000Z",
+            "action": "Created",
+            "actor": "admin@contoso.com",
+            "details": "Stage progression created for initial stage at subscription level"
+          },
+          {
+            "timestamp": "2025-07-08T10:10:00.000Z",
+            "action": "StatusChanged",
+            "actor": "system",
+            "details": "Status changed from Initialized to InProgress"
+          },
+          {
+            "timestamp": "2025-07-08T11:00:00.000Z",
+            "action": "StatusChanged",
+            "actor": "system",
+            "details": "Status changed from InProgress to Succeeded"
+          }
+        ]
+      }
+    }
+  }
+}

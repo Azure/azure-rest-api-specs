@@ -6,6 +6,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./stagemap.tsp";
 import "./changestate.tsp";
 import "./stageprogression.tsp";
+import "./changerecord.tsp";
+import "./changerecordstageprogression.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;

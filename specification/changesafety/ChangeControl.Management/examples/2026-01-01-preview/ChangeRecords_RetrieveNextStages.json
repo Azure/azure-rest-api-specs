@@ -1,0 +1,30 @@
+{
+  "title": "ChangeRecords_RetrieveNextStages",
+  "operationId": "ChangeRecords_RetrieveNextStages",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "stages": [
+          {
+            "stageName": "production",
+            "sequence": 3,
+            "expectedStartTime": "2025-07-09T10:00:00.000Z",
+            "expectedEndTime": "2025-07-09T12:00:00.000Z"
+          },
+          {
+            "stageName": "monitoring",
+            "sequence": 4,
+            "expectedStartTime": "2025-07-09T12:00:00.000Z",
+            "expectedEndTime": "2025-07-09T14:00:00.000Z"
+          }
+        ]
+      }
+    }
+  }
+}

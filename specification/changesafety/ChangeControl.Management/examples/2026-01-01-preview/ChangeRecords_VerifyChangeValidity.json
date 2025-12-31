@@ -1,0 +1,44 @@
+{
+  "title": "ChangeRecords_VerifyChangeValidity",
+  "operationId": "ChangeRecords_VerifyChangeValidity",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord",
+    "body": {
+      "additionalChecks": [
+        {
+          "name": "resourceAvailability",
+          "parameters": {
+            "checkType": "full"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": true,
+        "validationResults": [
+          {
+            "checkName": "stageMapValidation",
+            "status": "passed",
+            "message": "Stage map is valid and accessible"
+          },
+          {
+            "checkName": "resourceAvailability",
+            "status": "passed",
+            "message": "All target resources are available"
+          },
+          {
+            "checkName": "permissionCheck",
+            "status": "passed",
+            "message": "Required permissions are in place"
+          }
+        ]
+      }
+    }
+  }
+}
