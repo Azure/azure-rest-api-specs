@@ -3359,6 +3359,39 @@ model VMSizeProperties {
 }
 
 /**
+ * Specifies the VM size policy for the virtual machine. With this property the customer is able to specify a list of VM sizes and an allocation strategy.
+ */
+@added(Versions.v2025_11_01)
+model VMSizePolicy {
+  /**
+   * Specifies the VM sizes for the virtual machine.
+   */
+  @identifiers(#["name"])
+  vmSizes?: VMSizeWithRank[];
+
+  /**
+   * Specifies the allocation strategy for the virtual machine based on which the VM will be allocated.
+   */
+  allocationStrategy?: AllocationStrategy;
+}
+
+/**
+ * Specifies the VM Size with priority rank.
+ */
+@added(Versions.v2025_11_01)
+model VMSizeWithRank {
+  /**
+   * Specifies the name of the VM Size.
+   */
+  name?: string;
+
+  /**
+   * Specifies the rank (a.k.a priority) associated with the VM Size.
+   */
+  rank?: int32;
+}
+
+/**
  * Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01
  */
 model ServiceArtifactReference {
@@ -5184,6 +5217,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the VM size policy for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  vmSizePolicy?: VMSizePolicy;
 }
 
 /**

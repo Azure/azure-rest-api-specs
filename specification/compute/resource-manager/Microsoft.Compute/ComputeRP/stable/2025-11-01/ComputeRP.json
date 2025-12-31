@@ -9868,6 +9868,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a VM with VMSizePolicy": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizePolicy.json"
+          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -10001,6 +10004,9 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
+          },
+          "Create a VM with VMSizePolicy": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizePolicy.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -10205,6 +10211,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM with VMSizePolicy": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithVMSizePolicy.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14208,6 +14217,10 @@
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+        },
+        "vmSizePolicy": {
+          "$ref": "#/definitions/VMSizePolicy",
+          "description": "Specifies the VM size policy for the virtual machine."
         }
       }
     },
@@ -18531,6 +18544,26 @@
         }
       }
     },
+    "VMSizePolicy": {
+      "type": "object",
+      "description": "Specifies the VM size policy for the virtual machine. With this property the customer is able to specify a list of VM sizes and an allocation strategy.",
+      "properties": {
+        "vmSizes": {
+          "type": "array",
+          "description": "Specifies the VM sizes for the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/VMSizeWithRank"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "allocationStrategy": {
+          "$ref": "#/definitions/AllocationStrategy",
+          "description": "Specifies the allocation strategy for the virtual machine based on which the VM will be allocated."
+        }
+      }
+    },
     "VMSizeProperties": {
       "type": "object",
       "description": "Specifies VM Size Property settings on the virtual machine.",
@@ -18544,6 +18577,21 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**"
+        }
+      }
+    },
+    "VMSizeWithRank": {
+      "type": "object",
+      "description": "Specifies the VM Size with priority rank.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the VM Size."
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the rank (a.k.a priority) associated with the VM Size."
         }
       }
     },
