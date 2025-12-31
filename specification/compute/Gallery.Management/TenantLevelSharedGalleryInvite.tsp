@@ -24,7 +24,7 @@ model TenantLevelSharedGalleryInvite
     Resource = TenantLevelSharedGallerySubscription,
     KeyName = "sharedGalleryName",
     SegmentName = "sharedGalleries",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 }
 
@@ -63,7 +63,7 @@ interface TenantLevelSharedGalleryInvites {
   tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
-    ArmResponse<SharedGalleryInviteProperties> | (ArmAcceptedLroResponse<
+    ArmAcceptedLroResponse<
       "Resource operation accepted.",
       ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
@@ -71,6 +71,6 @@ interface TenantLevelSharedGalleryInvites {
       @added(Versions.v2025_12_03)
       @bodyRoot
       _: SharedGalleryInviteProperties;
-    })
+    }
   >;
 }

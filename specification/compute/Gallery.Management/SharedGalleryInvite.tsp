@@ -41,7 +41,7 @@ interface SharedGalleryInvites {
   gallerySharingAccept is ComputeResourceActionAsyncBase<
     SharedGalleryInvite,
     void,
-    ArmResponse<SharedGalleryInviteProperties> | (ArmAcceptedLroResponse<
+    ArmAcceptedLroResponse<
       "Resource operation accepted.",
       ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
@@ -49,7 +49,7 @@ interface SharedGalleryInvites {
       @added(Versions.v2025_12_03)
       @bodyRoot
       _: SharedGalleryInviteProperties;
-    })
+    }
   >;
 
   /**
