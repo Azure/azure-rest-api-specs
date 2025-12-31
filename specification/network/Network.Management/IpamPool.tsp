@@ -23,7 +23,7 @@ model IpamPool extends CommonTrackedResource {
   /**
    * Properties of the Pool resource.
    */
-  properties?: IpamPoolProperties;
+  properties: IpamPoolProperties;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)

@@ -833,7 +833,6 @@
 | `definitions.FlowLogListResult.required__added` | added | `["value"]` |
 | `definitions.InboundNatRuleListResult.required__added` | added | `["value"]` |
 | `definitions.IpAllocationListResult.required__added` | added | `["value"]` |
-| `definitions.IpamPool.required__deleted` | deleted | `["properties"]` |
 | `definitions.IpamPoolList.required__added` | added | `["value"]` |
 | `definitions.IpGroupListResult.required__added` | added | `["value"]` |
 | `definitions.ListHubRouteTablesResult.required__added` | added | `["value"]` |
@@ -1650,6 +1649,12 @@
 |------|------------|-------|
 | `definitions.ResourceWithRequiredLocation__added` | added | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
 
+### Changes for `ResourceWithWritableName`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ResourceWithWritableName__added` | added | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
+
 ### Changes for `SignaturesOverridesProperties`
 
 | Path | Change Type | Value |
@@ -2199,7 +2204,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BackendAddressPool.properties.etag.readOnly__deleted` | deleted | `true` |
 | `definitions.BgpConnectionProperties.properties.hubVirtualNetworkConnection.readOnly__deleted` | deleted | `false` |
 | `definitions.BgpConnectionProperties.properties.peerAsn.readOnly__deleted` | deleted | `false` |
 | `definitions.BgpConnectionProperties.properties.peerIp.readOnly__deleted` | deleted | `false` |
@@ -2208,7 +2212,6 @@
 | `definitions.BreakOutCategoryPolicies.properties.optimize.readOnly__deleted` | deleted | `false` |
 | `definitions.DdosSettings.properties.ddosProtectionPlan.readOnly__deleted` | deleted | `false` |
 | `definitions.DdosSettings.properties.protectionMode.readOnly__deleted` | deleted | `false` |
-| `definitions.DscpConfiguration.properties.etag.readOnly__deleted` | deleted | `true` |
 | `definitions.ExpressRoutePortPropertiesFormat.properties.links.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyDraftProperties.properties.basePolicy.readOnly__deleted` | deleted | `false` |
 | `definitions.FirewallPolicyPropertiesFormat.properties.basePolicy.readOnly__deleted` | deleted | `false` |
@@ -2217,7 +2220,6 @@
 | `definitions.InboundSecurityRules.properties.destinationPortRanges.readOnly__deleted` | deleted | `false` |
 | `definitions.InternetIngressPublicIpsProperties.properties.id.readOnly__deleted` | deleted | `false` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.loadBalancerFrontendIPConfiguration.readOnly__deleted` | deleted | `false` |
-| `definitions.NetworkManager.properties.systemData.readOnly__deleted` | deleted | `true` |
 | `definitions.NetworkManagerConnectionProperties.properties.connectionState.readOnly__added` | added | `true` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.asn.readOnly__deleted` | deleted | `false` |
 | `definitions.NetworkVirtualApplianceConnectionProperties.properties.tunnelIdentifier.readOnly__deleted` | deleted | `false` |
@@ -2999,7 +3001,7 @@
 | `definitions.VpnGatewayProperties.properties.bgpSettings.$ref` | `./virtualNetworkGateway.json#/definitions/BgpSettings` | `#/definitions/BgpSettings` |
 | `definitions.VpnGatewayProperties.properties.provisioningState.description` | `The provisioning state of the VPN gateway resource.` | `The current provisioning state.` |
 | `definitions.VpnGatewayProperties.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.VpnServerConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
+| `definitions.VpnServerConfiguration.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/ResourceWithWritableName` |
 | `definitions.VpnServerConfigurationPolicyGroup.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResourceModel` |
 | `definitions.VpnServerConfigurationPolicyGroupProperties.properties.p2SConnectionConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.VpnServerConfigurationPolicyGroupProperties.properties.provisioningState.description` | `The provisioning state of the VpnServerConfigurationPolicyGroup resource.` | `The current provisioning state.` |

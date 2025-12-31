@@ -35,6 +35,7 @@ model NetworkManager extends Resource {
   /**
    * The system metadata related to this resource.
    */
+  @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 

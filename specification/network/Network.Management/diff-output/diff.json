@@ -17940,6 +17940,36 @@
         "location"
       ]
     },
+    "ResourceWithWritableName__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SignaturesOverridesProperties__added": {
       "type": "object",
       "description": "Will contain the properties of the resource (the actual signature overrides)",
@@ -20115,9 +20145,6 @@
           "type": "string",
           "description": "Type of the resource.",
           "readOnly": true
-        },
-        "etag": {
-          "readOnly__deleted": true
         }
       },
       "allOf": [
@@ -21186,11 +21213,6 @@
       }
     },
     "DscpConfiguration": {
-      "properties": {
-        "etag": {
-          "readOnly__deleted": true
-        }
-      },
       "allOf": [
         [
           "~",
@@ -23253,9 +23275,6 @@
       }
     },
     "IpamPool": {
-      "required__deleted": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "description__added": "Properties of IpamPool resource properties which are specific to the Pool resource."
@@ -24121,7 +24140,6 @@
     "NetworkManager": {
       "properties": {
         "systemData": {
-          "readOnly__deleted": true,
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
             "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
@@ -28935,7 +28953,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourceWithWritableName"
             }
           }
         ]

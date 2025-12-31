@@ -50858,7 +50858,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -54413,7 +54414,8 @@
         },
         "etag": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -61458,6 +61460,9 @@
           "readOnly": true
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/CommonTrackedResource"
@@ -64452,7 +64457,8 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "The system metadata related to this resource."
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -70763,6 +70769,37 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true
+    },
+    "ResourceWithWritableName": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
       "x-ms-azure-resource": true
     },
     "RetentionPolicyParameters": {
@@ -78688,7 +78725,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithWritableName"
         }
       ]
     },
