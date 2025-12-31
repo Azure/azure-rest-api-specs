@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -16,6 +17,7 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
 @parentResource(TenantLocationResource)
+@added(Versions.v2025_12_03)
 model TenantLevelSharedGallerySubscription
   is ProxyResourceShared<SharedGallerySubscriptionProperties> {
   ...Azure.ResourceManager.Legacy.ResourceNameParameter<

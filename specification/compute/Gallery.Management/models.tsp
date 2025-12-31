@@ -2805,6 +2805,7 @@ model LatestGalleryImageVersion {
  * The shared gallery hosting subscription's properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
 model SharedGallerySubscriptionProperties {
   /**
    * id of the subscription that hosts the shared gallery.
@@ -2829,6 +2830,7 @@ union ShareInviteStatus {
  * The shared gallery invite's properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
 model SharedGalleryInviteProperties {
   /**
    * The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**

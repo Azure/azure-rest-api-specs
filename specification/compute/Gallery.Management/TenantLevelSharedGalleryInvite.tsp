@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -16,6 +17,7 @@ namespace Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
 @parentResource(TenantLevelSharedGallerySubscription)
+@added(Versions.v2025_12_03)
 model TenantLevelSharedGalleryInvite
   is ProxyResourceShared<SharedGalleryInviteProperties> {
   ...Azure.ResourceManager.Legacy.ResourceNameParameter<
@@ -35,6 +37,7 @@ interface TenantLevelSharedGalleryInvites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("accept")
   @operationId("TenantLevelGallerySharing_Accept")
+  @added(Versions.v2025_12_03)
   tenantLevelGallerySharingAccept is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
@@ -43,6 +46,7 @@ interface TenantLevelSharedGalleryInvites {
       ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
     > & {
+      @added(Versions.v2025_12_03)
       @bodyRoot _: SharedGalleryInviteProperties;
     })
   >;
@@ -54,6 +58,7 @@ interface TenantLevelSharedGalleryInvites {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body"
   @action("reject")
   @operationId("TenantLevelGallerySharing_Reject")
+  @added(Versions.v2025_12_03)
   tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
@@ -62,6 +67,7 @@ interface TenantLevelSharedGalleryInvites {
       ArmLroLocationHeader<FinalResult = SharedGalleryInviteProperties> &
         Azure.Core.Foundations.RetryAfterHeader
     > & {
+      @added(Versions.v2025_12_03)
       @bodyRoot _: SharedGalleryInviteProperties;
     })
   >;
