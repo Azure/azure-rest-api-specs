@@ -116,7 +116,8 @@ union ProvisioningState {
 model EdgeActionAttachment {
   @doc("The edge action attachment id")
   @visibility(Lifecycle.Read)
-  id: string;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  id?: string;
 
   @doc("The attached resource Id")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -151,7 +152,8 @@ model EdgeActionVersionProperties {
 
   @doc("The validation status")
   @visibility(Lifecycle.Read)
-  validationStatus: EdgeActionVersionValidationStatus;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  validationStatus?: EdgeActionVersionValidationStatus;
 
   @doc("The provisioning state")
   @visibility(Lifecycle.Read)
@@ -163,7 +165,8 @@ model EdgeActionVersionProperties {
 
   @doc("The last update time in UTC for package update")
   @visibility(Lifecycle.Read)
-  lastPackageUpdateTime: utcDateTime;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  lastPackageUpdateTime?: utcDateTime;
 }
 
 /** Properties for edge action execution filter */
@@ -174,7 +177,8 @@ model EdgeActionExecutionFilterProperties {
 
   @doc("The last update time in UTC for the execution filter")
   @visibility(Lifecycle.Read)
-  lastUpdateTime: utcDateTime;
+  @madeOptional(Versions.`2025-12-01-preview`)
+  lastUpdateTime?: utcDateTime;
 
   @doc("Custom Header Key associated with the execution filter")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
