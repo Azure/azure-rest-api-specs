@@ -7,8 +7,11 @@
     "changeRecordName": "webApplicationChangeRecord"
   },
   "responses": {
-    "200": {
-      "description": "Resource deleted successfully."
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/operationStatuses/delete?api-version=2026-01-01-preview",
+        "Retry-After": "10"
+      }
     },
     "204": {
       "description": "Resource does not exist."

@@ -10,18 +10,26 @@
   "responses": {
     "200": {
       "body": {
-        "stages": [
+        "changeRecordResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+        "lastStageProgressionSequence": 2,
+        "nextStages": [
           {
-            "stageName": "production",
+            "stageReference": "production",
             "sequence": 3,
-            "expectedStartTime": "2025-07-09T10:00:00.000Z",
-            "expectedEndTime": "2025-07-09T12:00:00.000Z"
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod",
+              "region": "eastus"
+            }
           },
           {
-            "stageName": "monitoring",
+            "stageReference": "monitoring",
             "sequence": 4,
-            "expectedStartTime": "2025-07-09T12:00:00.000Z",
-            "expectedEndTime": "2025-07-09T14:00:00.000Z"
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod",
+              "region": "eastus"
+            }
           }
         ]
       }
