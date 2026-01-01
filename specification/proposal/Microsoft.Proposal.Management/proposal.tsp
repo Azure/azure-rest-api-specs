@@ -34,7 +34,7 @@ model ProposalResourceProperties {
   status?: ProposalStatus;
 
   @doc("The list of line items associated with the proposal.")
-  @identifiers(#["productCode", "resourceUri", "status", "errorCode", "errorMessage"])
+  @identifiers(#["productCode"])
   lineItems?: LineItem[];
 }
 
