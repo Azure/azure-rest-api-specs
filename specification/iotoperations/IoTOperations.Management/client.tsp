@@ -30,6 +30,10 @@ using Microsoft.IoTOperations;
   "IotOperationsBrokerListenerProperties",
   "csharp"
 );
+@@clientName(BrokerListenerProperties.serviceType,
+  "ListenerServiceType",
+  "csharp"
+);
 @@clientName(BrokerResource, "IotOperationsBroker", "csharp");
 @@clientName(BrokerProperties, "IotOperationsBrokerProperties", "csharp");
 @@clientName(DataflowEndpointResource,
@@ -79,7 +83,7 @@ using Microsoft.IoTOperations;
 @@clientName(ProvisioningState, "IotOperationsProvisioningState", "csharp");
 @@clientName(SelfCheck, "BrokerDiagnosticSelfCheck", "csharp");
 @@clientName(SelfTracing, "DiagnosticSelfTracing", "csharp");
-@@clientName(ServiceType, "BlockerListenerServiceType", "csharp");
+@@clientName(ServiceType, "BrokerListenerServiceType", "csharp");
 @@clientName(ServiceType.ClusterIp, "ClusterIP", "csharp");
 @@clientName(SourceSerializationFormat,
   "DataflowSourceSerializationFormat",
@@ -90,10 +94,7 @@ using Microsoft.IoTOperations;
   "csharp"
 );
 @@clientName(TlsCertMethod, "ListenerPortTlsCertMethod", "csharp");
-@@clientName(X509ManualCertificate,
-  "ListenerPortTlsX509ManualCertificate",
-  "csharp"
-);
+@@clientName(X509ManualCertificate, "BrokerX509ManualCertificate", "csharp");
 @@clientName(TlsProperties, "IotOperationsTlsProperties", "csharp");
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
 @@clientName(AkriConnectorResource, "IotOperationsAkriConnector", "csharp");
