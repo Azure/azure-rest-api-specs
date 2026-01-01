@@ -10,13 +10,21 @@
       }
     ]
   },
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "host": "localhost",
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -45,7 +53,9 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products": {
       "get": {
         "operationId": "ProductResources_ListByParent",
-        "tags": ["ProductResources"],
+        "tags": [
+          "ProductResources"
+        ],
         "description": "List ProductResource resources by parent",
         "parameters": [
           {
@@ -87,7 +97,9 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products/{productCode}": {
       "get": {
         "operationId": "ProductResources_Get",
-        "tags": ["ProductResources"],
+        "tags": [
+          "ProductResources"
+        ],
         "description": "Get a ProductResource",
         "parameters": [
           {
@@ -134,7 +146,9 @@
     "/providers/Microsoft.Proposal/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -168,7 +182,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Proposal/proposals": {
       "get": {
         "operationId": "ProposalResources_ListBySubscription",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "List ProposalResource resources by subscription ID",
         "parameters": [
           {
@@ -205,7 +221,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals": {
       "get": {
         "operationId": "ProposalResources_ListByResourceGroup",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "List ProposalResource resources by resource group",
         "parameters": [
           {
@@ -245,7 +263,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals/{name}": {
       "get": {
         "operationId": "ProposalResources_Get",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "Get a ProposalResource",
         "parameters": [
           {
@@ -288,7 +308,9 @@
       },
       "put": {
         "operationId": "ProposalResources_CreateOrUpdate",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "Create a ProposalResource",
         "parameters": [
           {
@@ -361,7 +383,9 @@
       },
       "patch": {
         "operationId": "ProposalResources_Update",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "Update a ProposalResource",
         "parameters": [
           {
@@ -413,7 +437,9 @@
       },
       "delete": {
         "operationId": "ProposalResources_Delete",
-        "tags": ["ProposalResources"],
+        "tags": [
+          "ProposalResources"
+        ],
         "description": "Delete a ProposalResource",
         "parameters": [
           {
@@ -505,12 +531,20 @@
           "readOnly": true
         }
       },
-      "required": ["productCode"]
+      "required": [
+        "productCode"
+      ]
     },
     "LineItemStatus": {
       "type": "string",
       "description": "The status of the line item in the proposal.",
-      "enum": ["NotDeployed", "Success", "InProgress", "Canceled", "Failed"],
+      "enum": [
+        "NotDeployed",
+        "Success",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
       "x-ms-enum": {
         "name": "LineItemStatus",
         "modelAsString": true,
@@ -575,7 +609,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ProductResourceProperties": {
       "type": "object",
@@ -624,7 +660,9 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": ["value"]
+      "required": [
+        "value"
+      ]
     },
     "ProposalResourceProperties": {
       "type": "object",
@@ -649,10 +687,14 @@
           "items": {
             "$ref": "#/definitions/LineItem"
           },
-          "x-ms-identifiers": ["productCode"]
+          "x-ms-identifiers": [
+            "productCode"
+          ]
         }
       },
-      "required": ["productCode"]
+      "required": [
+        "productCode"
+      ]
     },
     "ProposalResourcePropertiesUpdate": {
       "type": "object",
@@ -672,7 +714,9 @@
           "items": {
             "$ref": "#/definitions/LineItem"
           },
-          "x-ms-identifiers": ["productCode"]
+          "x-ms-identifiers": [
+            "productCode"
+          ]
         }
       }
     },
