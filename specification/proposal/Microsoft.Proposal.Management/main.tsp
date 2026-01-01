@@ -18,5 +18,5 @@ using Azure.ResourceManager;
 namespace Microsoft.Proposal;
 
 enum Versions {
-  v1_0_Preview_1: "2025-01-01-preview"
+  v2025_01_01_preview: "2025-01-01-preview"
 }
