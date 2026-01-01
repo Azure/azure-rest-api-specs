@@ -64,7 +64,7 @@ union ProposalStatus {
 
 @doc("The line items to purchase in the proposal.")
 model LineItem {
-  @doc("The product code of the line item.")
+  @doc("The product code of the line item as a UUID that uniquely identifies this line item within the proposal.")
   productCode: string;
 
   @visibility(Lifecycle.Read)
