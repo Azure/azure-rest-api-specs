@@ -62,7 +62,6 @@ union ProposalStatus {
   Ended: "Ended",
 }
 
-
 @doc("The line items to purchase in the proposal.")
 model LineItem {
   @doc("The product code of the line item.")
@@ -104,4 +103,3 @@ union LineItemStatus {
   @doc("Failed - status when a line item deployment has failed.")
   Failed: "Failed",
 }
-
