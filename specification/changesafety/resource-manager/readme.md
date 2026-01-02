@@ -105,11 +105,13 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: validation.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
-  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
+  - suppress: PathForTrackedResourceTypes
     from: validation.json
-    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
+    reason: Validation supports subscription-level operations but includes location for MSI; not tracked resource.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
 ```
 
 ---
@@ -181,11 +183,9 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: validation.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
-    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
-  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
-    from: validation.json
-    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"].put
 ```
 
 ---
