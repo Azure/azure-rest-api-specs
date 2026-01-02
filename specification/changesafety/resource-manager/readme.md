@@ -102,6 +102,10 @@ directive:
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/safeRollouts/{safeRolloutName}"]
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: validation.json
+    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
 ```
 
 ---
@@ -170,6 +174,10 @@ directive:
     from: SafeRollout.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/safeRollouts/{safeRolloutName}"].put
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: validation.json
+    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
 ```
 
 ---
