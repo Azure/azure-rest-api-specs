@@ -196,6 +196,17 @@ union AlertsState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CrossSubscriptionRestoreState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -870,6 +881,12 @@ model VaultProperties {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_01_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Restore Settings of the vault
    */
   restoreSettings?: RestoreSettings;
@@ -1178,6 +1195,17 @@ model ClassicAlertSettings {
   alertsForCriticalOperations?: AlertsState;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   emailNotificationsForSiteRecovery?: AlertsState;
+}
+
+/**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_01_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
 }
 
 /**
