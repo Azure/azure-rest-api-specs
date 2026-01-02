@@ -105,6 +105,10 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: validation.json
     reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: validation.json
+    reason: Proxy resource needs to have location to pass to MSI, not tracked resource.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/validations/{validationName}"]
 ```
 
