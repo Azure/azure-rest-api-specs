@@ -175,6 +175,9 @@ union ChangeRecordStatus {
 
   @doc("Resource is in NotApplicable state, when no stagemap is associated with the change.")
   NotApplicable: "NotApplicable",
+
+  @doc("Resource is in Paused state.")
+  Paused: "Paused",
 }
 
 @added(Versions.v2026_01_01_preview)
