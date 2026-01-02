@@ -85,16 +85,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -142,11 +139,8 @@
           }
         },
         "x-ms-examples": {
-          "RecoveryServices_Capabilities_MaximumSet_Gen": {
-            "$ref": "./examples/RecoveryServices_Capabilities_MaximumSet_Gen.json"
-          },
-          "RecoveryServices_Capabilities_MinimumSet_Gen": {
-            "$ref": "./examples/RecoveryServices_Capabilities_MinimumSet_Gen.json"
+          "Capabilities for Microsoft.RecoveryServices/Vaults": {
+            "$ref": "./examples/Capabilities.json"
           }
         }
       }
@@ -183,16 +177,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List deleted vaults in a subscription": {
+            "$ref": "./examples/DeletedVaults_ListBySubscriptionId.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DeletedVaults_ListBySubscriptionId_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVaults_ListBySubscriptionId_MaximumSet_Gen.json"
-          },
-          "DeletedVaults_ListBySubscriptionId_MinimumSet_Gen": {
-            "$ref": "./examples/DeletedVaults_ListBySubscriptionId_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -237,8 +228,8 @@
           }
         },
         "x-ms-examples": {
-          "DeletedVaults_Get_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVaults_Get_MaximumSet_Gen.json"
+          "Gets Deleted vault": {
+            "$ref": "./examples/DeletedVaults_Get.json"
           }
         }
       }
@@ -290,8 +281,8 @@
           }
         },
         "x-ms-examples": {
-          "DeletedVaults_GetOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVaults_GetOperationStatus_MaximumSet_Gen.json"
+          "Gets operation status on deleted vault": {
+            "$ref": "./examples/DeletedVaults_GetOperationStatus.json"
           }
         }
       }
@@ -358,15 +349,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Undelete a deleted vault": {
+            "$ref": "./examples/DeletedVaults_Undelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "DeletedVaults_Undelete_MaximumSet_Gen": {
-            "$ref": "./examples/DeletedVaults_Undelete_MaximumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/vaults": {
@@ -398,16 +389,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in SubscriptionId": {
+            "$ref": "./examples/ListBySubscriptionIds.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Vaults_ListBySubscriptionId_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_ListBySubscriptionId_MaximumSet_Gen.json"
-          },
-          "Vaults_ListBySubscriptionId_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_ListBySubscriptionId_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -454,11 +442,11 @@
           }
         },
         "x-ms-examples": {
-          "RecoveryServices_CheckNameAvailability_MaximumSet_Gen": {
-            "$ref": "./examples/RecoveryServices_CheckNameAvailability_MaximumSet_Gen.json"
+          "Availability status of Resource Name when no resource with same name, type and subscription exists, nor has been deleted within last 24 hours": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
           },
-          "RecoveryServices_CheckNameAvailability_MinimumSet_Gen": {
-            "$ref": "./examples/RecoveryServices_CheckNameAvailability_MinimumSet_Gen.json"
+          "Availability status of Resource Name when resource with same name, type and subscription exists": {
+            "$ref": "./examples/CheckNameAvailability_NotAvailable.json"
           }
         }
       }
@@ -495,16 +483,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List of Recovery Services Resources in ResourceGroup": {
+            "$ref": "./examples/ListResources.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Vaults_ListByResourceGroup_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_ListByResourceGroup_MaximumSet_Gen.json"
-          },
-          "Vaults_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_ListByResourceGroup_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -548,11 +533,8 @@
           }
         },
         "x-ms-examples": {
-          "Vaults_Get_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_Get_MaximumSet_Gen.json"
-          },
-          "Vaults_Get_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_Get_MinimumSet_Gen.json"
+          "Get Recovery Services Resource": {
+            "$ref": "./examples/GETVault.json"
           }
         }
       },
@@ -626,18 +608,39 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or Update Recovery Services vault": {
+            "$ref": "./examples/PUTVault.json"
+          },
+          "Create or Update Vault With Cost Management Settings": {
+            "$ref": "./examples/PUTVault_WithCostManagementSettings.json"
+          },
+          "Create or Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PUTVault_WithMonitoringSettings.json"
+          },
+          "Create or Update Vault With Cost Management Setting": {
+            "$ref": "./examples/PUTVault_WithCostManagementSettings.json"
+          },
+          "Create or Update Vault With Redundancy Setting": {
+            "$ref": "./examples/PUTVault_WithRedundancySettings.json"
+          },
+          "Create or Update Vault performing critical operation With MUA": {
+            "$ref": "./examples/PUTVault_ResourceGuardEnabled.json"
+          },
+          "Create or Update Vault with CustomerManagedKeys": {
+            "$ref": "./examples/PUTVault_WithCMK.json"
+          },
+          "Create or Update Vault with Source scan configuration": {
+            "$ref": "./examples/PUTVault_WithSourceScanConfiguration.json"
+          },
+          "Create or Update Vault with User Assigned Identity": {
+            "$ref": "./examples/PUTVault_WithUserAssignedIdentity.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Vaults_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "Vaults_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_CreateOrUpdate_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Vaults_Update",
@@ -706,18 +709,39 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update Resource": {
+            "$ref": "./examples/PATCHVault.json"
+          },
+          "Update Resource With CustomerManagedKeys": {
+            "$ref": "./examples/PATCHVault_WithCMK.json"
+          },
+          "Update Resource With CustomerManagedKeys2": {
+            "$ref": "./examples/PatchVault_WithCMK2.json"
+          },
+          "Update Resource With CustomerManagedKeys3": {
+            "$ref": "./examples/PATCHVault_WithCMK3.json"
+          },
+          "Update Resource With User Assigned Identity": {
+            "$ref": "./examples/PATCHVault_WithUserAssignedIdentity.json"
+          },
+          "Update Vault With Monitoring Setting": {
+            "$ref": "./examples/PATCHVault_WithMonitoringSettings.json"
+          },
+          "Update Vault With Cost Management Setting": {
+            "$ref": "./examples/PATCHVault_WithCostManagementSettings.json"
+          },
+          "Update Vault With Redundancy Setting": {
+            "$ref": "./examples/PATCHVault_WithRedundancySettings.json"
+          },
+          "Update Vault With Source scan configuration": {
+            "$ref": "./examples/PATCHVault_WithSourceScanConfiguration.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Vaults_Update_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_Update_MaximumSet_Gen.json"
-          },
-          "Vaults_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_Update_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Vaults_Delete",
@@ -768,18 +792,15 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Recovery Services Vault": {
+            "$ref": "./examples/DeleteVault.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Vaults_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/Vaults_Delete_MaximumSet_Gen.json"
-          },
-          "Vaults_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/Vaults_Delete_MinimumSet_Gen.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}": {
@@ -838,11 +859,8 @@
           }
         },
         "x-ms-examples": {
-          "VaultCertificates_Create_MaximumSet_Gen": {
-            "$ref": "./examples/VaultCertificates_Create_MaximumSet_Gen.json"
-          },
-          "VaultCertificates_Create_MinimumSet_Gen": {
-            "$ref": "./examples/VaultCertificates_Create_MinimumSet_Gen.json"
+          "Download vault credential file": {
+            "$ref": "./examples/PUTVaultCred.json"
           }
         }
       }
@@ -887,11 +905,8 @@
           }
         },
         "x-ms-examples": {
-          "VaultExtendedInfo_Get_MaximumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_Get_MaximumSet_Gen.json"
-          },
-          "VaultExtendedInfo_Get_MinimumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_Get_MinimumSet_Gen.json"
+          "Get ExtendedInfo of Resource": {
+            "$ref": "./examples/GETVaultExtendedInfo.json"
           }
         }
       },
@@ -943,11 +958,8 @@
           }
         },
         "x-ms-examples": {
-          "VaultExtendedInfo_CreateOrUpdate_MaximumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "VaultExtendedInfo_CreateOrUpdate_MinimumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_CreateOrUpdate_MinimumSet_Gen.json"
+          "Put ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo_Put.json"
           }
         }
       },
@@ -999,11 +1011,8 @@
           }
         },
         "x-ms-examples": {
-          "VaultExtendedInfo_Update_MaximumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_Update_MaximumSet_Gen.json"
-          },
-          "VaultExtendedInfo_Update_MinimumSet_Gen": {
-            "$ref": "./examples/VaultExtendedInfo_Update_MinimumSet_Gen.json"
+          "PATCH ExtendedInfo of Resource": {
+            "$ref": "./examples/UpdateVaultExtendedInfo.json"
           }
         }
       }
@@ -1058,11 +1067,8 @@
           }
         },
         "x-ms-examples": {
-          "GetOperationResult_MaximumSet_Gen": {
-            "$ref": "./examples/GetOperationResult_MaximumSet_Gen.json"
-          },
-          "GetOperationResult_MinimumSet_Gen": {
-            "$ref": "./examples/GetOperationResult_MinimumSet_Gen.json"
+          "Get Operation Result": {
+            "$ref": "./examples/GetOperationResult.json"
           }
         }
       }
@@ -1110,11 +1116,8 @@
           }
         },
         "x-ms-examples": {
-          "GetOperationStatus_MaximumSet_Gen": {
-            "$ref": "./examples/GetOperationStatus_MaximumSet_Gen.json"
-          },
-          "GetOperationStatus_MinimumSet_Gen": {
-            "$ref": "./examples/GetOperationStatus_MinimumSet_Gen.json"
+          "Get Operation Status": {
+            "$ref": "./examples/GetOperationStatus.json"
           }
         }
       }
@@ -1158,16 +1161,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List PrivateLinkResources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_List_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResources_List_MaximumSet_Gen.json"
-          },
-          "PrivateLinkResources_List_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResources_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -1218,11 +1218,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateLinkResources_Get_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResources_Get_MaximumSet_Gen.json"
-          },
-          "PrivateLinkResources_Get_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResources_Get_MinimumSet_Gen.json"
+          "Get PrivateLinkResource": {
+            "$ref": "./examples/GetPrivateLinkResources.json"
           }
         }
       }
@@ -1271,11 +1268,8 @@
           }
         },
         "x-ms-examples": {
-          "RegisteredIdentities_Delete_MaximumSet_Gen": {
-            "$ref": "./examples/RegisteredIdentities_Delete_MaximumSet_Gen.json"
-          },
-          "RegisteredIdentities_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/RegisteredIdentities_Delete_MinimumSet_Gen.json"
+          "Delete registered Identity": {
+            "$ref": "./examples/DeleteRegisteredIdentities.json"
           }
         }
       }
@@ -1319,16 +1313,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets Replication usages of vault": {
+            "$ref": "./examples/ListReplicationUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ReplicationUsages_List_MaximumSet_Gen": {
-            "$ref": "./examples/ReplicationUsages_List_MaximumSet_Gen.json"
-          },
-          "ReplicationUsages_List_MinimumSet_Gen": {
-            "$ref": "./examples/ReplicationUsages_List_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -1371,16 +1362,13 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Gets vault usages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Usages_ListByVaults_MaximumSet_Gen": {
-            "$ref": "./examples/Usages_ListByVaults_MaximumSet_Gen.json"
-          },
-          "Usages_ListByVaults_MinimumSet_Gen": {
-            "$ref": "./examples/Usages_ListByVaults_MinimumSet_Gen.json"
-          }
         }
       }
     }
