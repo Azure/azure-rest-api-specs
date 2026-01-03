@@ -1,5 +1,3 @@
-
-
 import "@typespec/versioning";
 using TypeSpec.Versioning;
 
