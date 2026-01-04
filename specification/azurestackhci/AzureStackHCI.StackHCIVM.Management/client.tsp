@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.AzureStackHCI;
 
 @@clientName(Microsoft.AzureStackHCI, "AzureStackHCIVmClient", "python");
@@ -22,7 +23,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(StatusLevelTypes, "HciVmStatusLevelType", "csharp");
 @@clientName(PowerStateEnum, "HciVmPowerState", "csharp");
 @@clientName(ProvisioningAction, "GuestAgentProvisioningAction", "csharp");
-@@clientName(Identity, "HciVmIdentity", "csharp");
 @@clientName(SshConfiguration, "HciVmOSProfileSshConfiguration", "csharp");
 @@clientName(SshPublicKey, "HciVmOSProfileSshPublicKey", "csharp");
 @@clientName(AttestationStatus, "HciVmAttestationStatus", "csharp");
@@ -32,6 +32,7 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(GalleryImage, "HciVmGalleryImage", "csharp");
 @@clientName(GalleryImageProperties, "HciVmGalleryImageProperties", "csharp");
+@@clientName(GalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(GuestAgent, "HciVmGuestAgent", "csharp");
 @@clientName(GuestAgentProperties, "HciVmGuestAgentProperties", "csharp");
 @@clientName(HybridIdentityMetadata, "HciVmHybridIdentityMetadata", "csharp");
@@ -49,6 +50,7 @@ using Microsoft.AzureStackHCI;
   "HciVmMarketplaceGalleryImageProperties",
   "csharp"
 );
+@@clientName(MarketplaceGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(NetworkInterface, "HciVmNetworkInterface", "csharp");
 @@clientName(NetworkInterfaceProperties,
   "HciVmNetworkInterfaceProperties",
@@ -316,12 +318,113 @@ using Microsoft.AzureStackHCI;
   "HciVmInstanceStorageProfileOSDisk",
   "csharp"
 );
+@@clientName(VirtualMachineInstancePropertiesStorageProfileOsDisk.osType,
+  "OSType",
+  "csharp"
+);
 @@clientName(VirtualMachineInstanceStatus, "HciVmInstanceStatus", "csharp");
 @@clientName(VirtualMachineInstanceStatusProvisioningStatus,
   "HciVmInstanceProvisioningStatus",
   "csharp"
 );
 @@clientName(VmSizeEnum, "HciVmSize", "csharp");
+@@clientName(VirtualMachineInstanceManagedDiskParameters,
+  "VirtualMachineInstanceManagedDiskContent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@alternateType(VirtualMachineInstanceUpdateRequest.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(HybridIdentityMetadataProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(NetworkInterfaceArmReference,
+  "HciVmNetworkInterfaceArmReference",
+  "csharp"
+);
+@@clientName(VirtualHardDiskArmReference,
+  "HciVmVirtualHardDiskArmReference",
+  "csharp"
+);
+@@clientName(LogicalNetworkArmReference,
+  "HciVmLogicalNetworkArmReference",
+  "csharp"
+);
+@@clientName(SubnetIpConfigurationReference,
+  "HciVmSubnetIPConfigurationReference",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceProperties.hostNodeIpAddress,
+  "HostNodeIPAddress",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceProperties.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineInstanceUpdateProperties.osProfile,
+  "OSProfile",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesStorageProfile.osDisk,
+  "OSDisk",
+  "csharp"
+);
+@@clientName(IPPool.ipPoolType, "IPPoolType", "csharp");
+@@clientName(RouteProperties.nextHopIpAddress, "nextHopIPAddress", "csharp");
+@@clientName(SubnetProperties.ipAllocationMethod,
+  "IPAllocationMethod",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipConfigurationReferences,
+  "IPConfigurationReferences",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipPools, "IPPools", "csharp");
+@@clientName(NetworkInterfaceProperties.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetProperties.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
+@@clientName(GalleryImageVersionStorageProfile.osDiskImage,
+  "OSDiskImage",
+  "csharp"
+);
 
 // Java
 @@clientName(Update, "HciUpdate", "java");
