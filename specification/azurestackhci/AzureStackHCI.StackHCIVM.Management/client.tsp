@@ -589,6 +589,8 @@ using Microsoft.AzureStackHCI;
   "HciVmVirtualNetworkSubnetStatusProvisioningStatus",
   "csharp"
 );
+@@clientName(InterfaceDNSSettings, "HciVmInterfaceDnsSettings", "csharp");
+@@clientName(VMDiskSecurityProfile, "HciVmDiskSecurityProfile", "csharp");
 
 // Java
 @@clientName(Update, "HciUpdate", "java");
