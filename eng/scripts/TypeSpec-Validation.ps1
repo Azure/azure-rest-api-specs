@@ -28,7 +28,7 @@ if ($TotalShards -gt 1 -and $TotalShards -le $typespecFolders.Count) {
   $typespecFolders = shardArray $typespecFolders $Shard $TotalShards
 }
 
-Write-Host "Checking $($typespecFolders.Count) spec folders:"
+Write-Host "Checking $($typespecFolders.Count) TypeSpec folders:"
 foreach ($typespecFolder in $typespecFolders) {
   Write-Host "  $typespecFolder"
 }
@@ -52,7 +52,6 @@ if ($typespecFolders) {
     # Example: '{"checkingAllSpecs"=true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
-    LogInfo "npm exec --no -- folder-structure --validate $typespecFolder ""$context"""
     LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
 
     if ($DryRun) {
@@ -60,25 +59,13 @@ if ($typespecFolders) {
       continue
     }
 
-    npm exec --no -- folder-structure --validate $typespecFolder "$context" 2>&1 | Write-Host
-    if ($LASTEXITCODE) {
-      $typespecFoldersWithFailures += $typespecFolder
-      $errorString = "Folder structure validation failed for folder $typespecFolder.\n"
-      $errorString += "Run the following commands locally to validate."
-      $errorString += "`n > npm ci"
-      $errorString += "`n > npx folder-structure --validate $typespecFolder"
-      $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/spec-validation"
-      LogError $errorString
-    }
-
     npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
-      $errorString = "TypeSpec validation failed for project $typespecFolder.\n"
-      $errorString += "Run the following commands locally to validate."
+      $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
       $errorString += "`n > npm ci"
       $errorString += "`n > npx tsv $typespecFolder"
-      $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/spec-validation"
+      $errorString += "`nFor more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
       LogError $errorString
     }
     if ($GitClean) {
@@ -90,21 +77,19 @@ if ($typespecFolders) {
 }
 else {
   if ($CheckAll) {
-    LogError "Spec Validation - All did not validate any specs"
+    LogError "TypeSpec Validation - All did not validate any specs"
     LogJobFailure
     exit 1
   }
 }
 
 if ($typespecFoldersWithFailures.Count -gt 0) {
-  $typespecFoldersWithFailures = $typespecFoldersWithFailures | Sort-Object -Unique
-  LogInfo "Spec Validation failed for some folders; to fix, run and address any errors:"
+  LogInfo "TypeSpec Validation failed for some folder to fix run and address any errors:"
   LogInfo " > npm ci"
   foreach ($typespecFolderWithFailure in $typespecFoldersWithFailures) {
-    LogInfo " > npx folder-structure --validate $typespecFolderWithFailure"
     LogInfo " > npx tsv $typespecFolderWithFailure"
   }
-  LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/spec-validation"
+  LogInfo "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation"
   LogJobFailure
   exit 1
 }

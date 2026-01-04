@@ -1,4 +1,4 @@
-name: Spec Validation - All
+name: TypeSpec Validation - All
 
 on:
   push:
@@ -26,7 +26,7 @@ on:
       # Workflow and workflow dependencies
       - .github/actions/setup-node-npm-ci/**
       - .github/shared/**
-      - .github/workflows/spec-validation-all.yaml
+      - .github/workflows/typespec-validation-all.yaml
 
   schedule:
     # Run 4x/day
@@ -38,9 +38,9 @@ permissions:
   contents: read
 
 jobs:
-  spec-validation-all:
+  typespec-validation-all:
     # Use short name to maximize space for parameters in UI
-    name: SV
+    name: TSV
 
     strategy:
       # Validate all specs, even if one job fails early
