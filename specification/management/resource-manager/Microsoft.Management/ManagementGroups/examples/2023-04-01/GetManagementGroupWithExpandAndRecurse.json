@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "$expand": "children",
+    "$recurse": true,
+    "Cache-Control": "no-cache",
+    "api-version": "2023-04-01",
+    "groupId": "20000000-0001-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "RootGroup",
+        "type": "Microsoft.Management/managementGroups",
+        "id": "/providers/Microsoft.Management/managementGroups/RootGroup",
+        "properties": {
+          "children": [
+            {
+              "name": "Child",
+              "type": "Microsoft.Management/managementGroups",
+              "children": [
+                {
+                  "name": "Leaf",
+                  "type": "Microsoft.Management/managementGroups",
+                  "children": [
+                    {
+                      "name": "728bcbe4-8d56-4510-86c2-4921b8beefbc",
+                      "type": "/subscriptions",
+                      "displayName": "Pay-As-You-Go",
+                      "id": "/subscriptions/728bcbe4-8d56-4510-86c2-4921b8beefbc"
+                    }
+                  ],
+                  "displayName": "Leaf",
+                  "id": "/providers/Microsoft.Management/managementGroups/Leaf"
+                }
+              ],
+              "displayName": "Child",
+              "id": "/providers/Microsoft.Management/managementGroups/Child"
+            },
+            {
+              "name": "AnotherChild",
+              "type": "Microsoft.Management/managementGroups",
+              "displayName": "Leaf",
+              "id": "/providers/Microsoft.Management/managementGroups/AnotherChild"
+            }
+          ],
+          "displayName": "RootGroup",
+          "tenantId": "20000000-0000-0000-0000-000000000000",
+          "details": {
+            "parent": {
+              "name": "20000000-0000-0000-0000-000000000000",
+              "displayName": "20000000-0000-0000-0000-000000000000",
+              "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
+            },
+            "updatedBy": "bd490e30-04cb-433e-b8c8-6066959a8bab",
+            "updatedTime": "2018-01-25T02:26:49.0022093Z",
+            "version": 2
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagementGroups_Get",
+  "title": "GetManagementGroupsWithExpandAndRecurse"
+}

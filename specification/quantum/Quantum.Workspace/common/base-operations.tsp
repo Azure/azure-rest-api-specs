@@ -88,8 +88,8 @@ namespace Quantum.Workspace.Services {
     Azure.Core.Foundations.ErrorResponse
   >;
 
-  /** Operation to cancel a resource. */
-  alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
+  /** Operation to delete a resource. */
+  alias DeleteOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
 
   /** Operation to get a resource. */
   alias GetOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<Resource>;

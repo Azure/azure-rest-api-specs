@@ -7262,6 +7262,38 @@
           "type": "object",
           "x-ms-format": "dfe-string"
         },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Server name for connection. Type: string."
+        },
+        "port": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The port for the connection. Type: integer."
+        },
+        "uid": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Username for authentication. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database name for connection. Type: string."
+        },
+        "securityLevel": {
+          "description": "Specifies the security level for the driver connection to the data store. PreferredUnSecured : prefer unsecured, allow fallback to secured connection if required. OnlyUnSecured : strictly unsecured, no fallback.",
+          "type": "string",
+          "enum": [
+            "PreferredUnSecured",
+            "OnlyUnSecured"
+          ],
+          "x-ms-enum": {
+            "name": "NetezzaSecurityLevelType",
+            "modelAsString": true
+          }
+        },
         "pwd": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
           "description": "The Azure key vault secret reference of password in connection string."

@@ -32,7 +32,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2025-06-preview
+tag: package-2025-10-preview
 
 directive:
   - suppress: ListInOperationName
@@ -80,6 +80,15 @@ directive:
       - $.parameters.resourceGroupNameParameter.name
   - suppress: OperationsApiSchemaUsesCommonTypes
     reason: Common type operations api schema is not compatible with existing API spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
+```
+
+### Tag: package-2025-10-preview
+
+These settings apply only when `--tag=package-2025-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-10-preview'
+input-file:
+- preview/2025-10-01-preview/servicefabricmanagedclusters.json
 ```
 
 ### Tag: package-2025-06-preview
@@ -406,7 +415,8 @@ suppressions:
       - $.definitions.UserAssignedIdentityMap
       - $.definitions.VMSSExtensionProperties.properties.settings
       - $.definitions.VMSSExtensionProperties.properties.protectedSettings
-    
+      - $.definitions.ApplicationUpdateParametersProperties.properties.parameters
+
   - code: AvoidAdditionalProperties
     reason: Documenting already shipped APIs
     where:
@@ -447,6 +457,13 @@ suppressions:
       - $.definitions.StatefulServiceProperties.properties.quorumLossWaitDuration.format
       - $.definitions.StatefulServiceProperties.properties.standByReplicaKeepDuration.format
       - $.definitions.StatefulServiceProperties.properties.servicePlacementTimeLimit.format
+  
+  - code: PatchResponseCodes
+    reason: Managed cluster and application PATCH LRO 202 bodies have had response body schema since Day 0. This is a bug fix to make the specification accurately describe service behavior.
+    from: servicefabricmanagedclusters.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].patch
 ```
 
 ---
