@@ -122,6 +122,7 @@ model LocalizedOperationDisplayDefinitionNl is OperationsDisplayDefinition;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionPl is OperationsDisplayDefinition;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionPtBR is OperationsDisplayDefinition;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocalizedOperationDisplayDefinitionRu is OperationsDisplayDefinition;
