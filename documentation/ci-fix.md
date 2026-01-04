@@ -31,7 +31,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
-  - [`TypeSpec Validation`](#typespec-validation)
+  - [`Spec Validation`](#typespec-validation)
   - [`license/cla`](#licensecla)
 - [Suppression Process](#suppression-process)
 - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
@@ -251,7 +251,7 @@ Spell checking is *case-insensitive* so you only need to add a word once in lowe
 
 For more information see [cspell configuration](https://cspell.org/configuration/).
 
-## `TypeSpec Validation`
+## `Spec Validation`
 
 https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 

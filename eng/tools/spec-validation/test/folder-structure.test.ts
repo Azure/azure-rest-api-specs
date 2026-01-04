@@ -1417,44 +1417,6 @@ options:
       assert(result.errorOutput?.includes("examples folder"));
     });
 
-    it("should not apply TypeSpec validations to non-TypeSpec projects", async function () {
-      vi.mocked(globby.globby).mockImplementation(() => {
-        return Promise.resolve([]); // No tspconfig files
-      });
-      fileExistsSpy.mockImplementation((path: string) => {
-        if (path === "/gitroot/specification/foo/Foo") return Promise.resolve(true); // Folder exists
-        return Promise.resolve(false); // No TypeSpec files
-      });
-      normalizePathSpy.mockReturnValue("/gitroot");
-
-      // Mock git operations for import validation
-      const mockGit: Record<string, unknown> = {
-        revparse: vi.fn().mockResolvedValue("/gitroot"),
-        branch: vi.fn().mockResolvedValue({ current: "main", all: ["main"] }),
-        getRemotes: vi.fn().mockResolvedValue([
-          {
-            name: "origin",
-            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
-          },
-        ]),
-        raw: vi.fn().mockImplementation((args: string[]) => {
-          if (args[0] === "branch" && args[1] === "-vv") {
-            return Promise.resolve("* main abc123 Commit message");
-          }
-          if (args.includes("ls-tree")) {
-            // Target branch doesn't have v2 structure
-            return Promise.resolve("");
-          }
-          return Promise.resolve("main");
-        }),
-      };
-      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
-
-      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
-      // Should succeed for non-TypeSpec projects
-      assert(result.success);
-    });
-
     it("should succeed when validating a specification org folder (not a project root)", async function () {
       // This simulates invoking `tsv specification/widget` directly.
       // The folder contains nested TypeSpec projects, but it is not itself a TypeSpec project root.
@@ -1512,6 +1474,122 @@ options:
 
       const result = await new FolderStructureRule().execute("/gitroot/specification/widget");
       assert(result.success, `Expected success, got: ${result.errorOutput}`);
+    });
+  });
+
+  describe("v2 enforcement for non-TypeSpec projects", function () {
+    it("should enforce v2 structure for new Swagger-only service", async function () {
+      // Mock a new Swagger service using v1 structure (no TypeSpec files)
+      vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([])); // No TypeSpec files
+
+      fileExistsSpy.mockImplementation((path: string) => {
+        if (path === "/gitroot/specification/foo/Foo") return Promise.resolve(true); // Folder exists
+        // No TypeSpec files
+        return Promise.resolve(false);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/Foo/swagger.json"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args[0] === "branch" && args[1] === "-vv") {
+            return Promise.resolve("* feature-branch abc123 [origin/main] Commit message");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          if (args.includes("for-each-ref")) {
+            return Promise.resolve("refs/remotes/origin/main\n");
+          }
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/Foo/swagger.json");
+          }
+          if (args.includes("ls-tree")) {
+            // New service - doesn't exist in target branch
+            return Promise.reject(new Error("path not in tree"));
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+      // Should enforce v2 structure even for Swagger-only projects
+      assert(!result.success);
+      assert(
+        result.errorOutput?.includes("must use v2 structure"),
+        `Expected v2 enforcement for new Swagger service, got: ${result.errorOutput}`,
+      );
+    });
+
+    it("should allow existing v1 Swagger-only service to remain in v1 structure", async function () {
+      // Mock an existing Swagger service using v1 structure
+      vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([])); // No TypeSpec files
+
+      fileExistsSpy.mockImplementation((path: string) => {
+        if (path === "/gitroot/specification/foo/Foo") return Promise.resolve(true);
+        return Promise.resolve(false);
+      });
+      normalizePathSpy.mockReturnValue("/gitroot");
+
+      const mockGit: Record<string, unknown> = {
+        revparse: vi.fn().mockResolvedValue("/gitroot"),
+        branch: vi.fn().mockResolvedValue({ current: "feature-branch", all: ["feature-branch"] }),
+        getRemotes: vi.fn().mockResolvedValue([
+          {
+            name: "origin",
+            refs: { fetch: "https://github.com/Azure/azure-rest-api-specs.git" },
+          },
+        ]),
+        status: vi.fn().mockResolvedValue({
+          modified: ["specification/foo/Foo/swagger.json"],
+          not_added: [],
+          created: [],
+          deleted: [],
+        }),
+        raw: vi.fn().mockImplementation((args: string[]) => {
+          if (args[0] === "branch" && args[1] === "-vv") {
+            return Promise.resolve("* feature-branch abc123 [origin/main] Commit message");
+          }
+          if (args.includes("merge-base")) {
+            return Promise.resolve("abc123");
+          }
+          if (args.includes("for-each-ref")) {
+            return Promise.resolve("refs/remotes/origin/main\n");
+          }
+          if (args.includes("diff") && args.includes("--name-only")) {
+            return Promise.resolve("specification/foo/Foo/swagger.json");
+          }
+          if (args.includes("ls-tree")) {
+            // Service exists in target branch with v1 structure
+            return Promise.resolve("swagger.json\nreadme.md\n");
+          }
+          return Promise.resolve("main");
+        }),
+      };
+      simpleGitSpy.mockReturnValue(mockGit as unknown as SimpleGit);
+
+      const result = await new FolderStructureRule().execute("/gitroot/specification/foo/Foo");
+
+      // Should allow v1 structure for existing services
+      assert(
+        result.success,
+        `Expected success for existing v1 Swagger service, got: ${result.errorOutput}`,
+      );
     });
   });
 });
