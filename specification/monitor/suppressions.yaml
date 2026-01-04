@@ -5,3 +5,24 @@
 - tool: TypeSpecRequirement
   path: resource-manager/Microsoft.Insights/PrivateLinkScopes/preview/2023-06-01-preview/**/*.json
   reason: This is a reorganization of existing API versions, not introducing new API versions. These are old Swagger docs before Typespec requirements were implemented.
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+  paths:
+    - Microsoft.Monitor.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+  paths:
+    - Microsoft.Monitor.Operations.Management/tspconfig.yaml
+    - Microsoft.Monitor.PipelineGroups.Management/tspconfig.yaml
