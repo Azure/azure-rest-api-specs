@@ -58,6 +58,11 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets a network security perimeter configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "networkSecurityPerimeterConfigurationName",
+    "nspConfigName"
+  )
   get is NetworkSecurityPerimeterConfigurationOperations.Read<
     SearchService,
     Error = CloudError

@@ -56,6 +56,3 @@ using Microsoft.Search;
 @@doc(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
   "The network security perimeter configuration name."
 );
-@@key(Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationNameParameter.networkSecurityPerimeterConfigurationName,
-  "nspConfigName"
-);
