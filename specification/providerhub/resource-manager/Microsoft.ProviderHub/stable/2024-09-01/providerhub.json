@@ -4097,34 +4097,16 @@
           "readOnly": true
         },
         "specification": {
-          "$ref": "#/definitions/CustomRolloutPropertiesSpecification",
+          "$ref": "#/definitions/CustomRolloutSpecification",
           "description": "The specification."
         },
         "status": {
-          "$ref": "#/definitions/CustomRolloutPropertiesStatus",
+          "$ref": "#/definitions/CustomRolloutStatus",
           "description": "The status."
         }
       },
       "required": [
         "specification"
-      ]
-    },
-    "CustomRolloutPropertiesSpecification": {
-      "type": "object",
-      "description": "The specification.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomRolloutSpecification"
-        }
-      ]
-    },
-    "CustomRolloutPropertiesStatus": {
-      "type": "object",
-      "description": "The status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomRolloutStatus"
-        }
       ]
     },
     "CustomRolloutSpecification": {
@@ -4135,7 +4117,7 @@
           "description": "The auto provisioning configuration."
         },
         "canary": {
-          "$ref": "#/definitions/CustomRolloutSpecificationCanary",
+          "$ref": "#/definitions/TrafficRegions",
           "description": "The canary region configuration."
         },
         "releaseScopes": {
@@ -4154,7 +4136,7 @@
           "description": "Whether release scope validation should be skipped."
         },
         "providerRegistration": {
-          "$ref": "#/definitions/CustomRolloutSpecificationProviderRegistration",
+          "$ref": "#/definitions/ProviderRegistration",
           "description": "The provider registration."
         },
         "resourceTypeRegistrations": {
@@ -4178,24 +4160,6 @@
         }
       }
     },
-    "CustomRolloutSpecificationCanary": {
-      "type": "object",
-      "description": "The canary region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegions"
-        }
-      ]
-    },
-    "CustomRolloutSpecificationProviderRegistration": {
-      "type": "object",
-      "description": "The provider registration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProviderRegistration"
-        }
-      ]
-    },
     "CustomRolloutStatus": {
       "type": "object",
       "properties": {
@@ -4214,19 +4178,10 @@
           }
         },
         "manifestCheckinStatus": {
-          "$ref": "#/definitions/CustomRolloutStatusManifestCheckinStatus",
+          "$ref": "#/definitions/CheckinManifestInfo",
           "description": "The manifest checkin status."
         }
       }
-    },
-    "CustomRolloutStatusManifestCheckinStatus": {
-      "type": "object",
-      "description": "The manifest checkin status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CheckinManifestInfo"
-        }
-      ]
     },
     "DataBoundary": {
       "type": "string",
@@ -4305,66 +4260,48 @@
           "readOnly": true
         },
         "specification": {
-          "$ref": "#/definitions/DefaultRolloutPropertiesSpecification",
+          "$ref": "#/definitions/DefaultRolloutSpecification",
           "description": "The default rollout specification."
         },
         "status": {
-          "$ref": "#/definitions/DefaultRolloutPropertiesStatus",
+          "$ref": "#/definitions/DefaultRolloutStatus",
           "description": "The default rollout status."
         }
       }
-    },
-    "DefaultRolloutPropertiesSpecification": {
-      "type": "object",
-      "description": "The default rollout specification.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DefaultRolloutSpecification"
-        }
-      ]
-    },
-    "DefaultRolloutPropertiesStatus": {
-      "type": "object",
-      "description": "The default rollout status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DefaultRolloutStatus"
-        }
-      ]
     },
     "DefaultRolloutSpecification": {
       "type": "object",
       "properties": {
         "expeditedRollout": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationExpeditedRollout",
+          "$ref": "#/definitions/ExpeditedRolloutDefinition",
           "description": "The expedited rollout definition."
         },
         "canary": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationCanary",
+          "$ref": "#/definitions/CanaryTrafficRegionRolloutConfiguration",
           "description": "The canary traffic region configuration."
         },
         "lowTraffic": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationLowTraffic",
+          "$ref": "#/definitions/TrafficRegionRolloutConfiguration",
           "description": "The low traffic region configuration."
         },
         "mediumTraffic": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationMediumTraffic",
+          "$ref": "#/definitions/TrafficRegionRolloutConfiguration",
           "description": "The medium traffic region configuration."
         },
         "highTraffic": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationHighTraffic",
+          "$ref": "#/definitions/TrafficRegionRolloutConfiguration",
           "description": "The high traffic region configuration."
         },
         "restOfTheWorldGroupOne": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationRestOfTheWorldGroupOne",
+          "$ref": "#/definitions/TrafficRegionRolloutConfiguration",
           "description": "The rest of the world group one region configuration."
         },
         "restOfTheWorldGroupTwo": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationRestOfTheWorldGroupTwo",
+          "$ref": "#/definitions/TrafficRegionRolloutConfiguration",
           "description": "The rest of the world group two region configuration."
         },
         "providerRegistration": {
-          "$ref": "#/definitions/DefaultRolloutSpecificationProviderRegistration",
+          "$ref": "#/definitions/ProviderRegistration",
           "description": "The provider registration."
         },
         "resourceTypeRegistrations": {
@@ -4394,78 +4331,6 @@
         }
       }
     },
-    "DefaultRolloutSpecificationCanary": {
-      "type": "object",
-      "description": "The canary traffic region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CanaryTrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationExpeditedRollout": {
-      "type": "object",
-      "description": "The expedited rollout definition.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExpeditedRolloutDefinition"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationHighTraffic": {
-      "type": "object",
-      "description": "The high traffic region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationLowTraffic": {
-      "type": "object",
-      "description": "The low traffic region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationMediumTraffic": {
-      "type": "object",
-      "description": "The medium traffic region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationProviderRegistration": {
-      "type": "object",
-      "description": "The provider registration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProviderRegistration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationRestOfTheWorldGroupOne": {
-      "type": "object",
-      "description": "The rest of the world group one region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
-    "DefaultRolloutSpecificationRestOfTheWorldGroupTwo": {
-      "type": "object",
-      "description": "The rest of the world group two region configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
-        }
-      ]
-    },
     "DefaultRolloutStatus": {
       "type": "object",
       "properties": {
@@ -4483,22 +4348,13 @@
           "description": "The subscription reregistration result."
         },
         "manifestCheckinStatus": {
-          "$ref": "#/definitions/DefaultRolloutStatusManifestCheckinStatus",
+          "$ref": "#/definitions/CheckinManifestInfo",
           "description": "The manifest checkin status."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/RolloutStatusBase"
-        }
-      ]
-    },
-    "DefaultRolloutStatusManifestCheckinStatus": {
-      "type": "object",
-      "description": "The manifest checkin status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CheckinManifestInfo"
         }
       ]
     },
@@ -4905,19 +4761,10 @@
           "x-ms-identifiers": []
         },
         "dstsConfiguration": {
-          "$ref": "#/definitions/FanoutLinkedNotificationRuleDstsConfiguration",
+          "$ref": "#/definitions/DstsConfiguration",
           "description": "The dsts configuration."
         }
       }
-    },
-    "FanoutLinkedNotificationRuleDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
     },
     "FeaturesPolicy": {
       "type": "string",
@@ -5068,11 +4915,11 @@
           }
         },
         "overrideManifestLevelFields": {
-          "$ref": "#/definitions/FrontloadPayloadPropertiesOverrideManifestLevelFields",
+          "$ref": "#/definitions/ManifestLevelPropertyBag",
           "description": "The manifest level fields to override."
         },
         "overrideEndpointLevelFields": {
-          "$ref": "#/definitions/FrontloadPayloadPropertiesOverrideEndpointLevelFields",
+          "$ref": "#/definitions/ResourceTypeEndpointBase",
           "description": "The endpoint level fields to override."
         },
         "ignoreFields": {
@@ -5095,24 +4942,6 @@
         "overrideManifestLevelFields",
         "overrideEndpointLevelFields",
         "ignoreFields"
-      ]
-    },
-    "FrontloadPayloadPropertiesOverrideEndpointLevelFields": {
-      "type": "object",
-      "description": "The endpoint level fields to override.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceTypeEndpointBase"
-        }
-      ]
-    },
-    "FrontloadPayloadPropertiesOverrideManifestLevelFields": {
-      "type": "object",
-      "description": "The manifest level fields to override.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManifestLevelPropertyBag"
-        }
       ]
     },
     "GroupConnectivityInformation": {
@@ -5512,7 +5341,7 @@
           "description": "The origin."
         },
         "display": {
-          "$ref": "#/definitions/LocalizedOperationDefinitionDisplay",
+          "$ref": "#/definitions/LocalizedOperationDisplayDefinition",
           "description": "Display information of the operation."
         },
         "actionType": {
@@ -5525,255 +5354,84 @@
         "display"
       ]
     },
-    "LocalizedOperationDefinitionDisplay": {
-      "type": "object",
-      "description": "Display information of the operation.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinition"
-        }
-      ]
-    },
     "LocalizedOperationDisplayDefinition": {
       "type": "object",
       "properties": {
         "default": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionDefault",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation."
         },
         "en": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionEn",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for en locale."
         },
         "cs": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionCs",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for cs locale."
         },
         "de": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionDe",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for de locale."
         },
         "es": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionEs",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for es locale."
         },
         "fr": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionFr",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for fr locale."
         },
         "hu": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionHu",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for hu locale."
         },
         "it": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionIt",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for it locale."
         },
         "ja": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionJa",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for ja locale."
         },
         "ko": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionKo",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for ko locale."
         },
         "nl": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionNl",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for nl locale."
         },
         "pl": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionPl",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for pl locale."
         },
         "ptBR": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionPtBR",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for pt-BR locale."
         },
         "ptPT": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionPtPT",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for pt-PT locale."
         },
         "ru": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionRu",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for ru locale."
         },
         "sv": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionSv",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for sv locale."
         },
         "zhHans": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionZhHans",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for zh-Hans locale."
         },
         "zhHant": {
-          "$ref": "#/definitions/LocalizedOperationDisplayDefinitionZhHant",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation for zh-Hant locale."
         }
       },
       "required": [
         "default"
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionCs": {
-      "type": "object",
-      "description": "Display information of the operation for cs locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionDe": {
-      "type": "object",
-      "description": "Display information of the operation for de locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionDefault": {
-      "type": "object",
-      "description": "Display information of the operation.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionEn": {
-      "type": "object",
-      "description": "Display information of the operation for en locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionEs": {
-      "type": "object",
-      "description": "Display information of the operation for es locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionFr": {
-      "type": "object",
-      "description": "Display information of the operation for fr locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionHu": {
-      "type": "object",
-      "description": "Display information of the operation for hu locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionIt": {
-      "type": "object",
-      "description": "Display information of the operation for it locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionJa": {
-      "type": "object",
-      "description": "Display information of the operation for ja locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionKo": {
-      "type": "object",
-      "description": "Display information of the operation for ko locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionNl": {
-      "type": "object",
-      "description": "Display information of the operation for nl locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionPl": {
-      "type": "object",
-      "description": "Display information of the operation for pl locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionPtBR": {
-      "type": "object",
-      "description": "Display information of the operation for pt-BR locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionPtPT": {
-      "type": "object",
-      "description": "Display information of the operation for pt-PT locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionRu": {
-      "type": "object",
-      "description": "Display information of the operation for ru locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionSv": {
-      "type": "object",
-      "description": "Display information of the operation for sv locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionZhHans": {
-      "type": "object",
-      "description": "Display information of the operation for zh-Hans locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
-    },
-    "LocalizedOperationDisplayDefinitionZhHant": {
-      "type": "object",
-      "description": "Display information of the operation for zh-Hant locale.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
       ]
     },
     "LocationQuotaRule": {
@@ -5877,7 +5535,7 @@
           "description": "The detail level."
         },
         "hiddenPropertyPaths": {
-          "$ref": "#/definitions/LoggingRuleHiddenPropertyPaths",
+          "$ref": "#/definitions/LoggingHiddenPropertyPath",
           "description": "The hidden property paths."
         }
       },
@@ -5885,15 +5543,6 @@
         "action",
         "direction",
         "detailLevel"
-      ]
-    },
-    "LoggingRuleHiddenPropertyPaths": {
-      "type": "object",
-      "description": "The hidden property paths.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/LoggingHiddenPropertyPath"
-        }
       ]
     },
     "ManifestLevelPropertyBag": {
@@ -6262,7 +5911,7 @@
           "description": "The origin."
         },
         "display": {
-          "$ref": "#/definitions/OperationsDefinitionDisplay",
+          "$ref": "#/definitions/OperationsDisplayDefinition",
           "description": "Display information of the operation."
         },
         "actionType": {
@@ -6296,15 +5945,6 @@
           "description": "The URL to get to the next set of results, if there are any."
         }
       }
-    },
-    "OperationsDefinitionDisplay": {
-      "type": "object",
-      "description": "Display information of the operation.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsDisplayDefinition"
-        }
-      ]
     },
     "OperationsDisplayDefinition": {
       "type": "object",
@@ -6344,14 +5984,6 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "OperationsPutContentProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationsContentProperties"
         }
       ]
     },
@@ -6553,11 +6185,11 @@
           "x-ms-identifiers": []
         },
         "providerAuthentication": {
-          "$ref": "#/definitions/ProviderHubMetadataProviderAuthentication",
+          "$ref": "#/definitions/ResourceProviderAuthentication",
           "description": "The provider authentication."
         },
         "thirdPartyProviderAuthorization": {
-          "$ref": "#/definitions/ProviderHubMetadataThirdPartyProviderAuthorization",
+          "$ref": "#/definitions/ThirdPartyProviderAuthorization",
           "description": "The third party provider authorization."
         },
         "directRpRoleDefinitionId": {
@@ -6573,24 +6205,6 @@
           "description": "The global async operation resource type name."
         }
       }
-    },
-    "ProviderHubMetadataProviderAuthentication": {
-      "type": "object",
-      "description": "The provider authentication.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderAuthentication"
-        }
-      ]
-    },
-    "ProviderHubMetadataThirdPartyProviderAuthorization": {
-      "type": "object",
-      "description": "The third party provider authorization.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThirdPartyProviderAuthorization"
-        }
-      ]
     },
     "ProviderMonitorSetting": {
       "type": "object",
@@ -6737,7 +6351,7 @@
       "type": "object",
       "properties": {
         "providerHubMetadata": {
-          "$ref": "#/definitions/ProviderRegistrationPropertiesProviderHubMetadata",
+          "$ref": "#/definitions/ProviderHubMetadata",
           "description": "The provider hub metadata."
         },
         "provisioningState": {
@@ -6746,11 +6360,11 @@
           "readOnly": true
         },
         "subscriptionLifecycleNotificationSpecifications": {
-          "$ref": "#/definitions/ProviderRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications",
+          "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications",
           "description": "The subscription lifecycle notification specifications."
         },
         "privateResourceProviderConfiguration": {
-          "$ref": "#/definitions/ProviderRegistrationPropertiesPrivateResourceProviderConfiguration",
+          "$ref": "#/definitions/PrivateResourceProviderConfiguration",
           "description": "The private resource provider configuration."
         },
         "tokenAuthConfiguration": {
@@ -6761,33 +6375,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceProviderManifestProperties"
-        }
-      ]
-    },
-    "ProviderRegistrationPropertiesPrivateResourceProviderConfiguration": {
-      "type": "object",
-      "description": "The private resource provider configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PrivateResourceProviderConfiguration"
-        }
-      ]
-    },
-    "ProviderRegistrationPropertiesProviderHubMetadata": {
-      "type": "object",
-      "description": "The provider hub metadata.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProviderHubMetadata"
-        }
-      ]
-    },
-    "ProviderRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications": {
-      "type": "object",
-      "description": "The subscription lifecycle notification specifications.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
         }
       ]
     },
@@ -7362,7 +6949,7 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceProviderEndpointFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The feature rules."
         },
         "timeout": {
@@ -7379,15 +6966,6 @@
           "description": "The sku link."
         }
       }
-    },
-    "ResourceProviderEndpointFeaturesRule": {
-      "type": "object",
-      "description": "The feature rules.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
     },
     "ResourceProviderManagement": {
       "type": "object",
@@ -7505,7 +7083,7 @@
       "type": "object",
       "properties": {
         "providerAuthentication": {
-          "$ref": "#/definitions/ResourceProviderManifestProviderAuthentication",
+          "$ref": "#/definitions/ResourceProviderAuthentication",
           "description": "The provider authentication."
         },
         "providerAuthorizations": {
@@ -7548,11 +7126,11 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceProviderManifestFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The features rule."
         },
         "requestHeaderOptions": {
-          "$ref": "#/definitions/ResourceProviderManifestRequestHeaderOptions",
+          "$ref": "#/definitions/RequestHeaderOptions",
           "description": "The request header options."
         },
         "resourceTypes": {
@@ -7566,7 +7144,7 @@
           ]
         },
         "management": {
-          "$ref": "#/definitions/ResourceProviderManifestManagement",
+          "$ref": "#/definitions/ResourceProviderManagement",
           "description": "The resource provider management."
         },
         "capabilities": {
@@ -7595,7 +7173,7 @@
           "x-ms-identifiers": []
         },
         "reRegisterSubscriptionMetadata": {
-          "$ref": "#/definitions/ResourceProviderManifestReRegisterSubscriptionMetadata",
+          "$ref": "#/definitions/ReRegisterSubscriptionMetadata",
           "description": "The re-register subscription metadata."
         },
         "enableTenantLinkedNotification": {
@@ -7627,29 +7205,11 @@
         }
       }
     },
-    "ResourceProviderManifestFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceProviderManifestManagement": {
-      "type": "object",
-      "description": "The resource provider management.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderManagement"
-        }
-      ]
-    },
     "ResourceProviderManifestProperties": {
       "type": "object",
       "properties": {
         "providerAuthentication": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesProviderAuthentication",
+          "$ref": "#/definitions/ResourceProviderAuthentication",
           "description": "The provider authentication."
         },
         "providerAuthorizations": {
@@ -7692,15 +7252,15 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The features rule."
         },
         "requestHeaderOptions": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesRequestHeaderOptions",
+          "$ref": "#/definitions/RequestHeaderOptions",
           "description": "The request header options."
         },
         "management": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesManagement",
+          "$ref": "#/definitions/ResourceProviderManagement",
           "description": "The resource provider management."
         },
         "capabilities": {
@@ -7721,7 +7281,7 @@
           "description": "The metadata."
         },
         "templateDeploymentOptions": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesTemplateDeploymentOptions",
+          "$ref": "#/definitions/TemplateDeploymentOptions",
           "description": "The template deployment options."
         },
         "globalNotificationEndpoints": {
@@ -7760,7 +7320,7 @@
           "description": "The resource provider authorization rules."
         },
         "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceProviderManifestPropertiesDstsConfiguration",
+          "$ref": "#/definitions/DstsConfiguration",
           "description": "The dsts configuration."
         },
         "notificationOptions": {
@@ -7819,33 +7379,6 @@
         }
       }
     },
-    "ResourceProviderManifestPropertiesDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
-    },
-    "ResourceProviderManifestPropertiesFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceProviderManifestPropertiesManagement": {
-      "type": "object",
-      "description": "The resource provider management.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderManagement"
-        }
-      ]
-    },
     "ResourceProviderManifestPropertiesNotificationSettings": {
       "type": "object",
       "description": "Notification settings.",
@@ -7858,24 +7391,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "ResourceProviderManifestPropertiesProviderAuthentication": {
-      "type": "object",
-      "description": "The provider authentication.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderAuthentication"
-        }
-      ]
-    },
-    "ResourceProviderManifestPropertiesRequestHeaderOptions": {
-      "type": "object",
-      "description": "The request header options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestHeaderOptions"
-        }
-      ]
     },
     "ResourceProviderManifestPropertiesResourceGroupLockOptionDuringMove": {
       "type": "object",
@@ -7895,42 +7410,6 @@
           "$ref": "#/definitions/ServiceClientOptionsType"
         }
       }
-    },
-    "ResourceProviderManifestPropertiesTemplateDeploymentOptions": {
-      "type": "object",
-      "description": "The template deployment options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateDeploymentOptions"
-        }
-      ]
-    },
-    "ResourceProviderManifestProviderAuthentication": {
-      "type": "object",
-      "description": "The provider authentication.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderAuthentication"
-        }
-      ]
-    },
-    "ResourceProviderManifestReRegisterSubscriptionMetadata": {
-      "type": "object",
-      "description": "The re-register subscription metadata.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ReRegisterSubscriptionMetadata"
-        }
-      ]
-    },
-    "ResourceProviderManifestRequestHeaderOptions": {
-      "type": "object",
-      "description": "The request header options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestHeaderOptions"
-        }
-      ]
     },
     "ResourceProviderService": {
       "type": "object",
@@ -8108,7 +7587,7 @@
           "description": "The marketplace type."
         },
         "identityManagement": {
-          "$ref": "#/definitions/ResourceTypeIdentityManagement",
+          "$ref": "#/definitions/IdentityManagement",
           "description": "The identity management."
         },
         "metadata": {
@@ -8122,7 +7601,7 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceTypeFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The features rule."
         },
         "subscriptionStateRules": {
@@ -8142,7 +7621,7 @@
           "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
-          "$ref": "#/definitions/ResourceTypeRequestHeaderOptions",
+          "$ref": "#/definitions/RequestHeaderOptions",
           "description": "The request header options."
         },
         "skuLink": {
@@ -8157,7 +7636,7 @@
           }
         },
         "templateDeploymentPolicy": {
-          "$ref": "#/definitions/ResourceTypeTemplateDeploymentPolicy",
+          "$ref": "#/definitions/TemplateDeploymentPolicy",
           "description": "The template deployment policy."
         },
         "extendedLocations": {
@@ -8294,7 +7773,7 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceTypeEndpointFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The features rule."
         },
         "extensions": {
@@ -8340,7 +7819,7 @@
           }
         },
         "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeEndpointDstsConfiguration",
+          "$ref": "#/definitions/DstsConfiguration",
           "description": "The dsts configuration."
         },
         "dataBoundary": {
@@ -8382,7 +7861,7 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceTypeEndpointBaseFeaturesRule",
+          "$ref": "#/definitions/FeaturesPolicy",
           "description": "The features rule."
         },
         "timeout": {
@@ -8395,7 +7874,7 @@
           "description": "The endpoint type."
         },
         "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeEndpointBaseDstsConfiguration",
+          "$ref": "#/definitions/DstsConfiguration",
           "description": "The dsts configuration."
         },
         "skuLink": {
@@ -8427,42 +7906,6 @@
         "skuLink",
         "apiVersion",
         "zones"
-      ]
-    },
-    "ResourceTypeEndpointBaseDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
-    },
-    "ResourceTypeEndpointBaseFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceTypeEndpointDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
-    },
-    "ResourceTypeEndpointFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
       ]
     },
     "ResourceTypeEndpointKind": {
@@ -8535,37 +7978,10 @@
       "type": "object",
       "properties": {
         "resourceCreationBegin": {
-          "$ref": "#/definitions/ResourceTypeExtensionOptionsResourceCreationBegin",
+          "$ref": "#/definitions/ExtensionOptions",
           "description": "Resource creation begin."
         }
       }
-    },
-    "ResourceTypeExtensionOptionsResourceCreationBegin": {
-      "type": "object",
-      "description": "Resource creation begin.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExtensionOptions"
-        }
-      ]
-    },
-    "ResourceTypeFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceTypeIdentityManagement": {
-      "type": "object",
-      "description": "The identity management.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityManagement"
-        }
-      ]
     },
     "ResourceTypeOnBehalfOfToken": {
       "type": "object",
@@ -8704,7 +8120,7 @@
           "x-ms-identifiers": []
         },
         "extensionOptions": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesExtensionOptions",
+          "$ref": "#/definitions/ResourceTypeExtensionOptions",
           "description": "The extension options."
         },
         "marketplaceType": {
@@ -8781,7 +8197,7 @@
           }
         },
         "featuresRule": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesFeaturesRule",
+          "$ref": "#/definitions/FeaturesRule",
           "description": "The features rule."
         },
         "enableAsyncOperation": {
@@ -8798,7 +8214,7 @@
           "description": "Whether third party S2S is enabled."
         },
         "subscriptionLifecycleNotificationSpecifications": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications",
+          "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications",
           "description": "The subscription lifecycle notification specifications."
         },
         "isPureProxy": {
@@ -8806,11 +8222,11 @@
           "description": "Whether it is pure proxy."
         },
         "identityManagement": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesIdentityManagement",
+          "$ref": "#/definitions/IdentityManagementProperties",
           "description": "The identity management."
         },
         "checkNameAvailabilitySpecifications": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications",
+          "$ref": "#/definitions/CheckNameAvailabilitySpecifications",
           "description": "The check name availability specifications."
         },
         "disallowedActionVerbs": {
@@ -8829,7 +8245,7 @@
           "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesRequestHeaderOptions",
+          "$ref": "#/definitions/RequestHeaderOptions",
           "description": "The request header options."
         },
         "subscriptionStateRules": {
@@ -8841,7 +8257,7 @@
           "x-ms-identifiers": []
         },
         "templateDeploymentOptions": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesTemplateDeploymentOptions",
+          "$ref": "#/definitions/TemplateDeploymentOptions",
           "description": "The template deployment options."
         },
         "extendedLocations": {
@@ -8853,7 +8269,7 @@
           "x-ms-identifiers": []
         },
         "resourceMovePolicy": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesResourceMovePolicy",
+          "$ref": "#/definitions/ResourceMovePolicy",
           "description": "The resource move policy."
         },
         "resourceDeletionPolicy": {
@@ -8868,11 +8284,11 @@
           }
         },
         "resourceGraphConfiguration": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesResourceGraphConfiguration",
+          "$ref": "#/definitions/ResourceGraphConfiguration",
           "description": "The resource graph configuration."
         },
         "management": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesManagement",
+          "$ref": "#/definitions/ResourceProviderManagement",
           "description": "The resource provider management."
         },
         "openApiConfiguration": {
@@ -8938,7 +8354,7 @@
           "description": "The token auth configuration."
         },
         "templateDeploymentPolicy": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesTemplateDeploymentPolicy",
+          "$ref": "#/definitions/TemplateDeploymentPolicy",
           "description": "The template deployment policy."
         },
         "allowEmptyRoleAssignments": {
@@ -8954,7 +8370,7 @@
           "description": "The availability zone rule."
         },
         "dstsConfiguration": {
-          "$ref": "#/definitions/ResourceTypeRegistrationPropertiesDstsConfiguration",
+          "$ref": "#/definitions/DstsConfiguration",
           "description": "The dsts configuration."
         },
         "asyncTimeoutRules": {
@@ -9108,51 +8524,6 @@
         }
       }
     },
-    "ResourceTypeRegistrationPropertiesCheckNameAvailabilitySpecifications": {
-      "type": "object",
-      "description": "The check name availability specifications.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CheckNameAvailabilitySpecifications"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesDstsConfiguration": {
-      "type": "object",
-      "description": "The dsts configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DstsConfiguration"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesExtensionOptions": {
-      "type": "object",
-      "description": "The extension options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceTypeExtensionOptions"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesFeaturesRule": {
-      "type": "object",
-      "description": "The features rule.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FeaturesRule"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesIdentityManagement": {
-      "type": "object",
-      "description": "The identity management.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityManagementProperties"
-        }
-      ]
-    },
     "ResourceTypeRegistrationPropertiesLegacyPolicy": {
       "type": "object",
       "description": "The legacy policy.",
@@ -9172,15 +8543,6 @@
         }
       }
     },
-    "ResourceTypeRegistrationPropertiesManagement": {
-      "type": "object",
-      "description": "The resource provider management.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceProviderManagement"
-        }
-      ]
-    },
     "ResourceTypeRegistrationPropertiesMarketplaceOptions": {
       "type": "object",
       "description": "Marketplace options.",
@@ -9190,15 +8552,6 @@
           "description": "Add-on plan conversion allowed."
         }
       }
-    },
-    "ResourceTypeRegistrationPropertiesRequestHeaderOptions": {
-      "type": "object",
-      "description": "The request header options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestHeaderOptions"
-        }
-      ]
     },
     "ResourceTypeRegistrationPropertiesResourceCache": {
       "type": "object",
@@ -9213,15 +8566,6 @@
           "description": "Resource cache expiration timespan. This is a TimeSpan property."
         }
       }
-    },
-    "ResourceTypeRegistrationPropertiesResourceGraphConfiguration": {
-      "type": "object",
-      "description": "The resource graph configuration.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceGraphConfiguration"
-        }
-      ]
     },
     "ResourceTypeRegistrationPropertiesResourceManagementOptions": {
       "type": "object",
@@ -9269,15 +8613,6 @@
         }
       }
     },
-    "ResourceTypeRegistrationPropertiesResourceMovePolicy": {
-      "type": "object",
-      "description": "The resource move policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceMovePolicy"
-        }
-      ]
-    },
     "ResourceTypeRegistrationPropertiesResourceQueryManagement": {
       "type": "object",
       "description": "Resource query management options.",
@@ -9308,42 +8643,6 @@
         }
       }
     },
-    "ResourceTypeRegistrationPropertiesSubscriptionLifecycleNotificationSpecifications": {
-      "type": "object",
-      "description": "The subscription lifecycle notification specifications.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubscriptionLifecycleNotificationSpecifications"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesTemplateDeploymentOptions": {
-      "type": "object",
-      "description": "The template deployment options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateDeploymentOptions"
-        }
-      ]
-    },
-    "ResourceTypeRegistrationPropertiesTemplateDeploymentPolicy": {
-      "type": "object",
-      "description": "The template deployment policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateDeploymentPolicy"
-        }
-      ]
-    },
-    "ResourceTypeRequestHeaderOptions": {
-      "type": "object",
-      "description": "The request header options.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RequestHeaderOptions"
-        }
-      ]
-    },
     "ResourceTypeSku": {
       "type": "object",
       "properties": {
@@ -9365,15 +8664,6 @@
       },
       "required": [
         "skuSettings"
-      ]
-    },
-    "ResourceTypeTemplateDeploymentPolicy": {
-      "type": "object",
-      "description": "The template deployment policy.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TemplateDeploymentPolicy"
-        }
       ]
     },
     "ResourceValidation": {
@@ -9831,14 +9121,6 @@
         "value"
       ]
     },
-    "SkuResourceProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceTypeSku"
-        }
-      ]
-    },
     "SkuScaleType": {
       "type": "string",
       "description": "The scale type.",
@@ -9921,7 +9203,7 @@
           }
         },
         "capacity": {
-          "$ref": "#/definitions/SkuSettingCapacity",
+          "$ref": "#/definitions/SkuCapacity",
           "description": "The capacity."
         },
         "costs": {
@@ -9945,15 +9227,6 @@
       },
       "required": [
         "name"
-      ]
-    },
-    "SkuSettingCapacity": {
-      "type": "object",
-      "description": "The capacity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SkuCapacity"
-        }
       ]
     },
     "SkuZoneDetail": {
