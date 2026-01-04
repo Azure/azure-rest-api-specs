@@ -230,7 +230,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -27043,7 +27046,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
             }
           },
           "202": {
@@ -32599,18 +32605,6 @@
         "minCapacity"
       ]
     },
-    "ApplicationGatewayAvailableRequestHeadersResult": {
-      "type": "object",
-      "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ApplicationGatewayAvailableResponseHeadersResult": {
       "type": "object",
       "description": "Response for ApplicationGatewayAvailableResponseHeaders API service call.",
@@ -36636,6 +36630,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "type": "array",
+          "description": "The body type of the operation request or response.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+          }
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
@@ -43019,18 +43029,6 @@
       "required": [
         "value"
       ]
-    },
-    "ExpressRouteFailoverAllTestDetails": {
-      "type": "object",
-      "description": "Gateway Failover All Test Details",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      }
     },
     "ExpressRouteFailoverCircuitResourceDetails": {
       "type": "object",
@@ -59171,7 +59169,8 @@
           "x-ms-enum": {
             "name": "NicTypeInRequest",
             "modelAsString": true
-          }
+          },
+          "x-ms-client-name": "NicType"
         },
         "properties": {
           "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfigurationProperties",

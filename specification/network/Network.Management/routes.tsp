@@ -38,7 +38,7 @@ interface ApplicationGatewaysOperationGroup {
   @get
   @action("applicationGatewayAvailableRequestHeaders")
   listAvailableRequestHeaders is ArmProviderActionSync<
-    Response = ApplicationGatewayAvailableRequestHeadersResult,
+    Response = ArmResponse<ApplicationGatewayAvailableRequestHeadersResult>,
     Scope = SubscriptionActionScope,
     Error = Error
   >;

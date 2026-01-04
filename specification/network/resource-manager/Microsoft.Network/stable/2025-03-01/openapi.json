@@ -872,9 +872,12 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -36837,7 +36840,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
             }
           },
           "202": {
@@ -36868,7 +36874,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ExpressRouteFailoverAllTestDetails"
+          "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CExpressRouteFailoverTestDetails%5B%5D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -45108,18 +45114,6 @@
         "minCapacity"
       ]
     },
-    "ApplicationGatewayAvailableRequestHeadersResult": {
-      "type": "object",
-      "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ApplicationGatewayAvailableResponseHeadersResult": {
       "type": "object",
       "description": "Response for ApplicationGatewayAvailableResponseHeaders API service call.",
@@ -49565,6 +49559,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "type": "array",
+          "description": "The body type of the operation request or response.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+          }
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
@@ -56552,18 +56562,6 @@
       "required": [
         "value"
       ]
-    },
-    "ExpressRouteFailoverAllTestDetails": {
-      "type": "object",
-      "description": "Gateway Failover All Test Details",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      }
     },
     "ExpressRouteFailoverCircuitResourceDetails": {
       "type": "object",
@@ -74838,7 +74836,8 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/NicTypeInRequest",
-          "description": "NIC type. This should be either PublicNic or PrivateNic."
+          "description": "NIC type. This should be either PublicNic or PrivateNic.",
+          "x-ms-client-name": "NicType"
         },
         "properties": {
           "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfigurationProperties",

@@ -180,6 +180,15 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders": {
       "get": {
         "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult",
+              "type__added": "array",
+              "items__added": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "schema": {
               "$ref": {
@@ -14945,6 +14954,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
       "post": {
         "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ExpressRouteFailoverAllTestDetails",
+              "type__added": "array",
+              "items__added": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
+            }
+          },
           "202": {
             "headers": {
               "location__deleted": {
@@ -17252,6 +17270,13 @@
     }
   },
   "definitions": {
+    "ApplicationGatewayAvailableRequestHeadersResult__deleted": {
+      "type": "array",
+      "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call.",
+      "items": {
+        "type": "string"
+      }
+    },
     "AzureAsyncOperationResult__deleted": {
       "type": "object",
       "description": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.",
@@ -17393,6 +17418,13 @@
         }
       }
     },
+    "ExpressRouteFailoverAllTestDetails__deleted": {
+      "type": "array",
+      "description": "Gateway Failover All Test Details",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+      }
+    },
     "Filters__deleted": {
       "type": "array",
       "description": "Describers the filters to filter response by",
@@ -17519,6 +17551,22 @@
           "readOnly": true
         }
       }
+    },
+    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>__added": {
+      "type": "object",
+      "description": "Azure operation completed successfully.",
+      "properties": {
+        "body": {
+          "type": "array",
+          "description": "The body type of the operation request or response.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+          }
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>__added": {
       "type": "object",
@@ -18217,23 +18265,6 @@
         "maxCapacity": {
           "exclusiveMinimum__deleted": false
         }
-      }
-    },
-    "ApplicationGatewayAvailableRequestHeadersResult": {
-      "items__deleted": {
-        "type": "string"
-      },
-      "properties__added": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "type": {
-        "__old": "array",
-        "__new": "object"
       }
     },
     "ApplicationGatewayAvailableResponseHeadersResult": {
@@ -21846,23 +21877,6 @@
       "required__added": [
         "value"
       ]
-    },
-    "ExpressRouteFailoverAllTestDetails": {
-      "items__deleted": {
-        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-      },
-      "properties__added": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      },
-      "type": {
-        "__old": "array",
-        "__new": "object"
-      }
     },
     "ExpressRouteFailoverSingleTestDetailsObject": {
       "items__deleted": {
@@ -27595,9 +27609,6 @@
     "VirtualApplianceNetworkInterfaceConfiguration": {
       "readOnly__deleted": false,
       "properties": {
-        "type": {
-          "x-ms-client-name__deleted": "NicType"
-        },
         "properties": {
           "description__added": "Represents a single NIC configuration properties."
         }

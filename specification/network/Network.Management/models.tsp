@@ -27779,11 +27779,7 @@ model ApplicationGatewayAvailableServerVariablesResult {
 /**
  * Response for ApplicationGatewayAvailableRequestHeaders API service call.
  */
-model ApplicationGatewayAvailableRequestHeadersResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: string[];
-}
+alias ApplicationGatewayAvailableRequestHeadersResult = string[];
 
 /**
  * Response for ApplicationGatewayAvailableResponseHeaders API service call.
@@ -27797,12 +27793,7 @@ model ApplicationGatewayAvailableResponseHeadersResult {
 /**
  * Gateway Failover All Test Details
  */
-model ExpressRouteFailoverAllTestDetails {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: ExpressRouteFailoverTestDetails[];
-}
+alias ExpressRouteFailoverAllTestDetails = ExpressRouteFailoverTestDetails[];
 
 /**
  * Gateway Failover Single Test Details Object
@@ -27907,6 +27898,9 @@ model BastionHostListResult is Azure.Core.Page<BastionHost>;
 );
 @@Azure.ClientGenerator.Core.clientName(FirewallPolicyIdpsSignatureSeverity,
   "FirewallPolicyIDPSSignatureSeverity"
+);
+@@Azure.ClientGenerator.Core.clientName(VirtualApplianceNetworkInterfaceConfiguration.type,
+  "NicType"
 );
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(PacketCaptureListResult.value,
