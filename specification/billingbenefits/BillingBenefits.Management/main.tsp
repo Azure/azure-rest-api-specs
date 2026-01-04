@@ -35,7 +35,6 @@ using TypeSpec.Versioning;
 /**
  * Azure Benefits RP let users create and manage benefits.
  */
-#suppress "@azure-tools/typespec-client-generator-core/client-location-duplicate" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "Billing benefits RP" })
 @versioned(Versions)

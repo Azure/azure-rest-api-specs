@@ -25,16 +25,16 @@ using Microsoft.BillingBenefits;
 @@clientLocation(Discounts.update, "Discount");
 @@clientLocation(BenefitOperationGroup.validate, "Benefit");
 @@clientLocation(ContributorsOperationGroup.listFromApplicableMacc,
-  "Contributors"
+  Contributors
 );
 @@clientLocation(SellerResourceOperationGroup.list, "SellerResource");
 @@clientLocation(ApplicableMaccsOperationGroup.list, "ApplicableMaccs");
-@@clientLocation(CreditsOperationGroup.listApplicable, "Credits");
+@@clientLocation(CreditsOperationGroup.listApplicable, Credits);
 @@clientLocation(ConditionalCreditsOperationGroup.scopeList,
-  "ConditionalCredits"
+  ConditionalCredits
 );
 @@clientLocation(ConditionalCreditContributorsOperationGroup.listFromApplicableConditionalCredit,
-  "ConditionalCreditContributors"
+  ConditionalCreditContributors
 );
 @@clientLocation(CreditSources.get, "Sources");
 @@clientLocation(CreditSources.create, "Sources");
