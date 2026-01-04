@@ -88,7 +88,6 @@ using TypeSpec.Versioning;
 /**
  * Resource provider operation status.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)
@@ -106,12 +105,13 @@ enum Versions {
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
-@armResourceOperations
-interface ApiManagementOperations
+@armResourceOperations(#{ omitTags: true })
+interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(ApiManagementOperations.list,
+@@doc(Operations.list,
   "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
 );
+@@tag(Operations.list, "ApiManagementOperations");

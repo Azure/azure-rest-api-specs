@@ -1541,6 +1541,8 @@ using Microsoft.ApiManagement;
 
 @@clientLocation(OperationsResultsOperationGroup.get, "OperationsResults");
 
+@@clientLocation(Operations.list, "ApiManagementOperations");
+
 @@clientName(ApiManagementServiceOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
 );
