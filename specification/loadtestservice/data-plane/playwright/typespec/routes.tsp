@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Playwright;
 
@@ -21,21 +23,6 @@ alias ServiceTraits = NoRepeatableRequests &
   }>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-
-interface AccessTokens {
-  // AccessToken Operations
-  @doc("Creates an access token for the workspace with the specified access token ID and name. The ID and name must be unique among active access tokens for the user within a Playwright workspace. Requires Bearer JWT access token provided by Entra ID.")
-  createOrReplace is Operations.ResourceCreateOrReplace<AccessToken>;
-
-  @doc("Gets an access token for the workspace with the specified access token ID. Requires Bearer JWT access token provided by Entra ID.")
-  get is Operations.ResourceRead<AccessToken>;
-
-  @doc("Deletes an access token for the workspace with the specified access token ID. Requires Bearer JWT access token provided by Entra ID.")
-  delete is Operations.ResourceDelete<AccessToken>;
-
-  @doc("Lists access tokens for the specified workspace ID. Supports OData query parameters: $select, $filter, $orderby, $top, and $skip. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID.")
-  list is Operations.ResourceList<AccessToken>;
-}
 
 alias GetBrowsersParams = {
   @path
@@ -68,6 +55,11 @@ alias GetBrowsersResponse = {
 
 interface Workspaces {
   // Workspaces Operations
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Get details of the Azure resource mapped to a workspace for the given workspace id. Authorization required is Bearer JWT Access token provided by EntraID.")
+  get is Operations.ResourceRead<Workspace>;
+
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Operations defined using RpcOperation should not have path parameters. Consider using ResourceAction or ResourceCollectionAction instead."
   @doc("Gets remote browsers for the specified workspace ID and redirects the client to execute Playwright scripts. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
   @route("/playwrightworkspaces/{workspaceId}/browsers")
@@ -76,13 +68,4 @@ interface Workspaces {
     GetBrowsersResponse,
     ServiceTraits
   >;
-}
-
-interface TestRuns {
-  // TestRun Operations
-  @doc("Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
-  createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
-
-  @doc("Lists test runs for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
-  list is Operations.ResourceList<TestRun>;
 }
