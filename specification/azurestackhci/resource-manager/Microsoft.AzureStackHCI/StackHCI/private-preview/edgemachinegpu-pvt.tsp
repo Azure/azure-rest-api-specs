@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.AzureStackHCI;
 
 /**
- * Details of a particular GPU in EdgeMachine.
+ * Details of a particular GPU in an EdgeMachine.
  */
 @parentResource(EdgeMachine)
 model EdgeMachineGpu
@@ -22,7 +22,7 @@ model EdgeMachineGpu
     Resource = EdgeMachineGpu,
     KeyName = "gpuName",
     SegmentName = "gpus",
-    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9-_]{3,85}$"
   >;
 }
 
@@ -75,7 +75,7 @@ model EdgeMachineGpuProperties {
    * Represents the instance Id of the GPU.
    */
   @visibility(Lifecycle.Read)
-  gpuId: string;
+  gpuId?: string;
 
   /**
    * The vendor of the GPU.
