@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-04-01-preview",
+    "version": "2025-11-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -15111,6 +15111,10 @@
             "name": "TlsVersion",
             "modelAsString": true
           }
+        },
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/AutoScaleConfiguration",
+          "description": "Auto-scale configuration for the namespace resource"
         }
       }
     },
@@ -15496,6 +15500,10 @@
             "$ref": "#/definitions/InboundIpRule"
           },
           "x-ms-identifiers": []
+        },
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/UpdateAutoScaleConfiguration",
+          "description": "Auto-scale configuration for the namespace resource"
         }
       }
     },
@@ -17939,6 +17947,45 @@
             "$ref": "#/definitions/CustomDomainConfiguration"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "AutoScaleConfiguration": {
+      "description": "Auto-scale configuration for the namespace resource.",
+      "type": "object",
+      "properties": {
+        "enableAutoScale": {
+          "description": "Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale\r\nbetween minimumThroughputUnits and maximumThroughputUnits based on usage patterns.",
+          "type": "boolean"
+        },
+        "minimumThroughputUnits": {
+          "format": "int32",
+          "description": "Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.",
+          "type": "integer"
+        },
+        "maximumThroughputUnits": {
+          "format": "int32",
+          "description": "Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.",
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateAutoScaleConfiguration": {
+      "type": "object",
+      "properties": {
+        "enableAutoScale": {
+          "description": "Indicates whether auto-scaling is enabled for the namespace. When enabled, the namespace will automatically scale\r\nbetween minimumThroughputUnits and maximumThroughputUnits based on usage patterns.",
+          "type": "boolean"
+        },
+        "minimumThroughputUnits": {
+          "format": "int32",
+          "description": "Minimum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.",
+          "type": "integer"
+        },
+        "maximumThroughputUnits": {
+          "format": "int32",
+          "description": "Maximum number of Throughput Units for auto-scaling. Valid only when EnableAutoScale is true.",
+          "type": "integer"
         }
       }
     }
