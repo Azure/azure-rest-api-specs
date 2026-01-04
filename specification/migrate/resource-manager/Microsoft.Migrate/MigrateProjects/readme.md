@@ -47,6 +47,14 @@ input-file:
 - stable/2023-01-01/hubmigrate.json
 ```
 
+### Tag: package-preview-2025-09
+These settings apply only when `--tag=package-preview-2025-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09'
+input-file:
+- preview/2025-09-01-preview/migrate.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
