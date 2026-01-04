@@ -2199,7 +2199,7 @@
           "description": "Indicates if name is valid and available."
         },
         "reason": {
-          "$ref": "#/definitions/Reason",
+          "$ref": "#/definitions/reason",
           "description": "The reason the name is not available."
         }
       }
@@ -2223,42 +2223,6 @@
           "type": "string",
           "description": "Gets or sets the object identifier of the admin."
         }
-      }
-    },
-    "CreatedByType": {
-      "type": "string",
-      "description": "The type of identity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "User"
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "ManagedIdentity"
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "Key"
-          }
-        ]
       }
     },
     "Credentials": {
@@ -2590,42 +2554,6 @@
             ]
           }
         }
-      }
-    },
-    "LastModifiedByType": {
-      "type": "string",
-      "description": "The type of identity that last modified the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "LastModifiedByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "User"
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "ManagedIdentity"
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "Key"
-          }
-        ]
       }
     },
     "ManagedIdentityType": {
@@ -3278,30 +3206,6 @@
         }
       }
     },
-    "Reason": {
-      "type": "string",
-      "description": "The reason the name is not available.",
-      "enum": [
-        "Invalid",
-        "AlreadyExists"
-      ],
-      "x-ms-enum": {
-        "name": "Reason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
-          },
-          {
-            "name": "AlreadyExists",
-            "value": "AlreadyExists",
-            "description": "AlreadyExists"
-          }
-        ]
-      }
-    },
     "ScopeType": {
       "type": "string",
       "description": "The scope where the default account is set.",
@@ -3342,7 +3246,7 @@
           "readOnly": true
         },
         "createdByType": {
-          "$ref": "#/definitions/CreatedByType",
+          "$ref": "#/definitions/createdByType",
           "description": "The type of identity that created the resource.",
           "readOnly": true
         },
@@ -3358,7 +3262,7 @@
           "readOnly": true
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/LastModifiedByType",
+          "$ref": "#/definitions/lastModifiedByType",
           "description": "The type of identity that last modified the resource.",
           "readOnly": true
         }
@@ -3504,6 +3408,102 @@
           "description": "Gets or Sets Principal ID",
           "readOnly": true
         }
+      }
+    },
+    "createdByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "createdByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
+      }
+    },
+    "lastModifiedByType": {
+      "type": "string",
+      "description": "The type of identity that last modified the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "lastModifiedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
+      }
+    },
+    "reason": {
+      "type": "string",
+      "description": "The reason the name is not available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "reason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "AlreadyExists"
+          }
+        ]
       }
     }
   },

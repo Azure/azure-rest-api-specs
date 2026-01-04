@@ -61,3 +61,6 @@ using Microsoft.Purview;
 @@doc(OperationList.value, "Collection of items of type results.");
 @@doc(OperationList.nextLink, "The Url of next result page.");
 @@visibility(UsageList.value, Lifecycle.Read);
+@@clientName(CreatedByType, "createdByType");
+@@clientName(Reason, "reason");
+@@clientName(LastModifiedByType, "lastModifiedByType");
