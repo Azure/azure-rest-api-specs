@@ -12,6 +12,8 @@ model PrivateEndpointConnectionResource
 
 @armResourceOperations(PrivateEndpointConnectionResource)
 interface PrivateEndpointConnections {
+  /** List existing private connections */
+  listByMongoCluster is ArmResourceListByParent<PrivateEndpointConnectionResource>;
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
@@ -28,8 +30,6 @@ interface PrivateEndpointConnections {
   >;
   /** Delete the private endpoint connection */
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
-  /** List existing private connections */
-  listByMongoCluster is ArmResourceListByParent<PrivateEndpointConnectionResource>;
 }
 
 #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private links"
