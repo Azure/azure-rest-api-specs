@@ -73,3 +73,7 @@ using Microsoft.ApiManagement;
 );
 
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
+@@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
+  "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
+  "python"
+);
