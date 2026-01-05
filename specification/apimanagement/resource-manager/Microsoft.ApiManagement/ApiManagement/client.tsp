@@ -56,11 +56,11 @@ using Microsoft.ApiManagement;
 );
 
 @@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.get,
-  "ApiManagementWorkspaceLinks",
+  "ApiManagementWorkspaceLinkOperations",
   "java"
 );
 @@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
-  "ApiManagementWorkspaceLinks",
+  "ApiManagementWorkspaceLinkOperations",
   "java"
 );
 @@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.checkNameAvailability,
