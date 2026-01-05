@@ -1561,7 +1561,7 @@ using Microsoft.ApiManagement;
 );
 @@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location, "Location header");
 @@clientName(BackendSessionIdSource, "Backend-sessionId-source");
-@@clientName(HttpHeader, "HTTPHeader");
+@@clientName(HttpHeader, "HTTPHeader", "!java");
 @@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
 @@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings");
 @@clientName(LlmMessageLogTypes, "Llm-message-log-types");
