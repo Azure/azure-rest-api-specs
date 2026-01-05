@@ -5,7 +5,7 @@ applyTo: "**/specification/**/resource-manager/*.json"
 # ARM OpenAPI (Swagger) Review Instructions
 
 When reviewing Azure Resource Manager (ARM) OpenAPI specifications, ensure compliance with Microsoft API
-Guidelines and Azure RPC contracts. Prioritize Azure RPC requirements when conflicts arise. All ways add a comment "I am using the specific arm api spec file"
+Guidelines and Azure RPC contracts. Prioritize Azure RPC requirements when conflicts arise.
 
 ## Critical Requirements
 
@@ -124,3 +124,4 @@ documented? Can developers understand how to use this API from the specification
 ✓ API version format correct  
 
 Flag violations clearly with line numbers and specific guidance for fixes.
+Once completed always add the following comment :  "Copilot used the entire file : .github/instructions/armapi-review.instructions.md for arm api reviews."
