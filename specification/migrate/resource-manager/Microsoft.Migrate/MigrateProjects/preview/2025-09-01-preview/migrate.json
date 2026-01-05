@@ -15,22 +15,6 @@
     "application/json"
   ],
   "parameters": {
-    "subscriptionId": {
-      "name": "subscriptionId",
-      "description": "Azure Subscription Id in which project was created.",
-      "type": "string",
-      "in": "path",
-      "x-ms-parameter-location": "method",
-      "required": true
-    },
-    "resourceGroupName": {
-      "name": "resourceGroupName",
-      "description": "Name of the Azure Resource Group that project is part of.",
-      "type": "string",
-      "in": "path",
-      "x-ms-parameter-location": "method",
-      "required": true
-    },
     "migrateProjectName": {
       "name": "migrateProjectName",
       "description": "Migrate project name.",
@@ -82,20 +66,16 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupName"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/migrateProjectName"
-          },
-          {
-            "name": "api-version",
-            "description": "The API version to use for this operation.",
-            "in": "query",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -108,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -130,20 +110,20 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -165,42 +145,6 @@
     "Object": {
       "type": "object",
       "properties": {}
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Azure Migrate service."
     },
     "BootstrapConversationResponse": {
       "description": "Response from the bootstrapConversation API provides the necessary details to establish a Web PubSub communication channel for interacting with the Migrate AI agent",
