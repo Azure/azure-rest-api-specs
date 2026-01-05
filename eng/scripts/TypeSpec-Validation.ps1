@@ -18,7 +18,7 @@ if ($TotalShards -gt 0 -and $Shard -ge $TotalShards) {
 . $PSScriptRoot/Suppressions-Functions.ps1
 . $PSScriptRoot/Array-Functions.ps1
 
-$typespecFolders, $checkingAllSpecs = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
+$orgFolders, $typespecFolders, $checkingAllSpecs = &"$PSScriptRoot/Get-TypeSpec-Folders.ps1" `
   -BaseCommitish:$BaseCommitish `
   -HeadCommitish:$HeadCommitish `
   -CheckAll:$CheckAll `

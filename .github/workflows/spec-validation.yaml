@@ -36,4 +36,5 @@ jobs:
           $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
 
           ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
+          ./eng/scripts/Folder-Structure-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh
