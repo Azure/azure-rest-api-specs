@@ -67,7 +67,6 @@ interface ProviderRegistrations {
    * Generates the manifest for the given provider.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GenerateManifest")
   generateManifest is ArmResourceActionSync<
     ProviderRegistration,
     void,
@@ -79,7 +78,6 @@ interface ProviderRegistrations {
    * Checkin the manifest.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CheckinManifest")
   checkinManifest is ArmResourceActionSync<
     ProviderRegistration,
     CheckinManifestParams,

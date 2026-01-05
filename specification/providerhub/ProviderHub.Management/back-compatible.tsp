@@ -21,8 +21,8 @@ using Microsoft.ProviderHub;
 @@clientName(ProviderRegistrations.createOrUpdate::parameters.resource,
   "properties"
 );
-@@clientLocation(ProviderRegistrations.generateManifest, "");
-@@clientLocation(ProviderRegistrations.checkinManifest, "");
+@@clientLocation(ProviderRegistrations.generateManifest, Microsoft.ProviderHub);
+@@clientLocation(ProviderRegistrations.checkinManifest, Microsoft.ProviderHub);
 @@clientName(ProviderRegistrations.checkinManifest::parameters.body,
   "checkinManifestParams"
 );
