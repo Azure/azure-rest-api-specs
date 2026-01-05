@@ -40,6 +40,9 @@ namespace PurviewDataQuality;
 enum ApiVersions {
   @doc("2025-09-01-preview service API version")
   v2025_09_01_preview: "2025-09-01-preview",
+
+  @doc("2025-12-11-preview service API version")
+  v2025_12_11_preview: "2025-12-11-preview",
 }
 
 alias AuthToken = OAuth2Auth<[
