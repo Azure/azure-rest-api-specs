@@ -134,6 +134,17 @@ interface DatadogMonitorResources {
   >;
 
   /**
+   * Returns the latest SaaS linked to the Datadog organization of the underlying monitor.
+   */
+  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
+  @summary("link the latest Saas to the monitor")
+  latestLinkedSaaS is ArmResourceActionSync<
+    DatadogMonitorResource,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
+
+  /**
    * Set the default api key.
    */
   @summary("Set the default api key.")
