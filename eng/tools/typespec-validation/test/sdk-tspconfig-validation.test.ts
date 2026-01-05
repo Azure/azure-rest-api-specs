@@ -845,7 +845,7 @@ describe("tspconfig", function () {
       ? new SdkTspConfigValidationRule([], c.subRules)
       : new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, c.success); // Non-management should always pass
+    strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
