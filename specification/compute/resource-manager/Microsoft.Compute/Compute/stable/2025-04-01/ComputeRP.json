@@ -13155,6 +13155,28 @@
         }
       }
     },
+    "Common.HyperVGeneration": {
+      "type": "string",
+      "description": "The hypervisor generation of the Virtual Machine.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGeneration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1"
+          },
+          {
+            "name": "V2",
+            "value": "V2"
+          }
+        ]
+      }
+    },
     "Common.OperatingSystemStateTypes": {
       "type": "string",
       "description": "The OS State. For managed images, use Generalized.",
@@ -13203,6 +13225,63 @@
       "x-ms-enum": {
         "name": "ResourceIdentityType",
         "modelAsString": false
+      }
+    },
+    "Common.SnapshotAccessState": {
+      "type": "string",
+      "description": "The state of snapshot which determines the access availability of the snapshot.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Available",
+        "InstantAccess",
+        "AvailableWithInstantAccess"
+      ],
+      "x-ms-enum": {
+        "name": "SnapshotAccessState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Default value."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The snapshot cannot be used for restore, copy or download to offline."
+          },
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The snapshot can be used for restore, copy to different region, and download to offline."
+          },
+          {
+            "name": "InstantAccess",
+            "value": "InstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded."
+          },
+          {
+            "name": "AvailableWithInstantAccess",
+            "value": "AvailableWithInstantAccess",
+            "description": "The snapshot can be used for restoring disks with fast performance, copied and downloaded."
+          }
+        ]
+      }
+    },
+    "Common.UserAssignedIdentitiesValue": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
       }
     },
     "ComponentNames": {
@@ -14030,7 +14109,7 @@
           "description": "Disk restore point Id."
         },
         "snapshotAccessState": {
-          "$ref": "../../common-types/v1/common.json#/definitions/SnapshotAccessState",
+          "$ref": "#/definitions/Common.SnapshotAccessState",
           "description": "The state of snapshot which determines the access availability of the snapshot."
         },
         "replicationStatus": {
@@ -18903,7 +18982,7 @@
           "type": "object",
           "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "../../common-types/v1/common.json#/definitions/UserAssignedIdentitiesValue"
+            "$ref": "#/definitions/Common.UserAssignedIdentitiesValue"
           }
         }
       }
@@ -20254,7 +20333,7 @@
           "type": "object",
           "description": "The list of user identities associated with the virtual machine scale set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "../../common-types/v1/common.json#/definitions/UserAssignedIdentitiesValue"
+            "$ref": "#/definitions/Common.UserAssignedIdentitiesValue"
           }
         }
       }
@@ -21733,7 +21812,7 @@
           "description": "The version of Operating System running on the hybrid machine."
         },
         "hyperVGeneration": {
-          "$ref": "../../common-types/v1/common.json#/definitions/HyperVGeneration",
+          "$ref": "#/definitions/Common.HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine [V1, V2]"
         }
       }

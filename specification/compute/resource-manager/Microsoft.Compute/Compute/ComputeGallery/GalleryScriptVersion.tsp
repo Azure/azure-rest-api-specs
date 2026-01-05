@@ -4,15 +4,15 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./GalleryScript.tsp";
-import "../Common.Management/operations.tsp";
 
 using TypeSpec.Rest;
 using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Azure.Core; // Needed for @useFinalStateVia decorator
+using Common;
 
-namespace Microsoft.Compute {
+namespace ComputeGallery {
   @pattern("^[0-9]+\\.[0-9]+\\.[0-9]+$")
   @doc("The name of the gallery Script Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>")
   scalar GalleryScriptVersionName extends string;

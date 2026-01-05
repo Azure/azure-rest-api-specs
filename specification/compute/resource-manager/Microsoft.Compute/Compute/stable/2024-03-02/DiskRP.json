@@ -2489,6 +2489,50 @@
         }
       }
     },
+    "Common.Architecture": {
+      "type": "string",
+      "description": "CPU architecture supported by an OS disk.",
+      "enum": [
+        "x64",
+        "Arm64"
+      ],
+      "x-ms-enum": {
+        "name": "Architecture",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "x64",
+            "value": "x64"
+          },
+          {
+            "name": "Arm64",
+            "value": "Arm64"
+          }
+        ]
+      }
+    },
+    "Common.HyperVGeneration": {
+      "type": "string",
+      "description": "The hypervisor generation of the Virtual Machine.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGeneration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "V1",
+            "value": "V1"
+          },
+          {
+            "name": "V2",
+            "value": "V2"
+          }
+        ]
+      }
+    },
     "Common.OperatingSystemTypes": {
       "type": "string",
       "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: **Windows,** **Linux.**",
@@ -2499,6 +2543,21 @@
       "x-ms-enum": {
         "name": "OperatingSystemTypes",
         "modelAsString": false
+      }
+    },
+    "Common.UserAssignedIdentitiesValue": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
       }
     },
     "CopyCompletionError": {
@@ -3006,7 +3065,7 @@
           "description": "The Operating System type."
         },
         "hyperVGeneration": {
-          "$ref": "../../common-types/v1/common.json#/definitions/HyperVGeneration",
+          "$ref": "#/definitions/Common.HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only."
         },
         "purchasePlan": {
@@ -3240,7 +3299,7 @@
           "readOnly": true
         },
         "hyperVGeneration": {
-          "$ref": "../../common-types/v1/common.json#/definitions/HyperVGeneration",
+          "$ref": "#/definitions/Common.HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only."
         },
         "purchasePlan": {
@@ -3645,7 +3704,7 @@
           "type": "object",
           "description": "The list of user identities associated with the disk encryption set. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
           "additionalProperties": {
-            "$ref": "../../common-types/v1/common.json#/definitions/UserAssignedIdentitiesValue"
+            "$ref": "#/definitions/Common.UserAssignedIdentitiesValue"
           }
         }
       }
@@ -4291,7 +4350,7 @@
           "description": "The Operating System type."
         },
         "hyperVGeneration": {
-          "$ref": "../../common-types/v1/common.json#/definitions/HyperVGeneration",
+          "$ref": "#/definitions/Common.HyperVGeneration",
           "description": "The hypervisor generation of the Virtual Machine. Applicable to OS disks only."
         },
         "purchasePlan": {
@@ -4524,7 +4583,7 @@
           "description": "True if the image from which the OS disk is created supports accelerated networking."
         },
         "architecture": {
-          "$ref": "../../common-types/v1/common.json#/definitions/Architecture",
+          "$ref": "#/definitions/Common.Architecture",
           "description": "CPU architecture supported by an OS disk."
         }
       }

@@ -37,31 +37,3 @@ namespace Common;
 @@externalTypeRef(ExtendedLocationTypes,
   "../../common-types/v1/common.json#/definitions/ExtendedLocationTypes"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@externalTypeRef(UserAssignedIdentitiesValue,
-  "../../common-types/v1/common.json#/definitions/UserAssignedIdentitiesValue"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@externalTypeRef(Architecture,
-  "../../common-types/v1/common.json#/definitions/Architecture"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@externalTypeRef(HyperVGeneration,
-  "../../common-types/v1/common.json#/definitions/HyperVGeneration"
-);
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-// @@externalTypeRef(OperatingSystemTypes,
-//   "../../common-types/v1/common.json#/definitions/OperatingSystemTypes"
-// );
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-// @@externalTypeRef(OperatingSystemStateTypes,
-//   "../../common-types/v1/common.json#/definitions/OperatingSystemStateTypes"
-// );
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-// @@externalTypeRef(ResourceIdentityType,
-//   "../../common-types/v1/common.json#/definitions/ResourceIdentityType"
-// );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-@@externalTypeRef(SnapshotAccessState,
-  "../../common-types/v1/common.json#/definitions/SnapshotAccessState"
-);

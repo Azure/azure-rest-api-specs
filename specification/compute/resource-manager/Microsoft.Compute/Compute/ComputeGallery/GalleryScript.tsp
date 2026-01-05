@@ -5,14 +5,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Gallery.tsp";
-import "../Common.Management/operations.tsp";
 
 using TypeSpec.Rest;
 using Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using Common;
 
-namespace Microsoft.Compute;
+namespace ComputeGallery;
 
 /**
  * Gallery script name with pattern validation
