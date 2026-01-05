@@ -694,7 +694,7 @@ union RestrictionLevel {
    */
   Unrestricted: "Unrestricted",
 
-  @doc("Only */read RBAC permissions allowed on the managed node resource group")
+  @doc("Only \\*\\/read RBAC permissions allowed on the managed node resource group")
   ReadOnly: "ReadOnly",
 }
 
