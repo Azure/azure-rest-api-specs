@@ -17,3 +17,40 @@ using Microsoft.ApiManagement;
   "preferredIpVersion",
   "java"
 );
+
+@@clientName(Microsoft.ApiManagement.ApiManagementSkuCosts.meterID,
+  "meterId",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.KeyVaultLastAccessStatusContractProperties.timeStampUtc,
+  "timestampUtc",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.publicIPAddresses,
+  "publicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.privateIPAddresses,
+  "privateIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.outboundPublicIPAddresses,
+  "outboundPublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.publicIPAddresses,
+  "publicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.privateIPAddresses,
+  "privateIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.outboundPublicIPAddresses,
+  "outboundPublicIpAddresses",
+  "java"
+);
+@@clientName(Microsoft.ApiManagement.HostnameConfiguration.hostName,
+  "hostname",
+  "java"
+);
