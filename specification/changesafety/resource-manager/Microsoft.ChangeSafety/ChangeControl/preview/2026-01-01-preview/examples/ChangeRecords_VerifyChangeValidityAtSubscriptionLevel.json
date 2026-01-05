@@ -1,0 +1,28 @@
+{
+  "title": "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel",
+  "operationId": "ChangeRecords_VerifyChangeValidityAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionChangeRecord",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.Web/sites/subscriptionWebApp",
+        "httpMethod": "PUT",
+        "body": {
+          "location": "eastus",
+          "properties": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "The change is valid and can proceed at the subscription level.",
+        "validUntil": "2025-07-09T12:00:00.000Z"
+      }
+    }
+  }
+}
