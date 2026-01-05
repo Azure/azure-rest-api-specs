@@ -28,12 +28,38 @@ These are the global settings for the EdgeActions API.
 title: EdgeActionsManagementClient
 description: Edge Actions Management Client
 openapi-type: arm
-tag: package-2025-09-01-preview
+tag: package-2025-12-01-preview
+```
+
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+This is the default tag. It removes the internal `addAttachment` and `deleteAttachment` operations
+that are used exclusively by the AFD RP.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - preview/2025-12-01-preview/openapi.json
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
+suppressions:
+  # Operations endpoint for Microsoft.Cdn already defined in central Cdn swagger, not duplicated here
+  - code: OperationsAPIImplementation
+    reason: Operations API implemented in central Cdn swagger (package-preview-2025-09) for provider Microsoft.Cdn.
+  # LRO POST actions intentionally return 200 (final) and 202 (in-progress) matching 2024-07-22-preview baseline.
+  - code: PostResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
+    reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
 ```
 
 ### Tag: package-2025-09-01-preview
 
 These settings apply only when `--tag=package-2025-09-01-preview` is specified on the command line.
+
+This version includes the internal `addAttachment` and `deleteAttachment` operations.
 
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
