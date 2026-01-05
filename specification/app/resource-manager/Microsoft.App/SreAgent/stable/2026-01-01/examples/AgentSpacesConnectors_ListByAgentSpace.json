@@ -15,7 +15,8 @@
             "type": "Microsoft.App/agentSpaces/connectors",
             "properties": {
               "dataConnectorType": "SqlServer",
-              "keyVaultUri": "https://testkv.vault.azure.net/secrets/shared-sql-connection-string",
+              "endpoint": "https://shared-sqlserver.database.windows.net",
+
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedSqlIdentity"
             }
           },
@@ -25,6 +26,7 @@
             "type": "Microsoft.App/agentSpaces/connectors",
             "properties": {
               "dataConnectorType": "AzureStorage",
+              "endpoint": "https://sharedstorageaccount.blob.core.windows.net",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedStorageIdentity"
             }
           },
@@ -34,7 +36,8 @@
             "type": "Microsoft.App/agentSpaces/connectors",
             "properties": {
               "dataConnectorType": "CosmosDB",
-              "keyVaultUri": "https://testkv.vault.azure.net/secrets/shared-cosmos-connection-string",
+              "endpoint": "https://sharedcosmos.documents.azure.com:443/",
+
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedCosmosIdentity"
             }
           },
@@ -44,6 +47,7 @@
             "type": "Microsoft.App/agentSpaces/connectors",
             "properties": {
               "dataConnectorType": "KeyVault",
+              "endpoint": "https://sharedkeyvault.vault.azure.net",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sharedKvIdentity"
             }
           }

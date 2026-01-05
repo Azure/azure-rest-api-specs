@@ -15,7 +15,8 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "SqlServer",
-              "keyVaultUri": "https://testkv.vault.azure.net/secrets/sql-connection-string",
+              "endpoint": "https://sqlserver.database.windows.net",
+
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
               "source": "Agent",
               "extendedProperties": {
@@ -33,6 +34,7 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "AzureStorage",
+              "endpoint": "https://teststorage.blob.core.windows.net",
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/storageIdentity",
               "source": "AgentSpace",
               "extendedProperties": {
@@ -51,7 +53,8 @@
             "type": "Microsoft.App/agents/connectors",
             "properties": {
               "dataConnectorType": "CosmosDB",
-              "keyVaultUri": "https://testkv.vault.azure.net/secrets/cosmos-connection-string",
+              "endpoint": "https://testcosmos.documents.azure.com:443/",
+
               "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/cosmosIdentity",
               "source": "Agent"
             }

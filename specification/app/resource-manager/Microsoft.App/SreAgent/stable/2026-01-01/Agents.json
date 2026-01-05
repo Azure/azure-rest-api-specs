@@ -551,31 +551,14 @@
           "type": "string",
           "format": "arm-id"
         },
-        "vnetConfiguration": {
-          "$ref": "#/definitions/AgentVnetConfiguration"
-        },
         "knowledgeGraphConfiguration": {
           "$ref": "#/definitions/KnowledgeGraphConfiguration"
         },
         "actionConfiguration": {
           "$ref": "#/definitions/ActionConfiguration"
         },
-        "outboundConnectionConfiguration": {
-          "$ref": "#/definitions/OutboundConnectionConfiguration"
-        },
-        "mcpServers": {
-          "description": "A list of McpServer",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/McpServer"
-          }
-        },
-        "dataConnectors": {
-          "description": "A list of AgentDataConnector",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/AgentDataConnectorProperties"
-          }
+        "gitHubConfiguration": {
+          "$ref": "#/definitions/GitHubConfiguration"
         },
         "logConfiguration": {
           "$ref": "#/definitions/LogConfiguration"
@@ -583,18 +566,11 @@
         "dashboardConfiguration": {
           "$ref": "#/definitions/DashboardConfiguration"
         },
-        "incidentManagementConfiguration": {
-          "$ref": "#/definitions/IncidentManagementConfiguration"
-        },
-        "gitHubConfiguration": {
-          "description": "GitHub Configurations",
-          "$ref": "#/definitions/GitHubConfiguration"
-        },
-        "adminUsers": {
-          "description": "The list of admin users for the agent.",
+        "permissions": {
+          "description": "The list of user permissions for the agent.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UserIdentity"
+            "$ref": "#/definitions/UserIdentityPermission"
           }
         },
         "upgradeChannel": {
@@ -608,16 +584,6 @@
             "name": "UpgradeChannel",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "AgentVnetConfiguration": {
-      "description": "Vnet configuration for agent",
-      "type": "object",
-      "properties": {
-        "subnetResourceId": {
-          "description": "Resource ID of a subnet for agent",
-          "type": "string"
         }
       }
     },
@@ -676,35 +642,14 @@
         }
       }
     },
-    "OutboundConnectionConfiguration": {
-      "description": "Outbound connection configuration for agent",
+    "GitHubConfiguration": {
+      "description": "GitHub configuration for agent",
       "type": "object",
       "properties": {
-        "azureBotConfiguration": {
-          "description": "Azure Bot Configuration",
-          "$ref": "#/definitions/AzureBotConfiguration"
-        }
-      }
-    },
-    "AzureBotConfiguration": {
-      "description": "Teams Bot Configuration",
-      "type": "object",
-      "properties": {
-        "identity": {
-          "description": "The identity used to access Azure Bot.",
+        "patTokenOverride": {
+          "description": "The GitHub Personal Access Token override.",
           "type": "string",
-          "format": "arm-id"
-        }
-      }
-    },
-    "McpServer": {
-      "description": "McpServer information",
-      "type": "object",
-      "properties": {
-        "uri": {
-          "description": "The URI of the McpServer.",
-          "type": "string",
-          "format": "uri"
+          "x-ms-secret": true
         }
       }
     },
@@ -712,28 +657,9 @@
       "description": "Log Configurations",
       "type": "object",
       "properties": {
-        "logAnalyticsConfiguration": {
-          "description": "Log Analytics Configuration",
-          "$ref": "#/definitions/AgentLogAnalyticsConfiguration"
-        },
         "applicationInsightsConfiguration": {
           "description": "Application Insights Configuration",
           "$ref": "#/definitions/ApplicationInsightsConfiguration"
-        }
-      }
-    },
-    "AgentLogAnalyticsConfiguration": {
-      "description": "Log Analytics Configuration",
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "description": "The customer ID of the Log Analytics workspace.",
-          "type": "string"
-        },
-        "sharedKey": {
-          "description": "The shared key for the Log Analytics workspace.",
-          "type": "string",
-          "x-ms-secret": true
         }
       }
     },
@@ -753,7 +679,7 @@
       }
     },
     "DashboardConfiguration": {
-      "description": "Dashboard Configurations",
+      "description": "Dashboard Configuration",
       "type": "object",
       "properties": {
         "azureMonitorWorkspaceQueryEndpoint": {
@@ -780,55 +706,35 @@
         }
       }
     },
-    "IncidentManagementConfiguration": {
-      "description": "Incident Management Configurations",
+    "UserIdentityPermission": {
       "type": "object",
+      "description": "User identity permission properties",
       "properties": {
-        "type": {
-          "description": "The type of incident management system.",
-          "type": "string"
-        },
-        "connectionName": {
-          "description": "The name of the connection.",
-          "type": "string"
-        },
-        "connectionUrl": {
-          "description": "The URL of the connection.",
-          "type": "string"
-        },
-        "connectionKey": {
-          "description": "The key for the connection.",
+        "displayName": {
           "type": "string",
-          "x-ms-secret": true
+          "description": "The display name of the user."
         },
-        "oboUser": {
-          "description": "The user for the connection.",
-          "type": "string"
-        }
-      }
-    },
-    "GitHubConfiguration": {
-      "description": "GitHub Configurations",
-      "type": "object",
-      "properties": {
-        "patTokenOverride": {
-          "description": "The personal access token (PAT) to use for GitHub API requests.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "UserIdentity": {
-      "type": "object",
-      "description": "User identity properties",
-      "properties": {
         "objectId": {
           "type": "string",
           "description": "The object ID of the user identity."
         },
-        "clientId": {
+        "tenantId": {
           "type": "string",
-          "description": "The client ID of the user identity."
+          "description": "The tenant ID of the user identity."
+        },
+        "role": {
+          "description": "The role assigned to the user.",
+          "enum": [
+            "Administrator",
+            "Author",
+            "StandardUser",
+            "Reader"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UserIdentityPermissionRole",
+            "modelAsString": true
+          }
         }
       }
     }

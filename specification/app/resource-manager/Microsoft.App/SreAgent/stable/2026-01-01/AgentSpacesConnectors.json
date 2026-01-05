@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnectorCollection"
+              "$ref": "#/definitions/AgentSpaceConnectorCollection"
             }
           },
           "default": {
@@ -101,7 +101,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnector"
+              "$ref": "#/definitions/AgentSpaceConnector"
             }
           },
           "default": {
@@ -147,11 +147,11 @@
             "type": "string"
           },
           {
-            "name": "agentSpaceDataConnectorEnvelope",
+            "name": "agentSpaceConnectorEnvelope",
             "in": "body",
-            "description": "Agent Space Data Connector to be created or updated",
+            "description": "Agent Space Connector to be created or updated",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnector"
+              "$ref": "#/definitions/AgentSpaceConnector"
             }
           },
           {
@@ -162,7 +162,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnector"
+              "$ref": "#/definitions/AgentSpaceConnector"
             }
           },
           "201": {
@@ -173,7 +173,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnector"
+              "$ref": "#/definitions/AgentSpaceConnector"
             }
           },
           "default": {
@@ -284,7 +284,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnector"
+              "$ref": "#/definitions/AgentSpaceConnector"
             }
           },
           "default": {
@@ -330,7 +330,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentSpaceDataConnectorCollection"
+              "$ref": "#/definitions/AgentSpaceConnectorCollection"
             }
           },
           "default": {
@@ -352,18 +352,18 @@
     }
   },
   "definitions": {
-    "AgentSpaceDataConnectorCollection": {
-      "description": "Collection of AgentSpaceDataConnector",
+    "AgentSpaceConnectorCollection": {
+      "description": "Collection of AgentSpaceConnector",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of AgentSpaceDataConnector",
+          "description": "Array of AgentSpaceConnector",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentSpaceDataConnector"
+            "$ref": "#/definitions/AgentSpaceConnector"
           }
         },
         "nextLink": {
@@ -373,8 +373,8 @@
         }
       }
     },
-    "AgentSpaceDataConnector": {
-      "description": "Agent Space Data Connector resource.",
+    "AgentSpaceConnector": {
+      "description": "Agent Space Connector resource.",
       "type": "object",
       "allOf": [
         {
@@ -383,8 +383,8 @@
       ],
       "properties": {
         "properties": {
-          "description": "Properties of the Agent Space Data Connector.",
-          "$ref": "./CommonDefinitions.json#/definitions/AgentSpaceDataConnectorProperties"
+          "description": "Properties of the Agent Space Connector.",
+          "$ref": "./CommonDefinitions.json#/definitions/AgentSpaceConnectorProperties"
         }
       }
     }

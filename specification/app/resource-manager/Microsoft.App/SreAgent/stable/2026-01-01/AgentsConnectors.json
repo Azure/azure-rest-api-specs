@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentDataConnectorCollection"
+              "$ref": "#/definitions/AgentConnectorCollection"
             }
           },
           "default": {
@@ -101,7 +101,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentDataConnector"
+              "$ref": "#/definitions/AgentConnector"
             }
           },
           "default": {
@@ -147,12 +147,12 @@
             "type": "string"
           },
           {
-            "name": "agentDataConnectorEnvelope",
+            "name": "agentConnectorEnvelope",
             "in": "body",
-            "description": "Details of the agent data connector.",
+            "description": "Details of the agent connector.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentDataConnector"
+              "$ref": "#/definitions/AgentConnector"
             }
           },
           {
@@ -163,7 +163,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentDataConnector"
+              "$ref": "#/definitions/AgentConnector"
             }
           },
           "201": {
@@ -174,7 +174,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AgentDataConnector"
+              "$ref": "#/definitions/AgentConnector"
             }
           },
           "default": {
@@ -285,7 +285,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentDataConnector"
+              "$ref": "#/definitions/AgentConnector"
             }
           },
           "default": {
@@ -331,7 +331,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AgentDataConnectorCollection"
+              "$ref": "#/definitions/AgentConnectorCollection"
             }
           },
           "default": {
@@ -353,18 +353,18 @@
     }
   },
   "definitions": {
-    "AgentDataConnectorCollection": {
-      "description": "Collection of AgentDataConnector",
+    "AgentConnectorCollection": {
+      "description": "Collection of AgentConnector",
       "required": [
         "value"
       ],
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of AgentDataConnector",
+          "description": "Array of AgentConnector",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentDataConnector"
+            "$ref": "#/definitions/AgentConnector"
           }
         },
         "nextLink": {
@@ -374,8 +374,8 @@
         }
       }
     },
-    "AgentDataConnector": {
-      "description": "Agent Data Connector resource.",
+    "AgentConnector": {
+      "description": "Agent Connector resource.",
       "type": "object",
       "allOf": [
         {
@@ -384,8 +384,8 @@
       ],
       "properties": {
         "properties": {
-          "description": "Properties of the Agent Data Connector.",
-          "$ref": "./CommonDefinitions.json#/definitions/AgentDataConnectorProperties"
+          "description": "Properties of the Agent Connector.",
+          "$ref": "./CommonDefinitions.json#/definitions/AgentConnectorProperties"
         }
       }
     }

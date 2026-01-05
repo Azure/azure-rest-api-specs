@@ -27,9 +27,6 @@
           "runningState": "Running",
           "powerState": "Running",
           "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
-          "vnetConfiguration": {
-            "subnetResourceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet"
-          },
           "knowledgeGraphConfiguration": {
             "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity",
             "managedResources": [
@@ -42,41 +39,31 @@
             "mode": "Autonomous",
             "accessLevel": "High"
           },
-          "outboundConnectionConfiguration": {
-            "azureBotConfiguration": {
-              "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/botIdentity"
-            }
+          "gitHubConfiguration": {
           },
-          "mcpServers": [
-            {
-              "uri": "https://example-mcp-server.com/api"
-            }
-          ],
           "logConfiguration": {
-            "logAnalyticsConfiguration": {
-              "workspaceId": "12345678-1234-1234-1234-123456789012"
-            },
             "applicationInsightsConfiguration": {
               "appId": "87654321-4321-4321-4321-210987654321"
             }
           },
           "dashboardConfiguration": {
-            "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.metrics.monitor.azure.com",
-            "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-dce.eastus.ingest.monitor.azure.com",
-            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/monitorIdentity",
+            "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.prometheus.monitor.azure.com",
+            "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-abcd.eastus-1.metrics.ingest.monitor.azure.com",
+            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardIdentity",
             "grafanaUrl": "https://testgrafana.grafana.azure.com"
           },
-          "incidentManagementConfiguration": {
-            "type": "ServiceNow",
-            "connectionName": "ServiceNowConnection",
-            "connectionUrl": "https://testinstance.service-now.com",
-            "oboUser": "test@contoso.com"
-          },
-          "gitHubConfiguration": {},
-          "adminUsers": [
+          "permissions": [
             {
-              "objectId": "99999999-8888-7777-6666-555555555555",
-              "clientId": "88888888-7777-6666-5555-444444444444"
+              "displayName": "John Doe",
+              "objectId": "11111111-2222-3333-4444-555555555555",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "role": "Administrator"
+            },
+            {
+              "displayName": "Jane Smith",
+              "objectId": "22222222-3333-4444-5555-666666666666",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "role": "Author"
             }
           ],
           "upgradeChannel": "Stable"
