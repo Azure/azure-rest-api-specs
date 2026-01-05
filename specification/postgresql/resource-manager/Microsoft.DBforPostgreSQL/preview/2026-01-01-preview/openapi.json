@@ -1175,7 +1175,7 @@
         }
       },
       "put": {
-        "operationId": "AdvancedThreatProtectionSettings_CreateOrUpdate",
+        "operationId": "ServerThreatProtectionSettings_CreateOrUpdate",
         "tags": [
           "AdvancedThreatProtectionSettingsModels"
         ],
@@ -2701,6 +2701,84 @@
             "$ref": "./examples/BackupsLongTermRetentionCheckPrerequisites.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrateNetwork": {
+      "post": {
+        "operationId": "Servers_MigrateNetworkMode",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Migrates the network configuration of a PostgreSQL flexible server from customer owned VNET to Microsoft owned VNET with support for private endpoints, or from Microsoft owned VNET with no support for private endpoints to Microsoft owned VNET with support for private endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MigrateNetworkStatus"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MigrateNetworkStatus"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/migrations": {
@@ -6420,6 +6498,29 @@
         ]
       }
     },
+    "MigrateNetworkStatus": {
+      "type": "object",
+      "description": "The status of a network migration operation.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the subscription."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The name of the server."
+        },
+        "state": {
+          "$ref": "#/definitions/NetworkMigrationState",
+          "description": "The state of the network migration operation.",
+          "readOnly": true
+        }
+      }
+    },
     "MigrateRolesAndPermissions": {
       "type": "string",
       "description": "Indicates if roles and permissions must be migrated.",
@@ -7135,6 +7236,54 @@
             ]
           }
         }
+      }
+    },
+    "NetworkMigrationState": {
+      "type": "string",
+      "description": "The state of the network migration operation.",
+      "enum": [
+        "Pending",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "CancelInProgress",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkMigrationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The network migration is pending."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The network migration is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The network migration succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The network migration failed."
+          },
+          {
+            "name": "CancelInProgress",
+            "value": "CancelInProgress",
+            "description": "The network migration cancellation is in progress."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The network migration was cancelled."
+          }
+        ]
       }
     },
     "ObjectRecommendation": {
