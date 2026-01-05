@@ -24,7 +24,7 @@ interface ApplicationGatewaysOperationGroup {
   @get
   @action("applicationGatewayAvailableServerVariables")
   listAvailableServerVariables is ArmProviderActionSync<
-    Response = ApplicationGatewayAvailableServerVariablesResult,
+    Response = ArmResponse<ApplicationGatewayAvailableServerVariablesResult>,
     Scope = SubscriptionActionScope,
     Error = Error
   >;
@@ -52,7 +52,7 @@ interface ApplicationGatewaysOperationGroup {
   @get
   @action("applicationGatewayAvailableResponseHeaders")
   listAvailableResponseHeaders is ArmProviderActionSync<
-    Response = ApplicationGatewayAvailableResponseHeadersResult,
+    Response = ArmResponse<ApplicationGatewayAvailableResponseHeadersResult>,
     Scope = SubscriptionActionScope,
     Error = Error
   >;

@@ -259,7 +259,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableResponseHeadersResult"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -285,7 +288,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ApplicationGatewayAvailableServerVariablesResult"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -983,9 +989,6 @@
           "ExpressRouteProviderPortList": {
             "$ref": "./examples/expressRouteProviderPortList.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -27046,10 +27049,7 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-              }
+              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
             }
           },
           "202": {
@@ -32605,30 +32605,6 @@
         "minCapacity"
       ]
     },
-    "ApplicationGatewayAvailableResponseHeadersResult": {
-      "type": "object",
-      "description": "Response for ApplicationGatewayAvailableResponseHeaders API service call.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ApplicationGatewayAvailableServerVariablesResult": {
-      "type": "object",
-      "description": "Response for ApplicationGatewayAvailableServerVariables API service call.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ApplicationGatewayAvailableSslOptions": {
       "type": "object",
       "description": "Response for ApplicationGatewayAvailableSslOptions API service call.",
@@ -36630,22 +36606,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "The body type of the operation request or response.",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
@@ -43029,6 +42989,18 @@
       "required": [
         "value"
       ]
+    },
+    "ExpressRouteFailoverAllTestDetails": {
+      "type": "object",
+      "description": "Gateway Failover All Test Details",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+          }
+        }
+      }
     },
     "ExpressRouteFailoverCircuitResourceDetails": {
       "type": "object",
@@ -55153,15 +55125,6 @@
           "description": "Type of the resource.",
           "readOnly": true
         }
-      }
-    },
-    "Record<PeerRoute[]>": {
-      "type": "object",
-      "additionalProperties": {
-        "items": {
-          "$ref": "#/definitions/PeerRoute"
-        },
-        "type": "array"
       }
     },
     "RecordSet": {

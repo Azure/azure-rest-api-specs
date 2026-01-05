@@ -313,12 +313,12 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves the details of all the failover tests performed on the gateway for different peering locations
    */
-  @post
+  @list
   @action("getFailoverAllTestsDetails")
   getFailoverAllTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    Response = ArmResponse<ExpressRouteFailoverAllTestDetails>,
+    Response = ExpressRouteFailoverAllTestDetails,
     Parameters = {
       /**
        * The type of failover test
@@ -342,7 +342,7 @@ interface VirtualNetworkGateways {
   getFailoverSingleTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ExpressRouteFailoverSingleTestDetailsObject,
+    Response = ExpressRouteFailoverSingleTestDetailsObject,
     Parameters = {
       /**
        * Peering location of the test

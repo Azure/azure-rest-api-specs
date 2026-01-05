@@ -224,6 +224,8 @@
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.$ref__deleted` | deleted | `./network.json#/definitions/ProvisioningState` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].$ref__deleted` | deleted | `./networkManager.json#/parameters/ListTopParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableRequestHeadersResult` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableResponseHeadersResult` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ApplicationGatewayAvailableServerVariablesResult` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].$ref__added` | added | `../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter` |
@@ -259,7 +261,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ExpressRouteFailoverAllTestDetails` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
@@ -634,6 +635,8 @@
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.provisioningState.type__added` | added | `string` |
 | `paths['/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections'].get.parameters[1].type__added` | added | `integer` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.type__added` | added | `array` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.type__added` | added | `array` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].type__deleted` | deleted | `string` |
@@ -665,7 +668,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.type__deleted` | deleted | `string` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.type__deleted` | deleted | `string` |
@@ -781,20 +783,14 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ApplicationGatewayAvailableResponseHeadersResult.items__deleted` | deleted | `{"type":"string"}` |
-| `definitions.ApplicationGatewayAvailableServerVariablesResult.items__deleted` | deleted | `{"type":"string"}` |
 | `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.items__added` | added | `{"$ref":"#/definitions/AzureFirewallIpGroups"}` |
+| `definitions.ExpressRouteFailoverAllTestDetails.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
 | `definitions.ExpressRouteFailoverSingleTestDetailsObject.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}` |
 | `definitions.IDPSQueryObject.properties.filters.items__added` | added | `{"$ref":"#/definitions/FilterItems"}` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.items__added` | added | `{"$ref":"#/definitions/NvaInterfaceConfigurationsProperties"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
-
-### Changes for `x-ms-pageable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get['x-ms-pageable__added']` | added | `{"nextLinkName":"nextLink"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
 
 ### Changes for `required`
 
@@ -1456,6 +1452,18 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayAvailableRequestHeadersResult__deleted` | deleted | `{"type":"array","description":"Response for ApplicationGatewayAvailableRequestHeaders API service ca...` |
 
+### Changes for `ApplicationGatewayAvailableResponseHeadersResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayAvailableResponseHeadersResult__deleted` | deleted | `{"type":"array","description":"Response for ApplicationGatewayAvailableResponseHeaders API service c...` |
+
+### Changes for `ApplicationGatewayAvailableServerVariablesResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ApplicationGatewayAvailableServerVariablesResult__deleted` | deleted | `{"type":"array","description":"Response for ApplicationGatewayAvailableServerVariables API service c...` |
+
 ### Changes for `AzureAsyncOperationResult`
 
 | Path | Change Type | Value |
@@ -1479,12 +1487,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ConnectionStateSnapshot__deleted` | deleted | `{"type":"object","description":"Connection state snapshot.","properties":{"connectionState":{"type":...` |
-
-### Changes for `ExpressRouteFailoverAllTestDetails`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExpressRouteFailoverAllTestDetails__deleted` | deleted | `{"type":"array","description":"Gateway Failover All Test Details","items":{"$ref":"#/definitions/Exp...` |
 
 ### Changes for `Filters`
 
@@ -1551,12 +1553,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.VpnSiteId__deleted` | deleted | `{"type":"object","description":"VpnSite Resource.","properties":{"vpnSite":{"type":"string","descrip...` |
-
-### Changes for `Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<ExpressRouteFailoverTestDetails[]>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<stringApplicationJson>`
 
@@ -1659,12 +1655,6 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ReadOnlySubResourceModel__added` | added | `{"type":"object","description":"Reference to another subresource.","properties":{"id":{"type":"strin...` |
-
-### Changes for `Record<PeerRoute[]>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Record<PeerRoute[]>__added` | added | `{"type":"object","additionalProperties":{"items":{"$ref":"#/definitions/PeerRoute"},"type":"array"}}` |
 
 ### Changes for `ResourceWithReadOnlyID`
 
@@ -2135,26 +2125,6 @@
 | `definitions.PolicySettings.properties.fileUploadLimitInMb.exclusiveMinimum__deleted` | deleted | `false` |
 | `definitions.PolicySettings.properties.maxRequestBodySizeInKb.exclusiveMinimum__deleted` | deleted | `false` |
 
-### Changes for `properties`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ApplicationGatewayAvailableResponseHeadersResult.properties__added` | added | `{"value":{"type":"array","items":{"type":"string"}}}` |
-| `definitions.ApplicationGatewayAvailableServerVariablesResult.properties__added` | added | `{"value":{"type":"array","items":{"type":"string"}}}` |
-| `definitions.BastionHostPropertiesFormat.properties.networkAcls.properties__deleted` | deleted | `{"ipRules":{"type":"array","description":"Sets the IP ACL rules for Developer Bastion Host.","items"...` |
-| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.properties__deleted` | deleted | `{"connectedGroupPrivateEndpointsScale":{"type":"string","description":"Option indicating the scale o...` |
-| `definitions.Container.properties__deleted` | deleted | `{}` |
-| `definitions.ExpressRouteFailoverSingleTestDetailsObject.properties__added` | added | `{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}}}` |
-| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.properties__deleted` | deleted | `{"bounds":{"description":"Minimum and maximum number of scale units to deploy.","properties":{"min":...` |
-| `definitions.IpamPoolPrefixAllocation.properties.pool.properties__deleted` | deleted | `{"id":{"type":"string","format":"arm-id","description":"Resource id of the associated Azure IpamPool...` |
-| `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.properties__deleted` | deleted | `{"principalId":{"readOnly":true,"type":"string","description":"The principal id of user assigned ide...` |
-| `definitions.NetworkManagerProperties.properties.networkManagerScopes.properties__deleted` | deleted | `{"managementGroups":{"type":"array","description":"List of management groups.","items":{"type":"stri...` |
-| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.networkProfile.properties__deleted` | deleted | `{"networkInterfaceConfigurations":{"type":"array","items":{"$ref":"#/definitions/VirtualApplianceNet...` |
-| `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft Network."},"resource":{"type...` |
-| `definitions.OperationPropertiesFormat.properties.serviceSpecification.properties__deleted` | deleted | `{"metricSpecifications":{"type":"array","description":"Operation service specification.","items":{"$...` |
-| `definitions.PolicySettings.properties.logScrubbing.properties__deleted` | deleted | `{"state":{"type":"string","description":"State of the log scrubbing config. Default value is Enabled...` |
-| `definitions.SignaturesOverrides.properties.properties.properties__deleted` | deleted | `{"signatures":{"$ref":"#/definitions/Signatures","type":"object"}}` |
-
 ### Changes for `exclusiveMaximum`
 
 | Path | Change Type | Value |
@@ -2219,6 +2189,25 @@
 | `definitions.AzureWebCategory.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.ConnectionMonitorResult.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
 | `definitions.NetworkManagerConnection.properties.etag__deleted` | deleted | `{"type":"string","description":"A unique read-only string that changes whenever the resource is upda...` |
+
+### Changes for `properties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BastionHostPropertiesFormat.properties.networkAcls.properties__deleted` | deleted | `{"ipRules":{"type":"array","description":"Sets the IP ACL rules for Developer Bastion Host.","items"...` |
+| `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.properties__deleted` | deleted | `{"connectedGroupPrivateEndpointsScale":{"type":"string","description":"Option indicating the scale o...` |
+| `definitions.Container.properties__deleted` | deleted | `{}` |
+| `definitions.ExpressRouteFailoverAllTestDetails.properties__added` | added | `{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}}}` |
+| `definitions.ExpressRouteFailoverSingleTestDetailsObject.properties__added` | added | `{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}}}` |
+| `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.properties__deleted` | deleted | `{"bounds":{"description":"Minimum and maximum number of scale units to deploy.","properties":{"min":...` |
+| `definitions.IpamPoolPrefixAllocation.properties.pool.properties__deleted` | deleted | `{"id":{"type":"string","format":"arm-id","description":"Resource id of the associated Azure IpamPool...` |
+| `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.properties__deleted` | deleted | `{"principalId":{"readOnly":true,"type":"string","description":"The principal id of user assigned ide...` |
+| `definitions.NetworkManagerProperties.properties.networkManagerScopes.properties__deleted` | deleted | `{"managementGroups":{"type":"array","description":"List of management groups.","items":{"type":"stri...` |
+| `definitions.NetworkVirtualAppliancePropertiesFormat.properties.networkProfile.properties__deleted` | deleted | `{"networkInterfaceConfigurations":{"type":"array","items":{"$ref":"#/definitions/VirtualApplianceNet...` |
+| `definitions.Operation.properties.display.properties__deleted` | deleted | `{"provider":{"type":"string","description":"Service provider: Microsoft Network."},"resource":{"type...` |
+| `definitions.OperationPropertiesFormat.properties.serviceSpecification.properties__deleted` | deleted | `{"metricSpecifications":{"type":"array","description":"Operation service specification.","items":{"$...` |
+| `definitions.PolicySettings.properties.logScrubbing.properties__deleted` | deleted | `{"state":{"type":"string","description":"State of the log scrubbing config. Default value is Enabled...` |
+| `definitions.SignaturesOverrides.properties.properties.properties__deleted` | deleted | `{"signatures":{"$ref":"#/definitions/Signatures","type":"object"}}` |
 
 ### Changes for `readOnly`
 
@@ -2350,8 +2339,6 @@
 | `definitions.ApplicationGateway.properties.identity.$ref` | `./network.json#/definitions/ManagedServiceIdentity` | `#/definitions/ManagedServiceIdentity` |
 | `definitions.ApplicationGatewayAuthenticationCertificate.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayAuthenticationCertificatePropertiesFormat.properties.provisioningState.description` | `The provisioning state of the authentication certificate resource.` | `The current provisioning state.` |
-| `definitions.ApplicationGatewayAvailableResponseHeadersResult.type` | `array` | `object` |
-| `definitions.ApplicationGatewayAvailableServerVariablesResult.type` | `array` | `object` |
 | `definitions.ApplicationGatewayAvailableSslOptions.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.predefinedPolicies.items.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.ApplicationGatewayBackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
@@ -2579,6 +2566,7 @@
 | `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.state.description` | `The peering state.` | `The state of peering.` |
 | `definitions.ExpressRouteCrossConnectionProperties.properties.provisioningState.description` | `The provisioning state of the express route cross connection resource.` | `The current provisioning state.` |
 | `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.description` | `The provisioning state of the circuit in the connectivity provider system.` | `The ServiceProviderProvisioningState state of the resource.` |
+| `definitions.ExpressRouteFailoverAllTestDetails.type` | `array` | `object` |
 | `definitions.ExpressRouteFailoverSingleTestDetailsObject.type` | `array` | `object` |
 | `definitions.ExpressRouteGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ExpressRouteGatewayProperties.properties.provisioningState.description` | `The provisioning state of the express route gateway resource.` | `The current provisioning state.` |

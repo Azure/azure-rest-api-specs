@@ -109,7 +109,9 @@ interface BgpConnections {
   listLearnedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    PeerRouteList,
+    void,
+    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 
@@ -122,7 +124,9 @@ interface BgpConnections {
   listAdvertisedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
     void,
-    PeerRouteList,
+    void,
+    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
 }

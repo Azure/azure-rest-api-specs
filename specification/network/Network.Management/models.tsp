@@ -27770,11 +27770,7 @@ model VpnSiteId {
 /**
  * Response for ApplicationGatewayAvailableServerVariables API service call.
  */
-model ApplicationGatewayAvailableServerVariablesResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: string[];
-}
+alias ApplicationGatewayAvailableServerVariablesResult = string[];
 
 /**
  * Response for ApplicationGatewayAvailableRequestHeaders API service call.
@@ -27784,16 +27780,17 @@ alias ApplicationGatewayAvailableRequestHeadersResult = string[];
 /**
  * Response for ApplicationGatewayAvailableResponseHeaders API service call.
  */
-model ApplicationGatewayAvailableResponseHeadersResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: string[];
-}
+alias ApplicationGatewayAvailableResponseHeadersResult = string[];
 
 /**
  * Gateway Failover All Test Details
  */
-alias ExpressRouteFailoverAllTestDetails = ExpressRouteFailoverTestDetails[];
+model ExpressRouteFailoverAllTestDetails {
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
+  value?: ExpressRouteFailoverTestDetails[];
+}
 
 /**
  * Gateway Failover Single Test Details Object
