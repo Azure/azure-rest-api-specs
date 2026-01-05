@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-01'
 input-file:
-  - Microsoft.ProviderHub/stable/2024-09-01/providerhub.json
+  - stable/2024-09-01/providerhub.json
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-  - Microsoft.ProviderHub/preview/2021-09-01-preview/providerhub.json
+  - preview/2021-09-01-preview/providerhub.json
 directive:
   - suppress: R4009
     from: providerhub.json
@@ -60,7 +60,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-  - Microsoft.ProviderHub/preview/2021-06-01-preview/providerhub.json
+  - preview/2021-06-01-preview/providerhub.json
 directive:
   - suppress: R4009
     from: providerhub.json
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-  - Microsoft.ProviderHub/preview/2021-05-01-preview/providerhub.json
+  - preview/2021-05-01-preview/providerhub.json
 directive:
   - suppress: R4009
     from: providerhub.json
@@ -86,7 +86,7 @@ These settings apply only when `--tag=package-2020-11-20` is specified on the co
 
 ```yaml $(tag) == 'package-2020-11-20'
 input-file:
-  - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
+  - stable/2020-11-20/providerhub.json
 directive:
   - suppress: R4009
     from: providerhub.json
