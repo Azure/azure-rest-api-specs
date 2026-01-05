@@ -4,8 +4,8 @@
  * Parameters used:
  *   isFullCompatible: true
  *   guessResourceKey: false
- * Version: 0.10.14
- * Date: 2025-04-22T02:28:59.862Z
+ * Version: 0.11.5
+ * Date: 2025-11-17T07:40:02.557Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -19,6 +19,12 @@ import "./ReservationOrderAliasResponse.tsp";
 import "./Discount.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./Macc.tsp";
+import "./Contributor.tsp";
+import "./Credit.tsp";
+import "./ConditionalCredit.tsp";
+import "./ConditionalCreditContributor.tsp";
+import "./CreditSource.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -27,7 +33,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Benefits RP let users create and manage benefits like savings plan.
+ * Azure Benefits RP let users create and manage benefits.
  */
 @armProviderNamespace
 @service(#{ title: "Billing benefits RP" })
@@ -40,9 +46,9 @@ namespace Microsoft.BillingBenefits;
  */
 enum Versions {
   /**
-   * The 2024-11-01-preview API version.
+   * The 2025-05-01-preview API version.
    */
-  v2024_11_01_preview: "2024-11-01-preview",
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
