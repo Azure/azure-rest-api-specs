@@ -306,6 +306,10 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(ServiceEndpoint, "ManagedClusterServiceEndpoint", "csharp");
 @@clientName(NodeType, "ServiceFabricManagedNodeType", "csharp");
+@@clientName(NodeTypeProperties,
+  "ServiceFabricManagedNodeTypeProperties",
+  "csharp"
+);
 @@clientName(NodeTypeProperties.zoneBalance, "IsZoneBalanceEnabled", "csharp");
 @@clientName(NodeTypeProperties.dataDiskSizeGB, "DataDiskSizeInGB", "csharp");
 @@clientName(NodeTypeProperties.enableAcceleratedNetworking,
