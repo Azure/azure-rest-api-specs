@@ -25,10 +25,39 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-
 ``` yaml
 openapi-type: arm
-tag: package-2025-08-01-preview
+tag: package-2026-01-01-scheduledstart
+```
+
+### Tag: package-2026-01-01-scheduledstart
+
+These settings apply only when `--tag=package-2026-01-01-scheduledstart` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-scheduledstart'
+input-file:
+  - preview/2026-01-01-scheduledstart/fleets.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.FleetMemberUpdateProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions.ManagedNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: fleets.json
+    where: $.definitions['Meta.V1.LabelSelector'].properties.matchLabels
+    reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
 ```
 
 ### Tag: package-2025-08-01-preview

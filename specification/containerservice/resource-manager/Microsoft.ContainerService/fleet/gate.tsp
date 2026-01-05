@@ -34,6 +34,10 @@ union GateType {
 
   @doc("An approval gate is completed by setting its state to be Completed.")
   Approval: "Approval",
+
+  @doc("A scheduled start gate is automatically completed when the scheduled time is reached.")
+  @added(Versions.v2026_01_01_scheduledstart)
+  ScheduledStart: "ScheduledStart",
 }
 
 @doc("The state of the Gate.")
@@ -72,6 +76,11 @@ model GateProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   gateType: GateType;
 
+  @doc("Details for ScheduledStart gate")
+  @added(Versions.v2026_01_01_scheduledstart)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  scheduledStart?: ScheduledStartProperties;
+
   @doc("The target that the Gate is controlling, e.g. an Update Run.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   target: GateTarget;
@@ -88,6 +97,51 @@ union GateTargetType {
 
   @doc("The Gate targets an Update Run.")
   UpdateRun: "UpdateRun",
+}
+
+@doc("Day of week used to schedule a Gate start")
+@added(Versions.v2026_01_01_scheduledstart)
+union DayOfWeek {
+  string,
+
+  @doc("Monday")
+  Monday: "Monday",
+
+  @doc("Tuesday")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday")
+  Thursday: "Thursday",
+
+  @doc("Friday")
+  Friday: "Friday",
+
+  @doc("Saturday")
+  Saturday: "Saturday",
+
+  @doc("Sunday")
+  Sunday: "Sunday",
+}
+
+@doc("Properties for ScheduledStart gate")
+@added(Versions.v2026_01_01_scheduledstart)
+model ScheduledStartProperties {
+  @doc("The day of the week when the scheduled start occurs.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  startDay: DayOfWeek;
+
+  @doc("The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^([01][0-9]|2[0-3]):[0-5][0-9]$")
+  startTime: string;
+
+  @doc("The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
+  utcOffset: string;
 }
 
 @doc("The properties of the Update Run that the Gate is targeting.")

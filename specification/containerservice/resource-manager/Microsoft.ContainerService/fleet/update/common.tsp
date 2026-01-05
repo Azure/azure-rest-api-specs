@@ -78,4 +78,8 @@ model GateConfiguration {
 
   @doc("The type of the Gate determines how it is completed.")
   type: GateType;
+
+  @doc("Scheduled start configuration for gates of type ScheduledStart.")
+  @added(Versions.v2026_01_01_scheduledstart)
+  scheduledStart?: ScheduledStartProperties;
 }
