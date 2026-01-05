@@ -7,6 +7,16 @@ options:
     output-file: "{version-status}/{version}/ComputeRP.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcompute"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcompute"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 
 linter:
   extends:
