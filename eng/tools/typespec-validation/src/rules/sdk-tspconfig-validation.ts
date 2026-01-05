@@ -776,14 +776,14 @@ export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
 
 export class SdkTspConfigValidationRule implements Rule {
   private requiredRules: TspconfigSubRuleBase[] = [];
-  private optionalRules: TspconfigSubRuleBase[] = [];
+  private optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [];
   private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
   constructor(
     requiredSubRules: TspconfigSubRuleBase[] = requiredRules,
-    optionalSubRules: TspconfigSubRuleBase[] = optionalRules,
+    optionalSubRules: TspconfigEmitterOptionsSubRuleBase[] = optionalRules,
   ) {
     this.requiredRules = requiredSubRules;
     this.optionalRules = optionalSubRules;
@@ -819,21 +819,14 @@ export class SdkTspConfigValidationRule implements Rule {
     for (const subRule of this.optionalRules) {
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
 
-      // Skip if emitter is not configured (only for emitter-based rules)
-      if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
-        const config = await subRule.loadConfig(folder);
-        const emitterName = subRule.getEmitterName();
-        if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
-          console.warn(
-            `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
-          );
-          continue;
-        }
-      } else {
-        // Warn if optional rule is not emitter-based
+      // Skip if emitter is not configured
+      const config = await subRule.loadConfig(folder);
+      const emitterName = subRule.getEmitterName();
+      if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
         console.warn(
-          `Optional rule ${subRule.constructor.name} is not emitter-based. Optional rules should typically be emitter-specific.`,
+          `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
         );
+        continue;
       }
 
       const result = await subRule.execute(folder!);
