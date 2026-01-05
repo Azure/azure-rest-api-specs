@@ -678,6 +678,32 @@ options:
   },
 ];
 
+const optionalRulesWithoutEmitterConfigTestCases: Case[] = [
+  {
+    description: "Optional rule: should be skipped when emitter is not configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+parameters:
+  service-dir: "sdk/test"
+`,
+    success: true,
+    subRules: [new TspConfigCsharpAzNamespaceSubRule()],
+  },
+  {
+    description: "Optional rule: multiple rules should be skipped when emitter is not configured",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+parameters:
+  service-dir: "sdk/test"
+`,
+    success: true,
+    subRules: [
+      new TspConfigCsharpAzNamespaceSubRule(),
+      new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
+    ],
+  },
+];
+
 const suppressEntireRuleTestCase: Case = {
   description: "Suppress entire rule",
   folder: managementTspconfigFolder,
@@ -793,6 +819,8 @@ describe("tspconfig", function () {
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtEmitterOutputDirTestCases,
     ...csharpMgmtNamespaceTestCases,
+    // Test cases for optional rules when emitter is not configured
+    ...optionalRulesWithoutEmitterConfigTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {

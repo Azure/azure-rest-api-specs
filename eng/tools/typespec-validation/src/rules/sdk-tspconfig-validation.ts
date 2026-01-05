@@ -38,10 +38,10 @@ export abstract class TspconfigSubRuleBase {
     return this.validate(config);
   }
 
-  public async loadConfig(folder: string): Promise<any | null> {
+  public async loadConfig(folder: string): Promise<any | undefined> {
     const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
     if (!tspconfigExists) {
-      return null;
+      return undefined;
     }
 
     try {
@@ -49,7 +49,8 @@ export abstract class TspconfigSubRuleBase {
       const config = yamlParse(configText);
       return config;
     } catch (error) {
-      return null;
+      console.warn(`Failed to parse tspconfig.yaml in ${folder}: ${error}`);
+      return undefined;
     }
   }
 
@@ -724,6 +725,12 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+/**
+ * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
+ * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
+ * if a Rust emitter is configured in tspconfig.yaml but doesn't meet the required validation
+ * criteria, the validation will fail.
+ */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
@@ -753,7 +760,13 @@ export const requiredRules = [
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
 ];
 
-export const optionalRules = [
+/**
+ * Optional rules: Validate language-specific emitter configurations without blocking CI/CD.
+ * All rules in this array inherit from TspconfigEmitterOptionsSubRuleBase and only run when
+ * their corresponding emitter is configured in tspconfig.yaml. Failures are logged but do not
+ * affect the overall validation result.
+ */
+export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpAzNamespaceSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
@@ -809,9 +822,18 @@ export class SdkTspConfigValidationRule implements Rule {
       // Skip if emitter is not configured (only for emitter-based rules)
       if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
         const config = await subRule.loadConfig(folder);
-        if (config && this.skipIfEmitterNotConfigured(config, subRule.getEmitterName())) {
+        const emitterName = subRule.getEmitterName();
+        if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
+          console.warn(
+            `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
+          );
           continue;
         }
+      } else {
+        // Warn if optional rule is not emitter-based
+        console.warn(
+          `Optional rule ${subRule.constructor.name} is not emitter-based. Optional rules should typically be emitter-specific.`,
+        );
       }
 
       const result = await subRule.execute(folder!);
