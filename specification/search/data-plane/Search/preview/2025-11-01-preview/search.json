@@ -55,6 +55,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -84,6 +98,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -128,6 +156,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -165,6 +207,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -251,6 +307,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -308,12 +378,29 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "$select",
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string",
-            "format": "ArrayEncoding.commaDelimited"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -347,10 +434,24 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "name": "dataSource",
+            "name": "dataSourceConnection",
             "in": "body",
             "description": "The definition of the datasource to create.",
             "required": true,
@@ -387,6 +488,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -426,6 +541,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -520,6 +649,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -577,12 +720,29 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "$select",
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string",
-            "format": "ArrayEncoding.commaDelimited"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -614,6 +774,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -658,6 +832,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -695,6 +883,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -796,6 +998,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -853,6 +1069,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -889,6 +1119,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "overwrite",
@@ -946,6 +1190,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -993,6 +1251,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1029,6 +1301,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1075,12 +1361,29 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "$select",
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string",
-            "format": "ArrayEncoding.commaDelimited"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1112,6 +1415,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1156,6 +1473,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1193,6 +1524,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -1286,6 +1631,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -1341,6 +1700,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-query-source-authorization",
@@ -1504,6 +1877,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1544,6 +1931,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "search",
@@ -1691,6 +2092,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1747,6 +2162,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1794,6 +2223,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-query-source-authorization",
@@ -1870,6 +2313,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -1917,6 +2374,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "search",
@@ -2002,6 +2473,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=none"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "x-ms-query-source-authorization",
             "in": "header",
             "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
@@ -2078,6 +2563,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2128,6 +2627,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2169,6 +2682,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2202,6 +2729,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2231,6 +2772,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2275,6 +2830,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2312,6 +2881,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -2398,6 +2981,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -2453,6 +3050,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "knowledgeBaseName",
@@ -2521,6 +3132,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2562,6 +3187,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2618,6 +3257,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2667,6 +3320,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -2765,6 +3432,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -2834,6 +3515,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -2875,6 +3570,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
@@ -2911,12 +3620,29 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "$select",
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string",
-            "format": "ArrayEncoding.commaDelimited"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2948,6 +3674,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -2992,6 +3732,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3029,6 +3783,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -3130,6 +3898,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "If-Match",
             "in": "header",
             "description": "Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value.",
@@ -3187,6 +3969,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3234,12 +4030,29 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "name": "$select",
             "in": "query",
             "description": "Selects which top-level properties to retrieve. Specified as a comma-separated list of JSON property names, or '*' for all properties. The default is all properties.",
             "required": false,
-            "type": "string",
-            "format": "ArrayEncoding.commaDelimited"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3271,6 +4084,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3315,6 +4142,20 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
@@ -3352,6 +4193,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -3436,6 +4291,20 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/json;odata.metadata=minimal"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
           },
           {
             "name": "If-Match",
@@ -3902,7 +4771,10 @@
         "searchFields": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
+          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
+          "items": {
+            "type": "string"
+          }
         },
         "suggesterName": {
           "type": "string",
@@ -13060,10 +13932,12 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
           "type": "string",
           "format": "ArrayEncoding.pipeDelimited",
-          "description": "Regular expression flags."
+          "description": "Regular expression flags.",
+          "items": {
+            "$ref": "#/definitions/RegexFlags"
+          }
         },
         "stopwords": {
           "type": "array",
@@ -15911,7 +16785,10 @@
         "highlight": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
+          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
+          "items": {
+            "type": "string"
+          }
         },
         "highlightPostTag": {
           "type": "string",
@@ -15929,7 +16806,10 @@
         "orderby": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+          "items": {
+            "type": "string"
+          }
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -15965,7 +16845,10 @@
         "searchFields": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
+          "items": {
+            "type": "string"
+          }
         },
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
@@ -15982,7 +16865,10 @@
         "select": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
+          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
+          "items": {
+            "type": "string"
+          }
         },
         "skip": {
           "type": "integer",
@@ -16027,7 +16913,10 @@
         "semanticFields": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names used for semantic ranking."
+          "description": "The comma-separated list of field names used for semantic ranking.",
+          "items": {
+            "type": "string"
+          }
         },
         "vectorQueries": {
           "type": "array",
@@ -18244,7 +19133,10 @@
         "orderby": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
+          "items": {
+            "type": "string"
+          }
         },
         "search": {
           "type": "string",
@@ -18253,12 +19145,18 @@
         "searchFields": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
+          "items": {
+            "type": "string"
+          }
         },
         "select": {
           "type": "string",
           "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
+          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.",
+          "items": {
+            "type": "string"
+          }
         },
         "suggesterName": {
           "type": "string",
@@ -18344,7 +19242,10 @@
         "synonyms": {
           "type": "string",
           "format": "ArrayEncoding.newlineDelimited",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines."
+          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.",
+          "items": {
+            "type": "string"
+          }
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",

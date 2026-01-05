@@ -177,6 +177,10 @@ namespace SearchIndexClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.KnowledgeSources.create;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    getStatus is Search.KnowledgeSources.getStatus;
   }
 
   interface Root {
@@ -336,8 +340,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(DebugInfo, Usage.input);
 @@access(SearchResult, Access.public);
 @@usage(SearchResult, Usage.input);
+@@access(AnalyzeResult, Access.public);
+@@usage(AnalyzeResult, Usage.input);
+@@access(AnalyzeRequest, Access.public);
+@@usage(AnalyzeRequest, Usage.input);
+@@access(DocumentKeysOrIds, Access.public);
+@@usage(DocumentKeysOrIds, Usage.input);
+@@access(SkillNames, Access.public);
+@@usage(SkillNames, Usage.input);
 @@access(SearchDocumentsResult, Access.public);
 @@usage(SearchDocumentsResult, Usage.input);
+@@access(GetIndexStatisticsResult, Access.public);
+@@usage(GetIndexStatisticsResult, Usage.input);
 @@access(SemanticErrorReason, Access.public);
 @@usage(SemanticErrorReason, Usage.input);
 @@access(IndexBatch, Access.public);
@@ -361,15 +375,20 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexerClient.DataSources.delete, Access.internal, "python");
 @@access(SearchIndexerClient.Indexers.list, Access.internal);
 @@access(SearchIndexerClient.Indexers.createOrUpdate, Access.internal);
+@@access(SearchIndexerClient.Indexers.resetDocs, Access.internal, "python");
 @@access(SearchIndexerClient.Indexers.delete, Access.internal, "python");
+@@access(SearchIndexerClient.Indexers.resync, Access.internal, "python");
 @@access(SearchIndexerClient.Skillsets.list, Access.internal);
 @@access(SearchIndexerClient.Skillsets.createOrUpdate, Access.internal);
 @@access(SearchIndexerClient.Skillsets.delete, Access.internal, "python");
+@@access(SearchIndexerClient.Skillsets.resetSkills, Access.internal, "python");
 @@access(SearchIndexClient.SynonymMaps.list, Access.internal);
 @@access(SearchIndexClient.SynonymMaps.createOrUpdate, Access.internal);
 @@access(SearchIndexClient.SynonymMaps.delete, Access.internal, "python");
 @@access(SearchIndexClient.Indexes.createOrUpdate, Access.internal);
 @@access(SearchIndexClient.Indexes.delete, Access.internal, "python");
+@@access(SearchIndexClient.Indexes.analyze, Access.internal, "python");
+@@access(SearchIndexClient.Indexes.getStatistics, Access.internal, "python");
 @@access(SearchIndexClient.Aliases.createOrUpdate, Access.internal);
 @@access(SearchIndexClient.Aliases.delete, Access.internal, "python");
 @@access(SearchIndexClient.KnowledgeBases.createOrUpdate, Access.internal);
@@ -2512,6 +2531,7 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexClient.Sources.get, "getKnowledgeSource");
 @@clientName(SearchIndexClient.Sources.list, "listKnowledgeSources");
+@@clientName(SearchIndexClient.Sources.getStatus, "getKnowledgeSourceStatus");
 @@clientName(SearchIndexerClient.Indexers.create, "createIndexer");
 @@clientName(SearchIndexerClient.Indexers.createOrUpdate,
   "createOrUpdateIndexer"
@@ -2557,7 +2577,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(IndexBatch.value, "actions");
 @@clientName(IndexDocumentsResult.value, "results");
 @@clientName(IndexingResult.status, "succeeded");
-@@clientName(AutocompleteRequest.autocompleteMode, "mode");
 @@clientName(AutocompleteResult.value, "results");
 @@clientName(AutocompleteRequest.search, "searchText");
 @@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching");

@@ -19,7 +19,7 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
     Resource = Gallery,
     KeyName = "galleryName",
     SegmentName = "galleries",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**
