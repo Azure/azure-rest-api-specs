@@ -23044,6 +23044,14 @@
               "high"
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+          },
+          "custom_search_configuration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WebSearchConfiguration"
+              }
+            ],
+            "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
           }
         },
         "allOf": [
@@ -24960,6 +24968,24 @@
           }
         ],
         "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details."
+      },
+      "WebSearchConfiguration": {
+        "type": "object",
+        "required": [
+          "project_connection_id",
+          "instance_name"
+        ],
+        "properties": {
+          "project_connection_id": {
+            "type": "string",
+            "description": "Project connection id for grounding with bing custom search"
+          },
+          "instance_name": {
+            "type": "string",
+            "description": "Name of the custom configuration instance given to config."
+          }
+        },
+        "description": "A web search configuration for bing custom search"
       },
       "WeeklyRecurrenceSchedule": {
         "type": "object",

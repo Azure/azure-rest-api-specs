@@ -54,6 +54,34 @@ union _AgentIncludable {
   }
 );
 
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+@@copyProperties(OpenAI.WebSearchPreviewTool,
+  {
+ /**
+   * The project connections attached to this tool. There can be a maximum of 1 connection
+   * resource attached to the tool.
+   */
+    @added(Versions.v2025_11_15_preview)
+    @removed(Versions.v1)
+    custom_search_configuration?: WebSearchConfiguration;
+  }
+);
+
+/**
+ * A web search configuration for bing custom search
+ */
+model WebSearchConfiguration {
+  /**
+   * Project connection id for grounding with bing custom search
+   */
+  project_connection_id: string;
+
+  /**
+   * Name of the custom configuration instance given to config.
+   */
+  instance_name: string;
+}
+
 /**
  * The input definition information for a bing grounding search tool as used to configure an agent.
  */
