@@ -54,3 +54,20 @@ using Microsoft.ApiManagement;
   "hostname",
   "java"
 );
+
+@@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.get,
+  "ApiManagementWorkspaceLinkOperations",
+  "java"
+);
+@@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
+  "ApiManagementWorkspaceLinkOperations",
+  "java"
+);
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.checkNameAvailability,
+  "ResourceProviders",
+  "java"
+);
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
+  "ResourceProviders",
+  "java"
+);
