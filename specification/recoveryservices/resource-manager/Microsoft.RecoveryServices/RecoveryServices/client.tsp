@@ -92,10 +92,7 @@ namespace Microsoft.RecoveryServices;
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PrivateEndpoint.id,
-  armResourceIdentifier,
-  "csharp"
-);
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(UpgradeDetails.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
 @@clientName(VaultCertificateResponse, "VaultCertificateResult", "csharp");
 @@clientName(TriggerType, "VaultUpgradeTriggerType", "csharp");
@@ -133,18 +130,9 @@ namespace Microsoft.RecoveryServices;
   "DeleteRegisteredIdentity",
   "csharp"
 );
-@@clientName(Vaults.list,
-  "GetReplicationUsages",
-  "csharp"
-);
-@@clientName(Vaults.listByVaults,
-  "GetUsagesByVaults",
-  "csharp"
-);
-@@clientName(Vaults.create,
-  "CreateVaultCertificate",
-  "csharp"
-);
+@@clientName(Vaults.list, "GetReplicationUsages", "csharp");
+@@clientName(Vaults.listByVaults, "GetUsagesByVaults", "csharp");
+@@clientName(Vaults.create, "CreateVaultCertificate", "csharp");
 @@clientName(RecoveryServicesOperationGroup.checkNameAvailability,
   "CheckRecoveryServicesNameAvailability",
   "csharp"
@@ -185,13 +173,20 @@ namespace Microsoft.RecoveryServices;
 @@clientName(IdentityType, "RecoveryServicesIdentityType", "csharp");
 @@clientName(State, "RecoveryServicesSourceScanState", "csharp");
 @@clientName(DeletedVault, "RecoveryServicesDeletedVault", "csharp");
-@@clientName(DeletedVaultUndeleteInput, "DeletedVaultUndeleteContent", "csharp");
+@@clientName(DeletedVaultUndeleteInput,
+  "DeletedVaultUndeleteContent",
+  "csharp"
+);
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RawCertificateData.certificate, TypeSpec.bytes[], "csharp");
-@@alternateType(ResourceCertificateDetails.certificate, TypeSpec.bytes[], "csharp");
+@@clientName(RawCertificateData.certificate, "CertificateData", "csharp");
+@@clientName(ResourceCertificateDetails.certificate,
+  "CertificateData",
+  "csharp"
+);
+
 @@alternateType(PatchVault.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
