@@ -90,7 +90,9 @@ using Azure.Core;
 @@clientName(ElasticSans.update::parameters.properties, "patch", "csharp");
 @@clientName(VolumeGroups.update::parameters.properties, "patch", "csharp");
 @@clientName(VolumeGroups.preBackup::parameters.body, "content", "csharp");
+@@clientName(VolumeGroups.preRestore::parameters.body, "content", "csharp");
 @@clientName(Volumes.update::parameters.properties, "patch", "csharp");
+@@clientName(SkusOperationGroup.list, "GetSkus", "csharp");
 
 // Move restoreVolume operation to Management client for Go to maintain compatibility
 @@clientLocation(Microsoft.ElasticSan.restoreVolume, "Management", "go");
