@@ -11,7 +11,7 @@ using Microsoft.ApiManagement;
 );
 @@clientName(Microsoft.ApiManagement.TagTagResourceContractProperties,
   "TagResourceContractProperties",
-  "java"
+  "java,python"
 );
 @@clientName(Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
   "preferredIpVersion",
@@ -71,3 +71,10 @@ using Microsoft.ApiManagement;
   "ResourceProviders",
   "java"
 );
+
+@@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
+@@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
+  "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
+  "python"
+);
+
