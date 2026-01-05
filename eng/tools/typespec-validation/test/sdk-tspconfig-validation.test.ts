@@ -842,7 +842,7 @@ describe("tspconfig", function () {
     // Determine if the subRules are in optional test cases
     const isOptional = optionalTestCases.some((tc) => tc === c);
     const rule = isOptional
-      ? new SdkTspConfigValidationRule([], c.subRules)
+      ? new SdkTspConfigValidationRule([], c.subRules as any)
       : new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     strictEqual(result.success, c.success); // Verify the validation result matches the expected outcome
