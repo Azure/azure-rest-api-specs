@@ -27,14 +27,13 @@ These are the global settings for the Dell.Storage.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03-21-preview
+tag: package-2025-03-21
 
 suppressions:
-    - code: AvoidAnonymousTypes
-      where: 
-        - $.definitions["LiftrBase.Storage.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
-      reason: 
-        Issue with common-types
+  - code: AvoidAnonymousTypes
+    where:
+      - $.definitions["LiftrBase.Storage.ManagedServiceIdentityUpdate"].properties.userAssignedIdentities.additionalProperties
+    reason: Issue with common-types
 ```
 
 ### Tag: package-2025-03-21-preview
@@ -44,6 +43,15 @@ These settings apply only when `--tag=package-2025-03-21-preview` is specified o
 ```yaml $(tag) == 'package-2025-03-21-preview'
 input-file:
   - Dell.Storage/preview/2025-03-21-preview/Dell.Storage.json
+```
+
+### Tag: package-2025-03-21
+
+These settings apply only when `--tag=package-2025-03-21` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-03-21'
+input-file:
+  - Dell.Storage/stable/2025-03-21/Dell.Storage.json
 ```
 
 ---
