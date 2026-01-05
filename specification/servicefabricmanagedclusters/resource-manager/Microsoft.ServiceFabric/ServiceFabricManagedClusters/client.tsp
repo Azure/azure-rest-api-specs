@@ -188,14 +188,31 @@ namespace Azure.ResourceManager.Models {
   "GetManagedAzResiliencyStatus",
   "csharp"
 );
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ApplicationResource, "ServiceFabricManagedApplication", "csharp");
 @@alternateType(ApplicationResource.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationTypeResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ApplicationTypeResource,
   "ServiceFabricManagedApplicationType",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ApplicationTypeVersionResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 @@clientName(ApplicationTypeVersionResource,
@@ -332,6 +349,12 @@ namespace Azure.ResourceManager.Models {
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ServiceResource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ServiceResource, "ServiceFabricManagedService", "csharp");
 @@clientName(ServiceResourceProperties, "ManagedServiceProperties", "csharp");
 @@clientName(ServiceResourcePropertiesBase,
