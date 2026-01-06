@@ -1,6 +1,7 @@
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
 import { simpleGit } from "simple-git";
+import { inspect } from "util";
 import {
   example,
   getChangedFilesStatuses,
@@ -9,7 +10,7 @@ import {
   resourceManager,
 } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
-import { createEmptyPullRequestChanges, isTrivialPullRequest } from "./pr-changes.js";
+import { PullRequestChanges } from "./pr-changes.js";
 
 /** @typedef {import("./pr-changes.js").PullRequestChanges} PullRequestChanges */
 
@@ -35,58 +36,13 @@ const NON_FUNCTIONAL_PROPERTIES = new Set([
 ]);
 
 /**
- * @param {unknown} error
- * @returns {string}
- */
-function getErrorMessage(error) {
-  if (error instanceof Error) {
-    return error.message;
-  }
-  return String(error);
-}
-
-/**
- * @param {unknown} value
- * @returns {value is Record<string, unknown>}
- */
-function isRecord(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-/**
- * @param {string} text
- * @returns {unknown}
- */
-function parseJsonUnknown(text) {
-  return /** @type {unknown} */ (JSON.parse(text));
-}
-
-/**
- * @param {unknown} value
- * @returns {string}
- */
-function formatForLog(value) {
-  if (typeof value === "string") return value;
-  if (typeof value === "number" || typeof value === "boolean" || typeof value === "bigint") {
-    return String(value);
-  }
-  if (value === null) return "null";
-  if (value === undefined) return "undefined";
-  try {
-    return JSON.stringify(value);
-  } catch {
-    return "[unserializable]";
-  }
-}
-
-/**
  * Analyzes a PR to determine what types of changes it contains
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
  * @returns {Promise<PullRequestChanges>} Object with categorized change types
  */
 export async function checkTrivialChanges(core) {
   // Create result object once at the top
-  const changes = createEmptyPullRequestChanges();
+  const changes = new PullRequestChanges();
 
   // Compare the pull request merge commit (HEAD) against its first parent (HEAD^).
   core.info("Comparing against base commit: HEAD^");
@@ -125,7 +81,7 @@ export async function checkTrivialChanges(core) {
     // Mark as non-trivial/blocked because the PR touches files outside resource-manager.
     changes.other = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
-    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    core.info(`Is trivial: ${changes.isTrivial()}`);
     return changes;
   }
 
@@ -133,7 +89,7 @@ export async function checkTrivialChanges(core) {
   if (changedRmFiles.length === 0) {
     core.info("No resource-manager changes detected in PR");
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
-    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    core.info(`Is trivial: ${changes.isTrivial()}`);
     return changes;
   }
 
@@ -147,7 +103,7 @@ export async function checkTrivialChanges(core) {
     // These are functional changes by policy
     changes.rmFunctional = true;
     core.info(`PR Changes: ${JSON.stringify(changes)}`);
-    core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+    core.info(`Is trivial: ${changes.isTrivial()}`);
     return changes;
   }
 
@@ -155,7 +111,7 @@ export async function checkTrivialChanges(core) {
   await analyzePullRequestChanges(changedRmFiles, git, core, changes);
 
   core.info(`PR Changes: ${JSON.stringify(changes)}`);
-  core.info(`Is trivial: ${isTrivialPullRequest(changes)}`);
+  core.info(`Is trivial: ${changes.isTrivial()}`);
 
   return changes;
 }
@@ -249,7 +205,7 @@ async function analyzePullRequestChanges(changedFiles, git, core, changes) {
           break;
         }
       } catch (error) {
-        core.warning(`Failed to analyze ${file}: ${getErrorMessage(error)}`);
+        core.warning(`Failed to analyze ${file}: ${inspect(error)}`);
         // On error, treat as functional to be conservative
         hasFunctionalChanges = true;
         break;
@@ -299,10 +255,10 @@ async function analyzeSpecFileForNonFunctionalChanges(file, git, core) {
   let baseJson, headJson;
 
   try {
-    baseJson = parseJsonUnknown(baseContent);
-    headJson = parseJsonUnknown(headContent);
+    baseJson = /** @type {unknown} */ (JSON.parse(baseContent));
+    headJson = /** @type {unknown} */ (JSON.parse(headContent));
   } catch (error) {
-    core.warning(`Failed to parse JSON for ${file}: ${getErrorMessage(error)}`);
+    core.warning(`Failed to parse JSON for ${file}: ${inspect(error)}`);
     return false;
   }
 
@@ -386,7 +342,14 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
   }
 
   // Handle objects
-  if (isRecord(baseObj) && isRecord(headObj)) {
+  if (
+    typeof baseObj === "object" &&
+    baseObj !== null &&
+    !Array.isArray(baseObj) &&
+    typeof headObj === "object" &&
+    headObj !== null &&
+    !Array.isArray(headObj)
+  ) {
     const baseKeys = new Set(Object.keys(baseObj));
     const headKeys = new Set(Object.keys(headObj));
 
@@ -436,12 +399,12 @@ function analyzeJsonDifferences(baseObj, headObj, path, core) {
     const currentProperty = path.split(".").pop() || path.split("[")[0];
     if (NON_FUNCTIONAL_PROPERTIES.has(currentProperty)) {
       core.info(
-        `Value changed at ${path || "root"} (non-functional): "${formatForLog(baseObj)}" -> "${formatForLog(headObj)}"`,
+        `Value changed at ${path || "root"} (non-functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
       );
       return true;
     }
     core.info(
-      `Value changed at ${path || "root"} (functional): "${formatForLog(baseObj)}" -> "${formatForLog(headObj)}"`,
+      `Value changed at ${path || "root"} (functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
     );
     return false;
   }

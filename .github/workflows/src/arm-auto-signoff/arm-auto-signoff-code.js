@@ -1,5 +1,4 @@
 import { incrementalTypeSpec } from "./arm-incremental-typespec.js";
-import { isTrivialPullRequest } from "./pr-changes.js";
 import { checkTrivialChanges } from "./trivial-changes-check.js";
 
 /** @typedef {import("./pr-changes.js").PullRequestChanges} PullRequestChanges */
@@ -33,7 +32,7 @@ export async function armAutoSignoffCode(args) {
   core.info(`Trivial changes result: ${JSON.stringify(trivialChangesResult)}`);
   core.endGroup();
 
-  const isTrivial = isTrivialPullRequest(trivialChangesResult);
+  const isTrivial = trivialChangesResult.isTrivial();
 
   // Combine results
   const combined = {

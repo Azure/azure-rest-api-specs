@@ -76,7 +76,7 @@ function createSuccessResult({ headSha, issueNumber, incrementalTypeSpec, isTriv
  * @param {Object} param0
  * @param {boolean} param0.incrementalTypeSpec
  */
-function createMockGithub({ incrementalTypeSpec }) {
+function createMockGithub({ incrementalTypeSpec, isTrivial = false }) {
   const github = createMockGithubBase();
 
   github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
@@ -98,14 +98,17 @@ function createMockGithub({ incrementalTypeSpec }) {
     },
   });
 
-  // Return artifact in the format: arm-auto-signoff-code-results=incrementalTypeSpec-VALUE,isTrivial-VALUE,qualifies-VALUE
+  // Analyze-code uploads 2 empty artifacts named `${name}=${value}`.
   const incremental = incrementalTypeSpec ? "true" : "false";
-  const qualifies = incrementalTypeSpec ? "true" : "false";
+  const trivial = isTrivial ? "true" : "false";
   github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
     data: {
       artifacts: [
         {
-          name: `arm-auto-signoff-code-results=incrementalTypeSpec-${incremental},isTrivial-false,qualifies-${qualifies}`,
+          name: `incremental-typespec=${incremental}`,
+        },
+        {
+          name: `trivial-changes=${trivial}`,
         },
       ],
     },
@@ -161,6 +164,31 @@ describe("getLabelActionImpl", () => {
     const github = createMockGithub({ incrementalTypeSpec: false });
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
+    });
+
+    await expect(
+      getLabelActionImpl({
+        owner: "TestOwner",
+        repo: "TestRepo",
+        issue_number: 123,
+        head_sha: "abc123",
+        github: github,
+        core: core,
+      }),
+    ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
+  });
+
+  it("removes label if analysis artifacts missing (fail closed)", async () => {
+    const github = createMockGithub({ incrementalTypeSpec: true });
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "ARMAutoSignedOff-IncrementalTSP" }],
+    });
+
+    // Only one of the required artifacts is present.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "incremental-typespec=true" }],
+      },
     });
 
     await expect(
