@@ -13,14 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Purview;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AccountsOperationGroup {
   /**
    * Checks if account name is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Checks the account name availability.")
-  @operationId("Accounts_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityRequest,
@@ -30,14 +28,12 @@ interface AccountsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DefaultAccountsOperationGroup {
   /**
    * Get the default account for the scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the default account information set for the scope.")
-  @operationId("DefaultAccounts_Get")
   @autoRoute
   @get
   @action("getDefaultAccount")
@@ -47,7 +43,7 @@ interface DefaultAccountsOperationGroup {
       /**
        * The tenant ID.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @query("scopeTenantId")
       scopeTenantId: string;
@@ -69,9 +65,7 @@ interface DefaultAccountsOperationGroup {
   /**
    * Removes the default account from the scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Removes the default account from the scope.")
-  @operationId("DefaultAccounts_Remove")
   @autoRoute
   @action("removeDefaultAccount")
   remove is ArmProviderActionSync<
@@ -82,7 +76,7 @@ interface DefaultAccountsOperationGroup {
       /**
        * The tenant ID.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @query("scopeTenantId")
       scopeTenantId: string;
@@ -104,9 +98,7 @@ interface DefaultAccountsOperationGroup {
   /**
    * Sets the default account for the scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Sets the default account for the scope.")
-  @operationId("DefaultAccounts_Set")
   @autoRoute
   @action("setDefaultAccount")
   set is ArmProviderActionSync<
@@ -116,18 +108,16 @@ interface DefaultAccountsOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface FeaturesOperationGroup {
   /**
    * Gets details from a list of feature names.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("""
     Gets a list of features and their status for the location and subscription.
     Status of enabled features will be true. Status of disabled features will be false.
     Features that don't exist will be excluded from the results.
     """)
-  @operationId("Features_SubscriptionGet")
   @autoRoute
   @action("listFeatures")
   subscriptionGet is ArmProviderActionSync<
@@ -146,14 +136,12 @@ interface FeaturesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * Get the usage quota configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the Usage quota configuration.")
-  @operationId("Usages_Get")
   @autoRoute
   @get
   @action("usages")

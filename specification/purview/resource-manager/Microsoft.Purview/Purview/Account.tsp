@@ -13,7 +13,7 @@ namespace Microsoft.Purview;
 /**
  * Account resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Account
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
   ...ResourceNameParameter<
@@ -26,13 +26,13 @@ model Account
   /**
    * The Managed Identity of the resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 
   /**
    * Gets or sets the Sku.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: AccountSku;
 }
 
@@ -58,7 +58,7 @@ interface Accounts {
   /**
    * Updates an account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Patches the account resource.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -75,7 +75,7 @@ interface Accounts {
   /**
    * Deletes an account resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes the account resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
@@ -143,7 +143,7 @@ interface Accounts {
   /**
    * Gets details from a list of feature names.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.")
   @operationId("Features_AccountGet")
   @action("listFeatures")
@@ -157,7 +157,7 @@ interface Accounts {
   /**
    * Lists all ingestion private endpoint connections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Lists all ingestion private endpoint connections.")
   @operationId("IngestionPrivateEndpointConnections_List")
   @list
@@ -173,7 +173,7 @@ interface Accounts {
   /**
    * Update ingestion private endpoint connection status
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates ingestion private endpoint connection status.")
   @operationId("IngestionPrivateEndpointConnections_UpdateStatus")
   @action("ingestionPrivateEndpointConnectionStatus")
