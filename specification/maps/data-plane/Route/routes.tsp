@@ -9,7 +9,7 @@ namespace MapsRoute;
 
 op MapsRouteOperation<
   TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model | void,
   TError extends TypeSpec.Reflection.Model = ErrorResponse
 > is Azure.Core.Foundations.Operation<
   {
@@ -630,7 +630,7 @@ interface Route {
     {
       ...OperationIdPathParameter;
     },
-    RouteOperation
+    RouteOperation | (NotFoundResponse & ErrorResponse)
   >;
 
   /**
@@ -769,6 +769,6 @@ interface Route {
       ...AcceptLanguageHeader;
       ...OperationIdPathParameter;
     },
-    RouteOperationResponse
+    RouteOperationResponse | (NotFoundResponse & ErrorResponse)
   >;
 }

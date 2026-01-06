@@ -353,6 +353,12 @@
               "$ref": "#/definitions/RouteOperation"
             }
           },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -413,6 +419,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RouteOperationResponse"
+            }
+          },
+          "404": {
+            "description": "The server cannot find the requested resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
