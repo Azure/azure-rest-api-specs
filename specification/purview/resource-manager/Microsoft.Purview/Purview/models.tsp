@@ -969,12 +969,6 @@ model SystemData {
 }
 
 /**
- * Gets or sets the Sku.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model AccountSku extends AccountSku {}
-
-/**
  * The Sku
  */
 model AccountSku {
@@ -1191,7 +1185,6 @@ model BatchFeatureRequest {
   /**
    * Set of features
    */
-  @identifiers(#[])
   features?: string[];
 }
 
@@ -1463,13 +1456,11 @@ model OperationMetaMetricSpecification {
   /**
    * supported aggregation types
    */
-  @identifiers(#[])
   supportedAggregationTypes?: string[];
 
   /**
    * supported time grain types
    */
-  @identifiers(#[])
   supportedTimeGrainTypes?: string[];
 
   /**
