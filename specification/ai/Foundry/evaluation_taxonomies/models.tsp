@@ -25,6 +25,18 @@ model EvaluationTaxonomy {
   @doc("List of taxonomy categories.")
   taxonomyCategories?: TaxonomyCategory[];
 
+  @doc("Risk name from the Evaluator Catalog (for policy-based taxonomies).")
+  riskName?: string;
+
+  @doc("Natural language definition of the risk (for policy-based taxonomies).")
+  riskDefinition?: string;
+
+  @doc("Whether the taxonomy has been expanded in the P2M pipeline.")
+  isExpanded?: boolean;
+
+  @doc("Metadata about taxonomy expansion in the P2M pipeline.")
+  expansionMetadata?: TaxonomyExpansionMetadata;
+
   @doc("Additional properties for the evaluation taxonomy.")
   properties?: Record<string>;
 }
@@ -38,7 +50,7 @@ union EvaluationTaxonomyInputType {
   @doc("Agent")
   agent: "agent",
 
-  @doc("Policy.")
+  @doc("Policy")
   policy: "policy",
 }
 
@@ -63,6 +75,54 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
   @doc("List of risk categories to evaluate against.")
   riskCategories: RiskCategory[];
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+@doc("Input configuration for the evaluation taxonomy when the input type is policy.")
+model PolicyTaxonomyInput extends EvaluationTaxonomyInput {
+  @doc("Input type of the evaluation taxonomy.")
+  type: EvaluationTaxonomyInputType.policy;
+
+  @doc("Risk name from the Evaluator Catalog.")
+  riskName: string;
+
+  @doc("Natural language definition of the risk.")
+  riskDefinition?: string;
+
+  @doc("Clarifications to guide taxonomy generation.")
+  clarifications?: string[];
+
+  @doc("Scope of the risk policy.")
+  scope?: string;
+
+  @doc("Example prompts labeled as in_scope or out_of_scope.")
+  examples?: RiskExample[];
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+@doc("Example prompt with label for taxonomy generation.")
+model RiskExample {
+  @doc("Example prompt text.")
+  text: string;
+
+  @doc("Label indicating if the example is in scope or out of scope.")
+  label: "in_scope" | "out_of_scope";
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+@doc("Metadata about taxonomy expansion in the P2M pipeline.")
+model TaxonomyExpansionMetadata {
+  @doc("Model used to generate the taxonomy.")
+  generatorModel: string;
+
+  @doc("Timestamp when the taxonomy was expanded.")
+  expandedAt: utcDateTime;
+
+  @doc("Total number of subtopics in the taxonomy.")
+  totalSubtopics: int32;
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -103,6 +163,9 @@ model TaxonomySubCategory {
 
   @doc("List of taxonomy items under this sub-category.")
   enabled: boolean;
+
+  @doc("List of subtopics in this sub-category (for P2M pipeline).")
+  subtopics?: string[];
 
   @doc("Additional properties for the taxonomy sub-category.")
   properties?: Record<string>;
