@@ -314,9 +314,9 @@ model KnowledgeBaseActivityRecord {
   error?: KnowledgeBaseErrorDetail;
 }
 
+/** Represents a retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Inherits typed discriminator from base"
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
-/** Represents a retrieval activity record. */
 @discriminator("type")
 model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
   /** The knowledge source for the retrieval activity. */
@@ -329,9 +329,9 @@ model KnowledgeBaseRetrievalActivityRecord extends KnowledgeBaseActivityRecord {
   count?: int32;
 }
 
+/** Represents a search index retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a search index retrieval activity record. */
 model KnowledgeBaseSearchIndexActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -359,9 +359,9 @@ model KnowledgeBaseSearchIndexActivityArguments {
   semanticConfigurationName?: string;
 }
 
+/** Represents a azure blob retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a azure blob retrieval activity record. */
 model KnowledgeBaseAzureBlobActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -377,9 +377,9 @@ model KnowledgeBaseAzureBlobActivityArguments {
   search?: string;
 }
 
+/** Represents a indexed SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a indexed SharePoint retrieval activity record. */
 model KnowledgeBaseIndexedSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -395,9 +395,9 @@ model KnowledgeBaseIndexedSharePointActivityArguments {
   search?: string;
 }
 
+/** Represents a indexed OneLake retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a indexed OneLake retrieval activity record. */
 model KnowledgeBaseIndexedOneLakeActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -413,9 +413,9 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
   search?: string;
 }
 
+/** Represents a web retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a web retrieval activity record. */
 model KnowledgeBaseWebActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -443,9 +443,9 @@ model KnowledgeBaseWebActivityArguments {
   freshness?: string;
 }
 
+/** Represents a remote SharePoint retrieval activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 #suppress "DISCRIMINATOR_VALUE_NOT_FOUND" "Multi-Level Discrimination"
-/** Represents a remote SharePoint retrieval activity record. */
 model KnowledgeBaseRemoteSharePointActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
   /** The discriminator value. */
@@ -464,8 +464,8 @@ model KnowledgeBaseRemoteSharePointActivityArguments {
   filterExpressionAddOn?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an LLM query planning activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseModelQueryPlanningActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -478,8 +478,8 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
   outputTokens?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an LLM answer synthesis activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseModelAnswerSynthesisActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -492,8 +492,8 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
   outputTokens?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an agentic reasoning activity record. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseAgenticReasoningActivityRecord
   extends KnowledgeBaseActivityRecord {
   /** The discriminator value. */
@@ -541,16 +541,16 @@ model KnowledgeBaseReference {
   /** The source activity ID for the reference. */
   activitySource: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
   /** The source data for the reference. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
   sourceData?: Record<unknown>;
 
   /** The reranker score for the document reference. */
   rerankerScore?: float32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an Azure Search document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.searchIndex;
@@ -559,8 +559,8 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   docKey?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an Azure Blob Storage document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.azureBlob;
@@ -569,8 +569,8 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   blobUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an indexed SharePoint document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedSharePoint;
@@ -579,8 +579,8 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   docUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents an indexed OneLake document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.indexedOneLake;
@@ -589,8 +589,8 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   docUrl?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents a web document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseWebReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.web;
@@ -602,8 +602,8 @@ model KnowledgeBaseWebReference extends KnowledgeBaseReference {
   title?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 /** Represents a remote SharePoint document reference. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 model KnowledgeBaseRemoteSharePointReference extends KnowledgeBaseReference {
   /** The discriminator value. */
   type: KnowledgeBaseReferenceType.remoteSharePoint;
@@ -667,8 +667,8 @@ model KnowledgeBaseErrorAdditionalInfo {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
   /** The additional info. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Allows arbitrary JSON via additionalProperties: true."
   @visibility(Lifecycle.Read)
   info?: Record<unknown>;
 }
@@ -731,35 +731,35 @@ union KnowledgeSourceIngestionPermissionOption {
 
 /** Consolidates all general ingestion settings for knowledge sources. */
 model KnowledgeSourceIngestionParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** An explicit identity to use for this knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional vectorizer configuration for vectorizing content. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   embeddingModel?: KnowledgeSourceVectorizer | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional chat completion model for image verbalization or context extraction. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   chatCompletionModel?: KnowledgeBaseModel | null;
 
   /** Indicates whether image verbalization should be disabled. Default is false. */
   disableImageVerbalization?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional schedule for data ingestion. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionSchedule?: IndexingSchedule | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionPermissionOptions?: KnowledgeSourceIngestionPermissionOption[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional content extraction mode. Default is 'minimal'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   contentExtractionMode?: KnowledgeSourceContentExtractionMode | null = KnowledgeSourceContentExtractionMode.Minimal;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional AI Services configuration for content processing. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   aiServices?: AIServices | null;
 }
 
@@ -775,8 +775,8 @@ model KnowledgeSourceAzureOpenAIVectorizer extends KnowledgeSourceVectorizer {
   /** The discriminator value. */
   kind: VectorSearchVectorizerKind.AzureOpenAI;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** Contains the parameters specific to Azure OpenAI embedding vectorization. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
 }
 
@@ -799,20 +799,20 @@ model KnowledgeSourceStatus {
   /** The current synchronization status. */
   synchronizationStatus: KnowledgeSourceSynchronizationStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   synchronizationInterval?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Current synchronization state that spans multiple indexer runs. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   currentSynchronizationState?: SynchronizationState | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Details of the last completed synchronization. Null on first sync. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   lastSynchronizationState?: CompletedSynchronizationState | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Statistical information about the knowledge source synchronization history. Null on first sync. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   statistics?: KnowledgeSourceStatistics | null;
 }
 

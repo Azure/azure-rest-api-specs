@@ -481,8 +481,8 @@ model SearchOptions {
   @query("$count")
   includeTotalResultCount?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
   /** The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
   @query(#{ name: "facet", explode: true })
   facets?: string[];
 
@@ -514,8 +514,8 @@ model SearchOptions {
   @query
   queryType?: QueryType;
 
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
   /** The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be "mylocation--122.2,44.8" (without the quotes). */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
   @query(#{ name: "scoringParameter", explode: true })
   scoringParameters?: string[];
 
@@ -559,8 +559,8 @@ model SearchOptions {
   @query
   semanticErrorHandling?: SemanticErrorMode;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @minValue(700)
   @query
   semanticMaxWaitInMilliseconds?: int32 | null;
@@ -654,14 +654,14 @@ model SearchDocumentsResult {
   @visibility(Lifecycle.Read)
   facets?: Record<FacetResult[]>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The answers query results for the search operation; null if the answers query parameter was not specified or set to 'none'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @encodedName("application/json", "@search.answers")
   @visibility(Lifecycle.Read)
   answers?: QueryAnswerResult[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Debug information that applies to the search results as a whole. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.debug")
   debugInfo?: DebugInfo | null;
@@ -698,8 +698,8 @@ model SearchDocumentsResult {
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model FacetResult is Record<unknown> {
   /** The approximate count of documents falling within the bucket described by this facet. */
   @visibility(Lifecycle.Read)
@@ -731,8 +731,8 @@ model FacetResult is Record<unknown> {
   facets?: Record<FacetResult[]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model QueryAnswerResult is Record<unknown> {
   /** The score value represents how relevant the answer is to the query relative to other answers returned for the query. */
   @visibility(Lifecycle.Read)
@@ -746,8 +746,8 @@ model QueryAnswerResult is Record<unknown> {
   @visibility(Lifecycle.Read)
   text?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Same text passage as in the Text property with highlighted text phrases most relevant to the query. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   highlights?: string | null;
 }
@@ -792,9 +792,9 @@ model SearchRequest {
   /** The OData $filter expression to apply to the search query. */
   filter?: string;
 
+  /** The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting. */
   @encode(ArrayEncoding.commaDelimited)
   highlight?: string[];
 
@@ -807,9 +807,9 @@ model SearchRequest {
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100. */
   minimumCoverage?: float64;
 
+  /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   @encode(ArrayEncoding.commaDelimited)
   orderby?: string[];
 
@@ -834,9 +834,9 @@ model SearchRequest {
   /** A full-text search query expression; Use "*" or omit this parameter to match all documents. */
   search?: string;
 
+  /** The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter. */
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 
@@ -849,9 +849,9 @@ model SearchRequest {
   /** A value that specifies the type of the speller to use to spell-correct individual search query terms. */
   speller?: QuerySpellerType;
 
+  /** The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. */
   @encode(ArrayEncoding.commaDelimited)
   select?: string[];
 
@@ -883,9 +883,9 @@ model SearchRequest {
   /** A value that specifies whether query rewrites should be generated to augment the search query. */
   queryRewrites?: QueryRewritesType;
 
+  /** The comma-separated list of field names used for semantic ranking. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of field names used for semantic ranking. */
   @encode(ArrayEncoding.commaDelimited)
   semanticFields?: string[];
 
@@ -946,8 +946,8 @@ model HybridSearch {
   countAndFacetMode?: HybridCountAndFacetMode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** Contains a document found by a search query, plus associated metadata. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SearchResult {
   ...Record<unknown>;
 
@@ -956,14 +956,14 @@ model SearchResult {
   @visibility(Lifecycle.Read)
   score: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The relevance score computed by the semantic ranker for the top search results. Search results are sorted by the RerankerScore first and then by the Score. RerankerScore is only returned for queries of type 'semantic'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @encodedName("application/json", "@search.rerankerScore")
   @visibility(Lifecycle.Read)
   rerankerScore?: float64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The relevance score computed by boosting the Reranker Score. Search results are sorted by the RerankerScore/RerankerBoostedScore based on useScoringProfileBoostedRanking in the Semantic Config. RerankerBoostedScore is only returned for queries of type 'semantic'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @encodedName("application/json", "@search.rerankerBoostedScore")
   @visibility(Lifecycle.Read)
   rerankerBoostedScore?: float64 | null;
@@ -973,21 +973,21 @@ model SearchResult {
   @visibility(Lifecycle.Read)
   highlights?: Record<string[]>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type 'semantic'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @encodedName("application/json", "@search.captions")
   @visibility(Lifecycle.Read)
   captions?: QueryCaptionResult[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Contains debugging information that can be used to further explore your search results. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   @encodedName("application/json", "@search.documentDebugInfo")
   documentDebugInfo?: DocumentDebugInfo | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model QueryCaptionResult {
   ...Record<unknown>;
 
@@ -995,8 +995,8 @@ model QueryCaptionResult {
   @visibility(Lifecycle.Read)
   text?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Same text passage as in the Text property with highlighted phrases most relevant to the query. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   highlights?: string | null;
 }
@@ -1125,8 +1125,8 @@ model SuggestDocumentsResult {
   coverage?: float64;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A result containing a document found by a suggestion query, plus associated metadata. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SuggestResult {
   ...Record<unknown>;
 
@@ -1153,24 +1153,24 @@ model SuggestRequest {
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestion query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. */
   minimumCoverage?: float64;
 
+  /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses. */
   @encode(ArrayEncoding.commaDelimited)
   orderby?: string[];
 
   /** The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. */
   search: string;
 
+  /** The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester. */
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 
+  /** The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. */
   @encode(ArrayEncoding.commaDelimited)
   select?: string[];
 
@@ -1187,8 +1187,8 @@ model IndexBatch {
   value: IndexAction[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** Represents an index action that operates on a document. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model IndexAction {
   ...Record<unknown>;
 
@@ -1197,16 +1197,16 @@ model IndexAction {
   actionType?: IndexActionType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A document retrieved via a document lookup operation. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model LookupDocument {
   ...Record<unknown>;
 }
 
 /** Response containing the status of operations for all documents in the indexing request. */
 model IndexDocumentsResult {
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
   /** Response containing the status of operations for all actions in the batch. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
   @statusCode
   _: 200 | 207;
 
@@ -1282,10 +1282,10 @@ model AutocompleteRequest {
   /** A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80. */
   minimumCoverage?: float64;
 
+  /** The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. */
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester. */
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 

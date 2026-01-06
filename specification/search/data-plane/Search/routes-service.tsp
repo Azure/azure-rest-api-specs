@@ -9,9 +9,9 @@ using Azure.ClientGenerator.Core;
 namespace Search;
 
 interface DataSources {
+  /** Creates a new datasource or updates a datasource if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new datasource or updates a datasource if it already exists. */
   @route("/datasources('{dataSourceName}')")
   @put
   createOrUpdate is SearchDataSourceOperation<
@@ -29,15 +29,15 @@ interface DataSources {
       dataSource: SearchIndexerDataSource;
     },
     SearchIndexerDataSource & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes a datasource. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/datasources('{dataSourceName}')")
   @delete
   delete is SearchDataSourceOperation<
@@ -46,15 +46,15 @@ interface DataSources {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves a datasource definition. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/datasources('{dataSourceName}')")
   @get
   get is SearchDataSourceOperation<
@@ -64,9 +64,9 @@ interface DataSources {
     SearchIndexerDataSource
   >;
 
+  /** Lists all datasources available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all datasources available for a search service. */
   @route("/datasources")
   @get
   list is SearchOperation<
@@ -77,8 +77,8 @@ interface DataSources {
     ListDataSourcesResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new datasource. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/datasources")
   @post
   create is SearchOperation<
@@ -99,8 +99,8 @@ interface DataSources {
 }
 
 interface Indexers {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Resets the change tracking state associated with an indexer. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.reset")
   @post
   reset is SearchIndexerOperation<
@@ -114,8 +114,8 @@ interface Indexers {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Resync selective options from the datasource to be re-ingested by the indexer." */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.resync")
   @post
   resync is SearchIndexerOperation<
@@ -133,8 +133,8 @@ interface Indexers {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Resets specific documents in the datasource to be selectively re-ingested by the indexer. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.resetdocs")
   @post
   resetDocs is SearchIndexerOperation<
@@ -156,8 +156,8 @@ interface Indexers {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Runs an indexer on-demand. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.run")
   @post
   run is SearchIndexerOperation<
@@ -171,9 +171,9 @@ interface Indexers {
     }
   >;
 
+  /** Creates a new indexer or updates an indexer if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new indexer or updates an indexer if it already exists. */
   @route("/indexers('{indexerName}')")
   @put
   createOrUpdate is SearchIndexerOperation<
@@ -195,15 +195,15 @@ interface Indexers {
       indexer: SearchIndexer;
     },
     SearchIndexer & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes an indexer. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')")
   @delete
   delete is SearchIndexerOperation<
@@ -212,16 +212,16 @@ interface Indexers {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
+  /** Retrieves an indexer definition. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Retrieves an indexer definition. */
   @route("/indexers('{indexerName}')")
   @get
   get is SearchIndexerOperation<
@@ -231,9 +231,9 @@ interface Indexers {
     SearchIndexer
   >;
 
+  /** Lists all indexers available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all indexers available for a search service. */
   @route("/indexers")
   @get
   list is SearchOperation<
@@ -244,9 +244,9 @@ interface Indexers {
     ListIndexersResult
   >;
 
+  /** Creates a new indexer. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new indexer. */
   @route("/indexers")
   @post
   create is SearchOperation<
@@ -264,8 +264,8 @@ interface Indexers {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Returns the current status and execution history of an indexer. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexers('{indexerName}')/search.status")
   @get
   getStatus is SearchIndexerOperation<
@@ -277,9 +277,9 @@ interface Indexers {
 }
 
 interface Skillsets {
+  /** Creates a new skillset in a search service or updates the skillset if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new skillset in a search service or updates the skillset if it already exists. */
   @route("/skillsets('{skillsetName}')")
   @put
   createOrUpdate is SearchSkillsetOperation<
@@ -301,16 +301,16 @@ interface Skillsets {
       skillset: SearchIndexerSkillset;
     },
     SearchIndexerSkillset & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
+  /** Deletes a skillset in a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Deletes a skillset in a search service. */
   @route("/skillsets('{skillsetName}')")
   @delete
   delete is SearchSkillsetOperation<
@@ -319,15 +319,15 @@ interface Skillsets {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves a skillset in a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/skillsets('{skillsetName}')")
   @get
   get is SearchSkillsetOperation<
@@ -337,9 +337,9 @@ interface Skillsets {
     SearchIndexerSkillset
   >;
 
+  /** List all skillsets in a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** List all skillsets in a search service. */
   @route("/skillsets")
   @get
   list is SearchOperation<
@@ -350,8 +350,8 @@ interface Skillsets {
     ListSkillsetsResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new skillset in a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/skillsets")
   @post
   create is SearchOperation<
@@ -369,8 +369,8 @@ interface Skillsets {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Reset an existing skillset in a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/skillsets('{skillsetName}')/search.resetskills")
   @post
   resetSkills is SearchSkillsetOperation<
@@ -386,9 +386,9 @@ interface Skillsets {
 }
 
 interface SynonymMaps {
+  /** Creates a new synonym map or updates a synonym map if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new synonym map or updates a synonym map if it already exists. */
   @route("/synonymmaps('{synonymMapName}')")
   @put
   createOrUpdate is SearchSynonymMapOperation<
@@ -402,15 +402,15 @@ interface SynonymMaps {
       synonymMap: SynonymMap;
     },
     SynonymMap & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes a synonym map. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/synonymmaps('{synonymMapName}')")
   @delete
   delete is SearchSynonymMapOperation<
@@ -419,16 +419,16 @@ interface SynonymMaps {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
+  /** Retrieves a synonym map definition. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Retrieves a synonym map definition. */
   @route("/synonymmaps('{synonymMapName}')")
   @get
   get is SearchSynonymMapOperation<
@@ -438,9 +438,9 @@ interface SynonymMaps {
     SynonymMap
   >;
 
+  /** Lists all synonym maps available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all synonym maps available for a search service. */
   @route("/synonymmaps")
   @get
   list is SearchOperation<
@@ -451,8 +451,8 @@ interface SynonymMaps {
     ListSynonymMapsResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new synonym map. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/synonymmaps")
   @post
   create is SearchOperation<
@@ -472,8 +472,8 @@ interface SynonymMaps {
 }
 
 interface Indexes {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new search index. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes")
   @post
   create is SearchOperation<
@@ -491,9 +491,9 @@ interface Indexes {
     }
   >;
 
+  /** Lists all indexes available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all indexes available for a search service. */
   @route("/indexes")
   @list
   @get
@@ -505,9 +505,9 @@ interface Indexes {
     ListIndexesResult
   >;
 
+  /** Creates a new search index or updates an index if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new search index or updates an index if it already exists. */
   @route("/indexes('{indexName}')")
   @put
   createOrUpdate is SearchIndexOperation<
@@ -526,15 +526,15 @@ interface Indexes {
       index: SearchIndex;
     },
     SearchIndex & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes a search index and all the documents it contains. This operation is permanent, with no recovery option. Make sure you have a master copy of your index definition, data ingestion code, and a backup of the primary data source in case you need to re-build the index. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')")
   @delete
   delete is SearchIndexOperation<
@@ -543,15 +543,15 @@ interface Indexes {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves an index definition. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')")
   @get
   get is SearchIndexOperation<
@@ -561,8 +561,8 @@ interface Indexes {
     SearchIndex
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Returns statistics for the given index, including a document count and storage usage. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/search.stats")
   @get
   getStatistics is SearchIndexOperation<
@@ -572,8 +572,8 @@ interface Indexes {
     GetIndexStatisticsResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Shows how an analyzer breaks text into tokens. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/search.analyze")
   @post
   analyze is SearchIndexOperation<
@@ -589,8 +589,8 @@ interface Indexes {
 }
 
 interface Aliases {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new search alias. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/aliases")
   @post
   create is SearchOperation<
@@ -607,9 +607,9 @@ interface Aliases {
       code: "201";
     }
   >;
+  /** Lists all aliases available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all aliases available for a search service. */
   @route("/aliases")
   @list
   @get
@@ -620,9 +620,9 @@ interface Aliases {
     ListAliasesResult
   >;
 
+  /** Creates a new search alias or updates an alias if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new search alias or updates an alias if it already exists. */
   @route("/aliases('{aliasName}')")
   @put
   createOrUpdate is SearchAliasOperation<
@@ -636,15 +636,15 @@ interface Aliases {
       `alias`: SearchAlias;
     },
     SearchAlias & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes a search alias and its associated mapping to an index. This operation is permanent, with no recovery option. The mapped index is untouched by this operation. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/aliases('{aliasName}')")
   @delete
   delete is SearchAliasOperation<
@@ -653,16 +653,16 @@ interface Aliases {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
+  /** Retrieves an alias definition. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  /** Retrieves an alias definition. */
   @route("/aliases('{aliasName}')")
   @get
   get is SearchAliasOperation<
@@ -674,8 +674,8 @@ interface Aliases {
 }
 
 interface KnowledgeBases {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new knowledge base. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgebases")
   @post
   create is SearchOperation<
@@ -693,9 +693,9 @@ interface KnowledgeBases {
     }
   >;
 
+  /** Lists all knowledge bases available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all knowledge bases available for a search service. */
   @route("/knowledgebases")
   @list
   @get
@@ -706,9 +706,9 @@ interface KnowledgeBases {
     ListKnowledgeBasesResult
   >;
 
+  /** Creates a new knowledge base or updates a knowledge base if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new knowledge base or updates a knowledge base if it already exists. */
   @route("/knowledgebases('{knowledgeBaseName}')")
   @put
   createOrUpdate is SearchKnowledgeBaseOperation<
@@ -722,15 +722,15 @@ interface KnowledgeBases {
       knowledgeBase: KnowledgeBase;
     },
     KnowledgeBase & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes a knowledge base. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgebases('{knowledgeBaseName}')")
   @delete
   delete is SearchKnowledgeBaseOperation<
@@ -739,15 +739,15 @@ interface KnowledgeBases {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves a knowledge base definition. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgebases('{knowledgeBaseName}')")
   @get
   get is SearchKnowledgeBaseOperation<
@@ -759,8 +759,8 @@ interface KnowledgeBases {
 }
 
 interface KnowledgeSources {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Creates a new knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgesources")
   @post
   create is SearchOperation<
@@ -778,9 +778,9 @@ interface KnowledgeSources {
     }
   >;
 
+  /** Lists all knowledge sources available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Lists all knowledge sources available for a search service. */
   @route("/knowledgesources")
   @list
   @get
@@ -791,9 +791,9 @@ interface KnowledgeSources {
     ListKnowledgeSourcesResult
   >;
 
+  /** Creates a new knowledge source or updates an knowledge source if it already exists. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Creates a new knowledge source or updates an knowledge source if it already exists. */
   @route("/knowledgesources('{sourceName}')")
   @put
   createOrUpdate is SearchSourceOperation<
@@ -807,15 +807,15 @@ interface KnowledgeSources {
       knowledgeSource: KnowledgeSource;
     },
     KnowledgeSource & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "201";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Deletes an existing knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgesources('{sourceName}')")
   @delete
   delete is SearchSourceOperation<
@@ -824,15 +824,15 @@ interface KnowledgeSources {
       ...matchingHeader;
     },
     {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "204" | "404";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves a knowledge source definition. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgesources('{sourceName}')")
   @get
   get is SearchSourceOperation<
@@ -842,8 +842,8 @@ interface KnowledgeSources {
     KnowledgeSource
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves the status of a knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/knowledgesources('{sourceName}')/status")
   @get
   getStatus is SearchSourceOperation<
@@ -854,8 +854,8 @@ interface KnowledgeSources {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 /** Gets service level statistics for a search service. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @route("/servicestats")
 @get
 op getServiceStatistics is SearchOperation<
@@ -865,9 +865,9 @@ op getServiceStatistics is SearchOperation<
   SearchServiceStatistics
 >;
 
+/** Retrieves a summary of statistics for all indexes in the search service. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-/** Retrieves a summary of statistics for all indexes in the search service. */
 @route("/indexstats")
 @list
 @get

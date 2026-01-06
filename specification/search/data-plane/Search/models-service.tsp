@@ -3119,8 +3119,8 @@ union IndexerResyncOption {
 
 /** Request body for resync indexer operation. */
 model IndexerResyncBody {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Re-sync options that have been pre-defined from data source. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   options?: IndexerResyncOption[] | null;
 }
 
@@ -3139,36 +3139,36 @@ model SearchIndexerDataSource {
   @visibility(Lifecycle.Read)
   subType?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   /** Credentials for the datasource. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   @flattenProperty
   credentials: DataSourceCredentials;
 
   /** The data container for the datasource. */
   container: SearchIndexerDataContainer;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** An explicit managed identity to use for this datasource. If not specified and the connection string is a managed identity, the system-assigned managed identity is used. If not specified, the value remains unchanged. If "none" is specified, the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Ingestion options with various types of permission data. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   indexerPermissionOptions?: IndexerPermissionOption[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The data change detection policy for the datasource. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   dataChangeDetectionPolicy?: DataChangeDetectionPolicy | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The data deletion detection policy for the datasource. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   dataDeletionDetectionPolicy?: DataDeletionDetectionPolicy | null;
 
   /** The ETag of the data source. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition. Once you have encrypted your data source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 }
 
@@ -3190,18 +3190,18 @@ model SearchIndexerDataContainer {
 /** Base type for data change detection policies. */
 @discriminator("@odata.type")
 model DataChangeDetectionPolicy {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 }
 
 /** Base type for data deletion detection policies. */
 @discriminator("@odata.type")
 model DataDeletionDetectionPolicy {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 }
 
@@ -3216,13 +3216,13 @@ model SearchResourceEncryptionKey {
   /** The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be `https://my-keyvault-name.vault.azure.net`. */
   keyVaultUri: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   /** Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead. */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract"
   @flattenProperty
   accessCredentials?: AzureActiveDirectoryApplicationCredentials;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** An explicit managed identity to use for this encryption key. If not specified and the access credentials property is null, the system-assigned managed identity is used. On update to the resource, if the explicit identity is unspecified, it remains unchanged. If "none" is specified, the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 }
 
@@ -3269,12 +3269,12 @@ model SearchIndexer {
   /** The name of the index to which this indexer writes data. */
   targetIndexName: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The schedule for this indexer. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   schedule?: IndexingSchedule | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Parameters for indexer execution. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   parameters?: IndexingParameters | null;
 
   /** Defines mappings between fields in the data source and corresponding target fields in the index. */
@@ -3283,20 +3283,20 @@ model SearchIndexer {
   /** Output field mappings are applied after enrichment and immediately before indexing. */
   outputFieldMappings?: FieldMapping[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating whether the indexer is disabled. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   disabled?: boolean | null = false;
 
   /** The ETag of the indexer. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your indexer definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Adds caching to an enrichment pipeline to allow for incremental modification steps without having to rebuild the index every time. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   cache?: SearchIndexerCache | null;
 }
 
@@ -3311,25 +3311,25 @@ model IndexingSchedule {
 
 /** Represents parameters for indexer execution. */
 model IndexingParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The number of items that are read from the data source and indexed as a single batch in order to improve performance. The default depends on the data source type. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   batchSize?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum number of items that can fail indexing for indexer execution to still be considered successful. -1 means no limit. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxFailedItems?: int32 | null = 0;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxFailedItemsPerBatch?: int32 | null = 0;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   /** A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   configuration?: IndexingParametersConfiguration;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model IndexingParametersConfiguration {
   ...Record<unknown>;
 
@@ -3360,12 +3360,12 @@ model IndexingParametersConfiguration {
   /** For CSV blobs, indicates that the first (non-blank) line of each blob contains headers. */
   firstLineContainsHeaders?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Specifies the submode that will determine whether a markdown file will be parsed into exactly one search document or multiple search documents. Default is `oneToMany`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   markdownParsingSubmode?: MarkdownParsingSubmode | null = MarkdownParsingSubmode.OneToMany;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Specifies the max header depth that will be considered while grouping markdown content. Default is `h6`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   markdownHeaderDepth?: MarkdownHeaderDepth | null = MarkdownHeaderDepth.h6;
 
   /** For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property. */
@@ -3398,8 +3398,8 @@ model FieldMapping {
   /** The name of the target field in the index. Same as the source field name by default. */
   targetFieldName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A function to apply to each source field value before indexing. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   mappingFunction?: FieldMappingFunction | null;
 }
 
@@ -3408,9 +3408,9 @@ model FieldMappingFunction {
   /** The name of the field mapping function. */
   name: string;
 
+  /** A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-  /** A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type. */
   parameters?: Record<unknown> | null;
 }
 
@@ -3422,12 +3422,12 @@ model SearchIndexerCache {
   /** The connection string to the storage account where the cache data will be persisted. */
   storageConnectionString?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Specifies whether incremental reprocessing is enabled. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   enableReprocessing?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for connections to the enrichment cache.  If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 }
 
@@ -3492,8 +3492,8 @@ model IndexerExecutionResult {
   @visibility(Lifecycle.Read)
   startTime?: utcDateTime;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The end time of this indexer execution, if the execution has already completed. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   endTime?: utcDateTime | null;
 
@@ -3632,8 +3632,8 @@ model IndexerRuntime {
   /** Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds. */
   usedSeconds: int64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   remainingSeconds?: int64 | null;
 
   /** Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive). */
@@ -3667,17 +3667,17 @@ model SearchIndexerSkillset {
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition. Once you have encrypted your skillset definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 }
 
 /** Base type for skills. */
 @discriminator("@odata.type")
 model SearchIndexerSkill {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'. */
@@ -3723,9 +3723,9 @@ model OutputFieldMappingEntry {
 /** Base type for describing any Azure AI service resource attached to a skillset. */
 @discriminator("@odata.type")
 model CognitiveServicesAccount {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** Description of the Azure AI service resource attached to a skillset. */
@@ -3740,12 +3740,12 @@ model SearchIndexerKnowledgeStore {
   /** A list of additional projections to perform during indexing. */
   projections: SearchIndexerKnowledgeStoreProjection[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for connections to Azure Storage when writing knowledge store projections. If the connection string indicates an identity (ResourceId) and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   /** A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
 
@@ -3761,8 +3761,8 @@ model SearchIndexerKnowledgeStoreProjection {
   files?: SearchIndexerKnowledgeStoreFileProjectionSelector[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 /** Description for what data to store in Azure Tables. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   /** Name of generated key to store projection under. */
@@ -3790,21 +3790,21 @@ model SearchIndexerKnowledgeStoreProjectionSelector {
   inputs?: InputFieldMappingEntry[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 /** Projection definition for what data to store in Azure Blob. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreObjectProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 /** Abstract class to share properties between concrete selectors. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreBlobProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   /** Blob container to store projections in. */
   storageContainer: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 /** Projection definition for what data to store in Azure Files. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model SearchIndexerKnowledgeStoreFileProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
@@ -3813,8 +3813,8 @@ model SearchIndexerIndexProjection {
   /** A list of projections to be performed to secondary search indexes. */
   selectors: SearchIndexerIndexProjectionSelector[];
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   /** A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
   parameters?: SearchIndexerIndexProjectionsParameters;
 }
 
@@ -3833,8 +3833,8 @@ model SearchIndexerIndexProjectionSelector {
   mappings: InputFieldMappingEntry[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SearchIndexerIndexProjectionsParameters {
   ...Record<unknown>;
 
@@ -3850,8 +3850,8 @@ model ListSkillsetsResult {
   value: SearchIndexerSkillset[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 /** The type of the skill names. */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
 model SkillNames {
   /** the names of skills to be reset. */
   skillNames?: string[];
@@ -3865,14 +3865,14 @@ model SynonymMap {
   /** The format of the synonym map. Only the 'solr' format is currently supported. */
   format: "solr";
 
+  /** A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. */
   @encode(ArrayEncoding.newlineDelimited)
   synonyms: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 
   /** The ETag of the synonym map. */
@@ -3905,8 +3905,8 @@ model SearchIndex {
   /** The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. */
   defaultScoringProfile?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Options to control Cross-Origin Resource Sharing (CORS) for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   corsOptions?: CorsOptions | null;
 
   /** The suggesters for the index. */
@@ -3927,27 +3927,27 @@ model SearchIndex {
   /** The normalizers for the index. */
   normalizers?: LexicalNormalizer[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 
   /** The type of similarity algorithm to be used when scoring and ranking the documents matching a search query. The similarity algorithm can only be defined at index creation time and cannot be modified on existing indexes. If null, the ClassicSimilarity algorithm is used. */
   similarity?: SimilarityAlgorithm;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Defines parameters for a search index that influence semantic capabilities. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   semantic?: SemanticSearch | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Contains configuration options related to vector search. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   vectorSearch?: VectorSearch | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating whether permission filtering is enabled for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   permissionFilterOption?: SearchIndexPermissionFilterOption | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating whether Purview is enabled for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   purviewEnabled?: boolean | null;
 
   /** The ETag of the index. */
@@ -3984,28 +3984,28 @@ model SearchField {
   /** A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields. */
   facetable?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating whether the field should be used as a permission filter. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   permissionFilter?: PermissionFilter | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating whether the field contains sensitivity label information. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   sensitivityLabel?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   analyzer?: LexicalAnalyzerName | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   searchAnalyzer?: LexicalAnalyzerName | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   indexAnalyzer?: LexicalAnalyzerName | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   normalizer?: LexicalNormalizerName | null;
 
   /** The dimensionality of the vector field. */
@@ -4013,12 +4013,12 @@ model SearchField {
   @minValue(2)
   dimensions?: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   vectorSearchProfile?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The encoding format to interpret the field contents. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   vectorEncoding?: VectorEncodingFormat | null;
 
   /** A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields. */
@@ -4033,8 +4033,8 @@ model ScoringProfile {
   /** The name of the scoring profile. */
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Parameters that boost scoring based on text matches in certain index fields. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   text?: TextWeights | null;
 
   /** The collection of functions that influence the scoring of documents. */
@@ -4050,8 +4050,8 @@ model TextWeights {
   weights: Record<float64>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 /** Base type for functions that can modify document scores during ranking. */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
 @discriminator("type")
 model ScoringFunction {
   /** The name of the field used as input to the scoring function. */
@@ -4072,8 +4072,8 @@ model CorsOptions {
   /** The list of origins from which JavaScript code will be granted access to your index. Can contain a list of hosts of the form {protocol}://{fully-qualified-domain-name}[:{port#}], or a single '*' to allow all origins (not recommended). */
   allowedOrigins: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxAgeInSeconds?: int64 | null;
 }
 
@@ -4092,9 +4092,9 @@ model SearchSuggester {
 /** Base type for analyzers. */
 @discriminator("@odata.type")
 model LexicalAnalyzer {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. */
@@ -4104,9 +4104,9 @@ model LexicalAnalyzer {
 /** Base type for tokenizers. */
 @discriminator("@odata.type")
 model LexicalTokenizer {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. */
@@ -4116,9 +4116,9 @@ model LexicalTokenizer {
 /** Base type for token filters. */
 @discriminator("@odata.type")
 model TokenFilter {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. */
@@ -4128,9 +4128,9 @@ model TokenFilter {
 /** Base type for character filters. */
 @discriminator("@odata.type")
 model CharFilter {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. */
@@ -4140,9 +4140,9 @@ model CharFilter {
 /** Base type for normalizers. */
 @discriminator("@odata.type")
 model LexicalNormalizer {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 
   /** The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. */
@@ -4152,9 +4152,9 @@ model LexicalNormalizer {
 /** Base type for similarity algorithms. Similarity algorithms are used to calculate scores that tie queries to documents. The higher the score, the more relevant the document is to that specific query. Those scores are used to rank the search results. */
 @discriminator("@odata.type")
 model SimilarityAlgorithm {
+  /** The discriminator for derived types. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** The discriminator for derived types. */
   `@odata.type`: string;
 }
 
@@ -4175,8 +4175,8 @@ model SemanticConfiguration {
   /** Describes the title, content, and keyword fields to be used for semantic ranking, captions, highlights, and answers. At least one of the three sub properties (titleField, prioritizedKeywordsFields and prioritizedContentFields) need to be set. */
   prioritizedFields: SemanticPrioritizedFields;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Specifies the score type to be used for the sort order of the search results. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   rankingOrder?: RankingOrder | null;
 
   /** Determines which semantic or query rewrite models to use during model flighting/upgrades. */
@@ -4257,12 +4257,12 @@ model VectorSearchCompression {
   /** The name to associate with this particular configuration. */
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Contains the options for rescoring. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   rescoringOptions?: RescoringOptions | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The number of dimensions to truncate the vectors to. Truncating the vectors reduces the size of the vectors and the amount of data that needs to be transferred during search. This can save storage cost and improve search performance at the expense of recall. It should be only used for embeddings trained with Matryoshka Representation Learning (MRL) such as OpenAI text-embedding-3-large (small). The default value is null, which means no truncation. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   truncationDimension?: int32 | null;
 
   /** Type of VectorSearchCompression. */
@@ -4271,16 +4271,16 @@ model VectorSearchCompression {
 
 /** Contains the options for rescoring. */
 model RescoringOptions {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** If set to true, after the initial search on the compressed vectors, the similarity scores are recalculated using the full-precision vectors. This will improve recall at the expense of latency. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   enableRescoring?: boolean | null = true;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Default oversampling factor. Oversampling retrieves a greater set of potential documents to offset the resolution loss due to quantization. This increases the set of results that will be rescored on full-precision vectors. Minimum value is 1, meaning no oversampling (1x). This parameter can only be set when 'enableRescoring' is true. Higher values improve recall at the expense of latency. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultOversampling?: float64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the storage method for original vectors. This setting is immutable. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   rescoreStorageMethod?: VectorSearchCompressionRescoreStorageMethod | null = VectorSearchCompressionRescoreStorageMethod.PreserveOriginals;
 }
 
@@ -4396,8 +4396,8 @@ model KnowledgeBase {
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 
   /** The description of the knowledge base. */
@@ -4417,11 +4417,11 @@ model ListKnowledgeBasesResult {
   value: KnowledgeBase[];
 }
 
-@discriminator("kind")
 /** Specifies the connection parameters for the model to use for query planning. */
+@discriminator("kind")
 model KnowledgeBaseModel {
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   /** The AI model to be used for query planning. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: KnowledgeBaseModelKind;
 }
 
@@ -4437,8 +4437,8 @@ union KnowledgeBaseModelKind {
 model KnowledgeBaseAzureOpenAIModel extends KnowledgeBaseModel {
   kind: KnowledgeBaseModelKind.AzureOpenAI;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** Azure OpenAI parameters. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   azureOpenAIParameters: AzureOpenAIVectorizerParameters;
 }
 
@@ -4460,8 +4460,8 @@ model AzureOpenAiParameters {
   /** API key of the designated Azure OpenAI resource. */
   apiKey?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for outbound connections. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authIdentity?: SearchIndexerDataIdentity | null;
 
   /** The name of the embedding model that is deployed at the provided deploymentId path. */
@@ -4469,8 +4469,8 @@ model AzureOpenAiParameters {
 }
 
 // Knowledge Source models
-@discriminator("kind")
 /** Represents a knowledge source definition. */
+@discriminator("kind")
 model KnowledgeSource {
   /** The name of the knowledge source. */
   name: string;
@@ -4478,16 +4478,16 @@ model KnowledgeSource {
   /** Optional user-defined description. */
   description?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   /** The type of the knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: KnowledgeSourceKind;
 
   /** The ETag of the knowledge source. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
 }
 
@@ -4559,16 +4559,16 @@ model AzureBlobKnowledgeSourceParameters {
   /** The name of the blob storage container. */
   containerName: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional folder path within the container. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   folderPath?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** Set to true if connecting to an ADLS Gen2 storage account. Default is false. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   isADLSGen2?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Consolidates all general ingestion settings. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
   /** Resources created by the knowledge source. */
@@ -4592,12 +4592,12 @@ model IndexedSharePointKnowledgeSourceParameters {
   /** Specifies which SharePoint libraries to access. */
   containerName: IndexedSharePointContainerName;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional query to filter SharePoint content. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   query?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Consolidates all general ingestion settings. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   ingestionParameters?: KnowledgeSourceIngestionParameters | null;
 
   /** Resources created by the knowledge source. */
@@ -4621,8 +4621,8 @@ model IndexedOneLakeKnowledgeSourceParameters {
   /** Specifies which OneLake lakehouse to access. */
   lakehouseId: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Optional OneLakehouse folder or shortcut to filter OneLake content. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   targetPath?: string | null;
 
   /** Consolidates all general ingestion settings. */
@@ -4744,35 +4744,35 @@ model ResourceCounter {
   /** The resource usage amount. */
   usage: int64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The resource amount quota. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   quota?: int64 | null;
 }
 
 /** Represents various service level limits. */
 model SearchServiceLimits {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum allowed fields per index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxFieldsPerIndex?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxFieldNestingDepthPerIndex?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxComplexCollectionFieldsPerIndex?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum number of objects in complex collections allowed per document. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxComplexObjectsInCollectionsPerDocument?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum amount of storage in bytes allowed per index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxStoragePerIndex?: int64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum cumulative indexer runtime in seconds allowed for the service. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxCumulativeIndexerRuntimeSeconds?: int64 | null;
 }
 
@@ -4781,8 +4781,8 @@ model ServiceIndexersRuntime {
   /** Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds. */
   usedSeconds: int64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   remainingSeconds?: int64 | null;
 
   /** Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive). */
@@ -4803,8 +4803,8 @@ model CustomAnalyzer extends LexicalAnalyzer {
   /** A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed. */
   charFilters?: CharFilterName[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of analyzer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.CustomAnalyzer";
 }
 
@@ -4816,17 +4816,17 @@ model PatternAnalyzer extends LexicalAnalyzer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
 
+  /** Regular expression flags. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  /** Regular expression flags. */
   @encode(ArrayEncoding.pipeDelimited)
   flags?: RegexFlags[];
 
   /** A list of stopwords. */
   stopwords?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of analyzer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PatternAnalyzer";
 }
 
@@ -4839,8 +4839,8 @@ model LuceneStandardAnalyzer extends LexicalAnalyzer {
   /** A list of stopwords. */
   stopwords?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of analyzer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StandardAnalyzer";
 }
 
@@ -4849,8 +4849,8 @@ model StopAnalyzer extends LexicalAnalyzer {
   /** A list of stopwords. */
   stopwords?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of analyzer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StopAnalyzer";
 }
 
@@ -4862,8 +4862,8 @@ model CustomNormalizer extends LexicalNormalizer {
   /** A list of character filters used to prepare input text before it is processed. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed. */
   charFilters?: CharFilterName[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of normalizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.CustomNormalizer";
 }
 
@@ -4873,13 +4873,13 @@ model ClassicTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.ClassicTokenizer";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model EdgeNGramTokenizer extends LexicalTokenizer {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -4892,19 +4892,19 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   /** Character classes to keep in the tokens. */
   tokenChars?: TokenCharacterKind[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
-#deprecated "Use KeywordTokenizerV2 instead."
 /** Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene. */
+#deprecated "Use KeywordTokenizerV2 instead."
 model KeywordTokenizer extends LexicalTokenizer {
   /** The read buffer size in bytes. Default is 256. */
   bufferSize?: int32 = 256;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
 }
 
@@ -4914,8 +4914,8 @@ model KeywordTokenizerV2 extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 256;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizerV2";
 }
 
@@ -4931,8 +4931,8 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   /** The language to use. The default is English. */
   language?: MicrosoftTokenizerLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
 }
 
@@ -4948,13 +4948,13 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   /** The language to use. The default is English. */
   language?: MicrosoftStemmingTokenizerLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model NGramTokenizer extends LexicalTokenizer {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -4967,8 +4967,8 @@ model NGramTokenizer extends LexicalTokenizer {
   /** Character classes to keep in the tokens. */
   tokenChars?: TokenCharacterKind[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenizer";
 }
 
@@ -4992,8 +4992,8 @@ model PathHierarchyTokenizerV2 extends LexicalTokenizer {
   /** The number of initial tokens to skip. Default is 0. */
   skip?: int32 = 0;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
 }
 
@@ -5008,19 +5008,19 @@ model PatternTokenizer extends LexicalTokenizer {
   /** The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1. */
   group?: int32 = -1;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
-#deprecated "LuceneStandardTokenizer is deprecated. Use LuceneStandardTokenizerV2 instead."
 /** Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene. */
+#deprecated "LuceneStandardTokenizer is deprecated. Use LuceneStandardTokenizerV2 instead."
 model LuceneStandardTokenizer extends LexicalTokenizer {
   /** The maximum token length. Default is 255. Tokens longer than the maximum length are split. */
   maxTokenLength?: int32 = 255;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
 }
 
@@ -5030,8 +5030,8 @@ model LuceneStandardTokenizerV2 extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizerV2";
 }
 
@@ -5041,8 +5041,8 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of tokenizer. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
 }
 
@@ -5051,8 +5051,8 @@ model AsciiFoldingTokenFilter extends TokenFilter {
   /** A value indicating whether the original token will be kept. Default is false. */
   preserveOriginal?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
 }
 
@@ -5064,8 +5064,8 @@ model CjkBigramTokenFilter extends TokenFilter {
   /** A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false. */
   outputUnigrams?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
@@ -5080,8 +5080,8 @@ model CommonGramTokenFilter extends TokenFilter {
   /** A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false. */
   queryMode?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
 }
 
@@ -5105,14 +5105,14 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   /** A value indicating whether to add only the longest matching subword to the output. Default is false. */
   onlyLongestMatch?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
+/** Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 #deprecated "EdgeNGramTokenFilter is deprecated. Use EdgeNGramTokenFilterV2 instead."
-/** Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene. */
 model EdgeNGramTokenFilter extends TokenFilter {
   /** The minimum n-gram length. Default is 1. Must be less than the value of maxGram. */
   minGram?: int32 = 1;
@@ -5123,13 +5123,13 @@ model EdgeNGramTokenFilter extends TokenFilter {
   /** Specifies which side of the input the n-gram should be generated from. Default is "front". */
   side?: EdgeNGramTokenFilterSide = EdgeNGramTokenFilterSide.Front;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model EdgeNGramTokenFilterV2 extends TokenFilter {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -5142,8 +5142,8 @@ model EdgeNGramTokenFilterV2 extends TokenFilter {
   /** Specifies which side of the input the n-gram should be generated from. Default is "front". */
   side?: EdgeNGramTokenFilterSide = EdgeNGramTokenFilterSide.Front;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
 }
 
@@ -5152,8 +5152,8 @@ model ElisionTokenFilter extends TokenFilter {
   /** The set of articles to remove. */
   articles?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.ElisionTokenFilter";
 }
 
@@ -5165,8 +5165,8 @@ model KeepTokenFilter extends TokenFilter {
   /** A value indicating whether to lower case all words first. Default is false. */
   keepWordsCase?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.KeepTokenFilter";
 }
 
@@ -5178,8 +5178,8 @@ model KeywordMarkerTokenFilter extends TokenFilter {
   /** A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. */
   ignoreCase?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
 }
 
@@ -5193,8 +5193,8 @@ model LengthTokenFilter extends TokenFilter {
   @maxValue(300)
   max?: int32 = 300;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.LengthTokenFilter";
 }
 
@@ -5206,14 +5206,14 @@ model LimitTokenFilter extends TokenFilter {
   /** A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false. */
   consumeAllTokens?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
+/** Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 #deprecated "NGramTokenFilter is deprecated. Use NGramTokenFilterV2 instead."
-/** Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene. */
 model NGramTokenFilter extends TokenFilter {
   /** The minimum n-gram length. Default is 1. Must be less than the value of maxGram. */
   minGram?: int32 = 1;
@@ -5221,13 +5221,13 @@ model NGramTokenFilter extends TokenFilter {
   /** The maximum n-gram length. Default is 2. */
   maxGram?: int32 = 2;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model NGramTokenFilterV2 extends TokenFilter {
   /** The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram. */
   @maxValue(300)
@@ -5237,8 +5237,8 @@ model NGramTokenFilterV2 extends TokenFilter {
   @maxValue(300)
   maxGram?: int32 = 2;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilterV2";
 }
 
@@ -5250,8 +5250,8 @@ model PatternCaptureTokenFilter extends TokenFilter {
   /** A value indicating whether to return the original token even if one of the patterns matches. Default is true. */
   preserveOriginal?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
 }
 
@@ -5263,8 +5263,8 @@ model PatternReplaceTokenFilter extends TokenFilter {
   /** The replacement text. */
   replacement: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
 }
 
@@ -5276,8 +5276,8 @@ model PhoneticTokenFilter extends TokenFilter {
   /** A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true. */
   replace?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PhoneticTokenFilter";
 }
 
@@ -5303,8 +5303,8 @@ model ShingleTokenFilter extends TokenFilter {
   /** The string to insert for each position at which there is no token. Default is an underscore ("_"). */
   filterToken?: string = "_";
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.ShingleTokenFilter";
 }
 
@@ -5313,8 +5313,8 @@ model SnowballTokenFilter extends TokenFilter {
   /** The language to use. */
   language: SnowballTokenFilterLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.SnowballTokenFilter";
 }
 
@@ -5323,8 +5323,8 @@ model StemmerTokenFilter extends TokenFilter {
   /** The language to use. */
   language: StemmerTokenFilterLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StemmerTokenFilter";
 }
 
@@ -5333,8 +5333,8 @@ model StemmerOverrideTokenFilter extends TokenFilter {
   /** A list of stemming rules in the following format: "word => stem", for example: "ran => run". */
   rules: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
 }
 
@@ -5352,8 +5352,8 @@ model StopwordsTokenFilter extends TokenFilter {
   /** A value indicating whether to ignore the last search term if it's a stop word. Default is true. */
   removeTrailing?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.StopwordsTokenFilter";
 }
 
@@ -5368,8 +5368,8 @@ model SynonymTokenFilter extends TokenFilter {
   /** A value indicating whether all words in the list of synonyms (if => notation is not used) will map to one another. If true, all words in the list of synonyms (if => notation is not used) will map to one another. The following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing. If false, the following list: incredible, unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing => incredible. Default is true. */
   expand?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.SynonymTokenFilter";
 }
 
@@ -5379,8 +5379,8 @@ model TruncateTokenFilter extends TokenFilter {
   @maxValue(300)
   length?: int32 = 300;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.TruncateTokenFilter";
 }
 
@@ -5389,8 +5389,8 @@ model UniqueTokenFilter extends TokenFilter {
   /** A value indicating whether to remove duplicates only at the same position. Default is false. */
   onlyOnSamePosition?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.UniqueTokenFilter";
 }
 
@@ -5426,8 +5426,8 @@ model WordDelimiterTokenFilter extends TokenFilter {
   /** A list of tokens to protect from being delimited. */
   protectedWords?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of token filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
 }
 
@@ -5436,8 +5436,8 @@ model MappingCharFilter extends CharFilter {
   /** A list of mappings of the following format: "a=>b" (all occurrences of the character "a" will be replaced with character "b"). */
   mappings: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of char filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.MappingCharFilter";
 }
 
@@ -5449,31 +5449,31 @@ model PatternReplaceCharFilter extends CharFilter {
   /** The replacement text. */
   replacement: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of char filter. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
 }
 
 /** Legacy similarity algorithm which uses the Lucene TFIDFSimilarity implementation of TF-IDF. This variation of TF-IDF introduces static document length normalization as well as coordinating factors that penalize documents that only partially match the searched queries. */
 model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.ClassicSimilarity";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter). */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   k1?: float64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   b?: float64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.BM25Similarity";
 }
 
@@ -5503,8 +5503,8 @@ model HnswParameters {
   @minValue(100)
   efSearch?: int32 = 500;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The similarity metric to use for vector comparisons. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   metric?: VectorSearchAlgorithmMetric | null;
 }
 
@@ -5520,8 +5520,8 @@ model ExhaustiveKnnAlgorithmConfiguration
 
 /** Contains the parameters specific to exhaustive KNN algorithm. */
 model ExhaustiveKnnParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The similarity metric to use for vector comparisons. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   metric?: VectorSearchAlgorithmMetric | null;
 }
 
@@ -5536,8 +5536,8 @@ model ScalarQuantizationCompression extends VectorSearchCompression {
 
 /** Contains the parameters specific to Scalar Quantization. */
 model ScalarQuantizationParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The quantized data type of compressed vector values. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   quantizedDataType?: VectorSearchCompressionTarget | null;
 }
 
@@ -5547,8 +5547,8 @@ model BinaryQuantizationCompression extends VectorSearchCompression {
   kind: "binaryQuantization";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Specifies the Azure OpenAI resource used to vectorize a query string. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AzureOpenAIVectorizer extends VectorSearchVectorizer {
   /** Contains the parameters specific to Azure OpenAI embedding vectorization. */
   azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
@@ -5557,8 +5557,8 @@ model AzureOpenAIVectorizer extends VectorSearchVectorizer {
   kind: "azureOpenAI";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Specifies the parameters for connecting to the Azure OpenAI resource. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AzureOpenAIVectorizerParameters {
   /** The resource URI of the Azure OpenAI resource. */
   resourceUri?: url;
@@ -5579,9 +5579,9 @@ model AzureOpenAIVectorizerParameters {
 /** Abstract base type for data identities. */
 @discriminator("@odata.type")
 model SearchIndexerDataIdentity {
+  /** A URI fragment specifying the type of identity. */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** A URI fragment specifying the type of identity. */
   `@odata.type`: string;
 }
 
@@ -5608,17 +5608,17 @@ model WebApiVectorizerParameters {
   /** The desired timeout for the request. Default is 30 seconds. */
   timeout?: duration;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Applies to custom endpoints that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the vectorization connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authResourceId?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authIdentity?: SearchIndexerDataIdentity | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Clears the identity property of a datasource. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   /** Contains the parameters specific to AI Services Vision embedding vectorization. */
   aiServicesVisionParameters?: AIServicesVisionParameters;
@@ -5627,11 +5627,11 @@ model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   kind: "aiServicesVision";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Specifies the AI Services Vision parameters for vectorizing a query image or text. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AIServicesVisionParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion: string | null;
 
   /** The resource URI of the AI Services resource. */
@@ -5640,13 +5640,13 @@ model AIServicesVisionParameters {
   /** API key of the designated AI Services resource. */
   apiKey?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the index, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authIdentity?: SearchIndexerDataIdentity | null;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AMLVectorizer extends VectorSearchVectorizer {
   /** Specifies the properties of the AML vectorizer. */
   amlParameters?: AMLParameters;
@@ -5655,27 +5655,27 @@ model AMLVectorizer extends VectorSearchVectorizer {
   kind: "aml";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Specifies the properties for connecting to an AML vectorizer. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AMLParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   uri: url | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for key authentication) The key for the AML service. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   key?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   resourceId?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Optional) When specified, indicates the timeout for the http client making the API call. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   timeout?: duration | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Optional for token authentication). The region the AML service is deployed in. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   region?: string | null;
 
   /** The name of the embedding model from the Azure AI Foundry Catalog that is deployed at the provided endpoint. */
@@ -5684,8 +5684,8 @@ model AMLParameters {
 
 /** Clears the identity property of a datasource. */
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** The discriminator for derived types. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DataNoneIdentity";
 }
 
@@ -5694,8 +5694,8 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   /** The fully qualified Azure resource Id of a user assigned managed identity typically in the form "/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId" that should have been assigned to the search service. */
   userAssignedIdentity: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of identity. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
 }
 
@@ -5704,15 +5704,15 @@ model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
   /** The name of the high water mark column. */
   highWaterMarkColumnName: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of data change detection policy. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
 }
 
 /** Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database. */
 model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of data change detection policy. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
 }
 
@@ -5725,16 +5725,16 @@ model SoftDeleteColumnDeletionDetectionPolicy
   /** The marker value that identifies an item as deleted. */
   softDeleteMarkerValue?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of data deletion detection policy. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
 }
 
 /** Defines a data deletion detection policy utilizing Azure Blob Storage's native soft delete feature for deletion detection. */
 model NativeBlobSoftDeleteDeletionDetectionPolicy
   extends DataDeletionDetectionPolicy {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of data deletion detection policy. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy";
 }
 
@@ -5807,8 +5807,8 @@ model TagScoringParameters {
   tagsParameter: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 /** A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 model SearchIndexerKnowledgeStoreParameters {
   ...Record<unknown>;
 
@@ -5818,8 +5818,8 @@ model SearchIndexerKnowledgeStoreParameters {
 
 /** An empty object that represents the default Azure AI service resource for a skillset. */
 model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.DefaultCognitiveServices";
 }
 
@@ -5828,13 +5828,13 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
   /** The key used to provision the Azure AI service resource attached to a skillset. */
   key: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.CognitiveServicesByKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AIServicesAccountKey extends CognitiveServicesAccount {
   /** The key used to provision the Azure AI service resource attached to a skillset. */
   key: string;
@@ -5842,23 +5842,23 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   /** The subdomain url for the corresponding AI Service. */
   subdomainUrl: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.AIServicesByKey";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** The multi-region account of an Azure AI service resource that's attached to a skillset. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AIServicesAccountIdentity extends CognitiveServicesAccount {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   identity?: SearchIndexerDataIdentity | null;
 
   /** The subdomain url for the corresponding AI Service. */
   subdomainUrl: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Azure.Search.AIServicesByIdentity";
 }
 
@@ -5867,48 +5867,48 @@ model CustomEntity {
   /** The top-level entity descriptor. Matches in the skill output will be grouped by this name, and it should represent the "normalized" form of the text being found. */
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   description?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   type?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   subtype?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** This field can be used as a passthrough for custom metadata about the matched text(s). The value of this field will appear with every match of its entity in the skill output. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   id?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to character casing. Sample case insensitive matches of "Microsoft" could be: microsoft, microSoft, MICROSOFT. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   caseSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Defaults to false. Boolean value denoting whether comparisons with the entity name should be sensitive to accent. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   accentSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Defaults to 0. Maximum value of 5. Denotes the acceptable number of divergent characters that would still constitute a match with the entity name. The smallest possible fuzziness for any given match is returned. For instance, if the edit distance is set to 3, "Windows10" would still match "Windows", "Windows10" and "Windows 7". When case sensitivity is set to false, case differences do NOT count towards fuzziness tolerance, but otherwise do. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   fuzzyEditDistance?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Changes the default case sensitivity value for this entity. It be used to change the default value of all aliases caseSensitive values. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultCaseSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Changes the default accent sensitivity value for this entity. It be used to change the default value of all aliases accentSensitive values. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultAccentSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Changes the default fuzzy edit distance value for this entity. It can be used to change the default value of all aliases fuzzyEditDistance values. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultFuzzyEditDistance?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** An array of complex objects that can be used to specify alternative spellings or synonyms to the root entity name. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   aliases?: CustomEntityAlias[] | null;
 }
 
@@ -5917,23 +5917,23 @@ model CustomEntityAlias {
   /** The text of the alias. */
   text: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Determine if the alias is case sensitive. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   caseSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Determine if the alias is accent sensitive. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   accentSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Determine the fuzzy edit distance of the alias. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   fuzzyEditDistance?: int32 | null;
 }
 
 /** A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output. */
 model ConditionalSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.ConditionalSkill";
 }
 
@@ -5942,16 +5942,16 @@ model KeyPhraseExtractionSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: KeyPhraseExtractionSkillLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A number indicating how many key phrases to return. If absent, all identified key phrases will be returned. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxKeyPhraseCount?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
 }
 
@@ -5966,8 +5966,8 @@ model OcrSkill extends SearchIndexerSkill {
   /** Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is "space". */
   lineEnding?: OcrLineEnding;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Vision.OcrSkill";
 }
 
@@ -5982,30 +5982,30 @@ model ImageAnalysisSkill extends SearchIndexerSkill {
   /** A string indicating which domain-specific details to return. */
   details?: ImageDetail[];
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
 }
 
 /** A skill that detects the language of input text and reports a single language code for every document submitted on the request. The language code is paired with a score indicating the confidence of the analysis. */
 model LanguageDetectionSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A country code to use as a hint to the language detection model if it cannot disambiguate the language. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultCountryHint?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.LanguageDetectionSkill";
 }
 
 /** A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields). */
 model ShaperSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.ShaperSkill";
 }
 
@@ -6017,8 +6017,8 @@ model MergeSkill extends SearchIndexerSkill {
   /** The tag indicates the end of the merged text. By default, the tag is an empty space. */
   insertPostTag?: string = " ";
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.MergeSkill";
 }
 
@@ -6030,16 +6030,16 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: EntityRecognitionSkillLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   includeTypelessEntities?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   minimumPrecision?: float64 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
 }
 
@@ -6048,33 +6048,33 @@ model SentimentSkill extends SearchIndexerSkill {
   /** A value indicating which language code to use. Default is `en`. */
   defaultLanguageCode?: SentimentSkillLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
 }
 
 /** Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as "negative", "neutral" and "positive") based on the highest confidence score found by the service at a sentence and document-level. */
 model SentimentSkillV3 extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating which language code to use. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultLanguageCode?: string | null;
 
   /** If set to true, the skill output will include information from Text Analytics for opinion mining, namely targets (nouns or verbs) and their associated assessment (adjective) in the text. Default is false. */
   includeOpinionMining?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.V3.SentimentSkill";
 }
 
 /** Using the Text Analytics API, extracts linked entities from text. */
 model EntityLinkingSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating which language code to use. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultLanguageCode?: string | null;
 
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
@@ -6082,12 +6082,12 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   @maxValue(1)
   minimumPrecision?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
 }
 
@@ -6096,8 +6096,8 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   /** A list of entity categories that should be extracted. */
   categories?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating which language code to use. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultLanguageCode?: string | null;
 
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
@@ -6105,20 +6105,20 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   @maxValue(1)
   minimumPrecision?: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model PIIDetectionSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating which language code to use. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultLanguageCode?: string | null;
 
   /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
@@ -6133,19 +6133,19 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   @maxLength(1)
   maskingCharacter?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion?: string | null;
 
   /** A list of PII entity categories that should be extracted and masked. */
   piiCategories?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   domain?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.PIIDetectionSkill";
 }
 
@@ -6157,37 +6157,37 @@ model SplitSkill extends SearchIndexerSkill {
   /** A value indicating which split mode to perform. */
   textSplitMode?: TextSplitMode;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The desired maximum page length. Default is 10000. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maximumPageLength?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Only applicable when textSplitMode is set to 'pages'. If specified, n+1th chunk will start with this number of characters/tokens from the end of the nth chunk. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   pageOverlapLength?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Only applicable when textSplitMode is set to 'pages'. If specified, the SplitSkill will discontinue splitting after processing the first 'maximumPagesToTake' pages, in order to improve performance when only a few initial pages are needed from each document. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maximumPagesToTake?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Only applies if textSplitMode is set to pages. There are two possible values. The choice of the values will decide the length (maximumPageLength and pageOverlapLength) measurement. The default is 'characters', which means the length will be measured by character. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   unit?: SplitSkillUnit | null;
 
+  /** Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  /** Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property. */
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.SplitSkill";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Azure OpenAI Tokenizer parameters. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AzureOpenAITokenizerParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encoderModelName?: SplitSkillEncoderModelName | null;
 
   /** (Optional) Only applies if the unit is set to azureOpenAITokens. This parameter defines a collection of special tokens that are permitted within the tokenization process. */
@@ -6196,32 +6196,32 @@ model AzureOpenAITokenizerParameters {
 
 /** A skill looks for text from a custom, user-defined list of words and phrases. */
 model CustomEntityLookupSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A value indicating which language code to use. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   defaultLanguageCode?: CustomEntityLookupSkillLanguage | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Path to a JSON or CSV file containing all the target text to match against. This entity definition is read at the beginning of an indexer run. Any updates to this file during an indexer run will not take effect until subsequent runs. This config must be accessible over HTTPS. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   entitiesDefinitionUri?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The inline CustomEntity definition. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   inlineEntitiesDefinition?: CustomEntity[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A global flag for CaseSensitive. If CaseSensitive is not set in CustomEntity, this value will be the default value. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   globalDefaultCaseSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A global flag for AccentSensitive. If AccentSensitive is not set in CustomEntity, this value will be the default value. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   globalDefaultAccentSensitive?: boolean | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   globalDefaultFuzzyEditDistance?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
 }
 
@@ -6233,59 +6233,59 @@ model TextTranslationSkill extends SearchIndexerSkill {
   /** The language code to translate documents from for documents that don't specify the from language explicitly. */
   defaultFromLanguageCode?: TextTranslationSkillLanguage;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   suggestedFrom?: TextTranslationSkillLanguage | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.TranslationSkill";
 }
 
 /** A skill that extracts content from a file within the enrichment pipeline. */
 model DocumentExtractionSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The parsingMode for the skill. Will be set to 'default' if not defined. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   parsingMode?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   dataToExtract?: string | null;
 
+  /** A dictionary of configurations for the skill. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-  /** A dictionary of configurations for the skill. */
   configuration?: Record<unknown> | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.DocumentExtractionSkill";
 }
 
 /** A skill that extracts content and layout information, via Azure AI Services, from files within the enrichment pipeline. */
 model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the output format. Default is 'markdown'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   outputFormat?: DocumentIntelligenceLayoutSkillOutputFormat | null = DocumentIntelligenceLayoutSkillOutputFormat.Markdown;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the cardinality of the output produced by the skill. Default is 'oneToMany'. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   outputMode?: DocumentIntelligenceLayoutSkillOutputMode | null = DocumentIntelligenceLayoutSkillOutputMode.OneToMany;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The depth of headers in the markdown output. Default is h6. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   markdownHeaderDepth?: DocumentIntelligenceLayoutSkillMarkdownHeaderDepth | null = DocumentIntelligenceLayoutSkillMarkdownHeaderDepth.H6;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the cardinality of the content extracted from the document by the skill. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   extractionOptions?: DocumentIntelligenceLayoutSkillExtractionOptions[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the cardinality for chunking the content. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   chunkingProperties?: DocumentIntelligenceLayoutSkillChunkingProperties | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill";
 }
 
@@ -6303,95 +6303,95 @@ model WebApiSkill extends SearchIndexerSkill {
   /** The desired timeout for the request. Default is 30 seconds. */
   timeout?: duration;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The desired batch size which indicates number of documents. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   batchSize?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** If set, the number of parallel calls that can be made to the Web API. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   degreeOfParallelism?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authResourceId?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authIdentity?: SearchIndexerDataIdentity | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Custom.WebApiSkill";
 }
 
 /** The AML skill allows you to extend AI enrichment with a custom Azure Machine Learning (AML) model. Once an AML model is trained and deployed, an AML skill integrates it into AI enrichment. */
 model AzureMachineLearningSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   uri?: url | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for key authentication) The key for the AML service. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   key?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Required for token authentication). The Azure Resource Manager resource ID of the AML service. It should be in the format subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.MachineLearningServices/workspaces/{workspace-name}/services/{service_name}. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   resourceId?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Optional) When specified, indicates the timeout for the http client making the API call. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   timeout?: duration | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Optional for token authentication). The region the AML service is deployed in. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   region?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** (Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   degreeOfParallelism?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Custom.AmlSkill";
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 /** Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
 model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
   ...AzureOpenAIVectorizerParameters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   dimensions?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
 }
 
 /** Allows you to generate a vector embedding for a given image or text input using the Azure AI Services Vision Vectorize API. */
 model VisionVectorizeSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   modelVersion: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
 }
 
 /** A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval. */
 model ContentUnderstandingSkill extends SearchIndexerSkill {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the cardinality of the content extracted from the document by the skill. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   extractionOptions?: ContentUnderstandingSkillExtractionOptions[] | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Controls the cardinality for chunking the content. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   chunkingProperties?: ContentUnderstandingSkillChunkingProperties | null;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Util.ContentUnderstandingSkill";
 }
 
@@ -6408,16 +6408,16 @@ union ContentUnderstandingSkillExtractionOptions {
 
 /** Controls the cardinality for chunking the content. */
 model ContentUnderstandingSkillChunkingProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The unit of the chunk. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   unit?: ContentUnderstandingSkillChunkingUnit | null = ContentUnderstandingSkillChunkingUnit.Characters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum chunk length in characters. Default is 500. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maximumLength?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The length of overlap provided between two text chunks. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   overlapLength?: int32 | null;
 }
 
@@ -6449,19 +6449,19 @@ model ChatCompletionResponseFormat {
   /** Specifies how the LLM should format the response. */
   type?: ChatCompletionResponseFormatType = ChatCompletionResponseFormatType.Text;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** An open dictionary for extended properties. Required if 'type' == 'json_schema' */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   jsonSchemaProperties?: ChatCompletionSchemaProperties | null;
 }
 
 /** Properties for JSON schema response format. */
 model ChatCompletionSchemaProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Name of the json schema the model will adhere to. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   name?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Description of the json schema the model will adhere to. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   description?: string | null;
 
   /** Whether or not the model's response should use structured outputs. Default is true. */
@@ -6473,33 +6473,33 @@ model ChatCompletionSchemaProperties {
 
 /** Common language model parameters for Chat Completions. If omitted, default values are used. */
 model ChatCompletionCommonModelParameters {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The name of the model to use (e.g., 'gpt-4o', etc.). Default is null if not specified. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @encodedName("application/json", "model")
   modelName?: string | null = null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A float in the range [-2,2] that reduces or increases likelihood of repeated tokens. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   frequencyPenalty?: float64 | null = 0;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** A float in the range [-2,2] that penalizes new tokens based on their existing presence. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   presencePenalty?: float64 | null = 0;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Maximum number of tokens to generate. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxTokens?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Sampling temperature. Default is 0.7. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   temperature?: float64 | null = 0.7;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Random seed for controlling deterministic outputs. If omitted, randomization is used. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   seed?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** List of stop sequences that will cut off text generation. Default is none. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   stop?: string[] | null;
 }
 
@@ -6517,20 +6517,20 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   /** The desired timeout for the request. Default is 30 seconds. */
   timeout?: duration;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The desired batch size which indicates number of documents. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   batchSize?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** If set, the number of parallel calls that can be made to the Web API. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   degreeOfParallelism?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** Applies to custom skills that connect to external code in an Azure function or some other application that provides the transformations. This value should be the application ID created for the function or app when it was registered with Azure Active Directory. When specified, the custom skill connects to the function or app using a managed ID (either system or user-assigned) of the search service and the access token of the function or app, using this value as the resource id for creating the scope of the access token. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authResourceId?: string | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to "none", the value of this property is cleared. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   authIdentity?: SearchIndexerDataIdentity | null;
 
   /** API key for authenticating to the model. Both apiKey and authIdentity cannot be specified at the same time. */
@@ -6539,9 +6539,9 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   /** Common language model parameters that customers can tweak. If omitted, reasonable defaults will be applied. */
   commonModelParameters?: ChatCompletionCommonModelParameters;
 
+  /** Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
-  /** Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern. */
   extraParameters?: Record<unknown> | null;
 
   /** How extra parameters are handled by Azure AI Foundry. Default is 'error'. */
@@ -6550,8 +6550,8 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   /** Determines how the LLM should format its response. Defaults to 'text' response type. */
   responseFormat?: ChatCompletionResponseFormat;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   /** A URI fragment specifying the type of skill. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Custom.ChatCompletionSkill";
 }
 
@@ -6583,16 +6583,16 @@ model ListIndexStatsSummary {
 
 /** Controls the cardinality for chunking the content. */
 model DocumentIntelligenceLayoutSkillChunkingProperties {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The unit of the chunk. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   unit?: DocumentIntelligenceLayoutSkillChunkingUnit | null = DocumentIntelligenceLayoutSkillChunkingUnit.Characters;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The maximum chunk length in characters. Default is 500. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maximumLength?: int32 | null;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   /** The length of overlap provided between two text chunks. Default is 0. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   overlapLength?: int32 | null;
 }
 

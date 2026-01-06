@@ -10,8 +10,8 @@ namespace Search;
 
 @route("/knowledgebases('{knowledgeBaseName}')")
 interface KnowledgeRetrieval {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** KnowledgeBase retrieves relevant data from backing stores. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/retrieve")
   @post
   retrieve is Foundations.Operation<

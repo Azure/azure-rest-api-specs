@@ -7,9 +7,9 @@ using TypeSpec.Http;
 namespace Search;
 
 interface Documents {
+  /** Queries the number of documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Queries the number of documents in the index. */
   @route("/indexes('{indexName}')/docs/$count")
   @get
   count is SearchIndexOperation<
@@ -22,9 +22,9 @@ interface Documents {
     }
   >;
 
+  /** Searches for documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Searches for documents in the index. */
   @route("/indexes('{indexName}')/docs")
   @get
   searchGet is SearchIndexOperation<
@@ -40,16 +40,16 @@ interface Documents {
       ...SearchOptions;
     },
     SearchDocumentsResult & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "206";
     }
   >;
 
+  /** Searches for documents in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Searches for documents in the index. */
   @route("/indexes('{indexName}')/docs/search.post.search")
   @post
   searchPost is SearchIndexOperation<
@@ -60,15 +60,15 @@ interface Documents {
       ...SearchRequest;
     },
     SearchDocumentsResult & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       /** A process exit code. */
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
       @statusCode
       code: "200" | "206";
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Retrieves a document from the index. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/docs('{key}')")
   @get
   get is SearchIndexOperation<
@@ -88,9 +88,9 @@ interface Documents {
     LookupDocument
   >;
 
+  /** Suggests documents in the index that match the given partial query text. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Suggests documents in the index that match the given partial query text. */
   @route("/indexes('{indexName}')/docs/search.suggest")
   @get
   suggestGet is SearchIndexOperation<
@@ -110,8 +110,8 @@ interface Documents {
     SuggestDocumentsResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Suggests documents in the index that match the given partial query text. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/docs/search.post.suggest")
   @post
   suggestPost is SearchIndexOperation<
@@ -122,8 +122,8 @@ interface Documents {
     SuggestDocumentsResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Sends a batch of document write actions to the index. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/docs/search.index")
   @post
   index is SearchIndexOperation<
@@ -137,9 +137,9 @@ interface Documents {
     IndexDocumentsResult
   >;
 
+  /** Autocompletes incomplete query terms based on input text and matching terms in the index. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  /** Autocompletes incomplete query terms based on input text and matching terms in the index. */
   @route("/indexes('{indexName}')/docs/search.autocomplete")
   @get
   autocompleteGet is SearchIndexOperation<
@@ -189,8 +189,8 @@ interface Documents {
     AutocompleteResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   /** Autocompletes incomplete query terms based on input text and matching terms in the index. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   @route("/indexes('{indexName}')/docs/search.post.autocomplete")
   @post
   autocompletePost is SearchIndexOperation<
