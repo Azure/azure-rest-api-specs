@@ -29,11 +29,6 @@ model WorkspaceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("System Subnet ID associated with managed resources for the workspace.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @added(Microsoft.Discovery.Versions.v2025_12_01_preview)
-  subnetId?: Microsoft.Discovery.Shared.SubnetId;
-
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of linked Storages.")
   storageIds?: Array<Microsoft.Discovery.Shared.DiscoveryStorageId>;
