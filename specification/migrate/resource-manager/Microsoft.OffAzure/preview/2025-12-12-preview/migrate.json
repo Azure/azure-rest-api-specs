@@ -13632,42 +13632,6 @@
         }
       }
     },
-    "Default": {
-      "type": "string",
-      "description": "HealthError Details Source",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "Default",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "default",
-            "value": "default",
-            "description": "default value."
-          }
-        ]
-      }
-    },
-    "DefaultValues": {
-      "type": "string",
-      "description": "HealthError Details Source",
-      "enum": [
-        "default"
-      ],
-      "x-ms-enum": {
-        "name": "DefaultValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "default",
-            "value": "default",
-            "description": "default value."
-          }
-        ]
-      }
-    },
     "DeleteImportMachinesJob": {
       "type": "object",
       "description": "A host resource belonging to a site resource.",
@@ -18344,8 +18308,7 @@
         },
         "importType": {
           "$ref": "#/definitions/ImportTypeValues",
-          "description": "Gets or sets the import type.",
-          "default": "AzureMigrateCSV"
+          "description": "Gets or sets the import type."
         }
       }
     },
@@ -20255,7 +20218,8 @@
           "description": "Collection of errors encountered during the SQL import operation",
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errorCount": {
           "type": "integer",
