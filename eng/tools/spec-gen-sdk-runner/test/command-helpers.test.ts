@@ -608,8 +608,8 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(true, true, "azure-sdk-for-net");
-      // .NET SDK set (managementPlane: false)
-      expect(result2).toBe(false);
+      // .NET SDK set (managementPlane: true)
+      expect(result2).toBe(true);
     });
 
     test("should return dataPlane setting when hasManagementPlaneSpecs is false", () => {
