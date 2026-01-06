@@ -17,6 +17,10 @@ using Microsoft.FileShares;
   "FileShareNameAvailabilityResult",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
 @@clientName(CheckNameAvailabilityReason,
   "FileShareNameUnavailableReason",
   "csharp"
