@@ -10,3 +10,4 @@ using Microsoft.ProviderHub;
 @@clientLocation(ProviderRegistrations.generateManifest, "Client", "go");
 
 @@clientName(LocalizedOperationDefinitionDisplay.ptPT, "pt", "go");
+@@clientName(LocalizedOperationDisplayDefinitionPtPT, "LocalizedOperationDisplayDefinitionPt", "go");
