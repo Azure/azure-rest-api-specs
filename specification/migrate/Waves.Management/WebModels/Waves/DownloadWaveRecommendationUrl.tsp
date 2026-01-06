@@ -8,7 +8,7 @@ namespace Microsoft.Migrate;
 model DownloadWaveRecommendationUrl {
   @doc("Hyperlink to download report.")
   @visibility(Lifecycle.Read)
-  waveRecommendationReportUrl: string;
+  sasUri: string;
 
   @doc("Expiry date of download url.")
   @visibility(Lifecycle.Read)
