@@ -21,21 +21,11 @@ export abstract class TspconfigSubRuleBase {
   }
 
   public async execute(folder: string): Promise<RuleResult> {
-    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
-    if (!tspconfigExists)
+    const config = await this.loadConfig(folder);
+    if (!config) {
       return this.createFailedResult(
-        `Failed to find ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml",
-      );
-
-    let config = undefined;
-    try {
-      const configText = await readTspConfig(folder);
-      config = yamlParse(configText);
-    } catch (error) {
-      return this.createFailedResult(
-        `Failed to parse ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml.",
+        `Failed to load ${join(folder, "tspconfig.yaml")}`,
+        "Please ensure tspconfig.yaml exists and is valid",
       );
     }
 
@@ -46,6 +36,22 @@ export abstract class TspconfigSubRuleBase {
         stdOutput: `Validation skipped. ${reason}`,
       };
     return this.validate(config);
+  }
+
+  public async loadConfig(folder: string): Promise<any | undefined> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
+    if (!tspconfigExists) {
+      return undefined;
+    }
+
+    try {
+      const configText = await readTspConfig(folder);
+      const config = yamlParse(configText);
+      return config;
+    } catch (error) {
+      console.warn(`Failed to parse tspconfig.yaml in ${folder}: ${error}`);
+      return undefined;
+    }
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -719,7 +725,13 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
-export const defaultRules = [
+/**
+ * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
+ * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
+ * if a Rust emitter is configured in tspconfig.yaml but doesn't meet the required validation
+ * criteria, the validation will fail.
+ */
+export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
@@ -746,6 +758,15 @@ export const defaultRules = [
   new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
+];
+
+/**
+ * Optional rules: Validate language-specific emitter configurations without blocking CI/CD.
+ * All rules in this array inherit from TspconfigEmitterOptionsSubRuleBase and only run when
+ * their corresponding emitter is configured in tspconfig.yaml. Failures are logged but do not
+ * affect the overall validation result.
+ */
+export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpAzNamespaceSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
@@ -754,13 +775,18 @@ export const defaultRules = [
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
-  private subRules: TspconfigSubRuleBase[] = [];
+  private requiredRules: TspconfigSubRuleBase[] = [];
+  private optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [];
   private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
-    this.subRules = subRules;
+  constructor(
+    requiredSubRules: TspconfigSubRuleBase[] = requiredRules,
+    optionalSubRules: TspconfigEmitterOptionsSubRuleBase[] = optionalRules,
+  ) {
+    this.requiredRules = requiredSubRules;
+    this.optionalRules = optionalSubRules;
   }
 
   async execute(folder: string): Promise<RuleResult> {
@@ -777,27 +803,34 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const failedResults = [];
     let success = true;
-    for (const subRule of this.subRules) {
+
+    // Execute required rules
+    for (const subRule of this.requiredRules) {
       // Check for both direct matches and wildcard patterns
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
+
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
 
-      let isSubRuleSuccess = result.success;
+      success &&= result.success;
+    }
 
-      // TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
-      if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
-        const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
-        const emitterName = emitterOptionSubRule.getEmitterName();
-        if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}’s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
-          );
-          isSubRuleSuccess = true;
-        }
+    // Execute optional rules (failures don't affect overall success)
+    for (const subRule of this.optionalRules) {
+      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
+
+      // Skip if emitter is not configured
+      const config = await subRule.loadConfig(folder);
+      const emitterName = subRule.getEmitterName();
+      if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
+        console.warn(
+          `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
+        );
+        continue;
       }
 
-      success &&= isSubRuleSuccess;
+      const result = await subRule.execute(folder!);
+      if (!result.success) failedResults.push(result);
     }
 
     const stdOutputFailedResults =
@@ -809,6 +842,11 @@ export class SdkTspConfigValidationRule implements Rule {
       success,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
+  }
+
+  private skipIfEmitterNotConfigured(config: any, emitterName: string): boolean {
+    const isConfigured = config?.options?.[emitterName] !== undefined;
+    return !isConfigured;
   }
 
   private setSuppressedKeyPaths(suppressions: Suppression[]) {
