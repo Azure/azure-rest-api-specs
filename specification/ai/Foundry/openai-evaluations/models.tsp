@@ -198,6 +198,12 @@ model RedTeamTaxonomyItemGenerationParams extends RedTeamItemGenerationParams {
 
   /** The source from which JSONL content is read. */
   source: OpenAI.EvalJsonlFileContentSource;
+
+  /** The ID of the taxonomy to use for seed generation. */
+  taxonomy_id: string;
+
+  /** Description of the application for context-aware seed generation. */
+  application_description?: string;
 }
 
 /** Represents the set of parameters used to control item generation operations. */
