@@ -127,6 +127,10 @@ model ValidationProperties {
   @doc("The provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("The resource Id of the ChangeState/StageProgression resource that this operation is associated with. This will give users the capability to query all the validations that were for a particular change record.")
+  @added(Versions.v2026_01_01_preview)
+  changeSafetyReferenceId?: string;
 }
 
 @doc("The validation properties extended.")
