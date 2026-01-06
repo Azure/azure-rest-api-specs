@@ -63,11 +63,7 @@ using Microsoft.ApiManagement;
   "ApiManagementWorkspaceLinks",
   "java"
 );
-@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.checkNameAvailability,
-  "ResourceProviders",
-  "java"
-);
-@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier,
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "ResourceProviders",
   "java"
 );
