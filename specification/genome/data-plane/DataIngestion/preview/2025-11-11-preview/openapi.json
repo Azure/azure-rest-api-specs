@@ -1,0 +1,586 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "Comprehensive API documentation for Genome operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/dataingestion",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Genome API endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://genome.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://genome.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/dataingestions": {
+      "post": {
+        "operationId": "UploadCustomerData",
+        "summary": "Uploads customer data file.",
+        "description": "Uploads customer data file.",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "uploadType",
+            "in": "query",
+            "description": "Type of the upload. Value can be Delta or Full.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Delta",
+              "Full"
+            ],
+            "x-ms-enum": {
+              "name": "UploadType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Delta",
+                  "value": "Delta",
+                  "description": "Delta"
+                },
+                {
+                  "name": "Full",
+                  "value": "Full",
+                  "description": "Full"
+                }
+              ]
+            }
+          },
+          {
+            "name": "dataType",
+            "in": "query",
+            "description": "The type of data in the file.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "CustomerEntity",
+              "CustomerFlagType",
+              "CustomerProduct",
+              "CustomerSuppliedByRel",
+              "CustomerHasAddressRel",
+              "CustomerHasFlagRel",
+              "CustomerHasIdentifierRel",
+              "CustomerSuppliesProductRel",
+              "CustomerBuysProductRel",
+              "CustomerContainsComponentRel"
+            ],
+            "x-ms-enum": {
+              "name": "UploadDataType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "CustomerEntity",
+                  "value": "CustomerEntity",
+                  "description": "CustomerEntity"
+                },
+                {
+                  "name": "CustomerFlagType",
+                  "value": "CustomerFlagType",
+                  "description": "CustomerFlagType"
+                },
+                {
+                  "name": "CustomerProduct",
+                  "value": "CustomerProduct",
+                  "description": "CustomerProduct"
+                },
+                {
+                  "name": "CustomerSuppliedByRel",
+                  "value": "CustomerSuppliedByRel",
+                  "description": "CustomerSuppliedByRel"
+                },
+                {
+                  "name": "CustomerHasAddressRel",
+                  "value": "CustomerHasAddressRel",
+                  "description": "CustomerHasAddressRel"
+                },
+                {
+                  "name": "CustomerHasFlagRel",
+                  "value": "CustomerHasFlagRel",
+                  "description": "CustomerHasFlagRel"
+                },
+                {
+                  "name": "CustomerHasIdentifierRel",
+                  "value": "CustomerHasIdentifierRel",
+                  "description": "CustomerHasIdentifierRel"
+                },
+                {
+                  "name": "CustomerSuppliesProductRel",
+                  "value": "CustomerSuppliesProductRel",
+                  "description": "CustomerSuppliesProductRel"
+                },
+                {
+                  "name": "CustomerBuysProductRel",
+                  "value": "CustomerBuysProductRel",
+                  "description": "CustomerBuysProductRel"
+                },
+                {
+                  "name": "CustomerContainsComponentRel",
+                  "value": "CustomerContainsComponentRel",
+                  "description": "CustomerContainsComponentRel"
+                }
+              ]
+            }
+          },
+          {
+            "name": "formFile",
+            "in": "body",
+            "description": "The file content to upload",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Uploads customer data file.": {
+            "$ref": "./examples/UploadCustomerSourceData_MaximumSet_Gen.json"
+          },
+          "Uploads customer data file. - minimum set": {
+            "$ref": "./examples/UploadCustomerSourceData_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/dataingestions/{ingestionId}": {
+      "get": {
+        "operationId": "GetUploadStatus",
+        "summary": "Gets the status of an upload request.",
+        "description": "Gets the status of an upload request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "ingestionId",
+            "in": "path",
+            "description": "The ID of the ingestion request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UploadStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the status of an upload request.": {
+            "$ref": "./examples/GetUploadStatus_MaximumSet_Gen.json"
+          },
+          "Gets the status of an upload request. - minimum set": {
+            "$ref": "./examples/GetUploadStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "PathsTnhejgV1DataingestionRequestsPostRequestbodyContentMultipartFormDataSchema": {
+      "type": "object",
+      "description": "Multipart form data for file upload",
+      "properties": {
+        "formFile": {
+          "type": "string",
+          "format": "byte",
+          "description": "The file content to upload"
+        }
+      }
+    },
+    "UploadDataType": {
+      "type": "string",
+      "description": "Type of data being uploaded",
+      "enum": [
+        "CustomerEntity",
+        "CustomerFlagType",
+        "CustomerProduct",
+        "CustomerSuppliedByRel",
+        "CustomerHasAddressRel",
+        "CustomerHasFlagRel",
+        "CustomerHasIdentifierRel",
+        "CustomerSuppliesProductRel",
+        "CustomerBuysProductRel",
+        "CustomerContainsComponentRel"
+      ],
+      "x-ms-enum": {
+        "name": "UploadDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerEntity",
+            "value": "CustomerEntity",
+            "description": "CustomerEntity"
+          },
+          {
+            "name": "CustomerFlagType",
+            "value": "CustomerFlagType",
+            "description": "CustomerFlagType"
+          },
+          {
+            "name": "CustomerProduct",
+            "value": "CustomerProduct",
+            "description": "CustomerProduct"
+          },
+          {
+            "name": "CustomerSuppliedByRel",
+            "value": "CustomerSuppliedByRel",
+            "description": "CustomerSuppliedByRel"
+          },
+          {
+            "name": "CustomerHasAddressRel",
+            "value": "CustomerHasAddressRel",
+            "description": "CustomerHasAddressRel"
+          },
+          {
+            "name": "CustomerHasFlagRel",
+            "value": "CustomerHasFlagRel",
+            "description": "CustomerHasFlagRel"
+          },
+          {
+            "name": "CustomerHasIdentifierRel",
+            "value": "CustomerHasIdentifierRel",
+            "description": "CustomerHasIdentifierRel"
+          },
+          {
+            "name": "CustomerSuppliesProductRel",
+            "value": "CustomerSuppliesProductRel",
+            "description": "CustomerSuppliesProductRel"
+          },
+          {
+            "name": "CustomerBuysProductRel",
+            "value": "CustomerBuysProductRel",
+            "description": "CustomerBuysProductRel"
+          },
+          {
+            "name": "CustomerContainsComponentRel",
+            "value": "CustomerContainsComponentRel",
+            "description": "CustomerContainsComponentRel"
+          }
+        ]
+      }
+    },
+    "UploadResponse": {
+      "type": "object",
+      "description": "Response containing upload request details and status",
+      "properties": {
+        "ingestionId": {
+          "type": "string",
+          "description": "Gets or Sets ingestion id."
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the upload was created"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the upload was last modified"
+        },
+        "status": {
+          "$ref": "#/definitions/UploadStatusValue",
+          "description": "Current status of the upload"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the upload failed"
+        },
+        "dataType": {
+          "$ref": "#/definitions/UploadDataType",
+          "description": "Type of data in the uploaded file"
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType",
+          "description": "Type of upload operation performed"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the uploaded file in bytes"
+        },
+        "inputFileName": {
+          "type": "string",
+          "description": "Name of the uploaded file"
+        }
+      },
+      "required": [
+        "ingestionId",
+        "createdOn",
+        "modifiedOn",
+        "status",
+        "inputFileName"
+      ]
+    },
+    "UploadStatus": {
+      "type": "object",
+      "description": "Status response for upload request",
+      "properties": {
+        "ingestionId": {
+          "type": "string",
+          "description": "Gets or Sets ingestion id."
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the upload was created"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the upload was last modified"
+        },
+        "status": {
+          "$ref": "#/definitions/UploadStatusValue",
+          "description": "Current status of the upload"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the upload failed"
+        },
+        "dataType": {
+          "$ref": "#/definitions/UploadDataType",
+          "description": "Type of data in the uploaded file"
+        },
+        "uploadType": {
+          "$ref": "#/definitions/UploadType",
+          "description": "Type of upload operation performed"
+        },
+        "fileSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Size of the uploaded file in bytes"
+        },
+        "inputFileName": {
+          "type": "string",
+          "description": "Name of the uploaded file"
+        }
+      },
+      "required": [
+        "ingestionId",
+        "createdOn",
+        "modifiedOn",
+        "status",
+        "inputFileName"
+      ]
+    },
+    "UploadStatusValue": {
+      "type": "string",
+      "description": "Status of the upload operation",
+      "enum": [
+        "Uploaded",
+        "Verified",
+        "VerificationFailed",
+        "Ingested",
+        "IngestionFailed"
+      ],
+      "x-ms-enum": {
+        "name": "UploadStatusValue",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Uploaded",
+            "value": "Uploaded",
+            "description": "Uploaded"
+          },
+          {
+            "name": "Verified",
+            "value": "Verified",
+            "description": "Verified"
+          },
+          {
+            "name": "VerificationFailed",
+            "value": "VerificationFailed",
+            "description": "VerificationFailed"
+          },
+          {
+            "name": "Ingested",
+            "value": "Ingested",
+            "description": "Ingested"
+          },
+          {
+            "name": "IngestionFailed",
+            "value": "IngestionFailed",
+            "description": "IngestionFailed"
+          }
+        ]
+      }
+    },
+    "UploadType": {
+      "type": "string",
+      "description": "Type of upload operation",
+      "enum": [
+        "Delta",
+        "Full"
+      ],
+      "x-ms-enum": {
+        "name": "UploadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta"
+          },
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
