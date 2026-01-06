@@ -954,7 +954,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentExcelReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadAssessmentExcelReport": {
       "post": {
         "operationId": "Download_AssessmentExcelReport",
         "tags": [
@@ -1005,7 +1005,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentPptReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadAssessmentPptReport": {
       "post": {
         "operationId": "Download_AssessmentPptReport",
         "tags": [
@@ -1056,7 +1056,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentSurveyList": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getAssessmentSurveyList": {
       "post": {
         "operationId": "Get_AssessmentSurveyList",
         "tags": [
@@ -1098,7 +1098,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyAnalyzerResults": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getSurveyAnalyzerResults": {
       "post": {
         "operationId": "Get_SurveyAnalyzedResults",
         "tags": [
@@ -1149,7 +1149,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyExcelReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadSurveyExcelReport": {
       "post": {
         "operationId": "Download_SurveyExcelReport",
         "tags": [
@@ -1200,7 +1200,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyExecutiveSummary": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadSurveyExecutiveSummary": {
       "post": {
         "operationId": "Download_SurveyExecutiveSummary",
         "tags": [
@@ -2182,6 +2182,7 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
         "assessmentId": {
@@ -2192,7 +2193,11 @@
           "type": "string",
           "description": "Defines the culture."
         }
-      }
+      },
+      "required": [
+        "logAnalyticsWorkspaceId",
+        "assessmentId"
+      ]
     },
     "DownloadResult": {
       "type": "object",
@@ -2224,7 +2229,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Defines id of the survey."
+          "description": "Defines the unique identifier of the survey."
         },
         "surveyId": {
           "type": "string",
@@ -2236,7 +2241,7 @@
         },
         "externalId": {
           "type": "string",
-          "description": "Defines the external id of survey."
+          "description": "Defines the id of survey that is defined in the Qualtrics portal."
         }
       }
     },
@@ -2256,6 +2261,7 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
         "surveyId": {
@@ -2280,6 +2286,7 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
         "surveyId": {
@@ -2290,7 +2297,11 @@
           "type": "string",
           "description": "Defines the culture."
         }
-      }
+      },
+      "required": [
+        "logAnalyticsWorkspaceId",
+        "surveyId"
+      ]
     },
     "SurveyResult": {
       "type": "object",
