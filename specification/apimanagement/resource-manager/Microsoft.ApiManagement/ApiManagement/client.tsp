@@ -78,3 +78,8 @@ using Microsoft.ApiManagement;
 @@clientName(ExportResultFormat.Wadl, "WSDL_LINK_XML", "java");
 @@clientName(ExportResultFormat.Wsdl, "WADL_LINK_JSON", "java");
 @@clientName(ExportResultFormat.OpenApi, "OPENAPI_LINK", "java");
+@@clientName(SoapApiType.SoapToRest, "HTTP", "java");
+@@clientName(SoapApiType.SoapPassThrough, "SOAP", "java");
+@@clientName(SoapApiType.WebSocket, "WEBSOCKET", "java");
+@@clientName(SoapApiType.GraphQL, "GRAPHQL", "java");
+@@clientName(SoapApiType.gRPC, "GRPC", "java");
