@@ -14220,7 +14220,7 @@
         },
         "vmSizePolicy": {
           "$ref": "#/definitions/VMSizePolicy",
-          "description": "Specifies the VM size policy for the virtual machine."
+          "description": "Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both."
         }
       }
     },
@@ -18586,12 +18586,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Specifies the name of the VM Size."
+          "description": "Specifies the name of the VM Size. This must be a valid Azure VM size (e.g., Standard_D2s_v3)."
         },
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the rank (a.k.a priority) associated with the VM Size."
+          "description": "Specifies the rank (a.k.a priority) associated with the VM Size. Lower rank values have higher priority. Ranks should be non-negative integers and typically contiguous starting from 0."
         }
       }
     },

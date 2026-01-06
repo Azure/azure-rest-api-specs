@@ -3381,12 +3381,12 @@ model VMSizePolicy {
 @added(Versions.v2025_11_01)
 model VMSizeWithRank {
   /**
-   * Specifies the name of the VM Size.
+   * Specifies the name of the VM Size. This must be a valid Azure VM size (e.g., Standard_D2s_v3).
    */
   name?: string;
 
   /**
-   * Specifies the rank (a.k.a priority) associated with the VM Size.
+   * Specifies the rank (a.k.a priority) associated with the VM Size. Lower rank values have higher priority. Ranks should be non-negative integers and typically contiguous starting from 0.
    */
   rank?: int32;
 }
@@ -5219,7 +5219,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the VM size policy for the virtual machine.
+   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both.
    */
   @added(Versions.v2025_11_01)
   vmSizePolicy?: VMSizePolicy;
