@@ -12708,17 +12708,17 @@
           {
             "name": "CarriageReturn",
             "value": "carriageReturn",
-            "description": "Lines are separated by a carriage return ('\r') character."
+            "description": "Lines are separated by a carriage return ('\\r') character."
           },
           {
             "name": "LineFeed",
             "value": "lineFeed",
-            "description": "Lines are separated by a single line feed ('\n') character."
+            "description": "Lines are separated by a single line feed ('\\n') character."
           },
           {
             "name": "CarriageReturnLineFeed",
             "value": "carriageReturnLineFeed",
-            "description": "Lines are separated by a carriage return and a line feed ('\r\n') character."
+            "description": "Lines are separated by a carriage return and a line feed ('\\r\\n') character."
           }
         ]
       }
@@ -13975,7 +13975,7 @@
     },
     "PatternReplaceCharFilter": {
       "type": "object",
-      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This character filter is implemented using Apache Lucene.",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This character filter is implemented using Apache Lucene.",
       "properties": {
         "pattern": {
           "type": "string",
@@ -13999,7 +13999,7 @@
     },
     "PatternReplaceTokenFilter": {
       "type": "object",
-      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This token filter is implemented using Apache Lucene.",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This token filter is implemented using Apache Lucene.",
       "properties": {
         "pattern": {
           "type": "string",
@@ -14910,7 +14910,7 @@
         },
         "vectors": {
           "type": "array",
-          "description": "The vector similarity and @search.score values for each vector query.",
+          "description": "The vector similarity and",
           "items": {
             "type": "object",
             "additionalProperties": {
@@ -15511,7 +15511,7 @@
         },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
-          "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response.",
+          "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with",
           "readOnly": true,
           "x-ms-client-name": "nextPageParameters"
         },
@@ -17003,12 +17003,12 @@
     },
     "SearchScoreThreshold": {
       "type": "object",
-      "description": "The results of the vector query will filter based on the '@search.score' value. Note this is the @search.score returned as part of the search response. The threshold direction will be chosen for higher @search.score.",
+      "description": "The results of the vector query will filter based on the '",
       "properties": {
         "value": {
           "type": "number",
           "format": "double",
-          "description": "The threshold will filter based on the '@search.score' value. Note this is the @search.score returned as part of the search response. The threshold direction will be chosen for higher @search.score."
+          "description": "The threshold will filter based on the '"
         }
       },
       "required": [
@@ -17691,12 +17691,12 @@
     },
     "SingleVectorFieldResult": {
       "type": "object",
-      "description": "A single vector field result. Both @search.score and vector similarity values are returned. Vector similarity is related to @search.score by an equation.",
+      "description": "A single vector field result. Both",
       "properties": {
         "searchScore": {
           "type": "number",
           "format": "double",
-          "description": "The @search.score value that is calculated from the vector similarity score. This is the score that's visible in a pure single-field single-vector query.",
+          "description": "The",
           "readOnly": true
         },
         "vectorSimilarity": {
