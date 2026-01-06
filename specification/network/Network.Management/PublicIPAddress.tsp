@@ -251,7 +251,7 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     ReserveCloudServicePublicIpAddressRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
@@ -265,7 +265,7 @@ interface PublicIPAddressOperationGroup {
     PublicIPAddress,
     DisassociateCloudServicePublicIpRequest,
     Result = void,
-    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    Response = ArmResponse<PublicIPAddress> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PublicIPAddress> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;

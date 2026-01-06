@@ -197,7 +197,11 @@ interface VpnGateways {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
     VpnGateway,
-    Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<VpnConnection>,
+    Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<
+      VpnConnection,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = VpnConnection,
     OverrideErrorType = CloudError
   >;

@@ -141,7 +141,11 @@ interface PrivateEndpoints {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   privateDnsZoneGroupsCreateOrUpdate is PrivateDnsZoneGroupOps.CreateOrUpdateAsync<
     PrivateEndpoint,
-    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<PrivateDnsZoneGroup>,
+    Response = ArmResponse<PrivateDnsZoneGroup> | ArmResourceCreatedResponse<
+      PrivateDnsZoneGroup,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = PrivateDnsZoneGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = PrivateDnsZoneGroup,
     OverrideErrorType = CloudError
   >;

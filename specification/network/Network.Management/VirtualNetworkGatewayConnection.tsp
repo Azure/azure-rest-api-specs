@@ -103,7 +103,7 @@ interface VirtualNetworkGatewayConnections {
     ConnectionSharedKey,
     ArmResponse<ConnectionSharedKey> | ArmResourceCreatedResponse<
       ConnectionSharedKey,
-      LroHeaders = ArmAsyncOperationHeader &
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = ConnectionSharedKey> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGatewayConnection>,

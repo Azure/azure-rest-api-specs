@@ -83,7 +83,7 @@ interface NetworkVirtualAppliances {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NetworkVirtualAppliance,
-    LroHeaders = ArmCombinedLroHeaders &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = NetworkVirtualAppliance> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
@@ -163,7 +163,7 @@ interface NetworkVirtualAppliances {
     NetworkVirtualAppliance,
     Response = ArmResponse<NetworkVirtualApplianceConnection> | (ArmResourceCreatedResponse<
       NetworkVirtualApplianceConnection,
-      LroHeaders = ArmAsyncOperationHeader
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = NetworkVirtualApplianceConnection>
     > &
       Azure.Core.Foundations.RetryAfterHeader),
     Request = NetworkVirtualApplianceConnection,

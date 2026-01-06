@@ -181,7 +181,8 @@ interface NetworkManagers {
   post is ArmResourceActionAsyncBase<
     NetworkManager,
     Request = NetworkManagerCommit,
-    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<NetworkManagerCommit> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkManagerCommit> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: NetworkManagerCommit;
     }),

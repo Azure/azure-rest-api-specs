@@ -120,7 +120,11 @@ interface ExpressRouteGateways {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<ExpressRouteConnection>,
+    Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<
+      ExpressRouteConnection,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteConnection> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = ExpressRouteConnection,
     OverrideErrorType = CloudError
   >;

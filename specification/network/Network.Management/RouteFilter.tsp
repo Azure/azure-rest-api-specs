@@ -152,7 +152,11 @@ interface RouteFilters {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.CreateOrUpdateAsync<
     RouteFilter,
-    Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<RouteFilterRule>,
+    Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<
+      RouteFilterRule,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = RouteFilterRule,
     OverrideErrorType = CloudError
   >;

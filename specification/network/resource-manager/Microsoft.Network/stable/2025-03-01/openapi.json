@@ -7760,7 +7760,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ConnectionSharedKey"
         },
         "x-ms-long-running-operation": true
       }
@@ -11725,6 +11726,10 @@
               "$ref": "#/definitions/ExpressRouteConnection"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -11746,7 +11751,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ExpressRouteGateway"
+          "final-state-schema": "#/definitions/ExpressRouteConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -17142,7 +17147,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkManagerCommit"
         },
         "x-ms-long-running-operation": true
       }
@@ -25956,7 +25962,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
         },
         "x-ms-long-running-operation": true
       },
@@ -26462,7 +26469,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
+          "final-state-schema": "#/definitions/NetworkVirtualApplianceConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -27264,7 +27271,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AvailableProvidersList"
         },
         "x-ms-long-running-operation": true
       }
@@ -27340,7 +27348,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AzureReachabilityReport"
         },
         "x-ms-long-running-operation": true
       }
@@ -27416,7 +27425,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FlowLogInformation"
         },
         "x-ms-long-running-operation": true
       }
@@ -27884,7 +27894,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ConnectivityInformation"
         },
         "x-ms-long-running-operation": true
       }
@@ -28270,7 +28281,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VerificationIPFlowResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -28346,7 +28358,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkConfigurationDiagnosticResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -28422,7 +28435,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NextHopResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -28736,7 +28750,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PacketCaptureQueryStatusResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -28880,7 +28895,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/FlowLogInformation"
         },
         "x-ms-long-running-operation": true
       }
@@ -28956,7 +28972,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TroubleshootingResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -29032,7 +29049,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SecurityGroupViewResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -29163,7 +29181,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/TroubleshootingResult"
         },
         "x-ms-long-running-operation": true
       }
@@ -30211,6 +30230,10 @@
               "$ref": "#/definitions/PrivateDnsZoneGroup"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -30232,7 +30255,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/PrivateEndpoint"
+          "final-state-schema": "#/definitions/PrivateDnsZoneGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -31214,7 +31237,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PublicIPAddress"
         },
         "x-ms-long-running-operation": true
       }
@@ -31292,7 +31316,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PublicIPAddress"
         },
         "x-ms-long-running-operation": true
       }
@@ -32035,6 +32060,10 @@
               "$ref": "#/definitions/RouteFilterRule"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -32056,7 +32085,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/RouteFilter"
+          "final-state-schema": "#/definitions/RouteFilterRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -34098,7 +34127,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Record%3CPeerRoute%5B%5D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -34175,7 +34205,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Record%3CPeerRoute%5B%5D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -34665,6 +34696,10 @@
               "$ref": "#/definitions/HubVirtualNetworkConnection"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -34686,7 +34721,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualHub"
+          "final-state-schema": "#/definitions/HubVirtualNetworkConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -35567,6 +35602,10 @@
               "$ref": "#/definitions/VirtualHubRouteTableV2"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -35588,7 +35627,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualHub"
+          "final-state-schema": "#/definitions/VirtualHubRouteTableV2"
         },
         "x-ms-long-running-operation": true
       },
@@ -41971,6 +42010,10 @@
               "$ref": "#/definitions/VpnConnection"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -41992,7 +42035,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VpnGateway"
+          "final-state-schema": "#/definitions/VpnConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -70353,6 +70396,15 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "Record<PeerRoute[]>": {
+      "type": "object",
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array"
+      }
     },
     "RecordSet": {
       "type": "object",

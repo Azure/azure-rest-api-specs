@@ -110,7 +110,7 @@ interface BgpConnections {
     BgpConnection,
     void,
     void,
-    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;
@@ -125,7 +125,7 @@ interface BgpConnections {
     BgpConnection,
     void,
     void,
-    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Response = Record<PeerRoute[]> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PeerRouteList> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
   >;

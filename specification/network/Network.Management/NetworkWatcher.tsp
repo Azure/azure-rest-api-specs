@@ -125,7 +125,8 @@ interface NetworkWatchers {
   verifyIPFlow is ArmResourceActionAsyncBase<
     NetworkWatcher,
     VerificationIPFlowParameters,
-    ArmResponse<VerificationIPFlowResult> | (ArmAcceptedLroResponse & {
+    ArmResponse<VerificationIPFlowResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VerificationIPFlowResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: VerificationIPFlowResult;
     }),
@@ -141,7 +142,8 @@ interface NetworkWatchers {
   getNextHop is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NextHopParameters,
-    ArmResponse<NextHopResult> | (ArmAcceptedLroResponse & {
+    ArmResponse<NextHopResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NextHopResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: NextHopResult;
     }),
@@ -158,7 +160,8 @@ interface NetworkWatchers {
   getVMSecurityRules is ArmResourceActionAsyncBase<
     NetworkWatcher,
     SecurityGroupViewParameters,
-    ArmResponse<SecurityGroupViewResult> | (ArmAcceptedLroResponse & {
+    ArmResponse<SecurityGroupViewResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SecurityGroupViewResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: SecurityGroupViewResult;
     }),
@@ -174,7 +177,8 @@ interface NetworkWatchers {
   getTroubleshooting is ArmResourceActionAsyncBase<
     NetworkWatcher,
     TroubleshootingParameters,
-    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse & {
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: TroubleshootingResult;
     }),
@@ -190,7 +194,8 @@ interface NetworkWatchers {
   getTroubleshootingResult is ArmResourceActionAsyncBase<
     NetworkWatcher,
     QueryTroubleshootingParameters,
-    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse & {
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: TroubleshootingResult;
     }),
@@ -206,7 +211,8 @@ interface NetworkWatchers {
   setFlowLogConfiguration is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogInformation,
-    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse & {
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: FlowLogInformation;
     }),
@@ -222,7 +228,8 @@ interface NetworkWatchers {
   getFlowLogStatus is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogStatusParameters,
-    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse & {
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: FlowLogInformation;
     }),
@@ -238,7 +245,8 @@ interface NetworkWatchers {
   checkConnectivity is ArmResourceActionAsyncBase<
     NetworkWatcher,
     ConnectivityParameters,
-    ArmResponse<ConnectivityInformation> | (ArmAcceptedLroResponse & {
+    ArmResponse<ConnectivityInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ConnectivityInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: ConnectivityInformation;
     }),
@@ -254,7 +262,8 @@ interface NetworkWatchers {
   getAzureReachabilityReport is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AzureReachabilityReportParameters,
-    ArmResponse<AzureReachabilityReport> | (ArmAcceptedLroResponse & {
+    ArmResponse<AzureReachabilityReport> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AzureReachabilityReport> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: AzureReachabilityReport;
     }),
@@ -270,7 +279,8 @@ interface NetworkWatchers {
   listAvailableProviders is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AvailableProvidersListParameters,
-    ArmResponse<AvailableProvidersList> | (ArmAcceptedLroResponse & {
+    ArmResponse<AvailableProvidersList> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AvailableProvidersList> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: AvailableProvidersList;
     }),
@@ -286,7 +296,8 @@ interface NetworkWatchers {
   getNetworkConfigurationDiagnostic is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NetworkConfigurationDiagnosticParameters,
-    ArmResponse<NetworkConfigurationDiagnosticResponse> | (ArmAcceptedLroResponse & {
+    ArmResponse<NetworkConfigurationDiagnosticResponse> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkConfigurationDiagnosticResponse> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: NetworkConfigurationDiagnosticResponse;
     }),
@@ -357,7 +368,8 @@ interface NetworkWatchers {
     NetworkWatcher,
     void,
     Result = void,
-    Response = ArmResponse<PacketCaptureQueryStatusResult> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<PacketCaptureQueryStatusResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PacketCaptureQueryStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @body
       _: PacketCaptureQueryStatusResult;
     }),

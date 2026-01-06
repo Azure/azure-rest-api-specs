@@ -185,7 +185,11 @@ interface VirtualHubs {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.CreateOrUpdateAsync<
     VirtualHub,
-    Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<HubVirtualNetworkConnection>,
+    Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<
+      HubVirtualNetworkConnection,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = HubVirtualNetworkConnection,
     OverrideErrorType = CloudError
   >;
@@ -249,7 +253,11 @@ interface VirtualHubs {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.CreateOrUpdateAsync<
     VirtualHub,
-    Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<VirtualHubRouteTableV2>,
+    Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<
+      VirtualHubRouteTableV2,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     Request = VirtualHubRouteTableV2,
     OverrideErrorType = Error
   >;
