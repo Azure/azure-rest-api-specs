@@ -303,3 +303,8 @@ using Microsoft.DevTestLab;
 
 @@clientName(Labs.importVirtualMachine, "ImportVm", "csharp");
 @@clientName(PolicySets.evaluatePolicies, "EvaluatePolicies", "csharp");
+
+@@clientName(GlobalSchedules, "DevTestLabGlobalSchedules", "csharp");
+@@clientName(Schedules, "DevTestLabSchedules", "csharp");
+@@clientName(ServiceFabricSchedules, "DevTestLabServiceFabricSchedules", "csharp");
+@@clientName(VirtualMachineSchedules, "DevTestLabVmSchedules", "csharp");

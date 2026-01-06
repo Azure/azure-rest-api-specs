@@ -10,9 +10,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DevTestLab;
+
 /**
  * A schedule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 model Schedule
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
     ScheduleProperties,
