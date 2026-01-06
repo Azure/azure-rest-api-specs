@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2024-04-01-preview",
+    "privateEndpointConnectionName": "privateEndpointConnection1",
+    "resourceGroupName": "SampleResourceGroup",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "request": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Approved by johndoe@company.com",
+          "status": "Approved"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "privateEndpointConnection1",
+        "type": "Microsoft.Purview/accounts/privateEndpointConnections",
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/privateEndpointConnection1",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@company.com",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "privateEndpointConnection1",
+        "type": "Microsoft.Purview/accounts/privateEndpointConnections",
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/privateEndpointConnection1",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Approved by johndoe@company.com",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/SampleResourceGroup/providers/Microsoft.Purview/accounts/account1/privateEndpointConnections/privateEndpointConnection1?api-version=2021-07-01",
+        "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd",
+        "x-ms-long-running-operation": true,
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+  "title": "PrivateEndpointConnections_CreateOrUpdate"
+}
