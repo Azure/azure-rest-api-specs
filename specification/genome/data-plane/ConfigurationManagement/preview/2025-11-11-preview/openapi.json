@@ -1,0 +1,637 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "Configuration Management API for Genome platform",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/configurationmanagement",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Configuration Management endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://management.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://management.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/configurations": {
+      "get": {
+        "operationId": "GetConfigurations",
+        "summary": "Get all configurations",
+        "description": "Retrieves all configuration entries with optional filtering by category or key.\nReturns comprehensive configuration metadata including values, descriptions,\nand modification history.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Filter configurations by category/group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Filter configurations by key (partial match)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all configurations": {
+            "$ref": "./examples/GetConfigurations_MaximumSet_Gen.json"
+          },
+          "Get all configurations - minimum set": {
+            "$ref": "./examples/GetConfigurations_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrReplaceConfiguration",
+        "summary": "Create a new configuration",
+        "description": "Creates a new configuration entry with a unique key. The key must not already\nexist. Use PUT to update existing configurations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new configuration": {
+            "$ref": "./examples/CreateConfiguration_MaximumSet_Gen.json"
+          },
+          "Create a new configuration - minimum set": {
+            "$ref": "./examples/CreateConfiguration_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/configurations/{key}": {
+      "get": {
+        "operationId": "GetConfigurationByKey",
+        "summary": "Get configuration by key",
+        "description": "Retrieves a specific configuration entry using its unique key. Returns complete\nconfiguration metadata including value, description, category, and modification\nhistory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Unique configuration key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get configuration by key": {
+            "$ref": "./examples/GetConfigurationByKey_MaximumSet_Gen.json"
+          },
+          "Get configuration by key - minimum set": {
+            "$ref": "./examples/GetConfigurationByKey_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReplaceConfiguration",
+        "summary": "Update configuration",
+        "description": "Updates an existing configuration entry. All fields in the request body will be\nupdated. The configuration key in the URL must match an existing configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Unique configuration key to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Configuration data to update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update configuration": {
+            "$ref": "./examples/ReplaceConfiguration_MaximumSet_Gen.json"
+          },
+          "Update configuration - minimum set": {
+            "$ref": "./examples/ReplaceConfiguration_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteConfiguration",
+        "summary": "Delete configuration",
+        "description": "Deletes a configuration entry permanently. This action cannot be undone. Use\nwith caution as dependent services may be affected.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Unique configuration key to delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete configuration": {
+            "$ref": "./examples/DeleteConfiguration_MaximumSet_Gen.json"
+          },
+          "Delete configuration - minimum set": {
+            "$ref": "./examples/DeleteConfiguration_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/configurations/{key}/value": {
+      "get": {
+        "operationId": "GetConfigurationValue",
+        "summary": "Get configuration value by key",
+        "description": "Simplified endpoint for quickly retrieving just the configuration value without\nfull metadata. Ideal for services that need to read configuration values\nprogrammatically.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Unique configuration key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PathsB13Wt0V1ConfigurationsKeyValueGetResponses200ContentApplicationJsonSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get configuration value by key": {
+            "$ref": "./examples/GetConfigurationValue_MaximumSet_Gen.json"
+          },
+          "Get configuration value by key - minimum set": {
+            "$ref": "./examples/GetConfigurationValue_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CommonError": {
+      "type": "object",
+      "description": "Common error response structure",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorError",
+          "description": "Error details"
+        }
+      }
+    },
+    "CommonErrorError": {
+      "type": "object",
+      "description": "Detailed error information",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        }
+      }
+    },
+    "ConfigurationListResponse": {
+      "type": "object",
+      "description": "Response containing list of configurations",
+      "properties": {
+        "configurations": {
+          "type": "array",
+          "description": "List of configuration entries",
+          "items": {
+            "$ref": "#/definitions/ConfigurationResponse"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of configurations"
+        },
+        "pagination": {
+          "$ref": "#/definitions/ConfigurationListResponsePagination",
+          "description": "Pagination information (if applicable)"
+        }
+      },
+      "required": [
+        "configurations",
+        "totalCount"
+      ]
+    },
+    "ConfigurationListResponsePagination": {
+      "type": "object",
+      "description": "Pagination information (if applicable)",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of configurations"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of items per page"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip"
+        },
+        "hasNext": {
+          "type": "boolean",
+          "description": "Indicates if there is a next page"
+        },
+        "hasPrevious": {
+          "type": "boolean",
+          "description": "Indicates if there is a previous page"
+        }
+      }
+    },
+    "ConfigurationRequest": {
+      "type": "object",
+      "description": "Request for creating or updating a configuration",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Unique configuration key(s) - can be a single string or array of strings"
+        },
+        "value": {
+          "type": "string",
+          "description": "Configuration value(s) - can be a single string or array of strings. For\narrays, values are stored as JSON-serialized string"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the configuration"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category or group for organizing configurations"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "User ID of the person creating or updating the configuration"
+        }
+      },
+      "required": [
+        "key",
+        "value",
+        "modifiedBy"
+      ]
+    },
+    "ConfigurationResponse": {
+      "type": "object",
+      "description": "Configuration entry response",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the configuration entry"
+        },
+        "key": {
+          "type": "string",
+          "description": "Configuration key(s) - can be a single string or array of strings"
+        },
+        "value": {
+          "type": "string",
+          "description": "Configuration value(s) - can be a single string or array of strings"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the configuration"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category or group for organizing configurations"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Flag indicating if the configuration is active"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID who created the configuration"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "User ID who last modified the configuration"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the configuration was created"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the configuration was last modified"
+        }
+      },
+      "required": [
+        "id",
+        "key",
+        "value",
+        "createdBy"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Standard error response format for general errors",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error type"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        }
+      }
+    },
+    "HostOptions": {
+      "type": "string",
+      "description": "choices for server host",
+      "enum": [
+        "https://api.genomerp.com",
+        "https://api-dev.genomerp.com"
+      ],
+      "x-ms-enum": {
+        "name": "HostOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "https://api.genomerp.com",
+            "value": "https://api.genomerp.com",
+            "description": "host: https://api.genomerp.com"
+          },
+          {
+            "name": "https://api-dev.genomerp.com",
+            "value": "https://api-dev.genomerp.com",
+            "description": "host: https://api-dev.genomerp.com"
+          }
+        ]
+      }
+    },
+    "PathsB13Wt0V1ConfigurationsKeyValueGetResponses200ContentApplicationJsonSchema": {
+      "type": "object",
+      "description": "Response containing configuration key and value",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Configuration key"
+        },
+        "value": {
+          "type": "string",
+          "description": "Configuration value - can be a single string or array of strings"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

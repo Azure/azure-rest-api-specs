@@ -1,0 +1,1053 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "Comprehensive API documentation for Genome operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/action",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Genome API endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://genome.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://genome.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/actionExecutions": {
+      "get": {
+        "operationId": "GetAllActionExecutions",
+        "summary": "Get all action executions",
+        "description": "Retrieves all action executions across all actions with comprehensive\nfiltering, sorting, and pagination capabilities. Useful for monitoring\nexecution history and system-wide execution status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter executions by status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Queued",
+              "InProgress",
+              "Completed",
+              "Failed"
+            ],
+            "x-ms-enum": {
+              "name": "ActionExecutionStatus",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Queued",
+                  "value": "Queued",
+                  "description": "Queued"
+                },
+                {
+                  "name": "InProgress",
+                  "value": "InProgress",
+                  "description": "InProgress"
+                },
+                {
+                  "name": "Completed",
+                  "value": "Completed",
+                  "description": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed",
+                  "description": "Failed"
+                }
+              ]
+            }
+          },
+          {
+            "name": "actionId",
+            "in": "query",
+            "description": "Filter executions by action ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "Filter executions by user ID",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return (1-100)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of results to skip",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field to sort by",
+            "required": false,
+            "type": "string",
+            "default": "queuedAt",
+            "enum": [
+              "queuedAt",
+              "startedAt",
+              "completedAt"
+            ],
+            "x-ms-enum": {
+              "name": "Paths8JxwviV1ActionexecutionsGetParameters5Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "queuedAt",
+                  "value": "queuedAt",
+                  "description": "queuedAt"
+                },
+                {
+                  "name": "startedAt",
+                  "value": "startedAt",
+                  "description": "startedAt"
+                },
+                {
+                  "name": "completedAt",
+                  "value": "completedAt",
+                  "description": "completedAt"
+                }
+              ]
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "Paths1Aud0QxV1ActionexecutionsGetParameters6Schema",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "asc"
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "desc"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionExecutionListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all action executions": {
+            "$ref": "./examples/getAllActionExecutions_MaximumSet_Gen.json"
+          },
+          "Get all action executions - minimum set": {
+            "$ref": "./examples/getAllActionExecutions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/actions": {
+      "get": {
+        "operationId": "GetActions",
+        "summary": "Get all available actions",
+        "description": "Retrieves a complete list of all available actions in the system. Each action\nincludes metadata such as name, description, required input parameters, tags,\nand estimated duration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all available actions": {
+            "$ref": "./examples/getActions_MaximumSet_Gen.json"
+          },
+          "Get all available actions - minimum set": {
+            "$ref": "./examples/getActions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/actions/{actionId}": {
+      "get": {
+        "operationId": "GetActionById",
+        "summary": "Get action by ID",
+        "description": "Retrieves detailed information about a specific action using its unique\nidentifier. Returns action metadata including name, description, required input\nparameters schema, tags, and estimated execution duration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Unique identifier of the action to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get action by ID": {
+            "$ref": "./examples/getActionById_MaximumSet_Gen.json"
+          },
+          "Get action by ID - minimum set": {
+            "$ref": "./examples/getActionById_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/actions/{actionId}/executions": {
+      "get": {
+        "operationId": "GetActionExecutions",
+        "summary": "Get executions for a specific action",
+        "description": "Retrieves a list of all executions for the specified action with optional\nfiltering by status and pagination support.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Unique identifier of the action",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter executions by status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Queued",
+              "InProgress",
+              "Completed",
+              "Failed"
+            ],
+            "x-ms-enum": {
+              "name": "ActionExecutionStatus",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Queued",
+                  "value": "Queued",
+                  "description": "Queued"
+                },
+                {
+                  "name": "InProgress",
+                  "value": "InProgress",
+                  "description": "InProgress"
+                },
+                {
+                  "name": "Completed",
+                  "value": "Completed",
+                  "description": "Completed"
+                },
+                {
+                  "name": "Failed",
+                  "value": "Failed",
+                  "description": "Failed"
+                }
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results to return (1-100)",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20,
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of results to skip",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionExecutionListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get executions for a specific action": {
+            "$ref": "./examples/getActionExecutions_MaximumSet_Gen.json"
+          },
+          "Get executions for a specific action - minimum set": {
+            "$ref": "./examples/getActionExecutions_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateActionExecution",
+        "summary": "Create a new action execution",
+        "description": "Creates a new execution instance for the specified action. The execution is\nqueued and will be processed asynchronously. Returns an execution ID that can\nbe used to track progress and retrieve results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Unique identifier of the action to execute",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for creating action execution",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionExecutionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionExecutionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new action execution": {
+            "$ref": "./examples/createActionExecution_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/actions/{actionId}/executions/{executionId}": {
+      "get": {
+        "operationId": "GetActionExecutionById",
+        "summary": "Get action execution details by ID",
+        "description": "Retrieves detailed information about a specific action execution including\ninput parameters, results, progress, and error information if applicable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Unique identifier of the action",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "description": "Unique identifier of the execution",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ActionExecutionDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get action execution details by ID": {
+            "$ref": "./examples/getActionExecutionById_MaximumSet_Gen.json"
+          },
+          "Get action execution details by ID - minimum set": {
+            "$ref": "./examples/getActionExecutionById_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionExecutionDetailResponse": {
+      "type": "object",
+      "description": "Detailed information about an action execution",
+      "properties": {
+        "startedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution started"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution completed"
+        },
+        "failedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution failed"
+        },
+        "inputParameters": {
+          "type": "object",
+          "description": "Input parameters provided for the execution",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "result": {
+          "type": "object",
+          "description": "Result of the action execution",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/ExecutionErrorResponse",
+          "description": "Error information if execution failed"
+        },
+        "progress": {
+          "$ref": "#/definitions/ExecutionProgressResponse",
+          "description": "Progress information for in-progress executions"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the execution",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionExecutionResponse"
+        }
+      ]
+    },
+    "ActionExecutionListResponse": {
+      "type": "object",
+      "description": "Response containing a list of action executions with pagination",
+      "properties": {
+        "executions": {
+          "type": "array",
+          "description": "List of action execution summaries",
+          "items": {
+            "$ref": "#/definitions/ActionExecutionSummaryResponse"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/PaginationResponse",
+          "description": "Pagination information"
+        }
+      },
+      "required": [
+        "executions"
+      ]
+    },
+    "ActionExecutionRequest": {
+      "type": "object",
+      "description": "Request for creating a new action execution",
+      "properties": {
+        "inputParameters": {
+          "type": "object",
+          "description": "Action-specific input parameters. The structure must match the action's\nrequired input parameters schema.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "$ref": "#/definitions/ExecutionMetadata",
+          "description": "Optional metadata for the execution"
+        }
+      },
+      "required": [
+        "inputParameters"
+      ]
+    },
+    "ActionExecutionResponse": {
+      "type": "object",
+      "description": "Response after creating an action execution",
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "description": "Unique identifier for the execution"
+        },
+        "actionId": {
+          "type": "string",
+          "description": "ID of the action being executed"
+        },
+        "status": {
+          "$ref": "#/definitions/ActionExecutionStatus",
+          "description": "Status of action execution"
+        },
+        "queuedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution was queued"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable message about the execution"
+        }
+      },
+      "required": [
+        "executionId",
+        "actionId",
+        "status",
+        "queuedAt"
+      ]
+    },
+    "ActionExecutionStatus": {
+      "type": "string",
+      "description": "Status of action execution",
+      "enum": [
+        "Queued",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ActionExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Queued"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "ActionExecutionSummaryResponse": {
+      "type": "object",
+      "description": "Summary information about an action execution",
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "description": "Unique identifier for the execution"
+        },
+        "actionId": {
+          "type": "string",
+          "description": "ID of the action"
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Name of the action"
+        },
+        "status": {
+          "$ref": "#/definitions/ActionExecutionStatus",
+          "description": "Status of action execution"
+        },
+        "queuedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution was queued"
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the execution completed"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Execution duration in human-readable format"
+        },
+        "userId": {
+          "type": "string",
+          "description": "ID of the user who initiated the execution"
+        }
+      },
+      "required": [
+        "executionId",
+        "actionId",
+        "status",
+        "queuedAt"
+      ]
+    },
+    "ActionListResponse": {
+      "type": "object",
+      "description": "Response containing a list of all available actions",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "description": "List of available actions",
+          "items": {
+            "$ref": "#/definitions/ActionResponse"
+          }
+        },
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of actions available in the system"
+        }
+      },
+      "required": [
+        "actions",
+        "totalCount"
+      ]
+    },
+    "ActionResponse": {
+      "type": "object",
+      "description": "Detailed information about a specific action",
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "description": "Unique identifier for the action"
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Human-readable name of the action"
+        },
+        "actionDescription": {
+          "type": "string",
+          "description": "Detailed description of what the action does"
+        },
+        "requiredInputParameters": {
+          "type": "object",
+          "description": "JSON Schema defining the required and optional input parameters for executing\nthis action",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags for categorizing and filtering actions",
+          "items": {
+            "type": "string"
+          }
+        },
+        "estimatedDuration": {
+          "type": "string",
+          "description": "Estimated time range for action execution"
+        }
+      },
+      "required": [
+        "actionId",
+        "actionName",
+        "actionDescription",
+        "requiredInputParameters"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CommonError": {
+      "type": "object",
+      "description": "Standard error response format for authentication and authorization errors",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorError",
+          "description": "Error details"
+        }
+      }
+    },
+    "CommonErrorError": {
+      "type": "object",
+      "description": "Detailed error information",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Standard error response format for general errors",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error type"
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message"
+        }
+      }
+    },
+    "ExecutionErrorResponse": {
+      "type": "object",
+      "description": "Error information if execution failed",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional error details"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ExecutionMetadata": {
+      "type": "object",
+      "description": "Optional metadata for the execution",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "ID of the user executing the action"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source system or application initiating the execution"
+        }
+      }
+    },
+    "ExecutionProgressResponse": {
+      "type": "object",
+      "description": "Progress information for in-progress executions",
+      "properties": {
+        "currentStep": {
+          "type": "string",
+          "description": "Current step being executed"
+        },
+        "stepsCompleted": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of steps completed"
+        },
+        "totalSteps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of steps in the execution"
+        }
+      }
+    },
+    "PaginationResponse": {
+      "type": "object",
+      "description": "Pagination information",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of items across all pages"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items per page"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items skipped"
+        },
+        "hasNext": {
+          "type": "boolean",
+          "description": "Whether there are more items available"
+        },
+        "hasPrevious": {
+          "type": "boolean",
+          "description": "Whether there are previous items"
+        }
+      }
+    },
+    "Paths1Aud0QxV1ActionexecutionsGetParameters6Schema": {
+      "type": "string",
+      "description": "Sort order",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "Paths1Aud0QxV1ActionexecutionsGetParameters6Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "asc",
+            "value": "asc",
+            "description": "asc"
+          },
+          {
+            "name": "desc",
+            "value": "desc",
+            "description": "desc"
+          }
+        ]
+      }
+    },
+    "Paths8JxwviV1ActionexecutionsGetParameters5Schema": {
+      "type": "string",
+      "description": "Field to sort by",
+      "enum": [
+        "queuedAt",
+        "startedAt",
+        "completedAt"
+      ],
+      "x-ms-enum": {
+        "name": "Paths8JxwviV1ActionexecutionsGetParameters5Schema",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "queuedAt",
+            "value": "queuedAt",
+            "description": "queuedAt"
+          },
+          {
+            "name": "startedAt",
+            "value": "startedAt",
+            "description": "startedAt"
+          },
+          {
+            "name": "completedAt",
+            "value": "completedAt",
+            "description": "completedAt"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}

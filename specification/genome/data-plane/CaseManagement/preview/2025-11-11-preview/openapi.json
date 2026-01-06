@@ -1,0 +1,1171 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Genome API",
+    "version": "2025-11-11-preview",
+    "description": "Comprehensive API documentation for Genome operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/casemanagement",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Genome API endpoints (protocol and hostname, for example:\nhttps://westus.api.genome.contoso.com).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://genome.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://genome.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/v1/cases": {
+      "get": {
+        "operationId": "GetCases",
+        "summary": "Get all cases",
+        "description": "Retrieves a list of all cases with optional filtering by case type and status.\nReturns comprehensive case metadata including workflow status, priority, and\ndeadlines.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseType",
+            "in": "query",
+            "description": "Filter cases by case type",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UFLPA"
+            ],
+            "x-ms-enum": {
+              "name": "CaseType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "UFLPA",
+                  "value": "UFLPA",
+                  "description": "UFLPA"
+                }
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter cases by status",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseMetadataResponse"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get all cases": {
+            "$ref": "./examples/getCases_MaximumSet_Gen.json"
+          },
+          "Get all cases - minimum set": {
+            "$ref": "./examples/getCases_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrReplaceCase",
+        "summary": "Create a new case",
+        "description": "Creates a new case with specified metadata, priority, and deadline. Requires\ncase type, status, created by user, metadata with CBP contact information,\npriority, and deadline.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new case": {
+            "$ref": "./examples/createCase_MaximumSet_Gen.json"
+          },
+          "Create a new case - minimum set": {
+            "$ref": "./examples/createCase_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/cases/{caseId}": {
+      "get": {
+        "operationId": "GetCaseById",
+        "summary": "Get case by ID",
+        "description": "Retrieves detailed information about a specific case using its unique\nidentifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get case by ID": {
+            "$ref": "./examples/getCaseById_MaximumSet_Gen.json"
+          },
+          "Get case by ID - minimum set": {
+            "$ref": "./examples/getCaseById_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReplaceCase",
+        "summary": "Update a case",
+        "description": "Updates an existing case with new information. All fields in the request body\nwill be updated.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for updating case",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CaseRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a case": {
+            "$ref": "./examples/replaceCase_MaximumSet_Gen.json"
+          },
+          "Update a case - minimum set": {
+            "$ref": "./examples/replaceCase_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteCase",
+        "summary": "Archive a case",
+        "description": "Archives (soft deletes) a case. The case is not permanently deleted but marked\nas archived and will not appear in regular case listings.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case to archive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Archive a case": {
+            "$ref": "./examples/deleteCase_MaximumSet_Gen.json"
+          },
+          "Archive a case - minimum set": {
+            "$ref": "./examples/deleteCase_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/cases/{caseId}/suppliers": {
+      "get": {
+        "operationId": "GetCaseSuppliers",
+        "summary": "Get suppliers for a case",
+        "description": "Retrieves a list of all suppliers associated with a specific case, including\ntheir contact information, required documents, and upload status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CaseSupplierResponse"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get suppliers for a case": {
+            "$ref": "./examples/getCaseSuppliers_MaximumSet_Gen.json"
+          },
+          "Get suppliers for a case - minimum set": {
+            "$ref": "./examples/getCaseSuppliers_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CreateOrReplaceSupplierInCase",
+        "summary": "Add supplier to case",
+        "description": "Associates a new supplier with a case. Requires supplier ID, name,\njurisdiction, and created by user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for adding supplier to case",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CaseSupplierRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseSupplierResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Add supplier to case": {
+            "$ref": "./examples/addSupplierToCase_MaximumSet_Gen.json"
+          },
+          "Add supplier to case - minimum set": {
+            "$ref": "./examples/addSupplierToCase_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/cases/{caseId}/suppliers/{supplierId}": {
+      "get": {
+        "operationId": "GetCaseSupplier",
+        "summary": "Get specific supplier for a case",
+        "description": "Retrieves detailed information about a specific supplier associated with a case.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supplierId",
+            "in": "path",
+            "description": "Unique identifier of the supplier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseSupplierResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get specific supplier for a case": {
+            "$ref": "./examples/getCaseSupplier_MaximumSet_Gen.json"
+          },
+          "Get specific supplier for a case - minimum set": {
+            "$ref": "./examples/getCaseSupplier_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ReplaceCaseSupplier",
+        "summary": "Update supplier information for a case",
+        "description": "Updates supplier information such as name, contact details, status, and\nrequired documents.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supplierId",
+            "in": "path",
+            "description": "Unique identifier of the supplier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body for updating case supplier",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CaseSupplierRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CaseSupplierResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update supplier information for a case": {
+            "$ref": "./examples/replaceCaseSupplier_MaximumSet_Gen.json"
+          },
+          "Update supplier information for a case - minimum set": {
+            "$ref": "./examples/replaceCaseSupplier_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteSupplierFromCase",
+        "summary": "Remove supplier from case",
+        "description": "Removes the association between a supplier and a case. The supplier record is\ndeleted from the case but the supplier itself remains in the system.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "caseId",
+            "in": "path",
+            "description": "Unique identifier of the case",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "supplierId",
+            "in": "path",
+            "description": "Unique identifier of the supplier",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Remove supplier from case": {
+            "$ref": "./examples/deleteSupplierFromCase_MaximumSet_Gen.json"
+          },
+          "Remove supplier from case - minimum set": {
+            "$ref": "./examples/deleteSupplierFromCase_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "CaseMetadataResponse": {
+      "type": "object",
+      "description": "Complete case metadata response",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "description": "Unique identifier for the case"
+        },
+        "type": {
+          "$ref": "#/definitions/CaseType",
+          "description": "Type of case"
+        },
+        "caseName": {
+          "type": "string",
+          "description": "Human-readable name for the case"
+        },
+        "status": {
+          "$ref": "#/definitions/CaseStatus",
+          "description": "Current status of the case"
+        },
+        "workflowStatus": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "Detailed workflow status within the case lifecycle"
+        },
+        "workflowExecutionId": {
+          "type": "string",
+          "description": "ID of the associated workflow execution"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID of the person who created the case"
+        },
+        "modifiedBy": {
+          "type": "string",
+          "description": "User ID of the person who last modified the case"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the case was created"
+        },
+        "modifiedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the case was last modified"
+        },
+        "metadata": {
+          "$ref": "#/definitions/DetentionMetadata",
+          "description": "Detention-specific metadata"
+        },
+        "priority": {
+          "$ref": "#/definitions/CasePriority",
+          "description": "Priority level of the case"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deadline for case resolution"
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Indicates if the case has been archived (soft deleted)"
+        }
+      },
+      "required": [
+        "caseId",
+        "type",
+        "status",
+        "workflowExecutionId",
+        "createdBy",
+        "priority",
+        "deadline"
+      ]
+    },
+    "CasePriority": {
+      "type": "string",
+      "description": "Priority level of the case",
+      "enum": [
+        "Low",
+        "Normal",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "CasePriority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low"
+          },
+          {
+            "name": "Normal",
+            "value": "Normal",
+            "description": "Normal"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High"
+          }
+        ]
+      }
+    },
+    "CaseRequest": {
+      "type": "object",
+      "description": "Request for creating or updating a case",
+      "properties": {
+        "caseType": {
+          "$ref": "#/definitions/CaseType",
+          "description": "Type of case"
+        },
+        "caseName": {
+          "type": "string",
+          "description": "Human-readable name for the case"
+        },
+        "status": {
+          "$ref": "#/definitions/CaseStatus",
+          "description": "Current status of the case"
+        },
+        "workflowStatus": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "Detailed workflow status within the case lifecycle"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID of the person creating the case"
+        },
+        "metadata": {
+          "$ref": "#/definitions/DetentionMetadata",
+          "description": "Detention-specific metadata"
+        },
+        "priority": {
+          "$ref": "#/definitions/CasePriority",
+          "description": "Priority level of the case"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deadline for case resolution"
+        }
+      },
+      "required": [
+        "caseType",
+        "status",
+        "createdBy",
+        "priority",
+        "deadline"
+      ]
+    },
+    "CaseStatus": {
+      "type": "string",
+      "description": "Current status of the case",
+      "enum": [
+        "New",
+        "Active",
+        "Investigation",
+        "Resolution",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "CaseStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New",
+            "description": "New"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active"
+          },
+          {
+            "name": "Investigation",
+            "value": "Investigation",
+            "description": "Investigation"
+          },
+          {
+            "name": "Resolution",
+            "value": "Resolution",
+            "description": "Resolution"
+          },
+          {
+            "name": "Closed",
+            "value": "Closed",
+            "description": "Closed"
+          }
+        ]
+      }
+    },
+    "CaseSupplierRequest": {
+      "type": "object",
+      "description": "Request for adding or updating a supplier to a case",
+      "properties": {
+        "supplierId": {
+          "type": "string",
+          "description": "Unique identifier for the supplier"
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "Name of the supplier"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "description": "Country code where supplier operates"
+        },
+        "status": {
+          "type": "string",
+          "description": "Supplier status in relation to the case"
+        },
+        "supplierContact": {
+          "type": "string",
+          "description": "Contact information for the supplier"
+        },
+        "requiredDocumentTypes": {
+          "type": "array",
+          "description": "List of required document types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID who created this supplier association"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "User ID who last updated this supplier association"
+        }
+      },
+      "required": [
+        "supplierId",
+        "supplierName",
+        "jurisdiction"
+      ]
+    },
+    "CaseSupplierResponse": {
+      "type": "object",
+      "description": "Supplier information for a case",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this case supplier record"
+        },
+        "caseId": {
+          "type": "string",
+          "description": "Case ID this supplier is associated with"
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "Unique identifier for the supplier"
+        },
+        "supplierName": {
+          "type": "string",
+          "description": "Name of the supplier"
+        },
+        "jurisdiction": {
+          "type": "string",
+          "description": "Country code where supplier operates"
+        },
+        "status": {
+          "type": "string",
+          "description": "Supplier status in relation to the case"
+        },
+        "supplierContact": {
+          "type": "string",
+          "description": "Contact information for the supplier"
+        },
+        "requiredDocumentTypes": {
+          "type": "array",
+          "description": "List of required document types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "uploadedDocuments": {
+          "type": "array",
+          "description": "List of document categories already uploaded",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pendingDocumentTypes": {
+          "type": "array",
+          "description": "List of document types still pending upload",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the supplier is active in the case"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID who created this supplier association"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "User ID who last updated this supplier association"
+        }
+      },
+      "required": [
+        "id",
+        "caseId",
+        "supplierId",
+        "supplierName"
+      ]
+    },
+    "CaseType": {
+      "type": "string",
+      "description": "Type of case",
+      "enum": [
+        "UFLPA"
+      ],
+      "x-ms-enum": {
+        "name": "CaseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UFLPA",
+            "value": "UFLPA",
+            "description": "UFLPA"
+          }
+        ]
+      }
+    },
+    "CommonError": {
+      "type": "object",
+      "description": "Standard error response format for authentication and authorization errors",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommonErrorError",
+          "description": "Error details"
+        }
+      }
+    },
+    "CommonErrorError": {
+      "type": "object",
+      "description": "Detailed error information",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      }
+    },
+    "ContactInfo": {
+      "type": "object",
+      "description": "Contact information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contact person"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the contact"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DetentionMetadata": {
+      "type": "object",
+      "description": "Detention-specific metadata",
+      "properties": {
+        "detentionNumber": {
+          "type": "string",
+          "description": "Detention number assigned by CBP"
+        },
+        "portCode": {
+          "type": "string",
+          "description": "Port code where detention occurred"
+        },
+        "entryNumber": {
+          "type": "string",
+          "description": "Entry number for the shipment"
+        },
+        "merchandiseDescription": {
+          "type": "string",
+          "description": "Description of the detained merchandise"
+        },
+        "shipmentValue": {
+          "type": "string",
+          "description": "Value of the shipment"
+        },
+        "cbpContact": {
+          "$ref": "#/definitions/ContactInfo",
+          "description": "Contact information"
+        }
+      },
+      "required": [
+        "detentionNumber",
+        "portCode",
+        "entryNumber",
+        "cbpContact"
+      ]
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "General error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error type or code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      }
+    },
+    "WorkflowStatus": {
+      "type": "string",
+      "description": "Detailed workflow status within the case lifecycle",
+      "enum": [
+        "detentionReceived",
+        "initialAssessment",
+        "extensionRequest",
+        "applicabilityReview",
+        "submissionPreparation",
+        "cbpSubmission",
+        "cbpReview",
+        "additionalInfoRequested",
+        "clearanceReceived",
+        "denialReceived",
+        "exportElected"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "detentionReceived",
+            "value": "detentionReceived",
+            "description": "detentionReceived"
+          },
+          {
+            "name": "initialAssessment",
+            "value": "initialAssessment",
+            "description": "initialAssessment"
+          },
+          {
+            "name": "extensionRequest",
+            "value": "extensionRequest",
+            "description": "extensionRequest"
+          },
+          {
+            "name": "applicabilityReview",
+            "value": "applicabilityReview",
+            "description": "applicabilityReview"
+          },
+          {
+            "name": "submissionPreparation",
+            "value": "submissionPreparation",
+            "description": "submissionPreparation"
+          },
+          {
+            "name": "cbpSubmission",
+            "value": "cbpSubmission",
+            "description": "cbpSubmission"
+          },
+          {
+            "name": "cbpReview",
+            "value": "cbpReview",
+            "description": "cbpReview"
+          },
+          {
+            "name": "additionalInfoRequested",
+            "value": "additionalInfoRequested",
+            "description": "additionalInfoRequested"
+          },
+          {
+            "name": "clearanceReceived",
+            "value": "clearanceReceived",
+            "description": "clearanceReceived"
+          },
+          {
+            "name": "denialReceived",
+            "value": "denialReceived",
+            "description": "denialReceived"
+          },
+          {
+            "name": "exportElected",
+            "value": "exportElected",
+            "description": "exportElected"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
