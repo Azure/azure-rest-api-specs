@@ -4,4 +4,3 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
-@@clientName(Microsoft.HealthBot.IdentityType, "IdentityType", "python");
