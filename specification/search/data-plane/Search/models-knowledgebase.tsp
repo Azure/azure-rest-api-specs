@@ -6,7 +6,6 @@ import "./models-service.tsp";
 import "./models-shared.tsp";
 
 using TypeSpec.Http;
-using Azure.ClientGenerator.Core.Legacy;
 
 namespace Search;
 
