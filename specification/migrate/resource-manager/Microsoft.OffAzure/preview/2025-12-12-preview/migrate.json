@@ -4055,7 +4055,8 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "body",
@@ -4159,14 +4160,16 @@
             "in": "path",
             "description": "Site name",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
             "name": "jobName",
             "in": "path",
             "description": "Job Arm Name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -6657,6 +6660,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
           "202": {
             "description": "Accepted. The operation has been accepted and is being processed asynchronously. Use the URL in the Location header to monitor the status of the operation.",
             "headers": {
@@ -19422,6 +19431,10 @@
           "$ref": "#/definitions/DiscoveryScenario",
           "description": "Gets or sets the discovery scenario."
         },
+        "discoverySource": {
+          "$ref": "#/definitions/DiscoverySource",
+          "description": "Gets or sets the Discovery source properties for the site."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
@@ -22762,7 +22775,7 @@
         },
         "discoverySource": {
           "$ref": "#/definitions/DiscoverySource",
-          "description": "Gets or sets the Discovery source properties for the hyper-v site."
+          "description": "Gets or sets the Discovery source properties for the site."
         },
         "siteAppliancePropertiesCollection": {
           "type": "array",
