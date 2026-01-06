@@ -21,11 +21,6 @@ options:
     flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    namespace: "Azure.ResourceManager.ComputeSchedule"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computeschedule"
     namespace: "com.azure.resourcemanager.computeschedule"
@@ -41,6 +36,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ComputeSchedule"
+    emitter-output-dir: "{output-dir}/sdk/computeschedule/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
