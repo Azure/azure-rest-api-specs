@@ -293,9 +293,6 @@
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/RouteOperation"
-            },
             "headers": {
               "Operation-Location": {
                 "type": "string",
@@ -321,6 +318,9 @@
           "Submit an asynchronous request for matrix": {
             "$ref": "./examples/PostRouteMatrixAsync.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }

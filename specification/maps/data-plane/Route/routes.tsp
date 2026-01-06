@@ -753,7 +753,7 @@ interface Route {
       @bodyRoot
       routeMatrixAsyncRequest: RouteMatrixAsyncRequest;
     },
-    RouteOperation & AcceptedResponse,
+    AcceptedResponse,
     {},
     ErrorResponse
   >;
