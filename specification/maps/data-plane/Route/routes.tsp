@@ -634,6 +634,20 @@ interface Route {
   >;
 
   /**
+   * Get the result of an asynchronous operation by its operation ID.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  @route("/route/operations/{id}/result")
+  @get
+  getOperationResult is MapsRouteOperation<
+    {
+      ...AcceptLanguageHeader;
+      ...OperationIdPathParameter;
+    },
+    RouteOperationResponse | (NotFoundResponse & ErrorResponse)
+  >;
+
+  /**
    * The `Route Matrix Async` API is an HTTP `POST` request that allows calculation
    * of a matrix of route summaries for a set of routes defined by origin and
    * destination locations by using an asynchronous (async) request. For every given
@@ -739,6 +753,7 @@ interface Route {
   @route("/route/matrix:async")
   @post
   @pollingOperation(Route.getRouteOperationsStatus)
+  @finalOperation(Route.getOperationResult)
   postRouteMatrixAsync is Foundations.LongRunningOperation<
     {
       /** Content type */
@@ -756,19 +771,5 @@ interface Route {
     AcceptedResponse,
     {},
     ErrorResponse
-  >;
-
-  /**
-   * Get the result of an asynchronous operation by its operation ID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
-  @route("/route/operations/{id}/result")
-  @get
-  getOperationResult is MapsRouteOperation<
-    {
-      ...AcceptLanguageHeader;
-      ...OperationIdPathParameter;
-    },
-    RouteOperationResponse | (NotFoundResponse & ErrorResponse)
   >;
 }
