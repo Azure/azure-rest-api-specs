@@ -1,0 +1,31 @@
+{
+  "title": "ChangeRecords_VerifyChangeValidity",
+  "operationId": "ChangeRecords_VerifyChangeValidity",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.Web/sites/webApplication",
+        "httpMethod": "PUT",
+        "body": {
+          "location": "eastus",
+          "properties": {
+            "serverFarmId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.Web/serverfarms/webAppPlan"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "The change is valid and can proceed. All stage requirements have been met.",
+        "validUntil": "2025-07-09T12:00:00.000Z"
+      }
+    }
+  }
+}

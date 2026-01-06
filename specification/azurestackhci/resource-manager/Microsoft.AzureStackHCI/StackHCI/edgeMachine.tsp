@@ -248,7 +248,7 @@ model SiteDetails {
   ]>;
 
   @doc("Edge Device configuration received from site common configuration.")
-  deviceConfiguration?: DeviceConfiguration;
+  deviceConfiguration?: TargetDeviceConfiguration;
 }
 
 @added(Versions.v2025_12_01_preview)
