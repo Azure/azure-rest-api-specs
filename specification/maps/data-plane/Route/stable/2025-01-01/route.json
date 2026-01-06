@@ -85,6 +85,9 @@
           "application/geo+json",
           "application/json"
         ],
+        "consumes": [
+          "application/geo+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -211,6 +214,9 @@
         "produces": [
           "application/geo+json",
           "application/json"
+        ],
+        "consumes": [
+          "application/geo+json"
         ],
         "parameters": [
           {
@@ -473,6 +479,9 @@
           "application/geo+json",
           "application/json"
         ],
+        "consumes": [
+          "application/geo+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -583,6 +592,9 @@
           "application/geo+json",
           "application/json"
         ],
+        "consumes": [
+          "application/geo+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -644,6 +656,9 @@
       "post": {
         "operationId": "Route_PostSnapToRoadsBatch",
         "description": "The Snap To Roads Batch API sends batches of up to **100** queries as a single\ncall to the [Snap To Roads\nAPI](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2025-01-01). This\nAPI enables efficient processing of multiple queries in one request, reducing\nthe need for individual calls.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the\nservice receives a request, it will respond as soon as the batch items are\ncalculated and there will be no possibility to retrieve the results later. The\nSynchronous API will return a timeout error (a 408 response) if the request\ntakes longer than 60 seconds. The number of batch items is limited to **100**\nfor this API.\n```\nPOST https://atlas.microsoft.com/route/snapToRoads:batch?api-version=2025-01-01\n```\n### POST Body for Batch Request\nTo send the _snap to roads_ queries you will use a `POST` request where the\nrequest body will contain the `batchItems` array in `json` format and the\n`Content-Type` header will be set to `application/json`. Here's a sample\nrequest body containing 1 _snap to roads_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"optionalId\": \"bbc9c0f6-ab52-49d8-a788-a658fa654c94\",\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n              -122.336691,\n              47.59085\n            ]\n          },\n          \"properties\": {\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [\n              -122.336023,\n              47.601616\n            ]\n          },\n          \"properties\": {\n          }\n        }\n      ],\n      \"includeSpeedLimit\": true,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n```\n\nA _snap to roads_ batchItem object can accept any of the supported _snap to\nroads_ [Request\nbody](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2025-01-01#request-body)\n\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the\n`totalRequests` that were part of the original batch request and\n`successfulRequests` i.e. queries which were executed successfully. The batch\nresponse also includes a `batchItems` array which contains a response for each\nand every query in the batch request. The `batchItems` will contain the results\nin the exact same order the original queries were sent in the batch request.\nEach item is of one of the following types:\n\n- [`SnapToRoadsResponse`](/rest/api/maps/route/post-snap-to-roads#response) -\nIf the query completed successfully.\n\n- `Error` - If the query failed. The response will contain a `code` and a\n`message` in this case.",
+        "consumes": [
+          "application/geo+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

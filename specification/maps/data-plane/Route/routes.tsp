@@ -7,6 +7,12 @@ using TypeSpec.Http;
 
 namespace MapsRoute;
 
+alias ContentTypeHeader<T extends string> = {
+  /** Content-Type */
+  @header("Content-Type")
+  contentType: T;
+};
+
 op MapsRouteOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model | void,
@@ -57,7 +63,7 @@ interface Route {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Existing API behavior"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Reported due to response content-type. Needs fix: https://github.com/microsoft/typespec/issues/2853"
   @summary("""
     Use to get the best route between an origin and destination for automobile,
     commercial trucks and walking routes.
@@ -66,6 +72,7 @@ interface Route {
   @post
   postRouteDirections is MapsRouteOperation<
     {
+      ...ContentTypeHeader<"application/geo+json">;
       ...AcceptLanguageHeader;
 
       /**
@@ -74,10 +81,8 @@ interface Route {
       @bodyRoot
       routeDirectionsRequest: DirectionsRequest;
     },
-    RouteDirectionsResponse & {
-      @header("Content-Type")
-      contentType: "application/geo+json" | "application/json";
-    }
+    RouteDirectionsResponse &
+      ContentTypeHeader<"application/geo+json" | "application/json">
   >;
 
   /**
@@ -268,10 +273,12 @@ interface Route {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Reported due to response content-type. Needs fix: https://github.com/microsoft/typespec/issues/2853"
   @route("/route/snapToRoads")
   @post
   postSnapToRoads is MapsRouteOperation<
     {
+      ...ContentTypeHeader<"application/geo+json">;
       ...AcceptLanguageHeader;
 
       /**
@@ -280,11 +287,8 @@ interface Route {
       @bodyRoot
       snapToRoadsRequest: SnapToRoadsRequest;
     },
-    SnapToRoadsResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-      @header("Content-Type")
-      contentType: "application/geo+json" | "application/json";
-    }
+    SnapToRoadsResponse &
+      ContentTypeHeader<"application/geo+json" | "application/json">
   >;
 
   /**
@@ -382,6 +386,7 @@ interface Route {
   @post
   postSnapToRoadsBatch is MapsRouteOperation<
     {
+      ...ContentTypeHeader<"application/geo+json">;
       ...AcceptLanguageHeader;
 
       /**
@@ -414,21 +419,21 @@ interface Route {
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Reported due to response content-type. Needs fix: https://github.com/microsoft/typespec/issues/2853"
   @route("/route/range")
   @post
   postRouteRange is MapsRouteOperation<
     {
+      ...ContentTypeHeader<"application/geo+json">;
+
       /**
        * Request body of RouteRange API in GeoJSON format.
        */
       @bodyRoot
       routeRangeRequest: RouteRangeRequest;
     },
-    RouteRangeResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-      @header("Content-Type")
-      contentType: "application/geo+json" | "application/json";
-    }
+    RouteRangeResponse &
+      ContentTypeHeader<"application/geo+json" | "application/json">
   >;
 
   /**
@@ -608,16 +613,15 @@ interface Route {
   @post
   postRouteMatrix is MapsRouteOperation<
     {
+      ...ContentTypeHeader<"application/geo+json">;
+
       /**
        * Request body of RouteMatrix API in GeoJSON format.
        */
       @bodyRoot
       routeMatrixRequest: RouteMatrixRequest;
     },
-    RouteMatrixResponse & {
-      @header("Content-Type")
-      contentType: "application/geo+json";
-    }
+    RouteMatrixResponse & ContentTypeHeader<"application/geo+json">
   >;
 
   /**
@@ -756,10 +760,7 @@ interface Route {
   @finalOperation(Route.getOperationResult)
   postRouteMatrixAsync is Foundations.LongRunningOperation<
     {
-      /** Content type */
-      @header("Content-Type")
-      contentType: "application/geo+json";
-
+      ...ContentTypeHeader<"application/geo+json">;
       ...ClientIdHeader;
 
       /**
