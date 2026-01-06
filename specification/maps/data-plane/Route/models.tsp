@@ -2761,6 +2761,12 @@ model RouteOperationResult {
 @error
 model ErrorResponse {
   /**
+   * Error code of the error that occurred.
+   */
+  @header("x-ms-error-code")
+  errorCode?: string;
+
+  /**
    * The error object.
    */
   error?: ErrorDetail;
