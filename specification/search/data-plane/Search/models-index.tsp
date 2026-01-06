@@ -793,6 +793,7 @@ model SearchRequest {
   filter?: string;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.")
   @encode(ArrayEncoding.commaDelimited)
   highlight?: string[];
@@ -807,6 +808,7 @@ model SearchRequest {
   minimumCoverage?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.")
   @encode(ArrayEncoding.commaDelimited)
   orderby?: string[];
@@ -833,6 +835,7 @@ model SearchRequest {
   search?: string;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.")
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
@@ -847,6 +850,7 @@ model SearchRequest {
   speller?: QuerySpellerType;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.")
   @encode(ArrayEncoding.commaDelimited)
   select?: string[];
@@ -880,6 +884,7 @@ model SearchRequest {
   queryRewrites?: QueryRewritesType;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of field names used for semantic ranking.")
   @encode(ArrayEncoding.commaDelimited)
   semanticFields?: string[];
@@ -1149,6 +1154,7 @@ model SuggestRequest {
   minimumCoverage?: float64;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.")
   @encode(ArrayEncoding.commaDelimited)
   orderby?: string[];
@@ -1157,11 +1163,13 @@ model SuggestRequest {
   search: string;
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester.")
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.")
   @encode(ArrayEncoding.commaDelimited)
   select?: string[];
@@ -1274,7 +1282,9 @@ model AutocompleteRequest {
   @doc("A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.")
   minimumCoverage?: float64;
 
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.")
   @encode(ArrayEncoding.commaDelimited)
   searchFields?: string[];
