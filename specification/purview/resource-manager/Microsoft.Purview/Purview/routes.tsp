@@ -25,7 +25,8 @@ interface AccountsOperationGroup {
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityRequest,
     Response = CheckNameAvailabilityResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = ErrorResponseModel
   >;
 }
 
@@ -62,7 +63,8 @@ interface DefaultAccountsOperationGroup {
        */
       @query("scope")
       scope?: string;
-    }
+    },
+    Error = ErrorResponseModel
   >;
   /**
    * Removes the default account from the scope.
@@ -73,7 +75,9 @@ interface DefaultAccountsOperationGroup {
   @autoRoute
   @action("removeDefaultAccount")
   remove is ArmProviderActionSync<
-    Response = void,
+    Response = {
+      @body body: void;
+    } | NoContentResponse,
     Parameters = {
       /**
        * The tenant ID.
@@ -94,7 +98,8 @@ interface DefaultAccountsOperationGroup {
        */
       @query("scope")
       scope?: string;
-    }
+    },
+    Error = ErrorResponseModel
   >;
   /**
    * Sets the default account for the scope.
@@ -106,7 +111,8 @@ interface DefaultAccountsOperationGroup {
   @action("setDefaultAccount")
   set is ArmProviderActionSync<
     Request = DefaultAccountPayload,
-    Response = DefaultAccountPayload
+    Response = DefaultAccountPayload,
+    Error = ErrorResponseModel
   >;
 }
 
@@ -135,7 +141,8 @@ interface FeaturesOperationGroup {
       @path
       @segment("locations")
       locations: string;
-    }
+    },
+    Error = ErrorResponseModel
   >;
 }
 
@@ -161,6 +168,7 @@ interface UsagesOperationGroup {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Error = ErrorResponseModel
   >;
 }

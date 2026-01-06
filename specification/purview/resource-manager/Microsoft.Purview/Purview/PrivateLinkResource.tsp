@@ -30,14 +30,20 @@ interface PrivateLinkResources {
   /**
    * Gets a privately linkable resources for an account with given group identifier
    */
-  getByGroupId is ArmResourceRead<PrivateLinkResource>;
+  @summary("Gets a privately linkable resources for an account with given group identifier.")
+  getByGroupId is ArmResourceRead<
+    PrivateLinkResource,
+    Error = ErrorResponseModel
+  >;
 
   /**
    * Gets a list of privately linkable resources for an account
    */
+  @summary("Gets a list of privately linkable resources for an account.")
   listByAccount is ArmResourceListByParent<
     PrivateLinkResource,
-    Response = ArmResponse<PrivateLinkResourceList>
+    Response = ArmResponse<PrivateLinkResourceList>,
+    Error = ErrorResponseModel
   >;
 }
 

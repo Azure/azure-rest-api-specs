@@ -45,4 +45,11 @@ enum Versions {
   v2024_04_01_preview: "2024-04-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      ErrorResponseModel
+    > {}
+
+@@doc(Operations.list, "List of available operations");
+@@summary(Operations.list, "Lists the available operations");

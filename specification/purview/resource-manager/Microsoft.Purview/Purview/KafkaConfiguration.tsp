@@ -30,21 +30,31 @@ interface KafkaConfigurations {
   /**
    * Gets the kafka configuration for the account
    */
-  get is ArmResourceRead<KafkaConfiguration>;
+  @summary("Gets the kafka configuration.")
+  get is ArmResourceRead<KafkaConfiguration, Error = ErrorResponseModel>;
 
   /**
    * Create or update Kafka Configuration
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<KafkaConfiguration>;
+  @summary("Create or update the kafka configuration.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    KafkaConfiguration,
+    Error = ErrorResponseModel
+  >;
 
   /**
    * Deletes a KafkaConfiguration resource.
    */
-  delete is ArmResourceDeleteSync<KafkaConfiguration>;
+  @summary("Deletes the kafka configuration on the account.")
+  delete is ArmResourceDeleteSync<
+    KafkaConfiguration,
+    Error = ErrorResponseModel
+  >;
 
   /**
    * Lists the Kafka configurations in the Account
    */
+  @summary("Gets the list of Kafka configurations for the account.")
   listByAccount is ArmResourceListByParent<
     KafkaConfiguration,
     Parameters = {
@@ -54,7 +64,8 @@ interface KafkaConfigurations {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<KafkaConfigurationList>
+    Response = ArmResponse<KafkaConfigurationList>,
+    Error = ErrorResponseModel
   >;
 }
 

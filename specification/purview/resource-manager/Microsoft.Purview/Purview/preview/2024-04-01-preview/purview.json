@@ -118,7 +118,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -135,7 +135,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Lists the available operations",
+        "description": "List of available operations",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -145,13 +146,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -218,13 +219,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -245,7 +249,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "defaultAccountPayload",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -264,7 +268,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -281,6 +285,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Gets the accounts resources by subscription.",
         "description": "List accounts in Subscription",
         "parameters": [
           {
@@ -307,7 +312,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -334,7 +339,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
+            "name": "checkNameAvailabilityRequest",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -353,7 +358,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -384,7 +389,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "featureRequest",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -403,7 +408,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -447,7 +452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -464,6 +469,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Gets the accounts resources by resource group.",
         "description": "List accounts in ResourceGroup",
         "parameters": [
           {
@@ -493,7 +499,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -513,6 +519,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Gets the account resource.",
         "description": "Get an account",
         "parameters": [
           {
@@ -545,7 +552,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -560,6 +567,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Create or update an account resource.",
         "description": "Creates or updates an account",
         "parameters": [
           {
@@ -618,7 +626,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -638,6 +646,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Patches the account resource.",
         "description": "Updates an account",
         "parameters": [
           {
@@ -696,7 +705,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -706,7 +715,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Account"
         },
         "x-ms-long-running-operation": true
       },
@@ -715,6 +725,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Deletes the account resource.",
         "description": "Deletes an account resource",
         "parameters": [
           {
@@ -761,7 +772,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -782,6 +793,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Add the administrator for root collection.",
         "description": "Add the administrator for root collection associated with this account.",
         "parameters": [
           {
@@ -820,7 +832,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -837,6 +849,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Updates ingestion private endpoint connection status.",
         "description": "Update ingestion private endpoint connection status",
         "parameters": [
           {
@@ -878,7 +891,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -895,6 +908,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Lists all ingestion private endpoint connections.",
         "description": "Lists all ingestion private endpoint connections",
         "parameters": [
           {
@@ -927,7 +941,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -947,6 +961,7 @@
         "tags": [
           "KafkaConfigurations"
         ],
+        "summary": "Gets the list of Kafka configurations for the account.",
         "description": "Lists the Kafka configurations in the Account",
         "parameters": [
           {
@@ -986,7 +1001,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1006,6 +1021,7 @@
         "tags": [
           "KafkaConfigurations"
         ],
+        "summary": "Gets the kafka configuration.",
         "description": "Gets the kafka configuration for the account",
         "parameters": [
           {
@@ -1048,7 +1064,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1063,6 +1079,7 @@
         "tags": [
           "KafkaConfigurations"
         ],
+        "summary": "Create or update the kafka configuration.",
         "description": "Create or update Kafka Configuration",
         "parameters": [
           {
@@ -1120,7 +1137,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1135,6 +1152,7 @@
         "tags": [
           "KafkaConfigurations"
         ],
+        "summary": "Deletes the kafka configuration on the account.",
         "description": "Deletes a KafkaConfiguration resource.",
         "parameters": [
           {
@@ -1177,7 +1195,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1194,6 +1212,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.",
         "description": "Gets details from a list of feature names.",
         "parameters": [
           {
@@ -1235,7 +1254,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1252,6 +1271,7 @@
         "tags": [
           "Accounts"
         ],
+        "summary": "Lists the keys asynchronous.",
         "description": "List the authorization keys associated with this account.",
         "parameters": [
           {
@@ -1284,7 +1304,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1301,6 +1321,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "Gets private endpoint connections.",
         "description": "Get private endpoint connections for account",
         "parameters": [
           {
@@ -1340,7 +1361,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1360,6 +1381,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "Gets private endpoint connection information.",
         "description": "Get a private endpoint connection",
         "parameters": [
           {
@@ -1399,7 +1421,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1414,6 +1436,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "Approves/Rejects private endpoint connection request.",
         "description": "Create or update a private endpoint connection",
         "parameters": [
           {
@@ -1479,7 +1502,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1499,6 +1522,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
+        "summary": "Deletes private endpoint connection.",
         "description": "Delete a private endpoint connection",
         "parameters": [
           {
@@ -1552,7 +1576,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1573,6 +1597,7 @@
         "tags": [
           "PrivateLinkResources"
         ],
+        "summary": "Gets a list of privately linkable resources for an account.",
         "description": "Gets a list of privately linkable resources for an account",
         "parameters": [
           {
@@ -1605,7 +1630,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1625,6 +1650,7 @@
         "tags": [
           "PrivateLinkResources"
         ],
+        "summary": "Gets a privately linkable resources for an account with given group identifier.",
         "description": "Gets a privately linkable resources for an account with given group identifier",
         "parameters": [
           {
@@ -1664,7 +1690,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseModel"
             }
           }
         },
@@ -1901,8 +1927,35 @@
           "readOnly": true
         },
         "managedResourcesPublicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Gets or sets the public network access for managed resources."
+          "type": "string",
+          "description": "Gets or sets the public network access for managed resources.",
+          "default": "NotSpecified",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "NotSpecified"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
         },
         "mergeInfo": {
           "$ref": "#/definitions/AccountMergeInfo",
@@ -1923,8 +1976,35 @@
           "readOnly": true
         },
         "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Gets or sets the public network access."
+          "type": "string",
+          "description": "Gets or sets the public network access.",
+          "default": "Enabled",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "NotSpecified",
+                "value": "NotSpecified",
+                "description": "NotSpecified"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Disabled"
+              }
+            ]
+          }
         },
         "tenantEndpointState": {
           "$ref": "#/definitions/TenantEndpointState",
@@ -2197,6 +2277,178 @@
         }
       }
     },
+    "Consent": {
+      "type": "object",
+      "description": "Consent extension resource",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ConsentKind",
+          "description": "Gets or sets the consent kind."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConsentProperties",
+          "description": "The consent properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConsentKind": {
+      "type": "string",
+      "description": "Gets or sets the consent kind.",
+      "enum": [
+        "Metadata",
+        "Governance"
+      ],
+      "x-ms-enum": {
+        "name": "ConsentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Metadata",
+            "value": "Metadata",
+            "description": "Metadata"
+          },
+          {
+            "name": "Governance",
+            "value": "Governance",
+            "description": "Governance"
+          }
+        ]
+      }
+    },
+    "ConsentProperties": {
+      "type": "object",
+      "description": "The consent properties",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "readOnly": true
+        },
+        "scopeType": {
+          "$ref": "#/definitions/ConsentScopeType",
+          "description": "Defines consent scope type.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ConsentStatus",
+          "description": "Defines consent status.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConsentScopeType": {
+      "type": "string",
+      "description": "Defines consent scope type.",
+      "enum": [
+        "Azure",
+        "Fabric",
+        "Databricks",
+        "Snowflake",
+        "S3"
+      ],
+      "x-ms-enum": {
+        "name": "ConsentScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Azure"
+          },
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Fabric"
+          },
+          {
+            "name": "Databricks",
+            "value": "Databricks",
+            "description": "Databricks"
+          },
+          {
+            "name": "Snowflake",
+            "value": "Snowflake",
+            "description": "Snowflake"
+          },
+          {
+            "name": "S3",
+            "value": "S3",
+            "description": "S3"
+          }
+        ]
+      }
+    },
+    "ConsentStatus": {
+      "type": "string",
+      "description": "Defines consent status.",
+      "enum": [
+        "NotSpecified",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ConsentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "CreatedByType": {
+      "type": "string",
+      "description": "The type of identity that created the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "CreatedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
+      }
+    },
     "Credentials": {
       "type": "object",
       "description": "Credentials to access the event streaming service attached to the purview account.",
@@ -2241,6 +2493,24 @@
         }
       }
     },
+    "DimensionProperties": {
+      "type": "object",
+      "description": "properties for dimension",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "localized display name of the dimension to customer"
+        },
+        "name": {
+          "type": "string",
+          "description": "dimension name"
+        },
+        "toBeExportedForCustomer": {
+          "type": "boolean",
+          "description": "flag indicating whether this dimension should be included to the customer in Azure Monitor logs (aka Shoebox)"
+        }
+      }
+    },
     "ErrorModel": {
       "type": "object",
       "description": "Default error model",
@@ -2267,6 +2537,17 @@
         "target": {
           "type": "string",
           "description": "Gets or sets the target.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "description": "Default error response model",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseModelError",
+          "description": "Gets or sets the error.",
           "readOnly": true
         }
       }
@@ -2300,6 +2581,60 @@
             "name": "Hook",
             "value": "Hook",
             "description": "Hook"
+          }
+        ]
+      }
+    },
+    "EventStreamingState": {
+      "type": "string",
+      "description": "The state of the event streaming service",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "EventStreamingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          }
+        ]
+      }
+    },
+    "EventStreamingType": {
+      "type": "string",
+      "description": "The event streaming service type",
+      "enum": [
+        "None",
+        "Managed",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "EventStreamingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed"
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Azure"
           }
         ]
       }
@@ -2508,6 +2843,72 @@
         }
       }
     },
+    "LastModifiedByType": {
+      "type": "string",
+      "description": "The type of identity that last modified the resource.",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "LastModifiedByType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "User"
+          },
+          {
+            "name": "Application",
+            "value": "Application",
+            "description": "Application"
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "ManagedIdentity"
+          },
+          {
+            "name": "Key",
+            "value": "Key",
+            "description": "Key"
+          }
+        ]
+      }
+    },
+    "ManagedEventHubState": {
+      "type": "string",
+      "description": "Gets or sets the state of managed eventhub. If enabled managed eventhub will be created, if disabled the managed eventhub will be removed.",
+      "enum": [
+        "NotSpecified",
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedEventHubState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          }
+        ]
+      }
+    },
     "ManagedIdentityType": {
       "type": "string",
       "description": "Identity Type",
@@ -2611,6 +3012,195 @@
             "description": "InProgress"
           }
         ]
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Operation resource",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The response model for get operation properties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Whether operation is a data action"
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name for display purposes"
+        },
+        "origin": {
+          "type": "string",
+          "description": "origin of the operation"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "properties on meta info",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The response model for get operation properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the operation for display purposes"
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the operation for display purposes"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Name of the provider for display purposes"
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the resource type for display purposes"
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "Paged list of operation resources",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total item count."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The Url of next result page."
+        },
+        "value": {
+          "type": "array",
+          "description": "Collection of items of type results.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationMetaLogSpecification": {
+      "type": "object",
+      "description": "log specifications for operation api",
+      "properties": {
+        "blobDuration": {
+          "type": "string",
+          "description": "blob duration of the log"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "localized name of the log category"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the log category"
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "type": "object",
+      "description": "metric specifications for the operation",
+      "properties": {
+        "aggregationType": {
+          "type": "string",
+          "description": "aggregation type of metric"
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "properties for dimension",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "description of the metric"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "localized name of the metric"
+        },
+        "enableRegionalMdmAccount": {
+          "type": "string",
+          "description": "enable regional mdm account"
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "internal metric name"
+        },
+        "name": {
+          "type": "string",
+          "description": "name of the metric"
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "dimension name use to replace resource id if specified"
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "Metric namespace.\nOnly set the namespace if different from the default value,\nleaving it empty makes it use the value from the ARM manifest."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "supported aggregation types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "supported time grain types",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "type": "string",
+          "description": "units for the metric"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "type": "object",
+      "description": "The operation meta service specification",
+      "properties": {
+        "logSpecifications": {
+          "type": "array",
+          "description": "log specifications for the operation",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          },
+          "x-ms-identifiers": []
+        },
+        "metricSpecifications": {
+          "type": "array",
+          "description": "metric specifications for the operation",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OperationProperties": {
+      "type": "object",
+      "description": "properties on meta info",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "The operation meta service specification"
+        }
       }
     },
     "PrivateEndpoint": {
@@ -2897,6 +3487,41 @@
         ]
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "Proxy Azure Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/ProxyResourceSystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResourceSystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemData"
+        }
+      ]
+    },
     "PublicNetworkAccess": {
       "type": "string",
       "description": "Gets or sets the public network access for managed resources.",
@@ -2989,6 +3614,44 @@
         ]
       }
     },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "$ref": "#/definitions/CreatedByType",
+          "description": "The type of identity that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last modification the resource (UTC).",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource.",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/LastModifiedByType",
+          "description": "The type of identity that last modified the resource.",
+          "readOnly": true
+        }
+      }
+    },
     "TenantEndpointState": {
       "type": "string",
       "description": "Gets or sets the state of tenant endpoint.",
@@ -3018,6 +3681,56 @@
           }
         ]
       }
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "Azure ARM Tracked Resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the identifier.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The Managed Identity of the resource"
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the location."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/TrackedResourceSystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags on the azure resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type.",
+          "readOnly": true
+        }
+      }
+    },
+    "TrackedResourceSystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemData"
+        }
+      ]
     },
     "Usage": {
       "type": "object",

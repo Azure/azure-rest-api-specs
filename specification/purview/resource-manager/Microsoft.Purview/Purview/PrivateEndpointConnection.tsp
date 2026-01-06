@@ -30,29 +30,35 @@ interface PrivateEndpointConnections {
   /**
    * Get a private endpoint connection
    */
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  @summary("Gets private endpoint connection information.")
+  get is ArmResourceRead<PrivateEndpointConnection, Error = ErrorResponseModel>;
 
   /**
    * Create or update a private endpoint connection
    */
+  @summary("Approves/Rejects private endpoint connection request.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpointConnection,
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Delete a private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Deletes private endpoint connection.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Get private endpoint connections for account
    */
+  @summary("Gets private endpoint connections.")
   listByAccount is ArmResourceListByParent<
     PrivateEndpointConnection,
     Parameters = {
@@ -62,7 +68,8 @@ interface PrivateEndpointConnections {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<PrivateEndpointConnectionList>
+    Response = ArmResponse<PrivateEndpointConnectionList>,
+    Error = ErrorResponseModel
   >;
 }
 

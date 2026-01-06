@@ -49,3 +49,12 @@ using Microsoft.Purview;
 @@clientLocation(FeaturesOperationGroup.subscriptionGet, "Features");
 
 @@clientLocation(UsagesOperationGroup.get, "Usages");
+@@clientName(DefaultAccountsOperationGroup.set::parameters.body,
+  "defaultAccountPayload"
+);
+@@clientName(AccountsOperationGroup.checkNameAvailability::parameters.body,
+  "checkNameAvailabilityRequest"
+);
+@@clientName(FeaturesOperationGroup.subscriptionGet::parameters.body,
+  "featureRequest"
+);

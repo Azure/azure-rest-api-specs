@@ -13,6 +13,7 @@ namespace Microsoft.Purview;
 /**
  * Account resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 model Account
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<AccountProperties> {
   ...ResourceNameParameter<
@@ -40,43 +41,52 @@ interface Accounts {
   /**
    * Get an account
    */
-  get is ArmResourceRead<Account>;
+  @summary("Gets the account resource.")
+  get is ArmResourceRead<Account, Error = ErrorResponseModel>;
 
   /**
    * Creates or updates an account
    */
+  @summary("Create or update an account resource.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Account,
     LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Updates an account
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  @summary("Patches the account resource.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Account,
     PatchModel = AccountUpdateParameters,
-    Response = ArmResponse<Account> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Account> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Account;
-    })
+    }),
+    Error = ErrorResponseModel
   >;
 
   /**
    * Deletes an account resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Deletes the account resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Account,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = ErrorResponseModel
   >;
 
   /**
    * List accounts in ResourceGroup
    */
+  @summary("Gets the accounts resources by resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Account,
     Parameters = {
@@ -86,12 +96,14 @@ interface Accounts {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<AccountList>
+    Response = ArmResponse<AccountList>,
+    Error = ErrorResponseModel
   >;
 
   /**
    * List accounts in Subscription
    */
+  @summary("Gets the accounts resources by subscription.")
   listBySubscription is ArmListBySubscription<
     Account,
     Parameters = {
@@ -101,40 +113,52 @@ interface Accounts {
       @query("$skipToken")
       $skipToken?: string;
     },
-    Response = ArmResponse<AccountList>
+    Response = ArmResponse<AccountList>,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Add the administrator for root collection associated with this account.
    */
+  @summary("Add the administrator for root collection.")
   addRootCollectionAdmin is ArmResourceActionSync<
     Account,
     CollectionAdminUpdate,
-    OkResponse
+    OkResponse,
+    Error = ErrorResponseModel
   >;
 
   /**
    * List the authorization keys associated with this account.
    */
+  @summary("Lists the keys asynchronous.")
   @action("listkeys")
-  listKeys is ArmResourceActionSync<Account, void, ArmResponse<AccessKeys>>;
+  listKeys is ArmResourceActionSync<
+    Account,
+    void,
+    ArmResponse<AccessKeys>,
+    Error = ErrorResponseModel
+  >;
 
   /**
    * Gets details from a list of feature names.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a list of features and their status for the account.\r\nStatus of enabled features will be true. Status of disabled features will be false.\r\nFeatures that don't exist will be excluded from the results.")
   @operationId("Features_AccountGet")
   @action("listFeatures")
   accountGet is ArmResourceActionSync<
     Account,
     BatchFeatureRequest,
-    ArmResponse<BatchFeatureStatus>
+    ArmResponse<BatchFeatureStatus>,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Lists all ingestion private endpoint connections
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Lists all ingestion private endpoint connections.")
   @operationId("IngestionPrivateEndpointConnections_List")
   @list
   @get
@@ -142,19 +166,22 @@ interface Accounts {
   list is ArmResourceActionSync<
     Account,
     void,
-    ArmResponse<PrivateEndpointConnectionList>
+    ArmResponse<PrivateEndpointConnectionList>,
+    Error = ErrorResponseModel
   >;
 
   /**
    * Update ingestion private endpoint connection status
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Updates ingestion private endpoint connection status.")
   @operationId("IngestionPrivateEndpointConnections_UpdateStatus")
   @action("ingestionPrivateEndpointConnectionStatus")
   updateStatus is ArmResourceActionSync<
     Account,
     PrivateEndpointConnectionStatusUpdateRequest,
-    ArmResponse<PrivateEndpointConnectionStatusUpdateResponse>
+    ArmResponse<PrivateEndpointConnectionStatusUpdateResponse>,
+    Error = ErrorResponseModel
   >;
 }
 

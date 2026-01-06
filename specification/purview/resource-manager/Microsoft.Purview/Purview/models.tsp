@@ -11,6 +11,23 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.Purview;
 
 /**
+ * Paged list of operation resources
+ */
+model OperationList {
+  /** Total item count. */
+  count?: int64;
+
+  /** The Url of next result page. */
+  @nextLink
+  nextLink?: string;
+
+  /** Collection of items of type results. */
+  @pageItems
+  @identifiers(#[])
+  value: Operation[];
+}
+
+/**
  * Gets the account status code.
  */
 union AccountProvisioningState {
@@ -614,7 +631,7 @@ model AccountProperties {
   /**
    * Gets or sets the public network access for managed resources.
    */
-  managedResourcesPublicNetworkAccess?: PublicNetworkAccess;
+  managedResourcesPublicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.NotSpecified;
 
   /**
    * Gets or sets the Merge Info.
@@ -637,7 +654,7 @@ model AccountProperties {
   /**
    * Gets or sets the public network access.
    */
-  publicNetworkAccess?: PublicNetworkAccess;
+  publicNetworkAccess?: PublicNetworkAccess = PublicNetworkAccess.Enabled;
 
   /**
    * Gets or sets the state of tenant endpoint.
@@ -649,6 +666,7 @@ model AccountProperties {
  * Gets or sets the status of the account.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AccountPropertiesAccountStatus extends AccountStatus {}
 
 /**
@@ -672,6 +690,7 @@ model AccountStatus {
  * Gets the account error details.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AccountStatusErrorDetails extends ErrorModel {}
 
 /**
@@ -720,6 +739,7 @@ model CloudConnectors {
  * The URIs that are the public endpoints of the account.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AccountPropertiesEndpoints extends AccountEndpoints {}
 
 /**
@@ -765,6 +785,7 @@ model IngestionStorage {
  * Gets the resource identifiers of the managed resources.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AccountPropertiesManagedResources extends ManagedResources {}
 
 /**
@@ -922,6 +943,7 @@ model ProxyResource {
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ProxyResourceSystemData extends SystemData {}
 
@@ -1076,6 +1098,7 @@ model UserAssignedIdentity {
 /**
  * Metadata pertaining to creation and last modification of the resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model TrackedResourceSystemData extends SystemData {}
 
@@ -1095,11 +1118,13 @@ model ErrorResponseModel {
  * Gets or sets the error.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model ErrorResponseModelError extends ErrorModel {}
 
 /**
  * The account update properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model AccountUpdateParameters {
   /**
    * The Managed Identity of the resource
@@ -1596,6 +1621,7 @@ model Usage {
 /**
  * Quota name
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model UsageName extends QuotaName {}
 
