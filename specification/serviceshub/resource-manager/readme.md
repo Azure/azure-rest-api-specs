@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2025-12-12-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-12-12-preview'
 input-file:
-  - Microsoft.ServicesHub/2025-12-12-preview/serviceshub-preview.json
+  - Microsoft.ServicesHub/preview/2025-12-12-preview/serviceshub-preview.json
 ```
 
 ---
