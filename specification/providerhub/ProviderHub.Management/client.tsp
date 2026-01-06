@@ -9,8 +9,14 @@ using Microsoft.ProviderHub;
 @@clientLocation(ProviderRegistrations.checkinManifest, "Client", "go");
 @@clientLocation(ProviderRegistrations.generateManifest, "Client", "go");
 
-@@clientName(LocalizedOperationDefinitionDisplay.ptPT, "pt", "go");
+@@clientName(LocalizedOperationDefinitionDisplay.ptPT, "pt", "go,java");
 @@clientName(LocalizedOperationDisplayDefinitionPtPT,
   "LocalizedOperationDisplayDefinitionPt",
-  "go"
+  "go,java"
+);
+
+@@alternateType(AuthorizedApplication.name, Azure.Core.uuid, "java");
+@@clientName(SubscriptionLifecycleNotificationSpecifications.softDeleteTTL,
+  "softDeleteTtl",
+  "java"
 );

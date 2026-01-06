@@ -22,6 +22,18 @@ options:
     service-name: "ProviderHub" # human-readable service name, whitespace allowed
     flavor: azure
     use-object-for-unknown: true
+    uuid-as-string: false
+    client-side-validations: true
+    remove-inner:
+      - DefaultRolloutProperties
+      - DefaultRolloutSpecification
+      - DefaultRolloutStatus
+      - CustomRolloutProperties
+      - CustomRolloutSpecification
+      - CustomRolloutStatus
+    resource-collection-associations:
+      - resource: DefaultRollout
+        collection: DefaultRollouts
   "@azure-tools/typespec-ts":
     service-dir: "sdk/providerhub"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-providerhub"
