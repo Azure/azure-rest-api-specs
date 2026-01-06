@@ -420,7 +420,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(ManagedVMSize, "ServiceFabricManagedUnsupportedVmSize", "csharp");
-@@clientName(VMSize, "VmSize", "csharp");
+@@clientName(ManagedVMSizesResult,
+  "ServiceFabricManagedUnsupportedVmSizeListResult",
+  "csharp"
+);
+@@clientName(VMSize, "ServiceFabricManagedVmSizeProperties", "csharp");
 @@clientName(AddRemoveIncrementalNamedPartitionScalingMechanism,
   "NamedPartitionAddOrRemoveScalingMechanism",
   "csharp"
