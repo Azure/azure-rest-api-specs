@@ -9,7 +9,6 @@ using AttestationService;
 @@clientName(AttestationResult.`x-ms-sgx-svn`, "svn");
 @@clientName(AttestationResult.svn, "deprecatedSvn");
 
-@@usage(CertificateModification, Usage.output);
 @@usage(PolicyModification, Usage.output);
 @@usage(AttestOpenEnclaveRequest, Usage.output);
 @@usage(AttestSgxEnclaveRequest, Usage.output);
@@ -20,3 +19,4 @@ using AttestationService;
 @@usage(PolicyResult, Usage.output);
 @@usage(AttestationResult, Usage.output);
 @@usage(AttestationCertificateManagementBody, Usage.output);
+@@usage(CertificateModification, Usage.output);
