@@ -1094,7 +1094,7 @@ model HealthReportRequest {
 @added(Versions.v2026_01_01_preview)
 @doc("Evaluation rules for the health report")
 model HealthReportEvaluationRule {
-  ...OmitProperties<EvaluationRule, "dynamicDetectionRule">;
+  ...EvaluationRule;
 }
 
 alias TimestampQueryParam = {
