@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "./helpers.tsp";
+import "./meshmember.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -64,6 +65,10 @@ model FleetMemberProperties {
   @visibility(Lifecycle.Read)
   @doc("Status information of the last operation for fleet member.")
   status?: FleetMemberStatus;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The Mesh Member associated with this Fleet Member.")
+  meshMember?: MeshMember;
 }
 
 @added(Versions.v2025_03_01)
