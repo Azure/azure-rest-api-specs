@@ -30,7 +30,7 @@ namespace Genome;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom document upload operation with multipart form data for internal and external workflows"
 @summary("Upload documents")
 @route("/v1/documents")
-@put
+@post
 op uploadDocuments is Azure.Core.Foundations.Operation<
   UploadDocumentsRequest,
   UploadResponse
