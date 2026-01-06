@@ -76,7 +76,7 @@ model SegmentationManagerProperties {
 
   @doc("Managed-On-Behalf-Of configuration.")
   @visibility(Lifecycle.Read)
-  managedOnBehalfOfConfiguration: CommonTypes.ManagedOnBehalfOfConfiguration;
+  managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @visibility(Lifecycle.Read)
   @doc("The provisioning state of the resource.")
