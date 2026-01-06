@@ -4,24 +4,29 @@
     "resourceGroupName": "rgName",
     "servicesHubConnectorName": "resourceName1",
     "api-version": "2025-12-12-preview",
+    "x-ms-engage-hub-token": "fsdfsdfsd",
     "requestBody": {
       "properties": {
-        "createdTime": "2025-12-16T10:00:00.0000000+00:00",
-        "lastModifiedTime": "2025-12-16T12:00:00.0000000+00:00",
-        "agreementId": "12345678",
-        "provisioningState": "Creating",
-        "logAnalyticsWorkspace": [
-          {
-            "location": "West US",
-            "resourceGroupName": "laResourceGroup",
-            "subscriptionId": "0afefe50-734e-4610-8a82-a144ahf49dea",
-            "tenantId": "ABA2944F-5A6C-4DCC-9B1F-32084888853C",
-            "workspaceId": "341FE80D-3908-453D-B65A-3D12AECA4617",
-            "workspaceName": "laContosoWorkspace",
-            "linkedDate": "2025-12-01T10:00:00.0000000+00:00",
-            "isLatest": true
+        "servicesHubWorkspace": {
+          "properties": {
+            "servicesHubWorkspaceId": "shWorkspaceId1",
+            "servicesHubWorkspaceName": "shContosoWorkspace",
+            "logAnalyticsWorkspace": [
+              {
+                "workspaceId": "341FE80D-3908-453D-B65A-3D12AECA4617",
+                "workspaceName": "laContosoWorkspace",
+                "location": "West US",
+                "tenantId": "ABA2944F-5A6C-4DCC-9B1F-32084888853C",
+                "subscriptionId": "0afefe50-734e-4610-8a82-a144ahf49dea",
+                "resourceGroupName": "laResourceGroup"
+              }
+            ],
+            "consentedAzureSubscription": "0afefe50-734e-4610-8a82-a144ahf49dea"
           }
-        ]
+        },
+        "provisioningState": "Creating",
+        "agreementType": "sh",
+        "engageHubSpaces": null
       },
       "location": "East US"
     }
