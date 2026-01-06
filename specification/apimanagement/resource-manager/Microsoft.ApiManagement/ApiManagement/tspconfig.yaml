@@ -30,6 +30,47 @@ options:
     flavor: azure
     use-object-for-unknown: true
     float32-as-double: false
+    resource-collection-associations:
+      - resource: ApiContract
+        collection: Apis
+      - resource: ApiReleaseContract
+        collection: ApiReleases
+      - resource: ApiVersionSetContract
+        collection: ApiVersionSets
+      - resource: BackendContract
+        collection: Backends
+      - resource: CertificateContract
+        collection: Certificates
+      - resource: DiagnosticContract
+        collection: Diagnostics
+      - resource: GlobalSchemaContract
+        collection: GlobalSchemas
+      - resource: GroupContract
+        collection: Groups
+      - resource: LoggerContract
+        collection: Loggers
+      - resource: NamedValueContract
+        collection: NamedValues
+      - resource: OperationContract
+        collection: ApiOperations
+      - resource: PolicyContract
+        collection: Policies
+      - resource: PolicyFragmentContract
+        collection: PolicyFragments
+      - resource: ProductApiLinkContract
+        collection: ProductApiLinks
+      - resource: ProductContract
+        collection: Products
+      - resource: ProductGroupLinkContract
+        collection: ProductGroupLinks
+      - resource: SchemaContract
+        collection: ApiSchemas
+      - resource: TagApiLinkContract
+        collection: TagApiLinks
+      - resource: TagOperationLinkContract
+        collection: TagOperationLinks
+      - resource: TagProductLinkContract
+        collection: TagProductLinks
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-apimanagement"
     flavor: azure
