@@ -181,7 +181,7 @@ model RedTeam {
   displayName?: string;
 
   @doc("Number of simulation rounds.")
-  numTurns?: int32;
+  numTurns?: string;
 
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];

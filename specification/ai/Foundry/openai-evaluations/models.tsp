@@ -161,15 +161,26 @@ model CreateEvalRequest is OpenAI.CreateEvalRequest {
   properties?: Record<string>;
 }
 
+/** The types of parameters for red team item generation. */
+enum ItemGenerationParamsType {
+  /** The ResponseRetrieval item generation parameters.  */
+  responseRetrieval: "response_retrieval",
+
+  /** Parameters for red team item generation. */
+  redTeam: "red_team",
+
+  /** Parameters for red team seed prompts. */
+  redTeamSeedPrompts: "red_team_seed_prompts",
+
+  /** Parameters for red team taxonomy item generation. */
+  redTeamTaxonomy: "red_team_taxonomy"
+}
+
 /** Represents the parameters for red team item generation. */
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
 @discriminator("type")
 model RedTeamItemGenerationParams extends ItemGenerationParams {
-  /** The type of item generation parameters. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  type: "red_team" | "red_team_seed_prompts" | "red_team_taxonomy";
-
   /** The collection of attack strategies to be used. */
   attack_strategies: AttackStrategy[];
 
