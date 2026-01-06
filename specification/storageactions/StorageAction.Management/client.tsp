@@ -25,7 +25,7 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
-@@clientName(StorageTasks.list, "GetStorageTasksReports", "csharp");
+@@clientName(StorageTasks.list, "GetStorageTasksReportList", "csharp");
 @@clientName(StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
