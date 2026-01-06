@@ -110,11 +110,14 @@ union _AgentItemType {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyVariants(OpenAI.ItemType, _AgentItemType);
 
+/* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.ItemResource,
   {
     /** The information about the creator of the item */
-    created_by?: CreatedBy,
+    #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+    created_by?: CreatedBy | string,
   }
 );
 

@@ -8,6 +8,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 namespace Azure.AI.Projects;
 
 using Azure.Core.Experimental;
+using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 
 /** Error response for API failures. */
@@ -173,3 +174,79 @@ model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
 }
+
+alias PageLimitQueryParameter = {
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 20.
+   */
+  @query limit?: int32 = 20;
+};
+
+union PageOrder {
+  "asc",
+  "desc",
+}
+
+alias PageOrderQueryParameter = {
+  /**
+   * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+   * for descending order.
+   */
+  @query order?: PageOrder;
+};
+
+alias PageAfterQueryParameter = {
+  /**
+   * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+   * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+   */
+  @query @continuationToken after?: string;
+};
+
+alias PageBeforeQueryParameter = {
+  /**
+   * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+   * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+   * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+   */
+  @query before?: string;
+};
+
+alias CommonPageQueryParameters = {
+  ...PageLimitQueryParameter;
+  ...PageOrderQueryParameter;
+  ...PageAfterQueryParameter;
+  ...PageBeforeQueryParameter;
+};
+
+model MetadataPropertyForRequest {
+  /**
+   * Set of 16 key-value pairs that can be attached to an object. This can be
+   * useful for storing additional information about the object in a structured
+   * format, and querying for objects via API or the dashboard.
+   *
+   * Keys are strings with a maximum length of 64 characters. Values are strings
+   * with a maximum length of 512 characters.
+   */
+  @extension("x-oaiTypeLabel", "map")
+  metadata?: Record<string>;
+}
+model MetadataPropertyForResponse {
+  /**
+   * Set of 16 key-value pairs that can be attached to an object. This can be
+   * useful for storing additional information about the object in a structured
+   * format, and querying for objects via API or the dashboard.
+   *
+   * Keys are strings with a maximum length of 64 characters. Values are strings
+   * with a maximum length of 512 characters.
+   */
+  @extension("x-oaiTypeLabel", "map")
+  metadata: Record<string> | null;
+}
+
+alias SseResponseOf<T> = {
+  @header("Content-Type") contentType: "text/event-stream";
+  @body responseBody: T;
+};

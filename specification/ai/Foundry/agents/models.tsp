@@ -9,7 +9,7 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 model CreateAgentVersionRequest {
-  ...OpenAI.MetadataPropertyForRequest;
+  ...MetadataPropertyForRequest;
 
   @doc("A human-readable description of the agent.")
   @maxLength(512)
@@ -20,7 +20,7 @@ model CreateAgentVersionRequest {
 }
 
 model CreateAgentVersionFromManifestRequest {
-  ...OpenAI.MetadataPropertyForRequest;
+  ...MetadataPropertyForRequest;
 
   @doc("A human-readable description of the agent.")
   @maxLength(512)
@@ -85,7 +85,7 @@ model AgentObject {
 }
 
 model AgentVersionObject {
-  ...OpenAI.MetadataPropertyForResponse;
+  ...MetadataPropertyForResponse;
 
   @doc("The object type, which is always 'agent.version'.")
   object: "agent.version";
@@ -265,7 +265,7 @@ model PromptAgentDefinition extends AgentDefinition {
    */
   text?: {
     // Tool customization: Employ discriminated type base
-    format?: OpenAI.ResponseTextFormatConfiguration;
+    format?: OpenAI.TextResponseFormatConfiguration;
   };
 
   @doc("Set of structured inputs that can participate in prompt template substitution or tool argument bindings.")
@@ -277,7 +277,7 @@ alias ListAgentQueryParameters = {
   @doc("Filter agents by kind. If not provided, all agents are returned.")
   kind?: AgentKind;
 
-  ...OpenAI.CommonPageQueryParameters;
+  ...CommonPageQueryParameters;
 };
 
 @doc("A deleted agent Object")

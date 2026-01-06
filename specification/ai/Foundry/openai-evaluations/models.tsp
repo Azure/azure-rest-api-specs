@@ -1,12 +1,14 @@
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "../common/models.tsp";
 import "@typespec/openapi";
-import "../.external-readonly/openai.external.typespec/evals/models.tsp";
+
+import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-core/experimental";
+import "@azure-tools/openai-typespec/models/evals";
+
+import "../common/models.tsp";
 import "../red-teams/models.tsp";
 
 using Azure.Core.Experimental;

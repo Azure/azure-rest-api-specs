@@ -26,7 +26,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is AgentOperation<
-    OpenAI.CreateConversationRequest,
+    OpenAI.CreateConversationBody,
     OpenAI.ConversationResource
   >;
 
@@ -42,7 +42,7 @@ interface Conversations {
       /** The id of the conversation to update. */
       @path conversation_id: string;
 
-      ...OpenAI.UpdateConversationRequest;
+      ...OpenAI.UpdateConversationBody;
     },
     OpenAI.ConversationResource
   >;
@@ -92,7 +92,7 @@ interface Conversations {
   @list
   listConversations is AgentOperation<
     {
-      ...OpenAI.CommonPageQueryParameters;
+      ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
     },
@@ -122,7 +122,7 @@ interface Conversations {
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
-      items: (OpenAI.ItemParam | OpenAI.EasyInputMessage)[];
+      items: (OpenAI.Item | OpenAI.EasyInputMessage)[];
     },
     OpenAI.ConversationItemList
   >;
@@ -179,7 +179,7 @@ interface Conversations {
       /** The id of the conversation on which the items needs to be listed. */
       @path conversation_id: string;
 
-      ...OpenAI.CommonPageQueryParameters;
+      ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
     },
     AgentsPagedResult<OpenAI.ItemResource>

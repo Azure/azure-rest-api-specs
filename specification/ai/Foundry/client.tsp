@@ -171,7 +171,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@usage(OpenAI.ItemResource, Usage.json);
-@@usage(OpenAI.ResponseStreamEvent, Usage.json);
+@@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
 @@usage(AgentId, Usage.output);
 @@access(AgentId, Access.public);

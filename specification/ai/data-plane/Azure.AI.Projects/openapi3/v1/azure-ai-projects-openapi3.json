@@ -2912,7 +2912,13 @@
             "description": "The name of the evaluation."
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "data_source_config": {
             "anyOf": [
@@ -2978,7 +2984,13 @@
             "description": "The name of the run."
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "data_source": {
             "anyOf": [
@@ -3364,15 +3376,18 @@
             "description": "A list of testing criteria."
           },
           "created_at": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
+            "type": "integer",
+            "format": "unixtime",
             "description": "The Unix timestamp (in seconds) for when the eval was created."
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "modified_at": {
             "allOf": [
@@ -3492,11 +3507,8 @@
             "description": "The name of the evaluation run."
           },
           "created_at": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
+            "type": "integer",
+            "format": "unixtime",
             "description": "Unix timestamp (in seconds) when the evaluation run was created."
           },
           "report_url": {
@@ -3543,7 +3555,13 @@
             "description": "Information about the run's data source."
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "error": {
             "$ref": "#/components/schemas/OpenAI.EvalApiError"
@@ -3573,7 +3591,7 @@
         "x-oaiMeta": {
           "name": "The eval run object",
           "group": "evals",
-          "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\\n\\n# Steps\\n\\n1. Analyze the content of the news headline to understand its primary focus.\\n2. Extract the subject matter, identifying any key indicators or keywords.\\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\\n4. Ensure only one category is selected per headline.\\n\\n# Output Format\\n\\nRespond with the chosen category as a single word. For instance: \\\"Technology\\\", \\\"Markets\\\", \\\"World\\\", \\\"Business\\\", or \\\"Sports\\\".\\n\\n# Examples\\n\\n**Input**: \\\"Apple Unveils New iPhone Model, Featuring Advanced AI Features\\\"  \\n**Output**: \\\"Technology\\\"\\n\\n**Input**: \\\"Global Stocks Mixed as Investors Await Central Bank Decisions\\\"  \\n**Output**: \\\"Markets\\\"\\n\\n**Input**: \\\"War in Ukraine: Latest Updates on Negotiation Status\\\"  \\n**Output**: \\\"World\\\"\\n\\n**Input**: \\\"Microsoft in Talks to Acquire Gaming Company for $2 Billion\\\"  \\n**Output**: \\\"Business\\\"\\n\\n**Input**: \\\"Manchester United Secures Win in Premier League Football Match\\\"  \\n**Output**: \\\"Sports\\\" \\n\\n# Notes\\n\\n- If the headline appears to fit into more than one category, choose the most dominant theme.\\n- Keywords or phrases such as \\\"stocks\\\", \\\"company acquisition\\\", \\\"match\\\", or technological brands can be good indicators for classification.\\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
+          "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
         }
       },
       "EvalRunDataSource": {
@@ -3629,11 +3647,8 @@
             "description": "The identifier of the evaluation group."
           },
           "created_at": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
+            "type": "integer",
+            "format": "unixtime",
             "description": "Unix timestamp (in seconds) when the evaluation run was created."
           },
           "status": {
@@ -3736,6 +3751,7 @@
             "description": "Additional details about the test criteria metric."
           }
         },
+        "additionalProperties": {},
         "description": "A single grader result for an evaluation run output item.",
         "title": "EvalRunOutputItemResult"
       },
@@ -4151,153 +4167,29 @@
         ],
         "description": "Credentials that do not require authentication"
       },
-      "OpenAI.Annotation": {
+      "OpenAI.ApplyPatchToolParam": {
         "type": "object",
         "required": [
           "type"
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.AnnotationType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "file_citation": "#/components/schemas/OpenAI.AnnotationFileCitation",
-            "url_citation": "#/components/schemas/OpenAI.AnnotationUrlCitation",
-            "file_path": "#/components/schemas/OpenAI.AnnotationFilePath"
-          }
-        }
-      },
-      "OpenAI.AnnotationFileCitation": {
-        "type": "object",
-        "required": [
-          "type",
-          "file_id",
-          "index",
-          "filename"
-        ],
-        "properties": {
-          "type": {
             "type": "string",
             "enum": [
-              "file_citation"
+              "apply_patch"
             ],
-            "description": "The type of the file citation. Always `file_citation`."
-          },
-          "file_id": {
-            "type": "string",
-            "description": "The ID of the file."
-          },
-          "index": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The index of the file in the list of files."
-          },
-          "filename": {
-            "type": "string",
-            "description": "The filename of the file cited."
+            "description": "The type of the tool. Always `apply_patch`.",
+            "x-stainless-const": true,
+            "default": "apply_patch"
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.Annotation"
+            "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A citation to a file."
-      },
-      "OpenAI.AnnotationFilePath": {
-        "type": "object",
-        "required": [
-          "type",
-          "file_id",
-          "index"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "file_path"
-            ],
-            "description": "The type of the file path. Always `file_path`."
-          },
-          "file_id": {
-            "type": "string",
-            "description": "The ID of the file."
-          },
-          "index": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The index of the file in the list of files."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Annotation"
-          }
-        ],
-        "description": "A path to a file."
-      },
-      "OpenAI.AnnotationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "file_citation",
-              "url_citation",
-              "file_path",
-              "container_file_citation"
-            ]
-          }
-        ]
-      },
-      "OpenAI.AnnotationUrlCitation": {
-        "type": "object",
-        "required": [
-          "type",
-          "url",
-          "start_index",
-          "end_index",
-          "title"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "url_citation"
-            ],
-            "description": "The type of the URL citation. Always `url_citation`."
-          },
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The URL of the web resource."
-          },
-          "start_index": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The index of the first character of the URL citation in the message."
-          },
-          "end_index": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The index of the last character of the URL citation in the message."
-          },
-          "title": {
-            "type": "string",
-            "description": "The title of the web resource."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Annotation"
-          }
-        ],
-        "description": "A citation for a web resource used to generate a model response."
+        "description": "Allows the assistant to create, delete, or update files using unified diffs.",
+        "title": "Apply patch tool"
       },
       "OpenAI.ApproximateLocation": {
         "type": "object",
@@ -4309,7 +4201,10 @@
             "type": "string",
             "enum": [
               "approximate"
-            ]
+            ],
+            "description": "The type of location approximation. Always `approximate`.",
+            "x-stainless-const": true,
+            "default": "approximate"
           },
           "country": {
             "type": "string",
@@ -4327,12 +4222,7 @@
             "type": "string",
             "nullable": true
           }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Location"
-          }
-        ]
+        }
       },
       "OpenAI.ChatCompletionTool": {
         "type": "object",
@@ -4356,6 +4246,46 @@
         "description": "A function tool that can be used to generate a response.",
         "title": "Function tool"
       },
+      "OpenAI.CodeInterpreterContainerAuto": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto"
+            ],
+            "description": "Always `auto`.",
+            "x-stainless-const": true,
+            "default": "auto"
+          },
+          "file_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 50,
+            "description": "An optional list of uploaded files to make available to your code."
+          },
+          "memory_limit": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ContainerMemoryLimit"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "description": "Configuration for a code interpreter container. Optionally specify the IDs of the files to run the code on.",
+        "title": "CodeInterpreterToolAuto",
+        "x-stainless-naming": {
+          "go": {
+            "type_name": "ToolCodeInterpreterContainerCodeInterpreterContainerAuto"
+          }
+        }
+      },
       "OpenAI.CodeInterpreterTool": {
         "type": "object",
         "required": [
@@ -4368,7 +4298,8 @@
             "enum": [
               "code_interpreter"
             ],
-            "description": "The type of the code interpreter tool. Always `code_interpreter`."
+            "description": "The type of the code interpreter tool. Always `code_interpreter`.",
+            "x-stainless-const": true
           },
           "container": {
             "anyOf": [
@@ -4376,10 +4307,10 @@
                 "type": "string"
               },
               {
-                "$ref": "#/components/schemas/OpenAI.CodeInterpreterToolAuto"
+                "$ref": "#/components/schemas/OpenAI.CodeInterpreterContainerAuto"
               }
             ],
-            "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code."
+            "description": "The code interpreter container. Can be a container ID or an object that\n  specifies uploaded file IDs to make available to your code, along with an\n  optional `memory_limit` setting."
           }
         },
         "allOf": [
@@ -4387,30 +4318,8 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A tool that runs Python code to help generate a response to a prompt."
-      },
-      "OpenAI.CodeInterpreterToolAuto": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "auto"
-            ],
-            "description": "Always `auto`."
-          },
-          "file_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "An optional list of uploaded files to make available to your code."
-          }
-        },
-        "description": "Configuration for a code interpreter container. Optionally specify the IDs\nof the files to run the code on."
+        "description": "A tool that runs Python code to help generate a response to a prompt.",
+        "title": "Code interpreter"
       },
       "OpenAI.ComparisonFilter": {
         "type": "object",
@@ -4430,7 +4339,7 @@
               "lt",
               "lte"
             ],
-            "description": "Specifies the comparison operator:\n`eq` (equal), `ne` (not equal), `gt` (greater than), `gte` (greater than or equal), `lt` (less than), `lte` (less than or equal).",
+            "description": "Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`.\n  - `eq`: equals\n  - `ne`: not equal\n  - `gt`: greater than\n  - `gte`: greater than or equal\n  - `lt`: less than\n  - `lte`: less than or equal\n  - `in`: in\n  - `nin`: not in",
             "default": "eq"
           },
           "key": {
@@ -4443,17 +4352,36 @@
                 "type": "string"
               },
               {
-                "type": "number",
-                "format": "float"
+                "$ref": "#/components/schemas/OpenAI.numeric"
               },
               {
                 "type": "boolean"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OpenAI.ComparisonFilterValueItems"
+                }
               }
             ],
             "description": "The value to compare against the attribute key; supports string, number, or boolean types."
           }
         },
-        "description": "A filter used to compare a specified attribute key to a given value using a defined comparison operation."
+        "description": "A filter used to compare a specified attribute key to a given value using a defined comparison operation.",
+        "title": "Comparison Filter",
+        "x-oaiMeta": {
+          "name": "ComparisonFilter"
+        }
+      },
+      "OpenAI.ComparisonFilterValueItems": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.numeric"
+          }
+        ]
       },
       "OpenAI.CompoundFilter": {
         "type": "object",
@@ -4477,15 +4405,27 @@
                 {
                   "$ref": "#/components/schemas/OpenAI.ComparisonFilter"
                 },
-                {
-                  "$ref": "#/components/schemas/OpenAI.CompoundFilter"
-                }
+                {}
               ]
             },
             "description": "Array of filters to combine. Items can be `ComparisonFilter` or `CompoundFilter`."
           }
         },
-        "description": "Combine multiple filters using `and` or `or`."
+        "description": "Combine multiple filters using `and` or `or`.",
+        "title": "Compound Filter",
+        "x-oaiMeta": {
+          "name": "CompoundFilter"
+        }
+      },
+      "OpenAI.ComputerEnvironment": {
+        "type": "string",
+        "enum": [
+          "windows",
+          "mac",
+          "linux",
+          "ubuntu",
+          "browser"
+        ]
       },
       "OpenAI.ComputerUsePreviewTool": {
         "type": "object",
@@ -4501,27 +4441,32 @@
             "enum": [
               "computer_use_preview"
             ],
-            "description": "The type of the computer use tool. Always `computer_use_preview`."
+            "description": "The type of the computer use tool. Always `computer_use_preview`.",
+            "x-stainless-const": true,
+            "default": "computer_use_preview"
           },
           "environment": {
-            "type": "string",
-            "enum": [
-              "windows",
-              "mac",
-              "linux",
-              "ubuntu",
-              "browser"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ComputerEnvironment"
+              }
             ],
             "description": "The type of computer environment to control."
           },
           "display_width": {
-            "type": "integer",
-            "format": "int32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
             "description": "The width of the computer display."
           },
           "display_height": {
-            "type": "integer",
-            "format": "int32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
             "description": "The height of the computer display."
           }
         },
@@ -4530,7 +4475,97 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use)."
+        "description": "A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).",
+        "title": "Computer use preview"
+      },
+      "OpenAI.ContainerMemoryLimit": {
+        "type": "string",
+        "enum": [
+          "1g",
+          "4g",
+          "16g",
+          "64g"
+        ]
+      },
+      "OpenAI.CreateChatCompletionRequestResponseFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText",
+            "json_object": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject"
+          }
+        },
+        "description": "An object specifying the format that the model must output.\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables\nStructured Outputs which ensures the model will match your supplied JSON\nschema. Learn more in the [Structured Outputs\nguide](https://platform.openai.com/docs/guides/structured-outputs).\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
+      },
+      "OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "json_object"
+            ],
+            "description": "The type of response format being defined. Always `json_object`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormat"
+          }
+        ],
+        "description": "JSON object response format. An older method of generating JSON responses.\nUsing `json_schema` is recommended for models that support it. Note that the\nmodel will not generate JSON without a system or user message instructing it\nto do so.",
+        "title": "JSON object"
+      },
+      "OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "The type of response format being defined. Always `text`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormat"
+          }
+        ],
+        "description": "Default response format. Used to generate text responses.",
+        "title": "Text"
+      },
+      "OpenAI.CreateChatCompletionRequestResponseFormatType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "json_schema",
+              "json_object"
+            ]
+          }
+        ]
       },
       "OpenAI.CreateEvalCompletionsRunDataSource": {
         "type": "object",
@@ -4836,7 +4871,7 @@
           }
         },
         "description": "A ResponsesRunDataSource object describing a model sampling configuration.",
-        "title": "ResponsesRunDataSource",
+        "title": "CreateEvalResponsesRunDataSource",
         "x-oaiMeta": {
           "name": "The completions data source object used to configure an individual run",
           "group": "eval runs",
@@ -4982,15 +5017,159 @@
           "example": "{\n  \"type\": \"stored_completions\",\n  \"metadata\": {\n    \"use_case\": \"customer_support_agent\"\n  }\n}\n"
         }
       },
+      "OpenAI.CustomGrammarFormatParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "syntax",
+          "definition"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "grammar"
+            ],
+            "description": "Grammar format. Always `grammar`.",
+            "x-stainless-const": true,
+            "default": "grammar"
+          },
+          "syntax": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.GrammarSyntax1"
+              }
+            ],
+            "description": "The syntax of the grammar definition. One of `lark` or `regex`."
+          },
+          "definition": {
+            "type": "string",
+            "description": "The grammar definition."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat"
+          }
+        ],
+        "description": "A grammar defined by the user.",
+        "title": "Grammar format"
+      },
+      "OpenAI.CustomTextFormatParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "Unconstrained text format. Always `text`.",
+            "x-stainless-const": true,
+            "default": "text"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat"
+          }
+        ],
+        "description": "Unconstrained free-form text.",
+        "title": "Text format"
+      },
+      "OpenAI.CustomToolParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "custom"
+            ],
+            "description": "The type of the custom tool. Always `custom`.",
+            "x-stainless-const": true,
+            "default": "custom"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the custom tool, used to identify it in tool calls."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the custom tool, used to provide more context."
+          },
+          "format": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.CustomToolParamFormat"
+              }
+            ],
+            "description": "The input format for the custom tool. Default is unconstrained text."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A custom tool that processes input using a specified format. Learn more about   [custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools)",
+        "title": "Custom tool"
+      },
+      "OpenAI.CustomToolParamFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.CustomToolParamFormatType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/OpenAI.CustomTextFormatParam",
+            "grammar": "#/components/schemas/OpenAI.CustomGrammarFormatParam"
+          }
+        },
+        "description": "The input format for the custom tool. Default is unconstrained text."
+      },
+      "OpenAI.CustomToolParamFormatType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "grammar"
+            ]
+          }
+        ]
+      },
       "OpenAI.EasyInputMessage": {
         "type": "object",
         "required": [
           "role",
-          "content"
+          "content",
+          "type"
         ],
         "properties": {
           "role": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system",
+              "developer"
+            ],
+            "description": "The role of the message input. One of `user`, `assistant`, `system`, or\n  `developer`."
           },
           "content": {
             "anyOf": [
@@ -4998,14 +5177,27 @@
                 "type": "string"
               },
               {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.ItemContent"
-                }
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentListItem"
               }
-            ]
+            ],
+            "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The type of the message input. Always `message`.",
+            "x-stainless-const": true
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.InputItem"
+          }
+        ],
+        "description": "A message input to the model with a role indicating instruction following\nhierarchy. Instructions given with the `developer` or `system` role take\nprecedence over instructions given with the `user` role. Messages with the\n`assistant` role are presumed to have been generated by the model in previous\ninteractions.",
+        "title": "Input message"
       },
       "OpenAI.Error": {
         "type": "object",
@@ -5157,7 +5349,7 @@
             "description": "The threshold for the score."
           }
         },
-        "title": "PythonGrader"
+        "title": "EvalGraderPython"
       },
       "OpenAI.EvalGraderScoreModel": {
         "type": "object",
@@ -5197,7 +5389,7 @@
             "items": {
               "$ref": "#/components/schemas/OpenAI.EvalItem"
             },
-            "description": "The input text. This may include template strings."
+            "description": "The input messages evaluated by the grader. Supports text, output text, input image, and input audio content blocks, and may include template strings."
           },
           "range": {
             "type": "array",
@@ -5215,7 +5407,7 @@
             "description": "The threshold for the score."
           }
         },
-        "title": "ScoreModelGrader"
+        "title": "EvalGraderScoreModel"
       },
       "OpenAI.EvalGraderScoreModelSamplingParams": {
         "type": "object",
@@ -5363,7 +5555,7 @@
             "description": "The threshold for the score."
           }
         },
-        "title": "TextSimilarityGrader"
+        "title": "EvalGraderTextSimilarity"
       },
       "OpenAI.EvalItem": {
         "type": "object",
@@ -5383,28 +5575,7 @@
             "description": "The role of the message input. One of `user`, `assistant`, `system`, or\n  `developer`."
           },
           "content": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.ItemContentInputText"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalItemContentOutputText"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalItemContentInputImage"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.ItemContentInputAudio"
-              },
-              {
-                "type": "array",
-                "items": {}
-              }
-            ],
-            "description": "Inputs to the model - can contain template strings."
+            "$ref": "#/components/schemas/OpenAI.EvalItemContent"
           },
           "type": {
             "type": "string",
@@ -5416,29 +5587,116 @@
           }
         },
         "description": "A message input to the model with a role indicating instruction following\nhierarchy. Instructions given with the `developer` or `system` role take\nprecedence over instructions given with the `user` role. Messages with the\n`assistant` role are presumed to have been generated by the model in previous\ninteractions.",
-        "title": "Eval message object"
+        "title": "EvalItem"
       },
-      "OpenAI.EvalItemContentInputImage": {
+      "OpenAI.EvalItemContent": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItem"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentArray"
+          }
+        ],
+        "description": "Inputs to the model - can contain template strings. Supports text, output text, input images, and input audio, either as a single item or an array of items.",
+        "title": "Eval content"
+      },
+      "OpenAI.EvalItemContentArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.EvalItemContentItem"
+        },
+        "description": "A list of inputs, each of which may be either an input text, output text, input\nimage, or input audio object.",
+        "title": "An array of Input text, Output text, Input image, and Input audio"
+      },
+      "OpenAI.EvalItemContentItem": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentText"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObject"
+          }
+        ],
+        "description": "A single content item: input text, output text, input image, or input audio.",
+        "title": "Eval content item",
+        "x-stainless-naming": {
+          "ruby": {
+            "model_name": "GraderInputItem"
+          }
+        }
+      },
+      "OpenAI.EvalItemContentItemObject": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObjectType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "output_text": "#/components/schemas/OpenAI.EvalItemContentOutputText",
+            "input_image": "#/components/schemas/OpenAI.EvalItemInputImage",
+            "input_audio": "#/components/schemas/OpenAI.InputAudio",
+            "input_text": "#/components/schemas/OpenAI.EvalItemContentItemObjectInputTextContent"
+          }
+        },
+        "description": "A single content item: input text, output text, input image, or input audio.",
+        "title": "Eval content item",
+        "x-stainless-naming": {
+          "ruby": {
+            "model_name": "GraderInputItem"
+          }
+        }
+      },
+      "OpenAI.EvalItemContentItemObjectInputTextContent": {
         "type": "object",
         "required": [
           "type",
-          "image_url"
+          "text"
         ],
         "properties": {
           "type": {
             "type": "string",
             "enum": [
-              "input_image"
+              "input_text"
             ],
-            "x-stainless-const": true
+            "description": "The type of the input item. Always `input_text`.",
+            "x-stainless-const": true,
+            "default": "input_text"
           },
-          "image_url": {
-            "type": "string"
-          },
-          "detail": {
-            "type": "string"
+          "text": {
+            "type": "string",
+            "description": "The text input to the model."
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObject"
+          }
+        ],
+        "description": "A text input to the model.",
+        "title": "Input text"
+      },
+      "OpenAI.EvalItemContentItemObjectType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "input_text",
+              "output_text",
+              "input_image",
+              "input_audio"
+            ]
+          }
+        ]
       },
       "OpenAI.EvalItemContentOutputText": {
         "type": "object",
@@ -5452,12 +5710,58 @@
             "enum": [
               "output_text"
             ],
+            "description": "The type of the output text. Always `output_text`.",
             "x-stainless-const": true
           },
           "text": {
-            "type": "string"
+            "type": "string",
+            "description": "The text output from the model."
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObject"
+          }
+        ],
+        "description": "A text output from the model.",
+        "title": "Output text"
+      },
+      "OpenAI.EvalItemContentText": {
+        "type": "string",
+        "description": "A text input to the model.",
+        "title": "Text input"
+      },
+      "OpenAI.EvalItemInputImage": {
+        "type": "object",
+        "required": [
+          "type",
+          "image_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ],
+            "description": "The type of the image input. Always `input_image`.",
+            "x-stainless-const": true
+          },
+          "image_url": {
+            "type": "string",
+            "description": "The URL of the image input."
+          },
+          "detail": {
+            "type": "string",
+            "description": "The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObject"
+          }
+        ],
+        "description": "An image input block used within EvalItem content arrays.",
+        "title": "Input image"
       },
       "OpenAI.EvalJsonlFileContentSource": {
         "type": "object",
@@ -5787,7 +6091,13 @@
             "default": "stored_completions"
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "model": {
             "type": "string",
@@ -5841,7 +6151,9 @@
             "enum": [
               "file_search"
             ],
-            "description": "The type of the file search tool. Always `file_search`."
+            "description": "The type of the file search tool. Always `file_search`.",
+            "x-stainless-const": true,
+            "default": "file_search"
           },
           "vector_store_ids": {
             "type": "array",
@@ -5851,8 +6163,11 @@
             "description": "The IDs of the vector stores to search."
           },
           "max_num_results": {
-            "type": "integer",
-            "format": "int32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
             "description": "The maximum number of results to return. This number should be between 1 and 50 inclusive."
           },
           "ranking_options": {
@@ -5869,8 +6184,7 @@
                 "$ref": "#/components/schemas/OpenAI.Filters"
               }
             ],
-            "nullable": true,
-            "description": "A filter to apply."
+            "nullable": true
           }
         },
         "allOf": [
@@ -5878,7 +6192,8 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search)."
+        "description": "A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).",
+        "title": "File search"
       },
       "OpenAI.Filters": {
         "anyOf": [
@@ -5905,15 +6220,42 @@
             "description": "The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64."
           },
           "parameters": {
-            "description": "The parameters the functions accepts, described as a JSON Schema object. See the [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.\n\nOmitting `parameters` defines a function with an empty parameter list."
+            "$ref": "#/components/schemas/OpenAI.FunctionParameters"
           },
           "strict": {
             "type": "boolean",
-            "nullable": true,
-            "description": "Whether to enable strict schema adherence when generating the function call. If set to true, the model will follow the exact schema defined in the `parameters` field. Only a subset of JSON Schema is supported when `strict` is `true`. Learn more about Structured Outputs in the [function calling guide](docs/guides/function-calling).",
-            "default": false
+            "nullable": true
           }
         }
+      },
+      "OpenAI.FunctionParameters": {
+        "type": "object",
+        "additionalProperties": {},
+        "description": "The parameters the functions accepts, described as a JSON Schema object. See the [guide](https://platform.openai.com/docs/guides/function-calling) for examples, and the [JSON Schema reference](https://json-schema.org/understanding-json-schema/) for documentation about the format.\nOmitting `parameters` defines a function with an empty parameter list."
+      },
+      "OpenAI.FunctionShellToolParam": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "shell"
+            ],
+            "description": "The type of the shell tool. Always `shell`.",
+            "x-stainless-const": true,
+            "default": "shell"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A tool that allows the model to execute shell commands.",
+        "title": "Shell tool"
       },
       "OpenAI.FunctionTool": {
         "type": "object",
@@ -5929,7 +6271,9 @@
             "enum": [
               "function"
             ],
-            "description": "The type of the function tool. Always `function`."
+            "description": "The type of the function tool. Always `function`.",
+            "x-stainless-const": true,
+            "default": "function"
           },
           "name": {
             "type": "string",
@@ -5937,17 +6281,16 @@
           },
           "description": {
             "type": "string",
-            "nullable": true,
-            "description": "A description of the function. Used by the model to determine whether or not to call the function."
+            "nullable": true
           },
           "parameters": {
-            "nullable": true,
-            "description": "A JSON schema object describing the parameters of the function."
+            "type": "object",
+            "additionalProperties": {},
+            "nullable": true
           },
           "strict": {
             "type": "boolean",
-            "nullable": true,
-            "description": "Whether to enforce strict parameter validation. Default `true`."
+            "nullable": true
           }
         },
         "allOf": [
@@ -5955,7 +6298,48 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling)."
+        "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).",
+        "title": "Function"
+      },
+      "OpenAI.GrammarSyntax1": {
+        "type": "string",
+        "enum": [
+          "lark",
+          "regex"
+        ]
+      },
+      "OpenAI.HybridSearchOptions": {
+        "type": "object",
+        "required": [
+          "embedding_weight",
+          "text_weight"
+        ],
+        "properties": {
+          "embedding_weight": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.numeric"
+              }
+            ],
+            "description": "The weight of the embedding in the reciprocal ranking fusion."
+          },
+          "text_weight": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.numeric"
+              }
+            ],
+            "description": "The weight of the text in the reciprocal ranking fusion."
+          }
+        }
+      },
+      "OpenAI.ImageDetail": {
+        "type": "string",
+        "enum": [
+          "low",
+          "high",
+          "auto"
+        ]
       },
       "OpenAI.ImageGenTool": {
         "type": "object",
@@ -5968,14 +6352,23 @@
             "enum": [
               "image_generation"
             ],
-            "description": "The type of the image generation tool. Always `image_generation`."
+            "description": "The type of the image generation tool. Always `image_generation`.",
+            "x-stainless-const": true,
+            "default": "image_generation"
           },
           "model": {
-            "type": "string",
-            "enum": [
-              "gpt-image-1"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  "gpt-image-1",
+                  "gpt-image-1-mini"
+                ]
+              }
             ],
-            "description": "The image generation model to use. Default: `gpt-image-1`.",
             "default": "gpt-image-1"
           },
           "quality": {
@@ -5986,7 +6379,7 @@
               "high",
               "auto"
             ],
-            "description": "The quality of the generated image. One of `low`, `medium`, `high`,\nor `auto`. Default: `auto`.",
+            "description": "The quality of the generated image. One of `low`, `medium`, `high`,\n  or `auto`. Default: `auto`.",
             "default": "auto"
           },
           "size": {
@@ -5997,7 +6390,7 @@
               "1536x1024",
               "auto"
             ],
-            "description": "The size of the generated image. One of `1024x1024`, `1024x1536`,\n`1536x1024`, or `auto`. Default: `auto`.",
+            "description": "The size of the generated image. One of `1024x1024`, `1024x1536`,\n  `1536x1024`, or `auto`. Default: `auto`.",
             "default": "auto"
           },
           "output_format": {
@@ -6007,12 +6400,15 @@
               "webp",
               "jpeg"
             ],
-            "description": "The output format of the generated image. One of `png`, `webp`, or\n`jpeg`. Default: `png`.",
+            "description": "The output format of the generated image. One of `png`, `webp`, or\n  `jpeg`. Default: `png`.",
             "default": "png"
           },
           "output_compression": {
-            "type": "integer",
-            "format": "int32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
             "minimum": 0,
             "maximum": 100,
             "description": "Compression level for the output image. Default: 100.",
@@ -6034,30 +6430,34 @@
               "opaque",
               "auto"
             ],
-            "description": "Background type for the generated image. One of `transparent`,\n`opaque`, or `auto`. Default: `auto`.",
+            "description": "Background type for the generated image. One of `transparent`,\n  `opaque`, or `auto`. Default: `auto`.",
             "default": "auto"
           },
-          "input_image_mask": {
-            "type": "object",
-            "properties": {
-              "image_url": {
-                "type": "string",
-                "description": "Base64-encoded mask image."
-              },
-              "file_id": {
-                "type": "string",
-                "description": "File ID for the mask image."
+          "input_fidelity": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.InputFidelity"
               }
-            },
-            "description": "Optional mask for inpainting. Contains `image_url`\n(string, optional) and `file_id` (string, optional)."
+            ],
+            "nullable": true
+          },
+          "input_image_mask": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ImageGenToolInputImageMask"
+              }
+            ],
+            "description": "Optional mask for inpainting. Contains `image_url`\n  (string, optional) and `file_id` (string, optional)."
           },
           "partial_images": {
-            "type": "integer",
-            "format": "int32",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
             "minimum": 0,
             "maximum": 3,
-            "description": "Number of partial images to generate in streaming mode, from 0 (default value) to 3.",
-            "default": 0
+            "description": "Number of partial images to generate in streaming mode, from 0 (default value) to 3."
           }
         },
         "allOf": [
@@ -6065,36 +6465,25 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A tool that generates images using a model like `gpt-image-1`."
+        "description": "A tool that generates images using the GPT image models.",
+        "title": "Image generation tool"
       },
-      "OpenAI.ItemContent": {
+      "OpenAI.ImageGenToolInputImageMask": {
         "type": "object",
-        "required": [
-          "type"
-        ],
         "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.ItemContentType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "input_audio": "#/components/schemas/OpenAI.ItemContentInputAudio",
-            "output_audio": "#/components/schemas/OpenAI.ItemContentOutputAudio",
-            "refusal": "#/components/schemas/OpenAI.ItemContentRefusal",
-            "input_image": "#/components/schemas/OpenAI.ItemContentInputImage",
-            "input_file": "#/components/schemas/OpenAI.ItemContentInputFile",
-            "output_text": "#/components/schemas/OpenAI.ItemContentOutputText"
+          "image_url": {
+            "type": "string"
+          },
+          "file_id": {
+            "type": "string"
           }
         }
       },
-      "OpenAI.ItemContentInputAudio": {
+      "OpenAI.InputAudio": {
         "type": "object",
         "required": [
           "type",
-          "data",
-          "format"
+          "input_audio"
         ],
         "properties": {
           "type": {
@@ -6102,29 +6491,60 @@
             "enum": [
               "input_audio"
             ],
-            "description": "The type of the input item. Always `input_audio`."
+            "description": "The type of the input item. Always `input_audio`.",
+            "x-stainless-const": true
           },
+          "input_audio": {
+            "$ref": "#/components/schemas/OpenAI.InputAudioInputAudio"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.EvalItemContentItemObject"
+          }
+        ],
+        "description": "An audio input to the model.",
+        "title": "Input audio"
+      },
+      "OpenAI.InputAudioInputAudio": {
+        "type": "object",
+        "required": [
+          "data",
+          "format"
+        ],
+        "properties": {
           "data": {
-            "type": "string",
-            "description": "Base64-encoded audio data."
+            "type": "string"
           },
           "format": {
             "type": "string",
             "enum": [
               "mp3",
               "wav"
-            ],
-            "description": "The format of the audio data. Currently supported formats are `mp3` and\n`wav`."
+            ]
+          }
+        }
+      },
+      "OpenAI.InputContent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.InputContentType"
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "input_text": "#/components/schemas/OpenAI.InputContentInputTextContent",
+            "input_image": "#/components/schemas/OpenAI.InputContentInputImageContent",
+            "input_file": "#/components/schemas/OpenAI.InputContentInputFileContent"
           }
-        ],
-        "description": "An audio input to the model."
+        }
       },
-      "OpenAI.ItemContentInputFile": {
+      "OpenAI.InputContentInputFileContent": {
         "type": "object",
         "required": [
           "type"
@@ -6135,16 +6555,21 @@
             "enum": [
               "input_file"
             ],
-            "description": "The type of the input item. Always `input_file`."
+            "description": "The type of the input item. Always `input_file`.",
+            "x-stainless-const": true,
+            "default": "input_file"
           },
           "file_id": {
             "type": "string",
-            "nullable": true,
-            "description": "The ID of the file to be sent to the model."
+            "nullable": true
           },
           "filename": {
             "type": "string",
             "description": "The name of the file to be sent to the model."
+          },
+          "file_url": {
+            "type": "string",
+            "description": "The URL of the file to be sent to the model."
           },
           "file_data": {
             "type": "string",
@@ -6153,15 +6578,17 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
+            "$ref": "#/components/schemas/OpenAI.InputContent"
           }
         ],
-        "description": "A file input to the model."
+        "description": "A file input to the model.",
+        "title": "Input file"
       },
-      "OpenAI.ItemContentInputImage": {
+      "OpenAI.InputContentInputImageContent": {
         "type": "object",
         "required": [
-          "type"
+          "type",
+          "detail"
         ],
         "properties": {
           "type": {
@@ -6169,37 +6596,36 @@
             "enum": [
               "input_image"
             ],
-            "description": "The type of the input item. Always `input_image`."
+            "description": "The type of the input item. Always `input_image`.",
+            "x-stainless-const": true,
+            "default": "input_image"
           },
           "image_url": {
             "type": "string",
-            "nullable": true,
-            "description": "The URL of the image to be sent to the model. A fully qualified URL or base64 encoded image in a data URL."
+            "nullable": true
           },
           "file_id": {
             "type": "string",
-            "nullable": true,
-            "description": "The ID of the file to be sent to the model."
+            "nullable": true
           },
           "detail": {
-            "type": "string",
-            "enum": [
-              "low",
-              "high",
-              "auto"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ImageDetail"
+              }
             ],
-            "description": "The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.",
-            "default": "auto"
+            "description": "The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`."
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
+            "$ref": "#/components/schemas/OpenAI.InputContent"
           }
         ],
-        "description": "An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision)."
+        "description": "An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision).",
+        "title": "Input image"
       },
-      "OpenAI.ItemContentInputText": {
+      "OpenAI.InputContentInputTextContent": {
         "type": "object",
         "required": [
           "type",
@@ -6211,7 +6637,9 @@
             "enum": [
               "input_text"
             ],
-            "description": "The type of the input item. Always `input_text`."
+            "description": "The type of the input item. Always `input_text`.",
+            "x-stainless-const": true,
+            "default": "input_text"
           },
           "text": {
             "type": "string",
@@ -6220,122 +6648,104 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
+            "$ref": "#/components/schemas/OpenAI.InputContent"
           }
         ],
-        "description": "A text input to the model."
+        "description": "A text input to the model.",
+        "title": "Input text"
       },
-      "OpenAI.ItemContentOutputAudio": {
-        "type": "object",
-        "required": [
-          "type",
-          "data",
-          "transcript"
-        ],
-        "properties": {
-          "type": {
+      "OpenAI.InputContentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
             "type": "string",
             "enum": [
-              "output_audio"
-            ],
-            "description": "The type of the output audio. Always `output_audio`."
-          },
-          "data": {
-            "type": "string",
-            "description": "Base64-encoded audio data from the model."
-          },
-          "transcript": {
-            "type": "string",
-            "description": "The transcript of the audio data from the model."
+              "input_text",
+              "input_image",
+              "input_file"
+            ]
           }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
-          }
-        ],
-        "description": "An audio output from the model."
+        ]
       },
-      "OpenAI.ItemContentOutputText": {
-        "type": "object",
-        "required": [
-          "type",
-          "text",
-          "annotations"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "output_text"
-            ],
-            "description": "The type of the output text. Always `output_text`."
-          },
-          "text": {
-            "type": "string",
-            "description": "The text output from the model."
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Annotation"
-            },
-            "description": "The annotations of the text output."
-          },
-          "logprobs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.LogProb"
-            }
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
-          }
-        ],
-        "description": "A text output from the model."
-      },
-      "OpenAI.ItemContentRefusal": {
-        "type": "object",
-        "required": [
-          "type",
-          "refusal"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "refusal"
-            ],
-            "description": "The type of the refusal. Always `refusal`."
-          },
-          "refusal": {
-            "type": "string",
-            "description": "The refusal explanationfrom the model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemContent"
-          }
-        ],
-        "description": "A refusal from the model."
-      },
-      "OpenAI.ItemContentType": {
+      "OpenAI.InputFidelity": {
         "type": "string",
         "enum": [
-          "input_text",
-          "input_audio",
-          "input_image",
-          "input_file",
-          "output_text",
-          "output_audio",
-          "refusal"
+          "high",
+          "low"
         ],
-        "description": "Multi-modal input and output contents."
+        "description": "Control how much effort the model will exert to match the style and features, especially facial features, of input images. This parameter is only supported for `gpt-image-1`. Unsupported for `gpt-image-1-mini`. Supports `high` and `low`. Defaults to `low`."
       },
-      "OpenAI.LocalShellTool": {
+      "OpenAI.InputItem": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.InputItemType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam"
+          }
+        }
+      },
+      "OpenAI.InputItemType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "message",
+              "item_reference"
+            ]
+          }
+        ]
+      },
+      "OpenAI.InputMessageContentListItem": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OpenAI.InputContent"
+        },
+        "description": "A list of one or many input items to the model, containing different content\ntypes.",
+        "title": "Input item content list"
+      },
+      "OpenAI.ItemReferenceParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "item_reference"
+            ],
+            "description": "The type of item to reference. Always `item_reference`.",
+            "x-stainless-const": true,
+            "default": "item_reference"
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the item to reference."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.InputItem"
+          }
+        ],
+        "description": "An internal identifier for an item to reference.",
+        "title": "Item reference"
+      },
+      "OpenAI.LocalShellToolParam": {
         "type": "object",
         "required": [
           "type"
@@ -6346,7 +6756,9 @@
             "enum": [
               "local_shell"
             ],
-            "description": "The type of the local shell tool. Always `local_shell`."
+            "description": "The type of the local shell tool. Always `local_shell`.",
+            "x-stainless-const": true,
+            "default": "local_shell"
           }
         },
         "allOf": [
@@ -6354,76 +6766,14 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "A tool that allows the model to execute shell commands in a local environment."
-      },
-      "OpenAI.Location": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.LocationType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "approximate": "#/components/schemas/OpenAI.ApproximateLocation"
-          }
-        }
-      },
-      "OpenAI.LocationType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "approximate"
-            ]
-          }
-        ]
-      },
-      "OpenAI.LogProb": {
-        "type": "object",
-        "required": [
-          "token",
-          "logprob",
-          "bytes",
-          "top_logprobs"
-        ],
-        "properties": {
-          "token": {
-            "type": "string"
-          },
-          "logprob": {
-            "type": "number",
-            "format": "float"
-          },
-          "bytes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          "top_logprobs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.TopLogProb"
-            }
-          }
-        },
-        "description": "The log probability of a token."
+        "description": "A tool that allows the model to execute shell commands in a local environment.",
+        "title": "Local shell tool"
       },
       "OpenAI.MCPTool": {
         "type": "object",
         "required": [
           "type",
-          "server_label",
-          "server_url"
+          "server_label"
         ],
         "properties": {
           "type": {
@@ -6431,7 +6781,8 @@
             "enum": [
               "mcp"
             ],
-            "description": "The type of the MCP tool. Always `mcp`."
+            "description": "The type of the MCP tool. Always `mcp`.",
+            "x-stainless-const": true
           },
           "server_label": {
             "type": "string",
@@ -6439,15 +6790,36 @@
           },
           "server_url": {
             "type": "string",
-            "description": "The URL for the MCP server."
+            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
+          },
+          "connector_id": {
+            "type": "string",
+            "enum": [
+              "connector_dropbox",
+              "connector_gmail",
+              "connector_googlecalendar",
+              "connector_googledrive",
+              "connector_microsoftteams",
+              "connector_outlookcalendar",
+              "connector_outlookemail",
+              "connector_sharepoint"
+            ],
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](https://platform.openai.com/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
+          },
+          "authorization": {
+            "type": "string",
+            "description": "An OAuth access token that can be used with a remote MCP server, either\n  with a custom MCP server URL or a service connector. Your application\n  must handle the OAuth authorization flow and provide the token here."
+          },
+          "server_description": {
+            "type": "string",
+            "description": "Optional description of the MCP server, used to provide more context."
           },
           "headers": {
             "type": "object",
             "additionalProperties": {
               "type": "string"
             },
-            "nullable": true,
-            "description": "Optional HTTP headers to send to the MCP server. Use for authentication\nor other purposes."
+            "nullable": true
           },
           "allowed_tools": {
             "anyOf": [
@@ -6455,67 +6827,40 @@
                 "type": "array",
                 "items": {
                   "type": "string"
-                }
+                },
+                "nullable": true
               },
               {
                 "type": "object",
-                "properties": {
-                  "tool_names": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "List of allowed tool names."
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
                   }
-                }
+                ],
+                "nullable": true
               }
-            ],
-            "nullable": true,
-            "description": "List of allowed tool names or a filter object."
+            ]
           },
           "require_approval": {
             "anyOf": [
               {
                 "type": "object",
-                "properties": {
-                  "always": {
-                    "type": "object",
-                    "properties": {
-                      "tool_names": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "description": "List of tools that require approval."
-                      }
-                    },
-                    "description": "A list of tools that always require approval."
-                  },
-                  "never": {
-                    "type": "object",
-                    "properties": {
-                      "tool_names": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "description": "List of tools that do not require approval."
-                      }
-                    },
-                    "description": "A list of tools that never require approval."
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/OpenAI.MCPToolRequireApproval"
                   }
-                }
+                ],
+                "nullable": true
               },
               {
                 "type": "string",
                 "enum": [
                   "always",
                   "never"
-                ]
+                ],
+                "nullable": true
               }
             ],
-            "nullable": true,
-            "description": "Specify which of the MCP server's tools require approval.",
             "default": "always"
           }
         },
@@ -6524,28 +6869,80 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "Give the model access to additional tools via remote Model Context Protocol\n(MCP) servers. [Learn more about MCP](https://platform.openai.com/docs/guides/tools-remote-mcp)."
+        "description": "Give the model access to additional tools via remote Model Context Protocol\n(MCP) servers. [Learn more about MCP](https://platform.openai.com/docs/guides/tools-remote-mcp).",
+        "title": "MCP tool"
+      },
+      "OpenAI.MCPToolFilter": {
+        "type": "object",
+        "properties": {
+          "tool_names": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of allowed tool names.",
+            "title": "MCP allowed tools"
+          },
+          "read_only": {
+            "type": "boolean",
+            "description": "Indicates whether or not a tool modifies data or is read-only. If an\n  MCP server is [annotated with `readOnlyHint`](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations-readonlyhint),\n  it will match this filter."
+          }
+        },
+        "description": "A filter object to specify which tools are allowed.",
+        "title": "MCP tool filter"
+      },
+      "OpenAI.MCPToolRequireApproval": {
+        "type": "object",
+        "properties": {
+          "always": {
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+          },
+          "never": {
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+          }
+        }
       },
       "OpenAI.Metadata": {
         "type": "object",
-        "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\n\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
         "x-oaiTypeLabel": "map"
+      },
+      "OpenAI.RankerVersionType": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "default-2024-11-15"
+        ]
       },
       "OpenAI.RankingOptions": {
         "type": "object",
         "properties": {
           "ranker": {
-            "type": "string",
-            "enum": [
-              "auto",
-              "default-2024-11-15"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.RankerVersionType"
+              }
             ],
             "description": "The ranker to use for the file search."
           },
           "score_threshold": {
-            "type": "number",
-            "format": "float",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.numeric"
+              }
+            ],
             "description": "The score threshold for the file search, a number between 0 and 1. Numbers closer to 1 will attempt to return only the most relevant results, but may return fewer results."
+          },
+          "hybrid_search": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.HybridSearchOptions"
+              }
+            ],
+            "description": "Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled."
           }
         }
       },
@@ -6556,32 +6953,11 @@
           "minimal",
           "low",
           "medium",
-          "high"
+          "high",
+          "xhigh"
         ],
-        "description": "Constrains effort on reasoning for reasoning models.\n\nCurrently supported values are none, minimal, low, medium, and high.\n\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.\n\ngpt-5.1 defaults to none, which does not perform reasoning. The supported reasoning values for gpt-5.1 are none, low, medium, and high. Tool calls are supported for all reasoning values in gpt-5.1.\n\nAll models before gpt-5.1 default to medium reasoning effort, and do not support none.\n\nThe gpt-5-pro model defaults to (and only supports) high reasoning effort."
-      },
-      "OpenAI.ResponseFormat": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "text",
-              "json_object",
-              "json_schema"
-            ]
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "json_object": "#/components/schemas/OpenAI.ResponseFormatJsonObject",
-            "json_schema": "#/components/schemas/OpenAI.ResponseFormatJsonSchema"
-          }
-        }
+        "description": "Constrains effort on reasoning for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).\nCurrently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing\nreasoning effort can result in faster responses and fewer tokens used\non reasoning in a response.\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is supported for all models after `gpt-5.1-codex-max`.",
+        "nullable": true
       },
       "OpenAI.ResponseFormatJsonObject": {
         "type": "object",
@@ -6594,15 +6970,12 @@
             "enum": [
               "json_object"
             ],
-            "description": "The type of response format being defined. Always `json_object`."
+            "description": "The type of response format being defined. Always `json_object`.",
+            "x-stainless-const": true
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ResponseFormat"
-          }
-        ],
-        "description": "JSON object response format. An older method of generating JSON responses.\nUsing `json_schema` is recommended for models that support it. Note that the\nmodel will not generate JSON without a system or user message instructing it\nto do so."
+        "description": "JSON object response format. An older method of generating JSON responses.\nUsing `json_schema` is recommended for models that support it. Note that the\nmodel will not generate JSON without a system or user message instructing it\nto do so.",
+        "title": "JSON object"
       },
       "OpenAI.ResponseFormatJsonSchema": {
         "type": "object",
@@ -6616,42 +6989,53 @@
             "enum": [
               "json_schema"
             ],
-            "description": "The type of response format being defined. Always `json_schema`."
+            "description": "The type of response format being defined. Always `json_schema`.",
+            "x-stainless-const": true
           },
           "json_schema": {
-            "type": "object",
-            "properties": {
-              "description": {
-                "type": "string",
-                "description": "A description of what the response format is for, used by the model to\ndetermine how to respond in the format."
-              },
-              "name": {
-                "type": "string",
-                "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\nunderscores and dashes, with a maximum length of 64."
-              },
-              "schema": {
-                "type": "object",
-                "additionalProperties": {}
-              },
-              "strict": {
-                "type": "boolean",
-                "nullable": true,
-                "description": "Whether to enable strict schema adherence when generating the output.\nIf set to true, the model will always follow the exact schema defined\nin the `schema` field. Only a subset of JSON Schema is supported when\n`strict` is `true`. To learn more, read the [Structured Outputs\nguide](https://platform.openai.com/docs/guides/structured-outputs).",
-                "default": false
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseFormatJsonSchemaJsonSchema"
               }
-            },
-            "required": [
-              "name"
             ],
-            "description": "Structured Outputs configuration options, including a JSON Schema."
+            "description": "Structured Outputs configuration options, including a JSON Schema.",
+            "title": "JSON schema"
           }
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ResponseFormat"
+            "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormat"
           }
         ],
-        "description": "The schema for the response format, described as a JSON Schema object.\nLearn how to build JSON schemas [here](https://json-schema.org/).JSON Schema response format. Used to generate structured JSON responses.\nLearn more about [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs)."
+        "description": "JSON Schema response format. Used to generate structured JSON responses.\nLearn more about [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs).",
+        "title": "JSON schema"
+      },
+      "OpenAI.ResponseFormatJsonSchemaJsonSchema": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "schema": {
+            "$ref": "#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema"
+          },
+          "strict": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "OpenAI.ResponseFormatJsonSchemaSchema": {
+        "type": "object",
+        "additionalProperties": {},
+        "description": "The schema for the response format, described as a JSON Schema object.\nLearn how to build JSON schemas [here](https://json-schema.org/).",
+        "title": "JSON schema"
       },
       "OpenAI.ResponseFormatText": {
         "type": "object",
@@ -6664,15 +7048,20 @@
             "enum": [
               "text"
             ],
-            "description": "The type of response format being defined. Always `text`."
+            "description": "The type of response format being defined. Always `text`.",
+            "x-stainless-const": true
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ResponseFormat"
-          }
-        ],
-        "description": "Default response format. Used to generate text responses."
+        "description": "Default response format. Used to generate text responses.",
+        "title": "Text"
+      },
+      "OpenAI.SearchContextSize": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ]
       },
       "OpenAI.TextResponseFormatConfiguration": {
         "type": "object",
@@ -6681,13 +7070,119 @@
         ],
         "properties": {
           "type": {
-            "type": "string"
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfigurationType"
           }
         },
         "discriminator": {
-          "propertyName": "type"
+          "propertyName": "type",
+          "mapping": {
+            "json_schema": "#/components/schemas/OpenAI.TextResponseFormatJsonSchema",
+            "text": "#/components/schemas/OpenAI.TextResponseFormatConfigurationResponseFormatText",
+            "json_object": "#/components/schemas/OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject"
+          }
         },
-        "description": "An object specifying the format that the model must output.\n\nConfiguring `{ \"type\": \"json_schema\" }` enables Structured Outputs,\nwhich ensures the model will match your supplied JSON schema. Learn more in the\n[Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).\n\nThe default format is `{ \"type\": \"text\" }` with no additional options.\n\n*Not recommended for gpt-4o and newer models:**\n\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
+        "description": "An object specifying the format that the model must output.\nConfiguring `{ \"type\": \"json_schema\" }` enables Structured Outputs,\nwhich ensures the model will match your supplied JSON schema. Learn more in the\n[Structured Outputs guide](https://platform.openai.com/docs/guides/structured-outputs).\nThe default format is `{ \"type\": \"text\" }` with no additional options.\n*Not recommended for gpt-4o and newer models:**\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
+      },
+      "OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "json_object"
+            ],
+            "description": "The type of response format being defined. Always `json_object`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+          }
+        ],
+        "description": "JSON object response format. An older method of generating JSON responses.\nUsing `json_schema` is recommended for models that support it. Note that the\nmodel will not generate JSON without a system or user message instructing it\nto do so.",
+        "title": "JSON object"
+      },
+      "OpenAI.TextResponseFormatConfigurationResponseFormatText": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "The type of response format being defined. Always `text`.",
+            "x-stainless-const": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+          }
+        ],
+        "description": "Default response format. Used to generate text responses.",
+        "title": "Text"
+      },
+      "OpenAI.TextResponseFormatConfigurationType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "json_schema",
+              "json_object"
+            ]
+          }
+        ]
+      },
+      "OpenAI.TextResponseFormatJsonSchema": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "schema"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "json_schema"
+            ],
+            "description": "The type of response format being defined. Always `json_schema`.",
+            "x-stainless-const": true
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of what the response format is for, used by the model to\n  determine how to respond in the format."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\n  underscores and dashes, with a maximum length of 64."
+          },
+          "schema": {
+            "$ref": "#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema"
+          },
+          "strict": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+          }
+        ],
+        "description": "JSON Schema response format. Used to generate structured JSON responses.\nLearn more about [Structured Outputs](https://platform.openai.com/docs/guides/structured-outputs).",
+        "title": "JSON schema"
       },
       "OpenAI.Tool": {
         "type": "object",
@@ -6702,14 +7197,18 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
             "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
-            "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
-            "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
-            "local_shell": "#/components/schemas/OpenAI.LocalShellTool",
+            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
             "mcp": "#/components/schemas/OpenAI.MCPTool",
+            "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
+            "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
+            "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
+            "custom": "#/components/schemas/OpenAI.CustomToolParam",
+            "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
             "bing_grounding": "#/components/schemas/BingGroundingAgentTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricAgentTool",
             "sharepoint_grounding_preview": "#/components/schemas/SharepointAgentTool",
@@ -6720,7 +7219,8 @@
             "azure_function": "#/components/schemas/AzureFunctionAgentTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool"
           }
-        }
+        },
+        "description": "A tool that can be used to generate a response."
       },
       "OpenAI.ToolType": {
         "anyOf": [
@@ -6730,14 +7230,18 @@
           {
             "type": "string",
             "enum": [
-              "file_search",
               "function",
+              "file_search",
               "computer_use_preview",
-              "web_search_preview",
+              "web_search",
               "mcp",
               "code_interpreter",
               "image_generation",
               "local_shell",
+              "shell",
+              "custom",
+              "web_search_preview",
+              "apply_patch",
               "bing_grounding",
               "browser_automation_preview",
               "fabric_dataagent_preview",
@@ -6750,33 +7254,39 @@
               "azure_function"
             ]
           }
-        ],
-        "description": "A tool that can be used to generate a response."
+        ]
       },
-      "OpenAI.TopLogProb": {
+      "OpenAI.WebSearchApproximateLocation": {
         "type": "object",
-        "required": [
-          "token",
-          "logprob",
-          "bytes"
-        ],
         "properties": {
-          "token": {
-            "type": "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "approximate"
+            ],
+            "description": "The type of location approximation. Always `approximate`.",
+            "x-stainless-const": true,
+            "default": "approximate"
           },
-          "logprob": {
-            "type": "number",
-            "format": "float"
+          "country": {
+            "type": "string",
+            "nullable": true
           },
-          "bytes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "timezone": {
+            "type": "string",
+            "nullable": true
           }
         },
-        "description": "The top log probability of a token."
+        "description": "The approximate location of the user.",
+        "title": "Web search approximate location"
       },
       "OpenAI.WebSearchPreviewTool": {
         "type": "object",
@@ -6789,24 +7299,24 @@
             "enum": [
               "web_search_preview"
             ],
-            "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`."
+            "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.",
+            "x-stainless-const": true,
+            "default": "web_search_preview"
           },
           "user_location": {
             "type": "object",
             "allOf": [
               {
-                "$ref": "#/components/schemas/OpenAI.Location"
+                "$ref": "#/components/schemas/OpenAI.ApproximateLocation"
               }
             ],
-            "nullable": true,
-            "description": "The user's location."
+            "nullable": true
           },
           "search_context_size": {
-            "type": "string",
-            "enum": [
-              "low",
-              "medium",
-              "high"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.SearchContextSize"
+              }
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
           }
@@ -6816,7 +7326,71 @@
             "$ref": "#/components/schemas/OpenAI.Tool"
           }
         ],
-        "description": "Note: web_search is not yet available via Azure OpenAI."
+        "description": "This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).",
+        "title": "Web search preview"
+      },
+      "OpenAI.WebSearchTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "web_search"
+            ],
+            "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.",
+            "default": "web_search"
+          },
+          "filters": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.WebSearchToolFilters"
+              }
+            ],
+            "nullable": true
+          },
+          "user_location": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.WebSearchApproximateLocation"
+              }
+            ],
+            "nullable": true
+          },
+          "search_context_size": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ],
+            "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
+            "default": "medium"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "Search the Internet for sources related to the prompt. Learn more about the\n[web search tool](https://platform.openai.com/docs/guides/tools-web-search).",
+        "title": "Web search"
+      },
+      "OpenAI.WebSearchToolFilters": {
+        "type": "object",
+        "properties": {
+          "allowed_domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
       },
       "OpenAI.integer": {
         "type": "integer",
@@ -7384,7 +7958,13 @@
             "type": "string"
           },
           "metadata": {
-            "$ref": "#/components/schemas/OpenAI.Metadata"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
+            "nullable": true
           },
           "properties": {
             "type": "object",

@@ -1,4 +1,4 @@
-import "../../openai.external.typespec/responses/models.tsp";
+import "@azure-tools/openai-typespec/models/responses";
 
 using Azure.Core.Experimental;
 
@@ -26,7 +26,7 @@ namespace AzureOpenAI;
 // Note: this substitution removes OpenAI-local doc links.
 @@doc(OpenAI.CreateResponse.tools,
   """
-    An array of tools the model may call while generating a response. You 
+    An array of tools the model may call while generating a response. You
     can specify which tool to use by setting the `tool_choice` parameter.
     
     The two categories of tools you can provide the model are:
@@ -38,24 +38,24 @@ namespace AzureOpenAI;
     """
 );
 
-@@doc(OpenAI.ResponseWebSearchCallCompletedEvent,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.ResponseWebSearchCallInProgressEvent,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.ResponseWebSearchCallSearchingEvent,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.WebSearchPreviewTool,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.ToolChoiceObjectWebSearch,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.WebSearchToolCallItemParam,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
-@@doc(OpenAI.WebSearchToolCallItemResource,
-  "Note: web_search is not yet available via Azure OpenAI."
-);
+// @@doc(OpenAI.ResponseWebSearchCallCompletedEvent,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.ResponseWebSearchCallInProgressEvent,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.ResponseWebSearchCallSearchingEvent,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.WebSearchPreviewTool,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.ToolChoiceObjectWebSearch,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.WebSearchToolCallItemParam,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );
+// @@doc(OpenAI.WebSearchToolCallItemResource,
+//   "Note: web_search is not yet available via Azure OpenAI."
+// );

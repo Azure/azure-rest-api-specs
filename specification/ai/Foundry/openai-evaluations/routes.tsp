@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/openai-typespec/models/evals";
 import "./models.tsp";
-import "../.external-readonly/openai.external.typespec/evals/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
