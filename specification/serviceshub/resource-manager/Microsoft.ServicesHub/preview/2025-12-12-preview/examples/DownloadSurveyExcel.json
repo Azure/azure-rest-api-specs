@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2025-12-12-preview",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "ServicesHubConnectorName1",
+    "subscriptionId": "550e8400-e29b-41d4-a716-446655440000",
+    "body": {
+      "properties": {
+        "logAnalyticsWorkspaceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/logAnalyticsRG/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
+        "surveyId": "survey-123",
+        "culture": "en-US"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "fileName": "SQL_Survey_Report_2025-12-16.xlsx",
+          "content": "{base64EncodedExcelFile}"
+        }
+      }
+    }
+  },
+  "operationId": "Download_SurveyExcelReport",
+  "title": "Download the Survey Excel Report"
+}

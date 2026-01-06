@@ -953,6 +953,303 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentExcelReport": {
+      "post": {
+        "operationId": "Download_AssessmentExcelReport",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Download the Assessment Excel Report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssessmentDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download the Assessment Excel Report": {
+            "$ref": "./examples/DownloadAssessmentExcel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentPptReport": {
+      "post": {
+        "operationId": "Download_AssessmentPptReport",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Download the Assessment Ppt Report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssessmentDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download the Assessment PowerPoint Report": {
+            "$ref": "./examples/DownloadAssessmentPpt.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/assessmentSurveyList": {
+      "post": {
+        "operationId": "Get_AssessmentSurveyList",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Gets the Assessment and Survey list for a connector.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AssessmentAndSurveyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the list of Assessments and Surveys": {
+            "$ref": "./examples/ListAssessmentAndSurvey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyAnalyzerResults": {
+      "post": {
+        "operationId": "Get_SurveyAnalyzedResults",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Get the Analyzed Survey Results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SurveyAnalyzedPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SurveyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Survey Analyzer Results": {
+            "$ref": "./examples/GetSurveyAnalyzedList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyExcelReport": {
+      "post": {
+        "operationId": "Download_SurveyExcelReport",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Download the Survey Excel Report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SurveyDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download the Survey Excel Report": {
+            "$ref": "./examples/DownloadSurveyExcel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/surveyExecutiveSummary": {
+      "post": {
+        "operationId": "Download_SurveyExecutiveSummary",
+        "tags": [
+          "ServicesHubConnector"
+        ],
+        "summary": "Download the Survey Ppt Report.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SurveyDownloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Download the Survey PowerPoint Report": {
+            "$ref": "./examples/DownloadSurveyExecutiveSummary.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1024,12 +1321,31 @@
           "type": "string",
           "description": "AgreementType of Services Hub Connector"
         },
+        "agreementId": {
+          "type": "string",
+          "description": "AgreementId of Services Hub Connector"
+        },
         "engageHubSpaces": {
           "type": "array",
           "description": "List of EngageHub Spaces",
           "items": {
             "$ref": "#/definitions/EngageHubSpace"
           }
+        },
+        "logAnalyticsWorkspace": {
+          "type": "array",
+          "description": "Properties of Log Analytics Workspace.",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsWorkspace"
+          }
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Property of Created Date Time."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "Property of Last Modified Time."
         }
       }
     },
@@ -1066,6 +1382,10 @@
       "type": "object",
       "description": "Properties of Services Hub Workspace.",
       "properties": {
+        "agreementId": {
+          "type": "string",
+          "description": "Unique identifier of Agreement Id."
+        },
         "servicesHubWorkspaceId": {
           "type": "string",
           "description": "Unique identifier of Services Hub Workspace."
@@ -1114,6 +1434,15 @@
         "resourceGroupName": {
           "type": "string",
           "description": "Resource Group Name of the Azure Log Analytics Workspace."
+        },
+        "linkedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Linked Date of logAnalyticsWorkspaceId."
+        },
+        "isLatest": {
+          "type": "boolean",
+          "description": "Tracking the latest Log Analytics workspace linked to the connector"
         }
       }
     },
@@ -1749,6 +2078,232 @@
           "description": "Tracking the latest Log Analytics workspace linked to the connector."
         }
       }
+    },
+    "AnalyzedResult": {
+      "type": "object",
+      "description": "Defines the AnalyzedResult.",
+      "properties": {
+        "analyzerId": {
+          "type": "string",
+          "description": "Defines the analyzerId."
+        },
+        "analysisResult": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Defines the analysisResult."
+        },
+        "contentId": {
+          "type": "string",
+          "description": "Defines the contentId."
+        }
+      }
+    },
+    "AnalyzedSurvey": {
+      "type": "object",
+      "description": "Defines the AnalyzedSurvey.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Defines the id."
+        },
+        "surveyId": {
+          "type": "string",
+          "description": "Defines the surveyId."
+        },
+        "surveyResponseId": {
+          "type": "string",
+          "description": "Defines surveyResponseId."
+        },
+        "surveyAnalyzerId": {
+          "type": "string",
+          "description": "Defines surveyAnalyzerId."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Defines encrypted userid who took the survey."
+        },
+        "currentResult": {
+          "$ref": "#/definitions/AnalyzedResult",
+          "description": "Defines the currentResult."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "Defines encrypted userid who took the survey."
+        }
+      }
+    },
+    "AssessmentAndSurveyResult": {
+      "type": "object",
+      "description": "Defines the list of available Assessment List and SurveyList",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssessmentAndSurveyResultProperties",
+          "description": "Defines the properties."
+        }
+      }
+    },
+    "AssessmentAndSurveyResultProperties": {
+      "type": "object",
+      "description": "Defines the properties of AssessmentAndSurveyResult",
+      "properties": {
+        "agreementId": {
+          "type": "string",
+          "description": "Associated AgreementId."
+        },
+        "assessments": {
+          "type": "array",
+          "description": "Assessment cards list.",
+          "items": {
+            "$ref": "#/definitions/Assessment"
+          }
+        },
+        "surveys": {
+          "type": "array",
+          "description": "Survey cards list.",
+          "items": {
+            "$ref": "#/definitions/Survey"
+          }
+        }
+      }
+    },
+    "AssessmentDownloadPayload": {
+      "type": "object",
+      "description": "Defines the payload for Assessment Report download.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssessmentDownloadPayloadProperties",
+          "description": "Defines the properties."
+        }
+      }
+    },
+    "AssessmentDownloadPayloadProperties": {
+      "type": "object",
+      "description": "Defines the properties of Assessment Report download payload.",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Defines the loganalytics workspace Id."
+        },
+        "assessmentId": {
+          "type": "string",
+          "description": "Defines Assessment Id."
+        },
+        "culture": {
+          "type": "string",
+          "description": "Defines the culture."
+        }
+      }
+    },
+    "DownloadResult": {
+      "type": "object",
+      "description": "Defines the Result for Assessment Report download.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DownloadResultProperties",
+          "description": "Defines properties."
+        }
+      }
+    },
+    "DownloadResultProperties": {
+      "type": "object",
+      "description": "Defines the Result for Assessment Report download.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Defines the name of the file."
+        },
+        "content": {
+          "type": "string",
+          "description": "Defines content of file."
+        }
+      }
+    },
+    "Survey": {
+      "type": "object",
+      "description": "Defines the Survey config",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Defines id of the survey."
+        },
+        "surveyId": {
+          "type": "string",
+          "description": "Defines the survey id defined in configuration."
+        },
+        "name": {
+          "type": "string",
+          "description": "Defines the name of the Survey."
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Defines the external id of survey."
+        }
+      }
+    },
+    "SurveyAnalyzedPayload": {
+      "type": "object",
+      "description": "Defines the Payload to get Analyzed Survey.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SurveyAnalyzedPayloadProperties",
+          "description": "Defines the properties."
+        }
+      }
+    },
+    "SurveyAnalyzedPayloadProperties": {
+      "type": "object",
+      "description": "Defines the properties of SurveyAnalyzedPayload.",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Defines the loganalytics workspace Id."
+        },
+        "surveyId": {
+          "type": "string",
+          "description": "Defines the Survey Id."
+        }
+      }
+    },
+    "SurveyDownloadPayload": {
+      "type": "object",
+      "description": "Defines the payload for Survey Report download.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SurveyDownloadPayloadProperties",
+          "description": "Defines the properties."
+        }
+      }
+    },
+    "SurveyDownloadPayloadProperties": {
+      "type": "object",
+      "description": "Defines the properties for Survey Report download.",
+      "properties": {
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "Defines the loganalytics workspace Id."
+        },
+        "surveyId": {
+          "type": "string",
+          "description": "Defines Survey Id."
+        },
+        "culture": {
+          "type": "string",
+          "description": "Defines the culture."
+        }
+      }
+    },
+    "SurveyResult": {
+      "type": "object",
+      "description": "Defines the Survey Result.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Analyzed Survey list.",
+          "items": {
+            "$ref": "#/definitions/AnalyzedSurvey"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1792,14 +2347,6 @@
       "required": true,
       "type": "string",
       "description": "API version to be used with the HTTP request.",
-      "x-ms-parameter-location": "method"
-    },
-    "ServicesHubWorkspaceIdParameter": {
-      "name": "servicesHubWorkspaceId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Services Hub Workspace Id.",
       "x-ms-parameter-location": "method"
     }
   }
