@@ -536,6 +536,15 @@ model MongoDatabaseProperties is AzureResourceProperties {
   databaseDisplayName: string;
 
   /**
+   * discovered Mongo Instance Ids
+   */
+  mongoInstanceArmIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApplicationMigration/mongoSites/mongoInstances";
+    }
+  ]>[];
+
+  /**
    * The size of the database in MB.
    */
   sizeInMb?: float32;
@@ -644,6 +653,15 @@ model MongoDatabaseResourcePatchProperties {
   databaseDisplayName?: string;
 
   /**
+   * discovered Mongo Instance Ids
+   */
+  mongoInstanceArmIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApplicationMigration/mongoSites/mongoInstances";
+    }
+  ]>[];
+
+  /**
    * The size of the database in MB.
    */
   sizeInMb?: float32;
@@ -667,6 +685,15 @@ model MongoCollectionProperties is AzureResourceProperties {
    * The collection name.
    */
   collectionDisplayName: string;
+
+  /**
+   * discovered Mongo Database Ids
+   */
+  mongoDatabaseArmIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApplicationMigration/mongoSites/mongoDatabases";
+    }
+  ]>[];
 
   /**
    * The size of the collection in MB.
@@ -748,6 +775,15 @@ model MongoCollectionResourcePatch {
 model MongoCollectionResourcePatchProperties {
   /** The collection name. */
   collectionDisplayName?: string;
+
+  /**
+   * discovered Mongo Database Ids
+   */
+  mongoDatabaseArmIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ApplicationMigration/mongoSites/mongoDatabases";
+    }
+  ]>[];
 
   /** The size of the collection in MB. */
   sizeInMb?: float32;

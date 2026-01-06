@@ -34,19 +34,19 @@ model IngestSubvolumeProperties {
   @minLength(1)
   @maxLength(255)
   @pattern("^/?[a-zA-Z0-9-\\._]*$")
-  path?: string;
+  path: string;
 
   @doc("Authentication config for certain subvolumes.")
-  authentication?: AuthConfig;
+  authentication: AuthConfig;
 
   @doc("Blob storage endpoint, for example: https://mysa.core.windows.net")
   @minLength(3)
   @maxLength(1024)
-  storageAccountEndpoint?: string;
+  storageAccountEndpoint: string;
 
   @doc("Blob container name.")
   @minLength(3)
-  containerName?: string;
+  containerName: string;
 
   @doc("Optional Unix-like ownership info (UID/GID) for the subvolume.")
   authSys?: AuthSysConfig;
