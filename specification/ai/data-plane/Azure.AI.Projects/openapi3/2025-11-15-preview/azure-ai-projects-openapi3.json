@@ -12812,9 +12812,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "red_team": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_seed_prompts": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_taxonomy": "#/components/schemas/RedTeamItemGenerationParams"
+            "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
+            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -23916,8 +23915,7 @@
             "description": "Name of the red-team run."
           },
           "numTurns": {
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
             "description": "Number of simulation rounds."
           },
           "attackStrategies": {
@@ -24014,20 +24012,11 @@
       "RedTeamItemGenerationParams": {
         "type": "object",
         "required": [
-          "type",
           "attack_strategies",
-          "num_turns"
+          "num_turns",
+          "type"
         ],
         "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "red_team",
-              "red_team_seed_prompts",
-              "red_team_taxonomy"
-            ],
-            "description": "The type of item generation parameters."
-          },
           "attack_strategies": {
             "type": "array",
             "items": {
@@ -24040,6 +24029,10 @@
             "format": "int32",
             "description": "The number of turns allowed in the game.",
             "default": 20
+          },
+          "type": {
+            "type": "string",
+            "description": "Discriminator property for RedTeamItemGenerationParams."
           }
         },
         "discriminator": {
