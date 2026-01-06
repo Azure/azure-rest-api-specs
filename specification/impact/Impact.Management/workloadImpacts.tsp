@@ -60,9 +60,9 @@ model WorkloadImpactProperties is ResourceProperties {
   @doc("Details about connectivity issue. Applicable when root resource causing the issue is not identified. For example, when a VM is impacted due to a network issue, the impacted resource is identified as the VM, but the root cause is the network. In such cases, the connectivity field will have the details about the network issue")
   connectivity?: Connectivity;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing use case"
   @doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
-  additionalProperties?: {};
+  additionalProperties?: Record<unknown>;
 
   @doc("ARM error code and error message associated with the impact")
   errorDetails?: ErrorDetailProperties;
@@ -105,6 +105,12 @@ model WorkloadImpactProperties is ResourceProperties {
   @doc("This field represents the number of times a particular issue was observed over a given time range.")
   @minValue(0)
   hitCount?: int32;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Insights grouped by category. Each category contains status and a list of insight references.")
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["category"])
+  insightsByCategory?: InsightCategoryGroup[];
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

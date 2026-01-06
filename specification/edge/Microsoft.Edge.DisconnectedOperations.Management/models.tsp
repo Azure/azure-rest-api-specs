@@ -80,6 +80,73 @@ union RegistrationStatus {
   string,
 }
 
+/**
+ * Auto renew status
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union AutoRenew {
+  /**
+   * Auto renew is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Auto renew is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+}
+
+/**
+ * Pricing model
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union PricingModel {
+  /**
+   * Trial pricing model.
+   */
+  Trial: "Trial",
+
+  string,
+
+  /**
+   * Annual pricing model.
+   */
+  Annual: "Annual",
+
+  string,
+}
+
+/**
+ * Billing status
+ */
+@added(Microsoft.Edge.Versions.v2025_08_01)
+union BillingStatus {
+  /**
+   * Billing is enabled.
+   */
+  Enabled: "Enabled",
+
+  string,
+
+  /**
+   * Billing is disabled.
+   */
+  Disabled: "Disabled",
+
+  string,
+
+  /**
+   * Billing is stopped.
+   */
+  Stopped: "Stopped",
+
+  string,
+}
+
 @doc("The disconnected operation properties")
 model DisconnectedOperationProperties {
   @visibility(Lifecycle.Read)
@@ -108,6 +175,10 @@ model DisconnectedOperationProperties {
   @doc("The device version")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   deviceVersion?: string;
+
+  @doc("The billing configuration")
+  @added(Microsoft.Edge.Versions.v2025_08_01)
+  billingConfiguration?: BillingConfiguration;
 }
 
 @doc("The disconnected operation manifest")
@@ -268,4 +339,75 @@ model ArtifactDownloadResult {
   @visibility(Lifecycle.Read)
   @doc("The download link expiry time")
   linkExpiry: utcDateTime;
+}
+
+@doc("The hardware setting properties")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model HardwareSettingProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The resource provisioning state")
+  provisioningState?: ResourceProvisioningState;
+
+  @doc("The total number of cores")
+  totalCores: int32;
+
+  @doc("The disk space in GB")
+  diskSpaceInGb: int32;
+
+  @doc("The memory in GB")
+  memoryInGb: int32;
+
+  @doc("The OEM")
+  oem: string;
+
+  @doc("The hardware SKU")
+  hardwareSku: string;
+
+  @doc("The number of nodes")
+  nodes: int32;
+
+  @doc("The active version at registration")
+  versionAtRegistration: string;
+
+  @doc("The solution builder extension at registration")
+  solutionBuilderExtension: string;
+
+  @doc("The unique Id of the device")
+  deviceId: string;
+}
+
+@doc("The billing period")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingPeriod {
+  @doc("The number of cores")
+  cores: int32;
+
+  @doc("The pricing model")
+  pricingModel: PricingModel;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing start date")
+  startDate?: plainDate;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing end date")
+  endDate?: plainDate;
+}
+
+@doc("The billing configuration")
+@added(Microsoft.Edge.Versions.v2025_08_01)
+model BillingConfiguration {
+  @doc("The auto renew setting")
+  autoRenew: AutoRenew;
+
+  @visibility(Lifecycle.Read)
+  @doc("The billing status")
+  billingStatus: BillingStatus;
+
+  @doc("The current billing configuration")
+  current: BillingPeriod;
+
+  @doc("The upcoming billing configuration")
+  @visibility(Lifecycle.Update, Lifecycle.Read)
+  upcoming?: BillingPeriod;
 }

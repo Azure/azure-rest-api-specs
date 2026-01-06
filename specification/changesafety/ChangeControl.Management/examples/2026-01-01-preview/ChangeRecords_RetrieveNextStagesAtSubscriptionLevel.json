@@ -1,0 +1,35 @@
+{
+  "title": "ChangeRecords_RetrieveNextStagesAtSubscriptionLevel",
+  "operationId": "ChangeRecords_RetrieveNextStagesAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeRecordName": "subscriptionChangeRecord"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeRecordResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeRecords/subscriptionChangeRecord",
+        "lastStageProgressionSequence": 1,
+        "nextStages": [
+          {
+            "stageReference": "verification",
+            "sequence": 2,
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod"
+            }
+          },
+          {
+            "stageReference": "completion",
+            "sequence": 3,
+            "status": "NotStarted",
+            "stageVariables": {
+              "environment": "prod"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

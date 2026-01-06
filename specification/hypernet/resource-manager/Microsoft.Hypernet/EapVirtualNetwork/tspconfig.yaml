@@ -1,0 +1,50 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  service-dir:
+    default: sdk/eapvirtualnetwork
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    examples-dir: "{project-root}/examples"
+    output-file: "{emitter-output-dir}/{version-status}/{version}/eapvirtualnetworks.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    package-dir: "Azure.ResourceManager.Hypernet"
+    namespace: "Azure.ResourceManager.Hypernet"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hypernet"
+    namespace: "azure.mgmt.hypernet"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-hypernet"
+    namespace: "com.azure.resourcemanager.hypernet"
+    service-name: "hypernet"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-hypernet"
+    experimental-extensible-enums: true
+    flavor: azure
+    package-details:
+      name: "@azure/arm-hypernet"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/hypernet"
+    emitter-output-dir: "{output-dir}/{service-dir}/armhypernet"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armhypernet"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure

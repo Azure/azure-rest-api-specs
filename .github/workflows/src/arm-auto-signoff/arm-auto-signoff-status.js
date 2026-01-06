@@ -86,7 +86,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     core.info(`- ${wf.name}: ${wf.conclusion || wf.status}`);
   });
 
-  const wfName = "ARM Auto Signoff - Analyze Code";
+  const wfName = "ARM Auto SignOff - Analyze Code";
   const incrementalTspRuns = workflowRuns
     .filter((wf) => wf.name == wfName)
     // Sort by "updated_at" descending

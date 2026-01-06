@@ -68,7 +68,7 @@ model EdgeMachineGpuJobProperties {
    * The ID of the GPU on which the job is to be performed.
    */
   @visibility(Lifecycle.Read)
-  gpuId: string;
+  gpuId?: string;
 
   /**
    * Type of GPU job to be performed.
