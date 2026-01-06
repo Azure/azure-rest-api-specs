@@ -3866,6 +3866,7 @@ model SynonymMap {
   format: "solr";
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.")
   @encode(ArrayEncoding.newlineDelimited)
   synonyms: string[];
@@ -4816,6 +4817,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
   pattern?: string = "\\W+";
 
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
   @doc("Regular expression flags.")
   @encode(ArrayEncoding.pipeDelimited)
   flags?: RegexFlags[];
