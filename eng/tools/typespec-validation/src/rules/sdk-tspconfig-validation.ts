@@ -748,8 +748,6 @@ export const requiredRules = [
   new TspConfigGoMgmtGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoMgmtInjectSpansTrueSubRule(),
-  new TspConfigGoDpServiceDirMatchPatternSubRule(),
-  new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoModuleMatchPatternSubRule(),
   new TspConfigGoContainingModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
@@ -761,10 +759,11 @@ export const requiredRules = [
 ];
 
 /**
- * Optional rules: Validate language-specific emitter configurations without blocking CI/CD.
+ * Optional rules: Validate language-specific emitter configurations.
  * All rules in this array inherit from TspconfigEmitterOptionsSubRuleBase and only run when
- * their corresponding emitter is configured in tspconfig.yaml. Failures are logged but do not
- * affect the overall validation result.
+ * their corresponding emitter is configured in tspconfig.yaml. When the emitter is not configured,
+ * the rule is skipped and does not affect the validation result. When the emitter is configured,
+ * validation failures will affect the overall validation result.
  */
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpAzNamespaceSubRule(),
@@ -772,6 +771,8 @@ export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpMgmtNamespaceSubRule(),
   new TspConfigCsharpAzEmitterOutputDirSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
+  new TspConfigGoDpServiceDirMatchPatternSubRule(),
+  new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
@@ -831,6 +832,8 @@ export class SdkTspConfigValidationRule implements Rule {
 
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
+      // Optional rules affect overall success when emitter is configured
+      success &&= result.success;
     }
 
     const stdOutputFailedResults =

@@ -77,11 +77,6 @@ export function createEmitterOptionExample(
   return content;
 }
 
-// TODO: remove when @azure-tools/typespec-csharp is ready for validating tspconfig
-function shouldBeTrueOnFailSubRuleValidation(emitterName: string) {
-  return emitterName === "@azure-tools/typespec-csharp" ? true : false;
-}
-
 function createParameterTestCases(
   folder: string,
   key: string,
@@ -155,7 +150,7 @@ function createEmitterOptionTestCases(
       },
       ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
     ),
-    success: shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: false,
     subRules,
   });
 
@@ -166,7 +161,7 @@ function createEmitterOptionTestCases(
       emitterName,
       ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
     ),
-    success: allowUndefined ? true : shouldBeTrueOnFailSubRuleValidation(emitterName),
+    success: allowUndefined ? true : false,
     subRules,
   });
 
@@ -182,7 +177,7 @@ function createEmitterOptionTestCases(
         },
         ...Object.entries(additionalOptions).map(([key, value]) => ({ key, value })),
       ),
-      success: shouldBeTrueOnFailSubRuleValidation(emitterName),
+      success: false,
       subRules,
     });
   }
@@ -359,7 +354,6 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
   [new TspConfigGoModuleMatchPatternSubRule()],
-  false,
 );
 
 const goDpContainingModuleTestCases = createEmitterOptionTestCases(
@@ -794,8 +788,6 @@ describe("tspconfig", function () {
     ...goManagementInjectSpansTestCases,
     ...goDpModuleTestCases,
     ...goDpContainingModuleTestCases,
-    ...goDpEmitterOutputDirTestCases,
-    ...goDpServiceDirTestCases,
     // java
     ...javaAzEmitterOutputDirTestCases,
     ...javaMgmtEmitterOutputDirTestCases,
@@ -819,6 +811,9 @@ describe("tspconfig", function () {
     ...csharpAzClearOutputFolderTestCases,
     ...csharpMgmtEmitterOutputDirTestCases,
     ...csharpMgmtNamespaceTestCases,
+    // go data plane
+    ...goDpEmitterOutputDirTestCases,
+    ...goDpServiceDirTestCases,
     // Test cases for optional rules when emitter is not configured
     ...optionalRulesWithoutEmitterConfigTestCases,
   ];
