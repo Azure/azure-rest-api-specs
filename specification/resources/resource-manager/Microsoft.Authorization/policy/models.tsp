@@ -300,7 +300,7 @@ model PolicyAssignmentProperties {
    * The parameter values for the assigned policy rule. The keys are the parameter names.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterValues;
+  parameters?: Record<ParameterValuesValue>;
 
   /**
    * This message will be part of response in case of policy violation.
@@ -347,12 +347,6 @@ model PolicyAssignmentProperties {
   @visibility(Lifecycle.Read)
   instanceId?: string;
 }
-
-/**
- * The parameter values for the policy rule. The keys are the parameter names.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-model ParameterValues is Record<ParameterValuesValue>;
 
 /**
  * The value of a parameter.
@@ -558,7 +552,7 @@ model PolicyDefinitionProperties {
    * The parameter definitions for parameters used in the policy rule. The keys are the parameter names.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterDefinitions;
+  parameters?: Record<ParameterDefinitionsValue>;
 
   /**
    * The policy definition version in #.#.# format.
@@ -575,12 +569,6 @@ model PolicyDefinitionProperties {
    */
   externalEvaluationEnforcementSettings?: ExternalEvaluationEnforcementSettings;
 }
-
-/**
- * The parameter definitions for parameters used in the policy. The keys are the parameter names.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-model ParameterDefinitions is Record<ParameterDefinitionsValue>;
 
 /**
  * The definition of a parameter that can be provided to the policy.
@@ -723,7 +711,7 @@ model PolicyDefinitionVersionProperties {
    * The parameter definitions for parameters used in the policy rule. The keys are the parameter names.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterDefinitions;
+  parameters?: Record<ParameterDefinitionsValue>;
 
   /**
    * The policy definition version in #.#.# format.
@@ -766,7 +754,7 @@ model PolicySetDefinitionProperties {
    * The policy set definition parameters that can be used in policy definition references.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterDefinitions;
+  parameters?: Record<ParameterDefinitionsValue>;
 
   /**
    * An array of policy definition references.
@@ -821,7 +809,7 @@ model PolicyDefinitionReference {
    * The parameter values for the referenced policy rule. The keys are the parameter names.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterValues;
+  parameters?: Record<ParameterValuesValue>;
 
   /**
    * A unique id (within the policy set definition) for this policy definition reference.
@@ -894,7 +882,7 @@ model PolicySetDefinitionVersionProperties {
    * The policy set definition parameters that can be used in policy definition references.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  parameters?: ParameterDefinitions;
+  parameters?: Record<ParameterDefinitionsValue>;
 
   /**
    * An array of policy definition references.

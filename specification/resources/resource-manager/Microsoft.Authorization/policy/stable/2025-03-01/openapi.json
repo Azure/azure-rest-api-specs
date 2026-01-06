@@ -3320,13 +3320,6 @@
         ]
       }
     },
-    "ParameterDefinitions": {
-      "type": "object",
-      "description": "The parameter definitions for parameters used in the policy. The keys are the parameter names.",
-      "additionalProperties": {
-        "$ref": "#/definitions/ParameterDefinitionsValue"
-      }
-    },
     "ParameterDefinitionsValue": {
       "type": "object",
       "description": "The definition of a parameter that can be provided to the policy.",
@@ -3429,13 +3422,6 @@
         ]
       }
     },
-    "ParameterValues": {
-      "type": "object",
-      "description": "The parameter values for the policy rule. The keys are the parameter names.",
-      "additionalProperties": {
-        "$ref": "#/definitions/ParameterValuesValue"
-      }
-    },
     "ParameterValuesValue": {
       "type": "object",
       "description": "The value of a parameter.",
@@ -3529,8 +3515,11 @@
           }
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterValues",
-          "description": "The parameter values for the assigned policy rule. The keys are the parameter names."
+          "type": "object",
+          "description": "The parameter values for the assigned policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterValuesValue"
+          }
         },
         "description": {
           "type": "string",
@@ -3743,8 +3732,11 @@
           "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterDefinitions",
-          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names."
+          "type": "object",
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
         },
         "version": {
           "type": "string",
@@ -3786,8 +3778,11 @@
           "readOnly": true
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterValues",
-          "description": "The parameter values for the referenced policy rule. The keys are the parameter names."
+          "type": "object",
+          "description": "The parameter values for the referenced policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterValuesValue"
+          }
         },
         "policyDefinitionReferenceId": {
           "type": "string",
@@ -3870,8 +3865,11 @@
           "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterDefinitions",
-          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names."
+          "type": "object",
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
         },
         "version": {
           "type": "string",
@@ -4036,8 +4034,11 @@
           "description": "The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterDefinitions",
-          "description": "The policy set definition parameters that can be used in policy definition references."
+          "type": "object",
+          "description": "The policy set definition parameters that can be used in policy definition references.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
         },
         "policyDefinitions": {
           "type": "array",
@@ -4132,8 +4133,11 @@
           "description": "The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterDefinitions",
-          "description": "The policy set definition parameters that can be used in policy definition references."
+          "type": "object",
+          "description": "The policy set definition parameters that can be used in policy definition references.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
         },
         "policyDefinitions": {
           "type": "array",
