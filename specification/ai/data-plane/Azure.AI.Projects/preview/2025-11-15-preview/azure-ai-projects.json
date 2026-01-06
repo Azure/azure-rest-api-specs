@@ -18562,6 +18562,10 @@
           "x-ms-enum": {
             "modelAsString": false
           }
+        },
+        "custom_search_configuration": {
+          "$ref": "#/definitions/WebSearchConfiguration",
+          "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
         }
       },
       "allOf": [
@@ -20169,6 +20173,24 @@
         }
       ],
       "x-ms-discriminator-value": "user_profile"
+    },
+    "WebSearchConfiguration": {
+      "type": "object",
+      "description": "A web search configuration for bing custom search",
+      "properties": {
+        "project_connection_id": {
+          "type": "string",
+          "description": "Project connection id for grounding with bing custom search"
+        },
+        "instance_name": {
+          "type": "string",
+          "description": "Name of the custom configuration instance given to config."
+        }
+      },
+      "required": [
+        "project_connection_id",
+        "instance_name"
+      ]
     },
     "WeeklyRecurrenceSchedule": {
       "type": "object",
