@@ -1,0 +1,4438 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyClient",
+    "version": "2025-03-01",
+    "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PolicyAssignments"
+    },
+    {
+      "name": "PolicyDefinitions"
+    },
+    {
+      "name": "PolicyDefinitionVersions"
+    },
+    {
+      "name": "PolicySetDefinitions"
+    },
+    {
+      "name": "PolicySetDefinitionVersions"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}": {
+      "get": {
+        "operationId": "PolicyAssignments_Get",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "description": "This operation retrieves a single policy assignment, given its name and the scope it was created at.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "description": "The name of the policy assignment to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy assignment": {
+            "$ref": "./examples/getPolicyAssignment.json"
+          },
+          "Retrieve a policy assignment with a system assigned identity": {
+            "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
+          },
+          "Retrieve a policy assignment with a user assigned identity": {
+            "$ref": "./examples/getPolicyAssignmentWithUserAssignedIdentity.json"
+          },
+          "Retrieve a policy assignment with overrides": {
+            "$ref": "./examples/getPolicyAssignmentWithOverrides.json"
+          },
+          "Retrieve a policy assignment with resource selectors": {
+            "$ref": "./examples/getPolicyAssignmentWithResourceSelectors.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyAssignments_Create",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "description": "This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "description": "The name of the policy assignment to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the policy assignment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'PolicyAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy assignment": {
+            "$ref": "./examples/createPolicyAssignment.json"
+          },
+          "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update.": {
+            "$ref": "./examples/createPolicyAssignmentWithEnrollEnforcement.json"
+          },
+          "Create or update a policy assignment with a system assigned identity": {
+            "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
+          },
+          "Create or update a policy assignment with a user assigned identity": {
+            "$ref": "./examples/createPolicyAssignmentWithUserAssignedIdentity.json"
+          },
+          "Create or update a policy assignment with multiple non-compliance messages": {
+            "$ref": "./examples/createPolicyAssignmentNonComplianceMessages.json"
+          },
+          "Create or update a policy assignment with overrides": {
+            "$ref": "./examples/createPolicyAssignmentWithOverrides.json"
+          },
+          "Create or update a policy assignment with resource selectors": {
+            "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
+          },
+          "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
+            "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PolicyAssignments_Update",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "description": "This operation updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "description": "The name of the policy assignment to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for policy assignment patch request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a policy assignment with a system assigned identity": {
+            "$ref": "./examples/updatePolicyAssignmentWithIdentity.json"
+          },
+          "Update a policy assignment with a user assigned identity": {
+            "$ref": "./examples/updatePolicyAssignmentWithUserAssignedIdentity.json"
+          },
+          "Update a policy assignment with overrides": {
+            "$ref": "./examples/updatePolicyAssignmentWithOverrides.json"
+          },
+          "Update a policy assignment with resource selectors": {
+            "$ref": "./examples/updatePolicyAssignmentWithResourceSelectors.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyAssignments_Delete",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "description": "This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding '/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "policyAssignmentName",
+            "in": "path",
+            "description": "The name of the policy assignment to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignment"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy assignment": {
+            "$ref": "./examples/deletePolicyAssignment.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "operationId": "PolicyDefinitionVersions_ListAllBuiltins",
+        "summary": "Lists all built-in policy definition versions.",
+        "description": "This operation lists all the built-in policy definition versions for all built-in policy definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all built-in policy definition versions": {
+            "$ref": "./examples/listAllBuiltInPolicyDefinitionVersions.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
+      "post": {
+        "operationId": "PolicySetDefinitionVersions_ListAllBuiltins",
+        "summary": "Lists all built-in policy set definition versions.",
+        "description": "This operation lists all the built-in policy set definition versions for all built-in policy set definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all built-in policy definition versions": {
+            "$ref": "./examples/listAllBuiltInPolicySetDefinitionVersions.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions": {
+      "get": {
+        "operationId": "PolicyDefinitions_ListBuiltIn",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the built-in policy definitions that match the optional given $filter. If $filter='policyType -eq {value}' is provided, the returned list only includes all built-in policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all built-in policy definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List built-in policy definitions": {
+            "$ref": "./examples/listBuiltInPolicyDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
+      "get": {
+        "operationId": "PolicyDefinitions_GetBuiltIn",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves the built-in policy definition with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the built-in policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a built-in policy definition": {
+            "$ref": "./examples/getBuiltinPolicyDefinition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_ListBuiltIn",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the built-in policy definition versions for the given policy definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List built-in policy definition versions": {
+            "$ref": "./examples/listBuiltInPolicyDefinitionVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_GetBuiltIn",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves the built-in policy definition version with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a built-in policy definition version": {
+            "$ref": "./examples/getBuiltinPolicyDefinitionVersion.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policySetDefinitions": {
+      "get": {
+        "operationId": "PolicySetDefinitions_ListBuiltIn",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the built-in policy set definitions that match the optional given $filter. If $filter='category -eq {value}' is provided, the returned list only includes all built-in policy set definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List built-in policy set definitions": {
+            "$ref": "./examples/listBuiltInPolicySetDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}": {
+      "get": {
+        "operationId": "PolicySetDefinitions_GetBuiltIn",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves the built-in policy set definition with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a built-in policy set definition": {
+            "$ref": "./examples/getBuiltInPolicySetDefinition.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_ListBuiltIn",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the built-in policy set definition versions for the given built-in policy set definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List built-in policy set definitions": {
+            "$ref": "./examples/listBuiltInPolicySetDefinitionVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_GetBuiltIn",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves the built-in policy set definition version with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a built-in policy set definition version": {
+            "$ref": "./examples/getBuiltInPolicySetDefinitionVersion.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/acquirePolicyToken": {
+      "post": {
+        "operationId": "PolicyTokens_AcquireAtManagementGroup",
+        "summary": "Acquires a policy token at management group level.",
+        "description": "This operation acquires a policy token in the given management group for the given request body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy token properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Acquire a policy token at management group level": {
+            "$ref": "./examples/acquirePolicyTokenAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "operationId": "PolicyDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy definition versions at management group scope.",
+        "description": "This operation lists all the policy definition versions for all policy definitions at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicyDefinitionVersionsByManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
+      "post": {
+        "operationId": "PolicySetDefinitionVersions_ListAllAtManagementGroup",
+        "summary": "Lists all policy set definition versions at management group scope.",
+        "description": "This operation lists all the policy set definition versions for all policy set definitions at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at management group": {
+            "$ref": "./examples/listAllPolicySetDefinitionVersionsByManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "operationId": "PolicyAssignments_ListForManagementGroup",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "summary": "Retrieves all policy assignments that apply to a management group.",
+        "description": "This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy assignments that apply to a management group": {
+            "$ref": "./examples/listPolicyAssignmentsForManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions": {
+      "get": {
+        "operationId": "PolicyDefinitions_ListByManagementGroup",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the policy definitions in a given management group that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given management group. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy definitions by management group": {
+            "$ref": "./examples/listPolicyDefinitionsByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
+      "get": {
+        "operationId": "PolicyDefinitions_GetAtManagementGroup",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves the policy definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy definition at management group level": {
+            "$ref": "./examples/getPolicyDefinitionAtManagementGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyDefinitions_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation creates or updates a policy definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'PolicyDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy definition at management group level": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionAtManagementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyDefinitions_DeleteAtManagementGroup",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation deletes the policy definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy definition at management group level": {
+            "$ref": "./examples/deletePolicyDefinitionAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_ListByManagementGroup",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the policy definition versions for the given policy definition in the given management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy definition versions by management group": {
+            "$ref": "./examples/listPolicyDefinitionVersionsByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_GetAtManagementGroup",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves the policy definition version in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy definition version at management group level": {
+            "$ref": "./examples/getPolicyDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyDefinitionVersions_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation creates or updates a policy definition version in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicyDefinitionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicyDefinitionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy definition version at management group level": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyDefinitionVersions_DeleteAtManagementGroup",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation deletes the policy definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy definition version at management group level": {
+            "$ref": "./examples/deletePolicyDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policySetDefinitions": {
+      "get": {
+        "operationId": "PolicySetDefinitions_ListByManagementGroup",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the policy set definitions in a given management group that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy set definitions associated with the management group, including those that apply directly or from management groups that contain the given management group. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given management group. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy set definitions at management group level": {
+            "$ref": "./examples/listPolicySetDefinitionsByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}": {
+      "get": {
+        "operationId": "PolicySetDefinitions_GetAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves the policy set definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy set definition at management group level": {
+            "$ref": "./examples/getPolicySetDefinitionAtManagementGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicySetDefinitions_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation creates or updates a policy set definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy set definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicySetDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicySetDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy set definition at management group level": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionAtManagementGroup.json"
+          },
+          "Create or update a policy set definition with groups at management group level": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroupsAtManagementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicySetDefinitions_DeleteAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation deletes the policy set definition in the given management group with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy set definition at management group level": {
+            "$ref": "./examples/deletePolicySetDefinitionAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_ListByManagementGroup",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the policy set definition versions for the given policy set definition in a given management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy set definitions at management group level": {
+            "$ref": "./examples/listPolicySetDefinitionVersionsByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_GetAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves the policy set definition version in the given management group with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy set definition version at management group level": {
+            "$ref": "./examples/getPolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicySetDefinitionVersions_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation creates or updates a policy set definition version in the given management group with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy set definition version properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicySetDefinitionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicySetDefinitionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy set definition version at management group level": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicySetDefinitionVersions_DeleteAtManagementGroup",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation deletes the policy set definition version in the given management group with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ManagementGroupNameParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy set definition version at management group level": {
+            "$ref": "./examples/deletePolicySetDefinitionVersionAtManagementGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/acquirePolicyToken": {
+      "post": {
+        "operationId": "PolicyTokens_Acquire",
+        "summary": "Acquires a policy token.",
+        "description": "This operation acquires a policy token in the given subscription for the given request body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Acquire a policy token": {
+            "$ref": "./examples/acquirePolicyToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/listPolicyDefinitionVersions": {
+      "post": {
+        "operationId": "PolicyDefinitionVersions_ListAll",
+        "summary": "Lists all policy definition versions within a subscription.",
+        "description": "This operation lists all the policy definition versions for all policy definitions within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at subscription": {
+            "$ref": "./examples/listAllPolicyDefinitionVersions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/listPolicySetDefinitionVersions": {
+      "post": {
+        "operationId": "PolicySetDefinitionVersions_ListAll",
+        "summary": "Lists all policy set definition versions within a subscription.",
+        "description": "This operation lists all the policy set definition versions for all policy set definitions within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all policy definition versions at subscription": {
+            "$ref": "./examples/listAllPolicySetDefinitionVersions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "operationId": "PolicyAssignments_List",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "summary": "Retrieves all policy assignments that apply to a subscription.",
+        "description": "This operation retrieves the list of all policy assignments associated with the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the subscription, including those that apply directly or from management groups that contain the given subscription, as well as any applied to objects contained within the subscription. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the subscription, which is everything in the unfiltered list except those applied to objects contained within the subscription. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the subscription. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy assignments that apply to a subscription": {
+            "$ref": "./examples/listPolicyAssignments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions": {
+      "get": {
+        "operationId": "PolicyDefinitions_List",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the policy definitions in a given subscription that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given subscription. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy definitions by subscription": {
+            "$ref": "./examples/listPolicyDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}": {
+      "get": {
+        "operationId": "PolicyDefinitions_Get",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation retrieves the policy definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy definition": {
+            "$ref": "./examples/getPolicyDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyDefinitions_CreateOrUpdate",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation creates or updates a policy definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'PolicyDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy definition": {
+            "$ref": "./examples/createOrUpdatePolicyDefinition.json"
+          },
+          "Create or update a policy definition with advanced parameters": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionAdvancedParams.json"
+          },
+          "Create or update a policy definition with external evaluation enforcement settings": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionExternalEvaluationEnforcementSettings.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyDefinitions_Delete",
+        "tags": [
+          "PolicyDefinitions"
+        ],
+        "description": "This operation deletes the policy definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy definition": {
+            "$ref": "./examples/deletePolicyDefinition.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_List",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the policy definition versions for the given policy definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy definition versions by subscription": {
+            "$ref": "./examples/listPolicyDefinitionVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicyDefinitionVersions_Get",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation retrieves the policy definition version in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy definition version": {
+            "$ref": "./examples/getPolicyDefinitionVersion.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicyDefinitionVersions_CreateOrUpdate",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation creates or updates a policy definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicyDefinitionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicyDefinitionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicyDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy definition version": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionVersion.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicyDefinitionVersions_Delete",
+        "tags": [
+          "PolicyDefinitionVersions"
+        ],
+        "description": "This operation deletes the policy definition version in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policyDefinitionName",
+            "in": "path",
+            "description": "The name of the policy definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy definition version": {
+            "$ref": "./examples/deletePolicyDefinitionVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policySetDefinitions": {
+      "get": {
+        "operationId": "PolicySetDefinitions_List",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves a list of all the policy set definitions in a given subscription that match the optional given $filter. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, the unfiltered list includes all policy set definitions associated with the subscription, including those that apply directly or from management groups that contain the given subscription. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given subscription. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn and Custom. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atExactScope()', 'policyType -eq {value}' or 'category eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter='policyType -eq {value}' is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter='category -eq {value}' is provided, the returned list only includes all policy set definitions whose category match the {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listPolicySetDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}": {
+      "get": {
+        "operationId": "PolicySetDefinitions_Get",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation retrieves the policy set definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy set definition": {
+            "$ref": "./examples/getPolicySetDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicySetDefinitions_CreateOrUpdate",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation creates or updates a policy set definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy set definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicySetDefinition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicySetDefinition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy set definition": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinition.json"
+          },
+          "Create or update a policy set definition with groups": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroups.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicySetDefinitions_Delete",
+        "tags": [
+          "PolicySetDefinitions"
+        ],
+        "description": "This operation deletes the policy set definition in the given subscription with the given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition to get.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy set definition": {
+            "$ref": "./examples/deletePolicySetDefinition.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_List",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves a list of all the policy set definition versions for the given policy set definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy set definitions": {
+            "$ref": "./examples/listPolicySetDefinitionVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policySetDefinitions/{policySetDefinitionName}/versions/{policyDefinitionVersion}": {
+      "get": {
+        "operationId": "PolicySetDefinitionVersions_Get",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation retrieves the policy set definition version in the given subscription with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a policy set definition version": {
+            "$ref": "./examples/getPolicySetDefinitionVersion.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PolicySetDefinitionVersions_CreateOrUpdate",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation creates or updates a policy set definition version in the given subscription with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The policy set definition properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PolicySetDefinitionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'PolicySetDefinitionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PolicySetDefinitionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a policy set definition version": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionVersion.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PolicySetDefinitionVersions_Delete",
+        "tags": [
+          "PolicySetDefinitionVersions"
+        ],
+        "description": "This operation deletes the policy set definition version in the given subscription with the given name and version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "policySetDefinitionName",
+            "in": "path",
+            "description": "The name of the policy set definition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "policyDefinitionVersion",
+            "in": "path",
+            "description": "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number",
+            "required": true,
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a policy set definition version": {
+            "$ref": "./examples/deletePolicySetDefinitionVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "operationId": "PolicyAssignments_ListForResource",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "summary": "Retrieves all policy assignments that apply to a resource.",
+        "description": "This operation retrieves the list of all policy assignments associated with the specified resource in the given resource group and subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource, including those that apply directly or from all containing scopes, as well as any applied to resources contained within the resource. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource, which is everything in the unfiltered list except those applied to resources contained within the resource. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource level. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource. Three parameters plus the resource name are used to identify a specific resource. If the resource is not part of a parent resource (the more common case), the parent resource path should not be provided (or provided as ''). For example a web app could be specified as ({resourceProviderNamespace} == 'Microsoft.Web', {parentResourcePath} == '', {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource is part of a parent resource, then all parameters should be provided. For example a virtual machine DNS name could be specified as ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath} == 'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames', {resourceName} == 'MyComputerName'). A convenient alternative to providing the namespace and type name separately is to provide both in the {resourceType} parameter, format: ({resourceProviderNamespace} == '', {parentResourcePath} == '', {resourceType} == 'Microsoft.Web/sites', {resourceName} == 'MyWebApp').",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "description": "The namespace of the resource provider. For example, the namespace of a virtual machine is Microsoft.Compute (from Microsoft.Compute/virtualMachines)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentResourcePath",
+            "in": "path",
+            "description": "The parent resource path. Use empty string if there is none.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^.+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy assignments that apply to a resource group": {
+            "$ref": "./examples/listPolicyAssignmentsForResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "operationId": "PolicyAssignments_ListForResourceGroup",
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "description": "This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Maximum number of records to return. When the $top filter is not provided, it will return 500 records.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List policy assignments that apply to a resource group": {
+            "$ref": "./examples/listPolicyAssignmentsForResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssignmentType": {
+      "type": "string",
+      "description": "The type of policy assignment. Possible values are NotSpecified, System, SystemHidden, and Custom. Immutable.",
+      "enum": [
+        "NotSpecified",
+        "System",
+        "SystemHidden",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified"
+          },
+          {
+            "name": "System",
+            "value": "System",
+            "description": "System"
+          },
+          {
+            "name": "SystemHidden",
+            "value": "SystemHidden",
+            "description": "SystemHidden"
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom"
+          }
+        ]
+      }
+    },
+    "ExternalEndpointResult": {
+      "type": "string",
+      "description": "The result of the external endpoint. Possible values are Succeeded and Failed.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalEndpointResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "ExternalEvaluationEndpointInvocationResult": {
+      "type": "object",
+      "description": "The external evaluation endpoint invocation results.",
+      "properties": {
+        "policyInfo": {
+          "$ref": "#/definitions/PolicyLogInfo",
+          "description": "The details of the policy requiring the external endpoint invocation."
+        },
+        "result": {
+          "$ref": "#/definitions/ExternalEndpointResult",
+          "description": "The result of the external endpoint. Possible values are Succeeded and Failed."
+        },
+        "message": {
+          "type": "string",
+          "description": "The status message with additional details about the invocation result."
+        },
+        "retryAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time after which a failed endpoint invocation can be retried."
+        },
+        "claims": {
+          "description": "The set of claims that will be attached to the policy token as an attestation for the result of the endpoint invocation."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the results."
+        }
+      }
+    },
+    "ExternalEvaluationEndpointSettings": {
+      "type": "object",
+      "description": "The settings of an external endpoint providing evaluation results.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the endpoint."
+        },
+        "details": {
+          "description": "The details of the endpoint."
+        }
+      }
+    },
+    "ExternalEvaluationEnforcementSettings": {
+      "type": "object",
+      "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation.",
+      "properties": {
+        "missingTokenAction": {
+          "type": "string",
+          "description": "What to do when evaluating an enforcement policy that requires an external evaluation and the token is missing. Possible values are Audit and Deny and language expressions are supported."
+        },
+        "resultLifespan": {
+          "type": "string",
+          "description": "The lifespan of the endpoint invocation result after which it's no longer valid. Value is expected to follow the ISO 8601 duration format and language expressions are supported."
+        },
+        "endpointSettings": {
+          "$ref": "#/definitions/ExternalEvaluationEndpointSettings",
+          "description": "The settings of an external endpoint providing evaluation results."
+        },
+        "roleDefinitionIds": {
+          "type": "array",
+          "description": "An array of the role definition Ids the assignment's MSI will need in order to invoke the endpoint.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.  Policy assignments support a maximum of one identity.  That is either a system assigned identity or a single user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of the resource identity.  This property will only be provided for a system assigned identity",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the resource identity.  This property will only be provided for a system assigned identity",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The identity type. This is the only required field when adding a system or user assigned identity to a resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The user identity associated with the policy. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentitiesValue"
+          }
+        }
+      }
+    },
+    "NonComplianceMessage": {
+      "type": "object",
+      "description": "A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message applies to all policies assigned by this policy assignment."
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "Override": {
+      "type": "object",
+      "description": "The policy property value override.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/OverrideKind",
+          "description": "The override kind."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value to override the policy property."
+        },
+        "selectors": {
+          "type": "array",
+          "description": "The list of the selector expressions.",
+          "items": {
+            "$ref": "#/definitions/Selector"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OverrideKind": {
+      "type": "string",
+      "description": "The override kind.",
+      "enum": [
+        "policyEffect",
+        "definitionVersion"
+      ],
+      "x-ms-enum": {
+        "name": "OverrideKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "policyEffect",
+            "value": "policyEffect",
+            "description": "It will override the policy effect type."
+          },
+          {
+            "name": "definitionVersion",
+            "value": "definitionVersion",
+            "description": "It will override the definition version property value of the policy assignment."
+          }
+        ]
+      }
+    },
+    "ParameterDefinitionsValue": {
+      "type": "object",
+      "description": "The definition of a parameter that can be provided to the policy.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ParameterType",
+          "description": "The data type of the parameter."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "The allowed values for the parameter.",
+          "items": {}
+        },
+        "defaultValue": {
+          "description": "The default value for the parameter if no value is provided."
+        },
+        "schema": {
+          "description": "Provides validation of parameter inputs during assignment using a self-defined JSON schema. This property is only supported for object-type parameters and follows the Json.NET Schema 2019-09 implementation. You can learn more about using schemas at https://json-schema.org/ and test draft schemas at https://www.jsonschemavalidator.net/."
+        },
+        "metadata": {
+          "$ref": "#/definitions/ParameterDefinitionsValueMetadata",
+          "description": "General metadata for the parameter."
+        }
+      }
+    },
+    "ParameterDefinitionsValueMetadata": {
+      "type": "object",
+      "description": "General metadata for the parameter.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter."
+        },
+        "strongType": {
+          "type": "string",
+          "description": "Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from."
+        },
+        "assignPermissions": {
+          "type": "boolean",
+          "description": "Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ParameterType": {
+      "type": "string",
+      "description": "The data type of the parameter.",
+      "enum": [
+        "String",
+        "Array",
+        "Object",
+        "Boolean",
+        "Integer",
+        "Float",
+        "DateTime"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String"
+          },
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "Array"
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "Object"
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean"
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "Integer"
+          },
+          {
+            "name": "Float",
+            "value": "Float",
+            "description": "Float"
+          },
+          {
+            "name": "DateTime",
+            "value": "DateTime",
+            "description": "DateTime"
+          }
+        ]
+      }
+    },
+    "ParameterValuesValue": {
+      "type": "object",
+      "description": "The value of a parameter.",
+      "properties": {
+        "value": {
+          "description": "The value of the parameter."
+        }
+      }
+    },
+    "PolicyAssignment": {
+      "type": "object",
+      "description": "The policy assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyAssignmentProperties",
+          "description": "Properties for the policy assignment.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the policy assignment. Only required when utilizing managed identity."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The managed identity associated with the policy assignment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PolicyAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a PolicyAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyAssignmentProperties": {
+      "type": "object",
+      "description": "The policy assignment properties.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy assignment."
+        },
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The ID of the policy definition or policy set definition being assigned."
+        },
+        "definitionVersion": {
+          "type": "string",
+          "description": "The version of the policy definition to use."
+        },
+        "latestDefinitionVersion": {
+          "type": "string",
+          "description": "The latest version of the policy definition available. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "effectiveDefinitionVersion": {
+          "type": "string",
+          "description": "The effective version of the policy definition in use. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope for the policy assignment.",
+          "readOnly": true
+        },
+        "notScopes": {
+          "type": "array",
+          "description": "The policy's excluded scopes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameter values for the assigned policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterValuesValue"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "This message will be part of response in case of policy violation."
+        },
+        "metadata": {
+          "description": "The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "The policy assignment enforcement mode. Possible values are Default, DoNotEnforce, and Enroll",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "DoNotEnforce",
+            "Enroll"
+          ],
+          "x-ms-enum": {
+            "name": "EnforcementMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "The policy effect is enforced during resource creation or update."
+              },
+              {
+                "name": "DoNotEnforce",
+                "value": "DoNotEnforce",
+                "description": "The policy effect is not enforced during resource creation or update."
+              },
+              {
+                "name": "Enroll",
+                "value": "Enroll",
+                "description": "The policy effect is not enforced during resource creation or update until the resource or scope of the resource is enrolled to the assignment instance. Enrollment occurs upon deployment of the policy enrollment resource."
+              }
+            ]
+          }
+        },
+        "nonComplianceMessages": {
+          "type": "array",
+          "description": "The messages that describe why a resource is non-compliant with the policy.",
+          "items": {
+            "$ref": "#/definitions/NonComplianceMessage"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "policyDefinitionReferenceId"
+          ]
+        },
+        "resourceSelectors": {
+          "type": "array",
+          "description": "The resource selector list to filter policies by resource properties.",
+          "items": {
+            "$ref": "#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "overrides": {
+          "type": "array",
+          "description": "The policy property value override.",
+          "items": {
+            "$ref": "#/definitions/Override"
+          },
+          "x-ms-identifiers": []
+        },
+        "assignmentType": {
+          "$ref": "#/definitions/AssignmentType",
+          "description": "The type of policy assignment. Possible values are NotSpecified, System, SystemHidden, and Custom. Immutable."
+        },
+        "instanceId": {
+          "type": "string",
+          "description": "The instance ID of the policy assignment. This ID only and always changes when the assignment is deleted and recreated.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyAssignmentUpdate": {
+      "type": "object",
+      "description": "The policy assignment for Patch request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyAssignmentUpdateProperties",
+          "description": "The policy assignment properties for Patch request.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the policy assignment. Only required when utilizing managed identity."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The managed identity associated with the policy assignment."
+        }
+      }
+    },
+    "PolicyAssignmentUpdateProperties": {
+      "type": "object",
+      "description": "The policy assignment properties for Patch request.",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "description": "The resource selector list to filter policies by resource properties.",
+          "items": {
+            "$ref": "#/definitions/ResourceSelector"
+          },
+          "x-ms-identifiers": []
+        },
+        "overrides": {
+          "type": "array",
+          "description": "The policy property value override.",
+          "items": {
+            "$ref": "#/definitions/Override"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicyDefinition": {
+      "type": "object",
+      "description": "The policy definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyDefinitionProperties",
+          "description": "The policy definition properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PolicyDefinitionGroup": {
+      "type": "object",
+      "description": "The policy definition group.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The group's display name."
+        },
+        "category": {
+          "type": "string",
+          "description": "The group's category."
+        },
+        "description": {
+          "type": "string",
+          "description": "The group's description."
+        },
+        "additionalMetadataId": {
+          "type": "string",
+          "description": "A resource ID of a resource that contains additional metadata about the group."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "PolicyDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a PolicyDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyDefinitionProperties": {
+      "type": "object",
+      "description": "The policy definition properties.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy definition mode. Some examples are All, Indexed, Microsoft.KeyVault.Data.",
+          "default": "Indexed"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy definition description."
+        },
+        "policyRule": {
+          "description": "The policy rule."
+        },
+        "metadata": {
+          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version in #.#.# format."
+        },
+        "versions": {
+          "type": "array",
+          "description": "A list of available versions for this policy definition.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalEvaluationEnforcementSettings": {
+          "$ref": "#/definitions/ExternalEvaluationEnforcementSettings",
+          "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
+        }
+      }
+    },
+    "PolicyDefinitionReference": {
+      "type": "object",
+      "description": "The policy definition reference.",
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The ID of the policy definition or policy set definition."
+        },
+        "definitionVersion": {
+          "type": "string",
+          "description": "The version of the policy definition to use."
+        },
+        "latestDefinitionVersion": {
+          "type": "string",
+          "description": "The latest version of the policy definition available. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "effectiveDefinitionVersion": {
+          "type": "string",
+          "description": "The effective version of the policy definition in use. This is only present if requested via the $expand query parameter.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameter values for the referenced policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterValuesValue"
+          }
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "A unique id (within the policy set definition) for this policy definition reference."
+        },
+        "groupNames": {
+          "type": "array",
+          "description": "The name of the groups that this policy definition reference belongs to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "policyDefinitionId"
+      ]
+    },
+    "PolicyDefinitionVersion": {
+      "type": "object",
+      "description": "The ID of the policy definition version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicyDefinitionVersionProperties",
+          "description": "The policy definition version properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PolicyDefinitionVersionListResult": {
+      "type": "object",
+      "description": "The response of a PolicyDefinitionVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicyDefinitionVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicyDefinitionVersionProperties": {
+      "type": "object",
+      "description": "The policy definition properties.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy definition mode. Some examples are All, Indexed, Microsoft.KeyVault.Data.",
+          "default": "Indexed"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy definition description."
+        },
+        "policyRule": {
+          "description": "The policy rule."
+        },
+        "metadata": {
+          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version in #.#.# format."
+        },
+        "externalEvaluationEnforcementSettings": {
+          "$ref": "#/definitions/ExternalEvaluationEnforcementSettings",
+          "description": "The details of the source of external evaluation results required by the policy during enforcement evaluation."
+        }
+      }
+    },
+    "PolicyLogInfo": {
+      "type": "object",
+      "description": "The policy log info.",
+      "properties": {
+        "policyDefinitionId": {
+          "type": "string",
+          "description": "The policy definition Id."
+        },
+        "policySetDefinitionId": {
+          "type": "string",
+          "description": "The policy set definition Id."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition instance Id inside a policy set."
+        },
+        "policySetDefinitionName": {
+          "type": "string",
+          "description": "The policy set definition name."
+        },
+        "policySetDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy set definition display name."
+        },
+        "policySetDefinitionVersion": {
+          "type": "string",
+          "description": "The policy set definition version."
+        },
+        "policySetDefinitionCategory": {
+          "type": "string",
+          "description": "The policy set definition category."
+        },
+        "policyDefinitionName": {
+          "type": "string",
+          "description": "The policy definition name."
+        },
+        "policyDefinitionDisplayName": {
+          "type": "string",
+          "description": "The policy definition display name."
+        },
+        "policyDefinitionVersion": {
+          "type": "string",
+          "description": "The policy definition version."
+        },
+        "policyDefinitionEffect": {
+          "type": "string",
+          "description": "The policy definition action."
+        },
+        "policyDefinitionGroupNames": {
+          "type": "array",
+          "description": "An array of policy definition group names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyAssignmentId": {
+          "type": "string",
+          "description": "The policy assignment Id."
+        },
+        "policyAssignmentName": {
+          "type": "string",
+          "description": "The policy assignment name."
+        },
+        "policyAssignmentDisplayName": {
+          "type": "string",
+          "description": "The policy assignment display name."
+        },
+        "policyAssignmentVersion": {
+          "type": "string",
+          "description": "The policy assignment version."
+        },
+        "policyAssignmentScope": {
+          "type": "string",
+          "description": "The policy assignment scope."
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "ancestors": {
+          "type": "string",
+          "description": "The management group ancestors."
+        },
+        "complianceReasonCode": {
+          "type": "string",
+          "description": "The policy compliance reason code."
+        },
+        "policyExemptionIds": {
+          "type": "array",
+          "description": "An array of policy exemption Ids.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicySetDefinition": {
+      "type": "object",
+      "description": "The policy set definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicySetDefinitionProperties",
+          "description": "The policy set definition properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PolicySetDefinitionListResult": {
+      "type": "object",
+      "description": "The response of a PolicySetDefinition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicySetDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicySetDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicySetDefinitionProperties": {
+      "type": "object",
+      "description": "The policy set definition properties.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of policy set definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy set definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy set definition description."
+        },
+        "metadata": {
+          "description": "The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The policy set definition parameters that can be used in policy definition references.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
+        },
+        "policyDefinitions": {
+          "type": "array",
+          "description": "An array of policy definition references.",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionReference"
+          },
+          "x-ms-identifiers": [
+            "policyDefinitionReferenceId"
+          ]
+        },
+        "policyDefinitionGroups": {
+          "type": "array",
+          "description": "The metadata describing groups of policy definition references within the policy set definition.",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionGroup"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy set definition version in #.#.# format."
+        },
+        "versions": {
+          "type": "array",
+          "description": "A list of available versions for this policy set definition.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "policyDefinitions"
+      ]
+    },
+    "PolicySetDefinitionVersion": {
+      "type": "object",
+      "description": "The policy set definition version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PolicySetDefinitionVersionProperties",
+          "description": "The policy set definition version properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PolicySetDefinitionVersionListResult": {
+      "type": "object",
+      "description": "The response of a PolicySetDefinitionVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PolicySetDefinitionVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/PolicySetDefinitionVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PolicySetDefinitionVersionProperties": {
+      "type": "object",
+      "description": "The policy set definition properties.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy set definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy set definition description."
+        },
+        "metadata": {
+          "description": "The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "The policy set definition parameters that can be used in policy definition references.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParameterDefinitionsValue"
+          }
+        },
+        "policyDefinitions": {
+          "type": "array",
+          "description": "An array of policy definition references.",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionReference"
+          },
+          "x-ms-identifiers": [
+            "policyDefinitionReferenceId"
+          ]
+        },
+        "policyDefinitionGroups": {
+          "type": "array",
+          "description": "The metadata describing groups of policy definition references within the policy set definition.",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionGroup"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy set definition version in #.#.# format."
+        }
+      },
+      "required": [
+        "policyDefinitions"
+      ]
+    },
+    "PolicyTokenOperation": {
+      "type": "object",
+      "description": "The resource operation to acquire a token for.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The request URI of the resource operation."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the resource operation."
+        },
+        "content": {
+          "description": "The payload of the resource operation."
+        }
+      },
+      "required": [
+        "uri",
+        "httpMethod"
+      ]
+    },
+    "PolicyTokenRequest": {
+      "type": "object",
+      "description": "The policy token request properties.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/PolicyTokenOperation",
+          "description": "The resource operation to acquire a token for."
+        },
+        "changeReference": {
+          "type": "string",
+          "description": "The change reference."
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
+    "PolicyTokenResponse": {
+      "type": "object",
+      "description": "The policy token response properties.",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/PolicyTokenResult",
+          "description": "The result of the completed token acquisition operation. Possible values are Succeeded and Failed."
+        },
+        "message": {
+          "type": "string",
+          "description": "Status message with additional details about the token acquisition operation result."
+        },
+        "retryAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time after which the client can try to acquire a token again in the case of retry-able failures."
+        },
+        "results": {
+          "type": "array",
+          "description": "An array of external evaluation endpoint invocation results.",
+          "items": {
+            "$ref": "#/definitions/ExternalEvaluationEndpointInvocationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "changeReference": {
+          "type": "string",
+          "description": "The change reference associated with the operation for which the token is acquired."
+        },
+        "token": {
+          "type": "string",
+          "description": "The issued policy token."
+        },
+        "tokenId": {
+          "type": "string",
+          "description": "The unique Id assigned to the policy token."
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration of the policy token."
+        }
+      }
+    },
+    "PolicyTokenResult": {
+      "type": "string",
+      "description": "The result of the completed token acquisition operation. Possible values are Succeeded and Failed.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyTokenResult",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          }
+        ]
+      }
+    },
+    "PolicyType": {
+      "type": "string",
+      "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
+      "enum": [
+        "NotSpecified",
+        "BuiltIn",
+        "Custom",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "NotSpecified"
+          },
+          {
+            "name": "BuiltIn",
+            "value": "BuiltIn",
+            "description": "BuiltIn"
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom"
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "Static"
+          }
+        ]
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The identity type. This is the only required field when adding a system or user assigned identity to a resource.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Indicates that a system assigned identity is associated with the resource."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Indicates that a system assigned identity is associated with the resource."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates that no identity is associated with the resource or that the existing identity should be removed."
+          }
+        ]
+      }
+    },
+    "ResourceSelector": {
+      "type": "object",
+      "description": "The resource selector to filter policies by resource properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource selector."
+        },
+        "selectors": {
+          "type": "array",
+          "description": "The list of the selector expressions.",
+          "items": {
+            "$ref": "#/definitions/Selector"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Selector": {
+      "type": "object",
+      "description": "The selector expression.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SelectorKind",
+          "description": "The selector kind."
+        },
+        "in": {
+          "type": "array",
+          "description": "The list of values to filter in.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notIn": {
+          "type": "array",
+          "description": "The list of values to filter out.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SelectorKind": {
+      "type": "string",
+      "description": "The selector kind.",
+      "enum": [
+        "resourceLocation",
+        "resourceType",
+        "resourceWithoutLocation",
+        "policyDefinitionReferenceId"
+      ],
+      "x-ms-enum": {
+        "name": "SelectorKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "resourceLocation",
+            "value": "resourceLocation",
+            "description": "The selector kind to filter policies by the resource location."
+          },
+          {
+            "name": "resourceType",
+            "value": "resourceType",
+            "description": "The selector kind to filter policies by the resource type."
+          },
+          {
+            "name": "resourceWithoutLocation",
+            "value": "resourceWithoutLocation",
+            "description": "The selector kind to filter policies by the resource without location."
+          },
+          {
+            "name": "policyDefinitionReferenceId",
+            "value": "policyDefinitionReferenceId",
+            "description": "The selector kind to filter policies by the policy definition reference ID."
+          }
+        ]
+      }
+    },
+    "UserAssignedIdentitiesValue": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
