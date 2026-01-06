@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.Core;
 using TypeSpec.Http;
 
 namespace MapsRoute;
@@ -620,6 +621,19 @@ interface Route {
   >;
 
   /**
+   * Get the status of an asynchronous operation by its operation ID.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
+  @route("/route/operations/{id}")
+  @get
+  getRouteOperationsStatus is MapsRouteOperation<
+    {
+      ...OperationIdPathParameter;
+    },
+    RouteOperation
+  >;
+
+  /**
    * The `Route Matrix Async` API is an HTTP `POST` request that allows calculation
    * of a matrix of route summaries for a set of routes defined by origin and
    * destination locations by using an asynchronous (async) request. For every given
@@ -724,28 +738,24 @@ interface Route {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/matrix:async")
   @post
-  postRouteMatrixAsync is MapsRouteOperation<
+  @pollingOperation(Route.getRouteOperationsStatus)
+  postRouteMatrixAsync is Foundations.LongRunningOperation<
     {
+      /** Content type */
+      @header("Content-Type")
+      contentType: "application/geo+json";
+
+      ...ClientIdHeader;
+
       /**
        * Request body of RouteMatrix API in GeoJSON format.
        */
       @bodyRoot
       routeMatrixAsyncRequest: RouteMatrixAsyncRequest;
     },
-    RouteOperation
-  >;
-
-  /**
-   * Get the status of an asynchronous operation by its operation ID.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
-  @route("/route/operations/{id}")
-  @get
-  getRouteOperationsStatus is MapsRouteOperation<
-    {
-      ...OperationIdPathParameter;
-    },
-    RouteOperation
+    RouteOperation,
+    {},
+    ErrorResponse
   >;
 
   /**

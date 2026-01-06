@@ -265,6 +265,9 @@
       "post": {
         "operationId": "Route_PostRouteMatrixAsync",
         "description": "The `Route Matrix Async` API is an HTTP `POST` request that allows calculation\nof a matrix of route summaries for a set of routes defined by origin and\ndestination locations by using an asynchronous (async) request. For every given\norigin, the service calculates the cost of routing from that origin to every\ngiven destination. The set of origins and the set of destinations can be\nthought of as the column and row headers of a table and each cell in the table\ncontains the costs of routing from the origin to the destination for that cell.\nRoute Matrices can be calculated for driving, walking and truck routes.\n\nRoute Matrices are used in several different types of applications, most\ncommonly to solve the Traveling Salesman Problem (TSP) and Vehicle Routing\nProblem (VRP). For each origin-destination pair in the matrix, the travel time\nand distance are returned. You can use the computed costs to determine which\ndetailed routes to calculate using the Route Directions API.\n\n\nThe maximum size of a matrix for async request is **50000** (the number of\norigins multiplied by the number of destinations).\n\n\n### Submit Asynchronous Route Matrix Request\nThe Asynchronous API is appropriate for processing big volumes of relatively\ncomplex routing requests. When you make a request by using async request, by\ndefault the service returns a 202 response code along a URL in the\n`operation-Location` field of the response header with the Azure Maps geography\nendpoint {geography}.atlas.microsoft.com. This URL should be checked\nperiodically until the status is Succeeded.\n\n\nThe maximum size of a matrix for this API is **50000** (the number of origins\nmultiplied by the number of destinations). With that constraint in mind,\nexamples of possible matrix dimensions are: 500x100, 100x100, 280x170. 100x50\n(it does not need to be square).\n\n\nThe asynchronous responses are stored for **24** hours. The redirect URL\nreturns a 404 response if used after the expiration period.\n\n\n\n\n```\nPOST\nhttps://atlas.microsoft.com/route/matrix:async?api-version=2025-01-01&subscription-key={subscription-key}\n```\n\nHere's a typical sequence of asynchronous operations:\n1. Client sends a Route Matrix POST request to Azure Maps\n\n2. The server will respond with one of the following:\n\n> HTTP `202 Accepted` -  Route Matrix request has been accepted.\n\n> HTTP `Error` - There was an error processing your Route Matrix request.\nThis could either be a 400 Bad Request or any other Error status code.\n\n\n3. If the Matrix Route request was accepted successfully, the\n`operation-location` header in the response contains the URL to get the status\nof the request. This status URI looks like the following:\n\n```\n    GET\nhttps://atlas.microsoft.com/route/operations/{id}?api-version=2025-01-01?subscription-key={subscription-key}\n  ```\n\n\n4. Client issues a GET request on the resultUrl obtained in Step 3 to get the\nresults\n\n\n\n```\n    GET\nhttps://atlas.microsoft.com/route/operations/{id}/result?api-version=2025-01-01?subscription-key={subscription-key}\n   ```\n\n\n\n### API Limitations\nThe asynchronous processing of matrix is best suited for larger matrices that\nrequire heavy route calculation. The following limitation is applicable to the\nasynchronous requests. If none of the rows in the following table match the\nrequest's parameters, the request does not meet the requirements and will not\nbe processed.\n\n| Max matrix size  | Max number of origins | Max number of destinations  |\nAdditional limits |\n\n|------------------|-----------------------|-----------------------------|-------------------|\n| 2500             | 1000                  | 1000                        | All\norigins and destinations should be contained in an axis-aligned 400 km x 400 km\nbounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  |\n| 50,000           | 10,000                | 10,000                      | -\n`departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>-\n`optimizeRoute` must be fastest.<br/>- `travelMode` must be\neither driving or truck. <br/>- No other parameters can be used explicitly.  |",
+        "consumes": [
+          "application/geo+json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -292,18 +295,19 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RouteOperation"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -311,7 +315,8 @@
           "Submit an asynchronous request for matrix": {
             "$ref": "./examples/PostRouteMatrixAsync.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/route/operations/{id}": {
@@ -1259,8 +1264,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDetail"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "additionalInfo": {
           "type": "array",
@@ -1268,8 +1272,7 @@
           "items": {
             "$ref": "#/definitions/ErrorAdditionalInfo"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },

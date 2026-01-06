@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
-using Azure.ResourceManager;
+using Azure.Core;
 
 namespace MapsRoute;
 
@@ -597,6 +597,7 @@ union StatusEnum {
   /**
    * The operation has completed successfully.
    */
+  @lroSucceeded
   Completed: "Completed",
 
   /**
@@ -1783,14 +1784,12 @@ model ErrorDetail {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   details?: ErrorDetail[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -2713,6 +2712,7 @@ model RouteOperation {
   /**
    * Current status of the async operation.
    */
+  @lroStatus
   status?: StatusEnum;
 
   /**
