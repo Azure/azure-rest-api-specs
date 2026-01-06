@@ -26,30 +26,27 @@
           "mode": "Review",
           "accessLevel": "High"
         },
-        "gitHubConfiguration": {
-          "patTokenOverride": "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        },
         "logConfiguration": {
           "applicationInsightsConfiguration": {
             "appId": "87654321-4321-4321-4321-210987654321",
             "connectionString": "InstrumentationKey=87654321-4321-4321-4321-210987654321;IngestionEndpoint=https://eastus-0.in.applicationinsights.azure.com/"
           }
         },
-        "dashboardConfiguration": {
-          "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.prometheus.monitor.azure.com",
-          "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-abcd.eastus-1.metrics.ingest.monitor.azure.com",
-          "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardIdentity",
-          "grafanaUrl": "https://testgrafana.grafana.azure.com",
-          "grafanaApiKey": "gak_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        },
         "permissions": [
           {
             "displayName": "John Doe",
             "objectId": "11111111-2222-3333-4444-555555555555",
             "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-            "role": "Administrator"
+            "role": "StandardUser"
           }
-        ]
+        ],
+        "agentIdentity": {
+          "initialSponsorGroupId": "99999999-aaaa-bbbb-cccc-dddddddddddd"
+        },
+        "defaultModel": {
+          "provider": "MicrosoftFoundry",
+          "name": "gpt-5"
+        }
       }
     }
   },
@@ -86,29 +83,29 @@
             "mode": "Review",
             "accessLevel": "High"
           },
-          "gitHubConfiguration": {
-          },
           "logConfiguration": {
             "applicationInsightsConfiguration": {
               "appId": "87654321-4321-4321-4321-210987654321"
             }
           },
-          "dashboardConfiguration": {
-            "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.prometheus.monitor.azure.com",
-            "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-abcd.eastus-1.metrics.ingest.monitor.azure.com",
-            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardIdentity",
-            "grafanaUrl": "https://testgrafana.grafana.azure.com"
-          },
-
           "permissions": [
             {
               "displayName": "John Doe",
               "objectId": "11111111-2222-3333-4444-555555555555",
               "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-              "role": "Administrator"
+              "role": "StandardUser"
             }
           ],
-          "upgradeChannel": "Stable"
+          "upgradeChannel": "Stable",
+          "agentIdentity": {
+            "enabled": true,
+            "clientId": "88888888-9999-aaaa-bbbb-cccccccccccc",
+            "initialSponsorGroupId": "99999999-aaaa-bbbb-cccc-dddddddddddd"
+          },
+          "defaultModel": {
+            "provider": "MicrosoftFoundry",
+            "name": "gpt-5"
+          }
         }
       }
     },
@@ -141,29 +138,28 @@
             "mode": "Review",
             "accessLevel": "High"
           },
-          "gitHubConfiguration": {
-          },
           "logConfiguration": {
             "applicationInsightsConfiguration": {
               "appId": "87654321-4321-4321-4321-210987654321"
             }
           },
-          "dashboardConfiguration": {
-            "azureMonitorWorkspaceQueryEndpoint": "https://testworkspace.eastus.prometheus.monitor.azure.com",
-            "azureMonitorWorkspaceMetricsIngestionEndpoint": "https://testworkspace-abcd.eastus-1.metrics.ingest.monitor.azure.com",
-            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/dashboardIdentity",
-            "grafanaUrl": "https://testgrafana.grafana.azure.com"
-          },
-
           "permissions": [
             {
               "displayName": "John Doe",
               "objectId": "11111111-2222-3333-4444-555555555555",
               "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-              "role": "Administrator"
+              "role": "StandardUser"
             }
           ],
-          "upgradeChannel": "Stable"
+          "upgradeChannel": "Stable",
+          "agentIdentity": {
+            "enabled": false,
+            "initialSponsorGroupId": "99999999-aaaa-bbbb-cccc-dddddddddddd"
+          },
+          "defaultModel": {
+            "provider": "MicrosoftFoundry",
+            "name": "gpt-5"
+          }
         }
       }
     }

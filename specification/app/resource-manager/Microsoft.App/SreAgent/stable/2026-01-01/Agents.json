@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ContainerApps API Client",
+    "title": "SRE Agent API Client",
     "version": "2026-01-01"
   },
   "host": "management.azure.com",
@@ -24,10 +24,10 @@
         "operationId": "Agents_ListBySubscription",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -40,7 +40,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -63,13 +63,13 @@
         "operationId": "Agents_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -82,7 +82,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -105,10 +105,10 @@
         "operationId": "Agents_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -119,7 +119,7 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -132,7 +132,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -154,13 +154,14 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
+            "description": "Name of the Agent.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -168,14 +169,14 @@
           {
             "name": "agentEnvelope",
             "in": "body",
-            "description": "Details of the agent.",
+            "description": "Details of the Agent.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Agent"
             }
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -199,7 +200,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -221,13 +222,14 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
+            "description": "Name of the Agent.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -241,7 +243,7 @@
             }
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -262,7 +264,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -284,10 +286,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -297,7 +299,7 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -315,7 +317,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -339,10 +341,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -352,7 +354,7 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -373,7 +375,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -397,10 +399,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -410,7 +412,7 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -431,7 +433,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -470,13 +472,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "identity": {
           "description": "Managed identities for the Agent to interact with other Azure services without maintaining any secrets or credentials in code.",
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Agent specific properties",
@@ -495,7 +497,7 @@
       "properties": {
         "identity": {
           "description": "Managed identities for the Agent to interact with other Azure services without maintaining any secrets or credentials in code.",
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "description": "Agent specific properties",
@@ -557,21 +559,23 @@
         "actionConfiguration": {
           "$ref": "#/definitions/ActionConfiguration"
         },
-        "gitHubConfiguration": {
-          "$ref": "#/definitions/GitHubConfiguration"
-        },
         "logConfiguration": {
           "$ref": "#/definitions/LogConfiguration"
         },
-        "dashboardConfiguration": {
-          "$ref": "#/definitions/DashboardConfiguration"
+        "incidentManagementConfiguration": {
+          "$ref": "#/definitions/IncidentManagementConfiguration"
         },
         "permissions": {
           "description": "The list of user permissions for the agent.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserIdentityPermission"
-          }
+          },
+          "x-ms-identifiers": [
+            "objectId",
+            "tenantId",
+            "role"
+          ]
         },
         "upgradeChannel": {
           "description": "The upgrade channel of the agent.",
@@ -584,6 +588,48 @@
             "name": "UpgradeChannel",
             "modelAsString": true
           }
+        },
+        "agentIdentity": {
+          "description": "Agent identity configuration for accessing resources.",
+          "$ref": "#/definitions/AgentIdentity"
+        },
+        "defaultModel": {
+          "description": "Default AI model configuration for the agent.",
+          "$ref": "#/definitions/DefaultModel"
+        }
+      }
+    },
+    "AgentIdentity": {
+      "description": "Agent identity configuration",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether the agent identity is enabled.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Client ID (GUID) for the agent identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialSponsorGroupId": {
+          "description": "Initial sponsor group ID (required for agent identity).",
+          "type": "string"
+        }
+      }
+    },
+    "DefaultModel": {
+      "description": "Default AI model configuration",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "AI provider name (e.g., MicrosoftFoundry, Anthropic).",
+          "type": "string"
+        },
+        "name": {
+          "description": "Model name (e.g., gpt-5, claude-opus-4-5, claude-sonnet-4-5).",
+          "type": "string"
         }
       }
     },
@@ -642,14 +688,30 @@
         }
       }
     },
-    "GitHubConfiguration": {
-      "description": "GitHub configuration for agent",
+    "IncidentManagementConfiguration": {
+      "description": "Incident Management Configurations",
       "type": "object",
       "properties": {
-        "patTokenOverride": {
-          "description": "The GitHub Personal Access Token override.",
+        "type": {
+          "description": "The type of incident management system.",
+          "type": "string"
+        },
+        "connectionName": {
+          "description": "The name of the connection.",
+          "type": "string"
+        },
+        "connectionUrl": {
+          "description": "The URL of the connection.",
+          "type": "string"
+        },
+        "connectionKey": {
+          "description": "The key for the connection.",
           "type": "string",
           "x-ms-secret": true
+        },
+        "oboUser": {
+          "description": "The user for the connection.",
+          "type": "string"
         }
       }
     },
@@ -678,34 +740,6 @@
         }
       }
     },
-    "DashboardConfiguration": {
-      "description": "Dashboard Configuration",
-      "type": "object",
-      "properties": {
-        "azureMonitorWorkspaceQueryEndpoint": {
-          "description": "The query endpoint for the Azure Monitor workspace.",
-          "type": "string"
-        },
-        "azureMonitorWorkspaceMetricsIngestionEndpoint": {
-          "description": "The metrics ingestion endpoint for the Azure Monitor workspace.",
-          "type": "string"
-        },
-        "identity": {
-          "description": "The identity used to access the Azure Monitor workspace.",
-          "type": "string",
-          "format": "arm-id"
-        },
-        "grafanaUrl": {
-          "description": "The URL of the Grafana instance.",
-          "type": "string"
-        },
-        "grafanaApiKey": {
-          "description": "The API key for the Grafana instance.",
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
     "UserIdentityPermission": {
       "type": "object",
       "description": "User identity permission properties",
@@ -725,7 +759,6 @@
         "role": {
           "description": "The role assigned to the user.",
           "enum": [
-            "Administrator",
             "Author",
             "StandardUser",
             "Reader"
@@ -735,6 +768,100 @@
             "name": "UserIdentityPermissionRole",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "UsageCollection": {
+      "description": "Collection of usage information.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of usage information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageInfo": {
+      "description": "Usage information for an Agent.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "The unit of measurement.",
+          "type": "string"
+        },
+        "currentValue": {
+          "description": "The current usage value.",
+          "type": "number",
+          "format": "double"
+        },
+        "limit": {
+          "description": "The usage limit.",
+          "type": "number",
+          "format": "double"
+        },
+        "name": {
+          "description": "Usage name.",
+          "$ref": "#/definitions/UsageName"
+        }
+      }
+    },
+    "UsageName": {
+      "description": "Usage name information.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The usage name value.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized usage name.",
+          "type": "string"
+        }
+      }
+    },
+    "DailyUsageCollection": {
+      "description": "Collection of daily usage information.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of daily usage information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DailyUsageInfo"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DailyUsageInfo": {
+      "description": "Daily usage information for an Agent.",
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "The date of the usage.",
+          "type": "string",
+          "format": "date"
+        },
+        "name": {
+          "description": "Usage name.",
+          "$ref": "#/definitions/UsageName"
+        },
+        "value": {
+          "description": "The usage value for the day.",
+          "type": "number",
+          "format": "double"
         }
       }
     }

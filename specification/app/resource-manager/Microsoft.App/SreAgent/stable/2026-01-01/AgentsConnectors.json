@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "ContainerApps API Client",
+    "title": "SRE Agent API Client",
     "version": "2026-01-01"
   },
   "host": "management.azure.com",
@@ -24,21 +24,21 @@
         "operationId": "AgentsConnectors_ListByAgent",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
             "in": "path",
             "required": true,
-            "description": "The name of the Agent.",
+            "description": "Name of the Agent.",
             "type": "string",
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -51,7 +51,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -65,7 +65,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{dataConnectorName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{connectorName}": {
       "get": {
         "tags": [
           "AgentConnectors"
@@ -74,27 +74,29 @@
         "operationId": "AgentsConnectors_Get",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
+            "description": "Name of the Agent.",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "name": "dataConnectorName",
+            "name": "connectorName",
+            "description": "Name of the Agent connector.",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -107,7 +109,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -129,10 +131,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -141,7 +143,7 @@
             "type": "string"
           },
           {
-            "name": "dataConnectorName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -156,7 +158,7 @@
             }
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -180,7 +182,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -202,25 +204,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
             "in": "path",
+            "description": "Name of the Agent.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "dataConnectorName",
+            "name": "connectorName",
             "in": "path",
+            "description": "Name of the Agent connector.",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -238,7 +242,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -249,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{dataConnectorName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{connectorName}/listSecrets": {
       "post": {
         "tags": [
           "AgentConnectors"
@@ -258,10 +262,10 @@
         "operationId": "AgentsConnectors_ListSecrets",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -271,14 +275,14 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "name": "dataConnectorName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -291,7 +295,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -311,10 +315,10 @@
         "operationId": "AgentsConnectors_ListWithSecretsByAgent",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "agentName",
@@ -324,7 +328,7 @@
             "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -337,7 +341,7 @@
           "default": {
             "description": "Common error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -379,7 +383,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {

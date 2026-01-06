@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2026-01-01",
-    "title": "SRE Agent API Client"
+    "title": "SRE Agent API Client",
+    "version": "2026-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -110,6 +110,11 @@
             "name": "ConnectorProvisioningState",
             "modelAsString": true
           }
+        },
+        "deploymentError": {
+          "description": "Deployment error message if provisioning failed.",
+          "type": "string",
+          "readOnly": true
         },
         "extendedProperties": {
           "type": "object",
