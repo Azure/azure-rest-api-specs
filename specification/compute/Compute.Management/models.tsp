@@ -5218,7 +5218,7 @@ model StorageProfile {
 }
 
 /**
- * Describes periodic restore points configuration for a VM.
+ * Describes periodic restore points configuration for a VM. When isEnabled = true, daily restore points are created and up to 10 restore points are retained.
  */
 @added(Versions.v2025_11_01)
 model PeriodicRestorePoints {
@@ -5240,7 +5240,7 @@ model ZoneMovement {
 }
 
 /**
- * Describes resiliency profile for a VM.
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions..
  */
 @added(Versions.v2025_11_01)
 model ResiliencyProfile {
