@@ -31,6 +31,15 @@ openapi-subtype: rpaas
 tag: package-2025-06
 ```
 
+### Tag: package-2025-12-preview
+
+These settings apply only when `--tag=package-2025-12-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-preview'
+input-file:
+  - Microsoft.Datadog/preview/2025-12-26-preview/swagger.json
+```
+
 ### Tag: package-2025-11-preview
 
 These settings apply only when `--tag=package-2025-11-preview` is specified on the command line.
