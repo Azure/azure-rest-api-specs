@@ -127,7 +127,8 @@ interface ExpressRouteCrossConnections {
       @segment("arpTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse,
+    Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -152,7 +153,8 @@ interface ExpressRouteCrossConnections {
       @segment("routeTablesSummary")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse,
+    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableSummaryListResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -177,7 +179,8 @@ interface ExpressRouteCrossConnections {
       @segment("routeTables")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse,
+    Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -228,6 +231,8 @@ interface ExpressRouteCrossConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
     ExpressRouteCrossConnection,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,
     Request = ExpressRouteCrossConnectionPeering,
     OverrideErrorType = CloudError
