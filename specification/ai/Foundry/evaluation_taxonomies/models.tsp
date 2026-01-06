@@ -25,19 +25,15 @@ model EvaluationTaxonomy {
   @doc("List of taxonomy categories.")
   taxonomyCategories?: TaxonomyCategory[];
 
-  @doc("Risk name from the Evaluator Catalog (for policy-based taxonomies).")
-  riskName?: string;
-
-  @doc("Natural language definition of the risk (for policy-based taxonomies).")
-  riskDefinition?: string;
-
-  @doc("Whether the taxonomy has been expanded in the P2M pipeline.")
-  isExpanded?: boolean;
-
-  @doc("Metadata about taxonomy expansion in the P2M pipeline.")
-  expansionMetadata?: TaxonomyExpansionMetadata;
-
-  @doc("Additional properties for the evaluation taxonomy.")
+  @doc("""
+    Additional properties for the evaluation taxonomy.
+    
+    Note: Taxonomy expansion metadata should be stored here with the following fields:
+    - isExpanded: boolean indicating if the taxonomy has been expanded to include generated subtopics
+    - generatorModel: string - model used to generate the taxonomy
+    - expandedAt: string (ISO 8601 timestamp) - when the taxonomy was expanded
+    - totalSubtopics: integer - total number of subtopics in the taxonomy
+    """)
   properties?: Record<string>;
 }
 
@@ -50,8 +46,8 @@ union EvaluationTaxonomyInputType {
   @doc("Agent")
   agent: "agent",
 
-  @doc("Policy")
-  policy: "policy",
+  @doc("Risk definition")
+  riskDefinition: "riskDefinition",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -79,10 +75,10 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@doc("Input configuration for the evaluation taxonomy when the input type is policy.")
-model PolicyTaxonomyInput extends EvaluationTaxonomyInput {
+@doc("Input configuration for the evaluation taxonomy when the input type is riskDefinition.")
+model RiskDefinitionTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.policy;
+  type: EvaluationTaxonomyInputType.riskDefinition;
 
   @doc("Risk name from the Evaluator Catalog.")
   riskName: string;
@@ -93,11 +89,11 @@ model PolicyTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Clarifications to guide taxonomy generation.")
   clarifications?: string[];
 
-  @doc("Scope of the risk policy.")
+  @doc("Scope of the risk definition.")
   scope?: string;
 
-  @doc("Example prompts labeled as in_scope or out_of_scope.")
-  examples?: RiskExample[];
+  @doc("Example prompts with inScope indicators to guide taxonomy generation.")
+  riskExamples?: RiskExample[];
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -107,13 +103,13 @@ model RiskExample {
   @doc("Example prompt text.")
   text: string;
 
-  @doc("Label indicating if the example is in scope or out of scope.")
-  label: "in_scope" | "out_of_scope";
+  @doc("Indicates if the example is in scope.")
+  inScope: boolean;
 }
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@doc("Metadata about taxonomy expansion in the P2M pipeline.")
+@doc("Metadata about taxonomy expansion.")
 model TaxonomyExpansionMetadata {
   @doc("Model used to generate the taxonomy.")
   generatorModel: string;
@@ -141,6 +137,12 @@ model TaxonomyCategory {
   @doc("Risk category associated with this taxonomy category.")
   riskCategory: RiskCategory;
 
+  @doc("Risk name from the Evaluator Catalog (for risk definition-based taxonomies).")
+  riskName?: string;
+
+  @doc("Natural language definition of the risk (for risk definition-based taxonomies).")
+  riskDefinition?: string;
+
   @doc("List of taxonomy sub categories.")
   subCategories: TaxonomySubCategory[];
 
@@ -164,7 +166,7 @@ model TaxonomySubCategory {
   @doc("List of taxonomy items under this sub-category.")
   enabled: boolean;
 
-  @doc("List of subtopics in this sub-category (for P2M pipeline).")
+  @doc("List of subtopics in this sub-category.")
   subtopics?: string[];
 
   @doc("Additional properties for the taxonomy sub-category.")
