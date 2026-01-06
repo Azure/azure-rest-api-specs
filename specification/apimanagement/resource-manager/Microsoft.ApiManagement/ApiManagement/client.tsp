@@ -60,7 +60,7 @@ using Microsoft.ApiManagement;
   "java"
 );
 @@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
-  "ApiManagementWorkspaceLinkOperations",
+  "ApiManagementWorkspaceLinks",
   "java"
 );
 @@clientLocation(Microsoft.ApiManagement.ApiManagementServiceOperationGroup.checkNameAvailability,
