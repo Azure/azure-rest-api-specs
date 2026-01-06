@@ -73,3 +73,8 @@ using Microsoft.ApiManagement;
   "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
   "python"
 );
+
+@@clientName(ExportResultFormat.Swagger, "SWAGGER_LINK_JSON", "java");
+@@clientName(ExportResultFormat.Wadl, "WSDL_LINK_XML", "java");
+@@clientName(ExportResultFormat.Wsdl, "WADL_LINK_JSON", "java");
+@@clientName(ExportResultFormat.OpenApi, "OPENAPI_LINK", "java");
