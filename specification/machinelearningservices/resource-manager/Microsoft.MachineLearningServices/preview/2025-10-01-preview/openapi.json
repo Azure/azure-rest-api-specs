@@ -25891,6 +25891,10 @@
       "type": "object",
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/Compute",
+          "description": "The resource-specific properties for this resource."
+        },
         "location": {
           "type": "string",
           "description": "Specifies the location of the resource."
@@ -25915,18 +25919,9 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ComputeResourceSchema"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "ComputeResourceSchema": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/Compute",
-          "description": "Compute properties"
-        }
-      }
     },
     "ComputeRuntimeDto": {
       "type": "object",
