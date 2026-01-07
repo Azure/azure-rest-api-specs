@@ -1,0 +1,1422 @@
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
+namespace Microsoft.KubernetesConfiguration;
+
+/**
+ * Scope at which the configuration will be installed.
+ */
+union ScopeType {
+  string,
+
+  /**
+   * cluster
+   */
+  cluster: "cluster",
+
+  /**
+   * namespace
+   */
+  `namespace`: "namespace",
+}
+
+/**
+ * Source Kind to pull the configuration data from.
+ */
+union SourceKindType {
+  string,
+
+  /**
+   * GitRepository
+   */
+  GitRepository: "GitRepository",
+
+  /**
+   * Bucket
+   */
+  Bucket: "Bucket",
+
+  /**
+   * AzureBlob
+   */
+  AzureBlob: "AzureBlob",
+
+  /**
+   * OCIRepository
+   */
+  OCIRepository: "OCIRepository",
+}
+
+/**
+ * Name of the provider used for authentication.
+ */
+union ProviderType {
+  string,
+
+  /**
+   * Azure provider can be used to authenticate to Azure DevOps repositories using Managed Identity.
+   */
+  Azure: "Azure",
+
+  /**
+   * GitHub provider can be used to authenticate
+   */
+  GitHub: "GitHub",
+
+  /**
+   * Generic is the default provider that indicates secret-based authentication mechanism.
+   */
+  Generic: "Generic",
+}
+
+/**
+ * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
+ */
+union OperationType {
+  string,
+
+  /**
+   * extract
+   */
+  extract: "extract",
+
+  /**
+   * copy
+   */
+  copy: "copy",
+}
+
+/**
+ * Compliance state of the cluster object.
+ */
+union FluxComplianceState {
+  string,
+
+  /**
+   * Compliant
+   */
+  Compliant: "Compliant",
+
+  /**
+   * Non-Compliant
+   */
+  `Non-Compliant`: "Non-Compliant",
+
+  /**
+   * Pending
+   */
+  Pending: "Pending",
+
+  /**
+   * Suspended
+   */
+  Suspended: "Suspended",
+
+  /**
+   * Unknown
+   */
+  Unknown: "Unknown",
+}
+
+/**
+ * The provisioning state of the resource.
+ */
+union ProvisioningState {
+  string,
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Creating
+   */
+  Creating: "Creating",
+
+  /**
+   * Updating
+   */
+  Updating: "Updating",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * The type of identity that created the resource.
+ */
+union CreatedByType {
+  string,
+
+  /**
+   * User
+   */
+  User: "User",
+
+  /**
+   * Application
+   */
+  Application: "Application",
+
+  /**
+   * ManagedIdentity
+   */
+  ManagedIdentity: "ManagedIdentity",
+
+  /**
+   * Key
+   */
+  Key: "Key",
+}
+
+/**
+ * Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.
+ */
+union KustomizationValidationType {
+  string,
+
+  /**
+   * none
+   */
+  none: "none",
+
+  /**
+   * client
+   */
+  client: "client",
+
+  /**
+   * server
+   */
+  server: "server",
+}
+
+/**
+ * Properties to create a Flux Configuration resource
+ */
+model FluxConfigurationProperties {
+  /**
+   * Scope at which the operator will be installed.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  scope?: ScopeType = ScopeType.cluster;
+
+  /**
+   * The namespace to which this configuration is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  `namespace`?: string = "default";
+
+  /**
+   * Source Kind to pull the configuration data from.
+   */
+  sourceKind?: SourceKindType;
+
+  /**
+   * Whether this configuration should suspend its reconciliation of its kustomizations and sources.
+   */
+  suspend?: boolean;
+
+  /**
+   * Parameters to reconcile to the GitRepository source kind type.
+   */
+  gitRepository?: GitRepositoryDefinition;
+
+  /**
+   * Parameters to reconcile to the Bucket source kind type.
+   */
+  bucket?: BucketDefinition;
+
+  /**
+   * Parameters to reconcile to the AzureBlob source kind type.
+   */
+  azureBlob?: AzureBlobDefinition;
+
+  /**
+   * Parameters to reconcile to the OCIRepository source kind type.
+   */
+  ociRepository?: OCIRepositoryDefinition;
+
+  /**
+   * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  kustomizations?: Record<KustomizationDefinition>;
+
+  /**
+   * Key-value pairs of protected configuration settings for the configuration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  configurationProtectedSettings?: Record<string>;
+
+  /**
+   * Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name", "namespace", "kind"])
+  statuses?: ObjectStatusDefinition[];
+
+  /**
+   * Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).
+   */
+  @visibility(Lifecycle.Read)
+  repositoryPublicKey?: string;
+
+  /**
+   * Branch and/or SHA of the source commit synced with the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  sourceSyncedCommitId?: string;
+
+  /**
+   * Datetime the fluxConfiguration synced its source on the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  sourceUpdatedAt?: utcDateTime;
+
+  /**
+   * Datetime the fluxConfiguration synced its status on the cluster with Azure.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  statusUpdatedAt?: utcDateTime;
+
+  /**
+   * Whether flux configuration deployment should wait for cluster to reconcile the kustomizations.
+   */
+  waitForReconciliation?: boolean;
+
+  /**
+   * Maximum duration to wait for flux configuration reconciliation. E.g PT1H, PT5M, P1D
+   */
+  reconciliationWaitDuration?: string;
+
+  /**
+   * Combined status of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects.
+   */
+  @visibility(Lifecycle.Read)
+  complianceState?: FluxComplianceState = FluxComplianceState.Unknown;
+
+  /**
+   * Status of the creation of the fluxConfiguration.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Error message returned to the user in the case of provisioning failure.
+   */
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
+}
+
+/**
+ * Parameters to reconcile to the GitRepository source kind type.
+ */
+model GitRepositoryDefinition {
+  /**
+   * The URL to sync for the flux configuration git repository.
+   */
+  url?: string;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster git repository source with the remote.
+   */
+  timeoutInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the cluster git repository source with the remote.
+   */
+  syncIntervalInSeconds?: int64 = 600;
+
+  /**
+   * The source reference for the GitRepository object.
+   */
+  repositoryRef?: RepositoryRefDefinition;
+
+  /**
+   * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
+   */
+  sshKnownHosts?: string;
+
+  /**
+   * Plaintext HTTPS username used to access private git repositories over HTTPS
+   */
+  httpsUser?: string;
+
+  /**
+   * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
+   */
+  httpsCACert?: string;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+
+  /**
+   * Name of the provider used for authentication.
+   */
+  provider?: ProviderType;
+}
+
+/**
+ * The source reference for the GitRepository object.
+ */
+model RepositoryRefDefinition {
+  /**
+   * The git repository branch name to checkout.
+   */
+  branch?: string;
+
+  /**
+   * The git repository tag name to checkout. This takes precedence over branch.
+   */
+  tag?: string;
+
+  /**
+   * The semver range used to match against git repository tags. This takes precedence over tag.
+   */
+  semver?: string;
+
+  /**
+   * The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver.
+   */
+  commit?: string;
+}
+
+/**
+ * Parameters to reconcile to the Bucket source kind type.
+ */
+model BucketDefinition {
+  /**
+   * The URL to sync for the flux configuration S3 bucket.
+   */
+  url?: string;
+
+  /**
+   * The bucket name to sync from the url endpoint for the flux configuration.
+   */
+  bucketName?: string;
+
+  /**
+   * Specify whether to use insecure communication when puling data from the S3 bucket.
+   */
+  insecure?: boolean = true;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster bucket source with the remote.
+   */
+  timeoutInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the cluster bucket source with the remote.
+   */
+  syncIntervalInSeconds?: int64 = 600;
+
+  /**
+   * Plaintext access key used to securely access the S3 bucket
+   */
+  accessKey?: string;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * Parameters to reconcile to the AzureBlob source kind type.
+ */
+model AzureBlobDefinition {
+  /**
+   * The URL to sync for the flux configuration Azure Blob storage account.
+   */
+  url?: string;
+
+  /**
+   * The Azure Blob container name to sync from the url endpoint for the flux configuration.
+   */
+  containerName?: string;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
+   */
+  timeoutInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
+   */
+  syncIntervalInSeconds?: int64 = 600;
+
+  /**
+   * Parameters to authenticate using Service Principal.
+   */
+  servicePrincipal?: ServicePrincipalDefinition;
+
+  /**
+   * The account key (shared key) to access the storage account
+   */
+  accountKey?: string;
+
+  /**
+   * The Shared Access token to access the storage container
+   */
+  sasToken?: string;
+
+  /**
+   * Parameters to authenticate using a Managed Identity.
+   */
+  managedIdentity?: ManagedIdentityDefinition;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * Parameters to authenticate using Service Principal.
+ */
+model ServicePrincipalDefinition {
+  /**
+   * The client Id for authenticating a Service Principal.
+   */
+  clientId?: string;
+
+  /**
+   * The tenant Id for authenticating a Service Principal
+   */
+  tenantId?: string;
+
+  /**
+   * The client secret for authenticating a Service Principal
+   */
+  clientSecret?: string;
+
+  /**
+   * Base64-encoded certificate used to authenticate a Service Principal
+   */
+  clientCertificate?: string;
+
+  /**
+   * The password for the certificate used to authenticate a Service Principal
+   */
+  clientCertificatePassword?: string;
+
+  /**
+   * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
+   */
+  clientCertificateSendChain?: boolean;
+}
+
+/**
+ * Parameters to authenticate using a Managed Identity.
+ */
+model ManagedIdentityDefinition {
+  /**
+   * The client Id for authenticating a Managed Identity.
+   */
+  clientId?: string;
+}
+
+/**
+ * Parameters to reconcile to the OCIRepository source kind type.
+ */
+model OCIRepositoryDefinition {
+  /**
+   * The URL to sync for the flux configuration OCI repository.
+   */
+  url?: url;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
+   */
+  timeoutInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the cluster OCI repository source with the remote.
+   */
+  syncIntervalInSeconds?: int64 = 600;
+
+  /**
+   * The source reference for the OCIRepository object.
+   */
+  repositoryRef?: OCIRepositoryRefDefinition;
+
+  /**
+   * The layer to be pulled from the OCI artifact.
+   */
+  layerSelector?: LayerSelectorDefinition;
+
+  /**
+   * Verification of the authenticity of an OCI Artifact.
+   */
+  verify?: VerifyDefinition;
+
+  /**
+   * Specify whether to allow connecting to a non-TLS HTTP container registry.
+   */
+  insecure?: boolean;
+
+  /**
+   * Specifies whether to use Workload Identity to authenticate with the OCI repository.
+   */
+  useWorkloadIdentity?: boolean;
+
+  /**
+   * The service account name to authenticate with the OCI repository.
+   */
+  serviceAccountName?: string;
+
+  /**
+   * Parameters to authenticate using TLS config for OCI repository.
+   */
+  tlsConfig?: TlsConfigDefinition;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * The source reference for the OCIRepository object.
+ */
+model OCIRepositoryRefDefinition {
+  /**
+   * The OCI repository image tag name to pull. This defaults to 'latest'.
+   */
+  tag?: string;
+
+  /**
+   * The semver range used to match against OCI repository tags. This takes precedence over tag.
+   */
+  semver?: string;
+
+  /**
+   * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
+   */
+  digest?: string;
+}
+
+/**
+ * Parameters to specify which layer to pull from the OCI artifact. By default, the first layer in the artifact is pulled.
+ */
+model LayerSelectorDefinition {
+  /**
+   * The first layer matching the specified media type will be used.
+   */
+  mediaType?: string;
+
+  /**
+   * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
+   */
+  operation?: OperationType;
+}
+
+/**
+ * Parameters to verify the authenticity of an OCI Artifact.
+ */
+model VerifyDefinition {
+  /**
+   * Verification provider name.
+   */
+  provider?: string;
+
+  /**
+   * An object containing trusted public keys of trusted authors.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  verificationConfig?: Record<string>;
+
+  /**
+   * Array defining the criteria for matching the identity while verifying an OCI artifact.
+   */
+  @identifiers(#[])
+  matchOidcIdentity?: MatchOidcIdentityDefinition[];
+}
+
+/**
+ * MatchOIDCIdentity defines the criteria for matching the identity while verifying an OCI artifact.
+ */
+model MatchOidcIdentityDefinition {
+  /**
+   * The regex pattern to match against to verify the OIDC issuer.
+   */
+  issuer?: string;
+
+  /**
+   * The regex pattern to match against to verify the identity subject.
+   */
+  subject?: string;
+}
+
+/**
+ * Parameters to authenticate using TLS config for OCI repository.
+ */
+model TlsConfigDefinition {
+  /**
+   * Base64-encoded certificate used to authenticate a client with the OCI repository.
+   */
+  clientCertificate?: string;
+
+  /**
+   * Base64-encoded private key used to authenticate a client with the OCI repository.
+   */
+  privateKey?: string;
+
+  /**
+   * Base64-encoded CA certificate used to verify the server.
+   */
+  caCertificate?: string;
+}
+
+/**
+ * The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.
+ */
+model KustomizationDefinition {
+  /**
+   * Name of the Kustomization, matching the key in the Kustomizations object map.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The path in the source reference to reconcile on the cluster.
+   */
+  path?: string = "";
+
+  /**
+   * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
+   */
+  dependsOn?: string[];
+
+  /**
+   * The maximum time to attempt to reconcile the Kustomization on the cluster.
+   */
+  timeoutInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the Kustomization on the cluster.
+   */
+  syncIntervalInSeconds?: int64 = 600;
+
+  /**
+   * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
+   */
+  retryIntervalInSeconds?: int64;
+
+  /**
+   * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
+   */
+  prune?: boolean;
+
+  /**
+   * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
+   */
+  force?: boolean;
+
+  /**
+   * Enable/disable health check for all Kubernetes objects created by this Kustomization.
+   */
+  wait?: boolean = true;
+
+  /**
+   * Used for variable substitution for this Kustomization after kustomize build.
+   */
+  postBuild?: PostBuildDefinition;
+}
+
+/**
+ * The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.
+ */
+model PostBuildDefinition {
+  /**
+   * Key/value pairs holding the variables to be substituted in this Kustomization.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  substitute?: Record<string>;
+
+  /**
+   * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
+   */
+  @identifiers(#[])
+  substituteFrom?: SubstituteFromDefinition[];
+}
+
+/**
+ * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
+ */
+model SubstituteFromDefinition {
+  /**
+   * Define whether it is ConfigMap or Secret that holds the variables to be used in substitution.
+   */
+  kind?: string;
+
+  /**
+   * Name of the ConfigMap/Secret that holds the variables to be used in substitution.
+   */
+  name?: string;
+
+  /**
+   * Set to True to proceed without ConfigMap/Secret, if it is not present.
+   */
+  optional?: boolean;
+}
+
+/**
+ * Statuses of objects deployed by the user-specified kustomizations from the git repository.
+ */
+model ObjectStatusDefinition {
+  /**
+   * Name of the applied object
+   */
+  name?: string;
+
+  /**
+   * Namespace of the applied object
+   */
+  `namespace`?: string;
+
+  /**
+   * Kind of the applied object
+   */
+  kind?: string;
+
+  /**
+   * Compliance state of the applied object showing whether the applied object has come into a ready state on the cluster.
+   */
+  complianceState?: FluxComplianceState = FluxComplianceState.Unknown;
+
+  /**
+   * Object reference to the Kustomization that applied this object
+   */
+  appliedBy?: ObjectReferenceDefinition;
+
+  /**
+   * List of Kubernetes object status conditions present on the cluster
+   */
+  @identifiers(#["type"])
+  statusConditions?: ObjectStatusConditionDefinition[];
+
+  /**
+   * Additional properties that are provided from objects of the HelmRelease kind
+   */
+  helmReleaseProperties?: HelmReleasePropertiesDefinition;
+}
+
+/**
+ * Object reference to a Kubernetes object on a cluster
+ */
+model ObjectReferenceDefinition {
+  /**
+   * Name of the object
+   */
+  name?: string;
+
+  /**
+   * Namespace of the object
+   */
+  `namespace`?: string;
+}
+
+/**
+ * Status condition of Kubernetes object
+ */
+model ObjectStatusConditionDefinition {
+  /**
+   * Last time this status condition has changed
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastTransitionTime?: utcDateTime;
+
+  /**
+   * A more verbose description of the object status condition
+   */
+  message?: string;
+
+  /**
+   * Reason for the specified status condition type status
+   */
+  reason?: string;
+
+  /**
+   * Status of the Kubernetes object condition type
+   */
+  status?: string;
+
+  /**
+   * Object status condition type for this object
+   */
+  type?: string;
+}
+
+/**
+ * Properties for HelmRelease objects
+ */
+model HelmReleasePropertiesDefinition {
+  /**
+   * The revision number of the last released object change
+   */
+  lastRevisionApplied?: int64;
+
+  /**
+   * The reference to the HelmChart object used as the source to this HelmRelease
+   */
+  helmChartRef?: ObjectReferenceDefinition;
+
+  /**
+   * Total number of times that the HelmRelease failed to install or upgrade
+   */
+  failureCount?: int64;
+
+  /**
+   * Number of times that the HelmRelease failed to install
+   */
+  installFailureCount?: int64;
+
+  /**
+   * Number of times that the HelmRelease failed to upgrade
+   */
+  upgradeFailureCount?: int64;
+}
+
+/**
+ * The Flux Configuration Patch Request object.
+ */
+model FluxConfigurationPatch {
+  /**
+   * Updatable properties of an Flux Configuration Patch Request
+   */
+  properties?: FluxConfigurationPatchProperties;
+}
+
+/**
+ * Updatable properties of an Flux Configuration Patch Request
+ */
+model FluxConfigurationPatchProperties {
+  /**
+   * Source Kind to pull the configuration data from.
+   */
+  sourceKind?: SourceKindType;
+
+  /**
+   * Whether this configuration should suspend its reconciliation of its kustomizations and sources.
+   */
+  suspend?: boolean;
+
+  /**
+   * Parameters to reconcile to the GitRepository source kind type.
+   */
+  gitRepository?: GitRepositoryPatchDefinition;
+
+  /**
+   * Parameters to reconcile to the Bucket source kind type.
+   */
+  bucket?: BucketPatchDefinition;
+
+  /**
+   * Parameters to reconcile to the AzureBlob source kind type.
+   */
+  azureBlob?: AzureBlobPatchDefinition;
+
+  /**
+   * Parameters to reconcile to the OCIRepository source kind type.
+   */
+  ociRepository?: OCIRepositoryPatchDefinition;
+
+  /**
+   * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  kustomizations?: Record<KustomizationPatchDefinition>;
+
+  /**
+   * Key-value pairs of protected configuration settings for the configuration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  configurationProtectedSettings?: Record<string>;
+}
+
+/**
+ * Parameters to reconcile to the GitRepository source kind type.
+ */
+model GitRepositoryPatchDefinition {
+  /**
+   * The URL to sync for the flux configuration git repository.
+   */
+  url?: string;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster git repository source with the remote.
+   */
+  timeoutInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the cluster git repository source with the remote.
+   */
+  syncIntervalInSeconds?: int64;
+
+  /**
+   * The source reference for the GitRepository object.
+   */
+  repositoryRef?: RepositoryRefDefinition;
+
+  /**
+   * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
+   */
+  sshKnownHosts?: string;
+
+  /**
+   * Plaintext HTTPS username used to access private git repositories over HTTPS
+   */
+  httpsUser?: string;
+
+  /**
+   * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
+   */
+  httpsCACert?: string;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+
+  /**
+   * Name of the provider used for authentication.
+   */
+  provider?: ProviderType;
+}
+
+/**
+ * Parameters to reconcile to the Bucket source kind type.
+ */
+model BucketPatchDefinition {
+  /**
+   * The URL to sync for the flux configuration S3 bucket.
+   */
+  url?: string;
+
+  /**
+   * The bucket name to sync from the url endpoint for the flux configuration.
+   */
+  bucketName?: string;
+
+  /**
+   * Specify whether to use insecure communication when puling data from the S3 bucket.
+   */
+  insecure?: boolean;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster bucket source with the remote.
+   */
+  timeoutInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the cluster bucket source with the remote.
+   */
+  syncIntervalInSeconds?: int64;
+
+  /**
+   * Plaintext access key used to securely access the S3 bucket
+   */
+  accessKey?: string;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * Parameters to reconcile to the AzureBlob source kind type.
+ */
+model AzureBlobPatchDefinition {
+  /**
+   * The URL to sync for the flux configuration Azure Blob storage account.
+   */
+  url?: string;
+
+  /**
+   * The Azure Blob container name to sync from the url endpoint for the flux configuration.
+   */
+  containerName?: string;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
+   */
+  timeoutInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
+   */
+  syncIntervalInSeconds?: int64;
+
+  /**
+   * Parameters to authenticate using Service Principal.
+   */
+  servicePrincipal?: ServicePrincipalPatchDefinition;
+
+  /**
+   * The account key (shared key) to access the storage account
+   */
+  accountKey?: string;
+
+  /**
+   * The Shared Access token to access the storage container
+   */
+  sasToken?: string;
+
+  /**
+   * Parameters to authenticate using a Managed Identity.
+   */
+  managedIdentity?: ManagedIdentityPatchDefinition;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * Parameters to authenticate using Service Principal.
+ */
+model ServicePrincipalPatchDefinition {
+  /**
+   * The client Id for authenticating a Service Principal.
+   */
+  clientId?: string;
+
+  /**
+   * The tenant Id for authenticating a Service Principal
+   */
+  tenantId?: string;
+
+  /**
+   * The client secret for authenticating a Service Principal
+   */
+  clientSecret?: string;
+
+  /**
+   * Base64-encoded certificate used to authenticate a Service Principal
+   */
+  clientCertificate?: string;
+
+  /**
+   * The password for the certificate used to authenticate a Service Principal
+   */
+  clientCertificatePassword?: string;
+
+  /**
+   * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
+   */
+  clientCertificateSendChain?: boolean;
+}
+
+/**
+ * Parameters to authenticate using a Managed Identity.
+ */
+model ManagedIdentityPatchDefinition {
+  /**
+   * The client Id for authenticating a Managed Identity.
+   */
+  clientId?: string;
+}
+
+/**
+ * Parameters to reconcile to the OCIRepository source kind type.
+ */
+model OCIRepositoryPatchDefinition {
+  /**
+   * The URL to sync for the flux configuration OCI repository.
+   */
+  url?: url;
+
+  /**
+   * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
+   */
+  timeoutInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the cluster OCI repository source with the remote.
+   */
+  syncIntervalInSeconds?: int64;
+
+  /**
+   * The source reference for the OCIRepository object.
+   */
+  repositoryRef?: OCIRepositoryRefPatchDefinition;
+
+  /**
+   * The layer to be pulled from the OCI artifact.
+   */
+  layerSelector?: LayerSelectorPatchDefinition;
+
+  /**
+   * Verification of the authenticity of an OCI Artifact.
+   */
+  verify?: VerifyPatchDefinition;
+
+  /**
+   * Specify whether to allow connecting to a non-TLS HTTP container registry.
+   */
+  insecure?: boolean;
+
+  /**
+   * Specifies whether to use Workload Identity to authenticate with the OCI repository.
+   */
+  useWorkloadIdentity?: boolean;
+
+  /**
+   * The service account name to authenticate with the OCI repository.
+   */
+  serviceAccountName?: string;
+
+  /**
+   * Parameters to authenticate using TLS config for OCI repository.
+   */
+  tlsConfig?: TlsConfigPatchDefinition;
+
+  /**
+   * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
+   */
+  localAuthRef?: string;
+}
+
+/**
+ * The source reference for the OCIRepository object.
+ */
+model OCIRepositoryRefPatchDefinition {
+  /**
+   * The OCI repository image tag name to pull. This defaults to 'latest'.
+   */
+  tag?: string;
+
+  /**
+   * The semver range used to match against OCI repository tags. This takes precedence over tag.
+   */
+  semver?: string;
+
+  /**
+   * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
+   */
+  digest?: string;
+}
+
+/**
+ * Parameters to specify which layer to pull from the OCI artifact. By default, the first layer in the artifact is pulled.
+ */
+model LayerSelectorPatchDefinition {
+  /**
+   * The first layer matching the specified media type will be used.
+   */
+  mediaType?: string;
+
+  /**
+   * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
+   */
+  operation?: OperationType;
+}
+
+/**
+ * Parameters to verify the authenticity of an OCI Artifact.
+ */
+model VerifyPatchDefinition {
+  /**
+   * Verification provider name.
+   */
+  provider?: string;
+
+  /**
+   * An object containing trusted public keys of trusted authors.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  verificationConfig?: Record<string>;
+
+  /**
+   * Array defining the criteria for matching the OIDC identity while verifying an OCI artifact.
+   */
+  @identifiers(#[])
+  matchOidcIdentity?: MatchOidcIdentityPatchDefinition[];
+}
+
+/**
+ * MatchOIDCIdentity defines the criteria for matching the identity while verifying an OCI artifact.
+ */
+model MatchOidcIdentityPatchDefinition {
+  /**
+   * The regex pattern to match against to verify the OIDC issuer.
+   */
+  issuer?: string;
+
+  /**
+   * The regex pattern to match against to verify the identity subject.
+   */
+  subject?: string;
+}
+
+/**
+ * Parameters to authenticate using TLS config for OCI repository.
+ */
+model TlsConfigPatchDefinition {
+  /**
+   * Base64-encoded certificate used to authenticate a client with the OCI repository.
+   */
+  clientCertificate?: string;
+
+  /**
+   * Base64-encoded private key used to authenticate a client with the OCI repository.
+   */
+  privateKey?: string;
+
+  /**
+   * Base64-encoded CA certificate used to verify the server.
+   */
+  caCertificate?: string;
+}
+
+/**
+ * The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.
+ */
+model KustomizationPatchDefinition {
+  /**
+   * The path in the source reference to reconcile on the cluster.
+   */
+  path?: string;
+
+  /**
+   * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
+   */
+  dependsOn?: string[];
+
+  /**
+   * The maximum time to attempt to reconcile the Kustomization on the cluster.
+   */
+  timeoutInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the Kustomization on the cluster.
+   */
+  syncIntervalInSeconds?: int64;
+
+  /**
+   * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
+   */
+  retryIntervalInSeconds?: int64;
+
+  /**
+   * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
+   */
+  prune?: boolean;
+
+  /**
+   * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
+   */
+  force?: boolean;
+
+  /**
+   * Enable/disable health check for all Kubernetes objects created by this Kustomization.
+   */
+  wait?: boolean;
+
+  /**
+   * Used for variable substitution for this Kustomization after kustomize build.
+   */
+  postBuild?: PostBuildPatchDefinition;
+}
+
+/**
+ * The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.
+ */
+model PostBuildPatchDefinition {
+  /**
+   * Key/value pairs holding the variables to be substituted in this Kustomization.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  substitute?: Record<string>;
+
+  /**
+   * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
+   */
+  @identifiers(#[])
+  substituteFrom?: SubstituteFromPatchDefinition[];
+}
+
+/**
+ * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
+ */
+model SubstituteFromPatchDefinition {
+  /**
+   * Define whether it is ConfigMap or Secret that holds the variables to be used in substitution.
+   */
+  kind?: string;
+
+  /**
+   * Name of the ConfigMap/Secret that holds the variables to be used in substitution.
+   */
+  name?: string;
+
+  /**
+   * Set to True to proceed without ConfigMap/Secret, if it is not present.
+   */
+  optional?: boolean;
+}
+
+/**
+ * Result of the request to list Flux Configurations.  It contains a list of FluxConfiguration objects and a URL link to get the next set of results.
+ */
+model FluxConfigurationsList is Azure.Core.Page<FluxConfiguration>;
+
+/**
+ * The current status of an async operation.
+ */
+model OperationStatusResult {
+  /**
+   * Fully qualified ID for the async operation.
+   */
+  id?: string;
+
+  /**
+   * Name of the async operation.
+   */
+  name?: string;
+
+  /**
+   * Operation status.
+   */
+  status: string;
+
+  /**
+   * Additional information, if available.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  properties?: Record<string>;
+
+  /**
+   * If present, details of the operation error.
+   */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+}

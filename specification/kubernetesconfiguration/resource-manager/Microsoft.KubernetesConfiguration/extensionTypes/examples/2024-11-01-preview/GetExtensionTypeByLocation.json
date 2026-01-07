@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "extensionTypeName": "extensionType1",
+    "location": "westus2",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the extension type",
+      "body": {
+        "name": "bbbb",
+        "type": "cccc",
+        "id": "aaaa",
+        "properties": {
+          "description": "My extension type!",
+          "isManagedIdentityRequired": true,
+          "isSystemExtension": false,
+          "planInfo": {
+            "offerId": "myOfferId",
+            "planId": "myPlanId",
+            "publisherId": "myPublisherId"
+          },
+          "publisher": "Microsoft",
+          "supportedClusterTypes": [
+            "connectedClusters"
+          ],
+          "supportedScopes": {
+            "clusterScopeSettings": {
+              "name": "bbbbbbbbbbbbb",
+              "type": "ccccccccccccccccccccccccc",
+              "id": "aaaaaaaaaaaaaaaaaa",
+              "properties": {
+                "allowMultipleInstances": true,
+                "defaultReleaseNamespace": "kube-system"
+              }
+            },
+            "defaultScope": "cluster"
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ExtensionTypes_LocationGet",
+  "title": "Get Extension Type"
+}

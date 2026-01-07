@@ -1,0 +1,209 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ExtensionType.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.KubernetesConfiguration;
+/**
+ * The Extension Type Version object.
+ */
+@subscriptionResource
+@parentResource(ExtensionType)
+model ExtensionTypeVersionForReleaseTrain
+  is Azure.ResourceManager.ProxyResource<ExtensionTypeVersionForReleaseTrainProperties> {
+  ...ResourceNameParameter<
+    Resource = ExtensionTypeVersionForReleaseTrain,
+    KeyName = "versionNumber",
+    SegmentName = "versions",
+    NamePattern = ""
+  >;
+}
+
+alias ExtensionTypeVersionForReleaseTrainOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.KubernetesConfiguration";
+
+    ...LocationParameter;
+
+    /** Name of the Extension Type. */
+    @path
+    @segment("extensionTypes")
+    @key
+    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
+    extensionTypeName: string;
+  },
+  {},
+  {
+    /** Version number of the Extension Type. */
+    @path
+    @segment("versions")
+    @key
+    versionNumber: string;
+  }
+>;
+
+@armResourceOperations
+interface ExtensionTypeVersionForReleaseTrains {
+  /**
+   * Get details of a version for an extension type and location
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ExtensionTypes_GetVersion")
+  getVersion is ExtensionTypeVersionForReleaseTrainOps.Read<ExtensionTypeVersionForReleaseTrain>;
+
+  /**
+   * List the versions for an extension type and location.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ExtensionTypes_ListVersions")
+  listVersions is ExtensionTypeVersionForReleaseTrainOps.List<
+    ExtensionTypeVersionForReleaseTrain,
+    Parameters = {
+      /**
+       * Filter results by release train (default value is stable)
+       */
+      @query("releaseTrain")
+      releaseTrain?: string;
+
+      /**
+       * Filter results by the cluster type for extension types
+       */
+      @query("clusterType")
+      clusterType?: string;
+
+      /**
+       * Filter results by the major version of an extension type
+       */
+      @query("majorVersion")
+      majorVersion?: string;
+
+      /**
+       * Filter results by only the latest version (based on other query parameters)
+       */
+      @query("showLatest")
+      showLatest?: boolean;
+    },
+    Response = ArmResponse<ExtensionTypeVersionsList>
+  >;
+}
+alias ExtensionTypeVersionForReleaseTrainOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "clusterRp";
+
+    /** The name of the kubernetes cluster. */
+    @path
+    @segment("{clusterResourceName}")
+    @key
+    @pattern("^.*")
+    clusterName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ExtensionTypeVersionForReleaseTrain>;
+
+    /** Name of the Extension Type. */
+    @path
+    @segment("extensionTypes")
+    @key
+    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
+    extensionTypeName: string;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ExtensionTypeVersionForReleaseTrain>;
+
+    /** Name of the Extension Type. */
+    @path
+    @segment("extensionTypes")
+    @key
+    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
+    extensionTypeName: string;
+
+    /** Version number of the Extension Type. */
+    @path
+    @segment("versions")
+    @key
+    versionNumber: string;
+  }
+>;
+
+@armResourceOperations
+interface ExtensionTypeVersionForReleaseTrainOperationGroup {
+  /**
+   * Get details of a version for an Extension Type installable to the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ExtensionTypes_ClusterGetVersion")
+  clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<
+    ExtensionTypeVersionForReleaseTrain,
+    Parameters = {
+      /**
+       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
+       */
+      @pattern("^[a-zA-Z]*$")
+      @path
+      clusterResourceName: string;
+    }
+  >;
+
+  /**
+   * List the version for an Extension Type installable to the cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ExtensionTypes_ClusterListVersions")
+  clusterListVersions is ExtensionTypeVersionForReleaseTrainOperationGroupOps.List<
+    ExtensionTypeVersionForReleaseTrain,
+    Parameters = {
+      /**
+       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
+       */
+      @pattern("^[a-zA-Z]*$")
+      @path
+      clusterResourceName: string;
+
+      /**
+       * Filter results by release train (default value is stable)
+       */
+      @query("releaseTrain")
+      releaseTrain?: string;
+
+      /**
+       * Filter results by the major version of an extension type
+       */
+      @query("majorVersion")
+      majorVersion?: string;
+
+      /**
+       * Filter results by only the latest version (based on other query parameters)
+       */
+      @query("showLatest")
+      showLatest?: boolean;
+    },
+    Response = ArmResponse<ExtensionTypeVersionsList>
+  >;
+}
+
+@@doc(ExtensionTypeVersionForReleaseTrain.name,
+  "Version number of the Extension Type."
+);
+@@doc(ExtensionTypeVersionForReleaseTrain.properties, "");

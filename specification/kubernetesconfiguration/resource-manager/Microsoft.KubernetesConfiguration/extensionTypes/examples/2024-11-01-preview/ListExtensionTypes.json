@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "clusterName": "my-cluster",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "offerId": "myOfferId",
+    "planId": "myPlanId",
+    "publisherId": "myPublisherId",
+    "releaseTrain": "stable",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the extension types registered for the given region",
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "bbbb",
+            "type": "cccc",
+            "id": "aaaa",
+            "properties": {
+              "description": "My extension type!",
+              "isManagedIdentityRequired": true,
+              "isSystemExtension": false,
+              "planInfo": {
+                "offerId": "myOfferId",
+                "planId": "myPlanId",
+                "publisherId": "myPublisherId"
+              },
+              "publisher": "Microsoft",
+              "supportedClusterTypes": [
+                "connectedClusters"
+              ],
+              "supportedScopes": {
+                "clusterScopeSettings": {
+                  "name": "bbbbbbbbbbbbb",
+                  "type": "ccccccccccccccccccccccccc",
+                  "id": "aaaaaaaaaaaaaaaaaa",
+                  "properties": {
+                    "allowMultipleInstances": true,
+                    "defaultReleaseNamespace": "kube-system"
+                  }
+                },
+                "defaultScope": "cluster"
+              }
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ExtensionTypes_List",
+  "title": "Get Extension Types"
+}

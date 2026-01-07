@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "extensionTypeName": "extensionType1",
+    "location": "westus",
+    "subscriptionId": "subId1",
+    "versionNumber": "1.20.0"
+  },
+  "responses": {
+    "200": {
+      "description": "Versions for the Extension Type",
+      "body": {
+        "name": "bbbb",
+        "type": "cccc",
+        "id": "aaaa",
+        "properties": {
+          "supportedClusterTypes": [
+            "connectedCluster"
+          ],
+          "unsupportedKubernetesVersions": {
+            "appliances": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": [
+                  "1.18..1.21"
+                ]
+              }
+            ],
+            "connectedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              },
+              {
+                "distributions": [
+                  "GKE"
+                ],
+                "unsupportedVersions": [
+                  ">1.22"
+                ]
+              }
+            ],
+            "managedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              }
+            ],
+            "provisionedCluster": [
+              {
+                "distributions": [
+                  "AKS"
+                ],
+                "unsupportedVersions": []
+              }
+            ]
+          },
+          "version": "1.1.0"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ExtensionTypes_GetVersion",
+  "title": "List Extension Type Versions"
+}

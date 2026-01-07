@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "clusterName": "my-cluster",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionTypeName": "my-extension-type",
+    "majorVersion": "2",
+    "releaseTrain": "stable",
+    "resourceGroupName": "rg1",
+    "showLatest": true,
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Versions for the Extension Type",
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "bbbb",
+            "type": "cccc",
+            "id": "aaaa",
+            "properties": {
+              "supportedClusterTypes": [
+                "connectedCluster"
+              ],
+              "unsupportedKubernetesVersions": {
+                "appliances": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": [
+                      "1.18..1.21"
+                    ]
+                  }
+                ],
+                "connectedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  },
+                  {
+                    "distributions": [
+                      "GKE"
+                    ],
+                    "unsupportedVersions": [
+                      ">1.22"
+                    ]
+                  }
+                ],
+                "managedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  }
+                ],
+                "provisionedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  }
+                ]
+              },
+              "version": "1.1.0"
+            }
+          },
+          {
+            "name": "bbbb",
+            "type": "cccc",
+            "id": "aaaa",
+            "properties": {
+              "supportedClusterTypes": [
+                "connectedCluster"
+              ],
+              "unsupportedKubernetesVersions": {
+                "appliances": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": [
+                      "1.18..1.21"
+                    ]
+                  }
+                ],
+                "connectedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  },
+                  {
+                    "distributions": [
+                      "GKE"
+                    ],
+                    "unsupportedVersions": [
+                      ">1.22"
+                    ]
+                  }
+                ],
+                "managedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  }
+                ],
+                "provisionedCluster": [
+                  {
+                    "distributions": [
+                      "AKS"
+                    ],
+                    "unsupportedVersions": []
+                  }
+                ]
+              },
+              "version": "1.2.0"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ExtensionTypes_ClusterListVersions",
+  "title": "List Extension Type Versions"
+}
