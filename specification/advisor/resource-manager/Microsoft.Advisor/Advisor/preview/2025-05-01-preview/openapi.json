@@ -1663,7 +1663,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Advisor/configurations": {
       "get": {
         "operationId": "Configurations_ListByResourceGroup",
         "summary": "Retrieve Azure Advisor configurations.",
@@ -1676,7 +1676,7 @@
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroup",
+            "name": "resourceGroupName",
             "in": "path",
             "description": "The name of the Azure resource group.",
             "required": true,
@@ -1707,7 +1707,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Advisor/configurations/{configurationName}": {
       "put": {
         "operationId": "Configurations_CreateInResourceGroup",
         "summary": "Create/Overwrite Azure Advisor configuration.",
@@ -1740,7 +1740,7 @@
             }
           },
           {
-            "name": "resourceGroup",
+            "name": "resourceGroupName",
             "in": "path",
             "description": "The name of the Azure resource group.",
             "required": true,

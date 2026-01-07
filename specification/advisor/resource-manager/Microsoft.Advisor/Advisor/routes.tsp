@@ -57,7 +57,7 @@ interface ConfigurationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Retrieve Azure Advisor configurations.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Advisor/configurations")
   @list
   @get
   listByResourceGroup(
@@ -68,7 +68,7 @@ interface ConfigurationsOperationGroup {
      * The name of the Azure resource group.
      */
     @path
-    resourceGroup: string,
+    resourceGroupName: string,
   ): ArmResponse<ConfigurationListResult> | ArmDefaultErrorResponse;
 
   /**
@@ -76,7 +76,7 @@ interface ConfigurationsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create/Overwrite Azure Advisor configuration.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Advisor/configurations/{configurationName}")
   @put
   createInResourceGroup(
     ...ApiVersionParameter,
@@ -92,7 +92,7 @@ interface ConfigurationsOperationGroup {
      * The name of the Azure resource group.
      */
     @path
-    resourceGroup: string,
+    resourceGroupName: string,
 
     /**
      * The Azure Advisor configuration data structure.
