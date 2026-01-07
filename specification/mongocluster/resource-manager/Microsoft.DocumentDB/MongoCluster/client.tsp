@@ -82,6 +82,8 @@ using Microsoft.DocumentDB;
   "MongoClusterPrivateLinkResourceData",
   "csharp"
 );
+@@clientName(PrivateLinks.listByMongoCluster, "GetPrivateLinks", "csharp");
+@@clientName(Replicas.listByParent, "GetReplicasByParent", "csharp");
 @@clientName(ListConnectionStringsResult,
   "MongoClusterConnectionStringsResult",
   "csharp"
