@@ -78,7 +78,7 @@ function validateLeaseContent(leaseFile, today, relativePath) {
   const errors = [];
   const pathForExtraction = relativePath || leaseFile;
   // Extract namespace from .github/arm-leases/<servicename>/<namespace>/lease.yaml
-  const folderRP = pathForExtraction.split('/')[2];
+  const folderRP = pathForExtraction.split('/')[3];
   
   if (!existsSync(leaseFile)) {
     return { file: leaseFile, errors: ['File does not exist'] };
@@ -205,9 +205,9 @@ async function main() {
   );
   
   if (nonLeaseFiles.length > 0) {
-    console.log(`❌ Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
+    console.log(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
     nonLeaseFiles.forEach(file => console.log(`  ${file}`));
-    console.log('\n❌ Only lease.yaml and README.md files are allowed in .github/arm-leases/ directory\n');
+    console.log('\nOnly lease.yaml files are allowed in .github/arm-leases/ directory\n');
     exitCode = 1;
   }
 
