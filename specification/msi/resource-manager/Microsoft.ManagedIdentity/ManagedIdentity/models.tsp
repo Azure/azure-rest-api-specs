@@ -44,7 +44,7 @@ model ClaimsMatchingExpression {
  * Configuration to restrict identity assignment to specific resource providers or resource types.
  */
 @added(Versions.v2025_05_31_preview)
-model IdentityAssignmentRestrictions {
+model AssignmentRestrictions {
   /**
    * List of resource providers or resource providers with resource types that this identity can be assigned to (case-insensitive). Examples: 'Microsoft.Compute', 'Microsoft.Storage/Accounts', 'Microsoft.Network/VirtualNetworks'.
    */
@@ -163,7 +163,7 @@ model UserAssignedIdentityProperties {
    */
   @added(Versions.v2025_05_31_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  assignmentRestrictions?: IdentityAssignmentRestrictions;
+  assignmentRestrictions?: AssignmentRestrictions;
 }
 
 /**

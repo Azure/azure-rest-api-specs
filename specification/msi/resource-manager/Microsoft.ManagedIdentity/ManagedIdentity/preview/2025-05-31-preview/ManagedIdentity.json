@@ -659,6 +659,19 @@
     }
   },
   "definitions": {
+    "AssignmentRestrictions": {
+      "type": "object",
+      "description": "Configuration to restrict identity assignment to specific resource providers or resource types.",
+      "properties": {
+        "providers": {
+          "type": "array",
+          "description": "List of resource providers or resource providers with resource types that this identity can be assigned to (case-insensitive). Examples: 'Microsoft.Compute', 'Microsoft.Storage/Accounts', 'Microsoft.Network/VirtualNetworks'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -809,19 +822,6 @@
           "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "IdentityAssignmentRestrictions": {
-      "type": "object",
-      "description": "Configuration to restrict identity assignment to specific resource providers or resource types.",
-      "properties": {
-        "providers": {
-          "type": "array",
-          "description": "List of resource providers or resource providers with resource types that this identity can be assigned to (case-insensitive). Examples: 'Microsoft.Compute', 'Microsoft.Storage/Accounts', 'Microsoft.Network/VirtualNetworks'.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "IdentityUpdate": {
       "type": "object",
@@ -1068,7 +1068,7 @@
           ]
         },
         "assignmentRestrictions": {
-          "$ref": "#/definitions/IdentityAssignmentRestrictions",
+          "$ref": "#/definitions/AssignmentRestrictions",
           "description": "Restrictions on which resource providers this identity can be assigned to.",
           "x-ms-mutability": [
             "read",
