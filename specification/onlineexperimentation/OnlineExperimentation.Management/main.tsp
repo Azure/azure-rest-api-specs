@@ -1,13 +1,15 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./OnlineExperimentationWorkspace.tsp";
-import "./PrivateEndpointConnection.tsp";
-import "./PrivateLinkResource.tsp";
+import "./OnlineExperimentWorkspace.tsp";
 
-using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
 
 /** Microsoft.OnlineExperimentation Resource Provider management API. */
 @armProviderNamespace
@@ -20,10 +22,6 @@ enum Versions {
   /** 2025-05-31-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_05_31_preview: "2025-05-31-preview",
-
-  /** 2025-08-01-preview version */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

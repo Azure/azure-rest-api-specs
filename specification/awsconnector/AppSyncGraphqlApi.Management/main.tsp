@@ -69,7 +69,7 @@ model AppSyncGraphqlApiProperties {
 @doc("Definition of awsAppSyncGraphqlApi")
 model AwsAppSyncGraphqlApiProperties {
   @doc("<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   additionalAuthenticationProviders?: AdditionalAuthenticationProvider[];
 
   @doc("<p>The API ID.</p>")

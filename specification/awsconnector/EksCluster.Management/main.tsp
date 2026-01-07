@@ -69,6 +69,7 @@ model AwsEksClusterProperties {
   @doc("<p>The <code>certificate-authority-data</code> for your cluster.</p>")
   certificateAuthority?: Certificate;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>")
   clientRequestToken?: string;
 
@@ -79,7 +80,7 @@ model AwsEksClusterProperties {
   createdAt?: utcDateTime;
 
   @doc("<p>The encryption configuration for the cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   encryptionConfig?: EncryptionConfig[];
 
   @doc("<p>The endpoint for your Kubernetes API server.</p>")
@@ -247,7 +248,7 @@ model EncryptionConfig {
 @doc("Definition of ClusterHealth")
 model ClusterHealth {
   @doc("<p>An object representing the health issues of your local Amazon EKS cluster on an Amazon Web Services Outpost.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   issues?: ClusterIssue[];
 }
 
@@ -305,7 +306,7 @@ model IpFamilyEnumValue {
 @doc("Definition of Logging")
 model Logging {
   @doc("<p>The cluster control plane logging configuration for your cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   clusterLogging?: LogSetup[];
 }
 

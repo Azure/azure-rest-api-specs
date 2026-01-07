@@ -1,0 +1,127 @@
+{
+  "title": "NetworkProfiles_ListByCluster",
+  "operationId": "NetworkProfiles_ListByCluster",
+  "parameters": {
+    "api-version": "2023-12-01-preview",
+    "subscriptionId": "6D37FF61-4C93-4377-B06B-FC6D6D561A7D",
+    "resourceGroupName": "rghci",
+    "clusterName": "3-Vz3LSRO5Q6q8EV-PKs8-5E"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6D37FF61-4C93-4377-B06B-FC6D6D561A7D/resourceGroups/rghci/providers/Microsoft.AzureStackHCI/clusters/3-Vz3LSRO5Q6q8EV-PKs8-5E/networkProfiles/default",
+            "name": "default",
+            "type": "Microsoft.AzureStackHCI/clusters/networkProfiles",
+            "properties": {
+              "reportedProperties": {
+                "clusterIpv4Addresses": [
+                  "10.0.0.1"
+                ],
+                "clusterIpv6Addresses": [
+                  "2001:db8::1"
+                ],
+                "subnet": "255.255.255.0",
+                "autoSelectMigrationNetwork": true,
+                "enableNetworkNaming": true,
+                "autoSelectVmMigrationPerformance": true,
+                "maxVmMigration": 5,
+                "vmMigrationPerformance": "high",
+                "maxSmbMigrationBandwidth": "1000Mbps",
+                "nodes": [
+                  {
+                    "id": "node1",
+                    "physicalAdapterIds": [
+                      "adapter1",
+                      "adapter2"
+                    ],
+                    "virtualSwitchIds": [
+                      "vswitch1"
+                    ],
+                    "arcStatus": "connected",
+                    "arcMachineId": "/subscriptions/6D37FF61-4C93-4377-B06B-FC6D6D561A7D/resourceGroups/rghci/providers/Microsoft.HybridCompute/machines/test"
+                  }
+                ],
+                "physicalAdapters": [
+                  {
+                    "id": "adapter1",
+                    "name": "Adapter 1",
+                    "description": "Primary adapter",
+                    "vlan": 10,
+                    "ipv4Addresses": [
+                      "10.0.0.2"
+                    ],
+                    "ipv6Addresses": [
+                      "2001:db8::2"
+                    ],
+                    "driverVersion": "1.0.0",
+                    "nodeId": "node1"
+                  }
+                ],
+                "virtualSwitches": [
+                  {
+                    "id": "vswitch1",
+                    "name": "vSwitch 1",
+                    "virtualAdapterIds": [
+                      "vadapter1"
+                    ],
+                    "physicalAdapterIds": [
+                      "adapter1"
+                    ],
+                    "intentId": "intent1"
+                  }
+                ],
+                "networks": [
+                  {
+                    "id": "network1",
+                    "name": "Network 1",
+                    "type": "Logical",
+                    "vlan": 20,
+                    "intentId": "intent1"
+                  }
+                ],
+                "virtualAdapters": [
+                  {
+                    "id": "vadapter1",
+                    "name": "vAdapter 1",
+                    "vlan": 30,
+                    "ipv4Addresses": [
+                      "10.0.0.3"
+                    ],
+                    "ipv6Addresses": [
+                      "2001:db8::3"
+                    ]
+                  }
+                ],
+                "intents": [
+                  {
+                    "id": "intent1",
+                    "name": "Intent 1",
+                    "isManagementType": true,
+                    "physicalAdapterIds": [
+                      "adapter1"
+                    ],
+                    "virtualAdapterIds": [
+                      "vadapter1"
+                    ],
+                    "virtualSwitchIds": [
+                      "vswitch1"
+                    ],
+                    "networkIds": [
+                      "network1"
+                    ]
+                  }
+                ]
+              },
+              "lastSyncTimestamp": "2023-10-01T12:00:00Z",
+              "lastSyncStatus": "Success"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/axw"
+      }
+    }
+  }
+}

@@ -24,10 +24,6 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_02_01_preview: "2024-02-01-preview",
-
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v2_preview)
-  v2024_02_01: "2024-02-01",
 }
 
 @doc("Partner's specific Properties")

@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2024-09-30-preview",
+    "body": {
+      "properties": {
+        "autoRenew": "Off",
+        "renewalTerm": {
+          "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+          "quantity": 9
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalInfo": null,
+        "evaluateResult": "Failed",
+        "reason": "AutoRenew request requires AutoRenew.On to set renewalTerm",
+        "reasonCode": "InvalidRequestBody",
+        "updateScenario": "AutoRenew"
+      }
+    }
+  },
+  "operationId": "SaasResources_CanUpdate",
+  "title": "CanUpdate Invalid Request Body"
+}

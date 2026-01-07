@@ -122,6 +122,10 @@ union EndpointType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_07_01)
   AzureStorageNfsFileShare: "AzureStorageNfsFileShare",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_12_01)
+  S3WithHmac: "S3WithHMAC",
 }
 
 /**
@@ -134,6 +138,49 @@ union JobType {
   OnPremToCloud: "OnPremToCloud",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CloudToCloud: "CloudToCloud",
+}
+
+/**
+ * The type of the endpoint source/target.
+ */
+@added(Versions.v2025_12_01)
+union EndpointKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Source: "Source",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Target: "Target",
+}
+
+/**
+ * The type of Job run trigger Manual or Scheduled.
+ */
+@added(Versions.v2025_12_01)
+union TriggerType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Manual: "Manual",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Scheduled: "Scheduled",
+}
+/**
+ * Type of schedule — Monthly, Weekly, or Daily
+ */
+@added(Versions.v2025_12_01)
+union Frequency {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Monthly: "Monthly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Weekly: "Weekly",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Daily: "Daily",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Onetime: "Onetime",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Custom: "Custom",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  None: "None",
 }
 
 /**
@@ -205,6 +252,9 @@ union CredentialType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureKeyVaultSmb: "AzureKeyVaultSmb",
+
+  @added(Versions.v2025_12_01)
+  AzureKeyVaultS3WithHMAC: "AzureKeyVaultS3WithHMAC",
 }
 
 /**
@@ -280,6 +330,8 @@ model StorageMoverUpdateParameters {
   /**
    * The resource specific properties for the Storage Mover resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: StorageMoverUpdateProperties;
 
   /**
@@ -399,7 +451,7 @@ model UploadLimitSchedule {
   /**
    * The set of weekly repeating recurrences of the WAN-link upload limit schedule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   weeklyRecurrences?: UploadLimitWeeklyRecurrence[];
 }
 
@@ -455,6 +507,24 @@ model Time {
 }
 
 /**
+ * The time of day.
+ */
+@added(Versions.v2025_12_01)
+model SchedulerTime {
+  /**
+   * The hour element of the time. Allowed values range from 0 (start of the selected day) to 24 (end of the selected day). Hour value 24 cannot be combined with any other minute value but 0.
+   */
+  @minValue(0)
+  @maxValue(24)
+  hour?: int32;
+
+  /**
+   * The minute element of the time. Allowed values are 0 and 30. If not specified, its value defaults to 0.
+   */
+  minute?: Minute = 0;
+}
+
+/**
  * The WAN-link upload limit.
  */
 model UploadLimit {
@@ -482,7 +552,9 @@ model AgentPropertiesErrorDetails {
  * The Agent resource.
  */
 model AgentUpdateParameters {
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AgentUpdateProperties;
 }
 
@@ -516,6 +588,13 @@ model EndpointBaseProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   endpointType: EndpointType;
+
+  /**
+   * The Endpoint resource kind source or target.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  endpointKind?: EndpointKind;
 
   /**
    * A description for the Endpoint.
@@ -592,6 +671,8 @@ model ProjectUpdateParameters {
   /**
    * Project properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ProjectUpdateProperties;
 }
 
@@ -704,7 +785,7 @@ model JobDefinitionProperties {
   sourceTargetMap?: {
     @visibility(Lifecycle.Read)
     @added(Versions.v2025_07_01)
-    @OpenAPI.extension("x-ms-identifiers", #[])
+    @identifiers(#[])
     value?: SourceTargetMap[];
   };
 
@@ -713,6 +794,68 @@ model JobDefinitionProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /**
+   * List of connections associated to this job
+   */
+  @added(Versions.v2025_08_01)
+  connections?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * Schedule information for the Job Definition.
+   */
+  @added(Versions.v2025_12_01)
+  schedule?: ScheduleInfo;
+
+  /**
+   * The checksum validation mode for the job definition.
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation = DataIntegrityValidation.None;
+}
+
+/**
+ * Schedule information for the Job Definition.
+ */
+@added(Versions.v2025_12_01)
+model ScheduleInfo {
+  /** Type of schedule — Monthly, Weekly, or Daily */
+  frequency?: Frequency;
+
+  /** Whether the schedule is currently active */
+  isActive?: boolean;
+
+  /** Time of day to execute (hours and minutes) */
+  executionTime?: SchedulerTime;
+
+  /** Specific one-time execution date and time */
+  startDate?: utcDateTime;
+
+  /** Days of the week for weekly schedules */
+  daysOfWeek?: string[]; // e.g., ["Monday", "Wednesday"]
+
+  /** Days of the month for monthly schedules */
+  daysOfMonth?: int32[]; // e.g., [1, 15, 30]
+
+  /** Optional CRON expression for advanced scheduling */
+  cronExpression?: string;
+
+  /** End time of the schedule (in UTC) */
+  endDate?: utcDateTime;
+}
+
+/**
+ * The Data integrity validation mode.
+ */
+@added(Versions.v2025_08_01)
+union DataIntegrityValidation {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SaveVerifyFileMD5: "SaveVerifyFileMD5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  SaveFileMD5: "SaveFileMD5",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  None: "None",
 }
 
 /**
@@ -826,6 +969,8 @@ model JobDefinitionUpdateParameters {
   /**
    * Job definition properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: JobDefinitionUpdateProperties;
 }
 
@@ -847,6 +992,24 @@ model JobDefinitionUpdateProperties {
    * Name of the Agent to assign for new Job Runs of this Job Definition.
    */
   agentName?: string;
+
+  /**
+   * List of connections resourceId associated with the job.
+   */
+  @added(Versions.v2025_08_01)
+  connections?: string[];
+
+  /**
+   * Data Integrity validation to be updated
+   */
+  @added(Versions.v2025_08_01)
+  dataIntegrityValidation?: DataIntegrityValidation;
+
+  /**
+   * Schedule information for the Job Definition.
+   */
+  @added(Versions.v2025_12_01)
+  schedule?: ScheduleInfo;
 }
 
 /**
@@ -909,6 +1072,20 @@ model JobRunProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   executionEndTime?: utcDateTime;
+
+  /**
+   * Trigger type for the job run. Default is manual.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  triggerType?: TriggerType = TriggerType.Manual;
+
+  /**
+   * Scheduled execution time. Null if Trigger type is manual.
+   */
+  @added(Versions.v2025_12_01)
+  @visibility(Lifecycle.Read)
+  scheduledExecutionTime?: utcDateTime;
 
   /**
    * The last updated time of the Job Run.
@@ -1041,6 +1218,14 @@ model JobRunProperties {
   error?: JobRunError;
 
   /**
+   * Warning details.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01)
+  @identifiers(#[])
+  warnings?: JobRunWarning[];
+
+  /**
    * The provisioning state of this resource.
    */
   @visibility(Lifecycle.Read)
@@ -1058,6 +1243,26 @@ model JobRunError {
 
   /**
    * Error message of the given entry.
+   */
+  message?: string;
+
+  /**
+   * Target of the given error entry.
+   */
+  target?: string;
+}
+
+/**
+ * Warning type
+ */
+model JobRunWarning {
+  /**
+   * Error code of the given entry.
+   */
+  code?: string;
+
+  /**
+   * Warning message of the given entry.
    */
   message?: string;
 
@@ -1129,6 +1334,73 @@ model NfsMountEndpointProperties extends EndpointBaseProperties {
    * The Endpoint resource type.
    */
   endpointType: "NfsMount";
+}
+
+/**
+ * The properties of S3WithHmac share endpoint.
+ */
+@added(Versions.v2025_12_01)
+model S3WithHmacEndpointProperties extends EndpointBaseProperties {
+  /**
+   * The Azure Key Vault credentials which stores the access key and secret key. Use empty string to clean-up existing value.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  credentials?: AzureKeyVaultS3WithHmacCredentials;
+
+  /**
+   * The  URI which points to the source.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sourceUri?: string;
+
+  /**
+   * The source type of S3WithHmac endpoint.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sourceType?: S3WithHmacSourceType;
+
+  /**
+   * The description for other source type of S3WithHmac endpoint.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  otherSourceTypeDescription?: string;
+
+  /**
+   * The Endpoint resource type.
+   */
+  endpointType: "S3WithHMAC";
+}
+
+/**
+ * The source type of S3WithHmac endpoint.
+ */
+@added(Versions.v2025_12_01)
+union S3WithHmacSourceType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  MINIO: "MINIO",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  BACKBLAZE: "BACKBLAZE",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  IBM: "IBM",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  CLOUDFLARE: "CLOUDFLARE",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  GCS: "GCS",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_12_01)
+model S3WithHmacEndpointUpdateProperties extends EndpointBaseUpdateProperties {
+  /**
+   * The Azure Key Vault secret URIs which store the required credentials to access the S3.
+   */
+  credentials?: AzureKeyVaultS3WithHmacCredentials;
+
+  /**
+   * The Endpoint resource type.
+   */
+  endpointType: "S3WithHMAC";
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1310,6 +1582,27 @@ model AzureKeyVaultSmbCredentials extends Credentials {
 }
 
 /**
+ * The Azure Key Vault secret URIs which store the credentials.
+ */
+@added(Versions.v2025_12_01)
+model AzureKeyVaultS3WithHmacCredentials extends Credentials {
+  /**
+   * The Azure Key Vault secret URI which stores the username. Use empty string to clean-up existing value.
+   */
+  accessKeyUri?: string;
+
+  /**
+   * The Azure Key Vault secret URI which stores the password. Use empty string to clean-up existing value.
+   */
+  secretKeyUri?: string;
+
+  /**
+   * The Credentials type.
+   */
+  type: "AzureKeyVaultS3WithHMAC";
+}
+
+/**
  * The Credentials.
  */
 @discriminator("type")
@@ -1334,4 +1627,64 @@ model SmbMountEndpointUpdateProperties extends EndpointBaseUpdateProperties {
    * The Endpoint resource type.
    */
   endpointType: "SmbMount";
+}
+
+/**
+ * List of Connections.
+ */
+@added(Versions.v2025_08_01)
+model ConnectionList is Azure.Core.Page<Connection>;
+
+@@visibility(ConnectionList.value, Lifecycle.Read);
+/** Properties of the Connection resource. */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01)
+model ConnectionProperties {
+  /** A description for the Connection. */
+  description?: string;
+
+  /** The connection status. */
+  @visibility(Lifecycle.Read)
+  connectionStatus?: ConnectionStatus;
+
+  /** The PrivateLinkServiceId for the connection. */
+  privateLinkServiceId: Azure.Core.armResourceIdentifier;
+
+  /** The PrivateEndpointName associated with the connection. */
+  @visibility(Lifecycle.Read)
+  privateEndpointName?: string;
+
+  /** The privateEndpoint resource Id */
+  @visibility(Lifecycle.Read)
+  privateEndpointResourceId?: Azure.Core.armResourceIdentifier;
+
+  /** List of job definitions associated with this connection. */
+  jobList?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * The provisioning state of this resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** The connection status. */
+union ConnectionStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Rejected: "Rejected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Disconnected: "Disconnected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Stale: "Stale",
+}
+
+/** Parameters for updating a Connection resource. */
+model ConnectionUpdateParameters {
+  /** The status of the Connection. */
+  connectionStatus?: ConnectionStatus;
 }

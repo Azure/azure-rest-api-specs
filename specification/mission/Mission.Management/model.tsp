@@ -14,6 +14,7 @@ import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./resourcetypes/postActions/approvalspostactions.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/dedicatedHub/dedicatedHub.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
@@ -26,6 +27,7 @@ import "./resourcetypes/shared/principal.tsp";
 import "./resourcetypes/shared/provisioningstate.tsp";
 import "./resourcetypes/shared/resourceid.tsp";
 import "./resourcetypes/shared/roleassignmentitem.tsp";
+import "./resourcetypes/shared/updatemode.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -126,6 +128,18 @@ model CommunityEndpointResource
   @path
   @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the Community Endpoint Resource")
+  name: string;
+}
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("DedicatedHub Model Resource")
+@parentResource(CommunityResource)
+model DedicatedHubResource is TrackedResource<DedicatedHubProperties> {
+  @key("dedicatedHubName")
+  @segment("dedicatedHubs")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
+  @doc("The name of the Dedicated Hub Resource")
   name: string;
 }
 

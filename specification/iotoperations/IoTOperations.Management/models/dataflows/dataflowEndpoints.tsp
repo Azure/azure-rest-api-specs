@@ -68,6 +68,9 @@ model DataflowEndpointProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
 }
 
 @doc("DataflowEndpoint Type properties")
@@ -302,12 +305,14 @@ model DataflowEndpointKafkaBatching {
 
   @doc("Maximum number of bytes in a batch.")
   @minValue(0)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxBytes?: int32 = 1000000;
 
   @doc("Maximum number of messages in a batch.")
   @minValue(0)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxMessages?: int32 = 100000;
 }
 

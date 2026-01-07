@@ -1,0 +1,625 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI",
+    "version": "2024-03-15-preview",
+    "description": "Azure Stack HCI management service"
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "EdgeNodePool"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/edgeNodePools": {
+      "get": {
+        "operationId": "EdgeNodePool_ListBySubscription",
+        "x-ms-examples": {
+          "ListEdgeNodePoolBySubscription": {
+            "$ref": "./examples/ListEdgeNodePoolBySubscription.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "List EdgeNodePoolResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeNodePools": {
+      "get": {
+        "operationId": "EdgeNodePool_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListEdgeNodePoolByResourceGroup": {
+            "$ref": "./examples/ListEdgeNodePoolByResourceGroup.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "List EdgeNodePoolResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeNodePools/{nodePoolName}": {
+      "get": {
+        "operationId": "EdgeNodePool_Get",
+        "x-ms-examples": {
+          "GetEdgeNodePool": {
+            "$ref": "./examples/GetEdgeNodePool.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "Get a EdgeNodePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "Name of the node pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeNodePool_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutEdgeNodePool": {
+            "$ref": "./examples/PutEdgeNodePool.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "Create a EdgeNodePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "Name of the node pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeNodePoolResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeNodePoolResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EdgeNodePool_Update",
+        "x-ms-examples": {
+          "UpdateEdgeNodePool": {
+            "$ref": "./examples/UpdateEdgeNodePool.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "Update a EdgeNodePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "Name of the node pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeNodePoolResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeNodePool_Delete",
+        "x-ms-examples": {
+          "DeleteEdgeNodePool": {
+            "$ref": "./examples/DeleteEdgeNodePool.json"
+          }
+        },
+        "tags": [
+          "EdgeNodePool"
+        ],
+        "description": "Delete a EdgeNodePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "Name of the node pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EdgeNodePoolProperties": {
+      "type": "object",
+      "description": "Node pool properties",
+      "properties": {
+        "poolType": {
+          "type": "string",
+          "description": "Pool type",
+          "enum": [
+            "Mariner",
+            "WindowsIOT"
+          ],
+          "x-ms-enum": {
+            "name": "PoolTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "poolProperties": {
+          "type": "array",
+          "description": "Properties of the pool",
+          "items": {
+            "$ref": "#/definitions/NodesPropertyForTheCategory"
+          },
+          "x-ms-identifiers": []
+        },
+        "allowedNodeCategoriesUid": {
+          "type": "array",
+          "description": "Allowed node categories for the pool based on the pool type",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Aggregated status of the node pool",
+          "enum": [
+            "Healthy",
+            "NeedAttention"
+          ],
+          "x-ms-enum": {
+            "name": "StatusEnum",
+            "modelAsString": true
+          }
+        },
+        "nodeList": {
+          "type": "array",
+          "description": "ArmIds of the nodes",
+          "items": {
+            "type": "string",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "k8sClusterList": {
+          "type": "array",
+          "description": "ArmIds of the k8s configured using the Node Pool's Edge devices",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the storage container.",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Accepted",
+            "Deleting",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EdgeNodePoolResource": {
+      "type": "object",
+      "description": "An edge node pool resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeNodePoolProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EdgeNodePoolResourceListResult": {
+      "type": "object",
+      "description": "The response of a EdgeNodePoolResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeNodePoolResource items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeNodePoolResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeNodePoolResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the EdgeNodePoolResource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeNodePoolResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EdgeNodePoolResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the EdgeNodePoolResource.",
+      "properties": {
+        "poolType": {
+          "type": "string",
+          "description": "Pool type",
+          "enum": [
+            "Mariner",
+            "WindowsIOT"
+          ],
+          "x-ms-enum": {
+            "name": "PoolTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "poolProperties": {
+          "type": "array",
+          "description": "Properties of the pool",
+          "items": {
+            "$ref": "#/definitions/NodesPropertyForTheCategory"
+          },
+          "x-ms-identifiers": []
+        },
+        "allowedNodeCategoriesUid": {
+          "type": "array",
+          "description": "Allowed node categories for the pool based on the pool type",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Aggregated status of the node pool",
+          "enum": [
+            "Healthy",
+            "NeedAttention"
+          ],
+          "x-ms-enum": {
+            "name": "StatusEnum",
+            "modelAsString": true
+          }
+        },
+        "nodeList": {
+          "type": "array",
+          "description": "ArmIds of the nodes",
+          "items": {
+            "type": "string"
+          }
+        },
+        "k8sClusterList": {
+          "type": "array",
+          "description": "ArmIds of the k8s configured using the Node Pool's Edge devices",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NodeModelDetails": {
+      "type": "object",
+      "description": "Allowed Node Categories for this Pool, based on the pool type",
+      "properties": {
+        "manufacturer": {
+          "type": "string"
+        },
+        "modelName": {
+          "type": "string"
+        }
+      }
+    },
+    "NodesPropertyForTheCategory": {
+      "type": "object",
+      "description": "Node property for the category",
+      "properties": {
+        "edgeNodeCategoryUid": {
+          "type": "string"
+        },
+        "nodeModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeModelDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "coreCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "API versions",
+      "enum": [
+        "2024-03-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-03-15-preview",
+            "value": "2024-03-15-preview",
+            "description": "2024-03-15-preview version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -9,8 +9,10 @@ import "./occurrenceroutes.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
 
 namespace Microsoft.ComputeSchedule;
 
@@ -39,7 +41,7 @@ model ScheduledActionsSchedule {
   deadlineType?: DeadlineType;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
     {
@@ -91,7 +93,7 @@ model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
@@ -106,18 +108,18 @@ model ResourceDetachRequest {
 @doc("Request model perform a resource operation in a list of resources")
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The request to cancel an occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources the cancellation should act on. If no resource is passed in the list, Scheduled Action will cancel the occurrence for all resources.")
   resourceIds: Array<ValidScheduledActionResourceId>;
 }
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@added(Microsoft.ComputeSchedule.Versions.`2024-08-01-preview`)
 @doc("The status of a resource after a resource level operation was performed")
 model ResourceStatus {
   @doc("The arm identifier of the resource")
@@ -137,7 +139,7 @@ model ResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
@@ -191,7 +193,7 @@ model ScheduledActionResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 

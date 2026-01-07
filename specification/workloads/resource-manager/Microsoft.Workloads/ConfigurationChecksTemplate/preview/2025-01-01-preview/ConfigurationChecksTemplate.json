@@ -1,0 +1,887 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Workloads Client",
+    "version": "2025-01-01-preview",
+    "description": "Configuration checks template management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ConfigurationChecksTemplates"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Workloads/configurationChecksTemplates": {
+      "get": {
+        "operationId": "ConfigurationChecksTemplates_ListByResourceGroup",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "List ConfigurationChecksTemplate resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List configuration check templates at resource group level": {
+            "$ref": "./examples/ConfigurationChecksTemplates_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Workloads/configurationChecksTemplates/{configurationChecksTemplateName}": {
+      "get": {
+        "operationId": "ConfigurationChecksTemplates_Get",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "Get a ConfigurationChecksTemplate",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "configurationChecksTemplateName",
+            "in": "path",
+            "description": "The name of the configuration check template resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation on configuration check template": {
+            "$ref": "./examples/ConfigurationChecksTemplates_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ConfigurationChecksTemplates_Update",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "Update configuration checks template resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "configurationChecksTemplateName",
+            "in": "path",
+            "description": "The name of the configuration check template resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Request body to update the configuration check template resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationChecksTemplate"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Configuration Checks Template": {
+            "$ref": "./examples/ConfigurationChecksTemplates_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Workloads/configurationChecksTemplates/{configurationChecksTemplateName}/onDemandEvaluation": {
+      "post": {
+        "operationId": "ConfigurationChecksTemplates_OnDemandEvaluation",
+        "tags": [
+          "ConfigurationChecksTemplates"
+        ],
+        "description": "Evaluate the configuration check template resource on demand.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "configurationChecksTemplateName",
+            "in": "path",
+            "description": "The name of the configuration check template resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluate Configuration Checks Template On-Demand": {
+            "$ref": "./examples/ConfigurationChecksTemplates_OnDemandEvaluation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Workloads/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckConfiguration": {
+      "type": "object",
+      "description": "Schema for check configuration for allowing customization.",
+      "properties": {
+        "checkId": {
+          "type": "string",
+          "description": "The unique identifier of the check defined in check definition."
+        },
+        "applicableTo": {
+          "type": "array",
+          "description": "Represents the check applicability on the list of roles, component level resources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originType": {
+          "$ref": "#/definitions/CheckOriginType",
+          "description": "The origin of how the check applied at the role level in the virtual instance.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CheckExecutionStatus",
+          "description": "The status of the check execution."
+        },
+        "inputParameters": {
+          "type": "array",
+          "description": "List of input parameters to be used in the check.",
+          "items": {
+            "$ref": "#/definitions/SharedParameters"
+          },
+          "x-ms-identifiers": []
+        },
+        "outputParameters": {
+          "type": "array",
+          "description": "List of output parameters to be used in the check.",
+          "items": {
+            "$ref": "#/definitions/OutputParameters"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "checkId",
+        "status"
+      ]
+    },
+    "CheckEvaluationCondition": {
+      "type": "string",
+      "description": "Condition to be used to evaluate the output and customize the check.",
+      "enum": [
+        "eq",
+        "ne",
+        "gt",
+        "lt",
+        "ge",
+        "le",
+        "contains",
+        "notContains",
+        "startsWith",
+        "endsWith",
+        "in",
+        "notIn"
+      ],
+      "x-ms-enum": {
+        "name": "CheckEvaluationCondition",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equals",
+            "value": "eq",
+            "description": "Check output value must equal defined value."
+          },
+          {
+            "name": "NotEquals",
+            "value": "ne",
+            "description": "Check output value must not equal defined value."
+          },
+          {
+            "name": "GreaterThan",
+            "value": "gt",
+            "description": "Check output value must be greater than defined value."
+          },
+          {
+            "name": "LessThan",
+            "value": "lt",
+            "description": "Check output value must be less than defined value."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "ge",
+            "description": "Check output value must be greater than or equal to defined value."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "le",
+            "description": "Check output value must be less than or equal to defined value."
+          },
+          {
+            "name": "Contains",
+            "value": "contains",
+            "description": "Check output value must contain defined value."
+          },
+          {
+            "name": "NotContains",
+            "value": "notContains",
+            "description": "Check output value must not contain defined value."
+          },
+          {
+            "name": "StartsWith",
+            "value": "startsWith",
+            "description": "Check output value must start with defined value."
+          },
+          {
+            "name": "EndsWith",
+            "value": "endsWith",
+            "description": "Check output value must end with defined value."
+          },
+          {
+            "name": "In",
+            "value": "in",
+            "description": "Check output value must be in defined value."
+          },
+          {
+            "name": "NotIn",
+            "value": "notIn",
+            "description": "Check output value must not be in defined value."
+          }
+        ]
+      }
+    },
+    "CheckExecutionStatus": {
+      "type": "string",
+      "description": "The status of the check execution.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CheckExecutionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The execution of the check is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The execution of the check is disabled."
+          }
+        ]
+      }
+    },
+    "CheckOriginType": {
+      "type": "string",
+      "description": "Defines the origin of how the check is applied at the role level in the virtual instance.",
+      "enum": [
+        "Manual",
+        "TemplateDefinition"
+      ],
+      "x-ms-enum": {
+        "name": "CheckOriginType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual application of the check."
+          },
+          {
+            "name": "TemplateDefinition",
+            "value": "TemplateDefinition",
+            "description": "Check applied as per template definition"
+          }
+        ]
+      }
+    },
+    "ChecksConfigurationUpdateRequest": {
+      "type": "object",
+      "description": "Defines the configuration for the template properties.",
+      "properties": {
+        "components": {
+          "type": "array",
+          "description": "List of components managed at the workload level.",
+          "items": {
+            "$ref": "#/definitions/WorkloadComponents"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonChecks": {
+          "type": "array",
+          "description": "List of common checks to be executed for all the components (or) at parent resource level.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
+        }
+      }
+    },
+    "Configuration": {
+      "type": "object",
+      "description": "Defines the configuration for the template properties.",
+      "properties": {
+        "workloadType": {
+          "type": "string",
+          "description": "The type of workload for which the checks are executed. Referenced from VI resource.",
+          "readOnly": true
+        },
+        "environmentType": {
+          "$ref": "#/definitions/EnvironmentType",
+          "description": "The type of environment for which the checks are executed. Referenced from VI resource.",
+          "readOnly": true
+        },
+        "components": {
+          "type": "array",
+          "description": "List of components managed at the workload level.",
+          "items": {
+            "$ref": "#/definitions/WorkloadComponents"
+          },
+          "x-ms-identifiers": []
+        },
+        "commonChecks": {
+          "type": "array",
+          "description": "List of common checks to be executed for all the components (or) at parent resource level.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
+        }
+      }
+    },
+    "ConfigurationChecksTemplate": {
+      "type": "object",
+      "description": "Configuration checks template resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationChecksTemplateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConfigurationChecksTemplateListResult": {
+      "type": "object",
+      "description": "The response of a ConfigurationChecksTemplate list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConfigurationChecksTemplate items on this page",
+          "items": {
+            "$ref": "#/definitions/ConfigurationChecksTemplate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConfigurationChecksTemplateProperties": {
+      "type": "object",
+      "description": "Defines the properties of the configuration checks template.",
+      "properties": {
+        "executionInterval": {
+          "type": "string",
+          "description": "The interval at which the checks are executed."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConfigurationChecksTemplateProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration",
+          "description": "The configurations for the template."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Represents whether the checks template was generated by platform or authored by the customer.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC).",
+          "readOnly": true
+        },
+        "errors": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Represents errors encountered on the configuration checks template resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "executionInterval",
+        "configuration"
+      ]
+    },
+    "ConfigurationChecksTemplatePropertiesUpdateRequest": {
+      "type": "object",
+      "description": "Defines the properties to be updated in the configuration checks template.",
+      "properties": {
+        "configuration": {
+          "$ref": "#/definitions/ChecksConfigurationUpdateRequest",
+          "description": "The configurations for the template."
+        }
+      }
+    },
+    "ConfigurationChecksTemplateProvisioningState": {
+      "type": "string",
+      "description": "Represents the provisioning states of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress",
+        "Deleted",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationChecksTemplateProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Provisioning has succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning has failed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Provisioning in progress."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Provisioning has deleted resources."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning has been canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ConfigurationChecksTemplateUpdateRequest": {
+      "type": "object",
+      "description": "Defines the request body for updating the properties of the configuration checks template.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationChecksTemplatePropertiesUpdateRequest",
+          "description": "Represents the properties to be updated in the configuration checks template."
+        }
+      }
+    },
+    "DataType": {
+      "type": "string",
+      "description": "The data type.",
+      "enum": [
+        "String",
+        "Integer",
+        "Long",
+        "Boolean",
+        "Float",
+        "Double"
+      ],
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String datatype."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "Integer datatype."
+          },
+          {
+            "name": "Long",
+            "value": "Long",
+            "description": "Long datatype."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean datatype."
+          },
+          {
+            "name": "Float",
+            "value": "Float",
+            "description": "Float datatype."
+          },
+          {
+            "name": "Double",
+            "value": "Double",
+            "description": "Double datatype."
+          }
+        ]
+      }
+    },
+    "EnvironmentType": {
+      "type": "string",
+      "description": "The type of environment for which the checks are executed.",
+      "enum": [
+        "Production",
+        "NonProduction"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "Environment is production."
+          },
+          {
+            "name": "NonProduction",
+            "value": "NonProduction",
+            "description": "Environment is non production."
+          }
+        ]
+      }
+    },
+    "OutputParameters": {
+      "type": "object",
+      "description": "The model for list of output parameters to be used in the check.",
+      "properties": {
+        "condition": {
+          "$ref": "#/definitions/CheckEvaluationCondition",
+          "description": "Condition to be used to evaluate the output and customize the check."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the property.",
+          "readOnly": true
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Data type of the value.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the property.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Default (or) customized value to be used in the check."
+        }
+      },
+      "required": [
+        "condition",
+        "name",
+        "dataType",
+        "unit",
+        "value"
+      ]
+    },
+    "RoleConfiguration": {
+      "type": "object",
+      "description": "Schema for role configuration including checks and resources.",
+      "properties": {
+        "roleName": {
+          "type": "string",
+          "description": "Name of the role."
+        },
+        "checks": {
+          "type": "array",
+          "description": "List of checks to be executed for the role.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
+        }
+      },
+      "required": [
+        "roleName",
+        "checks"
+      ]
+    },
+    "SharedParameters": {
+      "type": "object",
+      "description": "Schema for shared parameters to use in 1P resources checks configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the property.",
+          "readOnly": true
+        },
+        "dataType": {
+          "$ref": "#/definitions/DataType",
+          "description": "Data type of the value.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit of the property.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "description": "Default (or) customized value to be used in the check."
+        }
+      },
+      "required": [
+        "name",
+        "dataType",
+        "unit",
+        "value"
+      ]
+    },
+    "WorkloadComponents": {
+      "type": "object",
+      "description": "Defines the components that are being managed at the workload level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the component."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the component."
+        },
+        "checks": {
+          "type": "array",
+          "description": "List of checks to be executed for the role.",
+          "items": {
+            "$ref": "#/definitions/CheckConfiguration"
+          },
+          "x-ms-identifiers": [
+            "checkId"
+          ]
+        },
+        "roles": {
+          "type": "array",
+          "description": "List of roles managed at the component level.",
+          "items": {
+            "$ref": "#/definitions/RoleConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "roles"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "title": "Pipelines_Get",
+  "operationId": "Pipelines_Get",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "pipelineName": "data-processing-pipeline"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "state": "Enabled",
+          "recurrence": {
+            "type": "Periodic",
+            "periodicity": "01:00:00",
+            "timeout": "03:00:00"
+          },
+          "activities": [
+            {
+              "name": "data-processing-activity",
+              "job": {
+                "type": "Reference",
+                "name": "data-processing-job"
+              },
+              "policy": {
+                "timeout": "03:00:00"
+              }
+            },
+            {
+              "name": "dataquality-validation-activity",
+              "job": {
+                "type": "Reference",
+                "name": "dataquality-validation-job"
+              },
+              "policy": {
+                "timeout": "02:00:00"
+              }
+            },
+            {
+              "name": "kusto-publish-activity",
+              "job": {
+                "type": "Reference",
+                "name": "kusto-publish-job"
+              },
+              "policy": {
+                "timeout": "01:00:00"
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace/pipelines/data-processing-pipeline",
+        "name": "data-processing-pipeline",
+        "type": "Microsoft.ResourceBuilder/workspaces/pipelines"
+      }
+    }
+  }
+}

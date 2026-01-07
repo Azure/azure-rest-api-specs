@@ -2,7 +2,6 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -14,7 +13,12 @@ enum Versions {
   /**
    * The 2025-03-21-preview API version.
    */
-  v2_preview: "2025-03-21-preview",
+  v2025_03_21_preview: "2025-03-21-preview",
+
+  /**
+   * The 2025-03-21 API version.
+   */
+  v2025_03_21: "2025-03-21",
 }
 
 /**
@@ -156,13 +160,13 @@ union ResourceEncryptionType {
   /**
    * Microsoft managed keys (Default)
    */
-  `Microsoft-managed keys (MMK)`: "Microsoft-managed keys (MMK)",
+  "Microsoft-managed keys (MMK)",
 
   /**
    * Customer managed keys
    * (CMK) - Only UserAssigned identity is supported
    */
-  `Customer-managed keys (CMK)`: "Customer-managed keys (CMK)",
+  "Customer-managed keys (CMK)",
 }
 
 /**
@@ -259,7 +263,7 @@ model UserDetails {
   /**
    * User Email
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "This needs to be a secret"
-  @extension("x-ms-secret", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Mark as @secret if this content should be kept private."
+  @OpenAPI.extension("x-ms-secret", true)
   email: string;
 }

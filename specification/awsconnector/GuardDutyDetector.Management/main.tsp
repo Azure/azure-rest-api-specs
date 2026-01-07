@@ -75,7 +75,7 @@ model AwsGuardDutyDetectorProperties {
   enable?: boolean;
 
   @doc("Property features")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   features?: CFNFeatureConfiguration[];
 
   @doc("Property findingPublishingFrequency")
@@ -85,7 +85,7 @@ model AwsGuardDutyDetectorProperties {
   id?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: TagItem[];
 }
 
@@ -112,7 +112,7 @@ model CFNDataSourceConfigurations {
 @doc("Definition of CFNFeatureConfiguration")
 model CFNFeatureConfiguration {
   @doc("Property additionalConfiguration")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   additionalConfiguration?: CFNFeatureAdditionalConfiguration[];
 
   @doc("Property name")

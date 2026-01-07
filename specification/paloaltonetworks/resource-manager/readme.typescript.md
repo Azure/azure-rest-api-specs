@@ -6,22 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-paloaltonetworksngfw"
-  output-folder: "$(typescript-sdks-folder)/sdk/paloaltonetworksngfw/arm-paloaltonetworksngfw"
+  package-name: "@azure/arm-PaloAltoNetworks.Cloudngfw"
+  output-folder: "$(typescript-sdks-folder)/sdk/PaloAltoNetworks.Cloudngfw/arm-PaloAltoNetworks.Cloudngfw"
   payload-flattening-threshold: 1
   generate-metadata: true
-
-directive:
-  - from: PaloAltoNetworks.Cloudngfw.json
-    where: $.paths
-    transform: >
-      for (const pathKey in $) {
-        const path = $[pathKey];
-        for (const methodKey in path) {
-          const method = path[methodKey];
-          if (method['x-ms-pageable'] && (method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listAppIds' || method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listCountries' || method['x-ms-pageable']['operationName'] === 'LocalRulestacks_listPredefinedUrlCategories')) {
-            delete method['x-ms-pageable'];
-          }
-        }
-      }
 ```

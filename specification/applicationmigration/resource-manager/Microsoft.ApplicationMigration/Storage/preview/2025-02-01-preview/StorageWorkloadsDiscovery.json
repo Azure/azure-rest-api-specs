@@ -1,0 +1,1757 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ApplicationMigration management service for storage workloads",
+    "version": "2025-02-01-preview",
+    "description": "The Microsoft.ApplicationMigration Rest API spec for Storage workloads.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "StorageSites"
+    },
+    {
+      "name": "FileShares"
+    },
+    {
+      "name": "Agents"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ApplicationMigration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApplicationMigration/StorageSites": {
+      "get": {
+        "operationId": "StorageSites_ListBySubscription",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Lists the StorageSites resource in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageSiteList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/StorageSites_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites": {
+      "get": {
+        "operationId": "StorageSites_ListByResourceGroup",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Lists the StorageSites resource in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageSiteList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/StorageSites_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}": {
+      "get": {
+        "operationId": "StorageSites_Get",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Gets the StorageSites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_Get_MaximumSet": {
+            "$ref": "./examples/StorageSites_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageSites_CreateOrUpdate",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Puts the StorageSites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The machines to add to the assessment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageSite' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageSite"
+            }
+          },
+          "201": {
+            "description": "Resource 'StorageSite' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageSite"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/StorageSites_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StorageSites_Update",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Patch the StorageSites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteTagsPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageSite"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_Update_MaximumSet": {
+            "$ref": "./examples/StorageSites_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "StorageSites_Delete",
+        "tags": [
+          "StorageSites"
+        ],
+        "description": "Deletes the StorageSites resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageSites_Delete_MaximumSet": {
+            "$ref": "./examples/StorageSites_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}/FileShares": {
+      "get": {
+        "operationId": "FileShares_ListBySite",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Lists the FileShares resource in StorageSites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileShareList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_ListBySite_MaximumSet": {
+            "$ref": "./examples/FileShares_ListBySite_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}/FileShares/{shareName}": {
+      "get": {
+        "operationId": "FileShares_Get",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Gets the FileShares resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of FileShare",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_Get_MaximumSet": {
+            "$ref": "./examples/FileShares_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FileShares_CreateOrUpdate",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Puts the FileShares resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of FileShare",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The machines to add to the assessment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FileShare' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "201": {
+            "description": "Resource 'FileShare' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/FileShares_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "FileShares_Update",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Patch the FileShares resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of FileShare",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "FileShare patch payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShareResourcePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_Update_MaximumSet": {
+            "$ref": "./examples/FileShares_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FileShares_Delete",
+        "tags": [
+          "FileShares"
+        ],
+        "description": "Deletes the FileShares resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of FileShare",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileShares_Delete_MaximumSet": {
+            "$ref": "./examples/FileShares_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}/agents": {
+      "get": {
+        "operationId": "Agents_ListBySite",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Lists the Agents resource in StorageSites.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_ListBySite_MaximumSet": {
+            "$ref": "./examples/Agents_ListBySite_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}/agents/{agentName}": {
+      "get": {
+        "operationId": "Agents_Get",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Gets the Agents resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of agent",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Get_MaximumSet": {
+            "$ref": "./examples/Agents_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Agents_CreateOrUpdate",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Puts the Agents resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of agent",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating agent.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Agent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Resource 'Agent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Agents_Update",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Patch the Agents resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of agent",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Agents patch payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Update_MaximumSet": {
+            "$ref": "./examples/Agents_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Agents_Delete",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Deletes the Agents resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of agent",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Delete_MaximumSet": {
+            "$ref": "./examples/Agents_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/StorageSites/{siteName}/agents/{agentName}/refresh": {
+      "post": {
+        "operationId": "Agents_TriggerRefresh",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Trigger Refresh action",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of Site",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of agent",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_TriggerRefresh_MaximumSet": {
+            "$ref": "./examples/Agents_TriggerRefresh_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Agent": {
+      "type": "object",
+      "description": "The Agent resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentHealthProperties": {
+      "type": "object",
+      "description": "Class for agent health properties.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of the agent."
+        },
+        "lastHeartBeatUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last heartbeat time of the agent in UTC."
+        }
+      }
+    },
+    "AgentList": {
+      "type": "object",
+      "description": "List of Agents.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Agent items on this page",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentProperties": {
+      "type": "object",
+      "description": "Agent properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/AgentSpnProperties",
+          "description": "Service principal identity details used by agent for communication to the service.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "migrateApplianceName": {
+          "type": "string",
+          "description": "Name of the appliance on which agent is running.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        },
+        "fabricSiteName": {
+          "type": "string",
+          "description": "Name of the fabric site.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "servicePrincipalIdentityDetails",
+        "migrateApplianceName",
+        "fabricSiteName"
+      ]
+    },
+    "AgentResourcePatch": {
+      "type": "object",
+      "description": "Object containing tags updates for patch operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentResourcePatchProperties",
+          "description": "The Agent properties resource definition."
+        }
+      }
+    },
+    "AgentResourcePatchProperties": {
+      "type": "object",
+      "description": "Agent resource patch properties",
+      "properties": {
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        }
+      }
+    },
+    "AgentSpnProperties": {
+      "type": "object",
+      "description": "Class for agent spn properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with Azure services."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with Azure services."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with Azure services."
+        }
+      }
+    },
+    "AzureResourceProperties": {
+      "type": "object",
+      "description": "Common properties for all azure tracked and proxy resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ColocatedShare": {
+      "type": "object",
+      "description": "Model to represent a co-located share.",
+      "properties": {
+        "shareId": {
+          "type": "string",
+          "description": "The co-located Share id."
+        }
+      },
+      "required": [
+        "shareId"
+      ]
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The error ID."
+        },
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "The summarized error message."
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "The account ID used to login."
+        },
+        "message": {
+          "type": "string",
+          "description": "The detailed error message."
+        },
+        "possibleCause": {
+          "type": "string",
+          "description": "The error possible cause."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "Gets description of the checkpoint."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Gets description of the severity."
+        },
+        "updatedTimeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this error was last updated."
+        }
+      }
+    },
+    "FileShare": {
+      "type": "object",
+      "description": "The StorageDatabase resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileShareProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FileShareList": {
+      "type": "object",
+      "description": "List of FilesShares.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FileShare items on this page",
+          "items": {
+            "$ref": "#/definitions/FileShare"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FileShareProperties": {
+      "type": "object",
+      "description": "FileShare properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "shareId": {
+          "type": "string",
+          "description": "The Share ID."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The Server name."
+        },
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                },
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/machines"
+                },
+                {
+                  "type": "Microsoft.OffAzure/hyperVSites/machines"
+                }
+              ]
+            }
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "The file share name."
+        },
+        "protocolType": {
+          "$ref": "#/definitions/ProtocolType",
+          "description": "The Protocol Type for the file share."
+        },
+        "protocolVersion": {
+          "type": "array",
+          "description": "The Protocol Version",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fileShareEstimatedVolSizeInGb": {
+          "type": "number",
+          "format": "double",
+          "description": "FileShare Estimated Volume Size in GB."
+        },
+        "fileShareEstimatedSizeInGb": {
+          "type": "number",
+          "format": "double",
+          "description": "FileShare Estimated Size in GB."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "volume": {
+          "type": "string",
+          "description": "The volume name."
+        },
+        "volumeId": {
+          "type": "string",
+          "description": "The volume ID."
+        },
+        "colocatedShares": {
+          "type": "array",
+          "description": "Co-located shares on the same volume.",
+          "items": {
+            "$ref": "#/definitions/ColocatedShare"
+          },
+          "x-ms-identifiers": [
+            "shareId"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "shareId",
+        "serverName"
+      ]
+    },
+    "FileShareResourcePatch": {
+      "type": "object",
+      "description": "FileShare properties",
+      "properties": {
+        "shareId": {
+          "type": "string",
+          "description": "The Share ID."
+        },
+        "serverName": {
+          "type": "string",
+          "description": "The Server name."
+        },
+        "machineArmIds": {
+          "type": "array",
+          "description": "discovery Machine Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/serverSites/machines"
+                },
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/machines"
+                },
+                {
+                  "type": "Microsoft.OffAzure/hyperVSites/machines"
+                }
+              ]
+            }
+          }
+        },
+        "fileShareName": {
+          "type": "string",
+          "description": "The file share name."
+        },
+        "protocolType": {
+          "$ref": "#/definitions/ProtocolType",
+          "description": "The Protocol Type for the file share."
+        },
+        "protocolVersion": {
+          "type": "array",
+          "description": "The Protocol Version",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fileShareEstimatedVolSizeInGb": {
+          "type": "number",
+          "format": "double",
+          "description": "FileShare Estimated Volume Size in GB."
+        },
+        "fileShareEstimatedSizeInGb": {
+          "type": "number",
+          "format": "double",
+          "description": "FileShare Estimated Size in GB."
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of errors.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of errors."
+        },
+        "volume": {
+          "type": "string",
+          "description": "The volume name."
+        },
+        "volumeId": {
+          "type": "string",
+          "description": "The volume ID."
+        },
+        "colocatedShares": {
+          "type": "array",
+          "description": "Co-located shares on the same volume.",
+          "items": {
+            "$ref": "#/definitions/ColocatedShare"
+          },
+          "x-ms-identifiers": [
+            "shareId"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FileShareResourcePatchProperties": {
+      "type": "object",
+      "description": "FileShare Server properties",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileShareResourcePatch",
+          "description": "FileShare resource patch properties object."
+        }
+      }
+    },
+    "ProtocolType": {
+      "type": "string",
+      "description": "The protocol Type for the file share.",
+      "enum": [
+        "Unknown",
+        "SMB",
+        "NFS"
+      ],
+      "x-ms-enum": {
+        "name": "ProtocolType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown protocol type."
+          },
+          {
+            "name": "SMB",
+            "value": "SMB",
+            "description": "Server Message Block Protocol."
+          },
+          {
+            "name": "NFS",
+            "value": "NFS",
+            "description": "Network File System Protocol."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown provisioning state."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded provisioning state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed provisioning state."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled provisioning state."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating provisioning state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting provisioning state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating provisioning state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SiteTagsPatch": {
+      "type": "object",
+      "description": "The Site Tags patch resource definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StorageSite": {
+      "type": "object",
+      "description": "The StorageSite resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageSiteProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageSiteList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageSite items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageSiteProperties": {
+      "type": "object",
+      "description": "Storage Site properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The mapped master Site Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/masterSites"
+              }
+            ]
+          }
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The mapped migrate project Id.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "masterSiteId",
+        "migrateProjectId"
+      ]
+    },
+    "StorageSitesResourcePatch": {
+      "type": "object",
+      "description": "Object containing tags updates for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/StorageSiteProperties",
+          "description": "The StorageSites resource definition."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

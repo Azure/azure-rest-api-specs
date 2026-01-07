@@ -1,15 +1,14 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
-    "environmentId": "env-stgcczjp2j3",
-    "organizationName": "myOrganization",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "organizationName": "myOrganization",
+    "environmentId": "env-stgcczjp2j3"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": null,
         "value": [
           {
             "id": "lsrc-stgczkq22z",
@@ -23,7 +22,6 @@
               },
               "spec": {
                 "name": "Stream Governance Package",
-                "cloud": "GCP",
                 "environment": {
                   "id": "env-stgccnk2mgd",
                   "related": "https://api.stag.cpdev.cloud/org/v2/environments/env-stgccnk2mgd",
@@ -35,17 +33,17 @@
                   "id": "sgreg-7",
                   "related": "https://api.stag.cpdev.cloud/srcm/v2/regions/sgreg-7",
                   "resourceName": "crn://confluent.cloud/schema-registry-region=sgreg-7"
-                }
+                },
+                "cloud": "GCP"
               },
               "status": {
                 "phase": "PROVISIONED"
               }
             }
           }
-        ]
+        ],
+        "nextLink": null
       }
     }
-  },
-  "operationId": "Organization_ListSchemaRegistryClusters",
-  "title": "Organization_ListSchemaRegistryClusters"
+  }
 }

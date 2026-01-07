@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "rgRoutePolicies",
+    "api-version": "2022-01-15-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": "RPexample",
+              "conditions": [
+                {
+                  "sequenceNumber": 7,
+                  "match": {
+                    "accessControlListIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/accessControlLists/accessControlListName"
+                    ],
+                    "ipCommunityListIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/ipCommunityLists/ipCommunityListName"
+                    ],
+                    "ipExtendedCommunityListIds": [
+                      ""
+                    ]
+                  },
+                  "action": {
+                    "action": "allow",
+                    "set": {
+                      "set": {
+                        "ipCommunityListIds": [
+                          "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/ipCommunityLists/ipCommunityListName"
+                        ],
+                        "ipExtendedCommunityListIds": [
+                          ""
+                        ]
+                      }
+                    }
+                  },
+                  "annotation": ""
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "annotation": "example routepolicy"
+            },
+            "tags": {
+              "key8254": ""
+            },
+            "location": "EastUS",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
+            "name": "routePolicyName",
+            "type": "microsoft.managednetworkfabric/routePolicies",
+            "systemData": {
+              "createdBy": "d1bd24c7-b27f-477e-86dd-939e107873d7",
+              "createdByType": "Application",
+              "createdAt": "2022-09-16T06:09:38.603Z",
+              "lastModifiedBy": "email@address.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2022-09-16T06:19:40.603Z"
+            }
+          }
+        ],
+        "nextLink": "a"
+      }
+    }
+  }
+}

@@ -6,11 +6,11 @@ For new Resource Provider. It is highly recommended to onboard Azure CLI extensi
 
 ``` yaml $(az) && $(target-mode) != 'core'
 az:
-    extensions: oep
-    namespace: azure.mgmt.oep
-    package-name: azure-mgmt-oep
-az-output-folder: $(azure-cli-extension-folder)/src/oep
-python-sdk-output-folder: "$(az-output-folder)/azext_oep/vendored_sdks/oep"
+    extensions: meds
+    namespace: azure.mgmt.meds
+    package-name: azure-mgmt-meds
+az-output-folder: $(azure-cli-extension-folder)/src/meds
+python-sdk-output-folder: "$(az-output-folder)/azext_meds/vendored_sdks/meds"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
@@ -20,9 +20,9 @@ python-sdk-output-folder: "$(az-output-folder)/azext_oep/vendored_sdks/oep"
 This is for command modules that already in azure cli main repo. 
 ``` yaml $(az) && $(target-mode) == 'core'
 az:
-  extensions: oep
-  namespace: azure.mgmt.oep
-  package-name: azure-mgmt-oep
-az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/oep
-python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/oep"
+  extensions: meds
+  namespace: azure.mgmt.meds
+  package-name: azure-mgmt-meds
+az-output-folder: $(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/meds
+python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/meds"
 ``` 

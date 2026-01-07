@@ -25,12 +25,7 @@ enum Versions {
   /** 2024-11-18 preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v1_preview)
-  v2024_11_18_preview: "2024-11-18-preview",
-
-  /** 2025-06-01 version */
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v1_preview)
-  v2025_06_01: "2025-06-01",
+  v2021_10_01_preview: "2024-11-18-preview",
 }
 
 @doc("User details for an organization")
@@ -91,7 +86,6 @@ model OrganizationProperties is BaseResourceProperties {
   partnerProperties?: PartnerProperties;
 }
 
-@doc("The resource model definition for an Azure Organization")
 model OrganizationResource
   is Azure.ResourceManager.TrackedResource<OrganizationProperties> {
   @key("organizationName")
@@ -112,14 +106,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    OrganizationResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      OrganizationResource,
-      OrganizationProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<OrganizationResource, OrganizationProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<OrganizationResource>;
   listByResourceGroup is ArmResourceListByParent<OrganizationResource>;
   listBySubscription is ArmListBySubscription<OrganizationResource>;

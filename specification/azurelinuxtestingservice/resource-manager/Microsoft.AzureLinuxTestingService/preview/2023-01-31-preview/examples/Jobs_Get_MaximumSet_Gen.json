@@ -1,0 +1,101 @@
+{
+  "title": "Jobs_Get",
+  "operationId": "Jobs_Get",
+  "parameters": {
+    "api-version": "2023-01-31-preview",
+    "subscriptionId": "BC7AE30F-7480-4B55-86CA-F243AF924107",
+    "resourceGroupName": "rgazurelinuxtestingservice",
+    "jobName": "Job_Three"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobTemplateInstance": {
+            "provisioningState": "Succeeded",
+            "templateTags": [
+              "functional-test"
+            ],
+            "region": [
+              "westus3"
+            ],
+            "vmSize": [
+              "Standard_D4_v4"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "cpu_count_check"
+                ],
+                "caseArea": [
+                  "core"
+                ],
+                "caseCategory": [
+                  "functional"
+                ],
+                "casePriority": [
+                  3
+                ],
+                "caseTags": [],
+                "action": "Include",
+                "testIterations": 1,
+                "retryCount": 0,
+                "useNewEnvironment": true,
+                "ignoreFailure": false
+              }
+            ],
+            "concurrency": 2
+          },
+          "resourceGroupNamePrefix": "alts-rg-",
+          "repos": [],
+          "image": {
+            "type": "vhd",
+            "vhdUrl": "www.azure.com/vhd_url",
+            "vhdGeneration": 1,
+            "vhdArchitecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "jobName": "Job_Three",
+              "caseName": "cpu_count_check",
+              "status": "Succeeded",
+              "message": "spuq",
+              "logUrl": "www.azure.com/log_url",
+              "image": "microsoft-dsvm aml-workstation ubuntu-20-gen2 22.11.09",
+              "vmSize": "Standard_D4_V4",
+              "location": "westus3",
+              "kernelVersion": "20.04",
+              "distroVersion": "7.10  ",
+              "vhdGeneration": "1",
+              "walaVersion": "WALinuxAgent-2.2.20",
+              "extraFields": {},
+              "duration": "1 hour",
+              "startTime": "2023-01-31T17:32:28Z",
+              "endTime": "2023-01-31T18:32:28Z"
+            }
+          ],
+          "duration": "1hr",
+          "logUrl": "www.azure.com/log_url"
+        },
+        "tags": {
+          "functional-test": "this test"
+        },
+        "location": "westus3",
+        "id": "nddfdglrsnasnmbnxkmyrhrt",
+        "name": "Job_Three",
+        "type": "Microsoft.AzureLinuxTestingService/jobTemplates",
+        "systemData": {
+          "createdBy": "oqxy",
+          "createdByType": "User",
+          "createdAt": "2023-01-31T21:52:10.285Z",
+          "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+        }
+      }
+    }
+  }
+}

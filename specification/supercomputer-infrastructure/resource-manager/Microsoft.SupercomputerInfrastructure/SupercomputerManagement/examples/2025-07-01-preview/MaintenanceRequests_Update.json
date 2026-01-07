@@ -1,0 +1,59 @@
+{
+  "title": "MaintenanceRequests_Update",
+  "operationId": "MaintenanceRequests_Update",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup",
+    "supercomputerName": "MySupercomputer",
+    "maintenanceRequestName": "MyMaintenanceRequest",
+    "properties": {
+      "properties": {
+        "state": "Approved"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "description": "Link down, please replace.",
+          "provisioningState": "Succeeded",
+          "maintenanceRequestType": "Unhealthy",
+          "state": "Approved",
+          "unhealthyResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000/links/c7bac46904be785cd0c965bf5659610044f0cdb4cbb02d2ec398dc56648988fd"
+          ],
+          "impactCategory": "EthLinkUnhealthy",
+          "repairedResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000/links/c7bac46904be785cd0c965bf5659610044f0cdb4cbb02d2ec398dc56648988fd"
+          ],
+          "repairCategory": "PowerCycle",
+          "workloadImpactId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Impact/workloadImpacts/ABCDEF",
+          "impactedResources": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/switches/0000-0000-00t0",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/links/c7bac46904be785cd0c965bf5659610044f0cdb4cbb02d2ec398dc56648988fd",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/nodes/012345678"
+          ],
+          "clusterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/clusters/ABC0000000"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.SupercomputerInfrastructure/supercomputers/MySupercomputer/maintenanceRequests/MyMaintenanceRequest",
+        "name": "MyMaintenanceRequest",
+        "type": "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests",
+        "systemData": {
+          "createdBy": "Supercomputer User",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "Supercomputer User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

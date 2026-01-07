@@ -6,6 +6,8 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+import "./back-compatible.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -53,8 +55,8 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+  ...Legacy.ManagedServiceIdentityV4Property;
 }
 
 @armResourceOperations

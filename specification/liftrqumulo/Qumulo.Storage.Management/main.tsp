@@ -1,4 +1,5 @@
 import "./LiftrBase.Storage/main.tsp";
+import "./back-compatible.tsp";
 
 import "@typespec/rest";
 import "@typespec/openapi";
@@ -6,15 +7,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
 using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using LiftrBase.Storage;
-using LiftrBase;
 
 @armProviderNamespace
 @useLibraryNamespace(LiftrBase.Storage)
@@ -27,12 +25,20 @@ namespace Qumulo.Storage;
  */
 enum Versions {
   /**
-   * The 2024-06-19 Stable API version.
+   * The 2024-02-01 Stable API version.
    */
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v2_preview)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2_stable: "2024-06-19",
+
+  /**
+   * The 2025-10-01-preview Preview API version.
+   */
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Storage.Versions.v2025_10_01_preview)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

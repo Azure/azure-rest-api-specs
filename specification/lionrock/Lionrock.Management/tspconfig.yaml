@@ -1,0 +1,55 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/lionrock.json"
+    use-read-only-status-schema: "true"
+  "@azure-tools/typespec-csharp":
+    service-name: "Lionrock"
+    package-dir: "Azure.ResourceManager.Lionrock"
+    namespace: "Azure.ResourceManager.Lionrock"
+    model-namespace: true
+    clear-output-folder: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Lionrock"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/lionrock"
+    package-dir: "armlionrock"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/armlionrock"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-lionrock"
+    namespace: "azure.mgmt.lionrock"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-lionrock"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-lionrock"
+    namespace: "com.azure.resourcemanager.lionrock"
+    service-name: "Lionrock"
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-lionrock"
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-lionrock"
+    package-details:
+      name: "@azure/arm-lionrock"
+    experimental-extensible-enums: true
+    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-lionrock"
+parameters:
+  service-dir:
+    default: "sdk/lionrock"

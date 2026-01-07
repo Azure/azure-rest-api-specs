@@ -86,7 +86,7 @@ model AwsEc2VPCPeeringConnectionProperties {
   peerVpcId?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The ID of the VPC.")

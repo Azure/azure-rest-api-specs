@@ -13,7 +13,7 @@ options:
     arm-types-dir: "{project-root}/../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.StorageDiscovery"
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.StorageDiscovery"
@@ -24,12 +24,12 @@ options:
     service-name: "Storage Discovery"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagediscovery"
     flavor: azure
     package-details:
       name: "@azure/arm-storagediscovery"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagediscovery"
     namespace: "azure.mgmt.storagediscovery"
     flavor: "azure"
     generate-test: true
@@ -46,7 +46,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-powershell":
     service-dir: "src"
-    package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
+    emitter-output-dir: "{output-dir}/{service-dir}/StorageDiscovery/StorageDiscovery.Autorest"
     clear-output-folder: true
     azure: true
     module-version: 1.0.0

@@ -110,12 +110,6 @@
         ],
         "responses": {
           "200": {
-            "description": "Succeeded to update an action request.",
-            "schema": {
-              "$ref": "#/definitions/ActionRequest"
-            }
-          },
-          "201": {
             "description": "Succeeded to create (submit) an action request.",
             "schema": {
               "$ref": "#/definitions/ActionRequest"
@@ -361,8 +355,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[A-Za-z0-9]([A-Za-z0-9_]|([-. ][A-Za-z0-9]))+$"
+      "x-ms-parameter-location": "method"
     },
     "RequestTypeFilter": {
       "name": "requestType",

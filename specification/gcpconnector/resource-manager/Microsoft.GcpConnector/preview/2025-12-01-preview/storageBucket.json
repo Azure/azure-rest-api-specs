@@ -1,0 +1,1103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.GcpConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.GcpConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "StorageBuckets"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GcpConnector/storageBuckets": {
+      "get": {
+        "operationId": "StorageBuckets_ListBySubscription",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "List StorageBucket resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageBucketListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_ListBySubscription": {
+            "$ref": "./examples/StorageBuckets_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/storageBuckets": {
+      "get": {
+        "operationId": "StorageBuckets_ListByResourceGroup",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "List StorageBucket resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageBucketListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_ListByResourceGroup": {
+            "$ref": "./examples/StorageBuckets_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/storageBuckets/{name}": {
+      "get": {
+        "operationId": "StorageBuckets_Get",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "Get a StorageBucket",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of StorageBucket",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageBucket"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_Get": {
+            "$ref": "./examples/StorageBuckets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StorageBuckets_CreateOrReplace",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "Create a StorageBucket. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of StorageBucket",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageBucket"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'StorageBucket' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageBucket"
+            }
+          },
+          "201": {
+            "description": "Resource 'StorageBucket' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/StorageBucket"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_CreateOrReplace": {
+            "$ref": "./examples/StorageBuckets_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "StorageBuckets_Update",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "Update a StorageBucket",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of StorageBucket",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageBucketTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageBucket"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_Update": {
+            "$ref": "./examples/StorageBuckets_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "StorageBuckets_Delete",
+        "tags": [
+          "StorageBuckets"
+        ],
+        "description": "Delete a StorageBucket",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of StorageBucket",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageBuckets_Delete": {
+            "$ref": "./examples/StorageBuckets_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "BucketAccessControl": {
+      "type": "object",
+      "description": "An access-control entry.",
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "description": "The name of the bucket."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain associated with the entity, if any."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address associated with the entity, if any."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        },
+        "entityId": {
+          "type": "string",
+          "description": "The ID for the entity, if any."
+        },
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the access-control entry."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the access-control entry."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of item this is. For bucket access control entries, this is always storage#bucketAccessControl.",
+          "default": "storage#bucketAccessControl"
+        },
+        "projectTeam": {
+          "type": "object",
+          "description": "The project team associated with the entity, if any.",
+          "properties": {
+            "projectNumber": {
+              "type": "string",
+              "description": "The project number."
+            },
+            "team": {
+              "type": "string",
+              "description": "The team."
+            }
+          }
+        },
+        "role": {
+          "type": "string",
+          "description": "The access permission for the entity."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The link to this access-control entry."
+        }
+      }
+    },
+    "BucketProperties": {
+      "type": "object",
+      "description": "Definition of BucketProperties",
+      "properties": {
+        "gcpProperties": {
+          "$ref": "#/definitions/GcpBucketProperties",
+          "description": "GCP Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "gcpProjectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "gcpProjectId": {
+          "type": "string",
+          "description": "GCP Project Id"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Fully qualified resource name of the GCP resource"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "gcpSourceSchema": {
+          "type": "string",
+          "description": "GCP Source Schema"
+        },
+        "gcpRegion": {
+          "type": "string",
+          "description": "GCP Region"
+        },
+        "gcpTags": {
+          "type": "object",
+          "description": "GCP Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "GcpBucketProperties": {
+      "type": "object",
+      "description": "A bucket.",
+      "properties": {
+        "acl": {
+          "type": "array",
+          "description": "Access controls on the bucket.",
+          "items": {
+            "$ref": "#/definitions/BucketAccessControl"
+          }
+        },
+        "autoclass": {
+          "type": "object",
+          "description": "The bucket's Autoclass configuration.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Whether or not Autoclass is enabled on this bucket"
+            },
+            "terminalStorageClass": {
+              "type": "string",
+              "description": "The storage class that objects in the bucket eventually transition to if they are not read for a certain length of time. Valid values are NEARLINE and ARCHIVE."
+            },
+            "terminalStorageClassUpdateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "A date and time in RFC 3339 format representing the time of the most recent update to \\\"terminalStorageClass\\\""
+            },
+            "toggleTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "A date and time in RFC 3339 format representing the instant at which \\\"enabled\\\" was last toggled."
+            }
+          }
+        },
+        "billing": {
+          "type": "object",
+          "description": "The bucket's billing configuration.",
+          "properties": {
+            "requesterPays": {
+              "type": "boolean",
+              "description": "When set to true, Requester Pays is enabled for this bucket."
+            }
+          }
+        },
+        "cors": {
+          "type": "array",
+          "description": "The bucket's Cross-Origin Resource Sharing (CORS) configuration.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "maxAgeSeconds": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The value, in seconds, to return in the  Access-Control-Max-Age header used in preflight responses."
+              },
+              "method": {
+                "type": "array",
+                "description": "The list of HTTP methods on which to include CORS response headers, (GET, OPTIONS, POST, etc) Note: '*' is permitted in the list of methods, and means 'any method'.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "origin": {
+                "type": "array",
+                "description": "The list of Origins eligible to receive CORS response headers. Note: '*' is permitted in the list of origins, and means 'any Origin'.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "responseHeader": {
+                "type": "array",
+                "description": "The list of HTTP headers other than the simple response headers to give permission for the user-agent to share across domains.",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "customPlacementConfig": {
+          "type": "object",
+          "description": "The bucket's custom placement configuration for Custom Dual Regions.",
+          "properties": {
+            "dataLocations": {
+              "type": "array",
+              "description": "The list of regional locations in which data is placed.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "defaultEventBasedHold": {
+          "type": "boolean",
+          "description": "The default value for event-based hold on newly created objects in this bucket. Event-based hold is a way to retain objects indefinitely until an event occurs, signified by the hold's release. After being released, such objects will be subject to bucket-level retention (if any). One sample use case of this flag is for banks to hold loan documents for at least 3 years after loan is paid in full. Here, bucket-level retention is 3 years and the event is loan being paid in full. In this example, these objects will be held intact for any number of years until the event has occurred (event-based hold on the object is released) and then 3 more years after that. That means retention duration of the objects begins from the moment event-based hold transitioned from true to false. Objects under event-based hold cannot be deleted, overwritten or archived until the hold is removed."
+        },
+        "defaultObjectAcl": {
+          "type": "array",
+          "description": "Default access controls to apply to new objects when no ACL is provided.",
+          "items": {
+            "$ref": "#/definitions/ObjectAccessControl"
+          }
+        },
+        "encryption": {
+          "type": "object",
+          "description": "Encryption configuration for a bucket.",
+          "properties": {
+            "defaultKmsKeyName": {
+              "type": "string",
+              "description": "A Cloud KMS key that will be used to encrypt objects inserted into this bucket, if no encryption method is specified."
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the bucket."
+        },
+        "hierarchicalNamespace": {
+          "type": "object",
+          "description": "The bucket's hierarchical namespace configuration.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "When set to true, hierarchical namespace is enabled for this bucket."
+            }
+          }
+        },
+        "iamConfiguration": {
+          "type": "object",
+          "description": "The bucket's IAM configuration.",
+          "properties": {
+            "bucketPolicyOnly": {
+              "type": "object",
+              "description": "The bucket's uniform bucket-level access configuration. The feature was formerly known as Bucket Policy Only. For backward compatibility, this field will be populated with identical information as the uniformBucketLevelAccess field. We recommend using the uniformBucketLevelAccess field to enable and disable the feature.",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "If set, access is controlled only by bucket-level or above IAM policies."
+                },
+                "lockedTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The deadline for changing iamConfiguration.bucketPolicyOnly.enabled from true to false in RFC 3339 format. iamConfiguration.bucketPolicyOnly.enabled may be changed from true to false until the locked time, after which the field is immutable."
+                }
+              }
+            },
+            "publicAccessPrevention": {
+              "type": "string",
+              "description": "The bucket's Public Access Prevention configuration. Currently, 'inherited' and 'enforced' are supported."
+            },
+            "uniformBucketLevelAccess": {
+              "type": "object",
+              "description": "The bucket's uniform bucket-level access configuration.",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "If set, access is controlled only by bucket-level or above IAM policies."
+                },
+                "lockedTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "The deadline for changing iamConfiguration.uniformBucketLevelAccess.enabled from true to false in RFC 3339  format. iamConfiguration.uniformBucketLevelAccess.enabled may be changed from true to false until the locked time, after which the field is immutable."
+                }
+              }
+            }
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the bucket. For buckets, the id and name properties are the same."
+        },
+        "generation": {
+          "type": "string",
+          "description": "The content generation of this object. Used for object versioning.."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of item this is. For buckets, this is always storage#bucket.",
+          "default": "storage#bucket"
+        },
+        "labels": {
+          "type": "object",
+          "description": "User-provided labels, in key/value pairs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lifecycle": {
+          "type": "object",
+          "description": "The bucket's lifecycle configuration. See lifecycle management for more information.",
+          "properties": {
+            "rule": {
+              "type": "array",
+              "description": "A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "type": "object",
+                    "description": "The action to take.",
+                    "properties": {
+                      "storageClass": {
+                        "type": "string",
+                        "description": "Target storage class. Required iff the type of the action is SetStorageClass."
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Type of the action. Currently, only Delete, SetStorageClass, and AbortIncompleteMultipartUpload are supported."
+                      }
+                    }
+                  },
+                  "condition": {
+                    "type": "object",
+                    "description": "The condition(s) under which the action will be taken.",
+                    "properties": {
+                      "age": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Age of an object (in days). This condition is satisfied when an object reaches the specified age."
+                      },
+                      "createdBefore": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when an object is created before midnight of the specified date in UTC."
+                      },
+                      "customTimeBefore": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when the custom time on an object is before this date in UTC."
+                      },
+                      "daysSinceCustomTime": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Number of days elapsed since the user-specified timestamp set on an object. The condition is satisfied if the days elapsed is at least this number. If no custom timestamp is specified on an object, the condition does not apply."
+                      },
+                      "daysSinceNoncurrentTime": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Number of days elapsed since the noncurrent timestamp of an object. The condition is satisfied if the days elapsed is at least this number. This condition is relevant only for versioned objects. The value of the field must be a nonnegative integer. If it's zero, the object version will become eligible for Lifecycle action as soon as it becomes noncurrent."
+                      },
+                      "isLive": {
+                        "type": "boolean",
+                        "description": "Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects."
+                      },
+                      "matchesPattern": {
+                        "type": "string",
+                        "description": "A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the \"Early Access\" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released."
+                      },
+                      "matchesPrefix": {
+                        "type": "array",
+                        "description": "List of object name prefixes. This condition will be satisfied when at least one of the prefixes exactly matches the beginning of the object name.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "matchesStorageClass": {
+                        "type": "array",
+                        "description": "Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, ARCHIVE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "matchesSuffix": {
+                        "type": "array",
+                        "description": "List of object name suffixes. This condition will be satisfied when at least one of the suffixes exactly matches the end of the object name.",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "noncurrentTimeBefore": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "A date in RFC 3339 format with only the date part (for instance, \"2013-01-15\"). This condition is satisfied when the noncurrent time on an object is before this date in UTC. This condition is relevant only for versioned objects."
+                      },
+                      "numNewerVersions": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Relevant only for versioned objects. If the value is N, this condition is satisfied when there are at least N versions (including the live version) newer than this version of the object."
+                      }
+                    }
+                  }
+                }
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer's guide for the authoritative list."
+        },
+        "locationType": {
+          "type": "string",
+          "description": "The type of the bucket location."
+        },
+        "logging": {
+          "type": "object",
+          "description": "The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs.",
+          "properties": {
+            "logBucket": {
+              "type": "string",
+              "description": "The destination bucket where the current bucket's logs should be placed."
+            },
+            "logObjectPrefix": {
+              "type": "string",
+              "description": "A prefix for log object names."
+            }
+          }
+        },
+        "metageneration": {
+          "type": "string",
+          "description": "The metadata generation of this bucket."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the bucket."
+        },
+        "objectRetention": {
+          "type": "object",
+          "description": "The bucket's object retention config.",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "The bucket's object retention mode. Can be Enabled."
+            }
+          }
+        },
+        "owner": {
+          "type": "object",
+          "description": "The owner of the bucket. This is always the project team's owner group.",
+          "properties": {
+            "entity": {
+              "type": "string",
+              "description": "The entity, in the form project-owner-projectId."
+            },
+            "entityId": {
+              "type": "string",
+              "description": "The ID for the entity."
+            }
+          }
+        },
+        "projectNumber": {
+          "type": "string",
+          "description": "The project number of the project the bucket belongs to."
+        },
+        "retentionPolicy": {
+          "type": "object",
+          "description": "The bucket's retention policy. The retention policy enforces a minimum retention time for all objects contained in the bucket, based on their creation time. Any attempt to overwrite or delete objects younger than the retention period will result in a PERMISSION_DENIED error. An unlocked retention policy can be modified or removed from the bucket via a storage.buckets.update operation. A locked retention policy cannot be removed or shortened in duration for the lifetime of the bucket. Attempting to remove or decrease period of a locked retention policy will result in a PERMISSION_DENIED error.",
+          "properties": {
+            "effectiveTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Server-determined value that indicates the time from which policy was enforced and effective. This value is in RFC 3339 format."
+            },
+            "isLocked": {
+              "type": "boolean",
+              "description": "Once locked, an object retention policy cannot be modified."
+            },
+            "retentionPeriod": {
+              "type": "string",
+              "description": "The duration in seconds that objects need to be retained. Retention duration must be greater than zero and less than 100 years. Note that enforcement of retention periods less than a day is not guaranteed. Such periods should only be used for testing purposes."
+            }
+          }
+        },
+        "rpo": {
+          "type": "string",
+          "description": "The Recovery Point Objective (RPO) of this bucket. Set to ASYNC_TURBO to turn on Turbo Replication on a bucket."
+        },
+        "satisfiesPZS": {
+          "type": "boolean",
+          "description": "Reserved for future use."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this bucket."
+        },
+        "softDeletePolicy": {
+          "type": "object",
+          "description": "The bucket's soft delete policy, which defines the period of time that soft-deleted objects will be retained, and cannot be permanently deleted.",
+          "properties": {
+            "effectiveTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Server-determined value that indicates the time from which the policy, or one with a greater retention, was effective. This value is in RFC 3339 format."
+            },
+            "retentionDurationSeconds": {
+              "type": "string",
+              "description": "The duration in seconds that soft-deleted objects in the bucket will be retained and cannot be permanently deleted."
+            }
+          }
+        },
+        "storageClass": {
+          "type": "string",
+          "description": "The bucket's default storage class, used whenever no storageClass is specified for a newly-created object. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include MULTI_REGIONAL, REGIONAL, STANDARD, NEARLINE, COLDLINE, ARCHIVE, and DURABLE_REDUCED_AVAILABILITY. If this value is not specified when the bucket is created, it will default to STANDARD. For more information, see storage classes."
+        },
+        "timeCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation time of the bucket in RFC 3339 format."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modification time of the bucket in RFC 3339 format."
+        },
+        "versioning": {
+          "type": "object",
+          "description": "The bucket's versioning configuration.",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "While set to true, versioning is fully enabled for this bucket."
+            }
+          }
+        },
+        "website": {
+          "type": "object",
+          "description": "The bucket's website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.",
+          "properties": {
+            "mainPageSuffix": {
+              "type": "string",
+              "description": "If the requested object path is missing, the service will ensure the path has a trailing '/', append this suffix, and attempt to retrieve the resulting object. This allows the creation of index.html objects to represent directory pages."
+            },
+            "notFoundPage": {
+              "type": "string",
+              "description": "If the requested object path is missing, and any mainPageSuffix object is missing, if applicable, the service will return the named object from this bucket as the content for a 404 Not Found result."
+            }
+          }
+        }
+      }
+    },
+    "ObjectAccessControl": {
+      "type": "object",
+      "description": "An access-control entry.",
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "description": "The name of the bucket."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain associated with the entity, if any."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address associated with the entity, if any."
+        },
+        "entity": {
+          "type": "string",
+          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        },
+        "entityId": {
+          "type": "string",
+          "description": "The ID for the entity, if any."
+        },
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the access-control entry."
+        },
+        "generation": {
+          "type": "string",
+          "description": "The content generation of the object, if applied to an object."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the access-control entry."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of item this is. For object access control entries, this is always storage#objectAccessControl.",
+          "default": "storage#objectAccessControl"
+        },
+        "object": {
+          "type": "string",
+          "description": "The name of the object, if applied to an object."
+        },
+        "projectTeam": {
+          "type": "object",
+          "description": "The project team associated with the entity, if any.",
+          "properties": {
+            "projectNumber": {
+              "type": "string",
+              "description": "The project number."
+            },
+            "team": {
+              "type": "string",
+              "description": "The team."
+            }
+          }
+        },
+        "role": {
+          "type": "string",
+          "description": "The access permission for the entity."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The link to this access-control entry."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "StorageBucket": {
+      "type": "object",
+      "description": "A Microsoft.GcpConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BucketProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "StorageBucketListResult": {
+      "type": "object",
+      "description": "The response of a StorageBucket list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StorageBucket items on this page",
+          "items": {
+            "$ref": "#/definitions/StorageBucket"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StorageBucketTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in StorageBucket resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

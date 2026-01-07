@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName",
+            "name": "myMPEName",
+            "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource1",
+              "privateLinkResourceRegion": "West US",
+              "groupIds": [
+                "grafana"
+              ],
+              "requestMessage": "Example Request Message",
+              "connectionState": {
+                "status": "Approved",
+                "description": "Auto-Approved"
+              },
+              "privateLinkServiceUrl": "my-self-hosted-influxdb.westus.mydomain.com",
+              "privateLinkServicePrivateIP": "10.0.0.5"
+            },
+            "location": "West US"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName2",
+            "name": "myMPEName2",
+            "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource2",
+              "privateLinkResourceRegion": "West US",
+              "groupIds": [
+                "grafana"
+              ],
+              "requestMessage": "Example Request Message 2",
+              "connectionState": {
+                "status": "Rejected",
+                "description": "Example Reject Reason"
+              }
+            },
+            "location": "West US"
+          }
+        ]
+      }
+    }
+  }
+}

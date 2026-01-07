@@ -1,0 +1,154 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication Services Management API",
+    "version": "2025-09-01-preview",
+    "description": "REST API for Azure Communication Services"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Communication/locations/{location}/usages": {
+      "get": {
+        "description": "Get the usage quota on the subscription",
+        "operationId": "Locations_GetQuota",
+        "summary": "Get",
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding QuotaResourceCollection.",
+            "schema": {
+              "$ref": "#/definitions/QuotaResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Quota": {
+            "$ref": "./examples/locations/getQuota.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QuotaName": {
+      "description": "The name of the resource",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The name of the resource",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "The localized name of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "QuotaResource": {
+      "description": "Quota on the assigned to the subscription",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The arm resource id",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/QuotaName"
+        },
+        "quotaPeriod": {
+          "description": "The period of the quota",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit of the quota",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "unit",
+            "modelAsString": true
+          }
+        },
+        "limit": {
+          "description": "Current quota limit per hour allowed on the subscription",
+          "type": "integer",
+          "format": "int32"
+        },
+        "currentValue": {
+          "description": "Current usage on the subscription",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "QuotaResourceCollection": {
+      "description": "A class representing a collection of QuotaResource.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of QuotaResource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

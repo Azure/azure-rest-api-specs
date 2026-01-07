@@ -1,0 +1,312 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-05-01-preview",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "CommonSku": {
+      "description": "The resource model definition representing SKU for ARM resources",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.  It is typically a letter+number code"
+        },
+        "dev": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether dev/test is enabled. When the dev field is set to true, the resource is used for dev/test purpose. "
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "BasicLoginInformation": {
+      "type": "object",
+      "description": "Username and password for basic login authentication.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login username."
+        },
+        "password": {
+          "type": "string",
+          "description": "Login password.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ConnectionAuth": {
+      "type": "string",
+      "description": "The endpoint connection authentication type(s).",
+      "enum": [
+        "Windows_NTLM",
+        "Windows_Kerberos",
+        "Windows_Negotiate",
+        "Certificate",
+        "Windows_NTLM_Certificate",
+        "Windows_Kerberos_Certificate",
+        "Windows_Negotiate_Certificate",
+        "Certificate_Windows_NTLM",
+        "Certificate_Windows_Kerberos",
+        "Certificate_Windows_Negotiate"
+      ],
+      "x-ms-enum": {
+        "name": "connectionAuth",
+        "modelAsString": true
+      }
+    },
+    "EncryptionAlgorithm": {
+      "type": "string",
+      "description": "The encryption algorithm(s) used by the endpoint.",
+      "enum": [
+        "NONE",
+        "RC4",
+        "AES",
+        "NONE, RC4",
+        "NONE, AES",
+        "RC4, AES",
+        "AES, RC4",
+        "NONE, RC4, AES",
+        "NONE, AES, RC4"
+      ],
+      "x-ms-enum": {
+        "name": "encryptionAlgorithm",
+        "modelAsString": true
+      }
+    },
+    "SkuRecommendationResultsRecommendationStatus": {
+      "description": "The target recommendation Status for this database.",
+      "type": "string",
+      "enum": [
+        "NotReady",
+        "Ready",
+        "ReadyWithConditions",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "recommendationStatus",
+        "modelAsString": true
+      }
+    },
+    "SkuRecommendationResultsMonthlyCost": {
+      "description": "The monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "iopsCost": {
+          "format": "float",
+          "description": "Represents the Cost of IOPS.",
+          "type": "number"
+        },
+        "sqlLicenseCost": {
+          "format": "float",
+          "description": "Represents the Cost of SQL license.",
+          "type": "number"
+        },
+        "windowsLicenseCost": {
+          "format": "float",
+          "description": "Represents the Cost of Windows license.",
+          "type": "number"
+        },
+        "totalCost": {
+          "format": "float",
+          "description": "Represents the Total Cost.",
+          "type": "number"
+        }
+      }
+    },
+    "ImpactedObjectsSuitabilitySummary": {
+      "type": "object",
+      "description": "Represents a summary of migration readiness issues/warnings per feature type for Azure SQL DB and SQL MI targets",
+      "properties": {
+        "azureSqlDatabase": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        },
+        "azureSqlManagedInstance": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ImpactedObjectsInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ImpactedObjectsInfo": {
+      "type": "object",
+      "description": "summary information about the incompatible feature id, number of objects impacted  and category of issue (warning/error)",
+      "properties": {
+        "featureId": {
+          "description": "Represents the feature id from https://learn.microsoft.com/en-us/data-migration/sql-server/database/assessment-rules?view=azuresql. OR https://learn.microsoft.com/en-us/data-migration/sql-server/managed-instance/assessment-rules?view=azuresql",
+          "type": "string"
+        },
+        "numberImpacted": {
+          "format": "int32",
+          "description": "Represents the number of issues/warnings.",
+          "type": "number"
+        },
+        "issueCategory": {
+          "description": "Issue or Warning",
+          "type": "string"
+        }
+      }
+    },
+    "SkuRecommendationResultsMonthlyCostOptions": {
+      "description": "The monthly cost for all different savings options applicable for the particular SKU.",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/SkuRecommendationResultsMonthlyCostOptionItem"
+      },
+      "x-ms-identifiers": []
+    },
+    "SkuRecommendationResultsMonthlyCostOptionItem": {
+      "description": "The monthly cost values for this saving option combination for the particular SKU.",
+      "type": "object",
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The unique combination of saving options for a price e.g. With1YearASPAndProd."
+        },
+        "keyValue": {
+          "$ref": "#/definitions/CostTypeValues"
+        }
+      }
+    },
+    "CostTypeValues": {
+      "description": "The Monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "iopsCost": {
+          "format": "float",
+          "description": "Represents the Cost of IOPS.",
+          "type": "number"
+        }
+      }
+    },
+    "EntraAuthentication": {
+      "description": "Entra Authentication configuration.",
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "enum": [
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "identityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SystemAssignedManagedIdentity",
+                "description": "System Assigned Managed Identity"
+              },
+              {
+                "value": "UserAssignedManagedIdentity",
+                "description": "User Assigned Managed Identity"
+              }
+            ]
+          },
+          "description": "The method used for Entra authentication"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client Id of the Managed Identity to query Microsoft Graph API. An empty string must be used for the system assigned Managed Identity."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

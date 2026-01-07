@@ -27,6 +27,15 @@ model ResolvedConfiguration {
 
 @doc("Solution Template Parameter")
 model SolutionTemplateParameter {
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Template Name")
+  solutionTemplate: string;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Template Version Name")
+  solutionTemplateVersion: string;
+
+  @added(Versions.v2025_06_01)
   @doc("Solution Template Version ARM Id")
   solutionTemplateVersionId: string;
 
@@ -41,6 +50,19 @@ model SolutionTemplateParameter {
 
 @doc("Solution Version Parameter")
 model SolutionVersionParameter {
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Name")
+  solution: string;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Version Name")
+  solutionVersion: string;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Review ID")
+  reviewId: string;
+
+  @added(Versions.v2025_06_01)
   @doc("Solution Version ARM Id")
   solutionVersionId: string;
 }
@@ -86,12 +108,26 @@ model SolutionDependencyParameter {
 
 @doc("Install Solution Parameter")
 model InstallSolutionParameter {
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Name")
+  solution: string;
+
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Version Name")
+  solutionVersion: string;
+
+  @added(Versions.v2025_06_01)
   @doc("Solution Version ARM Id")
   solutionVersionId: string;
 }
 
 @doc("Uninstall Solution Parameter")
 model UninstallSolutionParameter {
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Name")
+  solutionName: string;
+
+  @added(Versions.v2025_06_01)
   @doc("Solution Template ARM Id")
   solutionTemplateId: string;
 
@@ -101,6 +137,11 @@ model UninstallSolutionParameter {
 
 @doc("Install Solution Parameter")
 model RemoveRevisionParameter {
+  @removed(Versions.v2025_06_01)
+  @doc("Solution Name")
+  solution: string;
+
+  @added(Versions.v2025_06_01)
   @doc("Solution Template ARM Id")
   solutionTemplateId: string;
 
@@ -116,6 +157,7 @@ model TargetProperties {
   @doc("Display name of target")
   displayName: string;
 
+  @added(Versions.v2025_06_01)
   @doc("ArmId of Context")
   contextId: Azure.Core.armResourceIdentifier<[
     {
@@ -181,13 +223,7 @@ interface Targets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Target>;
 
   @doc("update a Target Resource")
-  update is ArmCustomPatchAsync<
-    Target,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Target,
-      TargetProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<Target, TargetProperties>;
 
   @doc("Delete a Target Resource")
   delete is ArmResourceDeleteWithoutOkAsync<

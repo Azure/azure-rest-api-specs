@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "cloudServiceResourceName": "myResourceName",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "myResourceGroup",
+    "body": {
+      "properties": {
+        "autoRenew": "On",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 9,
+            "endDate": "2023-03-12T00:00:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyCotermConstraints",
+        "reason": "Failed to satisfy coterm constraints",
+        "updateScenario": "AutoRenew",
+        "additionalInfo": {
+          "refundableQuantity": null,
+          "coTermDates": [
+            {
+              "coTermTarget": "cotermTargetName",
+              "coTermTargetType": "Resource",
+              "termEndDate": "2023-03-12T00:00:00Z",
+              "errorCode": "InvalidCotermEndDate"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "CloudServices_CanUpdate",
+  "title": "Evaluate if a coterminous SaaSHub cloud service can be updated - Failed"
+}

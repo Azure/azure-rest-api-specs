@@ -12,9 +12,6 @@ import "./back-compatible.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -76,7 +73,7 @@ model AwsRdsDBInstanceProperties {
   allowMajorVersionUpgrade?: boolean;
 
   @doc("The IAMlong (IAM) roles associated with the DB instance.   *Amazon Aurora*  Not applicable. The associated roles are managed by the DB cluster.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   associatedRoles?: DBInstanceRole[];
 
   @doc("A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.")
@@ -205,6 +202,7 @@ model AwsRdsDBInstanceProperties {
   @doc("Specifies whether to manage the master user password with AWS Secrets Manager. For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*  Constraints:  +  Can't manage the master user password with AWS Secrets Manager if ``MasterUserPassword`` is specified.")
   manageMasterUserPassword?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The password for the master user. The password can include any printable ASCII character except '/', ''', or '@'.  *Amazon Aurora*  Not applicable. The password for the master user is managed by the DB cluster.  *RDS for Db2*  Must contain from 8 to 255 characters.  *RDS for MariaDB*  Constraints: Must contain from 8 to 41 characters.  *RDS for Microsoft SQL Server*  Constraints: Must contain from 8 to 128 characters.  *RDS for MySQL*  Constraints: Must contain from 8 to 41 characters.  *RDS for Oracle*  Constraints: Must contain from 8 to 30 characters.  *RDS for PostgreSQL*  Constraints: Must contain from 8 to 128 characters.")
   masterUserPassword?: string;
 
@@ -251,7 +249,7 @@ model AwsRdsDBInstanceProperties {
   preferredMaintenanceWindow?: string;
 
   @doc("The number of CPU cores and the number of threads per core for the DB instance class of the DB instance. This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   processorFeatures?: ProcessorFeature[];
 
   @doc("The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see [Fault Tolerance for an Aurora DB Cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance) in the *Amazon Aurora User Guide*. This setting doesn't apply to RDS Custom DB instances. Default: ``1``  Valid Values: ``0 - 15``")
@@ -291,12 +289,13 @@ model AwsRdsDBInstanceProperties {
   storageType?: string;
 
   @doc("An optional array of key-value pairs to apply to this DB instance.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property tdeCredentialArn")
   tdeCredentialArn?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Property tdeCredentialPassword")
   tdeCredentialPassword?: string;
 

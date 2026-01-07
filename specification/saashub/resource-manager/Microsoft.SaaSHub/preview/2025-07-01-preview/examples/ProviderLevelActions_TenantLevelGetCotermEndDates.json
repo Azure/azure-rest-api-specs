@@ -1,0 +1,41 @@
+{
+  "title": "TenantLevelGetCotermEndDates for Provider Level",
+  "operationId": "ProviderLevelActions_TenantLevelGetCotermEndDates",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "endDates": [
+        {
+          "id": "endpoint-1",
+          "endDate": "2024-12-31T23:59:59.000Z",
+          "termDuration": "P1Y"
+        },
+        {
+          "id": "endpoint-2",
+          "endDate": "2024-06-30T23:59:59.000Z",
+          "termDuration": "P6M"
+        }
+      ],
+      "startDate": "2024-01-01T00:00:00.000Z",
+      "termDuration": "P1Y"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "coTermTarget": "contoso-cloud-service-1",
+          "coTermTargetType": "Resource",
+          "termEndDate": "2024-12-31T23:59:59.000Z",
+          "errorCode": ""
+        },
+        {
+          "coTermTarget": "contoso-contract-abc123",
+          "coTermTargetType": "Contract",
+          "termEndDate": "2024-06-30T23:59:59.000Z",
+          "errorCode": ""
+        }
+      ]
+    }
+  }
+}

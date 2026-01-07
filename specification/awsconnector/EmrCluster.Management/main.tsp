@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -69,7 +66,7 @@ model EmrClusterProperties {
 @doc("Definition of awsEmrCluster")
 model AwsEmrClusterProperties {
   @doc("<p>The applications installed on this cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   applications?: Application[];
 
   @doc("<p>An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>")
@@ -82,7 +79,7 @@ model AwsEmrClusterProperties {
   clusterArn?: string;
 
   @doc("<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   configurations?: Configuration[];
 
   @doc("<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.</p>")
@@ -131,7 +128,7 @@ model AwsEmrClusterProperties {
   outpostArn?: string;
 
   @doc("<p>Placement group configured for an Amazon EMR cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   placementGroups?: PlacementGroupConfig[];
 
   @doc("<p>The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version such as <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href='https://docs.aws.amazon.com/emr/latest/ReleaseGuide/'>https://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier versions use <code>AmiVersion</code>.</p>")
@@ -162,7 +159,7 @@ model AwsEmrClusterProperties {
   stepConcurrencyLevel?: int32;
 
   @doc("<p>A list of tags associated with a cluster.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.</p>")
@@ -267,7 +264,7 @@ model Configuration {
   classification?: string;
 
   @doc("<p>A list of additional configurations to apply within a configuration object.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   configurations?: Configuration[];
 
   @doc("<p>A set of properties specified within a configuration classification.</p>")
@@ -320,15 +317,18 @@ model Ec2InstanceAttributes {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of KerberosAttributes")
 model KerberosAttributes {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The Active Directory password for <code>ADDomainJoinUser</code>.</p>")
   adDomainJoinPassword?: string;
 
   @doc("<p>Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.</p>")
   adDomainJoinUser?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.</p>")
   crossRealmTrustPrincipalPassword?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.</p>")
   kdcAdminPassword?: string;
 
@@ -380,7 +380,7 @@ model InstanceRoleTypeEnumValue {
 @doc("Definition of ClusterStatus")
 model ClusterStatus {
   @doc("<p>A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   errorDetails?: ErrorDetail[];
 
   @doc("<p>The current state of the cluster.</p>")
@@ -479,7 +479,7 @@ model ErrorDetail {
   errorCode?: string;
 
   @doc("<p>A list of key value pairs that provides contextual information about why an error occured.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   errorData?: StringMap[];
 
   @doc("<p>A message that describes the error.</p>")

@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "my-subscription-id",
+    "resourceName": "plannedQuota1",
+    "api-version": "2022-08-22-privatepreview",
+    "PlannedQuota": {
+      "properties": {
+        "contactEmail": "example01@microsoft.com",
+        "name": "example-planned-quota-1",
+        "planVersion": 1,
+        "region": "qatarcentral",
+        "serviceTreeId": "00000000-0000-0000-0000-000000000000",
+        "stage": "example-stage",
+        "subscriptionNameInPlan": "example-subscription-name",
+        "propertyBindings": [
+          {
+            "placeHolder": "*",
+            "resourceName": "example-resource-name"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/providers/Microsoft.AzureCIS/plannedQuotas/plannedQuota1",
+        "name": "plannedQuota1",
+        "type": "Microsoft.AzureCIS/plannedQuotas",
+        "properties": {
+          "contactEmail": "example01@microsoft.com",
+          "name": "example-planned-quota-1",
+          "planVersion": 1,
+          "region": "qatarcentral",
+          "serviceTreeId": "00000000-0000-0000-0000-000000000000",
+          "stage": "example-stage",
+          "subscriptionNameInPlan": "example-subscription-name",
+          "propertyBindings": [
+            {
+              "placeHolder": "*",
+              "resourceName": "example-resource-name"
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/mySubscriptionId/providers/Microsoft.AzureCIS/plannedQuotas/operationResults/operationId"
+      },
+      "body": {
+        "id": "/subscriptions/mySubscriptionId/providers/Microsoft.AzureCIS/PlannedQuotas/plannedQuota1",
+        "name": "plannedQuota1",
+        "type": "Microsoft.AzureCIS/plannedQuotas",
+        "properties": {
+          "contactEmail": "example01@microsoft.com",
+          "name": "example-planned-quota-1",
+          "planVersion": 1,
+          "region": "qatarcentral",
+          "serviceTreeId": "00000000-0000-0000-0000-000000000000",
+          "stage": "example-stage",
+          "subscriptionNameInPlan": "example-subscription-name",
+          "propertyBindings": [
+            {
+              "placeHolder": "*",
+              "resourceName": "example-resource-name"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2700 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.UpdateManager service",
+    "version": "2025-08-01-preview",
+    "description": "Microsoft.UpdateManager Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "UpdateRules"
+    },
+    {
+      "name": "InventoryConfigurations"
+    },
+    {
+      "name": "InventoryConfigurationAssignments"
+    },
+    {
+      "name": "SoftwareCollections"
+    },
+    {
+      "name": "SoftwareManifests"
+    }
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.UpdateManager/inventoryConfigurationAssignments": {
+      "get": {
+        "operationId": "InventoryConfigurationAssignments_List",
+        "tags": [
+          "InventoryConfigurationAssignments"
+        ],
+        "description": "List InventoryConfigurationAssignment resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurationAssignments_List": {
+            "$ref": "./examples/InventoryConfigurationAssignments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.UpdateManager/inventoryConfigurationAssignments/default": {
+      "get": {
+        "operationId": "InventoryConfigurationAssignments_Get",
+        "tags": [
+          "InventoryConfigurationAssignments"
+        ],
+        "description": "Get a InventoryConfigurationAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurationAssignments_Get": {
+            "$ref": "./examples/InventoryConfigurationAssignments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InventoryConfigurationAssignments_CreateOrUpdate",
+        "tags": [
+          "InventoryConfigurationAssignments"
+        ],
+        "description": "Create a InventoryConfigurationAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InventoryConfigurationAssignment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationAssignment"
+            }
+          },
+          "201": {
+            "description": "Resource 'InventoryConfigurationAssignment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationAssignment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurationAssignments_CreateOrUpdate": {
+            "$ref": "./examples/InventoryConfigurationAssignments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InventoryConfigurationAssignments_Delete",
+        "tags": [
+          "InventoryConfigurationAssignments"
+        ],
+        "description": "Delete a InventoryConfigurationAssignment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurationAssignments_Delete": {
+            "$ref": "./examples/InventoryConfigurationAssignments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.UpdateManager/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/inventoryConfigurations": {
+      "get": {
+        "operationId": "InventoryConfigurations_ListBySubscription",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "List InventoryConfiguration resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_ListBySubscription": {
+            "$ref": "./examples/InventoryConfigurations_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/softwareCollections": {
+      "get": {
+        "operationId": "SoftwareCollections_ListBySubscription",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "List SoftwareCollection resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_ListBySubscription": {
+            "$ref": "./examples/SoftwareCollections_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.UpdateManager/updateRules": {
+      "get": {
+        "operationId": "UpdateRules_ListBySubscription",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "List UpdateRule resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_ListBySubscription": {
+            "$ref": "./examples/UpdateRules_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/inventoryConfigurations": {
+      "get": {
+        "operationId": "InventoryConfigurations_ListByResourceGroup",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "List InventoryConfiguration resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_ListByResourceGroup": {
+            "$ref": "./examples/InventoryConfigurations_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/inventoryConfigurations/{inventoryConfigurationName}": {
+      "get": {
+        "operationId": "InventoryConfigurations_Get",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "Get a InventoryConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "inventoryConfigurationName",
+            "in": "path",
+            "description": "The name of the InventoryConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_Get": {
+            "$ref": "./examples/InventoryConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "InventoryConfigurations_CreateOrUpdate",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "Create a InventoryConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "inventoryConfigurationName",
+            "in": "path",
+            "description": "The name of the InventoryConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InventoryConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'InventoryConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'InventoryConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfiguration"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/InventoryConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "InventoryConfigurations_Update",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "Update a InventoryConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "inventoryConfigurationName",
+            "in": "path",
+            "description": "The name of the InventoryConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InventoryConfigurationTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InventoryConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_Update": {
+            "$ref": "./examples/InventoryConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "InventoryConfigurations_Delete",
+        "tags": [
+          "InventoryConfigurations"
+        ],
+        "description": "Delete a InventoryConfiguration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "inventoryConfigurationName",
+            "in": "path",
+            "description": "The name of the InventoryConfiguration",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InventoryConfigurations_Delete": {
+            "$ref": "./examples/InventoryConfigurations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/softwareCollections": {
+      "get": {
+        "operationId": "SoftwareCollections_ListByResourceGroup",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "List SoftwareCollection resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_ListByResourceGroup": {
+            "$ref": "./examples/SoftwareCollections_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/softwareCollections/{softwareCollectionName}": {
+      "get": {
+        "operationId": "SoftwareCollections_Get",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "Get a SoftwareCollection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_Get": {
+            "$ref": "./examples/SoftwareCollections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SoftwareCollections_CreateOrUpdate",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "Create a SoftwareCollection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SoftwareCollection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollection"
+            }
+          },
+          "201": {
+            "description": "Resource 'SoftwareCollection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_CreateOrUpdate": {
+            "$ref": "./examples/SoftwareCollections_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SoftwareCollections_Update",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "Update a SoftwareCollection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollectionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareCollection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_Update": {
+            "$ref": "./examples/SoftwareCollections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SoftwareCollections_Delete",
+        "tags": [
+          "SoftwareCollections"
+        ],
+        "description": "Delete a SoftwareCollection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareCollections_Delete": {
+            "$ref": "./examples/SoftwareCollections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/softwareCollections/{softwareCollectionName}/softwareManifests": {
+      "get": {
+        "operationId": "SoftwareManifests_ListByParent",
+        "tags": [
+          "SoftwareManifests"
+        ],
+        "description": "List SoftwareManifest resources by SoftwareCollection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifestListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareManifests_ListByParent": {
+            "$ref": "./examples/SoftwareManifests_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/softwareCollections/{softwareCollectionName}/softwareManifests/{softwareManifestName}": {
+      "get": {
+        "operationId": "SoftwareManifests_Get",
+        "tags": [
+          "SoftwareManifests"
+        ],
+        "description": "Get a SoftwareManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "softwareManifestName",
+            "in": "path",
+            "description": "Name of the software manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareManifests_Get": {
+            "$ref": "./examples/SoftwareManifests_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SoftwareManifests_CreateOrUpdate",
+        "tags": [
+          "SoftwareManifests"
+        ],
+        "description": "Create a SoftwareManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "softwareManifestName",
+            "in": "path",
+            "description": "Name of the software manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SoftwareManifest' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifest"
+            }
+          },
+          "201": {
+            "description": "Resource 'SoftwareManifest' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifest"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareManifests_CreateOrUpdate": {
+            "$ref": "./examples/SoftwareManifests_CreateOrUpdate.json"
+          },
+          "SoftwareManifests_CreateOrUpdate_Linux": {
+            "$ref": "./examples/SoftwareManifests_CreateOrUpdate_Linux.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SoftwareManifests_Update",
+        "tags": [
+          "SoftwareManifests"
+        ],
+        "description": "Update a SoftwareManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "softwareManifestName",
+            "in": "path",
+            "description": "Name of the software manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifestTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftwareManifest"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareManifests_Update": {
+            "$ref": "./examples/SoftwareManifests_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SoftwareManifests_Delete",
+        "tags": [
+          "SoftwareManifests"
+        ],
+        "description": "Delete a SoftwareManifest",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "softwareCollectionName",
+            "in": "path",
+            "description": "The name of the SoftwareCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "softwareManifestName",
+            "in": "path",
+            "description": "Name of the software manifest",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SoftwareManifests_Delete": {
+            "$ref": "./examples/SoftwareManifests_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules": {
+      "get": {
+        "operationId": "UpdateRules_ListByResourceGroup",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "List UpdateRule resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_ListByResourceGroup": {
+            "$ref": "./examples/UpdateRules_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.UpdateManager/updateRules/{updateRuleName}": {
+      "get": {
+        "operationId": "UpdateRules_Get",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Get a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Get": {
+            "$ref": "./examples/UpdateRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRules_CreateOrUpdate",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Create a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'UpdateRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'UpdateRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_CreateOrUpdate": {
+            "$ref": "./examples/UpdateRules_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "UpdateRules_Update",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Update a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateRuleUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Update": {
+            "$ref": "./examples/UpdateRules_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "UpdateRules_Delete",
+        "tags": [
+          "UpdateRules"
+        ],
+        "description": "Delete a UpdateRule",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "updateRuleName",
+            "in": "path",
+            "description": "The name of the UpdateRule",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateRules_Delete": {
+            "$ref": "./examples/UpdateRules_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AssessmentEnabledState": {
+      "type": "string",
+      "description": "Enabled state for assessment features.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "Assessment is enabled"
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "Assessment is disabled"
+          }
+        ]
+      }
+    },
+    "Availability": {
+      "type": "object",
+      "description": "Availability policy.",
+      "properties": {
+        "vmAvailabilitySet": {
+          "$ref": "#/definitions/VMAvailabilitySet",
+          "description": "The availability set."
+        }
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "CleanupConfiguration": {
+      "type": "object",
+      "description": "Cleanup configuration for software collection.",
+      "properties": {
+        "versionsToRetain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of versions to retain during cleanup.",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "versionsToRetain"
+      ]
+    },
+    "InstallerSettings": {
+      "type": "object",
+      "description": "Installer settings configuration.",
+      "properties": {
+        "installScript": {
+          "type": "string",
+          "description": "Script for installation instructions."
+        },
+        "softwareFileName": {
+          "type": "string",
+          "description": "File name to set when downloaded in VM."
+        }
+      },
+      "required": [
+        "installScript"
+      ]
+    },
+    "InventoryConfiguration": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryConfigurationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "InventoryConfigurationAssignment": {
+      "type": "object",
+      "description": "Inventory Configuration Assignment resource representing the assignment of an inventory configuration to a VM resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InventoryConfigurationAssignmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InventoryConfigurationAssignmentListResult": {
+      "type": "object",
+      "description": "The response of a InventoryConfigurationAssignment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InventoryConfigurationAssignment items on this page",
+          "items": {
+            "$ref": "#/definitions/InventoryConfigurationAssignment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InventoryConfigurationAssignmentProperties": {
+      "type": "object",
+      "description": "Properties of the InventoryConfigurationAssignment resource.",
+      "properties": {
+        "inventoryConfigurationId": {
+          "type": "string",
+          "description": "ARM id of inventory configuration"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ARM id of VM resource",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when this is created",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Enum with status of the assignment.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object. Required when the provisioning state is failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "inventoryConfigurationId"
+      ]
+    },
+    "InventoryConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a InventoryConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InventoryConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/InventoryConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "InventoryConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of the InventoryConfiguration resource.",
+      "properties": {
+        "windows": {
+          "$ref": "#/definitions/WindowsInventoryProperties",
+          "description": "Object for Windows-related inventory, with potential future extension to Linux."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "InventoryConfigurationTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in InventoryConfiguration resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InventoryEnabledState": {
+      "type": "string",
+      "description": "Enabled state for inventory features.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "InventoryEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "Inventory is enabled"
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "Inventory is disabled"
+          }
+        ]
+      }
+    },
+    "LinuxParameters": {
+      "type": "object",
+      "description": "Linux parameters.",
+      "properties": {
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "description": "The package name masks to exclude.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "description": "The package name masks to include.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The classifications to include.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManagedPublishingConfiguration": {
+      "type": "object",
+      "description": "Managed publishing configuration for software collection.",
+      "properties": {
+        "replicationRegions": {
+          "type": "array",
+          "description": "Array of replication regions for managed configuration.",
+          "items": {
+            "$ref": "#/definitions/ReplicationRegion"
+          }
+        }
+      },
+      "required": [
+        "replicationRegions"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishingConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "Managed"
+    },
+    "ManualSoftwareManifestProperties": {
+      "type": "object",
+      "description": "Manual software manifest properties.",
+      "properties": {
+        "softwareName": {
+          "type": "string",
+          "description": "Name of the software."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Publisher of the software."
+        },
+        "softwareId": {
+          "type": "string",
+          "description": "Unique identifier for the software."
+        },
+        "osType": {
+          "$ref": "#/definitions/OSType",
+          "description": "Operating system type for the software."
+        },
+        "versions": {
+          "type": "array",
+          "description": "List of software versions.",
+          "items": {
+            "$ref": "#/definitions/SoftwareVersion"
+          },
+          "x-ms-identifiers": [
+            "version"
+          ]
+        }
+      },
+      "required": [
+        "softwareName",
+        "publisher",
+        "softwareId",
+        "osType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SoftwareManifestProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Manual"
+    },
+    "OSType": {
+      "type": "string",
+      "description": "Operating system type enumeration.",
+      "enum": [
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OSType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows operating system"
+          }
+        ]
+      }
+    },
+    "Policies": {
+      "type": "object",
+      "description": "Policies properties.",
+      "properties": {
+        "availability": {
+          "$ref": "#/definitions/Availability",
+          "description": "The availability policy."
+        },
+        "installWindowsPatchesAfter": {
+          "type": "string",
+          "description": "Approve windows patches after the mentioned date.",
+          "pattern": "(?<!\\w)(2Tuesday)\\+Offset([0-6](?!\\d))(?!\\w)|(?<!\\w)Days(([1-9]|1[0-4])(?!\\d))(?!\\w)"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning request has been accepted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublishingConfiguration": {
+      "type": "object",
+      "description": "Base publishing configuration for software collection.",
+      "properties": {
+        "enabled": {
+          "$ref": "#/definitions/PublishingState",
+          "description": "Indicates whether publishing is enabled."
+        },
+        "kind": {
+          "$ref": "#/definitions/PublishingKind",
+          "description": "Publishing kind configuration."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "enabled",
+        "kind"
+      ]
+    },
+    "PublishingKind": {
+      "type": "string",
+      "description": "Publishing kind enumeration.",
+      "enum": [
+        "Managed"
+      ],
+      "x-ms-enum": {
+        "name": "PublishingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed publishing"
+          }
+        ]
+      }
+    },
+    "PublishingState": {
+      "type": "string",
+      "description": "Publishing state enumeration.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublishingState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Publishing is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Publishing is disabled"
+          }
+        ]
+      }
+    },
+    "ReplicationRegion": {
+      "type": "object",
+      "description": "Replication region configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the replication region."
+        },
+        "replicationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replication count for the region.",
+          "minimum": 1,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "name",
+        "replicationCount"
+      ]
+    },
+    "SoftwareCollection": {
+      "type": "object",
+      "description": "Software Collection resource representing a collection of software updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareCollectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SoftwareCollectionListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareCollectionProperties": {
+      "type": "object",
+      "description": "Properties of the SoftwareCollection resource.",
+      "properties": {
+        "osType": {
+          "$ref": "#/definitions/OSType",
+          "description": "The operating system type for this collection."
+        },
+        "publishing": {
+          "$ref": "#/definitions/PublishingConfiguration",
+          "description": "Publishing configuration for the software collection."
+        },
+        "cleanupConfigurations": {
+          "$ref": "#/definitions/CleanupConfiguration",
+          "description": "Cleanup configurations for the software collection."
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Unique identifier used to create managed resource group.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the software collection.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "osType",
+        "publishing",
+        "collectionId"
+      ]
+    },
+    "SoftwareCollectionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SoftwareCollection resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoftwareInstaller": {
+      "type": "object",
+      "description": "Software installer information.",
+      "properties": {
+        "architecture": {
+          "type": "string",
+          "description": "Architecture of the installer."
+        },
+        "mediaLink": {
+          "type": "string",
+          "description": "Media link URL for the installer."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for the installer."
+        },
+        "upgradeCode": {
+          "type": "string",
+          "description": "Upgrade code for the installer."
+        },
+        "packageFamilyName": {
+          "type": "string",
+          "description": "Package family name for the installer."
+        },
+        "settings": {
+          "$ref": "#/definitions/InstallerSettings",
+          "description": "Installation settings for the installer."
+        }
+      },
+      "required": [
+        "architecture",
+        "mediaLink"
+      ]
+    },
+    "SoftwareKind": {
+      "type": "string",
+      "description": "Software kind enumeration.",
+      "enum": [
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "SoftwareKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Manual software definition"
+          }
+        ]
+      }
+    },
+    "SoftwareManifest": {
+      "type": "object",
+      "description": "Software Manifest resource representing a software definition within a collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftwareManifestProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SoftwareManifestListResult": {
+      "type": "object",
+      "description": "The response of a SoftwareManifest list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SoftwareManifest items on this page",
+          "items": {
+            "$ref": "#/definitions/SoftwareManifest"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SoftwareManifestProperties": {
+      "type": "object",
+      "description": "Properties of the SoftwareManifest resource.",
+      "properties": {
+        "softwarekind": {
+          "$ref": "#/definitions/SoftwareKind",
+          "description": "Software kind."
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "Collection ID reference.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the software manifest.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "softwarekind",
+      "required": [
+        "softwarekind"
+      ]
+    },
+    "SoftwareManifestTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SoftwareManifest resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SoftwareVersion": {
+      "type": "object",
+      "description": "Software version information.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version string of the software."
+        },
+        "installers": {
+          "type": "array",
+          "description": "List of installers for this version.",
+          "items": {
+            "$ref": "#/definitions/SoftwareInstaller"
+          },
+          "x-ms-identifiers": [
+            "architecture"
+          ]
+        }
+      },
+      "required": [
+        "version",
+        "installers"
+      ]
+    },
+    "UpdateRule": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRuleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "UpdateRuleListResult": {
+      "type": "object",
+      "description": "The response of a UpdateRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The UpdateRule items on this page",
+          "items": {
+            "$ref": "#/definitions/UpdateRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "UpdateRuleProperties": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSetting": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "rebootSetting"
+      ]
+    },
+    "UpdateRulePropertiesUpdate": {
+      "type": "object",
+      "description": "Update rule set properties.",
+      "properties": {
+        "rebootSetting": {
+          "$ref": "#/definitions/rebootSettings",
+          "description": "reboot settings."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "windows parameter."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "linux parameter."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "policies properties."
+        }
+      }
+    },
+    "UpdateRuleUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateRulePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "VMAvailabilitySet": {
+      "type": "string",
+      "description": "VMAvailabilitySet property.",
+      "enum": [
+        "Bypass"
+      ],
+      "x-ms-enum": {
+        "name": "VMAvailabilitySet",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bypass",
+            "value": "Bypass",
+            "description": "Bypass the availability set."
+          }
+        ]
+      }
+    },
+    "WindowsInventoryProperties": {
+      "type": "object",
+      "description": "Object for Windows-related inventory.",
+      "properties": {
+        "software": {
+          "$ref": "#/definitions/WindowsSoftwareInventoryProperties",
+          "description": "Software object. It can later be extended to include files, certificates, and another inventory."
+        }
+      }
+    },
+    "WindowsParameters": {
+      "type": "object",
+      "description": "Windows parameters.",
+      "properties": {
+        "kbNumbersToExclude": {
+          "type": "array",
+          "description": "The KB numbers to exclude.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "description": "The KB numbers to include.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The classifications to include.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Exclude KBs requiring reboot."
+        },
+        "patchNameMasksToInclude": {
+          "type": "array",
+          "description": "This is used to include patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "patchNameMasksToExclude": {
+          "type": "array",
+          "description": "This is used to exclude patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.",
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WindowsSoftwareAssessmentProperties": {
+      "type": "object",
+      "description": "Assessment properties for Windows software.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Toggle assessment on/off.",
+          "default": "true",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "AssessmentEnabledState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "true",
+                "description": "Assessment is enabled"
+              },
+              {
+                "name": "False",
+                "value": "false",
+                "description": "Assessment is disabled"
+              }
+            ]
+          }
+        },
+        "collectionIds": {
+          "type": "array",
+          "description": "Includes collectionIds for assessment. Limited to 1 for now.",
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "collectionIds"
+      ]
+    },
+    "WindowsSoftwareInventoryProperties": {
+      "type": "object",
+      "description": "Software inventory properties.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Toggle Inventory on/off. Inventory will not happen if flag is false.",
+          "default": "true",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "InventoryEnabledState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "True",
+                "value": "true",
+                "description": "Inventory is enabled"
+              },
+              {
+                "name": "False",
+                "value": "false",
+                "description": "Inventory is disabled"
+              }
+            ]
+          }
+        },
+        "assessment": {
+          "$ref": "#/definitions/WindowsSoftwareAssessmentProperties",
+          "description": "Object containing assessment specific properties."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "rebootSettings": {
+      "type": "string",
+      "description": "Reboot settings.",
+      "enum": [
+        "IfRequired",
+        "Never",
+        "Always"
+      ],
+      "x-ms-enum": {
+        "name": "rebootSettings",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IfRequired",
+            "value": "IfRequired",
+            "description": "Reboot if required"
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never reboot"
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always reboot"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.ResourceManager.ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "description": "The fully qualified Azure Resource manager identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

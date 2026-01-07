@@ -6,11 +6,8 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "Carbon" })
@@ -24,7 +21,7 @@ namespace Microsoft.Carbon;
  */
 enum Versions {
   /**
-   * The 2025-04-01 API version.
+   * The 2024-02-01 API version.
    */
   v2025_04_01: "2025-04-01",
 }
@@ -489,8 +486,10 @@ model ResourceGroupCarbonEmissionItemDetailData extends CarbonEmissionData {
 model CarbonEmissionDataListResult {
   @doc("The CarbonEmissionData items on this page")
   @Azure.ResourceManager.identifiers(#[])
+  @pageItems
   value: CarbonEmissionData[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
   skipToken?: string;
 
@@ -513,6 +512,7 @@ model CarbonEmissionDataAvailableDateRange {
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
+  @list
   @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(

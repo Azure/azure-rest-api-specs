@@ -1,0 +1,348 @@
+{
+  "title": "ChangeStates_CreateOrUpdateAtSubscriptionLevel_MaximumSet",
+  "operationId": "ChangeStates_CreateOrUpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "testChangeState",
+    "resource": {
+      "properties": {
+        "changeType": "AppDeployment",
+        "rolloutType": "Normal",
+        "description": "Deploy subscription-wide security compliance updates across all resource groups",
+        "stageMap": {
+          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscription-security-updates"
+        },
+        "parameters": {
+          "securityUpdateVersion": {
+            "type": "string",
+            "defaultValue": "2025.01.security",
+            "metadata": {
+              "description": "Version identifier for the security update package"
+            }
+          },
+          "targetResourceGroups": {
+            "type": "array",
+            "defaultValue": [
+              "rg-production",
+              "rg-staging",
+              "rg-development"
+            ],
+            "metadata": {
+              "description": "List of resource groups to apply security updates to"
+            }
+          },
+          "maintenanceWindow": {
+            "type": "object",
+            "defaultValue": {
+              "startTime": "02:00",
+              "endTime": "06:00",
+              "timezone": "UTC"
+            },
+            "metadata": {
+              "description": "Maintenance window for applying updates"
+            }
+          }
+        },
+        "state": "Initialized",
+        "comments": "Initial deployment of subscription-wide security compliance updates",
+        "changeDefinitions": [
+          {
+            "name": "securityComplianceUpdate",
+            "type": "ArmOperation",
+            "details": {
+              "operation": "PATCH",
+              "resourceType": "Microsoft.Security/assessments",
+              "scope": "subscription"
+            }
+          }
+        ],
+        "releaseLabel": "SecurityUpdate-2025.01",
+        "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+        "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+        "orchestrationTool": "Azure Policy",
+        "links": {
+          "workTrackingItem": {
+            "uri": "https://dev.azure.com/contoso/security/_workitems/edit/54321",
+            "description": "Security compliance update work item for subscription-wide deployment"
+          },
+          "approvalRequest": {
+            "uri": "https://approval.contoso.com/requests/SEC-2025-001",
+            "description": "Security compliance approval for subscription-wide updates"
+          },
+          "supportIncident": {
+            "uri": "https://support.contoso.com/incidents/INC-SEC-2025-001",
+            "description": "Related security compliance support incident"
+          },
+          "accessElevationRequest": {
+            "uri": "https://access.contoso.com/elevation/SEC-ELV-001",
+            "description": "Subscription-level access elevation for security updates"
+          },
+          "relatedChangeState": {
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/security-pilot",
+            "description": "Related pilot security update change state"
+          },
+          "testResults": {
+            "uri": "https://testresults.contoso.com/runs/security-compliance-2025-01",
+            "description": "Security compliance validation test results"
+          },
+          "serviceCatalog": {
+            "uri": "https://catalog.contoso.com/services/security-compliance",
+            "description": "Security compliance service catalog entry"
+          }
+        },
+        "additionalData": {
+          "complianceStandard": "SOC2-Type2",
+          "approvalBoard": "Security Review Board",
+          "emergencyContact": "security@contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy subscription-wide security compliance updates across all resource groups",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscription-security-updates"
+          },
+          "parameters": {
+            "securityUpdateVersion": {
+              "type": "string",
+              "defaultValue": "2025.01.security",
+              "metadata": {
+                "description": "Version identifier for the security update package"
+              }
+            },
+            "targetResourceGroups": {
+              "type": "array",
+              "defaultValue": [
+                "rg-production",
+                "rg-staging",
+                "rg-development"
+              ],
+              "metadata": {
+                "description": "List of resource groups to apply security updates to"
+              }
+            },
+            "maintenanceWindow": {
+              "type": "object",
+              "defaultValue": {
+                "startTime": "02:00",
+                "endTime": "06:00",
+                "timezone": "UTC"
+              },
+              "metadata": {
+                "description": "Maintenance window for applying updates"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial deployment of subscription-wide security compliance updates",
+          "changeDefinitions": [
+            {
+              "name": "securityComplianceUpdate",
+              "type": "ArmOperation",
+              "details": {
+                "operation": "PATCH",
+                "resourceType": "Microsoft.Security/assessments",
+                "scope": "subscription"
+              }
+            }
+          ],
+          "releaseLabel": "SecurityUpdate-2025.01",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Policy",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/security/_workitems/edit/54321",
+              "description": "Security compliance update work item for subscription-wide deployment",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/SEC-2025-001",
+              "description": "Security compliance approval for subscription-wide updates",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-SEC-2025-001",
+              "description": "Related security compliance support incident",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/elevation/SEC-ELV-001",
+              "description": "Subscription-level access elevation for security updates",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/security-pilot",
+              "description": "Related pilot security update change state",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/security-compliance-2025-01",
+              "description": "Security compliance validation test results",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/security-compliance",
+              "description": "Security compliance service catalog entry",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "complianceStandard": "SOC2-Type2",
+            "approvalBoard": "Security Review Board",
+            "emergencyContact": "security@contoso.com"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "security@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "security@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Deploy subscription-wide security compliance updates across all resource groups",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscription-security-updates"
+          },
+          "parameters": {
+            "securityUpdateVersion": {
+              "type": "string",
+              "defaultValue": "2025.01.security",
+              "metadata": {
+                "description": "Version identifier for the security update package"
+              }
+            },
+            "targetResourceGroups": {
+              "type": "array",
+              "defaultValue": [
+                "rg-production",
+                "rg-staging",
+                "rg-development"
+              ],
+              "metadata": {
+                "description": "List of resource groups to apply security updates to"
+              }
+            },
+            "maintenanceWindow": {
+              "type": "object",
+              "defaultValue": {
+                "startTime": "02:00",
+                "endTime": "06:00",
+                "timezone": "UTC"
+              },
+              "metadata": {
+                "description": "Maintenance window for applying updates"
+              }
+            }
+          },
+          "state": "Initialized",
+          "comments": "Initial deployment of subscription-wide security compliance updates",
+          "changeDefinitions": [
+            {
+              "name": "securityComplianceUpdate",
+              "type": "ArmOperation",
+              "details": {
+                "operation": "PATCH",
+                "resourceType": "Microsoft.Security/assessments",
+                "scope": "subscription"
+              }
+            }
+          ],
+          "releaseLabel": "SecurityUpdate-2025.01",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Policy",
+          "links": {
+            "workTrackingItem": {
+              "uri": "https://dev.azure.com/contoso/security/_workitems/edit/54321",
+              "description": "Security compliance update work item for subscription-wide deployment",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "approvalRequest": {
+              "uri": "https://approval.contoso.com/requests/SEC-2025-001",
+              "description": "Security compliance approval for subscription-wide updates",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "supportIncident": {
+              "uri": "https://support.contoso.com/incidents/INC-SEC-2025-001",
+              "description": "Related security compliance support incident",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "accessElevationRequest": {
+              "uri": "https://access.contoso.com/elevation/SEC-ELV-001",
+              "description": "Subscription-level access elevation for security updates",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "relatedChangeState": {
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/security-pilot",
+              "description": "Related pilot security update change state",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "testResults": {
+              "uri": "https://testresults.contoso.com/runs/security-compliance-2025-01",
+              "description": "Security compliance validation test results",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            },
+            "serviceCatalog": {
+              "uri": "https://catalog.contoso.com/services/security-compliance",
+              "description": "Security compliance service catalog entry",
+              "lastModifiedBy": "security@contoso.com",
+              "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+            }
+          },
+          "additionalData": {
+            "complianceStandard": "SOC2-Type2",
+            "approvalBoard": "Security Review Board",
+            "emergencyContact": "security@contoso.com"
+          },
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/testChangeState",
+        "name": "testChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "security@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "security@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

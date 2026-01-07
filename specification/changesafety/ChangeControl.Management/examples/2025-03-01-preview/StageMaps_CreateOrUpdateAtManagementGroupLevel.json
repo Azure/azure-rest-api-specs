@@ -1,0 +1,170 @@
+{
+  "title": "StageMaps_CreateOrUpdateAtManagementGroupLevel_MaximumSet",
+  "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "stageMapName": "sampleStageMap",
+    "api-version": "2025-03-01-preview",
+    "resource": {
+      "properties": {
+        "stages": [
+          {
+            "name": "stage1",
+            "sequence": 1,
+            "parameterValues": {
+              "param1": "value1"
+            }
+          },
+          {
+            "name": "stage2",
+            "sequence": 2,
+            "parameterValues": {
+              "param1": "value2"
+            }
+          }
+        ],
+        "parameters": {
+          "param1": {
+            "type": "string",
+            "defaultValue": "default",
+            "allowedValues": [
+              "value1",
+              "value2",
+              "default"
+            ]
+          }
+        }
+      }
+    },
+    "parameters": {
+      "properties": {
+        "stages": [
+          {
+            "name": "stage1",
+            "sequence": 1,
+            "parameterValues": {
+              "param1": "value1"
+            }
+          },
+          {
+            "name": "stage2",
+            "sequence": 2,
+            "parameterValues": {
+              "param1": "value2"
+            }
+          }
+        ],
+        "parameters": {
+          "param1": {
+            "type": "string",
+            "defaultValue": "default"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+        "name": "sampleStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stages": [
+            {
+              "name": "stage1",
+              "sequence": 1,
+              "parameterValues": {
+                "param1": {
+                  "value": "value1",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "stage2",
+              "sequence": 2,
+              "parameterValues": {
+                "param1": {
+                  "value": "value2",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
+                }
+              }
+            }
+          ],
+          "parameters": {
+            "param1": {
+              "type": "string",
+              "defaultValue": "default",
+              "allowedValues": [
+                "value1",
+                "value2",
+                "default"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap",
+        "name": "sampleStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "properties": {
+          "provisioningState": "Creating",
+          "stages": [
+            {
+              "name": "stage1",
+              "sequence": 1,
+              "parameterValues": {
+                "param1": {
+                  "value": "value1",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "stage2",
+              "sequence": 2,
+              "parameterValues": {
+                "param1": {
+                  "value": "value2",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
+                }
+              }
+            }
+          ],
+          "parameters": {
+            "param1": {
+              "type": "string",
+              "defaultValue": "default",
+              "allowedValues": [
+                "value1",
+                "value2",
+                "default"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

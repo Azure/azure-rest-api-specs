@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -136,7 +133,7 @@ model AwsOpenSearchDomainStatusProperties {
   logPublishingOptions?: Record<LogPublishingOption>;
 
   @doc("<p>Information about the domain properties that are currently being modified.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   modifyingProperties?: ModifyingProperties[];
 
   @doc("<p>Whether node-to-node encryption is enabled or disabled.</p>")
@@ -1092,12 +1089,14 @@ model SAMLOptionsOutput {
   @doc("<p>Describes the SAML identity provider's information.</p>")
   idp?: SAMLIdp;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The key used for matching the SAML roles attribute.</p>")
   rolesKey?: string;
 
   @doc("<p>The duration, in minutes, after which a user session becomes inactive.</p>")
   sessionTimeoutMinutes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The key used for matching the SAML subject attribute.</p>")
   subjectKey?: string;
 }

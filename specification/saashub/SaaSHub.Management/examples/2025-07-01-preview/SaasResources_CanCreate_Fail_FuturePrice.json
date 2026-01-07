@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "name": "myResourceName",
+      "type": "Microsoft.SaaSHub/SaasResources",
+      "properties": {
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyFuturePriceConstraints",
+        "reason": "Failed to satisfy future price constraints",
+        "additionalInfo": {
+          "addOn": null,
+          "promotion": null,
+          "futurePrice": [
+            {
+              "termEndDate": "2026-03-12T00:00:00Z",
+              "totalQuantity": 2501,
+              "isEligible": "Eligible",
+              "qualifyingResources": [
+                {
+                  "resourceName": "qualifyingResourceName"
+                }
+              ],
+              "futurePriceConcessionTypes": [
+                "FuturePercentNotToExceedCap",
+                "FuturePriceNotToExceedCap"
+              ],
+              "minimumQuantityRequired": 2400
+            }
+          ],
+          "coTermDates": null
+        }
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanCreate",
+  "title": "Purchase with Future Price - Failed"
+}

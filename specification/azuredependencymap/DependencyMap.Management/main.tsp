@@ -3,10 +3,12 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+
 import "./models.tsp";
 import "./resources.tsp";
 import "./routes.tsp";
-//import "@azure-tools/typespec-providerhub";
+import "./back-compatible.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -20,6 +22,9 @@ namespace Microsoft.DependencyMap;
 
 /** The available API versions. */
 enum Versions {
+  /** 2024-06-01-preview version */
+  v2024_06_01_preview: "2024-06-01-preview",
+
   /** 2025-01-31-preview version */
   v2025_01_31_preview: "2025-01-31-preview",
 

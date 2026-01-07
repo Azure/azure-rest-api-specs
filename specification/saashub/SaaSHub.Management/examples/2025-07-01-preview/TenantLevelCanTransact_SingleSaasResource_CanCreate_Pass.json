@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "items": [
+        {
+          "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/singleSaasResource",
+          "operationType": "canCreate",
+          "properties": {
+            "displayName": "Single SaaS Resource Check",
+            "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+            "quantity": 100,
+            "autoRenew": "On",
+            "billingScope": "/providers/Microsoft.Billing/billingAccounts/12345/billingProfiles/67890/invoiceSections/11111",
+            "term": {
+              "startDate": "2025-01-01T00:00:00Z"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/singleSaasResource",
+            "approvalCode": "d0e1f2a3-b4c5-6789-3456-890123456789",
+            "operationType": "canCreate",
+            "result": {
+              "evaluateResult": "Passed",
+              "reasonCode": null,
+              "reason": null,
+              "additionalInfo": null
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanTransact",
+  "title": "Tenant Level CanTransact - Single SaasResource CanCreate - Passed"
+}

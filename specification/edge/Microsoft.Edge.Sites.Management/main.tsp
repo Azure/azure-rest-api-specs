@@ -2,13 +2,10 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
 import "./Site.tsp";
+import "./SiteAwareResourceTypes.tsp";
+import "./backward-compatibles.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -22,13 +19,6 @@ namespace Microsoft.Edge;
 
 @doc("Supported API Versions")
 enum Versions {
-  @doc("API Version - 2024-02-01-preview")
-  v2024_02_01_preview: "2024-02-01-preview",
-
   @doc("API Version - 2025-03-01-preview")
   v2025_03_01_preview: "2025-03-01-preview",
-
-  @doc("API Version - 2025-06-01")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2025_06_01: "2025-06-01",
 }

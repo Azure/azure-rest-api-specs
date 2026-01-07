@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "account": {
+      "sku": {
+        "name": "S7"
+      }
+    },
+    "accountName": "MyAccount1",
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "MyAccount1",
+        "type": "Microsoft.Bing/accounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount1",
+        "kind": "Bing.Search.v7",
+        "location": "global",
+        "properties": {
+          "endpoint": "https://api.bing.microsoft.com/",
+          "internalId": "00000000000000000000000000000000",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "S7"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "http://azure.async.operation/status",
+        "Location": "http://azure.async.operation/status",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "Accounts_Update",
+  "title": "Update Account"
+}

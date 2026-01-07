@@ -1,0 +1,1028 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Frontdoor management service",
+    "version": "2024-01-01-preview",
+    "description": "Azure Frontdoor VM management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "VmResources"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PublicIpAddresses"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Frontdoor/locations/{location}/publicIpAddresses": {
+      "get": {
+        "operationId": "PublicIpAddresses_List",
+        "tags": [
+          "PublicIpAddresses"
+        ],
+        "description": "List PublicIpAddress resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIpAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicIpAddresses_List": {
+            "$ref": "./examples/PublicIpAddresses_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/publicIpAddresses/{publicIpAddress}": {
+      "get": {
+        "operationId": "PublicIpAddresses_Get",
+        "tags": [
+          "PublicIpAddresses"
+        ],
+        "description": "Get a PublicIpAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "publicIpAddress",
+            "in": "path",
+            "description": "The public ip address",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-]{3,32}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicIpAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicIpAddresses_Get": {
+            "$ref": "./examples/PublicIpAddresses_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/virtualMachines": {
+      "get": {
+        "operationId": "VmResources_ListByTenant",
+        "tags": [
+          "VmResources"
+        ],
+        "description": "List VmResource resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmResources_ListByTenant_MaximumSet_Gen": {
+            "$ref": "./examples/VmResources_ListByTenant_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/virtualMachines/{virtualMachineName}": {
+      "get": {
+        "operationId": "VmResources_Get",
+        "tags": [
+          "VmResources"
+        ],
+        "description": "Get a VmResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "VirtualMachines",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+[-_]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VmResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VmResources_Get_MaximumSet_Gen": {
+            "$ref": "./examples/VmResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssetTypeVM": {
+      "type": "string",
+      "description": "AssetTypeVM enum",
+      "enum": [
+        "BaremetalVM"
+      ],
+      "x-ms-enum": {
+        "name": "AssetTypeVM",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BaremetalVM",
+            "value": "BaremetalVM",
+            "description": "AssetType enum BaremetalVM"
+          }
+        ]
+      }
+    },
+    "Azure.Core.ipV4Address": {
+      "type": "string",
+      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
+    },
+    "Azure.Core.ipV6Address": {
+      "type": "string",
+      "description": "Represent an IP V6 address serialized as a string.\n\nIt is formatted as eight hex decimal values(16-bit) between 0 and FFFF separated by colon. (i.e. `y:y:y:y:y:y:y:y`)"
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Cloud": {
+      "type": "string",
+      "description": "Cloud enum",
+      "enum": [
+        "Public"
+      ],
+      "x-ms-enum": {
+        "name": "Cloud",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Cloud enum Public"
+          }
+        ]
+      }
+    },
+    "DatacenterResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "Environment": {
+      "type": "string",
+      "description": "Environment enum",
+      "enum": [
+        "Prod",
+        "PPE",
+        "Test"
+      ],
+      "x-ms-enum": {
+        "name": "Environment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Prod",
+            "value": "Prod",
+            "description": "Environment enum Prod"
+          },
+          {
+            "name": "PPE",
+            "value": "PPE",
+            "description": "Environment enum PPE (known 1st party customer data managed pre-prod traffic/canary)"
+          },
+          {
+            "name": "Test",
+            "value": "Test",
+            "description": "Environment enum Test"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.AllocationType": {
+      "type": "string",
+      "description": "Enum for AllocationType",
+      "enum": [
+        "Unicast",
+        "Multicast",
+        "Anycast"
+      ],
+      "x-ms-enum": {
+        "name": "AllocationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unicast",
+            "value": "Unicast",
+            "description": "Unicast AllocationType"
+          },
+          {
+            "name": "Multicast",
+            "value": "Multicast",
+            "description": "Multicast AllocationType"
+          },
+          {
+            "name": "Anycast",
+            "value": "Anycast",
+            "description": "Anycast AllocationType"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.AssetIdType": {
+      "type": "string",
+      "description": "Enum for AssetIdType",
+      "enum": [
+        "ContainerId",
+        "VirtualMachineUniqueId",
+        "ArmId",
+        "DeploymentId"
+      ],
+      "x-ms-enum": {
+        "name": "AssetIdType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ContainerId",
+            "value": "ContainerId",
+            "description": "ContainerId AssetIdType"
+          },
+          {
+            "name": "VirtualMachineUniqueId",
+            "value": "VirtualMachineUniqueId",
+            "description": "VirtualMachineUniqueId AssetIdType"
+          },
+          {
+            "name": "ArmId",
+            "value": "ArmId",
+            "description": "ArmId AssetIdType"
+          },
+          {
+            "name": "DeploymentId",
+            "value": "DeploymentId",
+            "description": "DeploymentId AssetIdType"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.AssetSubType": {
+      "type": "string",
+      "description": "Enum for AssetSubType",
+      "enum": [
+        "VirtualMachine"
+      ],
+      "x-ms-enum": {
+        "name": "AssetSubType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "VirtualMachine AssetSubType"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.AssetType": {
+      "type": "string",
+      "description": "Enum for AssetType",
+      "enum": [
+        "Physical",
+        "Logical"
+      ],
+      "x-ms-enum": {
+        "name": "AssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Physical",
+            "value": "Physical",
+            "description": "Physical AssetType"
+          },
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical AssetType"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.Cloud": {
+      "type": "string",
+      "description": "Enum for cloud",
+      "enum": [
+        "Public",
+        "USNat",
+        "Fairfax",
+        "Mooncake"
+      ],
+      "x-ms-enum": {
+        "name": "Cloud",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Public cloud"
+          },
+          {
+            "name": "USNat",
+            "value": "USNat",
+            "description": "USNat cloud"
+          },
+          {
+            "name": "Fairfax",
+            "value": "Fairfax",
+            "description": "Fairfax cloud"
+          },
+          {
+            "name": "Mooncake",
+            "value": "Mooncake",
+            "description": "Mooncake cloud"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.IpAddressState": {
+      "type": "string",
+      "description": "Enum for State",
+      "enum": [
+        "Managed",
+        "Allocated",
+        "Active",
+        "Retired"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed State"
+          },
+          {
+            "name": "Allocated",
+            "value": "Allocated",
+            "description": "Allocated State"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active State"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "Retired State"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.IpType": {
+      "type": "string",
+      "description": "Enum for IP Type",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "IPv4 type"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "IPv6 type"
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.IsFirstParty": {
+      "type": "string",
+      "description": "Conditions for whether the resource is first party.",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "IsFirstParty",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "true",
+            "description": "The resource is first party."
+          },
+          {
+            "name": "False",
+            "value": "false",
+            "description": "The resource is not first party."
+          }
+        ]
+      }
+    },
+    "Microsoft.Inventory.CommonTypes.PublicIpAddressPropertiesBase": {
+      "type": "object",
+      "description": "Properties for IpAddress resources",
+      "properties": {
+        "ipType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.IpType",
+          "description": "IPv4 or IPv6 type"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IPv4 or IPv6 address (CIDR ranges OK)"
+        },
+        "state": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.IpAddressState",
+          "description": "Managed, Allocated, Active, Retired"
+        },
+        "isFirstParty": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.IsFirstParty",
+          "description": "Whether the IP belongs to a 1P service"
+        },
+        "allocationType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AllocationType",
+          "description": "Allocation type (Anycast, Multicast, ..)"
+        },
+        "allocationSourceServiceTreeId": {
+          "type": "string",
+          "description": "Source allocating this IP address (IPAM or sub-allocators)"
+        },
+        "reportingServiceTreeId": {
+          "type": "string",
+          "description": "Service responsible for this IP Address (e.g. sub-allocator, HOBO provider)"
+        },
+        "ownerSubscriptionId": {
+          "type": "string",
+          "description": "Owner subscription Id"
+        },
+        "assetType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AssetType",
+          "description": "The type of the resource to which this IP address belongs (Physical/Logical)"
+        },
+        "assetSubType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AssetSubType",
+          "description": "The subtype of the resource to which this IP address belongs"
+        },
+        "assetId": {
+          "type": "string",
+          "description": "Unique identifier for the resource to which which this IP address belongs"
+        },
+        "assetIdType": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.AssetIdType",
+          "description": "Indicates the type of the assetId provided."
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "Fully Qualified Domain Name of the asset"
+        },
+        "cloud": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.Cloud",
+          "description": "Cloud where the asset exists"
+        },
+        "dcCode": {
+          "type": "string",
+          "description": "The Data Center where this asset resides"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ipType",
+        "ipAddress",
+        "state",
+        "isFirstParty",
+        "allocationType",
+        "allocationSourceServiceTreeId",
+        "reportingServiceTreeId",
+        "ownerSubscriptionId",
+        "assetType",
+        "assetSubType",
+        "assetId",
+        "assetIdType",
+        "fullyQualifiedDomainName",
+        "cloud",
+        "dcCode"
+      ]
+    },
+    "OsProperties": {
+      "type": "object",
+      "description": "OSProperties composed of osVersion, osType, osName, osBuild",
+      "properties": {
+        "osVersion": {
+          "type": "string",
+          "description": "Version of Operating System running on the virtual machine"
+        },
+        "osType": {
+          "$ref": "#/definitions/OsType",
+          "description": "Type  of Operating System running on the virtual machine (Windows, Linux)"
+        },
+        "osName": {
+          "type": "string",
+          "description": "Operating System running on the virtual machine (Ubuntu, Mariner)"
+        },
+        "osBuild": {
+          "type": "string",
+          "description": "OS Build Number"
+        }
+      },
+      "required": [
+        "osVersion",
+        "osType"
+      ]
+    },
+    "OsType": {
+      "type": "string",
+      "description": "OsType enum",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OsType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "OsType enum Windows"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "OsType enum Windows"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state enum",
+      "enum": [
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource action is successful."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource action has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource action has been cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource provisioning has been accepted."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The resource has been deleted."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource status is unspecified."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicIpAddress": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Microsoft.Inventory.CommonTypes.PublicIpAddressPropertiesBase",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PublicIpAddressListResult": {
+      "type": "object",
+      "description": "The response of a PublicIpAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicIpAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicIpAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "Status enum",
+      "enum": [
+        "Alive",
+        "Suspended",
+        "Decommissioned",
+        "Provisioned",
+        "Not Provisioned"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Alive",
+            "value": "Alive",
+            "description": "Status enum Alive"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Status enum Suspended"
+          },
+          {
+            "name": "Decommissioned",
+            "value": "Decommissioned",
+            "description": "Status enum Decommissioned"
+          },
+          {
+            "name": "Provisioned",
+            "value": "Provisioned",
+            "description": "Status enum Provisioned"
+          },
+          {
+            "name": "notProvisioned",
+            "value": "Not Provisioned",
+            "description": "Status enum Not Provisioned"
+          }
+        ]
+      }
+    },
+    "VmProperties": {
+      "type": "object",
+      "description": "VirtualMachine Properties",
+      "properties": {
+        "virtualMachineName": {
+          "type": "string",
+          "description": "Unique identifier for the VM (hostname + VM) used as identifier"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "physicalHostName": {
+          "type": "string",
+          "description": "Name of the physical server/machine this VM is running atop of"
+        },
+        "environment": {
+          "$ref": "#/definitions/Environment",
+          "description": "Whether this is in production or not (Prod, PPE, Test)"
+        },
+        "datacenterCode": {
+          "type": "string",
+          "description": "3 letter Data Center where this asset resides"
+        },
+        "cloud": {
+          "$ref": "#/definitions/Cloud",
+          "description": "Cloud the virtual machine exists in  (Public)"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "current machine status (Alive, Suspended, Decommissioned, Provisioned, Not Provisioned)"
+        },
+        "hostAssetTag": {
+          "type": "string",
+          "description": "Asset Tag of parent physicalHostName"
+        },
+        "hostSerialNumber": {
+          "type": "string",
+          "description": "Serial number of parent physicalHostName"
+        },
+        "assetType": {
+          "$ref": "#/definitions/AssetTypeVM",
+          "description": "Type of machine being tracked (BaremetalVM)"
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Logical Environment Name"
+        },
+        "osProperties": {
+          "$ref": "#/definitions/OsProperties",
+          "description": "OS Properties for the machine"
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "IPv4 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ipv4MsPrivateAddresses": {
+          "type": "array",
+          "description": "MS private IPv4 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "IPv6 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
+          }
+        },
+        "ipv6LinkLocalAddresses": {
+          "type": "array",
+          "description": "Link local IPv6 addresses for the machine",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV6Address"
+          }
+        }
+      },
+      "required": [
+        "virtualMachineName",
+        "physicalHostName",
+        "environment",
+        "datacenterCode",
+        "cloud",
+        "status",
+        "osProperties",
+        "ipv4Addresses",
+        "ipv4MsPrivateAddresses",
+        "ipv6Addresses",
+        "ipv6LinkLocalAddresses"
+      ]
+    },
+    "VmResource": {
+      "type": "object",
+      "description": "AFD VM resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VmProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VmResourceListResult": {
+      "type": "object",
+      "description": "The response of a VmResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VmResource items on this page",
+          "items": {
+            "$ref": "#/definitions/VmResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -35,7 +35,7 @@ model StandbyVirtualMachineResource
 @doc("Details of the StandbyVirtualMachine.")
 model StandbyVirtualMachineResourceProperties {
   @doc("Resource id of the virtual machine.")
-  virtualMachineResourceId: Azure.Core.armResourceIdentifier<[]>;
+  virtualMachineResourceId: string;
 
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
@@ -45,5 +45,6 @@ model StandbyVirtualMachineResourceProperties {
 @armResourceOperations
 interface StandbyVirtualMachines {
   get is ArmResourceRead<StandbyVirtualMachineResource>;
+  @list
   listByStandbyVirtualMachinePoolResource is ArmResourceListByParent<StandbyVirtualMachineResource>;
 }

@@ -1,0 +1,64 @@
+{
+  "title": "LibraryOperations_Create",
+  "operationId": "LibraryOperations_Create",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "default-rg",
+    "libraryName": "fastlib",
+    "resource": {
+      "properties": {
+        "storageAccount": "DefaultEndpointsProtocol=http;AccountName=myAccount;AccountKey=*;BlobEndpoint=https://myAccount.blob.core.windows.net;",
+        "containerName": "myContainer"
+      },
+      "tags": {},
+      "location": "uswest2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageAccount": "https://myAccount.blob.core.windows.net",
+          "containerName": "myContainer",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib",
+        "name": "fastlib",
+        "type": "Microsoft.Premonition/libraries",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "storageAccount": "https://myAccount.blob.core.windows.net",
+          "containerName": "myContainer",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib",
+        "name": "fastlib",
+        "type": "Microsoft.Premonition/libraries",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    }
+  }
+}

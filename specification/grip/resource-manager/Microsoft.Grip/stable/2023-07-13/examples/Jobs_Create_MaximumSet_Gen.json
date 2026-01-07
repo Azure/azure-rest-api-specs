@@ -1,0 +1,396 @@
+{
+  "title": "Jobs_Create_MaximumSet_Gen",
+  "operationId": "Jobs_Create",
+  "parameters": {
+    "api-version": "2023-07-13",
+    "subscriptionId": "2247880C-7885-42ED-8580-7A02FE229F6F",
+    "resourceGroupName": "grip-internal",
+    "location": "uswest",
+    "jobName": "Powercapping-ChassisFiltering",
+    "body": {
+      "properties": {
+        "jobId": "Powercapping-ChassisFiltering",
+        "kafkaSources": [
+          {
+            "offset": 25,
+            "enableNestedRecords": true,
+            "enableFlattenRecords": true,
+            "rebalanceFromCommittedOffset": true,
+            "endpoint": "uswest.azpubsub.windows.net",
+            "target": "zone",
+            "connectionType": "appki",
+            "topic": "OneFleet",
+            "schema": "json",
+            "useUnsecureConnection": true,
+            "enableLogging": true,
+            "format": "json"
+          }
+        ],
+        "cosmosReferenceSources": [
+          {
+            "inputAlias": "test",
+            "refreshRate": "00:00:05",
+            "query": "SELECT * FROM c",
+            "database": "testdb",
+            "container": "testc",
+            "connectionScheme": {
+              "type": "connectionString",
+              "value": "test@windows.net"
+            },
+            "enableBulkMode": true,
+            "preferredRegions": [
+              "uswest"
+            ],
+            "defaultTimeToLive": 8
+          }
+        ],
+        "cosmosChangeFeedSources": [
+          {
+            "inputAlias": "test",
+            "leaseContainer": "test",
+            "filter": "",
+            "database": "testdb",
+            "container": "testc",
+            "connectionScheme": {
+              "type": "connectionString",
+              "value": "test@windows.net"
+            },
+            "enableBulkMode": true,
+            "preferredRegions": [
+              "uswest"
+            ],
+            "defaultTimeToLive": 27
+          }
+        ],
+        "kafkaOutputs": [
+          {
+            "partitionKeyPath": "/id",
+            "ignoreErrors": true,
+            "useReliableProducer": true,
+            "postProcessFunction": "vbst",
+            "useAsyncProducer": true,
+            "useRetries": true,
+            "markerWriteIntervalInSeconds": 19,
+            "bondSerializerPath": "ViaJson",
+            "endpoint": "azpubsub@windows.net",
+            "target": "zone",
+            "connectionType": "appki",
+            "topic": "oneFleet",
+            "schema": "json",
+            "useUnsecureConnection": true,
+            "enableLogging": true,
+            "format": "json"
+          }
+        ],
+        "cosmosOutputs": [
+          {
+            "outputAlias": "test",
+            "partitionKey": "/id",
+            "documentId": "123",
+            "producerConfiguration": {
+              "batchSizeInBytes": 22,
+              "lingerMs": 28,
+              "retries": 1,
+              "retryBackoffMs": 27
+            },
+            "ignoreErrors": true,
+            "postProcessFunction": "funcOut.js"
+          }
+        ],
+        "outputBufferEnabled": true,
+        "bufferSize": 1000,
+        "query": "SLECT * FROM input",
+        "streamingUnits": 20,
+        "diskStorageConfiguration": {
+          "enabled": true,
+          "quotaInMb": 1500
+        },
+        "trillConfiguration": {
+          "disorderPolicy": "Adjust",
+          "maxOutOfOrderAllowedTicks": 6,
+          "onCompletedPolicy": "Drop",
+          "punctuationGenerationPeriod": 1000,
+          "dataBatchSize": 14,
+          "clearColumnOnReturn": true,
+          "forceRowBasedExecution": true
+        },
+        "injectFaultInMins": 12,
+        "enableIngressEventLogging": true,
+        "enableOutOfOrderEventLogging": true,
+        "dataLossSensitivity": 13,
+        "checkpointWriteInterval": "00:00:05",
+        "checkpointWriteOperationWaitMs": 30,
+        "logLevel": 11,
+        "yieldOutputMessageProcessing": true,
+        "hostedFunctionsRunnerCount": 20,
+        "tier": 28
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobId": "Powercapping-ChassisFiltering",
+          "kafkaSources": [
+            {
+              "offset": 25,
+              "enableNestedRecords": true,
+              "enableFlattenRecords": true,
+              "rebalanceFromCommittedOffset": true,
+              "endpoint": "uswest.azpubsub.windows.net",
+              "target": "zone",
+              "connectionType": "appki",
+              "topic": "OneFleet",
+              "schema": "json",
+              "useUnsecureConnection": true,
+              "enableLogging": true,
+              "format": "json"
+            }
+          ],
+          "cosmosReferenceSources": [
+            {
+              "inputAlias": "test",
+              "refreshRate": "00:00:05",
+              "query": "SELECT * FROM c",
+              "database": "testdb",
+              "container": "testc",
+              "connectionScheme": {
+                "type": "connectionString",
+                "value": "test@windows.net"
+              },
+              "enableBulkMode": true,
+              "preferredRegions": [
+                "uswest"
+              ],
+              "defaultTimeToLive": 8
+            }
+          ],
+          "cosmosChangeFeedSources": [
+            {
+              "inputAlias": "test",
+              "leaseContainer": "test",
+              "filter": "",
+              "database": "testdb",
+              "container": "testc",
+              "connectionScheme": {
+                "type": "connectionString",
+                "value": "test@windows.net"
+              },
+              "enableBulkMode": true,
+              "preferredRegions": [
+                "uswest"
+              ],
+              "defaultTimeToLive": 27
+            }
+          ],
+          "kafkaOutputs": [
+            {
+              "partitionKeyPath": "/id",
+              "ignoreErrors": true,
+              "useReliableProducer": true,
+              "postProcessFunction": "vbst",
+              "useAsyncProducer": true,
+              "useRetries": true,
+              "markerWriteIntervalInSeconds": 19,
+              "bondSerializerPath": "ViaJson",
+              "endpoint": "azpubsub@windows.net",
+              "target": "zone",
+              "connectionType": "appki",
+              "topic": "oneFleet",
+              "schema": "json",
+              "useUnsecureConnection": true,
+              "enableLogging": true,
+              "format": "json"
+            }
+          ],
+          "cosmosOutputs": [
+            {
+              "outputAlias": "test",
+              "partitionKey": "/id",
+              "documentId": "123",
+              "producerConfiguration": {
+                "batchSizeInBytes": 22,
+                "lingerMs": 28,
+                "retries": 1,
+                "retryBackoffMs": 27
+              },
+              "ignoreErrors": true,
+              "postProcessFunction": "funcOut.js"
+            }
+          ],
+          "outputBufferEnabled": true,
+          "bufferSize": 1000,
+          "query": "SLECT * FROM input",
+          "streamingUnits": 20,
+          "diskStorageConfiguration": {
+            "enabled": true,
+            "quotaInMb": 1500
+          },
+          "trillConfiguration": {
+            "disorderPolicy": "Adjust",
+            "maxOutOfOrderAllowedTicks": 6,
+            "onCompletedPolicy": "Drop",
+            "punctuationGenerationPeriod": 1000,
+            "dataBatchSize": 14,
+            "clearColumnOnReturn": true,
+            "forceRowBasedExecution": true
+          },
+          "injectFaultInMins": 12,
+          "enableIngressEventLogging": true,
+          "enableOutOfOrderEventLogging": true,
+          "dataLossSensitivity": 13,
+          "checkpointWriteInterval": "00:00:05",
+          "checkpointWriteOperationWaitMs": 30,
+          "logLevel": 11,
+          "yieldOutputMessageProcessing": true,
+          "hostedFunctionsRunnerCount": 20,
+          "tier": 28
+        },
+        "id": "/subscriptions/2247880C-7885-42ED-8580-7A02FE229F6F/resourceGroups/rgopenapi/providers/Microsoft.Frontdoor/locations/eastus/jobs/jobName",
+        "name": "Powercapping-ChassisFiltering",
+        "type": "Job",
+        "systemData": {
+          "createdBy": "testalias",
+          "createdByType": "User",
+          "createdAt": "2024-02-15T19:50:32.831Z",
+          "lastModifiedBy": "testalias",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-15T19:50:32.831Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "jobId": "Powercapping-ChassisFiltering",
+          "kafkaSources": [
+            {
+              "offset": 25,
+              "enableNestedRecords": true,
+              "enableFlattenRecords": true,
+              "rebalanceFromCommittedOffset": true,
+              "endpoint": "uswest.azpubsub.windows.net",
+              "target": "zone",
+              "connectionType": "appki",
+              "topic": "OneFleet",
+              "schema": "json",
+              "useUnsecureConnection": true,
+              "enableLogging": true,
+              "format": "json"
+            }
+          ],
+          "cosmosReferenceSources": [
+            {
+              "inputAlias": "test",
+              "refreshRate": "00:00:05",
+              "query": "SELECT * FROM c",
+              "database": "testdb",
+              "container": "testc",
+              "connectionScheme": {
+                "type": "connectionString",
+                "value": "test@windows.net"
+              },
+              "enableBulkMode": true,
+              "preferredRegions": [
+                "uswest"
+              ],
+              "defaultTimeToLive": 8
+            }
+          ],
+          "cosmosChangeFeedSources": [
+            {
+              "inputAlias": "test",
+              "leaseContainer": "test",
+              "filter": "",
+              "database": "testdb",
+              "container": "testc",
+              "connectionScheme": {
+                "type": "connectionString",
+                "value": "test@windows.net"
+              },
+              "enableBulkMode": true,
+              "preferredRegions": [
+                "uswest"
+              ],
+              "defaultTimeToLive": 27
+            }
+          ],
+          "kafkaOutputs": [
+            {
+              "partitionKeyPath": "/id",
+              "ignoreErrors": true,
+              "useReliableProducer": true,
+              "postProcessFunction": "vbst",
+              "useAsyncProducer": true,
+              "useRetries": true,
+              "markerWriteIntervalInSeconds": 19,
+              "bondSerializerPath": "ViaJson",
+              "endpoint": "azpubsub@windows.net",
+              "target": "zone",
+              "connectionType": "appki",
+              "topic": "oneFleet",
+              "schema": "json",
+              "useUnsecureConnection": true,
+              "enableLogging": true,
+              "format": "json"
+            }
+          ],
+          "cosmosOutputs": [
+            {
+              "outputAlias": "test",
+              "partitionKey": "/id",
+              "documentId": "123",
+              "producerConfiguration": {
+                "batchSizeInBytes": 22,
+                "lingerMs": 28,
+                "retries": 1,
+                "retryBackoffMs": 27
+              },
+              "ignoreErrors": true,
+              "postProcessFunction": "funcOut.js"
+            }
+          ],
+          "outputBufferEnabled": true,
+          "bufferSize": 1000,
+          "query": "SLECT * FROM input",
+          "streamingUnits": 20,
+          "diskStorageConfiguration": {
+            "enabled": true,
+            "quotaInMb": 1500
+          },
+          "trillConfiguration": {
+            "disorderPolicy": "Adjust",
+            "maxOutOfOrderAllowedTicks": 6,
+            "onCompletedPolicy": "Drop",
+            "punctuationGenerationPeriod": 1000,
+            "dataBatchSize": 14,
+            "clearColumnOnReturn": true,
+            "forceRowBasedExecution": true
+          },
+          "injectFaultInMins": 12,
+          "enableIngressEventLogging": true,
+          "enableOutOfOrderEventLogging": true,
+          "dataLossSensitivity": 13,
+          "checkpointWriteInterval": "00:00:05",
+          "checkpointWriteOperationWaitMs": 30,
+          "logLevel": 11,
+          "yieldOutputMessageProcessing": true,
+          "hostedFunctionsRunnerCount": 20,
+          "tier": 28
+        },
+        "id": "/subscriptions/2247880C-7885-42ED-8580-7A02FE229F6F/resourceGroups/rgopenapi/providers/Microsoft.Frontdoor/locations/eastus/jobs/jobName",
+        "name": "Powercapping-ChassisFiltering",
+        "type": "Job",
+        "systemData": {
+          "createdBy": "testalias",
+          "createdByType": "User",
+          "createdAt": "2024-02-15T19:50:32.831Z",
+          "lastModifiedBy": "testalias",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-15T19:50:32.831Z"
+        }
+      }
+    }
+  }
+}

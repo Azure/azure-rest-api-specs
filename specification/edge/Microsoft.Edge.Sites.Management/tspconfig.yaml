@@ -10,6 +10,9 @@ parameters:
     default: "sitemanager"
 emit:
   - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -23,7 +26,7 @@ options:
     service-name: "Site Manager"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sitemanager"
     namespace: "azure.mgmt.sitemanager"
     generate-test: true
     generate-sample: true
@@ -31,7 +34,7 @@ options:
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     flavor: azure
-    package-dir: "arm-sitemanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sitemanager"
     package-details:
       name: "@azure/arm-sitemanager"
   "@azure-tools/typespec-csharp":
@@ -50,6 +53,3 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"

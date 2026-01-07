@@ -1,0 +1,26 @@
+{
+  "title": "ChangeStates_RetrieveNextStages_MaximumSet_At_Subscription_Level",
+  "operationId": "ChangeStates_RetrieveNextStagesAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "subscriptionId": "26c33ec0-21f5-4889-8776-62038bf7881b",
+    "changeStateName": "demochangestate"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeStateResourceId": "/subscriptions/26c33ec0-21f5-4889-8776-62038bf7881b/resourceGroups/AzureChangeControlPrivateRP/providers/Microsoft.ChangeSafety/changeStates/demoChangeState",
+        "lastStageSequence": 2,
+        "nextStages": [
+          {
+            "stageReference": "Audit/canary",
+            "parameterValues": {
+              "location": "eastuseuap",
+              "stageParameter1": "stageParameterValue1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

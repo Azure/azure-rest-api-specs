@@ -97,11 +97,11 @@ model AwsNetworkFirewallFirewallProperties {
   subnetChangeProtection?: boolean;
 
   @doc("Property subnetMappings")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   subnetMappings?: SubnetMapping[];
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property vpcId")

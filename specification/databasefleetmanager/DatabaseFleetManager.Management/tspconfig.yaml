@@ -10,11 +10,12 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/databasefleetmanager.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-databasefleetmanager"
-    namespace: "azure.mgmt.databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databasefleetmanager"
+    package-name: "azure-mgmt-databasefleetmanager"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+    namespace: azure.mgmt.databasefleetmanager #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databasefleetmanager"
     namespace: "com.azure.resourcemanager.databasefleetmanager"
@@ -31,16 +32,18 @@ options:
     head-as-boolean: true
     inject-spans: true
     remove-unreferenced-types: true
+    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DatabaseFleetManager"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.DatabaseFleetManager"
   "@azure-tools/typespec-ts":
+    is-modular-library: true
     experimental-extensible-enums: true
-    package-dir: "arm-databasefleetmanager"
-    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databasefleetmanager"
+    flavor: "azure"
     package-details:
       name: "@azure/arm-databasefleetmanager"
 linter:

@@ -1,0 +1,43 @@
+{
+  "operationId": "SegmentationManagers_ListByResourceGroup",
+  "title": "List SegmentationManagers by resource group",
+  "parameters": {
+    "segmentationManagerName": "sample-segmentationManager",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426614174000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.ZeroTrustSegmentation/segmentationManagers/sample-segmentationManager",
+            "name": "sample-segmentationManager",
+            "type": "Microsoft.ZeroTrustSegmentation/segmentationManagers",
+            "location": "westeurope",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identity-name}": {}
+              }
+            },
+            "properties": {
+              "logSources": [
+                "/subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/{resource-provider}/{resource-type}/{resource-name}"
+              ],
+              "analysisRunType": "OneTime",
+              "startTime": "2023-10-01T00:00:00Z",
+              "endTime": "2023-10-02T00:00:00Z",
+              "segmentationMode": "Automatic",
+              "description": "Example description of the segmentation manager",
+              "provisioningState": "Succeeded",
+              "managedBy": "subscriptions/{subscription-id}/resourceGroups/{resource-group}/providers/Microsoft.Network/networkManagers/{resource-name}"
+            }
+          }
+        ],
+        "nextLink": "https://next-link.com"
+      }
+    }
+  }
+}

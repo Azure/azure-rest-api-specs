@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -92,6 +89,7 @@ model AwsCodeBuildProjectProperties {
   @doc("<p>A description that makes the build project easy to identify.</p>")
   description?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). If you don't specify a value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3). </p>")
   encryptionKey?: string;
 
@@ -99,7 +97,7 @@ model AwsCodeBuildProjectProperties {
   environment?: ProjectEnvironment;
 
   @doc("<p> An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   fileSystemLocations?: ProjectFileSystemLocation[];
 
   @doc("<p>When the build project's settings were last modified, expressed in Unix time format.</p>")
@@ -124,15 +122,15 @@ model AwsCodeBuildProjectProperties {
   resourceAccessRole?: string;
 
   @doc("<p>An array of <code>ProjectArtifacts</code> objects. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondaryArtifacts?: ProjectArtifacts[];
 
   @doc("<p>An array of <code>ProjectSourceVersion</code> objects. If <code>secondarySourceVersions</code> is specified at the build level, then they take over these <code>secondarySourceVersions</code> (at the project level). </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondarySourceVersions?: ProjectSourceVersion[];
 
   @doc("<p>An array of <code>ProjectSource</code> objects. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   secondarySources?: ProjectSource[];
 
   @doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>")
@@ -145,7 +143,7 @@ model AwsCodeBuildProjectProperties {
   sourceVersion?: string;
 
   @doc("<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>")
@@ -415,7 +413,7 @@ model ProjectEnvironment {
   computeType?: ComputeTypeEnumValue;
 
   @doc("<p>A set of environment variables to make available to builds for this build project.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   environmentVariables?: EnvironmentVariable[];
 
   @doc("<p>A ProjectFleet object to use for this build project.</p>")
@@ -750,7 +748,7 @@ model Webhook {
   buildType?: WebhookBuildTypeEnumValue;
 
   @doc("<p>An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p>For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   filterGroups?: FilterGroup[];
 
   @doc("<p>A timestamp that indicates the last time a repository's secret token was modified. </p>")
@@ -759,6 +757,7 @@ model Webhook {
   @doc("<p>The CodeBuild endpoint where webhook events are sent.</p>")
   payloadUrl?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The secret token of the associated repository. </p> <note> <p>A Bitbucket webhook does not support <code>secret</code>. </p> </note>")
   secret?: string;
 
@@ -856,6 +855,7 @@ model ProjectFleet {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RegistryCredential")
 model RegistryCredential {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p> The Amazon Resource Name (ARN) or name of credentials created using Secrets Manager. </p> <note> <p> The <code>credential</code> can use the name of the credentials only if they exist in your current Amazon Web Services Region. </p> </note>")
   credential?: string;
 

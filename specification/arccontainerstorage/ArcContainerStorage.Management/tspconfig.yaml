@@ -1,0 +1,56 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/arccontainerstorage"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/../resource-manager/Microsoft.ArcContainerStorage/preview/2024-10-01-preview"
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    output-file: "arccontainerstorage.json"
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ArcContainerStorage"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ArcContainerStorage"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-arccontainerstorage"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.arccontainerstorage"
+    service-name: "ArcContainerStorage"
+  "@azure-tools/typespec-ts":
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    hierarchyClient: false
+    experimental-extensible-enums: true
+    enableOperationGroup: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-arccontainerstorage"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-arccontainerstorage"
+  "@azure-tools/typespec-python":
+    namespace: "azure.mgmt.arccontainerstorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-arccontainerstorage"
+    package-name: "azure-mgmt-arccontainerstorage"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+    api-version: "2024-10-01-preview"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/arccontainerstorage"
+    emitter-output-dir: "{output-dir}/{service-dir}/armarccontainerstorage"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armarccontainerstorage"
+    flavor: "azure"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

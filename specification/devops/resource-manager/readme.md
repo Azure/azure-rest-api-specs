@@ -26,25 +26,17 @@ These are the global settings for the devops.
 
 ```yaml
 openapi-type: arm
-tag: package-2019-07-01-preview
+openapi-subtype: rpaas
+tag: package-2020-12-01-preview
 ```
 
-### Tag: package-2020-07-13-preview
+### Tag: package-2020-12-01-preview
 
-These settings apply only when `--tag=package-2020-07-13-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-13-preview'
+```yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-  - Microsoft.DevOps/preview/2020-07-13-preview/devops.json
-```
-
-### Tag: package-2019-07-01-preview
-
-These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-07-01-preview'
-input-file:
-  - Microsoft.DevOps/preview/2019-07-01-preview/devops.json
+  - Microsoft.DevOps/preview/2020-12-01-preview/devops.json
 ```
 
 ---
@@ -58,6 +50,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -68,6 +61,8 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devops']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js devops/resource-manager
   - repo: azure-powershell
 ```
 
@@ -91,14 +86,16 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Terraform
+## trenton
 
-These settings apply only when `--terraform` is specified on the command line.
+These settings apply only when `--trenton` is specified on the command line.
 
-``` yaml $(terraform)
-terraform:
+``` yaml $(trenton)
+trenton:
     cli-name: devops
     azure_arm: true
     license_header: MICROSOFT_MIT_NO_VERSION

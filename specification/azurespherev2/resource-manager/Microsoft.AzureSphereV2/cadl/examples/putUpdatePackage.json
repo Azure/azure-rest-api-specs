@@ -1,0 +1,52 @@
+{
+  "operationId": "UpdatePackages_CreateOrUpdate",
+  "title": "UpdatePackages_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "location": "eastus",
+    "catalogName": "MyCatalog1",
+    "updatePackageName": "MyUpdatePackage1",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "artifactNames": [
+          "artifact1"
+        ]
+      }
+    },
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The details of an update package",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/deployments/MyUpdatePackage1",
+        "name": "MyUpdatePackage1",
+        "type": "Microsoft.AzureSphereGen2/catalogs/updatePackages",
+        "location": "eastus",
+        "properties": {
+          "deploymentState": "Deployed",
+          "artifactNames": [
+            "artifact1"
+          ]
+        }
+      }
+    },
+    "201": {
+      "description": "The details of an update package",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereGen2/catalogs/MyCatalog1/deployments/MyUpdatePackage1",
+        "name": "MyUpdatePackage1",
+        "type": "Microsoft.AzureSphereGen2/catalogs/updatePackages",
+        "location": "eastus",
+        "properties": {
+          "deploymentState": "Deployed",
+          "artifactNames": [
+            "artifact1"
+          ]
+        }
+      }
+    }
+  }
+}

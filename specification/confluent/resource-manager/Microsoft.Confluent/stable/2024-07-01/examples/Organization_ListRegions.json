@@ -1,16 +1,16 @@
 {
   "parameters": {
     "api-version": "2024-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
     "body": {
       "searchFilters": {
         "cloud": "azure",
-        "packages": "ADVANCED,ESSENTIALS",
-        "region": "eastus"
+        "region": "eastus",
+        "packages": "ADVANCED,ESSENTIALS"
       }
-    },
-    "organizationName": "myOrganization",
-    "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
@@ -27,8 +27,8 @@
                 "updatedTimestamp": "2023-04-06T10:24:09.840788Z"
               },
               "spec": {
-                "name": "Iowa (centralus)",
                 "cloud": "AZURE",
+                "name": "Iowa (centralus)",
                 "packages": [
                   "ADVANCED"
                 ],
@@ -39,7 +39,5 @@
         ]
       }
     }
-  },
-  "operationId": "Organization_ListRegions",
-  "title": "Organization_ListRegions"
+  }
 }

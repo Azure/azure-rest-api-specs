@@ -1,0 +1,2029 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "dSCM Service",
+    "version": "2023-08-22-preview",
+    "description": "https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/dscm",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "DsmsAllowlist"
+    },
+    {
+      "name": "DsmsRootFolder"
+    },
+    {
+      "name": "DstsApplications"
+    },
+    {
+      "name": "DstsServiceAccount"
+    },
+    {
+      "name": "DstsServiceClientIdentity"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureCis/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_Operations.json"
+          },
+          "List Operations DsmsRootFolder": {
+            "$ref": "./examples/DsmsRootFolder_Operations.json"
+          },
+          "List Operations DstsApplication": {
+            "$ref": "./examples/DstsApplications_Operations.json"
+          },
+          "List Operations DstsServiceAccount": {
+            "$ref": "./examples/DstsServiceAccount_Operations.json"
+          },
+          "List Operations DstsServiceClientIdentity": {
+            "$ref": "./examples/DstsServiceClientIdentity_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dsmsAllowlists": {
+      "get": {
+        "operationId": "DsmsAllowlist_ListBySubscription",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "List DsmsAllowlistResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dsmsRootFolders": {
+      "get": {
+        "operationId": "DsmsRootFolder_ListBySubscription",
+        "tags": [
+          "DsmsRootFolder"
+        ],
+        "description": "List DsmsRootFolderResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DsmsRootFolder": {
+            "$ref": "./examples/DsmsRootFolder_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dstsApplications": {
+      "get": {
+        "operationId": "DstsApplications_ListBySubscription",
+        "tags": [
+          "DstsApplications"
+        ],
+        "description": "List DstsApplicationResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DstsApplication": {
+            "$ref": "./examples/DstsApplications_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dstsServiceAccounts": {
+      "get": {
+        "operationId": "DstsServiceAccount_ListBySubscription",
+        "tags": [
+          "DstsServiceAccount"
+        ],
+        "description": "List DstsServiceAccountResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DstsServiceAccount": {
+            "$ref": "./examples/DstsServiceAccount_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCis/dstsServiceClientIdentities": {
+      "get": {
+        "operationId": "DstsServiceClientIdentity_ListBySubscription",
+        "tags": [
+          "DstsServiceClientIdentity"
+        ],
+        "description": "List DstsServiceClientIdentityResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription DstsServiceClientIdentity": {
+            "$ref": "./examples/DstsServiceClientIdentity_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsAllowlists": {
+      "get": {
+        "operationId": "DsmsAllowlist_ListByResourceGroup",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "List DsmsAllowlistResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsAllowlists/{resourceName}": {
+      "get": {
+        "operationId": "DsmsAllowlist_Get",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "Get a DsmsAllowlistResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DsmsAllowlist_CreateOrUpdate",
+        "tags": [
+          "DsmsAllowlist"
+        ],
+        "description": "Create a DsmsAllowlistResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DsmsAllowlistResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DsmsAllowlistResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsAllowlistResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DsmsAllowlist": {
+            "$ref": "./examples/DsmsAllowlist_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsRootFolders": {
+      "get": {
+        "operationId": "DsmsRootFolder_ListByResourceGroup",
+        "tags": [
+          "DsmsRootFolder"
+        ],
+        "description": "List DsmsRootFolderResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DsmsRootFolder": {
+            "$ref": "./examples/DsmsRootFolder_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dsmsRootFolders/{resourceName}": {
+      "get": {
+        "operationId": "DsmsRootFolder_Get",
+        "tags": [
+          "DsmsRootFolder"
+        ],
+        "description": "Get a DsmsRootFolderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DsmsRootFolder": {
+            "$ref": "./examples/DsmsRootFolder_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DsmsRootFolder_CreateOrUpdate",
+        "tags": [
+          "DsmsRootFolder"
+        ],
+        "description": "Create a DsmsRootFolderResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DsmsRootFolderResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DsmsRootFolderResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DsmsRootFolderResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DsmsRootFolder": {
+            "$ref": "./examples/DsmsRootFolder_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsApplications": {
+      "get": {
+        "operationId": "DstsApplications_ListByResourceGroup",
+        "tags": [
+          "DstsApplications"
+        ],
+        "description": "List DstsApplicationResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DstsApplication": {
+            "$ref": "./examples/DstsApplications_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsApplications/{resourceName}": {
+      "get": {
+        "operationId": "DstsApplications_Get",
+        "tags": [
+          "DstsApplications"
+        ],
+        "description": "Get a DstsApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DstsApplication": {
+            "$ref": "./examples/DstsApplications_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DstsApplications_CreateOrUpdate",
+        "tags": [
+          "DstsApplications"
+        ],
+        "description": "Create a DstsApplicationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DstsApplicationResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DstsApplicationResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsApplicationResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DstsApplication": {
+            "$ref": "./examples/DstsApplications_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsServiceAccounts": {
+      "get": {
+        "operationId": "DstsServiceAccount_ListByResourceGroup",
+        "tags": [
+          "DstsServiceAccount"
+        ],
+        "description": "List DstsServiceAccountResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DstsServiceAccount": {
+            "$ref": "./examples/DstsServiceAccount_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsServiceAccounts/{resourceName}": {
+      "get": {
+        "operationId": "DstsServiceAccount_Get",
+        "tags": [
+          "DstsServiceAccount"
+        ],
+        "description": "Get a DstsServiceAccountResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.-]{3,255}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DstsServiceAccount": {
+            "$ref": "./examples/DstsServiceAccount_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DstsServiceAccount_CreateOrUpdate",
+        "tags": [
+          "DstsServiceAccount"
+        ],
+        "description": "Create a DstsServiceAccountResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9.-]{3,255}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DstsServiceAccountResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DstsServiceAccountResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceAccountResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DstsServiceAccount": {
+            "$ref": "./examples/DstsServiceAccount_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsServiceClientIdentities": {
+      "get": {
+        "operationId": "DstsServiceClientIdentity_ListByResourceGroup",
+        "tags": [
+          "DstsServiceClientIdentity"
+        ],
+        "description": "List DstsServiceClientIdentityResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup DstsServiceClientIdentity": {
+            "$ref": "./examples/DstsServiceClientIdentity_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCis/dstsServiceClientIdentities/{resourceName}": {
+      "get": {
+        "operationId": "DstsServiceClientIdentity_Get",
+        "tags": [
+          "DstsServiceClientIdentity"
+        ],
+        "description": "Get a DstsServiceClientIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DstsServiceClientIdentity": {
+            "$ref": "./examples/DstsServiceClientIdentity_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DstsServiceClientIdentity_CreateOrUpdate",
+        "tags": [
+          "DstsServiceClientIdentity"
+        ],
+        "description": "Create a DstsServiceClientIdentityResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,80}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DstsServiceClientIdentityResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'DstsServiceClientIdentityResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DstsServiceClientIdentityResource"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create DstsServiceClientIdentity": {
+            "$ref": "./examples/DstsServiceClientIdentity_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationAccount": {
+      "type": "object",
+      "description": "Application. Optional.",
+      "properties": {
+        "dstsInstance": {
+          "type": "string",
+          "description": "The dSTS instance where the Application resides. Required."
+        },
+        "applicationAccountName": {
+          "type": "string",
+          "description": "The name of the Application. Required."
+        },
+        "realms": {
+          "type": "array",
+          "description": "The realms of the application. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "description": "The Service Principal Names of the application. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "replyToAddresses": {
+          "type": "array",
+          "description": "The Reply Addresses of application. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupId": {
+          "type": "string",
+          "description": "GUID of the dSCM Application group to which the Application belongs. Optional."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Group name of the dSCM Application group to which the Application belongs. Optional."
+        },
+        "isMfaEnabled": {
+          "type": "boolean",
+          "description": "If set to true, authenticating to the application requires MFA. Optional.",
+          "default": true
+        },
+        "sawDeviceEnforcement": {
+          "type": "string",
+          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
+        },
+        "isElevatedAccess": {
+          "type": "boolean",
+          "description": "If your application (service) is exclusively limited to System Metadata, Read-Only access levels, set it to false. Optional."
+        },
+        "isProduction": {
+          "type": "boolean",
+          "description": "If your application (service) is exclusively NonProduction, set it to false. Optional.",
+          "default": true
+        },
+        "claimRules": {
+          "type": "array",
+          "description": "The claim rule which apply to this Application. Optional.",
+          "items": {
+            "$ref": "#/definitions/ApplicationClaimRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "applicationClientIdentity": {
+          "$ref": "#/definitions/ApplicationClientIdentity",
+          "description": "Client identity when using the application as a client. Optional."
+        }
+      },
+      "required": [
+        "dstsInstance",
+        "applicationAccountName"
+      ]
+    },
+    "ApplicationClaimRule": {
+      "type": "object",
+      "description": "The claim rule which apply to Application.",
+      "properties": {
+        "clientIdentifier": {
+          "$ref": "#/definitions/Claim",
+          "description": "A claim used to identify client. e.g., group claim, application name claim, object id claim."
+        },
+        "claim": {
+          "$ref": "#/definitions/Claim",
+          "description": "The claim"
+        },
+        "clientIdentityOrigin": {
+          "type": "string",
+          "description": "The name of the original identity provider of the client. e.g., federation for user or dsts instance for applications."
+        },
+        "isRegionalEnforced": {
+          "type": "boolean",
+          "description": "If true, when the claim is scoped to service account group, only SCIs on the same dsts instance where the service accounts exist can get the claim.",
+          "default": true
+        }
+      },
+      "required": [
+        "clientIdentifier",
+        "claim",
+        "clientIdentityOrigin"
+      ]
+    },
+    "ApplicationClientIdentity": {
+      "type": "object",
+      "description": "Represents application client identity.",
+      "properties": {
+        "dmsiInfo": {
+          "$ref": "#/definitions/DmsiInfo",
+          "description": "Dmsi client."
+        },
+        "certificateBasedIdentity": {
+          "$ref": "#/definitions/CertificateBasedIdentity",
+          "description": "Certificate client."
+        },
+        "subjectNameBasedIdentity": {
+          "$ref": "#/definitions/SubjectNameBasedIdentity",
+          "description": "Subject name client."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of your client identity.e.g., Dmsi, Certificate, SubjectName."
+        },
+        "clientTokenIpRangeRestrictions": {
+          "type": "array",
+          "description": "Provide a list IP address ranges to restrict where this application's client token can be requested. Optional.",
+          "items": {
+            "$ref": "#/definitions/IpRange"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ApplicationGroup": {
+      "type": "object",
+      "description": "The application group. Optional.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Group id. Optional."
+        },
+        "applicationGroupName": {
+          "type": "string",
+          "description": "Name of the Application Group. Required."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Common Name for all Applications inside the group. Required."
+        },
+        "servicePrincipalNames": {
+          "type": "array",
+          "description": "The Service Principal Names of the application. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "realms": {
+          "type": "array",
+          "description": "Actor realm. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "replyToAddresses": {
+          "type": "array",
+          "description": "The Reply Addresses of application. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isMfaEnabled": {
+          "type": "boolean",
+          "description": "If set to true, authenticating to the application requires MFA. Optional.",
+          "default": true
+        },
+        "isGlobalService": {
+          "type": "boolean",
+          "description": "If not set, default is regional service. Optional."
+        },
+        "sawDeviceEnforcement": {
+          "type": "string",
+          "description": "If it is null, full SAW enforcement will apply to the application. Possible options are NoEnforcement, SAWFull, SAWElevatedOnly. Optional."
+        },
+        "clientTokenIpRangeRestrictions": {
+          "type": "array",
+          "description": "Change.Remove client token ip range. Optional.",
+          "items": {
+            "$ref": "#/definitions/IpRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "The cloud identifier for the application group. Possible options are PROD, blackforest, fairfax, mooncake. Required.",
+          "default": "PROD"
+        },
+        "clientSubscriptions": {
+          "type": "array",
+          "description": "Client subscriptions. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regions": {
+          "type": "array",
+          "description": "Specific dSTS instances to create applications on. Optional.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claimRules": {
+          "type": "array",
+          "description": "The claim rules that apply to this Application Group. Optional.",
+          "items": {
+            "$ref": "#/definitions/ApplicationClaimRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "applicationClientIdentity": {
+          "$ref": "#/definitions/ApplicationClientIdentity",
+          "description": "Client identity when using the application as a client. Optional."
+        }
+      },
+      "required": [
+        "applicationGroupName",
+        "applicationName",
+        "cloudId"
+      ]
+    },
+    "CertificateBasedIdentity": {
+      "type": "object",
+      "description": "Represents certificate based authentication.",
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "description": "Certificate",
+          "items": {
+            "$ref": "#/definitions/CertificateInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "certificates"
+      ]
+    },
+    "CertificateInfo": {
+      "type": "object",
+      "description": "Certification based application client identity.",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Certificate thumbprint information"
+        },
+        "expiryDate": {
+          "type": "string",
+          "description": "Certificate expiry date"
+        }
+      },
+      "required": [
+        "thumbprint",
+        "expiryDate"
+      ]
+    },
+    "Claim": {
+      "type": "object",
+      "description": "A claim used to identify client. e.g., group claim, application name claim, object id claim.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the claim"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of claim"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "DmsiInfo": {
+      "type": "object",
+      "description": "Dmsi information",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Dmsi path"
+        },
+        "region": {
+          "type": "string",
+          "description": "Dmsi region"
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "Dmsi subscriptions",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "path",
+        "region",
+        "subscriptions"
+      ]
+    },
+    "DscmProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "DscmProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DsmsAllowlistResource": {
+      "type": "object",
+      "description": "dsmsAllowlist Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DsmsAllowlistResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DsmsAllowlistResourceListResult": {
+      "type": "object",
+      "description": "The response of a DsmsAllowlistResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DsmsAllowlistResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DsmsAllowlistResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DsmsAllowlistResourceProperties": {
+      "type": "object",
+      "description": "dsmsAllowlist properties",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": "The name of the folder to apply allowlist changes to. This should be the full folder path starting with a '$', with '$' replacing all '/' characters. Example: '/my-folder/root-folder' should be passed as '$my-folder$root-folder"
+        },
+        "targetDsmsEndpoints": {
+          "type": "array",
+          "description": "The dSMS endpoints to apply allowlist changes to. The folder specified in FolderName will be updated on each of the TargetDsmsEndpoints. If this is left null, this will default to all the dSMS endpoints used for the root folder.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsPatterns": {
+          "type": "array",
+          "description": "Dns domain patterns in the allowlist. Patterns with '*' are accepted values here.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure deployment subscriptions in allowlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageSubscriptions": {
+          "type": "array",
+          "description": "Guids of Azure storage subscriptions in allowlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "folderName"
+      ]
+    },
+    "DsmsRootFolderResource": {
+      "type": "object",
+      "description": "dsmsRootFolder Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DsmsRootFolderResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DsmsRootFolderResourceListResult": {
+      "type": "object",
+      "description": "The response of a DsmsRootFolderResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DsmsRootFolderResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DsmsRootFolderResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DsmsRootFolderResourceProperties": {
+      "type": "object",
+      "description": "dsmsRootFolder properties",
+      "properties": {
+        "folderName": {
+          "type": "string",
+          "description": "The name of the root folder to add. This should be the full folder path starting with a \"$\", with \"$\" replacing all \"/\" characters"
+        },
+        "cloudId": {
+          "type": "string",
+          "description": "The cloud ID where the root folder should be added. Acceptable values: Public, Fairfax, Mooncake, USSec, USNat"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "folderName"
+      ]
+    },
+    "DstsApplicationResource": {
+      "type": "object",
+      "description": "dstsApplication Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DstsApplicationResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DstsApplicationResourceListResult": {
+      "type": "object",
+      "description": "The response of a DstsApplicationResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DstsApplicationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DstsApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DstsApplicationResourceProperties": {
+      "type": "object",
+      "description": "dstsApplication properties",
+      "properties": {
+        "applicationAccount": {
+          "$ref": "#/definitions/ApplicationAccount",
+          "description": "Application."
+        },
+        "applicationGroup": {
+          "$ref": "#/definitions/ApplicationGroup",
+          "description": "The application group. Optional."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "DstsAuthenticationRequirement": {
+      "type": "object",
+      "description": "Authentication requirement of the account.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Authentication requirement value. E.g. \"PTH\"."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DstsClaimMapping": {
+      "type": "object",
+      "description": "Claim mapping for authorization of the account.",
+      "properties": {
+        "inputType": {
+          "type": "string",
+          "description": "Type of input identity. This is case-insensitive. E.g. \"http://sts.msft.net/user/Group\"."
+        },
+        "inputValue": {
+          "type": "string",
+          "description": "Name or ID of input identity. E.g. \"%($CS.CplatViewerGroup)\"."
+        },
+        "outputType": {
+          "type": "string",
+          "description": "Type of output identity, which is mapped from input identity. This is case-insensitive. E.g. \"http://schemas.microsoft.com/ws/2008/06/identity/claims/role\"."
+        },
+        "outputValue": {
+          "type": "string",
+          "description": "Name or ID of output identity, which is mapped from input identity. E.g. \"PlatformServiceViewer\" or \"PlatformServiceOperator\"."
+        },
+        "federation": {
+          "type": "string",
+          "description": "Federation context for the mapping. E.g. \"MSIT-ADFS-Federation\" or \"BF-ADFS-Federation\"."
+        }
+      },
+      "required": [
+        "inputType",
+        "outputType"
+      ]
+    },
+    "DstsClaimProvisioning": {
+      "type": "object",
+      "description": "This model represents a claim provisioning in SCI.",
+      "properties": {
+        "claimType": {
+          "type": "string",
+          "description": "Gets or sets the type of identity in the target service. This is case-insensitive. E.g. \"http://schemas.microsoft.com/ws/2008/06/identity/claims/role\"."
+        },
+        "claimValue": {
+          "type": "string",
+          "description": "Gets or sets the name or ID in the target service. This is case-insensitive. E.g. \"PlatformServiceViewer\" or \"PlatformServiceOperator\"."
+        },
+        "scopedToServiceAccount": {
+          "type": "string",
+          "description": "Gets or sets the service account name of the target service. This is case-insensitive. E.g. \"target-service-%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)\"."
+        },
+        "scopedServiceAccountGroupId": {
+          "type": "string",
+          "description": "Gets or sets the service account group id of the target service name."
+        },
+        "scopedServiceAccountGroupName": {
+          "type": "string",
+          "description": "Gets or sets the service account group name of the target service name."
+        },
+        "scopedServiceTreeId": {
+          "type": "string",
+          "description": "Gets or sets the service tree id of the scoped service account."
+        },
+        "dstsInstance": {
+          "type": "string",
+          "description": "Dstsinstance for the claim. This is case-insensitive. E.g. \"co2agg04-dsts.dsts.core.azure-test.net\" for dogfood."
+        }
+      },
+      "required": [
+        "claimType",
+        "claimValue"
+      ]
+    },
+    "DstsRealm": {
+      "type": "object",
+      "description": "Realm information of the account.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Realm's name. This is case-insensitive. E.g. \"svc://crpadmin@%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\"."
+        },
+        "redirectionUrl": {
+          "type": "string",
+          "description": "Realm's redirection URL. This is case-insensitive. E.g. \"https://%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\"."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DstsServiceAccountResource": {
+      "type": "object",
+      "description": "dstsServiceAccount Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DstsServiceAccountResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DstsServiceAccountResourceListResult": {
+      "type": "object",
+      "description": "The response of a DstsServiceAccountResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DstsServiceAccountResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DstsServiceAccountResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DstsServiceAccountResourceProperties": {
+      "type": "object",
+      "description": "dstsServiceAccount properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of the service account. Its value can be a GUID for a new account, or for an existing account created by CIS resource template or by other method. Or its value can be null or empty string for a new account, or for an existing account created by CIS resource template (but not by other method). In the latter case, CIS generates a GUID to be the new account's ID, and remembers the ID for future provisioning of the same service account. This is case-insensitive."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Service Account name, which must be unique for a given dsts endpoint. This is case-insensitive. E.g. \"%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)\"."
+        },
+        "dstsInstance": {
+          "type": "string",
+          "description": "DSTS instance in which the account is created. This is case-insensitive. E.g. \"co2agg04-dsts.dsts.core.azure-test.net\" for dogfood."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name of the account."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "GroupId of the account. This is case-insensitive. This is optional, and the account is placed into default group when this is not specified. This can be the GroupId of an existing group, which can be found at dSCM web portal."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "GroupName of the account. This is case-insensitive. This is optional, and the account is placed into default group when this is not specified. This can be the GroupName of an existing group, which can be found at dSCM web portal."
+        },
+        "authenticationRequirements": {
+          "type": "array",
+          "description": "list of authentication requirements.",
+          "items": {
+            "$ref": "#/definitions/DstsAuthenticationRequirement"
+          },
+          "x-ms-identifiers": []
+        },
+        "realms": {
+          "type": "array",
+          "description": "list of realms.",
+          "items": {
+            "$ref": "#/definitions/DstsRealm"
+          },
+          "x-ms-identifiers": []
+        },
+        "claimMappings": {
+          "type": "array",
+          "description": "list of claim mappings.",
+          "items": {
+            "$ref": "#/definitions/DstsClaimMapping"
+          },
+          "x-ms-identifiers": []
+        },
+        "accountTags": {
+          "type": "array",
+          "description": "Tags to add to the account.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountName",
+        "dstsInstance"
+      ]
+    },
+    "DstsServiceClientIdentityResource": {
+      "type": "object",
+      "description": "dstsServiceClientIdentityResource Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DstsServiceClientIdentityResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DstsServiceClientIdentityResourceListResult": {
+      "type": "object",
+      "description": "The response of a DstsServiceClientIdentityResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DstsServiceClientIdentityResource items on this page",
+          "items": {
+            "$ref": "#/definitions/DstsServiceClientIdentityResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DstsServiceClientIdentityResourceProperties": {
+      "type": "object",
+      "description": "dstsServiceClientIdentity properties",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "Gets or sets the account name. This is case-insensitive. E.g. \"%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)\"."
+        },
+        "dstsInstance": {
+          "type": "string",
+          "description": "Gets or sets the DSTS instance endpoint FQDN, in which the account is created. This is case-insensitive. E.g. \"co2agg04-dsts.dsts.core.azure-test.net\" for dogfood."
+        },
+        "claimProvisionings": {
+          "type": "array",
+          "description": "Gets or sets a list of claim provisionings.",
+          "items": {
+            "$ref": "#/definitions/DstsClaimProvisioning"
+          },
+          "x-ms-identifiers": []
+        },
+        "requiredIpRanges": {
+          "type": "array",
+          "description": "Gets or sets a list of required IP ranges. Optional.",
+          "items": {
+            "$ref": "#/definitions/RequiredIpRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Gets or sets the GroupId of the account. This is case-insensitive. This is optional, and the account is placed into default group when this is not specified. This can be the GroupId of an existing group, which can be found at dSCM web portal. E.g. \"76c46cf8-a5b4-40e6-a561-b0eb1c303cd9\"."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "Gets or sets the GroupName of the account. This is case-insensitive. This is optional, and the service client identity is placed into default group when this is not specified. This can be the GroupName of an existing group, which can be found at dSCM web portal."
+        },
+        "region": {
+          "type": "string",
+          "description": "Gets or sets the region for the SCI. This is optional. E.g. \"francec\" for France Central.."
+        },
+        "subscriptions": {
+          "type": "string",
+          "description": "Gets or sets the subscriptions for the SCI. This is optional. E.g. \"5d711910-92ea-4ff9-b70d-1e61307faaac,a524674c-7024-40f1-afe9-127ab5a2e1b0\"."
+        },
+        "subjectNames": {
+          "type": "array",
+          "description": "Subject names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/DscmProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountName",
+        "dstsInstance",
+        "subjectNames"
+      ]
+    },
+    "IpRange": {
+      "type": "object",
+      "description": "Class for a contiguous range of IP Addresses.",
+      "properties": {
+        "fromIpAddress": {
+          "type": "string",
+          "description": "From IP address."
+        },
+        "toIpAddress": {
+          "type": "string",
+          "description": "To IP address."
+        }
+      },
+      "required": [
+        "fromIpAddress",
+        "toIpAddress"
+      ]
+    },
+    "RequiredIpRange": {
+      "type": "object",
+      "description": "This model represents an IP range in SCI.",
+      "properties": {
+        "fromIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the start of IP range. E.g. \"172.1.1.1\"."
+        },
+        "toIpAddress": {
+          "type": "string",
+          "description": "Gets or sets the end of IP range. E.g. \"172.1.1.5\"."
+        }
+      },
+      "required": [
+        "fromIpAddress",
+        "toIpAddress"
+      ]
+    },
+    "SubjectNameBasedIdentity": {
+      "type": "object",
+      "description": "Represents application subject name base identity.",
+      "properties": {
+        "subjectNames": {
+          "type": "array",
+          "description": "List of subject names for sni based auth",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "subjectNames"
+      ]
+    }
+  },
+  "parameters": {}
+}

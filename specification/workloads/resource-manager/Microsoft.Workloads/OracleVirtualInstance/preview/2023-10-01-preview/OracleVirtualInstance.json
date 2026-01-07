@@ -1,0 +1,1262 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-10-01-preview",
+    "title": "Workloads Client",
+    "description": "Workloads client provides access to various workload operations"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/oracleVirtualInstances/{oracleVirtualInstanceName}": {
+      "put": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create Infrastructure only for Single Server System": {
+            "$ref": "./examples/OracleVirtualInstances_Create_SingleServer.json"
+          }
+        },
+        "description": "Creates a Virtual Instance for Oracle solutions (VIO) resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "description": "Virtual Instance for Oracle solutions resource request body.",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Virtual Instance for Oracle solutions resource which is updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstance"
+            }
+          },
+          "201": {
+            "description": "Describes the Virtual Instance for Oracle solutions resource created.",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_Get",
+        "x-ms-examples": {
+          "OracleVirtualInstances_Get": {
+            "$ref": "./examples/OracleVirtualInstances_Get.json"
+          }
+        },
+        "description": "Gets a Virtual Instance for Oracle solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Virtual Instance for Oracle solutions resource",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_Update",
+        "x-ms-examples": {
+          "OracleVirtualInstances_Update": {
+            "$ref": "./examples/OracleVirtualInstances_Update.json"
+          }
+        },
+        "description": "Updates a Virtual Instance for Oracle solutions resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body to update a Virtual Instance for Oracle solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/UpdateOracleVirtualInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Virtual Instance for Oracle solutions resource which is successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "OracleVirtualInstances_Delete": {
+            "$ref": "./examples/OracleVirtualInstances_Delete.json"
+          }
+        },
+        "description": "Deletes a Virtual Instance for Oracle solutions resource and its child resources, that is the associated Database Instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to poll for status updates."
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/oracleVirtualInstances": {
+      "get": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_ListByResourceGroup",
+        "x-ms-examples": {
+          "OracleVirtualInstances_ListByResourceGroup": {
+            "$ref": "./examples/OracleVirtualInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all Virtual Instances for Oracle solutions resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of all Virtual Instances for Oracle solutions resources.",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/oracleVirtualInstances": {
+      "get": {
+        "tags": [
+          "OracleVirtualInstances"
+        ],
+        "operationId": "OracleVirtualInstances_ListBySubscription",
+        "x-ms-examples": {
+          "OracleVirtualInstances_ListBySubscription": {
+            "$ref": "./examples/OracleVirtualInstances_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all Virtual Instances for Oracle solutions resources in a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of all Virtual Instances for Oracle solutions resources in the Subscription.",
+            "schema": {
+              "$ref": "#/definitions/OracleVirtualInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/oracleVirtualInstances/{oracleVirtualInstanceName}/databaseInstances/{databaseInstanceName}": {
+      "get": {
+        "tags": [
+          "OracleDatabaseInstances"
+        ],
+        "operationId": "OracleDatabaseInstances_Get",
+        "x-ms-examples": {
+          "OracleDatabaseInstances_Get": {
+            "$ref": "./examples/OracleDatabaseInstances_Get.json"
+          }
+        },
+        "description": "Gets the Oracle Database Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Database resource associated with the Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OracleDatabaseInstances"
+        ],
+        "operationId": "OracleDatabaseInstances_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "OracleDatabaseInstances_Create": {
+            "$ref": "./examples/OracleDatabaseInstances_Create.json"
+          }
+        },
+        "description": "Creates the Database resource corresponding to the Virtual Instance for Oracle solutions resource. <br><br>This will be used by service only. PUT by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body of Database resource of an Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Database resource of the Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          },
+          "201": {
+            "description": "Describes the Database resource of the Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleDatabaseInstances"
+        ],
+        "operationId": "OracleDatabaseInstances_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "OracleDatabaseInstances_Update": {
+            "$ref": "./examples/OracleDatabaseInstances_Update.json"
+          }
+        },
+        "description": "Updates the Database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Database resource update request body.",
+            "schema": {
+              "$ref": "#/definitions/UpdateOracleDatabaseInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Database resource of the Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          },
+          "201": {
+            "description": "Describes the Database resource of the Oracle system.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleDatabaseInstances"
+        ],
+        "operationId": "OracleDatabaseInstances_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "OracleDatabaseInstances_Delete": {
+            "$ref": "./examples/OracleDatabaseInstances_Delete.json"
+          }
+        },
+        "description": "Deletes the Database resource corresponding to a Virtual Instance for Oracle solutions resource. <br><br>This will be used by service only. Delete by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/oracleVirtualInstances/{oracleVirtualInstanceName}/databaseInstances": {
+      "get": {
+        "tags": [
+          "OracleDatabaseInstances"
+        ],
+        "operationId": "OracleDatabaseInstances_List",
+        "x-ms-examples": {
+          "OracleDatabaseInstances_List": {
+            "$ref": "./examples/OracleDatabaseInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Lists the Database resources associated with a Virtual Instance for Oracle solutions resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OracleVirtualInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the Database resource corresponding to a Virtual Instance for Oracle solutions resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HealthState": {
+      "description": "Defines the health of Oracle Instances.",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "Unhealthy",
+        "Degraded"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleHealthState",
+        "modelAsString": true
+      }
+    },
+    "DeploymentType": {
+      "description": "The type of Oracle deployment, single tier.",
+      "enum": [
+        "SingleServer"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleDeploymentType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "ConfigurationType": {
+      "description": "The configuration Type for Oracle.",
+      "enum": [
+        "Deployment"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleConfigurationType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "OracleVirtualInstanceStatus": {
+      "description": "Defines the Oracle Instance status.",
+      "enum": [
+        "Starting",
+        "Running",
+        "Stopping",
+        "Offline",
+        "PartiallyRunning",
+        "Unavailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleVirtualInstanceStatus",
+        "modelAsString": true
+      }
+    },
+    "OracleVirtualInstanceState": {
+      "description": "Defines the Virtual Instance for Oracle state.",
+      "enum": [
+        "InfrastructureDeploymentPending",
+        "InfrastructureDeploymentInProgress",
+        "InfrastructureDeploymentFailed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleVirtualInstanceState",
+        "modelAsString": true
+      }
+    },
+    "EnvironmentType": {
+      "description": "Defines the Oracle environment type - Production/Non Production.",
+      "enum": [
+        "NonProd",
+        "Prod"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleEnvironmentType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "OracleVersion": {
+      "description": "Defines the Oracle Version.",
+      "enum": [
+        "12C",
+        "19C",
+        "21C"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OracleVersion",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
+    },
+    "DeploymentConfiguration": {
+      "x-ms-discriminator-value": "Deployment",
+      "description": "Deployment Configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OracleConfiguration"
+        }
+      ],
+      "properties": {
+        "appLocation": {
+          "type": "string",
+          "description": "The geo-location where the Oracle system is to be created."
+        },
+        "infrastructureConfiguration": {
+          "$ref": "#/definitions/InfrastructureConfiguration",
+          "description": "The infrastructure configuration."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "description": "Defines the provisioning states for Oracle.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Creating",
+        "Failed",
+        "Deleting"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "OracleVirtualInstanceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "OracleVirtualInstanceError": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The Virtual Instance for Oracle error body.",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      },
+      "description": "An error response from the Virtual Instance for Oracle Workload service."
+    },
+    "UpdateOracleVirtualInstanceRequest": {
+      "description": "Defines the request body for updating Virtual Instance for Oracle.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        }
+      }
+    },
+    "UpdateOracleDatabaseInstanceRequest": {
+      "description": "Defines the request body for updating Oracle Database Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiskSkuName": {
+      "description": "Defines the disk sku name.",
+      "enum": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "StandardSSD_LRS",
+        "UltraSSD_LRS",
+        "Premium_ZRS",
+        "StandardSSD_ZRS",
+        "PremiumV2_LRS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DiskSkuName",
+        "modelAsString": true
+      }
+    },
+    "DiskSku": {
+      "description": "The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DiskSkuName"
+        }
+      }
+    },
+    "DiskConfiguration": {
+      "description": "The Disk Configuration Details.",
+      "type": "object",
+      "properties": {
+        "diskVolumeConfigurations": {
+          "description": "The disk configuration for the db volume. For oracle, Required volumes are: [data, log and temp]",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DiskVolumeConfiguration"
+            },
+            "x-ms-identifiers": []
+          }
+        }
+      }
+    },
+    "DiskVolumeConfiguration": {
+      "description": "The disk configuration required for the selected volume.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "description": "The total number of disks required for the concerned volume.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "sku": {
+          "description": "The disk SKU details.",
+          "$ref": "#/definitions/DiskSku"
+        }
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "type": "string",
+          "description": "The image publisher."
+        },
+        "offer": {
+          "type": "string",
+          "description": "Specifies the offer of the platform image or marketplace image used to create the virtual machine for Oracle."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The image SKU."
+        },
+        "version": {
+          "type": "string",
+          "description": "Specifies the version of the platform image or marketplace image used to create the Oracle virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available."
+        }
+      },
+      "description": "Specifies information about the image to use for Oracle. This includes information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image for Oracle, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
+    },
+    "SshPublicKey": {
+      "type": "object",
+      "properties": {
+        "keyData": {
+          "type": "string",
+          "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For guidance on creating ssh keys for Linux VMs, refer to the appropriate documentation."
+        }
+      },
+      "description": "Contains information about the SSH certificate public key and its placement path on the Linux VM."
+    },
+    "SshConfiguration": {
+      "type": "object",
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKey"
+          },
+          "description": "The list of SSH public keys used to authenticate with Linux-based VMs.",
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "SSH configuration for Linux-based VMs. Suitable for Oracle products and other applications running on Linux."
+    },
+    "LinuxConfiguration": {
+      "type": "object",
+      "x-ms-discriminator-value": "Linux",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OSConfiguration"
+        }
+      ],
+      "properties": {
+        "disablePasswordAuthentication": {
+          "type": "boolean",
+          "description": "Specifies whether password authentication should be disabled. For enhanced security, especially in Oracle-centric deployments, it's recommended to use SSH key authentication."
+        },
+        "ssh": {
+          "$ref": "#/definitions/SshConfiguration",
+          "description": "Specifies the SSH key configuration for a Linux OS."
+        }
+      },
+      "description": "Specifies Linux operating system settings for virtual machines, optimized for Oracle products and Oracle Linux. Refer to the official documentation for supported Linux distributions."
+    },
+    "OSConfiguration": {
+      "description": "Defines the OS configuration.",
+      "type": "object",
+      "required": [
+        "osType"
+      ],
+      "properties": {
+        "osType": {
+          "description": "The OS Type",
+          "enum": [
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OSType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "osType"
+    },
+    "OSProfile": {
+      "type": "object",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters."
+        },
+        "adminPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)"
+        },
+        "osConfiguration": {
+          "$ref": "#/definitions/OSConfiguration",
+          "description": "Specifies Linux operating system settings for virtual machines, optimized for Oracle products and Oracle Linux. Refer to the official documentation for supported Linux distributions."
+        }
+      },
+      "description": "Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned."
+    },
+    "VirtualMachineConfiguration": {
+      "description": "Defines the virtual machine configuration.",
+      "type": "object",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine size."
+        },
+        "imageReference": {
+          "description": "The image reference.",
+          "$ref": "#/definitions/ImageReference"
+        },
+        "osProfile": {
+          "description": "The OS profile.",
+          "$ref": "#/definitions/OSProfile"
+        }
+      },
+      "required": [
+        "vmSize",
+        "imageReference",
+        "osProfile"
+      ]
+    },
+    "SingleServerConfiguration": {
+      "x-ms-discriminator-value": "SingleServer",
+      "description": "Gets or sets the single server configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InfrastructureConfiguration"
+        }
+      ],
+      "properties": {
+        "networkConfiguration": {
+          "description": "Network configuration for the server",
+          "$ref": "#/definitions/NetworkConfiguration"
+        },
+        "subnetId": {
+          "description": "The subnet id.",
+          "type": "string"
+        },
+        "virtualMachineConfiguration": {
+          "description": "Gets or sets the virtual machine configuration.",
+          "$ref": "#/definitions/VirtualMachineConfiguration"
+        },
+        "diskConfiguration": {
+          "description": "The Oracle disk configuration.",
+          "$ref": "#/definitions/DiskConfiguration"
+        }
+      },
+      "required": [
+        "subnetId",
+        "virtualMachineConfiguration"
+      ]
+    },
+    "OracleConfiguration": {
+      "description": "The Oracle Configuration.",
+      "type": "object",
+      "required": [
+        "configurationType"
+      ],
+      "properties": {
+        "configurationType": {
+          "$ref": "#/definitions/ConfigurationType"
+        }
+      },
+      "discriminator": "configurationType"
+    },
+    "InfrastructureConfiguration": {
+      "description": "Deploy Oracle Infrastructure Details.",
+      "type": "object",
+      "required": [
+        "deploymentType",
+        "appResourceGroup"
+      ],
+      "properties": {
+        "deploymentType": {
+          "$ref": "#/definitions/DeploymentType"
+        },
+        "appResourceGroup": {
+          "type": "string",
+          "description": "The application resource group where Oracle system resources will be deployed."
+        }
+      },
+      "discriminator": "deploymentType"
+    },
+    "DatabaseVmDetails": {
+      "description": "Database VM details.",
+      "type": "object",
+      "properties": {
+        "virtualMachineId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OracleVirtualInstanceStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "OracleVirtualInstanceProperties": {
+      "description": "Defines the Virtual Instance properties for Oracle solutions.",
+      "type": "object",
+      "required": [
+        "environment",
+        "oracleVersion",
+        "configuration"
+      ],
+      "properties": {
+        "environment": {
+          "$ref": "#/definitions/EnvironmentType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "oracleVersion": {
+          "$ref": "#/definitions/OracleVersion",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "configuration": {
+          "description": "Defines if the Oracle system is being created using Azure Center for Oracle solutions (ACOS) or if an existing Oracle system is being registered with ACOS",
+          "$ref": "#/definitions/OracleConfiguration"
+        },
+        "status": {
+          "$ref": "#/definitions/OracleVirtualInstanceStatus",
+          "readOnly": true
+        },
+        "health": {
+          "$ref": "#/definitions/HealthState",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/OracleVirtualInstanceState",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Indicates any errors on the Virtual Instance for Oracle solutions resource.",
+          "$ref": "#/definitions/OracleVirtualInstanceError",
+          "readOnly": true
+        }
+      }
+    },
+    "OracleVirtualInstance": {
+      "description": "Define the Virtual Instance for Oracle solutions resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../common-types/v1/commonTypes.json#/definitions/UserAssignedServiceIdentity"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleVirtualInstanceProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "OracleVirtualInstanceList": {
+      "description": "Defines the collection of Virtual Instance for Oracle solutions resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of Virtual Instances for Oracle solutions resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OracleVirtualInstance"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "OracleDatabaseInstanceList": {
+      "description": "Defines the collection of Oracle Database Instances.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of Oracle Database instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OracleDatabaseInstance"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "OracleDatabaseProperties": {
+      "description": "Defines the Oracle Database properties.",
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "type": "string",
+          "description": "Oracle Database subnet.",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Oracle Database IP Address.",
+          "readOnly": true
+        },
+        "vmDetails": {
+          "description": "The list of virtual machines corresponding to the Oracle Database resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseVmDetails"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OracleVirtualInstanceStatus",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Defines the errors related to Oracle Database resource.",
+          "readOnly": true,
+          "$ref": "#/definitions/OracleVirtualInstanceError"
+        }
+      }
+    },
+    "OracleDatabaseInstance": {
+      "description": "Define the Oracle Database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleDatabaseProperties"
+        }
+      }
+    },
+    "NetworkConfiguration": {
+      "description": "Defines the network configuration type for Oracle system infrastructure that is being deployed",
+      "type": "object",
+      "properties": {
+        "isSecondaryIpEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether a secondary IP address should be added to the network interface on all VMs of the Oracle system being deployed",
+          "default": false
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OracleVirtualInstanceNameParameter": {
+      "name": "oracleVirtualInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Virtual Instances for Oracle solutions resource",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseInstanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Database resource name string modeled as parameter for auto generation to work correctly.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,861 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Proposal",
+    "version": "2025-01-01-preview",
+    "description": "Microsoft.Proposal RP provides APIs to purchase, manage and display proposals in the Marketplace",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "localhost",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ProposalResources"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ProductResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products": {
+      "get": {
+        "operationId": "ProductResources_ListByParent",
+        "tags": [
+          "ProductResources"
+        ],
+        "description": "List ProductResource resources by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the billing account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductResources_ListByParent": {
+            "$ref": "./examples/ProductResources_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/providers/Microsoft.Proposal/products/{productCode}": {
+      "get": {
+        "operationId": "ProductResources_Get",
+        "tags": [
+          "ProductResources"
+        ],
+        "description": "Get a ProductResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The name of the billing account",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_:-]+$"
+          },
+          {
+            "name": "productCode",
+            "in": "path",
+            "description": "The name of the ProductResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProductResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProductResources_Get": {
+            "$ref": "./examples/ProductResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Proposal/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Proposal/proposals": {
+      "get": {
+        "operationId": "ProposalResources_ListBySubscription",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "List ProposalResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProposalResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_ListBySubscription": {
+            "$ref": "./examples/ProposalResources_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals": {
+      "get": {
+        "operationId": "ProposalResources_ListByResourceGroup",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "List ProposalResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProposalResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_ListByResourceGroup": {
+            "$ref": "./examples/ProposalResources_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Proposal/proposals/{name}": {
+      "get": {
+        "operationId": "ProposalResources_Get",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "Get a ProposalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProposalResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_Get": {
+            "$ref": "./examples/ProposalResources_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProposalResources_CreateOrUpdate",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "Create a ProposalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ProposalResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProposalResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'ProposalResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ProposalResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_CreateOrUpdate": {
+            "$ref": "./examples/ProposalResources_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ProposalResources_Update",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "Update a ProposalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProposalResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_Update": {
+            "$ref": "./examples/ProposalResources_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProposalResources_Delete",
+        "tags": [
+          "ProposalResources"
+        ],
+        "description": "Delete a ProposalResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the proposal",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProposalResources_Delete": {
+            "$ref": "./examples/ProposalResources_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LineItem": {
+      "type": "object",
+      "description": "The line items to purchase in the proposal.",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "The product code of the line item as a UUID that uniquely identifies this line item within the proposal."
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "The resource URI of the line item.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LineItemStatus",
+          "description": "The status of the line item.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code if any error occurs during processing the line item.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message if any error occurs during processing the line item.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "productCode"
+      ]
+    },
+    "LineItemStatus": {
+      "type": "string",
+      "description": "The status of the line item in the proposal.",
+      "enum": [
+        "NotDeployed",
+        "Success",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "LineItemStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotDeployed",
+            "value": "NotDeployed",
+            "description": "NotDeployed - Initial status when a line item is created."
+          },
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "Success - status when a line item is successfully deployed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress - status when a line item deployment is in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled - status when a line item deployment is canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed - status when a line item deployment has failed."
+          }
+        ]
+      }
+    },
+    "ProductResource": {
+      "type": "object",
+      "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProductResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProductResourceListResult": {
+      "type": "object",
+      "description": "The response of a ProductResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProductResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ProductResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProductResourceProperties": {
+      "type": "object",
+      "description": "Details of the Proposal Product Item.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ProposalStatus",
+          "description": "The proposal status."
+        }
+      }
+    },
+    "ProposalResource": {
+      "type": "object",
+      "description": "A ProposalProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProposalResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProposalResourceListResult": {
+      "type": "object",
+      "description": "The response of a ProposalResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ProposalResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ProposalResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProposalResourceProperties": {
+      "type": "object",
+      "description": "Details of the Proposal Item.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The proposal product code."
+        },
+        "status": {
+          "$ref": "#/definitions/ProposalStatus",
+          "description": "The proposal status."
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "The list of line items associated with the proposal.",
+          "items": {
+            "$ref": "#/definitions/LineItem"
+          },
+          "x-ms-identifiers": [
+            "productCode"
+          ]
+        }
+      },
+      "required": [
+        "productCode"
+      ]
+    },
+    "ProposalResourcePropertiesUpdate": {
+      "type": "object",
+      "description": "Details of the Proposal Item.",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "The proposal product code."
+        },
+        "status": {
+          "$ref": "#/definitions/ProposalStatus",
+          "description": "The proposal status."
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "The list of line items associated with the proposal.",
+          "items": {
+            "$ref": "#/definitions/LineItem"
+          },
+          "x-ms-identifiers": [
+            "productCode"
+          ]
+        }
+      }
+    },
+    "ProposalResourceUpdate": {
+      "type": "object",
+      "description": "A ProposalProviderHub resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProposalResourcePropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ProposalStatus": {
+      "type": "string",
+      "description": "The proposal status.",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Active",
+        "Rejected",
+        "Deleted",
+        "Expired",
+        "PurchaseInProgress",
+        "Completed",
+        "Ended"
+      ],
+      "x-ms-enum": {
+        "name": "ProposalStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Draft",
+            "value": "Draft",
+            "description": "Draft - Initial status when a proposal is created."
+          },
+          {
+            "name": "Submitted",
+            "value": "Submitted",
+            "description": "Submitted - status when a proposal is submitted for approval and waiting for approver decision."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active -  status when a proposal is ready for purchase transaction."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Rejected - status when a proposal's approval has been denied by the approver."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted - status when a proposal has been deleted by the consumer (not visible once deleted)"
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "Expired - status when a proposal is beyond its set expiration date."
+          },
+          {
+            "name": "PurchaseInProgress",
+            "value": "PurchaseInProgress",
+            "description": "PurchaseInProgress - status when a proposal is inprogress on its purchase transaction."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed - status when a proposal is successfully transacted by purchase."
+          },
+          {
+            "name": "Ended",
+            "value": "Ended",
+            "description": "Ended - status when a proposal is ended by the consumer."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

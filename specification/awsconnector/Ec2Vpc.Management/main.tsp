@@ -99,7 +99,7 @@ model AwsEc2VpcProperties {
   ipv6CidrBlocks?: string[];
 
   @doc("The tags for the VPC.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property vpcId")

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "deviceGroupName": "MyDeviceGroup1",
+    "api-version": "2022-02-01-privatepreview",
+    "resource": {
+      "properties": {
+        "description": "Description for MyDeviceGroup1",
+        "osFeedType": "Retail",
+        "updatePolicy": "UpdateAll"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "The Azure Sphere product updated or created successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/devicegroups/MyDeviceGroup1",
+        "type": "microsoft.AzureSphere/catalogs/products/devicegroups",
+        "properties": {
+          "description": "Description of MyDeviceGroup1",
+          "osFeedType": "Retail",
+          "updatePolicy": "UpdateAll"
+        }
+      }
+    }
+  }
+}

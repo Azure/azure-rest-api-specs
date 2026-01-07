@@ -53,23 +53,32 @@ interface SAPApplicationServerInstances {
   /**
    * Lists the SAP Application Server Instance resources for a given Virtual Instance for SAP solutions resource.
    */
+  @list
   list is ArmResourceListByParent<SAPApplicationServerInstance>;
 
   /**
    * Starts the SAP Application Server Instance.
    */
-  start is CustomizedArmResourceActionAsync<
+  start is ArmResourceActionAsync<
     SAPApplicationServerInstance,
-    StartRequest,
+    {
+      @doc("SAP Application server instance start request body.")
+      @body
+      body?: StartRequest;
+    },
     Foundations.OperationStatusResult
   >;
 
   /**
    * Stops the SAP Application Server Instance.
    */
-  stop is CustomizedArmResourceActionAsync<
+  stop is ArmResourceActionAsync<
     SAPApplicationServerInstance,
-    StopRequest,
+    {
+      @doc("SAP Application server instance stop request body.")
+      @body
+      body?: StopRequest;
+    },
     Foundations.OperationStatusResult
   >;
 }

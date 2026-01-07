@@ -13,11 +13,11 @@ namespace LiftrBase.Data;
 
 @doc("Supported versions for LiftrBase.Data resource model")
 enum Versions {
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
+  @doc("Dependent on LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v1_preview: "2024-12-22-preview",
 
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
+  @doc("Dependent on LiftrBase.Versions.v1_preview, LiftrBase.Data.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v2_preview: "2025-03-01-preview",
 }
@@ -29,7 +29,7 @@ model OrganizationProperties is BaseResourceProperties {
 
   @doc("Neon Project Properties")
   @added(Versions.v2_preview)
-  projectProperties?: Neon.Postgres.ProjectProperties;
+  projectProperties?: Neon.Postgres.Models.ProjectProperties;
 }
 
 @doc("Properties specific to Partner's organization")

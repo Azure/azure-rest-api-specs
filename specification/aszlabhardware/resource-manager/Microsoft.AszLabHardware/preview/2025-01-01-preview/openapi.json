@@ -1,0 +1,5373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AszLabHardware Resource Provider",
+    "version": "2025-01-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "LabServerV1s"
+    },
+    {
+      "name": "Servers"
+    },
+    {
+      "name": "Reservations"
+    },
+    {
+      "name": "Pools"
+    },
+    {
+      "name": "Labs"
+    },
+    {
+      "name": "LabServers"
+    },
+    {
+      "name": "PoolServers"
+    },
+    {
+      "name": "ReservationServers"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AszLabHardware/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AszLabHardware/labs": {
+      "get": {
+        "operationId": "Labs_ListBySubscription",
+        "tags": [
+          "Labs"
+        ],
+        "description": "List Lab resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_ListBySubscription": {
+            "$ref": "./examples/Labs_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AszLabHardware/labservers": {
+      "get": {
+        "operationId": "LabServerV1s_ListBySubscription",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "List LabServerV1 resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1ListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_ListBySubscription": {
+            "$ref": "./examples/LabServerV1s_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AszLabHardware/pools": {
+      "get": {
+        "operationId": "Pools_ListBySubscription",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListBySubscription": {
+            "$ref": "./examples/Pools_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AszLabHardware/reservations": {
+      "get": {
+        "operationId": "Reservations_ListBySubscription",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "List Reservation resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_ListBySubscription": {
+            "$ref": "./examples/Reservations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AszLabHardware/servers": {
+      "get": {
+        "operationId": "Servers_ListBySubscription",
+        "tags": [
+          "Servers"
+        ],
+        "description": "List Server resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_ListBySubscription": {
+            "$ref": "./examples/Servers_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs": {
+      "get": {
+        "operationId": "Labs_ListByResourceGroup",
+        "tags": [
+          "Labs"
+        ],
+        "description": "List Lab resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_ListByResourceGroup": {
+            "$ref": "./examples/Labs_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}": {
+      "get": {
+        "operationId": "Labs_Get",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Get a Lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_Get": {
+            "$ref": "./examples/Labs_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Labs_CreateOrUpdate",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Create a Lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Lab' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "201": {
+            "description": "Resource 'Lab' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_CreateOrUpdate": {
+            "$ref": "./examples/Labs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Labs_Update",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Update a Lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_Update": {
+            "$ref": "./examples/Labs_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Labs_Delete",
+        "tags": [
+          "Labs"
+        ],
+        "description": "Delete a Lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Labs_Delete": {
+            "$ref": "./examples/Labs_Delete_MaximumSet_Gen.json"
+          },
+          "Labs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Labs_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers": {
+      "get": {
+        "operationId": "LabServers_ListByParent",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "List LabServer resources by Lab",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_ListByParent": {
+            "$ref": "./examples/LabServers_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}": {
+      "get": {
+        "operationId": "LabServers_Get",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Get a LabServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Get": {
+            "$ref": "./examples/LabServers_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LabServers_CreateOrUpdate",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Create a LabServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LabServer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            }
+          },
+          "201": {
+            "description": "Resource 'LabServer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_CreateOrUpdate": {
+            "$ref": "./examples/LabServers_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LabServers_Update",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Update a LabServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabServerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServer"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Update": {
+            "$ref": "./examples/LabServers_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LabServers_Delete",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Delete a LabServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Delete": {
+            "$ref": "./examples/LabServers_Delete_MaximumSet_Gen.json"
+          },
+          "LabServers_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/LabServers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/refresh": {
+      "post": {
+        "operationId": "LabServers_Refresh",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Refresh hardware information",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Refresh": {
+            "$ref": "./examples/LabServers_Refresh_MaximumSet_Gen.json"
+          },
+          "LabServers_Refresh_MinimumSet_Gen": {
+            "$ref": "./examples/LabServers_Refresh_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/removeAccount": {
+      "post": {
+        "operationId": "LabServers_RemoveAccount",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Remove BMC account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveAccountRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_RemoveAccount": {
+            "$ref": "./examples/LabServers_RemoveAccount_MaximumSet_Gen.json"
+          },
+          "LabServers_RemoveAccount_MinimumSet_Gen": {
+            "$ref": "./examples/LabServers_RemoveAccount_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/reset": {
+      "post": {
+        "operationId": "LabServers_Reset",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Power state operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_Reset": {
+            "$ref": "./examples/LabServers_Reset_MaximumSet_Gen.json"
+          },
+          "LabServers_Reset_MinimumSet_Gen": {
+            "$ref": "./examples/LabServers_Reset_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labs/{labName}/servers/{serverName}/setAccount": {
+      "post": {
+        "operationId": "LabServers_SetAccount",
+        "tags": [
+          "LabServers"
+        ],
+        "description": "Set BMC account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "labName",
+            "in": "path",
+            "description": "The name of the lab",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetAccountRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServers_SetAccount": {
+            "$ref": "./examples/LabServers_SetAccount_MaximumSet_Gen.json"
+          },
+          "LabServers_SetAccount_MinimumSet_Gen": {
+            "$ref": "./examples/LabServers_SetAccount_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labservers": {
+      "get": {
+        "operationId": "LabServerV1s_ListByResourceGroup",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "List LabServerV1 resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1ListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_ListByResourceGroup": {
+            "$ref": "./examples/LabServerV1s_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labservers/{serverName}": {
+      "get": {
+        "operationId": "LabServerV1s_Get",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "Get a LabServerV1",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_Get": {
+            "$ref": "./examples/LabServerV1s_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LabServerV1s_CreateOrUpdate",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "Create a LabServerV1",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabServerV1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LabServerV1' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1"
+            }
+          },
+          "201": {
+            "description": "Resource 'LabServerV1' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_CreateOrUpdate": {
+            "$ref": "./examples/LabServerV1s_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LabServerV1s_Update",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "Update a LabServerV1",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LabServerV1Update"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LabServerV1"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_Update": {
+            "$ref": "./examples/LabServerV1s_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LabServerV1s_Delete",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "Delete a LabServerV1",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_Delete": {
+            "$ref": "./examples/LabServerV1s_Delete_MaximumSet_Gen.json"
+          },
+          "LabServerV1s_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/LabServerV1s_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/labservers/{serverName}/collectInventory": {
+      "post": {
+        "operationId": "LabServerV1s_CollectInventory",
+        "tags": [
+          "LabServerV1s"
+        ],
+        "description": "Collects the inventory of the server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LabServerV1s_CollectInventory": {
+            "$ref": "./examples/LabServerV1s_CollectInventory_MaximumSet_Gen.json"
+          },
+          "LabServerV1s_CollectInventory_MinimumSet_Gen": {
+            "$ref": "./examples/LabServerV1s_CollectInventory_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/pools": {
+      "get": {
+        "operationId": "Pools_ListByResourceGroup",
+        "tags": [
+          "Pools"
+        ],
+        "description": "List Pool resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_ListByResourceGroup": {
+            "$ref": "./examples/Pools_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/pools/{poolName}": {
+      "get": {
+        "operationId": "Pools_Get",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Get a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "./examples/Pools_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Pools_CreateOrUpdate",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Create a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Pool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "201": {
+            "description": "Resource 'Pool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "./examples/Pools_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Pools_Update",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Update a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PoolTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "./examples/Pools_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Pools_Delete",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Delete a Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "./examples/Pools_Delete_MaximumSet_Gen.json"
+          },
+          "Pools_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Pools_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/pools/{poolName}/servers": {
+      "get": {
+        "operationId": "PoolServers_ListByParent",
+        "tags": [
+          "PoolServers"
+        ],
+        "description": "List PoolServer resources by Pool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoolServers_ListByParent": {
+            "$ref": "./examples/PoolServers_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/pools/{poolName}/servers/{serverName}": {
+      "get": {
+        "operationId": "PoolServers_Get",
+        "tags": [
+          "PoolServers"
+        ],
+        "description": "Get a PoolServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "poolName",
+            "in": "path",
+            "description": "The name of the pool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PoolServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoolServers_Get": {
+            "$ref": "./examples/PoolServers_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations": {
+      "get": {
+        "operationId": "Reservations_ListByResourceGroup",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "List Reservation resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_ListByResourceGroup": {
+            "$ref": "./examples/Reservations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}": {
+      "get": {
+        "operationId": "Reservations_Get",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Get a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Get": {
+            "$ref": "./examples/Reservations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Reservations_CreateOrUpdate",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Create a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Reservation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "201": {
+            "description": "Resource 'Reservation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_CreateOrUpdate": {
+            "$ref": "./examples/Reservations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Reservations_Update",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Update a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Update": {
+            "$ref": "./examples/Reservations_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Reservations_Delete",
+        "tags": [
+          "Reservations"
+        ],
+        "description": "Delete a Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reservations_Delete": {
+            "$ref": "./examples/Reservations_Delete_MaximumSet_Gen.json"
+          },
+          "Reservations_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Reservations_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers": {
+      "get": {
+        "operationId": "ReservationServers_ListByParent",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "List ReservationServer resources by Reservation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_ListByParent": {
+            "$ref": "./examples/ReservationServers_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}": {
+      "get": {
+        "operationId": "ReservationServers_Get",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Get a ReservationServer",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_Get": {
+            "$ref": "./examples/ReservationServers_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/allowMaintenance": {
+      "post": {
+        "operationId": "ReservationServers_AllowMaintenance",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Allows any requested maintenance on this Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_AllowMaintenance": {
+            "$ref": "./examples/ReservationServers_AllowMaintenance_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/removeAccount": {
+      "post": {
+        "operationId": "ReservationServers_RemoveAccount",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Remove BMC account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveAccountRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_RemoveAccount": {
+            "$ref": "./examples/ReservationServers_RemoveAccount_MaximumSet_Gen.json"
+          },
+          "ReservationServers_RemoveAccount_MinimumSet_Gen": {
+            "$ref": "./examples/ReservationServers_RemoveAccount_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/reset": {
+      "post": {
+        "operationId": "ReservationServers_Reset",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Power state operations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_Reset": {
+            "$ref": "./examples/ReservationServers_Reset_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/reservations/{reservationName}/servers/{serverName}/setAccount": {
+      "post": {
+        "operationId": "ReservationServers_SetAccount",
+        "tags": [
+          "ReservationServers"
+        ],
+        "description": "Set BMC account",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "reservationName",
+            "in": "path",
+            "description": "The name of the reservation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SetAccountRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReservationServers_SetAccount": {
+            "$ref": "./examples/ReservationServers_SetAccount_MaximumSet_Gen.json"
+          },
+          "ReservationServers_SetAccount_MinimumSet_Gen": {
+            "$ref": "./examples/ReservationServers_SetAccount_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/servers": {
+      "get": {
+        "operationId": "Servers_ListByResourceGroup",
+        "tags": [
+          "Servers"
+        ],
+        "description": "List Server resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_ListByResourceGroup": {
+            "$ref": "./examples/Servers_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/servers/{serverName}": {
+      "get": {
+        "operationId": "Servers_Get",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Get a Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_Get": {
+            "$ref": "./examples/Servers_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Servers_CreateOrUpdate",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Create a Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Server' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "201": {
+            "description": "Resource 'Server' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_CreateOrUpdate": {
+            "$ref": "./examples/Servers_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Servers_Update",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Update a Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_Update": {
+            "$ref": "./examples/Servers_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Servers_Delete",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Delete a Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_Delete": {
+            "$ref": "./examples/Servers_Delete_MaximumSet_Gen.json"
+          },
+          "Servers_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Servers_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AszLabHardware/servers/{serverName}/allowMaintenance": {
+      "post": {
+        "operationId": "Servers_AllowMaintenance",
+        "tags": [
+          "Servers"
+        ],
+        "description": "Allows any requested maintenance on this Server",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the Server",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Servers_AllowMaintenance": {
+            "$ref": "./examples/Servers_AllowMaintenance_MaximumSet_Gen.json"
+          },
+          "Servers_AllowMaintenance_MinimumSet_Gen": {
+            "$ref": "./examples/Servers_AllowMaintenance_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountStatus": {
+      "type": "string",
+      "description": "The status of the account",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AccountStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Account is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Account is disabled"
+          }
+        ]
+      }
+    },
+    "Drive": {
+      "type": "object",
+      "description": "Information regarding individual Disk Drives",
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "The Id of the disk drive"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the disk drive"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the disk drive"
+        },
+        "model": {
+          "type": "string",
+          "description": "Disk drive model"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Part number of the disk drive"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the disk drive"
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version of the disk drive"
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "Media type of the disk drive"
+        },
+        "capacityBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Capacity of the disk drive in bytes"
+        }
+      },
+      "required": [
+        "capacityBytes"
+      ]
+    },
+    "DriveCollection": {
+      "type": "object",
+      "description": "Information regarding collection of disk drives",
+      "properties": {
+        "totalDriveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of drives"
+        },
+        "totalDriveCapacityBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total capacity in bytes"
+        },
+        "drives": {
+          "type": "array",
+          "description": "Information about individual disk drives",
+          "items": {
+            "$ref": "#/definitions/Drive"
+          },
+          "x-ms-identifiers": [
+            "diskId"
+          ]
+        }
+      },
+      "required": [
+        "totalDriveCount",
+        "totalDriveCapacityBytes",
+        "drives"
+      ]
+    },
+    "DriveType": {
+      "type": "string",
+      "description": "The different types of drives",
+      "enum": [
+        "HDD",
+        "SATASSD",
+        "NVMESSD"
+      ],
+      "x-ms-enum": {
+        "name": "DriveType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hdd",
+            "value": "HDD",
+            "description": "Hard Disk Drive"
+          },
+          {
+            "name": "SataSsd",
+            "value": "SATASSD",
+            "description": "SATA SSD"
+          },
+          {
+            "name": "NvmeSsd",
+            "value": "NVMESSD",
+            "description": "NVME SSD"
+          }
+        ]
+      }
+    },
+    "ExternalReference": {
+      "$ref": "#/definitions/OneAssetReference",
+      "x-nullable": false
+    },
+    "HardwareInfo": {
+      "type": "object",
+      "description": "The hardware information about the server",
+      "properties": {
+        "server": {
+          "$ref": "#/definitions/ServerHardware",
+          "description": "Information about the hardware components",
+          "readOnly": true
+        },
+        "manager": {
+          "$ref": "#/definitions/Manager",
+          "description": "Information about the BMC",
+          "readOnly": true
+        },
+        "refreshedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the hardware information was refreshed",
+          "readOnly": true
+        }
+      }
+    },
+    "IntegratedGraphics": {
+      "type": "string",
+      "description": "Integrated Graphics capability of the processor",
+      "enum": [
+        "IntegratedGraphics",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IntegratedGraphics",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IntegratedGraphics",
+            "value": "IntegratedGraphics",
+            "description": "Processor has integrated graphics"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Processor does not have integrated graphics"
+          }
+        ]
+      }
+    },
+    "InventoryLocalAccount": {
+      "type": "object",
+      "description": "Inventory local account",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username of local account",
+          "readOnly": true
+        },
+        "accountType": {
+          "$ref": "#/definitions/InventoryLocalAccountType",
+          "description": "The account type",
+          "readOnly": true
+        },
+        "accountStatus": {
+          "$ref": "#/definitions/AccountStatus",
+          "description": "The status of the account",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "username",
+        "accountType",
+        "accountStatus"
+      ]
+    },
+    "InventoryLocalAccountType": {
+      "type": "string",
+      "description": "The account type of the local account",
+      "enum": [
+        "Service",
+        "DirectAccess",
+        "Unknown",
+        "Special"
+      ],
+      "x-ms-enum": {
+        "name": "InventoryLocalAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Service",
+            "value": "Service",
+            "description": "Service account. Cannot be modified or removed"
+          },
+          {
+            "name": "DirectAccess",
+            "value": "DirectAccess",
+            "description": "Direct access account. Used by customers for temporary access to the BMC and provisioned by the service"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown account"
+          },
+          {
+            "name": "Special",
+            "value": "Special",
+            "description": "Special account, such as monitoring accounts left on the lab team"
+          }
+        ]
+      }
+    },
+    "Lab": {
+      "type": "object",
+      "description": "A collection of hardware",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LabListResult": {
+      "type": "object",
+      "description": "The response of a Lab list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Lab items on this page",
+          "items": {
+            "$ref": "#/definitions/Lab"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabProperties": {
+      "type": "object",
+      "description": "Details of the AszLabHw Lab.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "LabResourceAvailableForReservationState": {
+      "type": "string",
+      "description": "LabResource availability for reservation state.",
+      "enum": [
+        "NotAvailableForReservation",
+        "AvailableForReservation"
+      ],
+      "x-ms-enum": {
+        "name": "LabResourceAvailableForReservationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAvailableForReservation",
+            "value": "NotAvailableForReservation",
+            "description": "The LabResource is not available for reservation."
+          },
+          {
+            "name": "AvailableForReservation",
+            "value": "AvailableForReservation",
+            "description": "The LabResource is available for reservation."
+          }
+        ]
+      }
+    },
+    "LabResourceMaintenanceRequestState": {
+      "type": "string",
+      "description": "LabResource maintenance request state.",
+      "enum": [
+        "MaintenanceNotRequested",
+        "MaintenanceRequested",
+        "MaintenanceRequired"
+      ],
+      "x-ms-enum": {
+        "name": "LabResourceMaintenanceRequestState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MaintenanceNotRequested",
+            "value": "MaintenanceNotRequested",
+            "description": "The LabResource is not requested for maintenance."
+          },
+          {
+            "name": "MaintenanceRequested",
+            "value": "MaintenanceRequested",
+            "description": "The LabResource is requested for maintenance."
+          },
+          {
+            "name": "MaintenanceRequired",
+            "value": "MaintenanceRequired",
+            "description": "The LabResource is required for maintenance."
+          }
+        ]
+      }
+    },
+    "LabResourceMaintenanceStatus": {
+      "type": "string",
+      "description": "LabResource maintenance status.",
+      "enum": [
+        "MaintenanceNotRequested",
+        "MaintenancePending",
+        "InMaintenance",
+        "ExclusiveAccess"
+      ],
+      "x-ms-enum": {
+        "name": "LabResourceMaintenanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MaintenanceNotRequested",
+            "value": "MaintenanceNotRequested",
+            "description": "The LabResource is not requested for maintenance."
+          },
+          {
+            "name": "MaintenancePending",
+            "value": "MaintenancePending",
+            "description": "The LabResource is pending a requested maintenance."
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "The LabResource is in maintenance."
+          },
+          {
+            "name": "ExclusiveAccess",
+            "value": "ExclusiveAccess",
+            "description": "The LabResource is in exclusive access mode (not available for reservation)."
+          }
+        ]
+      }
+    },
+    "LabResourceReservationStatus": {
+      "type": "string",
+      "description": "LabResource reservation status.",
+      "enum": [
+        "NotReserved",
+        "Reserved"
+      ],
+      "x-ms-enum": {
+        "name": "LabResourceReservationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotReserved",
+            "value": "NotReserved",
+            "description": "The LabResource is not reserved."
+          },
+          {
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "The LabResource is reserved."
+          }
+        ]
+      }
+    },
+    "LabServer": {
+      "type": "object",
+      "description": "Details about the AszLabHardware Lab/Server resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LabServerListResult": {
+      "type": "object",
+      "description": "The response of a LabServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabServer items on this page",
+          "items": {
+            "$ref": "#/definitions/LabServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabServerProperties": {
+      "type": "object",
+      "description": "Properties",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "The Serial Number of the Server.",
+          "readOnly": true
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "Asset tag of the server",
+          "readOnly": true
+        },
+        "hardware": {
+          "$ref": "#/definitions/HardwareInfo",
+          "description": "Server Hardware Information",
+          "readOnly": true
+        },
+        "physicalLocation": {
+          "$ref": "#/definitions/PhysicalLocation",
+          "description": "Physical location of the server",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "poolResourceId": {
+          "$ref": "#/definitions/PoolResourceId",
+          "description": "The Pool Azure Resource this server is assigned to",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "management": {
+          "$ref": "#/definitions/ManagementInformation",
+          "description": "Server management information bag",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "externalReference": {
+          "$ref": "#/definitions/ExternalReference",
+          "description": "The backing data source for this resource",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "maintenanceStatus": {
+          "$ref": "#/definitions/MaintenanceStatus",
+          "description": "Maintenance status",
+          "readOnly": true
+        },
+        "maintenanceState": {
+          "$ref": "#/definitions/MaintenanceState",
+          "description": "Maintenance state",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "reservationStatus": {
+          "$ref": "#/definitions/ReservationStatus",
+          "description": "Reservation status",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serialNumber",
+        "assetTag",
+        "management",
+        "externalReference",
+        "maintenanceStatus",
+        "reservationStatus"
+      ]
+    },
+    "LabServerPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties",
+      "properties": {
+        "poolResourceId": {
+          "$ref": "#/definitions/PoolResourceId",
+          "description": "The Pool Azure Resource this server is assigned to",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "maintenanceState": {
+          "$ref": "#/definitions/MaintenanceState",
+          "description": "Maintenance state",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "LabServerUpdate": {
+      "type": "object",
+      "description": "Details about the AszLabHardware Lab/Server resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabServerPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LabServerV1": {
+      "type": "object",
+      "description": "A physical computer which can be reserved for use by a user",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LabServerV1Properties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LabServerV1ListResult": {
+      "type": "object",
+      "description": "The response of a LabServerV1 list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LabServerV1 items on this page",
+          "items": {
+            "$ref": "#/definitions/LabServerV1"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LabServerV1Properties": {
+      "type": "object",
+      "description": "Details of the AszLabHw LabServer.",
+      "properties": {
+        "resourceManager": {
+          "$ref": "#/definitions/ResourceManager",
+          "description": "The current status of the GoalState",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The Serial Number of the LabServer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bmcIpAddress": {
+          "type": "string",
+          "description": "IP address of the LabServer's BMC.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "inventory": {
+          "$ref": "#/definitions/System",
+          "description": "LabServer Inventory Information",
+          "readOnly": true
+        },
+        "physicalLocation": {
+          "type": "string",
+          "description": "Physical location of the LabServer.",
+          "readOnly": true
+        },
+        "availableForReservationState": {
+          "$ref": "#/definitions/LabResourceAvailableForReservationState",
+          "description": "LabServer availability for reservation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "reservationStatus": {
+          "$ref": "#/definitions/LabResourceReservationStatus",
+          "description": "LabServer reservation status.",
+          "readOnly": true
+        },
+        "maintenanceRequestState": {
+          "$ref": "#/definitions/LabResourceMaintenanceRequestState",
+          "description": "LabServer maintenance request state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maintenanceStatus": {
+          "$ref": "#/definitions/LabResourceMaintenanceStatus",
+          "description": "LabServer maintenance status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serialNumber",
+        "bmcIpAddress"
+      ]
+    },
+    "LabServerV1Update": {
+      "type": "object",
+      "description": "The type used for update operations of the LabServerV1.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/LabServerV1UpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "LabServerV1UpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the LabServerV1.",
+      "properties": {
+        "availableForReservationState": {
+          "$ref": "#/definitions/LabResourceAvailableForReservationState",
+          "description": "LabServer availability for reservation.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "maintenanceRequestState": {
+          "$ref": "#/definitions/LabResourceMaintenanceRequestState",
+          "description": "LabServer maintenance request state.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "LabTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Lab resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LocalAccount": {
+      "type": "object",
+      "description": "Base model representing a local BMC account",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username for local account",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password for local account",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "MaintenanceState": {
+      "type": "string",
+      "description": "The maintenance state of the server",
+      "enum": [
+        "Require",
+        "Request",
+        "Clear"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Require",
+            "value": "Require",
+            "description": "Requires maintenance"
+          },
+          {
+            "name": "Request",
+            "value": "Request",
+            "description": "Request maintenance on server"
+          },
+          {
+            "name": "Clear",
+            "value": "Clear",
+            "description": "No maintenance needed on server"
+          }
+        ]
+      }
+    },
+    "MaintenanceStatus": {
+      "type": "string",
+      "description": "The maintenance status of the server",
+      "enum": [
+        "RequestedMaintenance",
+        "InMaintenance",
+        "NotInMaintenance"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestedMaintenance",
+            "value": "RequestedMaintenance",
+            "description": "Lab manager has requested maintenance"
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "Server is in maintenance"
+          },
+          {
+            "name": "NotInMaintenance",
+            "value": "NotInMaintenance",
+            "description": "Server is not in maintenance"
+          }
+        ]
+      }
+    },
+    "ManagementInformation": {
+      "type": "object",
+      "description": "Management information regarding server",
+      "properties": {
+        "managementEndpoint": {
+          "type": "string",
+          "description": "Endpoint for managing the server"
+        }
+      }
+    },
+    "Manager": {
+      "type": "object",
+      "description": "The model representing the BMC",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of BMC",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "Model of BMC",
+          "readOnly": true
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version of BMC",
+          "readOnly": true
+        },
+        "accounts": {
+          "type": "array",
+          "description": "List of BMC accounts",
+          "items": {
+            "$ref": "#/definitions/InventoryLocalAccount"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "username"
+          ]
+        }
+      }
+    },
+    "MemoryCollection": {
+      "type": "object",
+      "description": "Information regarding the RAM of the server",
+      "properties": {
+        "memoryModuleCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of memory modules"
+        },
+        "totalSystemMemoryGiB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total memory of server in GiB"
+        },
+        "memoryModules": {
+          "type": "array",
+          "description": "Information of individual memory modules",
+          "items": {
+            "$ref": "#/definitions/MemoryModule"
+          },
+          "x-ms-identifiers": [
+            "moduleName"
+          ]
+        }
+      },
+      "required": [
+        "memoryModuleCount",
+        "totalSystemMemoryGiB",
+        "memoryModules"
+      ]
+    },
+    "MemoryModule": {
+      "type": "object",
+      "description": "Information about the individual memory modules of the server",
+      "properties": {
+        "moduleName": {
+          "type": "string",
+          "description": "Name of the memory module"
+        },
+        "moduleLocation": {
+          "type": "string",
+          "description": "Location of the memory module"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the memory module"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Part number of the memory module"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the memory module"
+        },
+        "capacityMiB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Capacity of memory module in MiB"
+        },
+        "memoryDeviceType": {
+          "type": "string",
+          "description": "Device type of memory module"
+        },
+        "moduleProductId": {
+          "type": "string",
+          "description": "Product ID of memory module"
+        }
+      },
+      "required": [
+        "capacityMiB"
+      ]
+    },
+    "NetDevice": {
+      "type": "object",
+      "description": "Information about a network device",
+      "properties": {
+        "netDeviceId": {
+          "type": "string",
+          "description": "Id of network device"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer of the network device"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model of the network device"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "Part number of the network device"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number of the network device"
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version of the network device"
+        },
+        "portCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ports on the network device"
+        },
+        "netDeviceMacs": {
+          "type": "array",
+          "description": "List of MACs for network device",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ports": {
+          "type": "array",
+          "description": "Information of individual ports on network device",
+          "items": {
+            "$ref": "#/definitions/Port"
+          },
+          "x-ms-identifiers": [
+            "portId"
+          ]
+        }
+      },
+      "required": [
+        "netDeviceId",
+        "portCount",
+        "netDeviceMacs",
+        "ports"
+      ]
+    },
+    "NetworkCollection": {
+      "type": "object",
+      "description": "Information regarding the network of the server",
+      "properties": {
+        "systemMacs": {
+          "type": "array",
+          "description": "The list of MAC addresses",
+          "items": {
+            "type": "string"
+          }
+        },
+        "netDevices": {
+          "type": "array",
+          "description": "Information about the individual network devices of the server",
+          "items": {
+            "$ref": "#/definitions/NetDevice"
+          },
+          "x-ms-identifiers": [
+            "netDeviceId"
+          ]
+        }
+      }
+    },
+    "OneAssetPhysicalLocation": {
+      "type": "object",
+      "description": "The OneAsset model describing the physical location",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OneAsset type",
+          "enum": [
+            "OneAsset"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "datacenter": {
+          "type": "string",
+          "description": "The physical datacenter",
+          "readOnly": true
+        },
+        "colocation": {
+          "type": "string",
+          "description": "The colocation",
+          "readOnly": true
+        },
+        "colocationZone": {
+          "type": "string",
+          "description": "The colocation zone",
+          "readOnly": true
+        },
+        "rack": {
+          "type": "string",
+          "description": "The physical rack",
+          "readOnly": true
+        },
+        "chassis": {
+          "type": "string",
+          "description": "The chassis",
+          "readOnly": true
+        },
+        "slotNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The slot in the chassis",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "OneAssetReference": {
+      "type": "object",
+      "description": "The OneAsset id backing a resource",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OneAsset type",
+          "enum": [
+            "OneAsset"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "readOnly": true
+        },
+        "configId": {
+          "type": "string",
+          "description": "The OneAsset configuration id",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PhysicalLocation": {
+      "$ref": "#/definitions/OneAssetPhysicalLocation",
+      "x-nullable": false
+    },
+    "Pool": {
+      "type": "object",
+      "description": "A pool of assigned hardware",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PoolListResult": {
+      "type": "object",
+      "description": "The response of a Pool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Pool items on this page",
+          "items": {
+            "$ref": "#/definitions/Pool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolProperties": {
+      "type": "object",
+      "description": "Details of the AszLabHw Pool.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "PoolResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.AszLabHardware/pools"
+          }
+        ]
+      }
+    },
+    "PoolServer": {
+      "type": "object",
+      "description": "Microsoft.AszLabHardware/Pool/Server resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PoolServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PoolServerListResult": {
+      "type": "object",
+      "description": "The response of a PoolServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PoolServer items on this page",
+          "items": {
+            "$ref": "#/definitions/PoolServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PoolServerProperties": {
+      "type": "object",
+      "description": "Microsoft.AszLabHardware/Pool/Server properties",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "The Serial Number of the Server.",
+          "readOnly": true
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "Asset tag of the server",
+          "readOnly": true
+        },
+        "hardware": {
+          "$ref": "#/definitions/HardwareInfo",
+          "description": "Server Hardware Information",
+          "readOnly": true
+        },
+        "physicalLocation": {
+          "$ref": "#/definitions/PhysicalLocation",
+          "description": "Physical location of the server",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "managementEndpoint": {
+          "type": "string",
+          "description": "Endpoint for managing the server",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serialNumber",
+        "assetTag"
+      ]
+    },
+    "PoolServerResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.AszLabHardware/pools/servers"
+          }
+        ]
+      }
+    },
+    "PoolTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Pool resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Port": {
+      "type": "object",
+      "description": "Information regarding an individual port",
+      "properties": {
+        "portId": {
+          "type": "string",
+          "description": "Id of port"
+        },
+        "linkType": {
+          "type": "string",
+          "description": "Link type of port"
+        },
+        "linkSpeedMbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Link speed of port in Mbps"
+        },
+        "linkStatus": {
+          "type": "string",
+          "description": "Link status of port"
+        },
+        "associatedMacs": {
+          "type": "array",
+          "description": "Associated MACs of port",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "portId",
+        "linkSpeedMbps"
+      ]
+    },
+    "PowerState": {
+      "type": "string",
+      "description": "The different power states of the server",
+      "enum": [
+        "On",
+        "Off",
+        "PoweringOn",
+        "PoweringOff",
+        "Paused"
+      ],
+      "x-ms-enum": {
+        "name": "PowerState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Server is on"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Server is Off"
+          },
+          {
+            "name": "PoweringOn",
+            "value": "PoweringOn",
+            "description": "Server is powering on"
+          },
+          {
+            "name": "PoweringOff",
+            "value": "PoweringOff",
+            "description": "Server is powering off"
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "Server is paused"
+          }
+        ]
+      }
+    },
+    "Processor": {
+      "type": "object",
+      "description": "Information regarding the processor of the server",
+      "properties": {
+        "processorName": {
+          "type": "string",
+          "description": "The processor name"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The processor manufacturer"
+        },
+        "model": {
+          "type": "string",
+          "description": "The processor model"
+        },
+        "version": {
+          "type": "string",
+          "description": "The processor version"
+        },
+        "microCodeInfo": {
+          "type": "string",
+          "description": "The microcode information"
+        },
+        "maxSpeedMhz": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The max clock speed"
+        },
+        "operatingSpeedMhz": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The operating clock speed"
+        },
+        "totalCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of cores"
+        },
+        "totalEnabledCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of enabled cores"
+        },
+        "totalThreads": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total threads of the processor"
+        },
+        "turboState": {
+          "type": "string",
+          "description": "The turbo state of the processor"
+        }
+      }
+    },
+    "ProcessorCollection": {
+      "type": "object",
+      "description": "Information regarding the processors of the server",
+      "properties": {
+        "processorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Processor count total"
+        },
+        "logicalProcessorCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical core count"
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors of the server",
+          "items": {
+            "$ref": "#/definitions/Processor"
+          },
+          "x-ms-identifiers": [
+            "processorName"
+          ]
+        }
+      },
+      "required": [
+        "processorCount",
+        "logicalProcessorCount",
+        "processors"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource work has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RemoveAccountRequestBody": {
+      "type": "object",
+      "description": "Request body for RemoveMaintenanceAccount POST request",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The direct access account username to remove from BMC"
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "Reservation": {
+      "type": "object",
+      "description": "A physical computer which can be reserved for use by a user",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReservationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ReservationListResult": {
+      "type": "object",
+      "description": "The response of a Reservation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Reservation items on this page",
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReservationProperties": {
+      "type": "object",
+      "description": "Details of the AszLabHw Reservation.",
+      "properties": {
+        "resourceManager": {
+          "$ref": "#/definitions/ResourceManager",
+          "description": "The current status of the GoalState",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "serverAssociations": {
+          "type": "array",
+          "description": "The set of Servers to create the reservation.",
+          "items": {
+            "$ref": "#/definitions/ServerAssociation"
+          },
+          "x-ms-identifiers": [
+            "server"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "servers": {
+          "type": "array",
+          "description": "List of reserved pool servers",
+          "items": {
+            "$ref": "#/definitions/PoolServerResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "servers"
+      ]
+    },
+    "ReservationServer": {
+      "type": "object",
+      "description": "Microsoft.AszLabHardware/Reservation/Server resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReservationServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ReservationServerListResult": {
+      "type": "object",
+      "description": "The response of a ReservationServer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ReservationServer items on this page",
+          "items": {
+            "$ref": "#/definitions/ReservationServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ReservationServerProperties": {
+      "type": "object",
+      "description": "Microsoft.AszLabHardware/Reservation/Server properties",
+      "properties": {
+        "serialNumber": {
+          "type": "string",
+          "description": "The Serial Number of the Server.",
+          "readOnly": true
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "Asset tag of the server",
+          "readOnly": true
+        },
+        "hardware": {
+          "$ref": "#/definitions/HardwareInfo",
+          "description": "Server Hardware Information",
+          "readOnly": true
+        },
+        "physicalLocation": {
+          "$ref": "#/definitions/PhysicalLocation",
+          "description": "Physical location of the server",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "managementEndpoint": {
+          "type": "string",
+          "description": "Endpoint for managing the server",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serialNumber",
+        "assetTag"
+      ]
+    },
+    "ReservationStatus": {
+      "type": "string",
+      "description": "The reservation status of the server",
+      "enum": [
+        "Reserved",
+        "NotReserved"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "Reserved status"
+          },
+          {
+            "name": "NotReserved",
+            "value": "NotReserved",
+            "description": "Not Reserved status"
+          }
+        ]
+      }
+    },
+    "ReservationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Reservation.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResetRequestBody": {
+      "type": "object",
+      "description": "The request body model of a reset POST call",
+      "properties": {
+        "resetType": {
+          "$ref": "#/definitions/ResetType",
+          "description": "The enum describing the power state"
+        }
+      },
+      "required": [
+        "resetType"
+      ]
+    },
+    "ResetType": {
+      "type": "string",
+      "description": "The commands relating to power state",
+      "enum": [
+        "GracefulRestart",
+        "GracefulShutdown",
+        "ForceOff",
+        "On",
+        "ForceRestart"
+      ],
+      "x-ms-enum": {
+        "name": "ResetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GracefulRestart",
+            "value": "GracefulRestart",
+            "description": "Gracefully restart server"
+          },
+          {
+            "name": "GracefulShutdown",
+            "value": "GracefulShutdown",
+            "description": "Gracefully shut down server"
+          },
+          {
+            "name": "ForceOff",
+            "value": "ForceOff",
+            "description": "Force shut down server"
+          },
+          {
+            "name": "On",
+            "value": "On",
+            "description": "Turn server on"
+          },
+          {
+            "name": "ForceRestart",
+            "value": "ForceRestart",
+            "description": "Force restart server"
+          }
+        ]
+      }
+    },
+    "ResourceManager": {
+      "type": "object",
+      "description": "The properties of the resource manager.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ResourceManagerStatus",
+          "description": "The current status of the ResourceManager"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message of the ResourceManager (if in failed state)"
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "ResourceManagerStatus": {
+      "type": "string",
+      "description": "The status of the resource manager.",
+      "enum": [
+        "Creating",
+        "Converging",
+        "Converged",
+        "Deleting",
+        "FailedToCreate",
+        "FailedToConverge",
+        "FailedToDelete"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceManagerStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Converging",
+            "value": "Converging",
+            "description": "The resource is being converged."
+          },
+          {
+            "name": "Converged",
+            "value": "Converged",
+            "description": "The resource is converged."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "FailedToCreate",
+            "value": "FailedToCreate",
+            "description": "The resource failed to create."
+          },
+          {
+            "name": "FailedToConverge",
+            "value": "FailedToConverge",
+            "description": "The resource failed to converge."
+          },
+          {
+            "name": "FailedToDelete",
+            "value": "FailedToDelete",
+            "description": "The resource failed to delete."
+          }
+        ]
+      }
+    },
+    "Server": {
+      "type": "object",
+      "description": "A Server object which will be connected to a LabServer upon successful reservation",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ServerAssociation": {
+      "type": "object",
+      "description": "Details of the AszLabHw Reservation Server association.",
+      "properties": {
+        "server": {
+          "$ref": "#/definitions/ServerResourceId",
+          "description": "The Server resource to be used for this constraint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the server to be reserved.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the server to be reserved.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "server"
+      ]
+    },
+    "ServerHardware": {
+      "type": "object",
+      "description": "The hardware information about the server",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the server",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the server",
+          "readOnly": true
+        },
+        "powerState": {
+          "$ref": "#/definitions/PowerState",
+          "description": "Powerstate of the server",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the server",
+          "readOnly": true
+        },
+        "memoryGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total RAM capacity of the server",
+          "readOnly": true
+        },
+        "ssdCapacityGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total SSD capacity (SATA + NVME) of the server",
+          "readOnly": true
+        },
+        "hddCapacityGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total HDD capacity of the server",
+          "readOnly": true
+        },
+        "processors": {
+          "type": "array",
+          "description": "The processors of the server",
+          "items": {
+            "$ref": "#/definitions/ServerHardwareProcessor"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "drives": {
+          "type": "array",
+          "description": "The drives of the server",
+          "items": {
+            "$ref": "#/definitions/ServerHardwareDrive"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "graphicsCards": {
+          "type": "array",
+          "description": "The GPUs of the server",
+          "items": {
+            "$ref": "#/definitions/ServerHardwareGraphicsCard"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "networkCards": {
+          "type": "array",
+          "description": "The network cards of the server",
+          "items": {
+            "$ref": "#/definitions/ServerHardwareNetworkCard"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "powerState"
+      ]
+    },
+    "ServerHardwareDrive": {
+      "type": "object",
+      "description": "Information about the drive",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the drive"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the drive"
+        },
+        "driveType": {
+          "$ref": "#/definitions/DriveType",
+          "description": "The type of the drive"
+        },
+        "capacityGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total capacity of the drive"
+        }
+      }
+    },
+    "ServerHardwareGraphicsCard": {
+      "type": "object",
+      "description": "Information about the graphics card",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the GPU"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the GPU"
+        },
+        "memoryGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total VRAM of the GPU"
+        }
+      }
+    },
+    "ServerHardwareNetworkCard": {
+      "type": "object",
+      "description": "Information about the network card",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the network card"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the network card"
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the network card"
+        },
+        "speedMbps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The speed of the network card"
+        }
+      }
+    },
+    "ServerHardwareProcessor": {
+      "type": "object",
+      "description": "Information about the processor",
+      "properties": {
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the processor"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the processor"
+        },
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cores"
+        },
+        "threads": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of threads"
+        },
+        "integratedGraphics": {
+          "$ref": "#/definitions/IntegratedGraphics",
+          "description": "Processor's dedicated IGPU capabilities"
+        }
+      }
+    },
+    "ServerListResult": {
+      "type": "object",
+      "description": "The response of a Server list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Server items on this page",
+          "items": {
+            "$ref": "#/definitions/Server"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerProperties": {
+      "type": "object",
+      "description": "Details of the AszLabHw Server.",
+      "properties": {
+        "resourceManager": {
+          "$ref": "#/definitions/ResourceManager",
+          "description": "The current status of the GoalState",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "userName": {
+          "type": "string",
+          "description": "User name of the account credential to authenticate to the server.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userPasswordKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Keyvault Uri for the password of the account credential to authenticate to the server.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "associationStatus": {
+          "$ref": "#/definitions/UserLabResourceAssociationStatus",
+          "description": "Server association with LabServer status.",
+          "readOnly": true
+        },
+        "bmcIpAddress": {
+          "type": "string",
+          "description": "IP address of the associated LabServer's BMC.",
+          "readOnly": true
+        },
+        "inventory": {
+          "$ref": "#/definitions/System",
+          "description": "Inventory Information of the associated LabServer.",
+          "readOnly": true
+        },
+        "maintenanceStatus": {
+          "$ref": "#/definitions/UserLabResourceMaintenanceStatus",
+          "description": "Maintenance status of the associated LabServer.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.AszLabHardware/servers"
+          }
+        ]
+      }
+    },
+    "ServerUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Server.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ServerUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Server.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "description": "User name of the account credential to authenticate to the server.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userPasswordKeyVaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Keyvault Uri for the password of the account credential to authenticate to the server.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "SetAccountRequestBody": {
+      "type": "object",
+      "description": "Request body for SetMaintenanceAccount POST request",
+      "properties": {
+        "localAccount": {
+          "$ref": "#/definitions/LocalAccount",
+          "description": "The direct access account to provision on the BMC"
+        }
+      },
+      "required": [
+        "localAccount"
+      ]
+    },
+    "StorageCollection": {
+      "type": "object",
+      "description": "Information regarding the storage of the server",
+      "properties": {
+        "totalDriveCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of disk drives"
+        },
+        "totalDriveCapacityBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total capacity in bytes"
+        },
+        "ssdSata": {
+          "$ref": "#/definitions/DriveCollection",
+          "description": "SSD_SATA Disk drive collections"
+        },
+        "hdd": {
+          "$ref": "#/definitions/DriveCollection",
+          "description": "HDD Disk drive collections"
+        },
+        "ssdNvme": {
+          "$ref": "#/definitions/DriveCollection",
+          "description": "SSD_NVMe Disk drive collections"
+        }
+      },
+      "required": [
+        "totalDriveCount",
+        "totalDriveCapacityBytes",
+        "ssdSata",
+        "hdd",
+        "ssdNvme"
+      ]
+    },
+    "System": {
+      "type": "object",
+      "description": "Details of the physical properties of the AszLabHw Server System",
+      "properties": {
+        "bmcIpAddress": {
+          "type": "string",
+          "description": "The IP Address of the server"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The manufacturer of the server"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the server"
+        },
+        "partNumber": {
+          "type": "string",
+          "description": "The part number of the server"
+        },
+        "serviceTag": {
+          "type": "string",
+          "description": "The service tag of the server"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the server"
+        },
+        "assetTag": {
+          "type": "string",
+          "description": "The asset tag of the server"
+        },
+        "hostName": {
+          "type": "string",
+          "description": "The host name of the server"
+        },
+        "biosVersion": {
+          "type": "string",
+          "description": "The BIOS version of the server"
+        },
+        "cpldVersion": {
+          "type": "string",
+          "description": "The complex programmable logic device version of the server"
+        },
+        "tpm": {
+          "type": "string",
+          "description": "The TPM of the server"
+        },
+        "tpmFirmware": {
+          "type": "string",
+          "description": "The firmware of the TPM"
+        },
+        "processorInventory": {
+          "$ref": "#/definitions/ProcessorCollection",
+          "description": "The CPUs of the server"
+        },
+        "memoryInventory": {
+          "$ref": "#/definitions/MemoryCollection",
+          "description": "The memory information of the server"
+        },
+        "storageInventory": {
+          "$ref": "#/definitions/StorageCollection",
+          "description": "The disk information of the server"
+        },
+        "networkInventory": {
+          "$ref": "#/definitions/NetworkCollection",
+          "description": "The network information of the server"
+        }
+      },
+      "required": [
+        "networkInventory"
+      ]
+    },
+    "UserLabResourceAssociationStatus": {
+      "type": "string",
+      "description": "Resource association status.",
+      "enum": [
+        "NotAssociated",
+        "Associated"
+      ],
+      "x-ms-enum": {
+        "name": "UserLabResourceAssociationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAssociated",
+            "value": "NotAssociated",
+            "description": "The Resource is not associated with hardware in the lab."
+          },
+          {
+            "name": "Associated",
+            "value": "Associated",
+            "description": "The Resource is associated with hardware in the lab."
+          }
+        ]
+      }
+    },
+    "UserLabResourceMaintenanceStatus": {
+      "type": "string",
+      "description": "Resource maintenance status.",
+      "enum": [
+        "MaintenanceNotRequested",
+        "MaintenanceRequested",
+        "InMaintenance",
+        "ExclusiveAccess"
+      ],
+      "x-ms-enum": {
+        "name": "UserLabResourceMaintenanceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MaintenanceNotRequested",
+            "value": "MaintenanceNotRequested",
+            "description": "The Resource is not requested for maintenance."
+          },
+          {
+            "name": "MaintenanceRequested",
+            "value": "MaintenanceRequested",
+            "description": "The Resource has been requested for maintenance."
+          },
+          {
+            "name": "InMaintenance",
+            "value": "InMaintenance",
+            "description": "The Resource is in maintenance."
+          },
+          {
+            "name": "ExclusiveAccess",
+            "value": "ExclusiveAccess",
+            "description": "The Resource is in exclusive access mode (not available for reservation)."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,3 +1,4 @@
+import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -13,7 +14,7 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
+import { SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**

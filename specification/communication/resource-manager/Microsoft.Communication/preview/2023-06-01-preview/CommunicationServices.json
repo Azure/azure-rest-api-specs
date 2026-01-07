@@ -320,17 +320,8 @@
           "Update resource": {
             "$ref": "./examples/communicationServices/update.json"
           },
-          "Update resource to remove identity": {
+          "RemoveIdentity": {
             "$ref": "./examples/communicationServices/updateRemoveSystemIdentity.json"
-          },
-          "Update resource to add a System Assigned managed identity": {
-            "$ref": "./examples/communicationServices/updateWithSystemAssignedIdentity.json"
-          },
-          "Update resource to add a User Assigned managed identity": {
-            "$ref": "./examples/communicationServices/updateWithUserAssignedIdentity.json"
-          },
-          "Update resource to add System and User managed identities": {
-            "$ref": "./examples/communicationServices/updateWithSystemAndUserIdentity.json"
           }
         }
       },
@@ -447,9 +438,6 @@
         "x-ms-examples": {
           "Create or update resource": {
             "$ref": "./examples/communicationServices/createOrUpdate.json"
-          },
-          "Create or update resource with managed identity": {
-            "$ref": "./examples/communicationServices/createOrUpdateWithSystemAssignedIdentity.json"
           }
         }
       },
@@ -686,12 +674,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     },

@@ -1,0 +1,27 @@
+{
+  "operationId": "Artifacts_Get",
+  "title": "Artifacts_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "artifactName": "MyArtifact1",
+    "api-version": "2022-09-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "description": "The requested artifact.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphereV2/catalogs/MyCatalog1/artifacts/MyArtifact1",
+        "name": "MyArtifact1",
+        "type": "Microsoft.AzureSphereV2/catalogs/artifacts",
+        "location": "westus3",
+        "properties": {
+          "sasUri": "https://example.com",
+          "sha256Hash": "ABCD",
+          "artifactType": "AreRootFilesystem"
+        }
+      }
+    }
+  }
+}

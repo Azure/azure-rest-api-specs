@@ -2529,7 +2529,6 @@
         "Serverless"
       ],
       "type": "string",
-      "description": "Hosting type of the monitor resource - either Hosted deployments or Serverless Projects.",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "HostingType"
@@ -2540,11 +2539,11 @@
       "type": "object",
       "properties": {
         "projectType": {
-          "description": "Project type; ex: Elasticsearch / Observability / Security",
+          "description": "Project type; ex: Search / Observability / Security",
           "$ref": "#/definitions/ProjectType"
         },
         "configurationType": {
-          "description": "Configuration type of the Elasticsearch project",
+          "description": "Publisher ID of the plan",
           "$ref": "#/definitions/ConfigurationType"
         }
       }
@@ -2557,7 +2556,6 @@
         "NotApplicable"
       ],
       "type": "string",
-      "description": "Project type; ex: Elasticsearch / Observability / Security",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ProjectType"
@@ -2571,7 +2569,6 @@
         "NotApplicable"
       ],
       "type": "string",
-      "description": "Configuration type of the Elasticsearch project",
       "x-ms-enum": {
         "modelAsString": true,
         "name": "ConfigurationType"
@@ -3276,23 +3273,19 @@
       "type": "object",
       "properties": {
         "partnerDeploymentName": {
-          "description": "Elastic resource name",
+          "description": "Elastic deployment name",
           "type": "string"
         },
         "partnerDeploymentUri": {
-          "description": "URL of the resource in Elastic cloud.",
+          "description": "Deployment URL of the elasticsearch in Elastic cloud deployment.",
           "type": "string"
         },
         "azureResourceId": {
-          "description": "The azure resource Id of the resource.",
+          "description": "The azure resource Id of the deployment.",
           "type": "string"
         },
         "location": {
-          "description": "The location of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The hosting type of the resource.",
+          "description": "The location of the deployment.",
           "type": "string"
         }
       }

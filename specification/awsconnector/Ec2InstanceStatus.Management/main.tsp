@@ -72,7 +72,7 @@ model AwsEc2InstanceStatusProperties {
   availabilityZone?: string;
 
   @doc("<p>Any scheduled events associated with the instance.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   events?: InstanceStatusEvent[];
 
   @doc("<p>The ID of the instance.</p>")
@@ -199,7 +199,7 @@ model InstanceStateNameEnumValue {
 @doc("Definition of InstanceStatusSummary")
 model InstanceStatusSummary {
   @doc("<p>The system instance health or application instance health.</p>")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   details?: InstanceStatusDetails[];
 
   @doc("<p>The status.</p>")

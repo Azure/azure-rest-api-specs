@@ -47,6 +47,10 @@ model LoadBalancerProperties {
   @added(Microsoft.KubernetesRuntime.Versions.v2024_03_01)
   bgpPeers?: string[];
 
+  @doc("BGP Communities")
+  @added(Versions.v2024_08_01)
+  communities?: string[];
+
   @visibility(Lifecycle.Read)
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
@@ -55,12 +59,7 @@ model LoadBalancerProperties {
 @armResourceOperations(LoadBalancer)
 interface LoadBalancers {
   get is ArmResourceRead<LoadBalancer>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    LoadBalancer,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadBalancer>;
   @sharedRoute
   @added(Versions.v2024_03_01)
   delete is ArmResourceDeleteSync<LoadBalancer>;
@@ -69,5 +68,5 @@ interface LoadBalancers {
   @renamedFrom(Versions.v2024_03_01, "delete")
   @removed(Versions.v2024_03_01)
   oldDelete is ArmResourceDeleteWithoutOkAsync<LoadBalancer>;
-  list is ArmResourceListByParent<LoadBalancer>;
+  listByParent is ArmResourceListByParent<LoadBalancer>;
 }

@@ -1,0 +1,52 @@
+parameters:
+  "service-dir":
+    default: "sdk/sentinelplatformservices"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/sentinelplatformservices.json"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SentinelplatformServices"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.SentinelplatformServices"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sentinelplatformservices"
+    package-name: "azure-mgmt-sentinelplatformservices"
+    namespace: "azure.mgmt.sentinelplatformservices"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sentinelplatformservices"
+    azure-sdk-for-js: true
+    is-modular-library: true
+    generate-metadata: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-sentinelplatformservices"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sentinelplatformservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsentinelplatformservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsentinelplatformservices"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-placeholder"
+    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    namespace: com.azure.resourcemanager.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    service-name: Place Holder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -10,11 +10,17 @@ namespace Microsoft.Sovereign;
 
 @doc("The Microsoft Sovereign Provider version.")
 enum Versions {
+  @doc("Preview version.")
+  Preview20230928: "2023-09-28-preview",
+
+  @doc("Second preview version.")
+  Preview20240331: "2024-03-31-preview",
+
   @doc("Public preview version.")
-  Preview20250227: "2025-02-27-preview",
+  Preview20241031: "2024-10-31-preview",
 }
 
-@added(Versions.Preview20250227)
+@added(Versions.Preview20241031)
 @doc("The custom provisioning state.")
 union provisioningState {
   ResourceProvisioningState,

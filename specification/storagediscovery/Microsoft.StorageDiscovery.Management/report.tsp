@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.StorageDiscovery;
 
+@added(ApiVersion.v2025_06_01_preview)
 @parentResource(StorageDiscoveryWorkspace)
 @doc("A report resource")
 model ReportResource is Azure.ResourceManager.ProxyResource<ReportProperties> {
@@ -22,6 +23,7 @@ model ReportResource is Azure.ResourceManager.ProxyResource<ReportProperties> {
   >;
 }
 
+@added(ApiVersion.v2025_06_01_preview)
 @doc("Properties for the Report resource used only as a proxy for the Report API.")
 model ReportProperties {
   @visibility(Lifecycle.Read)
@@ -29,6 +31,7 @@ model ReportProperties {
   provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 }
 
+@added(ApiVersion.v2025_06_01_preview)
 @armResourceOperations
 interface Report {
   get is ArmResourceRead<ReportResource>;

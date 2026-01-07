@@ -12,4 +12,6 @@ az-output-folder: $(azure-cli-extension-folder)/src/trustedsigning
 python-sdk-output-folder: "$(az-output-folder)/azext_trustedsigning/vendored_sdks/trustedsigning"
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
+      
 
+```

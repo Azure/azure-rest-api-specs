@@ -1,0 +1,54 @@
+{
+  "title": "SampleOperations_Identify",
+  "operationId": "SampleOperations_Identify",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "analysisName": "metagenomic-analysis",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "default-rg",
+    "libraryName": "fastlib",
+    "sampleName": "fastsample",
+    "body": {
+      "name": "metagenomic-analysis",
+      "settings": {
+        "taxonomyVersion": "v2020_07_06",
+        "kind": "Metagenomics"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "samples": [
+            "fastsample"
+          ],
+          "settings": {
+            "kind": "Metagenomics",
+            "taxonomyVersion": "v2020_07_06"
+          },
+          "startedAt": "2024-08-06T21:45:11.973Z",
+          "provisioningState": "Started"
+        },
+        "tags": {},
+        "location": "uswest2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/default-rg/providers/Microsoft.Premonition/libraries/fastlib/analyses/metagenomic-analysis",
+        "name": "metagenomic-analysis",
+        "type": "Microsoft.Premonition/analysis",
+        "systemData": {
+          "createdBy": "jane",
+          "createdByType": "User",
+          "createdAt": "2024-08-05T19:37:32.909Z",
+          "lastModifiedBy": "john",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-05T19:37:32.909Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://resource/operationstatus?api-version=2024-09-01-preview"
+      }
+    }
+  }
+}

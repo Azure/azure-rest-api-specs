@@ -1,15 +1,19 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
+import "./pipeline.tsp";
+import "./testRun.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.IoTOperationsDataProcessor;
 
@@ -42,14 +46,18 @@ model InstanceProperties {
 @armResourceOperations
 interface Instances {
   get is ArmResourceRead<Instance>;
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "MUST CHANGE ON NEXT UPDATE"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    Instance,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<Instance>;
   update is ArmCustomPatchSync<Instance>;
   delete is ArmResourceDeleteWithoutOkAsync<Instance>;
   listByResourceGroup is ArmResourceListByParent<Instance>;
   listBySubscription is ArmListBySubscription<Instance>;
+
+  @doc("Execute a pipeline test run.")
+  @added(Versions.Preview20240201)
+  @armResourceAction(Instance)
+  executeTestRun is ArmResourceActionAsync<
+    Instance,
+    TestRunRequest,
+    TestRunResponse
+  >;
 }

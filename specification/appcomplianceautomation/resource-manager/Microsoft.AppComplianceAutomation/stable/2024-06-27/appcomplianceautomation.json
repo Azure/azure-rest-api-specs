@@ -84,8 +84,8 @@
           }
         },
         "x-ms-examples": {
-          "Report_CheckNameAvailability": {
-            "$ref": "./examples/Report_CheckNameAvailability.json"
+          "Reports_CheckNameAvailability": {
+            "$ref": "./examples/Reports_CheckNameAvailability.json"
           }
         }
       }
@@ -127,8 +127,8 @@
           }
         },
         "x-ms-examples": {
-          "Report_GetCollectionCount": {
-            "$ref": "./examples/Report_GetCollectionCount.json"
+          "Reports_GetCollectionCount": {
+            "$ref": "./examples/Reports_GetCollectionCount.json"
           }
         }
       }
@@ -170,8 +170,8 @@
           }
         },
         "x-ms-examples": {
-          "Report_GetOverviewStatus": {
-            "$ref": "./examples/Report_GetOverviewStatus.json"
+          "Reports_GetOverviewStatus": {
+            "$ref": "./examples/Reports_GetOverviewStatus.json"
           }
         }
       }
@@ -321,7 +321,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports": {
       "get": {
-        "operationId": "Report_List",
+        "operationId": "Reports_List",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -367,8 +367,8 @@
           }
         },
         "x-ms-examples": {
-          "Report_List": {
-            "$ref": "./examples/Report_List.json"
+          "Reports_List": {
+            "$ref": "./examples/Reports_List.json"
           }
         },
         "x-ms-pageable": {
@@ -378,7 +378,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}": {
       "get": {
-        "operationId": "Report_Get",
+        "operationId": "Reports_Get",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -417,7 +417,7 @@
         }
       },
       "put": {
-        "operationId": "Report_CreateOrUpdate",
+        "operationId": "Reports_CreateOrUpdate",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -441,8 +441,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReportResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -483,7 +482,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "Report_Update",
+        "operationId": "Reports_Update",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -550,7 +549,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Report_Delete",
+        "operationId": "Reports_Delete",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -606,7 +605,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/checkNameAvailability": {
       "post": {
-        "operationId": "Report_NestedResourceCheckNameAvailability",
+        "operationId": "Reports_NestedResourceCheckNameAvailability",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -649,21 +648,21 @@
           }
         },
         "x-ms-examples": {
-          "Report_EvidenceCheckNameAvailability": {
-            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Evidence_Check_Name_Availability.json"
+          "Reports_EvidenceCheckNameAvailability": {
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Evidence_Check_Name_Availability.json"
           },
-          "Report_SnapshotCheckNameAvailability": {
-            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Snapshot_Check_Name_Availability.json"
+          "Reports_SnapshotCheckNameAvailability": {
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Snapshot_Check_Name_Availability.json"
           },
-          "Report_WebhookCheckNameAvailability": {
-            "$ref": "./examples/Report_NestedResourceCheckNameAvailability_Report_Webhook_Check_Name_Availability.json"
+          "Reports_WebhookCheckNameAvailability": {
+            "$ref": "./examples/Reports_NestedResourceCheckNameAvailability_Reports_Webhook_Check_Name_Availability.json"
           }
         }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences": {
       "get": {
-        "operationId": "Evidence_ListByReport",
+        "operationId": "Evidences_ListByReport",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -717,8 +716,8 @@
           }
         },
         "x-ms-examples": {
-          "Evidence_ListByReport": {
-            "$ref": "./examples/Evidence_ListByReport.json"
+          "Evidences_ListByReport": {
+            "$ref": "./examples/Evidences_ListByReport.json"
           }
         },
         "x-ms-pageable": {
@@ -728,7 +727,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}": {
       "get": {
-        "operationId": "Evidence_Get",
+        "operationId": "Evidences_Get",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -736,6 +735,22 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "offerGuid",
+            "in": "query",
+            "description": "The offerGuid which mapping to the reports.",
+            "required": false,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "reportCreatorTenantId",
+            "in": "query",
+            "description": "The tenant id of the report creator.",
+            "required": false,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "reportName",
@@ -769,13 +784,13 @@
           }
         },
         "x-ms-examples": {
-          "Evidence_Get": {
-            "$ref": "./examples/Evidence_Get.json"
+          "Evidences_Get": {
+            "$ref": "./examples/Evidences_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Evidence_CreateOrUpdate",
+        "operationId": "Evidences_CreateOrUpdate",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -813,8 +828,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/EvidenceResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -838,13 +852,13 @@
           }
         },
         "x-ms-examples": {
-          "Evidence_CreateOrUpdate": {
-            "$ref": "./examples/Evidence_CreateOrUpdate.json"
+          "Evidences_CreateOrUpdate": {
+            "$ref": "./examples/Evidences_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
-        "operationId": "Evidence_Delete",
+        "operationId": "Evidences_Delete",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -885,15 +899,15 @@
           }
         },
         "x-ms-examples": {
-          "Evidence_Delete": {
-            "$ref": "./examples/Evidence_Delete.json"
+          "Evidences_Delete": {
+            "$ref": "./examples/Evidences_Delete.json"
           }
         }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/evidences/{evidenceName}/download": {
       "post": {
-        "operationId": "Evidence_Download",
+        "operationId": "Evidences_Download",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -944,15 +958,15 @@
           }
         },
         "x-ms-examples": {
-          "Evidence_Download": {
-            "$ref": "./examples/Evidence_Download.json"
+          "Evidences_Download": {
+            "$ref": "./examples/Evidences_Download.json"
           }
         }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/fix": {
       "post": {
-        "operationId": "Report_Fix",
+        "operationId": "Reports_Fix",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1011,7 +1025,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/getScopingQuestions": {
       "post": {
-        "operationId": "Report_GetScopingQuestions",
+        "operationId": "GetScopingQuestions",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1044,15 +1058,15 @@
           }
         },
         "x-ms-examples": {
-          "Report_GetScopingQuestions": {
-            "$ref": "./examples/Report_GetScopingQuestions.json"
+          "GetScopingQuestions": {
+            "$ref": "./examples/ScopingQuestions.json"
           }
         }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations": {
       "get": {
-        "operationId": "ScopingConfiguration_List",
+        "operationId": "ScopingConfigurations_List",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1085,8 +1099,8 @@
           }
         },
         "x-ms-examples": {
-          "ScopingConfiguration_List": {
-            "$ref": "./examples/ScopingConfiguration_List.json"
+          "ScopingConfigurations_List": {
+            "$ref": "./examples/ScopingConfigurations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1094,7 +1108,7 @@
         }
       }
     },
-    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/{scopingConfigurationName}": {
+    "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/scopingConfigurations/default": {
       "get": {
         "operationId": "ScopingConfiguration_Get",
         "tags": [
@@ -1112,14 +1126,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
-          },
-          {
-            "name": "scopingConfigurationName",
-            "in": "path",
-            "description": "The scoping configuration of the specific report.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -1161,22 +1167,13 @@
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
           },
           {
-            "name": "scopingConfigurationName",
-            "in": "path",
-            "description": "The scoping configuration of the specific report.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
-          },
-          {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters for the create or update operation, this is a singleton resource, so please make sure you're using 'default' as the name.",
+            "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ScopingConfigurationResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1222,14 +1219,6 @@
             "required": true,
             "type": "string",
             "pattern": "^[-a-zA-Z0-9_]{1,50}$"
-          },
-          {
-            "name": "scopingConfigurationName",
-            "in": "path",
-            "description": "The scoping configuration of the specific report.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_]*$"
           }
         ],
         "responses": {
@@ -1255,7 +1244,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots": {
       "get": {
-        "operationId": "Snapshot_List",
+        "operationId": "Snapshots_List",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1309,8 +1298,8 @@
           }
         },
         "x-ms-examples": {
-          "Snapshot_List": {
-            "$ref": "./examples/Snapshot_List.json"
+          "Snapshots_List": {
+            "$ref": "./examples/Snapshots_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1320,7 +1309,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}": {
       "get": {
-        "operationId": "Snapshot_Get",
+        "operationId": "Snapshots_Get",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1362,14 +1351,14 @@
         },
         "x-ms-examples": {
           "Snapshot_Get": {
-            "$ref": "./examples/Snapshot_Get.json"
+            "$ref": "./examples/Snapshots_Get.json"
           }
         }
       }
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/snapshots/{snapshotName}/download": {
       "post": {
-        "operationId": "Snapshot_Download",
+        "operationId": "Snapshots_Download",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1435,16 +1424,16 @@
         },
         "x-ms-examples": {
           "Snapshot_Download_ComplianceDetailedPdfReport": {
-            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Detailed_Pdf_Report.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Detailed_Pdf_Report.json"
           },
           "Snapshot_Download_CompliancePdfReport": {
-            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Pdf_Report.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Pdf_Report.json"
           },
           "Snapshot_Download_ComplianceReport": {
-            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Compliance_Report.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Compliance_Report.json"
           },
           "Snapshot_Download_ResourceList": {
-            "$ref": "./examples/Snapshot_Download_Snapshot_Download_Resource_List.json"
+            "$ref": "./examples/Snapshots_Download_Snapshot_Download_Resource_List.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1455,7 +1444,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/syncCertRecord": {
       "post": {
-        "operationId": "Report_SyncCertRecord",
+        "operationId": "Reports_SyncCertRecord",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1512,8 +1501,8 @@
           }
         },
         "x-ms-examples": {
-          "Report_SyncCertRecord": {
-            "$ref": "./examples/Report_SyncCertRecord.json"
+          "Reports_SyncCertRecord": {
+            "$ref": "./examples/Reports_SyncCertRecord.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1583,7 +1572,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/webhooks": {
       "get": {
-        "operationId": "Webhook_List",
+        "operationId": "Webhooks_List",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1637,8 +1626,8 @@
           }
         },
         "x-ms-examples": {
-          "Webhook_List": {
-            "$ref": "./examples/Webhook_List.json"
+          "Webhooks_List": {
+            "$ref": "./examples/Webhooks_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1648,7 +1637,7 @@
     },
     "/providers/Microsoft.AppComplianceAutomation/reports/{reportName}/webhooks/{webhookName}": {
       "get": {
-        "operationId": "Webhook_Get",
+        "operationId": "Webhooks_Get",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1690,12 +1679,12 @@
         },
         "x-ms-examples": {
           "Webhook_Get": {
-            "$ref": "./examples/Webhook_Get.json"
+            "$ref": "./examples/Webhooks_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "Webhook_CreateOrUpdate",
+        "operationId": "Webhooks_CreateOrUpdate",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1727,8 +1716,7 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/WebhookResource"
-            },
-            "x-ms-client-name": "properties"
+            }
           }
         ],
         "responses": {
@@ -1753,12 +1741,12 @@
         },
         "x-ms-examples": {
           "Webhook_CreateOrUpdate": {
-            "$ref": "./examples/Webhook_CreateOrUpdate.json"
+            "$ref": "./examples/Webhooks_CreateOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "Webhook_Update",
+        "operationId": "Webhooks_Update",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1810,12 +1798,12 @@
         },
         "x-ms-examples": {
           "Webhook_Update": {
-            "$ref": "./examples/Webhook_Update.json"
+            "$ref": "./examples/Webhooks_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "Webhook_Delete",
+        "operationId": "Webhooks_Delete",
         "tags": [
           "AppComplianceAutomation"
         ],
@@ -1857,7 +1845,7 @@
         },
         "x-ms-examples": {
           "Webhook_Delete": {
-            "$ref": "./examples/Webhook_Delete.json"
+            "$ref": "./examples/Webhooks_Delete.json"
           }
         }
       }
@@ -2513,7 +2501,8 @@
         "properties": {
           "$ref": "#/definitions/EvidenceProperties",
           "description": "Evidence property.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
         }
       },
       "required": [
@@ -3054,6 +3043,79 @@
         }
       }
     },
+    "ReportBaseProperties": {
+      "type": "object",
+      "description": "Report's properties.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ReportStatus",
+          "description": "Report status.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "List of report error codes.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Report's tenant id.",
+          "readOnly": true
+        },
+        "offerGuid": {
+          "type": "string",
+          "description": "A list of comma-separated offerGuids indicates a series of offerGuids that map to the report. For example, \"00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002\" and \"00000000-0000-0000-0000-000000000003\"."
+        },
+        "nextTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report next collection trigger time.",
+          "readOnly": true
+        },
+        "lastTriggerTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Report last collection trigger time.",
+          "readOnly": true
+        },
+        "subscriptions": {
+          "type": "array",
+          "description": "List of subscription Ids.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/ReportComplianceStatus",
+          "description": "Report compliance status.",
+          "readOnly": true
+        },
+        "storageInfo": {
+          "$ref": "#/definitions/StorageInfo",
+          "description": "The information of 'bring your own storage' binding to the report"
+        },
+        "certRecords": {
+          "type": "array",
+          "description": "List of synchronized certification records.",
+          "items": {
+            "$ref": "#/definitions/CertSyncRecord"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "offerGuid"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Azure lifecycle management",
+          "readOnly": true
+        }
+      }
+    },
     "ReportComplianceStatus": {
       "type": "object",
       "description": "A list which includes all the compliance result for one report.",
@@ -3277,7 +3339,8 @@
         "properties": {
           "$ref": "#/definitions/ReportProperties",
           "description": "Report property.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
         }
       },
       "required": [
@@ -3783,6 +3846,7 @@
         "Domains",
         "USPrivacyShield",
         "PublicSOX",
+        "FismaFedramp",
         "CreditCardPCI",
         "AzureApplication",
         "ValidGuid",
@@ -3829,6 +3893,11 @@
             "name": "PublicSOX",
             "value": "PublicSOX",
             "description": "The question answer should be a PublicSOX."
+          },
+          {
+            "name": "FismaFedramp",
+            "value": "FismaFedramp",
+            "description": "The question answer should be a FismaFedramp."
           },
           {
             "name": "CreditCardPCI",
@@ -3918,7 +3987,8 @@
         "properties": {
           "$ref": "#/definitions/ScopingConfigurationProperties",
           "description": "ScopingConfiguration property.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
         }
       },
       "required": [
@@ -4110,8 +4180,9 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SnapshotProperties",
-          "description": "Snapshot's property.",
-          "x-ms-client-flatten": true
+          "description": "Snapshot's property'.",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
         }
       },
       "allOf": [
@@ -4384,7 +4455,8 @@
         "properties": {
           "$ref": "#/definitions/WebhookProperties",
           "description": "Webhook property.",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "properties"
         }
       },
       "required": [

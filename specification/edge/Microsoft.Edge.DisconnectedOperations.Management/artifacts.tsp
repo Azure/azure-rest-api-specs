@@ -15,11 +15,13 @@ using TypeSpec.Versioning;
 namespace Microsoft.Edge;
 @doc("Disconnected operations artifact resource.")
 @parentResource(Image)
+@added(Microsoft.Edge.Versions.v2025_05_01)
 model Artifact is ProxyResource<ArtifactProperties> {
   ...ResourceNameParameter<Artifact>;
 }
 
 @armResourceOperations
+@added(Microsoft.Edge.Versions.v2025_05_01)
 interface Artifacts {
   @doc("List by parent")
   listByParent is ArmResourceListByParent<Artifact>;
@@ -27,7 +29,7 @@ interface Artifacts {
   @doc("Get the resource")
   get is ArmResourceRead<Artifact>;
 
-  @doc("Get artifact download link.")
+  @doc("get artifact download link.")
   listDownloadUri is ArmResourceActionSync<
     Artifact,
     void,

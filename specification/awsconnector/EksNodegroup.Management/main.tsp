@@ -120,7 +120,7 @@ model AwsEksNodegroupProperties {
   tags?: Record<string>;
 
   @doc("The Kubernetes taints to be applied to the nodes in the node group when they are created.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   taints?: Taint[];
 
   @doc("The node group update configuration. The node group update configuration.")
@@ -152,6 +152,7 @@ model LaunchTemplateSpecification {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RemoteAccess")
 model RemoteAccess {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Property ec2SshKey")
   ec2SshKey?: string;
 
@@ -184,6 +185,7 @@ model Taint {
   @doc("Property effect")
   effect?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Property key")
   key?: string;
 

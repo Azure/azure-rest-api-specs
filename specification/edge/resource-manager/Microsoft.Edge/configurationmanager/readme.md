@@ -59,6 +59,42 @@ input-file:
   - stable/2025-06-01/configurationmanager.json
 ```
 
+### Tag: package-2025-08-15-preview
+
+These settings apply only when `--tag=package-2025-08-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-15-preview'
+input-file:
+  - preview/2025-08-15-preview/configurationmanager.json
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - preview/2025-01-01-preview/configurationmanager.json
+```
+
+### Tag: package-2024-08-01-preview
+
+These settings apply only when `--tag=package-2024-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-01-preview'
+input-file:
+  - preview/2024-08-01-preview/configurationmanager.json
+```
+
+### Tag: package-2024-06-01-preview
+
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06-01-preview'
+input-file:
+  - preview/2024-06-01-preview/configurationmanager.json
+```
+
 ---
 
 ---
@@ -68,6 +104,9 @@ directive:
   - suppress: OperationsAPIImplementation
     from: configurationmanager.json
     reason: RP is in Public and PrivatePreview and no SDK has been released yet. Microsoft.Edge RP consist of multiple resources which are owned/maintained by different teams, so we follow folder structure for Service Group (explained here https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster?tab=readme-ov-file#folder-structure-for-service-group). We do have operations api exposed from common-location/folder (https://github.com/Azure/azure-rest-api-specs-pr/blob/RPSaaSMaster/specification/edge/resource-manager/Microsoft.Edge/edge/preview/2024-02-01-preview/operations.json#L46C5-L46C43) so every resource need not expose it separately. There has been open issue [Avocado] Support service group folder scenario azure-sdk-tools#6201 for the same.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: configurationmanager.json
+    reason: Adding provisioning state will break polymorphism
 
 ```
 ---
@@ -83,7 +122,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
+  # - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
@@ -108,7 +147,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## Java
-
-See configuration in [readme.java.md](./readme.java.md)

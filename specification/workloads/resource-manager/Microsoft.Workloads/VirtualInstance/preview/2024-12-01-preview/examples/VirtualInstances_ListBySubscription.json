@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "49d64d54-e966-4c46-a868-1999802b762c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testvi1",
+            "type": "Microsoft.Workloads/virtualInstances",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi",
+            "location": "eastus2euap",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+              }
+            },
+            "kind": "sap",
+            "properties": {
+              "architectureId": "Rise-PacemakerHA",
+              "environmentType": "Production",
+              "systemLifecycleStage": "Active",
+              "systemPriority": 0,
+              "metadata": {
+                "SID": "RS1"
+              },
+              "provisioningState": "Succeeded",
+              "complianceState": "Compliant"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T00:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T15:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "testvi2",
+            "type": "Microsoft.Workloads/virtualInstances",
+            "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi2",
+            "location": "eastus2euap",
+            "tags": {
+              "TestSystem": "true"
+            },
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/saprise-apprg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/saprisetestingmsi": {}
+              }
+            },
+            "kind": "sap",
+            "properties": {
+              "architectureId": "Rise-BasicAvailability",
+              "environmentType": "NonProduction",
+              "systemLifecycleStage": "Active",
+              "systemPriority": 3,
+              "metadata": {
+                "SID": "RS2"
+              },
+              "dependencies": [
+                "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Workloads/virtualInstances/testvi"
+              ],
+              "provisioningState": "Succeeded",
+              "complianceState": "Compliant"
+            },
+            "systemData": {
+              "createdAt": "2024-12-01T01:00:00.001Z",
+              "createdBy": "user@xyz.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-12-01T16:10:46.196Z",
+              "lastModifiedBy": "user@xyz.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualInstances_ListBySubscription",
+  "title": "List virtual instances by subscription - sample 1"
+}

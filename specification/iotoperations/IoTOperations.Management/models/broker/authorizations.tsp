@@ -42,6 +42,9 @@ model BrokerAuthorizationProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
 }
 
 @doc("Broker AuthorizationConfig properties")

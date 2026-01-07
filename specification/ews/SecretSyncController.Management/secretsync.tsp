@@ -4,8 +4,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.SecretSyncController")
@@ -37,7 +35,6 @@ model SecretSyncProperties {
   serviceAccountName: string;
 
   @doc("Type specifies the type of the Kubernetes secret object, e.g. \"Opaque\" or\"kubernetes.io/tls\". The controller must have permission to create secrets of the specified type.")
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   kubernetesSecretType: KubernetesSecretType;
 
   @doc("ForceSynchronization can be used to force the secret synchronization. The secret synchronization is triggered by changing the value in this field. This field is not used to resolve synchronization conflicts.")
@@ -47,7 +44,7 @@ model SecretSyncProperties {
 
   @doc("An array of SecretObjectData that maps secret data from the external secret provider to the Kubernetes secret. Each entry specifies the source secret in the external provider and the corresponding key in the Kubernetes secret.")
   @minItems(1)
-  @identifiers(#["targetKey"])
+  @Azure.ResourceManager.identifiers(#[])
   objectSecretMapping: KubernetesSecretObjectMapping[];
 
   @visibility(Lifecycle.Read)
@@ -67,6 +64,7 @@ model KubernetesSecretObjectMapping {
   @pattern("^[A-Za-z0-9.]([-A-Za-z0-9]+([-._a-zA-Z0-9]?[A-Za-z0-9])*)?(\\/([0-9]+))*$")
   sourcePath: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("TargetKey is the key in the Kubernetes secret's data field where the secret value will be stored. This key is used to reference the secret data within Kubernetes, and it should be unique within the secret.")
   @minLength(1)
   @maxLength(253)
@@ -110,7 +108,7 @@ model SecretSyncStatus {
   @visibility(Lifecycle.Read)
   lastSuccessfulSyncTime?: utcDateTime;
 
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   @doc("Conditions represent the status of the secret create and update processes. The status can be True, False, or Unknown with various reasons and messages explaining the state. Examples of reasons include CreateSucceeded, ProviderError, InvalidClusterSecretLabelError, InvalidClusterSecretAnnotationError, UnknownError, ValidatingAdmissionPolicyCheckFailed, UserInputValidationFailed, ControllerSpcError, ControllerInternalError, NoValueChange, and ValueChangeOrForceUpdateDetected.")
   @visibility(Lifecycle.Read)
   conditions?: SecretSyncCondition[];

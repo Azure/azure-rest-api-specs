@@ -59,6 +59,13 @@ union ProfileType {
 
   @doc("Used for signing files for testing purpose.")
   PublicTrustTest: "PublicTrustTest",
+
+  @removed(Versions.v2024_02_05_preview)
+  @removed(Versions.v2024_09_30_preview)
+  @removed(Versions.v2025_10_13)
+  @added(Versions.v2025_11_20_preview)
+  @doc("Used for signing content files.")
+  C2PAContentCredentials: "C2PAContentCredentials",
 }
 
 @doc("Status of the certificate profiles.")
@@ -151,9 +158,7 @@ model CodeSigningAccountPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("Properties of the trusted signing account.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
 }
 
@@ -248,11 +253,9 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   status?: CertificateProfileStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("List of renewed certificates.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   certificates?: Certificate[];
 }
 
@@ -280,9 +283,7 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("Revocations history of a certificate.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   revocation?: Revocation;
 }
 
@@ -328,6 +329,9 @@ model RevokeCertificate {
 
 @doc("The parameters used to check the availability of the trusted signing account name.")
 model CheckNameAvailability {
+  @doc("The type of the resource, \"Microsoft.CodeSigning/codeSigningAccounts\".")
+  type: string;
+
   @doc("Trusted signing account name.")
   name: string;
 }

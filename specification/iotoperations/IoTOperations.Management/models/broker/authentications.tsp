@@ -42,6 +42,9 @@ model BrokerAuthenticationProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
 }
 
 @doc("Set of broker authentication policies. Only one method is supported for each entry.")

@@ -1,0 +1,87 @@
+{
+  "title": "SchemaOperations fetchCdcSchema",
+  "operationId": "SchemaOperations_Fetch",
+  "parameters": {
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "api-version": "2025-10-01-preview",
+    "location": "Central US EUAP",
+    "body": {
+      "dataSourceProperties": {
+        "connectorType": "AzureDataExplorerSource",
+        "clusterUrl": "hostName.AzureDataExplorer.com",
+        "database": "databaseName1",
+        "tableNames": "tableName1,tableName2",
+        "authentication": {
+          "authenticationMode": "OAuth",
+          "accessToken": "accessToken1"
+        }
+      },
+      "format": {
+        "type": "Avro",
+        "version": "1.12.0"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemas": [
+          {
+            "schemaFormat": {
+              "type": "Avro",
+              "version": "1.12.0"
+            },
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "Cdc",
+              "cdcEventType": "DataChange",
+              "tableId": {
+                "databaseName": "demoDatabase",
+                "schemaName": "dbo",
+                "tableName": "orders"
+              }
+            }
+          },
+          {
+            "schemaFormat": {
+              "type": "Avro",
+              "version": "1.12.0"
+            },
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "Cdc",
+              "cdcEventType": "DataChange",
+              "tableId": {
+                "databaseName": "demoDatabase",
+                "schemaName": "dbo",
+                "tableName": "orders"
+              }
+            }
+          },
+          {
+            "schemaFormat": {
+              "type": "Avro",
+              "version": "1.12.0"
+            },
+            "schemaJson": "base64content",
+            "schemaProperties": {
+              "type": "Cdc",
+              "cdcEventType": "DataChange",
+              "tableId": {
+                "databaseName": "demoDatabase",
+                "schemaName": "dbo",
+                "tableName": "orders"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.MessagingConnectors/locations/westus/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "retry-after": "15"
+      }
+    }
+  }
+}

@@ -10,19 +10,21 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/computeschedule.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-computeschedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-computeschedule"
     namespace: "azure.mgmt.computeschedule"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
+    # TODO: remove this once issue resolved: https://github.com/Azure/autorest.typescript/issues/3228
+    generate-sample: false
     experimental-extensible-enums: true
-    package-dir: "arm-computeschedule"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-computeschedule"
     flavor: azure
     package-details:
       name: "@azure/arm-computeschedule"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ComputeSchedule"
     flavor: azure
     clear-output-folder: true
     namespace: "Azure.ResourceManager.ComputeSchedule"

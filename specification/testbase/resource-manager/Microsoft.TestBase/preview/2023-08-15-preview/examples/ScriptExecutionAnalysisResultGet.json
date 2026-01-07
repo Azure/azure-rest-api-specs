@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "packageName": "contoso-package2",
+    "testResultName": "Windows-10-1909-Test-Id",
+    "analysisResultName": "scriptExecution",
+    "api-version": "2023-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "scriptExecution",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2/testResults/Windows-10-1909-Test-Id/analysisResults/scriptExecution",
+        "type": "Microsoft.TestBase/testBaseAccounts/packages/testResults/analysisResults",
+        "properties": {
+          "grade": "Pass",
+          "analysisResultType": "ScriptExecution",
+          "scriptExecutionResults": [
+            {
+              "scriptName": "install",
+              "startTime": "2021-10-19T09:52:02.451Z",
+              "endTime": "2021-10-19T09:52:05.244Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "stdoutLogFileName": "install-stdout-1234.log",
+              "stderrLogFileName": "install-stderr-1234.log",
+              "stdout": "stdout sample content",
+              "stderr": "stderr sample content"
+            },
+            {
+              "scriptName": "launch",
+              "startTime": "2021-10-19T10:08:21.187Z",
+              "endTime": "2021-10-19T10:08:58.378Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "stdoutLogFileName": "launch-stdout-1234.log",
+              "stderrLogFileName": "launch-stderr-1234.log",
+              "stdout": "stdout sample content",
+              "stderr": "stderr sample content"
+            },
+            {
+              "scriptName": "close",
+              "startTime": "2021-10-19T10:09:15.981Z",
+              "endTime": "2021-10-19T10:09:19.59Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "stdoutLogFileName": "close-stdout-1234.log",
+              "stderrLogFileName": "close-stderr-1234.log",
+              "stdout": "stdout sample content",
+              "stderr": "stderr sample content"
+            },
+            {
+              "scriptName": "uninstall",
+              "startTime": "2021-10-19T10:10:49Z",
+              "endTime": "2021-10-19T10:10:55.082Z",
+              "exitCode": 0,
+              "timedOut": false,
+              "stdoutLogFileName": "uninstall-stdout-1234.log",
+              "stderrLogFileName": "uninstall-stderr-1234.log",
+              "stdout": "stdout sample content",
+              "stderr": "stderr sample content"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

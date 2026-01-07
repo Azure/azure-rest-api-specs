@@ -1,0 +1,1078 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.GcpConnector",
+    "version": "2025-12-01-preview",
+    "description": "Microsoft.GcpConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CloudFunctions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.GcpConnector/cloudFunctions": {
+      "get": {
+        "operationId": "CloudFunctions_ListBySubscription",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "List CloudFunction resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_ListBySubscription": {
+            "$ref": "./examples/CloudFunctions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/cloudFunctions": {
+      "get": {
+        "operationId": "CloudFunctions_ListByResourceGroup",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "List CloudFunction resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_ListByResourceGroup": {
+            "$ref": "./examples/CloudFunctions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/cloudFunctions/{name}": {
+      "get": {
+        "operationId": "CloudFunctions_Get",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "Get a CloudFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFunction"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_Get": {
+            "$ref": "./examples/CloudFunctions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudFunctions_CreateOrReplace",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "Create a CloudFunction. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFunction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudFunction' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFunction"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudFunction' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudFunction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_CreateOrReplace": {
+            "$ref": "./examples/CloudFunctions_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudFunctions_Update",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "Update a CloudFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudFunctionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudFunction"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_Update": {
+            "$ref": "./examples/CloudFunctions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudFunctions_Delete",
+        "tags": [
+          "CloudFunctions"
+        ],
+        "description": "Delete a CloudFunction",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of CloudFunction",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudFunctions_Delete": {
+            "$ref": "./examples/CloudFunctions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutomaticUpdatePolicy": {
+      "type": "object",
+      "description": "Security patches are applied automatically to the runtime without requiring the function to be redeployed."
+    },
+    "BuildConfig": {
+      "type": "object",
+      "description": "Describes the Build step of the function that builds a container from the given source.",
+      "properties": {
+        "automaticUpdatePolicy": {
+          "$ref": "#/definitions/AutomaticUpdatePolicy",
+          "description": "AutomaticUpdatePolicy of BuildConfig."
+        },
+        "build": {
+          "type": "string",
+          "description": "Output only. The Cloud Build name of the latest successful deployment of the function."
+        },
+        "dockerRegistry": {
+          "type": "string",
+          "description": "Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.",
+          "enum": [
+            "DOCKER_REGISTRY_UNSPECIFIED",
+            "CONTAINER_REGISTRY",
+            "ARTIFACT_REGISTRY"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "dockerRepository": {
+          "type": "string",
+          "description": "Repository in Artifact Registry to which the function docker image will be pushed after it is built by Cloud Build. If specified by user, it is created and managed by user with a customer managed encryption key. Otherwise, GCF will create and use a repository named 'gcf-artifacts' for every deployed region. It must match the pattern `projects/{project}/locations/{location}/repositories/{repository}`. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be 'DOCKER'."
+        },
+        "entryPoint": {
+          "type": "string",
+          "description": "The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named \"function\". For Node.js this is name of a function exported by the module specified in `source_location`."
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "User-provided build-time environment variables for the function",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "onDeployUpdatePolicy": {
+          "$ref": "#/definitions/OnDeployUpdatePolicy",
+          "description": "OnDeployUpdatePolicy of BuildConfig."
+        },
+        "runtime": {
+          "type": "string",
+          "description": "The runtime in which to run the function. Required when deploying a new function, optional when updating an existing function. For a complete list of possible choices, see the [`gcloud` command reference](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime)."
+        },
+        "serviceAccount": {
+          "type": "string",
+          "description": "[Preview] Service account to be used for building the container"
+        },
+        "source": {
+          "$ref": "#/definitions/Source",
+          "description": "The location of the function source code."
+        },
+        "sourceProvenance": {
+          "$ref": "#/definitions/SourceProvenance",
+          "description": "Output only. A permanent fixed identifier for source."
+        },
+        "sourceToken": {
+          "type": "string",
+          "description": "An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments."
+        },
+        "workerPool": {
+          "type": "string",
+          "description": "Name of the Cloud Build Custom Worker Pool that should be used to build the function. The format of this field is `projects/{project}/locations/{region}/workerPools/{workerPool}` where {project} and {region} are the project id and region respectively where the worker pool is defined and {workerPool} is the short name of the worker pool. If the project id is not the same as the function, then the Cloud Functions Service Agent (service-@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role Cloud Build Custom Workers Builder (roles/cloudbuild.customworkers.builder) in the project."
+        }
+      }
+    },
+    "CloudFunction": {
+      "type": "object",
+      "description": "A Microsoft.GcpConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FunctionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudFunctionListResult": {
+      "type": "object",
+      "description": "The response of a CloudFunction list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudFunction items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudFunction"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudFunctionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in CloudFunction resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EventFilter": {
+      "type": "object",
+      "description": "Filters events based on exact matches on the CloudEvents attributes.",
+      "properties": {
+        "attribute": {
+          "type": "string",
+          "description": "Required. The name of a CloudEvents attribute."
+        },
+        "operator": {
+          "type": "string",
+          "description": "Optional. The operator used for matching the events with the value of the filter. If not specified, only events that have an exact key-value pair specified in the filter are matched. The only allowed value is `match-path-pattern`."
+        },
+        "value": {
+          "type": "string",
+          "description": "Required. The value for the attribute."
+        }
+      }
+    },
+    "EventTrigger": {
+      "type": "object",
+      "description": "Describes EventTrigger, used to request events to be sent from another service.",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "Optional. The name of the channel associated with the trigger in `projects/{project}/locations/{location}/channels/{channel}` format. You must provide a channel to receive events from Eventarc SaaS partners."
+        },
+        "eventFilters": {
+          "type": "array",
+          "description": "Criteria used to filter events.",
+          "items": {
+            "$ref": "#/definitions/EventFilter"
+          },
+          "x-ms-identifiers": []
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Required. The type of event to observe. For example: `google.cloud.audit.log.v1.written` or `google.cloud.pubsub.topic.v1.messagePublished`."
+        },
+        "pubsubTopic": {
+          "type": "string",
+          "description": "Optional. The name of a Pub/Sub topic in the same project that will be used as the transport topic for the event delivery. Format: `projects/{project}/topics/{topic}`. This is only valid for events of type `google.cloud.pubsub.topic.v1.messagePublished`. The topic provided here will not be deleted at function deletion."
+        },
+        "retryPolicy": {
+          "type": "string",
+          "description": "Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).",
+          "enum": [
+            "RETRY_POLICY_UNSPECIFIED",
+            "RETRY_POLICY_DO_NOT_RETRY",
+            "RETRY_POLICY_RETRY"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "service": {
+          "type": "string",
+          "description": "Optional. The hostname of the service that 1st Gen function should be observed. If no string is provided, the default service implementing the API will be used. For example, `storage.googleapis.com` is the default for all event types in the `google.storage` namespace. The field is only applicable to 1st Gen functions."
+        },
+        "serviceAccountEmail": {
+          "type": "string",
+          "description": "Optional. The email of the trigger's service account. The service account must have permission to invoke Cloud Run services, the permission is `run.routes.invoke`. If empty, defaults to the Compute Engine default service account: `{project_number}-compute@developer.gserviceaccount.com`."
+        },
+        "trigger": {
+          "type": "string",
+          "description": "Output only. The resource name of the Eventarc trigger. The format of this field is `projects/{project}/locations/{region}/triggers/{trigger}`."
+        },
+        "triggerRegion": {
+          "type": "string",
+          "description": "The region that the trigger will be in. The trigger will only receive events originating in this region. It can be the same region as the function, a different region or multi-region, or the global region. If not provided, defaults to the same region as the function."
+        }
+      }
+    },
+    "FunctionProperties": {
+      "type": "object",
+      "description": "Definition of FunctionProperties",
+      "properties": {
+        "gcpProperties": {
+          "$ref": "#/definitions/GcpFunctionProperties",
+          "description": "GCP Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "gcpProjectNumber": {
+          "type": "string",
+          "description": "GCP Project Number"
+        },
+        "gcpProjectId": {
+          "type": "string",
+          "description": "GCP Project Id"
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Fully qualified resource name of the GCP resource"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "gcpSourceSchema": {
+          "type": "string",
+          "description": "GCP Source Schema"
+        },
+        "gcpRegion": {
+          "type": "string",
+          "description": "GCP Region"
+        },
+        "gcpTags": {
+          "type": "object",
+          "description": "GCP Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "GcpFunctionProperties": {
+      "type": "object",
+      "description": "Describes a Cloud Function that contains user computation executed in response to an event. It encapsulates function and trigger configurations.",
+      "properties": {
+        "buildConfig": {
+          "$ref": "#/definitions/BuildConfig",
+          "description": "Describes the Build step of the function that builds a container from the given source."
+        },
+        "createTime": {
+          "type": "string",
+          "description": "Output only. The create timestamp of a Cloud Function. This is only applicable to 2nd Gen functions."
+        },
+        "description": {
+          "type": "string",
+          "description": "User-provided description of a function."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Describe whether the function is 1st Gen or 2nd Gen.",
+          "enum": [
+            "ENVIRONMENT_UNSPECIFIED",
+            "GEN_1",
+            "GEN_2"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "eventTrigger": {
+          "$ref": "#/definitions/EventTrigger",
+          "description": "An Eventarc trigger managed by Google Cloud Functions that fires events in response to a condition in another service."
+        },
+        "kmsKeyName": {
+          "type": "string",
+          "description": "[Preview] Resource name of a KMS crypto key (managed by the user) used to encrypt/decrypt function resources. It must match the pattern `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`."
+        },
+        "labels": {
+          "type": "object",
+          "description": "Labels associated with this Cloud Function.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "A user-defined name of the function. Function names must be unique globally and match pattern `projects/*/locations/*/functions/*`"
+        },
+        "satisfiesPzs": {
+          "type": "boolean",
+          "description": "Output only. Reserved for future use."
+        },
+        "satisfiesPzi": {
+          "type": "boolean",
+          "description": "Output only. Reserved for future use."
+        },
+        "serviceConfig": {
+          "$ref": "#/definitions/ServiceConfig",
+          "description": "Describes the Service being deployed. Currently deploys services to Cloud Run (fully managed)."
+        },
+        "state": {
+          "type": "string",
+          "description": "Output only. State of the function.",
+          "enum": [
+            "STATE_UNSPECIFIED",
+            "ACTIVE",
+            "FAILED",
+            "DEPLOYING",
+            "DELETING",
+            "UNKNOWN"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "stateMessages": {
+          "type": "array",
+          "description": "Output only. State Messages for this Cloud Function.",
+          "items": {
+            "$ref": "#/definitions/GoogleCloudFunctionsV2StateMessage"
+          },
+          "x-ms-identifiers": []
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "Output only. The last update timestamp of a Cloud Function."
+        },
+        "url": {
+          "type": "string",
+          "description": "Output only. The deployed url for the function."
+        }
+      }
+    },
+    "GoogleCloudFunctionsV2StateMessage": {
+      "type": "object",
+      "description": "Informational messages about the state of the Cloud Function or Operation.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The message."
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity of the state message.",
+          "enum": [
+            "SEVERITY_UNSPECIFIED",
+            "ERROR",
+            "WARNING",
+            "INFO"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "One-word CamelCase type of the state message."
+        }
+      }
+    },
+    "OnDeployUpdatePolicy": {
+      "type": "object",
+      "description": "Security patches are only applied when a function is redeployed.",
+      "properties": {
+        "runtimeVersion": {
+          "type": "string",
+          "description": "Output only. contains the runtime version which was used during latest function deployment."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RepoSource": {
+      "type": "object",
+      "description": "Location of the source in a Google Cloud Source Repository.",
+      "properties": {
+        "branchName": {
+          "type": "string",
+          "description": "Regex matching branches to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https://github.com/google/re2/wiki/Syntax"
+        },
+        "commitSha": {
+          "type": "string",
+          "description": "Explicit commit SHA to build."
+        },
+        "dir": {
+          "type": "string",
+          "description": "Directory, relative to the source root, in which to run the build. This must be a relative path. If a step's `dir` is specified and is an absolute path, this value is ignored for that step's execution. eg. helloworld (no leading slash allowed)"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "ID of the project that owns the Cloud Source Repository. If omitted, the project ID requesting the build is assumed."
+        },
+        "repoName": {
+          "type": "string",
+          "description": "Name of the Cloud Source Repository."
+        },
+        "tagName": {
+          "type": "string",
+          "description": "Regex matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https://github.com/google/re2/wiki/Syntax"
+        }
+      }
+    },
+    "SecretEnvVar": {
+      "type": "object",
+      "description": "Configuration for a secret environment variable. It has the information necessary to fetch the secret value from secret manager and expose it as an environment variable.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Name of the environment variable."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project identifier (preferably project number but can also be the project ID) of the project that contains the secret. If not set, it is assumed that the secret is in the same project as the function."
+        },
+        "secret": {
+          "type": "string",
+          "description": "Name of the secret in secret manager (not the full resource name)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the secret (version number or the string 'latest'). It is recommended to use a numeric version for secret environment variables as any updates to the secret value is not reflected until new instances start."
+        }
+      }
+    },
+    "SecretVersion": {
+      "type": "object",
+      "description": "Configuration for a single version.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path of the file under the mount path where the secret value for this version will be fetched and made available. For example, setting the mount_path as '/etc/secrets' and path as `secret_foo` would mount the secret value file at `/etc/secrets/secret_foo`."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the secret (version number or the string 'latest'). It is preferable to use `latest` version with secret volumes as secret value changes are reflected immediately."
+        }
+      }
+    },
+    "SecretVolume": {
+      "type": "object",
+      "description": "Configuration for a secret volume. It has the information necessary to fetch the secret value from secret manager and make it available as files mounted at the requested paths within the application container.",
+      "properties": {
+        "mountPath": {
+          "type": "string",
+          "description": "The path within the container to mount the secret volume. For example, setting the mount_path as `/etc/secrets` would mount the secret value files under the `/etc/secrets` directory. This directory will also be completely shadowed and unavailable to mount any other secrets. Recommended mount path: /etc/secrets"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project identifier (preferably project number but can also be the project ID) of the project that contains the secret. If not set, it is assumed that the secret is in the same project as the function."
+        },
+        "secret": {
+          "type": "string",
+          "description": "Name of the secret in secret manager (not the full resource name)."
+        },
+        "versions": {
+          "type": "array",
+          "description": "List of secret versions to mount for this secret. If empty, the `latest` version of the secret will be made available in a file named after the secret under the mount point.",
+          "items": {
+            "$ref": "#/definitions/SecretVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServiceConfig": {
+      "type": "object",
+      "description": "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).",
+      "properties": {
+        "allTrafficOnLatestRevision": {
+          "type": "boolean",
+          "description": "Whether 100% of traffic is routed to the latest revision. On CreateFunction and UpdateFunction, when set to true, the revision being deployed will serve 100% of traffic, ignoring any traffic split settings, if any. On GetFunction, true will be returned if the latest revision is serving 100% of traffic."
+        },
+        "availableCpu": {
+          "type": "string",
+          "description": "The number of CPUs used in a single container instance. Default value is calculated from available memory. Supports the same values as Cloud Run, see https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements Example: \"1\" indicates 1 vCPU"
+        },
+        "availableMemory": {
+          "type": "string",
+          "description": "The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes. See https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go a full description."
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment variables that shall be available during function execution.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ingressSettings": {
+          "type": "string",
+          "description": "The ingress settings for the function, controlling what traffic can reach it.",
+          "enum": [
+            "INGRESS_SETTINGS_UNSPECIFIED",
+            "ALLOW_ALL",
+            "ALLOW_INTERNAL_ONLY",
+            "ALLOW_INTERNAL_AND_GCLB"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "maxInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit on the maximum number of function instances that may coexist at a given time. In some cases, such as rapid traffic surges, Cloud Functions may, for a short period of time, create more instances than the specified max instances limit. If your function cannot tolerate this temporary behavior, you may want to factor in a safety margin and set a lower max instances value than your function can tolerate. See the [Max Instances](https://cloud.google.com/functions/docs/max-instances) Guide for more details."
+        },
+        "maxInstanceRequestConcurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sets the maximum number of concurrent requests that each instance can receive. Defaults to 1."
+        },
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The limit on the minimum number of function instances that may coexist at a given time. Function instances are kept in idle state for a short period after they finished executing the request to reduce cold start time for subsequent requests. Setting a minimum instance count will ensure that the given number of instances are kept running in idle state always. This can help with cold start times when jump in incoming request count occurs after the idle instance would have been stopped in the default case."
+        },
+        "revision": {
+          "type": "string",
+          "description": "Output only. The name of service revision."
+        },
+        "secretEnvironmentVariables": {
+          "type": "array",
+          "description": "Secret environment variables configuration.",
+          "items": {
+            "$ref": "#/definitions/SecretEnvVar"
+          },
+          "x-ms-identifiers": []
+        },
+        "secretVolumes": {
+          "type": "array",
+          "description": "Secret volumes configuration.",
+          "items": {
+            "$ref": "#/definitions/SecretVolume"
+          },
+          "x-ms-identifiers": []
+        },
+        "securityLevel": {
+          "type": "string",
+          "description": "Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.",
+          "enum": [
+            "SECURITY_LEVEL_UNSPECIFIED",
+            "SECURE_ALWAYS",
+            "SECURE_OPTIONAL"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        },
+        "service": {
+          "type": "string",
+          "description": "Output only. Name of the service associated with a Function. The format of this field is `projects/{project}/locations/{region}/services/{service}`"
+        },
+        "serviceAccountEmail": {
+          "type": "string",
+          "description": "The email of the service's service account. If empty, defaults to `{project_number}-compute@developer.gserviceaccount.com`."
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The function execution timeout. Execution is considered failed and can be terminated if the function is not completed at the end of the timeout period. Defaults to 60 seconds."
+        },
+        "uri": {
+          "type": "string",
+          "description": "Output only. URI of the Service deployed."
+        },
+        "vpcConnector": {
+          "type": "string",
+          "description": "The Serverless VPC Access connector that this cloud function can connect to. The format of this field is `projects/*/locations/*/connectors/*`."
+        },
+        "vpcConnectorEgressSettings": {
+          "type": "string",
+          "description": "The egress settings for the connector, controlling what traffic is diverted through it.",
+          "enum": [
+            "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED",
+            "PRIVATE_RANGES_ONLY",
+            "ALL_TRAFFIC"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Source": {
+      "type": "object",
+      "description": "The location of the function source code.",
+      "properties": {
+        "gitUri": {
+          "type": "string",
+          "description": "If provided, get the source from GitHub repository. This option is valid only for GCF 1st Gen function. Example: https://github.com///blob//"
+        },
+        "repoSource": {
+          "$ref": "#/definitions/RepoSource",
+          "description": "If provided, get the source from this location in a Cloud Source Repository."
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource",
+          "description": "If provided, get the source from this location in Google Cloud Storage."
+        }
+      }
+    },
+    "SourceProvenance": {
+      "type": "object",
+      "description": "Provenance of the source. Ways to find the original source, or verify that some source was used for this build.",
+      "properties": {
+        "gitUri": {
+          "type": "string",
+          "description": "A copy of the build's `source.git_uri`, if exists, with any commits resolved."
+        },
+        "resolvedRepoSource": {
+          "$ref": "#/definitions/RepoSource",
+          "description": "A copy of the build's `source.repo_source`, if exists, with any revisions resolved."
+        },
+        "resolvedStorageSource": {
+          "$ref": "#/definitions/StorageSource",
+          "description": "A copy of the build's `source.storage_source`, if exists, with any generations resolved."
+        }
+      }
+    },
+    "StorageSource": {
+      "type": "object",
+      "description": "Location of the source in an archive file in Google Cloud Storage.",
+      "properties": {
+        "bucket": {
+          "type": "string",
+          "description": "Google Cloud Storage bucket containing the source (see [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements))."
+        },
+        "generation": {
+          "type": "string",
+          "description": "Google Cloud Storage generation for the object. If the generation is omitted, the latest generation will be used."
+        },
+        "object": {
+          "type": "string",
+          "description": "Google Cloud Storage object containing the source. This object must be a gzipped archive file (`.tar.gz`) containing source to build."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "accountName": "MyAccount",
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "MyResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "MyCustomSearchConfiguration1",
+            "type": "Microsoft.Bing/accounts/customSearchConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyCustomSearchConfiguration1",
+            "properties": {
+              "allowedDomains": [
+                {
+                  "boostLevel": "Default",
+                  "domain": "www.example.com",
+                  "includeSubPages": true
+                }
+              ],
+              "blockedDomains": [
+                {
+                  "domain": "www.blockedexample.com",
+                  "includeSubPages": true
+                }
+              ],
+              "pinnedDomains": [
+                {
+                  "condition": "Contains",
+                  "domain": "www.pinnedexample.com",
+                  "query": "example query"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2023-05-05T13:54:37.8072169Z",
+              "createdBy": "user@domain.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-05-05T13:54:37.8072169Z",
+              "lastModifiedBy": "user@domain.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "MyCustomSearchConfiguration2",
+            "type": "Microsoft.Bing/accounts/customSearchConfigurations",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup/providers/Microsoft.Bing/accounts/MyAccount/customSearchConfigurations/MyCustomSearchConfiguration2",
+            "properties": {
+              "allowedDomains": [
+                {
+                  "boostLevel": "Default",
+                  "domain": "www.example2.com",
+                  "includeSubPages": true
+                }
+              ],
+              "blockedDomains": [
+                {
+                  "domain": "www.blockedexample2.com",
+                  "includeSubPages": true
+                }
+              ],
+              "pinnedDomains": [
+                {
+                  "condition": "Contains",
+                  "domain": "www.pinnedexample2.com",
+                  "query": "example query"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2023-05-05T13:54:37.8072169Z",
+              "createdBy": "user@domain.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-05-05T13:54:37.8072169Z",
+              "lastModifiedBy": "user@domain.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CustomSearchConfigurations_ListByAccount",
+  "title": "List Custom Search Configurations by Account"
+}

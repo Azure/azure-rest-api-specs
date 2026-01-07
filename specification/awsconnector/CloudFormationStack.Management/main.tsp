@@ -11,9 +11,6 @@ import "../shared/main.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
-using Azure.Core;
-using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.Portal;
 
@@ -93,7 +90,7 @@ model AwsCloudFormationStackProperties {
   notificationARNs?: string[];
 
   @doc("Property outputs")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   outputs?: Output[];
 
   @doc("Property parameters")
@@ -127,7 +124,7 @@ model AwsCloudFormationStackProperties {
   stackStatusReason?: string;
 
   @doc("Property tags")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("Property templateBody")
@@ -166,6 +163,7 @@ model Output {
   @doc("Property exportName")
   exportName?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Property outputKey")
   outputKey?: string;
 

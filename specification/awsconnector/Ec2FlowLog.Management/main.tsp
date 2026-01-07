@@ -102,7 +102,7 @@ model AwsEc2FlowLogProperties {
   resourceType?: ResourceType;
 
   @doc("The tags to apply to the flow logs.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   tags?: Tag[];
 
   @doc("The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.")

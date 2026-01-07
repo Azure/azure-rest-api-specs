@@ -21,15 +21,22 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Workloads Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Workloads;
 
 /**
  * The available API versions.
  */
+@doc("The Microsoft.Workloads/SAPDiscoverySites resource versions.")
 enum Versions {
   /**
    * The 2023-10-01-preview API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2023_10_01_preview: "2023-10-01-preview",
+
+  /**
+   * The 2024-06-01-preview API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2024_06_01_preview: "2024-06-01-preview",
 }

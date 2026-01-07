@@ -1,0 +1,31 @@
+{
+  "title": "Workspaces_Update",
+  "operationId": "Workspaces_Update",
+  "parameters": {
+    "api-version": "2025-11-04-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourcebuilder-rg",
+    "workspaceName": "my-workspace",
+    "properties": {
+      "tags": {
+        "tag1": "updated-value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {},
+        "tags": {
+          "tag1": "updated-value1",
+          "tag2": "value2"
+        },
+        "location": "westus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcebuilder-rg/providers/Microsoft.ResourceBuilder/workspaces/my-workspace",
+        "name": "my-workspace",
+        "type": "Microsoft.ResourceBuilder/workspaces"
+      }
+    }
+  }
+}

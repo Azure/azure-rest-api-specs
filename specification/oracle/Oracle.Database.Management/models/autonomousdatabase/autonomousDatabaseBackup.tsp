@@ -95,7 +95,7 @@ model AutonomousDatabaseBackupProperties {
   @visibility(Lifecycle.Read)
   lifecycleState?: AutonomousDatabaseBackupLifecycleState;
 
-  @doc("Retention period, in days")
+  @doc("Retention period, in days, for long-term backups.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   retentionPeriodInDays?: int32;
 

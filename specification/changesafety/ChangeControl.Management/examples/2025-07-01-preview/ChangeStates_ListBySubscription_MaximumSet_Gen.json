@@ -1,0 +1,131 @@
+{
+  "title": "ChangeStates_ListBySubscription_MaximumSet",
+  "operationId": "ChangeStates_ListBySubscription",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "changeType": "AppDeployment",
+              "rolloutType": "Normal",
+              "description": "Cloud infrastructure platform deployment across subscription with multi-region coordination and enterprise governance. This deployment includes foundational services, security frameworks, networking infrastructure, and compliance controls for enterprise-scale operations.",
+              "stageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/cloudInfrastructureStageMap"
+              },
+              "parameters": {
+                "infrastructureVersion": {
+                  "type": "string",
+                  "metadata": {
+                    "description": "Version of the cloud infrastructure platform to deploy"
+                  }
+                }
+              },
+              "state": "InProgress",
+              "comments": "Cloud infrastructure deployment in progress with comprehensive governance validation and multi-region coordination enabled.",
+              "changeDefinitions": [
+                {
+                  "name": "cloudInfrastructureDeployment",
+                  "type": "ArmOperation",
+                  "details": {
+                    "templateUri": "https://templates.contoso.com/cloud-infrastructure.json",
+                    "parameters": {
+                      "version": "3.0.0",
+                      "subscriptionScope": true,
+                      "multiRegion": true
+                    }
+                  }
+                }
+              ],
+              "releaseLabel": "Release-3.0.0-CloudInfrastructure",
+              "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+              "anticipatedEndTime": "2025-07-09T13:30:17.815Z",
+              "orchestrationTool": "Azure Resource Manager",
+              "links": {
+                "workTrackingItem": {
+                  "uri": "https://dev.azure.com/contoso/CloudProject/_workitems/edit/12368",
+                  "description": "Work item for cloud infrastructure deployment with enterprise governance",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "approvalRequest": {
+                  "uri": "https://approval.contoso.com/requests/67913",
+                  "description": "Cloud infrastructure deployment approval with enterprise architecture review",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "supportIncident": {
+                  "uri": "https://support.contoso.com/incidents/INC001257",
+                  "description": "Support incident for cloud infrastructure deployment coordination and enterprise monitoring",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "accessElevationRequest": {
+                  "uri": "https://access.contoso.com/requests/AER-5701",
+                  "description": "Access elevation request for cloud infrastructure deployment with subscription privileges",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "relatedChangeState": {
+                  "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/enterpriseGovernanceState",
+                  "description": "Related enterprise governance change state for cloud infrastructure coordination",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "testResults": {
+                  "uri": "https://testresults.contoso.com/runs/TR-9899",
+                  "description": "Cloud infrastructure deployment test results with enterprise governance validation",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                },
+                "serviceCatalog": {
+                  "uri": "https://catalog.contoso.com/services/cloud-infrastructure-platform",
+                  "description": "Cloud infrastructure platform service catalog entry with enterprise specifications",
+                  "lastModifiedBy": "cloudops@contoso.com",
+                  "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+                }
+              },
+              "additionalData": {
+                "deploymentScope": "subscription",
+                "multiRegion": true,
+                "governanceLevel": "enterprise",
+                "complianceFramework": "enterprise"
+              },
+              "stageMapSnapshot": [
+                {
+                  "stageName": "planning",
+                  "status": "completed"
+                },
+                {
+                  "stageName": "governance",
+                  "status": "completed"
+                },
+                {
+                  "stageName": "deployment",
+                  "status": "in-progress"
+                }
+              ]
+            },
+            "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/cloudInfrastructureChangeState",
+            "name": "cloudInfrastructureChangeState",
+            "type": "Microsoft.ChangeSafety/changeStates",
+            "systemData": {
+              "createdBy": "cloudops@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-09T07:30:16.534Z",
+              "lastModifiedBy": "cloudops@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates?api-version=2025-07-01-preview&$skiptoken=ghi789"
+      }
+    }
+  }
+}

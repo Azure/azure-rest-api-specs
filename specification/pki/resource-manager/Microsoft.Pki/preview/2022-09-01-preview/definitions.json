@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MicrosoftPki",
+    "description": "Common definitions to Microsoft.Pki resource provider.",
+    "version": "2022-09-01-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ResourceBanner": {
+      "description": "A system-generated banner for a PKI resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the banner became effective.",
+          "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "The banner category",
+          "readOnly": true,
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "critical"
+          ],
+          "x-ms-enum": {
+            "name": "BannerCategory",
+            "modelAsString": true
+          }
+        },
+        "code": {
+          "type": "string",
+          "description": "The banner code. This is a mnemonic.",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "The banner properties. The content varies according to the banner code.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The banner description. This is a localized text derived from 'code' and 'properties'.",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

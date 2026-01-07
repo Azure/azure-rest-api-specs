@@ -22,7 +22,7 @@ namespace Pinecone.VectorDb;
 enum Versions {
   /** 2024-10-22-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Versions.v1_preview)
   v2024_10_22_preview: "2024-10-22-preview",
 }
 

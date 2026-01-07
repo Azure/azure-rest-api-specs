@@ -11,6 +11,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -18,19 +22,11 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "AzureTerraformResourceProviderClient" })
 @versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AzureTerraform;
 
 @doc("The available API versions.")
 enum Versions {
   @doc("The 2023-07-01-preview API version.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_07_01_preview: "2023-07-01-preview",
-
-  @doc("The 2025-06-01-preview API version.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_06_01_preview: "2025-06-01-preview",
-
-  @doc("The 2025-09-01-preview API version.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_09_01_preview: "2025-09-01-preview",
 }

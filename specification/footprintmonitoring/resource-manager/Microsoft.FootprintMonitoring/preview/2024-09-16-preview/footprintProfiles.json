@@ -1,0 +1,1771 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "FootprintMonitoringManagementClient",
+    "version": "2024-09-16-preview",
+    "description": "Microsoft Footprint active monitoring system REST API version 2020-02-01-preview.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Profiles"
+    },
+    {
+      "name": "MeasurementEndpoints"
+    },
+    {
+      "name": "MeasurementEndpointConditions"
+    },
+    {
+      "name": "Experiments"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.FootprintMonitoring/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all operations (maximum).": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.FootprintMonitoring/profiles": {
+      "get": {
+        "operationId": "Profiles_ListBySubscription",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Retrieves the information about all Footprint profiles under a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Footprint profiles under a subscription (max).": {
+            "$ref": "./examples/Profiles_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles": {
+      "get": {
+        "operationId": "Profiles_ListByResourceGroup",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Retrieves the information about all Footprint profiles under a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Footprint profiles under a resource group (max).": {
+            "$ref": "./examples/Profiles_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}": {
+      "get": {
+        "operationId": "Profiles_Get",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Retrieves the information about a single Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Footprint profile (max).": {
+            "$ref": "./examples/Profiles_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Profiles_CreateOrUpdate",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Creates or updates a Footprint profile with the specified properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Footprint profile creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Profile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "201": {
+            "description": "Resource 'Profile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Footprint profile (max).": {
+            "$ref": "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Profiles_Update",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Updates an existing Footprint profile resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Footprint profile update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfilePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a Footprint profile (max).": {
+            "$ref": "./examples/Profiles_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Profiles_Delete",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes an existing Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Footprint profile (max).": {
+            "$ref": "./examples/Profiles_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/experiments": {
+      "get": {
+        "operationId": "Experiments_ListByProfile",
+        "tags": [
+          "Experiments"
+        ],
+        "description": "Retrieves the information about all experiments under a Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExperimentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Footprint experiments (max).": {
+            "$ref": "./examples/Experiments_ListByProfile_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/experiments/{experimentName}": {
+      "get": {
+        "operationId": "Experiments_Get",
+        "tags": [
+          "Experiments"
+        ],
+        "description": "Retrieves the information about a single Footprint experiment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "experimentName",
+            "in": "path",
+            "description": "Name of the Footprint experiment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Footprint experiment (max).": {
+            "$ref": "./examples/Experiments_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Experiments_CreateOrUpdate",
+        "tags": [
+          "Experiments"
+        ],
+        "description": "Creates or updates a Footprint experiment with the specified properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "experimentName",
+            "in": "path",
+            "description": "Name of the Footprint experiment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Footprint experiment creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Experiment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "201": {
+            "description": "Resource 'Experiment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Footprint experiment (max).": {
+            "$ref": "./examples/Experiments_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Experiments_Delete",
+        "tags": [
+          "Experiments"
+        ],
+        "description": "Deletes an existing Footprint experiment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "experimentName",
+            "in": "path",
+            "description": "Name of the Footprint experiment resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Footprint experiment (max).": {
+            "$ref": "./examples/Experiments_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints": {
+      "get": {
+        "operationId": "MeasurementEndpoints_ListByProfile",
+        "tags": [
+          "MeasurementEndpoints"
+        ],
+        "description": "Retrieves the information about all measurement endpoints under a Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Footprint measurement endpoints (max).": {
+            "$ref": "./examples/MeasurementEndpoints_ListByProfile_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}": {
+      "get": {
+        "operationId": "MeasurementEndpoints_Get",
+        "tags": [
+          "MeasurementEndpoints"
+        ],
+        "description": "Retrieves the information about a single measurement endpoint under a Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Footprint measurement endpoint (max).": {
+            "$ref": "./examples/MeasurementEndpoints_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MeasurementEndpoints_CreateOrUpdate",
+        "tags": [
+          "MeasurementEndpoints"
+        ],
+        "description": "Creates or updates a single measurement endpoint under a Footprint profile with the specified properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Footprint measurement endpoint creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MeasurementEndpoint' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "201": {
+            "description": "Resource 'MeasurementEndpoint' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Footprint measurement endpoint (max).": {
+            "$ref": "./examples/MeasurementEndpoints_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MeasurementEndpoints_Delete",
+        "tags": [
+          "MeasurementEndpoints"
+        ],
+        "description": "Deletes an existing measurement endpoint under a Footprint profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Footprint measurement endpoint (max).": {
+            "$ref": "./examples/MeasurementEndpoints_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}/conditions": {
+      "get": {
+        "operationId": "MeasurementEndpointConditions_ListByMeasurementEndpoint",
+        "tags": [
+          "MeasurementEndpointConditions"
+        ],
+        "description": "Retrieves the information about all measurement endpoint conditions under a Footprint measurement endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointConditionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Footprint measurement endpoint conditions (max).": {
+            "$ref": "./examples/MeasurementEndpointConditions_ListByMeasurementEndpoint_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/profiles/{profileName}/measurementEndpoints/{measurementEndpointName}/conditions/{conditionName}": {
+      "get": {
+        "operationId": "MeasurementEndpointConditions_Get",
+        "tags": [
+          "MeasurementEndpointConditions"
+        ],
+        "description": "Retrieves the information about a single measurement endpoint condition under a Footprint measurement endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "conditionName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint condition resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Footprint measurement endpoint condition (max).": {
+            "$ref": "./examples/MeasurementEndpointConditions_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "MeasurementEndpointConditions_CreateOrUpdate",
+        "tags": [
+          "MeasurementEndpointConditions"
+        ],
+        "description": "Creates or updates a measurement endpoint condition under a Footprint measurement with the specified properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "conditionName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint condition resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Footprint measurement condition creation or update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'MeasurementEndpointCondition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "201": {
+            "description": "Resource 'MeasurementEndpointCondition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MeasurementEndpointCondition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Footprint measurement endpoint condition (max).": {
+            "$ref": "./examples/MeasurementEndpointConditions_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MeasurementEndpointConditions_Delete",
+        "tags": [
+          "MeasurementEndpointConditions"
+        ],
+        "description": "Deletes an existing measurement endpoint condition under a Footprint measurement.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the Footprint profile resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "measurementEndpointName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          },
+          {
+            "name": "conditionName",
+            "in": "path",
+            "description": "Name of the Footprint measurement endpoint condition resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Footprint measurement endpoint condition (max).": {
+            "$ref": "./examples/MeasurementEndpointConditions_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "The base response with an error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details, if any."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "The details of an error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        }
+      }
+    },
+    "Experiment": {
+      "type": "object",
+      "description": "A model representing the Footprint experiment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExperimentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExperimentListResult": {
+      "type": "object",
+      "description": "The response of a Experiment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Experiment items on this page",
+          "items": {
+            "$ref": "#/definitions/Experiment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExperimentProperties": {
+      "type": "object",
+      "description": "A model representing the Footprint Experiment resource.",
+      "properties": {
+        "experimentId": {
+          "type": "string",
+          "description": "The id of a Footprint experiment.",
+          "minLength": 32,
+          "maxLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of a Footprint experiment."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of a Footprint experiment.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "MeasurementEndpoint": {
+      "type": "object",
+      "description": "A model representing a Footprint measurement endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MeasurementEndpointProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MeasurementEndpointCondition": {
+      "type": "object",
+      "description": "A model representing the Footprint measurement endpoint condition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MeasurementEndpointConditionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "MeasurementEndpointConditionListResult": {
+      "type": "object",
+      "description": "The response of a MeasurementEndpointCondition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MeasurementEndpointCondition items on this page",
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpointCondition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MeasurementEndpointConditionProperties": {
+      "type": "object",
+      "description": "A model representing the Footprint Measurement Endpoint Condition resource.",
+      "properties": {
+        "conditionId": {
+          "type": "string",
+          "description": "The id of a Footprint measurement endpoint condition.",
+          "minLength": 32,
+          "maxLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Type",
+          "description": "The type of a Footprint measurement endpoint condition."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The variable of a Footprint measurement endpoint condition."
+        },
+        "operator": {
+          "$ref": "#/definitions/Operator",
+          "description": "The operator of a Footprint measurement endpoint condition."
+        },
+        "constant": {
+          "type": "string",
+          "description": "The constant of a Footprint measurement endpoint condition."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "variable",
+        "operator",
+        "constant"
+      ]
+    },
+    "MeasurementEndpointListResult": {
+      "type": "object",
+      "description": "The response of a MeasurementEndpoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The MeasurementEndpoint items on this page",
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MeasurementEndpointProperties": {
+      "type": "object",
+      "description": "A model representing the Footprint Measurement Endpoint resource.",
+      "properties": {
+        "endpointId": {
+          "type": "string",
+          "description": "The id of a measurement endpoint.",
+          "minLength": 32,
+          "maxLength": 32,
+          "pattern": "[a-f0-9]{32}",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of a measurement endpoint."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The value of a measurement endpoint.",
+          "maxLength": 1024,
+          "pattern": "^[a-z0-9\\*]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,}(:[0-9]{1,5})?$"
+        },
+        "measurementType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The type of a measurement endpoint."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of a measurement endpoint, higher weight means higher priority.",
+          "maximum": 2147483647
+        },
+        "experimentId": {
+          "type": "string",
+          "description": "The id of an experiment that a measurement endpoint is part of.",
+          "minLength": 32,
+          "maxLength": 32,
+          "pattern": "[a-f0-9]{32}"
+        },
+        "objectPath": {
+          "type": "string",
+          "description": "The path of the object that a measurement endpoint points to.",
+          "maxLength": 1024,
+          "pattern": "^/[a-zA-Z0-9-._~%!$&()*+,;=@/]*$"
+        },
+        "conditions": {
+          "type": "array",
+          "description": "The conditions of a measurement endpoint.",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "startTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time that a measurement endpoint should be served."
+        },
+        "endTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time that a measurement endpoint should be served."
+        },
+        "hotPathSamplingPercentageRate": {
+          "type": "number",
+          "format": "float",
+          "description": "The sample rate, in percent, for the hot path logging of a measurement endpoint.",
+          "maximum": 100
+        },
+        "warmPathSamplingPercentageRate": {
+          "type": "number",
+          "format": "float",
+          "description": "The sample rate, in percent, for the warm path logging of a measurement endpoint.",
+          "maximum": 100
+        },
+        "coldPathSamplingPercentageRateOverride": {
+          "type": "number",
+          "format": "float",
+          "description": "The sample rate, in percent, for the cold path logging of a measurement endpoint.",
+          "maximum": 100
+        },
+        "metadata": {
+          "type": "string",
+          "description": "The metadata of a measurement endpoint."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "endpoint",
+        "measurementType",
+        "weight"
+      ]
+    },
+    "Operator": {
+      "type": "string",
+      "description": "The operator of a Footprint measurement endpoint condition.",
+      "enum": [
+        "IsExactValue",
+        "MatchValueIgnoreCasing",
+        "ContainsValue",
+        "ContainsValueIgnoreCasing",
+        "DoesNotContainValue",
+        "DoesNotContainValueIgnoreCasing"
+      ],
+      "x-ms-enum": {
+        "name": "Operator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IsExactValue",
+            "value": "IsExactValue",
+            "description": "IsExactValue operator"
+          },
+          {
+            "name": "MatchValueIgnoreCasing",
+            "value": "MatchValueIgnoreCasing",
+            "description": "IsExactValueIgnoreCasing operator"
+          },
+          {
+            "name": "ContainsValue",
+            "value": "ContainsValue",
+            "description": "ContainsValue operator"
+          },
+          {
+            "name": "ContainsValueIgnoreCasing",
+            "value": "ContainsValueIgnoreCasing",
+            "description": "ContainsValueIgnoreCasing operator"
+          },
+          {
+            "name": "DoesNotContainValue",
+            "value": "DoesNotContainValue",
+            "description": "DoesNotContainValue operator"
+          },
+          {
+            "name": "DoesNotContainValueIgnoreCasing",
+            "value": "DoesNotContainValueIgnoreCasing",
+            "description": "DoesNotContainValueIgnoreCasing operator"
+          }
+        ]
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "description": "The Footprint profile resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProfileProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ProfileListResult": {
+      "type": "object",
+      "description": "The response of a Profile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Profile items on this page",
+          "items": {
+            "$ref": "#/definitions/Profile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProfilePatch": {
+      "type": "object",
+      "description": "The model for patches on Footprint profile resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The tags for this resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProfileProperties": {
+      "type": "object",
+      "description": "A model representing the Footprint profile resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource.",
+          "readOnly": true
+        },
+        "profileId": {
+          "type": "string",
+          "description": "The id of the Footprint profile.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the Footprint profile."
+        },
+        "startDelayMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The delay in milliseconds that the clients should wait for until they start performing measurements.",
+          "maximum": 3600000
+        },
+        "scriptUri": {
+          "type": "string",
+          "description": "The URL where the script for the Footprint profile.",
+          "readOnly": true
+        },
+        "measurementCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of measurements to perform."
+        },
+        "coldPathSamplingPercentageRate": {
+          "type": "number",
+          "format": "float",
+          "description": "The default sampling percentage for cold path measurement storage.",
+          "maximum": 100
+        },
+        "measurementEndpoints": {
+          "type": "array",
+          "description": "The endpoints which to perform measurements to.",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "reportingEndpoints": {
+          "type": "array",
+          "description": "The endpoints which to upload measurements to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "experiments": {
+          "type": "array",
+          "description": "The experiments currently associated to this Footprint profile.",
+          "items": {
+            "$ref": "#/definitions/SubResource"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startDelayMilliseconds",
+        "measurementCount"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioned state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded state"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed state"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled state"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating state"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting state"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the resource.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where the Azure resource is located.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceProviderOperationDefinition": {
+      "type": "object",
+      "description": "Describes the Resource Provider Operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Resource provider operation name."
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Resource provider display properties."
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Describes the properties of the Operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the resource provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the resource type."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the resource provider operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the resource provider operation."
+        }
+      }
+    },
+    "SubResource": {
+      "type": "object",
+      "description": "An Azure resource that is child to another Azure resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "Type": {
+      "type": "string",
+      "description": "The type of a Footprint measurement endpoint condition.",
+      "enum": [
+        "RequestHeader"
+      ],
+      "x-ms-enum": {
+        "name": "Type",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestHeader",
+            "value": "RequestHeader",
+            "description": "RequestHeader type"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

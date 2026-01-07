@@ -1,0 +1,13 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+namespace Microsoft.MessagingConnectors.Models.Network;
+
+@doc("Properties of network")
+model NetworkProperties {
+  @doc("Subnet properties")
+  subnetProperties?: SubnetProperties;
+}

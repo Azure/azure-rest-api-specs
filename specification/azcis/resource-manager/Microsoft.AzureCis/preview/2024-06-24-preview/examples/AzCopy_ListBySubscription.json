@@ -1,0 +1,33 @@
+{
+  "title": "ListBySubscription AzCopy",
+  "operationId": "AzCopy_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "api-version": "2024-06-24-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/azCopies/prodUSEastAzcis",
+            "name": "prodUSEastAzcis",
+            "type": "Microsoft.AzureCis/azCopies",
+            "properties": {
+              "command": "copy",
+              "source": "https://azcopyev2frp.blob.core.windows.net/source-blob",
+              "destination": "https://azcopyev2frp.blob.core.windows.net/dest-blob",
+              "fromTo": "BlobBlob",
+              "blobType": "BlockBlob",
+              "asSubdir": false,
+              "overwrite": "False",
+              "azureLocation": "useast",
+              "provisioningState": "Succeeded",
+              "azCopy": "Result message"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

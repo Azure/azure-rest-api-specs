@@ -1,0 +1,80 @@
+{
+  "title": "ChangeStates_RetrieveNextStagesAtSubscriptionLevel_MaximumSet",
+  "operationId": "ChangeStates_RetrieveNextStagesAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionInfrastructureChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeStateResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionInfrastructureChangeState",
+        "lastStageProgressionSequence": 7,
+        "nextStages": [
+          {
+            "stageReference": "subscription-governance-validation",
+            "stageVariables": {
+              "governanceLevel": "enterprise",
+              "complianceChecks": "enabled",
+              "multiRegion": true
+            },
+            "state": "Initialized",
+            "sequence": 8,
+            "comments": "Next stage: Subscription-level governance validation with enterprise compliance",
+            "links": {
+              "workTrackingItem": {
+                "uri": "https://dev.azure.com/contoso/EnterpriseProject/_workitems/edit/12370",
+                "description": "Subscription governance validation work item for stage 8",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "approvalRequest": {
+                "uri": "https://approval.contoso.com/requests/GOV-890",
+                "description": "Subscription governance validation approval request for stage 8",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "supportIncident": {
+                "uri": "https://support.contoso.com/incidents/INC-2024-001235",
+                "description": "Related support incident for subscription governance validation",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "accessElevationRequest": {
+                "uri": "https://access.contoso.com/elevation/GOV-678",
+                "description": "Subscription governance access elevation for validation stage",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "relatedChangeState": {
+                "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/compliance-framework",
+                "description": "Related compliance framework change state for subscription governance",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "testResults": {
+                "uri": "https://testresults.contoso.com/runs/governance-validation-stage8",
+                "description": "Subscription governance validation test results for stage 8",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              },
+              "serviceCatalog": {
+                "uri": "https://catalog.contoso.com/services/subscription-governance",
+                "description": "Subscription governance service catalog entry with enterprise compliance",
+                "lastModifiedBy": "governance@contoso.com",
+                "lastModifiedAt": "2025-07-09T07:30:17.815Z"
+              }
+            },
+            "additionalData": {
+              "complianceFramework": "SOC2-HIPAA",
+              "governanceScope": "subscription",
+              "auditTrailEnabled": true,
+              "riskAssessment": "high"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

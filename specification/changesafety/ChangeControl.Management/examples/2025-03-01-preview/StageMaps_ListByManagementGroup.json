@@ -1,0 +1,99 @@
+{
+  "title": "StageMaps_ListByManagementGroup_MaximumSet",
+  "operationId": "StageMaps_ListByManagementGroup",
+  "parameters": {
+    "managementGroupName": "myManagementGroup",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap1",
+            "name": "sampleStageMap1",
+            "type": "Microsoft.ChangeSafety/stageMaps",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stages": [
+                {
+                  "name": "stage1",
+                  "sequence": 1,
+                  "parameterValues": {
+                    "param1": {
+                      "value": "value1",
+                      "allowedValues": [
+                        "value1",
+                        "default"
+                      ]
+                    }
+                  }
+                }
+              ],
+              "parameters": {
+                "param1": {
+                  "type": "string",
+                  "defaultValue": "default",
+                  "allowedValues": [
+                    "value1",
+                    "default"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps/sampleStageMap2",
+            "name": "sampleStageMap2",
+            "type": "Microsoft.ChangeSafety/stageMaps",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "stages": [
+                {
+                  "name": "stage1",
+                  "sequence": 1,
+                  "parameterValues": {
+                    "param1": {
+                      "value": "value1",
+                      "allowedValues": [
+                        "value1",
+                        "value2",
+                        "default"
+                      ]
+                    }
+                  }
+                },
+                {
+                  "name": "stage2",
+                  "sequence": 2,
+                  "parameterValues": {
+                    "param1": {
+                      "value": "value2",
+                      "allowedValues": [
+                        "value1",
+                        "value2",
+                        "default"
+                      ]
+                    }
+                  }
+                }
+              ],
+              "parameters": {
+                "param1": {
+                  "type": "string",
+                  "defaultValue": "default",
+                  "allowedValues": [
+                    "value1",
+                    "value2",
+                    "default"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.ChangeSafety/stageMaps?api-version=2025-03-01-preview&$skiptoken=nextPage"
+      }
+    }
+  }
+}

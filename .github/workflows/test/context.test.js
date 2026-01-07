@@ -1,8 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
-import { extractInputs } from "../src/context.js";
+import { extractInputs as extractInputsImpl } from "../src/context.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
+
+/**
+ *
+ * @param {import("./mocks.js").GitHub} github
+ * @param {unknown} context
+ * @param {import("./mocks.js").Core} core
+ */
+function extractInputs(github, context, core) {
+  return extractInputsImpl(github, /** @type {import("./mocks.js").Context} */ (context), core);
+}
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
@@ -243,9 +253,9 @@ describe("extractInputs", () => {
       };
 
       const github = createMockGithub();
-      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(async (args) => {
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation((args) => {
         console.log(JSON.stringify(args));
-        return {
+        return Promise.resolve({
           data: [
             {
               base: {
@@ -268,7 +278,7 @@ describe("extractInputs", () => {
               number: 124,
             },
           ].slice(0, numPullRequests),
-        };
+        });
       });
 
       if (numPullRequests === 0) {

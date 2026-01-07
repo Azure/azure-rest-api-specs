@@ -55,21 +55,6 @@
       "name": "BillingContainers"
     },
     {
-      "name": "Namespaces"
-    },
-    {
-      "name": "NamespaceAssets"
-    },
-    {
-      "name": "NamespaceDevices"
-    },
-    {
-      "name": "NamespaceDiscoveredAssets"
-    },
-    {
-      "name": "NamespaceDiscoveredDevices"
-    },
-    {
       "name": "SchemaRegistries"
     },
     {
@@ -77,6 +62,21 @@
     },
     {
       "name": "SchemaVersions"
+    },
+    {
+      "name": "Namespaces"
+    },
+    {
+      "name": "NamespaceDevices"
+    },
+    {
+      "name": "NamespaceDiscoveredDevices"
+    },
+    {
+      "name": "NamespaceAssets"
+    },
+    {
+      "name": "NamespaceDiscoveredAssets"
     }
   ],
   "paths": {
@@ -771,7 +771,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -821,7 +821,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -907,7 +907,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -981,7 +981,7 @@
           {
             "name": "assetName",
             "in": "path",
-            "description": "Asset name parameter.",
+            "description": "The name of the asset.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -3669,8 +3669,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3696,8 +3695,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AssetEndpointProfileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -3744,7 +3742,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "targetAddress": {
@@ -3762,7 +3760,7 @@
         },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
         },
         "discoveredAssetEndpointProfileRef": {
           "type": "string",
@@ -3833,8 +3831,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AssetEndpointProfileUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -3851,13 +3848,27 @@
           "type": "string",
           "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
         },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationUpdate",
-          "description": "Defines the client authentication mechanism to the server."
-        },
         "additionalConfiguration": {
           "type": "string",
-          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g. OPC UA, Modbus, ONVIF)."
+          "description": "Stringified JSON that contains connectivity type specific further configuration (e.g., OPC UA, ONVIF)."
+        },
+        "authentication": {
+          "type": "object",
+          "description": "Object that describes the default user authentication information for the asset endpoint profile.",
+          "properties": {
+            "method": {
+              "$ref": "#/definitions/AuthenticationMethod",
+              "description": "Defines the method to authenticate the user of the client at the server."
+            },
+            "usernamePasswordCredentials": {
+              "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
+              "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
+            },
+            "x509Credentials": {
+              "$ref": "#/definitions/X509CredentialsUpdate",
+              "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+            }
+          }
         }
       }
     },
@@ -4123,8 +4134,7 @@
         },
         "properties": {
           "$ref": "#/definitions/AssetUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -4189,10 +4199,6 @@
           "type": "string",
           "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
-        "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
-          "description": "Object that describes the default topic information for the asset."
-        },
         "datasets": {
           "type": "array",
           "description": "Array of datasets that are part of the asset. Each dataset describes the data points that make up the set.",
@@ -4208,6 +4214,20 @@
             "$ref": "#/definitions/Event"
           },
           "x-ms-identifiers": []
+        },
+        "defaultTopic": {
+          "type": "object",
+          "description": "Object that describes the default topic information for the asset.",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "The topic path for messages published to an MQTT broker."
+            },
+            "retain": {
+              "$ref": "#/definitions/TopicRetainType",
+              "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'."
+            }
+          }
         }
       }
     },
@@ -4289,50 +4309,34 @@
         ]
       }
     },
-    "AuthenticationUpdate": {
+    "Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate": {
       "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
+      "description": "Managed service identity (either system assigned, or none)",
       "properties": {
-        "method": {
-          "type": "string",
-          "description": "Defines the method to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication method is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication method is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication method is a username and password."
-              }
-            ]
-          }
-        },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
         }
       }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "BillingContainer": {
       "type": "object",
@@ -4340,8 +4344,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BillingContainerProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -4476,6 +4479,48 @@
         "dataSource"
       ]
     },
+    "DataPointObservabilityMode": {
+      "type": "string",
+      "description": "Defines the data point observability mode.",
+      "enum": [
+        "None",
+        "Counter",
+        "Gauge",
+        "Histogram",
+        "Log"
+      ],
+      "x-ms-enum": {
+        "name": "DataPointObservabilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No mapping to OpenTelemetry."
+          },
+          {
+            "name": "Counter",
+            "value": "Counter",
+            "description": "Map as counter to OpenTelemetry."
+          },
+          {
+            "name": "Gauge",
+            "value": "Gauge",
+            "description": "Map as gauge to OpenTelemetry."
+          },
+          {
+            "name": "Histogram",
+            "value": "Histogram",
+            "description": "Map as histogram to OpenTelemetry."
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Map as log to OpenTelemetry."
+          }
+        ]
+      }
+    },
     "Dataset": {
       "type": "object",
       "description": "Defines the dataset properties.",
@@ -4605,6 +4650,63 @@
         }
       ],
       "x-ms-discriminator-value": "Storage"
+    },
+    "DeviceBaseProperties": {
+      "type": "object",
+      "description": "Defines the device properties.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "A unique identifier for the device.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the resource is enabled or not.",
+          "default": true
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model.",
+          "readOnly": true
+        },
+        "operatingSystem": {
+          "type": "string",
+          "description": "Device operating system.",
+          "readOnly": true
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "attributes": {
+          "type": "object",
+          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
     },
     "DeviceMessagingEndpoint": {
       "type": "object",
@@ -5015,6 +5117,30 @@
       ],
       "x-ms-discriminator-value": "Mqtt"
     },
+    "EventObservabilityMode": {
+      "type": "string",
+      "description": "Defines the event observability mode.",
+      "enum": [
+        "None",
+        "Log"
+      ],
+      "x-ms-enum": {
+        "name": "EventObservabilityMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No mapping to OpenTelemetry."
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "Map as log to OpenTelemetry."
+          }
+        ]
+      }
+    },
     "EventStorageDestination": {
       "type": "object",
       "description": "The type for a storage destination.",
@@ -5299,6 +5425,36 @@
         "targetUri"
       ]
     },
+    "ManagementActionType": {
+      "type": "string",
+      "description": "Defines the ManagementAction's type.",
+      "enum": [
+        "Call",
+        "Read",
+        "Write"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Call",
+            "value": "Call",
+            "description": "Call action type."
+          },
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read action type."
+          },
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "Write action type."
+          }
+        ]
+      }
+    },
     "ManagementGroup": {
       "type": "object",
       "description": "Defines the management group properties.",
@@ -5498,7 +5654,7 @@
               {
                 "name": "Keep",
                 "value": "Keep",
-                "description": "Retain the messages."
+                "description": "Retain messages."
               },
               {
                 "name": "Never",
@@ -5543,14 +5699,37 @@
         "topic"
       ]
     },
+    "MqttDestinationQos": {
+      "type": "string",
+      "description": "The set of supported QoS types for a MQTT destination.",
+      "enum": [
+        "Qos0",
+        "Qos1"
+      ],
+      "x-ms-enum": {
+        "name": "MqttDestinationQos",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Qos0",
+            "value": "Qos0",
+            "description": "QoS 0."
+          },
+          {
+            "name": "Qos1",
+            "value": "Qos1",
+            "description": "QoS 1."
+          }
+        ]
+      }
+    },
     "Namespace": {
       "type": "object",
       "description": "Namespace definition.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
@@ -5569,8 +5748,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceAssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -5986,8 +6164,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NamespaceAssetUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -6125,6 +6302,28 @@
         }
       }
     },
+    "NamespaceDataPoint": {
+      "type": "object",
+      "description": "Defines the data point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        }
+      },
+      "required": [
+        "name",
+        "dataSource"
+      ]
+    },
     "NamespaceDataset": {
       "type": "object",
       "description": "Defines the dataset properties.",
@@ -6198,8 +6397,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceDeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "etag": {
           "type": "string",
@@ -6246,23 +6444,9 @@
       "type": "object",
       "description": "Defines the device properties.",
       "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "A unique identifier for the device.",
-          "readOnly": true
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates if the resource is enabled or not.",
-          "default": true
-        },
-        "externalDeviceId": {
-          "type": "string",
-          "description": "The Device ID provided by the customer.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "endpoints": {
+          "$ref": "#/definitions/MessagingEndpoints",
+          "description": "Property bag containing the device's unassigned and assigned endpoints."
         },
         "discoveredDeviceRef": {
           "type": "string",
@@ -6290,7 +6474,7 @@
         },
         "operatingSystem": {
           "type": "string",
-          "description": "Device operating system.",
+          "description": "Device operating system name.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6299,15 +6483,6 @@
         "operatingSystemVersion": {
           "type": "string",
           "description": "Device operating system version."
-        },
-        "endpoints": {
-          "$ref": "#/definitions/MessagingEndpoints",
-          "description": "Property bag containing the device's unassigned and assigned endpoints."
-        },
-        "attributes": {
-          "type": "object",
-          "description": "A set of key-value pairs that contain custom attributes set by the customer.",
-          "additionalProperties": {}
         },
         "status": {
           "$ref": "#/definitions/DeviceStatus",
@@ -6325,13 +6500,13 @@
           "format": "date-time",
           "description": "A timestamp (in UTC) that is updated each time the resource is modified.",
           "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the resource.",
-          "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceBaseProperties"
+        }
+      ]
     },
     "NamespaceDeviceUpdate": {
       "type": "object",
@@ -6346,8 +6521,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NamespaceDeviceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -6355,13 +6529,13 @@
       "type": "object",
       "description": "The updatable properties of the NamespaceDevice.",
       "properties": {
-        "operatingSystemVersion": {
-          "type": "string",
-          "description": "Device operating system version."
-        },
         "endpoints": {
           "$ref": "#/definitions/MessagingEndpointsUpdate",
           "description": "Property bag containing the device's unassigned and assigned endpoints."
+        },
+        "operatingSystemVersion": {
+          "type": "string",
+          "description": "Device operating system version."
         },
         "attributes": {
           "type": "object",
@@ -6380,8 +6554,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceDiscoveredAssetProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6580,8 +6753,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NamespaceDiscoveredAssetUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -6720,6 +6892,33 @@
         }
       }
     },
+    "NamespaceDiscoveredDataPoint": {
+      "type": "object",
+      "description": "Defines the data point properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data point."
+        },
+        "dataSource": {
+          "type": "string",
+          "description": "The address of the source of the data in the asset (e.g. URL) so that a client can access the data source on the asset."
+        },
+        "dataPointConfiguration": {
+          "type": "string",
+          "description": "Stringified JSON that contains connector-specific configuration for the data point. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize."
+        },
+        "lastUpdatedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp indicating when the data point was added or modified."
+        }
+      },
+      "required": [
+        "name",
+        "dataSource"
+      ]
+    },
     "NamespaceDiscoveredDataset": {
       "type": "object",
       "description": "Defines the dataset properties.",
@@ -6803,8 +7002,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NamespaceDiscoveredDeviceProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
@@ -6923,8 +7121,7 @@
         },
         "properties": {
           "$ref": "#/definitions/NamespaceDiscoveredDeviceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       }
     },
@@ -7104,6 +7301,36 @@
         "name",
         "targetUri"
       ]
+    },
+    "NamespaceDiscoveredManagementActionType": {
+      "type": "string",
+      "description": "Defines the ManagementAction's type.",
+      "enum": [
+        "Call",
+        "Read",
+        "Write"
+      ],
+      "x-ms-enum": {
+        "name": "NamespaceDiscoveredManagementActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Call",
+            "value": "Call",
+            "description": "Call action type."
+          },
+          {
+            "name": "Read",
+            "value": "Read",
+            "description": "Read action type."
+          },
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "Write action type."
+          }
+        ]
+      }
     },
     "NamespaceDiscoveredManagementGroup": {
       "type": "object",
@@ -7378,35 +7605,22 @@
     },
     "NamespaceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Namespace.",
+      "description": "Namespace definition.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/NamespaceUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
         }
-      }
-    },
-    "NamespaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Namespace.",
-      "properties": {
-        "messaging": {
-          "$ref": "#/definitions/Messaging",
-          "description": "Assigned and unassigned messaging endpoints."
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "OutboundEndpoints": {
       "type": "object",
@@ -7500,8 +7714,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -7537,7 +7750,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "displayName": {
@@ -7588,8 +7801,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaRegistryProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
@@ -7629,7 +7841,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "namespace": {
@@ -7669,31 +7881,9 @@
         "storageAccountContainerUrl"
       ]
     },
-    "SchemaRegistryUpdate": {
+    "SchemaRegistryPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the SchemaRegistry.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SchemaRegistryUpdateProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SchemaRegistryUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the SchemaRegistry.",
+      "description": "Defines the schema registry properties.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -7704,6 +7894,25 @@
           "description": "Human-readable description of the schema registry."
         }
       }
+    },
+    "SchemaRegistryUpdate": {
+      "type": "object",
+      "description": "Schema registry definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SchemaRegistryPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "SchemaType": {
       "type": "string",
@@ -7729,8 +7938,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchemaVersionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource."
         }
       },
       "allOf": [
@@ -7766,7 +7974,7 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "Globally unique, immutable, non-reusable id.",
+          "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
         "description": {
@@ -7974,7 +8182,7 @@
               {
                 "name": "Keep",
                 "value": "Keep",
-                "description": "Retain the messages."
+                "description": "Retain messages."
               },
               {
                 "name": "Never",
@@ -7989,39 +8197,28 @@
         "path"
       ]
     },
-    "TopicUpdate": {
-      "type": "object",
-      "description": "Object that describes the topic information.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The topic path for messages published to an MQTT broker."
-        },
-        "retain": {
-          "type": "string",
-          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
-          "default": "Never",
-          "enum": [
-            "Keep",
-            "Never"
-          ],
-          "x-ms-enum": {
-            "name": "TopicRetainType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Keep",
-                "value": "Keep",
-                "description": "Retain the messages."
-              },
-              {
-                "name": "Never",
-                "value": "Never",
-                "description": "Never retain messages."
-              }
-            ]
+    "TopicRetainType": {
+      "type": "string",
+      "description": "Topic retain types.",
+      "enum": [
+        "Keep",
+        "Never"
+      ],
+      "x-ms-enum": {
+        "name": "TopicRetainType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Keep",
+            "value": "Keep",
+            "description": "Retain messages."
+          },
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "Never retain messages."
           }
-        }
+        ]
       }
     },
     "TrustSettings": {

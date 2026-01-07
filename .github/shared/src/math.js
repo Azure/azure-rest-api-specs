@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Convert a float [0,1] to a percentage string.
  *

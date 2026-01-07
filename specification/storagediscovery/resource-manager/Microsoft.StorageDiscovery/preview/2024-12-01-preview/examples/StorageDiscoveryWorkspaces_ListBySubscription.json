@@ -1,0 +1,108 @@
+{
+  "operationId": "StorageDiscoveryWorkspaces_ListBySubscription",
+  "title": "List StorageDiscoveryWorkspaces by Subscription",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/sampleworkspace1",
+            "name": "sampleworkspace1",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "systemData": {
+              "createdBy": "iewyxsnriqktsvp",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "xrchbnnuzierzpxw",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "exportState": "Running",
+              "tier": "Standard",
+              "scopes": [
+                {
+                  "displayName": "Sample Scope 1",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1/providers/Microsoft.Storage/storageAccounts/sample-storageAccount1"
+                  ],
+                  "armScopes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg1"
+                  ],
+                  "storageAccountFilters": {
+                    "tags": {
+                      "filterTag1": "value1",
+                      "filterTag2": "value2"
+                    },
+                    "locations": [
+                      "westeurope"
+                    ]
+                  }
+                }
+              ],
+              "destinations": {
+                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/sampleworkspace2",
+            "name": "sampleworkspace2",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "systemData": {
+              "createdBy": "iewyxsnriqktsvp",
+              "createdByType": "User",
+              "createdAt": "2023-05-19T00:28:48.610Z",
+              "lastModifiedBy": "xrchbnnuzierzpxw",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+            },
+            "tags": {
+              "tag3": "value1",
+              "tag4": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "exportState": "Running",
+              "tier": "Premium",
+              "scopes": [
+                {
+                  "displayName": "Sample Scope 2",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2/providers/Microsoft.Storage/storageAccounts/sample-storageAccount2"
+                  ],
+                  "armScopes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg2"
+                  ],
+                  "storageAccountFilters": {
+                    "tags": {
+                      "filterTag3": "value1",
+                      "filterTag4": "value2"
+                    },
+                    "locations": [
+                      "westeurope"
+                    ]
+                  }
+                }
+              ],
+              "destinations": {
+                "storageAccountArmId": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

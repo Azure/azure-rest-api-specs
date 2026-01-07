@@ -226,7 +226,7 @@ model Identity {
    * User identity ids
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   userAssignedIdentities?: DatabaseIdentity[];
 
   /**
@@ -468,7 +468,7 @@ model RegisterServerDefinition {
    * Destination tier overrides.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   destinationTierOverrides?: DestinationTierOverride[];
 }
 

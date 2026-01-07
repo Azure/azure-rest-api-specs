@@ -13,14 +13,9 @@ namespace Microsoft.BillingBenefits;
 /**
  * Savings plan order
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(
-  SavingsPlanOrderModelProperties
-)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
-model SavingsPlanOrderModel extends Foundations.ProxyResource {
+model SavingsPlanOrderModel
+  is Azure.ResourceManager.ProxyResource<SavingsPlanOrderModelProperties> {
   ...ResourceNameParameter<
     Resource = SavingsPlanOrderModel,
     KeyName = "savingsPlanOrderId",
@@ -33,11 +28,6 @@ model SavingsPlanOrderModel extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: ResourceSku;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  properties?: SavingsPlanOrderModelProperties;
 }
 
 @armResourceOperations
@@ -45,7 +35,6 @@ interface SavingsPlanOrderModels {
   /**
    * Get a savings plan order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     SavingsPlanOrderModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -61,7 +50,6 @@ interface SavingsPlanOrderModels {
   /**
    * List all Savings plan orders.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     SavingsPlanOrderModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -71,7 +59,6 @@ interface SavingsPlanOrderModels {
   /**
    * Elevate as owner on savings plan order based on billing permissions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   elevate is ArmResourceActionSync<
     SavingsPlanOrderModel,
     void,

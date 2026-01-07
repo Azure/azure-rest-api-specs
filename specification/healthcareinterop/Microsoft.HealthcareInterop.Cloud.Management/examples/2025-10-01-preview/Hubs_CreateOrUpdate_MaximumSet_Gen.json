@@ -1,0 +1,145 @@
+{
+  "title": "Hubs_CreateOrUpdate_MaximumSet",
+  "operationId": "Hubs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "EA9A3A92-77E8-44C3-9154-791246044458",
+    "resourceGroupName": "rgcloud",
+    "hubName": "testhub",
+    "resource": {
+      "properties": {
+        "remoteConnectorEnvironments": [
+          {
+            "name": "clustername",
+            "connectedClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername",
+            "location": "eastus2",
+            "healthcareExtensionId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername/Providers/Microsoft.KubernetesConfiguration/extensions/extensionname",
+            "customLocation": {
+              "name": "customlocationname",
+              "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/customlocationname"
+            },
+            "storageExtensionManagedIdentity": {
+              "principalId": "22222222-2222-2222-2222-222222222222",
+              "type": "SystemAssigned"
+            }
+          }
+        ]
+      },
+      "tags": {},
+      "location": "eastus2"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "managedInfraConfiguration": {
+            "resourceGroupName": "testmrg",
+            "storageAccount": {
+              "storageAccountResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
+              "storageAccountBlobEndpoint": "https://teststorageaccount.blob.core.windows.net/"
+            },
+            "keyVault": {
+              "keyVaultResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.KeyVault/vaults/testkv",
+              "keyVaultUri": "https://testkv.vault.azure.net/"
+            }
+          },
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.Resources/mobobrokers/testmobobroker"
+              }
+            ]
+          },
+          "remoteConnectorEnvironments": [
+            {
+              "name": "clustername",
+              "connectedClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername",
+              "location": "eastus2",
+              "healthcareExtensionId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername/Providers/Microsoft.KubernetesConfiguration/extensions/extensionname",
+              "customLocation": {
+                "name": "customlocationname",
+                "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/customlocationname"
+              },
+              "storageExtensionManagedIdentity": {
+                "principalId": "22222222-2222-2222-2222-222222222222",
+                "type": "SystemAssigned"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "tags": {},
+        "location": "eastus2",
+        "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+        "name": "testhub",
+        "type": "Microsoft.HealthcareInterop/hubs",
+        "systemData": {
+          "createdBy": "rqgqiooxsbu",
+          "createdByType": "User",
+          "createdAt": "2025-05-24T00:22:48.973Z",
+          "lastModifiedBy": "zqtbhvndtfvwzg",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-05-24T00:22:48.973Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/providers/Microsoft.HealthcareInterop/locations/EASTUS2/operationStatuses/04afacb4-b78c-42c8-b11d-f6708dad7aac"
+      },
+      "body": {
+        "properties": {
+          "managedInfraConfiguration": {
+            "resourceGroupName": "testmrg",
+            "storageAccount": {
+              "storageAccountResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.Storage/storageAccounts/teststorageaccount",
+              "storageAccountBlobEndpoint": "https://teststorageaccount.blob.core.windows.net/"
+            },
+            "keyVault": {
+              "keyVaultResourceId": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.KeyVault/vaults/testkv",
+              "keyVaultUri": "https://testkv.vault.azure.net/"
+            }
+          },
+          "managedOnBehalfOfConfiguration": {
+            "moboBrokerResources": [
+              {
+                "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.Resources/mobobrokers/testmobobroker"
+              }
+            ]
+          },
+          "remoteConnectorEnvironments": [
+            {
+              "name": "clustername",
+              "connectedClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername",
+              "location": "eastus2",
+              "healthcareExtensionId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/clustername/Providers/Microsoft.KubernetesConfiguration/extensions/extensionname",
+              "customLocation": {
+                "name": "customlocationname",
+                "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/customlocationname"
+              },
+              "storageExtensionManagedIdentity": {
+                "principalId": "22222222-2222-2222-2222-222222222222",
+                "type": "SystemAssigned"
+              }
+            }
+          ],
+          "provisioningState": "Accepted"
+        },
+        "tags": {},
+        "location": "eastus2",
+        "id": "/subscriptions/EA9A3A92-77E8-44C3-9154-791246044458/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+        "name": "testhub",
+        "type": "Microsoft.HealthcareInterop/hubs",
+        "systemData": {
+          "createdBy": "rqgqiooxsbu",
+          "createdByType": "User",
+          "createdAt": "2025-05-24T00:22:48.973Z",
+          "lastModifiedBy": "zqtbhvndtfvwzg",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-05-24T00:22:48.973Z"
+        }
+      }
+    }
+  }
+}

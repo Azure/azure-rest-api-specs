@@ -1,0 +1,52 @@
+{
+  "title": "ChangeStates_VerifyChangeValidityAtSubscriptionLevel_MaximumSet",
+  "operationId": "ChangeStates_VerifyChangeValidityAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionGovernanceChangeState",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.Authorization/policyDefinitions/enterprise-security-policy",
+        "httpMethod": "PUT",
+        "content": {
+          "name": "enterprise-security-policy",
+          "properties": {
+            "displayName": "Enterprise Security Policy",
+            "description": "Comprehensive security policy for enterprise governance with compliance requirements",
+            "policyType": "Custom",
+            "mode": "All",
+            "policyRule": {
+              "if": {
+                "field": "type",
+                "equals": "Microsoft.Compute/virtualMachines"
+              },
+              "then": {
+                "effect": "audit"
+              }
+            },
+            "parameters": {
+              "complianceLevel": {
+                "type": "string",
+                "defaultValue": "enterprise"
+              }
+            }
+          }
+        }
+      },
+      "context": {
+        "applicationId": "a1b2c3d4-e5f6-4789-a012-b34567890123"
+      },
+      "stageProgressionResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionGovernanceChangeState/stageProgressions/policyDeployment"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "Change validation successful. The PUT operation for enterprise-security-policy has been validated and is safe to execute. Policy definition is compliant with subscription governance requirements and will not conflict with existing policies.",
+        "validUntil": "2025-07-09T08:30:19.442Z"
+      }
+    }
+  }
+}

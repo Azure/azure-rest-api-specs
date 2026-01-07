@@ -1,0 +1,66 @@
+{
+  "title": "Hl7EdgeConnectors_Get_MaximumSet",
+  "operationId": "Hl7EdgeConnectors_Get",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "subscriptionId": "5DBF8983-BF47-4272-9E0D-381B581CCD32",
+    "resourceGroupName": "rgedge",
+    "hl7EdgeConnectorName": "hl7-edge-connector-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "receiver": {
+            "hl7Configuration": {
+              "carriageReturn": "0x0D",
+              "carriageReturnOptional": true,
+              "endBlockDelimiter": "0x1C",
+              "errorAckStrategy": "SendNackOnError",
+              "noStartByteRequired": true,
+              "startBlockDelimiter": "0x0B"
+            },
+            "messageListenerConfiguration": {
+              "inactivityTimeoutInSeconds": 10,
+              "messageBufferSize": 65536,
+              "port": 33000,
+              "useTransientConnection": true
+            },
+            "storageEndpointConfiguration": {
+              "endpoint": "https://example.blob.core.windows.net",
+              "container": "example-container",
+              "fileExtension": "txt",
+              "outputFileNameFormat": "yyyyMMddHHmmssffffff",
+              "outputFolderFormat": "Clinical/HL7/MESSAGE(MSH.4)/MESSAGE(MSH.3)/MESSAGE(MSH.9.1)/DATETIME(yyyy/MM/dd/HH/mm)"
+            },
+            "requirements": {
+              "cpu": "100m",
+              "memory": "512Mi",
+              "storage": "10Gi"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "custom-location-name"
+        },
+        "tags": {
+          "key4366": "example-tag-value"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/5DBF8983-BF47-4272-9E0D-381B581CCD32/resourceGroups/rgedge/providers/Microsoft.HealthcareInterop/hl7EdgeConnectors/hl7-edge-connector-01",
+        "name": "hl7-edge-connector-01",
+        "type": "Microsoft.HealthcareInterop/hl7EdgeConnectors",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-21T15:45:02.815Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-21T15:45:02.816Z"
+        }
+      }
+    }
+  }
+}

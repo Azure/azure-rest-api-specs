@@ -102,17 +102,35 @@ input-file:
   - NewRelic.Observability/stable/2024-10-01/NewRelic.json
 ```
 
+### Tag: package-2025-04-01-preview
+
+These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-01-preview'
+input-file:
+  - NewRelic.Observability/preview/2025-04-01-preview/NewRelic.json
+```
+
 ### Tag: package-2025-05-01-preview
 
 These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
- 
+
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
   - NewRelic.Observability/preview/2025-05-01-preview/NewRelic.json
+```
+
+### Suppressions
+
+```yaml
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     from: NewRelic.json
-    reason: Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
+    reason: Temporary solution, to be fixed in next iteration - Seems like a tool bug, as the visibility is set to read only in definition of ProvisioningState.
+  - code: LroLocationHeader
+    from: NewRelic.json
+    where: $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/switchBilling'].post.responses.202
+    reason: The Monitors_SwitchBilling operation is synchronous POST operation that returns 202 for accepted requests. No Location header is needed as per all the previous versions and we do not intend to make any change here as per business logic.
 ```
 
 ---

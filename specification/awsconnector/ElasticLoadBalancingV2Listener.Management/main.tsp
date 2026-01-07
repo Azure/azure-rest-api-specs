@@ -80,11 +80,11 @@ model AwsElasticLoadBalancingV2ListenerProperties {
   alpnPolicy?: string[];
 
   @doc("The default SSL server certificate for a secure listener. You must provide exactly one certificate if the listener protocol is HTTPS or TLS. To create a certificate list for a secure listener, use [AWS::ElasticLoadBalancingV2::ListenerCertificate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenercertificate.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   certificates?: Certificate[];
 
   @doc("The actions for the default rule. You cannot define a condition for a default rule. To create additional rules for an Application Load Balancer, use [AWS::ElasticLoadBalancingV2::ListenerRule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-listenerrule.html).")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   defaultActions?: Action[];
 
   @doc("Property listenerArn")
@@ -209,6 +209,7 @@ model AuthenticateOidcConfig {
   @doc("The OAuth 2.0 client identifier.")
   clientId?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set ``UseExistingClientSecret`` to true.")
   clientSecret?: string;
 
@@ -263,7 +264,7 @@ model ForwardConfig {
   targetGroupStickinessConfig?: TargetGroupStickinessConfig;
 
   @doc("Information about how traffic will be distributed between multiple target groups in a forward rule.")
-  @identifiers(#[])
+  @Azure.ResourceManager.identifiers(#[])
   targetGroups?: TargetGroupTuple[];
 }
 
