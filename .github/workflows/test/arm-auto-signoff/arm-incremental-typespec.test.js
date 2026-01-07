@@ -2,11 +2,15 @@ import { relative, resolve } from "path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { repoRoot } from "../../../shared/test/repo.js";
 
-/**  @type {import("vitest").MockedFunction<import("simple-git").SimpleGit["raw"]>} */
-const mockRaw = vi.hoisted(() => vi.fn().mockResolvedValue(""));
+const mockRaw = vi.hoisted(
+  /** @returns {import("vitest").MockedFunction<import("simple-git").SimpleGit["raw"]>} */
+  () => vi.fn().mockResolvedValue(""),
+);
 
-/**  @type {import("vitest").MockedFunction<import("simple-git").SimpleGit["show"]>} */
-const mockShow = vi.hoisted(() => vi.fn().mockResolvedValue(""));
+const mockShow = vi.hoisted(
+  /** @returns {import("vitest").MockedFunction<import("simple-git").SimpleGit["show"]>} */
+  () => vi.fn().mockResolvedValue(""),
+);
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
@@ -33,7 +37,7 @@ describe("incrementalTypeSpec", () => {
   });
 
   it("rejects if inputs null", async () => {
-    await expect(incrementalTypeSpec(undefined)).rejects.toThrow();
+    await expect(incrementalTypeSpec(/** @type {any} */ (undefined))).rejects.toThrow();
   });
 
   it("returns false if no changed RM files", async () => {

@@ -72,10 +72,7 @@ function createSuccessResult({ headSha, issueNumber, incrementalTypeSpec, isTriv
   };
 }
 
-/**
- * @param {Object} param0
- * @param {boolean} param0.incrementalTypeSpec
- */
+/** @param {{ incrementalTypeSpec: boolean, isTrivial?: boolean }} param0 */
 function createMockGithub({ incrementalTypeSpec, isTrivial = false }) {
   const github = createMockGithubBase();
 

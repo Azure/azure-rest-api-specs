@@ -1,18 +1,18 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+/** @type {import("vitest").Mock<(args: string[]) => Promise<string>>} */
+const mockShow = vi.hoisted(() => vi.fn().mockResolvedValue(""));
+
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
-    show: vi.fn().mockResolvedValue(""),
+    show: mockShow,
   }),
 }));
-
-import * as simpleGit from "simple-git";
 import * as changedFiles from "../../../shared/src/changed-files.js";
 import { checkTrivialChanges } from "../../src/arm-auto-signoff/trivial-changes-check.js";
-import { createMockContext, createMockCore } from "../mocks.js";
+import { createMockCore } from "../mocks.js";
 
 const core = createMockCore();
-const context = createMockContext();
 
 /** @typedef {import("../../src/arm-auto-signoff/pr-changes.js").PullRequestChanges} PullRequestChanges */
 
@@ -57,9 +57,7 @@ function parsePullRequestChanges(value) {
  * @returns {{ show: import("vitest").Mock<(args: string[]) => Promise<string>> }}
  */
 function getMockGit() {
-  return /** @type {{ show: import("vitest").Mock<(args: string[]) => Promise<string>> }} */ (
-    /** @type {unknown} */ (simpleGit.simpleGit())
-  );
+  return { show: mockShow };
 }
 
 describe("checkTrivialChanges", () => {
