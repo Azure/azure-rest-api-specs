@@ -112,7 +112,7 @@ interface ApiReleaseContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ApiReleaseContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ApiReleaseContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

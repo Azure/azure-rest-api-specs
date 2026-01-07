@@ -79,7 +79,7 @@ interface CacheContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<CacheContract> & {
+    }) | (ArmResourceCreatedSyncResponse<CacheContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

@@ -118,7 +118,7 @@ interface SubscriptionContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<SubscriptionContract> & {
+    }) | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -426,7 +426,7 @@ interface WorkspaceSubscription {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<SubscriptionContract> & {
+    }) | (ArmResourceCreatedSyncResponse<SubscriptionContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

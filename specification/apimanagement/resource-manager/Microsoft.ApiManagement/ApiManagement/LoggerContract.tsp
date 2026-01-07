@@ -103,7 +103,7 @@ interface LoggerContracts {
        */
       @header("ETag")
       etag?: string;
-    }) | (ArmCreatedResponse<LoggerContract> & {
+    }) | (ArmResourceCreatedSyncResponse<LoggerContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -269,7 +269,7 @@ interface WorkspaceLogger {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<LoggerContract> & {
+    }) | (ArmResourceCreatedSyncResponse<LoggerContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

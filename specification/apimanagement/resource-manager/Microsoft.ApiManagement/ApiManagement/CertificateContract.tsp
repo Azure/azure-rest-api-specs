@@ -110,7 +110,7 @@ interface CertificateContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<CertificateContract> & {
+    }) | (ArmResourceCreatedSyncResponse<CertificateContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -283,7 +283,7 @@ interface WorkspaceCertificate {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<CertificateContract> & {
+    }) | (ArmResourceCreatedSyncResponse<CertificateContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

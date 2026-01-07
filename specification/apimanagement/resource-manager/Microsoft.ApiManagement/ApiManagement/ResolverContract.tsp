@@ -74,7 +74,7 @@ interface ResolverContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ResolverContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ResolverContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

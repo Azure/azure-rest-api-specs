@@ -74,7 +74,7 @@ interface DocumentationContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<DocumentationContract> & {
+    }) | (ArmResourceCreatedSyncResponse<DocumentationContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

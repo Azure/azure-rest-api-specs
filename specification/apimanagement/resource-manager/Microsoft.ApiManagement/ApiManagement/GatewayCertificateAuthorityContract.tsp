@@ -74,7 +74,7 @@ interface GatewayCertificateAuthorityContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<GatewayCertificateAuthorityContract> & {
+    }) | (ArmResourceCreatedSyncResponse<GatewayCertificateAuthorityContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

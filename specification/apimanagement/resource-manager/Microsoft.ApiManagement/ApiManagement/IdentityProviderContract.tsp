@@ -76,7 +76,7 @@ interface IdentityProviderContracts {
        */
       @header("ETag")
       etag?: string;
-    }) | (ArmCreatedResponse<IdentityProviderContract> & {
+    }) | (ArmResourceCreatedSyncResponse<IdentityProviderContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

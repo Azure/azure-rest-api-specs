@@ -126,7 +126,7 @@ interface PolicyContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -260,7 +260,7 @@ interface GraphQLApiResolverPolicy {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -384,7 +384,7 @@ interface ApiPolicy {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -499,7 +499,7 @@ interface Policy {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -622,7 +622,7 @@ interface ProductPolicy {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -746,7 +746,7 @@ interface WorkspacePolicy {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<PolicyContract> & {
+    }) | (ArmResourceCreatedSyncResponse<PolicyContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

@@ -104,7 +104,7 @@ interface ApiVersionSetContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ApiVersionSetContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -269,7 +269,7 @@ interface WorkspaceApiVersionSet {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ApiVersionSetContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ApiVersionSetContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

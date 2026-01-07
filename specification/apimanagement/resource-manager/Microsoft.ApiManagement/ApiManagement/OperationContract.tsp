@@ -112,7 +112,7 @@ interface OperationContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<OperationContract> & {
+    }) | (ArmResourceCreatedSyncResponse<OperationContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

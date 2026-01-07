@@ -227,7 +227,7 @@ interface Tag {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<TagContract> & {
+    }) | (ArmResourceCreatedSyncResponse<TagContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -461,7 +461,7 @@ interface TagContractOperationGroup {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<TagContract> & {
+    }) | (ArmResourceCreatedSyncResponse<TagContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -633,7 +633,7 @@ interface WorkspaceTag {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<TagContract> & {
+    }) | (ArmResourceCreatedSyncResponse<TagContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

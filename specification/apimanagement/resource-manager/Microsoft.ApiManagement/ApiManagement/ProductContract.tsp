@@ -194,7 +194,7 @@ interface ProductContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ProductContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ProductContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
@@ -564,7 +564,7 @@ interface WorkspaceProduct {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<ProductContract> & {
+    }) | (ArmResourceCreatedSyncResponse<ProductContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

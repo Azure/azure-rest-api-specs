@@ -112,7 +112,7 @@ interface DiagnosticContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<DiagnosticContract> & {
+    }) | (ArmResourceCreatedSyncResponse<DiagnosticContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

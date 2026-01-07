@@ -60,7 +60,7 @@ interface AuthorizationContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<AuthorizationContract> & {
+    }) | (ArmResourceCreatedSyncResponse<AuthorizationContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */

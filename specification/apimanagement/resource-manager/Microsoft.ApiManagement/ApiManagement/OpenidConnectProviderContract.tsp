@@ -74,7 +74,7 @@ interface OpenidConnectProviderContracts {
        */
       @header("ETag")
       etag: string;
-    }) | (ArmCreatedResponse<OpenidConnectProviderContract> & {
+    }) | (ArmResourceCreatedSyncResponse<OpenidConnectProviderContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
