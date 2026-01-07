@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "resourceGroupName": "myRg",
+    "ruleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "kind": "Scheduled",
+        "properties": {
+          "description": "An example for a scheduled rule",
+          "alertDetailsOverride": {
+            "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+            "alertDisplayNameFormat": "Alert from {{Computer}}",
+            "alertSeverityColumnName": null,
+            "alertTacticsColumnName": null
+          },
+          "alertRuleTemplateName": null,
+          "customDetails": {
+            "OperatingSystemName": "OSName",
+            "OperatingSystemType": "OSType"
+          },
+          "displayName": "My scheduled rule",
+          "enabled": true,
+          "entityMappings": [
+            {
+              "entityType": "Host",
+              "fieldMappings": [
+                {
+                  "columnName": "Computer",
+                  "identifier": "FullName"
+                }
+              ]
+            },
+            {
+              "entityType": "IP",
+              "fieldMappings": [
+                {
+                  "columnName": "ComputerIP",
+                  "identifier": "Address"
+                }
+              ]
+            }
+          ],
+          "eventGroupingSettings": {
+            "aggregationKind": "AlertPerResult"
+          },
+          "incidentConfiguration": {
+            "createIncident": true,
+            "groupingConfiguration": {
+              "enabled": true,
+              "groupByAlertDetails": [
+                "DisplayName"
+              ],
+              "groupByCustomDetails": [
+                "OperatingSystemType",
+                "OperatingSystemName"
+              ],
+              "groupByEntities": [
+                "Host"
+              ],
+              "lookbackDuration": "PT5H",
+              "matchingMethod": "Selected",
+              "reopenClosedIncident": false
+            }
+          },
+          "lastModifiedUtc": "2021-03-01T13:17:30Z",
+          "query": "Heartbeat",
+          "queryFrequency": "PT1H",
+          "queryPeriod": "P2DT1H30M",
+          "severity": "High",
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "techniques": [
+            "T1037",
+            "T1021"
+          ],
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0
+        }
+      }
+    }
+  },
+  "operationId": "AlertRules_Get",
+  "title": "Get a Scheduled alert rule."
+}

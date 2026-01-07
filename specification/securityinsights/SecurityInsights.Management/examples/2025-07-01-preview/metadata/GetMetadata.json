@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "metadataName": "metadataName",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "2e1dc338-d04d-4443-b721-037eff4fdcac",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "metadataName",
+        "type": "Microsoft.SecurityInsights/metadata",
+        "id": "/subscriptions/2e1dc338-d04d-4443-b721-037eff4fdcac/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/metadata/metadataName",
+        "properties": {
+          "author": {
+            "name": "User Name",
+            "email": "email@microsoft.com"
+          },
+          "categories": {
+            "domains": [
+              "Application",
+              "Security – Insider Threat"
+            ],
+            "verticals": [
+              "Healthcare"
+            ]
+          },
+          "contentId": "c00ee137-7475-47c8-9cce-ec6f0f1bedd0",
+          "contentSchemaVersion": "2.0",
+          "customVersion": "1.0",
+          "dependencies": {
+            "criteria": [
+              {
+                "criteria": [
+                  {
+                    "contentId": "045d06d0-ee72-4794-aba4-cf5646e4c756",
+                    "kind": "DataConnector"
+                  },
+                  {
+                    "contentId": "dbfcb2cc-d782-40ef-8d94-fe7af58a6f2d",
+                    "kind": "DataConnector"
+                  },
+                  {
+                    "contentId": "de4dca9b-eb37-47d6-a56f-b8b06b261593",
+                    "kind": "DataConnector",
+                    "version": "2.0"
+                  }
+                ],
+                "operator": "OR"
+              },
+              {
+                "contentId": "31ee11cc-9989-4de8-b176-5e0ef5c4dbab",
+                "kind": "Playbook",
+                "version": "1.0"
+              },
+              {
+                "contentId": "21ba424a-9438-4444-953a-7059539a7a1b",
+                "kind": "Parser"
+              }
+            ],
+            "operator": "AND"
+          },
+          "firstPublishDate": "2021-05-18",
+          "kind": "AnalyticsRule",
+          "lastPublishDate": "2021-05-18",
+          "parentId": "/subscriptions/2e1dc338-d04d-4443-b721-037eff4fdcac/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/ruleName",
+          "previewImages": [
+            "firstImage.png",
+            "secondImage.jpeg"
+          ],
+          "previewImagesDark": [
+            "firstImageDark.png",
+            "secondImageDark.jpeg"
+          ],
+          "providers": [
+            "Amazon",
+            "Microsoft"
+          ],
+          "source": {
+            "name": "Contoso Solution 1.0",
+            "kind": "Solution",
+            "sourceId": "b688a130-76f4-4a07-bf57-762222a3cadf"
+          },
+          "support": {
+            "name": "Microsoft",
+            "email": "support@microsoft.com",
+            "link": "https://support.microsoft.com/",
+            "tier": "Partner"
+          },
+          "threatAnalysisTactics": [
+            "reconnaissance",
+            "commandandcontrol"
+          ],
+          "threatAnalysisTechniques": [
+            "T1548",
+            "T1548.001"
+          ],
+          "version": "1.0.0.0"
+        }
+      }
+    }
+  },
+  "operationId": "Metadata_Get",
+  "title": "Get single metadata by name"
+}

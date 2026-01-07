@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "type": "Microsoft.SecurityInsights/bookmarks",
+            "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+            "properties": {
+              "created": "2021-09-01T13:15:30Z",
+              "createdBy": {
+                "name": "john doe",
+                "email": "john@contoso.com",
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70"
+              },
+              "displayName": "My bookmark",
+              "entityMappings": [
+                {
+                  "entityType": "Account",
+                  "fieldMappings": [
+                    {
+                      "identifier": "Fullname",
+                      "value": "johndoe@microsoft.com"
+                    }
+                  ]
+                }
+              ],
+              "incidentInfo": {
+                "incidentId": "DDA55F97-170B-40B9-B8ED-CBFD05481E7D",
+                "relationName": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0018",
+                "severity": "Low",
+                "title": "New case 1"
+              },
+              "labels": [
+                "Tag1",
+                "Tag2"
+              ],
+              "notes": "Found a suspicious activity",
+              "query": "SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)",
+              "queryResult": "Security Event query result",
+              "tactics": [
+                "Execution"
+              ],
+              "techniques": [
+                "T1609"
+              ],
+              "updated": "2021-09-01T13:15:30Z",
+              "updatedBy": {
+                "name": "john doe",
+                "email": "john@contoso.com",
+                "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Bookmarks_List",
+  "title": "Get all bookmarks."
+}
