@@ -648,6 +648,21 @@ parameters:
   },
 ];
 
+const optionalRulesWithEmitterConfigTestCases: Case[] = [
+  {
+    description:
+      "Validate Go DP emitter-output-dir should fail when not defined (emitter configured with model)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  },
+];
+
 const suppressEntireRuleTestCase: Case = {
   description: "Suppress entire rule",
   folder: managementTspconfigFolder,
@@ -757,6 +772,7 @@ describe("tspconfig", function () {
   const optionalTestCases = [
     // Test cases for optional rules when emitter is not configured
     ...optionalRulesWithoutEmitterConfigTestCases,
+    ...optionalRulesWithEmitterConfigTestCases,
     // go data plane
     ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
