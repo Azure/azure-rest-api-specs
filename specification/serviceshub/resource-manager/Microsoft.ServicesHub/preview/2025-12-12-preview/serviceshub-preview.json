@@ -1720,15 +1720,7 @@
         1
       ],
       "description": "Type of Connected Machine - ARC or VM."
-    },
-    "ReportType": {
-      "type": "string",
-      "enum": [
-        "ppt",
-        "excel"
-      ],
-      "description": "Type of Report to be downloaded."
-    },
+    },    
     "ServicesHubAssessmentConfigResult": {
       "type": "object",
       "description": "Services Hub Assessment Config Result",
@@ -2100,12 +2092,8 @@
           "description": "Defines the culture."
         },        
         "reportType": {
-          "type": "string",
-          "description": "Type of Report to be downloaded: ppt or excel.",
-          "enum": [
-            "ppt",
-            "excel"
-          ]
+          "$ref": "#/definitions/ReportType",
+          "description": "Type of Report to be downloaded: ppt or excel."          
         }
       },
       "required": [
@@ -2135,6 +2123,30 @@
           "type": "string",
           "description": "Defines the blob url of the file."
         }
+      }
+    },
+    "ReportType": {
+      "type": "string",
+      "description": "Type of Report to be downloaded: ppt or excel.",
+      "enum": [
+        "ppt",
+        "excel"
+      ],
+      "x-ms-enum": {
+        "name": "ReportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ppt",
+            "value": "ppt",
+            "description": "Report Type-PPT"
+          },
+          {
+            "name": "excel",
+            "value": "excel",
+            "description": "Report Type-Excel"
+          }
+        ]
       }
     },
     "Survey": {
@@ -2212,12 +2224,8 @@
           "description": "Defines the culture."
         },
         "reportType": {
-          "type": "string",
-          "description": "Type of Report to be downloaded: ppt or excel.",
-          "enum": [
-            "ppt",
-            "excel"
-          ]
+          "$ref": "#/definitions/ReportType",
+          "description": "Type of Report to be downloaded: ppt or excel."          
         }
       },
       "required": [
