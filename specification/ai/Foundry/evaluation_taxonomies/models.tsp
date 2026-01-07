@@ -25,15 +25,7 @@ model EvaluationTaxonomy {
   @doc("List of taxonomy categories.")
   taxonomyCategories?: TaxonomyCategory[];
 
-  @doc("""
-    Additional properties for the evaluation taxonomy.
-    
-    Note: Taxonomy expansion metadata should be stored here with the following fields:
-    - isExpanded: boolean indicating if the taxonomy has been expanded to include generated subtopics
-    - generatorModel: string - model used to generate the taxonomy
-    - expandedAt: string (ISO 8601 timestamp) - when the taxonomy was expanded
-    - totalSubtopics: integer - total number of subtopics in the taxonomy
-    """)
+  @doc("Additional properties for the evaluation taxonomy.")
   properties?: Record<string>;
 }
 
@@ -109,20 +101,6 @@ model RiskExample {
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@doc("Metadata about taxonomy expansion.")
-model TaxonomyExpansionMetadata {
-  @doc("Model used to generate the taxonomy.")
-  generatorModel: string;
-
-  @doc("Timestamp when the taxonomy was expanded.")
-  expandedAt: utcDateTime;
-
-  @doc("Total number of subtopics in the taxonomy.")
-  totalSubtopics: int32;
-}
-
-@added(Versions.v2025_11_15_preview)
-@removed(Versions.v1)
 @doc("Taxonomy category definition.")
 model TaxonomyCategory {
   @doc("Unique identifier of the taxonomy category.")
@@ -133,12 +111,6 @@ model TaxonomyCategory {
 
   @doc("Description of the taxonomy category.")
   description?: string;
-
-  @doc("Risk category associated with this taxonomy category.")
-  riskCategory: RiskCategory;
-
-  @doc("Risk name from the Evaluator Catalog (for risk definition-based taxonomies).")
-  riskName?: string;
 
   @doc("Natural language definition of the risk (for risk definition-based taxonomies).")
   riskDefinition?: string;
