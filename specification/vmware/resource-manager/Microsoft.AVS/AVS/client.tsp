@@ -11,6 +11,74 @@ using Microsoft.AVS;
 @@clientName(Microsoft.AVS, "AzureVMwareSolutionAPI", "javascript");
 @@clientName(Microsoft.AVS, "AVSClient", "python");
 
+@@clientName(WorkloadNetworkVmGroups.list, "ListVMGroups", "!csharp");
+@@clientName(WorkloadNetworkVmGroups.get, "GetVMGroup", "!csharp");
+@@clientName(WorkloadNetworkVmGroups.create, "CreateVMGroup", "!csharp");
+@@clientName(WorkloadNetworkVmGroups.update, "UpdateVMGroup", "!csharp");
+@@clientName(WorkloadNetworkVmGroups.delete, "DeleteVMGroup", "!csharp");
+
+@@clientName(WorkloadNetworkVirtualMachines.list,
+  "ListVirtualMachines",
+  "!csharp"
+);
+@@clientName(WorkloadNetworkVirtualMachines.get,
+  "GetVirtualMachine",
+  "!csharp"
+);
+
+@@clientName(WorkloadNetworkSegments.list, "ListSegments", "!csharp");
+@@clientName(WorkloadNetworkSegments.get, "GetSegment", "!csharp");
+@@clientName(WorkloadNetworkSegments.create, "CreateSegments", "!csharp");
+@@clientName(WorkloadNetworkSegments.update, "UpdateSegments", "!csharp");
+@@clientName(WorkloadNetworkSegments.deleteSegment, "DeleteSegment", "!csharp");
+
+@@clientName(WorkloadNetworkPublicIps.list, "ListPublicIPs", "!csharp");
+@@clientName(WorkloadNetworkPublicIps.get, "GetPublicIP", "!csharp");
+@@clientName(WorkloadNetworkPublicIps.create, "CreatePublicIP", "!csharp");
+@@clientName(WorkloadNetworkPublicIps.delete, "DeletePublicIP", "!csharp");
+
+@@clientName(WorkloadNetworkPortMirroringProfiles.list,
+  "ListPortMirroring",
+  "!csharp"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.get,
+  "GetPortMirroring",
+  "!csharp"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.create,
+  "CreatePortMirroring",
+  "!csharp"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.update,
+  "UpdatePortMirroring",
+  "!csharp"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.delete,
+  "DeletePortMirroring",
+  "!csharp"
+);
+
+@@clientName(WorkloadNetworkGateways.list, "ListGateways", "!csharp");
+@@clientName(WorkloadNetworkGateways.get, "GetGateway", "!csharp");
+
+@@clientName(WorkloadNetworkDnsZones.list, "ListDnsZones", "!csharp");
+@@clientName(WorkloadNetworkDnsZones.get, "GetDnsZone", "!csharp");
+@@clientName(WorkloadNetworkDnsZones.create, "CreateDnsZone", "!csharp");
+@@clientName(WorkloadNetworkDnsZones.update, "UpdateDnsZone", "!csharp");
+@@clientName(WorkloadNetworkDnsZones.delete, "DeleteDnsZone", "!csharp");
+
+@@clientName(WorkloadNetworkDnsServices.list, "ListDnsServices", "!csharp");
+@@clientName(WorkloadNetworkDnsServices.get, "GetDnsService", "!csharp");
+@@clientName(WorkloadNetworkDnsServices.create, "CreateDnsService", "!csharp");
+@@clientName(WorkloadNetworkDnsServices.update, "UpdateDnsService", "!csharp");
+@@clientName(WorkloadNetworkDnsServices.delete, "DeleteDnsService", "!csharp");
+
+@@clientName(WorkloadNetworkDhcpConfigurations.list, "ListDhcp", "!csharp");
+@@clientName(WorkloadNetworkDhcpConfigurations.get, "GetDhcp", "!csharp");
+@@clientName(WorkloadNetworkDhcpConfigurations.create, "CreateDhcp", "!csharp");
+@@clientName(WorkloadNetworkDhcpConfigurations.update, "UpdateDhcp", "!csharp");
+@@clientName(WorkloadNetworkDhcpConfigurations.delete, "DeleteDhcp", "!csharp");
+
 @@clientName(Addon, "AvsPrivateCloudAddon", "csharp");
 @@clientName(AddonProperties, "AvsPrivateCloudAddonProperties", "csharp");
 @@alternateType(CloudLinkProperties.linkedCloud,
@@ -19,6 +87,7 @@ using Microsoft.AVS;
 );
 @@clientName(Cluster, "AvsPrivateCloudCluster", "csharp");
 @@clientName(Datastore, "AvsPrivateCloudDatastore", "csharp");
+@@alternateType(NetAppVolume.id, armResourceIdentifier, "csharp");
 @@alternateType(ExpressRouteAuthorizationProperties.expressRouteAuthorizationId,
   armResourceIdentifier,
   "csharp"
@@ -40,6 +109,11 @@ using Microsoft.AVS;
   "csharp"
 );
 @@clientName(Circuit, "ExpressRouteCircuit", "csharp");
+@@clientName(Circuit.expressRouteID, "ExpressRouteId", "csharp");
+@@clientName(Circuit.expressRoutePrivatePeeringID,
+  "ExpressRoutePrivatePeeringId",
+  "csharp"
+);
 @@clientName(Microsoft.AVS.Encryption, "CustomerManagedEncryption", "csharp");
 @@clientName(Endpoints, "AvsPrivateCloudEndpoints", "csharp");
 @@clientName(IdentitySource, "SingleSignOnIdentitySource", "csharp");
@@ -97,6 +171,11 @@ using Microsoft.AVS;
   ipV4Address[],
   "csharp"
 );
+@@clientName(WorkloadNetworkDnsZoneProperties.dnsServerIps,
+  "DnsServerIPs",
+  "csharp"
+);
+@@clientName(WorkloadNetworkDnsZoneProperties.sourceIp, "SourceIP", "csharp");
 @@clientName(WorkloadNetworkPortMirroring,
   "WorkloadNetworkPortMirroringProfile",
   "csharp"
@@ -160,6 +239,14 @@ using Microsoft.AVS;
   "csharp"
 );
 @@clientName(PrivateCloud, "AvsPrivateCloud", "csharp");
+@@alternateType(PrivateCloud.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(PrivateCloudUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(PrivateCloudProperties.externalCloudLinks,
   armResourceIdentifier[],
   "csharp"
@@ -177,12 +264,22 @@ using Microsoft.AVS;
   "VCenterCertificateThumbprint",
   "csharp"
 );
+@@clientName(PrivateCloudProperties.nsxPublicIpQuotaRaised,
+  "NsxPublicIPQuotaRaised",
+  "csharp"
+);
 @@clientName(AdminCredentials.vcenterUsername, "VCenterUsername", "csharp");
 @@clientName(AdminCredentials.vcenterPassword, "VCenterPassword", "csharp");
 @@clientName(AffinityType, "AvsPlacementPolicyAffinityType", "csharp");
 @@alternateType(DiskPoolVolume.targetId, armResourceIdentifier, "csharp");
 @@clientName(EncryptionState, "AvsEncryptionState", "csharp");
 @@clientName(EncryptionVersionType, "AvsEncryptionVersionType", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagementCluster,
+  CommonClusterProperties,
+  "csharp"
+);
 @@clientName(ManagementCluster, "AvsManagementCluster", "csharp");
 @@clientName(AffinityStrength,
   "VmHostPlacementPolicyAffinityStrength",
@@ -280,6 +377,23 @@ using Microsoft.AVS;
   "csharp"
 );
 @@clientName(ResourceSkuZoneDetails, "AvsResourceSkuZoneDetails", "csharp");
+@@clientName(NsxPublicIpQuotaRaisedEnum,
+  "NsxPublicIPQuotaRaisedEnum",
+  "csharp"
+);
+@@clientName(WorkloadNetworkVMGroup, "WorkloadNetworkVmGroup", "csharp");
+@@clientName(WorkloadNetworkVMGroupProvisioningState,
+  "WorkloadNetworkVmGroupProvisioningState",
+  "csharp"
+);
+@@clientName(WorkloadNetworkDnsServiceProperties.dnsServiceIp,
+  "DnsServiceIP",
+  "csharp"
+);
+@@clientName(Endpoints.nsxtManagerIp, "NsxtManagerIP", "csharp");
+@@clientName(Endpoints.vcenterIp, "VcenterIP", "csharp");
+@@clientName(Endpoints.hcxCloudManagerIp, "HcxCloudManagerIP", "csharp");
+@@clientName(ScriptParameterTypes, "ScriptParameterType", "csharp");
 
 @@clientName(WorkloadNetworkPublicIps.list, "list_public_ips", "python");
 @@clientName(WorkloadNetworkPublicIps.get, "getPublicIp", "java");
