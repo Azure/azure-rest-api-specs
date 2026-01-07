@@ -7,19 +7,19 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.Workloads, "MigrationDiscoverySapMgmtClient", "java");
 
-@@clientName(Microsoft.Workloads.SapDiscoverySite, "SapDiscoverySite", "java");
-@@clientName(Microsoft.Workloads.SapDiscoverySiteProperties,
+@@clientName(Microsoft.Workloads.SAPDiscoverySite, "SapDiscoverySite", "java");
+@@clientName(Microsoft.Workloads.SAPDiscoverySiteProperties,
   "SapDiscoverySiteProperties",
   "java"
 );
-@@clientName(Microsoft.Workloads.SapDiscoverySites,
+@@clientName(Microsoft.Workloads.SAPDiscoverySites,
   "SapDiscoverySites",
   "java"
 );
-@@clientName(Microsoft.Workloads.SapInstance, "SapInstance", "java");
-@@clientName(Microsoft.Workloads.SapInstanceProperties,
+@@clientName(Microsoft.Workloads.SAPInstance, "SapInstance", "java");
+@@clientName(Microsoft.Workloads.SAPInstanceProperties,
   "SapInstanceProperties",
   "java"
 );
-@@clientName(Microsoft.Workloads.SapInstances, "SapInstances", "java");
-@@clientName(Microsoft.Workloads.SapMigrateError, "SapMigrateError", "java");
+@@clientName(Microsoft.Workloads.SAPInstances, "SapInstances", "java");
+@@clientName(Microsoft.Workloads.SAPMigrateError, "SapMigrateError", "java");
