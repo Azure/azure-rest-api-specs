@@ -240,6 +240,7 @@ model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2025_11_01_preview)
   @identifiers(#[])
   @doc("DedicatedHub List.")
+  @visibility(Lifecycle.Read)
   dedicatedHubList?: DedicatedHubResource[];
 }
 
@@ -272,11 +273,6 @@ model CommunityPatchProperties
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
-
-  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
-  @identifiers(#[])
-  @doc("DedicatedHub List.")
-  dedicatedHubList?: DedicatedHubBaseModel[];
 }
 
 @doc("Community Patch Resource")

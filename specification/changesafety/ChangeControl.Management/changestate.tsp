@@ -293,6 +293,7 @@ union ChangeStatus {
 
   @doc("Resource is in Paused state.")
   @removed(Versions.v2025_09_01_preview)
+  @added(Versions.v2026_01_01_preview)
   Paused: "Paused",
 
   @doc("Resource is in Failed state.")
