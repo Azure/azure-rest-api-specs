@@ -37,10 +37,5 @@ jobs:
         working-directory: .github
 
       - name: Validate ARM leases
-        uses: actions/github-script@v8
-        with:
-          result-encoding: string
-          script: |
-            const { default: validateArmLeases } =
-              await import('${{ github.workspace }}/.github/workflows/src/validate-arm-leases.js');
-            return await validateArmLeases({ github, context, core });
+        run: node workflows/src/validate-arm-leases.js ${{ github.event.pull_request.base.ref }}
+        working-directory: .github
