@@ -201,8 +201,8 @@ async function main() {
   
   if (nonLeaseFiles.length > 0) {
     console.log(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
-    nonLeaseFiles.forEach(file => console.log(`  ${file}`));
-    console.log('\nOnly lease.yaml files are allowed in .github/arm-leases/ directory\n');
+    nonLeaseFiles.forEach(file => console.log(`Remove or rename - ${file}`));
+    console.log('Only lease.yaml files are allowed in .github/arm-leases/ directory\n');
     exitCode = 1;
   }
 
@@ -213,12 +213,10 @@ async function main() {
 
   if (armLeaseFiles.length === 0) {
     if (exitCode === 0) {
-      console.log('No ARM lease files to validate');
+      console.log('--------- No ARM lease files to validate ------------');
     }
     process.exit(exitCode);
   }
-
-  console.log(`Found ${armLeaseFiles.length} ARM lease file(s) to validate\n`);
 
   // Step 5: Validate folder structure
   const invalidStructure = validateFolderStructure(armLeaseFiles);
@@ -226,13 +224,13 @@ async function main() {
   if (invalidStructure.length > 0) {
     console.log(`${invalidStructure.length} file(s) with invalid folder structure:`);
     invalidStructure.forEach(file => console.log(`  ${file}`));
-    console.log('\nExpected format: .github/arm-leases/<servicename>/<namespace>/lease.yaml');
+    console.log('Expected format: .github/arm-leases/<servicename>/<namespace>/lease.yaml');
     console.log('Requirements:');
     console.log('  - <servicename>: lowercase alphanumeric only (e.g., testservice, widgetservice)');
-    console.log('  - <namespace>: alphanumeric with dots and case-sensitive (e.g., test.Rp, Widget.Manager)');
+    console.log('  - <namespace>: alphanumeric with dots and case-sensitive (e.g., Test.Rp, Widget.Manager)');
     console.log('  - Only lease.yaml files are allowed in arm-leases folder');
     console.log('Examples:');
-    console.log('  - .github/arm-leases/testservice/test.Rp/lease.yaml');
+    console.log('  - .github/arm-leases/testservice/Test.Rp/lease.yaml');
     console.log('  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml\n');
     exitCode = 1;
   }
