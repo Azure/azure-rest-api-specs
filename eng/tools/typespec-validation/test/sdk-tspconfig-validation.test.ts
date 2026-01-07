@@ -10,11 +10,6 @@ import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigCsharpAzClearOutputFolderTrueSubRule,
-  TspConfigCsharpAzEmitterOutputDirSubRule,
-  TspConfigCsharpAzNamespaceSubRule,
-  TspConfigCsharpMgmtEmitterOutputDirSubRule,
-  TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
@@ -575,51 +570,6 @@ const pythonDpEmitterOutputTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
 );
 
-const csharpAzEmitterOutputTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "emitter-output-dir",
-  "{output-dir}/{service-dir}/Azure.AAA",
-  "{output-dir}/{service-dir}/AAA",
-  [new TspConfigCsharpAzEmitterOutputDirSubRule()],
-);
-
-const csharpAzNamespaceTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "namespace",
-  "Azure.AAA",
-  "AAA",
-  [new TspConfigCsharpAzNamespaceSubRule()],
-);
-
-const csharpAzClearOutputFolderTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  "",
-  "clear-output-folder",
-  true,
-  false,
-  [new TspConfigCsharpAzClearOutputFolderTrueSubRule()],
-);
-
-const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  managementTspconfigFolder,
-  "emitter-output-dir",
-  "{output-dir}/{service-dir}/Azure.ResourceManager.AAA",
-  "{output-dir}/{service-dir}/Azure.Management.AAA",
-  [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
-);
-
-const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
-  "@azure-tools/typespec-csharp",
-  managementTspconfigFolder,
-  "namespace",
-  "Azure.ResourceManager.AAA",
-  "Azure.Management.AAA",
-  [new TspConfigCsharpMgmtNamespaceSubRule()],
-);
-
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -681,7 +631,7 @@ parameters:
   service-dir: "sdk/test"
 `,
     success: true,
-    subRules: [new TspConfigCsharpAzNamespaceSubRule()],
+    subRules: [new TspConfigJavaMgmtNamespaceFormatSubRule()],
   },
   {
     description: "Optional rule: multiple rules should be skipped when emitter is not configured",
@@ -692,8 +642,8 @@ parameters:
 `,
     success: true,
     subRules: [
-      new TspConfigCsharpAzNamespaceSubRule(),
-      new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
+      new TspConfigJavaMgmtNamespaceFormatSubRule(),
+      new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
     ],
   },
 ];
@@ -805,17 +755,11 @@ describe("tspconfig", function () {
   ];
 
   const optionalTestCases = [
-    // csharp
-    ...csharpAzEmitterOutputTestCases,
-    ...csharpAzNamespaceTestCases,
-    ...csharpAzClearOutputFolderTestCases,
-    ...csharpMgmtEmitterOutputDirTestCases,
-    ...csharpMgmtNamespaceTestCases,
+    // Test cases for optional rules when emitter is not configured
+    ...optionalRulesWithoutEmitterConfigTestCases,
     // go data plane
     ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
-    // Test cases for optional rules when emitter is not configured
-    ...optionalRulesWithoutEmitterConfigTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {

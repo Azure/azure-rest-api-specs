@@ -684,47 +684,6 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
   }
 }
 
-// ----- CSharp sub rules -----
-export class TspConfigCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "clear-output-folder", true);
-  }
-}
-
-export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-csharp",
-      "emitter-output-dir",
-      new RegExp(/^Azure\.ResourceManager\./),
-    );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
-export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\.ResourceManager\./));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -766,11 +725,6 @@ export const requiredRules = [
  * validation failures will affect the overall validation result.
  */
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
-  new TspConfigCsharpAzNamespaceSubRule(),
-  new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
-  new TspConfigCsharpMgmtNamespaceSubRule(),
-  new TspConfigCsharpAzEmitterOutputDirSubRule(),
-  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
 ];
