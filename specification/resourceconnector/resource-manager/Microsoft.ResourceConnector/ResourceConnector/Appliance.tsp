@@ -28,7 +28,7 @@ model Appliance is Azure.ResourceManager.TrackedResource<ApplianceProperties> {
   identity?: Identity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface Appliances {
   /**
    * Gets the details of an Appliance with a specified resource group and name.
@@ -110,25 +110,68 @@ interface Appliances {
     }
   >;
 
+  // /**
+  //  * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
+  //  */
+  // @get
+  // @summary("Gets an Appliance upgrade graph.")
+  // getUpgradeGraph is ArmResourceRead<
+  //   Appliance,
+  //   Parameters = {
+  //     /**
+  //      * Upgrade graph version, ex - stable
+  //      */
+  //     @path
+  //     @key
+  //     @segment("upgradeGraphs")
+  //     upgradeGraph: string;
+  //   },
+  //   Response = ArmResponse<UpgradeGraph>
+  // >;
+
   /**
    * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
    */
   @get
   @summary("Gets an Appliance upgrade graph.")
-  getUpgradeGraph is ArmResourceRead<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}/upgradeGraphs/{upgradeGraph}")
+  getUpgradeGraph is ApplianceOps.ActionSync<
     Appliance,
+    void,
+    ArmResponse<UpgradeGraph> | ErrorResponse,
     Parameters = {
       /**
        * Upgrade graph version, ex - stable
        */
       @path
-      @key
       @segment("upgradeGraphs")
       upgradeGraph: string;
-    },
-    Response = ArmResponse<UpgradeGraph>
+    }
   >;
 }
+
+alias ApplianceOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    /**
+     * Appliances name.
+     */
+    @path
+    @segment("appliances")
+    @key
+    @minLength(1)
+    @maxLength(63)
+    @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+    resourceName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceConnector/appliances/{resourceName}",
+  }
+>;
 
 @@maxLength(Appliance.name, 63);
 @@minLength(Appliance.name, 1);
