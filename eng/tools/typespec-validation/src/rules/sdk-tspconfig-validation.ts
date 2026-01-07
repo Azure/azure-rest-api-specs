@@ -232,6 +232,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
     // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
     // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+    // Format 4: {output-dir}/sdk/dellstorage/{xxxx} where we need to validate "{xxxx}"
 
     let extractedPath: string;
     if (!actualValue.includes("/")) {
@@ -241,9 +242,15 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       const filteredParts = pathParts.filter(
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
-      extractedPath = filteredParts.join("/");
+      
+      // If the last part is a variable (e.g., {namespace}, {package-name}, {xxxx}), use it as extractedPath
+      const lastPart = pathParts[pathParts.length - 1];
+      if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
+        extractedPath = lastPart;
+      } else {
+        extractedPath = filteredParts.join("/");
+      }
     }
-    console.log(`Extracted path from emitter-output-dir: ${extractedPath}`);
     // Resolve variables in the extracted path
     return this.resolveVariables(extractedPath, config);
   }
