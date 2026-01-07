@@ -242,7 +242,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       const filteredParts = pathParts.filter(
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
-      
+
       // If the last part is a variable (e.g., {namespace}, {package-name}, {xxxx}), use it as extractedPath
       const lastPart = pathParts[pathParts.length - 1];
       if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
