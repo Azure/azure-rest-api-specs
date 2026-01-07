@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 input-file:
   - Microsoft.ChangeSafety/ChangeControl/preview/2025-03-01-preview/ChangeControl.json
   - Microsoft.ChangeSafety/SafeRollout/preview/2025-03-01-preview/SafeRollout.json
-  - Microsoft.ChangeSafety/SafeRollout/preview/2026-01-01-preview/SafeRollout.json
+  - Microsoft.ChangeSafety/validation/preview/2026-01-01-preview/validation.json
 ```
 
 ---
