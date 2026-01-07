@@ -60,11 +60,6 @@ suppressions:
     reason: MatchLabels are a key/value map that is passed through to the underlying Kubernetes model.
 ```
 
-``` yaml
-openapi-type: arm
-tag: package-2025-08-01-preview
-```
-
 ### Tag: package-2025-08-01-preview
 
 These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.

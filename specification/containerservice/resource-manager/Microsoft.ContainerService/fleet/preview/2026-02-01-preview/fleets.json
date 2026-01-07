@@ -49,6 +49,9 @@
       "name": "FleetMembers"
     },
     {
+      "name": "FleetManagedNamespaces"
+    },
+    {
       "name": "Gates"
     },
     {
@@ -91,6 +94,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List the operations for the provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -109,6 +117,12 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -123,6 +137,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Fleet resources in a subscription.": {
+            "$ref": "./examples/Fleets_ListBySub.json"
           }
         },
         "x-ms-pageable": {
@@ -160,6 +179,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Fleet resources in a resource group.": {
+            "$ref": "./examples/Fleets_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -207,6 +231,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Fleet resource.": {
+            "$ref": "./examples/Fleets_Get.json"
           }
         }
       },
@@ -289,6 +318,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates a Fleet resource with a long running operation.": {
+            "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -366,6 +400,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Patch tags of a Fleet during Update.": {
+            "$ref": "./examples/Fleets_PatchTags.json"
+          },
+          "Update a Fleet.": {
+            "$ref": "./examples/Fleets_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -434,6 +476,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deletes a Fleet resource asynchronously with a long running operation.": {
+            "$ref": "./examples/Fleets_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -466,6 +513,12 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -480,6 +533,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the AutoUpgradeProfile resources by fleet.": {
+            "$ref": "./examples/AutoUpgradeProfiles_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -537,6 +595,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Get.json"
           }
         }
       },
@@ -633,6 +696,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create an AutoUpgradeProfile.": {
+            "$ref": "./examples/AutoUpgradeProfiles_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -706,6 +774,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AutoUpgradeProfile resource.": {
+            "$ref": "./examples/AutoUpgradeProfiles_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -783,6 +856,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "AutoUpgradeProfileOperations_GenerateUpdateRun": {
+            "$ref": "./examples/AutoUpgradeProfileOperations_GenerateUpdateRun.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -815,6 +893,15 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -829,6 +916,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Gates of a Fleet.": {
+            "$ref": "./examples/Gates_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -886,6 +978,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Gate resource.": {
+            "$ref": "./examples/Gates_Get.json"
           }
         }
       },
@@ -979,6 +1076,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates a Gate resource.": {
+            "$ref": "./examples/Gates_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1026,7 +1128,398 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Lists the user credentials of a Fleet.": {
+            "$ref": "./examples/Fleets_ListCredentialsResult.json"
+          }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces": {
+      "get": {
+        "operationId": "FleetManagedNamespaces_ListByFleet",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "List FleetManagedNamespace resources by Fleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_ListByFleet": {
+            "$ref": "./examples/FleetManagedNamespaces_ListByFleet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces/{managedNamespaceName}": {
+      "get": {
+        "operationId": "FleetManagedNamespaces_Get",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Get a FleetManagedNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespace"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Get": {
+            "$ref": "./examples/FleetManagedNamespaces_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FleetManagedNamespaces_CreateOrUpdate",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Create a FleetManagedNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FleetManagedNamespace' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespace"
+            }
+          },
+          "201": {
+            "description": "Resource 'FleetManagedNamespace' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespace"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_CreateOrUpdate": {
+            "$ref": "./examples/FleetManagedNamespaces_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FleetManagedNamespaces_Update",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Update a FleetManagedNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespacePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespace"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Update": {
+            "$ref": "./examples/FleetManagedNamespaces_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "FleetManagedNamespaces_Delete",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Delete a FleetManagedNamespace",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Delete": {
+            "$ref": "./examples/FleetManagedNamespaces_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members": {
@@ -1055,6 +1548,15 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
           }
         ],
         "responses": {
@@ -1069,6 +1571,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the members of a Fleet.": {
+            "$ref": "./examples/FleetMembers_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -1126,6 +1633,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a FleetMember resource.": {
+            "$ref": "./examples/FleetMembers_Get.json"
           }
         }
       },
@@ -1218,6 +1730,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates a FleetMember resource with a long running operation.": {
+            "$ref": "./examples/FleetMembers_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1305,6 +1822,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates a FleetMember resource synchronously.": {
+            "$ref": "./examples/FleetMembers_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
         },
@@ -1383,6 +1905,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Deletes a FleetMember resource asynchronously with a long running operation.": {
+            "$ref": "./examples/FleetMembers_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1415,6 +1942,12 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -1429,6 +1962,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the UpdateRun resources by fleet.": {
+            "$ref": "./examples/UpdateRuns_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -1486,6 +2024,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Gets an UpdateRun resource.": {
+            "$ref": "./examples/UpdateRuns_Get.json"
           }
         }
       },
@@ -1578,6 +2121,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1654,6 +2202,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an updateRun resource.": {
+            "$ref": "./examples/UpdateRuns_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1745,6 +2298,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Skips one or more member/group/stage/afterStageWait(s) of an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Skip.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1823,6 +2381,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Starts an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Start.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1905,6 +2468,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Stops an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Stop.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1937,6 +2505,12 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -1951,6 +2525,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List the FleetUpdateStrategy resources by fleet.": {
+            "$ref": "./examples/UpdateStrategies_ListByFleet.json"
           }
         },
         "x-ms-pageable": {
@@ -2008,6 +2587,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get a FleetUpdateStrategy resource.": {
+            "$ref": "./examples/UpdateStrategies_Get.json"
           }
         }
       },
@@ -2100,6 +2684,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a FleetUpdateStrategy.": {
+            "$ref": "./examples/UpdateStrategies_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2178,6 +2767,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete a FleetUpdateStrategy resource.": {
+            "$ref": "./examples/UpdateStrategies_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -2214,6 +2808,36 @@
             "create"
           ]
         }
+      }
+    },
+    "AdoptionPolicy": {
+      "type": "string",
+      "description": "Action if the Namespace with the same name already exists.",
+      "enum": [
+        "Never",
+        "IfIdentical",
+        "Always"
+      ],
+      "x-ms-enum": {
+        "name": "AdoptionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Never",
+            "value": "Never",
+            "description": "If the Namespace already exists, do not take over the existing Namespace to be managed by ARM."
+          },
+          {
+            "name": "IfIdentical",
+            "value": "IfIdentical",
+            "description": "If there is an identical Namespace, take over the existing Namespace to be managed by ARM."
+          },
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always take over the existing Namespace to be managed by ARM, even if it is not identical."
+          }
+        ]
       }
     },
     "AgentProfile": {
@@ -2477,6 +3101,72 @@
         ]
       }
     },
+    "Core.V1.TaintEffect": {
+      "type": "string",
+      "description": "TaintEffect",
+      "enum": [
+        "NoSchedule"
+      ],
+      "x-ms-enum": {
+        "name": "TaintEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoSchedule",
+            "value": "NoSchedule",
+            "description": "Do not allow new pods to schedule onto the node unless they tolerate the taint, but allow all pods submitted to Kubelet without going through the scheduler to start, and allow all already-running pods to continue running. Enforced by the scheduler."
+          }
+        ]
+      }
+    },
+    "Core.V1.TolerationOperator": {
+      "type": "string",
+      "description": "A toleration operator is the set of operators that can be used in a toleration.",
+      "enum": [
+        "Exists",
+        "Equal"
+      ],
+      "x-ms-enum": {
+        "name": "TolerationOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Toleration Operator Exists"
+          },
+          {
+            "name": "Equal",
+            "value": "Equal",
+            "description": "Toleration Operator Equal"
+          }
+        ]
+      }
+    },
+    "DeletePolicy": {
+      "type": "string",
+      "description": "Delete options for the ARM managed namespace.",
+      "enum": [
+        "Keep",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "DeletePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Keep",
+            "value": "Keep",
+            "description": "Delete the ARM resource but keep the Namespace."
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "Delete both ARM resource and Namespace."
+          }
+        ]
+      }
+    },
     "Fleet": {
       "type": "object",
       "description": "The Fleet resource.",
@@ -2604,6 +3294,166 @@
       "required": [
         "value"
       ]
+    },
+    "FleetManagedNamespace": {
+      "type": "object",
+      "description": "A fleet managed namespace.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FleetManagedNamespaceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FleetManagedNamespaceListResult": {
+      "type": "object",
+      "description": "The response of a FleetManagedNamespace list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetManagedNamespace items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetManagedNamespace"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetManagedNamespacePatch": {
+      "type": "object",
+      "description": "The properties of a fleet managed namespace that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FleetManagedNamespaceProperties": {
+      "type": "object",
+      "description": "The properties of a fleet managed namespace.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/FleetManagedNamespaceProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "managedNamespaceProperties": {
+          "$ref": "#/definitions/ManagedNamespaceProperties",
+          "description": "The namespace properties for the fleet managed namespace."
+        },
+        "adoptionPolicy": {
+          "$ref": "#/definitions/AdoptionPolicy",
+          "description": "Action if the managed namespace with the same name already exists. Default is Never."
+        },
+        "deletePolicy": {
+          "$ref": "#/definitions/DeletePolicy",
+          "description": "Delete options of a fleet managed namespace. Default is Keep."
+        },
+        "propagationPolicy": {
+          "$ref": "#/definitions/PropagationPolicy",
+          "description": "The profile of the propagation to create the namespace."
+        },
+        "status": {
+          "$ref": "#/definitions/FleetManagedNamespaceStatus",
+          "description": "Status information of the last operation for fleet managed namespace.",
+          "readOnly": true
+        },
+        "portalFqdn": {
+          "type": "string",
+          "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "adoptionPolicy",
+        "deletePolicy"
+      ]
+    },
+    "FleetManagedNamespaceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the fleet managed namespace resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "FleetManagedNamespaceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state of a fleet managed namespace being created."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state of a fleet managed namespace being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state of a fleet managed namespace being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "FleetManagedNamespaceStatus": {
+      "type": "object",
+      "description": "Status information for the fleet managed namespace.",
+      "properties": {
+        "lastOperationId": {
+          "type": "string",
+          "description": "The last operation ID for the fleet managed namespace",
+          "readOnly": true
+        },
+        "lastOperationError": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The last operation error of the fleet managed namespace",
+          "readOnly": true
+        }
+      }
     },
     "FleetMember": {
       "type": "object",
@@ -3327,6 +4177,34 @@
         ]
       }
     },
+    "ManagedNamespaceProperties": {
+      "type": "object",
+      "description": "The namespace properties for the fleet managed namespace.",
+      "properties": {
+        "labels": {
+          "type": "object",
+          "description": "The labels for the fleet managed namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "type": "object",
+          "description": "The annotations for the fleet managed namespace.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultResourceQuota": {
+          "$ref": "#/definitions/ResourceQuota",
+          "description": "The default resource quota for the fleet managed namespace."
+        },
+        "defaultNetworkPolicy": {
+          "$ref": "#/definitions/NetworkPolicy",
+          "description": "The default network policy for the fleet managed namespace."
+        }
+      }
+    },
     "MemberUpdateStatus": {
       "type": "object",
       "description": "The status of a member update operation.",
@@ -3355,6 +4233,102 @@
           "type": "string",
           "description": "The status message after processing the member update operation.",
           "readOnly": true
+        }
+      }
+    },
+    "Meta.V1.LabelSelector": {
+      "type": "object",
+      "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
+      "properties": {
+        "matchLabels": {
+          "type": "object",
+          "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is \"key\", the operator is \"In\", and the values array contains only \"value\". The requirements are ANDed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "matchExpressions": {
+          "type": "array",
+          "description": "matchExpressions is a list of label selector requirements. The requirements are ANDed.",
+          "items": {
+            "$ref": "#/definitions/Meta.V1.LabelSelectorRequirement"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Meta.V1.LabelSelectorOperator": {
+      "type": "string",
+      "description": "A label selector operator is the set of operators that can be used in a selector requirement.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "LabelSelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "Label Selector Operator In"
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "Label Selector Operator NotIn"
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "Label Selector Operator Exists"
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "Label Selector Operator DoesNotExist"
+          }
+        ]
+      }
+    },
+    "Meta.V1.LabelSelectorRequirement": {
+      "type": "object",
+      "description": "A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "key is the label key that the selector applies to."
+        },
+        "operator": {
+          "$ref": "#/definitions/Meta.V1.LabelSelectorOperator",
+          "description": "operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "key",
+        "operator"
+      ]
+    },
+    "NetworkPolicy": {
+      "type": "object",
+      "description": "The network policy for the managed namespace.",
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/PolicyRule",
+          "description": "The ingress policy for the managed namespace."
+        },
+        "egress": {
+          "$ref": "#/definitions/PolicyRule",
+          "description": "The egress policy for the managed namespace."
         }
       }
     },
@@ -3440,6 +4414,329 @@
           "type": "string",
           "description": "The image version to upgrade the nodes to (e.g., 'AKSUbuntu-1804gen2containerd-2022.12.13').",
           "readOnly": true
+        }
+      }
+    },
+    "Placement.V1.Affinity": {
+      "type": "object",
+      "description": "Affinity is a group of cluster affinity scheduling rules. More to be added.",
+      "properties": {
+        "clusterAffinity": {
+          "$ref": "#/definitions/Placement.V1.ClusterAffinity",
+          "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources."
+        }
+      }
+    },
+    "Placement.V1.ClusterAffinity": {
+      "type": "object",
+      "description": "ClusterAffinity contains cluster affinity scheduling rules for the selected resources.",
+      "properties": {
+        "requiredDuringSchedulingIgnoredDuringExecution": {
+          "$ref": "#/definitions/Placement.V1.ClusterSelector",
+          "description": "If the affinity requirements specified by this field are not met at scheduling time, the resource will not be scheduled onto the cluster. If the affinity requirements specified by this field cease to be met at some point after the placement (e.g. due to an update), the system may or may not try to eventually remove the resource from the cluster."
+        }
+      }
+    },
+    "Placement.V1.ClusterResourcePlacementSpec": {
+      "type": "object",
+      "description": "ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/Placement.V1.PlacementPolicy",
+          "description": "Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected."
+        }
+      }
+    },
+    "Placement.V1.ClusterSelector": {
+      "type": "object",
+      "description": "ClusterSelector",
+      "properties": {
+        "clusterSelectorTerms": {
+          "type": "array",
+          "description": "ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.",
+          "items": {
+            "$ref": "#/definitions/Placement.V1.ClusterSelectorTerm"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "clusterSelectorTerms"
+      ]
+    },
+    "Placement.V1.ClusterSelectorTerm": {
+      "type": "object",
+      "description": "ClusterSelectorTerm",
+      "properties": {
+        "labelSelector": {
+          "$ref": "#/definitions/Meta.V1.LabelSelector",
+          "description": "LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd."
+        },
+        "propertySelector": {
+          "$ref": "#/definitions/Placement.V1.PropertySelector",
+          "description": "PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd. At this moment, PropertySelector can only be used with `RequiredDuringSchedulingIgnoredDuringExecution` affinity terms. This field is beta-level; it is for the property-based scheduling feature and is only functional when a property provider is enabled in the deployment."
+        }
+      }
+    },
+    "Placement.V1.PlacementPolicy": {
+      "type": "object",
+      "description": "PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.",
+      "properties": {
+        "placementType": {
+          "$ref": "#/definitions/Placement.V1.PlacementType",
+          "description": "Type of placement. Can be \"PickAll\", \"PickN\" or \"PickFixed\". Default is PickAll."
+        },
+        "clusterNames": {
+          "type": "array",
+          "description": "ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is \"PickFixed\"",
+          "items": {
+            "type": "string"
+          }
+        },
+        "affinity": {
+          "$ref": "#/definitions/Placement.V1.Affinity",
+          "description": "Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\"."
+        },
+        "tolerations": {
+          "type": "array",
+          "description": "If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.",
+          "items": {
+            "$ref": "#/definitions/Placement.V1.Toleration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Placement.V1.PlacementType": {
+      "type": "string",
+      "description": "PlacementType identifies the type of placement.",
+      "enum": [
+        "PickAll",
+        "PickFixed"
+      ],
+      "x-ms-enum": {
+        "name": "PlacementType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PickAll",
+            "value": "PickAll",
+            "description": "PickAll picks all clusters that satisfy the rules."
+          },
+          {
+            "name": "PickFixed",
+            "value": "PickFixed",
+            "description": "PickFixed picks a fixed set of clusters."
+          }
+        ]
+      }
+    },
+    "Placement.V1.PropertySelector": {
+      "type": "object",
+      "description": "PropertySelector helps user specify property requirements when picking clusters for resource placement.",
+      "properties": {
+        "matchExpressions": {
+          "type": "array",
+          "description": "MatchExpressions is an array of PropertySelectorRequirements. The requirements are AND'd.",
+          "items": {
+            "$ref": "#/definitions/Placement.V1.PropertySelectorRequirement"
+          }
+        }
+      },
+      "required": [
+        "matchExpressions"
+      ]
+    },
+    "Placement.V1.PropertySelectorOperator": {
+      "type": "string",
+      "description": "PropertySelectorOperator is the operator that can be used with PropertySelectorRequirements.",
+      "enum": [
+        "Gt",
+        "Ge",
+        "Eq",
+        "Ne",
+        "Lt",
+        "Le"
+      ],
+      "x-ms-enum": {
+        "name": "PropertySelectorOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Gt",
+            "value": "Gt",
+            "description": "Gt dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement."
+          },
+          {
+            "name": "Ge",
+            "value": "Ge",
+            "description": "Ge dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement."
+          },
+          {
+            "name": "Eq",
+            "value": "Eq",
+            "description": "Eq dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement."
+          },
+          {
+            "name": "Ne",
+            "value": "Ne",
+            "description": "Ne dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement."
+          },
+          {
+            "name": "Lt",
+            "value": "Lt",
+            "description": "Lt dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement."
+          },
+          {
+            "name": "Le",
+            "value": "Le",
+            "description": "Le dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement."
+          }
+        ]
+      }
+    },
+    "Placement.V1.PropertySelectorRequirement": {
+      "type": "object",
+      "description": "PropertySelectorRequirement is a specific property requirement when picking clusters for resource placement.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the name of the property; it should be a Kubernetes label name."
+        },
+        "operator": {
+          "$ref": "#/definitions/Placement.V1.PropertySelectorOperator",
+          "description": "Operator specifies the relationship between a cluster's observed value of the specified property and the values given in the requirement."
+        },
+        "values": {
+          "type": "array",
+          "description": "Values are a list of values of the specified property which Fleet will compare against the observed values of individual member clusters in accordance with the given operator. At this moment, each value should be a Kubernetes quantity. For more information, see https://pkg.go.dev/k8s.io/apimachinery/pkg/api/resource#Quantity. If the operator is Gt (greater than), Ge (greater than or equal to), Lt (less than), or `Le` (less than or equal to), Eq (equal to), or Ne (ne), exactly one value must be specified in the list.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "Placement.V1.Toleration": {
+      "type": "object",
+      "description": "Toleration allows ClusterResourcePlacement to tolerate any taint that matches the triple <key,value,effect> using the matching operator <operator>.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys."
+        },
+        "operator": {
+          "$ref": "#/definitions/Core.V1.TolerationOperator",
+          "description": "Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a ClusterResourcePlacement can tolerate all taints of a particular category."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string."
+        },
+        "effect": {
+          "$ref": "#/definitions/Core.V1.TaintEffect",
+          "description": "Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule."
+        }
+      }
+    },
+    "PlacementProfile": {
+      "type": "object",
+      "description": "The configuration profile for default ClusterResourcePlacement for placement.",
+      "properties": {
+        "defaultClusterResourcePlacement": {
+          "$ref": "#/definitions/Placement.V1.ClusterResourcePlacementSpec",
+          "description": "The default ClusterResourcePlacement policy configuration."
+        }
+      }
+    },
+    "PolicyRule": {
+      "type": "string",
+      "description": "The possible values representing different network policy rules.",
+      "enum": [
+        "AllowAll",
+        "DenyAll",
+        "AllowSameNamespace"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyRule",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllowAll",
+            "value": "AllowAll",
+            "description": "Allow all network traffic."
+          },
+          {
+            "name": "DenyAll",
+            "value": "DenyAll",
+            "description": "Deny all network traffic."
+          },
+          {
+            "name": "AllowSameNamespace",
+            "value": "AllowSameNamespace",
+            "description": "Allow traffic within the same namespace."
+          }
+        ]
+      }
+    },
+    "PropagationPolicy": {
+      "type": "object",
+      "description": "The propagation to be used for provisioning the namespace among the fleet.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PropagationType",
+          "description": "The type of the policy to be used. Default is Placement."
+        },
+        "placementProfile": {
+          "$ref": "#/definitions/PlacementProfile",
+          "description": "The profile to be used for propagation via placement."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PropagationType": {
+      "type": "string",
+      "description": "How the namespace will be provisioned among the fleet members.",
+      "enum": [
+        "Placement"
+      ],
+      "x-ms-enum": {
+        "name": "PropagationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Placement",
+            "value": "Placement",
+            "description": "Using ClusterResourcePlacement."
+          }
+        ]
+      }
+    },
+    "ResourceQuota": {
+      "type": "object",
+      "description": "The resource quota for the managed namespace.",
+      "properties": {
+        "cpuRequest": {
+          "type": "string",
+          "description": "The CPU request for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
+        },
+        "cpuLimit": {
+          "type": "string",
+          "description": "The CPU limit for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu"
+        },
+        "memoryRequest": {
+          "type": "string",
+          "description": "The memory request for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
+        },
+        "memoryLimit": {
+          "type": "string",
+          "description": "The memory limit for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
         }
       }
     },
@@ -4123,5 +5420,34 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "FilterQueryParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "SkipTokenQueryParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The page-continuation token to use with a paged version of this API.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipToken"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    }
+  }
 }
