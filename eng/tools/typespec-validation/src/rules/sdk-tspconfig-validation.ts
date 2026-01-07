@@ -684,47 +684,6 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
   }
 }
 
-// ----- CSharp sub rules -----
-export class TspConfigCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "clear-output-folder", true);
-  }
-}
-
-export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-csharp",
-      "emitter-output-dir",
-      new RegExp(/^Azure\.ResourceManager\./),
-    );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
-export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\.ResourceManager\./));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -761,18 +720,13 @@ export const requiredRules = [
 ];
 
 /**
- * Optional rules: Validate language-specific emitter configurations without blocking CI/CD.
+ * Optional rules: Validate language-specific emitter configurations.
  * All rules in this array inherit from TspconfigEmitterOptionsSubRuleBase and only run when
- * their corresponding emitter is configured in tspconfig.yaml. Failures are logged but do not
- * affect the overall validation result.
+ * their corresponding emitter is configured in tspconfig.yaml. When the emitter is not configured,
+ * the rule is skipped and does not affect the validation result. When the emitter is configured,
+ * validation failures will affect the overall validation result.
  */
-export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
-  new TspConfigCsharpAzNamespaceSubRule(),
-  new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
-  new TspConfigCsharpMgmtNamespaceSubRule(),
-  new TspConfigCsharpAzEmitterOutputDirSubRule(),
-  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
-];
+export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [];
 
 export class SdkTspConfigValidationRule implements Rule {
   private requiredRules: TspconfigSubRuleBase[] = [];
@@ -831,6 +785,8 @@ export class SdkTspConfigValidationRule implements Rule {
 
       const result = await subRule.execute(folder!);
       if (!result.success) failedResults.push(result);
+      // Optional rules affect overall success when emitter is configured
+      success &&= result.success;
     }
 
     const stdOutputFailedResults =
