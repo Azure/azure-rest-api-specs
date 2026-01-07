@@ -5225,7 +5225,7 @@ model PeriodicRestorePoints {
   /**
    * Indicates if periodic restore points for the VM are enabled.
    */
-  isEnabled: boolean;
+  isEnabled?: boolean;
 }
 
 /**
@@ -5236,7 +5236,7 @@ model ZoneMovement {
   /**
    * Indicates if zone movement is enabled.
    */
-  isEnabled: boolean;
+  isEnabled?: boolean;
 }
 
 /**
