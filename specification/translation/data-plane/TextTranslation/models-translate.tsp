@@ -124,9 +124,9 @@ model TranslateParameters {
   allowFallback?: boolean = true;
 }
 
-@doc("Translate targets parameters")
+@doc("Target language and translation configuration parameters.")
 @added(APIVersion.v2025_10_01_preview)
-model TranslateTarget {
+model TranslationTarget {
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. It's possible to translate to multiple languages simultaneously by including 
@@ -152,12 +152,12 @@ model TranslateTarget {
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
   @doc("""
-    Default is ‘general’, which uses NMT system.
-    ‘abc-inc-gpt-4o’, and ‘abc-inc-gpt-4o-mini’ are examples of deployment names which use GPT-4o uses or 
-    GPT-4o-mini model. ‘gpt-4o’ uses GPT-4o model. 
+    Default is 'general', which uses NMT system.
+    'abc-inc-gpt-4o', and 'abc-inc-gpt-4o-mini' are examples of deployment names which use GPT-4o uses or
+    GPT-4o-mini model. 'gpt-4o' uses GPT-4o model.
     
-    ‘<custom model id>’ uses the custom NMT model tuned by customer.
-    ‘best’ system determines which is the best model to use for the request. This intelligence could be introduced
+    '<custom model id>' uses the custom NMT model tuned by customer.
+    'best' system determines which is the best model to use for the request. This intelligence could be introduced
     in future. Customer should have deployed it in their resource.
     
     """)
@@ -199,13 +199,13 @@ model TranslateTarget {
   adaptiveDatasetId?: string;
 
   @doc("""
-    Reference sentence pairs to generate adaptive results.
+    Reference text pairs to generate adaptive customized translation.
     """)
   @maxItems(5)
-  referenceTextPairs?: ReferenceSentencePair[];
+  referenceTextPairs?: ReferenceTextPair[];
 }
 
-@doc("Request body for the translate API.")
+@doc("Request data for translate.")
 @added(APIVersion.v2025_10_01_preview)
 model TranslateBody {
   @doc("Array of the input text elements to translate.")
@@ -242,12 +242,12 @@ model TranslateInputItem {
   @doc("""
     Translation target parameters.
     """)
-  targets: TranslateTarget[];
+  targets: TranslationTarget[];
 }
 
-@doc("Reference sentence pair.")
+@doc("Reference text pair to generate adaptive customized translation.")
 @added(APIVersion.v2025_10_01_preview)
-model ReferenceSentencePair {
+model ReferenceTextPair {
   @doc("Source reference sentence.")
   source: string;
 
@@ -290,6 +290,7 @@ model TranslationResult {
   ...CommonResultHeaders;
 
   @doc("Array of the translated text elements.")
+  @visibility(Lifecycle.Read)
   value: TranslatedTextItem[];
 
   @header("x-mt-system")
@@ -354,6 +355,16 @@ model TranslatedTextItem {
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "translations")
+  @removed(APIVersion.v2025_10_01_preview)
+  translationsV3: TranslationText[];
+
+  @doc("""
+    An array of translation results. The size of the array matches the number of target 
+    languages specified through the to query parameter.
+    """)
+  @added(APIVersion.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
   translations: TranslationText[];
 
   @removed(APIVersion.v2025_10_01_preview)
@@ -389,23 +400,23 @@ model TranslationText {
   language: string;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of characters in the source text string")
+  @doc("An integer indicating the number of characters in the source text string")
   sourceCharacters?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in generating the translated text")
+  @doc("An integer indicating the number of tokens used in generating the translated text")
   instructionTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the source sentence")
+  @doc("An integer indicating the number of tokens used in the source sentence")
   sourceTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the translation response")
+  @doc("An integer indicating the number of tokens used in the translation response")
   responseTokens?: int32;
 
   @added(APIVersion.v2025_10_01_preview)
-  @doc("An interger indicating the number of tokens used in the target sentence")
+  @doc("An integer indicating the number of tokens used in the target sentence")
   targetTokens?: int32;
 
   @doc("A string giving the translated text.")
