@@ -120,7 +120,7 @@ interface NewRegionFrontloadRelease {
    */
   createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<
     FrontloadPayload,
-    Response = DefaultRollout | ArmCreatedResponse<DefaultRollout>
+    Response = DefaultRollout | ArmResourceCreatedSyncResponse<DefaultRollout>
   >;
 
   /**
