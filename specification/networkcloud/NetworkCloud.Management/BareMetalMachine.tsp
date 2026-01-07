@@ -145,7 +145,8 @@ interface BareMetalMachines {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -199,7 +200,7 @@ interface BareMetalMachines {
   cordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineCordonParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
@@ -211,7 +212,7 @@ interface BareMetalMachines {
   powerOff is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachinePowerOffParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
@@ -223,7 +224,7 @@ interface BareMetalMachines {
   reimage is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -234,7 +235,7 @@ interface BareMetalMachines {
   replace is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineReplaceParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>,
     OptionalRequestBody = true
   >;
@@ -246,7 +247,7 @@ interface BareMetalMachines {
   restart is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -257,7 +258,7 @@ interface BareMetalMachines {
   runCommand is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunCommandParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -268,7 +269,7 @@ interface BareMetalMachines {
   runDataExtracts is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -279,7 +280,7 @@ interface BareMetalMachines {
   runDataExtractsRestricted is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunDataExtractsParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -290,7 +291,7 @@ interface BareMetalMachines {
   runReadCommands is ArmResourceActionAsyncBase<
     BareMetalMachine,
     BareMetalMachineRunReadCommandsParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -301,7 +302,7 @@ interface BareMetalMachines {
   start is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 
@@ -312,7 +313,7 @@ interface BareMetalMachines {
   uncordon is ArmResourceActionAsyncBase<
     BareMetalMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<BareMetalMachine>
   >;
 }

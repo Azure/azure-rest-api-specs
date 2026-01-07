@@ -147,7 +147,8 @@ interface VirtualMachines {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -201,7 +202,7 @@ interface VirtualMachines {
   assignRelay is ArmResourceActionAsyncBase<
     VirtualMachine,
     VirtualMachineAssignRelayParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
     OptionalRequestBody = true
   >;
@@ -213,7 +214,7 @@ interface VirtualMachines {
   powerOff is ArmResourceActionAsyncBase<
     VirtualMachine,
     VirtualMachinePowerOffParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
     OptionalRequestBody = true
   >;
@@ -225,7 +226,7 @@ interface VirtualMachines {
   reimage is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
@@ -236,7 +237,7 @@ interface VirtualMachines {
   restart is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 
@@ -247,7 +248,7 @@ interface VirtualMachines {
   start is ArmResourceActionAsyncBase<
     VirtualMachine,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>
   >;
 }

@@ -125,7 +125,8 @@ interface AccessBridges {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

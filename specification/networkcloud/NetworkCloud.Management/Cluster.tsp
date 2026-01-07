@@ -154,7 +154,8 @@ interface Clusters {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -208,7 +209,7 @@ interface Clusters {
   continueUpdateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterContinueUpdateVersionParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
@@ -219,7 +220,7 @@ interface Clusters {
   deploy is ArmResourceActionAsyncBase<
     Cluster,
     ClusterDeployParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -231,7 +232,7 @@ interface Clusters {
   inspect is ArmResourceActionAsyncBase<
     Cluster,
     ClusterInspectParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -243,7 +244,7 @@ interface Clusters {
   scanRuntime is ArmResourceActionAsyncBase<
     Cluster,
     ClusterScanRuntimeParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>,
     OptionalRequestBody = true
   >;
@@ -255,7 +256,7 @@ interface Clusters {
   updateVersion is ArmResourceActionAsyncBase<
     Cluster,
     ClusterUpdateVersionParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 }

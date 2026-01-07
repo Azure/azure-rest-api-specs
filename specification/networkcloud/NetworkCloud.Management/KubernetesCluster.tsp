@@ -145,7 +145,8 @@ interface KubernetesClusters {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -199,7 +200,7 @@ interface KubernetesClusters {
   restartNode is ArmResourceActionAsyncBase<
     KubernetesCluster,
     KubernetesClusterRestartNodeParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<KubernetesCluster>
   >;
 }

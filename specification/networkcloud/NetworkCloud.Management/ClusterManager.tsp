@@ -141,7 +141,8 @@ interface ClusterManagers {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -195,7 +196,7 @@ interface ClusterManagers {
   updateRelayPrivateEndpointConnection is ArmResourceActionAsyncBase<
     ClusterManager,
     ClusterManagerUpdateRelayPrivateEndpointConnectionParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterManager>,
     OptionalRequestBody = true
   >;

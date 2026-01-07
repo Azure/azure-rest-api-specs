@@ -145,7 +145,8 @@ interface StorageAppliances {
       @audience("internal")
       `X-Ms-Userrp-Extension-Callback-Enabled`?: boolean;
     },
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -199,7 +200,7 @@ interface StorageAppliances {
   disableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     void,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 
@@ -210,7 +211,7 @@ interface StorageAppliances {
   enableRemoteVendorManagement is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceEnableRemoteVendorManagementParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>,
     OptionalRequestBody = true
   >;
@@ -222,7 +223,7 @@ interface StorageAppliances {
   runReadCommands is ArmResourceActionAsyncBase<
     StorageAppliance,
     StorageApplianceRunReadCommandsParameters,
-    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
+    ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<StorageAppliance>
   >;
 }
