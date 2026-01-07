@@ -22,7 +22,7 @@ using Azure.Core;
   "{endpoint}/speechtotext",
   "Azure Speech Services APIs for speech-to-text",
   {
-    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com.")
+    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).")
     endpoint: url,
   }
 )
