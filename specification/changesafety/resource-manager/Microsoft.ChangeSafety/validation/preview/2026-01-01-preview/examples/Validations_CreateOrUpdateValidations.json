@@ -1,9 +1,10 @@
 {
-  "title": "Validations_CreateOrUpdateAtSubscriptionLevel",
-  "operationId": "Validations_CreateOrUpdateAtSubscriptionLevel",
+  "title": "Validations_CreateOrUpdateValidations",
+  "operationId": "Validations_CreateOrUpdate",
   "parameters": {
     "api-version": "2025-01-15-preview",
     "subscriptionId": "76AC0828-CFA9-401D-BA95-F317AAC2C62A",
+    "resourceGroupName": "rgvalidation",
     "validationName": "testValidationName",
     "resource": {
       "properties": {
@@ -13,6 +14,13 @@
         "stageId": "canary-eastuseuap",
         "stageParameters": {},
         "validationParameters": {}
+      },
+      "location": "eastus",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
       }
     }
   },
@@ -28,7 +36,17 @@
           "validationParameters": {},
           "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/providers/Microsoft.ChangeSafety/validations/myTestValidation_7897",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "6adb6df5-2f57-44bc-ad3f-7bbc20063d73",
+              "clientId": "6adb6df5-2f57-44bc-ad3f-7bbc20063d73"
+            }
+          }
+        },
+        "id": "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/resourceGroups/myResourceGroupName/providers/Microsoft.ChangeSafety/validations/myTestValidation_7897",
         "name": "testValidationName",
         "type": "Microsoft.ChangeSafety/validations",
         "systemData": {
@@ -54,6 +72,16 @@
           "stageParameters": {},
           "validationParameters": {},
           "provisioningState": "Succeeded"
+        },
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "6adb6df5-2f57-44bc-ad3f-7bbc20063d73",
+              "clientId": "6adb6df5-2f57-44bc-ad3f-7bbc20063d73"
+            }
+          }
         },
         "id": "/subscriptions/6adb6df5-2f57-44bc-ad3f-7bbc20063d73/resourceGroups/myResourceGroupName/providers/Microsoft.ChangeSafety/validations/myTestValidation_7897",
         "name": "testValidationName",
