@@ -49,7 +49,7 @@ function validateFolderStructure(files) {
 function parseLeaseFile(filePath) {
   try {
     const content = readFileSync(filePath, 'utf-8');
-    const data = YAML.parse(content);
+    const data = YAML.load(content);
     
     if (!data || !data.lease) {
       return { error: 'Invalid YAML structure: missing "lease" key' };
@@ -199,7 +199,19 @@ async function main() {
     exitCode = 1;
   }
 
-  // Step 3: Get ARM lease files
+  // Step 3: Check for non-lease.yaml and non-README files
+  const nonLeaseFiles = allChangedFiles.filter(file => 
+    !file.endsWith('/lease.yaml') && !file.endsWith('/README.md')
+  );
+  
+  if (nonLeaseFiles.length > 0) {
+    console.log(`❌ Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
+    nonLeaseFiles.forEach(file => console.log(`  ${file}`));
+    console.log('\n❌ Only lease.yaml and README.md files are allowed in .github/arm-leases/ directory\n');
+    exitCode = 1;
+  }
+
+  // Step 4: Get ARM lease files (only lease.yaml files)
   const armLeaseFiles = allChangedFiles.filter(file => 
     file.startsWith('.github/arm-leases/') && !file.endsWith('.md')
   );
@@ -212,16 +224,6 @@ async function main() {
   }
 
   console.log(`Found ${armLeaseFiles.length} ARM lease file(s) to validate\n`);
-
-  // Step 4: Check for non-lease.yaml files
-  const nonLeaseFiles = armLeaseFiles.filter(file => !file.endsWith('/lease.yaml'));
-  
-  if (nonLeaseFiles.length > 0) {
-    console.log(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
-    nonLeaseFiles.forEach(file => console.log(`  ${file}`));
-    console.log('\nOnly lease.yaml files are allowed in .github/arm-leases/ directory\n');
-    exitCode = 1;
-  }
 
   // Step 5: Validate folder structure
   const invalidStructure = validateFolderStructure(armLeaseFiles);
