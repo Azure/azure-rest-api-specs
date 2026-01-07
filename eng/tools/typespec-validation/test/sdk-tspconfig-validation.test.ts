@@ -644,6 +644,7 @@ parameters:
     subRules: [
       new TspConfigJavaMgmtNamespaceFormatSubRule(),
       new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
+      new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
     ],
   },
 ];
