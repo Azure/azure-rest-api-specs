@@ -425,6 +425,10 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
+@@clientName(GalleryImageVersionStorageProfile,
+  "HciVmGalleryImageVersionStorageProfile",
+  "csharp"
+);
 @@clientName(GalleryImageVersionStorageProfile.osDiskImage,
   "OSDiskImage",
   "csharp"
@@ -455,16 +459,17 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(FabricConnectionHealthEnum,
-  "FabricConnectionHealthStateType",
+  "HciVmFabricConnectionHealthStateType",
   "csharp"
 );
 @@clientName(FabricIntegrationStateEnum,
-  "FabricIntegrationStateType",
+  "HciVmFabricIntegrationStateType",
   "csharp"
 );
+@@clientName(FabricIntegrationStatus, "HciVmFabricIntegrationStatus", "csharp");
 @@clientName(FabricIntegrationStatus.lastChecked, "LastCheckedOn", "csharp");
-@@clientName(FabricIssue, "ManagedNetworkFabricIssue", "csharp");
-@@clientName(FabricResourceTypeEnum, "FabricResourceType", "csharp");
+@@clientName(FabricIssue, "HciVmFabricIssue", "csharp");
+@@clientName(FabricResourceTypeEnum, "HciVmFabricResourceType", "csharp");
 @@clientName(FrontendIPConfiguration, "HciVmFrontendIPConfiguration", "csharp");
 @@clientName(FrontendIPConfigurationProperties,
   "HciVmFrontendIPConfigurationProperties",
@@ -591,6 +596,15 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(InterfaceDNSSettings, "HciVmInterfaceDnsSettings", "csharp");
 @@clientName(VMDiskSecurityProfile, "HciVmDiskSecurityProfile", "csharp");
+@@clientName(GalleryOSDiskImage, "HciVmGalleryOSDiskImage", "csharp");
+@@clientName(GalleryImageVersionProperties,
+  "HciVmGalleryImageVersionProperties",
+  "csharp"
+);
+@@clientName(GalleryImageStatusDownloadStatus,
+  "HciVmGalleryImageDownloadStatus",
+  "csharp"
+);
 
 // Java
 @@clientName(Update, "HciUpdate", "java");
