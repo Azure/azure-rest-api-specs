@@ -661,15 +661,7 @@ interface Fleets {
     Fleet,
     void,
     Response = VirtualMachineListResult,
-    Parameters = {
-      /** Filter expression to filter the virtual machines. */
-      @query
-      $filter?: string;
-
-      /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
-      @query
-      $skiptoken?: string;
-    }
+    Parameters = ListVirtualMachinesParameters
   >;
 
   /** Cancels an instance Fleet creation that is in progress. */
@@ -677,3 +669,13 @@ interface Fleets {
   @added(Versions.v2025_07_01_preview)
   cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
+
+alias ListVirtualMachinesParameters = {
+  @doc("Filter expression to filter the virtual machines.")
+  @query
+  $filter?: string;
+
+  @doc("Skip token for pagination. Uses the token from a previous response to fetch the next page of results.")
+  @query
+  $skiptoken?: string;
+};
