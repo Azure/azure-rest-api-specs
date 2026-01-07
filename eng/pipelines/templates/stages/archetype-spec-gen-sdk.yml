@@ -206,6 +206,7 @@ stages:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
@@ -246,10 +247,6 @@ stages:
           cd $(SpecRepoDirectory)
           echo "##[group]Run npm ci"
           npm ci
-          if [ "$?" -ne 0 ]; then
-            echo "##vso[task.logissue type=error]npm ci failed."
-            exit 1
-          fi
           echo "##[endgroup]"
           node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
             --scp $(SpecRepoDirectory) \
