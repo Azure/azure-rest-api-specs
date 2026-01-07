@@ -1,32 +1,37 @@
 {
-  "operationId": "AutoUpgradeProfiles_Get",
   "title": "Gets an AutoUpgradeProfile resource.",
+  "operationId": "AutoUpgradeProfiles_Get",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
+    "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
     "autoUpgradeProfileName": "autoupgradeprofile1"
   },
   "responses": {
     "200": {
       "body": {
+        "properties": {
+          "channel": "Stable",
+          "provisioningState": "Succeeded",
+          "updateStrategyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/fleet1/updateStrategies/strategy1",
+          "nodeImageSelection": {
+            "type": "Latest"
+          },
+          "disabled": true
+        },
+        "eTag": "\"EtagValue\"",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/autoUpgradeProfiles/autoupgradeprofile1",
         "name": "autoupgradeprofile1",
         "type": "Microsoft.ContainerService/fleets/autoUpgradeProfiles",
         "systemData": {
-          "createdBy": "@contoso.com",
+          "createdBy": "someUser",
           "createdByType": "User",
-          "createdAt": "2023-03-01T01:10:08.395Z",
-          "lastModifiedBy": "@contoso.com",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-03-01T01:10:08.395Z"
-        },
-        "properties": {
-          "provisioningState": "Succeeded",
-          "channel": "Stable"
-        },
-        "eTag": "\"EtagValue\""
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        }
       }
     }
   }

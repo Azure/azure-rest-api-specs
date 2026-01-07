@@ -1,36 +1,74 @@
 {
-  "operationId": "Fleets_CreateOrUpdate",
   "title": "Creates a Fleet resource with a long running operation.",
+  "operationId": "Fleets_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
+    "resourceGroupName": "rgfleets",
+    "If-Match": "jzlrwaylijhsnzp",
+    "If-None-Match": "cqpzdjshmggwolagomzxfy",
     "fleetName": "fleet1",
     "resource": {
-      "tags": {
-        "tier": "production",
-        "archv2": ""
-      },
+      "tags": {},
       "location": "East US",
       "properties": {
         "hubProfile": {
           "dnsPrefix": "dnsprefix1",
           "agentProfile": {
-            "vmSize": "Standard_DS1"
+            "vmSize": "Standard_DS1",
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+          },
+          "apiServerAccessProfile": {
+            "enablePrivateCluster": true,
+            "enableVnetIntegration": true,
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
           }
+        }
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key126": {}
         }
       }
     }
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "23ujdflewrj3=",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
-      },
       "body": {
-        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1",
+        "tags": {},
+        "location": "East US",
+        "properties": {
+          "hubProfile": {
+            "dnsPrefix": "dnsprefix1",
+            "agentProfile": {
+              "vmSize": "Standard_DS1",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+            },
+            "apiServerAccessProfile": {
+              "enablePrivateCluster": true,
+              "enableVnetIntegration": true,
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+            },
+            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
+            "kubernetesVersion": "1.22.4",
+            "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "eTag": "23ujdflewrj3=",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key126": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1",
         "name": "fleet-1",
         "type": "Microsoft.ContainerService/fleets",
         "systemData": {
@@ -40,43 +78,48 @@
           "lastModifiedBy": "someOtherUser",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
-        },
-        "tags": {
-          "tier": "production",
-          "archv2": ""
-        },
-        "location": "East US",
-        "eTag": "23ujdflewrj3=",
-        "properties": {
-          "hubProfile": {
-            "dnsPrefix": "dnsprefix1",
-            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
-            "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
-            "kubernetesVersion": "1.22.4",
-            "agentProfile": {
-              "vmSize": "Standard_DS1"
-            }
-          },
-          "provisioningState": "Updating",
-          "status": {
-            "lastOperationId": "operation-12345",
-            "lastOperationError": {
-              "code": "None",
-              "message": "No error"
-            }
-          }
         }
       }
     },
     "201": {
       "headers": {
-        "ETag": "23ujdflewrj3=",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2022-02-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2022-02-01"
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
       },
       "body": {
+        "tags": {},
+        "location": "East US",
+        "properties": {
+          "hubProfile": {
+            "dnsPrefix": "dnsprefix1",
+            "agentProfile": {
+              "vmSize": "Standard_DS1",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+            },
+            "apiServerAccessProfile": {
+              "enablePrivateCluster": true,
+              "enableVnetIntegration": true,
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+            },
+            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
+            "kubernetesVersion": "1.22.4",
+            "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "eTag": "23ujdflewrj3=",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key126": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
         "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1",
-        "name": "fleet1",
+        "name": "fleet-1",
         "type": "Microsoft.ContainerService/fleets",
         "systemData": {
           "createdBy": "someUser",
@@ -85,24 +128,6 @@
           "lastModifiedBy": "someOtherUser",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2022-03-23T05:40:40.657Z"
-        },
-        "tags": {
-          "tier": "production",
-          "archv2": ""
-        },
-        "location": "East US",
-        "eTag": "23ujdflewrj3=",
-        "properties": {
-          "hubProfile": {
-            "dnsPrefix": "dnsprefix1",
-            "fqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
-            "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
-            "kubernetesVersion": "1.22.4",
-            "agentProfile": {
-              "vmSize": "Standard_DS1"
-            }
-          },
-          "provisioningState": "Creating"
         }
       }
     }

@@ -1,6 +1,6 @@
 {
-  "operationId": "Fleets_ListBySubscription",
   "title": "Lists the Fleet resources in a subscription.",
+  "operationId": "Fleets_ListBySubscription",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
@@ -21,10 +21,7 @@
               "lastModifiedByType": "User",
               "lastModifiedAt": "2022-03-23T05:40:40.657Z"
             },
-            "tags": {
-              "tier": "production",
-              "archv2": ""
-            },
+            "tags": {},
             "location": "East US",
             "eTag": "23ujdflewrj3=",
             "properties": {
@@ -34,21 +31,31 @@
                 "portalFqdn": "dnsprefix1-abcd1234.flt.eastus.azmk8s.io",
                 "kubernetesVersion": "1.22.4",
                 "agentProfile": {
-                  "vmSize": "Standard_DS1"
+                  "vmSize": "Standard_DS1",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
+                },
+                "apiServerAccessProfile": {
+                  "enablePrivateCluster": true,
+                  "enableVnetIntegration": true,
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.Network/virtualNetwork/myvnet/subnets/mysubnet1"
                 }
               },
-              "provisioningState": "Succeeded",
-              "status": {
-                "lastOperationId": "operation-12345",
-                "lastOperationError": {
-                  "code": "None",
-                  "message": "No error"
+              "provisioningState": "Succeeded"
+            },
+            "identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000",
+              "type": "None",
+              "userAssignedIdentities": {
+                "key126": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
                 }
               }
             }
           }
         ],
-        "nextLink": null
+        "nextLink": "https://microsoft.com/adyccxeh"
       }
     }
   }

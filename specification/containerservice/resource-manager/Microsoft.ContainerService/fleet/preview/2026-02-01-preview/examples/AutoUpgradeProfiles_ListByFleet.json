@@ -1,10 +1,10 @@
 {
-  "operationId": "AutoUpgradeProfiles_ListByFleet",
   "title": "Lists the AutoUpgradeProfile resources by fleet.",
+  "operationId": "AutoUpgradeProfiles_ListByFleet",
   "parameters": {
     "api-version": "2026-02-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
+    "resourceGroupName": "rgfleets",
     "fleetName": "fleet1"
   },
   "responses": {
@@ -25,7 +25,12 @@
             },
             "properties": {
               "provisioningState": "Succeeded",
-              "channel": "Stable"
+              "channel": "Stable",
+              "updateStrategyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/fleet1/updateStrategies/strategy1",
+              "nodeImageSelection": {
+                "type": "Latest"
+              },
+              "disabled": true
             },
             "eTag": "\"EtagValue\""
           }
