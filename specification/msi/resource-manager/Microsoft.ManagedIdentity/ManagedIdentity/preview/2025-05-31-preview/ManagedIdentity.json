@@ -88,7 +88,7 @@
           }
         },
         "x-ms-examples": {
-          "MsiOperationsList": {
+          "SystemAssignedIdentityGet": {
             "$ref": "./examples/SystemAssignedIdentityGet.json"
           }
         }
@@ -528,6 +528,9 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialGet": {
             "$ref": "./examples/FederatedIdentityCredentialGet.json"
+          },
+          "FlexibleFederatedIdentityCredentialGet": {
+            "$ref": "./examples/FlexibleFederatedIdentityCredentialGet.json"
           }
         }
       },
@@ -595,6 +598,9 @@
         "x-ms-examples": {
           "FederatedIdentityCredentialCreate": {
             "$ref": "./examples/FederatedIdentityCredentialCreate.json"
+          },
+          "FlexibleFederatedIdentityCredentialCreate": {
+            "$ref": "./examples/FlexibleFederatedIdentityCredentialCreate.json"
           }
         }
       },
@@ -657,6 +663,25 @@
       "type": "string",
       "format": "uuid",
       "description": "Universally Unique Identifier"
+    },
+    "ClaimsMatchingExpression": {
+      "type": "object",
+      "description": "Object for defining the allowed identifiers of external identities. Introduced in 2025-01-31-preview.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Wildcard-based expression for matching incoming subject claims."
+        },
+        "languageVersion": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the version of the flexible fic language used in the expression."
+        }
+      },
+      "required": [
+        "value",
+        "languageVersion"
+      ]
     },
     "CloudError": {
       "type": "object",
@@ -734,11 +759,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "claimsMatchingExpression": {
+          "$ref": "#/definitions/ClaimsMatchingExpression",
+          "description": "Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both. Introduced in 2025-01-31-preview."
         }
       },
       "required": [
         "issuer",
-        "subject",
         "audiences"
       ]
     },

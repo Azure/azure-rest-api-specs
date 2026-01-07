@@ -25,6 +25,22 @@ union IsolationScope {
 }
 
 /**
+ * Object for defining the allowed identifiers of external identities. Introduced in 2025-01-31-preview.
+ */
+@added(Versions.v2025_05_31_preview)
+model ClaimsMatchingExpression {
+  /**
+   * Wildcard-based expression for matching incoming subject claims.
+   */
+  value: string;
+
+  /**
+   * Specifies the version of the flexible fic language used in the expression.
+   */
+  languageVersion: int32;
+}
+
+/**
  * Configuration to restrict identity assignment to specific resource providers or resource types.
  */
 @added(Versions.v2025_05_31_preview)
@@ -195,12 +211,19 @@ model FederatedIdentityCredentialProperties {
   /**
    * The identifier of the external identity.
    */
-  subject: string;
+  @madeOptional(Versions.v2025_05_31_preview)
+  subject?: string;
 
   /**
    * The list of audiences that can appear in the issued token.
    */
   audiences: string[];
+
+  /**
+   * Object for defining the allowed identifiers of external identities. Either 'subject' or 'claimsMatchingExpression' must be defined, but not both. Introduced in 2025-01-31-preview.
+   */
+  @added(Versions.v2025_05_31_preview)
+  claimsMatchingExpression?: ClaimsMatchingExpression;
 }
 
 /**
