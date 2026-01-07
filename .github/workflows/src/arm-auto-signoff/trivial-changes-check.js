@@ -7,7 +7,7 @@ import {
   getChangedFilesStatuses,
   markdown,
   resourceManager,
-  swagger
+  swagger,
 } from "../../../shared/src/changed-files.js";
 import { CoreLogger } from "../core-logger.js";
 import { PullRequestChanges } from "./pr-changes.js";
@@ -98,7 +98,7 @@ export async function checkTrivialChanges(core) {
     changedRmFilesStatuses,
     core,
   );
-  
+
   if (hasSignificantFileOperationsInPr) {
     core.info("Significant file operations detected (new spec files, deletions, or renames)");
     // These are functional changes by policy
@@ -163,8 +163,9 @@ async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, chang
   const documentationFiles = changedFiles.filter(markdown);
   const exampleFiles = changedFiles.filter(example);
   const specFiles = changedFiles.filter(swagger);
-  const otherFiles = changedFiles.filter((file) => !markdown(file) && !example(file) && !swagger(file));
-
+  const otherFiles = changedFiles.filter(
+    (file) => !markdown(file) && !example(file) && !swagger(file),
+  );
 
   core.info(
     `File breakdown: ${documentationFiles.length} docs, ${exampleFiles.length} examples, ${specFiles.length} specs, ${otherFiles.length} other`,

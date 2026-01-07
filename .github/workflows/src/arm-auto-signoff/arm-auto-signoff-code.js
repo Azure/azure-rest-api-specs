@@ -3,7 +3,6 @@ import { checkTrivialChanges } from "./trivial-changes-check.js";
 
 /** @typedef {import("./pr-changes.js").PullRequestChanges} PullRequestChanges */
 
-
 /**
  * Main entry point for ARM Auto Signoff Code workflow.
  *

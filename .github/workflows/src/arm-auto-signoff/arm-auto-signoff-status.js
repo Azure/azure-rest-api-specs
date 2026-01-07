@@ -100,7 +100,9 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
   // Check if any auto sign-off labels are currently present
   // Only proceed with auto sign-off logic if auto labels exist or we're about to add them
-  const hasAutoSignedOffLabels = labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP);
+  const hasAutoSignedOffLabels = labelNames.includes(
+    ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP,
+  );
   core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
 
@@ -301,7 +303,7 @@ async function checkArmAnalysisWorkflow(workflowRuns, github, owner, repo, core)
     run_id: run.id,
     per_page: PER_PAGE_MAX,
   });
-  
+
   /** @type {string[]} */
   const artifactNames = artifacts.map((a) => a.name);
   core.info(`${wfName} artifactNames: ${JSON.stringify(artifactNames)}`);

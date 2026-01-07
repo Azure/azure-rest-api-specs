@@ -52,11 +52,7 @@ export class PullRequestChanges {
    */
   isDocumentationOnly() {
     return (
-      this.rmDocumentation &&
-      !this.rmExamples &&
-      !this.rmFunctional &&
-      !this.rmOther &&
-      !this.other
+      this.rmDocumentation && !this.rmExamples && !this.rmFunctional && !this.rmOther && !this.other
     );
   }
 
@@ -65,11 +61,7 @@ export class PullRequestChanges {
    */
   isExamplesOnly() {
     return (
-      !this.rmDocumentation &&
-      this.rmExamples &&
-      !this.rmFunctional &&
-      !this.rmOther &&
-      !this.other
+      !this.rmDocumentation && this.rmExamples && !this.rmFunctional && !this.rmOther && !this.other
     );
   }
 

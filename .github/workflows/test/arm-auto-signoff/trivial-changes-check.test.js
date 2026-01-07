@@ -1,4 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import * as changedFiles from "../../../shared/src/changed-files.js";
+import { checkTrivialChanges } from "../../src/arm-auto-signoff/trivial-changes-check.js";
+import { createMockCore } from "../mocks.js";
 
 /** @type {import("vitest").Mock<(args: string[]) => Promise<string>>} */
 const mockShow = vi.hoisted(() => vi.fn().mockResolvedValue(""));
@@ -8,9 +11,6 @@ vi.mock("simple-git", () => ({
     show: mockShow,
   }),
 }));
-import * as changedFiles from "../../../shared/src/changed-files.js";
-import { checkTrivialChanges } from "../../src/arm-auto-signoff/trivial-changes-check.js";
-import { createMockCore } from "../mocks.js";
 
 const core = createMockCore();
 
