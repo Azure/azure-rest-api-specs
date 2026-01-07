@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.AzureStackHCI;
 
 @@clientName(Microsoft.AzureStackHCI, "AzureStackHCIVmClient", "python");
@@ -22,7 +23,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(StatusLevelTypes, "HciVmStatusLevelType", "csharp");
 @@clientName(PowerStateEnum, "HciVmPowerState", "csharp");
 @@clientName(ProvisioningAction, "GuestAgentProvisioningAction", "csharp");
-@@clientName(Identity, "HciVmIdentity", "csharp");
 @@clientName(SshConfiguration, "HciVmOSProfileSshConfiguration", "csharp");
 @@clientName(SshPublicKey, "HciVmOSProfileSshPublicKey", "csharp");
 @@clientName(AttestationStatus, "HciVmAttestationStatus", "csharp");
@@ -32,6 +32,7 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(GalleryImage, "HciVmGalleryImage", "csharp");
 @@clientName(GalleryImageProperties, "HciVmGalleryImageProperties", "csharp");
+@@clientName(GalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(GuestAgent, "HciVmGuestAgent", "csharp");
 @@clientName(GuestAgentProperties, "HciVmGuestAgentProperties", "csharp");
 @@clientName(HybridIdentityMetadata, "HciVmHybridIdentityMetadata", "csharp");
@@ -49,6 +50,7 @@ using Microsoft.AzureStackHCI;
   "HciVmMarketplaceGalleryImageProperties",
   "csharp"
 );
+@@clientName(MarketplaceGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(NetworkInterface, "HciVmNetworkInterface", "csharp");
 @@clientName(NetworkInterfaceProperties,
   "HciVmNetworkInterfaceProperties",
@@ -316,12 +318,293 @@ using Microsoft.AzureStackHCI;
   "HciVmInstanceStorageProfileOSDisk",
   "csharp"
 );
+@@clientName(VirtualMachineInstancePropertiesStorageProfileOsDisk.osType,
+  "OSType",
+  "csharp"
+);
 @@clientName(VirtualMachineInstanceStatus, "HciVmInstanceStatus", "csharp");
 @@clientName(VirtualMachineInstanceStatusProvisioningStatus,
   "HciVmInstanceProvisioningStatus",
   "csharp"
 );
 @@clientName(VmSizeEnum, "HciVmSize", "csharp");
+@@clientName(VirtualMachineInstanceManagedDiskParameters,
+  "VirtualMachineInstanceManagedDiskContent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileLinuxConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesOsProfileWindowsConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMAgent,
+  "ProvisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMConfigAgent,
+  "ProvisionVmConfigAgent",
+  "csharp"
+);
+@@alternateType(VirtualMachineInstanceUpdateRequest.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(HybridIdentityMetadataProperties.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(NetworkInterfaceArmReference,
+  "HciVmNetworkInterfaceArmReference",
+  "csharp"
+);
+@@clientName(VirtualHardDiskArmReference,
+  "HciVmVirtualHardDiskArmReference",
+  "csharp"
+);
+@@clientName(LogicalNetworkArmReference,
+  "HciVmLogicalNetworkArmReference",
+  "csharp"
+);
+@@clientName(SubnetIpConfigurationReference,
+  "HciVmSubnetIPConfigurationReference",
+  "csharp"
+);
+@@clientName(IPConfigurationArmReference,
+  "HciVmIPConfigurationArmReference",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceProperties.hostNodeIpAddress,
+  "HostNodeIPAddress",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceProperties.osProfile, "OSProfile", "csharp");
+@@clientName(VirtualMachineInstanceUpdateProperties.osProfile,
+  "OSProfile",
+  "csharp"
+);
+@@clientName(VirtualMachineInstancePropertiesStorageProfile.osDisk,
+  "OSDisk",
+  "csharp"
+);
+@@clientName(IPPool.ipPoolType, "IPPoolType", "csharp");
+@@clientName(RouteProperties.nextHopIpAddress, "nextHopIPAddress", "csharp");
+@@clientName(SubnetProperties.ipAllocationMethod,
+  "IPAllocationMethod",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipConfigurationReferences,
+  "IPConfigurationReferences",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipPools, "IPPools", "csharp");
+@@clientName(NetworkInterfaceProperties.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetProperties.ipConfigurations,
+  "IPConfigurations",
+  "csharp"
+);
+@@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
+@@clientName(GalleryImageVersionStorageProfile,
+  "HciVmGalleryImageVersionStorageProfile",
+  "csharp"
+);
+@@clientName(GalleryImageVersionStorageProfile.osDiskImage,
+  "OSDiskImage",
+  "csharp"
+);
+@@clientName(LoadBalancer, "HciVmLoadBalancer", "csharp");
+@@clientName(LoadBalancerProperties, "HciVmLoadBalancerProperties", "csharp");
+@@clientName(NatGateway, "HciVmNatGateway", "csharp");
+@@clientName(NatGatewayProperties, "HciVmNatGatewayProperties", "csharp");
+@@clientName(NatGatewayProperties.inboundNATRules, "InboundNatRules", "csharp");
+@@clientName(PublicIPAddress, "HciVmPublicIPAddress", "csharp");
+@@clientName(PublicIPAddressProperties,
+  "HciVmPublicIPAddressProperties",
+  "csharp"
+);
+@@clientName(VirtualNetwork, "HciVmVirtualNetwork", "csharp");
+@@clientName(VirtualNetworkProperties,
+  "HciVmVirtualNetworkProperties",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnet, "HciVmVirtualNetworkSubnet", "csharp");
+@@clientName(VirtualNetworkSubnetProperties,
+  "HciVmVirtualNetworkSubnetProperties",
+  "csharp"
+);
+@@clientName(BackendAddressPool, "HciVmBackendAddressPool", "csharp");
+@@clientName(BackendAddressPoolProperties,
+  "HciVmBackendAddressPoolProperties",
+  "csharp"
+);
+@@clientName(FabricConnectionHealthEnum,
+  "HciVmFabricConnectionHealthStateType",
+  "csharp"
+);
+@@clientName(FabricIntegrationStateEnum,
+  "HciVmFabricIntegrationStateType",
+  "csharp"
+);
+@@clientName(FabricIntegrationStatus, "HciVmFabricIntegrationStatus", "csharp");
+@@clientName(FabricIntegrationStatus.lastChecked, "LastCheckedOn", "csharp");
+@@clientName(FabricIssue, "HciVmFabricIssue", "csharp");
+@@clientName(FabricResourceTypeEnum, "HciVmFabricResourceType", "csharp");
+@@clientName(FrontendIPConfiguration, "HciVmFrontendIPConfiguration", "csharp");
+@@clientName(FrontendIPConfigurationProperties,
+  "HciVmFrontendIPConfigurationProperties",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.bypassSdnPolicies,
+  "IsSdnPoliciesBypassed",
+  "csharp"
+);
+@@clientName(NetworkInterfacesUpdateProperties.bypassSdnPolicies,
+  "IsSdnPoliciesBypassed",
+  "csharp"
+);
+@@clientName(InboundNATRule, "HciVmInboundNatRule", "csharp");
+@@clientName(InboundNATRuleProperties,
+  "HciVmInboundNatRuleProperties",
+  "csharp"
+);
+@@clientName(InboundNATRuleProtocol, "HciVmInboundNatRuleProtocol", "csharp");
+@@clientName(InboundNATRuleProtocol.TCP, "Tcp", "csharp");
+@@clientName(InboundNATRuleProtocol.UDP, "Udp", "csharp");
+@@clientName(LoadBalancerBackendAddress,
+  "HciVmLoadBalancerBackendAddress",
+  "csharp"
+);
+@@clientName(LoadBalancerBackendAddressProperties,
+  "HciVmLoadBalancerBackendAddressProperties",
+  "csharp"
+);
+@@clientName(LoadBalancerBackendAddressProperties.ipAddress,
+  "IPAddress",
+  "csharp"
+);
+@@clientName(LoadBalancerBackendAddressAdminState,
+  "HciVmLoadBalancerBackendAddressAdminState",
+  "csharp"
+);
+@@clientName(LoadBalancerBackendAddressPoolReference,
+  "HciVmLoadBalancerBackendAddressPoolReference",
+  "csharp"
+);
+@@clientName(LoadBalancerFrontendIPConfigurationReference,
+  "HciVmLoadBalancerFrontendIPConfigurationReference",
+  "csharp"
+);
+@@clientName(LoadBalancerProbeProtocol,
+  "HciVmLoadBalancerProbeProtocol",
+  "csharp"
+);
+@@clientName(LoadBalancerProbeProtocol.HTTP, "Http", "csharp");
+@@clientName(LoadBalancerProbeProtocol.TCP, "Tcp", "csharp");
+@@clientName(LoadBalancerRule, "HciVmLoadBalancerRule", "csharp");
+@@clientName(LoadBalancerRuleProperties,
+  "HciVmLoadBalancerRuleProperties",
+  "csharp"
+);
+@@clientName(LoadBalancerRuleSessionPersistenceType,
+  "HciVmLoadBalancerRuleSessionPersistenceType",
+  "csharp"
+);
+@@clientName(LoadBalancerRuleTransportProtocol,
+  "HciVmLoadBalancerRuleTransportProtocol",
+  "csharp"
+);
+@@clientName(LoadBalancerRuleTransportProtocol.TCP, "Tcp", "csharp");
+@@clientName(LoadBalancerRuleTransportProtocol.UDP, "Udp", "csharp");
+@@clientName(LoadBalancerStatus, "HciVmLoadBalancerStatus", "csharp");
+@@clientName(LoadBalancerStatusProvisioningStatus,
+  "HciVmLoadBalancerStatusProvisioningStatus",
+  "csharp"
+);
+@@clientName(NatGatewayStatus, "HciVmNatGatewayStatus", "csharp");
+@@clientName(NatGatewayStatusProvisioningStatus,
+  "HciVmNatGatewayStatusProvisioningStatus",
+  "csharp"
+);
+@@clientName(Probe, "HciVmLoadBalancerHealthProbe", "csharp");
+@@clientName(ProbeProperties,
+  "HciVmLoadBalancerHealthProbeProperties",
+  "csharp"
+);
+@@clientName(PublicIPAddressArmReference,
+  "HciVmPublicIPAddressArmReference",
+  "csharp"
+);
+@@clientName(PublicIPAddressProperties.ipAddress, "IPAddress", "csharp");
+@@clientName(PublicIPAddressProperties.ipAllocationScope,
+  "IPAllocationScope",
+  "csharp"
+);
+@@clientName(PublicIPAddressProperties.ipConfiguration,
+  "IPConfiguration",
+  "csharp"
+);
+@@clientName(PublicIPAddressType, "HciVmPublicIPAddressType", "csharp");
+@@clientName(VirtualNetworkAddressSpace,
+  "HciVmVirtualNetworkAddressSpace",
+  "csharp"
+);
+@@clientName(VirtualNetworkStatus, "HciVmVirtualNetworkStatus", "csharp");
+@@clientName(VirtualNetworkStatusProvisioningStatus,
+  "HciVmVirtualNetworkStatusProvisioningStatus",
+  "csharp"
+);
+@@clientName(VirtualNetworkDhcpOptions,
+  "HciVmVirtualNetworkDhcpOptions",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetArmReference,
+  "HciVmVirtualNetworkSubnetArmReference",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetIpConfigurationReference,
+  "HciVmVirtualNetworkSubnetIPConfigurationReference",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetStatus,
+  "HciVmVirtualNetworkSubnetStatus",
+  "csharp"
+);
+@@clientName(VirtualNetworkSubnetStatusProvisioningStatus,
+  "HciVmVirtualNetworkSubnetStatusProvisioningStatus",
+  "csharp"
+);
+@@clientName(InterfaceDNSSettings, "HciVmInterfaceDnsSettings", "csharp");
+@@clientName(VMDiskSecurityProfile, "HciVmDiskSecurityProfile", "csharp");
+@@clientName(GalleryOSDiskImage, "HciVmGalleryOSDiskImage", "csharp");
+@@clientName(GalleryImageVersionProperties,
+  "HciVmGalleryImageVersionProperties",
+  "csharp"
+);
+@@clientName(GalleryImageStatusDownloadStatus,
+  "HciVmGalleryImageDownloadStatus",
+  "csharp"
+);
 
 // Java
 @@clientName(Update, "HciUpdate", "java");
