@@ -74,9 +74,14 @@ using Microsoft.ApiManagement;
   "python"
 );
 
+@@clientName(ExportFormat.Swagger, "SWAGGER_LINK", "java");
+@@clientName(ExportFormat.Wadl, "WADL_LINK", "java");
+@@clientName(ExportFormat.Wsdl, "WSDL_LINK", "java");
+@@clientName(ExportFormat.Openapi, "OPENAPI_LINK", "java");
+@@clientName(ExportFormat.OpenapiJson, "OPENAPI_JSON_LINK", "java");
 @@clientName(ExportResultFormat.Swagger, "SWAGGER_LINK_JSON", "java");
-@@clientName(ExportResultFormat.Wadl, "WSDL_LINK_XML", "java");
-@@clientName(ExportResultFormat.Wsdl, "WADL_LINK_JSON", "java");
+@@clientName(ExportResultFormat.Wadl, "WADL_LINK_JSON", "java");
+@@clientName(ExportResultFormat.Wsdl, "WSDL_LINK_XML", "java");
 @@clientName(ExportResultFormat.OpenApi, "OPENAPI_LINK", "java");
 @@clientName(SoapApiType.SoapToRest, "HTTP", "java");
 @@clientName(SoapApiType.SoapPassThrough, "SOAP", "java");
