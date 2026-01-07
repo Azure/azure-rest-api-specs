@@ -954,13 +954,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadAssessmentExcelReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadAssessmentReport": {
       "post": {
-        "operationId": "Download_AssessmentExcelReport",
+        "operationId": "Download_AssessmentReport",
         "tags": [
           "ServicesHubConnector"
         ],
-        "summary": "Download the Assessment Excel Report.",
+        "summary": "Download the Assessment Report.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -999,63 +999,12 @@
           }
         },
         "x-ms-examples": {
-          "Download the Assessment Excel Report": {
-            "$ref": "./examples/DownloadAssessmentExcel.json"
+          "Download the Assessment Report": {
+            "$ref": "./examples/DownloadAssessmentReport.json"
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadAssessmentPptReport": {
-      "post": {
-        "operationId": "Download_AssessmentPptReport",
-        "tags": [
-          "ServicesHubConnector"
-        ],
-        "summary": "Download the Assessment Ppt Report.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssessmentDownloadPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DownloadResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Download the Assessment PowerPoint Report": {
-            "$ref": "./examples/DownloadAssessmentPpt.json"
-          }
-        }
-      }
-    },
+    },    
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/getAssessmentSurveyList": {
       "post": {
         "operationId": "Get_AssessmentSurveyList",
@@ -1149,13 +1098,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadSurveyExcelReport": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadSurveyReport": {
       "post": {
-        "operationId": "Download_SurveyExcelReport",
+        "operationId": "Download_SurveyReport",
         "tags": [
           "ServicesHubConnector"
         ],
-        "summary": "Download the Survey Excel Report.",
+        "summary": "Download the Survey Report.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1194,59 +1143,8 @@
           }
         },
         "x-ms-examples": {
-          "Download the Survey Excel Report": {
-            "$ref": "./examples/DownloadSurveyExcel.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServicesHub/connectors/{servicesHubConnectorName}/downloadSurveyExecutiveSummary": {
-      "post": {
-        "operationId": "Download_SurveyExecutiveSummary",
-        "tags": [
-          "ServicesHubConnector"
-        ],
-        "summary": "Download the Survey Ppt Report.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServicesHubConnectorNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SurveyDownloadPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DownloadResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Download the Survey PowerPoint Report": {
-            "$ref": "./examples/DownloadSurveyExecutiveSummary.json"
+          "Download the Survey Report": {
+            "$ref": "./examples/DownloadSurveyReport.json"
           }
         }
       }
@@ -1823,6 +1721,14 @@
       ],
       "description": "Type of Connected Machine - ARC or VM."
     },
+    "ReportType": {
+      "type": "string",
+      "enum": [
+        "ppt",
+        "excel"
+      ],
+      "description": "Type of Report to be downloaded."
+    },
     "ServicesHubAssessmentConfigResult": {
       "type": "object",
       "description": "Services Hub Assessment Config Result",
@@ -2192,6 +2098,10 @@
         "culture": {
           "type": "string",
           "description": "Defines the culture."
+        },        
+        "reportType": {
+          "type": "string",
+          "description": "Defines the report type."
         }
       },
       "required": [
@@ -2217,9 +2127,9 @@
           "type": "string",
           "description": "Defines the name of the file."
         },
-        "content": {
+        "blobUrl": {
           "type": "string",
-          "description": "Defines content of file."
+          "description": "Defines the blob url of the file."
         }
       }
     },
@@ -2296,6 +2206,10 @@
         "culture": {
           "type": "string",
           "description": "Defines the culture."
+        },
+        "reportType": {
+          "type": "string",
+          "description": "Type of Report to be downloaded: ppt or excel."
         }
       },
       "required": [
