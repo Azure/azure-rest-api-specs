@@ -1,5 +1,5 @@
 import "./main.tsp";
-import "./csharp-client.tsp";
+//import "./csharp-client.tsp";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
@@ -10,74 +10,6 @@ using Microsoft.AVS;
 @@clientName(Microsoft.AVS, "AvsClient", "csharp,java,go");
 @@clientName(Microsoft.AVS, "AzureVMwareSolutionAPI", "javascript");
 @@clientName(Microsoft.AVS, "AVSClient", "python");
-
-@@clientName(WorkloadNetworkVmGroups.list, "ListVMGroups", "!csharp");
-@@clientName(WorkloadNetworkVmGroups.get, "GetVMGroup", "!csharp");
-@@clientName(WorkloadNetworkVmGroups.create, "CreateVMGroup", "!csharp");
-@@clientName(WorkloadNetworkVmGroups.update, "UpdateVMGroup", "!csharp");
-@@clientName(WorkloadNetworkVmGroups.delete, "DeleteVMGroup", "!csharp");
-
-@@clientName(WorkloadNetworkVirtualMachines.list,
-  "ListVirtualMachines",
-  "!csharp"
-);
-@@clientName(WorkloadNetworkVirtualMachines.get,
-  "GetVirtualMachine",
-  "!csharp"
-);
-
-@@clientName(WorkloadNetworkSegments.list, "ListSegments", "!csharp");
-@@clientName(WorkloadNetworkSegments.get, "GetSegment", "!csharp");
-@@clientName(WorkloadNetworkSegments.create, "CreateSegments", "!csharp");
-@@clientName(WorkloadNetworkSegments.update, "UpdateSegments", "!csharp");
-@@clientName(WorkloadNetworkSegments.deleteSegment, "DeleteSegment", "!csharp");
-
-@@clientName(WorkloadNetworkPublicIps.list, "ListPublicIPs", "!csharp");
-@@clientName(WorkloadNetworkPublicIps.get, "GetPublicIP", "!csharp");
-@@clientName(WorkloadNetworkPublicIps.create, "CreatePublicIP", "!csharp");
-@@clientName(WorkloadNetworkPublicIps.delete, "DeletePublicIP", "!csharp");
-
-@@clientName(WorkloadNetworkPortMirroringProfiles.list,
-  "ListPortMirroring",
-  "!csharp"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.get,
-  "GetPortMirroring",
-  "!csharp"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.create,
-  "CreatePortMirroring",
-  "!csharp"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.update,
-  "UpdatePortMirroring",
-  "!csharp"
-);
-@@clientName(WorkloadNetworkPortMirroringProfiles.delete,
-  "DeletePortMirroring",
-  "!csharp"
-);
-
-@@clientName(WorkloadNetworkGateways.list, "ListGateways", "!csharp");
-@@clientName(WorkloadNetworkGateways.get, "GetGateway", "!csharp");
-
-@@clientName(WorkloadNetworkDnsZones.list, "ListDnsZones", "!csharp");
-@@clientName(WorkloadNetworkDnsZones.get, "GetDnsZone", "!csharp");
-@@clientName(WorkloadNetworkDnsZones.create, "CreateDnsZone", "!csharp");
-@@clientName(WorkloadNetworkDnsZones.update, "UpdateDnsZone", "!csharp");
-@@clientName(WorkloadNetworkDnsZones.delete, "DeleteDnsZone", "!csharp");
-
-@@clientName(WorkloadNetworkDnsServices.list, "ListDnsServices", "!csharp");
-@@clientName(WorkloadNetworkDnsServices.get, "GetDnsService", "!csharp");
-@@clientName(WorkloadNetworkDnsServices.create, "CreateDnsService", "!csharp");
-@@clientName(WorkloadNetworkDnsServices.update, "UpdateDnsService", "!csharp");
-@@clientName(WorkloadNetworkDnsServices.delete, "DeleteDnsService", "!csharp");
-
-@@clientName(WorkloadNetworkDhcpConfigurations.list, "ListDhcp", "!csharp");
-@@clientName(WorkloadNetworkDhcpConfigurations.get, "GetDhcp", "!csharp");
-@@clientName(WorkloadNetworkDhcpConfigurations.create, "CreateDhcp", "!csharp");
-@@clientName(WorkloadNetworkDhcpConfigurations.update, "UpdateDhcp", "!csharp");
-@@clientName(WorkloadNetworkDhcpConfigurations.delete, "DeleteDhcp", "!csharp");
 
 @@clientName(Addon, "AvsPrivateCloudAddon", "csharp");
 @@clientName(AddonProperties, "AvsPrivateCloudAddonProperties", "csharp");

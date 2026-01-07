@@ -109,6 +109,59 @@ using Microsoft.AVS;
   "!csharp"
 );
 
+@@clientName(WorkloadNetworkVmGroups.list, "ListVMGroups");
+@@clientName(WorkloadNetworkVmGroups.get, "GetVMGroup");
+@@clientName(WorkloadNetworkVmGroups.create, "CreateVMGroup");
+@@clientName(WorkloadNetworkVmGroups.update, "UpdateVMGroup");
+@@clientName(WorkloadNetworkVmGroups.delete, "DeleteVMGroup");
+
+@@clientName(WorkloadNetworkVirtualMachines.list, "ListVirtualMachines");
+@@clientName(WorkloadNetworkVirtualMachines.get, "GetVirtualMachine");
+
+@@clientName(WorkloadNetworkSegments.list, "ListSegments");
+@@clientName(WorkloadNetworkSegments.get, "GetSegment");
+@@clientName(WorkloadNetworkSegments.create, "CreateSegments");
+@@clientName(WorkloadNetworkSegments.update, "UpdateSegments");
+@@clientName(WorkloadNetworkSegments.deleteSegment, "DeleteSegment");
+
+@@clientName(WorkloadNetworkPublicIps.list, "ListPublicIPs");
+@@clientName(WorkloadNetworkPublicIps.get, "GetPublicIP");
+@@clientName(WorkloadNetworkPublicIps.create, "CreatePublicIP");
+@@clientName(WorkloadNetworkPublicIps.delete, "DeletePublicIP");
+
+@@clientName(WorkloadNetworkPortMirroringProfiles.list, "ListPortMirroring");
+@@clientName(WorkloadNetworkPortMirroringProfiles.get, "GetPortMirroring");
+@@clientName(WorkloadNetworkPortMirroringProfiles.create,
+  "CreatePortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.update,
+  "UpdatePortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.delete,
+  "DeletePortMirroring"
+);
+
+@@clientName(WorkloadNetworkGateways.list, "ListGateways");
+@@clientName(WorkloadNetworkGateways.get, "GetGateway");
+
+@@clientName(WorkloadNetworkDnsZones.list, "ListDnsZones");
+@@clientName(WorkloadNetworkDnsZones.get, "GetDnsZone");
+@@clientName(WorkloadNetworkDnsZones.create, "CreateDnsZone");
+@@clientName(WorkloadNetworkDnsZones.update, "UpdateDnsZone");
+@@clientName(WorkloadNetworkDnsZones.delete, "DeleteDnsZone");
+
+@@clientName(WorkloadNetworkDnsServices.list, "ListDnsServices");
+@@clientName(WorkloadNetworkDnsServices.get, "GetDnsService");
+@@clientName(WorkloadNetworkDnsServices.create, "CreateDnsService");
+@@clientName(WorkloadNetworkDnsServices.update, "UpdateDnsService");
+@@clientName(WorkloadNetworkDnsServices.delete, "DeleteDnsService");
+
+@@clientName(WorkloadNetworkDhcpConfigurations.list, "ListDhcp");
+@@clientName(WorkloadNetworkDhcpConfigurations.get, "GetDhcp");
+@@clientName(WorkloadNetworkDhcpConfigurations.create, "CreateDhcp");
+@@clientName(WorkloadNetworkDhcpConfigurations.update, "UpdateDhcp");
+@@clientName(WorkloadNetworkDhcpConfigurations.delete, "DeleteDhcp");
+
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
