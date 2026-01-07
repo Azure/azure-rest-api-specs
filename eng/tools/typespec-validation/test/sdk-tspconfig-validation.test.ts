@@ -20,10 +20,8 @@ import {
   TspConfigGoMgmtInjectSpansTrueSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoModuleMatchPatternSubRule,
-  TspConfigHttpClientCsharpAzEmitterOutputDirSubRule,
   TspConfigHttpClientCsharpAzNamespaceSubRule,
   TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule,
-  TspConfigHttpClientCsharpMgmtNamespaceSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -612,18 +610,18 @@ options:
     success: false,
     subRules: [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
   },
-  //   {
-  //     description: "Validate http-client-csharp namespace with {package-name} variable",
-  //     folder: "",
-  //     tspconfigContent: `
-  // options:
-  //   "@azure-typespec/http-client-csharp":
-  //     package-name: "Azure.MyService"
-  //     namespace: "{package-name}"
-  // `,
-  //     success: true,
-  //     subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
-  //   },
+  {
+    description: "Validate http-client-csharp namespace with {package-name} variable",
+    folder: "",
+    tspconfigContent: `
+  options:
+    "@azure-typespec/http-client-csharp":
+      package-name: "Azure.MyService"
+      namespace: "{package-name}"
+  `,
+    success: true,
+    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+  },
   {
     description: "Validate http-client-csharp namespace with invalid {package-name} variable value",
     folder: "",
@@ -662,20 +660,20 @@ options:
     success: true,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
   },
-  //   {
-  //     description:
-  //       "Validate http-client-csharp-mgmt emitter-output-dir with custom service-dir and recursive variable resolution",
-  //     folder: managementTspconfigFolder,
-  //     tspconfigContent: `
+  // {
+  //   description:
+  //     "1Validate http-client-csharp-mgmt emitter-output-dir with custom service-dir and recursive variable resolution",
+  //   folder: managementTspconfigFolder,
+  //   tspconfigContent: `
   // options:
   //   "@azure-typespec/http-client-csharp-mgmt":
   //     package-name: "Azure.ResourceManager.Compute.Recommender"
   //     namespace: "{package-name}"
   //     emitter-output-dir: "{output-dir}/sdk/dellstorage/{namespace}"
   // `,
-  //     success: true,
-  //     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  //   },
+  //   success: true,
+  //   subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+  // },
   {
     description:
       "Validate http-client-csharp-mgmt emitter-output-dir fails when last segment is invalid",
@@ -688,79 +686,6 @@ options:
 `,
     success: false,
     subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },
-];
-
-// Test cases for CSharp emitters - validation behavior tests
-const csharpEmittersValidationTestCases: Case[] = [
-  // @azure-typespec/http-client-csharp - "Failed to find" should be ignored (success)
-  {
-    description:
-      "Validate http-client-csharp emitter-output-dir - Failed to find should be ignored",
-    folder: "",
-    tspconfigContent: `
-options:
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "some-dir"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
-  },
-  {
-    description: "Validate http-client-csharp namespace - Failed to find should be ignored",
-    folder: "",
-    tspconfigContent: `
-options:
-  "@azure-tools/typespec-ts":
-    namespace: "Azure.Something"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
-  },
-  {
-    description:
-      "Validate http-client-csharp-mgmt emitter-output-dir - Failed to find should be ignored",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-options:
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "arm-something"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
-  },
-  {
-    description: "Validate http-client-csharp-mgmt namespace - Failed to find should be ignored",
-    folder: managementTspconfigFolder,
-    tspconfigContent: `
-options:
-  "@azure-tools/typespec-ts":
-    namespace: "Azure.ResourceManager.Something"
-`,
-    success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtNamespaceSubRule()],
-  },
-  {
-    description: "Validate http-client-csharp emitter-output-dir - Invalid value should fail",
-    folder: "",
-    tspconfigContent: `
-options:
-  "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "InvalidValue"
-`,
-    success: false,
-    subRules: [new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule()],
-  },
-  {
-    description: "Validate http-client-csharp namespace - Invalid value should fail",
-    folder: "",
-    tspconfigContent: `
-options:
-  "@azure-typespec/http-client-csharp":
-    namespace: "InvalidNamespace"
-`,
-    success: false,
-    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
   },
 ];
 

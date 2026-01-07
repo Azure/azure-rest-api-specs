@@ -243,7 +243,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       );
       extractedPath = filteredParts.join("/");
     }
-
+    console.log(`Extracted path from emitter-output-dir: ${extractedPath}`);
     // Resolve variables in the extracted path
     return this.resolveVariables(extractedPath, config);
   }
@@ -256,13 +256,25 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
       );
 
-    const actualValue = option as unknown as undefined | string | boolean;
+    let actualValue = option as unknown as undefined | string | boolean;
+
+    // Resolve variables if the value is a string
+    if (typeof actualValue === "string" && actualValue.includes("{")) {
+      const { resolved, error } = this.resolveVariables(actualValue, config);
+      if (error) {
+        return this.createFailedResult(
+          error,
+          `Please define the variable in your configuration or use a direct value`,
+        );
+      }
+      actualValue = resolved;
+    }
+
     if (!this.validateValue(actualValue, this.expectedValue))
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
       );
-
     return { success: true };
   }
 
