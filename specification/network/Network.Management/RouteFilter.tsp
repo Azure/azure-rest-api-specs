@@ -125,7 +125,9 @@ interface RouteFilters {
     RouteFilter,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     OverrideErrorType = CloudError
   >;

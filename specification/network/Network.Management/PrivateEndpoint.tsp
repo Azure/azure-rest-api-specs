@@ -115,7 +115,9 @@ interface PrivateEndpoints {
   @delete
   privateDnsZoneGroupsDelete is PrivateDnsZoneGroupOps.DeleteWithoutOkAsync<
     PrivateEndpoint,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

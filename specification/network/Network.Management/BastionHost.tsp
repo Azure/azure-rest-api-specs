@@ -116,7 +116,9 @@ interface BastionHosts {
   deleteBastionShareableLink is ArmResourceActionAsync<
     BastionHost,
     BastionShareableLinkListRequest,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = CloudError
   >;
 

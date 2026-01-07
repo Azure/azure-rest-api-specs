@@ -353,7 +353,9 @@ interface NetworkWatchers {
     NetworkWatcher,
     void,
     Result = void,
-    Response = OkResponse | ArmAcceptedLroResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse,
     OverrideErrorType = ErrorResponse
   >;
 

@@ -84,7 +84,9 @@ interface Subnets {
   prepareNetworkPolicies is ArmResourceActionAsync<
     Subnet,
     PrepareNetworkPoliciesRequest,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = CloudError
   >;
 
@@ -95,7 +97,9 @@ interface Subnets {
   unprepareNetworkPolicies is ArmResourceActionAsync<
     Subnet,
     UnprepareNetworkPoliciesRequest,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = CloudError
   >;
 

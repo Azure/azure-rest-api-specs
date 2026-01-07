@@ -149,7 +149,9 @@ interface ExpressRouteGateways {
   @delete
   expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
     ExpressRouteGateway,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

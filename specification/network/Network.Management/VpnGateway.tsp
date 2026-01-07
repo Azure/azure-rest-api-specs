@@ -218,7 +218,9 @@ interface VpnGateways {
   @delete
   vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
     VpnGateway,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

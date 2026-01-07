@@ -205,7 +205,9 @@ interface ExpressRouteCrossConnections {
   @delete
   delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
     ExpressRouteCrossConnection,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

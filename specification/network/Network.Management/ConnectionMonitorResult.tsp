@@ -103,7 +103,9 @@ interface ConnectionMonitorResults {
   stop is ArmResourceActionAsync<
     ConnectionMonitorResult,
     void,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = ErrorResponse
   >;
 }

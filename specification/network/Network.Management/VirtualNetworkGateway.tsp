@@ -126,7 +126,9 @@ interface VirtualNetworkGateways {
   resetVpnClientSharedKey is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = CloudError
   >;
 
@@ -422,7 +424,9 @@ interface VirtualNetworkGateways {
   disconnectVirtualNetworkGatewayVpnConnections is ArmResourceActionAsync<
     VirtualNetworkGateway,
     P2SVpnConnectionRequest,
-    Response = OkResponse,
+    Response = {
+      @body body: void;
+    },
     Error = CloudError
   >;
 

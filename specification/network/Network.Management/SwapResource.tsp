@@ -93,7 +93,9 @@ interface SwapResources {
   @operationId("VipSwap_Create")
   create is CloudServiceOps.CreateOrUpdateAsync<
     SwapResource,
-    Response = OkResponse | ArmAcceptedLroResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     ErrorType = CloudError

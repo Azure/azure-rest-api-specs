@@ -1706,12 +1706,6 @@
 |------|------------|-------|
 | `definitions.TrackedResourcewithOptionalLocation__added` | added | `{"type":"object","description":"Tracked resource with optional location.","properties":{"id":{"type"...` |
 
-### Changes for `TypeSpec.Http.OkResponse`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object","description":"The request has succeeded."}` |
-
 ### Changes for `stringApplicationJson`
 
 | Path | Change Type | Value |

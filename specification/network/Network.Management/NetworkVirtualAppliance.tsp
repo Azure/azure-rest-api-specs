@@ -190,7 +190,9 @@ interface NetworkVirtualAppliances {
   @delete
   networkVirtualApplianceConnectionsDelete is NetworkVirtualApplianceNetworkVirtualApplianceOps.DeleteWithoutOkAsync<
     NetworkVirtualAppliance,
-    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 

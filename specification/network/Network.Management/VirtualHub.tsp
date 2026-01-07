@@ -202,7 +202,9 @@ interface VirtualHubs {
   @delete
   hubVirtualNetworkConnectionsDelete is HubVirtualNetworkConnectionOps.DeleteSync<
     VirtualHub,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -270,7 +272,9 @@ interface VirtualHubs {
   @delete
   virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.DeleteWithoutOkAsync<
     VirtualHub,
-    Response = OkResponse | ArmAcceptedLroResponse | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse | NoContentResponse,
     OverrideErrorType = Error
   >;
 
