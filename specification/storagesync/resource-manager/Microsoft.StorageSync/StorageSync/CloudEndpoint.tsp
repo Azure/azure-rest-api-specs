@@ -80,7 +80,6 @@ interface CloudEndpoints {
    * Patch a given CloudEndpoint.
    */
   @added(Versions.v2025_12_01)
-  @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("location")
   update is Legacy.CustomPatchAsync<
     CloudEndpoint,
@@ -104,7 +103,7 @@ interface CloudEndpoints {
       requestId?: string;
     }),
     Error = StorageSyncError,
-    OptionalRequestBody = true
+    OptionalRequestBody = false
   >;
 
   /**
