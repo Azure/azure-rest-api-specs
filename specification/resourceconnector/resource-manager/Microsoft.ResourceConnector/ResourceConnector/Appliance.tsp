@@ -138,7 +138,8 @@ interface Appliances {
   getUpgradeGraph is ApplianceOps.ActionSync<
     Appliance,
     void,
-    ArmResponse<UpgradeGraph> | ErrorResponse,
+    // ArmResponse<UpgradeGraph> | ErrorResponse,
+    ArmResponse<UpgradeGraph>,
     Parameters = {
       /**
        * Upgrade graph version, ex - stable
