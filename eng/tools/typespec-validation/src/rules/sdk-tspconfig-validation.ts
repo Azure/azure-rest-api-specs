@@ -256,38 +256,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with expected value "${this.expectedValue}"`,
       );
 
-    let actualValue = option as unknown as undefined | string | boolean;
-
-    // First, try to validate the value as-is
-    if (this.validateValue(actualValue, this.expectedValue)) {
-      return { success: true };
-    }
-
-    // If validation fails and the value contains variables, try resolving them
-    if (typeof actualValue === "string" && actualValue.includes("{")) {
-      const { resolved, error } = this.resolveVariables(actualValue, config);
-      if (error) {
-        return this.createFailedResult(
-          error,
-          `Please define the variable in your configuration or use a direct value`,
-        );
-      }
-      actualValue = resolved;
-
-      // Validate again after resolving variables
-      if (!this.validateValue(actualValue, this.expectedValue)) {
-        return this.createFailedResult(
-          `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
-          `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
-        );
-      }
-    } else {
-      // No variables to resolve, validation already failed
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (!this.validateValue(actualValue, this.expectedValue))
       return this.createFailedResult(
         `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" does not match "${this.expectedValue}"`,
         `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to match "${this.expectedValue}"`,
       );
-    }
 
     return { success: true };
   }
