@@ -55,9 +55,15 @@ function parseLeaseFile(filePath) {
       return { error: 'Invalid YAML structure: missing "lease" key' };
     }
     
+    // Convert Date objects to YYYY-MM-DD strings
+    let startdate = data.lease.startdate || '';
+    if (startdate instanceof Date) {
+      startdate = startdate.toISOString().split('T')[0];
+    }
+    
     return {
       resourceProvider: data.lease['resource-provider'] || '',
-      startdate: data.lease.startdate || '',
+      startdate: startdate,
       duration: data.lease.duration || '',
       reviewer: data.lease.reviewer || ''
     };
