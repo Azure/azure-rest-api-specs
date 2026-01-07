@@ -342,6 +342,27 @@ interface Agents {
     AgentContainerObject
   >;
 
+    /**
+   * Stream logs from a container for a specific version of an agent.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @post
+  @route("/agents/{agent_name}/versions/{agent_version}/containers/default:logstream")
+  @tag("Agents")
+  streamAgentContainerLogs is AgentOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    },
+    {
+      @header("Content-Type") contentType: "text/plain";
+      @body body: StreamingContainerLog;
+    } | ApiErrorResponse
+  >;
+
   /**
    * Get the status of a container operation for an agent.
    */

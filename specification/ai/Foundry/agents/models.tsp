@@ -336,6 +336,10 @@ model AgentContainerObject {
   @visibility(Lifecycle.Read)
   object: "agent.container";
 
+  @doc("The identifier of the container.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
   @doc("The status of the container of a specific version of an agent.")
   @visibility(Lifecycle.Read)
   status: AgentContainerStatus;
@@ -359,6 +363,40 @@ model AgentContainerObject {
   @doc("The last update time of the container.")
   @visibility(Lifecycle.Read)
   updated_at: utcDateTime;
+
+  @doc("The detailed container information.")
+  @visibility(Lifecycle.Read)
+  container?: ContainerDetails;
+}
+
+@doc("Detailed information about the container.")
+model ContainerDetails {
+  @doc("The provisioning state of the container.")
+  provisioning_state: string;
+
+  @doc("The state of the container.")
+  state: string;
+
+  @doc("The health state of the container.")
+  health_state: string;
+
+  @doc("The list of replicas in the container.")
+  replicas: ContainerReplica[];
+
+  @doc("The last update time of the container.")
+  updated_on: utcDateTime;
+}
+
+@doc("Information about a container replica.")
+model ContainerReplica {
+  @doc("The name of the replica.")
+  name: string;
+
+  @doc("The state of the replica.")
+  state: string;
+
+  @doc("The container state of the replica.")
+  container_state: string;
 }
 
 @doc("Status of the container of a specific version of an agent.")
@@ -446,3 +484,46 @@ model AcceptedAgentContainerOperation {
   @body
   body: AgentContainerOperationObject;
 }
+
+@doc("A structured event log entry from the container. Each stream chunk contains a JSON object with event details.")
+model EventContainerLog {
+  @doc("The timestamp of the event.")
+  @encodedName("application/json", "TimeStamp")
+  @encode("rfc3339")
+  timestamp: utcDateTime;
+
+  @doc("The type of the event (e.g., 'Normal', 'Warning').")
+  @encodedName("application/json", "Type")
+  event_type: string;
+
+  @doc("The revision name, if applicable.")
+  @encodedName("application/json", "RevisionName")
+  revision_name?: string | null;
+
+  @doc("The replica name, if applicable.")
+  @encodedName("application/json", "ReplicaName")
+  replica_name?: string | null;
+
+  @doc("The message describing the event.")
+  @encodedName("application/json", "Msg")
+  msg: string;
+
+  @doc("The reason for the event.")
+  @encodedName("application/json", "Reason")
+  reason: string;
+
+  @doc("The source of the event.")
+  @encodedName("application/json", "EventSource")
+  event_source: string;
+
+  @doc("The count of occurrences of this event.")
+  @encodedName("application/json", "Count")
+  count: int32;
+}
+
+@doc("""
+  Container log entry streamed from the container as plain text chunks. 
+  Each chunk may be a plain text log line or a JSON-encoded EventContainerLog object.
+  Clients should parse each chunk and handle both formats accordingly.
+  """)
+scalar StreamingContainerLog extends string;
