@@ -756,6 +756,8 @@ interface ContainerRegistryBlob {
 
       /** Content range of the blob chunk. */
       @header("Content-Range") contentRange: string;
+
+      @body responseBody: bytes;
     }
   >;
 
