@@ -1592,6 +1592,10 @@
       "get": {
         "operationId": "ContainerRegistryBlob_GetChunk",
         "description": "Retrieve the blob from the registry identified by `digest`. This endpoint may\nalso support RFC7233 compliant range requests. Support can be detected by\nissuing a HEAD request. If the header `Accept-Range: bytes` is returned, range\nrequests can be used to fetch partial content.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1622,6 +1626,9 @@
         "responses": {
           "206": {
             "description": "Successful",
+            "schema": {
+              "type": "file"
+            },
             "headers": {
               "Content-Length": {
                 "type": "integer",
