@@ -30,29 +30,25 @@ interface SuppressionLists {
   /**
    * Get a SuppressionList resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionLists_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<SuppressionListResource>;
 
   /**
    * Add a new SuppressionList resource under the parent Domains resource or update an existing SuppressionList resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionLists_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListResource>;
 
   /**
    * Delete a SuppressionList.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionLists_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<SuppressionListResource>;
 
   /**
    * List all suppression lists for a domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionLists_ListByDomain")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByDomain is ArmResourceListByParent<
     SuppressionListResource,
     Response = ArmResponse<SuppressionListResourceCollection>

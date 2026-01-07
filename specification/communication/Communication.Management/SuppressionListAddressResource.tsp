@@ -30,29 +30,25 @@ interface SuppressionListAddresses {
   /**
    * Get a SuppressionListAddress.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionListAddresses_Get")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<SuppressionListAddressResource>;
 
   /**
    * Create or update a SuppressionListAddress.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionListAddresses_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListAddressResource>;
 
   /**
    * Operation to delete a single address from a suppression list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionListAddresses_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<SuppressionListAddressResource>;
 
   /**
    * Get all the addresses in a suppression list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SuppressionListAddresses_List")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     SuppressionListAddressResource,
     Response = ArmResponse<SuppressionListAddressResourceCollection>
