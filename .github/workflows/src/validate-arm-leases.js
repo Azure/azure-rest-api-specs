@@ -175,12 +175,8 @@ async function main() {
   allFiles.forEach(f => console.log(`  ${f}`));
   console.log('');
 
-  // Now get only arm-leases files
-  const allChangedFiles = await getChangedFiles({
-    baseCommitish: mergeBase,
-    headCommitish: 'HEAD',
-    paths: ['.github/arm-leases/']
-  });
+  // Filter for arm-leases files from all changed files
+  const allChangedFiles = allFiles.filter(file => file.startsWith('.github/arm-leases/'));
 
   console.log(`Comparing ${mergeBase} to HEAD`);
   console.log(`ARM lease files found: ${allChangedFiles.length}`);
