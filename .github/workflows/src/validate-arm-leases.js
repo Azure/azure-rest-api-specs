@@ -3,7 +3,7 @@
 import { execSync } from 'child_process';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
-import YAML from 'yaml';
+import YAML from 'js-yaml';
 import { getChangedFiles } from '../../shared/src/changed-files.js';
 
 // ============================================
