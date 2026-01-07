@@ -24,11 +24,13 @@ model Validation is ProxyResource<ValidationPropertiesExtended> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, location is needed for MSI"
   @doc("The location of the validation")
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_01_01_preview)
   location?: Azure.Core.azureLocation;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, MSI support for proxy resource"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The managed identity for the validation to use.")
+  @added(Versions.v2026_01_01_preview)
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
