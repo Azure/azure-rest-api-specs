@@ -1,0 +1,56 @@
+{
+  "title": "Validate ownership vouchers in a given resource group",
+  "operationId": "OwnershipVouchers_Validate",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "resourceGroupName": "ArcInstance-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "location": "westus",
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://management.azure.com/subscriptions/YourSubscriptionId/resourcegroups/TestResourceGroupName/providers/Microsoft.AzureStackHCI/locations/TestLocation/validateOwnershipVouchers?api-version=2025-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "1675"
+    ],
+    "validationRequest": {
+      "ownershipVoucherDetails": [
+        {
+          "ownershipVoucher": "Device Model Ownership content",
+          "ownerKeyType": "MicrosoftManaged"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "ownershipVoucherValidationDetails": [
+          {
+            "validationStatus": "Valid",
+            "serialNumber": "1234567890",
+            "id": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+            "azureMachineId": "6b92c606-8538-43f4-9c07-2a72fcafa260",
+            "manufacturer": "Lenovo",
+            "modelName": "ThinkPad X1 Carbon",
+            "version": "XXXX",
+            "error": {
+              "code": "Success",
+              "target": "OwnershipVoucher",
+              "details": [],
+              "additionalInfo": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

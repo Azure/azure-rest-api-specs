@@ -14,7 +14,7 @@ export type AutorestRunResult = {
 
 export interface AutoRestMessage {
   level: "information" | "warning" | "error" | "debug" | "verbose" | "fatal";
-  code?: any;
+  code?: unknown;
   message: string;
   readme?: string;
   tag?: string;

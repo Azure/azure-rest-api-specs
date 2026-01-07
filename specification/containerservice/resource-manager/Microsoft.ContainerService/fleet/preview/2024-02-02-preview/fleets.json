@@ -105,6 +105,12 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -541,6 +547,15 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
           }
         ],
         "responses": {
@@ -926,6 +941,12 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -1483,6 +1504,12 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenQueryParameter"
           }
         ],
         "responses": {
@@ -2896,5 +2923,34 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "FilterQueryParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "SkipTokenQueryParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "description": "The page-continuation token to use with a paged version of this API.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipToken"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    }
+  }
 }

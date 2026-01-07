@@ -10278,6 +10278,7 @@
         "certificateCNHost": {
           "type": "string",
           "description": "The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.",
+          "maxLength": 255,
           "x-nullable": true
         }
       }
@@ -10864,11 +10865,11 @@
     },
     "NicInfo": {
       "type": "object",
-      "description": "NIC information and list of volumes for which the NIC has the primary mount ip address.",
+      "description": "NIC information and list of volumes for which the NIC has the primary mount IP Address.",
       "properties": {
         "ipAddress": {
           "type": "string",
-          "description": "ipAddress",
+          "description": "IP Address",
           "readOnly": true
         },
         "volumeResourceIds": {
