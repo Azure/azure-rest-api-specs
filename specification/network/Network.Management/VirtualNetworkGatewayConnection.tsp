@@ -89,7 +89,9 @@ interface VirtualNetworkGatewayConnections {
   vpnDeviceConfigurationScript is ArmResourceActionSync<
     VirtualNetworkGatewayConnection,
     VpnDeviceScriptParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 
@@ -139,7 +141,9 @@ interface VirtualNetworkGatewayConnections {
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStartParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     Error = Error
   >;
@@ -150,7 +154,9 @@ interface VirtualNetworkGatewayConnections {
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = Error
   >;
 
@@ -161,7 +167,11 @@ interface VirtualNetworkGatewayConnections {
   getIkeSas is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     void,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader,
     Error = ErrorResponse
   >;
 

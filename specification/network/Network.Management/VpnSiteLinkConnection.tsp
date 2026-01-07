@@ -118,7 +118,9 @@ interface VpnSiteLinkConnections {
   getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
     void,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OverrideErrorType = ErrorResponse
   >;
 }

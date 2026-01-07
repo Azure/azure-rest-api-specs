@@ -158,7 +158,9 @@ interface VpnGateways {
   startPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStartParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -170,7 +172,9 @@ interface VpnGateways {
   stopPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -227,7 +231,9 @@ interface VpnGateways {
   vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStartParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     OverrideErrorType = CloudError
   >;
@@ -241,7 +247,9 @@ interface VpnGateways {
   vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     OverrideErrorType = CloudError
   >;

@@ -136,7 +136,9 @@ interface VirtualNetworkGateways {
   generatevpnclientpackage is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 
@@ -147,7 +149,9 @@ interface VirtualNetworkGateways {
   generateVpnProfile is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 
@@ -158,7 +162,9 @@ interface VirtualNetworkGateways {
   getVpnProfilePackageUrl is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 
@@ -187,7 +193,9 @@ interface VirtualNetworkGateways {
   supportedVpnDevices is ArmResourceActionSync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 
@@ -295,7 +303,9 @@ interface VirtualNetworkGateways {
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStartParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     OptionalRequestBody = true,
     Error = Error
   >;
@@ -306,7 +316,9 @@ interface VirtualNetworkGateways {
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStopParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = Error
   >;
 
@@ -366,7 +378,9 @@ interface VirtualNetworkGateways {
   startExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Parameters = {
       /**
        * Peering location of the test
@@ -384,7 +398,9 @@ interface VirtualNetworkGateways {
   stopExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     ExpressRouteFailoverStopApiParameters,
-    ArmResponse<stringApplicationJson>,
+    {
+      @body body: stringApplicationJson;
+    },
     Error = CloudError
   >;
 

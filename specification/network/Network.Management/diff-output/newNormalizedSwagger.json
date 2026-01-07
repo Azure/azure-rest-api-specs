@@ -5368,7 +5368,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ConnectionSharedKey"
         },
         "x-ms-long-running-operation": true
       }
@@ -8201,6 +8202,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ExpressRouteConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -8217,7 +8224,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ExpressRouteGateway"
+          "final-state-schema": "#/definitions/ExpressRouteConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -19270,7 +19277,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
         },
         "x-ms-long-running-operation": true
       },
@@ -19639,7 +19647,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/NetworkVirtualAppliance"
+          "final-state-schema": "#/definitions/NetworkVirtualApplianceConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -22307,6 +22315,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PrivateDnsZoneGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -22323,7 +22337,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/PrivateEndpoint"
+          "final-state-schema": "#/definitions/PrivateDnsZoneGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -23613,6 +23627,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/RouteFilterRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -23629,7 +23649,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/RouteFilter"
+          "final-state-schema": "#/definitions/RouteFilterRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -25509,6 +25529,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/HubVirtualNetworkConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -25525,7 +25551,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualHub"
+          "final-state-schema": "#/definitions/HubVirtualNetworkConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -26157,6 +26183,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/VirtualHubRouteTableV2"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -26173,7 +26205,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VirtualHub"
+          "final-state-schema": "#/definitions/VirtualHubRouteTableV2"
         },
         "x-ms-long-running-operation": true
       },
@@ -30692,6 +30724,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/VpnConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -30708,7 +30746,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/VpnGateway"
+          "final-state-schema": "#/definitions/VpnConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -36606,19 +36644,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "Azure.ResourceManager.ArmResponse<stringApplicationJson>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "type": "string",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "AzureFirewall": {
@@ -55125,6 +55150,15 @@
           "description": "Type of the resource.",
           "readOnly": true
         }
+      }
+    },
+    "Record<PeerRoute[]>": {
+      "type": "object",
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array"
       }
     },
     "RecordSet": {
