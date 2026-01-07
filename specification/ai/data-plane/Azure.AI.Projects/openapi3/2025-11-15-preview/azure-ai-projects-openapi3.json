@@ -12805,19 +12805,32 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemGenerationParamsType"
+              }
+            ],
             "description": "The type of item generation parameters to use."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "red_team": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_seed_prompts": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_taxonomy": "#/components/schemas/RedTeamItemGenerationParams"
+            "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
+            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
+      },
+      "ItemGenerationParamsType": {
+        "type": "string",
+        "enum": [
+          "response_retrieval",
+          "red_team",
+          "red_team_seed_prompts",
+          "red_team_taxonomy"
+        ],
+        "description": "The types of parameters for red team item generation."
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -24014,20 +24027,11 @@
       "RedTeamItemGenerationParams": {
         "type": "object",
         "required": [
-          "type",
           "attack_strategies",
-          "num_turns"
+          "num_turns",
+          "type"
         ],
         "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "red_team",
-              "red_team_seed_prompts",
-              "red_team_taxonomy"
-            ],
-            "description": "The type of item generation parameters."
-          },
           "attack_strategies": {
             "type": "array",
             "items": {
@@ -24040,6 +24044,10 @@
             "format": "int32",
             "description": "The number of turns allowed in the game.",
             "default": 20
+          },
+          "type": {
+            "type": "string",
+            "description": "Discriminator property for RedTeamItemGenerationParams."
           }
         },
         "discriminator": {
