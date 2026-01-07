@@ -171,19 +171,8 @@ async function main() {
     headCommitish: 'HEAD'
   });
   
-  console.log(`DEBUG: All changed files (${allFiles.length}):`);
-  allFiles.forEach(f => console.log(`  ${f}`));
-  console.log('');
-
   // Filter for arm-leases files from all changed files
   const allChangedFiles = allFiles.filter(file => file.startsWith('.github/arm-leases/'));
-
-  console.log(`Comparing ${mergeBase} to HEAD`);
-  console.log(`ARM lease files found: ${allChangedFiles.length}`);
-  if (allChangedFiles.length > 0) {
-    console.log('Changed files:', allChangedFiles);
-  }
-  console.log('');
 
   // Step 2: Check for disallowed files
   const disallowedFiles = allChangedFiles.filter(file => !isFileAllowed(file));
