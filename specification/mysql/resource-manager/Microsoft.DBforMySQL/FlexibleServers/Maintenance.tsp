@@ -31,7 +31,6 @@ interface Maintenances {
    * Read maintenance.
    */
   read is ArmResourceRead<Maintenance>;
-
   /**
    * Update maintenances.
    */
