@@ -17,7 +17,7 @@ model GitHubRunnerTriggerMetadata {
   /** The owner of the GitHub repository or organization */
   owner?: string;
 
-  /** The scope of the runner: org (organisation), ent (enterprise), or repo (repository) */
+  /** The scope of the runner: org (organization), ent (enterprise), or repo (repository) */
   runnerScope?: string;
 
   /** List of repositories to scale, separated by comma */
