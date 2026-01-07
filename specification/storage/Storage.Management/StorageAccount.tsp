@@ -57,6 +57,22 @@ model StorageAccount
   placement?: Placement;
 }
 
+alias StorageAccountListKeysParameters = {
+  /**
+   * Specifies type of the key to be listed. Possible value is kerb.
+   */
+  @query("$expand")
+  $expand?: "kerb";
+};
+
+alias StorageAccountFailoverParameters = {
+  /**
+   * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
+   */
+  @query("failoverType")
+  failoverType?: "Planned";
+};
+
 @armResourceOperations
 interface StorageAccounts {
   /**
@@ -138,13 +154,7 @@ interface StorageAccounts {
     StorageAccount,
     void,
     ArmResponse<StorageAccountListKeysResult>,
-    Parameters = {
-      /**
-       * Specifies type of the key to be listed. Possible value is kerb.
-       */
-      @query("$expand")
-      $expand?: "kerb";
-    },
+    Parameters = StorageAccountListKeysParameters,
     Error = ErrorResponse
   >;
 
@@ -191,13 +201,7 @@ interface StorageAccounts {
     {
       @body body: void;
     },
-    Parameters = {
-      /**
-       * The parameter is set to 'Planned' to indicate whether a Planned failover is requested.
-       */
-      @query("failoverType")
-      failoverType?: "Planned";
-    },
+    Parameters = StorageAccountFailoverParameters,
     Error = ErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader<FinalResult = void>
