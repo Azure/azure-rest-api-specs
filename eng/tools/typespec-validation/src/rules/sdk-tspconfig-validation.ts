@@ -21,21 +21,11 @@ export abstract class TspconfigSubRuleBase {
   }
 
   public async execute(folder: string): Promise<RuleResult> {
-    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
-    if (!tspconfigExists)
+    const config = await this.loadConfig(folder);
+    if (!config) {
       return this.createFailedResult(
-        `Failed to find ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml",
-      );
-
-    let config = undefined;
-    try {
-      const configText = await readTspConfig(folder);
-      config = yamlParse(configText);
-    } catch (error) {
-      return this.createFailedResult(
-        `Failed to parse ${join(folder, "tspconfig.yaml")}`,
-        "Please add tspconfig.yaml.",
+        `Failed to load ${join(folder, "tspconfig.yaml")}`,
+        "Please ensure tspconfig.yaml exists and is valid",
       );
     }
 
@@ -46,6 +36,22 @@ export abstract class TspconfigSubRuleBase {
         stdOutput: `Validation skipped. ${reason}`,
       };
     return this.validate(config);
+  }
+
+  public async loadConfig(folder: string): Promise<any | undefined> {
+    const tspconfigExists = await fileExists(join(folder, "tspconfig.yaml"));
+    if (!tspconfigExists) {
+      return undefined;
+    }
+
+    try {
+      const configText = await readTspConfig(folder);
+      const config = yamlParse(configText);
+      return config;
+    } catch (error) {
+      console.warn(`Failed to parse tspconfig.yaml in ${folder}: ${error}`);
+      return undefined;
+    }
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -118,9 +124,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return this.emitterName;
   }
 
-  protected tryFindOption(config: any): Record<string, any> | undefined {
+  protected tryFindOption(config: any, keyToValidate?: string): Record<string, any> | undefined {
+    const key = keyToValidate ?? this.keyToValidate;
     let option: Record<string, any> | undefined = config?.options?.[this.emitterName];
-    for (const segment of this.keyToValidate.split(".")) {
+    for (const segment of key.split(".")) {
       if (option && typeof option === "object" && !Array.isArray(option) && segment in option)
         option = option![segment];
       else return undefined;
@@ -128,7 +135,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return option;
   }
 
-  protected resolveVariables(value: string, config: any): { resolved: string; error?: string } {
+  protected resolveVariables(
+    value: string,
+    config: Record<string, any>,
+  ): { resolved: string; error?: string } {
     let resolvedValue = value;
     const variablePattern = /\{([^}]+)\}/g;
     const maxIterations = 10; // Prevent infinite loops
@@ -199,6 +209,45 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
     return { resolved: resolvedValue };
   }
 
+  protected getPackageDirFromEmitterOutputDir(config: Record<string, any>): {
+    resolved: string;
+    error?: string;
+  } {
+    const option = this.tryFindOption(config, "emitter-output-dir");
+    if (option === undefined) {
+      return {
+        resolved: "",
+        error: `Failed to find "options.${this.emitterName}.emitter-output-dir"`,
+      };
+    }
+
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (typeof actualValue !== "string") {
+      return {
+        resolved: "",
+        error: `The value of options.${this.emitterName}.emitter-output-dir "${actualValue}" must be a string`,
+      };
+    }
+    // Handle various path formats with different prefixes
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+
+    let extractedPath: string;
+    if (!actualValue.includes("/")) {
+      extractedPath = actualValue;
+    } else {
+      const pathParts = actualValue.split("/");
+      const filteredParts = pathParts.filter(
+        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
+      );
+      extractedPath = filteredParts.join("/");
+    }
+
+    // Resolve variables in the extracted path
+    return this.resolveVariables(extractedPath, config);
+  }
+
   protected validate(config: any): RuleResult {
     const option = this.tryFindOption(config);
     if (option === undefined)
@@ -253,102 +302,19 @@ class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitte
     super(emitterName, keyToValidate, expectedValue);
   }
 
-  private tryResolveAndValidate(
-    path: string,
-    config: any,
-  ): { success: boolean; resolved?: string; error?: string } {
-    // First, try to validate the path as-is
-    if (this.validateValue(path, this.expectedValue)) {
-      return { success: true, resolved: path };
-    }
-
-    // Only resolve variables if validation failed and path contains variables
-    if (path.includes("{")) {
-      const { resolved, error } = this.resolveVariables(path, config);
-      if (error) {
-        return { success: false, error };
-      }
-
-      // Validate the resolved path
-      const isValid = this.validateValue(resolved, this.expectedValue);
-      return { success: isValid, resolved };
-    }
-
-    // No variables and validation failed
-    return { success: false, resolved: path };
-  }
-
   protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined)
+    const result = this.getPackageDirFromEmitterOutputDir(config);
+    if (result.error) {
       return this.createFailedResult(
-        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        result.error,
         `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
       );
+    }
 
-    const actualValue = option as unknown as undefined | string | boolean;
-    if (typeof actualValue !== "string") {
+    // Validate the resolved path
+    if (!this.validateValue(result.resolved, this.expectedValue)) {
       return this.createFailedResult(
-        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
-        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
-      );
-    }
-
-    // Handle various path formats with different prefixes
-    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
-    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
-    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/{service-dir}/{namespace} where namespace needs to be resolved
-
-    // For simple paths without '/', validate directly
-    if (!actualValue.includes("/")) {
-      const result = this.tryResolveAndValidate(actualValue, config);
-      if (result.error) {
-        return this.createFailedResult(
-          result.error,
-          `Please define the variable in your configuration or use a direct path value`,
-        );
-      }
-      if (!result.success) {
-        return this.createFailedResult(
-          `The path part "${result.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
-          `Please update the emitter-output-dir path to follow the SDK naming convention`,
-        );
-      }
-      return { success: true };
-    }
-
-    // For paths with '/', filter out prefix parts and try from last segment backward
-    const filteredParts = actualValue
-      .split("/")
-      .filter((part) => part !== "{output-dir}" && part !== "{service-dir}");
-
-    // Try from the last segment backward to find a valid match
-    for (let i = filteredParts.length - 1; i >= 0; i--) {
-      const candidatePath = filteredParts.slice(i).join("/");
-      const result = this.tryResolveAndValidate(candidatePath, config);
-
-      // Skip if resolution failed, try next segment
-      if (result.error) continue;
-
-      // If validation succeeds, return success immediately
-      if (result.success) return { success: true };
-    }
-
-    // If all segments failed, try the complete filtered path as final attempt
-    const completePath = filteredParts.join("/");
-    const finalResult = this.tryResolveAndValidate(completePath, config);
-
-    if (finalResult.error) {
-      return this.createFailedResult(
-        finalResult.error,
-        `Please define the variable in your configuration or use a direct path value`,
-      );
-    }
-
-    if (!finalResult.success) {
-      return this.createFailedResult(
-        `The path part "${finalResult.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        `The path part "${result.resolved}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
         `Please update the emitter-output-dir path to follow the SDK naming convention`,
       );
     }
@@ -380,7 +346,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
   folder: string,
 ): SkipResult {
   const isRLCClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === false;
   const shouldSkip = isManagementSdk(folder) || isRLCClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
@@ -392,7 +358,7 @@ function skipForRestLevelClientOrManagementPlaneInTsEmitter(
 
 function skipForModularOrManagementPlaneInTsEmitter(config: any, folder: string): SkipResult {
   const isModularClient =
-    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] === true;
+    config?.options?.["@azure-tools/typespec-ts"]?.["is-modular-library"] !== false;
   const shouldSkip = isManagementSdk(folder) || isModularClient;
   const result: SkipResult = {
     shouldSkip: shouldSkip,
@@ -597,12 +563,6 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
   }
 }
 
-export class TspConfigGoAzInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-go", "inject-spans", true);
-  }
-}
-
 // ----- Go Mgmt plane sub rules -----
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
@@ -658,13 +618,22 @@ export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOpt
   }
 }
 
+export class TspConfigGoMgmtInjectSpansTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-go", "inject-spans", true);
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 // ----- Python management plane sub rules -----
 export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-python",
       "emitter-output-dir",
-      new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
+      new RegExp(/^azure[-.]mgmt([-.][a-z]+){1,2}$/),
     );
   }
   protected skip(_: any, folder: string) {
@@ -699,6 +668,34 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+export class TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-python", "namespace", "derived from emitter-output-dir");
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+  protected validate(config: any): RuleResult {
+    const resolvedSegmentResult = this.getPackageDirFromEmitterOutputDir(config);
+    if (resolvedSegmentResult.error) {
+      return this.createFailedResult(
+        resolvedSegmentResult.error,
+        `Please add "options.${this.emitterName}.emitter-output-dir" with a path matching the SDK naming convention`,
+      );
+    }
+    const derivedNamespace = resolvedSegmentResult.resolved.replace(/-/g, ".");
+    const namespaceOption = this.tryFindOption(config);
+    const namespace = namespaceOption as unknown as undefined | string;
+    if (derivedNamespace !== namespace)
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.namespace "${namespace}" does not match the value derived from options.${this.emitterName}.emitter-output-dir "${derivedNamespace}"`,
+        `Please update "options.${this.emitterName}.namespace" to "${derivedNamespace}" or adjust "options.${this.emitterName}.emitter-output-dir" so the derived namespace matches`,
+      );
+
+    return { success: true };
+  }
+}
+
 // ----- Python data plane sub rules -----
 export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
@@ -714,47 +711,6 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
 }
 
 // ----- CSharp sub rules -----
-export class TspConfigCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\./));
-  }
-}
-
-export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "clear-output-folder", true);
-  }
-}
-
-export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-csharp",
-      "emitter-output-dir",
-      new RegExp(/^Azure\.ResourceManager\./),
-    );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
-export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\.ResourceManager\./));
-  }
-  protected skip(_: any, folder: string) {
-    return skipForDataPlane(folder);
-  }
-}
-
-// new Csharp sub rules should be added above this line
 export class TspConfigHttpClientCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super("@azure-typespec/http-client-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
@@ -793,7 +749,13 @@ export class TspConfigHttpClientCsharpMgmtNamespaceSubRule extends TspconfigEmit
   }
 }
 
-export const defaultRules = [
+/**
+ * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
+ * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
+ * if a Rust emitter is configured in tspconfig.yaml but doesn't meet the required validation
+ * criteria, the validation will fail.
+ */
+export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
@@ -809,7 +771,7 @@ export const defaultRules = [
   new TspConfigGoMgmtGenerateSamplesTrueSubRule(),
   new TspConfigGoMgmtGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
-  new TspConfigGoAzInjectSpansTrueSubRule(),
+  new TspConfigGoMgmtInjectSpansTrueSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoModuleMatchPatternSubRule(),
@@ -817,13 +779,19 @@ export const defaultRules = [
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpEmitterOutputDirSubRule(),
+  new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
-  new TspConfigCsharpAzNamespaceSubRule(),
-  new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
-  new TspConfigCsharpMgmtNamespaceSubRule(),
-  new TspConfigCsharpAzEmitterOutputDirSubRule(),
-  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
+];
+
+/**
+ * Optional rules: Validate language-specific emitter configurations.
+ * All rules in this array inherit from TspconfigEmitterOptionsSubRuleBase and only run when
+ * their corresponding emitter is configured in tspconfig.yaml. When the emitter is not configured,
+ * the rule is skipped and does not affect the validation result. When the emitter is configured,
+ * validation failures will affect the overall validation result.
+ */
+export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigHttpClientCsharpAzNamespaceSubRule(),
   new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule(),
   new TspConfigHttpClientCsharpMgmtNamespaceSubRule(),
@@ -831,23 +799,18 @@ export const defaultRules = [
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
-  private subRules: TspconfigSubRuleBase[] = [];
+  private requiredRules: TspconfigSubRuleBase[] = [];
+  private optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [];
   private suppressedKeyPaths: Set<string> = new Set();
   name = "SdkTspConfigValidation";
   description = "Validate the SDK tspconfig.yaml file";
 
-  constructor(subRules: TspconfigSubRuleBase[] = defaultRules) {
-    this.subRules = subRules;
-  }
-
-  private shouldIgnoreValidationError(result: RuleResult): boolean {
-    // Check for errors that should be ignored for certain emitters
-    const ignorableErrorPatterns = [
-      "Failed to find", // Configuration not found errors
-      // Add more patterns here as needed in the future
-    ];
-
-    return ignorableErrorPatterns.some((pattern) => result.errorOutput?.includes(pattern) ?? false);
+  constructor(
+    requiredSubRules: TspconfigSubRuleBase[] = requiredRules,
+    optionalSubRules: TspconfigEmitterOptionsSubRuleBase[] = optionalRules,
+  ) {
+    this.requiredRules = requiredSubRules;
+    this.optionalRules = optionalSubRules;
   }
 
   async execute(folder: string): Promise<RuleResult> {
@@ -864,58 +827,36 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const failedResults = [];
     let success = true;
-    for (const subRule of this.subRules) {
+
+    // Execute required rules
+    for (const subRule of this.requiredRules) {
       // Check for both direct matches and wildcard patterns
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
+
       const result = await subRule.execute(folder!);
+      if (!result.success) failedResults.push(result);
 
-      let isSubRuleSuccess = result.success;
+      success &&= result.success;
+    }
 
-      // Special handling for emitter-specific validation rules
-      if (subRule instanceof TspconfigEmitterOptionsSubRuleBase) {
-        const emitterOptionSubRule = subRule as TspconfigEmitterOptionsSubRuleBase;
-        const emitterName = emitterOptionSubRule.getEmitterName();
+    // Execute optional rules (failures don't affect overall success)
+    for (const subRule of this.optionalRules) {
+      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
 
-        // Skip all validation failures for @azure-tools/typespec-csharp (legacy emitter)
-        if (emitterName === "@azure-tools/typespec-csharp" && isSubRuleSuccess === false) {
-          console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" are failed. However, per ${emitterName}'s decision, we will treat it as passed, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`,
-          );
-          isSubRuleSuccess = true;
-        }
-
-        // For new C# emitters (@azure-typespec/http-client-csharp and @azure-typespec/http-client-csharp-mgmt),
-        // only ignore validation for specific error types (e.g., missing configuration)
-        if (
-          (emitterName === "@azure-typespec/http-client-csharp" ||
-            emitterName === "@azure-typespec/http-client-csharp-mgmt") &&
-          isSubRuleSuccess === false &&
-          this.shouldIgnoreValidationError(result)
-        ) {
-          console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" is skipped because the option is not configured.`,
-          );
-          isSubRuleSuccess = true;
-        }
-
-        // For @azure-tools/typespec-go data plane SDKs only,
-        // ignore validation for specific error types (e.g., missing configuration)
-        // Management plane SDKs still require strict validation
-        if (
-          emitterName === "@azure-tools/typespec-go" &&
-          !isManagementSdk(folder) &&
-          isSubRuleSuccess === false &&
-          this.shouldIgnoreValidationError(result)
-        ) {
-          console.warn(
-            `Validation on option "${emitterOptionSubRule.getPathOfKeyToValidate()}" in "${emitterName}" is skipped because the option is not configured.`,
-          );
-          isSubRuleSuccess = true;
-        }
+      // Skip if emitter is not configured
+      const config = await subRule.loadConfig(folder);
+      const emitterName = subRule.getEmitterName();
+      if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
+        console.warn(
+          `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
+        );
+        continue;
       }
-      if (!isSubRuleSuccess) failedResults.push(result);
 
-      success &&= isSubRuleSuccess;
+      const result = await subRule.execute(folder!);
+      if (!result.success) failedResults.push(result);
+      // Optional rules affect overall success when emitter is configured
+      success &&= result.success;
     }
 
     const stdOutputFailedResults =
@@ -927,6 +868,11 @@ export class SdkTspConfigValidationRule implements Rule {
       success,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
+  }
+
+  private skipIfEmitterNotConfigured(config: any, emitterName: string): boolean {
+    const isConfigured = config?.options?.[emitterName] !== undefined;
+    return !isConfigured;
   }
 
   private setSuppressedKeyPaths(suppressions: Suppression[]) {
