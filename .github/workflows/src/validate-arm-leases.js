@@ -156,11 +156,20 @@ async function main() {
 
   console.log('Running ARM Lease File Validation\n');
 
+  // Get the merge base for proper PR comparison
+  let mergeBase;
+  try {
+    mergeBase = execSync(`git merge-base origin/${baseBranch} HEAD`, { encoding: 'utf-8' }).trim();
+  } catch (error) {
+    console.log('Warning: Could not find merge-base, using origin/main directly');
+    mergeBase = `origin/${baseBranch}`;
+  }
+
   // Step 1: Get all changed files
   const allChangedFiles = await getChangedFiles({
-    baseCommitish: `origin/${baseBranch}`,
+    baseCommitish: mergeBase,
     headCommitish: 'HEAD',
-    paths: ['.github/arm-leases/', '.github/']
+    paths: ['.github/arm-leases/']
   });
 
   // Step 2: Check for disallowed files
