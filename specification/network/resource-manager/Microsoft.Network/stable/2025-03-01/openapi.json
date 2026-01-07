@@ -36876,7 +36876,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
             }
           },
           "202": {
@@ -36906,8 +36909,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ExpressRouteFailoverAllTestDetails"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -36955,7 +36957,10 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+              }
             }
           },
           "202": {
@@ -36985,8 +36990,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -56534,18 +56538,6 @@
         "value"
       ]
     },
-    "ExpressRouteFailoverAllTestDetails": {
-      "type": "object",
-      "description": "Gateway Failover All Test Details",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      }
-    },
     "ExpressRouteFailoverCircuitResourceDetails": {
       "type": "object",
       "properties": {
@@ -56648,18 +56640,6 @@
           "description": "List of all the failover connections for this peering location",
           "items": {
             "$ref": "#/definitions/FailoverConnectionDetails"
-          }
-        }
-      }
-    },
-    "ExpressRouteFailoverSingleTestDetailsObject": {
-      "type": "object",
-      "description": "Gateway Failover Single Test Details Object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
           }
         }
       }

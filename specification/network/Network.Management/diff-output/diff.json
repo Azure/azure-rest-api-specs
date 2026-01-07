@@ -15015,6 +15015,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
       "post": {
         "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ExpressRouteFailoverAllTestDetails",
+              "type__added": "array",
+              "items__added": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
+            }
+          },
           "202": {
             "headers": {
               "location__deleted": {
@@ -15040,6 +15049,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails": {
       "post": {
         "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject",
+              "type__added": "array",
+              "items__added": {
+                "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+              }
+            }
+          },
           "202": {
             "headers": {
               "location__deleted": {
@@ -17490,6 +17508,20 @@
           },
           "readOnly": true
         }
+      }
+    },
+    "ExpressRouteFailoverAllTestDetails__deleted": {
+      "type": "array",
+      "description": "Gateway Failover All Test Details",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+      }
+    },
+    "ExpressRouteFailoverSingleTestDetailsObject__deleted": {
+      "type": "array",
+      "description": "Gateway Failover Single Test Details Object",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
       }
     },
     "Filters__deleted": {
@@ -21877,40 +21909,6 @@
       "required__added": [
         "value"
       ]
-    },
-    "ExpressRouteFailoverAllTestDetails": {
-      "items__deleted": {
-        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-      },
-      "properties__added": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      },
-      "type": {
-        "__old": "array",
-        "__new": "object"
-      }
-    },
-    "ExpressRouteFailoverSingleTestDetailsObject": {
-      "items__deleted": {
-        "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
-      },
-      "properties__added": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
-          }
-        }
-      },
-      "type": {
-        "__old": "array",
-        "__new": "object"
-      }
     },
     "ExpressRouteGateway": {
       "allOf": [

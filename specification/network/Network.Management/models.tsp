@@ -27785,22 +27785,12 @@ alias ApplicationGatewayAvailableResponseHeadersResult = string[];
 /**
  * Gateway Failover All Test Details
  */
-model ExpressRouteFailoverAllTestDetails {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: ExpressRouteFailoverTestDetails[];
-}
+alias ExpressRouteFailoverAllTestDetails = ExpressRouteFailoverTestDetails[];
 
 /**
  * Gateway Failover Single Test Details Object
  */
-model ExpressRouteFailoverSingleTestDetailsObject {
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @pageItems
-  value?: ExpressRouteFailoverSingleTestDetails[];
-}
+alias ExpressRouteFailoverSingleTestDetailsObject = ExpressRouteFailoverSingleTestDetails[];
 
 model PerimeterAssociableResourcesListResult
   is Azure.Core.Page<PerimeterAssociableResource>;

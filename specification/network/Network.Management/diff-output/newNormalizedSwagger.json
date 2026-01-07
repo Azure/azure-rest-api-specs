@@ -27081,7 +27081,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverAllTestDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
             }
           },
           "202": {
@@ -27136,7 +27139,10 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+              }
             }
           },
           "202": {
@@ -43015,18 +43021,6 @@
         "value"
       ]
     },
-    "ExpressRouteFailoverAllTestDetails": {
-      "type": "object",
-      "description": "Gateway Failover All Test Details",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
-          }
-        }
-      }
-    },
     "ExpressRouteFailoverCircuitResourceDetails": {
       "type": "object",
       "properties": {
@@ -43152,18 +43146,6 @@
           "description": "List of all the failover connections for this peering location",
           "items": {
             "$ref": "#/definitions/FailoverConnectionDetails"
-          }
-        }
-      }
-    },
-    "ExpressRouteFailoverSingleTestDetailsObject": {
-      "type": "object",
-      "description": "Gateway Failover Single Test Details Object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
           }
         }
       }

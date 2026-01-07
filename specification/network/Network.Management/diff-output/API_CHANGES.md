@@ -261,6 +261,8 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/PeerRouteList` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ExpressRouteFailoverAllTestDetails` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.200.schema.$ref__deleted` | deleted | `#/definitions/ExpressRouteFailoverSingleTestDetailsObject` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.$ref__added` | added | `#/definitions/stringApplicationJson` |
@@ -668,6 +670,8 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes'].post.responses.200.schema.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile'].post.responses.200.schema.type__deleted` | deleted | `string` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.type__added` | added | `array` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.200.schema.type__added` | added | `array` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture'].post.responses.200.schema.type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest'].post.responses.200.schema.type__deleted` | deleted | `string` |
@@ -784,13 +788,13 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.items__added` | added | `{"$ref":"#/definitions/AzureFirewallIpGroups"}` |
-| `definitions.ExpressRouteFailoverAllTestDetails.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
-| `definitions.ExpressRouteFailoverSingleTestDetailsObject.items__deleted` | deleted | `{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}` |
 | `definitions.IDPSQueryObject.properties.filters.items__added` | added | `{"$ref":"#/definitions/FilterItems"}` |
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.items__added` | added | `{"$ref":"#/definitions/NvaInterfaceConfigurationsProperties"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables'].get.responses.200.schema.items__added` | added | `{"type":"string"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails'].post.responses.200.schema.items__added` | added | `{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}` |
 
 ### Changes for `required`
 
@@ -1496,6 +1500,18 @@
 |------|------------|-------|
 | `definitions.ConnectionStateSnapshot__deleted` | deleted | `{"type":"object","description":"Connection state snapshot.","properties":{"connectionState":{"type":...` |
 
+### Changes for `ExpressRouteFailoverAllTestDetails`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExpressRouteFailoverAllTestDetails__deleted` | deleted | `{"type":"array","description":"Gateway Failover All Test Details","items":{"$ref":"#/definitions/Exp...` |
+
+### Changes for `ExpressRouteFailoverSingleTestDetailsObject`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ExpressRouteFailoverSingleTestDetailsObject__deleted` | deleted | `{"type":"array","description":"Gateway Failover Single Test Details Object","items":{"$ref":"#/defin...` |
+
 ### Changes for `Filters`
 
 | Path | Change Type | Value |
@@ -2199,8 +2215,6 @@
 | `definitions.BastionHostPropertiesFormat.properties.networkAcls.properties__deleted` | deleted | `{"ipRules":{"type":"array","description":"Sets the IP ACL rules for Developer Bastion Host.","items"...` |
 | `definitions.ConnectivityConfigurationProperties.properties.connectivityCapabilities.properties__deleted` | deleted | `{"connectedGroupPrivateEndpointsScale":{"type":"string","description":"Option indicating the scale o...` |
 | `definitions.Container.properties__deleted` | deleted | `{}` |
-| `definitions.ExpressRouteFailoverAllTestDetails.properties__added` | added | `{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteFailoverTestDetails"}}}` |
-| `definitions.ExpressRouteFailoverSingleTestDetailsObject.properties__added` | added | `{"value":{"type":"array","items":{"$ref":"#/definitions/ExpressRouteFailoverSingleTestDetails"}}}` |
 | `definitions.ExpressRouteGatewayProperties.properties.autoScaleConfiguration.properties__deleted` | deleted | `{"bounds":{"description":"Minimum and maximum number of scale units to deploy.","properties":{"min":...` |
 | `definitions.IpamPoolPrefixAllocation.properties.pool.properties__deleted` | deleted | `{"id":{"type":"string","format":"arm-id","description":"Resource id of the associated Azure IpamPool...` |
 | `definitions.ManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.properties__deleted` | deleted | `{"principalId":{"readOnly":true,"type":"string","description":"The principal id of user assigned ide...` |
@@ -2568,8 +2582,6 @@
 | `definitions.ExpressRouteCrossConnectionPeeringProperties.properties.state.description` | `The peering state.` | `The state of peering.` |
 | `definitions.ExpressRouteCrossConnectionProperties.properties.provisioningState.description` | `The provisioning state of the express route cross connection resource.` | `The current provisioning state.` |
 | `definitions.ExpressRouteCrossConnectionProperties.properties.serviceProviderProvisioningState.description` | `The provisioning state of the circuit in the connectivity provider system.` | `The ServiceProviderProvisioningState state of the resource.` |
-| `definitions.ExpressRouteFailoverAllTestDetails.type` | `array` | `object` |
-| `definitions.ExpressRouteFailoverSingleTestDetailsObject.type` | `array` | `object` |
 | `definitions.ExpressRouteGateway.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ExpressRouteGatewayProperties.properties.provisioningState.description` | `The provisioning state of the express route gateway resource.` | `The current provisioning state.` |
 | `definitions.ExpressRouteLink.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
