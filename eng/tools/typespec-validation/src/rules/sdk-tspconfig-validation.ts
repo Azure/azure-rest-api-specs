@@ -538,6 +538,18 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
 }
 
 // ----- Go Mgmt plane sub rules -----
+export class TspConfigGoMgmtModuleMatchPatternSubRule extends TspConfigGoModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigGoMgmtContainingModuleMatchPatternSubRule extends TspConfigGoContainingModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
@@ -707,8 +719,8 @@ export const requiredRules = [
   new TspConfigGoMgmtGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoMgmtInjectSpansTrueSubRule(),
-  new TspConfigGoModuleMatchPatternSubRule(),
-  new TspConfigGoContainingModuleMatchPatternSubRule(),
+  new TspConfigGoMgmtModuleMatchPatternSubRule(),
+  new TspConfigGoMgmtContainingModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpEmitterOutputDirSubRule(),
@@ -727,6 +739,8 @@ export const requiredRules = [
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
+  new TspConfigGoModuleMatchPatternSubRule(),
+  new TspConfigGoContainingModuleMatchPatternSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
