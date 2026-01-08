@@ -18,6 +18,8 @@ model Employee is TrackedResource<EmployeeProperties> {
 /** Employee properties */
 model EmployeeProperties {
   /** Age of employee */
+  @minValue(18)
+  @maxValue(99)
   age?: int32;
 
   /** City of employee */
