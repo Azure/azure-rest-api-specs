@@ -24,7 +24,7 @@ These settings apply only when `--tag=package-2021-11-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-11-01'
 input-file:
-  - stable/2021-11-01/widget.json
+  - stable/2021-11-01/Widget.json
 suppressions:
   - code: PathContainsResourceType
   - code: PathResourceProviderMatchNamespace
@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-  - preview/2021-10-01-preview/widget.json
+  - preview/2021-10-01-preview/Widget.json
 suppressions:
   - code: PathContainsResourceType
   - code: PathResourceProviderMatchNamespace
