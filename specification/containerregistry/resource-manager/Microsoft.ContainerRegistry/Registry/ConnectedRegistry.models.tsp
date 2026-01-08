@@ -1,6 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
 using Azure.ResourceManager;
+using Versioning;
 
 /**
  * The mode of the connected registry resource that indicates the permissions of the registry.
@@ -167,6 +168,12 @@ model ConnectedRegistryProperties {
    * The garbage collection properties of the connected registry.
    */
   garbageCollection?: GarbageCollectionProperties;
+
+  /**
+   * The result of the connected registry's most recent sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  registrySyncResult?: RegistrySyncResult;
 }
 
 /**
@@ -348,6 +355,37 @@ model GarbageCollectionProperties {
    * The cron expression indicating the schedule that the connected registry will run garbage collection.
    */
   schedule?: string;
+}
+
+/**
+ * The registry sync result of the connected registry.
+ */
+@added(Versions.vLatestPreview)
+model RegistrySyncResult {
+  /**
+   * The action that triggered the most recent registry sync.
+   */
+  syncTrigger: string;
+
+  /**
+   * The status of the connected registry's most recent sync.
+   */
+  syncState: string;
+
+  /**
+   * The time that the connected registry's most recent sync started.
+   */
+  lastSyncStartTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent sync ended.
+   */
+  lastSyncEndTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent successful sync ended.
+   */
+  lastSuccessfulSyncEndTime?: utcDateTime;
 }
 
 /**
