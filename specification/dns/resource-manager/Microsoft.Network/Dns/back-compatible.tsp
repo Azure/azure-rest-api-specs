@@ -19,26 +19,31 @@ using Microsoft.Network;
 @@clientName(SoaRecord.minimumTTL, "minimumTtl");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DnsResourceReferenceRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DnsResourceReferenceResult.properties
 );
 
 @@clientName(RecordSetUpdateParameters.RecordSet, "recordSet");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DnssecConfig.properties);
 
 @@clientName(RecordSets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RecordSets.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecordSet.properties);
 
 @@clientName(Zones.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Zones.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Zone.properties);
 @@visibility(DnssecConfig.properties, Lifecycle.Read);
 @@clientName(DnsResourceReferenceOperationGroup.getByTargetResources::parameters.body,
