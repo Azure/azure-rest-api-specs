@@ -483,3 +483,64 @@ using Microsoft.AVS;
 @@scope(ServiceComponents.checkAvailability,
   "!(python,javascript,go,java,csharp)"
 );
+
+// Prefix some csharp client names with "Avs"
+@@clientName(License, "AvsLicense", "csharp");
+@@clientName(LicenseName, "AvsLicenseName", "csharp");
+@@clientName(LicenseKind, "AvsLicenseKind", "csharp");
+@@clientName(LicenseProperties, "AvsLicenseProperties", "csharp");
+@@clientName(LicenseProvisioningState, "AvsLicenseProvisioningState", "csharp");
+@@clientName(Label, "AvsLabel", "csharp");
+@@clientName(Maintenance, "AvsMaintenance", "csharp");
+@@clientName(ImpactedMaintenanceResource, "ImpactedMaintenanceInfo", "csharp");
+@@clientName(ImpactedMaintenanceResourceError,
+  "ImpactedMaintenanceInfoError",
+  "csharp"
+);
+@@clientName(Maintenance, "AvsMaintenance", "csharp");
+@@clientName(MaintenanceProperties, "AvsMaintenanceProperties", "csharp");
+@@clientName(MaintenanceState, "AvsMaintenanceState", "csharp");
+@@clientName(MaintenanceStateName, "AvsMaintenanceStateName", "csharp");
+@@clientName(MaintenanceStatusFilter, "AvsMaintenanceStatusFilter", "csharp");
+@@clientName(MaintenanceFailedCheck, "AvsMaintenanceFailedCheck", "csharp");
+@@clientName(MaintenanceFailedCheck, "AvsMaintenanceFailedCheck", "csharp");
+@@clientName(MaintenanceManagementOperation,
+  "AvsMaintenanceManagementOperation",
+  "csharp"
+);
+@@clientName(MaintenanceSchedule, "AvsMaintenanceSchedule", "csharp");
+@@clientName(MaintenanceProvisioningState,
+  "AvsMaintenanceProvisioningState",
+  "csharp"
+);
+@@clientName(MaintenanceType, "AvsMaintenanceType", "csharp");
+@@clientName(MaintenanceReadiness, "AvsMaintenanceReadiness", "csharp");
+@@clientName(MaintenanceReadinessStatus,
+  "AvsMaintenanceReadinessStatus",
+  "csharp"
+);
+@@clientName(MaintenanceReadinessRefreshOperationStatus,
+  "AvsMaintenanceReadinessRefreshOperationStatus",
+  "csharp"
+);
+@@clientName(MaintenanceReadinessRefreshOperation,
+  "AvsMaintenanceReadinessRefreshOperation",
+  "csharp"
+);
+@@clientName(RescheduleOperation, "AvsRescheduleOperation", "csharp");
+@@clientName(RescheduleOperationConstraint,
+  "AvsRescheduleOperationConstraint",
+  "csharp"
+);
+@@clientName(RescheduleOperationConstraintKind,
+  "AvsRescheduleOperationConstraintKind",
+  "csharp"
+);
+@@clientName(ScheduleOperationConstraint,
+  "AvsScheduleOperationConstraint",
+  "csharp"
+);
+@@clientName(ScheduleOperationConstraintKind,
+  "AvsScheduleOperationConstraintKind",
+  "csharp"
+);
