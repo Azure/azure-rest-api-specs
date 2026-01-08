@@ -43,9 +43,15 @@ enum Versions {
   /**
    * The 2025-01-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_01: "2025-01-01",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      OperationListResult,
+      ErrorResponse
+    > {}
+
+@@doc(Operations.list,
+  "Lists all of the available Microsoft.Marketplace REST API operations."
+);

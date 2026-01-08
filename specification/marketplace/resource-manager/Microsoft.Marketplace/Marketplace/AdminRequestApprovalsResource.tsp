@@ -25,12 +25,13 @@ model AdminRequestApprovalsResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface AdminRequestApprovalsResources {
   /**
    * Get open approval requests
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_GetAdminRequestApproval")
   getAdminRequestApproval is ArmResourceRead<
     AdminRequestApprovalsResource,
@@ -40,28 +41,32 @@ interface AdminRequestApprovalsResources {
        */
       @query("publisherId")
       publisherId: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
    * Update the admin action, weather the request is approved or rejected and the approved plans
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_UpdateAdminRequestApproval")
-  updateAdminRequestApproval is ArmResourceCreateOrReplaceSync<
+  updateAdminRequestApproval is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     AdminRequestApprovalsResource,
-    Response = ArmResourceUpdatedResponse<AdminRequestApprovalsResource>
+    Response = ArmResourceUpdatedResponse<AdminRequestApprovalsResource>,
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Get list of admin request approvals
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_AdminRequestApprovalsList")
   adminRequestApprovalsList is ArmResourceListByParent<
     AdminRequestApprovalsResource,
-    Response = ArmResponse<AdminRequestApprovalsList>
+    Response = ArmResponse<AdminRequestApprovalsList>,
+    Error = ErrorResponse
   >;
 }
 

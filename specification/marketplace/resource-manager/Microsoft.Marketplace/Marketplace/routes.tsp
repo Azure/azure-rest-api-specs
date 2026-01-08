@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Marketplace;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateStoreCollectionOperationGroup {
   /**
    * Delete Private store collection. This is a workaround.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStoreCollection_Post")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}")
   @post
@@ -37,18 +37,18 @@ interface PrivateStoreCollectionOperationGroup {
     @path
     collectionId: string,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateStoreCollectionOfferOperationGroup {
   /**
    * Delete Private store offer. This is a workaround.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStoreCollectionOffer_Post")
   @route("/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/offers/{offerId}")
   @post
@@ -73,7 +73,7 @@ interface PrivateStoreCollectionOfferOperationGroup {
     @path
     offerId: string,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @bodyRoot
     payload?: Operation,
   ): OkResponse | ErrorResponse;

@@ -29,39 +29,44 @@ interface PrivateStores {
   /**
    * Get information about the private store
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_Get")
   get is ArmResourceRead<
     PrivateStore,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * Changes private store properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     PrivateStore,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Response = OkResponse
+    Response = OkResponse,
+    Error = ErrorResponse,
+    OptionalRequestBody = true
   >;
 
   /**
    * Deletes the private store. All that is not saved will be lost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_Delete")
   delete is ArmResourceDeleteSync<
     PrivateStore,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * Gets the list of available private stores.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_List")
   list is ArmResourceListByParent<
     PrivateStore,
@@ -70,116 +75,126 @@ interface PrivateStores {
       /**
        * Determines if to use cache or DB for serving this request
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("use-cache")
       `use-cache`?: string;
     },
-    Response = ArmResponse<PrivateStoreList>
+    Response = ArmResponse<PrivateStoreList>,
+    Error = ErrorResponse
   >;
 
   /**
    * Query whether exists any offer in the collections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_AnyExistingOffersInTheCollections")
   anyExistingOffersInTheCollections is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<AnyExistingOffersInTheCollectionsResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * List of offers, regardless the collections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_QueryOffers")
   queryOffers is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<QueryOffers>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * List of user's approved offers for the provided offers and subscriptions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_QueryUserOffers")
   queryUserOffers is ArmResourceActionSync<
     PrivateStore,
     QueryUserOffersProperties,
     ArmResponse<QueryOffers>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Tenant billing accounts names
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_BillingAccounts")
   billingAccounts is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<BillingAccountsResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * For a given subscriptions list, the API will return a map of collections and the related subscriptions from the supplied list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_CollectionsToSubscriptionsMapping")
   collectionsToSubscriptionsMapping is ArmResourceActionSync<
     PrivateStore,
     CollectionsToSubscriptionsMappingPayload,
     ArmResponse<CollectionsToSubscriptionsMappingResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Get map of plans and related approved subscriptions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_QueryApprovedPlans")
   queryApprovedPlans is ArmResourceActionSync<
     PrivateStore,
     QueryApprovedPlansPayload,
     ArmResponse<QueryApprovedPlansResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Perform an action on bulk collections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_BulkCollectionsAction")
   bulkCollectionsAction is ArmResourceActionSync<
     PrivateStore,
     BulkCollectionsPayload,
     ArmResponse<BulkCollectionsResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Get private store notifications state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_QueryNotificationsState")
   queryNotificationsState is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<PrivateStoreNotificationsState>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * Acknowledge notification for offer
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_AcknowledgeOfferNotification")
   @action("acknowledgeNotification")
   acknowledgeOfferNotification is ArmResourceActionSync<
@@ -192,15 +207,17 @@ interface PrivateStores {
        * The offer ID to update or delete
        */
       @path
+      @segment("offers")
       offerId: string;
     },
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Fetch all subscriptions in tenant, only for marketplace admin
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_FetchAllSubscriptionsInTenant")
   fetchAllSubscriptionsInTenant is ArmResourceActionSync<
     PrivateStore,
@@ -211,59 +228,65 @@ interface PrivateStores {
       /**
        * The skip token to get the next page.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `next-page-token`?: string;
-    }
+    },
+    Error = ErrorResponse
   >;
 
   /**
    * List new plans notifications
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_ListNewPlansNotifications")
   listNewPlansNotifications is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<NewPlansNotificationsList>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * List stop sell notifications for both stop sell offers and stop sell plans
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_ListStopSellOffersPlansNotifications")
   listStopSellOffersPlansNotifications is ArmResourceActionSync<
     PrivateStore,
     StopSellSubscriptions,
     ArmResponse<StopSellOffersPlansNotificationsList>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * List all the subscriptions in the private store context
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_ListSubscriptionsContext")
   listSubscriptionsContext is ArmResourceActionSync<
     PrivateStore,
     void,
     ArmResponse<SubscriptionsContextList>,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    Error = ErrorResponse
   >;
 
   /**
    * All rules approved in the private store that are relevant for user subscriptions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("QueryUserRules")
   queryUserRules is ArmResourceActionSync<
     PrivateStore,
     QueryUserRulesProperties,
     ArmResponse<RuleListResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 }
 

@@ -3,38 +3,35 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Marketplace;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateStoreProperties.notificationsSettings);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(PrivateStoreProperties.notificationsSettings);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(QueryUserOffersProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QueryUserOffersProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(QueryUserRulesProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QueryUserRulesProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(TransferOffersProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TransferOffersProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(QueryApprovedPlansPayload.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(BulkCollectionsPayload.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QueryApprovedPlansPayload.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(CollectionOffersByAllContextsPayload.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BulkCollectionsPayload.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(CollectionOffersByContext.offers);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CollectionOffersByAllContextsPayload.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(MultiContextAndPlansPayload.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CollectionOffersByContext.offers);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(MultiContextAndPlansPayload.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AcknowledgeOfferNotificationProperties.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WithdrawProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(AcknowledgeOfferNotificationProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(WithdrawProperties.properties);
 
 @@clientLocation(PrivateStores.get, "PrivateStore");
 @@clientLocation(PrivateStores.createOrUpdate, "PrivateStore");
@@ -74,8 +71,9 @@ using Microsoft.Marketplace;
 @@clientLocation(PrivateStores.listSubscriptionsContext, "PrivateStore");
 @@clientLocation(PrivateStores.queryUserRules, "");
 @@clientName(PrivateStores.queryUserRules::parameters.body, "payload");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateStore.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(PrivateStore.properties);
 
 @@clientLocation(Collections.get, "PrivateStoreCollection");
 @@clientLocation(Collections.createOrUpdate, "PrivateStoreCollection");
@@ -91,8 +89,9 @@ using Microsoft.Marketplace;
 @@clientLocation(Collections.disableApproveAllItems, "PrivateStoreCollection");
 @@clientLocation(Collections.listByContexts, "PrivateStoreCollectionOffer");
 @@clientName(Collections.listByContexts::parameters.body, "payload");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Collection.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(Collection.properties);
 
 @@clientLocation(Offers.get, "PrivateStoreCollectionOffer");
 @@clientLocation(Offers.createOrUpdate, "PrivateStoreCollectionOffer");
@@ -105,8 +104,9 @@ using Microsoft.Marketplace;
   "PrivateStoreCollectionOffer"
 );
 @@clientName(Offers.upsertOfferWithMultiContext::parameters.body, "payload");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Offer.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(Offer.properties);
 
 @@clientLocation(RequestApprovalResources.getRequestApproval, "PrivateStore");
 @@clientLocation(RequestApprovalResources.createApprovalRequest,
@@ -124,8 +124,9 @@ using Microsoft.Marketplace;
 );
 @@clientLocation(RequestApprovalResources.withdrawPlan, "PrivateStore");
 @@clientName(RequestApprovalResources.withdrawPlan::parameters.body, "payload");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RequestApprovalResource.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(RequestApprovalResource.properties);
 
 @@clientLocation(AdminRequestApprovalsResources.getAdminRequestApproval,
   "PrivateStore"
@@ -139,8 +140,9 @@ using Microsoft.Marketplace;
 @@clientLocation(AdminRequestApprovalsResources.adminRequestApprovalsList,
   "PrivateStore"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AdminRequestApprovalsResource.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(AdminRequestApprovalsResource.properties);
 
 @@clientLocation(PrivateStoreCollectionOperationGroup.post,
   "PrivateStoreCollection"
@@ -149,3 +151,7 @@ using Microsoft.Marketplace;
 @@clientLocation(PrivateStoreCollectionOfferOperationGroup.post,
   "PrivateStoreCollectionOffer"
 );
+@@clientName(CollectionsSubscriptionsMappingDetails,
+  "collectionsSubscriptionsMappingDetails"
+);
+@@clientName(PlanDetails, "planDetails");

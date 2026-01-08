@@ -15,9 +15,9 @@ namespace Microsoft.Marketplace;
  */
 union Availability {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enabled: "enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disabled: "disabled",
 }
 
@@ -26,13 +26,13 @@ union Availability {
  */
 union IdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -41,13 +41,13 @@ union IdentityType {
  */
 union Accessibility {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Public: "Public",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrivateTenantOnLevel: "PrivateTenantOnLevel",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrivateSubscriptionOnLevel: "PrivateSubscriptionOnLevel",
 }
 
@@ -56,9 +56,9 @@ union Accessibility {
  */
 union RuleType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrivateProducts: "PrivateProducts",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TermsAndCondition: "TermsAndCondition",
 }
 
@@ -67,13 +67,13 @@ union RuleType {
  */
 union Operation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DeletePrivateStoreOffer: "DeletePrivateStoreOffer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DeletePrivateStoreCollection: "DeletePrivateStoreCollection",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DeletePrivateStoreCollectionOffer: "DeletePrivateStoreCollectionOffer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Ping: "Ping",
 }
 
@@ -82,13 +82,13 @@ union Operation {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 
@@ -97,9 +97,9 @@ union Status {
  */
 union AdminAction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Rejected: "Rejected",
 }
 
@@ -108,15 +108,15 @@ union AdminAction {
  */
 union SubscriptionState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Warned: "Warned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PastDue: "PastDue",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleted: "Deleted",
 }
 
@@ -128,7 +128,7 @@ model PrivateStoreList is Azure.Core.Page<PrivateStore>;
 /**
  * Describes the json payload on whether or not the private store is enabled for a given tenant
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateStoreProperties {
   /**
    * Indicates private store availability
@@ -170,14 +170,12 @@ model PrivateStoreProperties {
   /**
    * Gets or sets list of branding characteristics
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   branding?: Record<string>;
 
   /**
    * Gets or sets notifications settings
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   notificationsSettings?: NotificationsSettingsProperties;
 }
 
@@ -188,7 +186,7 @@ model NotificationsSettingsProperties {
   /**
    * Gets or sets list of notified recipients for new requests
    */
-  @OpenAPI.extension("x-ms-identifiers", #["principalId"])
+  @identifiers(#["principalId"])
   recipients?: Recipient[];
 
   /**
@@ -327,8 +325,8 @@ model AnyExistingOffersInTheCollectionsResponse {
  * List of offers
  */
 model QueryOffers {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["uniqueOfferId"])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["uniqueOfferId"])
   value?: OfferProperties[];
 
   /**
@@ -337,8 +335,8 @@ model QueryOffers {
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OfferProperties {
   /**
    * Offers unique id
@@ -394,7 +392,7 @@ model OfferProperties {
   /**
    * Icon File Uris
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   iconFileUris?: Record<string>;
 
   /**
@@ -406,11 +404,11 @@ model OfferProperties {
   /**
    * Offer plans
    */
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: Plan[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Plan {
   /**
    * Identifier for this plan
@@ -461,8 +459,6 @@ model QueryUserOffersProperties {
   /**
    * Query user's offers details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QueryUserOffersDetails;
 }
 
@@ -488,8 +484,6 @@ model QueryUserRulesProperties {
   /**
    * Query user's rules details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QueryUserRulesDetails;
 }
 
@@ -503,11 +497,11 @@ model QueryUserRulesDetails {
   subscriptionIds?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RuleListResponse {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   value?: Rule[];
 
   /**
@@ -516,14 +510,14 @@ model RuleListResponse {
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Rule {
   /**
    * Rule type
    */
   type?: RuleType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: string[];
 }
 
@@ -564,9 +558,16 @@ model CollectionsToSubscriptionsMappingResponse {
   /**
    * The map of collections subscriptions
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  details?: Record<CollectionsSubscriptionsMappingDetails>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  details?: CollectionsToSubscriptionsMappingResponseProperties;
 }
+
+/**
+ * Collections - subscriptions mapping details, map key is collectionId. In case subscriptions list is null or empty: no subscription from the list is related to that collection.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model CollectionsToSubscriptionsMappingResponseProperties
+  is Record<CollectionsSubscriptionsMappingDetails>;
 
 /**
  * Collection name and related subscriptions list
@@ -583,9 +584,10 @@ model CollectionsSubscriptionsMappingDetails {
   subscriptions?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CollectionsList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
   value?: Collection[];
 
   /**
@@ -597,7 +599,7 @@ model CollectionsList {
 /**
  * The collection details
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CollectionProperties {
   /**
    * Gets collection Id.
@@ -653,7 +655,7 @@ model CollectionProperties {
    * Gets list of collection rules
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   appliedRules?: Rule[];
 }
 
@@ -664,8 +666,6 @@ model TransferOffersProperties {
   /**
    * transfer offers properties details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TransferOffersDetails;
 }
 
@@ -696,13 +696,13 @@ model TransferOffersResponse {
   /**
    * Succeeded collections
    */
-  @OpenAPI.extension("x-ms-identifiers", #["collectionId"])
+  @identifiers(#["collectionId"])
   succeeded?: CollectionsDetails[];
 
   /**
    * Failed collections
    */
-  @OpenAPI.extension("x-ms-identifiers", #["collectionId"])
+  @identifiers(#["collectionId"])
   failed?: CollectionsDetails[];
 }
 
@@ -728,8 +728,6 @@ model QueryApprovedPlansPayload {
   /**
    * Query approved plans details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QueryApprovedPlans;
 }
 
@@ -760,6 +758,7 @@ model QueryApprovedPlansResponse {
   /**
    * A list indicating for each plan which subscriptions are approved. Plan Id is unique
    */
+  @identifiers(#["planId"])
   details?: QueryApprovedPlansDetails[];
 }
 
@@ -790,8 +789,6 @@ model BulkCollectionsPayload {
   /**
    * bulk collections properties details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BulkCollectionsDetails;
 }
 
@@ -817,17 +814,17 @@ model BulkCollectionsResponse {
   /**
    * Succeeded collections
    */
-  @OpenAPI.extension("x-ms-identifiers", #["collectionId"])
+  @identifiers(#["collectionId"])
   succeeded?: CollectionsDetails[];
 
   /**
    * Failed collections
    */
-  @OpenAPI.extension("x-ms-identifiers", #["collectionId"])
+  @identifiers(#["collectionId"])
   failed?: CollectionsDetails[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OfferListResponse is Azure.Core.Page<Offer>;
 
 /**
@@ -837,8 +834,6 @@ model CollectionOffersByAllContextsPayload {
   /**
    * Subscriptions ids list
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CollectionOffersByAllContextsProperties;
 }
 
@@ -855,8 +850,20 @@ model CollectionOffersByAllContextsProperties {
 /**
  * List of objects which describes offers per context. An empty GUID is a public context.
  */
-model CollectionOffersByContextList
-  is Azure.Core.Page<CollectionOffersByContext>;
+model CollectionOffersByContextList {
+  /**
+   * aaaaaaaaaaaaaaaaaaaaaaaa
+   */
+  @identifiers(#["context"])
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: CollectionOffersByContext[];
+
+  /**
+   * aaaaaaaaaaaaaaaaaaaaaaa
+   */
+  nextLink?: string;
+}
 
 /**
  * List of offers and plans that restricted to the context
@@ -871,8 +878,6 @@ model CollectionOffersByContext {
   /**
    * List of offers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   offers?: CollectionOffersByContextOffers;
 }
 
@@ -880,15 +885,15 @@ model CollectionOffersByContext {
  * List of offers
  */
 model CollectionOffersByContextOffers {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["uniqueOfferId"])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["uniqueOfferId"])
   value?: OfferProperties[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SetRulesRequest {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["type"])
   value?: Rule[];
 
   /**
@@ -904,8 +909,6 @@ model MultiContextAndPlansPayload {
   /**
    * Object describes multiple context and plans.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: MultiContextAndPlansProperties;
 }
 
@@ -923,8 +926,8 @@ model MultiContextAndPlansProperties {
    */
   eTag?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["context"])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["context"])
   plansContext?: ContextAndPlansDetails[];
 }
 
@@ -947,7 +950,8 @@ model ContextAndPlansDetails {
  * List of admin request approval resources
  */
 model RequestApprovalsList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
   value?: RequestApprovalResource[];
 
   /**
@@ -960,7 +964,7 @@ model RequestApprovalsList {
 /**
  * Approval request resource properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RequestApprovalProperties {
   /**
    * Gets or sets unique offer id.
@@ -981,7 +985,7 @@ model RequestApprovalProperties {
   /**
    * Gets or sets the plans details
    */
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plansDetails?: PlanDetails[];
 
   /**
@@ -1015,7 +1019,7 @@ model PlanDetails {
    * Gets request date
    */
   @visibility(Lifecycle.Read)
-  requestDate?: unknown;
+  requestDate?: utcDateTime;
 
   /**
    * Gets or sets user's justification for the plan's request
@@ -1075,7 +1079,7 @@ model QueryRequestApproval {
   /**
    * Gets or sets the plans details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   plansDetails?: Record<PlanDetails>;
 
   /**
@@ -1093,7 +1097,8 @@ model QueryRequestApproval {
  * List of admin request approval resources
  */
 model AdminRequestApprovalsList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @pageItems
   value?: AdminRequestApprovalsResource[];
 
   /**
@@ -1106,7 +1111,7 @@ model AdminRequestApprovalsList {
 /**
  * Admin approval request resource properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AdminRequestApprovalProperties {
   /**
    * Gets or sets offer Id
@@ -1148,7 +1153,7 @@ model AdminRequestApprovalProperties {
    * Gets list of plans with requesters details
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: PlanRequesterDetails[];
 
   /**
@@ -1183,7 +1188,7 @@ model PlanRequesterDetails {
    * Gets requesters details list
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["user"])
+  @identifiers(#["user"])
   requesters?: UserRequestDetails[];
 }
 
@@ -1224,16 +1229,16 @@ model UserRequestDetails {
  * Get private store notifications state
  */
 model PrivateStoreNotificationsState {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   stopSellNotifications?: StopSellNotifications[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   newNotifications?: NewNotifications[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   approvalRequests?: RequestApprovalsDetails[];
 }
 
@@ -1269,7 +1274,7 @@ model StopSellNotifications {
   /**
    * Gets or sets removed plans notifications
    */
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: PlanNotificationDetails[];
 }
 
@@ -1320,7 +1325,7 @@ model NewNotifications {
   /**
    * Gets or sets removed plans notifications
    */
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: PlanNotificationDetails[];
 }
 
@@ -1356,7 +1361,7 @@ model RequestApprovalsDetails {
   /**
    * Gets or sets removed plans notifications
    */
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: PlanNotificationDetails[];
 }
 
@@ -1367,8 +1372,6 @@ model AcknowledgeOfferNotificationProperties {
   /**
    * Notification update request payload details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AcknowledgeOfferNotificationDetails;
 }
 
@@ -1409,8 +1412,6 @@ model WithdrawProperties {
   /**
    * Withdraw properties details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WithdrawDetails;
 }
 
@@ -1442,6 +1443,7 @@ model SubscriptionsResponse {
   /**
    * The skip token to retrieve the next page.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   skipToken?: string;
 
@@ -1485,8 +1487,8 @@ model Subscription {
  * List of all new plans notifications for public offers
  */
 model NewPlansNotificationsList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#[])
   newPlansNotifications?: NewNotifications[];
 }
 
@@ -1494,7 +1496,7 @@ model NewPlansNotificationsList {
  * Private plans subscriptions
  */
 model StopSellSubscriptions {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptions?: string[];
 }
 
@@ -1502,8 +1504,8 @@ model StopSellSubscriptions {
  * List of stop sell offers and plans notifications.
  */
 model StopSellOffersPlansNotificationsList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["offerId"])
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @identifiers(#["offerId"])
   stopSellNotifications?: StopSellOffersPlansNotificationsListProperties[];
 }
 
@@ -1545,7 +1547,7 @@ model StopSellOffersPlansNotificationsListProperties {
    * The list of removed plans notifications
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["planId"])
+  @identifiers(#["planId"])
   plans?: PlanNotificationDetails[];
 
   /**
@@ -1565,7 +1567,7 @@ model StopSellOffersPlansNotificationsListProperties {
  * List of subscription Ids in the private store
  */
 model SubscriptionsContextList {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionsIds?: string[];
 }
 
@@ -1601,7 +1603,8 @@ model SingleOperation {
   /**
    * Properties of the operation
    */
-  properties?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: unknown;
 }
 
 /**
@@ -1631,4 +1634,22 @@ model SingleOperationDisplay {
    */
   @visibility(Lifecycle.Read)
   description?: string;
+}
+
+/**
+ * aaaaaaaaaaaaaaaaaaaaa
+ */
+model OperationListResult {
+  /**
+   * aaaaaaaaaaaaaaaaaaaaaaa
+   */
+  @pageItems
+  @identifiers(#["name"])
+  value?: SingleOperation[];
+
+  /**
+   * aaaaaaaaaaaaaaaaaaaaa
+   */
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }

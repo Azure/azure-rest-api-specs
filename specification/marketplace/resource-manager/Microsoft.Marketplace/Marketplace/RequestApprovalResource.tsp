@@ -25,59 +25,67 @@ model RequestApprovalResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface RequestApprovalResources {
   /**
    * Get open request approval details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_GetRequestApproval")
-  getRequestApproval is ArmResourceRead<RequestApprovalResource>;
+  getRequestApproval is ArmResourceRead<
+    RequestApprovalResource,
+    Error = ErrorResponse
+  >;
 
   /**
    * Create approval request
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_CreateApprovalRequest")
   createApprovalRequest is ArmResourceCreateOrReplaceSync<
     RequestApprovalResource,
-    Response = ArmResourceUpdatedResponse<RequestApprovalResource>
+    Response = ArmResourceUpdatedResponse<RequestApprovalResource>,
+    Error = ErrorResponse
   >;
 
   /**
    * Get all open approval requests of current user
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_GetApprovalRequestsList")
   getApprovalRequestsList is ArmResourceListByParent<
     RequestApprovalResource,
-    Response = ArmResponse<RequestApprovalsList>
+    Response = ArmResponse<RequestApprovalsList>,
+    Error = ErrorResponse
   >;
 
   /**
    * Get request statuses foreach plan, this api is used as a complex GET action.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_QueryRequestApproval")
   @action("query")
   queryRequestApproval is ArmResourceActionSync<
     RequestApprovalResource,
     QueryRequestApprovalProperties,
     ArmResponse<QueryRequestApproval>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 
   /**
    * Withdraw a user request approval on specific plan
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateStore_WithdrawPlan")
   withdrawPlan is ArmResourceActionSync<
     RequestApprovalResource,
     WithdrawProperties,
     OkResponse,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorResponse
   >;
 }
 
