@@ -10,8 +10,9 @@ import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigGoContainingModuleMatchPatternSubRule,
+  TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
+  TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
   TspConfigGoMgmtContainingModuleMatchPatternSubRule,
   TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule,
@@ -21,7 +22,6 @@ import {
   TspConfigGoMgmtInjectSpansTrueSubRule,
   TspConfigGoMgmtModuleMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoModuleMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -350,7 +350,7 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoModuleMatchPatternSubRule()],
+  [new TspConfigGoDpModuleMatchPatternSubRule()],
 );
 
 const goDpContainingModuleTestCases = createEmitterOptionTestCases(
@@ -359,7 +359,7 @@ const goDpContainingModuleTestCases = createEmitterOptionTestCases(
   "containing-module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  [new TspConfigGoDpContainingModuleMatchPatternSubRule()],
   false,
 );
 
@@ -647,8 +647,8 @@ parameters:
       new TspConfigJavaMgmtNamespaceFormatSubRule(),
       new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
       new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
-      new TspConfigGoModuleMatchPatternSubRule(),
-      new TspConfigGoContainingModuleMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
+      new TspConfigGoDpContainingModuleMatchPatternSubRule(),
     ],
   },
 ];
@@ -733,7 +733,7 @@ options:
     folder: managementTspconfigFolder,
     subRules: [
       new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule(),
-      new TspConfigGoModuleMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
     ],
     tspconfigContent: `
 options:
