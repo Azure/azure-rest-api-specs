@@ -780,8 +780,6 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpModuleTestCases,
-    ...goDpContainingModuleTestCases,
     // java
     ...javaAzEmitterOutputDirTestCases,
     ...javaMgmtEmitterOutputDirTestCases,
@@ -805,6 +803,8 @@ describe("tspconfig", function () {
     // go data plane
     ...goDpEmitterOutputDirTestCases,
     ...goDpServiceDirTestCases,
+    ...goDpModuleTestCases,
+    ...goDpContainingModuleTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
