@@ -12,15 +12,11 @@ namespace Microsoft.ContainerService;
 
 @doc("The Mesh Member data for a Fleet Member resource.")
 model MeshMember {
-  @doc("The name of the Mesh member resource.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  name: string;
-
   @doc("The Id of the Mesh Member.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   meshMemberId: MeshMemberId;
 
-  @doc("The Cilium cluster.")
+  @doc("The Cilium cluster properties.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   ciliumProperties: CiliumProperties;
 
