@@ -15,6 +15,12 @@ using Microsoft.Attestation;
   armResourceIdentifier,
   "csharp"
 );
-
-// this is temporary before our generator fixes this issue.
-@@scope(Operations.list, "!csharp");
+@@clientName(PrivateEndpointConnection,
+  "AttestationPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(AttestationProviderListResult,
+  "AttestationProviderCreateOrUpdateContent",
+  "csharp"
+);
+@@alternateType(StatusResult.attestUri, url, "csharp");
