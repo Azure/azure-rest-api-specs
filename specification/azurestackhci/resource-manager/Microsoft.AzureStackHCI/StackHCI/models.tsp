@@ -1777,6 +1777,10 @@ model ArcSettingsPatch {
    * ArcSettings properties.
    */
   properties?: ArcSettingsPatchProperties;
+
+  @removed(Versions.v2025_12_01_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
