@@ -318,7 +318,7 @@ stages:
             Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
             Write-Host "Updated PR Title to: '$updatedTitle'"
           displayName: "Set PR title prefix based on job status"
-          condition: and(or(eq('$(Agent.JobStatus)', 'SucceededWithIssues'), eq('$(Agent.JobStatus)', 'Failed')), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))
+          condition: and(eq('$(Agent.JobStatus)', 'Failed'), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))
 
         - task: PowerShell@2
           displayName: Create pull request
