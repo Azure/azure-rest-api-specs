@@ -468,17 +468,14 @@ export class TspConfigTsMlcDpPackageNameMatchPatternSubRule extends TspconfigEmi
   }
 }
 
-// ----- Go data plane sub rules -----
-export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+// ----- Go common sub rules -----
+export class TspConfigGoModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-go",
       "module",
       new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
     );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
   }
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
@@ -494,16 +491,13 @@ export class TspConfigGoDpModuleMatchPatternSubRule extends TspconfigEmitterOpti
   }
 }
 
-export class TspConfigGoDpContainingModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-go",
       "containing-module",
       new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
     );
-  }
-  protected skip(_: any, folder: string) {
-    return skipForManagementPlane(folder);
   }
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
@@ -518,6 +512,20 @@ export class TspConfigGoDpContainingModuleMatchPatternSubRule extends TspconfigE
     return super.validate(config);
   }
 }
+
+// ----- Go data plane sub rules -----
+export class TspConfigGoDpModuleMatchPatternSubRule extends TspConfigGoModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigGoDpContainingModuleMatchPatternSubRule extends TspConfigGoContainingModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^(\{output-dir\}\/)?sdk\/.*$/));
@@ -542,53 +550,15 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
 }
 
 // ----- Go Mgmt plane sub rules -----
-export class TspConfigGoMgmtModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "module",
-      new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
-    );
-  }
+export class TspConfigGoMgmtModuleMatchPatternSubRule extends TspConfigGoModuleMatchPatternSubRule {
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
-  }
-  protected validate(config: any): RuleResult {
-    const module = config?.options?.[this.emitterName]?.["module"];
-    const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) {
-      return this.createFailedResult(
-        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
-        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
-      );
-    }
-    if (module === undefined) return { success: true };
-    return super.validate(config);
   }
 }
 
-export class TspConfigGoMgmtContainingModuleMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "containing-module",
-      new RegExp(/^github.com\/Azure\/azure-sdk-for-go\/.*$/),
-    );
-  }
+export class TspConfigGoMgmtContainingModuleMatchPatternSubRule extends TspConfigGoContainingModuleMatchPatternSubRule {
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
-  }
-  protected validate(config: any): RuleResult {
-    const module = config?.options?.[this.emitterName]?.["module"];
-    const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) {
-      return this.createFailedResult(
-        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
-        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
-      );
-    }
-    if (containingModule === undefined) return { success: true };
-    return super.validate(config);
   }
 }
 
