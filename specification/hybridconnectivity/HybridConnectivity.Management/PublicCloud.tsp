@@ -101,7 +101,7 @@ model PublicCloudConnector is TrackedResource<PublicCloudConnectorProperties> {
 model PublicCloudConnectorUpdate extends TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   properties?: PublicCloudConnectorPropertiesUpdate;
 }
 
@@ -210,7 +210,7 @@ model SolutionConfigurationUpdate
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   properties?: SolutionConfigurationPropertiesUpdate;
 }
 
