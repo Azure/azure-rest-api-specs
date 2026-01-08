@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-12-12-preview",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "ServicesHubConnectorName1",
+    "subscriptionId": "550e8400-e29b-41d4-a716-446655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "assessments": [
+            {
+              "id": "WinSvr",
+              "name": "Windows Server"
+            },
+            {
+              "id": "Azure",
+              "name": "Azure Active Directory"
+            }
+          ],
+          "surveys": [
+            {
+              "id": "SQLSecSurvey",
+              "name": "SQL Server Security Survey",
+              "surveyId": "550e8400-e29b-41d4-a716-446655440001",
+              "externalId": "SV_1235"
+            },
+            {
+              "id": "ExOpsSurvey",
+              "name": "Exchange Server Operational Survey",
+              "surveyId": "550e8400-e29b-41d4-a716-446655440002",
+              "externalId": "SV_1234"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Get_AssessmentSurveyList",
+  "title": "Get the list of Assessments and Surveys"
+}
