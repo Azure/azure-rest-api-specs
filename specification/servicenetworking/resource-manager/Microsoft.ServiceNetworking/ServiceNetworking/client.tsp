@@ -73,6 +73,53 @@ using Microsoft.ServiceNetworking;
   "ServiceNetworkingIPAccessRuleAction",
   "csharp"
 );
+@@clientName(IpAccessRulesPolicy,
+  "ServiceNetworkingIPAccessRulesPolicy",
+  "csharp"
+);
+@@clientName(IpAccessRulesSecurityPolicy,
+  "ServiceNetworkingIPAccessRulesSecurityPolicy",
+  "csharp"
+);
+@@clientName(PolicyType.IpAccessRules, "IPAccessRules", "csharp");
+@@clientName(SecurityPolicyConfigurations.ipAccessRulesSecurityPolicy,
+  "IPAccessRulesSecurityPolicy",
+  "csharp"
+);
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(AssociationSubnet.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(WafPolicy.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(AssociationSubnetUpdate.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(WafSecurityPolicy.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(IpAccessRulesSecurityPolicy.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(TrafficControllerProperties.frontends,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(TrafficControllerProperties.associations,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(TrafficControllerProperties.securityPolicies,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+
 @@clientName(Versions.v2023_11_01,
   "$DO_NOT_NORMALIZE$V2023_11_01",
   "javascript"
@@ -81,3 +128,10 @@ using Microsoft.ServiceNetworking;
   "$DO_NOT_NORMALIZE$V2025_05_01",
   "javascript"
 );
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  model SubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
