@@ -38,8 +38,8 @@ union EvaluationTaxonomyInputType {
   @doc("Agent")
   agent: "agent",
 
-  @doc("Risk definition")
-  riskDefinition: "riskDefinition",
+  @doc("Behavior")
+  behavior: "behavior",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -67,16 +67,22 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@doc("Input configuration for the evaluation taxonomy when the input type is riskDefinition.")
-model RiskDefinitionTaxonomyInput extends EvaluationTaxonomyInput {
+@doc("Input configuration for the evaluation taxonomy when the input type is behavior.")
+model BehaviorTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
-  type: EvaluationTaxonomyInputType.riskDefinition;
+  type: EvaluationTaxonomyInputType.behavior;
 
-  @doc("Risk name from the Evaluator Catalog.")
-  riskName: string;
+  @doc("Name of the behavior.")
+  behavior_name: string;
 
-  @doc("Natural language definition of the risk.")
-  riskDefinition?: string;
+  @doc("Natural language definition of the behavior.")
+  behavior_definition: string;
+
+  @doc("Indicates whether the behavior is desirable.")
+  desirable: boolean;
+
+  @doc("Impact level of the behavior.")
+  impact?: string;
 }
 
 @added(Versions.v2025_11_15_preview)
