@@ -1423,7 +1423,7 @@ model SaaSData {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
 @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
 model SaaSResourceDetailsResponse
-  extends Azure.ResourceManager.Foundations.ProxyResource {
+  is Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Id of the Marketplace SaaS Resource
    */
