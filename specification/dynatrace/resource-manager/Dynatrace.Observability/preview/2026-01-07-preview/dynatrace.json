@@ -96,7 +96,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/activateSaaS": {
       "post": {
-        "operationId": "SaaS_ActivateResource",
+        "operationId": "SaaSOperationGroup_ActivateResource",
         "description": "Activate the marketplace SaaS resource",
         "parameters": [
           {
@@ -123,7 +123,7 @@
             }
           },
           "202": {
-            "description": "The request is accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
               "Location": {
                 "type": "string",
@@ -840,9 +840,9 @@
       "post": {
         "operationId": "Monitors_LatestLinkedSaaS",
         "tags": [
-          "DynatraceMonitorResources"
+          "MonitorResources"
         ],
-        "description": "Returns the latest SaaS linked to the dynatrace account of the underlying monitor.",
+        "description": "Get the latest SaaS linked to the dynatrace account of the underlying monitor.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -872,7 +872,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2141,74 +2141,6 @@
     }
   },
   "definitions": {
-    "ActivateSaaSParameterRequest": {
-      "type": "object",
-      "description": "SaaS guid for activate and Validate SaaS Resource",
-      "properties": {
-        "saasGuid": {
-          "type": "string",
-          "description": "SaaS guid of marketplace saas subscription to be activated."
-        },
-        "adminUserDetails": {
-          "$ref": "#/definitions/AdminUserDetails",
-          "description": "Dynatrace Account Admin user details"
-        }
-      },
-      "required": [
-        "saasGuid",
-        "adminUserDetails"
-      ]
-    },
-    "AdminUserDetails": {
-      "type": "object",
-      "description": "Dynatrace Account Admin user details",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First Name of the admin user"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last Name of the admin user"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number of the admin user used by Dynatrace for contacting them if needed",
-          "maxLength": 40
-        },
-        "company": {
-          "type": "string",
-          "description": "Name of the customer account/company"
-        },
-        "country": {
-          "type": "string",
-          "description": "Country of the admin user"
-        },
-        "state": {
-          "type": "string",
-          "description": "State of the admin user"
-        },
-        "jobTitle": {
-          "type": "string",
-          "description": "Job title of the admin user"
-        },
-        "emailAddress": {
-          "type": "string",
-          "description": "Email of the admin user required for resetting password or used by Dynatrace for contacting them if needed",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
-        }
-      },
-      "required": [
-        "firstName",
-        "lastName",
-        "phoneNumber",
-        "company",
-        "country",
-        "state",
-        "jobTitle",
-        "emailAddress"
-      ]
-    },
     "AccountInfo": {
       "type": "object",
       "description": "Dynatrace Account Information",
@@ -2249,6 +2181,74 @@
         ]
       }
     },
+    "ActivateSaaSParameterRequest": {
+      "type": "object",
+      "description": "SaaS guid for activate and Validate SaaS Resource",
+      "properties": {
+        "saasGuid": {
+          "type": "string",
+          "description": "SaaS guid of marketplace saas subscription to be activated."
+        },
+        "adminUserDetails": {
+          "$ref": "#/definitions/AdminUserDetails",
+          "description": "Admin user details"
+        }
+      },
+      "required": [
+        "saasGuid",
+        "adminUserDetails"
+      ]
+    },
+    "AdminUserDetails": {
+      "type": "object",
+      "description": "Dynatrace Account Admin user details",
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name"
+        },
+        "emailAddress": {
+          "type": "string",
+          "description": "Email address",
+          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number",
+          "maxLength": 40
+        },
+        "company": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "country": {
+          "type": "string",
+          "description": "Country"
+        },
+        "state": {
+          "type": "string",
+          "description": "State"
+        },
+        "jobTitle": {
+          "type": "string",
+          "description": "Job title"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress",
+        "phoneNumber",
+        "company",
+        "country",
+        "state",
+        "jobTitle"
+      ]
+    },
     "AppServiceInfo": {
       "type": "object",
       "description": "Details of App Services having Dynatrace OneAgent installed",
@@ -2288,20 +2288,6 @@
         "hostName": {
           "type": "string",
           "description": "The name of the host"
-        }
-      }
-    },
-    "LatestLinkedSaaSResponse": {
-      "type": "object",
-      "description": "Response of get latest linked SaaS resource operation",
-      "properties": {
-        "isHiddenSaaS": {
-          "type": "boolean",
-          "description": "Flag indicating if the SaaS resource is hidden"
-        },
-        "saaSResourceId": {
-          "type": "string",
-          "description": "SaaS resource id"
         }
       }
     },
@@ -2630,6 +2616,20 @@
       "required": [
         "type"
       ]
+    },
+    "LatestLinkedSaaSResponse": {
+      "type": "object",
+      "description": "Response of get latest linked SaaS resource operation",
+      "properties": {
+        "isHiddenSaaS": {
+          "type": "boolean",
+          "description": "Flag indicating if the SaaS resource is hidden"
+        },
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        }
+      }
     },
     "LiftrResourceCategories": {
       "type": "string",
@@ -3452,31 +3452,6 @@
         ]
       }
     },
-    "SaaSData": {
-      "type": "object",
-      "description": "SaaS details",
-      "properties": {
-        "saaSResourceId": {
-          "type": "string",
-          "description": "SaaS resource id"
-        }
-      }
-    },
-    "SaaSResourceDetailsResponse": {
-      "type": "object",
-      "description": "Marketplace SaaS resource details.",
-      "properties": {
-        "saaSId": {
-          "type": "string",
-          "description": "Id of the Marketplace SaaS Resource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "SSODetailsRequest": {
       "type": "object",
       "description": "Request for getting sso details for a user",
@@ -3543,6 +3518,31 @@
           }
         ]
       }
+    },
+    "SaaSData": {
+      "type": "object",
+      "description": "SaaS details",
+      "properties": {
+        "saaSResourceId": {
+          "type": "string",
+          "description": "SaaS resource id"
+        }
+      }
+    },
+    "SaaSResourceDetailsResponse": {
+      "type": "object",
+      "description": "Marketplace SaaS resource details.",
+      "properties": {
+        "saaSId": {
+          "type": "string",
+          "description": "Id of the Marketplace SaaS Resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "SendAadLogsStatus": {
       "type": "string",
