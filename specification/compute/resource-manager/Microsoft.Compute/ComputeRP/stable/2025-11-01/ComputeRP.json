@@ -13164,6 +13164,16 @@
         }
       }
     },
+    "InterconnectBlockProfile": {
+      "type": "object",
+      "description": "The parameters of an interconnect block Profile.",
+      "properties": {
+        "interconnectBlock": {
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
+          "description": "Specifies the interconnect block resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved."
+        }
+      }
+    },
     "ComponentNames": {
       "type": "string",
       "enum": [
@@ -19763,6 +19773,10 @@
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum api-version: 2021-04-01."
         },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies the interconnect block related details of a vm. Minimum api-version: 2025-11-01."
+        },
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
           "description": "Specifies the gallery applications that should be made available to the VM/VMSS."
@@ -22026,6 +22040,10 @@
         "capacityReservation": {
           "$ref": "#/definitions/CapacityReservationProfile",
           "description": "Specifies the capacity reservation related details of a scale set. Minimum api-version: 2021-04-01."
+        },
+        "interconnectBlockProfile": {
+          "$ref": "#/definitions/InterconnectBlockProfile",
+          "description": "Specifies the interconnect block related details of a scale set. Minimum api-version: 2025-11-01."
         },
         "applicationProfile": {
           "$ref": "#/definitions/ApplicationProfile",
