@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("default")
 @parentResource(FirewallPolicy)
-model SignaturesOverrides extends ProxyResource {
+model SignaturesOverrides extends WritableResource {
   /**
    * Will contain the properties of the resource (the actual signature overrides)
    */

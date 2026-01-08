@@ -332,6 +332,7 @@ interface VirtualNetworkGateways {
     VirtualNetworkGateway,
     void,
     Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body body: ExpressRouteFailoverAllTestDetails;
     },
     Parameters = {
@@ -357,6 +358,7 @@ interface VirtualNetworkGateways {
     VirtualNetworkGateway,
     void,
     Response = {
+      #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body body: ExpressRouteFailoverSingleTestDetailsObject;
     },
     Parameters = {

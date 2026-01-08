@@ -73338,7 +73338,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/WritableResource"
         }
       ]
     },
@@ -79756,6 +79756,25 @@
           }
         ]
       }
+    },
+    "WritableResource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "connectivityGroupItem": {
       "type": "object",
