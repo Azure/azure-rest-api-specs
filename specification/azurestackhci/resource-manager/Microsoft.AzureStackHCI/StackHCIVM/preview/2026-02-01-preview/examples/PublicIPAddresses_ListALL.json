@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "publicip1",
+            "type": "Microsoft.AzureStackHCI/publicIPAddresses",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/publicIPAddresses/publicip1",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "publicIPAddressVersion": "IPv4",
+              "ipAddress": "10.100.100.4",
+              "ipAllocationScope": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/logicalNetworks/lnet1",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "publicip2",
+            "type": "Microsoft.AzureStackHCI/publicIPAddresses",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/rg2/providers/Microsoft.AzureStackHCI/publicIPAddresses/publicip2",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "publicIPAddressVersion": "IPv4",
+              "ipAddress": "10.100.100.5",
+              "ipAllocationScope": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/logicalNetworks/lnet1",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PublicIPAddresses_ListAll",
+  "title": "List all public IP addresses"
+}
