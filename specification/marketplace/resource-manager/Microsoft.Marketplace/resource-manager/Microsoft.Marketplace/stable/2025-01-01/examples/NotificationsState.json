@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "privateStoreId": "a0e28e55-90c4-41d8-8e34-bb7ef7775406"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "approvalRequests": [
+          {
+            "displayName": "Offer display name",
+            "icon": "https://some-images.someDomail.com/image/apps.12345678-09876567894321",
+            "messageCode": 0,
+            "offerId": "publisherId.legacyId",
+            "plans": [
+              {
+                "planDisplayName": "Plan Test display name",
+                "planId": "test-plan"
+              },
+              {
+                "planDisplayName": "Plan Test display name B",
+                "planId": "test-planB"
+              }
+            ],
+            "publisherId": "publisherId"
+          }
+        ],
+        "newNotifications": [
+          {
+            "displayName": "Offer display name C",
+            "icon": "https://some-images.someDomail.com/image/apps.12345678-76545678",
+            "isFuturePlansEnabled": false,
+            "messageCode": 10000,
+            "offerId": "publisherIdC.legacyIdC",
+            "plans": [
+              {
+                "planDisplayName": "Display Name Test",
+                "planId": "plan-test"
+              }
+            ]
+          }
+        ],
+        "stopSellNotifications": [
+          {
+            "displayName": "Offer display name",
+            "icon": "https://some-images.someDomail.com/image/apps.12345678-4321",
+            "isEntire": false,
+            "messageCode": 10002,
+            "offerId": "publisherId.legacyId",
+            "plans": [
+              {
+                "planDisplayName": "test123",
+                "planId": "aaa"
+              }
+            ]
+          },
+          {
+            "displayName": "Offer display name B",
+            "icon": "https://some-images.someDomail.com/image/apps.12345678-7654",
+            "isEntire": true,
+            "messageCode": 10003,
+            "offerId": "publisherIdB.legacyIdB",
+            "plans": null
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateStore_QueryNotificationsState",
+  "title": "NotificationsState"
+}
