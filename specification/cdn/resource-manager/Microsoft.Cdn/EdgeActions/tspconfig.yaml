@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/edgeactions"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/openapi.json"
+    azure-resource-provider-folder: "resource-manager"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    new-line: lf
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeactions"
+    namespace: "azure.mgmt.edgeactions"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-edgeactions"
+    namespace: "com.azure.resourcemanager.edgeactions"
+    service-name: "EdgeActions"
+    service-dir: "sdk/edgeactions"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/edgeactions
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-edgeactions"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-edgeactions"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/edgeactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/armedgeactions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armedgeactions"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.EdgeActions"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

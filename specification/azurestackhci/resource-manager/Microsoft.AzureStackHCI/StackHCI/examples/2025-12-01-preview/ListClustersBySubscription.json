@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myCluster1",
+            "type": "Microsoft.AzureStackHCI/clusters",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg1/providers/Microsoft.AzureStackHCI/clusters/myCluster1",
+            "location": "East US",
+            "properties": {
+              "aadClientId": "515da1c2-379e-49b4-9975-09e3e40c86be",
+              "aadTenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94",
+              "billingModel": "Trial",
+              "cloudId": "91c2b355-4826-4e96-9164-e3f26dcf1cdd",
+              "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com",
+              "connectivityStatus": "NotYetRegistered",
+              "desiredProperties": {
+                "diagnosticLevel": "Basic",
+                "windowsServerSubscription": "Enabled"
+              },
+              "identityProvider": "ActiveDirectory",
+              "provisioningState": "Succeeded",
+              "reportedProperties": {},
+              "ring": "Production",
+              "status": "NotYetRegistered",
+              "supportStatus": "InSupport",
+              "trialDaysRemaining": 29
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          },
+          {
+            "name": "myCluster2",
+            "type": "Microsoft.AzureStackHCI/clusters",
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg2/providers/Microsoft.AzureStackHCI/clusters/myCluster2",
+            "location": "West US",
+            "properties": {
+              "aadClientId": "24a6e53d-04e5-44d2-b7cc-1b732a847dfc",
+              "aadTenantId": "7e589cc1-a8b6-4dff-91bd-5ec0fa18db94",
+              "billingModel": "Trial",
+              "cloudId": "a3c0468f-e38e-4dda-ac48-817f620536f0",
+              "cloudManagementEndpoint": "https://98294836-31be-4668-aeae-698667faf99b.waconazure.com",
+              "connectivityStatus": "Connected",
+              "desiredProperties": {
+                "diagnosticLevel": "Basic",
+                "windowsServerSubscription": "Enabled"
+              },
+              "identityProvider": "ActiveDirectory",
+              "lastBillingTimestamp": "2020-03-12T08:12:55.2312022Z",
+              "lastSyncTimestamp": "2020-03-11T20:44:32.5625121Z",
+              "provisioningState": "Succeeded",
+              "registrationTimestamp": "2020-03-11T20:44:32.5625121Z",
+              "reportedProperties": {
+                "clusterId": "a76ac23a-1819-4e82-9410-e3e4ec3d1425",
+                "clusterName": "cluster1",
+                "clusterType": "ThirdParty",
+                "clusterVersion": "10.0.17777",
+                "diagnosticLevel": "Basic",
+                "imdsAttestation": "Disabled",
+                "lastUpdated": "2020-03-11T19:24:42.1946017Z",
+                "manufacturer": "Dell Inc.",
+                "nodes": [
+                  {
+                    "name": "Node1",
+                    "coreCount": 8,
+                    "id": 0,
+                    "manufacturer": "Dell Inc.",
+                    "memoryInGiB": 128,
+                    "model": "EMC AX740",
+                    "oemActivation": "Enabled",
+                    "osName": "Azure Stack HCI",
+                    "osVersion": "10.0.17777.1061",
+                    "serialNumber": "Q45CZC3",
+                    "windowsServerSubscription": "Enabled"
+                  },
+                  {
+                    "name": "Node2",
+                    "coreCount": 8,
+                    "id": 1,
+                    "manufacturer": "Dell Inc.",
+                    "memoryInGiB": 128,
+                    "model": "EMC AX740",
+                    "oemActivation": "Enabled",
+                    "osName": "Azure Stack HCI",
+                    "osVersion": "10.0.17777.1061",
+                    "serialNumber": "Q44BSC3",
+                    "windowsServerSubscription": "Enabled"
+                  },
+                  {
+                    "name": "Node3",
+                    "coreCount": 16,
+                    "id": 2,
+                    "manufacturer": "Dell Inc.",
+                    "memoryInGiB": 256,
+                    "model": "EMC AX740",
+                    "oemActivation": "Enabled",
+                    "osName": "Azure Stack HCI",
+                    "osVersion": "10.0.17777.1061",
+                    "serialNumber": "Q44RFC3",
+                    "windowsServerSubscription": "Enabled"
+                  }
+                ],
+                "oemActivation": "Enabled"
+              },
+              "ring": "Production",
+              "status": "ConnectedRecently",
+              "supportStatus": "InSupport",
+              "trialDaysRemaining": 30
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Clusters_ListBySubscription",
+  "title": "List clusters in a given subscription"
+}

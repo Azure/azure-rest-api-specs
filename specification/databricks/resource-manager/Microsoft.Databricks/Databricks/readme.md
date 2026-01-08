@@ -10,6 +10,8 @@ This is the AutoRest configuration file for Databricks.
 
 ```yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2026-01-01
+  - tag: package-2025-10-01-preview
   - tag: package-2025-08-01-preview
   - tag: package-2025-03-01-preview
   - tag: package-2024-09-01-preview
@@ -20,6 +22,32 @@ batch:
   - tag: package-2021-04-01-preview
   - tag: package-2018-04-01
   - tag: package-2023-05-01
+```
+
+### Tag: package-2026-01-01 and java
+
+These settings apply only when `--tag=package-2026-01-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2026-01-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2026_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2026_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2025-10-01-preview and java
+
+These settings apply only when `--tag=package-2025-10-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+```yaml $(tag) == 'package-2025-10-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2025_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2025_10_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2025-08-01-preview and java
@@ -174,7 +202,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-2025-08-01-preview
+tag: package-2026-01-01
 ```
 
 ### Tag: package-2018-04-01
@@ -285,6 +313,28 @@ input-file:
   - preview/2025-08-01-preview/accessconnector.json
 ```
 
+### Tag: package-2025-10-01-preview
+
+These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01-preview'
+input-file:
+  - preview/2025-10-01-preview/databricks.json
+  - preview/2025-10-01-preview/vnetpeering.json
+  - preview/2025-10-01-preview/accessconnector.json
+```
+
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/databricks.json
+  - stable/2026-01-01/vnetpeering.json
+  - stable/2026-01-01/accessconnector.json
+```
+
 ---
 
 # Suppressions
@@ -295,6 +345,10 @@ directive:
     from: databricks.json
     where: $.definitions.Encryption.properties.KeyName
     reason: Response from service is not camel case
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: databricks.json
+    where: $.definitions.Encryption.properties.KeyName
+    reason: It will break existing clients if we change the name
   - suppress: RequiredReadOnlySystemData
     reason: We do not yet support system data. Currently our system support system data inside property field.
 ```

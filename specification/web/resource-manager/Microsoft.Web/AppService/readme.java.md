@@ -3,6 +3,7 @@
 These settings apply only when `--java` is specified on the command line.
 
 ```yaml $(java)
+title: WebSiteManagementClient
 service-name: AppService
 add-inner: AppServiceCertificate
 remove-inner: CsmDeploymentStatus
@@ -50,6 +51,18 @@ directive:
     transform: >
       $["x-ms-long-running-operation"] = true;
     reason: Swagger bug. Function App on ACA is LRO.
+```
+
+### Tag: package-2025-03 and java
+
+``` yaml $(java) && $(tag) == 'package-2025-03'
+input-file:
+  - ../../../../certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/AppServiceCertificateOrders.json
+  - ../../../../certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/CertificateOrdersDiagnostics.json
+  - ../../../../certificateregistration/resource-manager/Microsoft.CertificateRegistration/CertificateRegistration/stable/2024-11-01/CertificateRegistrationProvider.json
+  - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/DomainRegistrationProvider.json
+  - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/Domains.json
+  - ../../../../domainregistration/resource-manager/Microsoft.DomainRegistration/DomainRegistration/stable/2024-11-01/TopLevelDomains.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01 and java

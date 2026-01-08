@@ -1,0 +1,194 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "correlationScheme": [
+          {
+            "scheme": "AlignedAffinity",
+            "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1"
+          }
+        ],
+        "defaultMoveCost": "Medium",
+        "instanceCount": 5,
+        "minInstanceCount": 3,
+        "minInstancePercentage": 30,
+        "partitionDescription": {
+          "partitionScheme": "Singleton"
+        },
+        "placementConstraints": "NodeType==frontend",
+        "scalingPolicies": [
+          {
+            "scalingMechanism": {
+              "kind": "ScalePartitionInstanceCount",
+              "maxInstanceCount": 9,
+              "minInstanceCount": 3,
+              "scaleIncrement": 2
+            },
+            "scalingTrigger": {
+              "kind": "AveragePartitionLoadTrigger",
+              "lowerLoadThreshold": 2,
+              "metricName": "metricName",
+              "scaleInterval": "00:01:00",
+              "upperLoadThreshold": 8
+            }
+          }
+        ],
+        "serviceDnsName": "myservicednsname.myApp",
+        "serviceKind": "Stateless",
+        "serviceLoadMetrics": [
+          {
+            "name": "metric1",
+            "defaultLoad": 3,
+            "weight": "Low"
+          }
+        ],
+        "servicePackageActivationMode": "SharedProcess",
+        "servicePlacementPolicies": [
+          {
+            "type": "NonPartiallyPlaceService"
+          }
+        ],
+        "serviceTypeName": "myServiceType"
+      },
+      "tags": {
+        "a": "b"
+      }
+    },
+    "resourceGroupName": "resRg",
+    "serviceName": "myService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myService",
+        "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
+        "properties": {
+          "correlationScheme": [
+            {
+              "scheme": "AlignedAffinity",
+              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1"
+            }
+          ],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "minInstanceCount": 3,
+          "minInstancePercentage": 30,
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "placementConstraints": "NodeType==frontend",
+          "provisioningState": "Creating",
+          "scalingPolicies": [
+            {
+              "scalingMechanism": {
+                "kind": "ScalePartitionInstanceCount",
+                "maxInstanceCount": 9,
+                "minInstanceCount": 3,
+                "scaleIncrement": 2
+              },
+              "scalingTrigger": {
+                "kind": "AveragePartitionLoadTrigger",
+                "lowerLoadThreshold": 2,
+                "metricName": "metricName",
+                "scaleInterval": "00:01:00",
+                "upperLoadThreshold": 8
+              }
+            }
+          ],
+          "serviceDnsName": "myservicednsname.myApp",
+          "serviceKind": "Stateless",
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "defaultLoad": 3,
+              "weight": "Low"
+            }
+          ],
+          "servicePackageActivationMode": "SharedProcess",
+          "servicePlacementPolicies": [
+            {
+              "type": "NonPartiallyPlaceService"
+            }
+          ],
+          "serviceTypeName": "myServiceType"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "myService",
+        "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
+        "properties": {
+          "correlationScheme": [
+            {
+              "scheme": "AlignedAffinity",
+              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1"
+            }
+          ],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "minInstanceCount": 3,
+          "minInstancePercentage": 30,
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "placementConstraints": "NodeType==frontend",
+          "provisioningState": "Updating",
+          "scalingPolicies": [
+            {
+              "scalingMechanism": {
+                "kind": "ScalePartitionInstanceCount",
+                "maxInstanceCount": 9,
+                "minInstanceCount": 3,
+                "scaleIncrement": 2
+              },
+              "scalingTrigger": {
+                "kind": "AveragePartitionLoadTrigger",
+                "lowerLoadThreshold": 2,
+                "metricName": "metricName",
+                "scaleInterval": "00:01:00",
+                "upperLoadThreshold": 8
+              }
+            }
+          ],
+          "serviceDnsName": "myservicednsname.myApp",
+          "serviceKind": "Stateless",
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "defaultLoad": 3,
+              "weight": "Low"
+            }
+          ],
+          "servicePackageActivationMode": "SharedProcess",
+          "servicePlacementPolicies": [
+            {
+              "type": "NonPartiallyPlaceService"
+            }
+          ],
+          "serviceTypeName": "myServiceType"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-10-01-preview",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/9c2ce367-47ea-43de-b69e-c5a423da4557?api-version=2025-10-01-preview"
+      }
+    }
+  },
+  "operationId": "Services_CreateOrUpdate",
+  "title": "Put a service with maximum parameters"
+}

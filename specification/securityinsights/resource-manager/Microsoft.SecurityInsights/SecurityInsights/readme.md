@@ -96,7 +96,6 @@ input-file:
   - preview/2025-07-01-preview/AutomationRules.json
   - preview/2025-07-01-preview/BillingStatistics.json
   - preview/2025-07-01-preview/Bookmarks.json
-  - preview/2025-07-01-preview/BusinessApplicationAgents.json
   - preview/2025-07-01-preview/ContentPackages.json
   - preview/2025-07-01-preview/ContentProductPackages.json
   - preview/2025-07-01-preview/ContentProductTemplates.json
@@ -214,7 +213,6 @@ input-file:
   - preview/2025-04-01-preview/AutomationRules.json
   - preview/2025-04-01-preview/BillingStatistics.json
   - preview/2025-04-01-preview/Bookmarks.json
-  - preview/2025-04-01-preview/BusinessApplicationAgents.json
   - preview/2025-04-01-preview/ContentPackages.json
   - preview/2025-04-01-preview/ContentProductPackages.json
   - preview/2025-04-01-preview/ContentProductTemplates.json
@@ -329,7 +327,6 @@ input-file:
   - preview/2025-01-01-preview/AutomationRules.json
   - preview/2025-01-01-preview/BillingStatistics.json
   - preview/2025-01-01-preview/Bookmarks.json
-  - preview/2025-01-01-preview/BusinessApplicationAgents.json
   - preview/2025-01-01-preview/ContentPackages.json
   - preview/2025-01-01-preview/ContentProductPackages.json
   - preview/2025-01-01-preview/ContentProductTemplates.json
@@ -372,7 +369,6 @@ input-file:
   - preview/2024-10-01-preview/AutomationRules.json
   - preview/2024-10-01-preview/BillingStatistics.json
   - preview/2024-10-01-preview/Bookmarks.json
-  - preview/2024-10-01-preview/BusinessApplicationAgents.json
   - preview/2024-10-01-preview/ContentPackages.json
   - preview/2024-10-01-preview/ContentProductPackages.json
   - preview/2024-10-01-preview/ContentProductTemplates.json
@@ -446,7 +442,6 @@ input-file:
   - preview/2024-04-01-preview/AutomationRules.json
   - preview/2024-04-01-preview/BillingStatistics.json
   - preview/2024-04-01-preview/Bookmarks.json
-  - preview/2024-04-01-preview/BusinessApplicationAgents.json
   - preview/2024-04-01-preview/ContentPackages.json
   - preview/2024-04-01-preview/ContentProductPackages.json
   - preview/2024-04-01-preview/ContentProductTemplates.json
