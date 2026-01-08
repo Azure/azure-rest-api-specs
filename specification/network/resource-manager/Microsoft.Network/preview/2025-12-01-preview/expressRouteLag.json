@@ -736,6 +736,63 @@
           }
         }
       },
+      "get": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_Get",
+        "description": "Gets the specified authorization from the specified express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the authorization."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the ExpressRouteLagAuthorization resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationWithoutKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationGet.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ExpressRouteLagAuthorizations"
@@ -813,13 +870,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/listAuthorizations": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations": {
+      "get": {
         "tags": [
           "ExpressRouteLagAuthorizations"
         ],
-        "operationId": "ExpressRouteLagAuthorizations_ListWithKey",
-        "description": "Gets all authorizations with key in an express route lag.",
+        "operationId": "ExpressRouteLagAuthorizations_List",
+        "description": "Gets all authorizations in an express route lag.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -847,7 +904,7 @@
           "200": {
             "description": "Request successful. The operation returns a list of ExpressRouteLagAuthorization resources.",
             "schema": {
-              "$ref": "#/definitions/ExpressRouteLagAuthorizationListResult"
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationWithoutKeyListResult"
             }
           },
           "default": {
@@ -862,12 +919,12 @@
         },
         "x-ms-examples": {
           "List ExpressRouteLag Authorization": {
-            "$ref": "./examples/ExpressRouteLagAuthorizationListWithKey.json"
+            "$ref": "./examples/ExpressRouteLagAuthorizationList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}/getAuthorization": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}/getAuthorizationWithKey": {
       "post": {
         "tags": [
           "ExpressRouteLagAuthorizations"
@@ -922,6 +979,60 @@
         "x-ms-examples": {
           "Get ExpressRouteLag Authorization": {
             "$ref": "./examples/ExpressRouteLagAuthorizationGetWithKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/listAuthorizationsWithKey": {
+      "post": {
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "operationId": "ExpressRouteLagAuthorizations_ListWithKey",
+        "description": "Gets all authorizations with key in an express route lag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+$",
+            "description": "The name of the express route lag."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ExpressRouteLagAuthorization resources.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationListWithKey.json"
           }
         }
       }
@@ -1424,6 +1535,72 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExpressRouteLagAuthorization"
+          },
+          "description": "The authorizations in an ExpressRoute Lag."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "ExpressRouteLagAuthorizationWithoutKeyPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization Properties without key",
+      "description": "Properties of ExpressRouteLag Authorization.",
+      "properties": {
+        "authorizationUseStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The authorization use status.",
+          "enum": [
+            "Available",
+            "InUse"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLagAuthorizationUseStatus",
+            "modelAsString": true
+          }
+        },
+        "circuitResourceUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The reference to the ExpressRoute circuit resource using the authorization."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the authorization resource."
+        }
+      }
+    },
+    "ExpressRouteLagAuthorizationWithoutKey": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization",
+      "description": "ExpressRouteLag Authorization resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteLagAuthorizationWithoutKeyPropertiesFormat",
+          "description": "ExpressRouteLag properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ExpressRouteLagAuthorizationWithoutKeyListResult": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization List Result",
+      "description": "Response for ListExpressRouteLagAuthorizations API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagAuthorizationWithoutKey"
           },
           "description": "The authorizations in an ExpressRoute Lag."
         },
