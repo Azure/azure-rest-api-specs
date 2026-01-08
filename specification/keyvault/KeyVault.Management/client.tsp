@@ -267,6 +267,24 @@ using Azure.Core;
 @@alternateType(MhsmPrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Vault,
+  Azure.ResourceManager.Foundations.TrackedResource, 
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ManagedHsm,
+  Azure.ResourceManager.Foundations.TrackedResource, 
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(MhsmPrivateEndpointConnection,
+  Azure.ResourceManager.Foundations.TrackedResource, 
+  "csharp"
+);
+
 // Java-specific client configurations
 @@clientName(IPRule, "IpRule", "java");
 @@usage(Vault, Usage.input, "java");
