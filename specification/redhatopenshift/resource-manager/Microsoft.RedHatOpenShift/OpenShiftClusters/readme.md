@@ -26,7 +26,7 @@ These are the global settings for the Azure Red Hat OpenShift API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-08-12-preview
+tag: package-2025-07-25
 suppressions:
   - code: AvoidAdditionalProperties
     from: redhatopenshift.json
@@ -117,6 +117,15 @@ These settings apply only when `--tag=package-2024-08-12-preview` is specified o
 ``` yaml $(tag) == 'package-2024-08-12-preview'
 input-file:
   - preview/2024-08-12-preview/redhatopenshift.json
+```
+
+### Tag: package-2025-07-25
+
+These settings apply only when `--tag=package-2025-07-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-07-25'
+input-file:
+  - stable/2025-07-25/redhatopenshift.json
 ```
 ---
 
