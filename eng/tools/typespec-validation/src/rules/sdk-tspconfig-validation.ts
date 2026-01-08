@@ -264,6 +264,10 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       );
 
     let actualValue = option as unknown as undefined | string | boolean;
+    // First try to validate directly
+    if (this.validateValue(actualValue, this.expectedValue)) {
+      return { success: true };
+    }
 
     // Resolve variables if the value is a string
     if (typeof actualValue === "string" && actualValue.includes("{")) {
@@ -786,12 +790,12 @@ export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSu
   }
 }
 
-export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-rust",
       "emitter-output-dir",
-      new RegExp(/^azure_resourcemanager_(?:[a-z0-9]+_)*[a-z0-9]+$/),
+      new RegExp(/^{output-dir}\/{service-dir}\/{crate-name}$/),
     );
   }
 }

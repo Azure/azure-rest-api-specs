@@ -855,7 +855,7 @@ const rushEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "@azure-tools/typespec-rust",
   managementTspconfigFolder,
   "emitter-output-dir",
-  "{output-dir}/{service-dir}/azure_resourcemanager_sapmonitors",
+  "{output-dir}/{service-dir}/{crate-name}",
   "{output-dir}/{service-dir}/aaa-bbb",
   [new TspConfigRustAzEmitterOutputDirSubRule()],
 );
