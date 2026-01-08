@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2024-08-01-preview",
+    "version": "2021-10-01",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -43,7 +43,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -79,7 +79,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -112,7 +112,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -151,7 +151,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -187,13 +187,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -228,7 +228,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -267,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -298,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -331,7 +331,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -339,10 +339,7 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
+        ]
       }
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership": {
@@ -373,7 +370,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -414,7 +411,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -447,7 +444,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -483,7 +480,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -513,7 +510,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -546,7 +543,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -559,203 +556,41 @@
           }
         ]
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest/default": {
-      "put": {
-        "operationId": "Subscriptions_PutTargetDirectory",
-        "x-ms-examples": {
-          "putTargetDirectory": {
-            "$ref": "./examples/putTargetDirectory.json"
-          }
-        },
-        "description": "The operation to initiate Subscription Changed Request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/targetDirectoryRequestParameters"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TargetDirectoryResult"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "get": {
-        "operationId": "Subscriptions_GetTargetDirectory",
-        "x-ms-examples": {
-          "getTargetDirectory": {
-            "$ref": "./examples/getTargetDirectory.json"
-          }
-        },
-        "description": "The operation to view Initiator Subscription Changed Request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TargetDirectoryResult"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Subscriptions_DeleteTargetDirectory",
-        "x-ms-examples": {
-          "deleteTargetDirectory": {
-            "$ref": "./examples/deleteTargetDirectory.json"
-          }
-        },
-        "description": "The operation to delete Initiator Subscription Changed Request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deleted the Target Directory"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/changeTenantRequest": {
-      "get": {
-        "operationId": "Subscriptions_ListTargetDirectory",
-        "x-ms-examples": {
-          "listTargetDirectory": {
-            "$ref": "./examples/listTargetDirectory.json"
-          }
-        },
-        "description": "The operation to list Initiator Subscription Changed Request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TargetDirectoryListResult"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptChangeTenant": {
-      "post": {
-        "operationId": "Subscriptions_AcceptTargetDirectory",
-        "x-ms-examples": {
-          "acceptTargetDirectory": {
-            "$ref": "./examples/acceptTargetDirectory.json"
-          }
-        },
-        "description": "The operation to accept Subscription Changed Request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Subscription Accepted properly with No Content."
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/changeTenantStatus": {
-      "post": {
-        "operationId": "Subscriptions_TargetDirectoryStatus",
-        "x-ms-examples": {
-          "targetDirectoryStatus": {
-            "$ref": "./examples/targetDirectoryStatus.json"
-          }
-        },
-        "description": "The operation for Acceptor to view the accepted request",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TargetDirectoryStatusResult"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "CanceledSubscriptionId": {
       "description": "The ID of the canceled subscription",
       "type": "object",
@@ -806,6 +641,59 @@
         "subscriptionName": {
           "type": "string",
           "description": "New subscription name"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Localized friendly description for the operation",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -896,7 +784,7 @@
           "description": "Subscription Alias response properties."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -918,7 +806,6 @@
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the resource.",
-          "readOnly": true,
           "enum": [
             "Accepted",
             "Succeeded",
@@ -1105,7 +992,7 @@
           "description": "Tenant policy properties."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -1154,7 +1041,7 @@
           "description": "Billing account policies response properties."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -1264,125 +1151,15 @@
           "type": "string"
         }
       }
-    },
-    "TargetDirectoryRequest": {
-      "type": "object",
-      "description": "Subscription Request for Changed Target Directory.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TargetDirectoryRequestProperties",
-          "description": "Target Directory request properties."
-        }
-      }
-    },
-    "TargetDirectoryRequestProperties": {
-      "type": "object",
-      "description": "Properties of subscription Request for Changed Target Directory.",
-      "properties": {
-        "destinationOwnerId": {
-          "description": "The destination OwnerId, can be object id or email address",
-          "type": "string"
-        },
-        "destinationTenantId": {
-          "description": "The destination Tenant id where subscription needs to be accepted",
-          "type": "string"
-        }
-      }
-    },
-    "TargetDirectoryStatusResult": {
-      "type": "object",
-      "description": "Subscription Status for accepted request.",
-      "properties": {
-        "status": {
-          "description": "Subscription Status",
-          "type": "string"
-        }
-      }
-    },
-    "TargetDirectoryListResult": {
-      "type": "object",
-      "description": "Subscription Response to list out Changed Target Directory.",
-      "properties": {
-        "value": {
-          "description": "The list of subscription response to changed target directory.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/TargetDirectoryResult"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TargetDirectoryResult": {
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "description": "Subscription Response for Changed Target Directory.",
-      "properties": {
-        "id": {
-          "description": "Fully qualified ID for the Subscription Changed Directory resource.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Subscription Name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type, Microsoft.Subscription/changeTenantRequest.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/TargetDirectoryResultProperties",
-          "description": "Subscription Changed Target Directory response properties."
-        }
-      }
-    },
-    "TargetDirectoryResultProperties": {
-      "type": "object",
-      "description": "Properties of subscription Response for Changed Target Directory.",
-      "properties": {
-        "destinationTenantId": {
-          "description": "Destination Tenant Id where Subscription will be accepted.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "destinationOwnerId": {
-          "description": "Destination Owner Id where Subscription will be accepted.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "status": {
-          "description": "Subscription Status.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "expiresOn": {
-          "description": "Subscription Initiate Request Expiry time",
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time"
-        }
-      }
     }
   },
   "parameters": {
     "apiVersionParameter": {
       "name": "api-version",
-      "x-ms-parameter-location": "method",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2024-08-01-preview"
+      "description": "Version of the API to be used with the client request. Current version is 2021-10-01"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
@@ -1417,16 +1194,6 @@
       "required": true,
       "type": "string",
       "description": "Billing Account Id."
-    },
-    "targetDirectoryRequestParameters": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Target Directory Request",
-      "schema": {
-        "$ref": "#/definitions/TargetDirectoryRequest"
-      }
     }
   },
   "security": [
