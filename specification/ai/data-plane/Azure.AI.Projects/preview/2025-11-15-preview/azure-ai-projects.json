@@ -3933,6 +3933,379 @@
         }
       }
     },
+    "/memory_stores/{name}/items": {
+      "post": {
+        "operationId": "createMemoryItem",
+        "tags": [
+          "Memory stores"
+        ],
+        "description": "Create a memory item in a memory store.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the memory store.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "scope": {
+                  "type": "string",
+                  "description": "The namespace that logically groups and isolates memories, such as a user ID."
+                },
+                "content": {
+                  "type": "string",
+                  "description": "The content of the memory."
+                },
+                "kind": {
+                  "$ref": "#/definitions/MemoryItemKind",
+                  "description": "The kind of the memory item."
+                }
+              },
+              "required": [
+                "scope",
+                "content",
+                "kind"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/memory_stores/{name}/items/{memory_id}": {
+      "get": {
+        "operationId": "getMemoryItem",
+        "tags": [
+          "Memory stores"
+        ],
+        "description": "Retrieve a memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the memory store.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "description": "The ID of the memory item.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "updateMemoryItem",
+        "tags": [
+          "Memory stores"
+        ],
+        "description": "Update the content of an existing memory item in a memory store.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the memory store.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "description": "The ID of the memory item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "description": "The updated content of the memory."
+                }
+              },
+              "required": [
+                "content"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MemoryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteMemoryItem",
+        "tags": [
+          "Memory stores"
+        ],
+        "description": "Delete an existing memory item from a memory store.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the memory store.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "memory_id",
+            "in": "path",
+            "description": "The ID of the memory item.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteMemoryItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/memory_stores/{name}/items:list": {
+      "post": {
+        "operationId": "listMemoryItems",
+        "tags": [
+          "Memory stores"
+        ],
+        "description": "List memory items for a specific scope in a memory store.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the memory store.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the updated_at timestamp of the memory items. 'asc' for ascending order and 'desc' for descending order.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "Filter by memory item kind. If provided, only items of the specified kind will be returned.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "user_profile",
+              "chat_summary"
+            ],
+            "x-ms-enum": {
+              "name": "MemoryItemKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "user_profile",
+                  "value": "user_profile",
+                  "description": "User profile information extracted from conversations."
+                },
+                {
+                  "name": "chat_summary",
+                  "value": "chat_summary",
+                  "description": "Summary of chat conversations."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "scope": {
+                  "type": "string",
+                  "description": "The namespace that logically groups and isolates memories, such as a user ID."
+                }
+              },
+              "required": [
+                "scope"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/MemoryItem"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list."
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list."
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list."
+                }
+              },
+              "required": [
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/memory_stores/{name}/updates/{update_id}": {
       "get": {
         "operationId": "getUpdateResult",
@@ -9360,6 +9733,35 @@
         }
       }
     },
+    "DeleteMemoryItemResponse": {
+      "type": "object",
+      "description": "Response for deleting a memory item.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type. Always 'memory_store.item.deleted'.",
+          "enum": [
+            "memory_store.item.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "memory_id": {
+          "type": "string",
+          "description": "The ID of the deleted memory item."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Whether the memory item was successfully deleted."
+        }
+      },
+      "required": [
+        "object",
+        "memory_id",
+        "deleted"
+      ]
+    },
     "DeleteMemoryStoreResponse": {
       "type": "object",
       "properties": {
@@ -11354,6 +11756,16 @@
       "type": "object",
       "description": "A single memory item stored in the memory store, containing content and metadata.",
       "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'memory_store.item'.",
+          "enum": [
+            "memory_store.item"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
         "memory_id": {
           "type": "string",
           "description": "The unique ID of the memory item."
@@ -11378,6 +11790,7 @@
       },
       "discriminator": "kind",
       "required": [
+        "object",
         "memory_id",
         "updated_at",
         "scope",
