@@ -3136,7 +3136,7 @@
             "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Free services create request",
             "required": true,
@@ -3223,7 +3223,7 @@
             "pattern": "^[a-zA-Z0-9_\\-\\.]+$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "Free services patch request",
             "required": true,
@@ -6262,7 +6262,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FreeServicesProperties",
-          "description": "Free services properties"
+          "description": "Free services properties",
+          "x-ms-client-flatten": true
         },
         "managedBy": {
           "type": "string",
@@ -6331,7 +6332,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/FreeServicesPatchRequestProperties",
-          "description": "Free services patch request properties"
+          "description": "Free services patch request properties",
+          "x-ms-client-flatten": true
         },
         "tags": {
           "type": "object",
