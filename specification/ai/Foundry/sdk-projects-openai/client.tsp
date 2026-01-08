@@ -1,5 +1,12 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./main.tsp";
+
+// Paths resolve for tsp-client use with additionalDirectories peering the parent folder to this one; uncomment the alternate form for proper linter support
+import "../Foundry/agents/models.tsp";
+import "../Foundry/conversations/routes.tsp";
+import "../Foundry/responses/routes.tsp";
+// import "../agents/models.tsp";
+// import "../conversations/routes.tsp";
+// import "../responses/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 
@@ -30,8 +37,6 @@ namespace Azure.AI.Projects;
 
 @@usage(OpenAI.ConversationResource, Usage.output);
 @@access(OpenAI.ConversationResource, Access.public);
-@@usage(ConversationList, Usage.output);
-@@access(ConversationList, Access.public);
 @@usage(OpenAI.CreateConversationRequest, Usage.input);
 @@access(OpenAI.CreateConversationRequest, Access.public);
 @@usage(OpenAI.UpdateConversationRequest, Usage.input);
@@ -42,14 +47,17 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 @@clientName(OpenAI, "ProjectOpenAIClient");
 
+@@clientName(AgentId, "AgentInfo");
+@@clientName(AgentObject, "AgentRecord");
+@@clientName(AgentProtocol, "AgentCommunicationMethod");
 @@clientName(BingGroundingSearchToolParameters,
   "BingGroundingSearchToolOptions"
 );
 @@clientName(ContainerAppAgentDefinition,
   "ContainerApplicationAgentDefinition"
 );
+@@clientName(CreatedBy, "AgentResponseItemSource");
 @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
-
 @@clientName(MemorySearchOptions, "MemorySearchToolOptions");
 @@clientName(MemorySearchToolCallItemResource,
   "MemorySearchToolCallResponseItem"
@@ -57,6 +65,7 @@ namespace Azure.AI.Projects;
 @@clientName(OAuthConsentRequestItemResource,
   "OAuthConsentRequestResponseItem"
 );
+@@clientName(OpenAI.ItemType, "AgentResponseItemKind");
 @@clientName(OpenApiAgentTool, "OpenAPIAgentTool");
 @@clientName(OpenApiAnonymousAuthDetails,
   "OpenAPIAnonymousAuthenticationDetails"
@@ -77,11 +86,31 @@ namespace Azure.AI.Projects;
 @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
 
 // --------------------------------------------------------------------------------
+// Renames and visibility changes for targeted suppressions
+// --------------------------------------------------------------------------------
+
+@@access(OpenAI.LocalShellTool, Access.internal);
+@@clientName(OpenAI.LocalShellTool, "InternalLocalShellTool");
+
+@@access(OpenAI.LocalShellToolCallItemResource, Access.internal);
+@@clientName(OpenAI.LocalShellToolCallItemResource,
+  "InternalLocalShellToolCallItem"
+);
+@@access(OpenAI.LocalShellToolCallOutputItemResource, Access.internal);
+@@clientName(OpenAI.LocalShellToolCallOutputItemResource,
+  "InternalLocalShellToolCallOutputItem"
+);
+
+@@access(OpenAI.ResponseStreamEvent, Access.internal);
+@@clientName(OpenAI.ResponseStreamEvent, "InternalResponseStreamEvent");
+
+// --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
 @@usage(OpenAI.ItemResource, Usage.json);
-@@usage(OpenAI.ResponseStreamEvent, Usage.json);
+@@access(OpenAI.ItemResource, Access.public);
+@@clientName(OpenAI.ItemResource, "AgentResponseItem");
 
 @@usage(AgentId, Usage.output);
 @@access(AgentId, Access.public);
