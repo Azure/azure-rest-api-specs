@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ApiManagement;
+using Http;
 
 // Java-specific compatibility customizations generated per TypeSpec migration guidance.
 @@clientName(Microsoft.ApiManagement.PreferredIPVersion,
@@ -86,38 +87,6 @@ using Microsoft.ApiManagement;
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
 @@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
   "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
-  "python"
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(PolicyContractsGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(ApiPolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(GraphQLApiResolverPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(PolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(ProductPolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspaceApiOperationPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspaceApiPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspacePolicyGetParameters.format,
-  "xml",
   "python"
 );
 
