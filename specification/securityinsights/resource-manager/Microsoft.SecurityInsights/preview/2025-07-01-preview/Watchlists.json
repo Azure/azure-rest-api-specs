@@ -44,7 +44,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets all watchlists, without watchlist items.",
+        "description": "Get all watchlists, without watchlist items.",
         "operationId": "Watchlists_List",
         "parameters": [
           {
@@ -92,7 +92,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
+        "description": "Get a watchlist, without its watchlist items.",
         "operationId": "Watchlists_Get",
         "parameters": [
           {
@@ -163,6 +163,7 @@
                 "type": "string"
               },
               "Location": {
+                "description": "Location URL to poll for result.",
                 "type": "string"
               }
             }
@@ -177,21 +178,24 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist.": {
+          "Create or update a watchlist.": {
             "$ref": "./examples/watchlists/CreateWatchlist.json"
           },
-          "Creates or updates a watchlist and bulk creates watchlist items.": {
+          "Create or update a watchlist and bulk creates watchlist items.": {
             "$ref": "./examples/watchlists/CreateWatchlistAndWatchlistItems.json"
           }
         },
         "tags": [
           "Watchlists"
         ],
-        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with either rawContent or a valid SAR URI and contentType properties. The rawContent is mainly used for small watchlist (content size below 3.8 MB). The SAS URI enables the creation of large watchlist, where the content size can go up to 500 MB. The status of processing such large file can be polled through the URL returned in Azure-AsyncOperation header.",
+        "description": "Create or update a Watchlist and its Watchlist Items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint with rawContent and contentType properties.",
         "operationId": "Watchlists_CreateOrUpdate",
         "parameters": [
           {
@@ -239,7 +243,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
@@ -252,7 +259,7 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Gets all watchlist Items.",
+        "description": "Get all watchlist Items.",
         "operationId": "WatchlistItems_List",
         "parameters": [
           {
@@ -303,7 +310,7 @@
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Gets a watchlist, without its watchlist items.",
+        "description": "Get a watchlist item.",
         "operationId": "WatchlistItems_Get",
         "parameters": [
           {
@@ -342,7 +349,7 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a watchlist Item.": {
+          "Delete a watchlist item.": {
             "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
           }
         },
@@ -388,14 +395,14 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a watchlist item.": {
+          "Create or update a watchlist item.": {
             "$ref": "./examples/watchlists/CreateWatchlistItem.json"
           }
         },
         "tags": [
           "WatchlistItems"
         ],
-        "description": "Creates or updates a watchlist item.",
+        "description": "Create or update a watchlist item.",
         "operationId": "WatchlistItems_CreateOrUpdate",
         "parameters": [
           {
@@ -509,7 +516,17 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "sourceType"
+            "name": "sourceType",
+            "values": [
+              {
+                "description": "The source from local file.",
+                "value": "Local"
+              },
+              {
+                "description": "The source from Azure storage.",
+                "value": "AzureStorage"
+              }
+            ]
           }
         },
         "created": {
@@ -578,11 +595,11 @@
           "type": "string"
         },
         "contentType": {
-          "description": "The content type of the raw content. Example : text/csv or text/tsv ",
+          "description": "The content type of the raw content. Example : text/csv or text/tsv",
           "type": "string"
         },
         "uploadStatus": {
-          "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
+          "description": "The status of the Watchlist upload : New, InProgress or Complete. **Note** : When a Watchlist upload status is InProgress, the Watchlist cannot be deleted",
           "type": "string"
         },
         "provisioningState": {
@@ -598,9 +615,10 @@
     },
     "WatchlistItemList": {
       "description": "List all the watchlist items.",
+      "type": "object",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of watchlist item.",
+          "description": "URL to fetch the next set of watchlist items.",
           "readOnly": true,
           "type": "string"
         },
@@ -612,7 +630,6 @@
           "type": "array"
         }
       },
-      "type": "object",
       "required": [
         "value"
       ]
@@ -623,7 +640,7 @@
           "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
         }
       ],
-      "description": "Represents a Watchlist item in Azure Security Insights.",
+      "description": "Represents a Watchlist Item in Azure Security Insights.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/WatchlistItemProperties",
@@ -669,7 +686,8 @@
         },
         "updatedBy": {
           "$ref": "../../../common/2.0/types.json#/definitions/UserInfo",
-          "description": "Describes a user that updated the watchlist item"
+          "description": "Describes a user that updated the watchlist item",
+          "type": "object"
         },
         "itemsKeyValue": {
           "description": "key-value pairs for a watchlist item",
@@ -699,14 +717,44 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The New provisioning state.",
+            "value": "New"
+          },
+          {
+            "description": "The InProgress provisioning state.",
+            "value": "InProgress"
+          },
+          {
+            "description": "The Uploading provisioning state.",
+            "value": "Uploading"
+          },
+          {
+            "description": "The Deleting provisioning state.",
+            "value": "Deleting"
+          },
+          {
+            "description": "The Succeeded provisioning state.",
+            "value": "Succeeded"
+          },
+          {
+            "description": "The Failed provisioning state.",
+            "value": "Failed"
+          },
+          {
+            "description": "The Canceled provisioning state.",
+            "value": "Canceled"
+          }
+        ]
       },
       "readOnly": true
     }
   },
   "parameters": {
     "WatchlistAlias": {
-      "description": "Watchlist Alias",
+      "description": "The watchlist alias",
       "in": "path",
       "name": "watchlistAlias",
       "required": true,
@@ -734,7 +782,7 @@
       "x-ms-parameter-location": "method"
     },
     "WatchlistItemId": {
-      "description": "Watchlist Item Id (GUID)",
+      "description": "The watchlist item id (GUID)",
       "in": "path",
       "name": "watchlistItemId",
       "required": true,

@@ -833,6 +833,26 @@
         "artifactType"
       ]
     },
+    "AssetOwnershipLimit": {
+      "type": "object",
+      "description": "Defines ownership restrictions and limits for SKU assets",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Limit type"
+        },
+        "minAssets": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum number of assets"
+        },
+        "maxAssets": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of assets"
+        }
+      }
+    },
     "Attribute": {
       "type": "object",
       "description": "Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services.",
@@ -897,6 +917,28 @@
         "hasFreeTrials",
         "displayRank"
       ]
+    },
+    "Benefit": {
+      "type": "object",
+      "description": "Benefit information for a plan",
+      "properties": {
+        "benefitType": {
+          "type": "string",
+          "description": "Benefit type"
+        },
+        "basePlanId": {
+          "type": "string",
+          "description": "Base plan ID"
+        },
+        "billingPlan": {
+          "type": "string",
+          "description": "Billing plan"
+        },
+        "termDuration": {
+          "type": "string",
+          "description": "Term duration. Examples: 'P1M' (1 month), 'P30D' (30 days)"
+        }
+      }
     },
     "BillingAccountBaseParameters": {
       "type": "object",
@@ -976,6 +1018,32 @@
         "billingProfileId"
       ]
     },
+    "ConstraintsData": {
+      "type": "object",
+      "description": "Constraints data for a plan",
+      "properties": {
+        "seatConstraints": {
+          "type": "array",
+          "description": "Seat constraint configurations defining minimum and maximum seat limits",
+          "items": {
+            "$ref": "#/definitions/MinMaxSeatsConstraint"
+          },
+          "x-ms-identifiers": []
+        },
+        "assetOwnershipLimits": {
+          "type": "array",
+          "description": "Asset ownership limits",
+          "items": {
+            "$ref": "#/definitions/AssetOwnershipLimit"
+          },
+          "x-ms-identifiers": []
+        },
+        "prerequisiteSkus": {
+          "$ref": "#/definitions/Prerequisites",
+          "description": "Lists eligible prerequisite SKUs"
+        }
+      }
+    },
     "DiscoveryErrorDetails": {
       "type": "object",
       "description": "Error details returned in DiscoveryErrorPayload",
@@ -1006,6 +1074,42 @@
       "required": [
         "error"
       ]
+    },
+    "FulfillmentAttributes": {
+      "type": "object",
+      "description": "Attributes that define fulfillment timing and delay handling",
+      "properties": {
+        "fulfillmentTiming": {
+          "type": "string",
+          "description": "Timing configuration for product fulfillment"
+        },
+        "fulfillmentDelayMitigation": {
+          "type": "string",
+          "description": "Mitigation explanation for delayed fulfillment"
+        }
+      }
+    },
+    "FulfillmentData": {
+      "type": "object",
+      "description": "Contains fulfillment configuration and instructions",
+      "properties": {
+        "fulfillmentType": {
+          "type": "string",
+          "description": "Differentiates between fulfillment types"
+        },
+        "attributes": {
+          "$ref": "#/definitions/FulfillmentAttributes",
+          "description": "Fulfillment attributes"
+        },
+        "additionalProducts": {
+          "type": "array",
+          "description": "Bundled products included defining additional product/SKU combinations",
+          "items": {
+            "$ref": "#/definitions/ProductFulfillmentConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "Image": {
       "type": "object",
@@ -1053,6 +1157,24 @@
         "quantity": {
           "type": "string",
           "description": "Included quantity"
+        }
+      }
+    },
+    "LifecyclePolicy": {
+      "type": "object",
+      "description": "Defines lifecycle management policy",
+      "properties": {
+        "graceDuration": {
+          "type": "string",
+          "description": "Grace period duration where customers retain access to their product. Examples: 'P1M' (1 month), 'P30D' (30 days), 'P0D' (0 days)"
+        },
+        "inactiveDuration": {
+          "type": "string",
+          "description": "Inactive period duration"
+        },
+        "lockoutDuration": {
+          "type": "string",
+          "description": "Lockout period duration"
         }
       }
     },
@@ -1119,6 +1241,74 @@
             "$ref": "#/definitions/IncludedQuantityProperty"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "MeterTypeDescription": {
+      "type": "object",
+      "description": "Meter type description",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Meter Type Description key"
+        },
+        "value": {
+          "$ref": "#/definitions/MeterTypeDescriptionValue",
+          "description": "Meter type description value"
+        }
+      }
+    },
+    "MeterTypeDescriptionValue": {
+      "type": "object",
+      "description": "Meter type description value",
+      "properties": {
+        "meterType": {
+          "type": "string",
+          "description": "The type of meter"
+        },
+        "unitOfMeasure": {
+          "type": "string",
+          "description": "The unit of measurement for the meter"
+        }
+      }
+    },
+    "MinMaxPercentageSeatsConstraint": {
+      "type": "object",
+      "description": "Minimum and maximum percentage seats constraint",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Constraint type"
+        },
+        "minPercentSeats": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum percent seats"
+        },
+        "maxPercentSeats": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum percent seats"
+        }
+      }
+    },
+    "MinMaxSeatsConstraint": {
+      "type": "object",
+      "description": "Defines minimum and maximum seat limits for a specific constraint type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Constraint type"
+        },
+        "minSeats": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum seats"
+        },
+        "maxSeats": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum seats"
         }
       }
     },
@@ -1399,6 +1589,62 @@
             "$ref": "#/definitions/OfferingProperties"
           },
           "x-ms-identifiers": []
+        },
+        "hasConsumptionComponents": {
+          "type": "boolean",
+          "description": "Indicates if this SKU has consumption components"
+        },
+        "isEndUserEligible": {
+          "type": "boolean",
+          "description": "Indicates if this SKU is available for end users"
+        },
+        "isAdminEligible": {
+          "type": "boolean",
+          "description": "Indicates if this SKU is available for admins"
+        },
+        "entraIdVersion": {
+          "type": "string",
+          "description": "The entra id version for products that come with entra id support"
+        },
+        "technicalRequirements": {
+          "type": "string",
+          "description": "Technical Requirements"
+        },
+        "faqUri": {
+          "type": "string",
+          "description": "The URI to the FAQ page"
+        },
+        "fulfillmentData": {
+          "$ref": "#/definitions/FulfillmentData",
+          "description": "Fulfillment instructions for this SKU"
+        },
+        "benefits": {
+          "type": "array",
+          "description": "Provides promotion data",
+          "items": {
+            "$ref": "#/definitions/Benefit"
+          },
+          "x-ms-identifiers": []
+        },
+        "constraintsData": {
+          "$ref": "#/definitions/ConstraintsData",
+          "description": "Contains constraint product properties to determine eligibility"
+        },
+        "meterTypeDescriptions": {
+          "type": "array",
+          "description": "Meter type descriptions",
+          "items": {
+            "$ref": "#/definitions/MeterTypeDescription"
+          },
+          "x-ms-identifiers": []
+        },
+        "usageUnit": {
+          "type": "string",
+          "description": "Usage unit"
+        },
+        "skuName": {
+          "type": "string",
+          "description": "Sku name"
         }
       },
       "required": [
@@ -1519,6 +1765,53 @@
       "required": [
         "planType"
       ]
+    },
+    "PrerequisiteSet": {
+      "type": "object",
+      "description": "Prerequisite set",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Product ID"
+        },
+        "skuIds": {
+          "type": "array",
+          "description": "SKU IDs",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Prerequisites": {
+      "type": "object",
+      "description": "Defines prerequisite SKU requirements and seat constraints",
+      "properties": {
+        "mustHaveAll": {
+          "type": "array",
+          "description": "Prerequisite sets where all specified SKUs must be owned",
+          "items": {
+            "$ref": "#/definitions/PrerequisiteSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "mustHaveAny": {
+          "type": "array",
+          "description": "Prerequisite sets where any one of the specified SKUs must be owned",
+          "items": {
+            "$ref": "#/definitions/PrerequisiteSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "seatConstraints": {
+          "type": "array",
+          "description": "Percentage-based seat constraints for prerequisite SKUs",
+          "items": {
+            "$ref": "#/definitions/MinMaxPercentageSeatsConstraint"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "PreviewImage": {
       "type": "object",
@@ -2066,6 +2359,10 @@
           "items": {
             "$ref": "#/definitions/PlanDetails"
           }
+        },
+        "hasAddOns": {
+          "type": "boolean",
+          "description": "Indicates that the SKU has add-ons"
         }
       },
       "required": [
@@ -2074,6 +2371,21 @@
         "isPrivate",
         "isStopSell"
       ]
+    },
+    "ProductFulfillmentConfig": {
+      "type": "object",
+      "description": "Configuration for additional products bundled with early access pass SKUs",
+      "properties": {
+        "productSkuId": {
+          "type": "string",
+          "description": "Product and SKU ID for bundled products included with the license"
+        },
+        "defaultKeyActivationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the bundled product per license "
+        }
+      }
     },
     "ProductSingle": {
       "type": "object",
@@ -2486,6 +2798,25 @@
         "isAutorenewable": {
           "type": "boolean",
           "description": "Indicates if autorenew is enabled"
+        },
+        "lifecyclePolicy": {
+          "$ref": "#/definitions/LifecyclePolicy",
+          "description": "Defines the lifecycle management policy for the term"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code for this term"
+        },
+        "state": {
+          "type": "string",
+          "description": "Term state"
+        },
+        "actions": {
+          "type": "array",
+          "description": "Term Actions",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
