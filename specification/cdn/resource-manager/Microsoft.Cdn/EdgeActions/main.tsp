@@ -85,13 +85,7 @@ model EdgeActionExecutionFilter
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
-  update is ArmCustomPatchAsync<
-    EdgeAction,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      EdgeAction,
-      EdgeActionProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;

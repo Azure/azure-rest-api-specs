@@ -1585,7 +1585,7 @@
       "description": "The type used for update operations of the EdgeAction.",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/SkuType",
+          "$ref": "#/definitions/SkuTypeUpdate",
           "description": "The sku type of the edge action"
         },
         "tags": {
@@ -1850,6 +1850,20 @@
         "name",
         "tier"
       ]
+    },
+    "SkuTypeUpdate": {
+      "type": "object",
+      "description": "The SKU type for update operations",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU"
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of the SKU"
+        }
+      }
     },
     "VersionCode": {
       "type": "object",

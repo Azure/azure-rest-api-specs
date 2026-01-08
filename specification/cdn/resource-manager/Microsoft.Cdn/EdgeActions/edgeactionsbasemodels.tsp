@@ -27,6 +27,15 @@ model SkuType {
   tier: string;
 }
 
+/** The SKU type for update operations */
+model SkuTypeUpdate {
+  /** The name of the SKU */
+  name?: string;
+
+  /** The tier of the SKU */
+  tier?: string;
+}
+
 /** The deployment type for edge action versions */
 union EdgeActionVersionDeploymentType {
   string,
@@ -142,6 +151,16 @@ model EdgeActionProperties {
   @doc("A list of attachments for the edge action")
   @visibility(Lifecycle.Read)
   attachments: EdgeActionAttachment[];
+}
+
+/** The type used for update operations of the EdgeAction. */
+model EdgeActionUpdate {
+  @doc("The sku type of the edge action")
+  sku?: SkuTypeUpdate;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
 }
 
 @doc("Represents an edge action version")
