@@ -30,25 +30,21 @@ interface SenderUsernames {
   /**
    * Get a valid sender username for a domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<SenderUsernameResource>;
 
   /**
    * Add a new SenderUsername resource under the parent Domains resource or update an existing SenderUsername resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<SenderUsernameResource>;
 
   /**
    * Operation to delete a SenderUsernames resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<SenderUsernameResource>;
 
   /**
    * List all valid sender usernames for a domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByDomains is ArmResourceListByParent<
     SenderUsernameResource,
     Response = ArmResponse<SenderUsernameResourceCollection>

@@ -29,19 +29,16 @@ interface CommunicationServices {
   /**
    * Get the CommunicationService and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<CommunicationServiceResource>;
 
   /**
    * Create a new CommunicationService or update an existing CommunicationService.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<CommunicationServiceResource>;
 
   /**
    * Operation to update an existing CommunicationService.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CommunicationServiceResource,
@@ -51,7 +48,6 @@ interface CommunicationServices {
   /**
    * Operation to delete a CommunicationService.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CommunicationServiceResource,
@@ -61,7 +57,6 @@ interface CommunicationServices {
   /**
    * Handles requests to list all resources in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByResourceGroup is ArmResourceListByParent<
     CommunicationServiceResource,
     Response = ArmResponse<CommunicationServiceResourceList>
@@ -70,7 +65,6 @@ interface CommunicationServices {
   /**
    * Handles requests to list all resources in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listBySubscription is ArmListBySubscription<
     CommunicationServiceResource,
     Response = ArmResponse<CommunicationServiceResourceList>
@@ -79,7 +73,6 @@ interface CommunicationServices {
   /**
    * Links an Azure Notification Hub to this communication service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   linkNotificationHub is ArmResourceActionSync<
     CommunicationServiceResource,
     LinkNotificationHubParameters,
@@ -90,7 +83,6 @@ interface CommunicationServices {
   /**
    * Get the access keys of the CommunicationService resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listKeys is ArmResourceActionSync<
     CommunicationServiceResource,
     void,
@@ -100,7 +92,6 @@ interface CommunicationServices {
   /**
    * Regenerate CommunicationService access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   regenerateKey is ArmResourceActionSync<
     CommunicationServiceResource,
     RegenerateKeyParameters,
@@ -110,7 +101,6 @@ interface CommunicationServices {
   /**
    * Checks that the CommunicationService name is valid and is not already in use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Check Name Availability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<

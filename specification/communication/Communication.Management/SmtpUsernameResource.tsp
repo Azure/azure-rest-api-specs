@@ -30,25 +30,21 @@ interface SmtpUsernames {
   /**
    * Get a SmtpUsernameResource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<SmtpUsernameResource>;
 
   /**
    * Create or update an SmtpUsernameResource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceSync<SmtpUsernameResource>;
 
   /**
    * Operation to delete a single SmtpUsername resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteSync<SmtpUsernameResource>;
 
   /**
    * Get all SmtpUsernames for a Communication resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     SmtpUsernameResource,
     Response = ArmResponse<SmtpUsernameResourceCollection>

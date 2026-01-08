@@ -30,19 +30,16 @@ interface Domains {
   /**
    * Get the Domains resource and its properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<DomainResource>;
 
   /**
    * Add a new Domains resource under the parent EmailService resource or update an existing Domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DomainResource>;
 
   /**
    * Operation to update an existing Domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     DomainResource,
@@ -57,7 +54,6 @@ interface Domains {
   /**
    * Operation to delete a Domains resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainResource,
@@ -67,7 +63,6 @@ interface Domains {
   /**
    * Handles requests to list all Domains resources under the parent EmailServices resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   listByEmailServiceResource is ArmResourceListByParent<
     DomainResource,
     Response = ArmResponse<DomainResourceList>
@@ -76,7 +71,6 @@ interface Domains {
   /**
    * Initiate verification of DNS record.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   initiateVerification is ArmResourceActionAsyncBase<
     DomainResource,
     VerificationParameter,
@@ -87,7 +81,6 @@ interface Domains {
   /**
    * Cancel verification of DNS record.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   cancelVerification is ArmResourceActionAsyncBase<
     DomainResource,
     VerificationParameter,
