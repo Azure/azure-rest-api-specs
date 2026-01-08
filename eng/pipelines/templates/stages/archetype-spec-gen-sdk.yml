@@ -206,6 +206,7 @@ stages:
           versionSpec: $(PythonVersion)
 
       - script: |
+          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
           optional_params=""
           sdk_gen_info="Configurations: "
 
