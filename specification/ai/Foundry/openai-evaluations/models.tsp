@@ -165,6 +165,9 @@ model CreateEvalRequest is OpenAI.CreateEvalRequest {
 union ItemGenerationParamsType {
   string,
 
+  /** Parameters for red team. */
+  redTeam: "red_team",
+
   /** The ResponseRetrieval item generation parameters. */
   responseRetrieval: "response_retrieval",
 
@@ -173,6 +176,19 @@ union ItemGenerationParamsType {
 
   /** Parameters for red team taxonomy item generation. */
   redTeamTaxonomy: "red_team_taxonomy",
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+model RedTeamItemGenerationParams extends ItemGenerationParams {
+  /** The type of item generation parameters. */
+  type: ItemGenerationParamsType.redTeam;
+
+  /** The collection of attack strategies to be used. */
+  attack_strategies: AttackStrategy[];
+
+  /** The number of turns allowed in the game. */
+  num_turns: int32 = 20;
 }
 
 /** Represents the parameters for red team seed prompts item generation. */
