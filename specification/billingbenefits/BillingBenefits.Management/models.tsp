@@ -3293,3 +3293,146 @@ model SavingsPlanValidateModel extends BenefitValidateModel {
    */
   benefitType: "SavingsPlan";
 }
+
+/**
+ * Properties of free services
+ */
+model FreeServicesProperties {
+  /**
+   * This is the catalog UPN for the product.
+   */
+  productCode: string;
+
+  /**
+   * Current status of the free services
+   */
+  status?: FreeServicesStatus;
+
+  /**
+   * Date and time when the free services become active
+   */
+  startAt: utcDateTime;
+
+  /**
+   * Expiration date and time of the free services
+   */
+  endAt: utcDateTime;
+
+  /**
+   * Provisioning state of Free Services as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of Free Services resource, refer to FreeServicesStatus.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * Billing account resource id where the free services metadata is present.
+   */
+  @visibility(Lifecycle.Read)
+  billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Billing profile resource id where the free services are scoped to.
+   */
+  billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts/billingProfiles";
+    }
+  ]>;
+
+  /**
+   * Customer resource id where the free services are scoped to.
+   */
+  customerResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Billing/billingAccounts/customers";
+    }
+  ]>;
+
+  /**
+   * This is the globally unique identifier of the free services which will not change for its lifetime.
+   */
+  systemId?: string;
+}
+
+/**
+ * Status of the free services
+ */
+union FreeServicesStatus {
+  string,
+
+  /**
+   * Free services status is unknown
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Free services are pending activation
+   */
+  Pending: "Pending",
+
+  /**
+   * Free services are active
+   */
+  Active: "Active",
+
+  /**
+   * Free services have been canceled
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Free services have been fully consumed or completed
+   */
+  Completed: "Completed",
+}
+
+/**
+ * Free services patch request
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+model FreeServicesPatchRequest {
+  /**
+   * Free services patch request properties
+   */
+  properties?: FreeServicesPatchRequestProperties;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * Free services patch request properties
+ */
+model FreeServicesPatchRequestProperties {
+  /**
+   * Updated expiration date and time of the free services
+   */
+  endAt?: utcDateTime;
+}
+
+/**
+ * This operation lists the free services that are available under the specified subscription.
+ */
+model FreeServicesList {
+  /**
+   * The list of free services
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: FreeServices[];
+
+  /**
+   * The URL to get the next set of results
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
