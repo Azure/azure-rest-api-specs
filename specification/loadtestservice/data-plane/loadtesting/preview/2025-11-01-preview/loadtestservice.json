@@ -961,6 +961,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a load test run while the run is executing.": {
+            "$ref": "./examples/GetTestRun_Executing.json"
+          },
           "Get a load test run.": {
             "$ref": "./examples/GetTestRun.json"
           }
@@ -6140,6 +6143,18 @@
           "type": "number",
           "format": "double",
           "description": "Estimated virtual user hours for the test run.",
+          "readOnly": true
+        },
+        "executionStartDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The test run execution start DateTime(RFC 3339 literal format).",
+          "readOnly": true
+        },
+        "executionEndDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The test run execution end DateTime(RFC 3339 literal format).",
           "readOnly": true
         },
         "createdDateTime": {

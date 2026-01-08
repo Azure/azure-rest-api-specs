@@ -945,6 +945,16 @@ model TestRun {
   @visibility(Lifecycle.Read)
   estimatedVirtualUserHours?: float64;
 
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("The test run execution start DateTime(RFC 3339 literal format).")
+  @visibility(Lifecycle.Read)
+  executionStartDateTime?: utcDateTime;
+
+  @added(APIVersions.v2025_11_01_preview)
+  @doc("The test run execution end DateTime(RFC 3339 literal format).")
+  @visibility(Lifecycle.Read)
+  executionEndDateTime?: utcDateTime;
+
   ...SystemMetaData;
 }
 
