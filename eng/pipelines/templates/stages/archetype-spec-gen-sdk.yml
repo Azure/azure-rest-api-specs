@@ -25,6 +25,9 @@ parameters:
   - name: CreatePullRequest
     type: boolean
     default: false
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
   - name: SpecBatchTypes
     type: string
     default: ''
@@ -282,6 +285,7 @@ stages:
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
+          condition: or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true)))
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - task: AzureCLI@2
@@ -306,10 +310,19 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+            CustomCondition: or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true)))
+
+        - pwsh: |
+            $currentTitle = "$(PrTitle)"
+            $updatedTitle = "Failed-$currentTitle"
+            Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
+            Write-Host "Updated PR Title to: '$updatedTitle'"
+          displayName: "Set PR title prefix based on job status"
+          condition: and(or(eq('$(Agent.JobStatus)', 'SucceededWithIssues'), eq('$(Agent.JobStatus)', 'Failed')), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))
 
         - task: PowerShell@2
           displayName: Create pull request
-          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+          condition: and(or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
           inputs:
             pwsh: true
             workingDirectory: $(SdkRepoDirectory)
