@@ -786,12 +786,12 @@ export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSu
   }
 }
 
-export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-rust",
       "emitter-output-dir",
-      new RegExp(/^{output-dir}\/{service-dir}\/{crate-name}$/),
+      new RegExp(/^azure_resourcemanager_(?:[a-z0-9]+_)*[a-z0-9]+$/),
     );
   }
 }
