@@ -89,6 +89,42 @@ using Http;
   "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
   "python"
 );
+@@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
+  "Microsoft.ApiManagement",
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(PolicyContractsGetParameters.format,
+  "xml",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(ApiPolicyGetParameters.format, "xml", "python");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(GraphQLApiResolverPolicyGetParameters.format,
+  "xml",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(PolicyGetParameters.format, "xml", "python");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(ProductPolicyGetParameters.format, "xml", "python");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(WorkspaceApiOperationPolicyGetParameters.format,
+  "xml",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(WorkspaceApiPolicyGetParameters.format,
+  "xml",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Legacy.clientDefaultValue(WorkspacePolicyGetParameters.format,
+  "xml",
+  "python"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
