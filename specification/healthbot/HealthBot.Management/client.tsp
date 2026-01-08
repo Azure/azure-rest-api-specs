@@ -3,3 +3,4 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
+@@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
