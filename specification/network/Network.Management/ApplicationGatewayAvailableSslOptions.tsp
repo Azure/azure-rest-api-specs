@@ -30,17 +30,10 @@ model ApplicationGatewayAvailableSslOptions extends Resource {
   name: string;
 }
 
-alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** The name of the application gateway available ssl option. */
-    @path
-    @segment("applicationGatewayAvailableSslOptions")
-    @key
-    applicationGatewayAvailableSslOption: "default";
   },
   {
     /** The name of the ssl predefined policy. */
@@ -48,16 +41,20 @@ alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.Le
     @segment("predefinedPolicies")
     @key
     predefinedPolicyName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/{applicationGatewayAvailableSslOption}/predefinedPolicies",
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Lists available Ssl options for configuring Ssl policy.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_ListAvailableSslOptions")
+  @autoRoute
   listAvailableSslOptions is ArmResourceRead<
     ApplicationGatewayAvailableSslOptions,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -72,6 +69,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   @list
   @get
   @action("predefinedPolicies")
+  @autoRoute
   listAvailableSslPredefinedPolicies is ArmResourceActionSync<
     ApplicationGatewayAvailableSslOptions,
     void,
@@ -86,8 +84,10 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationGateways_GetSslPredefinedPolicy")
   @get
-  getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.Read<
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}")
+  getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.ActionSync<
     ApplicationGatewayAvailableSslOptions,
+    void,
     Response = ArmResponse<ApplicationGatewaySslPredefinedPolicy>,
     OverrideErrorType = CloudError
   >;
