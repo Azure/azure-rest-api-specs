@@ -27,6 +27,16 @@ options:
     crate-name: "azure_resourcemanager_scvmm"
     crate-version: "0.1.0"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/scvmm"
+    emitter-output-dir: "{output-dir}/{service-dir}/armscvmm"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armscvmm"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   disable:
   extends:

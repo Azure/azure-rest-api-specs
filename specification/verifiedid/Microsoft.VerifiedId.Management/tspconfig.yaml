@@ -29,3 +29,13 @@ options:
     crate-name: "azure_resourcemanager_verifiedid"
     crate-version: "0.1.0"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/verifiedid"
+    emitter-output-dir: "{output-dir}/{service-dir}/armverifiedid"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armverifiedid"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

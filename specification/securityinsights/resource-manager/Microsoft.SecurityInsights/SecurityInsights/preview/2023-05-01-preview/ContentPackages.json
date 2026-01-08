@@ -1,0 +1,453 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages": {
+      "get": {
+        "x-ms-examples": {
+          "Get all available packages.": {
+            "$ref": "./examples/contentPackages/GetPackages.json"
+          }
+        },
+        "tags": [
+          "ContentPackages"
+        ],
+        "description": "Gets all installed packages.",
+        "operationId": "ContentPackages_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/packageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages/{packageId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get installed packages by id.": {
+            "$ref": "./examples/contentPackages/GetPackageById.json"
+          }
+        },
+        "tags": [
+          "ContentPackages"
+        ],
+        "description": "Gets an installed packages by its id.",
+        "operationId": "ContentPackages_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/packageModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Install a package to the workspace.": {
+            "$ref": "./examples/contentPackages/InstallPackage.json"
+          }
+        },
+        "tags": [
+          "ContentPackages"
+        ],
+        "description": "Install a package to the workspace.",
+        "operationId": "ContentPackage_Install",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PackageInstallationProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK, a package is updated.",
+            "schema": {
+              "$ref": "#/definitions/packageModel"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/packageModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Uninstall a package from the workspace.": {
+            "$ref": "./examples/contentPackages/UninstallPackage.json"
+          }
+        },
+        "tags": [
+          "ContentPackages"
+        ],
+        "description": "Uninstall a package from the workspace.",
+        "operationId": "ContentPackage_Uninstall",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "packageList": {
+      "description": "List available packages.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of packages.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of packages.",
+          "items": {
+            "$ref": "#/definitions/packageModel"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    },
+    "packageModel": {
+      "allOf": [
+        {
+          "$ref": "./common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Package in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "package properties",
+          "$ref": "#/definitions/packageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "packageProperties": {
+      "description": "Describes package properties",
+      "properties": {
+        "contentId": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "The package id"
+        },
+        "contentKind": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+          "description": "The package kind"
+        },
+        "contentSchemaVersion": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "description": "The version of the content schema."
+        },
+        "isNew": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "description": "Flag indicates if this is a newly published package."
+        },
+        "isPreview": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "description": "Flag indicates if this package is in preview."
+        },
+        "isFeatured": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
+          "description": "Flag indicates if this package is among the featured list."
+        },
+        "version": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
+          "description": "The display name of the package"
+        },
+        "description": {
+          "description": "The description of the package",
+          "type": "string"
+        },
+        "publisherDisplayName": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
+          "description": "The publisher display name of the package"
+        },
+        "source": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSource",
+          "description": "The source of the package"
+        },
+        "author": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataAuthor",
+          "description": "The author of the package"
+        },
+        "support": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataSupport",
+          "description": "The support tier of the package"
+        },
+        "dependencies": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDependencies",
+          "description": "The support tier of the package"
+        },
+        "providers": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataProviders",
+          "description": "Providers for the package item"
+        },
+        "firstPublishDate": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataFirstPublishDate",
+          "description": "first publish date package item"
+        },
+        "lastPublishDate": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataLastPublishDate",
+          "description": "last publish date for the package item"
+        },
+        "categories": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
+          "description": "The categories of the package"
+        },
+        "threatAnalysisTactics": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTactics",
+          "description": "the tactics the resource covers"
+        },
+        "threatAnalysisTechniques": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTechniques",
+          "description": "the techniques the resource covers, these have to be aligned with the tactics being used"
+        },
+        "icon": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
+          "description": "the icon identifier. this id can later be fetched from the content metadata"
+        }
+      },
+      "required": [
+        "contentId",
+        "contentKind",
+        "version",
+        "displayName"
+      ],
+      "type": "object"
+    },
+    "metadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "description": "Id of the content item we depend on",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId"
+        },
+        "kind": {
+          "description": "Type of the content item we depend on",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataKind"
+        },
+        "version": {
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion"
+        },
+        "name": {
+          "description": "Name of the content item",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Operator used for list of dependencies in criteria array.",
+          "type": "string",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "operator",
+            "values": [
+              {
+                "value": "AND"
+              },
+              {
+                "value": "OR"
+              }
+            ]
+          }
+        },
+        "criteria": {
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataDependencies",
+            "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+          },
+          "x-ms-identifiers": [],
+          "example": [
+            {
+              "kind": "DataConnector",
+              "contentId": "68b1de8a-b635-430d-b208-01ba3dda5877",
+              "version": "1.0.0"
+            },
+            {
+              "kind": "Workbook",
+              "contentId": "ad903b46-9905-4504-9825-3bcce796da8e",
+              "version": "1.0.0"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PackageIdParameter": {
+      "description": "package Id",
+      "in": "path",
+      "name": "packageId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PackageInstallationProperties": {
+      "description": "Package installation properties",
+      "in": "body",
+      "name": "packageInstallationProperties",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/packageModel"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

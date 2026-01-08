@@ -31,3 +31,13 @@ options:
     crate-name: "azure_resourcemanager_monitor"
     crate-version: "0.1.0"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
