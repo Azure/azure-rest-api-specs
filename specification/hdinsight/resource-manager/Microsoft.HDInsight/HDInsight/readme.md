@@ -38,7 +38,7 @@ tag: package-2025-01-preview
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
+    from: preview/2015-03-01-preview/locations.json
     where:
       - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
@@ -61,7 +61,7 @@ directive:
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-    from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+    from: stable/2018-06-01-preview/locations.json
     where:
       - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
@@ -85,10 +85,10 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: 
-      - Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-      - Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
-      - Microsoft.HDInsight/stable/2021-06-01/cluster.json
-      - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
+      - stable/2018-06-01-preview/cluster.json
+      - preview/2015-03-01-preview/cluster.json
+      - stable/2021-06-01/cluster.json
+      - preview/2023-04-15-preview/cluster.json
     where:
       - $.definitions.Role.properties.VMGroupName
 ```
@@ -115,16 +115,16 @@ These settings apply only when `--tag=package-2025-01-preview` is specified on t
 
 ```yaml $(tag) == 'package-2025-01-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2025-01-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2025-01-15-preview/virtualMachines.json
+  - preview/2025-01-15-preview/applications.json
+  - preview/2025-01-15-preview/cluster.json
+  - preview/2025-01-15-preview/configurations.json
+  - preview/2025-01-15-preview/extensions.json
+  - preview/2025-01-15-preview/locations.json
+  - preview/2025-01-15-preview/operations.json
+  - preview/2025-01-15-preview/privateEndpointConnections.json
+  - preview/2025-01-15-preview/privateLinkResources.json
+  - preview/2025-01-15-preview/scriptActions.json
+  - preview/2025-01-15-preview/virtualMachines.json
 
 suppressions:
   - code: EvenSegmentedPathForPutOperation
@@ -177,16 +177,16 @@ These settings apply only when `--tag=package-2024-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2024-08-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2024-08-01-preview/applications.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/cluster.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/configurations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/extensions.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/locations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/operations.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2024-08-01-preview/virtualMachines.json
+  - preview/2024-08-01-preview/applications.json
+  - preview/2024-08-01-preview/cluster.json
+  - preview/2024-08-01-preview/configurations.json
+  - preview/2024-08-01-preview/extensions.json
+  - preview/2024-08-01-preview/locations.json
+  - preview/2024-08-01-preview/operations.json
+  - preview/2024-08-01-preview/privateEndpointConnections.json
+  - preview/2024-08-01-preview/privateLinkResources.json
+  - preview/2024-08-01-preview/scriptActions.json
+  - preview/2024-08-01-preview/virtualMachines.json
 
 suppressions:
   - code: EvenSegmentedPathForPutOperation
@@ -239,16 +239,16 @@ These settings apply only when `--tag=package-2023-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-08-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2023-08-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2023-08-15-preview/virtualMachines.json
+  - preview/2023-08-15-preview/applications.json
+  - preview/2023-08-15-preview/cluster.json
+  - preview/2023-08-15-preview/configurations.json
+  - preview/2023-08-15-preview/extensions.json
+  - preview/2023-08-15-preview/locations.json
+  - preview/2023-08-15-preview/operations.json
+  - preview/2023-08-15-preview/privateEndpointConnections.json
+  - preview/2023-08-15-preview/privateLinkResources.json
+  - preview/2023-08-15-preview/scriptActions.json
+  - preview/2023-08-15-preview/virtualMachines.json
 ```
 
 ### Tag: package-2023-04-preview
@@ -257,16 +257,16 @@ These settings apply only when `--tag=package-2023-04-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-04-preview'
 input-file:
-  - Microsoft.HDInsight/preview/2023-04-15-preview/applications.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/cluster.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/configurations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/extensions.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/locations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/operations.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/privateEndpointConnections.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/privateLinkResources.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/scriptActions.json
-  - Microsoft.HDInsight/preview/2023-04-15-preview/virtualMachines.json
+  - preview/2023-04-15-preview/applications.json
+  - preview/2023-04-15-preview/cluster.json
+  - preview/2023-04-15-preview/configurations.json
+  - preview/2023-04-15-preview/extensions.json
+  - preview/2023-04-15-preview/locations.json
+  - preview/2023-04-15-preview/operations.json
+  - preview/2023-04-15-preview/privateEndpointConnections.json
+  - preview/2023-04-15-preview/privateLinkResources.json
+  - preview/2023-04-15-preview/scriptActions.json
+  - preview/2023-04-15-preview/virtualMachines.json
 ```
 
 ### Tag: package-2021-06
@@ -275,16 +275,16 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-- Microsoft.HDInsight/stable/2021-06-01/cluster.json
-- Microsoft.HDInsight/stable/2021-06-01/applications.json
-- Microsoft.HDInsight/stable/2021-06-01/locations.json
-- Microsoft.HDInsight/stable/2021-06-01/configurations.json
-- Microsoft.HDInsight/stable/2021-06-01/extensions.json
-- Microsoft.HDInsight/stable/2021-06-01/scriptActions.json
-- Microsoft.HDInsight/stable/2021-06-01/operations.json
-- Microsoft.HDInsight/stable/2021-06-01/virtualMachines.json
-- Microsoft.HDInsight/stable/2021-06-01/privateEndpointConnections.json
-- Microsoft.HDInsight/stable/2021-06-01/privateLinkResources.json
+- stable/2021-06-01/cluster.json
+- stable/2021-06-01/applications.json
+- stable/2021-06-01/locations.json
+- stable/2021-06-01/configurations.json
+- stable/2021-06-01/extensions.json
+- stable/2021-06-01/scriptActions.json
+- stable/2021-06-01/operations.json
+- stable/2021-06-01/virtualMachines.json
+- stable/2021-06-01/privateEndpointConnections.json
+- stable/2021-06-01/privateLinkResources.json
 ```
 
 ### Tag: package-2018-06-preview
@@ -293,14 +293,14 @@ These settings apply only when `--tag=package-2018-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
+- stable/2018-06-01-preview/cluster.json
+- stable/2018-06-01-preview/applications.json
+- stable/2018-06-01-preview/locations.json
+- stable/2018-06-01-preview/configurations.json
+- stable/2018-06-01-preview/extensions.json
+- stable/2018-06-01-preview/scriptActions.json
+- stable/2018-06-01-preview/operations.json
+- stable/2018-06-01-preview/virtualMachines.json
 ```
 
 ### Tag: package-2015-03-preview
@@ -309,14 +309,14 @@ These settings apply only when `--tag=package-2015-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-03-preview'
 input-file:
-- Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/configurations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
-- Microsoft.HDInsight/preview/2015-03-01-preview/virtualMachines.json
+- preview/2015-03-01-preview/cluster.json
+- preview/2015-03-01-preview/applications.json
+- preview/2015-03-01-preview/locations.json
+- preview/2015-03-01-preview/configurations.json
+- preview/2015-03-01-preview/extensions.json
+- preview/2015-03-01-preview/scriptActions.json
+- preview/2015-03-01-preview/operations.json
+- preview/2015-03-01-preview/virtualMachines.json
 ```
 
 ---
