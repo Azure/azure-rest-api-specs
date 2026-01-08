@@ -1367,7 +1367,7 @@ model GeoJsonGeometry {
    * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
-  type: GeoJsonGeometryObjectType;
+  type: GeoJsonObjectType;
 }
 
 /**
@@ -1603,7 +1603,7 @@ model RouteDirectionsGeometry {
    * Specifies the geometry type for the `GeoJSON` Geometry object. For more
    * information, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
-  type: GeoJsonGeometryObjectType;
+  type: GeoJsonObjectType;
 }
 
 /**
@@ -2059,7 +2059,7 @@ model RouteRangePointGeometry extends RouteRangeGeometry {
    * Specifies the geometry type for the `GeoJSON` Geometry object. Refer to [RFC
    * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonPoint;
+  type: GeoJsonObjectType.GeoJsonPoint;
 }
 
 /**
@@ -2074,7 +2074,7 @@ model RouteRangeGeometry {
    * Specifies the geometry type for the `GeoJSON` Geometry object. Refer to [RFC
    * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.
    */
-  type: GeoJsonGeometryObjectType;
+  type: GeoJsonObjectType;
 }
 
 /**
@@ -2444,7 +2444,7 @@ model GeoJsonMultiPoint extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonMultiPoint;
+  type: GeoJsonObjectType.GeoJsonMultiPoint;
 }
 
 /**
@@ -3255,7 +3255,7 @@ model GeoJsonPoint extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonPoint;
+  type: GeoJsonObjectType.GeoJsonPoint;
 }
 
 /**
@@ -3270,7 +3270,7 @@ model GeoJsonLineString extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonLineString;
+  type: GeoJsonObjectType.GeoJsonLineString;
 }
 
 /** GeoJson LineString data */
@@ -3293,7 +3293,7 @@ model GeoJsonMultiLineString extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonMultiLineString;
+  type: GeoJsonObjectType.GeoJsonMultiLineString;
 }
 
 /**
@@ -3308,7 +3308,7 @@ model GeoJsonPolygon extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonPolygon;
+  type: GeoJsonObjectType.GeoJsonPolygon;
 }
 
 /**
@@ -3323,7 +3323,7 @@ model GeoJsonMultiPolygon extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonMultiPolygon;
+  type: GeoJsonObjectType.GeoJsonMultiPolygon;
 }
 
 /** GeoJson MultiPolygon data */
@@ -3347,7 +3347,7 @@ model GeoJsonGeometryCollection extends GeoJsonGeometry {
    * types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon,
    * GeometryCollection, Feature and FeatureCollection.
    */
-  type: GeoJsonGeometryObjectType.GeoJsonGeometryCollection;
+  type: GeoJsonObjectType.GeoJsonGeometryCollection;
 }
 
 /**
