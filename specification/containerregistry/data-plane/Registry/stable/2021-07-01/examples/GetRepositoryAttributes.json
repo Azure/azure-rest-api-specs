@@ -1,25 +1,27 @@
 {
   "parameters": {
-    "url": "acrapi.azurecr.io",
     "name": "nanoserver",
-    "api-version": "2021-07-01"
+    "api-version": "2021-07-01",
+    "url": "acrapi.azurecr.io"
   },
   "responses": {
     "200": {
       "body": {
-        "registry": "acrapi.azurecr.io",
-        "imageName": "nanoserver",
-        "createdTime": "2018-09-06T06:17:20.9531248Z",
-        "lastUpdateTime": "2018-09-07T16:30:46.6583219Z",
-        "manifestCount": 2,
-        "tagCount": 2,
         "changeableAttributes": {
           "deleteEnabled": true,
-          "writeEnabled": true,
+          "listEnabled": true,
           "readEnabled": true,
-          "listEnabled": true
-        }
+          "writeEnabled": true
+        },
+        "createdTime": "2018-09-06T06:17:20.9531248Z",
+        "imageName": "nanoserver",
+        "lastUpdateTime": "2018-09-07T16:30:46.6583219Z",
+        "manifestCount": 2,
+        "registry": "acrapi.azurecr.io",
+        "tagCount": 2
       }
     }
-  }
+  },
+  "operationId": "ContainerRegistry_GetProperties",
+  "title": "Get details of repository"
 }
