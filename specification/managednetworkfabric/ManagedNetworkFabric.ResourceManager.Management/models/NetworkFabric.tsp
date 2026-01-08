@@ -51,6 +51,14 @@ model NetworkFabricProperties {
   @doc("Number of compute racks associated to Network Fabric.")
   @maxValue(8)
   @minValue(1)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "rackCount")
+  rackCountDeprecated?: int32;
+
+  @doc("Number of compute racks associated to Network Fabric.")
+  @maxValue(16)
+  @minValue(1)
+  @added(Versions.v2026_01_15_preview)
   rackCount?: int32;
 
   @doc("Number of servers.Possible values are from 1-16.")
