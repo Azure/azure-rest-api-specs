@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2022-11-30-preview",
+    "body": {
+      "details": {
+        "countryCode": "SE",
+        "phoneNumberType": "geographic",
+        "locality": "Stockholm",
+        "businessDetails": {
+          "name": "Contoso",
+          "address": "123 Fake Street",
+          "addressCountry": "US"
+        },
+        "contactDetails": {
+          "name": "Homer Simpson",
+          "email": "homersimpson@contoso,com",
+          "phoneNumber": "+15555551234"
+        }
+      }
+    },
+    "endpoint": "https://resourcename.communication.azure.com/",
+    "regulatoryPackageId": "1156fa32-81b1-4523-ba4d-613198ea6c26"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "regulatoryPackage": {
+          "details": {
+            "countryCode": "SE",
+            "phoneNumberType": "geographic",
+            "locality": "Stockholm",
+            "businessDetails": {
+              "name": "Contoso",
+              "address": "123 Fake Street",
+              "addressCountry": "US"
+            },
+            "contactDetails": {
+              "name": "Homer Simpson",
+              "email": "homersimpson@contoso,com",
+              "phoneNumber": "+15555551234"
+            }
+          },
+          "regulatoryPackageId": "1156fa32-81b1-4523-ba4d-613198ea6c26"
+        }
+      }
+    }
+  }
+}
