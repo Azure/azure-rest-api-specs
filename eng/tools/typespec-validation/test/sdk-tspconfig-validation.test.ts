@@ -14,7 +14,6 @@ import {
   TspConfigCsharpDpNamespaceSubRule,
   TspConfigCsharpMgmtEmitterOutputDirSubRule,
   TspConfigCsharpMgmtNamespaceSubRule,
-  TspConfigGoContainingModuleMatchPatternSubRule,
   TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpModuleMatchPatternSubRule,
