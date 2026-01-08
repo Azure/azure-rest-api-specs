@@ -10,16 +10,18 @@ import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
-  TspConfigGoContainingModuleMatchPatternSubRule,
+  TspConfigGoDpContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
+  TspConfigGoDpModuleMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
+  TspConfigGoMgmtContainingModuleMatchPatternSubRule,
   TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigGoMgmtGenerateFakesTrueSubRule,
   TspConfigGoMgmtGenerateSamplesTrueSubRule,
   TspConfigGoMgmtHeadAsBooleanTrueSubRule,
   TspConfigGoMgmtInjectSpansTrueSubRule,
+  TspConfigGoMgmtModuleMatchPatternSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
-  TspConfigGoModuleMatchPatternSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -292,7 +294,7 @@ const goManagementModuleTestCases = createEmitterOptionTestCases(
   "module",
   "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
   "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
-  [new TspConfigGoModuleMatchPatternSubRule()],
+  [new TspConfigGoMgmtModuleMatchPatternSubRule()],
   false,
 );
 
@@ -302,7 +304,7 @@ const goManagementContainingModuleTestCases = createEmitterOptionTestCases(
   "containing-module",
   "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute",
   "github.com/Azure/azure-sdk-for-java/sdk/compute/arm-compute",
-  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  [new TspConfigGoMgmtContainingModuleMatchPatternSubRule()],
   false,
 );
 
@@ -348,8 +350,7 @@ const goDpModuleTestCases = createEmitterOptionTestCases(
   "module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoModuleMatchPatternSubRule()],
-  false,
+  [new TspConfigGoDpModuleMatchPatternSubRule()],
 );
 
 const goDpContainingModuleTestCases = createEmitterOptionTestCases(
@@ -358,7 +359,7 @@ const goDpContainingModuleTestCases = createEmitterOptionTestCases(
   "containing-module",
   "github.com/Azure/azure-sdk-for-go/sdk/messaging/aaa",
   "github.com/Azure/azure-sdk-for-cpp/bbb",
-  [new TspConfigGoContainingModuleMatchPatternSubRule()],
+  [new TspConfigGoDpContainingModuleMatchPatternSubRule()],
   false,
 );
 
@@ -645,7 +646,49 @@ parameters:
     subRules: [
       new TspConfigJavaMgmtNamespaceFormatSubRule(),
       new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
+      new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
+      new TspConfigGoDpContainingModuleMatchPatternSubRule(),
     ],
+  },
+];
+
+const optionalRulesWithEmitterConfigTestCases: Case[] = [
+  {
+    description:
+      "Validate Go DP emitter-output-dir should fail when not defined (emitter configured with model)",
+    folder: "",
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoDpEmitterOutputDirMatchPatternSubRule()],
+  },
+  {
+    description:
+      "Validate Go Mgmt Module should fail when not defined (emitter configured with model)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoMgmtModuleMatchPatternSubRule()],
+  },
+  {
+    description:
+      "Validate Go Mgmt Containing Module should fail when not defined (emitter configured with model)",
+    folder: managementTspconfigFolder,
+    tspconfigContent: `
+options:
+  "@azure-tools/typespec-go":
+    model: "a"
+`,
+    success: false,
+    subRules: [new TspConfigGoMgmtContainingModuleMatchPatternSubRule()],
   },
 ];
 
@@ -690,7 +733,7 @@ options:
     folder: managementTspconfigFolder,
     subRules: [
       new TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule(),
-      new TspConfigGoModuleMatchPatternSubRule(),
+      new TspConfigGoDpModuleMatchPatternSubRule(),
     ],
     tspconfigContent: `
 options:
@@ -737,10 +780,6 @@ describe("tspconfig", function () {
     ...goManagementGenerateFakesTestCases,
     ...goManagementHeadAsBooleanTestCases,
     ...goManagementInjectSpansTestCases,
-    ...goDpModuleTestCases,
-    ...goDpContainingModuleTestCases,
-    ...goDpEmitterOutputDirTestCases,
-    ...goDpServiceDirTestCases,
     // java
     ...javaAzEmitterOutputDirTestCases,
     ...javaMgmtEmitterOutputDirTestCases,
@@ -760,6 +799,12 @@ describe("tspconfig", function () {
   const optionalTestCases = [
     // Test cases for optional rules when emitter is not configured
     ...optionalRulesWithoutEmitterConfigTestCases,
+    ...optionalRulesWithEmitterConfigTestCases,
+    // go data plane
+    ...goDpEmitterOutputDirTestCases,
+    ...goDpServiceDirTestCases,
+    ...goDpModuleTestCases,
+    ...goDpContainingModuleTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {

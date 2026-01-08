@@ -514,6 +514,18 @@ export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmi
 }
 
 // ----- Go data plane sub rules -----
+export class TspConfigGoDpModuleMatchPatternSubRule extends TspConfigGoModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigGoDpContainingModuleMatchPatternSubRule extends TspConfigGoContainingModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
 export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-go", "service-dir", new RegExp(/^(\{output-dir\}\/)?sdk\/.*$/));
@@ -538,6 +550,18 @@ export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigE
 }
 
 // ----- Go Mgmt plane sub rules -----
+export class TspConfigGoMgmtModuleMatchPatternSubRule extends TspConfigGoModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigGoMgmtContainingModuleMatchPatternSubRule extends TspConfigGoContainingModuleMatchPatternSubRule {
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
 export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
@@ -707,10 +731,8 @@ export const requiredRules = [
   new TspConfigGoMgmtGenerateFakesTrueSubRule(),
   new TspConfigGoMgmtHeadAsBooleanTrueSubRule(),
   new TspConfigGoMgmtInjectSpansTrueSubRule(),
-  new TspConfigGoDpServiceDirMatchPatternSubRule(),
-  new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
-  new TspConfigGoModuleMatchPatternSubRule(),
-  new TspConfigGoContainingModuleMatchPatternSubRule(),
+  new TspConfigGoMgmtModuleMatchPatternSubRule(),
+  new TspConfigGoMgmtContainingModuleMatchPatternSubRule(),
   new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
   new TspConfigPythonDpEmitterOutputDirSubRule(),
@@ -726,7 +748,12 @@ export const requiredRules = [
  * the rule is skipped and does not affect the validation result. When the emitter is configured,
  * validation failures will affect the overall validation result.
  */
-export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [];
+export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
+  new TspConfigGoDpServiceDirMatchPatternSubRule(),
+  new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
+  new TspConfigGoDpModuleMatchPatternSubRule(),
+  new TspConfigGoDpContainingModuleMatchPatternSubRule(),
+];
 
 export class SdkTspConfigValidationRule implements Rule {
   private requiredRules: TspconfigSubRuleBase[] = [];
