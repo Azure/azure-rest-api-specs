@@ -1,13 +1,6 @@
 import "@typespec/rest";
 import "./helpers.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
-
 namespace Microsoft.ContainerService;
 
 @doc("The Mesh Member data for a Fleet Member resource.")
