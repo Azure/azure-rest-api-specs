@@ -16,24 +16,22 @@ Set-StrictMode -Version 3
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 
 $checkAllPath = ((Get-ChildItem "specification" -Directory).Name -replace '^', 'specification/') -replace '$', '/'
-$checkedAll = $false
 
 if ($CheckAll) {
-  $changedFiles = $checkAllPath
-  $checkedAll = $true
-}
-else {
   $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
   $coreChangedFiles = Get-ChangedCoreFiles $changedFiles
 
   if ($coreChangedFiles -and !$IgnoreCoreFiles) {
     Write-Verbose "Found changes to core eng or root files so checking all specs."
     $changedFiles = $checkAllPath
-    $checkedAll = $true
   }
   else {
     $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
   }
+}
+else {
+  $changedFiles = @(Get-ChangedFiles -baseCommitish $BaseCommitish -headCommitish $HeadCommitish -diffFilter "")
+  $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
 }
 
 # Extract specification/{org} folders from changed files
@@ -54,14 +52,8 @@ foreach ($orgFolder in $orgFolders) {
   Write-Host "  $orgFolder"
 }
 
-# Skip folder-structure validation when checking all specs (TypeSpec Validation - All mode)
-if ($checkedAll) {
-  Write-Host "Skipping folder structure validation in CheckAll mode"
-  exit 0
-}
-
 $foldersWithFailures = @()
-$context = @{ checkingAllSpecs = $checkedAll } | ConvertTo-Json -Compress
+$context = @{ checkingAllSpecs = $CheckAll } | ConvertTo-Json -Compress
 
 if ($orgFolders) {
   foreach ($orgFolder in $orgFolders) {
