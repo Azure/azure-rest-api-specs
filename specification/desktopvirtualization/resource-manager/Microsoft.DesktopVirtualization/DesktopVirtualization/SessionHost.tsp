@@ -105,6 +105,12 @@ interface SessionHosts {
   >;
 
   /**
+   * create a sessionHost.
+   */
+  @added(Versions.v2026_01_01_preview)
+  create is ArmResourceCreateOrReplaceSync<SessionHost>;
+
+  /**
    * Retry provisioning on a SessionHost.
    */
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
@@ -113,7 +119,7 @@ interface SessionHosts {
    * Operation to list the scoped RegistrationTokens associated with the SessionHost.
    */
   @added(Versions.v2026_01_01_preview)
-  listSingleRegistrationTokens is ArmResourceActionSync<
+  listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
     SessionHost,
     ScopedRegistrationTokenProperties,
     RegistrationTokenList
