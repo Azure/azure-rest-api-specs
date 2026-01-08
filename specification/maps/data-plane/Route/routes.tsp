@@ -643,7 +643,7 @@ interface Route {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/operations/{id}/result")
   @get
-  getOperationResult is MapsRouteOperation<
+  getRouteOperationsResult is MapsRouteOperation<
     {
       ...AcceptLanguageHeader;
       ...OperationIdPathParameter;
@@ -757,7 +757,7 @@ interface Route {
   @route("/route/matrix:async")
   @post
   @pollingOperation(Route.getRouteOperationsStatus)
-  @finalOperation(Route.getOperationResult)
+  @finalOperation(Route.getRouteOperationsResult)
   postRouteMatrixAsync is Foundations.LongRunningOperation<
     {
       ...ContentTypeHeader<"application/geo+json">;
