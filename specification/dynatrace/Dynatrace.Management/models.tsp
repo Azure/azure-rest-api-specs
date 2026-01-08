@@ -1337,7 +1337,7 @@ model ActivateSaaSParameterRequest {
   /**
    * Admin user details
    */
-  AdminUserDetails: AdminUserDetails;
+  adminUserDetails: AdminUserDetails;
 }
 
 /**
@@ -1420,7 +1420,6 @@ model SaaSData {
 /**
  * Marketplace SaaS resource details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
 @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
 model SaaSResourceDetailsResponse
