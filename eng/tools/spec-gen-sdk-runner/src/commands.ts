@@ -50,23 +50,30 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
     statusCode = 1;
   }
-
-  if (statusCode === 0) {
-    // Set the pipeline variables for the SDK pull request
-    let packageName: string =
-      executionReport.packages[0]?.packageName ??
-      commandInput.tspConfigPath ??
-      commandInput.readmePath ??
-      "missing-package-name";
-    packageName = packageName.replace("/", "-");
-    const installationInstructions = executionReport.packages[0]?.installationInstructions;
-    setPipelineVariables(
-      executionReport.stagedArtifactsFolder,
-      false,
-      packageName,
-      installationInstructions,
-    );
+  
+  // Always set the pipeline variables for the SDK pull request even if
+  // there are failures in the generation process since we allow the PR creation for such cases.
+  let packageName = "";
+  let installationInstructions = "";
+  if (executionReport){
+    packageName = executionReport.packages[0]?.packageName ??
+                  commandInput.tspConfigPath ??
+                  commandInput.readmePath ??
+                  "missing-package-name";
+    installationInstructions = executionReport.packages[0]?.installationInstructions;
+  } else {
+    packageName = commandInput.tspConfigPath ??
+                  commandInput.readmePath ??
+                  "missing-package-name";
   }
+
+  packageName = packageName.replace("/", "-");  
+  setPipelineVariables(
+    executionReport?.stagedArtifactsFolder ?? "",
+    false,
+    packageName,
+    installationInstructions,
+  );
 
   logMessage("ending group logging", LogLevel.EndGroup);
   logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);
