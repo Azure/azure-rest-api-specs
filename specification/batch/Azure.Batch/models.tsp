@@ -3942,7 +3942,7 @@ model BatchNode {
 
   @doc("Information about the Compute Node agent version and the time the Compute Node upgraded to a new version.")
   @visibility(Lifecycle.Read)
-  nodeAgentInfo: BatchNodeAgentInfo;
+  nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
   @visibility(Lifecycle.Read)
