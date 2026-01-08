@@ -704,19 +704,25 @@ export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOp
 }
 
 // ----- CSharp sub rules -----
-export class TspConfigHttpClientCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+export class TspConfigCsharpDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super("@azure-typespec/http-client-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
   }
-}
-
-export class TspConfigHttpClientCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
-  constructor() {
-    super("@azure-typespec/http-client-csharp", "namespace", new RegExp(/^Azure\./));
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
   }
 }
 
-export class TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+export class TspConfigCsharpDpNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-typespec/http-client-csharp", "namespace", new RegExp(/^Azure\./));
+  }
+  protected skip(_: any, folder: string) {
+    return skipForManagementPlane(folder);
+  }
+}
+
+export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-typespec/http-client-csharp-mgmt",
@@ -729,7 +735,7 @@ export class TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule extends Tspcon
   }
 }
 
-export class TspConfigHttpClientCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super(
       "@azure-typespec/http-client-csharp-mgmt",
@@ -785,10 +791,10 @@ export const requiredRules = [
  * validation failures will affect the overall validation result.
  */
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
-  new TspConfigHttpClientCsharpAzNamespaceSubRule(),
-  new TspConfigHttpClientCsharpAzEmitterOutputDirSubRule(),
-  new TspConfigHttpClientCsharpMgmtNamespaceSubRule(),
-  new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule(),
+  new TspConfigCsharpDpEmitterOutputDirSubRule(),
+  new TspConfigCsharpDpNamespaceSubRule(),
+  new TspConfigCsharpMgmtNamespaceSubRule(),
+  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {

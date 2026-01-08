@@ -10,6 +10,10 @@ import { stringify } from "yaml";
 import {
   SdkTspConfigValidationRule,
   TspConfigCommonAzServiceDirMatchPatternSubRule,
+  TspConfigCsharpDpEmitterOutputDirSubRule,
+  TspConfigCsharpDpNamespaceSubRule,
+  TspConfigCsharpMgmtEmitterOutputDirSubRule,
+  TspConfigCsharpMgmtNamespaceSubRule,
   TspConfigGoContainingModuleMatchPatternSubRule,
   TspConfigGoDpEmitterOutputDirMatchPatternSubRule,
   TspConfigGoDpServiceDirMatchPatternSubRule,
@@ -20,8 +24,6 @@ import {
   TspConfigGoMgmtInjectSpansTrueSubRule,
   TspConfigGoMgmtServiceDirMatchPatternSubRule,
   TspConfigGoModuleMatchPatternSubRule,
-  TspConfigHttpClientCsharpAzNamespaceSubRule,
-  TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule,
   TspConfigJavaAzEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule,
   TspConfigJavaMgmtNamespaceFormatSubRule,
@@ -573,6 +575,42 @@ const pythonDpEmitterOutputTestCases = createEmitterOptionTestCases(
   [new TspConfigPythonDpEmitterOutputDirSubRule()],
 );
 
+const csharpDpNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
+  "",
+  "namespace",
+  "Azure.AI.Vision.Face",
+  "AI.Vision.Face",
+  [new TspConfigCsharpDpNamespaceSubRule()],
+);
+
+const csharpDpEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp",
+  "",
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/Azure.AI.Vision.Face",
+  "{output-dir}/{service-dir}/AI.Vision.Face",
+  [new TspConfigCsharpDpEmitterOutputDirSubRule()],
+);
+
+const csharpMgmtNamespaceTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp-mgmt",
+  managementTspconfigFolder,
+  "namespace",
+  "Azure.ResourceManager.compute",
+  "Azure.compute", // Invalid: missing "resourcemanager"
+  [new TspConfigCsharpMgmtNamespaceSubRule()],
+);
+
+const csharpMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
+  "@azure-typespec/http-client-csharp-mgmt",
+  managementTspconfigFolder,
+  "emitter-output-dir",
+  "{output-dir}/{service-dir}/Azure.ResourceManager.compute",
+  "{output-dir}/{service-dir}/ResourceManager.compute", // Invalid: missing "Azure."
+  [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
+);
+
 // Test cases for emitter-output-dir with namespace variable resolution
 const emitterOutputDirWithNamespaceVariableTestCases: Case[] = [
   {
@@ -620,7 +658,7 @@ options:
       namespace: "{package-name}"
   `,
     success: true,
-    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+    subRules: [new TspConfigCsharpDpNamespaceSubRule()],
   },
   {
     description: "Validate http-client-csharp namespace with invalid {package-name} variable value",
@@ -632,7 +670,7 @@ options:
     namespace: "{package-name}"
 `,
     success: false,
-    subRules: [new TspConfigHttpClientCsharpAzNamespaceSubRule()],
+    subRules: [new TspConfigCsharpDpNamespaceSubRule()],
   },
   {
     description: "Validate http-client-csharp-mgmt emitter-output-dir with {package-name} variable",
@@ -644,7 +682,7 @@ options:
       emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
   `,
     success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
   {
     description:
@@ -658,7 +696,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 `,
     success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
   {
     description:
@@ -672,7 +710,7 @@ options:
       emitter-output-dir: "{output-dir}/sdk/dellstorage/{namespace}"
   `,
     success: true,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
   {
     description:
@@ -685,7 +723,7 @@ options:
     emitter-output-dir: "{output-dir}/sdk/dellstorage/Dell.Storage"
 `,
     success: false,
-    subRules: [new TspConfigHttpClientCsharpMgmtEmitterOutputDirSubRule()],
+    subRules: [new TspConfigCsharpMgmtEmitterOutputDirSubRule()],
   },
 ];
 
@@ -826,6 +864,10 @@ describe("tspconfig", function () {
   const optionalTestCases = [
     // Test cases for optional rules when emitter is not configured
     ...optionalRulesWithoutEmitterConfigTestCases,
+    ...csharpDpNamespaceTestCases,
+    ...csharpMgmtNamespaceTestCases,
+    ...csharpDpEmitterOutputDirTestCases,
+    ...csharpMgmtEmitterOutputDirTestCases,
   ];
 
   it.each([...requiredTestCases, ...optionalTestCases])(`$description`, async (c: Case) => {
