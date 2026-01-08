@@ -16,7 +16,8 @@ namespace Microsoft.BillingBenefits;
 /**
  * Free Services resource definition
  */
-model FreeServices is Azure.ResourceManager.TrackedResource<FreeServicesProperties> {
+model FreeServices
+  is Azure.ResourceManager.TrackedResource<FreeServicesProperties> {
   ...ResourceNameParameter<
     Resource = FreeServices,
     KeyName = "freeServiceName",
@@ -127,5 +128,9 @@ interface FreeServicesOperations {
 
 @@doc(FreeServices.name, "Name of the free service");
 @@doc(FreeServices.properties, "Free services properties");
-@@doc(FreeServicesOperations.create::parameters.resource, "Free services create request");
-@@doc(FreeServicesOperations.update::parameters.properties, "Free services patch request");
+@@doc(FreeServicesOperations.create::parameters.resource,
+  "Free services create request"
+);
+@@doc(FreeServicesOperations.update::parameters.properties,
+  "Free services patch request"
+);
