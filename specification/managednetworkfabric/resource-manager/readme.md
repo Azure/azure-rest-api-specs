@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2026-01-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-01-15-preview'
 input-file:
-  - Microsoft.ManagedNetworkFabric/stable/2026-01-15-preview/managednetworkfabric.json
+  - Microsoft.ManagedNetworkFabric/preview/2026-01-15-preview/managednetworkfabric.json
 suppressions:
   - code: AvoidAnonymousTypes
     reason: This error is caused by typespec inbuilt managed identity model.
