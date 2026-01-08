@@ -69,7 +69,7 @@ using Microsoft.Marketplace;
   "stopSellSubscriptions"
 );
 @@clientLocation(PrivateStores.listSubscriptionsContext, "PrivateStore");
-@@clientLocation(PrivateStores.queryUserRules, "");
+@@clientLocation(PrivateStores.queryUserRules, Microsoft.Marketplace);
 @@clientName(PrivateStores.queryUserRules::parameters.body, "payload");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -80,9 +80,9 @@ using Microsoft.Marketplace;
 @@clientName(Collections.createOrUpdate::parameters.resource, "payload");
 @@clientLocation(Collections.delete, "PrivateStoreCollection");
 @@clientLocation(Collections.list, "PrivateStoreCollection");
-@@clientLocation(Collections.setCollectionRules, "");
+@@clientLocation(Collections.setCollectionRules, Microsoft.Marketplace);
 @@clientName(Collections.setCollectionRules::parameters.body, "payload");
-@@clientLocation(Collections.queryRules, "");
+@@clientLocation(Collections.queryRules, Microsoft.Marketplace);
 @@clientLocation(Collections.transferOffers, "PrivateStoreCollection");
 @@clientName(Collections.transferOffers::parameters.body, "payload");
 @@clientLocation(Collections.approveAllItems, "PrivateStoreCollection");

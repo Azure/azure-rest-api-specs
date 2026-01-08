@@ -29,8 +29,6 @@ interface PrivateStores {
   /**
    * Get information about the private store
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_Get")
   get is ArmResourceRead<
     PrivateStore,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -55,8 +53,6 @@ interface PrivateStores {
   /**
    * Deletes the private store. All that is not saved will be lost.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_Delete")
   delete is ArmResourceDeleteSync<
     PrivateStore,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -66,8 +62,6 @@ interface PrivateStores {
   /**
    * Gets the list of available private stores.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_List")
   list is ArmResourceListByParent<
     PrivateStore,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -86,8 +80,6 @@ interface PrivateStores {
   /**
    * Query whether exists any offer in the collections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_AnyExistingOffersInTheCollections")
   anyExistingOffersInTheCollections is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -99,8 +91,6 @@ interface PrivateStores {
   /**
    * List of offers, regardless the collections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_QueryOffers")
   queryOffers is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -112,8 +102,6 @@ interface PrivateStores {
   /**
    * List of user's approved offers for the provided offers and subscriptions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_QueryUserOffers")
   queryUserOffers is ArmResourceActionSync<
     PrivateStore,
     QueryUserOffersProperties,
@@ -126,8 +114,6 @@ interface PrivateStores {
   /**
    * Tenant billing accounts names
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_BillingAccounts")
   billingAccounts is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -139,8 +125,6 @@ interface PrivateStores {
   /**
    * For a given subscriptions list, the API will return a map of collections and the related subscriptions from the supplied list.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_CollectionsToSubscriptionsMapping")
   collectionsToSubscriptionsMapping is ArmResourceActionSync<
     PrivateStore,
     CollectionsToSubscriptionsMappingPayload,
@@ -153,8 +137,6 @@ interface PrivateStores {
   /**
    * Get map of plans and related approved subscriptions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_QueryApprovedPlans")
   queryApprovedPlans is ArmResourceActionSync<
     PrivateStore,
     QueryApprovedPlansPayload,
@@ -167,8 +149,6 @@ interface PrivateStores {
   /**
    * Perform an action on bulk collections
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_BulkCollectionsAction")
   bulkCollectionsAction is ArmResourceActionSync<
     PrivateStore,
     BulkCollectionsPayload,
@@ -181,8 +161,6 @@ interface PrivateStores {
   /**
    * Get private store notifications state
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_QueryNotificationsState")
   queryNotificationsState is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -194,8 +172,6 @@ interface PrivateStores {
   /**
    * Acknowledge notification for offer
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_AcknowledgeOfferNotification")
   @action("acknowledgeNotification")
   acknowledgeOfferNotification is ArmResourceActionSync<
     PrivateStore,
@@ -217,8 +193,6 @@ interface PrivateStores {
   /**
    * Fetch all subscriptions in tenant, only for marketplace admin
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_FetchAllSubscriptionsInTenant")
   fetchAllSubscriptionsInTenant is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -238,8 +212,6 @@ interface PrivateStores {
   /**
    * List new plans notifications
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_ListNewPlansNotifications")
   listNewPlansNotifications is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -251,8 +223,6 @@ interface PrivateStores {
   /**
    * List stop sell notifications for both stop sell offers and stop sell plans
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_ListStopSellOffersPlansNotifications")
   listStopSellOffersPlansNotifications is ArmResourceActionSync<
     PrivateStore,
     StopSellSubscriptions,
@@ -265,8 +235,6 @@ interface PrivateStores {
   /**
    * List all the subscriptions in the private store context
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_ListSubscriptionsContext")
   listSubscriptionsContext is ArmResourceActionSync<
     PrivateStore,
     void,
@@ -278,8 +246,6 @@ interface PrivateStores {
   /**
    * All rules approved in the private store that are relevant for user subscriptions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("QueryUserRules")
   queryUserRules is ArmResourceActionSync<
     PrivateStore,
     QueryUserRulesProperties,

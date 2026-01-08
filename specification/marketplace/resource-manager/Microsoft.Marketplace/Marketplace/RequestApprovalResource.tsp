@@ -31,8 +31,6 @@ interface RequestApprovalResources {
   /**
    * Get open request approval details
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_GetRequestApproval")
   getRequestApproval is ArmResourceRead<
     RequestApprovalResource,
     Error = ErrorResponse
@@ -53,8 +51,6 @@ interface RequestApprovalResources {
   /**
    * Get all open approval requests of current user
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_GetApprovalRequestsList")
   getApprovalRequestsList is ArmResourceListByParent<
     RequestApprovalResource,
     Response = ArmResponse<RequestApprovalsList>,
@@ -64,8 +60,6 @@ interface RequestApprovalResources {
   /**
    * Get request statuses foreach plan, this api is used as a complex GET action.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_QueryRequestApproval")
   @action("query")
   queryRequestApproval is ArmResourceActionSync<
     RequestApprovalResource,
@@ -78,8 +72,6 @@ interface RequestApprovalResources {
   /**
    * Withdraw a user request approval on specific plan
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateStore_WithdrawPlan")
   withdrawPlan is ArmResourceActionSync<
     RequestApprovalResource,
     WithdrawProperties,
