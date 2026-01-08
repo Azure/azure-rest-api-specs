@@ -1,4 +1,4 @@
-name: TypeSpec Validation
+name: Spec Validation
 
 on:
   pull_request:
@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  typespec-validation:
-    name: TypeSpec Validation
+  spec-validation:
+    name: Spec Validation
     runs-on: ubuntu-24.04
 
     steps:
@@ -36,4 +36,5 @@ jobs:
           $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
 
           ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
+          ./eng/scripts/Folder-Structure-Validation.ps1 -GitClean -Verbose -IgnoreCoreFiles:$ignoreCoreFiles
         shell: pwsh
