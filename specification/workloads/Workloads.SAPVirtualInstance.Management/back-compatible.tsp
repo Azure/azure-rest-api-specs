@@ -17,23 +17,10 @@ using Microsoft.Workloads;
   "SapApplicationServerInstances",
   "autorest"
 );
-@@clientName(SAPVirtualInstances.getSizingRecommendations,
-  "InvokeSizingRecommendations",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getSapSupportedSku,
-  "InvokeSapSupportedSku",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getDiskConfigurations,
-  "InvokeDiskConfigurations",
-  "autorest"
-);
-@@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
-  "InvokeAvailabilityZoneDetails",
-  "autorest"
-);
-
+@@clientName(SAPVirtualInstances.invokeSizingRecommendations, "getSizingRecommendations", "!autorest");
+@@clientName(SAPVirtualInstances.invokeSapSupportedSku, "getSapSupportedSku", "!autorest");
+@@clientName(SAPVirtualInstances.invokeDiskConfigurations, "getDiskConfigurations", "!autorest");
+@@clientName(SAPVirtualInstances.invokeAvailabilityZoneDetails, "getAvailabilityZoneDetails", "!autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
   "autorest"

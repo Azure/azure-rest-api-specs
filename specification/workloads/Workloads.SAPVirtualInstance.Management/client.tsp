@@ -450,19 +450,19 @@ using Microsoft.Workloads;
 );
 @@clientName(OSProfile.osConfiguration, "OSConfiguration", "csharp");
 @@clientName(VirtualMachineConfiguration.osProfile, "OSProfile", "csharp");
-@@clientName(SAPVirtualInstances.getSizingRecommendations,
+@@clientName(SAPVirtualInstances.invokeSizingRecommendations,
   "getSizingRecommendationsSapVirtualInstance",
   "csharp"
 );
-@@clientName(SAPVirtualInstances.getSapSupportedSku,
+@@clientName(SAPVirtualInstances.invokeSapSupportedSku,
   "getSapSupportedSkuSapVirtualInstance",
   "csharp"
 );
-@@clientName(SAPVirtualInstances.getDiskConfigurations,
+@@clientName(SAPVirtualInstances.invokeDiskConfigurations,
   "getDiskConfigurationsSapVirtualInstance",
   "csharp"
 );
-@@clientName(SAPVirtualInstances.getAvailabilityZoneDetails,
+@@clientName(SAPVirtualInstances.invokeAvailabilityZoneDetails,
   "getAvailabilityZoneDetailsSapVirtualInstance",
   "csharp"
 );

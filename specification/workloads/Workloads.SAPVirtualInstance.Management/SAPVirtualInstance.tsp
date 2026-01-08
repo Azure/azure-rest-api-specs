@@ -77,7 +77,7 @@ interface SAPVirtualInstances {
   /**
    * Gets the sizing recommendations.
    */
-  getSizingRecommendations is ArmResourceActionSync<
+  invokeSizingRecommendations is ArmResourceActionSync<
     SubscriptionLocationResource,
     SAPSizingRecommendationRequest,
     SAPSizingRecommendationResult,
@@ -95,7 +95,7 @@ interface SAPVirtualInstances {
   /**
    * Get a list of SAP supported SKUs for ASCS, Application and Database tier.
    */
-  getSapSupportedSku is ArmResourceActionSync<
+  invokeSapSupportedSku is ArmResourceActionSync<
     SubscriptionLocationResource,
     SAPSupportedSkusRequest,
     SAPSupportedResourceSkusResult,
@@ -113,7 +113,7 @@ interface SAPVirtualInstances {
   /**
    * Get the SAP Disk Configuration Layout prod/non-prod SAP System.
    */
-  getDiskConfigurations is ArmResourceActionSync<
+  invokeDiskConfigurations is ArmResourceActionSync<
     SubscriptionLocationResource,
     SAPDiskConfigurationsRequest,
     SAPDiskConfigurationsResult,
@@ -131,7 +131,7 @@ interface SAPVirtualInstances {
   /**
    * Get the recommended SAP Availability Zone Pair Details for your region.
    */
-  getAvailabilityZoneDetails is ArmResourceActionSync<
+  invokeAvailabilityZoneDetails is ArmResourceActionSync<
     SubscriptionLocationResource,
     SAPAvailabilityZoneDetailsRequest,
     SAPAvailabilityZoneDetailsResult,
