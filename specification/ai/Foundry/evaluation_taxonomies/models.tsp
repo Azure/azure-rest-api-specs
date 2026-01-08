@@ -77,15 +77,6 @@ model RiskDefinitionTaxonomyInput extends EvaluationTaxonomyInput {
 
   @doc("Natural language definition of the risk.")
   riskDefinition?: string;
-
-  @doc("Clarifications to guide taxonomy generation.")
-  clarifications?: string[];
-
-  @doc("Scope of the risk definition.")
-  scope?: string;
-
-  @doc("Example prompts with inScope indicators to guide taxonomy generation.")
-  riskExamples?: RiskExample[];
 }
 
 @added(Versions.v2025_11_15_preview)
