@@ -12,6 +12,7 @@ union ToolType {
   string,
   function: "function",
   mcp: "mcp",
+  foundry_agent: "foundry_agent",
 }
 
 /**
@@ -106,4 +107,34 @@ union MCPApprovalType {
 
   /** Approval is always required. */
   Always: "always",
+}
+
+/**
+ * The available set of Foundry agent context types.
+ */
+union FoundryAgentContextType {
+  string,
+
+  /** Only the current user input is sent, no context maintained. */
+  no_context: "no_context",
+
+  /** Agent maintains its own context (thread), only current input sent per call. */
+  agent_context: "agent_context",
+}
+
+/**
+ * The definition of a Foundry agent tool as used by the voicelive endpoint.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
+model FoundryAgentTool extends Tool {
+  type: ToolType.foundry_agent;
+  agent_name: string;
+  agent_version?: string;
+  project_name: string;
+  client_id?: string;
+  description?: string;
+  foundry_resource_override?: string;
+  agent_context_type?: FoundryAgentContextType = FoundryAgentContextType.agent_context;
+  return_agent_response_directly?: boolean = true;
 }

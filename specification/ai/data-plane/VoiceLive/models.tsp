@@ -1366,3 +1366,88 @@ model ServerEventResponseMcpCallFailed extends ServerEvent {
   /** The index of the output associated with the event. */
   output_index: int32;
 }
+
+/** Represents a delta update of the arguments for a Foundry agent call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseFoundryAgentCallArgumentsDelta extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_foundry_agent_call_arguments_delta;
+
+  /** The delta of the arguments. */
+  delta: string;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The ID of the response associated with the event. */
+  response_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}
+
+/** Indicates the completion of the arguments for a Foundry agent call. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseFoundryAgentCallArgumentsDone extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_foundry_agent_call_arguments_done;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The ID of the response associated with the event. */
+  response_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+
+  /** The full arguments for the agent call. */
+  arguments?: string;
+}
+
+/** Indicates the Foundry agent call is in progress. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseFoundryAgentCallInProgress extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_foundry_agent_call_in_progress;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+
+  /** The ID of the agent response, if any. */
+  agent_response_id?: string;
+}
+
+/** Indicates the Foundry agent call has completed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseFoundryAgentCallCompleted extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_foundry_agent_call_completed;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}
+
+/** Indicates the Foundry agent call has failed. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
+model ServerEventResponseFoundryAgentCallFailed extends ServerEvent {
+  /** @inheritdoc */
+  type: ServerEventType.response_foundry_agent_call_failed;
+
+  /** The ID of the item associated with the event. */
+  item_id: string;
+
+  /** The index of the output associated with the event. */
+  output_index: int32;
+}

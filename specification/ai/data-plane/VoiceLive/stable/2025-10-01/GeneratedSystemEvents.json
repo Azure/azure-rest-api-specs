@@ -1364,6 +1364,93 @@
         "error"
       ]
     },
+    "FoundryAgentContextType": {
+      "type": "string",
+      "description": "The available set of Foundry agent context types.",
+      "enum": [
+        "no_context",
+        "agent_context"
+      ],
+      "x-ms-enum": {
+        "name": "FoundryAgentContextType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "no_context",
+            "value": "no_context",
+            "description": "Only the current user input is sent, no context maintained."
+          },
+          {
+            "name": "agent_context",
+            "value": "agent_context",
+            "description": "Agent maintains its own context (thread), only current input sent per call."
+          }
+        ]
+      }
+    },
+    "FoundryAgentTool": {
+      "type": "object",
+      "description": "The definition of a Foundry agent tool as used by the voicelive endpoint.",
+      "properties": {
+        "agent_name": {
+          "type": "string"
+        },
+        "agent_version": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "foundry_resource_override": {
+          "type": "string"
+        },
+        "agent_context_type": {
+          "type": "string",
+          "description": "The available set of Foundry agent context types.",
+          "default": "agent_context",
+          "enum": [
+            "no_context",
+            "agent_context"
+          ],
+          "x-ms-enum": {
+            "name": "FoundryAgentContextType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "no_context",
+                "value": "no_context",
+                "description": "Only the current user input is sent, no context maintained."
+              },
+              {
+                "name": "agent_context",
+                "value": "agent_context",
+                "description": "Agent maintains its own context (thread), only current input sent per call."
+              }
+            ]
+          }
+        },
+        "return_agent_response_directly": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "agent_name",
+        "project_name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "foundry_agent"
+    },
     "FunctionCallItem": {
       "type": "object",
       "description": "A function call item within a conversation.",
@@ -1604,7 +1691,8 @@
         "mcp_list_tools",
         "mcp_call",
         "mcp_approval_request",
-        "mcp_approval_response"
+        "mcp_approval_response",
+        "foundry_agent_call"
       ],
       "x-ms-enum": {
         "name": "ItemType",
@@ -1637,6 +1725,10 @@
           {
             "name": "mcp_approval_response",
             "value": "mcp_approval_response"
+          },
+          {
+            "name": "foundry_agent_call",
+            "value": "foundry_agent_call"
           }
         ]
       }
@@ -2616,6 +2708,46 @@
         }
       ],
       "x-ms-discriminator-value": "failed"
+    },
+    "ResponseFoundryAgentCallItem": {
+      "type": "object",
+      "description": "A response item that represents a call to a Foundry agent.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Foundry agent."
+        },
+        "call_id": {
+          "type": "string",
+          "description": "The ID of the call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments for the agent call."
+        },
+        "agent_response_id": {
+          "type": "string",
+          "description": "The ID of the agent response, if any."
+        },
+        "output": {
+          "type": "string",
+          "description": "The output of the agent call."
+        },
+        "error": {
+          "description": "The error, if any, from the agent call."
+        }
+      },
+      "required": [
+        "name",
+        "call_id",
+        "arguments"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseItem"
+        }
+      ],
+      "x-ms-discriminator-value": "foundry_agent_call"
     },
     "ResponseFunctionCallItem": {
       "type": "object",
@@ -4023,6 +4155,154 @@
       ],
       "x-ms-discriminator-value": "response.done"
     },
+    "ServerEventResponseFoundryAgentCallArgumentsDelta": {
+      "type": "object",
+      "description": "Represents a delta update of the arguments for a Foundry agent call.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "The delta of the arguments."
+        },
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "delta",
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call_arguments.delta"
+    },
+    "ServerEventResponseFoundryAgentCallArgumentsDone": {
+      "type": "object",
+      "description": "Indicates the completion of the arguments for a Foundry agent call.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "response_id": {
+          "type": "string",
+          "description": "The ID of the response associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The full arguments for the agent call."
+        }
+      },
+      "required": [
+        "item_id",
+        "response_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call_arguments.done"
+    },
+    "ServerEventResponseFoundryAgentCallCompleted": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call has completed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.completed"
+    },
+    "ServerEventResponseFoundryAgentCallFailed": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call has failed.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.failed"
+    },
+    "ServerEventResponseFoundryAgentCallInProgress": {
+      "type": "object",
+      "description": "Indicates the Foundry agent call is in progress.",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "description": "The ID of the item associated with the event."
+        },
+        "output_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the output associated with the event."
+        },
+        "agent_response_id": {
+          "type": "string",
+          "description": "The ID of the agent response, if any."
+        }
+      },
+      "required": [
+        "item_id",
+        "output_index"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "response.foundry_agent_call.in_progress"
+    },
     "ServerEventResponseFunctionCallArgumentsDelta": {
       "type": "object",
       "description": "Returned when the model-generated function call arguments are updated.",
@@ -4497,7 +4777,12 @@
         "mcp_approval_response",
         "response.mcp_call.in_progress",
         "response.mcp_call.completed",
-        "response.mcp_call.failed"
+        "response.mcp_call.failed",
+        "response.foundry_agent_call_arguments.delta",
+        "response.foundry_agent_call_arguments.done",
+        "response.foundry_agent_call.in_progress",
+        "response.foundry_agent_call.completed",
+        "response.foundry_agent_call.failed"
       ],
       "x-ms-enum": {
         "name": "ServerEventType",
@@ -4682,6 +4967,26 @@
           {
             "name": "response_mcp_call_failed",
             "value": "response.mcp_call.failed"
+          },
+          {
+            "name": "response_foundry_agent_call_arguments_delta",
+            "value": "response.foundry_agent_call_arguments.delta"
+          },
+          {
+            "name": "response_foundry_agent_call_arguments_done",
+            "value": "response.foundry_agent_call_arguments.done"
+          },
+          {
+            "name": "response_foundry_agent_call_in_progress",
+            "value": "response.foundry_agent_call.in_progress"
+          },
+          {
+            "name": "response_foundry_agent_call_completed",
+            "value": "response.foundry_agent_call.completed"
+          },
+          {
+            "name": "response_foundry_agent_call_failed",
+            "value": "response.foundry_agent_call.failed"
           }
         ]
       }
@@ -4857,7 +5162,8 @@
       "description": "The supported tool type discriminators for voicelive tools.\nCurrently, only 'function' tools are supported.",
       "enum": [
         "function",
-        "mcp"
+        "mcp",
+        "foundry_agent"
       ],
       "x-ms-enum": {
         "name": "ToolType",
@@ -4870,6 +5176,10 @@
           {
             "name": "mcp",
             "value": "mcp"
+          },
+          {
+            "name": "foundry_agent",
+            "value": "foundry_agent"
           }
         ]
       }

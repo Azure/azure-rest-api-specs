@@ -72,4 +72,9 @@ union ServerEventType {
   response_mcp_call_in_progress: "response.mcp_call.in_progress",
   response_mcp_call_completed: "response.mcp_call.completed",
   response_mcp_call_failed: "response.mcp_call.failed",
+  response_foundry_agent_call_arguments_delta: "response.foundry_agent_call_arguments.delta",
+  response_foundry_agent_call_arguments_done: "response.foundry_agent_call_arguments.done",
+  response_foundry_agent_call_in_progress: "response.foundry_agent_call.in_progress",
+  response_foundry_agent_call_completed: "response.foundry_agent_call.completed",
+  response_foundry_agent_call_failed: "response.foundry_agent_call.failed",
 }
