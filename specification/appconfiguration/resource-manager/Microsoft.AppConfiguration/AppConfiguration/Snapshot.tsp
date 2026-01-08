@@ -15,7 +15,8 @@ namespace Microsoft.AppConfiguration;
  * The snapshot resource.
  */
 @parentResource(ConfigurationStore)
-model Snapshot is Azure.ResourceManager.ProxyResource<SnapshotProperties, false> {
+model Snapshot
+  is Azure.ResourceManager.ProxyResource<SnapshotProperties, false> {
   ...ResourceNameParameter<
     Resource = Snapshot,
     KeyName = "snapshotName",
