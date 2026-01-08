@@ -155,13 +155,4 @@ model MeshMemberProperties {
 union MeshMemberProvisioningState {
   string,
   ResourceProvisioningState,
-
-  @doc("The provisioning state of a fleet being created.")
-  Creating: "Creating",
-
-  @doc("The provisioning state of a fleet being leaving.")
-  Deleting: "Leaving",
-
-  @doc("The provisioning state of a fleet being updated.")
-  Updating: "Updating",
 }
