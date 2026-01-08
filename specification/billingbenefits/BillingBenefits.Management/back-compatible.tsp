@@ -117,7 +117,8 @@ using Microsoft.BillingBenefits;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServices.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServicesPatchRequest.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServicesPatchRequest.properties
+);
 
 @@clientName(Discounts.create::parameters.resource, "body");
 @@clientName(Discounts.update::parameters.properties, "body");
