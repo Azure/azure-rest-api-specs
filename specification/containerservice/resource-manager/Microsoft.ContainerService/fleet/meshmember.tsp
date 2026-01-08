@@ -11,23 +11,27 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.ContainerService;
 
 @doc("The Mesh Member data for a Fleet Member resource.")
-@resource("meshmembers")
-@parentResource(FleetMember)
-model MeshMember is ProxyResource<MeshMemberProperties> {
+model MeshMember {
   @doc("The name of the Mesh member resource.")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  @minLength(1)
-  @maxLength(50)
-  @key("meshMemberName")
-  @path
-  @segment("members")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   name: string;
 
-  ...EntityTagProperty;
+  @doc("The Id of the Mesh Member.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  meshMemberId: MeshMemberId;
+
+  @doc("The Cilium cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  ciliumProperties: CiliumProperties;
+
+  @doc("Mutable properties of the mesh member.")
+  mutableProperties?: MeshMemberUpdate;
+
+  @doc("Resource id of the cluster mesh profile associated with this mesh member.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  clusterMeshProfileResourceId?: string;
 }
 
-// ???
 scalar FleetResourceId
   extends Azure.Core.armResourceIdentifier<[
     {
@@ -107,7 +111,7 @@ union MeshMemberState {
 @doc("Status of the mesh member.")
 model MeshMemberStatus {
   @doc("The mesh member state.")
-  state: MeshMemberState;
+  meshMemberState: MeshMemberState;
 
   @doc("When the status was last updated.")
   lastUpdatedAt?: utcDateTime;
@@ -122,37 +126,8 @@ model MeshMemberUpdate {
   clusterMeshApiServer?: ClusterMeshApiServer;
 
   @doc("Network properties for the cluster.")
-  network?: MeshNetwork;
+  meshNetwork?: MeshNetwork;
 
   @doc("The mesh member status.")
-  status?: MeshMemberStatus;
-}
-
-@doc("The Mesh Member properties for a Fleet Member resource.")
-model MeshMemberProperties {
-  @doc("The Id of the Mesh Member.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  meshMemberId: MeshMemberId;
-
-  @doc("The Cilium cluster.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  ciliumProperties: CiliumProperties;
-
-  @doc("Mutable properties of the mesh member.")
-  mutableProperties?: MeshMemberUpdate;
-
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: MeshMemberProvisioningState;
-
-  @doc("Resource id of the cluster mesh profile associated with this mesh member.")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  clusterMeshProfileResourceId?: string;
-}
-
-@lroStatus
-@doc("The provisioning state of the last accepted operation.")
-union MeshMemberProvisioningState {
-  string,
-  ResourceProvisioningState,
+  meshMemberStatus?: MeshMemberStatus;
 }
