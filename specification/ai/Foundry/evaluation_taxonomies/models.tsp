@@ -109,9 +109,6 @@ model TaxonomyCategory {
   @doc("Description of the taxonomy category.")
   description?: string;
 
-  @doc("Natural language definition of the risk (for risk definition-based taxonomies).")
-  riskDefinition?: string;
-
   @doc("List of taxonomy sub categories.")
   subCategories: TaxonomySubCategory[];
 
