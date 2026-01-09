@@ -207,18 +207,11 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zoneId?: Ocid;
 
-  @removed(Versions.v20251201_preview)
-  @doc("The hostname for the cloud VM cluster.")
+  @doc("The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(23)
   hostname: string;
-
-  @added(Versions.v20251201_preview)
-  @doc("The hostname for the cloud VM cluster.")
-  @encodedName("application/json", "hostname")
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  hostnameV2: string;
 
   @doc("The domain name for the cloud VM cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
