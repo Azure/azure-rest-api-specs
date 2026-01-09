@@ -149,9 +149,9 @@ export class PRContext {
     return [...tags.values()].map((tag) => tag.name);
   }
 
-  async getPossibleParentConfigurations(): Promise<string[]> {
+  getPossibleParentConfigurations(): string[] {
     console.log("ENTER definition getPossibleParentConfigurations");
-    const changedFiles = await this.getChangedFiles();
+    const changedFiles = this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
     const readmes = changedFiles.filter((f) => readme(f));
 
@@ -187,13 +187,13 @@ export class PRContext {
     // diff what oad does does here, so I'm leaving it alone for now until I can build some strong unit tests around this.
     const cmd = parseMarkdown(readMeContent);
     const allTags = new amd.ReadMeManipulator(
-      { error: (_msg: string) => {} },
+      { error: () => {} },
       new amd.ReadMeBuilder(),
     ).getAllTags(cmd);
     return [...allTags];
   }
 
-  async getInputFiles(readMeContent: string, tag: string) {
+  getInputFiles(readMeContent: string, tag: string) {
     // todo: we should refactor this to use spec model, but I haven't had time to isolate exactly what
     // openapi-markdown is doing here, so I'm just going to use the same logic for now
     const cmd = parseMarkdown(readMeContent);
@@ -204,7 +204,7 @@ export class PRContext {
     // we are retrieving all the readme changes, no matter if they're additions, deletions, etc
     // Additionally, we're also retrieving all the readme files that may be affected by the changes in the PR, which means
     // climbing up the directory tree until we find a readme.md file if necessary.
-    const allAffectedReadmes: string[] = await this.getPossibleParentConfigurations();
+    const allAffectedReadmes: string[] = this.getPossibleParentConfigurations();
     console.log(`all affected readme are:`);
     console.log(JSON.stringify(allAffectedReadmes, null, 2));
     const Diffs: TagDiff[] = [];
@@ -235,12 +235,12 @@ export class PRContext {
       // const allAffectedInputFiles = await this.getRealAffectedSwagger(readme)
       // talk to Mike and ask him how we could get all affected swagger files from a readme path.
       // I want to say that readme(readme).specModel.getAffectedSwaggerFiles will work?
-      const allAffectedInputFiles = await (await this.getChangedFiles()).filter((f) => swagger(f));
+      const allAffectedInputFiles = this.getChangedFiles().filter((f) => swagger(f));
       console.log(`all affected swagger files in ${readme} are:`);
       console.log(JSON.stringify(allAffectedInputFiles, null, 2));
       const getChangedInputFiles = async (tag: string) => {
         const readmeContent = await fs.promises.readFile(newReadme, "utf-8");
-        const inputFiles = await this.getInputFiles(readmeContent, tag);
+        const inputFiles = this.getInputFiles(readmeContent, tag);
         if (inputFiles) {
           const changedInputFiles = (inputFiles as string[]).filter((f) =>
             allAffectedInputFiles.some((a) => a.endsWith(f)),
@@ -273,7 +273,7 @@ export class PRContext {
     // const readmeDeletions = this.fileList?.deletions.filter(file => readme(file));
     //const changedFiles: DiffFileResult | undefined = await this.localPRContext?.getChangingFiles();
 
-    const changedFiles = await this.fileList;
+    const changedFiles = this.fileList;
     const tagDiffs = (await this.getChangingTags()) || [];
 
     const readmeTagDiffs = tagDiffs
