@@ -287,7 +287,6 @@ stages:
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
-          condition: succeededOrFailed()
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - task: AzureCLI@2
@@ -312,7 +311,6 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-            CustomCondition: succeededOrFailed()
 
         - pwsh: |
             $currentTitle = "$(PrTitle)"
@@ -324,7 +322,7 @@ stages:
 
         - task: PowerShell@2
           displayName: Create pull request
-          condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+          condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
           inputs:
             pwsh: true
             workingDirectory: $(SdkRepoDirectory)

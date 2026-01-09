@@ -8,12 +8,11 @@ parameters:
   WorkingDirectory: $(System.DefaultWorkingDirectory)'
   ScriptDirectory: eng/common/scripts
   SkipCheckingForChanges: false
-  CustomCondition: succeeded()
 
 steps:
 - task: PowerShell@2
   displayName: Check for changes
-  condition: and(${{ parameters.CustomCondition }}, eq(${{ parameters.SkipCheckingForChanges }}, false))
+  condition: and(succeeded(), eq(${{ parameters.SkipCheckingForChanges }}, false))
   inputs:
     pwsh: true
     workingDirectory: ${{ parameters.WorkingDirectory }}
@@ -26,7 +25,7 @@ steps:
     echo "##vso[task.setvariable variable=RepoNameWithoutOwner]$repoName"
     echo "RepoName = $repoName"
   displayName: Remove Repo Owner from Repo Name
-  condition: ${{ parameters.CustomCondition }}
+  condition: succeeded()
   workingDirectory: ${{ parameters.WorkingDirectory }}
 
 - template: /eng/common/pipelines/templates/steps/emit-rate-limit-metrics.yml
@@ -36,7 +35,7 @@ steps:
 
 - task: PowerShell@2
   displayName: Push changes
-  condition: and(${{ parameters.CustomCondition }}, eq(variables['HasChanges'], 'true'))
+  condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
   inputs:
     pwsh: true
     workingDirectory: ${{ parameters.WorkingDirectory }}
