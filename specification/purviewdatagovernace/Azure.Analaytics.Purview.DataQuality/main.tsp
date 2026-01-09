@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
   """)
 @service(#{ title: "PurviewDataQuality" })
 @server(
-  "{endpoint}/purviewdataquality/api",
+  "{endpoint}/datagovernance/quality",
   "Purview Data Quality Service is a fully managed cloud service that enables comprehensive data quality monitoring, assessment, and governance across organizational data assets.",
   {
     endpoint: url,
