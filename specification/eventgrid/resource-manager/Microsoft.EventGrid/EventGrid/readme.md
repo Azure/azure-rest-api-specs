@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2025-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2025-11-preview'
 input-file:
-- Microsoft.EventGrid/preview/2025-11-15-preview/EventGrid.json
+- preview/2025-11-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2025-04-preview
