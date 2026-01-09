@@ -14,7 +14,7 @@ namespace Customizations;
   service: Search,
 })
 @clientInitialization(Search.SearchIndexClientOptions)
-@clientNamespace("Azure.Search.Documents")
+@clientNamespace("Azure.Search.Documents", "!csharp")
 @clientNamespace("com.azure.search.documents", "java")
 namespace SearchClient {
   interface Documents {
