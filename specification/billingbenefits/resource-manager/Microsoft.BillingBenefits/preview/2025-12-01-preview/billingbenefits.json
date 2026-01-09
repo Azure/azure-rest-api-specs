@@ -76,7 +76,7 @@
       "name": "CreditSources"
     },
     {
-      "name": "FreeServicesOperations"
+      "name": "FreeServices"
     }
   ],
   "paths": {
@@ -1342,9 +1342,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.BillingBenefits/freeServices": {
       "get": {
-        "operationId": "FreeServicesOperations_ListBySubscription",
+        "operationId": "FreeServices_ListBySubscription",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "List free services under a subscription.",
         "parameters": [
@@ -3025,9 +3025,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices": {
       "get": {
-        "operationId": "FreeServicesOperations_ListByResourceGroup",
+        "operationId": "FreeServices_ListByResourceGroup",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "List free services under a resource group.",
         "parameters": [
@@ -3067,9 +3067,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/freeServices/{freeServiceName}": {
       "get": {
-        "operationId": "FreeServicesOperations_Get",
+        "operationId": "FreeServices_Get",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "Get a free service.",
         "parameters": [
@@ -3095,7 +3095,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FreeServices"
+              "$ref": "#/definitions/FreeService"
             }
           },
           "default": {
@@ -3112,9 +3112,9 @@
         }
       },
       "put": {
-        "operationId": "FreeServicesOperations_Create",
+        "operationId": "FreeServices_Create",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "Create a free service.",
         "parameters": [
@@ -3141,7 +3141,7 @@
             "description": "Free services create request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FreeServices"
+              "$ref": "#/definitions/FreeService"
             }
           }
         ],
@@ -3149,7 +3149,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FreeServices"
+              "$ref": "#/definitions/FreeService"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -3161,7 +3161,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/FreeServices"
+              "$ref": "#/definitions/FreeService"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -3194,14 +3194,14 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
-          "final-state-schema": "#/definitions/FreeServices"
+          "final-state-schema": "#/definitions/FreeService"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "FreeServicesOperations_Update",
+        "operationId": "FreeServices_Update",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "Update a free service.",
         "parameters": [
@@ -3236,7 +3236,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FreeServices"
+              "$ref": "#/definitions/FreeService"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -3278,14 +3278,14 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FreeServices"
+          "final-state-schema": "#/definitions/FreeService"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "FreeServicesOperations_Delete",
+        "operationId": "FreeServices_Delete",
         "tags": [
-          "FreeServicesOperations"
+          "FreeServices"
         ],
         "description": "Delete a free service.",
         "parameters": [
@@ -6256,7 +6256,7 @@
         }
       }
     },
-    "FreeServices": {
+    "FreeService": {
       "type": "object",
       "description": "Free Services resource definition",
       "properties": {
@@ -6315,7 +6315,7 @@
           "type": "array",
           "description": "The list of free services",
           "items": {
-            "$ref": "#/definitions/FreeServices"
+            "$ref": "#/definitions/FreeService"
           },
           "readOnly": true
         },

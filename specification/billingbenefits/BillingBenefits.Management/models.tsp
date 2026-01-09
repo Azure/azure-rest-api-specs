@@ -3427,7 +3427,7 @@ model FreeServicesList {
    */
   @pageItems
   @visibility(Lifecycle.Read)
-  value?: FreeServices[];
+  value?: FreeService[];
 
   /**
    * The URL to get the next set of results
