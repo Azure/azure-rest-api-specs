@@ -68,7 +68,7 @@ model FleetMemberProperties {
 
   @added(Versions.v2025_08_02_clustermesh)
   @visibility(Lifecycle.Read)
-  @doc("The Mesh Member associated with this Fleet Member.")
+  @doc("The Mesh Member Properties associated with this Fleet Member.")
   meshProperties?: MeshProperties;
 }
 
