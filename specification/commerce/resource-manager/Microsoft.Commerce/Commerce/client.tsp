@@ -12,3 +12,10 @@ using Microsoft.Commerce;
   "Daily",
   "python"
 );
+
+@@clientName(Microsoft.Commerce, "UsageManager", "java");
+
+@@alternateType(Microsoft.Commerce.UsageSample.infoFields,
+  ClientCustomizations.InfoField,
+  "java"
+);
