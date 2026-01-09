@@ -22,8 +22,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * KubernetesConfiguration Extensions Client
+ * Use these APIs to create extension resources through ARM, for Kubernetes Clusters.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ExtensionsClient" })
 @versioned(Versions)

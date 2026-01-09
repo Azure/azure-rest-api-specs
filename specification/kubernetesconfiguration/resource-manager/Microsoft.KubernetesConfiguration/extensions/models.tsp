@@ -134,7 +134,8 @@ model ExtensionProperties {
   /**
    * User-specified version of the extension for this extension to 'pin'. To use 'version', autoUpgradeMinorVersion must be 'false'.
    */
-  version?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  version?: string | null;
 
   /**
    * Scope at which the extension is installed.
@@ -144,20 +145,23 @@ model ExtensionProperties {
   /**
    * Configuration settings, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  configurationSettings?: Record<string>;
+  configurationSettings?: Record<string> | null;
 
   /**
    * Configuration settings that are sensitive, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  configurationProtectedSettings?: Record<string>;
+  configurationProtectedSettings?: Record<string> | null;
 
   /**
    * Currently installed version of the extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  currentVersion?: string;
+  currentVersion?: string | null;
 
   /**
    * Status of installation of this extension.
@@ -174,32 +178,36 @@ model ExtensionProperties {
   /**
    * Error information from the Agent - e.g. errors during installation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  errorInfo?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+  errorInfo?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 
   /**
    * Custom Location settings properties.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  customLocationSettings?: Record<string>;
+  customLocationSettings?: Record<string> | null;
 
   /**
    * Uri of the Helm package
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  packageUri?: string;
+  packageUri?: string | null;
 
   /**
    * Identity of the Extension resource in an AKS cluster
    */
-  aksAssignedIdentity?: ExtensionPropertiesAksAssignedIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  aksAssignedIdentity?: ExtensionPropertiesAksAssignedIdentity | null;
 
   /**
    * Flag to note if this extension is a system extension
    */
   @visibility(Lifecycle.Read)
-  isSystemExtension?: boolean;
+  isSystemExtension?: boolean = false;
 }
 
 /**
@@ -209,12 +217,14 @@ model Scope {
   /**
    * Specifies that the scope of the extension is Cluster
    */
-  cluster?: ScopeCluster;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  cluster?: ScopeCluster | null;
 
   /**
    * Specifies that the scope of the extension is Namespace
    */
-  `namespace`?: ScopeNamespace;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  `namespace`?: ScopeNamespace | null;
 }
 
 /**
@@ -316,19 +326,23 @@ model PatchExtensionProperties {
   /**
    * Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.
    */
-  version?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  version?: string | null;
 
   /**
    * Configuration settings, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  configurationSettings?: Record<string>;
+  configurationSettings?: Record<string> | null;
 
   /**
    * Configuration settings that are sensitive, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  configurationProtectedSettings?: Record<string>;
+  @secret
+  configurationProtectedSettings?: Record<string> | null;
 }
 
 /**
@@ -358,12 +372,14 @@ model OperationStatusResult {
   /**
    * Additional information, if available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string> | null;
 
   /**
    * If present, details of the operation error.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail | null;
 }
