@@ -260,6 +260,8 @@ stages:
             --spec-repo-url ${{ parameters.SpecRepoUrl }} \
             $optional_params || true # return true always to suppress exit error logging
         displayName: 'Generate SDK'
+        ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
+          continueOnError: true
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:
@@ -285,7 +287,7 @@ stages:
             Write-Host "##vso[task.setvariable variable=SdkPullRequestSourceBranch]$sdkPrBranchName"
           workingDirectory: $(SdkRepoDirectory)
           displayName: "Create SDK PR branch variable"
-          condition: or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true)))
+          condition: succeededOrFailed()
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
           - task: AzureCLI@2
@@ -310,7 +312,7 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
-            CustomCondition: or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true)))
+            CustomCondition: succeededOrFailed()
 
         - pwsh: |
             $currentTitle = "$(PrTitle)"
@@ -318,11 +320,11 @@ stages:
             Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
             Write-Host "Updated PR Title to: '$updatedTitle'"
           displayName: "Set PR title prefix based on job status"
-          condition: and(eq(variables['Agent.JobStatus'], 'Failed'), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))
+          condition: eq(variables['Agent.JobStatus'], 'Failed')
 
         - task: PowerShell@2
           displayName: Create pull request
-          condition: and(or(succeeded(), and(succeededOrFailed(), eq('${{ parameters.ForceCreateEvenWithFailures }}', true))), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
+          condition: and(succeededOrFailed(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), not(endsWith(variables['SdkRepoName'], '-pr')))
           inputs:
             pwsh: true
             workingDirectory: $(SdkRepoDirectory)
