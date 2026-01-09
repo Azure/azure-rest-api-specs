@@ -421,36 +421,36 @@ model MigrationStatus {
 @doc("Properties of the DatabaseMigration resource.")
 model DatabaseMigrationProperties {
   @doc("Migration name")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   migrationName: string;
 
   @doc("Migration description")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   description: string;
 
   @doc("Migration mode")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   migrationMode: MigrationMode;
 
   @doc("Source database configuration")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   source: SourceConfiguration;
 
   @doc("Target database configuration")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   target: TargetConfiguration;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
   @doc("List of mapping definitions")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   mappingDefinitions: DatabaseMapping[];
 
   @doc("Compute profile")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   computeProfile: ComputeProfile;
 
   @doc("Migration job settings")
-  @visibility(Lifecycle.Create)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   migrationJobsettings: MigrationJobSettings;
 
   @doc("The type of operation to perform on the migration")
