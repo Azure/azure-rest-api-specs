@@ -7,7 +7,7 @@ namespace Microsoft.ContainerService;
 
 @added(Versions.v2025_08_02_clustermesh)
 @doc("The Mesh Member data for a Fleet Member resource.")
-model MeshMember {
+model MeshProperties {
   @doc("The Cilium cluster properties.")
   @visibility(Lifecycle.Read)
   ciliumProperties: CiliumProperties;
@@ -39,9 +39,6 @@ model CiliumProperties {
 @doc("Mesh member state.")
 union MeshMemberState {
   string,
-
-  @doc("Unknown state.")
-  Unknown: "Unknown",
 
   @doc("The member is not connected to the mesh.")
   NotConnected: "NotConnected",

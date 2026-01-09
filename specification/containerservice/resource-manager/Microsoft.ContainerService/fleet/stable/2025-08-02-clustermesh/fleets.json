@@ -3366,8 +3366,8 @@
           "description": "Status information of the last operation for fleet member.",
           "readOnly": true
         },
-        "meshMember": {
-          "$ref": "#/definitions/MeshMember",
+        "meshProperties": {
+          "$ref": "#/definitions/MeshProperties",
           "description": "The Mesh Member associated with this Fleet Member.",
           "readOnly": true
         }
@@ -4074,37 +4074,10 @@
         }
       }
     },
-    "MeshMember": {
-      "type": "object",
-      "description": "The Mesh Member data for a Fleet Member resource.",
-      "properties": {
-        "ciliumProperties": {
-          "$ref": "#/definitions/CiliumProperties",
-          "description": "The Cilium cluster properties.",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/MeshMemberStatus",
-          "description": "The status of the mesh member.",
-          "readOnly": true
-        },
-        "clusterMeshProfileResourceId": {
-          "type": "string",
-          "description": "Resource id of the cluster mesh profile associated with this mesh member.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "ciliumProperties",
-        "status",
-        "clusterMeshProfileResourceId"
-      ]
-    },
     "MeshMemberState": {
       "type": "string",
       "description": "Mesh member state.",
       "enum": [
-        "Unknown",
         "NotConnected",
         "Connecting",
         "Connected",
@@ -4115,11 +4088,6 @@
         "name": "MeshMemberState",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown state."
-          },
           {
             "name": "NotConnected",
             "value": "NotConnected",
@@ -4152,7 +4120,7 @@
       "type": "object",
       "description": "Status of the mesh member.",
       "properties": {
-        "meshMemberState": {
+        "state": {
           "$ref": "#/definitions/MeshMemberState",
           "description": "The mesh member state."
         },
@@ -4167,7 +4135,33 @@
         }
       },
       "required": [
-        "meshMemberState"
+        "state"
+      ]
+    },
+    "MeshProperties": {
+      "type": "object",
+      "description": "The Mesh Member data for a Fleet Member resource.",
+      "properties": {
+        "ciliumProperties": {
+          "$ref": "#/definitions/CiliumProperties",
+          "description": "The Cilium cluster properties.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/MeshMemberStatus",
+          "description": "The status of the mesh member.",
+          "readOnly": true
+        },
+        "clusterMeshProfileResourceId": {
+          "type": "string",
+          "description": "Resource id of the cluster mesh profile associated with this mesh member.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ciliumProperties",
+        "status",
+        "clusterMeshProfileResourceId"
       ]
     },
     "Meta.V1.LabelSelector": {
