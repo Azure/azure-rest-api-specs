@@ -3,4 +3,4 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Purview, "PurviewManagementClient", "javascript");
+@@clientName(Microsoft.Purview, "PurviewManagementClient", "javascript,python");
