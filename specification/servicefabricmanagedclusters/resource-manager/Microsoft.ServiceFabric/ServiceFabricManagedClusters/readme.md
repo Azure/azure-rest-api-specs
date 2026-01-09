@@ -86,7 +86,7 @@ directive:
 
 These settings apply only when `--tag=package-2026-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-10-preview'
+``` yaml $(tag) == 'package-2026-02'
 input-file:
 - stable/2026-02-01/servicefabricmanagedclusters.json
 ```
