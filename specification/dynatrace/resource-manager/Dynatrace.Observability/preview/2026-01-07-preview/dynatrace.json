@@ -96,7 +96,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/activateSaaS": {
       "post": {
-        "operationId": "SaaSOperationGroup_ActivateResource",
+        "operationId": "SaaSOperationGroup_ActivateSaaS",
         "description": "Activate the marketplace SaaS resource",
         "parameters": [
           {
@@ -106,7 +106,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
             "description": "The request body",
             "required": true,
@@ -144,7 +144,7 @@
           }
         },
         "x-ms-examples": {
-          "ActivateSaaS": {
+          "SaaS_ActivateSaaS": {
             "$ref": "./examples/SaaS_ActivateResource.json"
           }
         },
@@ -2213,12 +2213,12 @@
         },
         "emailAddress": {
           "type": "string",
-          "description": "Email address of the admin user",
+          "description": "Email of the user used by Dynatrace for contacting them if needed",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         },
         "phoneNumber": {
           "type": "string",
-          "description": "Phone number of the admin user",
+          "description": "Phone number of the user used by Dynatrace for contacting them if needed",
           "maxLength": 40
         },
         "company": {

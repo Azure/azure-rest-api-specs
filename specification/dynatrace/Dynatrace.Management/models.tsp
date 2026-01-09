@@ -757,7 +757,7 @@ model MonitorProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
   @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
-  saasData?: SaaSData;
+  saaSData?: SaaSData;
 
   /**
    * SRE Agent configuration to connect to MCP server of Dynatrace for given environment.
@@ -1346,42 +1346,44 @@ model ActivateSaaSParameterRequest {
 @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
 model AdminUserDetails {
   /**
-   * First name
+   * First name of the admin user
    */
   firstName: string;
 
   /**
-   * Last name
+   * Last name of the admin user
    */
   lastName: string;
 
   /**
-   * Email address
+   * Email of the user used by Dynatrace for contacting them if needed
    */
+   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   emailAddress: string;
 
   /**
-   * Phone number
+   * Phone number of the user used by Dynatrace for contacting them if needed
    */
+   @maxLength(40)
   phoneNumber: string;
 
   /**
-   * Company name
+   * Company name of the admin user
    */
   company: string;
 
   /**
-   * Country
+   * Country of the admin user
    */
   country: string;
 
   /**
-   * State
+   * State of the admin user
    */
   state: string;
 
   /**
-   * Job title
+   * Job title of the admin user
    */
   jobTitle: string;
 }
@@ -1421,9 +1423,10 @@ model SaaSData {
  * Marketplace SaaS resource details.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends for proxy resource model"
 @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
 model SaaSResourceDetailsResponse
-  is Azure.ResourceManager.Foundations.ProxyResource {
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Id of the Marketplace SaaS Resource
    */

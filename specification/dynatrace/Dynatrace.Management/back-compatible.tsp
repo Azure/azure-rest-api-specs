@@ -41,6 +41,7 @@ using Dynatrace.Observability;
 @@clientName(MonitorResources.listLinkableEnvironments::parameters.body,
   "request"
 );
+@@clientLocation(MonitorResources.latestLinkedSaaS, "Monitors");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FixME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MonitorResource.properties);
 

@@ -44,7 +44,7 @@ interface MonitorsOperationGroup {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
 interface SaaSOperationGroup {
   /**
-   * Activate SaaS resource
+   * Activate the marketplace SaaS resource
    */
   @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
   @autoRoute
