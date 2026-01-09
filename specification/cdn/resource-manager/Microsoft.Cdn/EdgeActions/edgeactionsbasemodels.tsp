@@ -142,6 +142,7 @@ model EdgeActionAttachmentResponse {
   edgeActionId: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Represents an edge action properties")
 model EdgeActionProperties {
   @doc("The provisioning state of the edge action")
