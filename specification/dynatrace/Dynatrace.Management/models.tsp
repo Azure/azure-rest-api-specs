@@ -1358,13 +1358,13 @@ model AdminUserDetails {
   /**
    * Email of the user used by Dynatrace for contacting them if needed
    */
-   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
+  @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   emailAddress: string;
 
   /**
    * Phone number of the user used by Dynatrace for contacting them if needed
    */
-   @maxLength(40)
+  @maxLength(40)
   phoneNumber: string;
 
   /**
