@@ -20256,6 +20256,10 @@
         "search_context_size": {
           "$ref": "#/definitions/OpenAI.SearchContextSize",
           "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default."
+        },
+        "custom_search_configuration": {
+          "$ref": "#/definitions/WebSearchConfiguration",
+          "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
         }
       },
       "allOf": [
@@ -20290,10 +20294,6 @@
           "x-ms-enum": {
             "modelAsString": false
           }
-        },
-        "custom_search_configuration": {
-          "$ref": "#/definitions/WebSearchConfiguration",
-          "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool."
         }
       },
       "allOf": [
