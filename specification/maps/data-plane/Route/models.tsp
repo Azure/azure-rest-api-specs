@@ -1359,16 +1359,7 @@ enum GeoJsonGeometryObjectType {
  * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
  * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
  */
-@discriminator("type")
-model GeoJsonGeometry {
-  /** Specifies the `GeoJSON` geometry type. The type must be one of the seven valid
-   * GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString,
-   * Polygon, MultiPolygon and GeometryCollection. Please refer to [RFC
-   * 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing API contract"
-  type: GeoJsonObjectType;
-}
+model GeoJsonGeometry is GeoJsonObject;
 
 /**
  * A valid `GeoJSON` object. Please refer to [RFC
