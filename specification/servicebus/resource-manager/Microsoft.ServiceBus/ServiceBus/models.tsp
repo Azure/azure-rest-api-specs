@@ -851,7 +851,6 @@ model FailOver {
   properties?: FailOverProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailoverProperties, see if they can be combined"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailOverProperties {
   /**
@@ -1228,29 +1227,6 @@ model ArmDisasterRecoveryProperties {
    */
   @visibility(Lifecycle.Read)
   role?: RoleDisasterRecovery;
-}
-
-/**
- * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
- */
-#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailOverProperties, see if they can be combined"
-model FailoverProperties {
-  /**
-   * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: FailoverPropertiesProperties;
-}
-
-/**
- * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
- */
-model FailoverPropertiesProperties {
-  /**
-   * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  IsSafeFailover?: boolean;
 }
 
 /**
