@@ -9258,8 +9258,9 @@
         },
         "hostname": {
           "type": "string",
-          "description": "The hostname for the cloud VM cluster.",
-          "x-ms-client-name": "hostnameV2",
+          "description": "The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.",
+          "minLength": 1,
+          "maxLength": 23,
           "x-ms-mutability": [
             "read",
             "create"
