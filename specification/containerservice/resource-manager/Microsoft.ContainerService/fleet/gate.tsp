@@ -79,7 +79,7 @@ model GateProperties {
   @doc("Details for ScheduledStart gate")
   @added(Versions.v2026_01_01_scheduledstart)
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  scheduledStart?: ScheduledStartProperties;
+  scheduledStartProperties?: ScheduledStartProperties;
 
   @doc("The target that the Gate is controlling, e.g. an Update Run.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -97,33 +97,6 @@ union GateTargetType {
 
   @doc("The Gate targets an Update Run.")
   UpdateRun: "UpdateRun",
-}
-
-@doc("Day of week used to schedule a Gate start")
-@added(Versions.v2026_01_01_scheduledstart)
-union DayOfWeek {
-  string,
-
-  @doc("Monday")
-  Monday: "Monday",
-
-  @doc("Tuesday")
-  Tuesday: "Tuesday",
-
-  @doc("Wednesday")
-  Wednesday: "Wednesday",
-
-  @doc("Thursday")
-  Thursday: "Thursday",
-
-  @doc("Friday")
-  Friday: "Friday",
-
-  @doc("Saturday")
-  Saturday: "Saturday",
-
-  @doc("Sunday")
-  Sunday: "Sunday",
 }
 
 @doc("Properties for ScheduledStart gate")

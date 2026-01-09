@@ -3745,8 +3745,8 @@
           "$ref": "#/definitions/GateType",
           "description": "The type of the Gate determines how it is completed."
         },
-        "scheduledStart": {
-          "$ref": "#/definitions/ScheduledStartProperties",
+        "scheduledStartConfiguration": {
+          "$ref": "#/definitions/ScheduledStartConfiguration",
           "description": "Scheduled start configuration for gates of type ScheduledStart."
         }
       },
@@ -3822,7 +3822,7 @@
             "create"
           ]
         },
-        "scheduledStart": {
+        "scheduledStartProperties": {
           "$ref": "#/definitions/ScheduledStartProperties",
           "description": "Details for ScheduledStart gate",
           "x-ms-mutability": [
@@ -4623,6 +4623,43 @@
           "description": "The memory limit for the managed namespace. See more at https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory"
         }
       }
+    },
+    "ScheduledStartConfiguration": {
+      "type": "object",
+      "description": "Configuration for ScheduledStart gate",
+      "properties": {
+        "startDay": {
+          "$ref": "#/definitions/DayOfWeek",
+          "description": "The day of the week when the scheduled start occurs.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.",
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "UTCOffset": {
+          "type": "string",
+          "description": "The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00",
+          "pattern": "^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "startDay",
+        "startTime",
+        "UTCOffset"
+      ]
     },
     "ScheduledStartProperties": {
       "type": "object",

@@ -68,6 +68,51 @@ model UpdateGroup {
   afterGates?: GateConfiguration[];
 }
 
+@doc("Day of week used to schedule a Gate start")
+@added(Versions.v2026_01_01_scheduledstart)
+union DayOfWeek {
+  string,
+
+  @doc("Monday")
+  Monday: "Monday",
+
+  @doc("Tuesday")
+  Tuesday: "Tuesday",
+
+  @doc("Wednesday")
+  Wednesday: "Wednesday",
+
+  @doc("Thursday")
+  Thursday: "Thursday",
+
+  @doc("Friday")
+  Friday: "Friday",
+
+  @doc("Saturday")
+  Saturday: "Saturday",
+
+  @doc("Sunday")
+  Sunday: "Sunday",
+}
+
+@doc("Configuration for ScheduledStart gate")
+@added(Versions.v2026_01_01_scheduledstart)
+model ScheduledStartConfiguration {
+  @doc("The day of the week when the scheduled start occurs.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  startDay: DayOfWeek;
+
+  @doc("The local time of day when the scheduled start occurs in 24-hour (HH:mm) format.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^([01][0-9]|2[0-3]):[0-5][0-9]$")
+  startTime: string;
+
+  @doc("The UTC offset for the scheduled time in HH:mm format, -14:00 to +14:00")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @pattern("^[+-]((0[0-9]|1[0-3]):[0-5][0-9]|14:00)$")
+  UTCOffset: string;
+}
+
 @doc("GateConfiguration is used to define where Gates should be placed within the Update Run.")
 @added(Versions.v2025_04_01_preview)
 model GateConfiguration {
@@ -81,5 +126,5 @@ model GateConfiguration {
 
   @doc("Scheduled start configuration for gates of type ScheduledStart.")
   @added(Versions.v2026_01_01_scheduledstart)
-  scheduledStart?: ScheduledStartProperties;
+  scheduledStartConfiguration?: ScheduledStartConfiguration;
 }
