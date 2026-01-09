@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "accountName": "myMapsAccount",
+    "api-version": "2025-10-01-preview",
+    "monitor": "true",
+    "privateEndpointConnectionName": "privateEndpointConnectionName",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "Auto-Approved",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.Maps/accounts/privateEndpointConnections",
+        "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount/privateEndpointConnections/privateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Auto-Approved",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/locations/eastus/operationStatuses/2d7f573a-7acd-4a3c-9425-fed7d029c69d?api-version=2025-10-01-preview"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "privateEndpointConnectionName",
+        "type": "Microsoft.Maps/accounts/privateEndpointConnections",
+        "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount/privateEndpointConnections/privateEndpointConnectionName",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/petest01"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Auto-Approved",
+            "status": "Approved"
+          },
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/locations/eastus/operationStatuses/2d7f573a-7acd-4a3c-9425-fed7d029c69d?api-version=2025-10-01-preview"
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_Create",
+  "title": "PrivateEndpointConnections_Create"
+}
