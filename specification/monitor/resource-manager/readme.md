@@ -135,15 +135,6 @@ suppressions:
     reason: Service design forces this behavior (and it's actually the correct behavior that doesn't violate Microsoft API guidelines).
 ```
 
-### Tag: package-preview-2024-01
-
-These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-01'
-input-file:
-  - Microsoft.Insights/preview/2024-01-01-preview/scheduledQueryRule_API.json
-```
-
 ### Tag: package-2024-04
 
 These settings apply only when `--tag=package-2024-04` is specified on the command line.
@@ -1525,6 +1516,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

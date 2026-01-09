@@ -13,12 +13,10 @@ options:
 
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.ContainerRegistry"
+    package-name: "Azure.ResourceManager.ContainerRegistry"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistry"

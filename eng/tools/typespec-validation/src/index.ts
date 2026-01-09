@@ -30,7 +30,7 @@ export async function main() {
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {
-    context = { ...context, ...JSON.parse(parsedArgs.positionals[1]) };
+    context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
   }
 
   const absolutePath = normalizePath(folder);
