@@ -3368,3 +3368,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebase",
   "java"
 );
+
+// TODO: Java emitter currently does not support non-string element in ArrayEncoding
+@@alternateType(Search.PatternAnalyzer.flags, string, "java");
