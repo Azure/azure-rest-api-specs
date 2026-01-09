@@ -12,6 +12,7 @@ import "./main.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Search;
@@ -720,3 +721,5 @@ op SharedPrivateLinkResourcesDeleteCustomization(
 @@Azure.ClientGenerator.Core.override(SharedPrivateLinkResources.delete,
   SharedPrivateLinkResourcesDeleteCustomization
 );
+
+@@clientName(Microsoft.Search, "SearchManagementClient", "python");
