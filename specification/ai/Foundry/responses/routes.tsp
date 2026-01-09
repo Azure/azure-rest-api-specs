@@ -38,7 +38,7 @@ interface Responses {
   @sharedRoute
   createResponseStream(
     @body request: OpenAI.CreateResponse,
-  ): OpenAI.SseResponseOf<OpenAI.ResponseStreamEvent>;
+  ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
 
   /**
    * Retrieves a model response with the given ID.
@@ -61,7 +61,7 @@ interface Responses {
       response_id: string;
 
       @query(#{ name: "include[]", explode: true })
-      includables?: OpenAI.Includable[] = #[];
+      includables?: OpenAI.IncludeEnum[] = #[];
 
       @query stream?: boolean = false;
       @query starting_after?: int32;
@@ -88,11 +88,11 @@ interface Responses {
     response_id: string,
 
     @query(#{ name: "include[]", explode: true })
-    includables?: OpenAI.Includable[] = #[],
+    includables?: OpenAI.IncludeEnum[] = #[],
 
     @header accept: "text/event-stream",
     @query starting_after?: int32,
-  ): OpenAI.SseResponseOf<OpenAI.ResponseStreamEvent>;
+  ): SseResponseOf<OpenAI.CreateResponseStreamingResponse>;
 
   /**
    * Deletes a model response.
@@ -150,7 +150,7 @@ interface Responses {
     @example("resp_677efb5139a88190b512bc3fef8e535d")
     response_id: string,
 
-    ...OpenAI.CommonPageQueryParameters,
+    ...CommonPageQueryParameters,
   ): AgentsPagedResult<OpenAI.ItemResource> | ApiErrorResponse;
 
   /**
@@ -163,7 +163,7 @@ interface Responses {
   @list
   listResponses(
     ...ApiVersionParameter,
-    ...OpenAI.CommonPageQueryParameters,
+    ...CommonPageQueryParameters,
     ...AgentNameQueryParam,
     ...AgentIdQueryParam,
     ...ConversationIdQueryParam,

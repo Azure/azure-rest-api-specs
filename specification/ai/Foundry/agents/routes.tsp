@@ -225,7 +225,7 @@ interface Agents {
     /** The name of the agent to retrieve versions for. */
     @path agent_name: string,
 
-    ...OpenAI.CommonPageQueryParameters,
+    ...CommonPageQueryParameters,
   ): AgentsPagedResult<AgentVersionObject> | ApiErrorResponse;
 
   /**
@@ -374,7 +374,7 @@ interface Agents {
     /** The name of the agent. */
     @path agent_name: string,
 
-    ...OpenAI.CommonPageQueryParameters,
+    ...CommonPageQueryParameters,
   ): AgentsPagedResult<AgentContainerOperationObject> | ApiErrorResponse;
 
   /**
@@ -394,6 +394,6 @@ interface Agents {
     /** The version of the agent. */
     @path agent_version: string,
 
-    ...OpenAI.CommonPageQueryParameters,
+    ...CommonPageQueryParameters,
   ): AgentsPagedResult<AgentContainerOperationObject> | ApiErrorResponse;
 }

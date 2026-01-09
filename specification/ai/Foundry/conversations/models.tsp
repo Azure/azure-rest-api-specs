@@ -1,5 +1,5 @@
 import "../responses/models.tsp";
-import "../.external-readonly/openai.external.typespec/conversations/custom.tsp";
+// import "../.external-readonly/openai.external.typespec/conversations/custom.tsp";
 
 import "@typespec/http";
 import "@typespec/openapi";

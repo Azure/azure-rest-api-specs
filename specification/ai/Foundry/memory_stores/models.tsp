@@ -337,7 +337,7 @@ alias GetMemoryStoreRequest = {
 };
 
 alias ListMemoryStoresRequest = {
-  ...OpenAI.CommonPageQueryParameters;
+  ...CommonPageQueryParameters;
 };
 
 alias DeleteMemoryStoreRequest = {
@@ -355,7 +355,7 @@ alias MemoryStoreSearchRequest = {
   scope: string;
 
   @doc("Items for which to search for relevant memories.")
-  items?: OpenAI.ItemParam[];
+  items?: OpenAI.Item[];
 
   @doc("The unique ID of the previous search request, enabling incremental memory search from where the last operation left off.")
   previous_search_id?: string;
@@ -373,7 +373,7 @@ alias MemoryStoreUpdateRequest = {
   scope: string;
 
   @doc("Conversation items from which to extract memories.")
-  items?: OpenAI.ItemParam[];
+  items?: OpenAI.Item[];
 
   @doc("The unique ID of the previous update request, enabling incremental memory updates from where the last operation left off.")
   previous_update_id?: string;

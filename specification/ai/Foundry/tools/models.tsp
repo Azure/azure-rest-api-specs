@@ -1,7 +1,7 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core/experimental";
+import "@azure-tools/openai-typespec/models/responses";
 
-import "../.external-readonly/openai.external.typespec/responses/models.tsp";
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;
@@ -40,7 +40,7 @@ union _AgentIncludable {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyVariants(OpenAI.Includable, Azure.AI.Projects._AgentIncludable);
+@@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@copyProperties(OpenAI.MCPTool,
@@ -744,7 +744,7 @@ alias MemorySearchToolCallItemBase = {
 
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-model MemorySearchToolCallItemParam extends OpenAI.ItemParam {
+model MemorySearchToolCallItemParam extends OpenAI.Item {
   type: "memory_search_call";
   ...MemorySearchToolCallItemBase;
 }
