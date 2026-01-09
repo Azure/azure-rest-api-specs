@@ -29,11 +29,11 @@ export class FolderStructureRule implements Rule {
     if (structureVersion === 1) {
       const suppressions = await getSuppressions(folder);
 
-      const mustUseFsv2Suppressions = suppressions.filter(
-        (s) => s.rules?.includes(this.name) && s.subRules?.includes("MustUseFsv2"),
+      const mustUseV2Suppressions = suppressions.filter(
+        (s) => s.rules?.includes(this.name) && s.subRules?.includes("MustUseV2"),
       );
 
-      if (mustUseFsv2Suppressions.length === 0) {
+      if (mustUseV2Suppressions.length === 0) {
         return {
           success: false,
           stdOutput: stdOutput,
