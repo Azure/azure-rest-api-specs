@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "customDomainName": "domain1",
+    "customDomainUpdateProperties": {
+      "properties": {
+        "azureDnsZone": {
+          "id": ""
+        },
+        "tlsSettings": {
+          "certificateType": "CustomerCertificate",
+          "minimumTlsVersion": "TLS12"
+        }
+      }
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "domain1",
+        "type": "Microsoft.Cdn/profiles/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+        "properties": {
+          "azureDnsZone": {
+            "id": ""
+          },
+          "deploymentStatus": "NotStarted",
+          "domainValidationState": "Approved",
+          "hostName": "www.contoso.com",
+          "preValidatedCustomDomainResourceId": {
+            "id": ""
+          },
+          "profileName": "profile1",
+          "provisioningState": "Updating",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "minimumTlsVersion": "TLS12",
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "validationProperties": {
+            "expirationDate": "2009-06-15T13:45:43.0000000Z",
+            "validationToken": "8c9912db-c615-4eeb-8465"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "domain1",
+        "type": "Microsoft.Cdn/profiles/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/domain1",
+        "properties": {
+          "azureDnsZone": {
+            "id": ""
+          },
+          "deploymentStatus": "NotStarted",
+          "domainValidationState": "Approved",
+          "hostName": "www.contoso.com",
+          "preValidatedCustomDomainResourceId": {
+            "id": ""
+          },
+          "profileName": "profile1",
+          "provisioningState": "Updating",
+          "tlsSettings": {
+            "certificateType": "ManagedCertificate",
+            "minimumTlsVersion": "TLS12",
+            "secret": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/secrets/mysecert"
+            }
+          },
+          "validationProperties": {
+            "expirationDate": "2009-06-15T13:45:43.0000000Z",
+            "validationToken": "8c9912db-c615-4eeb-8465"
+          }
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2021-06-01"
+      }
+    }
+  },
+  "operationId": "FrontDoorCustomDomains_Update",
+  "title": "AFDCustomDomains_Update"
+}

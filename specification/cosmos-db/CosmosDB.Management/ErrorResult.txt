@@ -1,0 +1,826 @@
+##output folder is C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management
+##Generating metadata with csharp codegen in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management with https://aka.ms/azsdk/openapi-to-typespec-csharp
+autorest --csharp --max-memory-size=8192 --use="https://aka.ms/azsdk/openapi-to-typespec-csharp" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management --mgmt-debug.only-generate-metadata --azure-arm --skip-csproj C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
+AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+info    | AutoRest core version selected from configuration: ^3.7.0.
+
+There is a new version of AutoRest available (3.7.1).
+ > You can install the newer version with with npm install -g autorest@latest
+
+info    |    Loading AutoRest core      'C:\Users\v-cruan\.autorest\@autorestcore@3.9.7\nodemodules\@autorest\core\dist' (3.9.7)
+warning | DeprecatedConfig | Using directive.0.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.1.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.2.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.3.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.4.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.5.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.6.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.7.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.8.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.9.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.10.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.11.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.12.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.13.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.14.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.15.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.16.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.17.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.18.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.19.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.20.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.21.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.22.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.23.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.24.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.25.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.26.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.27.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.28.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.29.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.30.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.31.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.32.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.33.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.34.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.35.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.36.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.37.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.38.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.39.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.40.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.41.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.42.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.43.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.44.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.45.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.46.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.47.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.48.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.49.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.50.suppress which is deprecated and will be removed in the future.
+info    |    Loading AutoRest extension '@autorest/csharp' (https://aka.ms/azsdk/openapi-to-typespec-csharp->3.0.0-alpha.20231017.8)
+info    |    Loading AutoRest extension '@autorest/modelerfour' (4.26.0->4.26.0)
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8678:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8687:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > createMode)
+  keys: [ [32m'type'[39m, [32m'default'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8692:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8698:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8721:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > restoreParameters)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8730:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8735:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8744:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8757:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8762:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8771:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8890:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8899:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8904:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8927:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8936:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8945:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8958:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8963:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8972:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OptionsResource > properties > autoscaleSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9768:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AnalyticalStorageConfiguration > properties > schemaType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11552:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicy > properties > type)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11726:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicy > properties > migrationState)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11731:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicyMigrationState > properties > status)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11757:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicyMigrationState > properties > targetType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11762:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PeriodicModeBackupPolicy > properties > periodicModeProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11797:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ContinuousModeBackupPolicy > properties > continuousModeProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11814:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PeriodicModeProperties > properties > backupStorageRedundancy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11838:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ContinuousModeProperties > properties > tier)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11849:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBLocation > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > createMode)
+  keys: [ [32m'type'[39m, [32m'default'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > restoreParameters)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DataTransferJobGetResults > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/dataTransferService.json:505:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableDatabaseAccountProperties > properties > apiType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:981:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1096:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlContainerProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1204:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1348:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbCollectionGetResult > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1391:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbCollectionProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1427:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1552:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinGraphProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1631:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableTableProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1756:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupInformation > properties > continuousBackupInformation)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1846:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableCosmosDBAccount > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlContainer > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongoDBDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinGraph > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableTable > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > Resource > properties > systemData)
+  keys: [ [32m'type'[39m ]
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > Resource > properties > systemData)
+  keys: [ [32m'type'[39m ]
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7270:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7297:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlContainerListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7310:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlStoredProcedureListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7323:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlUserDefinedFunctionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7336:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlTriggerListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7349:5
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7362:5
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7375:5
+warning | PreCheck/SchemaMissingType | The schema 'TableListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7388:5
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7401:5
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7414:5
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7427:5
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7440:5
+warning | PreCheck/SchemaMissingType | The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7467:5
+warning | PreCheck/SchemaMissingType | The schema 'CloudError' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7480:5
+warning | PreCheck/SchemaMissingType | The schema 'FailoverPolicies' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7489:5
+warning | PreCheck/SchemaMissingType | The schema 'RegionForOnlineOffline' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7525:5
+warning | PreCheck/SchemaMissingType | The schema 'ClientEncryptionKeyGetProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7671:9
+warning | PreCheck/SchemaMissingType | The schema 'GraphResourceGetProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7801:9
+warning | PreCheck/SchemaMissingType | The schema 'CassandraViewGetProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8287:9
+warning | PreCheck/SchemaMissingType | The schema 'CassandraViewGetProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8297:9
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountConnectionString' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9034:5
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountListConnectionStringsResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9084:5
+warning | PreCheck/SchemaMissingType | The schema 'PhysicalPartitionThroughputInfoResultProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9926:9
+warning | PreCheck/SchemaMissingType | The schema 'ManagedServiceIdentity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:10884:5
+warning | PreCheck/SchemaMissingType | The schema 'Operation-display' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11054:9
+warning | PreCheck/SchemaMissingType | The schema 'OperationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11077:5
+warning | PreCheck/SchemaMissingType | The schema 'UsagesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11093:5
+warning | PreCheck/SchemaMissingType | The schema 'Usage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11106:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionUsagesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11137:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionUsage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11150:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricDefinitionsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11170:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricDefinition' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11183:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricAvailability' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11227:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11242:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricName' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11294:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricValue' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11309:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11350:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11363:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetricValue' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11402:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionMetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11454:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11467:5
+warning | PreCheck/SchemaMissingType | The schema 'ThroughputSettingsProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlDatabaseProperties-resource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlContainerProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlContainerProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlStoredProcedureProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlUserDefinedFunctionProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlTriggerProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBTableProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBTableProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBAccountReadOnlyKeyList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBAccountKeyList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBBaseMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'SqlRoleDefinitionResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/rbac.json:401:5
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlRoleAssignmentList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlRoleDefinitionList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ErrorResponse' (4 differences):
+  - properties.code: {"$ref":"#/components/schemas/schemas:33","description":"Error code."} => <none>
+  - properties.message: {"$ref":"#/components/schemas/schemas:34","description":"Error message indicating why the operation failed."} => <none>
+  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1298"}
+  - title: <none> => "Error response"
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProvisioningState' (2 differences):
+  - enum: <none> => ["Succeeded","Failed","Canceled","InProgress","Updating","Dropping"]
+  - x-ms-enum: <none> => {"name":"ProvisioningState","modelAsString":true}
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'Resource' (3 differences):
+  - properties.id.$ref: "#/components/schemas/schemas:1184" => "#/components/schemas/schemas:1265"
+  - properties.id.description: "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}" => "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+  - properties.systemData: <none> => {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1249"}
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProxyResource' (1 differences):
+  - allOf.0.$ref: "#/components/schemas/schemas:1183" => "#/components/schemas/schemas:1264"
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'DatabaseAccountCreateUpdateParameters' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from DatabaseAccountCreateUpdateParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreSource' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreTimestampInUtc' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'CosmosDBAccount' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from CosmosDBAccount
+warning | SecurityDefinedSpecAndConfig | OpenAPI spec has a security definition but autorest security config is defined. Security config from autorest will be used.
+warning | PreNamer/DeduplicateName | Deduplicating schema name: 'ProxyResource' -> 'ProxyResourceAutoGenerated'
+warning | PreNamer/DeduplicateName | Deduplicating schema name: 'Resource' -> 'ResourceAutoGenerated'
+warning | PreNamer/DeduplicateName | Deduplicating schema name: 'ErrorResponse' -> 'ErrorResponseAutoGenerated'
+info    | Autorest completed in 136.68s. 1 files generated.
+##Converting from swagger to tsp with in C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management with https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.5aa5fec3b.tgz
+autorest --openapi-to-typespec --isArm --use="https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.5aa5fec3b.tgz" --output-folder=C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management --src-path=tsp-output C:\Users\v-cruan\Documents\GitHub\azure-rest-api-specs\specification\cosmos-db\CosmosDB.Management\TspReadme.md
+AutoRest code generation utility [cli version: 3.6.3; node: v20.9.0]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+
+There is a new version of AutoRest available (3.7.1).
+ > You can install the newer version with with npm install -g autorest@latest
+
+info    |    Loading AutoRest core      'C:\Users\v-cruan\.autorest\@autorestcore@3.9.7\nodemodules\@autorest\core\dist' (3.9.7)
+warning | DeprecatedConfig | Using directive.0.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.1.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.2.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.3.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.4.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.5.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.6.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.7.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.8.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.9.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.10.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.11.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.12.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.13.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.14.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.15.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.16.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.17.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.18.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.19.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.20.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.21.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.22.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.23.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.24.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.25.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.26.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.27.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.28.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.29.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.30.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.31.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.32.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.33.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.34.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.35.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.36.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.37.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.38.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.39.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.40.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.41.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.42.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.43.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.44.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.45.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.46.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.47.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.48.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.49.suppress which is deprecated and will be removed in the future.
+warning | DeprecatedConfig | Using directive.50.suppress which is deprecated and will be removed in the future.
+info    |    Loading AutoRest extension '@autorest/openapi-to-typespec' (https://chenjieshistorage.blob.core.windows.net/package-store/autorest-openapi-to-typespec-0.7.0-ci.5aa5fec3b.tgz->0.7.0-ci.5aa5fec3b)
+info    |    Loading AutoRest extension '@autorest/modelerfour' (^4.23.5->4.25.0)
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8678:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8687:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > createMode)
+  keys: [ [32m'type'[39m, [32m'default'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8692:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8698:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8721:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > restoreParameters)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8730:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8735:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8744:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8757:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8762:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountCreateUpdateProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8771:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8890:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8899:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8904:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8927:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8936:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8945:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8958:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8963:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DatabaseAccountUpdateProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8972:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > OptionsResource > properties > autoscaleSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9768:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > AnalyticalStorageConfiguration > properties > schemaType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11552:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicy > properties > type)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11726:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicy > properties > migrationState)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11731:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicyMigrationState > properties > status)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11757:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupPolicyMigrationState > properties > targetType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11762:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PeriodicModeBackupPolicy > properties > periodicModeProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11797:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ContinuousModeBackupPolicy > properties > continuousModeProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11814:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > PeriodicModeProperties > properties > backupStorageRedundancy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11838:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > ContinuousModeProperties > properties > tier)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11849:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBLocation > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > apiProperties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > analyticalStorageConfiguration)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > createMode)
+  keys: [ [32m'type'[39m, [32m'default'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > restoreParameters)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > backupPolicy)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > diagnosticLogSettings)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > capacity)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > keysMetadata)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > minimalTlsVersion)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > customerManagedKeyStatus)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > CosmosDBAccountProperties > properties > defaultPriorityLevel)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > DataTransferJobGetResults > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/dataTransferService.json:505:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableDatabaseAccountProperties > properties > apiType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:981:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1096:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlContainerProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1204:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1348:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbCollectionGetResult > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1391:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongodbCollectionProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1427:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinDatabaseProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1552:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinGraphProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1631:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableTableProperties > properties > resource > properties > operationType)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1756:13
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > BackupInformation > properties > continuousBackupInformation)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:1846:9
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableCosmosDBAccount > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableSqlContainer > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableMongoDBDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinDatabase > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableGremlinGraph > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > RestorableTable > properties > properties)
+  keys: [ [32m'type'[39m ]
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/restorable.json:912:3
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > Resource > properties > systemData)
+  keys: [ [32m'type'[39m ]
+warning | IgnoredPropertyNextToRef | Semantic violation: Sibling values alongside $ref will be ignored. See https://github.com/Azure/autorest/blob/main/docs/openapi/howto/$ref-siblings.md for allowed values (components > schemas > Resource > properties > systemData)
+  keys: [ [32m'type'[39m ]
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7270:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7297:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlContainerListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7310:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlStoredProcedureListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7323:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlUserDefinedFunctionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7336:5
+warning | PreCheck/SchemaMissingType | The schema 'SqlTriggerListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7349:5
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7362:5
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7375:5
+warning | PreCheck/SchemaMissingType | The schema 'TableListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7388:5
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7401:5
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7414:5
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7427:5
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7440:5
+warning | PreCheck/SchemaMissingType | The schema 'ErrorResponse' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7467:5
+warning | PreCheck/SchemaMissingType | The schema 'CloudError' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7480:5
+warning | PreCheck/SchemaMissingType | The schema 'FailoverPolicies' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7489:5
+warning | PreCheck/SchemaMissingType | The schema 'RegionForOnlineOffline' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7525:5
+warning | PreCheck/SchemaMissingType | The schema 'ClientEncryptionKeyGetProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7671:9
+warning | PreCheck/SchemaMissingType | The schema 'GraphResourceGetProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7801:9
+warning | PreCheck/SchemaMissingType | The schema 'CassandraViewGetProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8287:9
+warning | PreCheck/SchemaMissingType | The schema 'CassandraViewGetProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:8297:9
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountConnectionString' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9034:5
+warning | PreCheck/SchemaMissingType | The schema 'DatabaseAccountListConnectionStringsResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9084:5
+warning | PreCheck/SchemaMissingType | The schema 'PhysicalPartitionThroughputInfoResultProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:9926:9
+warning | PreCheck/SchemaMissingType | The schema 'ManagedServiceIdentity' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:10884:5
+warning | PreCheck/SchemaMissingType | The schema 'Operation-display' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11054:9
+warning | PreCheck/SchemaMissingType | The schema 'OperationListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11077:5
+warning | PreCheck/SchemaMissingType | The schema 'UsagesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11093:5
+warning | PreCheck/SchemaMissingType | The schema 'Usage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11106:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionUsagesResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11137:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionUsage' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11150:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricDefinitionsListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11170:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricDefinition' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11183:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricAvailability' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11227:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11242:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricName' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11294:5
+warning | PreCheck/SchemaMissingType | The schema 'MetricValue' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11309:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11350:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11363:5
+warning | PreCheck/SchemaMissingType | The schema 'PercentileMetricValue' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11402:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionMetricListResult' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11454:5
+warning | PreCheck/SchemaMissingType | The schema 'PartitionMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:11467:5
+warning | PreCheck/SchemaMissingType | The schema 'ThroughputSettingsProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlDatabaseProperties-resource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlContainerProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlContainerProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlStoredProcedureProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlUserDefinedFunctionProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlTriggerProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'MongoDBCollectionProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBTableProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBTableProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraKeyspaceProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CassandraTableProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinDatabaseProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphProperties-resource' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'GremlinGraphProperties-options' with an undefined type and 'allOf'/'anyOf'/'oneOf' is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBAccountReadOnlyKeyList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBAccountKeyList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBBaseMetric' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'SqlRoleDefinitionResource' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/rbac.json:401:5
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlRoleAssignmentList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/SchemaMissingType | The schema 'CosmosDBSqlRoleDefinitionList' with an undefined type and declared properties is a bit ambiguous. This has been auto-corrected to 'type:object'
+    - https://github.com/Azure/azure-rest-api-specs/blob/fa285f544fa37cd839c4befe1109db3547b016ab/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/preview/2023-09-15-preview/cosmos-db.json:7255:3
+warning | PreCheck/CheckDuplicateSchemas | Checking for duplicate schemas, this could take a (long) while.  Run with --verbose for more detail.
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ErrorResponse' (4 differences):
+  - properties.code: {"$ref":"#/components/schemas/schemas:33","description":"Error code."} => <none>
+  - properties.message: {"$ref":"#/components/schemas/schemas:34","description":"Error message indicating why the operation failed."} => <none>
+  - properties.error: <none> => {"description":"The error object.","$ref":"#/components/schemas/schemas:1488"}
+  - title: <none> => "Error response"
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProvisioningState' (2 differences):
+  - enum: <none> => ["Succeeded","Failed","Canceled","InProgress","Updating","Dropping"]
+  - x-ms-enum: <none> => {"name":"ProvisioningState","modelAsString":true}
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'Resource' (3 differences):
+  - properties.id.$ref: "#/components/schemas/schemas:1184" => "#/components/schemas/schemas:1455"
+  - properties.id.description: "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}" => "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+  - properties.systemData: <none> => {"readOnly":true,"type":"object","description":"Azure Resource Manager metadata containing createdBy and modifiedBy information.","$ref":"#/components/schemas/schemas:1249"}
+warning | PreCheck/DuplicateSchema | Duplicate Schema named 'ProxyResource' (1 differences):
+  - allOf.0.$ref: "#/components/schemas/schemas:1183" => "#/components/schemas/schemas:1454"
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'DatabaseAccountCreateUpdateParameters' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from DatabaseAccountCreateUpdateParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreSource' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'RestoreParameters' has a property 'restoreTimestampInUtc' that is already declared the parent schema 'RestoreParametersBase' but isn't significantly different. The property has been removed from RestoreParameters
+warning | PreCheck/PropertyRedeclarationWarning | Schema 'CosmosDBAccount' has a property 'identity' that is already declared the parent schema 'ARMResourceProperties' but isn't significantly different. The property has been removed from CosmosDBAccount
+error   | Duplicate object schemas with 'ProxyResource' name  detected.
+error   | Duplicate object schemas with 'Resource' name  detected.
+error   | Duplicate object schemas with 'ErrorResponse' name  detected.
+fatal   | Error: 3 errors occured -- cannot continue.
+fatal   | Process() cancelled due to failure 
+error   |   Error: Plugin checker reported failure.
+error   | Autorest completed with an error. If you think the error message is unclear, or is a bug, please declare an issues at https://github.com/Azure/autorest/issues with the error message you are seeing.

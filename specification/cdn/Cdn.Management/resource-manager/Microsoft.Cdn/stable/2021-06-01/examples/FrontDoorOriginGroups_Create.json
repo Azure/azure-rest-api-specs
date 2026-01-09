@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "originGroup": {
+      "properties": {
+        "healthProbeSettings": {
+          "probeIntervalInSeconds": 10,
+          "probePath": "/path2",
+          "probeProtocol": "NotSet",
+          "probeRequestType": "NotSet"
+        },
+        "loadBalancingSettings": {
+          "additionalLatencyInMilliseconds": 1000,
+          "sampleSize": 3,
+          "successfulSamplesRequired": 3
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+      }
+    },
+    "originGroupName": "origingroup1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Succeeded",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Succeeded",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Creating",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      }
+    }
+  },
+  "operationId": "FrontDoorOriginGroups_Create",
+  "title": "AFDOriginGroups_Create"
+}
