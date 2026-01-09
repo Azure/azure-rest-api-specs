@@ -155,6 +155,9 @@ model EdgeActionProperties {
 
 /** The type used for update operations of the EdgeAction. */
 model EdgeActionUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: EdgeActionPropertiesUpdate;
+
   @doc("The sku type of the edge action")
   sku?: SkuTypeUpdate;
 
@@ -162,6 +165,10 @@ model EdgeActionUpdate {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
+
+/** Represents an edge action properties */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model EdgeActionPropertiesUpdate {}
 
 @doc("Represents an edge action version")
 model EdgeActionVersionProperties {

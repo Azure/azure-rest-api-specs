@@ -1580,10 +1580,18 @@
         "attachments"
       ]
     },
+    "EdgeActionPropertiesUpdate": {
+      "type": "object",
+      "description": "Represents an edge action properties"
+    },
     "EdgeActionUpdate": {
       "type": "object",
       "description": "The type used for update operations of the EdgeAction.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeActionPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
         "sku": {
           "$ref": "#/definitions/SkuTypeUpdate",
           "description": "The sku type of the edge action"
