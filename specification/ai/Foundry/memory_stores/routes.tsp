@@ -65,6 +65,47 @@ interface MemoryStores {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Create a memory item in a memory store.")
+  @operationId("createMemoryItem")
+  @post
+  @route("/memory_stores/{name}/items")
+  createMemoryItem is AgentOperation<CreateMemoryItemRequest, MemoryItem>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Retrieve a memory item from a memory store.")
+  @operationId("getMemoryItem")
+  @get
+  @route("/memory_stores/{name}/items/{memory_id}")
+  getMemoryItem is AgentOperation<GetMemoryItemRequest, MemoryItem>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Update the content of an existing memory item in a memory store.")
+  @operationId("updateMemoryItem")
+  @post
+  @route("/memory_stores/{name}/items/{memory_id}")
+  updateMemoryItem is AgentOperation<UpdateMemoryItemRequest, MemoryItem>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("Delete an existing memory item from a memory store.")
+  @operationId("deleteMemoryItem")
+  @delete
+  @route("/memory_stores/{name}/items/{memory_id}")
+  deleteMemoryItem is AgentOperation<
+    DeleteMemoryItemRequest,
+    DeleteMemoryItemResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
+  @doc("List memory items for a specific scope in a memory store.")
+  @operationId("listMemoryItems")
+  @post
+  @route("/memory_stores/{name}/items:list")
+  listMemoryItems is AgentOperation<
+    ListMemoryItemsRequest,
+    AgentsPagedResult<MemoryItem>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
   @doc("Search for relevant memories from a memory store based on conversation context.")
   @operationId("searchMemories")
   @post

@@ -250,6 +250,9 @@ union MemoryItemKind {
 @doc("A single memory item stored in the memory store, containing content and metadata.")
 @discriminator("kind")
 model MemoryItem {
+  @doc("The object type, which is always 'memory_store.item'.")
+  object: "memory_store.item";
+
   @doc("The unique ID of the memory item.")
   memory_id: string;
 
@@ -403,5 +406,90 @@ alias MemoryStoreDeleteScopeRequest = {
   name: string;
 
   @doc("The namespace that logically groups and isolates memories to delete, such as a user ID.")
+  scope: string;
+};
+
+@doc("Response for deleting a memory item.")
+model DeleteMemoryItemResponse {
+  @doc("The object type. Always 'memory_store.item.deleted'.")
+  object: "memory_store.item.deleted";
+
+  @doc("The ID of the deleted memory item.")
+  memory_id: string;
+
+  @doc("Whether the memory item was successfully deleted.")
+  deleted: boolean;
+}
+
+alias CreateMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
+  scope: string;
+
+  @doc("The content of the memory.")
+  content: string;
+
+  @doc("The kind of the memory item.")
+  kind: MemoryItemKind;
+};
+
+alias GetMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item.")
+  @path
+  memory_id: string;
+};
+
+alias UpdateMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item.")
+  @path
+  memory_id: string;
+
+  @doc("The updated content of the memory.")
+  content: string;
+};
+
+alias DeleteMemoryItemRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  @doc("The ID of the memory item.")
+  @path
+  memory_id: string;
+};
+
+alias MemoryItemsPageOrderQueryParameter = {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Align with OpenAI.PageOrderQueryParameter."
+  @doc("Sort order by the updated_at timestamp of the memory items. 'asc' for ascending order and 'desc' for descending order.")
+  @query
+  order?: "asc" | "desc";
+};
+
+alias ListMemoryItemsRequest = {
+  @doc("The name of the memory store.")
+  @path
+  name: string;
+
+  ...OpenAI.PageLimitQueryParameter;
+  ...OpenAI.PageAfterQueryParameter;
+  ...OpenAI.PageBeforeQueryParameter;
+  ...MemoryItemsPageOrderQueryParameter;
+
+  @doc("Filter by memory item kind. If provided, only items of the specified kind will be returned.")
+  @query
+  kind?: MemoryItemKind;
+
+  @doc("The namespace that logically groups and isolates memories, such as a user ID.")
   scope: string;
 };
