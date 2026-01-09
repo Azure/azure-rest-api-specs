@@ -9,9 +9,11 @@
     "api-version": "2025-01-10",
     "properties": {
       "properties": {
-        "migrationJobsettings": {
-          "validateOnly": true
-        }
+        "operationType": "cutover",
+        "databaseNames": [
+          "HR",
+          "Finance"
+        ]
       }
     }
   },
@@ -82,12 +84,6 @@
           "migrationJobsettings": {
             "validateOnly": false
           },
-          "tags": [
-            {
-              "key": "environment",
-              "value": "production"
-            }
-          ],
           "provisioningState": "Succeeded",
           "migrationStatus": {
             "state": "CutoverInProgress",

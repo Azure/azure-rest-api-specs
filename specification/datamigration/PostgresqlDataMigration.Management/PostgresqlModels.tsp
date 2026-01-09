@@ -330,15 +330,6 @@ model MigrationJobSettings {
   validateOnly: boolean;
 }
 
-@doc("Tag key-value pair.")
-model Tag {
-  @doc("Tag key")
-  key: string;
-
-  @doc("Tag value")
-  value: string;
-}
-
 @doc("Migration statistics.")
 model MigrationStatistics {
   @doc("Total number of tables")
@@ -430,33 +421,43 @@ model MigrationStatus {
 @doc("Properties of the DatabaseMigration resource.")
 model DatabaseMigrationProperties {
   @doc("Migration name")
+  @visibility(Lifecycle.Create)
   migrationName: string;
 
   @doc("Migration description")
+  @visibility(Lifecycle.Create)
   description: string;
 
   @doc("Migration mode")
+  @visibility(Lifecycle.Create)
   migrationMode: MigrationMode;
 
   @doc("Source database configuration")
+  @visibility(Lifecycle.Create)
   source: SourceConfiguration;
 
   @doc("Target database configuration")
+  @visibility(Lifecycle.Create)
   target: TargetConfiguration;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No identifier properties for this array"
   @doc("List of mapping definitions")
+  @visibility(Lifecycle.Create)
   mappingDefinitions: DatabaseMapping[];
 
   @doc("Compute profile")
+  @visibility(Lifecycle.Create)
   computeProfile: ComputeProfile;
 
   @doc("Migration job settings")
+  @visibility(Lifecycle.Create)
   migrationJobsettings: MigrationJobSettings;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "key is the identifier"
-  @doc("List of tags")
-  tags: Tag[];
+  @doc("The type of operation to perform on the migration")
+  operationType?: MigrationOperationType;
+
+  @doc("List of database names to apply the operation to. If not specified, applies to all databases.")
+  databaseNames?: string[];
 
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
@@ -478,15 +479,6 @@ model DatabaseMigrationProperties {
   @doc("Migration end time")
   @visibility(Lifecycle.Read)
   endedAt?: utcDateTime;
-}
-
-@doc("Properties for updating a DatabaseMigration resource with operation type.")
-model DatabaseMigrationUpdateProperties {
-  @doc("The type of operation to perform on the migration")
-  operationType: MigrationOperationType;
-
-  @doc("List of database names to apply the operation to. If not specified, applies to all databases.")
-  databaseNames?: string[];
 }
 
 @doc("Request body for testing connectivity.")

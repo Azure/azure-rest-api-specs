@@ -874,16 +874,6 @@
         "computeSubnetResourceId"
       ]
     },
-    "ComputeProfileUpdate": {
-      "type": "object",
-      "description": "Compute profile configuration.",
-      "properties": {
-        "computeSubnetResourceId": {
-          "type": "string",
-          "description": "Compute subnet resource ID"
-        }
-      }
-    },
     "ConnectionEndpoint": {
       "type": "object",
       "description": "Connection endpoint for database.",
@@ -1200,44 +1190,72 @@
       "properties": {
         "migrationName": {
           "type": "string",
-          "description": "Migration name"
+          "description": "Migration name",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "Migration description"
+          "description": "Migration description",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "migrationMode": {
           "$ref": "#/definitions/MigrationMode",
-          "description": "Migration mode"
+          "description": "Migration mode",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "source": {
           "$ref": "#/definitions/SourceConfiguration",
-          "description": "Source database configuration"
+          "description": "Source database configuration",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "target": {
           "$ref": "#/definitions/TargetConfiguration",
-          "description": "Target database configuration"
+          "description": "Target database configuration",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "mappingDefinitions": {
           "type": "array",
           "description": "List of mapping definitions",
           "items": {
             "$ref": "#/definitions/DatabaseMapping"
-          }
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
-          "description": "Compute profile"
+          "description": "Compute profile",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "migrationJobsettings": {
           "$ref": "#/definitions/MigrationJobSettings",
-          "description": "Migration job settings"
+          "description": "Migration job settings",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
-        "tags": {
+        "operationType": {
+          "$ref": "#/definitions/MigrationOperationType",
+          "description": "The type of operation to perform on the migration"
+        },
+        "databaseNames": {
           "type": "array",
-          "description": "List of tags",
+          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
           "items": {
-            "$ref": "#/definitions/Tag"
+            "type": "string"
           }
         },
         "provisioningState": {
@@ -1279,54 +1297,22 @@
         "target",
         "mappingDefinitions",
         "computeProfile",
-        "migrationJobsettings",
-        "tags"
+        "migrationJobsettings"
       ]
     },
     "DatabaseMigrationPropertiesUpdate": {
       "type": "object",
       "description": "Properties of the DatabaseMigration resource.",
       "properties": {
-        "migrationName": {
-          "type": "string",
-          "description": "Migration name"
+        "operationType": {
+          "$ref": "#/definitions/MigrationOperationType",
+          "description": "The type of operation to perform on the migration"
         },
-        "description": {
-          "type": "string",
-          "description": "Migration description"
-        },
-        "migrationMode": {
-          "$ref": "#/definitions/MigrationMode",
-          "description": "Migration mode"
-        },
-        "source": {
-          "$ref": "#/definitions/SourceConfigurationUpdate",
-          "description": "Source database configuration"
-        },
-        "target": {
-          "$ref": "#/definitions/TargetConfigurationUpdate",
-          "description": "Target database configuration"
-        },
-        "mappingDefinitions": {
+        "databaseNames": {
           "type": "array",
-          "description": "List of mapping definitions",
+          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
           "items": {
-            "$ref": "#/definitions/DatabaseMapping"
-          }
-        },
-        "computeProfile": {
-          "$ref": "#/definitions/ComputeProfileUpdate",
-          "description": "Compute profile"
-        },
-        "migrationJobsettings": {
-          "$ref": "#/definitions/MigrationJobSettingsUpdate",
-          "description": "Migration job settings"
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of tags",
-          "items": {
-            "$ref": "#/definitions/Tag"
+            "type": "string"
           }
         }
       }
@@ -1394,26 +1380,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "DatabaseMigrationUpdateProperties": {
-      "type": "object",
-      "description": "Properties for updating a DatabaseMigration resource with operation type.",
-      "properties": {
-        "operationType": {
-          "$ref": "#/definitions/MigrationOperationType",
-          "description": "The type of operation to perform on the migration"
-        },
-        "databaseNames": {
-          "type": "array",
-          "description": "List of database names to apply the operation to. If not specified, applies to all databases.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "operationType"
       ]
     },
     "DiscoverDatabaseObjectsRequest": {
@@ -1570,16 +1536,6 @@
       "required": [
         "validateOnly"
       ]
-    },
-    "MigrationJobSettingsUpdate": {
-      "type": "object",
-      "description": "Migration job settings.",
-      "properties": {
-        "validateOnly": {
-          "type": "boolean",
-          "description": "Validate only flag"
-        }
-      }
     },
     "MigrationMode": {
       "type": "string",
@@ -1995,27 +1951,6 @@
         "connectionEndPoints"
       ]
     },
-    "SourceConfigurationUpdate": {
-      "type": "object",
-      "description": "Source database configuration.",
-      "properties": {
-        "engine": {
-          "$ref": "#/definitions/SourceDatabaseEngine",
-          "description": "Database engine type"
-        },
-        "serverResourceId": {
-          "type": "string",
-          "description": "Server resource ID"
-        },
-        "connectionEndPoints": {
-          "type": "array",
-          "description": "List of connection endpoints",
-          "items": {
-            "$ref": "#/definitions/ConnectionEndpoint"
-          }
-        }
-      }
-    },
     "SourceDatabaseEngine": {
       "type": "string",
       "description": "The source database engine type.",
@@ -2113,24 +2048,6 @@
         ]
       }
     },
-    "Tag": {
-      "type": "object",
-      "description": "Tag key-value pair.",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "Tag key"
-        },
-        "value": {
-          "type": "string",
-          "description": "Tag value"
-        }
-      },
-      "required": [
-        "key",
-        "value"
-      ]
-    },
     "TargetConfiguration": {
       "type": "object",
       "description": "Target database configuration.",
@@ -2155,27 +2072,6 @@
         "engine",
         "connectionEndPoints"
       ]
-    },
-    "TargetConfigurationUpdate": {
-      "type": "object",
-      "description": "Target database configuration.",
-      "properties": {
-        "engine": {
-          "$ref": "#/definitions/TargetDatabaseEngine",
-          "description": "Database engine type"
-        },
-        "serverResourceId": {
-          "type": "string",
-          "description": "Server resource ID"
-        },
-        "connectionEndPoints": {
-          "type": "array",
-          "description": "List of connection endpoints",
-          "items": {
-            "$ref": "#/definitions/ConnectionEndpoint"
-          }
-        }
-      }
     },
     "TargetDatabaseEngine": {
       "type": "string",

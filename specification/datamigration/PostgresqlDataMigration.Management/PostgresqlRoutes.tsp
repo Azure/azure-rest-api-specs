@@ -54,7 +54,7 @@ interface PostgresqlDatabaseMigrations {
   @doc("Updates a database migration. Supports cancel and cutover operations.")
   update is ArmResourcePatchSync<
     DatabaseMigration,
-    DatabaseMigrationUpdateProperties
+    DatabaseMigrationProperties
   >;
 
   @doc("Deletes a database migration.")
