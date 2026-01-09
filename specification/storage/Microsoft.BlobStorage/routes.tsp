@@ -52,7 +52,7 @@ op StorageOperationNoBody<
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
 >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
-  ...DateResponseHeader;
+  ...DateResponseHeaderPrivate;
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
