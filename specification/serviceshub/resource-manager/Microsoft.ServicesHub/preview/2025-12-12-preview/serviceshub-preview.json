@@ -2080,12 +2080,31 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
-          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
-        "assessmentId": {
+        "logAnalyticsSubscriptionId": {
           "type": "string",
-          "description": "Defines Assessment Id."
+          "description": "Defines the loganalytics subscription Id."
+        },
+        "logAnalyticsResourceGroupName": {
+          "type": "string",
+          "description": "Defines the loganalytics resource group name."
+        },
+        "logAnalyticsWorkspaceName": {
+          "type": "string",
+          "description": "Defines the loganalytics workspace name."
+        },
+        "token": {
+          "type": "string",
+          "description": "Defines the token."
+        },
+        "solutionDisplayName": {
+          "type": "string",
+          "description": "Defines the solution display name."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Defines the solution name."
         },
         "culture": {
           "type": "string",
@@ -2098,7 +2117,14 @@
       },
       "required": [
         "logAnalyticsWorkspaceId",
-        "assessmentId"
+        "logAnalyticsSubscriptionId",
+        "logAnalyticsResourceGroupName",
+        "logAnalyticsWorkspaceName",
+        "token",
+        "solutionDisplayName",
+        "solutionName",
+        "culture",
+        "reportType"
       ]
     },
     "DownloadResult": {
@@ -2219,6 +2245,14 @@
           "type": "string",
           "description": "Defines Survey Id."
         },
+        "solutionDisplayName": {
+          "type": "string",
+          "description": "Defines the solution display name."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Defines the solution name."
+        },
         "culture": {
           "type": "string",
           "description": "Defines the culture."
@@ -2230,7 +2264,11 @@
       },
       "required": [
         "logAnalyticsWorkspaceId",
-        "surveyId"
+        "surveyId",
+        "solutionDisplayName",
+        "solutionName",
+        "culture",
+        "reportType"
       ]
     },
     "SurveyResult": {
