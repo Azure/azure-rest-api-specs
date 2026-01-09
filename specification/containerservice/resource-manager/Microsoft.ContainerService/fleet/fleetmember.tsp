@@ -66,7 +66,8 @@ model FleetMemberProperties {
   @doc("Status information of the last operation for fleet member.")
   status?: FleetMemberStatus;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.v2025_08_02_clustermesh)
+  @visibility(Lifecycle.Read)
   @doc("The Mesh Member associated with this Fleet Member.")
   meshMember?: MeshMember;
 }
