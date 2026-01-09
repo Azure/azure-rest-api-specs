@@ -4096,6 +4096,18 @@
       },
       "description": "Specifies the VM Size."
     },
+    "HighSpeedInterconnectPlacement": {
+      "type": "string",
+      "description": "Specifies the high-speed interconnect placement for the virtual machine scale set.",
+      "enum": [
+        "None",
+        "Trunk"
+      ],
+      "x-ms-enum": {
+        "name": "HighSpeedInterconnectPlacement",
+        "modelAsString": true
+      }
+    },
     "OrchestrationMode": {
       "type": "string",
       "description": "Specifies the orchestration mode for the virtual machine scale set.",
@@ -5353,6 +5365,10 @@
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
           "description": "Specifies the policies applied when scaling in Virtual Machines in the Virtual Machine Scale Set."
+        },
+        "highSpeedInterconnectPlacement": {
+          "$ref": "#/definitions/HighSpeedInterconnectPlacement",
+          "description": "Specifies the configuration for high-speed interconnect placement."
         },
         "orchestrationMode": {
           "$ref": "#/definitions/OrchestrationMode",
