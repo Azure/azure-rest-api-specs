@@ -12816,6 +12816,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "red_team": "#/components/schemas/RedTeamItemGenerationParams",
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
           }
@@ -12830,6 +12831,7 @@
           {
             "type": "string",
             "enum": [
+              "red_team",
               "response_retrieval",
               "red_team_seed_prompts",
               "red_team_taxonomy"
@@ -24027,6 +24029,41 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ]
+      },
+      "RedTeamItemGenerationParams": {
+        "type": "object",
+        "required": [
+          "type",
+          "attack_strategies",
+          "num_turns"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "red_team"
+            ],
+            "description": "The type of item generation parameters."
+          },
+          "attack_strategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttackStrategy"
+            },
+            "description": "The collection of attack strategies to be used."
+          },
+          "num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of turns allowed in the game.",
+            "default": 20
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ]
       },
