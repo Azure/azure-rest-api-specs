@@ -1175,7 +1175,7 @@ interface Entities {
   >;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("Ingest a health report for a specific signal on an entity")
+  @doc("Ingest a health report for a specific signal on an entity (the entity must already exist)")
   @post
   @action("ingestHealthReport")
   ingestHealthReport is ArmResourceActionNoContentSync<
