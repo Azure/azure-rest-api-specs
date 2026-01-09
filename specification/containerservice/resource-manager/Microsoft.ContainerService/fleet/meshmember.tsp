@@ -64,7 +64,7 @@ union MeshMemberState {
 @doc("Status of the mesh member.")
 model MeshMemberStatus {
   @doc("The mesh member state.")
-  meshMemberState: MeshMemberState;
+  state: MeshMemberState;
 
   @doc("When the status was last updated.")
   lastUpdatedAt?: utcDateTime;
