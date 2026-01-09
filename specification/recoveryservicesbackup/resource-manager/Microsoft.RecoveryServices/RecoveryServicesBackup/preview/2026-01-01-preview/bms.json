@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-02-28-preview",
+    "version": "2026-01-01-preview",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -6370,7 +6370,59 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
         }
       ],
+      "properties": {
+        "parentProtectedItem": {
+          "description": "Parent Protected item in case protected as part of a parent.",
+          "type": "string"
+        },
+        "protectionLevel": {
+          "description": "Protection type in case protected as part of a parent.",
+          "enum": [
+            "Database",
+            "DatabaseUnderInstance"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtectionLevel",
+            "modelAsString": true
+          }
+        }
+      },
       "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
+    },
+    "AzureVmWorkloadSQLInstanceProtectedItem": {
+      "description": "Azure VM workload-specific protected item representing SQL Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
+        }
+      ],
+      "properties": {
+        "childDBNames": {
+          "description": "Name of Child Dbs protected under this parent.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "instanceProtectionReadiness": {
+          "description": "The state of instance protection.",
+          "enum": [
+            "Unknown",
+            "Ready",
+            "ScheduleDisabled",
+            "PartialProtection",
+            "ProtectionError"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstanceProtectionReadiness",
+            "modelAsString": true
+          }
+        }
+      },
+      "x-ms-discriminator-value": "AzureVmWorkloadSQLInstance"
     },
     "AzureWorkloadErrorInfo": {
       "description": "Azure storage specific error information",
@@ -6821,6 +6873,14 @@
             "$ref": "#/definitions/SQLDataDirectory"
           },
           "x-ms-identifiers": []
+        },
+        "includedDatabases": {
+          "description": "List of Databases included in the recovery point.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseInRP"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -6895,7 +6955,9 @@
             "All",
             "Incremental",
             "SnapshotFull",
-            "SnapshotCopyOnlyFull"
+            "SnapshotCopyOnlyFull",
+            "Snapshot",
+            "FullDifferentialAndSnapshot"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6914,6 +6976,18 @@
         "includeSoftDeletedRP": {
           "description": "Flag to indicate whether Soft Deleted RPs should be included/excluded from result.",
           "type": "boolean"
+        },
+        "baseSnapshotRPId": {
+          "description": "Id of the base snapshot recovery point.",
+          "type": "string"
+        },
+        "baseRPDatasourceId": {
+          "description": "Id of the datasource of the base snapshot recovery point.",
+          "type": "string"
+        },
+        "getLatestRPOnly": {
+          "type": "boolean",
+          "description": "Flag to indicate whether to get only the latest recovery point."
         }
       }
     },
@@ -7080,6 +7154,20 @@
         "retentionDuration": {
           "$ref": "#/definitions/RetentionDuration",
           "description": "Retention duration of retention Policy."
+        }
+      }
+    },
+    "DatabaseInRP": {
+      "description": "Database included in RP.",
+      "type": "object",
+      "properties": {
+        "datasourceId": {
+          "description": "Datasource Id for the database.",
+          "type": "string"
+        },
+        "datasourceName": {
+          "description": "Datasource name for the database.",
+          "type": "string"
         }
       }
     },
