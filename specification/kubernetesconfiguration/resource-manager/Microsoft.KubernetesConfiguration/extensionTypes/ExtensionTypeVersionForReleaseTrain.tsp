@@ -106,38 +106,37 @@ alias ExtensionTypeVersionForReleaseTrainOperationGroupOps = Azure.ResourceManag
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
-    /** the provider namespace */
+    /**
+     * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.
+     */
     @path
     @segment("providers")
     @key
-    providerNamespace: "clusterRp";
+    clusterRp: string;
 
-    /** The name of the kubernetes cluster. */
-    @path
-    @segment("{clusterResourceName}")
+    /**
+     * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
+     */
     @key
+    @path
+    @pattern("^[a-zA-Z]*$")
+    clusterResourceName: string;
+
+    /**
+     * The name of the kubernetes cluster.
+     */
+    @key
+    @path
     @pattern("^.*")
     clusterName: string;
   },
   {
     ...Extension.ExtensionProviderNamespace<ExtensionTypeVersionForReleaseTrain>;
-
-    /** Name of the Extension Type. */
-    @path
-    @segment("extensionTypes")
-    @key
-    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
-    extensionTypeName: string;
+    ...KeysOf<ExtensionType>;
   },
   {
     ...Extension.ExtensionProviderNamespace<ExtensionTypeVersionForReleaseTrain>;
-
-    /** Name of the Extension Type. */
-    @path
-    @segment("extensionTypes")
-    @key
-    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
-    extensionTypeName: string;
+    ...KeysOf<ExtensionType>;
 
     /** Version number of the Extension Type. */
     @path
@@ -154,17 +153,7 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionTypes_ClusterGetVersion")
-  clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<
-    ExtensionTypeVersionForReleaseTrain,
-    Parameters = {
-      /**
-       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
-       */
-      @pattern("^[a-zA-Z]*$")
-      @path
-      clusterResourceName: string;
-    }
-  >;
+  clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<ExtensionTypeVersionForReleaseTrain>;
 
   /**
    * List the version for an Extension Type installable to the cluster.
@@ -174,13 +163,6 @@ interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   clusterListVersions is ExtensionTypeVersionForReleaseTrainOperationGroupOps.List<
     ExtensionTypeVersionForReleaseTrain,
     Parameters = {
-      /**
-       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
-       */
-      @pattern("^[a-zA-Z]*$")
-      @path
-      clusterResourceName: string;
-
       /**
        * Filter results by release train (default value is stable)
        */

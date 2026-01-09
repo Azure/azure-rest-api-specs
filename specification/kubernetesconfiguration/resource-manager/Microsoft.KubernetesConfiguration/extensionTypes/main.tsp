@@ -23,8 +23,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * KubernetesConfiguration Extension Types Client
+ * Use these APIs to view extension type resources through ARM, for Kubernetes Clusters.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "ExtensionTypesClient" })
 @versioned(Versions)

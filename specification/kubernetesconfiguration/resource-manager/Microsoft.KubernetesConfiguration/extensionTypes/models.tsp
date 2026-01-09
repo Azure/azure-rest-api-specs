@@ -146,12 +146,19 @@ model ExtensionTypeVersionForReleaseTrainProperties {
  */
 model ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @identifiers(#[])
   connectedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @identifiers(#[])
   appliances?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @identifiers(#[])
   provisionedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @identifiers(#[])
   managedCluster?: ExtensionTypeVersionUnsupportedKubernetesMatrixItem[];
 }
 

@@ -100,31 +100,37 @@ alias ExtensionTypeOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpe
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
 
-    /** the provider namespace */
+    /**
+     * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.
+     */
     @path
     @segment("providers")
     @key
-    providerNamespace: "clusterRp";
+    clusterRp: string;
 
-    /** The name of the kubernetes cluster. */
-    @path
-    @segment("{clusterResourceName}")
+    /**
+     * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
+     */
     @key
+    @path
+    @pattern("^[a-zA-Z]*$")
+    clusterResourceName: string;
+
+    /**
+     * The name of the kubernetes cluster.
+     */
+    @key
+    @path
     @pattern("^.*")
     clusterName: string;
   },
   {
     ...Extension.ExtensionProviderNamespace<ExtensionType>;
+    ...ParentKeysOf<ExtensionType>;
   },
   {
     ...Extension.ExtensionProviderNamespace<ExtensionType>;
-
-    /** Name of the Extension Type. */
-    @path
-    @segment("extensionTypes")
-    @key
-    @pattern("^[a-zA-Z][a-zA-Z0-9-_]*$")
-    extensionTypeName: string;
+    ...KeysOf<ExtensionType>;
   }
 >;
 
@@ -135,17 +141,7 @@ interface ExtensionTypeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ExtensionTypes_Get")
-  get is ExtensionTypeOperationGroupOps.Read<
-    ExtensionType,
-    Parameters = {
-      /**
-       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
-       */
-      @pattern("^[a-zA-Z]*$")
-      @path
-      clusterResourceName: string;
-    }
-  >;
+  get is ExtensionTypeOperationGroupOps.Read<ExtensionType>;
 
   /**
    * List installable Extension Types for the cluster based region and type for the cluster.
@@ -155,13 +151,6 @@ interface ExtensionTypeOperationGroup {
   list is ExtensionTypeOperationGroupOps.List<
     ExtensionType,
     Parameters = {
-      /**
-       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
-       */
-      @pattern("^[a-zA-Z]*$")
-      @path
-      clusterResourceName: string;
-
       /**
        * Filter results by Publisher ID of a marketplace extension type
        */
