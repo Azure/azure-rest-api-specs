@@ -8,7 +8,7 @@ using Microsoft.Web;
 using Azure.ResourceManager;
 
 // python
-@@clientName(Microsoft.Web, "WebSiteManagementClient", "python");
+@@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go");
 
 @@clientName(SupportedTlsVersions.`1.0`, "ONE0", "python");
@@ -16,10 +16,10 @@ using Azure.ResourceManager;
 @@clientName(SupportedTlsVersions.`1.2`, "ONE2", "python");
 @@clientName(SupportedTlsVersions.`1.3`, "ONE3", "python");
 
-@@clientName(SupportedTlsVersions.`1.0`, "One0", "go");
-@@clientName(SupportedTlsVersions.`1.1`, "One1", "go");
-@@clientName(SupportedTlsVersions.`1.2`, "One2", "go");
-@@clientName(SupportedTlsVersions.`1.3`, "One3", "go");
+@@clientName(SupportedTlsVersions.`1.0`, "One0", "go, javascript");
+@@clientName(SupportedTlsVersions.`1.1`, "One1", "go, javascript");
+@@clientName(SupportedTlsVersions.`1.2`, "One2", "go, javascript");
+@@clientName(SupportedTlsVersions.`1.3`, "One3", "go, javascript");
 
 @@clientName(TlsCipherSuites.TLS_AES_256_GCM_SHA384,
   "TLS_AES256_GCM_SHA384",
