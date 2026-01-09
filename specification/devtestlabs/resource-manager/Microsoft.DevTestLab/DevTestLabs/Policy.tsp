@@ -13,17 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A Policy.
  */
-model Policy
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    PolicyProperties,
-    false
-  > {
+model Policy is Azure.ResourceManager.ProxyResource<PolicyProperties> {
   ...ResourceNameParameter<
     Resource = Policy,
     KeyName = "name",
     SegmentName = "policies",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

@@ -14,16 +14,21 @@ namespace Microsoft.DevTestLab;
  * A virtual network.
  */
 model VirtualNetwork
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    VirtualNetworkProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<VirtualNetworkProperties> {
   ...ResourceNameParameter<
     Resource = VirtualNetwork,
     KeyName = "name",
     SegmentName = "virtualnetworks",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

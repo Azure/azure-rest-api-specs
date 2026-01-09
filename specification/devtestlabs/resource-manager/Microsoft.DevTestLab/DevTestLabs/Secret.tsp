@@ -13,17 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
-model Secret
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    SecretProperties,
-    false
-  > {
+model Secret is Azure.ResourceManager.ProxyResource<SecretProperties> {
   ...ResourceNameParameter<
     Resource = Secret,
     KeyName = "name",
     SegmentName = "secrets",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

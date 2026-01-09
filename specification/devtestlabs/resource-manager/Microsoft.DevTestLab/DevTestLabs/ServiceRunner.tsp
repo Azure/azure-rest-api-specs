@@ -13,23 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
-model ServiceRunner
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    never,
-    false
-  > {
+model ServiceRunner is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
-    Resource = Secret,
+    Resource = ServiceRunner,
     KeyName = "name",
-    SegmentName = "servicerunners",
+    SegmentName = "servicefabrics",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /**
-   * The identity of the resource.
+   * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  identity?: IdentityProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

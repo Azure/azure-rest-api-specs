@@ -8,17 +8,75 @@ using Microsoft.DevTestLab;
 @@scope(Operations.get, "!csharp");
 @@scope(ProviderOperations.list, "!csharp");
 
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ArmTemplate,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ArmTemplate, "DevTestLabArmTemplate", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Artifact,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Artifact, "DevTestLabArtifact", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ArtifactSource,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ArtifactSource, "DevTestLabArtifactSource", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(LabCost,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(CustomImage, "DevTestLabCustomImage", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Disk,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Disk, "DevTestLabDisk", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DtlEnvironment,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(DtlEnvironment, "DevTestLabEnvironment", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Formula,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Formula, "DevTestLabFormula", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Lab,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Lab, "DevTestLab", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(LabCost,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(LabCost, "DevTestLabCost", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Schedule,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Schedule, "DevTestLabSchedule", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(LabVirtualMachine,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(LabVirtualMachine, "DevTestLabVm", "csharp");
 @@clientName(LabVirtualMachineProperties.virtualMachineCreationSource,
   "VmCreationSource",
@@ -37,11 +95,41 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(NotificationChannel, "DevTestLabNotificationChannel", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Policy,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Policy, "DevTestLabPolicy", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(Secret,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(Secret, "DevTestLabSecret", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ServiceFabric,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ServiceFabric, "DevTestLabServiceFabric", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ServiceRunner,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(ServiceRunner, "DevTestLabServiceRunner", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(User,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(User, "DevTestLabUser", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VirtualNetwork,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(VirtualNetwork, "DevTestLabVirtualNetwork", "csharp");
 @@clientName(ApplicableSchedule, "DevTestLabApplicableSchedule", "csharp");
 @@alternateType(ApplicableSchedule.location, azureLocation, "csharp");
@@ -146,6 +234,11 @@ using Microsoft.DevTestLab;
 @@clientName(SubnetOverride, "DevTestLabSubnetOverride", "csharp");
 @@alternateType(SubnetOverride.resourceId, armResourceIdentifier, "csharp");
 @@clientName(FileUploadOptions, "DevTestLabFileUploadOption", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(GalleryImage,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@clientName(GalleryImage, "DevTestLabGalleryImage", "csharp");
 @@clientName(GalleryImageProperties.enabled, "IsEnabled", "csharp");
 @@clientName(GalleryImageReference,
@@ -265,6 +358,7 @@ using Microsoft.DevTestLab;
 );
 @@clientName(WeekDetails, "DevTestLabWeekDetails", "csharp");
 @@clientName(ArmTemplateProperties.enabled, "IsEnabled", "csharp");
+@@alternateType(ArmTemplateProperties.contents, unknown, "csharp");
 @@clientName(LabAnnouncementProperties.expired, "IsExpired", "csharp");
 @@clientName(CustomImagePropertiesCustom.sysPrep, "IsSysPrepEnabled", "csharp");
 @@alternateType(DiskProperties.managedDiskId, armResourceIdentifier, "csharp");
@@ -306,5 +400,8 @@ using Microsoft.DevTestLab;
 
 @@clientName(GlobalSchedules, "DevTestLabGlobalSchedules", "csharp");
 @@clientName(Schedules, "DevTestLabSchedules", "csharp");
-@@clientName(ServiceFabricSchedules, "DevTestLabServiceFabricSchedules", "csharp");
+@@clientName(ServiceFabricSchedules,
+  "DevTestLabServiceFabricSchedules",
+  "csharp"
+);
 @@clientName(VirtualMachineSchedules, "DevTestLabVmSchedules", "csharp");

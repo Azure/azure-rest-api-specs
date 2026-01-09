@@ -13,16 +13,21 @@ namespace Microsoft.DevTestLab;
  * A notification.
  */
 model NotificationChannel
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    NotificationChannelProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<NotificationChannelProperties> {
   ...ResourceNameParameter<
     Resource = NotificationChannel,
     KeyName = "name",
     SegmentName = "notificationchannels",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

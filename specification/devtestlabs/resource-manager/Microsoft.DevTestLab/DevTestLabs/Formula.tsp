@@ -13,17 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
-model Formula
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    FormulaProperties,
-    false
-  > {
+model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties> {
   ...ResourceNameParameter<
     Resource = Formula,
     KeyName = "name",
     SegmentName = "formulas",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

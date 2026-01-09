@@ -13,16 +13,21 @@ namespace Microsoft.DevTestLab;
  * A gallery image.
  */
 model GalleryImage
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    GalleryImageProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<GalleryImageProperties> {
   ...ResourceNameParameter<
     Resource = GalleryImage,
     KeyName = "name",
     SegmentName = "galleryimages",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

@@ -13,16 +13,21 @@ namespace Microsoft.DevTestLab;
  * A custom image.
  */
 model CustomImage
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    CustomImageProperties,
-    false
-  > {
+  is Azure.ResourceManager.ProxyResource<CustomImageProperties> {
   ...ResourceNameParameter<
     Resource = CustomImage,
     KeyName = "name",
     SegmentName = "customimages",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

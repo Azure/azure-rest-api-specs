@@ -14,18 +14,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-model Schedule
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    ScheduleProperties,
-    false
-  > {
+model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = Schedule,
     KeyName = "name",
     SegmentName = "schedules",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

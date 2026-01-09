@@ -12,17 +12,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
-model Disk
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    DiskProperties,
-    false
-  > {
+model Disk is Azure.ResourceManager.ProxyResource<DiskProperties> {
   ...ResourceNameParameter<
     Resource = Disk,
     KeyName = "name",
     SegmentName = "disks",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations

@@ -13,17 +13,21 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
-model LabCost
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    LabCostProperties,
-    false
-  > {
+model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties> {
   ...ResourceNameParameter<
     Resource = LabCost,
     KeyName = "name",
     SegmentName = "costs",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
 
 @armResourceOperations
