@@ -319,8 +319,8 @@ stages:
             $updatedTitle = "Failed-$currentTitle"
             Write-Host "##vso[task.setvariable variable=PrTitle]$updatedTitle"
             Write-Host "Updated PR Title to: '$updatedTitle'"
-          displayName: "Set PR title prefix based on job status"
-          condition: eq(variables['Agent.JobStatus'], 'Failed')
+          displayName: "Set PR title prefix on failures"
+          condition: or(eq(variables['Agent.JobStatus'], 'Failed'), eq(variables['Agent.JobStatus'], 'SucceededWithIssues'))
 
         - task: PowerShell@2
           displayName: Create pull request
