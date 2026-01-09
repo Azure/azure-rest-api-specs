@@ -183,6 +183,33 @@ interface DocumentModels {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @doc("Gets the generated searchable PNG output from document analysis.")
+  @route("/documentModels/{modelId}/analyzeResults/{resultId}/png")
+  @get
+  getAnalyzeResultPng is DocumentIntelligenceOperation<
+    {
+      @doc("Unique document model name.")
+      @path
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
+      @maxLength(64)
+      modelId: string;
+
+      @doc("Analyze operation result ID.")
+      @path
+      resultId: uuid;
+    },
+    {
+      @doc("Response content type.")
+      @header
+      contentType: "application/png";
+
+      @doc("Response PNG.")
+      @body
+      png: bytes;
+    }
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Gets the generated cropped image of specified figure from document analysis.")
   @route("/documentModels/{modelId}/analyzeResults/{resultId}/figures/{figureId}")
   @get
