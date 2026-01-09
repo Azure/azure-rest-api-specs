@@ -5368,6 +5368,7 @@ model DeletedSiteProperties {
   /**
    * Kind of site that was deleted
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   kind?: string;
 
