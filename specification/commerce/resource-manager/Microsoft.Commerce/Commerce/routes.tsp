@@ -13,38 +13,6 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Commerce;
 
-alias UsageAggregatesListParameters = {
-  /**
-   * The start of the time range to retrieve data for.
-   */
-  @query("reportedStartTime")
-  reportedStartTime: utcDateTime;
-
-  /**
-   * The end of the time range to retrieve data for.
-   */
-  @query("reportedEndTime")
-  reportedEndTime: utcDateTime;
-
-  /**
-   * `True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime).
-   */
-  @query("showDetails")
-  showDetails?: boolean;
-
-  /**
-   * `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.
-   */
-  @query("aggregationGranularity")
-  aggregationGranularity?: AggregationGranularity = AggregationGranularity.Daily;
-
-  /**
-   * Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in.
-   */
-  @query("continuationToken")
-  continuationToken?: string;
-};
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsageAggregatesOperationGroup {
   /**
@@ -61,7 +29,37 @@ interface UsageAggregatesOperationGroup {
     Response = ResourceListResult<UsageAggregation> | (ArmAcceptedLroResponse &
       ErrorObjectResponse),
     Scope = SubscriptionActionScope,
-    Parameters = UsageAggregatesListParameters,
+    Parameters = {
+      /**
+       * The start of the time range to retrieve data for.
+       */
+      @query("reportedStartTime")
+      reportedStartTime: utcDateTime;
+
+      /**
+       * The end of the time range to retrieve data for.
+       */
+      @query("reportedEndTime")
+      reportedEndTime: utcDateTime;
+
+      /**
+       * `True` returns usage data in instance-level detail, `false` causes server-side aggregation with fewer details. For example, if you have 3 website instances, by default you will get 3 line items for website consumption. If you specify showDetails = false, the data will be aggregated as a single line item for website consumption within the time period (for the given subscriptionId, meterId, usageStartTime and usageEndTime).
+       */
+      @query("showDetails")
+      showDetails?: boolean;
+
+      /**
+       * `Daily` (default) returns the data in daily granularity, `Hourly` returns the data in hourly granularity.
+       */
+      @query("aggregationGranularity")
+      aggregationGranularity?: AggregationGranularity = AggregationGranularity.Daily;
+
+      /**
+       * Used when a continuation token string is provided in the response body of the previous call, enabling paging through a large result set. If not present, the data is retrieved from the beginning of the day/hour (based on the granularity) passed in.
+       */
+      @query("continuationToken")
+      continuationToken?: string;
+    },
     Error = ErrorObjectResponse
   >;
 }
