@@ -12760,7 +12760,11 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemGenerationParamsType"
+              }
+            ],
             "description": "The type of item generation parameters to use."
           }
         },
@@ -12768,11 +12772,28 @@
           "propertyName": "type",
           "mapping": {
             "red_team": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_seed_prompts": "#/components/schemas/RedTeamItemGenerationParams",
-            "red_team_taxonomy": "#/components/schemas/RedTeamItemGenerationParams"
+            "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
+            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
+      },
+      "ItemGenerationParamsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "red_team",
+              "response_retrieval",
+              "red_team_seed_prompts",
+              "red_team_taxonomy"
+            ]
+          }
+        ],
+        "description": "The types of parameters for red team item generation."
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -30306,7 +30327,7 @@
           "item_generation_params": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/RedTeamItemGenerationParams"
+                "$ref": "#/components/schemas/ItemGenerationParams"
               }
             ],
             "description": "The parameters for item generation."
@@ -30337,9 +30358,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "red_team",
-              "red_team_seed_prompts",
-              "red_team_taxonomy"
+              "red_team"
             ],
             "description": "The type of item generation parameters."
           },
@@ -30357,24 +30376,18 @@
             "default": 20
           }
         },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
-            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/ItemGenerationParams"
           }
-        ],
-        "description": "Represents the parameters for red team item generation."
+        ]
       },
       "RedTeamSeedPromptsItemGenerationParams": {
         "type": "object",
         "required": [
           "type",
+          "attack_strategies",
+          "num_turns",
           "source"
         ],
         "properties": {
@@ -30384,6 +30397,19 @@
               "red_team_seed_prompts"
             ],
             "description": "The type of item generation parameters, always `red_team_seed_prompts`."
+          },
+          "attack_strategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttackStrategy"
+            },
+            "description": "The collection of attack strategies to be used."
+          },
+          "num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of turns allowed in the game.",
+            "default": 20
           },
           "source": {
             "allOf": [
@@ -30396,7 +30422,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/RedTeamItemGenerationParams"
+            "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ],
         "description": "Represents the parameters for red team seed prompts item generation."
@@ -30405,6 +30431,8 @@
         "type": "object",
         "required": [
           "type",
+          "attack_strategies",
+          "num_turns",
           "source"
         ],
         "properties": {
@@ -30414,6 +30442,19 @@
               "red_team_taxonomy"
             ],
             "description": "The type of item generation parameters, always `red_team_taxonomy`."
+          },
+          "attack_strategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttackStrategy"
+            },
+            "description": "The collection of attack strategies to be used."
+          },
+          "num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of turns allowed in the game.",
+            "default": 20
           },
           "source": {
             "allOf": [
@@ -30426,7 +30467,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/RedTeamItemGenerationParams"
+            "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ],
         "description": "Represents the parameters for red team taxonomy item generation."

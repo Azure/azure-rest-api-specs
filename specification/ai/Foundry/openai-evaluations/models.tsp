@@ -163,14 +163,28 @@ model CreateEvalRequest is OpenAI.CreateEvalRequest {
   properties?: Record<string>;
 }
 
-/** Represents the parameters for red team item generation. */
+/** The types of parameters for red team item generation. */
+union ItemGenerationParamsType {
+  string,
+
+  /** Parameters for red team. */
+  redTeam: "red_team",
+
+  /** The ResponseRetrieval item generation parameters. */
+  responseRetrieval: "response_retrieval",
+
+  /** Parameters for red team seed prompts. */
+  redTeamSeedPrompts: "red_team_seed_prompts",
+
+  /** Parameters for red team taxonomy item generation. */
+  redTeamTaxonomy: "red_team_taxonomy",
+}
+
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-@discriminator("type")
 model RedTeamItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  type: "red_team" | "red_team_seed_prompts" | "red_team_taxonomy";
+  type: ItemGenerationParamsType.redTeam;
 
   /** The collection of attack strategies to be used. */
   attack_strategies: AttackStrategy[];
@@ -182,10 +196,15 @@ model RedTeamItemGenerationParams extends ItemGenerationParams {
 /** Represents the parameters for red team seed prompts item generation. */
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-model RedTeamSeedPromptsItemGenerationParams
-  extends RedTeamItemGenerationParams {
+model RedTeamSeedPromptsItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `red_team_seed_prompts`. */
-  type: "red_team_seed_prompts";
+  type: ItemGenerationParamsType.redTeamSeedPrompts;
+
+  /** The collection of attack strategies to be used. */
+  attack_strategies: AttackStrategy[];
+
+  /** The number of turns allowed in the game. */
+  num_turns: int32 = 20;
 
   /** The source of JSONL content to be processed. */
   source: OpenAI.EvalJsonlFileContentSource;
@@ -194,9 +213,15 @@ model RedTeamSeedPromptsItemGenerationParams
 /** Represents the parameters for red team taxonomy item generation. */
 @added(Versions.v2025_11_15_preview)
 @removed(Versions.v1)
-model RedTeamTaxonomyItemGenerationParams extends RedTeamItemGenerationParams {
+model RedTeamTaxonomyItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `red_team_taxonomy`. */
-  type: "red_team_taxonomy";
+  type: ItemGenerationParamsType.redTeamTaxonomy;
+
+  /** The collection of attack strategies to be used. */
+  attack_strategies: AttackStrategy[];
+
+  /** The number of turns allowed in the game. */
+  num_turns: int32 = 20;
 
   /** The source from which JSONL content is read. */
   source: OpenAI.EvalJsonlFileContentSource;
@@ -208,7 +233,7 @@ model RedTeamTaxonomyItemGenerationParams extends RedTeamItemGenerationParams {
 @removed(Versions.v1)
 model ItemGenerationParams {
   /** The type of item generation parameters to use. */
-  type: string;
+  type: ItemGenerationParamsType;
 }
 
 /** Represents the parameters for continuous evaluation item generation. */
@@ -216,7 +241,7 @@ model ItemGenerationParams {
 @removed(Versions.v1)
 model ContinuousEvalItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `ResponseRetrieval`. */
-  type: "response_retrieval";
+  type: ItemGenerationParamsType.responseRetrieval;
 
   /** The maximum number of turns of chat history to evaluate. */
   max_num_turns: int32;
@@ -376,7 +401,7 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
   type: "azure_ai_red_team";
 
   /** The parameters for item generation. */
-  item_generation_params: RedTeamItemGenerationParams;
+  item_generation_params: ItemGenerationParams;
 
   /** The target configuration for the evaluation. */
   target: Target;
