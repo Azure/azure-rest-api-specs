@@ -796,7 +796,13 @@ export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOpti
   }
 }
 
-export const defaultRules = [
+/**
+ * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
+ * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
+ * if a Rust emitter is configured in tspconfig.yaml but doesn't meet the required validation
+ * criteria, the validation will fail.
+ */
+export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
@@ -835,6 +841,10 @@ export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpDpNamespaceSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
   new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
+  new TspConfigGoDpServiceDirMatchPatternSubRule(),
+  new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
+  new TspConfigGoDpModuleMatchPatternSubRule(),
+  new TspConfigGoDpContainingModuleMatchPatternSubRule(),
   new TspConfigRustMgmtCrateNameSubRule(),
   new TspConfigRustAzEmitterOutputDirSubRule(),
 ];
