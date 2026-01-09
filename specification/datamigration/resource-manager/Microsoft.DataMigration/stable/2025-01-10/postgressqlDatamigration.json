@@ -85,6 +85,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/postgresqlMigrationServices": {
+      "get": {
+        "operationId": "PostgresqlMigrationServices_ListBySubscription",
+        "tags": [
+          "PostgresqlMigrationServices"
+        ],
+        "description": "Lists migration services by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MigrationServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List migration services by subscription": {
+            "$ref": "./examples/PostgresqlMigrationServices_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataMigration/postgresqlMigrationServices": {
       "get": {
         "operationId": "PostgresqlMigrationServices_ListByResourceGroup",

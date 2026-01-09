@@ -28,6 +28,9 @@ interface PostgresqlMigrationServices {
   @doc("Lists migration services by resource group.")
   listByResourceGroup is ArmResourceListByParent<MigrationService>;
 
+  @doc("Lists migration services by subscription.")
+  listBySubscription is ArmListBySubscription<MigrationService>;
+
   @doc("Tests connectivity to source and target databases.")
   testConnectivity is ArmResourceActionAsync<
     MigrationService,
