@@ -129,12 +129,28 @@ union FoundryAgentContextType {
 @usage(RequestUsage)
 model FoundryAgentTool extends Tool {
   type: ToolType.foundry_agent;
+
+  /** The name of the Foundry agent to call. */
   agent_name: string;
+
+  /** The version of the Foundry agent to call. */
   agent_version?: string;
+
+  /** The name of the Foundry project containing the agent. */
   project_name: string;
+
+  /** The client ID associated with the Foundry agent. */
   client_id?: string;
+
+  /** An optional description for the Foundry agent tool. If this is provided, it will be used instead of the agent's description in foundry portal. */
   description?: string;
+
+  /** An optional override for the Foundry resource used to execute the agent. */
   foundry_resource_override?: string;
+
+  /** The context type to use when invoking the Foundry agent. Defaults to 'agent_context'. */
   agent_context_type?: FoundryAgentContextType = FoundryAgentContextType.agent_context;
+
+  /** Whether to return the agent's response directly in the VoiceLive response. Set to false means to ask the voice live to rewrite the response. */
   return_agent_response_directly?: boolean = true;
 }

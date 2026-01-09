@@ -1393,26 +1393,32 @@
       "description": "The definition of a Foundry agent tool as used by the voicelive endpoint.",
       "properties": {
         "agent_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the Foundry agent to call."
         },
         "agent_version": {
-          "type": "string"
+          "type": "string",
+          "description": "The version of the Foundry agent to call."
         },
         "project_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the Foundry project containing the agent."
         },
         "client_id": {
-          "type": "string"
+          "type": "string",
+          "description": "The client ID associated with the Foundry agent."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional description for the Foundry agent tool. If this is provided, it will be used instead of the agent's description in foundry portal."
         },
         "foundry_resource_override": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional override for the Foundry resource used to execute the agent."
         },
         "agent_context_type": {
           "type": "string",
-          "description": "The available set of Foundry agent context types.",
+          "description": "The context type to use when invoking the Foundry agent. Defaults to 'agent_context'.",
           "default": "agent_context",
           "enum": [
             "no_context",
@@ -1437,6 +1443,7 @@
         },
         "return_agent_response_directly": {
           "type": "boolean",
+          "description": "Whether to return the agent's response directly in the VoiceLive response. Set to false means to ask the voice live to rewrite the response.",
           "default": true
         }
       },
