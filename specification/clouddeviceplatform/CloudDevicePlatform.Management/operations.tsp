@@ -19,3 +19,14 @@ interface DelegatedIdentities {
   listBySubscription is ArmListBySubscription<DelegatedIdentity>;
   update is ArmCustomPatchSync<DelegatedIdentity, DelegatedIdentityUpdate>;
 }
+
+@added(Versions.v2026_01_01_preview)
+@armResourceOperations
+interface PartnerBusinesses {
+  createOrUpdate is ArmResourceCreateOrReplaceSync<PartnerBusiness>;
+  delete is ArmResourceDeleteSync<PartnerBusiness>;
+  get is ArmResourceRead<PartnerBusiness>;
+  listByResourceGroup is ArmResourceListByParent<PartnerBusiness>;
+  listBySubscription is ArmListBySubscription<PartnerBusiness>;
+  update is ArmCustomPatchSync<PartnerBusiness, PartnerBusinessUpdate>;
+}
