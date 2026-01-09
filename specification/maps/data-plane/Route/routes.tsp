@@ -630,7 +630,7 @@ interface Route {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"
   @route("/route/operations/{id}")
   @get
-  getRouteOperationsStatus is MapsRouteOperation<
+  getRouteOperationsStatus is Foundations.Operation<
     {
       ...OperationIdPathParameter;
     },

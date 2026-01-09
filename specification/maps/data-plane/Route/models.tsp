@@ -1176,6 +1176,7 @@ model DirectionsRequest {
    * locations. For more information on the GeoJSON format, see [RFC
    * 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
+  @minItems(2)
   features: InputWaypointFeaturesItem[];
 
   /**
@@ -1271,6 +1272,7 @@ model DirectionsRequest {
    * North and continuing in clockwise direction. North is 0 degrees, east is 90
    * degrees, south is 180 degrees, west is 270 degrees.
    */
+  @minValue(0)
   @maxValue(359)
   heading?: int64;
 
@@ -1829,6 +1831,8 @@ model SnapToRoadsRequest {
    * `Note`: The API will not return a point object in the response for the GPS
    * point that cannot be snapped to a road network.
    */
+  @minItems(2)
+  @maxItems(100)
   features: InputSnapToRoadsFeaturesItem[];
 
   /**
@@ -2316,6 +2320,8 @@ model RouteMatrixRequest {
    * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON
    * format.
    */
+  @minItems(2)
+  @maxItems(2)
   features: InputRouteMatrixFeaturesItem[];
 
   /**
@@ -2612,6 +2618,8 @@ model RouteMatrixAsyncRequest {
    * 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON
    * format.
    */
+  @minItems(2)
+  @maxItems(2)
   features: InputRouteMatrixFeaturesItem[];
 
   /**

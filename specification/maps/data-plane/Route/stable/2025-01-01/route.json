@@ -340,14 +340,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "x-ms-client-id",
-            "in": "header",
-            "description": "Indicates the account intended for use with the Microsoft Entra ID security\nmodel. This unique ID for the Azure Maps account can be obtained from the\n[Azure Maps management plane Account API](/rest/api/maps-management/accounts).\nFor more information on using Microsoft Entra ID security in Azure Maps, see\n[Manage authentication in Azure\nMaps](/azure/azure-maps/how-to-manage-authentication).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "clientId"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "System generated unique identifier for the asynchronous operation after it has\nbeen submitted.",
@@ -920,6 +912,7 @@
         "features": {
           "type": "array",
           "description": "Driving, walking, and truck routes are defined by a set of waypoints(stops) and\nviaWaypoints (intermediate locations that the route must pass through). You can\nhave a maximum of 150 waypoints, and a maximum of 10 viaWaypoints between each\nset of waypoints.\n\nA route must have a minimum of 2 waypoints and the start and end points of the\nroute cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON\nPoint feature object along with pointIndex that specifies the order of the\nlocations. For more information on the GeoJSON format, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946).",
+          "minItems": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
           }
@@ -1035,6 +1028,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The initial directional heading of the vehicle in degrees starting at true\nNorth and continuing in clockwise direction. North is 0 degrees, east is 90\ndegrees, south is 180 degrees, west is 270 degrees.",
+          "minimum": 0,
           "maximum": 359
         },
         "vehicleSpec": {
@@ -1123,6 +1117,7 @@
         "features": {
           "type": "array",
           "description": "Driving, walking, and truck routes are defined by a set of waypoints(stops) and\nviaWaypoints (intermediate locations that the route must pass through). You can\nhave a maximum of 150 waypoints, and a maximum of 10 viaWaypoints between each\nset of waypoints.\n\nA route must have a minimum of 2 waypoints and the start and end points of the\nroute cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON\nPoint feature object along with pointIndex that specifies the order of the\nlocations. For more information on the GeoJSON format, see [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946).",
+          "minItems": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"
           }
@@ -1238,6 +1233,7 @@
           "type": "integer",
           "format": "int64",
           "description": "The initial directional heading of the vehicle in degrees starting at true\nNorth and continuing in clockwise direction. North is 0 degrees, east is 90\ndegrees, south is 180 degrees, west is 270 degrees.",
+          "minimum": 0,
           "maximum": 359
         },
         "vehicleSpec": {
@@ -3344,6 +3340,8 @@
         "features": {
           "type": "array",
           "description": "A set of origin and destination points passed as GeoJSON MultiPoint features\nfor the input matrix. Refer to [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON\nformat.",
+          "minItems": 2,
+          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
           }
@@ -3605,6 +3603,8 @@
         "features": {
           "type": "array",
           "description": "A set of origin and destination points passed as GeoJSON MultiPoint features\nfor the input matrix. Refer to [RFC\n7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON\nformat.",
+          "minItems": 2,
+          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/InputRouteMatrixFeaturesItem"
           }
@@ -4638,6 +4638,8 @@
         "features": {
           "type": "array",
           "description": "A set of points to snap to road network. You can have a minimum of 2 points and\nmaximum of 5000 points and the two consecutive points must be within 6\nkilometer of each other and a total road distance of up to 100 kilometers.\nRefer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the\nGeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS\npoint that cannot be snapped to a road network.",
+          "minItems": 2,
+          "maxItems": 100,
           "items": {
             "$ref": "#/definitions/InputSnapToRoadsFeaturesItem"
           }
@@ -4774,6 +4776,8 @@
         "features": {
           "type": "array",
           "description": "A set of points to snap to road network. You can have a minimum of 2 points and\nmaximum of 5000 points and the two consecutive points must be within 6\nkilometer of each other and a total road distance of up to 100 kilometers.\nRefer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the\nGeoJSON format.\n\n`Note`: The API will not return a point object in the response for the GPS\npoint that cannot be snapped to a road network.",
+          "minItems": 2,
+          "maxItems": 100,
           "items": {
             "$ref": "#/definitions/InputSnapToRoadsFeaturesItem"
           }
