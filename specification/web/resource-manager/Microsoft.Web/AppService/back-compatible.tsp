@@ -337,12 +337,6 @@ using Microsoft.Web;
 @@clientLocation(AppServiceEnvironmentResources.listCapacities,
   AppServiceEnvironments
 );
-@@clientLocation(AppServiceEnvironmentResources.changeVnet,
-  AppServiceEnvironments
-);
-@@clientName(AppServiceEnvironmentResources.changeVnet::parameters.body,
-  "vnetInfo"
-);
 @@clientLocation(AppServiceEnvironmentResources.listDiagnostics,
   AppServiceEnvironments
 );
@@ -368,14 +362,10 @@ using Microsoft.Web;
   AppServiceEnvironments
 );
 @@clientLocation(AppServiceEnvironmentResources.reboot, AppServiceEnvironments);
-@@clientLocation(AppServiceEnvironmentResources.resume, AppServiceEnvironments);
 @@clientLocation(AppServiceEnvironmentResources.listAppServicePlans,
   AppServiceEnvironments
 );
 @@clientLocation(AppServiceEnvironmentResources.listWebApps,
-  AppServiceEnvironments
-);
-@@clientLocation(AppServiceEnvironmentResources.suspend,
   AppServiceEnvironments
 );
 @@clientLocation(AppServiceEnvironmentResources.listUsages,

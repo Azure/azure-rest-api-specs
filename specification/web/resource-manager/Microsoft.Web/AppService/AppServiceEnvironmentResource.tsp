@@ -146,21 +146,20 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Move an App Service Environment to a different VNET.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Move an App Service Environment to a different VNET.")
-  @action("changeVirtualNetwork")
-  @list
-  changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
-    AppServiceEnvironmentResource,
-    VirtualNetworkProfile,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
-    Error = DefaultErrorResponse
-  >;
-
+  // #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  // @summary("Move an App Service Environment to a different VNET.")
+  // @action("changeVirtualNetwork")
+  // @list
+  // changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
+  //   AppServiceEnvironmentResource,
+  //   VirtualNetworkProfile,
+  //   ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+  //     @bodyRoot
+  //     _: WebAppCollection;
+  //   }),
+  //   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<WebAppCollection>,
+  //   Error = DefaultErrorResponse
+  // >;
   /**
    * Description for Get diagnostic information for an App Service Environment.
    */
@@ -288,20 +287,19 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Resume an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Resume an App Service Environment.")
-  @list
-  resume is ArmResourceActionAsyncBase<
-    AppServiceEnvironmentResource,
-    void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
-    Error = DefaultErrorResponse
-  >;
-
+  // #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  // @summary("Resume an App Service Environment.")
+  // @list
+  // resume is ArmResourceActionAsyncBase<
+  //   AppServiceEnvironmentResource,
+  //   void,
+  //   ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+  //     @bodyRoot
+  //     _: WebAppCollection;
+  //   }),
+  //   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
+  //   Error = DefaultErrorResponse
+  // >;
   /**
    * Description for Get all App Service plans in an App Service Environment.
    */
@@ -340,20 +338,19 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Suspend an App Service Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Suspend an App Service Environment.")
-  @list
-  suspend is ArmResourceActionAsyncBase<
-    AppServiceEnvironmentResource,
-    void,
-    ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
-      @bodyRoot
-      _: WebAppCollection;
-    }),
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
-    Error = DefaultErrorResponse
-  >;
-
+  // #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  // @summary("Suspend an App Service Environment.")
+  // @list
+  // suspend is ArmResourceActionAsyncBase<
+  //   AppServiceEnvironmentResource,
+  //   void,
+  //   ArmResponse<WebAppCollection> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAppCollection>> & {
+  //     @bodyRoot
+  //     _: WebAppCollection;
+  //   }),
+  //   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AppServiceEnvironmentResource>,
+  //   Error = DefaultErrorResponse
+  // >;
   /**
    * Description for Get global usage metrics of an App Service Environment.
    */
@@ -497,7 +494,4 @@ interface AppServiceEnvironmentResources {
 );
 @@doc(AppServiceEnvironmentResources.update::parameters.properties,
   "Configuration details of the App Service Environment."
-);
-@@doc(AppServiceEnvironmentResources.changeVnet::parameters.body,
-  "Details for the new virtual network."
 );
