@@ -39,12 +39,11 @@ model ExpressRoutePort extends Resource {
   identity?: ManagedServiceIdentity;
 }
 
-alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the express route port. */
     @path
@@ -58,19 +57,24 @@ alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("links")
     @key
     linkName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRoutePorts/{expressRoutePortName}/links/{linkName}",
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRoutePorts {
   /**
    * Retrieves the requested ExpressRoutePort resource.
    */
+  @autoRoute
   get is ArmResourceRead<ExpressRoutePort, Error = CloudError>;
 
   /**
    * Creates or updates the specified ExpressRoutePort resource.
    */
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRoutePort,
     Error = CloudError
@@ -79,6 +83,7 @@ interface ExpressRoutePorts {
   /**
    * Update ExpressRoutePort tags.
    */
+  @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     ExpressRoutePort,
@@ -92,6 +97,7 @@ interface ExpressRoutePorts {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRoutePort,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
@@ -102,6 +108,7 @@ interface ExpressRoutePorts {
   /**
    * List all the ExpressRoutePort resources in the specified resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRoutePort,
     Response = ExpressRoutePortListResult,
@@ -111,6 +118,7 @@ interface ExpressRoutePorts {
   /**
    * List all the ExpressRoutePort resources in the specified subscription.
    */
+  @autoRoute
   list is ArmListBySubscription<
     ExpressRoutePort,
     Response = ExpressRoutePortListResult,
@@ -122,6 +130,7 @@ interface ExpressRoutePorts {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("generateLoa")
+  @autoRoute
   generateLOA is ArmResourceActionSync<
     ExpressRoutePort,
     GenerateExpressRoutePortsLOARequest,
@@ -135,8 +144,10 @@ interface ExpressRoutePorts {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteLinks_Get")
   @get
-  expressRouteLinksGet is ExpressRouteLinkOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}")
+  expressRouteLinksGet is ExpressRouteLinkOps.ActionSync<
     ExpressRoutePort,
+    void,
     Response = ArmResponse<ExpressRouteLink>,
     OverrideErrorType = CloudError
   >;
@@ -148,10 +159,13 @@ interface ExpressRoutePorts {
   @operationId("ExpressRouteLinks_List")
   @list
   @get
-  expressRouteLinksList is ExpressRouteLinkOps.List<
+  @action("links")
+  @autoRoute
+  expressRouteLinksList is ArmResourceActionSync<
     ExpressRoutePort,
-    Response = ArmResponse<ExpressRouteLinkListResult>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ExpressRouteLinkListResult>,
+    Error = CloudError
   >;
 }
 

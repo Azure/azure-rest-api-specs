@@ -4479,7 +4479,7 @@
           {
             "name": "expressRoutePortName",
             "in": "path",
-            "description": "The name of the express route port.",
+            "description": "The name of ExpressRoutePort.",
             "required": true,
             "type": "string"
           }
@@ -10809,7 +10809,7 @@
           {
             "name": "crossConnectionName",
             "in": "path",
-            "description": "Name for the express route cross connection.",
+            "description": "The name of the ExpressRouteCrossConnection (service key of the circuit).",
             "required": true,
             "type": "string"
           }
@@ -10943,6 +10943,10 @@
               "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -10964,7 +10968,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ExpressRouteCrossConnection"
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnectionPeering"
         },
         "x-ms-long-running-operation": true
       },
@@ -11001,7 +11005,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -11589,7 +11593,7 @@
           {
             "name": "expressRouteGatewayName",
             "in": "path",
-            "description": "The name of the express route gateway.",
+            "description": "The name of the ExpressRoute gateway.",
             "required": true,
             "type": "string"
           }
@@ -11782,7 +11786,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -26306,7 +26310,7 @@
           {
             "name": "networkVirtualApplianceName",
             "in": "path",
-            "description": "The name of the Network Virtual Appliance.",
+            "description": "The name of Network Virtual Appliance.",
             "required": true,
             "type": "string"
           }
@@ -26433,7 +26437,7 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkVirtualApplianceConnection"
             },
@@ -26499,7 +26503,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -28582,6 +28586,10 @@
               "$ref": "#/definitions/PacketCaptureResult"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -30104,7 +30112,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -30285,7 +30293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -31934,7 +31942,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -32115,7 +32123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",

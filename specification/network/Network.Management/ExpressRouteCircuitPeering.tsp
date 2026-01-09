@@ -34,12 +34,11 @@ model ExpressRouteCircuitPeering extends SubResourceModel {
   etag?: string;
 }
 
-alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ArpTablesgOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the express route port. */
     @path
@@ -59,15 +58,17 @@ alias ArpTablesgOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("arpTables")
     @key
     devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}",
   }
 >;
 
-alias RouteTablesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias RouteTablesOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the express route port. */
     @path
@@ -87,15 +88,17 @@ alias RouteTablesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("routeTables")
     @key
     devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}",
   }
 >;
 
-alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the express route port. */
     @path
@@ -115,19 +118,24 @@ alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("routeTablesSummary")
     @key
     devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}",
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRouteCircuitPeerings {
   /**
    * Gets the specified peering for the express route circuit.
    */
+  @autoRoute
   get is ArmResourceRead<ExpressRouteCircuitPeering, Error = CloudError>;
 
   /**
    * Creates or updates a peering in the specified express route circuits.
    */
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCircuitPeering,
     Error = CloudError
@@ -137,6 +145,7 @@ interface ExpressRouteCircuitPeerings {
    * Deletes the specified peering from the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuitPeering,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -146,6 +155,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets all peerings in a specified express route circuit.
    */
+  @autoRoute
   list is ArmResourceListByParent<
     ExpressRouteCircuitPeering,
     Error = CloudError
@@ -157,8 +167,11 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListArpTable")
   @post
-  listArpTable is ArpTablesgOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}")
+  listArpTable is ArpTablesgOps.ActionAsync<
     ExpressRouteCircuitPeering,
+    void,
+    void,
     Response = ArmResponse<ExpressRouteCircuitsArpTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
@@ -170,8 +183,11 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListRoutesTable")
   @post
-  listRoutesTable is RouteTablesOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}")
+  listRoutesTable is RouteTablesOps.ActionAsync<
     ExpressRouteCircuitPeering,
+    void,
+    void,
     Response = ArmResponse<ExpressRouteCircuitsRoutesTableListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
@@ -183,8 +199,11 @@ interface ExpressRouteCircuitPeerings {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
   @post
-  listRoutesTableSummary is RouteTablesSummaryOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}")
+  listRoutesTableSummary is RouteTablesSummaryOps.ActionAsync<
     ExpressRouteCircuitPeering,
+    void,
+    void,
     Response = ArmResponse<ExpressRouteCircuitsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableSummaryListResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OverrideErrorType = CloudError
@@ -197,6 +216,7 @@ interface ExpressRouteCircuitPeerings {
   @operationId("ExpressRouteCircuits_GetPeeringStats")
   @get
   @action("stats")
+  @autoRoute
   getPeeringStats is ArmResourceActionSync<
     ExpressRouteCircuitPeering,
     void,

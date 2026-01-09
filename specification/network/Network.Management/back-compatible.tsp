@@ -413,7 +413,7 @@ using Microsoft.Network;
 @@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.resource,
+@@clientName(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
   "parameters"
 );
 @@clientLocation(PrivateEndpoints.privateDnsZoneGroupsList,
@@ -724,7 +724,7 @@ using Microsoft.Network;
 @@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
+@@clientName(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "peeringParameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1083,7 +1083,7 @@ using Microsoft.Network;
 @@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.resource,
+@@clientName(NetworkVirtualAppliances.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "NetworkVirtualApplianceConnectionParameters"
 );
 @@clientLocation(NetworkVirtualAppliances.networkVirtualApplianceConnectionsGet,
@@ -1153,7 +1153,7 @@ using Microsoft.Network;
   "parameters"
 );
 @@clientLocation(NetworkWatchers.create, "PacketCaptures");
-@@clientName(NetworkWatchers.create::parameters.resource, "parameters");
+@@clientName(NetworkWatchers.create::parameters.body, "parameters");
 @@clientLocation(NetworkWatchers.packetCapturesGet, "PacketCaptures");
 @@clientName(NetworkWatchers.packetCapturesGet, "Get");
 @@clientLocation(NetworkWatchers.packetCapturesDelete, "PacketCaptures");
@@ -1199,7 +1199,7 @@ using Microsoft.Network;
   "RouteFilterRules"
 );
 @@clientName(RouteFilters.routeFilterRulesCreateOrUpdate, "CreateOrUpdate");
-@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.resource,
+@@clientName(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
   "routeFilterRuleParameters"
 );
 @@clientLocation(RouteFilters.listByRouteFilter, "RouteFilterRules");
@@ -1562,7 +1562,7 @@ using Microsoft.Network;
 @@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.resource,
+@@clientName(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "putExpressRouteConnectionParameters"
 );
 @@clientLocation(ExpressRouteGateways.expressRouteConnectionsGet,

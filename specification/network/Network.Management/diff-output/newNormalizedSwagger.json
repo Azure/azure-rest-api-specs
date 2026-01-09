@@ -7543,42 +7543,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
-      "get": {
-        "operationId": "ExpressRouteCrossConnectionPeerings_List",
-        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCrossConnectionBgpPeeringList": {
-            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
       "get": {
         "operationId": "ExpressRouteCrossConnectionPeerings_Get",
@@ -7653,6 +7617,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -7669,9 +7639,49 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ExpressRouteCrossConnection"
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnectionPeering"
         },
         "x-ms-long-running-operation": true
+      },
+      "post": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_List",
+        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionBgpPeeringList": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       },
       "delete": {
         "operationId": "ExpressRouteCrossConnectionPeerings_Delete",
@@ -57737,7 +57747,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/WritableResource"
         }
       ]
     },
@@ -63630,6 +63640,24 @@
         "matchVariable",
         "selectorMatchOperator"
       ]
+    },
+    "WritableResource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
+        }
+      }
     },
     "connectivityGroupItem": {
       "type": "object",

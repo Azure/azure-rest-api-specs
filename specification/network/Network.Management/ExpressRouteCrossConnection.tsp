@@ -32,12 +32,11 @@ model ExpressRouteCrossConnection extends Resource {
   etag?: string;
 }
 
-alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** Name for the express route cross connection. */
     @path
@@ -51,21 +50,26 @@ alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.Legac
     @segment("peerings")
     @key
     peeringName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings",
   }
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRouteCrossConnections {
   /**
    * Gets details about the specified ExpressRouteCrossConnection.
    */
+  @autoRoute
   get is ArmResourceRead<ExpressRouteCrossConnection, Error = CloudError>;
 
   /**
    * Update the specified ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCrossConnection,
     Response = ArmResourceUpdatedResponse<ExpressRouteCrossConnection> &
@@ -77,6 +81,7 @@ interface ExpressRouteCrossConnections {
    * Updates an express route cross connection tags.
    */
   @patch(#{ implicitOptionality: false })
+  @autoRoute
   updateTags is ArmCustomPatchSync<
     ExpressRouteCrossConnection,
     PatchModel = TagsObject,
@@ -86,6 +91,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Retrieves all the ExpressRouteCrossConnections in a resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRouteCrossConnection,
     Error = CloudError
@@ -94,6 +100,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Retrieves all the ExpressRouteCrossConnections in a subscription.
    */
+  @autoRoute
   list is ArmListBySubscription<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -110,6 +117,7 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
   @post
+  @autoRoute
   listArpTable is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -136,6 +144,7 @@ interface ExpressRouteCrossConnections {
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
   @post
+  @autoRoute
   listRoutesTableSummary is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -162,6 +171,7 @@ interface ExpressRouteCrossConnections {
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
    */
   @post
+  @autoRoute
   listRoutesTable is ArmResourceRead<
     ExpressRouteCrossConnection,
     Parameters = {
@@ -191,10 +201,13 @@ interface ExpressRouteCrossConnections {
   @operationId("ExpressRouteCrossConnectionPeerings_List")
   @list
   @get
-  expressRouteCrossConnectionPeeringsList is ExpressRouteCrossConnectionPeeringOps.List<
+  @autoRoute
+  @action("peerings")
+  expressRouteCrossConnectionPeeringsList is ArmResourceActionSync<
     ExpressRouteCrossConnection,
-    Response = ArmResponse<ExpressRouteCrossConnectionPeeringList>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ExpressRouteCrossConnectionPeeringList>,
+    Error = CloudError
   >;
 
   /**
@@ -203,8 +216,11 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCrossConnectionPeerings_Delete")
   @delete
-  delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
+  delete is ExpressRouteCrossConnectionPeeringOps.ActionAsync<
     ExpressRouteCrossConnection,
+    void,
+    void,
     Response = {
       @body body: void;
     } | ArmAcceptedLroResponse | NoContentResponse,
@@ -217,8 +233,10 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCrossConnectionPeerings_Get")
   @get
-  expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
+  expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.ActionSync<
     ExpressRouteCrossConnection,
+    void,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering>,
     OverrideErrorType = CloudError
   >;
@@ -230,13 +248,19 @@ interface ExpressRouteCrossConnections {
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteCrossConnectionPeerings_CreateOrUpdate")
   @put
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
+  expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.ActionAsync<
     ExpressRouteCrossConnection,
+    ExpressRouteCrossConnectionPeering,
+    void,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
       Azure.Core.Foundations.RetryAfterHeader,
-    Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<ExpressRouteCrossConnectionPeering>,
-    Request = ExpressRouteCrossConnectionPeering,
+    Response = ArmResponse<ExpressRouteCrossConnectionPeering> | ArmResourceCreatedResponse<
+      ExpressRouteCrossConnectionPeering,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >,
     OverrideErrorType = CloudError
   >;
 }
@@ -253,6 +277,6 @@ interface ExpressRouteCrossConnections {
 @@doc(ExpressRouteCrossConnections.updateTags::parameters.properties,
   "Parameters supplied to update express route cross connection tags."
 );
-@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
+@@doc(ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
 );

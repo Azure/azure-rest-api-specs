@@ -32,12 +32,11 @@ model ExpressRouteGateway extends Resource {
   etag?: string;
 }
 
-alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the express route gateway. */
     @path
@@ -51,14 +50,18 @@ alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("expressRouteConnections")
     @key
     connectionName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}",
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface ExpressRouteGateways {
   /**
    * Fetches the details of a ExpressRoute gateway in a resource group.
    */
+  @autoRoute
   get is ArmResourceRead<ExpressRouteGateway, Error = CloudError>;
 
   /**
@@ -74,6 +77,7 @@ interface ExpressRouteGateways {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
+  @autoRoute
   updateTags is ArmCustomPatchAsync<
     ExpressRouteGateway,
     PatchModel = TagsObject,
@@ -86,6 +90,7 @@ interface ExpressRouteGateways {
    * Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteGateway,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -95,6 +100,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteGatewayList>,
@@ -104,6 +110,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
+  @autoRoute
   listBySubscription is ArmListBySubscription<
     ExpressRouteGateway,
     Response = ArmResponse<ExpressRouteGatewayList>,
@@ -118,14 +125,16 @@ interface ExpressRouteGateways {
   @operationId("ExpressRouteConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
+  expressRouteConnectionsCreateOrUpdate is ExpressRouteConnectionOps.ActionAsync<
     ExpressRouteGateway,
+    ExpressRouteConnection,
+    void,
     Response = ArmResponse<ExpressRouteConnection> | ArmResourceCreatedResponse<
       ExpressRouteConnection,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteConnection> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Request = ExpressRouteConnection,
     OverrideErrorType = CloudError
   >;
 
@@ -135,8 +144,10 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteConnections_Get")
   @get
-  expressRouteConnectionsGet is ExpressRouteConnectionOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
+  expressRouteConnectionsGet is ExpressRouteConnectionOps.ActionSync<
     ExpressRouteGateway,
+    void,
     Response = ArmResponse<ExpressRouteConnection>,
     OverrideErrorType = CloudError
   >;
@@ -147,8 +158,11 @@ interface ExpressRouteGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ExpressRouteConnections_Delete")
   @delete
-  expressRouteConnectionsDelete is ExpressRouteConnectionOps.DeleteWithoutOkAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
+  expressRouteConnectionsDelete is ExpressRouteConnectionOps.ActionAsync<
     ExpressRouteGateway,
+    void,
+    void,
     Response = {
       @body body: void;
     } | ArmAcceptedLroResponse | NoContentResponse,
@@ -162,10 +176,12 @@ interface ExpressRouteGateways {
   @operationId("ExpressRouteConnections_List")
   @list
   @get
-  list is ExpressRouteConnectionOps.List<
+  @action("expressRouteConnections")
+  list is ArmResourceActionSync<
     ExpressRouteGateway,
-    Response = ArmResponse<ExpressRouteConnectionList>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ExpressRouteConnectionList>,
+    Error = CloudError
   >;
 }
 
@@ -179,6 +195,6 @@ interface ExpressRouteGateways {
 @@doc(ExpressRouteGateways.updateTags::parameters.properties,
   "Parameters supplied to update a virtual wan express route gateway tags."
 );
-@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.resource,
+@@doc(ExpressRouteGateways.expressRouteConnectionsCreateOrUpdate::parameters.body,
   "Parameters required in an ExpressRouteConnection PUT operation."
 );

@@ -32,12 +32,11 @@ model RouteFilter extends ResourceWithRequiredLocation {
   etag?: string;
 }
 
-alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the route filter. */
     @path
@@ -51,13 +50,17 @@ alias RouteFilterRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("routeFilterRules")
     @key
     ruleName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}",
   }
 >;
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface RouteFilters {
   /**
    * Gets the specified route filter.
    */
+  @autoRoute
   get is ArmResourceRead<
     RouteFilter,
     Parameters = {
@@ -73,6 +76,7 @@ interface RouteFilters {
   /**
    * Creates or updates a route filter in a specified resource group.
    */
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RouteFilter,
     Error = CloudError
@@ -81,6 +85,7 @@ interface RouteFilters {
   /**
    * Updates tags of a route filter.
    */
+  @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     RouteFilter,
@@ -94,6 +99,7 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     RouteFilter,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
@@ -104,6 +110,7 @@ interface RouteFilters {
   /**
    * Gets all route filters in a resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     RouteFilter,
     Error = CloudError
@@ -112,6 +119,7 @@ interface RouteFilters {
   /**
    * Gets all route filters in a subscription.
    */
+  @autoRoute
   list is ArmListBySubscription<RouteFilter, Error = CloudError>;
 
   /**
@@ -121,8 +129,11 @@ interface RouteFilters {
   @operationId("RouteFilterRules_Delete")
   @delete
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  routeFilterRulesDelete is RouteFilterRuleOps.DeleteWithoutOkAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
+  routeFilterRulesDelete is RouteFilterRuleOps.ActionAsync<
     RouteFilter,
+    void,
+    void,
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     Response = {
@@ -138,8 +149,10 @@ interface RouteFilters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("RouteFilterRules_Get")
   @get
-  routeFilterRulesGet is RouteFilterRuleOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
+  routeFilterRulesGet is RouteFilterRuleOps.ActionSync<
     RouteFilter,
+    void,
     Response = ArmResponse<RouteFilterRule>,
     OverrideErrorType = CloudError
   >;
@@ -152,14 +165,16 @@ interface RouteFilters {
   @operationId("RouteFilterRules_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
+  routeFilterRulesCreateOrUpdate is RouteFilterRuleOps.ActionAsync<
     RouteFilter,
+    RouteFilterRule,
+    void,
     Response = ArmResponse<RouteFilterRule> | ArmResourceCreatedResponse<
       RouteFilterRule,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = RouteFilterRule> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Request = RouteFilterRule,
     OverrideErrorType = CloudError
   >;
 
@@ -170,10 +185,12 @@ interface RouteFilters {
   @operationId("RouteFilterRules_ListByRouteFilter")
   @list
   @get
-  listByRouteFilter is RouteFilterRuleOps.List<
+  @autoRoute
+  @action("routeFilterRules")
+  listByRouteFilter is ArmResourceActionSync<
     RouteFilter,
-    Response = ArmResponse<RouteFilterRuleListResult>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<RouteFilterRuleListResult>
   >;
 }
 
@@ -185,6 +202,6 @@ interface RouteFilters {
 @@doc(RouteFilters.updateTags::parameters.properties,
   "Parameters supplied to update route filter tags."
 );
-@@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.resource,
+@@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update route filter rule operation."
 );
