@@ -1004,7 +1004,8 @@
         },
         "optimizeWaypointOrder": {
           "type": "boolean",
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the\nroute cost specified with the optimize parameter. The origin and destination\nare excluded from the optimized waypoint and their position is considered\nfixed. Acceptable values are true or false."
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the\nroute cost specified with the optimize parameter. The origin and destination\nare excluded from the optimized waypoint and their position is considered\nfixed. Acceptable values are true or false.",
+          "default": false
         },
         "avoid": {
           "type": "array",
@@ -1206,7 +1207,8 @@
         },
         "optimizeWaypointOrder": {
           "type": "boolean",
-          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the\nroute cost specified with the optimize parameter. The origin and destination\nare excluded from the optimized waypoint and their position is considered\nfixed. Acceptable values are true or false."
+          "description": "Re-order the route waypoints using a fast heuristic algorithm to reduce the\nroute cost specified with the optimize parameter. The origin and destination\nare excluded from the optimized waypoint and their position is considered\nfixed. Acceptable values are true or false.",
+          "default": false
         },
         "avoid": {
           "type": "array",
@@ -3171,42 +3173,55 @@
       "properties": {
         "isVehicleCommercial": {
           "type": "boolean",
-          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads."
+          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads.",
+          "default": false
         },
         "length": {
           "type": "number",
           "format": "double",
           "description": "Length of the vehicle in meters. A value of 0 means that length restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "width": {
           "type": "number",
           "format": "double",
           "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are\nnot considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "height": {
           "type": "number",
           "format": "double",
           "description": "Height of the vehicle in meters. A value of 0 means that height restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "weight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight of the vehicle in kilograms. A value of 0 means that weight restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "maxSpeed": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile\nis used to check whether a vehicle is allowed on motorways.\n\nA value of 0 means that an appropriate value for the vehicle will be determined\nand applied during route planning.\n\nA non-zero value may be overridden during route planning. For example, the\ncurrent traffic flow is 60 km/hour. If the vehicle maximum speed is set to 50\nkm/hour, the routing engine will consider 60 km/hour as this is the current\nsituation. If the maximum speed of the vehicle is provided as 80 km/hour but\nthe current traffic flow is 60 km/hour, then routing engine will again use 60\nkm/hour.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 250
         },
         "axleWeight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight\nrestrictions per axle are not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "loadType": {
@@ -4449,42 +4464,55 @@
       "properties": {
         "isVehicleCommercial": {
           "type": "boolean",
-          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads."
+          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads.",
+          "default": false
         },
         "length": {
           "type": "number",
           "format": "double",
           "description": "Length of the vehicle in meters. A value of 0 means that length restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "width": {
           "type": "number",
           "format": "double",
           "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are\nnot considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "height": {
           "type": "number",
           "format": "double",
           "description": "Height of the vehicle in meters. A value of 0 means that height restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "weight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight of the vehicle in kilograms. A value of 0 means that weight restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "maxSpeed": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile\nis used to check whether a vehicle is allowed on motorways.\n\nA value of 0 means that an appropriate value for the vehicle will be determined\nand applied during route planning.\n\nA non-zero value may be overridden during route planning. For example, the\ncurrent traffic flow is 60 km/hour. If the vehicle maximum speed is set to 50\nkm/hour, the routing engine will consider 60 km/hour as this is the current\nsituation. If the maximum speed of the vehicle is provided as 80 km/hour but\nthe current traffic flow is 60 km/hour, then routing engine will again use 60\nkm/hour.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 250
         },
         "axleWeight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight\nrestrictions per axle are not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "loadType": {
@@ -5028,42 +5056,55 @@
       "properties": {
         "isVehicleCommercial": {
           "type": "boolean",
-          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads."
+          "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may\nnot be allowed to drive on some roads.",
+          "default": false
         },
         "length": {
           "type": "number",
           "format": "double",
           "description": "Length of the vehicle in meters. A value of 0 means that length restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "width": {
           "type": "number",
           "format": "double",
           "description": "Width of the vehicle in meters. A value of 0 means that width restrictions are\nnot considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "height": {
           "type": "number",
           "format": "double",
           "description": "Height of the vehicle in meters. A value of 0 means that height restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "weight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight of the vehicle in kilograms. A value of 0 means that weight restrictions\nare not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "maxSpeed": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile\nis used to check whether a vehicle is allowed on motorways.\n\nA value of 0 means that an appropriate value for the vehicle will be determined\nand applied during route planning.\n\nA non-zero value may be overridden during route planning. For example, the\ncurrent traffic flow is 60 km/hour. If the vehicle maximum speed is set to 50\nkm/hour, the routing engine will consider 60 km/hour as this is the current\nsituation. If the maximum speed of the vehicle is provided as 80 km/hour but\nthe current traffic flow is 60 km/hour, then routing engine will again use 60\nkm/hour.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 250
         },
         "axleWeight": {
           "type": "integer",
           "format": "int64",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight\nrestrictions per axle are not considered.",
+          "default": 0,
+          "minimum": 0,
           "maximum": 1000000
         },
         "loadType": {

@@ -1234,7 +1234,7 @@ model DirectionsRequest {
    * are excluded from the optimized waypoint and their position is considered
    * fixed. Acceptable values are true or false.
    */
-  optimizeWaypointOrder?: boolean;
+  optimizeWaypointOrder?: boolean = false;
 
   /**
    * Specifies restrictions that the route calculation should honor when determining
@@ -1443,35 +1443,39 @@ model VehicleSpec {
    * Whether the vehicle is used for commercial purposes. Commercial vehicles may
    * not be allowed to drive on some roads.
    */
-  isVehicleCommercial?: boolean;
+  isVehicleCommercial?: boolean = false;
 
   /**
    * Length of the vehicle in meters. A value of 0 means that length restrictions
    * are not considered.
    */
+  @minValue(0)
   @maxValue(1000000)
-  length?: float64;
+  length?: float64 = 0;
 
   /**
    * Width of the vehicle in meters. A value of 0 means that width restrictions are
    * not considered.
    */
+  @minValue(0)
   @maxValue(1000000)
-  width?: float64;
+  width?: float64 = 0;
 
   /**
    * Height of the vehicle in meters. A value of 0 means that height restrictions
    * are not considered.
    */
+  @minValue(0)
   @maxValue(1000000)
-  height?: float64;
+  height?: float64 = 0;
 
   /**
    * Weight of the vehicle in kilograms. A value of 0 means that weight restrictions
    * are not considered.
    */
+  @minValue(0)
   @maxValue(1000000)
-  weight?: int64;
+  weight?: int64 = 0;
 
   /**
    * Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile
@@ -1487,15 +1491,17 @@ model VehicleSpec {
    * the current traffic flow is 60 km/hour, then routing engine will again use 60
    * km/hour.
    */
+  @minValue(0)
   @maxValue(250)
-  maxSpeed?: int64;
+  maxSpeed?: int64 = 0;
 
   /**
    * Weight per axle of the vehicle in kg. A value of 0 means that weight
    * restrictions per axle are not considered.
    */
+  @minValue(0)
   @maxValue(1000000)
-  axleWeight?: int64;
+  axleWeight?: int64 = 0;
 
   /**
    * Types of cargo that may be classified as hazardous materials and restricted
