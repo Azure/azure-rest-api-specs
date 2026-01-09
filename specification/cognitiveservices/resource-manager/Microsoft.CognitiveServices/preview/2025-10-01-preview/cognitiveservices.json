@@ -10285,13 +10285,19 @@
     },
     "RaiBlocklistItemsBulkAddRequest": {
       "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
+      "type": "object",
+      "properties": {
+        "blockListItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+          },
+        "x-ms-identifiers": [
+          "name"
+          ],
+        "description": "The list of RaiBlocklist Item definitions."
+        }
+      }
     },
     "RaiBlocklistItemBulkRequest": {
       "description": "The Cognitive Services RaiBlocklist Item request body.",
@@ -10308,9 +10314,15 @@
     },
     "RaiBlocklistItemsBulkDeleteRequest": {
       "description": "The list of Cognitive Services RaiBlocklist Items Names.",
-      "type": "array",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "blocklistItemNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of RaiBlocklist Item names."
+        }
       }
     },
     "RaiBlocklistItem": {
