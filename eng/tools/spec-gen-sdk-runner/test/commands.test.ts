@@ -54,7 +54,9 @@ describe("generateSdkForSingleSpec", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
     vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport as ExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -210,7 +212,9 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport as ExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
     vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
@@ -362,7 +366,9 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockReturnValue(mockChangedSpecs);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockRejectedValue(new Error("Command failed"));
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
-    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(mockExecutionReport as ExecutionReport);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
     });

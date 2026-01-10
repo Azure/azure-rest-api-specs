@@ -9,7 +9,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
 import { groupSpecConfigPaths } from "./spec-helpers.js";
-import { ExecutionReport, SpecGenSdkCmdInput, SpecGenSdkRequiredSettings, VsoLogs } from "./types.js";
+import {
+  ExecutionReport,
+  SpecGenSdkCmdInput,
+  SpecGenSdkRequiredSettings,
+  VsoLogs,
+} from "./types.js";
 import {
   findReadmeFiles,
   getAllTypeSpecPaths,
