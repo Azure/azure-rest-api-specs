@@ -36,7 +36,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     await runSpecGenSdkCommand(specGenSdkCommand);
     logMessage("Runner command executed successfully");
   } catch (error) {
-    logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
+    logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
     statusCode = 1;
   }
 
@@ -47,7 +47,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     const executionResult = executionReport.executionResult;
     logMessage(`Runner command execution result:${executionResult}`);
   } catch (error) {
-    logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
+    logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
     statusCode = 1;
   }
 
@@ -61,7 +61,7 @@ export async function generateSdkForSingleSpec(): Promise<number> {
       commandInput.tspConfigPath ??
       commandInput.readmePath ??
       "missing-package-name";
-    installationInstructions = executionReport.packages[0]?.installationInstructions;
+    installationInstructions = executionReport.packages[0]?.installationInstructions ?? "";
   } else {
     packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
   }
@@ -143,7 +143,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
       statusCode = 1;
     }
     // Pop the spec config path from specGenSdkCommand
@@ -162,7 +162,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       if (executionReport.stagedArtifactsFolder) {
         stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
         for (const pkg of executionReport.packages) {
-          if (pkg.apiViewArtifact) {
+          if (pkg.apiViewArtifact && pkg.packageName) {
             apiViewRequestData.push({
               packageName: pkg.packageName,
               filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
@@ -178,7 +178,7 @@ export async function generateSdkForSpecPr(): Promise<number> {
       overallRunHasBreakingChange = overallRunHasBreakingChange || currentRunHasBreakingChange;
       logMessage(`Runner command execution result:${currentExecutionResult}`);
     } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
+      logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
       statusCode = 1;
       overallExecutionResult = "failed";
     }
@@ -268,7 +268,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
       await runSpecGenSdkCommand(specGenSdkCommand);
       logMessage("Runner command executed successfully");
     } catch (error) {
-      logMessage(`Runner: error executing command:${error}`, LogLevel.Error);
+      logMessage(`Runner: error executing command:${String(error)}`, LogLevel.Error);
       statusCode = 1;
     }
 
@@ -303,7 +303,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
         duplicatedConfigCount++;
       }
     } catch (error) {
-      logMessage(`Runner: error reading execution-report.json:${error}`, LogLevel.Error);
+      logMessage(`Runner: error reading execution-report.json:${String(error)}`, LogLevel.Error);
       statusCode = 1;
     }
     logMessage("ending group logging", LogLevel.EndGroup);
@@ -344,7 +344,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<numbe
     logMessage(`Runner: markdown file written to ${markdownFilePath}`);
     vsoAddAttachment("Generation Summary", markdownFilePath);
   } catch (error) {
-    vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${error}`);
+    vsoLogIssue(`Runner: error writing markdown file ${markdownFilePath}:${String(error)}`);
     statusCode = 1;
   }
   // Set the pipeline variables for artifacts location
