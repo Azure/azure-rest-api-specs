@@ -12,7 +12,7 @@ import { checkTrivialChanges } from "./trivial-changes-check.js";
  * - Trivial changes check
  *
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
- * @returns {Promise<{ incremental: boolean, trivial: boolean }>} JSON object consumed by downstream workflow logic.
+ * @returns {Promise<{ incremental: boolean, trivial: boolean }>}
  */
 export async function armAutoSignoffCode(args) {
   const { core } = args;

@@ -84,7 +84,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const { default: getLabelAction } =
+            const { getLabelAction } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
             return await getLabelAction({ github, context, core });
 

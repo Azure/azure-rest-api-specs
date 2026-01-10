@@ -17,41 +17,6 @@ const core = createMockCore();
 /** @typedef {import("../../src/arm-auto-signoff/pr-changes.js").PullRequestChanges} PullRequestChanges */
 
 /**
- * @param {unknown} value
- * @returns {value is PullRequestChanges}
- */
-function isPullRequestChanges(value) {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-  /** @type {Record<string, unknown>} */
-  const obj = /** @type {Record<string, unknown>} */ (value);
-  return (
-    typeof obj.rmDocumentation === "boolean" &&
-    typeof obj.rmExamples === "boolean" &&
-    typeof obj.rmFunctional === "boolean" &&
-    typeof obj.rmOther === "boolean" &&
-    typeof obj.other === "boolean"
-  );
-}
-
-/**
- * Accept either the JSON string form (workflow output) or the object instance returned
- * by the checker (which implements `toJSON`).
- *
- * @param {unknown} value
- * @returns {PullRequestChanges}
- */
-function parsePullRequestChanges(value) {
-  const jsonText = typeof value === "string" ? value : JSON.stringify(value);
-  const parsed = /** @type {unknown} */ (JSON.parse(jsonText));
-  if (!isPullRequestChanges(parsed)) {
-    throw new Error("Unexpected PullRequestChanges JSON shape");
-  }
-  return parsed;
-}
-
-/**
  * The tests mock `simple-git` to return a minimal object with only `show`.
  * Return that mock with a precise type so ESLint doesn't treat it as an unbound method.
  * @returns {{ show: import("vitest").Mock<(args: string[]) => Promise<string>> }}
@@ -79,7 +44,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -107,7 +72,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -134,7 +99,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -159,7 +124,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -184,7 +149,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -210,7 +175,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -236,7 +201,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: true,
@@ -262,7 +227,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -288,7 +253,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: true,
@@ -338,7 +303,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -389,7 +354,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -440,7 +405,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     // Should detect functional changes, so overall not trivial
     expect(parsed).toEqual({
@@ -477,7 +442,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     // Should treat JSON parsing errors as non-trivial changes
     expect(parsed).toEqual({
@@ -505,7 +470,7 @@ describe("checkTrivialChanges", () => {
     getMockGit().show.mockRejectedValue(new Error("Git operation failed"));
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     // Should treat git errors as non-trivial changes
     expect(parsed).toEqual({
@@ -572,7 +537,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -633,7 +598,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: false,
@@ -660,7 +625,7 @@ describe("checkTrivialChanges", () => {
     });
 
     const result = await checkTrivialChanges(core);
-    const parsed = parsePullRequestChanges(result);
+    const parsed = result.toJSON();
 
     expect(parsed).toEqual({
       rmDocumentation: true,

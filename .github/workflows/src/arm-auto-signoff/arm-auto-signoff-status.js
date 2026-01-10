@@ -54,7 +54,7 @@ function readBooleanArtifactValue(artifactNames, key) {
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{headSha: string, issueNumber: number, labelActions: ManagedLabelActions}>}
  */
-export default async function getLabelAction({ github, context, core }) {
+export async function getLabelAction({ github, context, core }) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   return await getLabelActionImpl({
@@ -217,7 +217,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     const autoIncrementalTSP = armAnalysisResult.incrementalTypeSpec;
     const autoTrivialTest = armAnalysisResult.isTrivial;
 
-    // Add ARMAutoSignOff label only when the PR is identified as an incremental typespec
+    // Add ARMSignOff label only when the PR is identified as an incremental typespec
     // As the trivial changes sign-off is being released in test mode
     const armSignOffAction = autoIncrementalTSP
       ? LabelAction.Add
@@ -240,10 +240,9 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     };
   }
 
-  // If any statuses are missing or pending, return empty labels only if we had auto labels before
-  // This prevents removing manually-added ARMSignedOff labels
+  // If any statuses are missing or pending, no-op to prevent frequent remove/add label as checks re-run
   core.info("One or more statuses are still pending");
-  return removeAutoSignedOffLabelsIfPresent();
+  return noneResult;
 }
 
 /**

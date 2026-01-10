@@ -45,9 +45,7 @@ export async function checkTrivialChanges(core) {
   const changes = new PullRequestChanges();
 
   // Compare the pull request merge commit (HEAD) against its first parent (HEAD^).
-  core.info("Comparing against base commit: HEAD^");
-
-  const options = {
+   const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     logger: new CoreLogger(core),
   };
@@ -155,7 +153,7 @@ function hasSignificantFileOperations(changedFilesStatuses, core) {
  * @param {string[]} changedFiles - Array of changed file paths
  * @param {import('simple-git').SimpleGit} git - Git instance
  * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
- * @param {import('./pr-changes.js').PullRequestChanges} changes - Changes object to update
+ * @param {PullRequestChangesType} changes - Changes object to update
  * @returns {Promise<void>}
  */
 async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, changes) {
@@ -199,14 +197,16 @@ async function analyzeAndUpdatePullRequestChanges(changedFiles, git, core, chang
           git,
           core,
         );
+
         if (hasOnlyNonFunctionalChanges) {
           core.info(`File ${file} contains only non-functional changes`);
-        } else {
-          hasFunctionalChanges = true;
-          core.info(`File ${file} contains functional changes`);
-          // Once we find functional changes, we can stop
-          break;
+          continue;
         }
+
+        hasFunctionalChanges = true;
+        core.info(`File ${file} contains functional changes`);
+        // Once we find functional changes, we can stop
+        break;
       } catch (error) {
         core.warning(`Failed to analyze ${file}: ${inspect(error)}`);
         // On error, treat as functional to be conservative
@@ -269,7 +269,7 @@ async function hasOnlyNonFunctionalChangesInSpecFile(file, git, core) {
     return false;
   }
 
-  return hasNonFunctionalDifferences(baseJson, headJson, "", core);
+  return !hasFunctionalDifferences(baseJson, headJson, "", core);
 }
 
 /**
@@ -305,22 +305,22 @@ function getFlattenedChangedFilesFromStatuses(statuses) {
  * @param {unknown} headObj - Head object
  * @param {string} path - Current path in the object
  * * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core - Core logger
- * @returns {boolean} - True if all differences are non-functional
+ * @returns {boolean} - True if any functional differences are detected
  */
-function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
+function hasFunctionalDifferences(baseObj, headObj, path, core) {
   // If types differ, it's a functional change
   if (typeof baseObj !== typeof headObj) {
     core.info(`Type change at ${path || "root"}: ${typeof baseObj} -> ${typeof headObj}`);
-    return false;
+    return true;
   }
 
   // Handle null values
   if (baseObj === null || headObj === null) {
     if (baseObj !== headObj) {
       core.info(`Null value change at ${path || "root"}`);
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
   // Handle arrays
@@ -334,18 +334,18 @@ function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
 
       // Special case: if arrays contain only strings and changes are in non-functional properties like tags
       if (isNonFunctionalArrayChange(baseObj, headObj, path)) {
-        return true;
+        return false;
       }
-      return false;
+      return true;
     }
 
     // Check each element
     for (let i = 0; i < baseObj.length; i++) {
-      if (!hasNonFunctionalDifferences(baseObj[i], headObj[i], `${path}[${i}]`, core)) {
-        return false;
+      if (hasFunctionalDifferences(baseObj[i], headObj[i], `${path}[${i}]`, core)) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   // Handle objects
@@ -372,7 +372,7 @@ function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
         const fullPath = path ? `${path}.${key}` : key;
         if (!NON_FUNCTIONAL_PROPERTIES.has(key)) {
           core.info(`Property removed at ${fullPath} (functional)`);
-          return false;
+          return true;
         }
         core.info(`Property removed at ${fullPath} (non-functional)`);
       }
@@ -383,7 +383,7 @@ function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
         const fullPath = path ? `${path}.${key}` : key;
         if (!NON_FUNCTIONAL_PROPERTIES.has(key)) {
           core.info(`Property added at ${fullPath} (functional)`);
-          return false;
+          return true;
         }
         core.info(`Property added at ${fullPath} (non-functional)`);
       }
@@ -393,18 +393,25 @@ function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
     for (const key of baseKeys) {
       if (headKeys.has(key)) {
         const fullPath = path ? `${path}.${key}` : key;
-        if (!hasNonFunctionalDifferences(baseRecord[key], headRecord[key], fullPath, core)) {
-          // If the change is in a non-functional property, it's still non-functional
+        const childHasFunctional = hasFunctionalDifferences(
+          baseRecord[key],
+          headRecord[key],
+          fullPath,
+          core,
+        );
+
+        if (childHasFunctional) {
+          // If the change is in a non-functional property, treat as non-functional.
           if (NON_FUNCTIONAL_PROPERTIES.has(key)) {
             core.info(`Property changed at ${fullPath} (non-functional)`);
             continue;
           }
-          return false;
+          return true;
         }
       }
     }
 
-    return true;
+    return false;
   }
 
   // Handle primitive values
@@ -414,15 +421,15 @@ function hasNonFunctionalDifferences(baseObj, headObj, path, core) {
       core.info(
         `Value changed at ${path || "root"} (non-functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
       );
-      return true;
+      return false;
     }
     core.info(
       `Value changed at ${path || "root"} (functional): ${inspect(baseObj)} -> ${inspect(headObj)}`,
     );
-    return false;
+    return true;
   }
 
-  return true;
+  return false;
 }
 
 /**
