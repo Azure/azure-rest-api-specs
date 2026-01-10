@@ -113,10 +113,20 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 @@clientName(HostType, "PublicCloudHostType", "csharp");
+@@clientName(GenerateAwsTemplateRequest,
+  "GenerateAwsTemplateContent",
+  "csharp"
+);
 @@alternateType(GenerateAwsTemplateRequest.connectorId,
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(ListCredentialsRequest, "ListCredentialsContent", "csharp");
+@@clientName(ListIngressGatewayCredentialsRequest,
+  "ListIngressGatewayCredentialsContent",
+  "csharp"
+);
+@@clientName(ManagedProxyRequest, "ManagedProxyContent", "csharp");
 @@clientName(HostType.AWS, "Aws", "csharp");
 @@clientName(InventoryProperties, "PublicCloudInventoryProperties", "csharp");
 @@alternateType(InventoryProperties.azureResourceId,
@@ -167,3 +177,11 @@ namespace Microsoft.HybridConnectivity;
   "GenerateAwsTemplateResult",
   "csharp"
 );
+
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+// @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PublicCloudConnectorUpdate,
+// Azure.ResourceManager.CommonTypes.Resource,
+// "csharp"
+// );
+
+@@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate");
