@@ -13,12 +13,22 @@ using Microsoft.Commerce;
   "python"
 );
 
+@@clientName(Microsoft.Commerce, "CommerceManager", "java");
+
+@alternateType(Microsoft.Commerce.UsageSample.infoFields,
+  ClientCustomizations.InfoField,
+  "java"
+);
 @@alternateType(Microsoft.Commerce.OfferTermInfo, ClientCustomizations.OfferTermInfo, "java");
 @@alternateType(Microsoft.Commerce.MonetaryCredit, ClientCustomizations.MonetaryCredit, "java");
 @@alternateType(Microsoft.Commerce.MonetaryCommitment, ClientCustomizations.MonetaryCommitment, "java");
 @@alternateType(Microsoft.Commerce.RecurringCharge, ClientCustomizations.RecurringCharge, "java");
 
+
 namespace ClientCustomizations {
+  model InfoField extends Record<string> {
+    project?: string;
+  }
   /** Base offer term info definition without discriminator to preserve Java hierarchy. */
   model OfferTermInfo {
     /** Name of the offer term */
