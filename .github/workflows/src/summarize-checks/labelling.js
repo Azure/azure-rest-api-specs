@@ -992,23 +992,6 @@ const rulesPri1Suppressions = [
   },
 ];
 
-/** @type {RequiredLabelRule[]} */
-const rulesPri1ArcReview = [
-  {
-    precedence: 1,
-    anyPrerequisiteLabels: ["ArcReview"],
-    anyRequiredLabels: ["ArcSignedOff"],
-    troubleshootingGuide:
-      "This PR is labelled with <code>ArcReview</code>. " +
-      "For this PR to be merged, it must pass an ARC review and be labelled <code>ArcSignedOff</code>.<br/>" +
-      "Email the ARC board to request review per " +
-      `${href(
-        "this Contact section",
-        "https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=contact",
-      )}.`,
-  },
-];
-
 /**
  * This collection has "SDK breaking changes" labels rules introduced in February 2024.
  * For description of the "SDK breaking changes" labels, see:
@@ -1155,7 +1138,6 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
-  .concat(rulesPri1ArcReview)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);
