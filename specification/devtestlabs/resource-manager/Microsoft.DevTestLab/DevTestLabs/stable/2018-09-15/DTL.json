@@ -409,7 +409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}": {
       "get": {
         "operationId": "Labs_Get",
         "tags": [
@@ -427,17 +427,17 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
-            "in": "path",
-            "description": "The name of the lab.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "$expand",
             "in": "query",
             "description": "Specify the $expand query. Example: 'properties($select=defaultStorageAccount)'",
             "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the lab.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -478,7 +478,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -552,7 +552,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -605,7 +605,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1339,7 +1339,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/claimAnyVm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/claimAnyVm": {
       "post": {
         "operationId": "Labs_ClaimAnyVm",
         "tags": [
@@ -1357,7 +1357,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1526,7 +1526,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/createEnvironment": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/createEnvironment": {
       "post": {
         "operationId": "Labs_CreateEnvironment",
         "tags": [
@@ -1544,7 +1544,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -1944,7 +1944,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/exportResourceUsage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/exportResourceUsage": {
       "post": {
         "operationId": "Labs_ExportResourceUsage",
         "tags": [
@@ -1962,7 +1962,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2422,7 +2422,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/generateUploadUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/generateUploadUri": {
       "post": {
         "operationId": "Labs_GenerateUploadUri",
         "tags": [
@@ -2440,7 +2440,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2477,7 +2477,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/importVirtualMachine": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/importVirtualMachine": {
       "post": {
         "operationId": "Labs_ImportVirtualMachine",
         "tags": [
@@ -2495,7 +2495,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,
@@ -2547,7 +2547,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/listVhds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{name}/listVhds": {
       "post": {
         "operationId": "Labs_ListVhds",
         "tags": [
@@ -2565,7 +2565,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "labName",
+            "name": "name",
             "in": "path",
             "description": "The name of the lab.",
             "required": true,

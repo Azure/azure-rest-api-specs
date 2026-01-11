@@ -522,3 +522,50 @@ using Microsoft.DevTestLab;
   "armTemplateName",
   "name"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.get, "labName", "name");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.createOrUpdate,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.update,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.delete,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.claimAnyVm,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.createEnvironment,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.exportResourceUsage,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.generateUploadUri,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.importVirtualMachine,
+  "labName",
+  "name"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ResourceManager.Legacy.renamePathParameter(Labs.listVhds,
+  "labName",
+  "name"
+);

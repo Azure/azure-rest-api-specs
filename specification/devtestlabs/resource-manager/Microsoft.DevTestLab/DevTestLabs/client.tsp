@@ -24,6 +24,7 @@ using Microsoft.DevTestLab;
   "csharp"
 );
 @@clientName(Artifact, "DevTestLabArtifact", "csharp");
+@@clientName(ArtifactProperties.targetOsType, "TargetOSType", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ArtifactSource,
   Azure.ResourceManager.Foundations.TrackedResource,
