@@ -19,3 +19,9 @@ using Microsoft.Commerce;
   ClientCustomizations.InfoField,
   "java"
 );
+
+namespace ClientCustomizations {
+  model InfoField extends Record<string> {
+    project?: string;
+  }
+}
