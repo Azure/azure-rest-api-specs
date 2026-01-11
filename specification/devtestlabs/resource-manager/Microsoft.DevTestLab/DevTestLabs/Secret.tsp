@@ -13,10 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A secret.
  */
+@parentResource(User)
 model Secret is Azure.ResourceManager.ProxyResource<SecretProperties> {
   ...ResourceNameParameter<
     Resource = Secret,
-    KeyName = "name",
+    KeyName = "secretName",
     SegmentName = "secrets",
     NamePattern = ""
   >;
@@ -31,34 +32,11 @@ model Secret is Azure.ResourceManager.ProxyResource<SecretProperties> {
 }
 
 @armResourceOperations
-interface SecretOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the user profile. */
-        @path @segment("users") userName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Secret,
-        KeyName = "name",
-        SegmentName = "secrets",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface Secrets {
   /**
    * Get secret.
    */
-  get is SecretOps.Read<
+  get is ArmResourceRead<
     Secret,
     Parameters = {
       /**
@@ -72,7 +50,7 @@ interface Secrets {
   /**
    * Create or replace an existing secret. This operation can take a while to complete.
    */
-  createOrUpdate is SecretOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Secret,
     LroHeaders = ArmLroLocationHeader<FinalResult = Secret> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -83,17 +61,17 @@ interface Secrets {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is SecretOps.CustomPatchSync<Secret, PatchModel = SecretFragment>;
+  update is ArmCustomPatchSync<Secret, PatchModel = SecretFragment>;
 
   /**
    * Delete secret.
    */
-  delete is SecretOps.DeleteSync<Secret>;
+  delete is ArmResourceDeleteSync<Secret>;
 
   /**
    * List secrets in a given user profile.
    */
-  list is SecretOps.List<
+  list is ArmResourceListByParent<
     Secret,
     Parameters = {
       /**

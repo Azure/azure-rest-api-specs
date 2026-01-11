@@ -13,10 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A formula for creating a VM, specifying an image base and other parameters
  */
+@parentResource(Lab)
 model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties> {
   ...ResourceNameParameter<
     Resource = Formula,
-    KeyName = "name",
+    KeyName = "formulaName",
     SegmentName = "formulas",
     NamePattern = ""
   >;
@@ -31,31 +32,11 @@ model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties> {
 }
 
 @armResourceOperations
-interface FormulaOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Formula,
-        KeyName = "name",
-        SegmentName = "formulas",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface Formulas {
   /**
    * Get formula.
    */
-  get is FormulaOps.Read<
+  get is ArmResourceRead<
     Formula,
     Parameters = {
       /**
@@ -69,7 +50,7 @@ interface Formulas {
   /**
    * Create or replace an existing formula. This operation can take a while to complete.
    */
-  createOrUpdate is FormulaOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Formula,
     LroHeaders = ArmLroLocationHeader<FinalResult = Formula> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -80,17 +61,17 @@ interface Formulas {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FormulaFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is FormulaOps.CustomPatchSync<Formula, PatchModel = FormulaFragment>;
+  update is ArmCustomPatchSync<Formula, PatchModel = FormulaFragment>;
 
   /**
    * Delete formula.
    */
-  delete is FormulaOps.DeleteSync<Formula>;
+  delete is ArmResourceDeleteSync<Formula>;
 
   /**
    * List formulas in a given lab.
    */
-  list is FormulaOps.List<
+  list is ArmResourceListByParent<
     Formula,
     Parameters = {
       /**

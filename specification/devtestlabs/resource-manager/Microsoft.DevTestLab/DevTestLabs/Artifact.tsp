@@ -12,10 +12,11 @@ namespace Microsoft.DevTestLab;
 /**
  * An artifact.
  */
+@parentResource(ArtifactSource)
 model Artifact is Azure.ResourceManager.ProxyResource<ArtifactProperties> {
   ...ResourceNameParameter<
     Resource = Artifact,
-    KeyName = "name",
+    KeyName = "artifactName",
     SegmentName = "artifacts",
     NamePattern = ""
   >;
@@ -30,34 +31,11 @@ model Artifact is Azure.ResourceManager.ProxyResource<ArtifactProperties> {
 }
 
 @armResourceOperations
-interface ArtifactOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the artifact source. */
-        @path @segment("artifactsources") artifactSourceName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Artifact,
-        KeyName = "name",
-        SegmentName = "artifacts",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface Artifacts {
   /**
    * Get artifact.
    */
-  get is ArtifactOps.Read<
+  get is ArmResourceRead<
     Artifact,
     Parameters = {
       /**
@@ -71,7 +49,7 @@ interface Artifacts {
   /**
    * List artifacts in a given artifact source.
    */
-  list is ArtifactOps.List<
+  list is ArmResourceListByParent<
     Artifact,
     Parameters = {
       /**
@@ -104,7 +82,7 @@ interface Artifacts {
   /**
    * Generates an ARM template for the given artifact, uploads the required files to a storage account, and validates the generated artifact.
    */
-  generateArmTemplate is ArtifactOps.ActionSync<
+  generateArmTemplate is ArmResourceActionSync<
     Artifact,
     GenerateArmTemplateRequest,
     ArmResponse<ArmTemplateInfo>

@@ -17,7 +17,7 @@ namespace Microsoft.DevTestLab;
 model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
   ...ResourceNameParameter<
     Resource = Schedule,
-    KeyName = "name",
+    KeyName = "scheduleName",
     SegmentName = "schedules",
     NamePattern = ""
   >;
@@ -32,7 +32,7 @@ model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
 }
 
 @armResourceOperations
-interface ScheduleOps
+interface GlobalScheduleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -54,7 +54,7 @@ interface GlobalSchedules {
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ScheduleOps.Read<
+  get is GlobalScheduleOps.Read<
     Schedule,
     Parameters = {
       /**
@@ -69,7 +69,7 @@ interface GlobalSchedules {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ScheduleOps.CreateOrUpdateSync<Schedule>;
+  createOrUpdate is GlobalScheduleOps.CreateOrUpdateSync<Schedule>;
 
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
@@ -77,7 +77,7 @@ interface GlobalSchedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ScheduleOps.CustomPatchSync<
+  update is GlobalScheduleOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
   >;
@@ -86,13 +86,13 @@ interface GlobalSchedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is ScheduleOps.DeleteSync<Schedule>;
+  delete is GlobalScheduleOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByResourceGroup is ScheduleOps.List<
+  listByResourceGroup is GlobalScheduleOps.List<
     Schedule,
     Parameters = {
       /**
@@ -160,7 +160,7 @@ interface GlobalSchedules {
    * Execute a schedule. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  execute is ScheduleOps.ActionAsync<
+  execute is GlobalScheduleOps.ActionAsync<
     Schedule,
     void,
     {
@@ -174,7 +174,7 @@ interface GlobalSchedules {
    * Updates a schedule's target resource Id. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  retarget is ScheduleOps.ActionAsync<
+  retarget is GlobalScheduleOps.ActionAsync<
     Schedule,
     RetargetScheduleProperties,
     {
@@ -185,7 +185,7 @@ interface GlobalSchedules {
   >;
 }
 @armResourceOperations
-interface ScheduleOperationGroupOps
+interface ScheduleOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -210,7 +210,7 @@ interface Schedules {
    * Get schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ScheduleOperationGroupOps.Read<
+  get is ScheduleOps.Read<
     Schedule,
     Parameters = {
       /**
@@ -225,7 +225,7 @@ interface Schedules {
    * Create or replace an existing schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is ScheduleOperationGroupOps.CreateOrUpdateSync<Schedule>;
+  createOrUpdate is ScheduleOps.CreateOrUpdateSync<Schedule>;
 
   /**
    * Allows modifying tags of schedules. All other properties will be ignored.
@@ -233,7 +233,7 @@ interface Schedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is ScheduleOperationGroupOps.CustomPatchSync<
+  update is ScheduleOps.CustomPatchSync<
     Schedule,
     PatchModel = ScheduleFragment
   >;
@@ -242,13 +242,13 @@ interface Schedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  delete is ScheduleOperationGroupOps.DeleteSync<Schedule>;
+  delete is ScheduleOps.DeleteSync<Schedule>;
 
   /**
    * List schedules in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is ScheduleOperationGroupOps.List<
+  list is ScheduleOps.List<
     Schedule,
     Parameters = {
       /**
@@ -281,7 +281,7 @@ interface Schedules {
   /**
    * Execute a schedule. This operation can take a while to complete.
    */
-  execute is ScheduleOperationGroupOps.ActionAsync<
+  execute is ScheduleOps.ActionAsync<
     Schedule,
     void,
     {
@@ -295,7 +295,7 @@ interface Schedules {
    * Lists all applicable schedules
    */
   @list
-  listApplicable is ScheduleOperationGroupOps.ActionSync<
+  listApplicable is ScheduleOps.ActionSync<
     Schedule,
     void,
     ArmResponse<ScheduleList>

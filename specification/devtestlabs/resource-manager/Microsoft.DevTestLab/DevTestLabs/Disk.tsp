@@ -12,10 +12,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A Disk.
  */
+@parentResource(User)
 model Disk is Azure.ResourceManager.ProxyResource<DiskProperties> {
   ...ResourceNameParameter<
     Resource = Disk,
-    KeyName = "name",
+    KeyName = "diskName",
     SegmentName = "disks",
     NamePattern = ""
   >;
@@ -30,34 +31,11 @@ model Disk is Azure.ResourceManager.ProxyResource<DiskProperties> {
 }
 
 @armResourceOperations
-interface DiskOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the user profile. */
-        @path @segment("users") userName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = Disk,
-        KeyName = "name",
-        SegmentName = "disks",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface Disks {
   /**
    * Get disk.
    */
-  get is DiskOps.Read<
+  get is ArmResourceRead<
     Disk,
     Parameters = {
       /**
@@ -71,7 +49,7 @@ interface Disks {
   /**
    * Create or replace an existing disk. This operation can take a while to complete.
    */
-  createOrUpdate is DiskOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Disk,
     LroHeaders = ArmLroLocationHeader<FinalResult = Disk> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -82,13 +60,13 @@ interface Disks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is DiskOps.CustomPatchSync<Disk, PatchModel = DiskFragment>;
+  update is ArmCustomPatchSync<Disk, PatchModel = DiskFragment>;
 
   /**
    * Delete disk. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is DiskOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     Disk,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -96,7 +74,7 @@ interface Disks {
   /**
    * List disks in a given user profile.
    */
-  list is DiskOps.List<
+  list is ArmResourceListByParent<
     Disk,
     Parameters = {
       /**
@@ -130,7 +108,7 @@ interface Disks {
    * Attach and create the lease of the disk to the virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy non-standard usage of operation response codes. Consider revising in a future API version."
-  attach is DiskOps.ActionAsync<
+  attach is ArmResourceActionAsync<
     Disk,
     AttachDiskProperties,
     {
@@ -143,7 +121,7 @@ interface Disks {
    * Detach and break the lease of the disk attached to the virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Legacy non-standard usage of operation response codes. Consider revising in a future API version."
-  detach is DiskOps.ActionAsync<
+  detach is ArmResourceActionAsync<
     Disk,
     DetachDiskProperties,
     {

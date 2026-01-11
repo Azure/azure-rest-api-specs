@@ -12,11 +12,12 @@ namespace Microsoft.DevTestLab;
 /**
  * Properties of an artifact source.
  */
+@parentResource(Lab)
 model ArtifactSource
   is Azure.ResourceManager.ProxyResource<ArtifactSourceProperties> {
   ...ResourceNameParameter<
     Resource = ArtifactSource,
-    KeyName = "name",
+    KeyName = "artifactSourceName",
     SegmentName = "artifactsources",
     NamePattern = ""
   >;
@@ -31,31 +32,11 @@ model ArtifactSource
 }
 
 @armResourceOperations
-interface ArtifactSourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ArtifactSource,
-        KeyName = "name",
-        SegmentName = "artifactsources",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface ArtifactSources {
   /**
    * Get artifact source.
    */
-  get is ArtifactSourceOps.Read<
+  get is ArmResourceRead<
     ArtifactSource,
     Parameters = {
       /**
@@ -69,14 +50,14 @@ interface ArtifactSources {
   /**
    * Create or replace an existing artifact source.
    */
-  createOrUpdate is ArtifactSourceOps.CreateOrUpdateSync<ArtifactSource>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ArtifactSource>;
 
   /**
    * Allows modifying tags of artifact sources. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "ArtifactSourceFragment contains tags as expected by the patch operation."
   @patch(#{ implicitOptionality: false })
-  update is ArtifactSourceOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     ArtifactSource,
     PatchModel = ArtifactSourceFragment
   >;
@@ -84,12 +65,12 @@ interface ArtifactSources {
   /**
    * Delete artifact source.
    */
-  delete is ArtifactSourceOps.DeleteSync<ArtifactSource>;
+  delete is ArmResourceDeleteSync<ArtifactSource>;
 
   /**
    * List artifact sources in a given lab.
    */
-  list is ArtifactSourceOps.List<
+  list is ArmResourceListByParent<
     ArtifactSource,
     Parameters = {
       /**

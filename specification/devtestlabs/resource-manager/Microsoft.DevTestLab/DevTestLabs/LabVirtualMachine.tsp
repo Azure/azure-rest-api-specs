@@ -13,11 +13,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual machine.
  */
+@parentResource(Lab)
 model LabVirtualMachine
   is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties> {
   ...ResourceNameParameter<
     Resource = LabVirtualMachine,
-    KeyName = "name",
+    KeyName = "virtualMachineName",
     SegmentName = "virtualmachines",
     NamePattern = ""
   >;
@@ -32,32 +33,12 @@ model LabVirtualMachine
 }
 
 @armResourceOperations
-interface LabVirtualMachineOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = LabVirtualMachine,
-        KeyName = "name",
-        SegmentName = "virtualmachines",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface VirtualMachines {
   /**
    * Get virtual machine.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is LabVirtualMachineOps.Read<
+  get is ArmResourceRead<
     LabVirtualMachine,
     Parameters = {
       /**
@@ -72,7 +53,7 @@ interface VirtualMachines {
    * Create or replace an existing virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is LabVirtualMachineOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LabVirtualMachine,
     LroHeaders = ArmLroLocationHeader<FinalResult = LabVirtualMachine> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -84,7 +65,7 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is LabVirtualMachineOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     LabVirtualMachine,
     PatchModel = LabVirtualMachineFragment
   >;
@@ -94,7 +75,7 @@ interface VirtualMachines {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is LabVirtualMachineOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     LabVirtualMachine,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -103,7 +84,7 @@ interface VirtualMachines {
    * List virtual machines in a given lab.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is LabVirtualMachineOps.List<
+  list is ArmResourceListByParent<
     LabVirtualMachine,
     Parameters = {
       /**
@@ -137,7 +118,7 @@ interface VirtualMachines {
    * Attach a new or existing data disk to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  addDataDisk is LabVirtualMachineOps.ActionAsync<
+  addDataDisk is ArmResourceActionAsync<
     LabVirtualMachine,
     DataDiskProperties,
     {
@@ -151,7 +132,7 @@ interface VirtualMachines {
    * Apply artifacts to virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  applyArtifacts is LabVirtualMachineOps.ActionAsync<
+  applyArtifacts is ArmResourceActionAsync<
     LabVirtualMachine,
     ApplyArtifactsRequest,
     {
@@ -165,7 +146,7 @@ interface VirtualMachines {
    * Take ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  claim is LabVirtualMachineOps.ActionAsync<
+  claim is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -179,7 +160,7 @@ interface VirtualMachines {
    * Detach the specified disk from the virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  detachDataDisk is LabVirtualMachineOps.ActionAsync<
+  detachDataDisk is ArmResourceActionAsync<
     LabVirtualMachine,
     DetachDataDiskProperties,
     {
@@ -193,7 +174,7 @@ interface VirtualMachines {
    * Gets a string that represents the contents of the RDP file for the virtual machine
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  getRdpFileContents is LabVirtualMachineOps.ActionSync<
+  getRdpFileContents is ArmResourceActionSync<
     LabVirtualMachine,
     void,
     ArmResponse<RdpConnection>
@@ -203,7 +184,7 @@ interface VirtualMachines {
    * Lists the applicable start/stop schedules, if any.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listApplicableSchedules is LabVirtualMachineOps.ActionSync<
+  listApplicableSchedules is ArmResourceActionSync<
     LabVirtualMachine,
     void,
     ArmResponse<ApplicableSchedule>
@@ -213,7 +194,7 @@ interface VirtualMachines {
    * Redeploy a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  redeploy is LabVirtualMachineOps.ActionAsync<
+  redeploy is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -227,7 +208,7 @@ interface VirtualMachines {
    * Resize Virtual Machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  resize is LabVirtualMachineOps.ActionAsync<
+  resize is ArmResourceActionAsync<
     LabVirtualMachine,
     ResizeLabVirtualMachineProperties,
     {
@@ -241,7 +222,7 @@ interface VirtualMachines {
    * Restart a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  restart is LabVirtualMachineOps.ActionAsync<
+  restart is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -255,7 +236,7 @@ interface VirtualMachines {
    * Start a virtual machine. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  start is LabVirtualMachineOps.ActionAsync<
+  start is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -269,7 +250,7 @@ interface VirtualMachines {
    * Stop a virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  stop is LabVirtualMachineOps.ActionAsync<
+  stop is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -283,7 +264,7 @@ interface VirtualMachines {
    * Transfers all data disks attached to the virtual machine to be owned by the current user. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  transferDisks is LabVirtualMachineOps.ActionAsync<
+  transferDisks is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {
@@ -297,7 +278,7 @@ interface VirtualMachines {
    * Release ownership of an existing virtual machine This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  unClaim is LabVirtualMachineOps.ActionAsync<
+  unClaim is ArmResourceActionAsync<
     LabVirtualMachine,
     void,
     {

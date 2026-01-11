@@ -12,11 +12,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A gallery image.
  */
+@parentResource(Lab)
 model GalleryImage
   is Azure.ResourceManager.ProxyResource<GalleryImageProperties> {
   ...ResourceNameParameter<
     Resource = GalleryImage,
-    KeyName = "name",
+    KeyName = "galleryImageName",
     SegmentName = "galleryimages",
     NamePattern = ""
   >;
@@ -31,31 +32,11 @@ model GalleryImage
 }
 
 @armResourceOperations
-interface GalleryImageOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = GalleryImage,
-        KeyName = "name",
-        SegmentName = "galleryimages",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface GalleryImages {
   /**
    * List gallery images in a given lab.
    */
-  list is GalleryImageOps.List<
+  list is ArmResourceListByParent<
     GalleryImage,
     Parameters = {
       /**

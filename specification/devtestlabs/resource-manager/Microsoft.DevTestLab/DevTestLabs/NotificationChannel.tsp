@@ -12,11 +12,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A notification.
  */
+@parentResource(Lab)
 model NotificationChannel
   is Azure.ResourceManager.ProxyResource<NotificationChannelProperties> {
   ...ResourceNameParameter<
     Resource = NotificationChannel,
-    KeyName = "name",
+    KeyName = "notificationChannelName",
     SegmentName = "notificationchannels",
     NamePattern = ""
   >;
@@ -31,31 +32,11 @@ model NotificationChannel
 }
 
 @armResourceOperations
-interface NotificationChannelOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = NotificationChannel,
-        KeyName = "name",
-        SegmentName = "notificationchannels",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface NotificationChannels {
   /**
    * Get notification channel.
    */
-  get is NotificationChannelOps.Read<
+  get is ArmResourceRead<
     NotificationChannel,
     Parameters = {
       /**
@@ -69,14 +50,14 @@ interface NotificationChannels {
   /**
    * Create or replace an existing notification channel.
    */
-  createOrUpdate is NotificationChannelOps.CreateOrUpdateSync<NotificationChannel>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NotificationChannel>;
 
   /**
    * Allows modifying tags of notification channels. All other properties will be ignored.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is NotificationChannelOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     NotificationChannel,
     PatchModel = NotificationChannelFragment
   >;
@@ -84,12 +65,12 @@ interface NotificationChannels {
   /**
    * Delete notification channel.
    */
-  delete is NotificationChannelOps.DeleteSync<NotificationChannel>;
+  delete is ArmResourceDeleteSync<NotificationChannel>;
 
   /**
    * List notification channels in a given lab.
    */
-  list is NotificationChannelOps.List<
+  list is ArmResourceListByParent<
     NotificationChannel,
     Parameters = {
       /**
@@ -122,7 +103,7 @@ interface NotificationChannels {
   /**
    * Send notification to provided channel.
    */
-  notify is NotificationChannelOps.ActionSync<
+  notify is ArmResourceActionSync<
     NotificationChannel,
     NotifyParameters,
     OkResponse

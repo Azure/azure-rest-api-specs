@@ -13,11 +13,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A virtual network.
  */
+@parentResource(Lab)
 model VirtualNetwork
   is Azure.ResourceManager.ProxyResource<VirtualNetworkProperties> {
   ...ResourceNameParameter<
     Resource = VirtualNetwork,
-    KeyName = "name",
+    KeyName = "virtualnetworkName",
     SegmentName = "virtualnetworks",
     NamePattern = ""
   >;
@@ -32,31 +33,11 @@ model VirtualNetwork
 }
 
 @armResourceOperations
-interface VirtualNetworkOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = VirtualNetwork,
-        KeyName = "name",
-        SegmentName = "virtualnetworks",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface VirtualNetworks {
   /**
    * Get virtual network.
    */
-  get is VirtualNetworkOps.Read<
+  get is ArmResourceRead<
     VirtualNetwork,
     Parameters = {
       /**
@@ -70,7 +51,7 @@ interface VirtualNetworks {
   /**
    * Create or replace an existing virtual network. This operation can take a while to complete.
    */
-  createOrUpdate is VirtualNetworkOps.CreateOrUpdateAsync<
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetwork,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualNetwork> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -81,7 +62,7 @@ interface VirtualNetworks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Already contains tags"
   @patch(#{ implicitOptionality: false })
-  update is VirtualNetworkOps.CustomPatchSync<
+  update is ArmCustomPatchSync<
     VirtualNetwork,
     PatchModel = VirtualNetworkFragment
   >;
@@ -90,7 +71,7 @@ interface VirtualNetworks {
    * Delete virtual network. This operation can take a while to complete.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  delete is VirtualNetworkOps.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
@@ -98,7 +79,7 @@ interface VirtualNetworks {
   /**
    * List virtual networks in a given lab.
    */
-  list is VirtualNetworkOps.List<
+  list is ArmResourceListByParent<
     VirtualNetwork,
     Parameters = {
       /**

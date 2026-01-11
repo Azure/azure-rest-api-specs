@@ -13,10 +13,11 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
+@parentResource(Lab)
 model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties> {
   ...ResourceNameParameter<
     Resource = LabCost,
-    KeyName = "name",
+    KeyName = "costName",
     SegmentName = "costs",
     NamePattern = ""
   >;
@@ -30,26 +31,6 @@ model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties> {
   location?: string;
 }
 
-@armResourceOperations
-interface LabCostOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = LabCost,
-        KeyName = "name",
-        SegmentName = "costs",
-        NamePattern = ""
-      >>
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface Costs {
@@ -58,7 +39,7 @@ interface Costs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_Get")
-  get is LabCostOps.Read<
+  get is ArmResourceRead<
     LabCost,
     Parameters = {
       /**
@@ -74,7 +55,7 @@ interface Costs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_CreateOrUpdate")
-  createOrUpdate is LabCostOps.CreateOrUpdateSync<LabCost>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
 }
 
 @@doc(LabCost.name, "The name of the cost.");

@@ -31,7 +31,7 @@ using Microsoft.DevTestLab;
 );
 @@clientName(ArtifactSource, "DevTestLabArtifactSource", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(LabCost,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CustomImage,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );

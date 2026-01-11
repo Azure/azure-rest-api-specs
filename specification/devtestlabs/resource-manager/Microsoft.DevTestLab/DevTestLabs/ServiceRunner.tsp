@@ -13,11 +13,12 @@ namespace Microsoft.DevTestLab;
 /**
  * A container for a managed identity to execute DevTest lab services.
  */
+@parentResource(Lab)
 model ServiceRunner is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = ServiceRunner,
-    KeyName = "name",
-    SegmentName = "servicefabrics",
+    KeyName = "serviceRunnerName",
+    SegmentName = "servicerunners",
     NamePattern = ""
   >;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -31,41 +32,21 @@ model ServiceRunner is Azure.ResourceManager.ProxyResource<never> {
 }
 
 @armResourceOperations
-interface ServiceRunnerOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ServiceRunner,
-        KeyName = "name",
-        SegmentName = "servicerunners",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface ServiceRunners {
   /**
    * Get service runner.
    */
-  get is ServiceRunnerOps.Read<ServiceRunner>;
+  get is ArmResourceRead<ServiceRunner>;
 
   /**
    * Create or replace an existing service runner.
    */
-  createOrUpdate is ServiceRunnerOps.CreateOrUpdateSync<ServiceRunner>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<ServiceRunner>;
 
   /**
    * Delete service runner.
    */
-  delete is ServiceRunnerOps.DeleteSync<ServiceRunner>;
+  delete is ArmResourceDeleteSync<ServiceRunner>;
 }
 
 @@doc(ServiceRunner.name, "The name of the service runner.");

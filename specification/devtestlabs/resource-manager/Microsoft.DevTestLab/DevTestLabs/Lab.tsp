@@ -16,7 +16,7 @@ namespace Microsoft.DevTestLab;
 model Lab is Azure.ResourceManager.ProxyResource<LabProperties> {
   ...ResourceNameParameter<
     Resource = Lab,
-    KeyName = "name",
+    KeyName = "labName",
     SegmentName = "labs",
     NamePattern = ""
   >;

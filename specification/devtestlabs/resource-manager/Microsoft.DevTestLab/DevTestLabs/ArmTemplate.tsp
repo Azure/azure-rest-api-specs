@@ -12,11 +12,12 @@ namespace Microsoft.DevTestLab;
 /**
  * An Azure Resource Manager template.
  */
+@parentResource(ArtifactSource)
 model ArmTemplate
   is Azure.ResourceManager.ProxyResource<ArmTemplateProperties> {
   ...ResourceNameParameter<
     Resource = ArmTemplate,
-    KeyName = "name",
+    KeyName = "armTemplateName",
     SegmentName = "armtemplates",
     NamePattern = ""
   >;
@@ -31,34 +32,11 @@ model ArmTemplate
 }
 
 @armResourceOperations
-interface ArmTemplatesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-
-        /** The name of the artifact source. */
-        @path @segment("artifactsources") artifactSourceName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = ArmTemplate,
-        KeyName = "name",
-        SegmentName = "armtemplates",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface ArmTemplates {
   /**
    * Get azure resource manager template.
    */
-  get is ArmTemplatesOps.Read<
+  get is ArmResourceRead<
     ArmTemplate,
     Parameters = {
       /**
@@ -72,7 +50,8 @@ interface ArmTemplates {
   /**
    * List azure resource manager templates in a given artifact source.
    */
-  list is ArmTemplatesOps.List<
+  @list
+  list is ArmResourceListByParent<
     ArmTemplate,
     Parameters = {
       /**
