@@ -13,7 +13,7 @@ using Microsoft.Commerce;
   "python"
 );
 
-@@clientName(Microsoft.Commerce, "UsageManager", "java");
+@@clientName(Microsoft.Commerce.CommerceManager, "UsageManager", "java");
 
 @@alternateType(Microsoft.Commerce.OfferTermInfo, ClientCustomizations.OfferTermInfo, "java");
 @@alternateType(Microsoft.Commerce.MonetaryCredit, ClientCustomizations.MonetaryCredit, "java");
