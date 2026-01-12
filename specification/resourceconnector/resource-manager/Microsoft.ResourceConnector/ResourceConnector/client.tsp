@@ -48,29 +48,6 @@ using Microsoft.ResourceConnector;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AppliancesUpdateCustomized(
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @path
-  @maxLength(63)
-  @minLength(1)
-  @doc("Appliances name.")
-  @segment("appliances")
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "override"
-  @doc("Resource tags")
-  @body
-  tags?: Record<string>,
-): Appliance;
-@@override(Appliances.update, AppliancesUpdateCustomized, "javascript");
 @@clientName(Microsoft.ResourceConnector.ApplianceGetTelemetryConfigResult,
   "ApplianceTelemetryConfigResult",
   "csharp"
@@ -130,10 +107,37 @@ op AppliancesUpdateCustomized(
 @@clientName(Event, "ResourceConnectorEvent", "csharp");
 @@clientName(NetworkProfile, "ResourceConnectorNetworkProfile", "csharp");
 @@clientName(PatchableAppliance, "ResourceConnectorAppliancePatch", "csharp");
-@@clientName(AppliancesOperationGroup.getTelemetryConfig, "GetTelemetryConfigAppliance", "csharp");
+@@clientName(AppliancesOperationGroup.getTelemetryConfig,
+  "GetTelemetryConfigAppliance",
+  "csharp"
+);
 @@clientName(Provider.SCVMM, "Scvmm", "csharp");
 @@clientName(Appliances.update::parameters.properties, "patch", "csharp");
 @@alternateType(Appliance.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op AppliancesUpdateCustomized(
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+
+  @path
+  @maxLength(63)
+  @minLength(1)
+  @doc("Appliances name.")
+  @segment("appliances")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
+  resourceName: string,
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "override"
+  @doc("Resource tags")
+  @body
+  tags?: Record<string>,
+): Appliance;
+@@override(Appliances.update, AppliancesUpdateCustomized, "javascript");
