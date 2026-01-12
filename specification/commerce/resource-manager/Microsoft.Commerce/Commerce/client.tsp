@@ -12,14 +12,3 @@ using Microsoft.Commerce;
   "Daily",
   "python"
 );
-
-@@alternateType(Microsoft.Commerce.UsageSample.infoFields,
-  ClientCustomizations.InfoField,
-  "java"
-);
-
-namespace ClientCustomizations {
-  model InfoField extends Record<string> {
-    project?: string;
-  }
-}
