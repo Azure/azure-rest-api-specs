@@ -847,9 +847,20 @@ export class TspConfigNoSuppressionForConfiguredLanguageSubRule extends Tspconfi
         // Check if suppression affects configured languages
         const subRules = suppression.subRules || [];
         for (const subRule of subRules) {
-          // Check if subRule contains language-specific patterns
+          // Check if subRule matches any configured language emitter
           for (const [emitter, language] of Object.entries(this.emitterToLanguageMap)) {
-            if (configuredLanguages.has(language) && subRule.includes(emitter)) {
+            if (!configuredLanguages.has(language)) {
+              // Skip if language is not configured
+              continue;
+            }
+
+            // Check if the subRule is for this emitter
+            // Matches patterns like:
+            // - options.@azure-tools/typespec-ts.*
+            // - options.@azure-tools/typespec-ts.package-details.name
+            // - options.@azure-tools/typespec-python.namespace
+            const emitterPattern = `options.${emitter}`;
+            if (subRule.startsWith(emitterPattern)) {
               conflictingSuppressions.push(
                 `Language "${language}" (emitter: ${emitter}) is configured in tspconfig.yaml but has suppression for sub-rule: ${subRule}`,
               );
