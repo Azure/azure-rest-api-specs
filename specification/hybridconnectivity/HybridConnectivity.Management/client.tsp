@@ -178,10 +178,4 @@ namespace Microsoft.HybridConnectivity;
   "csharp"
 );
 
-// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
-// @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PublicCloudConnectorUpdate,
-// Azure.ResourceManager.CommonTypes.Resource,
-// "csharp"
-// );
-
-@@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate");
+@@clientName(GenerateAwsTemplate.post, "PostGenerateAwsTemplate", "csharp");
