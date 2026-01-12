@@ -14,4 +14,3 @@ using Microsoft.Commerce;
 );
 
 @@clientName(Microsoft.Commerce, "CommerceManager", "java");
-@@clientName(UsageManagementClient, "CommerceManagementClient", "java");
