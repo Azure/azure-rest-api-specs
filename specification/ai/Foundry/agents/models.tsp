@@ -374,6 +374,9 @@ model ContainerDetails {
   @doc("The provisioning state of the container.")
   provisioning_state: string;
 
+  @doc("The provisioning error of the container, if any.")
+  provisioning_error?: string;
+
   @doc("The state of the container.")
   state: string;
 
@@ -485,45 +488,11 @@ model AcceptedAgentContainerOperation {
   body: AgentContainerOperationObject;
 }
 
-@doc("A structured event log entry from the container. Each stream chunk contains a JSON object with event details.")
-model EventContainerLog {
-  @doc("The timestamp of the event.")
-  @encodedName("application/json", "TimeStamp")
-  @encode("rfc3339")
-  timestamp: utcDateTime;
+/** The type of logs to stream from a container. */
+union ContainerLogKind {
+  /** Console logs from the container. */
+  console: "console",
 
-  @doc("The type of the event (e.g., 'Normal', 'Warning').")
-  @encodedName("application/json", "Type")
-  event_type: string;
-
-  @doc("The revision name, if applicable.")
-  @encodedName("application/json", "RevisionName")
-  revision_name?: string | null;
-
-  @doc("The replica name, if applicable.")
-  @encodedName("application/json", "ReplicaName")
-  replica_name?: string | null;
-
-  @doc("The message describing the event.")
-  @encodedName("application/json", "Msg")
-  msg: string;
-
-  @doc("The reason for the event.")
-  @encodedName("application/json", "Reason")
-  reason: string;
-
-  @doc("The source of the event.")
-  @encodedName("application/json", "EventSource")
-  event_source: string;
-
-  @doc("The count of occurrences of this event.")
-  @encodedName("application/json", "Count")
-  count: int32;
+  /** System logs from the container. */
+  system: "system",
 }
-
-@doc("""
-  Container log entry streamed from the container as plain text chunks. 
-  Each chunk may be a plain text log line or a JSON-encoded EventContainerLog object.
-  Clients should parse each chunk and handle both formats accordingly.
-  """)
-scalar StreamingContainerLog extends string;

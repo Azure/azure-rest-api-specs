@@ -1040,13 +1040,55 @@
             "description": "The version of the agent.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "console returns container stdout/stderr, system returns container app event stream. defaults to console",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "console",
+              "system"
+            ],
+            "x-ms-enum": {
+              "name": "ContainerLogKind",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "console",
+                  "value": "console",
+                  "description": "Console logs from the container."
+                },
+                {
+                  "name": "system",
+                  "value": "system",
+                  "description": "System logs from the container."
+                }
+              ]
+            }
+          },
+          {
+            "name": "replica_name",
+            "in": "query",
+            "description": "When omitted, the server chooses the first replica for console logs. Required to target a specific replica.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tail",
+            "in": "query",
+            "description": "Number of trailing lines returned. Enforced to 1-300. Defaults to 20",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StreamingContainerLog"
+              "type": "string"
             }
           },
           "default": {
@@ -19914,10 +19956,6 @@
         "size",
         "tier"
       ]
-    },
-    "StreamingContainerLog": {
-      "type": "string",
-      "description": "Container log entry streamed from the container as plain text chunks. \nEach chunk may be a plain text log line or a JSON-encoded EventContainerLog object.\nClients should parse each chunk and handle both formats accordingly."
     },
     "StructuredInputDefinition": {
       "type": "object",
