@@ -87,7 +87,7 @@ using Http;
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
 @@clientName(HttpCorrelationProtocol.W3C, "W3_C", "python");
 @@clientName(BackendSessionIdSource, "BackendSessionIdSource", "python");
-@@clientName(LLMDiagnosticSettings, "LlmDiagnosticSettings", "python");
+@@clientName(LlmDiagnosticSettings, "LlmDiagnosticSettings", "python");
 @@clientName(LlmMessageLogTypes, "LlmMessageLogTypes", "python");
 @@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
   "Microsoft.ApiManagement",
