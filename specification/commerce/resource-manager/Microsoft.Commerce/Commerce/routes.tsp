@@ -18,6 +18,7 @@ interface UsageAggregatesOperationGroup {
   /**
    * Query aggregated Azure subscription consumption data for a date range.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("https://docs.microsoft.com/rest/api/commerce/usageaggregates")
@@ -26,7 +27,7 @@ interface UsageAggregatesOperationGroup {
   @list
   @action("UsageAggregates")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<UsageAggregation> | (ArmAcceptedLroResponse &
+    Response = ResourceListResult<UsageAggregation> | (ArmAcceptedResponse &
       ErrorObjectResponse),
     Scope = SubscriptionActionScope,
     Parameters = {
