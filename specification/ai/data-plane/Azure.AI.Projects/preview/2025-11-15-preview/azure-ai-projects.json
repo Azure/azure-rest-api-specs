@@ -7034,7 +7034,7 @@
     }
   },
   "definitions": {
-    "A2ATool": {
+    "A2APreviewTool": {
       "type": "object",
       "description": "An agent implementing the A2A protocol.",
       "properties": {
@@ -8061,25 +8061,6 @@
       ],
       "x-ms-discriminator-value": "azure_ai_model"
     },
-    "AzureAISearchAgentTool": {
-      "type": "object",
-      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
-      "properties": {
-        "azure_ai_search": {
-          "$ref": "#/definitions/AzureAISearchToolResource",
-          "description": "The azure ai search index resource."
-        }
-      },
-      "required": [
-        "azure_ai_search"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenAI.Tool"
-        }
-      ],
-      "x-ms-discriminator-value": "azure_ai_search"
-    },
     "AzureAISearchIndex": {
       "type": "object",
       "description": "Azure AI Search Index Definition",
@@ -8159,6 +8140,25 @@
         ]
       }
     },
+    "AzureAISearchTool": {
+      "type": "object",
+      "description": "The input definition information for an Azure AI search tool as used to configure an agent.",
+      "properties": {
+        "azure_ai_search": {
+          "$ref": "#/definitions/AzureAISearchToolResource",
+          "description": "The azure ai search index resource."
+        }
+      },
+      "required": [
+        "azure_ai_search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search"
+    },
     "AzureAISearchToolResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
@@ -8175,25 +8175,6 @@
       "required": [
         "indexes"
       ]
-    },
-    "AzureFunctionAgentTool": {
-      "type": "object",
-      "description": "The input definition information for an Azure Function Tool, as used to configure an Agent.",
-      "properties": {
-        "azure_function": {
-          "$ref": "#/definitions/AzureFunctionDefinition",
-          "description": "The Azure Function Tool definition."
-        }
-      },
-      "required": [
-        "azure_function"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenAI.Tool"
-        }
-      ],
-      "x-ms-discriminator-value": "azure_function"
     },
     "AzureFunctionBinding": {
       "type": "object",
@@ -8277,6 +8258,25 @@
         "queue_name"
       ]
     },
+    "AzureFunctionTool": {
+      "type": "object",
+      "description": "The input definition information for an Azure Function Tool, as used to configure an Agent.",
+      "properties": {
+        "azure_function": {
+          "$ref": "#/definitions/AzureFunctionDefinition",
+          "description": "The Azure Function Tool definition."
+        }
+      },
+      "required": [
+        "azure_function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function"
+    },
     "AzureOpenAIModelConfiguration": {
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
@@ -8310,25 +8310,6 @@
       "required": [
         "type"
       ]
-    },
-    "BingCustomSearchAgentTool": {
-      "type": "object",
-      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
-      "properties": {
-        "bing_custom_search_preview": {
-          "$ref": "#/definitions/BingCustomSearchToolParameters",
-          "description": "The bing custom search tool parameters."
-        }
-      },
-      "required": [
-        "bing_custom_search_preview"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenAI.Tool"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_custom_search_preview"
     },
     "BingCustomSearchConfiguration": {
       "type": "object",
@@ -8365,6 +8346,25 @@
         "instance_name"
       ]
     },
+    "BingCustomSearchPreviewTool": {
+      "type": "object",
+      "description": "The input definition information for a Bing custom search tool as used to configure an agent.",
+      "properties": {
+        "bing_custom_search_preview": {
+          "$ref": "#/definitions/BingCustomSearchToolParameters",
+          "description": "The bing custom search tool parameters."
+        }
+      },
+      "required": [
+        "bing_custom_search_preview"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search_preview"
+    },
     "BingCustomSearchToolParameters": {
       "type": "object",
       "description": "The bing custom search tool parameters.",
@@ -8381,25 +8381,6 @@
       "required": [
         "search_configurations"
       ]
-    },
-    "BingGroundingAgentTool": {
-      "type": "object",
-      "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
-      "properties": {
-        "bing_grounding": {
-          "$ref": "#/definitions/BingGroundingSearchToolParameters",
-          "description": "The bing grounding search tool parameters."
-        }
-      },
-      "required": [
-        "bing_grounding"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenAI.Tool"
-        }
-      ],
-      "x-ms-discriminator-value": "bing_grounding"
     },
     "BingGroundingSearchConfiguration": {
       "type": "object",
@@ -8448,6 +8429,25 @@
         "search_configurations"
       ]
     },
+    "BingGroundingTool": {
+      "type": "object",
+      "description": "The input definition information for a bing grounding search tool as used to configure an agent.",
+      "properties": {
+        "bing_grounding": {
+          "$ref": "#/definitions/BingGroundingSearchToolParameters",
+          "description": "The bing grounding search tool parameters."
+        }
+      },
+      "required": [
+        "bing_grounding"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding"
+    },
     "BlobReference": {
       "type": "object",
       "description": "Blob reference details.",
@@ -8471,7 +8471,7 @@
         "credential"
       ]
     },
-    "BrowserAutomationAgentTool": {
+    "BrowserAutomationPreviewTool": {
       "type": "object",
       "description": "The input definition information for a Browser Automation Tool, as used to configure an Agent.",
       "properties": {
@@ -12097,7 +12097,7 @@
         ]
       }
     },
-    "MicrosoftFabricAgentTool": {
+    "MicrosoftFabricPreviewTool": {
       "type": "object",
       "description": "The input definition information for a Microsoft Fabric tool as used to configure an agent.",
       "properties": {
@@ -20458,25 +20458,6 @@
       "type": "number",
       "format": "double"
     },
-    "OpenApiAgentTool": {
-      "type": "object",
-      "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
-      "properties": {
-        "openapi": {
-          "$ref": "#/definitions/OpenApiFunctionDefinition",
-          "description": "The openapi function definition."
-        }
-      },
-      "required": [
-        "openapi"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/OpenAI.Tool"
-        }
-      ],
-      "x-ms-discriminator-value": "openapi"
-    },
     "OpenApiAnonymousAuthDetails": {
       "type": "object",
       "description": "Security details for OpenApi anonymous authentication",
@@ -20649,6 +20630,25 @@
       "required": [
         "project_connection_id"
       ]
+    },
+    "OpenApiTool": {
+      "type": "object",
+      "description": "The input definition information for an OpenAPI tool as used to configure an agent.",
+      "properties": {
+        "openapi": {
+          "$ref": "#/definitions/OpenApiFunctionDefinition",
+          "description": "The openapi function definition."
+        }
+      },
+      "required": [
+        "openapi"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.Tool"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi"
     },
     "PagedConnection": {
       "type": "object",
@@ -21549,7 +21549,21 @@
         ]
       }
     },
-    "SharepointAgentTool": {
+    "SharepointGroundingToolParameters": {
+      "type": "object",
+      "description": "The sharepoint grounding tool parameters.",
+      "properties": {
+        "project_connections": {
+          "type": "array",
+          "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ToolProjectConnection"
+          }
+        }
+      }
+    },
+    "SharepointPreviewTool": {
       "type": "object",
       "description": "The input definition information for a sharepoint tool as used to configure an agent.",
       "properties": {
@@ -21567,20 +21581,6 @@
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding_preview"
-    },
-    "SharepointGroundingToolParameters": {
-      "type": "object",
-      "description": "The sharepoint grounding tool parameters.",
-      "properties": {
-        "project_connections": {
-          "type": "array",
-          "description": "The project connections attached to this tool. There can be a maximum of 1 connection\nresource attached to the tool.",
-          "maxItems": 1,
-          "items": {
-            "$ref": "#/definitions/ToolProjectConnection"
-          }
-        }
-      }
     },
     "Sku": {
       "type": "object",
