@@ -2896,7 +2896,7 @@ op checkNameAvailabilityCustomized(
   name: string,
 
   @doc("Resource type used for verification.")
-  typeParam: CheckNameResourceTypes,
+  type: CheckNameResourceTypes,
 
   @doc("Is fully qualified domain name.")
   isFqdn?: boolean,
@@ -2922,7 +2922,7 @@ op regionalCheckNameAvailabilityCustomized(
   location: string,
 
   @doc("Resource type used for verification.")
-  typeParam: CheckNameResourceTypes,
+  type: CheckNameResourceTypes,
 
   @doc("Resource group name.")
   resourceGroupName?: string,
@@ -2935,3 +2935,8 @@ op regionalCheckNameAvailabilityCustomized(
   regionalCheckNameAvailabilityCustomized,
   "javascript"
 );
+@@clientName(DnlResourceNameAvailabilityRequest.type,
+  "typeParam",
+  "javascript"
+);
+@@clientName(ResourceNameAvailabilityRequest.type, "typeParam", "javascript");
