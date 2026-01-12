@@ -33,14 +33,16 @@ using Microsoft.DomainRegistration;
 @@clientName(DomainsOperationGroup.checkAvailability::parameters.body,
   "identifier"
 );
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainOwnershipIdentifier.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainPatchResource.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TopLevelDomain.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Domain.properties);
 
 @@clientLocation(Operations.list, "DomainRegistrationProvider");
