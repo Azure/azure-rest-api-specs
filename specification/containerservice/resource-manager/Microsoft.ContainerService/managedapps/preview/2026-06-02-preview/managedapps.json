@@ -44,6 +44,12 @@
     },
     {
       "name": "Apps"
+    },
+    {
+      "name": "AppRevisions"
+    },
+    {
+      "name": "AppDeployments"
     }
   ],
   "paths": {
@@ -367,9 +373,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions": {
       "get": {
-        "operationId": "Apps_GetAppRevisions",
+        "operationId": "AppRevisions_List",
         "tags": [
-          "Apps"
+          "AppRevisions"
         ],
         "description": "List AppRevision resources by ManagedApp",
         "parameters": [
@@ -411,10 +417,58 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions/{appRevisionName}": {
-      "put": {
-        "operationId": "Apps_CreateOrUpdateAppRevision",
+      "get": {
+        "operationId": "AppRevisions_Get",
         "tags": [
-          "Apps"
+          "AppRevisions"
+        ],
+        "description": "Get a AppRevision",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appRevisionName",
+            "in": "path",
+            "description": "The name of the AppRevision",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppRevision"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppRevisions_CreateOrUpdate",
+        "tags": [
+          "AppRevisions"
         ],
         "description": "Create a AppRevision",
         "parameters": [
@@ -490,11 +544,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Apps_DeleteAppRevision",
+        "operationId": "AppRevisions_Delete",
         "tags": [
-          "Apps"
+          "AppRevisions"
         ],
-        "description": "Delete a AppRevision",
+        "description": "Deletes an app revision. This will also delete all deployments that reference this revision. WARNING: This operation is destructive",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -555,9 +609,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions/{appRevisionName}/deployments": {
       "get": {
-        "operationId": "Apps_RevisionDeployments",
+        "operationId": "AppRevisions_RevisionDeployments",
         "tags": [
-          "Apps"
+          "AppRevisions"
         ],
         "description": "Lists the deployments for a given App Revision or Managed App.",
         "parameters": [
@@ -592,6 +646,56 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AppDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedApps/{managedAppName}/appRevisions/{appRevisionName}/render": {
+      "post": {
+        "operationId": "AppRevisions_Render",
+        "tags": [
+          "AppRevisions"
+        ],
+        "description": "Renders the app revision kubernetes manifests",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedAppName",
+            "in": "path",
+            "description": "The name of the ManagedApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appRevisionName",
+            "in": "path",
+            "description": "The name of the AppRevision",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RenderResponse"
             }
           },
           "default": {
@@ -647,9 +751,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments": {
       "get": {
-        "operationId": "Apps_GetAppDeployments",
+        "operationId": "AppDeployments_List",
         "tags": [
-          "Apps"
+          "AppDeployments"
         ],
         "description": "List AppDeployment resources by ManagedNamespace",
         "parameters": [
@@ -699,10 +803,66 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments/{appDeploymentName}": {
-      "put": {
-        "operationId": "Apps_CreateOrUpdateAppDeployment",
+      "get": {
+        "operationId": "AppDeployments_Get",
         "tags": [
-          "Apps"
+          "AppDeployments"
+        ],
+        "description": "Get a AppDeployment",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedClusterName",
+            "in": "path",
+            "description": "The name of the ManagedCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AppDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "AppDeployments_CreateOrUpdate",
+        "tags": [
+          "AppDeployments"
         ],
         "description": "Create a AppDeployment",
         "parameters": [
@@ -786,9 +946,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Apps_DeleteAppDeployment",
+        "operationId": "AppDeployments_Delete",
         "tags": [
-          "Apps"
+          "AppDeployments"
         ],
         "description": "Delete a AppDeployment",
         "parameters": [
@@ -857,13 +1017,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/trafficSplits": {
-      "get": {
-        "operationId": "Apps_GetTrafficSplits",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/appDeployments/{appDeploymentName}/rollback": {
+      "post": {
+        "operationId": "AppDeployments_Rollback",
         "tags": [
-          "Apps"
+          "AppDeployments"
         ],
-        "description": "List TrafficSplit resources by ManagedNamespace",
+        "description": "Rollback the app deployment to the previous revision",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -886,6 +1046,14 @@
             "name": "managedNamespaceName",
             "in": "path",
             "description": "The name of the ManagedNamespace",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "appDeploymentName",
+            "in": "path",
+            "description": "The name of the AppDeployment",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -895,7 +1063,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/TrafficSplitListResult"
+              "$ref": "#/definitions/AppDeployment"
             }
           },
           "default": {
@@ -904,176 +1072,14 @@
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{managedClusterName}/managedNamespaces/{managedNamespaceName}/trafficSplits/{trafficSplitName}": {
-      "put": {
-        "operationId": "Apps_CreateOrUpdateTrafficSplit",
-        "tags": [
-          "Apps"
-        ],
-        "description": "Create a TrafficSplit",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedClusterName",
-            "in": "path",
-            "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "trafficSplitName",
-            "in": "path",
-            "description": "The name of the TrafficSplit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrafficSplit"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'TrafficSplit' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TrafficSplit"
-            }
-          },
-          "201": {
-            "description": "Resource 'TrafficSplit' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/TrafficSplit"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "Apps_DeleteTrafficSplit",
-        "tags": [
-          "Apps"
-        ],
-        "description": "Delete a TrafficSplit",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "managedClusterName",
-            "in": "path",
-            "description": "The name of the ManagedCluster",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "managedNamespaceName",
-            "in": "path",
-            "description": "The name of the ManagedNamespace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          },
-          {
-            "name": "trafficSplitName",
-            "in": "path",
-            "description": "The name of the TrafficSplit",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
     "AppDeployment": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "Represents deploying a revision of an app inside a managed namespace",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AppDeploymentProperties",
@@ -1131,6 +1137,15 @@
           "$ref": "#/definitions/AppRevisionId",
           "description": "The App Revision Id"
         },
+        "previousAppRevisionId": {
+          "$ref": "#/definitions/AppRevisionId",
+          "description": "The previous App Revision Id. This is used for rolling back to a previous revision",
+          "readOnly": true
+        },
+        "listOverridePolicy": {
+          "$ref": "#/definitions/ListOverridePolicy",
+          "description": "The override policy for list fields, Replace or Append. Default is replace"
+        },
         "permissionsInSameNamespace": {
           "type": "array",
           "description": "An array of permissions for k8s resources in the same namespace associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app",
@@ -1170,7 +1185,7 @@
           "description": "Scaling type for the app. This is an override only. Any value here will overwrite scaling inherited from the app"
         },
         "template": {
-          "$ref": "#/definitions/AppTemplate",
+          "$ref": "#/definitions/DeploymentTemplate",
           "description": "Deployment Template for the app. Specify any configuration that will be needed or used for this deployment. This is an override only. Any value here will overwrite the template inherited from the app"
         },
         "autoscalingTriggers": {
@@ -1185,12 +1200,12 @@
         },
         "generatedServiceAccountName": {
           "type": "string",
-          "description": "The name of the generated service account",
+          "description": "The name of the generated service account. This is generated from the app deployment name, and namespace name",
           "readOnly": true
         },
         "generatedKubernetesServiceName": {
           "type": "string",
-          "description": "The name of the generated kubernetes service",
+          "description": "The name of the generated kubernetes service. This is generated from the app deployment name and namespace name",
           "readOnly": true
         },
         "fqdn": {
@@ -1206,6 +1221,7 @@
       },
       "required": [
         "appRevisionId",
+        "listOverridePolicy",
         "healthChecks",
         "scaling",
         "template",
@@ -1272,7 +1288,7 @@
           "description": "Ingress configuration for the app"
         },
         "template": {
-          "$ref": "#/definitions/AppTemplate",
+          "$ref": "#/definitions/DeploymentTemplate",
           "description": "Deployment Template for the app. Specify any configuration that will be needed or used for every deployment"
         },
         "provisioningState": {
@@ -1383,52 +1399,6 @@
           }
         ]
       }
-    },
-    "AppTemplate": {
-      "type": "object",
-      "description": "Deployment template for the app",
-      "properties": {
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of replicas. Only needed if the ScalingType is Manual. Defaults to 3"
-        },
-        "command": {
-          "type": "string",
-          "description": "Command to run in the container"
-        },
-        "arguments": {
-          "type": "array",
-          "description": "Arguments to the command",
-          "items": {
-            "type": "string"
-          }
-        },
-        "initContainers": {
-          "type": "array",
-          "description": "Init containers for the app",
-          "items": {
-            "$ref": "#/definitions/Container"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "sidecarContainers": {
-          "type": "array",
-          "description": "Sidecar containers for the app",
-          "items": {
-            "$ref": "#/definitions/Container"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "command",
-        "arguments"
-      ]
     },
     "AutoscalingTrigger": {
       "type": "object",
@@ -2103,6 +2073,113 @@
         "healthChecks"
       ]
     },
+    "DeploymentTemplate": {
+      "type": "object",
+      "description": "Deployment template for the app",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of replicas. Only needed if the ScalingType is Manual. Defaults to 3"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command to run in the container"
+        },
+        "arguments": {
+          "type": "array",
+          "description": "Arguments to the command",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "Labels for the app",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "annotations": {
+          "type": "array",
+          "description": "Annotations for the app",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "Environment variables for the app",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "initContainers": {
+          "type": "array",
+          "description": "Init containers for the app",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "sidecarContainers": {
+          "type": "array",
+          "description": "Sidecar containers for the app",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Volumes for the app",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "command"
+      ]
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "Environment variable for a container",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the environment variable"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the environment variable"
+        },
+        "secretRef": {
+          "type": "string",
+          "description": "Reference to a secret for the environment variable"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "GitHubRunnerTriggerMetadata": {
       "type": "object",
       "description": "GitHub Runner Trigger Configuration",
@@ -2341,6 +2418,48 @@
         ]
       }
     },
+    "KeyValuePair": {
+      "type": "object",
+      "description": "Key Value Pair for labels/annotations",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the pair"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the pair"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "ListOverridePolicy": {
+      "type": "string",
+      "description": "List Override Policy for list fields in the deployment template",
+      "enum": [
+        "Replace",
+        "Append"
+      ],
+      "x-ms-enum": {
+        "name": "ListOverridePolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Replace",
+            "value": "Replace",
+            "description": "Replace existing list fields with those from the deployment"
+          },
+          {
+            "name": "Append",
+            "value": "Append",
+            "description": "Append to existing list fields with those from the deployment"
+          }
+        ]
+      }
+    },
     "ManagedApp": {
       "type": "object",
       "description": "App resource",
@@ -2453,7 +2572,7 @@
           "description": "Ingress configuration for the app"
         },
         "template": {
-          "$ref": "#/definitions/AppTemplate",
+          "$ref": "#/definitions/DeploymentTemplate",
           "description": "Deployment Template for the app. Specify any configuration that will be needed or used for every deployment"
         }
       }
@@ -2606,6 +2725,19 @@
       },
       "readOnly": true
     },
+    "RenderResponse": {
+      "type": "object",
+      "description": "Response for rendering an app revision deployment template",
+      "properties": {
+        "renderedTemplate": {
+          "type": "string",
+          "description": "The rendered deployment template"
+        }
+      },
+      "required": [
+        "renderedTemplate"
+      ]
+    },
     "ResourceRequirements": {
       "type": "object",
       "description": "Resource requirements for a container",
@@ -2682,27 +2814,6 @@
         "trafficPercentage"
       ]
     },
-    "TrafficSplitListResult": {
-      "type": "object",
-      "description": "The response of a TrafficSplit list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The TrafficSplit items on this page",
-          "items": {
-            "$ref": "#/definitions/TrafficSplit"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TrafficSplitProperties": {
       "type": "object",
       "description": "Properties of the Traffic Split",
@@ -2725,6 +2836,29 @@
       },
       "required": [
         "deployments"
+      ]
+    },
+    "Volume": {
+      "type": "object",
+      "description": "Volume for a container",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "Mount path for the volume"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Volume is ReadOnly or not"
+        }
+      },
+      "required": [
+        "name",
+        "mountPath",
+        "readOnly"
       ]
     },
     "azureManagedPrometheusWorkspaceId": {
