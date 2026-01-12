@@ -388,11 +388,6 @@ interface PublicCloudConnectors {
   >;
 }
 
-// model HybridConnectivityOperationStatus extends Azure.ResourceManager.Foundations.OperationStatusResult {
-
-// }
-
-
 @armResourceOperations
 interface SolutionConfigurations {
   get is ArmResourceRead<SolutionConfiguration>;
