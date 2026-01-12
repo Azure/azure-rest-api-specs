@@ -5,3 +5,4 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Help;
 
 @@clientName(Solutions, "SolutionMetadatas", "csharp");
+@@clientName(ValidationScope.IpAddressFormat, "IPAddressFormat", "csharp");
