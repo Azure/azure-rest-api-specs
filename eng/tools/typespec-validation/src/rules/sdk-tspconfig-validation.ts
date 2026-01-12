@@ -787,6 +787,10 @@ export class TspConfigNoSuppressionForConfiguredLanguageSubRule extends Tspconfi
     super("", "");
   }
 
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
   public getPathOfKeyToValidate(): string {
     return "suppression-validation";
   }
