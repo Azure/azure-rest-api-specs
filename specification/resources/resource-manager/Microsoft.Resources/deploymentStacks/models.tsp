@@ -732,6 +732,7 @@ model DeploymentStackTemplateDefinition {
 /**
  * The value or how to get a value for an extension config property.
  */
+@added(Versions.v2025_07_01)
 model DeploymentExtensionConfigItem {
   /**
    * The type of the value.
