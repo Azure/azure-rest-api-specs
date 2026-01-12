@@ -37,6 +37,11 @@ namespace Nginx.NginxPlus;
  */
 enum Versions {
   /**
+   * The 2025-11-01 API version.
+   */
+  v2025_11_01: "2025-11-01",
+
+  /**
    * The 2025-03-01-preview API version.
    */
   v2025_03_01_preview: "2025-03-01-preview",

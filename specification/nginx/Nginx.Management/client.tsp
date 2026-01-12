@@ -90,10 +90,6 @@ using Azure.Core;
   "NginxCertificateError",
   "csharp"
 );
-@@clientName(NginxConfigurationResponseProperties,
-  "NginxConfigurationProperties",
-  "csharp"
-);
 @@clientName(NginxConfigurationRequestProperties,
   "NginxConfigurationCreateOrUpdateProperties",
   "csharp"
@@ -120,10 +116,10 @@ using Azure.Core;
 );
 @@clientName(AnalysisResultData, "NginxAnalysisResultDetails", "csharp");
 @@clientName(Level, "NginxDiagnosticLevel", "csharp");
-@@clientName(NginxConfigurationResponse, "NginxConfiguration", "csharp");
+@@clientName(NginxConfigurationResponse, "NginxConfiguration", "csharp,go");
 @@clientName(NginxConfigurationResponseProperties,
   "NginxConfigurationProperties",
-  "csharp"
+  "csharp,go"
 );
 @@clientName(NginxDeploymentApiKeyResponse, "NginxDeploymentApiKey", "csharp");
 @@clientName(NginxDeploymentApiKeyResponseProperties,
