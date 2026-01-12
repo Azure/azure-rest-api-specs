@@ -29,7 +29,6 @@ using Microsoft.ResourceConnector;
   "java"
 );
 
-@@scope(Appliances.getUpgradeGraph, "!csharp");
 @@clientName(Microsoft.ResourceConnector.Appliance, "Appliance", "csharp");
 @@clientName(Microsoft.ResourceConnector.SupportedVersionCatalogVersionData,
   "SupportedVersionCatalogVersionDataField",
