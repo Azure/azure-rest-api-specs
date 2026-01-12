@@ -5,4 +5,3 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Commerce;
 
 @@clientName(Microsoft.Commerce, "UsageManagementClient", "python");
-
