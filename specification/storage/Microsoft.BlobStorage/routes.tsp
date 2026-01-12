@@ -39,6 +39,7 @@ op StorageOperation<
   @header("Content-Type")
   contentType: ResponseMediaType;
 
+  ...DateResponseHeaderPrivate;
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
@@ -51,6 +52,7 @@ op StorageOperationNoBody<
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
 >(...ApiVersionHeader, ...TParams, ...ClientRequestIdHeader): (TResponse & {
+  ...DateResponseHeaderPrivate;
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
   ...ClientRequestIdHeader;
@@ -90,8 +92,6 @@ interface Service {
   getStatistics is StorageOperation<
     TimeoutParameter,
     {
-      ...DateResponseHeader;
-
       /** Storage service statistics */
       @body
       storageServiceStats: StorageServiceStats;
@@ -133,8 +133,6 @@ interface Service {
       /** The user delegation key */
       @body
       userDelegationKey: UserDelegationKey;
-
-      ...DateResponseHeader;
     }
   >;
 
@@ -147,7 +145,6 @@ interface Service {
   getAccountInfo is StorageOperation<
     TimeoutParameter,
     {
-      ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
 
@@ -197,8 +194,6 @@ interface Service {
       ...FilterBlobsIncludeParameter;
     },
     {
-      ...DateResponseHeaderPrivate;
-
       /** The filter blobs enumeration results */
       @body
       enumerationResults: FilterBlobSegment;
@@ -230,7 +225,6 @@ interface Container {
       @statusCode statusCode: 201;
       ...EtagResponseHeaderPrivate;
       ...LastModifiedResponseHeaderPrivate;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -248,7 +242,6 @@ interface Container {
       ...MetadataHeaders;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...LeaseDurationResponseHeader;
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
@@ -307,7 +300,6 @@ interface Container {
     {
       ...EtagResponseHeaderPrivate;
       ...LastModifiedResponseHeaderPrivate;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -327,7 +319,6 @@ interface Container {
       ...BlobPublicAccess;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -353,7 +344,6 @@ interface Container {
     {
       ...EtagResponseHeaderPrivate;
       ...LastModifiedResponseHeaderPrivate;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -377,7 +367,6 @@ interface Container {
     },
     {
       @statusCode statusCode: 201;
-      ...DateResponseHeader;
     }
   >;
 
@@ -399,7 +388,7 @@ interface Container {
 
       ...TimeoutParameter;
     },
-    DateResponseHeader
+    {}
   >;
 
   /** The Batch operation allows multiple API calls to be embedded into a single HTTP request. */
@@ -444,8 +433,6 @@ interface Container {
       ...FilterBlobsIncludeParameter;
     },
     {
-      ...DateResponseHeaderPrivate;
-
       /** The container filter blob enumeration results */
       @body
       enumerationResults: FilterBlobSegment;
@@ -472,7 +459,6 @@ interface Container {
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -493,7 +479,6 @@ interface Container {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -515,7 +500,6 @@ interface Container {
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -537,7 +521,6 @@ interface Container {
       ...LeaseTimeResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -560,7 +543,6 @@ interface Container {
       ...LeaseIdResponseHeader;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -579,8 +561,6 @@ interface Container {
       ...TimeoutParameter;
     },
     {
-      ...DateResponseHeader;
-
       /** The list of blobs in the container */
       @body
       enumerationResults: ListBlobsFlatSegmentResponse;
@@ -605,8 +585,6 @@ interface Container {
       ...TimeoutParameter;
     },
     {
-      ...DateResponseHeader;
-
       /** The list of blobs in the container */
       @body
       enumerationResults: ListBlobsHierarchySegmentResponse;
@@ -624,7 +602,6 @@ interface Container {
       ...TimeoutParameter;
     },
     {
-      ...DateResponseHeader;
       ...SkuNameResponseHeader;
       ...AccountKindResponseHeader;
       ...IsHierarchicalNamespaceEnabled;
@@ -823,7 +800,6 @@ interface Blob {
       ...ContentLanguageResponseHeader;
       ...CacheControlResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...AcceptRangesResponseHeaderPrivate;
       ...BlobCommittedBlockCountResponseHeader;
       ...ServerEncryptedResponseHeader;
@@ -889,7 +865,6 @@ interface Blob {
     },
     {
       @statusCode statusCode: 202;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -903,7 +878,7 @@ interface Blob {
     {
       ...TimeoutParameter;
     },
-    DateResponseHeaderPrivate
+    {}
   >;
 
   /** Set the expiration time of a blob */
@@ -921,7 +896,6 @@ interface Blob {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
     }
   >;
 
@@ -951,7 +925,6 @@ interface Blob {
       ...EtagResponseHeaderPrivate;
       ...LastModifiedResponseHeaderPrivate;
       ...BlobSequenceNumberResponseHeaderPrivate;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -971,7 +944,6 @@ interface Blob {
       ...VersionIdParameter;
     },
     {
-      ...DateResponseHeaderPrivate;
       ...ImmutabilityPolicyExpiresOnResponseHeaderPrivate;
       ...ImmutabilityPolicyModeResponseHeaderPrivate;
     }
@@ -988,7 +960,7 @@ interface Blob {
       ...SnapshotParameter;
       ...VersionIdParameter;
     },
-    DateResponseHeaderPrivate
+    {}
   >;
 
   /** The Set Legal Hold operation sets a legal hold on the blob. */
@@ -1005,7 +977,6 @@ interface Blob {
       ...VersionIdParameter;
     },
     {
-      ...DateResponseHeaderPrivate;
       ...LegalHoldResponseHeaderPrivate;
     }
   >;
@@ -1035,7 +1006,6 @@ interface Blob {
       ...EtagResponseHeaderPrivate;
       ...LastModifiedResponseHeaderPrivate;
       ...VersionIdResponseHeaderPrivate;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeaderPrivate;
       ...EncryptionKeySha256ResponseHeaderPrivate;
       ...EncryptionScopeResponseHeaderPrivate;
@@ -1065,7 +1035,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...LeaseIdResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1089,7 +1058,6 @@ interface Blob {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1114,7 +1082,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...LeaseIdResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1140,7 +1107,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...LeaseIdResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1166,7 +1132,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...LeaseTimeResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1201,7 +1166,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
     }
   >;
@@ -1248,7 +1212,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeader;
       ...CopyIdResponseHeader;
       ...CopyStatusResponseHeader;
     }
@@ -1295,7 +1258,6 @@ interface Blob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeader;
       ...CopyIdResponseHeader;
 
       /** State of the copy operation identified by x-ms-copy-id. */
@@ -1330,7 +1292,6 @@ interface Blob {
     },
     {
       @statusCode statusCode: 204;
-      ...DateResponseHeader;
     }
   >;
 
@@ -1372,7 +1333,6 @@ interface Blob {
       ...TimeoutParameter;
     },
     {
-      ...DateResponseHeader;
       ...AccountKindResponseHeader;
       ...SkuNameResponseHeader;
       ...IsHierarchicalNamespaceEnabled;
@@ -1393,8 +1353,6 @@ interface Blob {
       ...IfTagsParameter;
     },
     {
-      ...DateResponseHeader;
-
       /** The blob tags. */
       @body
       tags: BlobTags;
@@ -1478,7 +1436,6 @@ interface PageBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -1531,7 +1488,6 @@ interface PageBlob {
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -1581,7 +1537,6 @@ interface PageBlob {
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1637,7 +1592,6 @@ interface PageBlob {
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -1667,7 +1621,6 @@ interface PageBlob {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
-      ...DateResponseHeader;
     }
   >;
 
@@ -1703,7 +1656,6 @@ interface PageBlob {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
-      ...DateResponseHeader;
     }
   >;
 
@@ -1733,7 +1685,6 @@ interface PageBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1760,7 +1711,6 @@ interface PageBlob {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
       ...BlobSequenceNumberResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -1784,7 +1734,6 @@ interface PageBlob {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeader;
       ...CopyIdResponseHeader;
       ...CopyStatusResponseHeader;
     }
@@ -1838,7 +1787,6 @@ interface AppendBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -1883,7 +1831,6 @@ interface AppendBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...BlobAppendOffsetResponseHeader;
       ...BlobCommittedBlockCountResponseHeader;
       ...RequestServerEncryptedResponseHeader;
@@ -1935,7 +1882,6 @@ interface AppendBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...BlobAppendOffsetResponseHeader;
       ...BlobCommittedBlockCountResponseHeader;
       ...RequestServerEncryptedResponseHeader;
@@ -1964,7 +1910,6 @@ interface AppendBlob {
     {
       ...EtagResponseHeader;
       ...LastModifiedResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...IsSealedResponseHeader;
     }
   >;
@@ -2022,7 +1967,6 @@ interface BlockBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -2089,7 +2033,6 @@ interface BlockBlob {
       ...LastModifiedResponseHeader;
       ...ContentMd5ResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeader;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -2122,7 +2065,6 @@ interface BlockBlob {
     },
     {
       @statusCode statusCode: 201;
-      ...DateResponseHeaderPrivate;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
@@ -2163,7 +2105,6 @@ interface BlockBlob {
     },
     {
       @statusCode statusCode: 201;
-      ...DateResponseHeader;
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...RequestServerEncryptedResponseHeader;
@@ -2218,7 +2159,6 @@ interface BlockBlob {
       ...ContentMd5ResponseHeader;
       ...ContentCrc64ResponseHeader;
       ...VersionIdResponseHeader;
-      ...DateResponseHeaderPrivate;
       ...RequestServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
       ...EncryptionScopeResponseHeader;
@@ -2250,7 +2190,6 @@ interface BlockBlob {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...BlobContentLengthResponseHeader;
-      ...DateResponseHeaderPrivate;
     }
   >;
 
@@ -2303,7 +2242,6 @@ interface BlockBlob {
       ...LeaseStateResponseHeader;
       ...LeaseStatusResponseHeader;
       ...AcceptRangesResponseHeader;
-      ...DateResponseHeader;
       ...BlobCommittedBlockCountResponseHeader;
       ...ServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;
