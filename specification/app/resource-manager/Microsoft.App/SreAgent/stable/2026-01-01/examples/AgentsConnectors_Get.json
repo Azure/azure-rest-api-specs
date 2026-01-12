@@ -3,7 +3,7 @@
     "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
     "agentName": "testAgent",
-    "dataConnectorName": "sql-connector",
+    "connectorName": "sql-connector",
     "api-version": "2026-01-01"
   },
   "responses": {
@@ -14,9 +14,17 @@
         "type": "Microsoft.App/agents/connectors",
         "properties": {
           "dataConnectorType": "SqlServer",
-          "keyVaultUri": "https://testkv.vault.azure.net/secrets/sql-connection-string",
+          "keyVaultUri": "https://testkeyvault.vault.azure.net",
+          "endpoint": "https://sqlserver.database.windows.net",
           "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sqlIdentity",
-          "source": "Agent"
+          "source": "Agent",
+          "extendedProperties": {
+            "AuthType": "Custom",
+            "CustomHeader": {
+              "DD_API_KEY": "value 1",
+              "DD_APPLICATION_KEY": "value 2"
+            }
+          }
         }
       }
     }
