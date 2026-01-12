@@ -11,7 +11,36 @@
     }
   },
   "responses": {
-    "202": {
+    "200": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/targetAnalyzer/operations/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2025-11-01"
+      },
+      "body": {
+        "analyzerId": "targetAnalyzer",
+        "description": "My analyzer",
+        "status": "creating",
+        "createdAt": "2025-05-01T18:46:36.051Z",
+        "lastModifiedAt": "2025-05-01T18:46:36.051Z",
+        "baseAnalyzerId": "prebuilt-document",
+        "config": {
+          "enableOcr": true,
+          "enableLayout": true,
+          "returnDetails": true
+        },
+        "fieldSchema": {
+          "name": "MyForm",
+          "description": "My form",
+          "fields": {
+            "Company": {
+              "type": "string",
+              "description": "Name of company."
+            }
+          },
+          "definitions": {}
+        }
+      }
+    },
+    "201": {
       "headers": {
         "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/targetAnalyzer/operations/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2025-11-01"
       },
