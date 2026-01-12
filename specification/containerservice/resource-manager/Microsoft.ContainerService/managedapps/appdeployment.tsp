@@ -36,6 +36,7 @@ model ManagedNamespaceProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** Represents deploying a revision of an app inside a managed namespace */
 @parentResource(ManagedNamespace)
 model AppDeployment is ProxyResource<AppDeploymentProperties> {
   ...ResourceNameParameter<AppDeployment>;
@@ -49,10 +50,28 @@ scalar AppRevisionId
     }
   ]>;
 
+/** List Override Policy for list fields in the deployment template */
+union ListOverridePolicy {
+  /** Replace existing list fields with those from the deployment */
+  Replace: "Replace",
+
+  /** Append to existing list fields with those from the deployment */
+  Append: "Append",
+
+  string,
+}
+
 /** Properties of the App Deployment */
 model AppDeploymentProperties {
   /** The App Revision Id */
   appRevisionId: AppRevisionId;
+
+  /** The previous App Revision Id. This is used for rolling back to a previous revision */
+  @visibility(Lifecycle.Read)
+  previousAppRevisionId?: AppRevisionId;
+
+  /** The override policy for list fields, Replace or Append. Default is replace */
+  listOverridePolicy: ListOverridePolicy;
 
   /** An array of permissions for k8s resources in the same namespace associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app */
   @identifiers(#["apiGroups", "resources", "verbs"])
@@ -70,17 +89,17 @@ model AppDeploymentProperties {
   scaling: ScalingType;
 
   /** Deployment Template for the app. Specify any configuration that will be needed or used for this deployment. This is an override only. Any value here will overwrite the template inherited from the app */
-  template: AppTemplate;
+  template: DeploymentTemplate;
 
   /** An array of KEDA autoscaling triggers for the app deployment. */
   @identifiers(#["type"])
   autoscalingTriggers?: AutoscalingTrigger[];
 
-  /** The name of the generated service account */
+  /** The name of the generated service account. This is generated from the app deployment name, and namespace name */
   @visibility(Lifecycle.Read)
   generatedServiceAccountName: string;
 
-  /** The name of the generated kubernetes service */
+  /** The name of the generated kubernetes service. This is generated from the app deployment name and namespace name */
   @visibility(Lifecycle.Read)
   generatedKubernetesServiceName: string;
 
@@ -174,7 +193,7 @@ union AutoscalingTriggerType {
 }
 
 /** Used to program a traffic split between 2 deployments in the same managed namespace */
-@parentResource(ManagedNamespace)
+@parentResource(ManagedApp)
 model TrafficSplit is ProxyResource<TrafficSplitProperties> {
   ...ResourceNameParameter<TrafficSplit>;
 }

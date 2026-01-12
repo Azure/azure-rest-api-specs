@@ -45,7 +45,7 @@ model AppProperties {
   ingressConfiguration?: IngressProperties;
 
   /** Deployment Template for the app. Specify any configuration that will be needed or used for every deployment */
-  template: AppTemplate;
+  template: DeploymentTemplate;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
@@ -53,7 +53,7 @@ model AppProperties {
 }
 
 /** Deployment template for the app */
-model AppTemplate {
+model DeploymentTemplate {
   /** Number of replicas. Only needed if the ScalingType is Manual. Defaults to 3 */
   replicas?: int32;
 
@@ -61,7 +61,19 @@ model AppTemplate {
   command: string;
 
   /** Arguments to the command */
-  arguments: string[];
+  arguments?: string[];
+
+  /** Labels for the app */
+  @identifiers(#["key"])
+  labels?: KeyValuePair[];
+
+  /** Annotations for the app */
+  @identifiers(#["key"])
+  annotations?: KeyValuePair[];
+
+  /** Environment variables for the app */
+  @identifiers(#["name"])
+  environmentVariables?: EnvironmentVariable[];
 
   /** Init containers for the app */
   @identifiers(#["name"])
@@ -70,6 +82,43 @@ model AppTemplate {
   /** Sidecar containers for the app */
   @identifiers(#["name"])
   sidecarContainers?: Container[];
+
+  /** Volumes for the app */
+  @identifiers(#["name"])
+  volumes?: Volume[];
+}
+
+/** Volume for a container */
+model Volume {
+  /** Name of the volume */
+  name: string;
+
+  /** Mount path for the volume */
+  mountPath: string;
+
+  /** Volume is ReadOnly or not */
+  readOnly: boolean;
+}
+
+/** Key Value Pair for labels/annotations */
+model KeyValuePair {
+  /** Key of the pair */
+  key: string;
+
+  /** Value of the pair */
+  value: string;
+}
+
+/** Environment variable for a container */
+model EnvironmentVariable {
+  /** Name of the environment variable */
+  name: string;
+
+  /** Value of the environment variable */
+  value: string;
+
+  /** Reference to a secret for the environment variable */
+  secretRef?: string;
 }
 
 /** Container definition */
@@ -262,6 +311,7 @@ union ProvisioningState {
 
 @armResourceOperations
 interface Apps {
+  // Managed App Operations
   get is ArmResourceRead<ManagedApp>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
   update is ArmCustomPatchSync<
@@ -275,26 +325,47 @@ interface Apps {
   listByResourceGroup is ArmResourceListByParent<ManagedApp>;
   listBySubscription is ArmListBySubscription<ManagedApp>;
   appDeployments is ListDeployments<ManagedApp>;
+}
 
-  getAppRevisions is ArmResourceListByParent<AppRevision>;
-  getAppDeployments is ArmResourceListByParent<AppDeployment>;
-  createOrUpdateAppRevision is ArmResourceCreateOrReplaceAsync<
+@armResourceOperations
+interface AppRevisions {
+  // App Revision Operations
+  list is ArmResourceListByParent<AppRevision>;
+  get is ArmResourceRead<AppRevision>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppRevision,
     Azure.ResourceManager.Foundations.BaseParameters<AppRevision>
   >;
-  createOrUpdateAppDeployment is ArmResourceCreateOrReplaceAsync<
+  /** Deletes an app revision. This will also delete all deployments that reference this revision. WARNING: This operation is destructive */
+  delete is ArmResourceDeleteWithoutOkAsync<AppRevision>;
+  revisionDeployments is ListDeployments<AppRevision>;
+
+  /** Renders the app revision kubernetes manifests */
+  render is RenderRevision<AppRevision, RenderResponse>;
+}
+
+@armResourceOperations
+interface AppDeployments {
+  // App Deployment Operations
+  list is ArmResourceListByParent<AppDeployment>;
+  get is ArmResourceRead<AppDeployment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppDeployment,
     Azure.ResourceManager.Foundations.BaseParameters<AppDeployment>
   >;
+  delete is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
 
-  deleteAppRevision is ArmResourceDeleteWithoutOkAsync<AppRevision>;
-  deleteAppDeployment is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
-  revisionDeployments is ListDeployments<AppRevision>;
-
-  getTrafficSplits is ArmResourceListByParent<TrafficSplit>;
-  createOrUpdateTrafficSplit is ArmResourceCreateOrReplaceAsync<
-    TrafficSplit,
-    Azure.ResourceManager.Foundations.BaseParameters<TrafficSplit>
-  >;
-  deleteTrafficSplit is ArmResourceDeleteWithoutOkAsync<TrafficSplit>;
+  rollback is RollbackDeployment<AppDeployment, AppDeployment>;
 }
+
+// @armResourceOperations
+// interface TrafficSplits {
+//   // Traffic Split Operations
+//   list is ArmResourceListByParent<TrafficSplit>;
+//   get is ArmResourceRead<TrafficSplit>;
+//   createOrUpdate is ArmResourceCreateOrReplaceAsync<
+//     TrafficSplit,
+//     Azure.ResourceManager.Foundations.BaseParameters<TrafficSplit>
+//   >;
+//   delete is ArmResourceDeleteWithoutOkAsync<TrafficSplit>;
+// }
