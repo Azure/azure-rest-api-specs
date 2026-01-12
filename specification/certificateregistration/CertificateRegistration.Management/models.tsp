@@ -179,6 +179,7 @@ model AppServiceCertificateOrderProperties {
   /**
    * Domain verification token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   domainVerificationToken?: string;
 
