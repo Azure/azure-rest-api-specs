@@ -772,6 +772,94 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- Suppressions validation rule -----
+export class TspConfigNoSuppressionForConfiguredLanguageSubRule extends TspconfigSubRuleBase {
+  private emitterToLanguageMap: { [key: string]: string } = {
+    "@azure-tools/typespec-python": "Python",
+    "@azure-tools/typespec-java": "Java",
+    "@azure-tools/typespec-ts": "TypeScript",
+    "@azure-tools/typespec-go": "Go",
+    "@azure-typespec/http-client-csharp": ".NET",
+    "@azure-typespec/http-client-csharp-mgmt": ".NET",
+  };
+
+  constructor() {
+    super("", "");
+  }
+
+  public getPathOfKeyToValidate(): string {
+    return "suppression-validation";
+  }
+
+  protected validate(_config: any): RuleResult {
+    // This validation is handled in the execute method
+    return { success: true };
+  }
+
+  public async execute(folder: string): Promise<RuleResult> {
+    const config = await this.loadConfig(folder);
+    if (!config) {
+      return this.createFailedResult(
+        `Failed to load ${join(folder, "tspconfig.yaml")}`,
+        "Please ensure tspconfig.yaml exists and is valid",
+      );
+    }
+
+    // Get configured emitters
+    const configuredEmitters = Object.keys(config?.options || {});
+    const configuredLanguages = new Set<string>();
+
+    for (const emitter of configuredEmitters) {
+      const language = this.emitterToLanguageMap[emitter];
+      if (language) {
+        configuredLanguages.add(language);
+      }
+    }
+
+    if (configuredLanguages.size === 0) {
+      return {
+        success: true,
+        stdOutput: "No language emitters configured, skipping suppression validation",
+      };
+    }
+
+    // Get suppressions for this folder
+    const suppressions = await getSuppressions(join(folder, "tspconfig.yaml"));
+
+    // Check if any suppressions exist for configured languages
+    const conflictingSuppressions: string[] = [];
+
+    for (const suppression of suppressions) {
+      if (suppression.rules?.includes("SdkTspConfigValidation")) {
+        // Check if suppression affects configured languages
+        const subRules = suppression.subRules || [];
+        for (const subRule of subRules) {
+          // Check if subRule contains language-specific patterns
+          for (const [emitter, language] of Object.entries(this.emitterToLanguageMap)) {
+            if (configuredLanguages.has(language) && subRule.includes(emitter)) {
+              conflictingSuppressions.push(
+                `Language "${language}" (emitter: ${emitter}) is configured in tspconfig.yaml but has suppression for sub-rule: ${subRule}`,
+              );
+            }
+          }
+        }
+      }
+    }
+
+    if (conflictingSuppressions.length > 0) {
+      return this.createFailedResult(
+        `Found suppressions for languages that are configured in tspconfig.yaml:\n${conflictingSuppressions.join("\n")}`,
+        "Please remove suppressions for configured languages from suppressions.yaml or remove the language configuration from tspconfig.yaml",
+      );
+    }
+
+    return {
+      success: true,
+      stdOutput: "No conflicting suppressions found for configured languages",
+    };
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -803,6 +891,7 @@ export const requiredRules = [
   new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
+  new TspConfigNoSuppressionForConfiguredLanguageSubRule(),
 ];
 
 /**
