@@ -85,103 +85,11 @@ using Http;
 @@clientName(SoapApiType.gRPC, "GRPC", "java");
 
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
-@@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
-  "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
-  "python"
-);
+@@clientName(HttpCorrelationProtocol.W3C, "W3_C", "python");
+@@clientName(BackendSessionIdSource, "BackendSessionIdSource", "python");
+@@clientName(LLMDiagnosticSettings, "LlmDiagnosticSettings", "python");
+@@clientName(LlmMessageLogTypes, "LlmMessageLogTypes", "python");
 @@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
   "Microsoft.ApiManagement",
-  "python"
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(PolicyContractsGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(ApiPolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(GraphQLApiResolverPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(PolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(ProductPolicyGetParameters.format, "xml", "python");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspaceApiOperationPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspaceApiPolicyGetParameters.format,
-  "xml",
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Legacy.clientDefaultValue(WorkspacePolicyGetParameters.format,
-  "xml",
-  "python"
-);
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DeletedServicesContractsPurge(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: Azure.Core.uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  serviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  location: Azure.Core.azureLocation,
-): void;
-
-@@override(DeletedServiceContracts.purge,
-  DeletedServicesContractsPurge,
-  "python"
-);
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DeletedServicesContractsGetByName(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: Azure.Core.uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  serviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  location: Azure.Core.azureLocation,
-): void;
-
-@@override(DeletedServiceContracts.getByName,
-  DeletedServicesContractsGetByName,
   "python"
 );
