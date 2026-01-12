@@ -741,6 +741,7 @@ model DomainControlCenterSsoRequest {
   /**
    * Post parameter key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   postParameterKey?: string;
 
@@ -997,6 +998,7 @@ model TldLegalAgreement {
   /**
    * Unique identifier for the agreement.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   agreementKey: string;
 
   /**
