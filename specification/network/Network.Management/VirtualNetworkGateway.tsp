@@ -294,7 +294,9 @@ interface VirtualNetworkGateways {
   getVpnclientIpsecParameters is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
     void,
-    Response = VpnClientIPsecParameters & ArmLroLocationHeader,
+    Response = VpnClientIPsecParameters &
+      ArmLroLocationHeader<FinalResult = VpnClientIPsecParameters> &
+      Azure.Core.Foundations.RetryAfterHeader,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualNetworkGateway>,
     Error = CloudError
   >;

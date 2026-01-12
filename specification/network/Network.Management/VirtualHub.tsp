@@ -41,12 +41,11 @@ model VirtualHub extends ResourceWithRequiredLocation {
   kind?: string;
 }
 
-alias HubVirtualNetworkConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias HubVirtualNetworkConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the Virtual Hub. */
     @path
@@ -60,15 +59,17 @@ alias HubVirtualNetworkConnectionOps = Azure.ResourceManager.Legacy.LegacyOperat
     @segment("hubVirtualNetworkConnections")
     @key
     connectionName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}",
   }
 >;
 
-alias VirtualHubRouteTableV2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
+alias VirtualHubRouteTableV2Ops = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the Virtual Hub. */
     @path
@@ -82,19 +83,24 @@ alias VirtualHubRouteTableV2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("routeTables")
     @key
     routeTableName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}",
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface VirtualHubs {
   /**
    * Retrieves the details of a VirtualHub.
    */
+  @autoRoute
   get is ArmResourceRead<VirtualHub, Error = CloudError>;
 
   /**
    * Creates a VirtualHub resource if it doesn't exist else updates the existing VirtualHub.
    */
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualHub,
     Error = CloudError
@@ -104,6 +110,7 @@ interface VirtualHubs {
    * Updates VirtualHub tags.
    */
   @patch(#{ implicitOptionality: false })
+  @autoRoute
   updateTags is ArmCustomPatchSync<
     VirtualHub,
     PatchModel = TagsObject,
@@ -114,6 +121,7 @@ interface VirtualHubs {
    * Deletes a VirtualHub.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualHub,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -123,6 +131,7 @@ interface VirtualHubs {
   /**
    * Lists all the VirtualHubs in a resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     VirtualHub,
     Response = ArmResponse<ListVirtualHubsResult>,
@@ -132,6 +141,7 @@ interface VirtualHubs {
   /**
    * Lists all the VirtualHubs in a subscription.
    */
+  @autoRoute
   list is ArmListBySubscription<
     VirtualHub,
     Response = ArmResponse<ListVirtualHubsResult>,
@@ -143,6 +153,7 @@ interface VirtualHubs {
    */
   @list
   @action("effectiveRoutes")
+  @autoRoute
   getEffectiveVirtualHubRoutes is ArmResourceActionAsync<
     VirtualHub,
     EffectiveRoutesParameters,
@@ -156,6 +167,7 @@ interface VirtualHubs {
    */
   @list
   @action("inboundRoutes")
+  @autoRoute
   getInboundRoutes is ArmResourceActionAsync<
     VirtualHub,
     GetInboundRoutesParameters,
@@ -168,6 +180,7 @@ interface VirtualHubs {
    */
   @list
   @action("outboundRoutes")
+  @autoRoute
   getOutboundRoutes is ArmResourceActionAsync<
     VirtualHub,
     GetOutboundRoutesParameters,
@@ -183,14 +196,16 @@ interface VirtualHubs {
   @operationId("HubVirtualNetworkConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
+  hubVirtualNetworkConnectionsCreateOrUpdate is HubVirtualNetworkConnectionOps.ActionAsync<
     VirtualHub,
+    HubVirtualNetworkConnection,
+    void,
     Response = ArmResponse<HubVirtualNetworkConnection> | ArmResourceCreatedResponse<
       HubVirtualNetworkConnection,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = HubVirtualNetworkConnection> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Request = HubVirtualNetworkConnection,
     OverrideErrorType = CloudError
   >;
 
@@ -200,8 +215,11 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("HubVirtualNetworkConnections_Delete")
   @delete
-  hubVirtualNetworkConnectionsDelete is HubVirtualNetworkConnectionOps.DeleteSync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
+  hubVirtualNetworkConnectionsDelete is HubVirtualNetworkConnectionOps.ActionAsync<
     VirtualHub,
+    void,
+    void,
     Response = {
       @body body: void;
     } | ArmAcceptedLroResponse | NoContentResponse,
@@ -214,8 +232,10 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("HubVirtualNetworkConnections_Get")
   @get
-  hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
+  hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.ActionSync<
     VirtualHub,
+    void,
     Response = ArmResponse<HubVirtualNetworkConnection>,
     OverrideErrorType = CloudError
   >;
@@ -227,10 +247,13 @@ interface VirtualHubs {
   @operationId("HubVirtualNetworkConnections_List")
   @list
   @get
-  hubVirtualNetworkConnectionsList is HubVirtualNetworkConnectionOps.List<
+  @autoRoute
+  @action("hubVirtualNetworkConnections")
+  hubVirtualNetworkConnectionsList is ArmResourceActionSync<
     VirtualHub,
-    Response = ArmResponse<ListHubVirtualNetworkConnectionsResult>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ListHubVirtualNetworkConnectionsResult>,
+    Error = CloudError
   >;
 
   /**
@@ -239,8 +262,10 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubRouteTableV2s_Get")
   @get
-  virtualHubRouteTableV2sGet is VirtualHubRouteTableV2Ops.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
+  virtualHubRouteTableV2sGet is VirtualHubRouteTableV2Ops.ActionSync<
     VirtualHub,
+    void,
     Response = ArmResponse<VirtualHubRouteTableV2>,
     OverrideErrorType = Error
   >;
@@ -253,14 +278,16 @@ interface VirtualHubs {
   @operationId("VirtualHubRouteTableV2s_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
+  virtualHubRouteTableV2sCreateOrUpdate is VirtualHubRouteTableV2Ops.ActionAsync<
     VirtualHub,
+    VirtualHubRouteTableV2,
+    void,
     Response = ArmResponse<VirtualHubRouteTableV2> | ArmResourceCreatedResponse<
       VirtualHubRouteTableV2,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = VirtualHubRouteTableV2> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Request = VirtualHubRouteTableV2,
     OverrideErrorType = Error
   >;
 
@@ -270,8 +297,10 @@ interface VirtualHubs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VirtualHubRouteTableV2s_Delete")
   @delete
-  virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.DeleteWithoutOkAsync<
+  virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.ActionAsync<
     VirtualHub,
+    void,
+    void,
     Response = {
       @body body: void;
     } | ArmAcceptedLroResponse | NoContentResponse,
@@ -285,10 +314,12 @@ interface VirtualHubs {
   @operationId("VirtualHubRouteTableV2s_List")
   @list
   @get
-  virtualHubRouteTableV2sList is VirtualHubRouteTableV2Ops.List<
+  @action("routeTables")
+  virtualHubRouteTableV2sList is ArmResourceActionSync<
     VirtualHub,
-    Response = ArmResponse<ListVirtualHubRouteTableV2SResult>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ListVirtualHubRouteTableV2SResult>,
+    Error = Error
   >;
 }
 
@@ -309,9 +340,9 @@ interface VirtualHubs {
 @@doc(VirtualHubs.getOutboundRoutes::parameters.body,
   "Parameters supplied to get the outbound routes for a connection resource."
 );
-@@doc(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.resource,
+@@doc(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied to create or update a hub virtual network connection."
 );
-@@doc(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.resource,
+@@doc(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
   "Parameters supplied to create or update VirtualHubRouteTableV2."
 );

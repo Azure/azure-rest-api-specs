@@ -34565,7 +34565,7 @@
           {
             "name": "virtualHubName",
             "in": "path",
-            "description": "The name of the Virtual Hub.",
+            "description": "The name of the VirtualHub.",
             "required": true,
             "type": "string"
           }
@@ -34758,7 +34758,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -35469,7 +35469,7 @@
           {
             "name": "virtualHubName",
             "in": "path",
-            "description": "The name of the Virtual Hub.",
+            "description": "The name of the VirtualHub.",
             "required": true,
             "type": "string"
           }
@@ -35484,7 +35484,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -35665,7 +35665,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -37312,6 +37312,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -37328,7 +37333,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VpnClientIPsecParameters"
         },
         "x-ms-long-running-operation": true
       }
@@ -41868,7 +41874,7 @@
           {
             "name": "gatewayName",
             "in": "path",
-            "description": "The name of the vpn gateway.",
+            "description": "The name of the gateway.",
             "required": true,
             "type": "string"
           }
@@ -42064,7 +42070,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",

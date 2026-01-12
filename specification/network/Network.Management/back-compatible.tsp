@@ -1436,7 +1436,7 @@ using Microsoft.Network;
 @@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.resource,
+@@clientName(VirtualHubs.hubVirtualNetworkConnectionsCreateOrUpdate::parameters.body,
   "hubVirtualNetworkConnectionParameters"
 );
 @@clientLocation(VirtualHubs.hubVirtualNetworkConnectionsDelete,
@@ -1461,7 +1461,7 @@ using Microsoft.Network;
 @@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate,
   "CreateOrUpdate"
 );
-@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.resource,
+@@clientName(VirtualHubs.virtualHubRouteTableV2sCreateOrUpdate::parameters.body,
   "virtualHubRouteTableV2Parameters"
 );
 @@clientLocation(VirtualHubs.virtualHubRouteTableV2sDelete,
@@ -1493,7 +1493,7 @@ using Microsoft.Network;
 @@clientName(VpnGateways.vpnConnectionsGet, "Get");
 @@clientLocation(VpnGateways.vpnConnectionsCreateOrUpdate, "VpnConnections");
 @@clientName(VpnGateways.vpnConnectionsCreateOrUpdate, "CreateOrUpdate");
-@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.resource,
+@@clientName(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
   "VpnConnectionParameters"
 );
 @@clientLocation(VpnGateways.vpnConnectionsDelete, "VpnConnections");

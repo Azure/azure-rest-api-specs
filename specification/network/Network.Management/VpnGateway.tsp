@@ -34,12 +34,11 @@ model VpnGateway extends ResourceWithRequiredLocation {
   etag?: string;
 }
 
-alias VpnConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias VpnConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
 
     /** The name of the vpn gateway. */
     @path
@@ -53,6 +52,9 @@ alias VpnConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("vpnConnections")
     @key
     connectionName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}",
   }
 >;
 
@@ -78,16 +80,18 @@ alias VpnConnection2Ops = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface VpnGateways {
   /**
    * Retrieves the details of a virtual wan vpn gateway.
    */
+  @autoRoute
   get is ArmResourceRead<VpnGateway, Error = CloudError>;
 
   /**
    * Creates a virtual wan vpn gateway if it doesn't exist else updates the existing gateway.
    */
+  @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VpnGateway,
     Error = CloudError
@@ -97,6 +101,7 @@ interface VpnGateways {
    * Updates virtual wan vpn gateway tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     VpnGateway,
@@ -110,6 +115,7 @@ interface VpnGateways {
    * Deletes a virtual wan vpn gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnGateway,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -119,6 +125,7 @@ interface VpnGateways {
   /**
    * Lists all the VpnGateways in a resource group.
    */
+  @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     VpnGateway,
     Response = ArmResponse<ListVpnGatewaysResult>,
@@ -128,6 +135,7 @@ interface VpnGateways {
   /**
    * Lists all the VpnGateways in a subscription.
    */
+  @autoRoute
   list is ArmListBySubscription<
     VpnGateway,
     Response = ArmResponse<ListVpnGatewaysResult>,
@@ -137,6 +145,7 @@ interface VpnGateways {
   /**
    * Resets the primary of the vpn gateway in the specified resource group.
    */
+  @autoRoute
   reset is ArmResourceActionAsync<
     VpnGateway,
     void,
@@ -155,6 +164,7 @@ interface VpnGateways {
    * Starts packet capture on vpn gateway in the specified resource group.
    */
   @action("startpacketcapture")
+  @autoRoute
   startPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStartParameters,
@@ -169,6 +179,7 @@ interface VpnGateways {
    * Stops packet capture on vpn gateway in the specified resource group.
    */
   @action("stoppacketcapture")
+  @autoRoute
   stopPacketCapture is ArmResourceActionAsync<
     VpnGateway,
     VpnGatewayPacketCaptureStopParameters,
@@ -185,8 +196,10 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_Get")
   @get
-  vpnConnectionsGet is VpnConnectionOps.Read<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
+  vpnConnectionsGet is VpnConnectionOps.ActionSync<
     VpnGateway,
+    void,
     Response = ArmResponse<VpnConnection>,
     OverrideErrorType = CloudError
   >;
@@ -199,14 +212,16 @@ interface VpnGateways {
   @operationId("VpnConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  vpnConnectionsCreateOrUpdate is VpnConnectionOps.CreateOrUpdateAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
+  vpnConnectionsCreateOrUpdate is VpnConnectionOps.ActionAsync<
     VpnGateway,
+    VpnConnection,
+    void,
     Response = ArmResponse<VpnConnection> | ArmResourceCreatedResponse<
       VpnConnection,
       LroHeaders = ArmAsyncOperationHeader<FinalResult = VpnConnection> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    Request = VpnConnection,
     OverrideErrorType = CloudError
   >;
 
@@ -216,8 +231,11 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_Delete")
   @delete
-  vpnConnectionsDelete is VpnConnectionOps.DeleteWithoutOkAsync<
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
+  vpnConnectionsDelete is VpnConnectionOps.ActionAsync<
     VpnGateway,
+    void,
+    void,
     Response = {
       @body body: void;
     } | ArmAcceptedLroResponse | NoContentResponse,
@@ -230,6 +248,7 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_StartPacketCapture")
   @action("startpacketcapture")
+  @autoRoute
   vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStartParameters,
@@ -246,6 +265,7 @@ interface VpnGateways {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VpnConnections_StopPacketCapture")
   @action("stoppacketcapture")
+  @autoRoute
   vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
     VpnGateway,
     VpnConnectionPacketCaptureStopParameters,
@@ -263,10 +283,13 @@ interface VpnGateways {
   @operationId("VpnConnections_ListByVpnGateway")
   @list
   @get
-  listByVpnGateway is VpnConnectionOps.List<
+  @action("vpnConnections")
+  @autoRoute
+  listByVpnGateway is ArmResourceActionSync<
     VpnGateway,
-    Response = ArmResponse<ListVpnConnectionsResult>,
-    OverrideErrorType = CloudError
+    void,
+    ArmResponse<ListVpnConnectionsResult>,
+    Error = CloudError
   >;
 }
 
@@ -284,7 +307,7 @@ interface VpnGateways {
 @@doc(VpnGateways.stopPacketCapture::parameters.body,
   "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway."
 );
-@@doc(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.resource,
+@@doc(VpnGateways.vpnConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied to create or Update a VPN Connection."
 );
 @@doc(VpnGateways.vpnConnectionsStartPacketCapture::parameters.body,

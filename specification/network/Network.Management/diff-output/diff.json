@@ -1,41 +1,5 @@
 {
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings__deleted": {
-      "get": {
-        "operationId": "ExpressRouteCrossConnectionPeerings_List",
-        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCrossConnectionBgpPeeringList": {
-            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections": {
       "get": {
         "parameters": [
@@ -97,20 +61,26 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "networkManagerConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "managementGroupId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -160,20 +130,26 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "networkManagerConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "managementGroupId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "minLength": 1
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -890,16 +866,22 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "operationId",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "200": {
@@ -1199,13 +1181,16 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -1245,13 +1230,16 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkManagerConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -3807,47 +3795,21 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
-      "post__added": {
-        "operationId": "ExpressRouteCrossConnectionPeerings_List",
-        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
+      "get": {
         "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
-            }
-          },
           "default": {
-            "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "#/definitions/CloudError"
+              }
             }
           }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCrossConnectionBgpPeeringList": {
-            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
       "get": {
         "responses": {
           "default": {
@@ -6163,14 +6125,17 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -6361,20 +6326,26 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7164,20 +7135,26 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "networkGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7327,26 +7304,35 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "networkGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "staticMemberName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "staticMemberName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7405,26 +7391,35 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "networkGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "staticMemberName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "networkGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "staticMemberName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7471,21 +7466,27 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7619,28 +7620,37 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7786,41 +7796,56 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skipToken",
+              "in": "query",
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -7859,35 +7884,47 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8097,20 +8134,26 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "scopeConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scopeConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8160,20 +8203,26 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "scopeConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "scopeConnectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8244,20 +8293,26 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8416,26 +8471,35 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8577,39 +8641,54 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skipToken",
+              "in": "query",
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8648,32 +8727,44 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleName",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -8838,21 +8929,27 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -9016,28 +9113,37 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -9183,41 +9289,56 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 20
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "type": "string"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$top",
+              "in": "query",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 20
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "$skipToken",
+              "in": "query",
+              "type": "string"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -9256,35 +9377,47 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleCollectionName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkManagerName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "configurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleCollectionName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "ruleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9_.-]*$"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10319,15 +10452,18 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10468,23 +10604,29 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "linkReferenceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "linkReferenceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10498,23 +10640,29 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "linkReferenceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "linkReferenceName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "202": {
@@ -10573,23 +10721,29 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "linkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "linkName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10642,23 +10796,29 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "linkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "linkName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "202": {
@@ -10700,15 +10860,18 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10741,23 +10904,29 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "loggingConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "loggingConfigurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10810,23 +10979,29 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "loggingConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "loggingConfigurationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10873,23 +11048,29 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "profileName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -10942,23 +11123,29 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "profileName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -11008,31 +11195,40 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "accessRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "profileName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "accessRuleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -11096,31 +11292,40 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "accessRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "profileName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "accessRuleName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -11249,23 +11454,29 @@
         }
       ],
       "get": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "associationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "associationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "default": {
@@ -11331,23 +11542,29 @@
         }
       },
       "delete": {
-        "parameters__added": [
-          {
-            "name": "networkSecurityPerimeterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          },
-          {
-            "name": "associationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "maxLength": 80,
-            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-          }
+        "parameters": [
+          [
+            "+",
+            {
+              "name": "networkSecurityPerimeterName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ],
+          [
+            "+",
+            {
+              "name": "associationName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+            }
+          ]
         ],
         "responses": {
           "202": {
@@ -12206,6 +12423,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}": {
       "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-schema__added": "#/definitions/NetworkWatcher"
         }
@@ -12605,7 +12832,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/Error",
-                "__new": "#/definitions/Error"
+                "__new": "#/definitions/CloudError"
               }
             }
           }
@@ -13224,7 +13451,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "#/definitions/CloudError"
+                "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
               }
             }
           }
@@ -14331,7 +14558,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "#/definitions/CloudError"
+                "__new": "#/definitions/Error"
               }
             }
           }

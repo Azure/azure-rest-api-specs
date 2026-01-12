@@ -7543,6 +7543,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_List",
+        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionBgpPeeringList": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
       "get": {
         "operationId": "ExpressRouteCrossConnectionPeerings_Get",
@@ -7642,46 +7678,6 @@
           "final-state-schema": "#/definitions/ExpressRouteCrossConnectionPeering"
         },
         "x-ms-long-running-operation": true
-      },
-      "post": {
-        "operationId": "ExpressRouteCrossConnectionPeerings_List",
-        "description": "Gets all peerings in a specified ExpressRouteCrossConnection.",
-        "parameters": [
-          {
-            "name": "crossConnectionName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ExpressRouteCrossConnectionBgpPeeringList": {
-            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       },
       "delete": {
         "operationId": "ExpressRouteCrossConnectionPeerings_Delete",
@@ -21171,6 +21167,12 @@
             "description": "ignore",
             "schema": {
               "$ref": "#/definitions/PacketCaptureResult"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "default": {
@@ -22237,7 +22239,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -23549,7 +23551,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -26105,7 +26107,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "#/definitions/Error"
             }
           }
         },
