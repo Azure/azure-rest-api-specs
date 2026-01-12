@@ -2073,6 +2073,6 @@ using Microsoft.Web;
 @@clientLocation(verifyHostingEnvironmentVnet, "WebSiteManagement", "go");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(checkNameAvailability::parameters.body);
+@@flattenProperty(checkNameAvailability::parameters.body.request);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(regionalCheckNameAvailability::parameters.body);
+@@flattenProperty(regionalCheckNameAvailability::parameters.body.request);
