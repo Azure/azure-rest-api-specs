@@ -809,6 +809,15 @@ export class TspConfigNoSuppressionForConfiguredLanguageSubRule extends Tspconfi
       );
     }
 
+    // Check if this rule should be skipped
+    const { shouldSkip, reason } = this.skip(config, folder);
+    if (shouldSkip) {
+      return {
+        success: true,
+        stdOutput: `Validation skipped. ${reason}`,
+      };
+    }
+
     // Get configured emitters
     const configuredEmitters = Object.keys(config?.options || {});
     const configuredLanguages = new Set<string>();
