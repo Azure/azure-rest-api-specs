@@ -1,0 +1,43 @@
+{
+  "title": "StoragePools_GetHealthStatus_MaximumSet",
+  "operationId": "92ce5a6c-9346-46f6-b5e2-953ff54fc9be",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "subscriptionId": "6808FCAE-462F-4398-819F-CCA6DFD71000",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "test-pool-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "health": {
+          "usedCapacityPercentage": 9,
+          "bandwidthUsage": {
+            "current": 6,
+            "provisioned": 21,
+            "max": 9
+          },
+          "iopsUsage": {
+            "current": 25,
+            "provisioned": 15,
+            "max": 25
+          },
+          "space": {
+            "totalUsed": 23,
+            "unique": 17,
+            "snapshots": 30,
+            "shared": 16
+          },
+          "dataReductionRatio": 5,
+          "estimatedMaxCapacity": 15
+        },
+        "alerts": [
+          {
+            "level": "info",
+            "message": "phbrvweclfkrueajwoarzdrh"
+          }
+        ]
+      }
+    }
+  }
+}
