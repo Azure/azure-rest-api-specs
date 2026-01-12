@@ -9,3 +9,7 @@ using Microsoft.Commerce;
 @@clientLocation(UsageAggregatesOperationGroup.list, "UsageAggregates");
 
 @@clientLocation(RateCardOperationGroup.get, "RateCard");
+
+@@alternateType(MonetaryCommitment.Name, OfferTermInfo.Name, "go");
+@@alternateType(MonetaryCredit.Name, OfferTermInfo.Name, "go");
+@@alternateType(RecurringCharge.Name, OfferTermInfo.Name, "go");
