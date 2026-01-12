@@ -22,8 +22,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * KubernetesConfiguration Flux Client
+ * Use these APIs to create Flux Configuration resources through ARM, for Kubernetes Clusters.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "FluxConfigurationClient" })
 @versioned(Versions)

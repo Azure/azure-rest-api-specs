@@ -230,12 +230,12 @@ model FluxConfigurationProperties {
   /**
    * Source Kind to pull the configuration data from.
    */
-  sourceKind?: SourceKindType;
+  sourceKind?: SourceKindType = SourceKindType.GitRepository;
 
   /**
    * Whether this configuration should suspend its reconciliation of its kustomizations and sources.
    */
-  suspend?: boolean;
+  suspend?: boolean = false;
 
   /**
    * Parameters to reconcile to the GitRepository source kind type.
@@ -260,14 +260,17 @@ model FluxConfigurationProperties {
   /**
    * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  kustomizations?: Record<KustomizationDefinition>;
+  kustomizations?: Record<KustomizationDefinition> | null;
 
   /**
    * Key-value pairs of protected configuration settings for the configuration
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  configurationProtectedSettings?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  configurationProtectedSettings?: Record<string> | null;
 
   /**
    * Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.
@@ -279,38 +282,44 @@ model FluxConfigurationProperties {
   /**
    * Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  repositoryPublicKey?: string;
+  repositoryPublicKey?: string | null;
 
   /**
    * Branch and/or SHA of the source commit synced with the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  sourceSyncedCommitId?: string;
+  sourceSyncedCommitId?: string | null;
 
   /**
    * Datetime the fluxConfiguration synced its source on the cluster.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  sourceUpdatedAt?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  sourceUpdatedAt?: utcDateTime | null;
 
   /**
    * Datetime the fluxConfiguration synced its status on the cluster with Azure.
    */
-  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  statusUpdatedAt?: utcDateTime;
+  @visibility(Lifecycle.Read)
+  statusUpdatedAt?: utcDateTime | null;
 
   /**
    * Whether flux configuration deployment should wait for cluster to reconcile the kustomizations.
    */
-  waitForReconciliation?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  waitForReconciliation?: boolean | null;
 
   /**
    * Maximum duration to wait for flux configuration reconciliation. E.g PT1H, PT5M, P1D
    */
-  reconciliationWaitDuration?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  reconciliationWaitDuration?: string | null;
 
   /**
    * Combined status of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects.
@@ -327,8 +336,9 @@ model FluxConfigurationProperties {
   /**
    * Error message returned to the user in the case of provisioning failure.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  errorMessage?: string;
+  errorMessage?: string | null;
 }
 
 /**
@@ -338,7 +348,8 @@ model GitRepositoryDefinition {
   /**
    * The URL to sync for the flux configuration git repository.
    */
-  url?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
@@ -358,22 +369,27 @@ model GitRepositoryDefinition {
   /**
    * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
    */
-  sshKnownHosts?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  sshKnownHosts?: string | null;
 
   /**
    * Plaintext HTTPS username used to access private git repositories over HTTPS
    */
-  httpsUser?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  httpsUser?: string | null;
 
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
-  httpsCACert?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  httpsCACert?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 
   /**
    * Name of the provider used for authentication.
@@ -388,22 +404,26 @@ model RepositoryRefDefinition {
   /**
    * The git repository branch name to checkout.
    */
-  branch?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  branch?: string | null;
 
   /**
    * The git repository tag name to checkout. This takes precedence over branch.
    */
-  tag?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tag?: string | null;
 
   /**
    * The semver range used to match against git repository tags. This takes precedence over tag.
    */
-  semver?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  semver?: string | null;
 
   /**
    * The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver.
    */
-  commit?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  commit?: string | null;
 }
 
 /**
@@ -438,12 +458,14 @@ model BucketDefinition {
   /**
    * Plaintext access key used to securely access the S3 bucket
    */
-  accessKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  accessKey?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
@@ -453,12 +475,14 @@ model AzureBlobDefinition {
   /**
    * The URL to sync for the flux configuration Azure Blob storage account.
    */
-  url?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: string | null;
 
   /**
    * The Azure Blob container name to sync from the url endpoint for the flux configuration.
    */
-  containerName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  containerName?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
@@ -478,12 +502,15 @@ model AzureBlobDefinition {
   /**
    * The account key (shared key) to access the storage account
    */
-  accountKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  accountKey?: string | null;
 
   /**
    * The Shared Access token to access the storage container
    */
-  sasToken?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  sasToken?: string | null;
 
   /**
    * Parameters to authenticate using a Managed Identity.
@@ -493,7 +520,8 @@ model AzureBlobDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
@@ -503,32 +531,40 @@ model ServicePrincipalDefinition {
   /**
    * The client Id for authenticating a Service Principal.
    */
-  clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  clientId?: string | null;
 
   /**
    * The tenant Id for authenticating a Service Principal
    */
-  tenantId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tenantId?: string | null;
 
   /**
    * The client secret for authenticating a Service Principal
    */
-  clientSecret?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientSecret?: string | null;
 
   /**
    * Base64-encoded certificate used to authenticate a Service Principal
    */
-  clientCertificate?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientCertificate?: string | null;
 
   /**
    * The password for the certificate used to authenticate a Service Principal
    */
-  clientCertificatePassword?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientCertificatePassword?: string | null;
 
   /**
    * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
    */
-  clientCertificateSendChain?: boolean;
+  clientCertificateSendChain?: boolean = false;
 }
 
 /**
@@ -538,17 +574,20 @@ model ManagedIdentityDefinition {
   /**
    * The client Id for authenticating a Managed Identity.
    */
-  clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  clientId?: string | null;
 }
 
 /**
  * Parameters to reconcile to the OCIRepository source kind type.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OCIRepositoryDefinition {
   /**
    * The URL to sync for the flux configuration OCI repository.
    */
-  url?: url;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: url | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
@@ -578,17 +617,18 @@ model OCIRepositoryDefinition {
   /**
    * Specify whether to allow connecting to a non-TLS HTTP container registry.
    */
-  insecure?: boolean;
+  insecure?: boolean = false;
 
   /**
    * Specifies whether to use Workload Identity to authenticate with the OCI repository.
    */
-  useWorkloadIdentity?: boolean;
+  useWorkloadIdentity?: boolean = false;
 
   /**
    * The service account name to authenticate with the OCI repository.
    */
-  serviceAccountName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  serviceAccountName?: string | null;
 
   /**
    * Parameters to authenticate using TLS config for OCI repository.
@@ -598,27 +638,32 @@ model OCIRepositoryDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
  * The source reference for the OCIRepository object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OCIRepositoryRefDefinition {
   /**
    * The OCI repository image tag name to pull. This defaults to 'latest'.
    */
-  tag?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tag?: string | null;
 
   /**
    * The semver range used to match against OCI repository tags. This takes precedence over tag.
    */
-  semver?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  semver?: string | null;
 
   /**
    * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
    */
-  digest?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  digest?: string | null;
 }
 
 /**
@@ -628,12 +673,14 @@ model LayerSelectorDefinition {
   /**
    * The first layer matching the specified media type will be used.
    */
-  mediaType?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  mediaType?: string | null;
 
   /**
    * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
    */
-  operation?: OperationType;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  operation?: OperationType | null;
 }
 
 /**
@@ -680,17 +727,23 @@ model TlsConfigDefinition {
   /**
    * Base64-encoded certificate used to authenticate a client with the OCI repository.
    */
-  clientCertificate?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientCertificate?: string | null;
 
   /**
    * Base64-encoded private key used to authenticate a client with the OCI repository.
    */
-  privateKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  privateKey?: string | null;
 
   /**
    * Base64-encoded CA certificate used to verify the server.
    */
-  caCertificate?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  caCertificate?: string | null;
 }
 
 /**
@@ -711,7 +764,8 @@ model KustomizationDefinition {
   /**
    * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
    */
-  dependsOn?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  dependsOn?: string[] | null;
 
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
@@ -726,17 +780,18 @@ model KustomizationDefinition {
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
    */
-  retryIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  retryIntervalInSeconds?: int64 | null;
 
   /**
    * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
    */
-  prune?: boolean;
+  prune?: boolean = false;
 
   /**
    * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
    */
-  force?: boolean;
+  force?: boolean = false;
 
   /**
    * Enable/disable health check for all Kubernetes objects created by this Kustomization.
@@ -746,7 +801,8 @@ model KustomizationDefinition {
   /**
    * Used for variable substitution for this Kustomization after kustomize build.
    */
-  postBuild?: PostBuildDefinition;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  postBuild?: PostBuildDefinition | null;
 }
 
 /**
@@ -756,8 +812,9 @@ model PostBuildDefinition {
   /**
    * Key/value pairs holding the variables to be substituted in this Kustomization.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  substitute?: Record<string>;
+  substitute?: Record<string> | null;
 
   /**
    * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
@@ -783,7 +840,7 @@ model SubstituteFromDefinition {
   /**
    * Set to True to proceed without ConfigMap/Secret, if it is not present.
    */
-  optional?: boolean;
+  optional?: boolean = false;
 }
 
 /**
@@ -813,7 +870,8 @@ model ObjectStatusDefinition {
   /**
    * Object reference to the Kustomization that applied this object
    */
-  appliedBy?: ObjectReferenceDefinition;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  appliedBy?: ObjectReferenceDefinition | null;
 
   /**
    * List of Kubernetes object status conditions present on the cluster
@@ -880,7 +938,8 @@ model HelmReleasePropertiesDefinition {
   /**
    * The revision number of the last released object change
    */
-  lastRevisionApplied?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  lastRevisionApplied?: int64 | null;
 
   /**
    * The reference to the HelmChart object used as the source to this HelmRelease
@@ -890,17 +949,20 @@ model HelmReleasePropertiesDefinition {
   /**
    * Total number of times that the HelmRelease failed to install or upgrade
    */
-  failureCount?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  failureCount?: int64 | null;
 
   /**
    * Number of times that the HelmRelease failed to install
    */
-  installFailureCount?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  installFailureCount?: int64 | null;
 
   /**
    * Number of times that the HelmRelease failed to upgrade
    */
-  upgradeFailureCount?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  upgradeFailureCount?: int64 | null;
 }
 
 /**
@@ -967,17 +1029,20 @@ model GitRepositoryPatchDefinition {
   /**
    * The URL to sync for the flux configuration git repository.
    */
-  url?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
    */
-  timeoutInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster git repository source with the remote.
    */
-  syncIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  syncIntervalInSeconds?: int64 | null;
 
   /**
    * The source reference for the GitRepository object.
@@ -987,27 +1052,33 @@ model GitRepositoryPatchDefinition {
   /**
    * Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH
    */
-  sshKnownHosts?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  sshKnownHosts?: string | null;
 
   /**
    * Plaintext HTTPS username used to access private git repositories over HTTPS
    */
-  httpsUser?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  httpsUser?: string | null;
 
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
-  httpsCACert?: string;
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  httpsCACert?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 
   /**
    * Name of the provider used for authentication.
    */
-  provider?: ProviderType;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  provider?: ProviderType | null;
 }
 
 /**
@@ -1017,37 +1088,44 @@ model BucketPatchDefinition {
   /**
    * The URL to sync for the flux configuration S3 bucket.
    */
-  url?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: string | null;
 
   /**
    * The bucket name to sync from the url endpoint for the flux configuration.
    */
-  bucketName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  bucketName?: string | null;
 
   /**
    * Specify whether to use insecure communication when puling data from the S3 bucket.
    */
-  insecure?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  insecure?: boolean | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster bucket source with the remote.
    */
-  timeoutInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster bucket source with the remote.
    */
-  syncIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  syncIntervalInSeconds?: int64 | null;
 
   /**
    * Plaintext access key used to securely access the S3 bucket
    */
-  accessKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  accessKey?: string | null;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
@@ -1057,22 +1135,26 @@ model AzureBlobPatchDefinition {
   /**
    * The URL to sync for the flux configuration Azure Blob storage account.
    */
-  url?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: string | null;
 
   /**
    * The Azure Blob container name to sync from the url endpoint for the flux configuration.
    */
-  containerName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  containerName?: string | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
    */
-  timeoutInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
    */
-  syncIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  syncIntervalInSeconds?: int64 | null;
 
   /**
    * Parameters to authenticate using Service Principal.
@@ -1082,12 +1164,16 @@ model AzureBlobPatchDefinition {
   /**
    * The account key (shared key) to access the storage account
    */
-  accountKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  accountKey?: string | null;
 
   /**
    * The Shared Access token to access the storage container
    */
-  sasToken?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  sasToken?: string | null;
 
   /**
    * Parameters to authenticate using a Managed Identity.
@@ -1097,7 +1183,8 @@ model AzureBlobPatchDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
@@ -1107,27 +1194,35 @@ model ServicePrincipalPatchDefinition {
   /**
    * The client Id for authenticating a Service Principal.
    */
-  clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  clientId?: string | null;
 
   /**
    * The tenant Id for authenticating a Service Principal
    */
-  tenantId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tenantId?: string | null;
 
   /**
    * The client secret for authenticating a Service Principal
    */
-  clientSecret?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientSecret?: string | null;
 
   /**
    * Base64-encoded certificate used to authenticate a Service Principal
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
   clientCertificate?: string;
 
   /**
    * The password for the certificate used to authenticate a Service Principal
    */
-  clientCertificatePassword?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientCertificatePassword?: string | null;
 
   /**
    * Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate
@@ -1142,27 +1237,32 @@ model ManagedIdentityPatchDefinition {
   /**
    * The client Id for authenticating a Managed Identity.
    */
-  clientId?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  clientId?: string | null;
 }
 
 /**
  * Parameters to reconcile to the OCIRepository source kind type.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OCIRepositoryPatchDefinition {
   /**
    * The URL to sync for the flux configuration OCI repository.
    */
-  url?: url;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  url?: url | null;
 
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
    */
-  timeoutInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the cluster OCI repository source with the remote.
    */
-  syncIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  syncIntervalInSeconds?: int64 | null;
 
   /**
    * The source reference for the OCIRepository object.
@@ -1182,17 +1282,20 @@ model OCIRepositoryPatchDefinition {
   /**
    * Specify whether to allow connecting to a non-TLS HTTP container registry.
    */
-  insecure?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  insecure?: boolean = false;
 
   /**
    * Specifies whether to use Workload Identity to authenticate with the OCI repository.
    */
-  useWorkloadIdentity?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  useWorkloadIdentity?: boolean = false;
 
   /**
    * The service account name to authenticate with the OCI repository.
    */
-  serviceAccountName?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  serviceAccountName?: string | null;
 
   /**
    * Parameters to authenticate using TLS config for OCI repository.
@@ -1202,27 +1305,32 @@ model OCIRepositoryPatchDefinition {
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
    */
-  localAuthRef?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  localAuthRef?: string | null;
 }
 
 /**
  * The source reference for the OCIRepository object.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OCIRepositoryRefPatchDefinition {
   /**
    * The OCI repository image tag name to pull. This defaults to 'latest'.
    */
-  tag?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  tag?: string | null;
 
   /**
    * The semver range used to match against OCI repository tags. This takes precedence over tag.
    */
-  semver?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  semver?: string | null;
 
   /**
    * The image digest to pull from OCI repository, the value should be in the format ‘sha256:’. This takes precedence over semver.
    */
-  digest?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  digest?: string | null;
 }
 
 /**
@@ -1232,12 +1340,14 @@ model LayerSelectorPatchDefinition {
   /**
    * The first layer matching the specified media type will be used.
    */
-  mediaType?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  mediaType?: string | null;
 
   /**
    * The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.
    */
-  operation?: OperationType;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  operation?: OperationType | null;
 }
 
 /**
@@ -1284,17 +1394,23 @@ model TlsConfigPatchDefinition {
   /**
    * Base64-encoded certificate used to authenticate a client with the OCI repository.
    */
-  clientCertificate?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  clientCertificate?: string | null;
 
   /**
    * Base64-encoded private key used to authenticate a client with the OCI repository.
    */
-  privateKey?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  privateKey?: string | null;
 
   /**
    * Base64-encoded CA certificate used to verify the server.
    */
-  caCertificate?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
+  caCertificate?: string | null;
 }
 
 /**
@@ -1304,47 +1420,57 @@ model KustomizationPatchDefinition {
   /**
    * The path in the source reference to reconcile on the cluster.
    */
-  path?: string;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  path?: string | null;
 
   /**
    * Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.
    */
-  dependsOn?: string[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  dependsOn?: string[] | null;
 
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
    */
-  timeoutInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  timeoutInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster.
    */
-  syncIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  syncIntervalInSeconds?: int64 | null;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
    */
-  retryIntervalInSeconds?: int64;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  retryIntervalInSeconds?: int64 | null;
 
   /**
    * Enable/disable garbage collections of Kubernetes objects created by this Kustomization.
    */
-  prune?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  prune?: boolean | null;
 
   /**
    * Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.
    */
-  force?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  force?: boolean | null;
 
   /**
    * Enable/disable health check for all Kubernetes objects created by this Kustomization.
    */
-  wait?: boolean;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  wait?: boolean | null;
 
   /**
    * Used for variable substitution for this Kustomization after kustomize build.
    */
-  postBuild?: PostBuildPatchDefinition;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  postBuild?: PostBuildPatchDefinition | null;
 }
 
 /**
@@ -1381,7 +1507,7 @@ model SubstituteFromPatchDefinition {
   /**
    * Set to True to proceed without ConfigMap/Secret, if it is not present.
    */
-  optional?: boolean;
+  optional?: boolean = false;
 }
 
 /**

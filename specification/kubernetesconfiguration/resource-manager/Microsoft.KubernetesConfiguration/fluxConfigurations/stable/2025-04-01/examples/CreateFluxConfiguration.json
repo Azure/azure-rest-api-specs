@@ -1,34 +1,24 @@
 {
   "parameters": {
-    "subscriptionId": "subId1",
-    "resourceGroupName": "rg1",
-    "clusterRp": "Microsoft.Kubernetes",
-    "clusterResourceName": "connectedClusters",
-    "fluxConfigurationName": "srs-fluxconfig",
     "api-version": "2025-04-01",
     "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
     "fluxConfiguration": {
       "properties": {
-        "scope": "cluster",
-        "namespace": "srs-namespace",
-        "sourceKind": "GitRepository",
-        "suspend": false,
         "gitRepository": {
-          "url": "https://github.com/Azure/arc-k8s-demo",
-          "timeoutInSeconds": 600,
-          "syncIntervalInSeconds": 600,
+          "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl",
           "repositoryRef": {
             "branch": "master"
           },
-          "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+          "syncIntervalInSeconds": 600,
+          "timeoutInSeconds": 600,
+          "url": "https://github.com/Azure/arc-k8s-demo"
         },
         "kustomizations": {
           "srs-kustomization1": {
             "path": "./test/path",
             "dependsOn": [],
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
-            "wait": true,
             "postBuild": {
               "substitute": {
                 "cluster_env": "prod",
@@ -36,88 +26,81 @@
               },
               "substituteFrom": [
                 {
-                  "kind": "ConfigMap",
                   "name": "cluster-test",
+                  "kind": "ConfigMap",
                   "optional": true
                 }
               ]
-            }
+            },
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600,
+            "wait": true
           },
           "srs-kustomization2": {
             "path": "./other/test/path",
             "dependsOn": [
               "srs-kustomization1"
             ],
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
-            "retryIntervalInSeconds": 600,
-            "prune": false,
-            "wait": false,
             "postBuild": {
               "substituteFrom": [
                 {
-                  "kind": "ConfigMap",
                   "name": "cluster-values",
+                  "kind": "ConfigMap",
                   "optional": true
                 },
                 {
-                  "kind": "Secret",
                   "name": "secret-name",
+                  "kind": "Secret",
                   "optional": false
                 }
               ]
-            }
+            },
+            "prune": false,
+            "retryIntervalInSeconds": 600,
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600,
+            "wait": false
           }
         },
-        "waitForReconciliation": true,
-        "reconciliationWaitDuration": "PT30M"
+        "namespace": "srs-namespace",
+        "reconciliationWaitDuration": "PT30M",
+        "scope": "cluster",
+        "sourceKind": "GitRepository",
+        "suspend": false,
+        "waitForReconciliation": true
       }
-    }
+    },
+    "fluxConfigurationName": "srs-fluxconfig",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
   },
   "responses": {
     "200": {
-      "headers": {
-        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
-        "x-ms-async-operation-timeout": "PT48H"
-      },
       "description": "Details of the Kubernetes Flux Configuration's current status.",
       "body": {
-        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
-        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
         "name": "srs-fluxconfig",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-05-19T05:10:57.027Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2020-05-19T05:10:57.027Z"
-        },
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
         "properties": {
-          "scope": "cluster",
-          "namespace": "srs-namespace",
-          "sourceKind": "GitRepository",
-          "suspend": false,
+          "complianceState": "Compliant",
+          "errorMessage": "",
           "gitRepository": {
-            "url": "https://github.com/Azure/arc-k8s-demo",
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
+            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl",
             "repositoryRef": {
               "branch": "master",
-              "tag": null,
+              "commit": null,
               "semver": null,
-              "commit": null
+              "tag": null
             },
-            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600,
+            "url": "https://github.com/Azure/arc-k8s-demo"
           },
           "kustomizations": {
             "srs-kustomization1": {
               "name": "srs-kustomization1",
               "path": "./test/path",
               "dependsOn": [],
-              "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600,
-              "wait": true,
               "postBuild": {
                 "substitute": {
                   "cluster_env": "prod",
@@ -125,12 +108,15 @@
                 },
                 "substituteFrom": [
                   {
-                    "kind": "ConfigMap",
                     "name": "cluster-test",
+                    "kind": "ConfigMap",
                     "optional": true
                   }
                 ]
-              }
+              },
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "wait": true
             },
             "srs-kustomization2": {
               "name": "srs-kustomization2",
@@ -138,149 +124,145 @@
               "dependsOn": [
                 "srs-kustomization1"
               ],
-              "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600,
-              "retryIntervalInSeconds": 600,
-              "prune": false,
-              "wait": false,
               "postBuild": {
                 "substituteFrom": [
                   {
-                    "kind": "ConfigMap",
                     "name": "cluster-values",
+                    "kind": "ConfigMap",
                     "optional": true
                   },
                   {
-                    "kind": "Secret",
                     "name": "secret-name",
+                    "kind": "Secret",
                     "optional": false
                   }
                 ]
-              }
+              },
+              "prune": false,
+              "retryIntervalInSeconds": 600,
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "wait": false
             }
           },
+          "namespace": "srs-namespace",
+          "provisioningState": "Succeeded",
+          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiNkrANrhtRy+02Xc7b5bwvgOKvQMbqUQaXeB6FCDkbLaavw/zO/vIhIBEQu+vbBt6IlI/Pui0rMFr5JjA8Vwwd85oabzU07TPzbFvKSU9eCXqWRKWf0DHNQj/kxPJNtyPYFv3lGoiZZ6QzejOxlW/lPPokUePN0oI10daWwqznm2q0Cmh1EgPUYveq3J5KCWncZXCdwY36zWYulCWFaqazoaGy4kxcqlVy+mPjE/UJthaoLm3mq+23uhlmmfCc1j7W6+H6fcOwTyOtcbimxz2Ug8HlTzSTXBPtEe7qyllMyk62EPNUUq4bVoVsex9sKBK6/hW0Cn2P5i5jslUPCQF",
+          "scope": "cluster",
+          "sourceKind": "GitRepository",
+          "sourceSyncedCommitId": "master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
+          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
+          "statusUpdatedAt": "2021-05-19T18:17:12Z",
           "statuses": [
             {
               "name": "srs-fluxconfig",
-              "kind": "GitRepository",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
               "helmReleaseProperties": null,
+              "kind": "GitRepository",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Fetched revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "GitOperationSucceed",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             },
             {
               "name": "srs-fluxconfig-srs-kustomization1",
-              "kind": "Kustomization",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
               "helmReleaseProperties": {
-                "lastRevisionApplied": 1,
+                "failureCount": null,
                 "helmChartRef": {
                   "name": "myname",
                   "namespace": "mynamespace"
                 },
-                "failureCount": null,
-                "upgradeFailureCount": null,
-                "installFailureCount": null
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
               },
+              "kind": "Kustomization",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "ReconciliationSucceeded",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             },
             {
               "name": "srs-fluxconfig-srs-kustomization2",
-              "kind": "Kustomization",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
               "helmReleaseProperties": {
-                "lastRevisionApplied": 1,
+                "failureCount": null,
                 "helmChartRef": {
                   "name": "myname",
                   "namespace": "mynamespace"
                 },
-                "failureCount": null,
-                "upgradeFailureCount": null,
-                "installFailureCount": null
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
               },
+              "kind": "Kustomization",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "ReconciliationSucceeded",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             }
           ],
-          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiNkrANrhtRy+02Xc7b5bwvgOKvQMbqUQaXeB6FCDkbLaavw/zO/vIhIBEQu+vbBt6IlI/Pui0rMFr5JjA8Vwwd85oabzU07TPzbFvKSU9eCXqWRKWf0DHNQj/kxPJNtyPYFv3lGoiZZ6QzejOxlW/lPPokUePN0oI10daWwqznm2q0Cmh1EgPUYveq3J5KCWncZXCdwY36zWYulCWFaqazoaGy4kxcqlVy+mPjE/UJthaoLm3mq+23uhlmmfCc1j7W6+H6fcOwTyOtcbimxz2Ug8HlTzSTXBPtEe7qyllMyk62EPNUUq4bVoVsex9sKBK6/hW0Cn2P5i5jslUPCQF",
-          "sourceSyncedCommitId": "master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
-          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
-          "statusUpdatedAt": "2021-05-19T18:17:12Z",
-          "complianceState": "Compliant",
-          "provisioningState": "Succeeded",
-          "errorMessage": ""
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2021-05-19T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-05-19T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
         }
+      },
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
       }
     },
     "201": {
-      "headers": {
-        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
-        "x-ms-async-operation-timeout": "PT48H",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2025-04-01"
-      },
       "description": "Details of the Kubernetes Flux Configuration's current status.",
       "body": {
-        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
-        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
         "name": "srs-fluxconfig",
-        "systemData": {
-          "createdBy": "string",
-          "createdByType": "Application",
-          "createdAt": "2021-05-19T05:10:57.027Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "Application",
-          "lastModifiedAt": "2020-05-19T05:10:57.027Z"
-        },
+        "type": "Microsoft.KubernetesConfiguration/fluxConfigurations",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig",
         "properties": {
-          "scope": "cluster",
-          "namespace": "srs-namespace",
-          "sourceKind": "GitRepository",
-          "suspend": false,
+          "complianceState": "Compliant",
+          "errorMessage": "",
           "gitRepository": {
-            "url": "https://github.com/Azure/arc-k8s-demo",
-            "timeoutInSeconds": 600,
-            "syncIntervalInSeconds": 600,
+            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl",
             "repositoryRef": {
               "branch": "master",
-              "tag": null,
+              "commit": null,
               "semver": null,
-              "commit": null
+              "tag": null
             },
-            "httpsCACert": "ZXhhbXBsZWNlcnRpZmljYXRl"
+            "syncIntervalInSeconds": 600,
+            "timeoutInSeconds": 600,
+            "url": "https://github.com/Azure/arc-k8s-demo"
           },
           "kustomizations": {
             "srs-kustomization1": {
               "name": "srs-",
               "path": "./test/path",
               "dependsOn": [],
-              "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600,
-              "wait": true,
               "postBuild": {
                 "substitute": {
                   "cluster_env": "prod",
@@ -288,12 +270,15 @@
                 },
                 "substituteFrom": [
                   {
-                    "kind": "ConfigMap",
                     "name": "cluster-test",
+                    "kind": "ConfigMap",
                     "optional": true
                   }
                 ]
-              }
+              },
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "wait": true
             },
             "srs-kustomization2": {
               "name": "srs-kustomization2",
@@ -301,103 +286,120 @@
               "dependsOn": [
                 "srs-kustomization1"
               ],
-              "timeoutInSeconds": 600,
-              "syncIntervalInSeconds": 600,
-              "retryIntervalInSeconds": 600,
-              "prune": false,
-              "wait": false,
               "postBuild": {
                 "substituteFrom": [
                   {
-                    "kind": "ConfigMap",
                     "name": "cluster-values",
+                    "kind": "ConfigMap",
                     "optional": true
                   },
                   {
-                    "kind": "Secret",
                     "name": "secret-name",
+                    "kind": "Secret",
                     "optional": false
                   }
                 ]
-              }
+              },
+              "prune": false,
+              "retryIntervalInSeconds": 600,
+              "syncIntervalInSeconds": 600,
+              "timeoutInSeconds": 600,
+              "wait": false
             }
           },
+          "namespace": "srs-namespace",
+          "provisioningState": "Succeeded",
+          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiNkrANrhtRy+02Xc7b5bwvgOKvQMbqUQaXeB6FCDkbLaavw/zO/vIhIBEQu+vbBt6IlI/Pui0rMFr5JjA8Vwwd85oabzU07TPzbFvKSU9eCXqWRKWf0DHNQj/kxPJNtyPYFv3lGoiZZ6QzejOxlW/lPPokUePN0oI10daWwqznm2q0Cmh1EgPUYveq3J5KCWncZXCdwY36zWYulCWFaqazoaGy4kxcqlVy+mPjE/UJthaoLm3mq+23uhlmmfCc1j7W6+H6fcOwTyOtcbimxz2Ug8HlTzSTXBPtEe7qyllMyk62EPNUUq4bVoVsex9sKBK6/hW0Cn2P5i5jslUPCQF",
+          "scope": "cluster",
+          "sourceKind": "GitRepository",
+          "sourceSyncedCommitId": "master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
+          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
+          "statusUpdatedAt": "2021-05-19T18:17:12Z",
           "statuses": [
             {
               "name": "srs-fluxconfig",
-              "kind": "GitRepository",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
+              "kind": "GitRepository",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Fetched revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "GitOperationSucceed",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             },
             {
               "name": "srs-fluxconfig-srs-kustomization1",
-              "kind": "Kustomization",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
               "helmReleaseProperties": {
-                "lastRevisionApplied": 1,
+                "failureCount": null,
                 "helmChartRef": {
                   "name": "myname",
                   "namespace": "mynamespace"
                 },
-                "failureCount": null,
-                "upgradeFailureCount": null,
-                "installFailureCount": null
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
               },
+              "kind": "Kustomization",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "ReconciliationSucceeded",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             },
             {
               "name": "srs-fluxconfig-srs-kustomization2",
-              "kind": "Kustomization",
-              "complianceState": "Compliant",
               "appliedBy": null,
+              "complianceState": "Compliant",
               "helmReleaseProperties": {
-                "lastRevisionApplied": 1,
+                "failureCount": null,
                 "helmChartRef": {
                   "name": "myname",
                   "namespace": "mynamespace"
                 },
-                "failureCount": null,
-                "upgradeFailureCount": null,
-                "installFailureCount": null
+                "installFailureCount": null,
+                "lastRevisionApplied": 1,
+                "upgradeFailureCount": null
               },
+              "kind": "Kustomization",
               "statusConditions": [
                 {
+                  "type": "Ready",
                   "lastTransitionTime": "2021-05-19T18:12:40Z",
                   "message": "'Applied revision: master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590'",
                   "reason": "ReconciliationSucceeded",
-                  "status": "True",
-                  "type": "Ready"
+                  "status": "True"
                 }
               ]
             }
           ],
-          "repositoryPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDiNkrANrhtRy+02Xc7b5bwvgOKvQMbqUQaXeB6FCDkbLaavw/zO/vIhIBEQu+vbBt6IlI/Pui0rMFr5JjA8Vwwd85oabzU07TPzbFvKSU9eCXqWRKWf0DHNQj/kxPJNtyPYFv3lGoiZZ6QzejOxlW/lPPokUePN0oI10daWwqznm2q0Cmh1EgPUYveq3J5KCWncZXCdwY36zWYulCWFaqazoaGy4kxcqlVy+mPjE/UJthaoLm3mq+23uhlmmfCc1j7W6+H6fcOwTyOtcbimxz2Ug8HlTzSTXBPtEe7qyllMyk62EPNUUq4bVoVsex9sKBK6/hW0Cn2P5i5jslUPCQF",
-          "sourceSyncedCommitId": "master/0ba6f0d30760d567de0bac86c8c4eec13ce1a590",
-          "sourceUpdatedAt": "2021-05-19T18:17:12Z",
-          "statusUpdatedAt": "2021-05-19T18:17:12Z",
-          "complianceState": "Compliant",
-          "provisioningState": "Succeeded",
-          "errorMessage": ""
+          "suspend": false
+        },
+        "systemData": {
+          "createdAt": "2021-05-19T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-05-19T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
         }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/srs-fluxconfig/operations/operationId?api-version=2025-04-01",
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/ClusterMonitor/srs-fluxconfig/{operationId}",
+        "x-ms-async-operation-timeout": "PT48H"
       }
     }
-  }
+  },
+  "operationId": "FluxConfigurations_CreateOrUpdate",
+  "title": "Create Flux Configuration"
 }
