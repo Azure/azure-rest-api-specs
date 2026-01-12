@@ -3440,24 +3440,20 @@
       "description": "Chat completion and embedding models supported by the analyzer.",
       "properties": {
         "completion": {
-          "type": "object",
+          "type": "array",
           "description": "Chat completion models supported by the analyzer.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
           }
         },
         "embedding": {
-          "type": "object",
+          "type": "array",
           "description": "Embedding models supported by the analyzer.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
           }
         }
-      },
-      "required": [
-        "completion",
-        "embedding"
-      ]
+      }
     },
     "TimeField": {
       "type": "object",
