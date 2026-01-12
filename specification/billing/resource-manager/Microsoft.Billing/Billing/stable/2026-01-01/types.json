@@ -8,27 +8,98 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
-  "paths": {},
+  "paths": { },
   "definitions": {
-    "ProxyResourceWithTags": {
+    "Error": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The error target.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        },
+        "additionalInfo": {
+          "description": "The resource management error additional info.",
+          "type": "array",
+          "items": {
+            "description": "The resource management error additional info.",
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The additional info type.",
+                "type": "string",
+                "readOnly": true
+              },
+              "info": {
+                "description": "The additional info.",
+                "type": "object",
+                "readOnly": true
+              }
+            }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Resource": {
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "description": "Fully qualified resource ID for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "tags": {
           "description": "Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "location": {
+          "description": "Location of the resource. It may not be populated for all resource types.",
+          "type": "string"
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "Amount": {
@@ -46,6 +117,7 @@
           "readOnly": true
         }
       },
+      "additionalProperties": false,
       "readOnly": true
     },
     "AddressDetails": {
@@ -118,7 +190,8 @@
           "description": "Indicates if the address is incomplete.",
           "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzurePlan": {
       "description": "Details of the Azure plan.",
@@ -136,7 +209,8 @@
           "description": "The sku description.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "IndirectRelationshipInfo": {
       "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
@@ -154,11 +228,13 @@
           "description": "The display name of the partner or customer for an indirect motion.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PatchResource": {
       "description": "Common fields that are in the patch method request body of all Azure Resource Manager patch resources.",
-      "type": "object"
+      "type": "object",
+      "additionalProperties": false
     },
     "Reseller": {
       "description": "Details of the reseller.",
@@ -175,6 +251,7 @@
           "readOnly": true
         }
       },
+      "additionalProperties": false,
       "readOnly": true
     }
   },
@@ -185,21 +262,21 @@
       "description": "The ID that uniquely identifies a billing account.",
       "required": true,
       "type": "string",
-      "pattern": "^([0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
+      "pattern": "^([a-zA-Z]?[0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
       "x-ms-parameter-location": "method"
     },
     "apiVersionParameter": {
       "in": "query",
       "name": "api-version",
-      "description": "The version of the API to be used with the client request. The current version is 2024-04-01.",
+      "description": "The version of the API to be used with the client request. The current version is 2026-01-01.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "associatedTenantName": {
+    "alertPreferenceName": {
       "in": "path",
-      "name": "associatedTenantName",
-      "description": "The ID that uniquely identifies a tenant.",
+      "name": "alertPreferenceName",
+      "description": "The GUID format ID that uniquely identifies an alert preference",
       "required": true,
       "type": "string",
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
@@ -258,6 +335,33 @@
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
       "x-ms-parameter-location": "method"
     },
+    "associatedTenantName": {
+      "in": "path",
+      "name": "associatedTenantName",
+      "description": "The ID that uniquely identifies a tenant.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentName": {
+      "in": "path",
+      "name": "departmentName",
+      "description": "The ID that uniquely identifies the department.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountName": {
+      "in": "path",
+      "name": "enrollmentAccountName",
+      "description": "The ID that uniquely identifies an enrollment account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    },
     "customerName": {
       "in": "path",
       "name": "customerName",
@@ -271,24 +375,6 @@
       "in": "path",
       "name": "invoiceSectionName",
       "description": "The ID that uniquely identifies an invoice section.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
-    },
-    "departmentName": {
-      "in": "path",
-      "name": "departmentName",
-      "description": "The name of the department.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
-    },
-    "enrollmentAccountName": {
-      "in": "path",
-      "name": "enrollmentAccountName",
-      "description": "The name of the enrollment account.",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
@@ -346,6 +432,14 @@
       "required": true,
       "type": "string",
       "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceProviderNamespace": {
+      "in": "path",
+      "name": "resourceProviderNamespace",
+      "description": "The resource provider namespace.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   },

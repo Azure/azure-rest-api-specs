@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transactions": {
@@ -98,7 +98,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -199,7 +199,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -297,7 +297,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -363,7 +363,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -386,7 +386,7 @@
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
-        "operationId": "Transactions_TransactionsDownloadByInvoice",
+        "operationId": "Transactions_DownloadByInvoice",
         "produces": [
           "application/json"
         ],
@@ -423,7 +423,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -484,7 +484,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -511,7 +511,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "RefundTransactionDetails": {
       "description": "The refund details of a transaction.",
@@ -537,21 +538,29 @@
           "description": "The ID of refund operation.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Transaction": {
       "description": "A transaction.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TransactionProperties"
+          "description": "The properties of a(n) Transaction",
+          "allOf": [
+            {
+              "$ref": "#/definitions/TransactionProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "TransactionListResult": {
@@ -574,7 +583,8 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "TransactionProperties": {
       "description": "A transaction.",
@@ -799,7 +809,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "TransactionSummary": {
       "description": "A transaction summary.",
@@ -835,7 +846,8 @@
           "type": "number",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

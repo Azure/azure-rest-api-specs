@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/validateDeleteEligibility": {
@@ -48,7 +48,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -108,7 +108,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -158,7 +158,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -234,7 +234,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -308,7 +308,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -347,7 +347,8 @@
           "description": "Validation message.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeleteInvoiceSectionEligibilityResult": {
       "description": "Eligibility to delete an invoice section result.",
@@ -371,23 +372,31 @@
           "items": {
             "$ref": "#/definitions/DeleteInvoiceSectionEligibilityDetail"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InvoiceSection": {
-      "description": "An invoice section.",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InvoiceSectionProperties"
+          "description": "The properties of a(n) InvoiceSection",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InvoiceSectionProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "InvoiceSectionListResult": {
@@ -410,10 +419,10 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InvoiceSectionProperties": {
-      "description": "An invoice section.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -461,7 +470,8 @@
             "PastDue",
             "UnusualActivity",
             "SpendingLimitReached",
-            "SpendingLimitExpired"
+            "SpendingLimitExpired",
+            "Offboarded"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -477,15 +487,9 @@
         "targetCloud": {
           "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
           "type": "string"
-        },
-        "tags": {
-          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

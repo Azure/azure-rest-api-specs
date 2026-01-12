@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "billingProfileName": "da71896f-06b0-4390-87e0-c135b5895cb9",
+    "invoiceName": "G123456789",
+    "parameters": {
+      "amount": 100,
+      "paymentMethodName": "1234567890"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/paynow_00000000-0000-0000-0000-000000000001",
+        "name": "paynow_00000000-0000-0000-0000-000000000001",
+        "status": "Completed"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/paynow_00000000-0000-0000-0000-000000000001?api-version=2026-01-01"
+      }
+    }
+  }
+}

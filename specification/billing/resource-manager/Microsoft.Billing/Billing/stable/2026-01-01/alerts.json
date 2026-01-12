@@ -1,0 +1,548 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/alerts/{alertName}": {
+      "delete": {
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Deletes an alert for the specified Billing Account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Alerts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "alertName",
+            "description": "The resource ID that uniquely identifies a billing alert resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The request has succeeded with no response body."
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertDelete": {
+            "$ref": "./examples/alertDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Gets the alert definition by an Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Alerts_GetById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "alertName",
+            "description": "The resource ID that uniquely identifies a billing alert resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertGet": {
+            "$ref": "./examples/alertGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Creates or updates an alert for the specified Billing Account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Alerts_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "alertName",
+            "description": "The resource ID that uniquely identifies a billing alert resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "A billing alert",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "201": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AlertPut": {
+            "$ref": "./examples/alertPut.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Lists the alerts for a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Alerts_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertsListByBillingAccount": {
+            "$ref": "./examples/alertsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/alerts": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Lists the alerts for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Alerts_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertsListByBillingProfile": {
+            "$ref": "./examples/alertsListByBillingProfile.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Alert": {
+      "description": "A billing alert",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) Alert",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "AlertContext": {
+      "description": "Information specific to an alert type.",
+      "type": "object",
+      "properties": {
+        "alertType": {
+          "description": "Type of alert.",
+          "enum": [
+            "Unknown",
+            "Custom",
+            "Service",
+            "Maintenance",
+            "ThresholdBillingAuthSuccess",
+            "ThresholdBillingLimitDeclined",
+            "ThresholdBillingLimitDeclinedReminder",
+            "ThresholdBillingConsumption",
+            "PaymentSuccessful",
+            "PaymentFailed",
+            "PurchaseStarted",
+            "PurchaseCompleted",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertType",
+            "modelAsString": true
+          }
+        },
+        "billingAccountId": {
+          "description": "The resource ID that uniquely identifies a billing account resource.",
+          "type": "string"
+        },
+        "billingAccountDisplayName": {
+          "description": "The name of the billing account.",
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The resource ID that uniquely identifies a billing profile resource.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertEssentials": {
+      "description": "Information that is common to all alert types.",
+      "type": "object",
+      "properties": {
+        "alertState": {
+          "description": "The state of an alert.",
+          "enum": [
+            "Unknown",
+            "New",
+            "Acknowledged",
+            "Closed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertState",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The description of the alert.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The severity of the alert. Severity ranges from Sev0, which is the highest, to Sev3, which is the lowest.",
+          "enum": [
+            "Sev0",
+            "Sev1",
+            "Sev2",
+            "Sev3"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertSeverity",
+            "modelAsString": true
+          }
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Alert starts display time.",
+          "type": "string"
+        },
+        "expiredDateTime": {
+          "format": "date-time",
+          "description": "The time at which the alert expires.",
+          "type": "string"
+        },
+        "targetResource": {
+          "description": "Resource id of target Azure Resource Manager resource, on which alert got created. This represents billing scope Id, invoice Id or billing subscription Id.",
+          "type": "string"
+        },
+        "targetResourceType": {
+          "description": "Resource type of target Azure Resource Manager resource. This represents billing account/profile/subscription, invoice, and transaction.",
+          "enum": [
+            "Unknown",
+            "BillingSubscription",
+            "BillingAccount",
+            "BillingProfile",
+            "Invoice",
+            "Transaction"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertTargetResourceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertProperties": {
+      "description": "A billing alert",
+      "type": "object",
+      "properties": {
+        "essentials": {
+          "description": "Information that is common to all alert types.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertEssentials"
+            }
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "egressConfig": {
+          "description": "Information that will be used to display the alert in the portal.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "context": {
+          "description": "Information specific to an alert type.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertContext"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

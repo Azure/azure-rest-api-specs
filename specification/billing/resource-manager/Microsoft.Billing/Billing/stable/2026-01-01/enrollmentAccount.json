@@ -8,9 +8,219 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/departments/{departmentName}/enrollmentAccounts/{enrollmentAccountName}": {
+      "get": {
+        "tags": [
+          "EnrollmentAccount"
+        ],
+        "description": "Get enrollment account using billing profile ID, department ID and enrollment account ID",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfileEnrollmentAccounts_GetByAccountIdByDepartmentId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/departmentName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountGetByDepartmentByBillingProfile": {
+            "$ref": "./examples/enrollmentAccountGetByDepartmentByBillingProfile.json"
+          },
+          "EnrollmentAccountGetByDepartmentByBillingProfileWithExpand": {
+            "$ref": "./examples/enrollmentAccountGetByDepartmentByBillingProfileWithExpand.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/departments/{departmentName}/enrollmentAccounts": {
+      "get": {
+        "tags": [
+          "EnrollmentAccount"
+        ],
+        "description": "Get list of enrollment accounts using billing",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfileEnrollmentAccounts_ListByDepartmentName",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/departmentName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountsListByDepartmentByBillingProfile": {
+            "$ref": "./examples/enrollmentAccountsListByDepartmentByBillingProfile.json"
+          },
+          "EnrollmentAccountsListByDepartmentByBillingProfileWithExpand": {
+            "$ref": "./examples/enrollmentAccountsListByDepartmentByBillingProfileWithExpand.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/enrollmentAccounts/{enrollmentAccountName}": {
+      "get": {
+        "tags": [
+          "EnrollmentAccount"
+        ],
+        "description": "Get the enrollment account belonging to a specific billing account and a billing profile belonging to it.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfileEnrollmentAccounts_GetById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/enrollmentAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountGetByBillingProfile": {
+            "$ref": "./examples/enrollmentAccountGetByBillingProfile.json"
+          },
+          "EnrollmentAccountGetByBillingProfileWithExpand": {
+            "$ref": "./examples/enrollmentAccountGetByBillingProfileWithExpand.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/enrollmentAccounts": {
+      "get": {
+        "tags": [
+          "EnrollmentAccount"
+        ],
+        "description": "Lists the enrollment accounts for a specific billing account and a billing profile belonging to it.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfileEnrollmentAccounts_ListByBillingProfile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnrollmentAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnrollmentAccountsListByBillingProfile": {
+            "$ref": "./examples/enrollmentAccountsListByBillingProfile.json"
+          },
+          "EnrollmentAccountsListByBillingProfileWithExpand": {
+            "$ref": "./examples/enrollmentAccountsListByBillingProfileWithExpand.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}/enrollmentAccounts/{enrollmentAccountName}": {
       "get": {
         "tags": [
@@ -48,13 +258,16 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "EnrollmentAccountByDepartment": {
             "$ref": "./examples/enrollmentAccountByDepartment.json"
+          },
+          "EnrollmentAccountByDepartmentWithExpand": {
+            "$ref": "./examples/enrollmentAccountByDepartmentWithExpand.json"
           }
         }
       }
@@ -111,13 +324,16 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "EnrollmentAccountsListByDepartment": {
             "$ref": "./examples/enrollmentAccountsListByDepartment.json"
+          },
+          "EnrollmentAccountsListByDepartmentWithExpand": {
+            "$ref": "./examples/enrollmentAccountsListByDepartmentWithExpand.json"
           }
         },
         "x-ms-pageable": {
@@ -159,13 +375,16 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "EnrollmentAccountGet": {
             "$ref": "./examples/enrollmentAccountGet.json"
+          },
+          "EnrollmentAccountGetWithExpand": {
+            "$ref": "./examples/enrollmentAccountGetWithExpand.json"
           }
         }
       }
@@ -219,13 +438,16 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "EnrollmentAccountsListByBillingAccount": {
             "$ref": "./examples/enrollmentAccountsListByBillingAccount.json"
+          },
+          "EnrollmentAccountsListByBillingAccountWithExpand": {
+            "$ref": "./examples/enrollmentAccountsListByBillingAccountWithExpand.json"
           }
         },
         "x-ms-pageable": {
@@ -235,19 +457,41 @@
     }
   },
   "definitions": {
+    "BillingOwnerDetails": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "EnrollmentAccount": {
       "description": "It is an organizational hierarchy within a billing account to administer and manage azure costs.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EnrollmentAccountProperties"
+          "description": "The properties of a(n) EnrollmentAccount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrollmentAccountProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "EnrollmentAccountListResult": {
@@ -270,7 +514,8 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnrollmentAccountProperties": {
       "description": "It is an organizational hierarchy within a billing account to administer and manage azure costs.",
@@ -324,8 +569,26 @@
           "description": "The date of expiration of the enrollment account.",
           "type": "string",
           "readOnly": true
+        },
+        "offerTypes": {
+          "description": "The offer types associated with the enrollment account.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        },
+        "ownerDetails": {
+          "description": "Details of the owner of the enrollment account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingOwnerDetails"
+            }
+          ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

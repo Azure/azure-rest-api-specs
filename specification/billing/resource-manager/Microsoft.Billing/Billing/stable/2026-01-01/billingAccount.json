@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addPaymentTerms": {
@@ -44,7 +44,7 @@
               "items": {
                 "$ref": "#/definitions/PaymentTerm"
               },
-              "x-ms-identifiers": []
+              "x-ms-identifiers": [ ]
             }
           }
         ],
@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -81,6 +81,83 @@
         "x-ms-examples": {
           "PaymentTermsAdd": {
             "$ref": "./examples/paymentTermsAdd.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/addresses/{addressName}": {
+      "put": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Creates or updates an address for the billing account. The address can be used for billing and shipping purposes.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_PutAddress",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "addressName",
+            "description": "The user-friendly name for the address.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Address details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressEntityProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An address resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressEntity"
+            }
+          },
+          "201": {
+            "description": "An address resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressEntity"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AddressPut": {
+            "$ref": "./examples/addressPut.json"
           }
         }
       }
@@ -141,7 +218,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,7 +264,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -232,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -243,6 +320,222 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/offboard": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Offboard a billing account",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_Offboard",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountName",
+            "description": "The billing account name",
+            "required": true,
+            "type": "string",
+            "pattern": "^([a-zA-Z]?[0-9]+|([Pp][Cc][Nn]\\.[A-Za-z0-9]+)|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The offboarding request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountOffboardingRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A billing account.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/refresh": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Refresh resources for a billing account",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_RefreshBillingAccountResources",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Request to refresh specific resource types for a billing account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingRefreshResourceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of billing account resources that were refreshed for a billing account.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BillingRefreshedResourcesResponse"
+              },
+              "x-ms-identifiers": [ ]
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RefreshBillingAccountResourcesExample": {
+            "$ref": "./examples/refreshBillingAccountResourcesExample.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/transferEnrollmentToMCA": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Create and update entities in WAEP database, when enrollment is transferred from EA to MCA",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_Create",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "billingAccountName",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The transfer was successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TransferEnrollmentToMCAExample": {
+            "$ref": "./examples/transferEnrollmentToMCAExample.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validateInvoicePayEligibility": {
+      "post": {
+        "tags": [
+          "BillingAccount"
+        ],
+        "description": "Validates invoice pay eligibility on a billing account. The operation is supported for billing accounts with agreement of type Microsoft Customer Agreement and Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingAccounts_ValidateInvoicePayEligibility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result of the invoice payment eligibility validation.",
+            "schema": {
+              "$ref": "#/definitions/InvoicePayEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicePayEligibilityApproved": {
+            "$ref": "./examples/invoicePayEligibilityApproved.json"
+          },
+          "InvoicePayEligibilityRejected": {
+            "$ref": "./examples/invoicePayEligibilityRejected.json"
+          }
         }
       }
     },
@@ -279,7 +572,7 @@
               "items": {
                 "$ref": "#/definitions/PaymentTerm"
               },
-              "x-ms-identifiers": []
+              "x-ms-identifiers": [ ]
             }
           }
         ],
@@ -293,7 +586,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -338,7 +631,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -417,7 +710,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -528,7 +821,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -571,7 +864,6 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "Address details.",
             "required": true,
             "schema": {
               "$ref": "./types.json#/definitions/AddressDetails"
@@ -588,7 +880,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -604,6 +896,132 @@
     }
   },
   "definitions": {
+    "AddressEntity": {
+      "description": "Address details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) AddressEntity",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AddressEntityProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "AddressEntityProperties": {
+      "description": "Address details.",
+      "required": [
+        "addressLine1",
+        "country"
+      ],
+      "type": "object",
+      "properties": {
+        "systemId": {
+          "description": "The system-generated unique identifier for the address.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user-friendly name for the address.",
+          "type": "string"
+        },
+        "addressLine1": {
+          "description": "Address line 1.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address city.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name. Optional for MCA Individual (Pay-as-you-go).",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses ISO 3166-1 Alpha-2 format.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "district": {
+          "description": "Address district.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name. Optional for MCA Enterprise.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name. Optional for MCA Enterprise.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address region.",
+          "type": "string"
+        },
+        "isValidAddress": {
+          "description": "Indicates if the address is incomplete.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "snapshotId": {
+          "description": "The snapshot identifier for the address version.",
+          "type": "string"
+        },
+        "addressUsage": {
+          "description": "Type of the address usage.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Other",
+              "BillTo",
+              "ShipTo",
+              "SoldTo"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AddressUsageType",
+              "modelAsString": true
+            }
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
+    },
     "AddressValidationResponse": {
       "description": "Result of the address validation.",
       "type": "object",
@@ -629,7 +1047,7 @@
             "$ref": "./types.json#/definitions/AddressDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "validationMessage": {
           "description": "Validation error message.",
@@ -637,21 +1055,44 @@
           "readOnly": true
         }
       },
+      "additionalProperties": false,
       "readOnly": true
+    },
+    "AffiliatedOrganizationInfo": {
+      "description": "The organization that the billing account is affiliated with.",
+      "type": "object",
+      "properties": {
+        "affiliatedOrganizationName": {
+          "description": "The name of the affiliated organization.",
+          "type": "string"
+        },
+        "affiliatedOrganizationCountry": {
+          "description": "The country of the affiliated organization.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "BillingAccount": {
       "description": "A billing account.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingAccountProperties"
+          "description": "The properties of a(n) BillingAccount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingAccountProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "BillingAccountListResult": {
@@ -674,21 +1115,49 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "BillingAccountOffboardingRequest": {
+      "description": "The request to offboard a partner billing account.",
+      "type": "object",
+      "properties": {
+        "chargesEndDate": {
+          "format": "date-time",
+          "description": "The date when charges should end. If not provided, the current date is used.",
+          "type": "string"
+        },
+        "offboardingAction": {
+          "description": "The offboarding action to perform.",
+          "type": "string"
+        },
+        "indirectResellerMPNId": {
+          "description": "The id of indirect reseller to offboard.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "BillingAccountPatch": {
       "description": "A billing account.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingAccountProperties"
+          "description": "The properties of a(n) BillingAccount",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingAccountProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "BillingAccountProperties": {
@@ -725,7 +1194,8 @@
             "New",
             "Expired",
             "Terminated",
-            "Transferred"
+            "Transferred",
+            "Closed"
           ],
           "type": "string",
           "readOnly": true,
@@ -778,7 +1248,15 @@
             "ManuallyTerminated",
             "Expired",
             "Transferred",
-            "TerminateProcessing"
+            "TerminateProcessing",
+            "PaymentTermIssue",
+            "TradeLicenseRequired",
+            "NameIssue",
+            "CompanyNameIssue",
+            "AddressIssue",
+            "RegistrationIDIssue",
+            "Offboarded",
+            "NoSignedAgreement"
           ],
           "type": "string",
           "readOnly": true,
@@ -794,7 +1272,9 @@
             "MicrosoftCustomerAgreement",
             "EnterpriseAgreement",
             "MicrosoftOnlineServicesProgram",
-            "MicrosoftPartnerAgreement"
+            "MicrosoftPartnerAgreement",
+            "OpenAgreement",
+            "SelectPlusAgreement"
           ],
           "type": "string",
           "readOnly": true,
@@ -867,7 +1347,7 @@
             }
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "qualifications": {
           "description": "Qualifications for pricing on a billing account. Values may be Commercial, Education, Charity or Government.",
@@ -876,17 +1356,75 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
-        "taxIds": {
-          "description": "A list of tax identifiers for the billing account.",
+        "affiliatedOrganization": {
+          "description": "Provides information such as name and country about the organization affiliated with the billing account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AffiliatedOrganizationInfo"
+            }
+          ]
+        },
+        "sandboxInformation": {
+          "description": "The sandbox information for the billing account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SandboxInfo"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BillingRefreshResourceRequest": {
+      "type": "object",
+      "properties": {
+        "resourceTypes": {
+          "description": "The list of resource types that need to be refreshed for the billing account.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TaxIdentifier"
+            "description": "The resource type to be refreshed.",
+            "enum": [
+              "Unknown",
+              "Agreements"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ResourceType",
+              "modelAsString": true
+            }
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "BillingRefreshedResourcesResponse": {
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type that was refreshed for the billing account.",
+          "enum": [
+            "Unknown",
+            "Agreements"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceType",
+            "modelAsString": true
+          }
+        },
+        "ids": {
+          "description": "The list of resources that were refreshed for the billing account.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
     },
     "EnrollmentDetails": {
       "description": "The properties of an enrollment.",
@@ -998,8 +1536,73 @@
           "description": "The contact who receives invoices of the enrollment.",
           "type": "string",
           "readOnly": true
+        },
+        "agreementStatus": {
+          "description": "Agreement status of an enrollment, applicable only for users with non-azure roles.",
+          "enum": [
+            "Other",
+            "Active",
+            "Amended",
+            "AmendmentHold",
+            "AmendmentInProgress",
+            "Ended",
+            "Expired",
+            "New",
+            "Hold",
+            "Pending",
+            "Rejected",
+            "Review",
+            "Terminated"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EaAgreementStatus",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "InvoicePayEligibilityResult": {
+      "description": "The result of the invoice payment eligibility validation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the invoice payment eligibility.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoicePayEligibilityStatus",
+            "modelAsString": true
+          }
+        },
+        "reason": {
+          "description": "The reason for the invoice payment eligibility status.",
+          "enum": [
+            "None",
+            "InReview",
+            "AccountTypeInvalid",
+            "InsufficientPaymentHistory",
+            "InsufficientSpendingHistory",
+            "CountryNotSupported",
+            "OutstandingBalance",
+            "CreditResponse"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoicePayEligibilityReason",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "InvoiceSectionWithCreateSubPermission": {
       "description": "Invoice section properties with create subscription permission.",
@@ -1044,7 +1647,8 @@
             "PastDue",
             "UnusualActivity",
             "SpendingLimitReached",
-            "SpendingLimitExpired"
+            "SpendingLimitExpired",
+            "Offboarded"
           ],
           "type": "string",
           "readOnly": true,
@@ -1073,7 +1677,7 @@
             "$ref": "./types.json#/definitions/AzurePlan"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "invoiceSectionDisplayName": {
           "description": "The name of the invoice section.",
@@ -1090,7 +1694,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InvoiceSectionWithCreateSubPermissionListResult": {
       "description": "A container for a list of resources",
@@ -1112,7 +1717,8 @@
             "invoiceSectionId"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PaymentTerm": {
       "description": "The properties of payment term.",
@@ -1137,7 +1743,8 @@
           "type": "boolean",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PaymentTermsEligibilityDetail": {
       "description": "Details of the payment terms eligibility.",
@@ -1167,7 +1774,8 @@
           "description": "Indicates the message for the ineligibility of the payment terms.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PaymentTermsEligibilityResult": {
       "description": "Result of the payment terms eligibility.",
@@ -1192,9 +1800,10 @@
           "items": {
             "$ref": "#/definitions/PaymentTermsEligibilityDetail"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "RegistrationNumber": {
       "description": "Describes the registration number of the organization linked with the billing account.",
@@ -1216,70 +1825,25 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     },
-    "TaxIdentifier": {
-      "description": "A tax identifier for the billing account.",
+    "SandboxInfo": {
+      "description": "The sandbox information for the billing account.",
       "type": "object",
       "properties": {
-        "id": {
-          "description": "The id of the tax identifier.",
+        "name": {
+          "description": "The name of the sandbox.",
           "type": "string"
         },
         "type": {
-          "description": "The type of the tax identifier.",
-          "enum": [
-            "Other",
-            "BrazilCcmId",
-            "BrazilCnpjId",
-            "BrazilCpfId",
-            "CanadianFederalExempt",
-            "CanadianProvinceExempt",
-            "ExternalTaxation",
-            "IndiaFederalTanId",
-            "IndiaFederalServiceTaxId",
-            "IndiaPanId",
-            "IndiaStateCstId",
-            "IndiaStateGstINId",
-            "IndiaStateVatId",
-            "IntlExempt",
-            "USExempt",
-            "VatId",
-            "LoveCode",
-            "MobileBarCode",
-            "NationalIdentificationNumber",
-            "PublicSectorId"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaxIdentifierType",
-            "modelAsString": true
-          }
-        },
-        "scope": {
-          "description": "The scope of the tax identifier.",
+          "description": "The type of the sandbox.",
           "type": "string"
-        },
-        "country": {
-          "description": "The country of the tax identifier.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The status of the tax identifier.",
-          "enum": [
-            "Other",
-            "Valid",
-            "Invalid"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TaxIdentifierStatus",
-            "modelAsString": true
-          }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "TransitionDetails": {
       "description": "The details for a billing account transitioned from agreement type Microsoft Online Services Program to agreement type Microsoft Customer Agreement.",
@@ -1297,7 +1861,8 @@
           "type": "integer",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

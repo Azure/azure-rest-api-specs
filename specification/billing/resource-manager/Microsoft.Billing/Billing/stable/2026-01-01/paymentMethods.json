@@ -1,0 +1,289 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/paymentMethods/{paymentMethodName}": {
+      "delete": {
+        "tags": [
+          "PaymentMethods"
+        ],
+        "description": "Deletes a payment method owned by the caller.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PaymentMethods_DeleteByUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paymentMethodName",
+            "description": "Id of payment method.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "The resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentMethodsUserDelete": {
+            "$ref": "./examples/paymentMethodsUserDelete.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/paymentMethods": {
+      "get": {
+        "tags": [
+          "PaymentMethods"
+        ],
+        "description": "Lists the payment methods owned by the caller.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PaymentMethods_ListByUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "country",
+            "description": "The two character country code to filter the payment methods. Example: US",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaymentMethodUserBoundListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentMethodsListByUser": {
+            "$ref": "./examples/paymentMethodsListByUser.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PaymentMethodLogo": {
+      "description": "The logo for the payment method.",
+      "type": "object",
+      "properties": {
+        "mimeType": {
+          "description": "MIME type of the logo.",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "description": "Public URL of image of the logo.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaymentMethodUserBound": {
+      "description": "The properties of a payment method.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) PaymentMethodUserBound",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PaymentMethodUserBoundProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "PaymentMethodUserBoundListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodUserBound"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaymentMethodUserBoundProperties": {
+      "description": "The properties of a payment method.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountHolderName": {
+          "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name of the payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expiration": {
+          "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "The family of payment method.",
+          "enum": [
+            "Other",
+            "None",
+            "CreditCard",
+            "Credits",
+            "CheckWire",
+            "EWallet",
+            "TaskOrder",
+            "DirectDebit",
+            "RealTimePayments",
+            "Virtual",
+            "Sandbox"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PaymentMethodFamily",
+            "modelAsString": true
+          }
+        },
+        "lastFourDigits": {
+          "description": "Last four digits of payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "logos": {
+          "description": "The list of logos for the payment method.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodLogo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
+        },
+        "paymentMethodType": {
+          "description": "The type of payment method.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the payment method.",
+          "enum": [
+            "Unknown",
+            "Active",
+            "Inactive"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PaymentMethodStatus",
+            "modelAsString": true
+          }
+        },
+        "address": {
+          "description": "The address of the payment instrument.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/AddressDetails"
+            }
+          ]
+        },
+        "bankName": {
+          "description": "The name of bank where the account is held. This is only supported for payment methods with family DirectDebit.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

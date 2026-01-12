@@ -8,129 +8,9 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}": {
-      "get": {
-        "tags": [
-          "Customer"
-        ],
-        "description": "Gets a customer by its ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Customers_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A partner's customer.",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomersGet": {
-            "$ref": "./examples/customersGet.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers": {
-      "get": {
-        "tags": [
-          "Customer"
-        ],
-        "description": "Lists the customers that are billed to a billing profile. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Customers_ListByBillingProfile",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/billingProfileName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand enabledAzurePlans and resellers",
-            "type": "string"
-          },
-          {
-            "$ref": "./types.json#/parameters/filter"
-          },
-          {
-            "$ref": "./types.json#/parameters/orderBy"
-          },
-          {
-            "$ref": "./types.json#/parameters/top"
-          },
-          {
-            "$ref": "./types.json#/parameters/skip"
-          },
-          {
-            "$ref": "./types.json#/parameters/count"
-          },
-          {
-            "$ref": "./types.json#/parameters/search"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of customers.",
-            "schema": {
-              "$ref": "#/definitions/CustomerListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CustomersListByBillingProfile": {
-            "$ref": "./examples/customersListByBillingProfile.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}": {
       "get": {
         "tags": [
@@ -165,7 +45,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -231,7 +111,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -255,14 +135,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CustomerProperties"
+          "description": "The properties of a(n) Customer",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomerProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "CustomerListResult": {
@@ -285,7 +172,8 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CustomerProperties": {
       "description": "A partner's customer.",
@@ -335,7 +223,7 @@
           "items": {
             "$ref": "./types.json#/definitions/AzurePlan"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "resellers": {
           "description": "The list of resellers for which an Azure plan is enabled for the customer.",
@@ -343,16 +231,10 @@
           "items": {
             "$ref": "./types.json#/definitions/Reseller"
           },
-          "x-ms-identifiers": []
-        },
-        "tags": {
-          "description": "Dictionary of metadata associated with the resource. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \\ ? /",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

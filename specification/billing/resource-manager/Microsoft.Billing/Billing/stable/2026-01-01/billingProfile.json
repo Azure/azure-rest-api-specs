@@ -8,9 +8,82 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/updateInvoiceRecipientContacts": {
+      "post": {
+        "tags": [
+          "BillingProfile"
+        ],
+        "description": "Updates invoice recipient contacts for a billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "BillingProfiles_UpdateInvoiceRecipientContacts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Request parameters that are provided to update invoice recipient contacts.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateInvoiceRecipientContactsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A billing profile.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BillingProfilesUpdateInvoiceRecipientContacts": {
+            "$ref": "./examples/billingProfilesUpdateInvoiceRecipientContacts.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/validateDeleteEligibility": {
       "post": {
         "tags": [
@@ -45,7 +118,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -102,7 +175,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,7 +222,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -163,7 +236,7 @@
         "tags": [
           "BillingProfile"
         ],
-        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement and Microsoft Partner Agreement. If you are a MCA Individual (Pay-as-you-go) customer, then please use the Azure portal experience to create the billing profile.",
+        "description": "Creates or updates a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement, Microsoft Partner Agreement and Enterprise Agreement. If you are a MCA Individual (Pay-as-you-go) customer, then please use the Azure portal experience to create the billing profile.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -222,7 +295,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -262,6 +335,12 @@
             "default": false
           },
           {
+            "in": "query",
+            "name": "paymentMethodName",
+            "description": "Can be used to filter billing profiles by payment method.",
+            "type": "string"
+          },
+          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
@@ -293,7 +372,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -314,14 +393,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingProfileProperties"
+          "description": "The properties of a(n) BillingProfile",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingProfileProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "BillingProfileListResult": {
@@ -344,7 +430,8 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BillingProfileProperties": {
       "description": "A billing profile.",
@@ -407,18 +494,18 @@
           "items": {
             "$ref": "./types.json#/definitions/AzurePlan"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "hasReadAccess": {
           "description": "Indicates whether user has read access to the billing profile.",
           "type": "boolean",
           "readOnly": true
         },
-        "indirectRelationshipInfo": {
-          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+        "partnerRelationshipInfo": {
+          "description": "The details of the relationship between a partner's billing profile and a customer's billing profile. The partner could be either a direct-bill Cloud Solution Provider (CSP) partner or an indirect reseller.",
           "allOf": [
             {
-              "$ref": "./types.json#/definitions/IndirectRelationshipInfo"
+              "$ref": "#/definitions/PartnerRelationshipInfo"
             }
           ]
         },
@@ -438,7 +525,15 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
+        },
+        "invoiceRecipientContacts": {
+          "description": "The list of contacts who will receive invoices by email for the selected billing profile and will be contacted if there are issues related to payments of these invoices.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceRecipientContact"
+          },
+          "x-ms-identifiers": [ ]
         },
         "poNumber": {
           "description": "The default purchase order number that will appear on the invoices generated for the billing profile.",
@@ -480,7 +575,7 @@
             "$ref": "#/definitions/SpendingLimitDetails"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "status": {
           "description": "The status of the billing profile.",
@@ -506,7 +601,8 @@
             "PastDue",
             "UnusualActivity",
             "SpendingLimitReached",
-            "SpendingLimitExpired"
+            "SpendingLimitExpired",
+            "Offboarded"
           ],
           "type": "string",
           "readOnly": true,
@@ -530,10 +626,11 @@
         "targetClouds": {
           "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
         },
         "currentPaymentTerm": {
           "description": "The current payment term of the billing profile.",
@@ -550,9 +647,10 @@
             "$ref": "#/definitions/PaymentTerm"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeleteBillingProfileEligibilityDetail": {
       "description": "Validation details of delete billing profile eligibility.",
@@ -581,7 +679,8 @@
           "description": "Validation message.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeleteBillingProfileEligibilityResult": {
       "description": "Eligibility to delete a billing profile result.",
@@ -605,9 +704,66 @@
           "items": {
             "$ref": "#/definitions/DeleteBillingProfileEligibilityDetail"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "InvoiceRecipientContact": {
+      "description": "Invoice recipient contact.",
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name. Optional",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "emailAddress": {
+          "description": "Email address.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerRelationshipInfo": {
+      "description": "The details of the relationship between a partner's billing profile and a customer's billing profile. The partner could be either a direct-bill Cloud Solution Provider (CSP) partner or an indirect reseller.",
+      "type": "object",
+      "properties": {
+        "billingAccountName": {
+          "description": "The partner billing account ID.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The partner billing profile ID.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "PaymentTerm": {
       "description": "The properties of payment term.",
@@ -632,7 +788,8 @@
           "type": "boolean",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SpendingLimitDetails": {
       "description": "The billing profile spending limit.",
@@ -697,7 +854,26 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "UpdateInvoiceRecipientContactsRequest": {
+      "description": "Request parameters that are provided to update invoice recipient contacts.",
+      "required": [
+        "invoiceRecipientContacts"
+      ],
+      "type": "object",
+      "properties": {
+        "invoiceRecipientContacts": {
+          "description": "The list of contacts who will receive invoices by email for the selected billing profile and will be contacted if there are issues related to payments of these invoices.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceRecipientContact"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

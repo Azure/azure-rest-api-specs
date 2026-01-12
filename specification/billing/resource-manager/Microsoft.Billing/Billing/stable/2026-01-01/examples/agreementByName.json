@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-04-01",
+    "api-version": "2026-01-01",
     "billingAccountName": "10000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
     "agreementName": "ABC123"
   },
@@ -15,8 +15,31 @@
           "displayName": "Microsoft Customer Agreement",
           "effectiveDate": "2018-11-01T00:00:00Z",
           "expirationDate": "2019-11-01T00:00:00Z",
+          "participants": [
+            {
+              "email": "abc@contoso.com",
+              "firstName": "John",
+              "lastName": "Doe",
+              "status": "Accepted",
+              "statusDate": "2018-11-01T00:00:00Z"
+            }
+          ],
           "status": "Active",
-          "leadBillingAccountName": "20000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31"
+          "leadBillingAccountName": "20000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+          "clauses": [
+            {
+              "id": "fafb8160-05cf-44a8-b10e-485d1e9228f0",
+              "name": "State of IL Tax Amendment",
+              "effectiveDate": "2024-01-01T00:00:00Z",
+              "expirationDate": "2025-12-31T23:59:59Z"
+            },
+            {
+              "id": "c1d2e3f4-5678-90ab-cdef-1234567890ab",
+              "name": "True-Up Amendment",
+              "effectiveDate": "2024-01-01T00:00:00Z",
+              "expirationDate": "2025-12-31T23:59:59Z"
+            }
+          ]
         },
         "type": "Microsoft.Billing/billingAccounts/agreements"
       }

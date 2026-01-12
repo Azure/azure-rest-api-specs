@@ -8,9 +8,142 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/paynow": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Initiates a pay now operation for an invoice.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_Paynow",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The request details for a pay now operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InvoicePaynowRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation object that represents the status of the operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "InvoicesGetPaynowOperationSucceededResponse": {
+            "$ref": "./examples/invoicesGetPaynowOperationSucceededResponse.json"
+          },
+          "InvoicesGetPaynowOperationFaultedResponse": {
+            "$ref": "./examples/invoicesGetPaynowOperationFaultedResponse.json"
+          },
+          "InvoicesGetPaynowOperationCompletedResponse": {
+            "$ref": "./examples/invoicesGetPaynowOperationCompletedResponse.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/validatePaynowEligibility": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "description": "Validate whether a user is eligible to use the Pay Now feature for the invoice.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Invoices_ValidatePaynowEligibility",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/invoiceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result of the Pay Now feature eligibility.",
+            "schema": {
+              "$ref": "#/definitions/PaynowEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "InvoicePaynowEligible": {
+            "$ref": "./examples/invoicePaynowEligible.json"
+          },
+          "InvoicePaynowNotEligible": {
+            "$ref": "./examples/invoicePaynowNotEligible.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices": {
       "get": {
         "tags": [
@@ -77,7 +210,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -124,7 +257,7 @@
               "items": {
                 "$ref": "#/definitions/DocumentDownloadRequest"
               },
-              "x-ms-identifiers": []
+              "x-ms-identifiers": [ ]
             }
           }
         ],
@@ -150,7 +283,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -205,7 +338,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -272,7 +405,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -333,7 +466,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -353,7 +486,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Gets an invoice by billing account name and ID. The operation is supported for all billing account types.",
+        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -382,7 +515,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -398,7 +531,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for all billing account types.",
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement, or Microsoft Online Services Program.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -456,7 +589,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -475,7 +608,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -503,7 +636,7 @@
               "items": {
                 "$ref": "#/definitions/DocumentDownloadRequest"
               },
-              "x-ms-identifiers": []
+              "x-ms-identifiers": [ ]
             }
           }
         ],
@@ -529,7 +662,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -549,7 +682,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Gets a URL to download an invoice by billing subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets a URL to download an invoice by billing subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -596,7 +729,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -616,7 +749,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Gets an invoice by subscription ID and invoice ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets an invoice by subscription ID and invoice ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -645,7 +778,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -661,7 +794,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Lists the invoices for a subscription. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Lists the invoices for a subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -719,7 +852,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -738,7 +871,7 @@
         "tags": [
           "Invoice"
         ],
-        "description": "Gets an invoice by ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "description": "Gets an invoice by ID. The operation is supported for all billing account types.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -764,7 +897,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -789,7 +922,8 @@
           "description": "The ID that uniquely identifies an invoice.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DocumentDownloadResult": {
       "description": "A secure URL that can be used to download a an entity until the URL expires.",
@@ -805,7 +939,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "FailedPayment": {
       "description": "A failed payment.",
@@ -832,21 +967,29 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Invoice": {
       "description": "An invoice.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InvoiceProperties"
+          "description": "The properties of a(n) Invoice",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InvoiceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "InvoiceDocument": {
@@ -860,7 +1003,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "externalUrl": {
           "description": "The URL to download the invoice document if the source is external to Microsoft.Billing.",
@@ -909,7 +1052,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InvoiceListResult": {
       "description": "A container for a list of resources",
@@ -931,14 +1075,30 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "InvoicePaynowRequest": {
+      "description": "The request details for a pay now operation",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "The amount to be paid for the invoice.",
+          "type": "number"
+        },
+        "paymentMethodName": {
+          "description": "The payment method to be used for the payment.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "InvoiceProperties": {
       "description": "An invoice.",
       "type": "object",
       "properties": {
         "amountDue": {
-          "description": "The amount due as of now.",
+          "description": "Amount due based on this invoice.",
           "allOf": [
             {
               "$ref": "./types.json#/definitions/Amount"
@@ -996,7 +1156,7 @@
             "$ref": "#/definitions/InvoiceDocument"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "documentType": {
           "description": "The type of the document.",
@@ -1029,7 +1189,7 @@
             "$ref": "#/definitions/FailedPayment"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "freeAzureCreditApplied": {
           "description": "The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
@@ -1084,7 +1244,7 @@
             "$ref": "#/definitions/Payment"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "purchaseOrderNumber": {
           "description": "An optional purchase order number for the invoice.",
@@ -1171,7 +1331,49 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "OperationResult": {
+      "description": "A result of an asynchronous operation with details about status and error state.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource ID for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the operation result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the ARM operation. Completed means that the operation has terminated in a success state. Faulted means that the operation has terminated in a failed state and will not retry any more. Succeeded means that the operation is being executed and there are positive indicators that it will terminate in a success state. Failed means that the operation has failed but will be retried. This can be an early indicator that the service is facing some performance or availability issue. Postponed means that the operation is still being executed, but there are no significant indicators if it will succeed or fail.",
+          "enum": [
+            "Completed",
+            "Faulted",
+            "Succeeded",
+            "Failed",
+            "Postponed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "description": "The error details for an unsuccessful operation.",
+          "allOf": [
+            {
+              "$ref": "./types.json#/definitions/Error"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
     },
     "Payment": {
       "description": "An invoice payment.",
@@ -1192,7 +1394,7 @@
           "readOnly": true
         },
         "paymentMethodId": {
-          "description": "The ID that uniquely identifies the payment method used for the invoice.",
+          "description": "Id of payment method.",
           "type": "string",
           "readOnly": true
         },
@@ -1206,7 +1408,10 @@
             "CheckWire",
             "EWallet",
             "TaskOrder",
-            "DirectDebit"
+            "DirectDebit",
+            "RealTimePayments",
+            "Virtual",
+            "Sandbox"
           ],
           "type": "string",
           "readOnly": true,
@@ -1226,7 +1431,95 @@
           "readOnly": true
         }
       },
+      "additionalProperties": false,
       "readOnly": true
+    },
+    "PaymentMethodEligibility": {
+      "description": "The payment method eligibility for the Pay Now feature.",
+      "type": "object",
+      "properties": {
+        "family": {
+          "description": "The family of the payment method for the Pay Now feature eligibility.",
+          "enum": [
+            "Other",
+            "None",
+            "CreditCard",
+            "Credits",
+            "CheckWire",
+            "EWallet",
+            "TaskOrder",
+            "DirectDebit",
+            "RealTimePayments",
+            "Virtual",
+            "Sandbox"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaymentMethodFamily",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "description": "The type of the payment method for the Pay Now feature eligibility.",
+          "type": "string"
+        },
+        "isEligible": {
+          "description": "The status of the payment method for the Pay Now feature eligibility.",
+          "type": "boolean"
+        },
+        "reasonCode": {
+          "description": "Indicates the reason for the ineligibility of the payment method for the Pay Now feature.",
+          "enum": [
+            "Other",
+            "NotEligible",
+            "PayNowLimitExceeded",
+            "InsufficientPermissions",
+            "DuplicatePayment",
+            "InvoiceNotFound",
+            "InvalidAmount",
+            "InvalidAccount"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaynowEligibilityReasonCode",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaynowEligibilityResult": {
+      "description": "Result of the Pay Now feature eligibility.",
+      "type": "object",
+      "properties": {
+        "reasonCode": {
+          "description": "Indicates the reason for the ineligibility of the Pay Now feature.",
+          "enum": [
+            "Other",
+            "NotEligible",
+            "PayNowLimitExceeded",
+            "InsufficientPermissions",
+            "DuplicatePayment",
+            "InvoiceNotFound",
+            "InvalidAmount",
+            "InvalidAccount"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PaynowEligibilityReasonCode",
+            "modelAsString": true
+          }
+        },
+        "paymentMethods": {
+          "description": "The payment methods for the Pay Now feature eligibility.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodEligibility"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
     },
     "RebillDetails": {
       "description": "The rebill details of an invoice.",
@@ -1246,6 +1539,7 @@
           "$ref": "#/definitions/RebillDetails"
         }
       },
+      "additionalProperties": false,
       "readOnly": true
     },
     "RefundDetailsSummary": {
@@ -1337,7 +1631,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

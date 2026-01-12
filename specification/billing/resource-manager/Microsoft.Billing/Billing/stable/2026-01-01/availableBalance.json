@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/availableBalance/default": {
@@ -42,7 +42,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -87,7 +87,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -105,14 +105,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AvailableBalanceProperties"
+          "description": "The properties of a(n) AvailableBalance",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AvailableBalanceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "AvailableBalanceProperties": {
@@ -134,7 +141,7 @@
             "$ref": "#/definitions/PaymentOnAccount"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "totalPaymentsOnAccount": {
           "description": "Total amount of payments on accounts.",
@@ -144,7 +151,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PaymentOnAccount": {
       "description": "A Payment on Account.",
@@ -184,7 +192,7 @@
           "type": "string",
           "readOnly": true
         },
-        "paymentMethodType": {
+        "type": {
           "description": "Payment on Account type.",
           "enum": [
             "Other",
@@ -194,7 +202,10 @@
             "CheckWire",
             "EWallet",
             "TaskOrder",
-            "DirectDebit"
+            "DirectDebit",
+            "RealTimePayments",
+            "Virtual",
+            "Sandbox"
           ],
           "type": "string",
           "readOnly": true,
@@ -203,7 +214,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

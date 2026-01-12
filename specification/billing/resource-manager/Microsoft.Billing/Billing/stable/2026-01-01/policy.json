@@ -8,10 +8,10 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/{policyName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
       "get": {
         "tags": [
           "Policy"
@@ -35,21 +35,6 @@
             "$ref": "./types.json#/parameters/customerName"
           },
           {
-            "in": "path",
-            "name": "policyName",
-            "description": "Service-defined resource names such as 'default' which are reserved resource names.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "ServiceDefinedResourceName",
-              "modelAsString": true
-            }
-          },
-          {
             "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
@@ -63,7 +48,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -72,9 +57,7 @@
             "$ref": "./examples/policiesGetByCustomer.json"
           }
         }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
+      },
       "put": {
         "tags": [
           "Policy"
@@ -138,7 +121,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -184,7 +167,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -254,7 +237,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -300,7 +283,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -370,7 +353,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -413,7 +396,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -480,7 +463,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -523,7 +506,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -541,14 +524,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingAccountPolicyProperties"
+          "description": "The properties of a(n) BillingAccountPolicy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingAccountPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "BillingAccountPolicyProperties": {
@@ -633,21 +623,29 @@
             "name"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BillingProfilePolicy": {
       "description": "A policy at billing profile scope.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BillingProfilePolicyProperties"
+          "description": "The properties of a(n) BillingProfilePolicy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BillingProfilePolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "BillingProfilePolicyProperties": {
@@ -758,21 +756,29 @@
             "name"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CustomerPolicy": {
       "description": "A policy at customer scope.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CustomerPolicyProperties"
+          "description": "The properties of a(n) CustomerPolicy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomerPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "CustomerPolicyProperties": {
@@ -822,7 +828,8 @@
             "name"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnterpriseAgreementPolicies": {
       "description": "The policies for Enterprise Agreement enrollments.",
@@ -871,10 +878,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "PolicySummary": {
-      "description": "The summary of the policy.",
       "type": "object",
       "properties": {
         "name": {
@@ -901,22 +908,37 @@
         "scope": {
           "description": "The scope at which the policy is defined.",
           "type": "string"
+        },
+        "additionalProperties": {
+          "description": "Additional properties related to the policy.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SubscriptionPolicy": {
       "description": "A policy at subscription scope.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubscriptionPolicyProperties"
+          "description": "The properties of a(n) SubscriptionPolicy",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "SubscriptionPolicyProperties": {
@@ -950,7 +972,8 @@
             "name"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/products": {
@@ -66,7 +66,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -132,7 +132,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -270,14 +270,11 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "ProductMove": {
             "$ref": "./examples/productMove.json"
@@ -331,7 +328,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -379,7 +376,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -434,7 +431,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -494,7 +491,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -510,22 +507,17 @@
     }
   },
   "definitions": {
-    "ExternalReference": {
-      "description": "An external reference.",
+    "CommerceExternalReference": {
       "type": "object",
       "properties": {
         "id": {
-          "description": "The ID that uniquely identifies an external reference.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "url": {
-          "description": "The URL of the external reference.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
-      "readOnly": true
+      "additionalProperties": false
     },
     "MoveProductEligibilityResult": {
       "description": "Result of the transfer eligibility validation.",
@@ -543,7 +535,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "MoveProductErrorDetails": {
       "description": "Error details of the transfer eligibility validation.",
@@ -587,7 +580,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "MoveProductRequest": {
       "description": "The properties of the product to initiate a transfer.",
@@ -601,21 +595,29 @@
           "minLength": 1,
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Product": {
       "description": "A product.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProductProperties"
+          "description": "The properties of a(n) Product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "ProductListResult": {
@@ -638,21 +640,29 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ProductPatch": {
       "description": "A product.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProductProperties"
+          "description": "The properties of a(n) Product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProductProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "ProductProperties": {
@@ -799,7 +809,8 @@
             }
           ]
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {

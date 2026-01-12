@@ -8,7 +8,7 @@
       "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
       "email": "pacebpexphot@microsoft.com"
     },
-    "version": "2024-04-01"
+    "version": "2026-01-01"
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": {
@@ -50,7 +50,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -80,12 +80,6 @@
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "in": "query",
-            "name": "expand",
-            "description": "May be used to expand the participants.",
-            "type": "string"
           }
         ],
         "responses": {
@@ -98,7 +92,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -119,14 +113,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/ProxyResourceWithTags"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AgreementProperties"
+          "description": "The properties of a(n) Agreement",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AgreementProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
         }
       },
+      "additionalProperties": false,
       "x-ms-azure-resource": true
     },
     "AgreementListResult": {
@@ -149,7 +150,8 @@
             "id"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AgreementProperties": {
       "description": "An agreement.",
@@ -185,7 +187,7 @@
             "$ref": "#/definitions/BillingProfileInfo"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "category": {
           "description": "The category of the agreement.",
@@ -228,7 +230,7 @@
             "$ref": "#/definitions/Participant"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [ ]
         },
         "status": {
           "description": "The current status of the agreement.",
@@ -239,8 +241,18 @@
           "description": "The ID of the lead billing account if this agreement is part of the Customer Affiliate Purchase Terms.",
           "type": "string",
           "readOnly": true
+        },
+        "clauses": {
+          "description": "A list of clauses in an agreement.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Clause"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [ ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BillingProfileInfo": {
       "description": "Details about billing profile associated with agreement and available only for specific agreements.",
@@ -266,7 +278,42 @@
           "description": "Billing account name. Available for a specific type of agreement.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
+    },
+    "Clause": {
+      "description": "A clause in an agreement.",
+      "required": [
+        "effectiveDate",
+        "id",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID that uniquely identifies an agreement clause.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the agreement clause.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "effectiveDate": {
+          "format": "date-time",
+          "description": "The date from which the agreement clause is effective.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The date when the agreement clause expires.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
     },
     "Participant": {
       "description": "Billing account name. Available for a specific type of agreement.",
@@ -277,10 +324,37 @@
           "type": "string",
           "readOnly": true
         },
+        "firstName": {
+          "description": "The first name of the participant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastName": {
+          "description": "The last name of the participant.",
+          "type": "string",
+          "readOnly": true
+        },
         "status": {
           "description": "The acceptance status of the participant.",
           "type": "string",
           "readOnly": true
+        },
+        "role": {
+          "description": "The role of the participant.",
+          "enum": [
+            "Other",
+            "Signer",
+            "Reviewer",
+            "AutoSigner",
+            "OnBehalfOf",
+            "Lead"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ParticipantRole",
+            "modelAsString": true
+          }
         },
         "statusDate": {
           "format": "date-time",
@@ -288,7 +362,8 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {
