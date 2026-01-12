@@ -2887,3 +2887,14 @@ op webAppsUpdateVnetConnectionSlotCustomized(
   "AppCertificatePatchResourceProperties",
   "go"
 );
+op checkNameAvailabilityCustomized(
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  name: string,
+  ...Azure.ResourceManager.Legacy.Provider,
+  type: string,
+  nameAvailable?: string,
+  reason?: string,
+): ResourceNameAvailability;
+
+@@override(checkNameAvailability, checkNameAvailabilityCustomized, "javascript");
