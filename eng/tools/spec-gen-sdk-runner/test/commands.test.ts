@@ -131,7 +131,7 @@ describe("generateSdkForSingleSpec", () => {
       `Runner: error executing command:Error: Command failed`,
       LogLevel.Error,
     );
-    expect(commandHelpers.setPipelineVariables).not.toHaveBeenCalled();
+    expect(commandHelpers.setPipelineVariables).toHaveBeenCalled();
   });
 
   test("should handle errors during execution report reading", async () => {

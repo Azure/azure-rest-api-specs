@@ -4817,10 +4817,7 @@ model PatternAnalyzer extends LexicalAnalyzer {
   pattern?: string = "\\W+";
 
   /** Regular expression flags. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
-  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
-  @encode(ArrayEncoding.pipeDelimited)
-  flags?: RegexFlags[];
+  flags?: RegexFlags;
 
   /** A list of stopwords. */
   stopwords?: string[];
