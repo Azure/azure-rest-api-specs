@@ -1,0 +1,179 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "cloudServicesNetworkName": "cloudServicesNetworkName",
+    "cloudServicesNetworkUpdateParameters": {
+      "properties": {
+        "additionalEgressEndpoints": [
+          {
+            "category": "azure-resource-management",
+            "endpoints": [
+              {
+                "domainName": "storageaccountex.blob.core.windows.net",
+                "port": 443
+              }
+            ]
+          }
+        ],
+        "enableDefaultEgressEndpoints": "False",
+        "storageOptions": {
+          "mode": "Standard",
+          "sizeMiB": 1048576,
+          "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+        }
+      },
+      "tags": {
+        "key1": "myvalue1",
+        "key2": "myvalue2"
+      }
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cloudServicesNetworkName",
+        "type": "Microsoft.NetworkCloud/cloudServicesNetworks",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+        "location": "location",
+        "properties": {
+          "additionalEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
+          ],
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Cloud services network is up",
+          "enableDefaultEgressEndpoints": "False",
+          "enabledEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
+          ],
+          "interfaceName": "eth0",
+          "provisioningState": "Succeeded",
+          "storageOptions": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+          },
+          "storageStatus": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "status": "Available",
+            "statusMessage": "Storage is available",
+            "volumeId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/Volumes/volumeName"
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "cloudServicesNetworkName",
+        "type": "Microsoft.NetworkCloud/cloudServicesNetworks",
+        "extendedLocation": {
+          "name": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/cloudServicesNetworks/cloudServicesNetworkName",
+        "location": "location",
+        "properties": {
+          "additionalEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
+          ],
+          "associatedResourceIds": [
+            "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
+          "detailedStatus": "Available",
+          "detailedStatusMessage": "Cloud services network is up",
+          "enableDefaultEgressEndpoints": "False",
+          "enabledEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
+          ],
+          "interfaceName": "eth0",
+          "provisioningState": "Accepted",
+          "storageOptions": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "storageApplianceId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/StorageAppliances/storageApplianceName"
+          },
+          "storageStatus": {
+            "mode": "Standard",
+            "sizeMiB": 1048576,
+            "status": "Available",
+            "statusMessage": "Storage is available",
+            "volumeId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/Volumes/volumeName"
+          }
+        },
+        "systemData": {
+          "createdAt": "2021-01-22T13:27:03.008Z",
+          "createdBy": "identityA",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-01-22T13:29:03.001Z",
+          "lastModifiedBy": "identityB",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "myvalue1",
+          "key2": "myvalue2"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview",
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
+      }
+    }
+  },
+  "operationId": "CloudServicesNetworks_Update",
+  "title": "Patch cloud services network"
+}
