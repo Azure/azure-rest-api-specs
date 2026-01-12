@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
@@ -120,6 +121,7 @@ op listBillingMeters is ArmProviderActionSync<
 @autoRoute
 @action("checknameavailability")
 op checkNameAvailability is ArmProviderActionSync<
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   Request = ResourceNameAvailabilityRequest,
   Response = ResourceNameAvailability,
   Scope = SubscriptionActionScope,
@@ -219,6 +221,7 @@ op listSiteIdentifiersAssignedToHostName is ArmProviderActionSync<
 @autoRoute
 @action("checknameavailability")
 op regionalCheckNameAvailability is ArmProviderActionSync<
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   Request = DnlResourceNameAvailabilityRequest,
   Response = DnlResourceNameAvailability,
   Scope = SubscriptionActionScope,
