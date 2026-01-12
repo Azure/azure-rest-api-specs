@@ -63,7 +63,7 @@ interface ContentAnalyzers {
   >;
 
   @doc("Update analyzer properties.")
-  @convenientAPI(false)
+  @convenientAPI(false, "csharp")
   update is Operations.ResourceUpdate<ContentAnalyzer>;
 
   @doc("Get analyzer properties.")
@@ -215,7 +215,7 @@ interface ContentAnalyzers {
   @doc("Return default settings for this Content Understanding resource.")
   @route("/defaults")
   @patch
-  @convenientAPI(false)
+  @convenientAPI(false, "csharp")
   updateDefaults is Foundations.Operation<
     MergePatchUpdate<ContentUnderstandingDefaults>,
     ContentUnderstandingDefaults,
