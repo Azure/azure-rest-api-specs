@@ -2896,7 +2896,7 @@ op checkNameAvailabilityCustomized(
   name: string,
 
   @doc("Resource type used for verification.")
-  type: CheckNameResourceTypes,
+  typeParam: CheckNameResourceTypes,
 
   @doc("Is fully qualified domain name.")
   isFqdn?: boolean,
@@ -2922,7 +2922,7 @@ op regionalCheckNameAvailabilityCustomized(
   location: string,
 
   @doc("Resource type used for verification.")
-  type: CheckNameResourceTypes,
+  typeParam: CheckNameResourceTypes,
 
   @doc("Resource group name.")
   resourceGroupName?: string,
