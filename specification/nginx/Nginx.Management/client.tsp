@@ -90,6 +90,10 @@ using Azure.Core;
   "NginxCertificateError",
   "csharp"
 );
+@@clientName(NginxConfigurationResponseProperties,
+  "NginxConfigurationProperties",
+  "csharp"
+);
 @@clientName(NginxConfigurationRequestProperties,
   "NginxConfigurationCreateOrUpdateProperties",
   "csharp"
