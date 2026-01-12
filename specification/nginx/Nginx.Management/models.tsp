@@ -1210,7 +1210,7 @@ model NginxDeploymentWafPolicyAnalysisData {
   /**
    * List of errors found during analysis
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: NginxDeploymentWafPolicyError[];
 }
 
