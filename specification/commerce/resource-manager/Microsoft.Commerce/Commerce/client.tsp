@@ -13,4 +13,3 @@ using Microsoft.Commerce;
   "python"
 );
 
-@@clientName(Microsoft.Commerce, "CommerceManager", "java");
