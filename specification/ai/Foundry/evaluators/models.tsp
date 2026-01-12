@@ -112,6 +112,9 @@ model TaxonomyBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The taxonomy id used for evaluation")
   taxonomy_id: string;
+
+  @doc("The version of the taxonomy. If not specified, uses the latest version.")
+  taxonomy_version?: string;
 }
 
 @doc("Evaluator Definition")
