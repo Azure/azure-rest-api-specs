@@ -96,6 +96,6 @@ interface FabricCapacities {
     Request = void,
     Response = PagedQuota,
     Scope = Extension.Subscription,
-    Parameters = LocationParameter
+    Parameters = LocationResourceParameter
   >;
 }
