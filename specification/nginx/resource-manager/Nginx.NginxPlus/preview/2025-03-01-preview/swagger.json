@@ -1548,65 +1548,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/wafPolicies/{wafPolicyName}/analyzeWafPolicy": {
-      "post": {
-        "operationId": "NginxDeploymentWafPolicies_Analysis",
-        "tags": [
-          "NginxDeploymentWafPolicies"
-        ],
-        "description": "Analyze an Nginx Waf Policy",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "deploymentName",
-            "in": "path",
-            "description": "The name of targeted NGINX deployment",
-            "required": true,
-            "type": "string",
-            "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
-          },
-          {
-            "name": "wafPolicyName",
-            "in": "path",
-            "description": "The name of Waf Policy",
-            "required": true,
-            "type": "string",
-            "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2540,49 +2481,6 @@
         }
       ]
     },
-    "NginxDeploymentWafPolicyAnalysisCreateRequest": {
-      "type": "object",
-      "description": "Nginx Deployment Waf Policy Analysis Create Request",
-      "properties": {
-        "content": {
-          "type": "string",
-          "format": "byte",
-          "description": "The byte content of the policy"
-        },
-        "filepath": {
-          "type": "string",
-          "description": "The file path of the policy"
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyAnalysisData": {
-      "type": "object",
-      "description": "Nginx Deployment Waf Policy Analysis Data",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "List of errors found during analysis",
-          "items": {
-            "$ref": "#/definitions/NginxDeploymentWafPolicyError"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NginxDeploymentWafPolicyAnalysisResponse": {
-      "type": "object",
-      "description": "Nginx Deployment Waf Policy Analysis Response",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The status of the analysis"
-        },
-        "data": {
-          "$ref": "#/definitions/NginxDeploymentWafPolicyAnalysisData",
-          "description": "The analysis data containing errors"
-        }
-      }
-    },
     "NginxDeploymentWafPolicyApplyingStatus": {
       "type": "object",
       "description": "Nginx Deployment Waf Policy Applying Status",
@@ -2701,24 +2599,6 @@
             "description": "The compilation of the custom waf policy failed."
           }
         ]
-      }
-    },
-    "NginxDeploymentWafPolicyError": {
-      "type": "object",
-      "description": "Nginx Deployment Waf Policy Error",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "field": {
-          "type": "string",
-          "description": "Field that caused the error"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message"
-        }
       }
     },
     "NginxDeploymentWafPolicyListResponse": {
