@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "frontendName": "fe1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fe1",
+        "location": "NorthCentralUS",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1",
+        "properties": {
+          "mode": "public",
+          "ipAddressVersion": "IPv4",
+          "publicIPAddress": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/PublicIP-fe1"
+          },
+          "fqdn": "test.net",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "tags": {
+        "CostCode": "12345"
+      }
+    },
+    "devCenterName": "Contoso",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "Contoso",
+        "type": "Microsoft.DevCenter/devcenters",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
+        "location": "centralus",
+        "properties": {
+          "devCenterUri": "https://4c7c8922-78e9-4928-aa6f-75ba59355371-contoso.centralus.devcenter.azure.com",
+          "displayName": "ContosoDevCenter",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "CostCode": "12345"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2025-07-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevCenter/locations/CENTRALUS/operationStatuses/722e7bc4-60fa-4e6b-864f-d5bf12b9adc4?api-version=2025-07-01-preview"
+      }
+    }
+  },
+  "operationId": "DevCenters_Update",
+  "title": "DevCenters_Update"
+}

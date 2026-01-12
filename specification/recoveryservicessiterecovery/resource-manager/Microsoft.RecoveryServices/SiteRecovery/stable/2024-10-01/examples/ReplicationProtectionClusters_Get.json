@@ -1,0 +1,145 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "replicationProtectionClusterName": "cluster1",
+    "protectionContainerName": "eastus-container",
+    "fabricName": "eastus",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/eastus/replicationProtectionContainers/eastus-container/replicationProtectionClusters/cluster1",
+        "name": "cluster1",
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectionClusters",
+        "properties": {
+          "protectionClusterType": "WindowsServerFailoverCluster",
+          "primaryFabricFriendlyName": "eastus",
+          "primaryFabricProvider": "AzureFabric",
+          "recoveryFabricFriendlyName": "centraluseuap",
+          "recoveryFabricId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/centraluseuap",
+          "primaryProtectionContainerFriendlyName": "eastus",
+          "recoveryProtectionContainerFriendlyName": "eastus-container",
+          "protectionState": "Protected",
+          "protectionStateDescription": "Protected",
+          "activeLocation": "Primary",
+          "allowedOperations": [
+            "UnplannedFailover",
+            "DisableProtection"
+          ],
+          "replicationHealth": "Normal",
+          "healthErrors": [],
+          "lastSuccessfulFailoverTime": null,
+          "policyId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/24-hour-retention-policy",
+          "policyFriendlyName": "24-hour-retention-policy",
+          "currentScenario": null,
+          "recoveryContainerId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/centraluseuap/replicationProtectionContainers/centraluseuap-container",
+          "agentClusterId": "dd9925cf-5f90-49e9-bd6d-d4cbdcec956b",
+          "clusterFqdn": "ad45f2fc-f9d6-42ac-8a7c-1c5380c88c28",
+          "clusterNodeFqdns": [],
+          "clusterProtectedItemIds": [
+            "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/eastus/replicationProtectionContainers/eastus-container/replicationProtectedItems/cluster2vm0",
+            "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/eastus/replicationProtectionContainers/eastus-container/replicationProtectedItems/cluster2vm1"
+          ],
+          "provisioningState": "Created",
+          "areAllClusterNodesRegistered": true,
+          "clusterRegisteredNodes": [
+            {
+              "clusterNodeFqdn": "VM0",
+              "machineId": "a7eaf02d-60d9-45be-a444-d1b945f1c7b2",
+              "biosId": "eed7a457-b11f-420e-8e4f-384833a6b7c9",
+              "isSharedDiskVirtualNode": true
+            }
+          ],
+          "providerSpecificDetails": {
+            "instanceType": "A2A",
+            "multiVmGroupId": "4c2988ed-7e2a-566e-9c5f-c33835621e83",
+            "multiVmGroupName": "multiVmGroupName1111",
+            "multiVmGroupCreateOption": "UserSpecified",
+            "primaryFabricLocation": "eastus",
+            "recoveryFabricLocation": "centraluseuap",
+            "failoverRecoveryPointId": null,
+            "clusterManagementId": "1ed32804-ae51-4752-9448-9f686ae27d7b",
+            "rpoInSeconds": null,
+            "lastRpoCalculatedTime": null,
+            "initialPrimaryZone": "",
+            "initialPrimaryFabricLocation": "eastus",
+            "initialRecoveryZone": "",
+            "initialRecoveryFabricLocation": "centraluseuap",
+            "initialPrimaryExtendedLocation": null,
+            "initialRecoveryExtendedLocation": null,
+            "primaryAvailabilityZone": null,
+            "recoveryAvailabilityZone": null,
+            "primaryExtendedLocation": null,
+            "recoveryExtendedLocation": null,
+            "lifecycleId": null
+          },
+          "sharedDiskProperties": {
+            "protectionState": "Protected",
+            "activeLocation": null,
+            "allowedOperations": [],
+            "replicationHealth": "Normal",
+            "healthErrors": [],
+            "currentScenario": null,
+            "sharedDiskProviderSpecificDetails": {
+              "instanceType": "A2A",
+              "managementId": "1ed32804-ae51-4752-9448-9f686ae27d7b",
+              "unprotectedDisks": [
+                {
+                  "diskLunId": 1,
+                  "diskAutoProtectionStatus": "Disabled"
+                },
+                {
+                  "diskLunId": 2,
+                  "diskAutoProtectionStatus": "Disabled"
+                }
+              ],
+              "protectedManagedDisks": [
+                {
+                  "diskId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourcegroups/resourceGroupPS2/providers/microsoft.compute/disks/cluster2-datadisk0",
+                  "recoveryResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1",
+                  "recoveryTargetDiskId": null,
+                  "recoveryReplicaDiskId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.Compute/disks/cluster2-datadisk0-ASRReplica",
+                  "recoveryOrignalTargetDiskId": null,
+                  "recoveryReplicaDiskAccountType": "Premium_LRS",
+                  "recoveryTargetDiskAccountType": "Premium_LRS",
+                  "recoveryDiskEncryptionSetId": null,
+                  "primaryDiskEncryptionSetId": null,
+                  "diskName": "cluster2-datadisk0",
+                  "diskCapacityInBytes": 0,
+                  "primaryStagingAzureStorageAccountId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS2/providers/Microsoft.Storage/storageAccounts/eastus1210192341",
+                  "diskType": "Data",
+                  "resyncRequired": true,
+                  "monitoringPercentageCompletion": null,
+                  "monitoringJobType": null,
+                  "dataPendingInStagingStorageAccountInMB": 100.0,
+                  "dataPendingAtSourceAgentInMB": 10.0,
+                  "diskState": "Unavailable",
+                  "allowedDiskLevelOperation": [],
+                  "isDiskEncrypted": false,
+                  "secretIdentifier": null,
+                  "dekKeyVaultArmId": null,
+                  "isDiskKeyEncrypted": false,
+                  "keyIdentifier": null,
+                  "kekKeyVaultArmId": null,
+                  "failoverDiskName": "cluster2-datadisk0",
+                  "tfoDiskName": "cluster2-datadisk0-ASRtest"
+                }
+              ],
+              "primaryFabricLocation": "eastus",
+              "recoveryFabricLocation": "centraluseuap",
+              "failoverRecoveryPointId": null,
+              "monitoringPercentageCompletion": null,
+              "monitoringJobType": null,
+              "rpoInSeconds": 300,
+              "lastRpoCalculatedTime": "2022-11-11T07:34:58.856Z",
+              "sharedDiskIRErrors": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

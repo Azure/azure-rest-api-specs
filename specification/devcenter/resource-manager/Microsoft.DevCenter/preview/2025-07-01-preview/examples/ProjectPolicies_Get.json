@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "devCenterName": "Contoso",
+    "projectPolicyName": "DevOnlyResources",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DevOnlyResources",
+        "type": "Microsoft.DevCenter/devcenters/projectpolicies",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/projectPolicies/DevOnlyResources",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourcePolicies": [
+            {
+              "resources": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/attachednetworks/network-westus3"
+            }
+          ],
+          "scopes": [
+            "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff1/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/DevProject"
+          ]
+        },
+        "systemData": {
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ProjectPolicies_Get",
+  "title": "ProjectPolicies_Get"
+}

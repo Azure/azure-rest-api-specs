@@ -1,0 +1,39 @@
+{
+  "title": "Get NSP LinkReference",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp2",
+    "linkReferenceName": "link1-guid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "link1-guid",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2/linkreferences/link1-guid",
+        "type": "Microsoft.Network/networkSecurityPerimeters/linkreferences",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "remotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+          "remotePerimeterGuid": "guid",
+          "remotePerimeterLocation": "westus2",
+          "localInboundProfiles": [
+            "*"
+          ],
+          "localOutboundProfiles": [
+            "*"
+          ],
+          "remoteInboundProfiles": [
+            "*"
+          ],
+          "remoteOutboundProfiles": [
+            "*"
+          ],
+          "description": "Auto Approved",
+          "status": "Approved"
+        }
+      }
+    }
+  }
+}

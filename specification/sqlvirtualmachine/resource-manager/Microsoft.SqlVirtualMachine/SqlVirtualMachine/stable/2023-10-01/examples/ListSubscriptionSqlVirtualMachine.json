@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testvm",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm",
+            "location": "northeurope",
+            "properties": {
+              "additionalVmPatch": "WUMU",
+              "enableAutomaticUpgrade": true,
+              "leastPrivilegeMode": "Enabled",
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2022-WS2022",
+              "sqlImageSku": "Enterprise",
+              "sqlManagement": "Full",
+              "sqlServerLicenseType": "PAYG",
+              "virtualMachineIdentitySettings": {
+                "type": "SystemAssigned"
+              },
+              "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm"
+            }
+          },
+          {
+            "name": "testvm1",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm1",
+            "location": "northeurope",
+            "properties": {
+              "additionalVmPatch": "WUMU",
+              "enableAutomaticUpgrade": false,
+              "leastPrivilegeMode": "Enabled",
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2019-WS2022",
+              "sqlImageSku": "Enterprise",
+              "sqlManagement": "Full",
+              "sqlServerLicenseType": "AHUB",
+              "virtualMachineIdentitySettings": {
+                "type": "None"
+              },
+              "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm1"
+            }
+          },
+          {
+            "name": "testvm2",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg1/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+            "location": "northeurope",
+            "properties": {
+              "additionalVmPatch": "WU",
+              "enableAutomaticUpgrade": false,
+              "leastPrivilegeMode": "Enabled",
+              "osType": "Windows",
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2016-WS2016",
+              "sqlImageSku": "Developer",
+              "sqlManagement": "Full",
+              "sqlServerLicenseType": "PAYG",
+              "virtualMachineIdentitySettings": {
+                "type": "SystemAssigned"
+              },
+              "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg1/providers/Microsoft.Compute/virtualMachines/testvm2"
+            }
+          },
+          {
+            "name": "testvm2",
+            "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg2/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+            "location": "northeurope",
+            "properties": {
+              "enableAutomaticUpgrade": true,
+              "leastPrivilegeMode": "NotSet",
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "sqlImageOffer": "SQL2019-Ubuntu20",
+              "sqlImageSku": "Developer",
+              "sqlManagement": "LightWeight",
+              "sqlServerLicenseType": "PAYG",
+              "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg2/providers/Microsoft.Compute/virtualMachines/testvm2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachines_List",
+  "title": "Gets all SQL virtual machines in a subscription."
+}

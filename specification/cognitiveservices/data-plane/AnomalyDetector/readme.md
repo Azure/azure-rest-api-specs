@@ -4,10 +4,10 @@
 
 Configuration for generating Anomaly Detector SDK.
 
-The current release is `release_1_1_preview.1`.
+The current release is `release_1_1`.
 
 ``` yaml
-tag: release_1_1_preview.1
+tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -21,22 +21,12 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v1.0/AnomalyDetector.json
 ```
 
-### Release 1.1-preview
-These settings apply only when `--tag=release_1_1_preview` is specified on the command line.
+### Release 1.1
+These settings apply only when `--tag=release_1_1` is specified on the command line.
 
-``` yaml $(tag) == 'release_1_1_preview'
-input-file: 
-  - preview/v1.1-preview/AnomalyDetector.json
-  - preview/v1.1-preview/MultivariateAnomalyDetector.json
-```
-
-### Release 1.1-preview.1
-These settings apply only when `--tag=release_1_1_preview.1` is specified on the command line.
-
-``` yaml $(tag) == 'release_1_1_preview.1'
-input-file: 
-  - preview/v1.1-preview.1/AnomalyDetector.json
-  - preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+```yaml $(tag) == 'release_1_1'
+input-file:
+  - stable/v1.1/openapi.json
 ```
 
 ## Swagger to SDK
@@ -46,15 +36,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_anomalydetector']
-```
+  - repo: azure-sdk-for-net
+ ```
 
 ## CSharp Settings
 
@@ -79,19 +62,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-```yaml $(java)
-azure-arm: true
-namespace: com.microsoft.azure.cognitiveservices.anomalydetector
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
-with-optional-parameters: true
-with-single-async-method: true
-regenerate-manager: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -106,8 +77,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v1.0/AnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview/MultivariateAnomalyDetector.json
-  - $(this-folder)/preview/v1.1-preview.1/MultivariateAnomalyDetector.json
+  - $(this-folder)/stable/v1.1/openapi.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
@@ -117,3 +87,4 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+

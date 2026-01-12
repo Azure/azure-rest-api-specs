@@ -1,0 +1,2317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "version": "2022-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}": {
+      "get": {
+        "operationId": "ProvisionedClusters_Get",
+        "x-ms-examples": {
+          "GetProvisionedCluster": {
+            "$ref": "./examples/GetProvisionedCluster.json"
+          }
+        },
+        "summary": "Gets the provisioned cluster",
+        "description": "Gets the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProvisionedClusters_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutProvisionedCluster": {
+            "$ref": "./examples/PutProvisionedCluster.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Creates the provisioned cluster",
+        "description": "Creates the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "provisionedClusters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/provisionedClusters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponse"
+            }
+          },
+          "201": {
+            "description": "Creates the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProvisionedClusters_Delete",
+        "x-ms-examples": {
+          "DeleteProvisionedCluster": {
+            "$ref": "./examples/DeleteProvisionedCluster.json"
+          }
+        },
+        "summary": "Deletes the provisioned cluster",
+        "description": "Deletes the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the provisionedClusters resource."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ProvisionedClusters_Update",
+        "x-ms-examples": {
+          "UpdateProvisionedCluster": {
+            "$ref": "./examples/UpdateProvisionedCluster.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Updates the provisioned cluster",
+        "description": "Updates the Hybrid AKS provisioned cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "provisionedClusters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Updated the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponse"
+            }
+          },
+          "202": {
+            "description": "Updating the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters": {
+      "get": {
+        "operationId": "ProvisionedClusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListProvisionedClusterByResourceGroup": {
+            "$ref": "./examples/ListProvisionedClusterByResourceGroup.json"
+          }
+        },
+        "summary": "Gets the provisioned clusters in a resource group",
+        "description": "Gets the Hybrid AKS provisioned cluster in a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all provisionedClusters under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/provisionedClusters": {
+      "get": {
+        "operationId": "ProvisionedClusters_ListBySubscription",
+        "x-ms-examples": {
+          "ListProvisionedClusterBySubscription": {
+            "$ref": "./examples/ListProvisionedClusterBySubscription.json"
+          }
+        },
+        "summary": "Gets the provisioned clusters in a subscription",
+        "description": "Gets the Hybrid AKS provisioned cluster in a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all provisionedClusters under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/provisionedClustersResponseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/upgradeProfiles/default": {
+      "get": {
+        "tags": [
+          "ProvisionedClusters"
+        ],
+        "operationId": "ProvisionedClusters_GetUpgradeProfile",
+        "summary": "Gets the upgrade profile of a provisioned cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProvisionedClusterUpgradeProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetUpgradeProfileForProvisionedCluster": {
+            "$ref": "./examples/ProvisionedClustersGetUpgradeProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/hybridIdentityMetadata/{hybridIdentityMetadataResourceName}": {
+      "put": {
+        "operationId": "HybridIdentityMetadata_Put",
+        "x-ms-examples": {
+          "CreateHybridIdentityMetadata": {
+            "$ref": "./examples/CreateHybridIdentityMetadata.json"
+          }
+        },
+        "summary": "Creates the hybrid identity metadata resource",
+        "description": "Creates the hybrid identity metadata proxy resource that facilitates the managed identity provisioning.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hybridIdentityMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created the hybridIdentityMetadata resource.",
+            "schema": {
+              "$ref": "#/definitions/hybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "HybridIdentityMetadata_Get",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetHybridIdentityMetadata.json"
+          }
+        },
+        "summary": "Get the hybrid identity metadata resource",
+        "description": "Get the hybrid identity metadata proxy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the hybridIdentityMetadata resource for the given AKS Edge cluster.",
+            "schema": {
+              "$ref": "#/definitions/hybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HybridIdentityMetadata_Delete",
+        "x-ms-examples": {
+          "DeleteHybridIdentityMetadata": {
+            "$ref": "./examples/DeleteHybridIdentityMetadata.json"
+          }
+        },
+        "summary": "Deletes the hybrid identity metadata resource",
+        "description": "Deletes the hybrid identity metadata proxy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/hybridIdentityMetadataResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete the hybridIdentityMetadata resource"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/hybridIdentityMetadata": {
+      "get": {
+        "operationId": "HybridIdentityMetadata_ListByCluster",
+        "summary": "Lists the hybrid identity metadata resources in a cluster",
+        "description": "Lists the hybrid identity metadata proxy resource in a cluster.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByCluster": {
+            "$ref": "./examples/HybridIdentityMetadataListByCluster.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/hybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/agentPools/{agentPoolName}": {
+      "get": {
+        "operationId": "agentPool_Get",
+        "summary": "Gets the agent pool in the provisioned cluster",
+        "description": "Gets the agent pool in the Hybrid AKS provisioned cluster",
+        "x-ms-examples": {
+          "GetAgentPool": {
+            "$ref": "./examples/GetAgentPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agentPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the agentPool resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "agentPool_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Creates the agent pool in the provisioned cluster",
+        "description": "Creates the agent pool in the Hybrid AKS provisioned cluster",
+        "x-ms-examples": {
+          "PutAgentPool": {
+            "$ref": "./examples/PutAgentPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agentPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "agentPool",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          },
+          "201": {
+            "description": "Creates the agent pool in the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "agentPool_Delete",
+        "summary": "Deletes the agent pool in the provisioned cluster",
+        "description": "Deletes the agent pool in the Hybrid AKS provisioned cluster",
+        "x-ms-examples": {
+          "DeleteAgentPool": {
+            "$ref": "./examples/DeleteAgentPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agentPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the agent pool in the provisionedClusters resource."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "agentPool_Update",
+        "summary": "Updates the agent pool in the provisioned cluster",
+        "description": "Updates the agent pool in the Hybrid AKS provisioned cluster",
+        "x-ms-examples": {
+          "UpdateAgentPool": {
+            "$ref": "./examples/UpdateAgentPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/agentPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "agentPool",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          },
+          "202": {
+            "description": "Updates the agent pool in the provisionedClusters resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/agentPools": {
+      "get": {
+        "operationId": "agentPool_ListByProvisionedCluster",
+        "summary": "Gets the agent pools in the provisioned cluster",
+        "description": "Gets the agent pools in the Hybrid AKS provisioned cluster",
+        "x-ms-examples": {
+          "ListAgentPoolByProvisionedCluster": {
+            "$ref": "./examples/ListAgentPoolByProvisionedCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all the agentPools in the provisionedCluster resource.",
+            "schema": {
+              "$ref": "#/definitions/agentPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/provisionedClusters/{resourceName}/upgradeNodeImageVersionForEntireCluster": {
+      "post": {
+        "tags": [
+          "ProvisionedClusters"
+        ],
+        "operationId": "ProvisionedClusters_UpgradeNodeImageVersionForEntireCluster",
+        "summary": "Upgrades the node image version of the cluster control plane and all agent pools to the latest.",
+        "description": "Upgrading the node image version of a cluster applies the newest OS and runtime updates to the nodes.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "UpgradeClusterNodeImageVersion": {
+            "$ref": "./examples/ProvisionedClustersUpgradeNodeImageVersionForEntireCluster.json"
+          }
+        }
+      }
+    },
+    "/{customLocationResourceUri}/providers/Microsoft.HybridContainerService/orchestrators": {
+      "get": {
+        "operationId": "HybridContainerService_ListOrchestrators",
+        "x-ms-examples": {
+          "ListOrchestrators": {
+            "$ref": "./examples/ListOrchestrators.json"
+          }
+        },
+        "summary": "Lists the available orchestrators in a custom location",
+        "description": "Lists the available orchestrators in a custom location for HybridAKS",
+        "parameters": [
+          {
+            "$ref": "#/parameters/customLocationResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the available orchestrators in a custom location.",
+            "schema": {
+              "$ref": "#/definitions/OrchestratorVersionProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{customLocationResourceUri}/providers/Microsoft.HybridContainerService/vmSkus": {
+      "get": {
+        "operationId": "HybridContainerService_ListVMSkus",
+        "x-ms-examples": {
+          "ListVMSkus": {
+            "$ref": "./examples/ListVMSkus.json"
+          }
+        },
+        "summary": "Lists the available VM SKUs in a custom location",
+        "description": "Lists the available VM SKUs in a custom location for HybridAKS",
+        "parameters": [
+          {
+            "$ref": "#/parameters/customLocationResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists the available VM SKUs in a custom location.",
+            "schema": {
+              "$ref": "#/definitions/VMSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HybridContainerService/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "provisionedClustersAllProperties": {
+      "type": "object",
+      "description": "All properties of the provisioned cluster",
+      "x-ms-client-flatten": true,
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/provisionedClustersPropertiesWithSecrets"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/provisionedClustersCommonProperties"
+        }
+      ]
+    },
+    "provisionedClustersResponseProperties": {
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/provisionedClustersPropertiesWithoutSecrets"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/provisionedClustersCommonProperties"
+        }
+      ]
+    },
+    "provisionedClustersPropertiesWithSecrets": {
+      "type": "object",
+      "description": "Properties of provisioned clusters that contain secrets",
+      "properties": {
+        "aadProfile": {
+          "description": "AAD profile for the provisioned cluster.",
+          "$ref": "#/definitions/AADProfile"
+        },
+        "windowsProfile": {
+          "description": "WindowsProfile - Profile for Windows VMs in the Provisioned Cluster.",
+          "$ref": "#/definitions/WindowsProfile"
+        },
+        "httpProxyConfig": {
+          "description": "HttpProxyConfig - Configurations for provisioning the cluster with HTTP proxy servers.",
+          "$ref": "#/definitions/httpProxyConfig"
+        }
+      }
+    },
+    "provisionedClustersPropertiesWithoutSecrets": {
+      "type": "object",
+      "description": "Properties of provisioned clusters without the corresponding secrets",
+      "properties": {
+        "aadProfile": {
+          "description": "AAD profile for the provisioned cluster.",
+          "$ref": "#/definitions/AADProfileResponse"
+        },
+        "windowsProfile": {
+          "description": "WindowsProfile - Profile for Windows VMs in the Provisioned Cluster.",
+          "$ref": "#/definitions/WindowsProfileResponse"
+        },
+        "httpProxyConfig": {
+          "description": "HttpProxyConfig - Configurations for provisioning the cluster with HTTP proxy servers.",
+          "$ref": "#/definitions/httpProxyConfigResponse"
+        }
+      }
+    },
+    "provisionedClustersCommonProperties": {
+      "type": "object",
+      "properties": {
+        "enableRbac": {
+          "type": "boolean",
+          "description": "EnableRBAC - Whether to enable Kubernetes Role-Based Access Control."
+        },
+        "linuxProfile": {
+          "description": "LinuxProfile - The profile for Linux VMs in the Provisioned Cluster.",
+          "$ref": "#/definitions/LinuxProfileProperties"
+        },
+        "features": {
+          "type": "object",
+          "description": "Additional features specs like Arc Agent Onboarding.",
+          "properties": {
+            "arcAgentProfile": {
+              "description": "Arc agentry configuration for the provisioned cluster.",
+              "$ref": "#/definitions/ArcAgentProfile"
+            }
+          }
+        },
+        "addonProfiles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AddonProfiles"
+          },
+          "description": "AddonProfiles - Profile of managed cluster add-on."
+        },
+        "controlPlane": {
+          "$ref": "#/definitions/ControlPlaneProfile",
+          "description": "ControlPlane - ControlPlane Configuration"
+        },
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "KubernetesVersion - Version of Kubernetes specified when creating the managed cluster."
+        },
+        "networkProfile": {
+          "description": "NetworkProfile - Profile of network configuration.",
+          "$ref": "#/definitions/NetworkProfile"
+        },
+        "nodeResourceGroup": {
+          "type": "string",
+          "description": "NodeResourceGroup - Name of the resource group containing agent pool nodes."
+        },
+        "agentPoolProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedAgentPoolProfile"
+          },
+          "x-ms-identifiers": [],
+          "description": "The agent pools of the cluster."
+        },
+        "cloudProviderProfile": {
+          "description": "The underlying cloud infra provider properties.",
+          "$ref": "#/definitions/CloudProviderProfile"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting",
+            "Updating",
+            "Accepted",
+            "Created"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "featuresStatus": {
+              "type": "object",
+              "description": "Additional features status like Arc Agent Onboarding.",
+              "properties": {
+                "arcAgentStatus": {
+                  "description": "Defines the observed Arc Agent status that is resourceSynced back to the ARM resource.",
+                  "$ref": "#/definitions/ArcAgentStatus"
+                }
+              }
+            },
+            "addonStatus": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/AddonStatus"
+              },
+              "description": "AddonStatus - Status of Addons"
+            },
+            "errorMessage": {
+              "type": "string",
+              "description": "ErrorMessage - Error messages during creation of cluster"
+            },
+            "provisioningStatus": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string"
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "description": "Contains Provisioning errors"
+            }
+          },
+          "description": "HybridAKSClusterStatus defines the observed state of HybridAKSCluster"
+        }
+      },
+      "description": "HybridAKSClusterSpec defines the desired state of HybridAKSCluster"
+    },
+    "provisionedClustersResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "readOnly": true,
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/provisionedClusterIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/provisionedClustersResponseProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The provisionedClusters resource definition."
+    },
+    "provisionedClusters": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/provisionedClusterIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/provisionedClustersAllProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The provisionedClusters resource definition."
+    },
+    "provisionedClustersPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The provisionedClusters resource patch definition."
+    },
+    "provisionedClustersResponseListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/provisionedClustersResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "x-ms-identifiers": []
+    },
+    "AddonProfiles": {
+      "properties": {
+        "config": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Config - Key-value pairs for configuring an add-on.",
+          "type": "object"
+        },
+        "enabled": {
+          "description": "Enabled - Whether the add-on is enabled or not.",
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "description": "Addon configurations"
+    },
+    "AddonStatus": {
+      "properties": {
+        "errorMessage": {
+          "description": "ErrorMessage will be set in the event that there is a terminal problem reconciling the AddOn and will contain a more verbose string suitable for logging and human consumption.",
+          "type": "string"
+        },
+        "phase": {
+          "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc.",
+          "type": "string"
+        },
+        "ready": {
+          "type": "boolean"
+        }
+      },
+      "type": "object",
+      "description": "Status of the addon"
+    },
+    "httpProxyConfigPassword": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "Password to use for connecting to proxy server"
+        }
+      }
+    },
+    "httpProxyConfigResponse": {
+      "type": "object",
+      "description": "Configurations for provisioning the cluster with HTTP proxy servers.",
+      "properties": {
+        "httpProxy": {
+          "type": "string",
+          "description": "The HTTP proxy server endpoint to use."
+        },
+        "httpsProxy": {
+          "type": "string",
+          "description": "The HTTPS proxy server endpoint to use."
+        },
+        "noProxy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The endpoints that should not go through proxy."
+        },
+        "trustedCa": {
+          "type": "string",
+          "description": "Alternative CA cert to use for connecting to proxy servers."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username to use for connecting to proxy server"
+        }
+      }
+    },
+    "httpProxyConfig": {
+      "description": "Configurations for provisioning the cluster with HTTP proxy servers.",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/httpProxyConfigResponse"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/httpProxyConfigPassword"
+        }
+      ]
+    },
+    "AgentPoolProfile": {
+      "type": "object",
+      "description": "NodePool configuration",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count - Number of agents to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.",
+          "default": 1
+        },
+        "availabilityZones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "AvailabilityZones - The list of Availability zones to use for nodes. Datacenter racks modelled as zones"
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes for auto-scaling"
+        },
+        "maxPods": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of pods that can run on a node."
+        },
+        "minCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes for auto-scaling"
+        },
+        "mode": {
+          "type": "string",
+          "description": "Mode - AgentPoolMode represents mode of an agent pool. Possible values include: 'System', 'LB', 'User'. Default is 'User'",
+          "enum": [
+            "System",
+            "LB",
+            "User"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "mode"
+          },
+          "default": "User"
+        },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "NodeLabels - Agent pool node labels to be persisted across all nodes in agent pool."
+        },
+        "nodeTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "NodeTaints - Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "osType": {
+          "$ref": "#/definitions/OSType"
+        },
+        "nodeImageVersion": {
+          "type": "string",
+          "description": "The version of node image"
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "VmSize - The size of the agent pool VMs."
+        },
+        "cloudProviderProfile": {
+          "description": "The underlying cloud infra provider properties.",
+          "$ref": "#/definitions/CloudProviderProfile"
+        }
+      }
+    },
+    "AgentPoolName": {
+      "type": "object",
+      "description": "AgentPool Name",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+        }
+      }
+    },
+    "NamedAgentPoolProfile": {
+      "description": "Agent pool profile along with a name parameter",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentPoolProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentPoolName"
+        }
+      ]
+    },
+    "agentPoolProperties": {
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AgentPoolProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/agentPoolProvisioningStatus"
+        }
+      ]
+    },
+    "agentPoolProvisioningStatus": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "InProgress",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "agentPoolProvisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "errorMessage": {
+              "type": "string",
+              "description": "ErrorMessage - Error messages during creation of cluster"
+            },
+            "provisioningStatus": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string"
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "description": "Contains Provisioning errors"
+            },
+            "readyReplicas": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total number of ready machines targeted by this deployment."
+            },
+            "replicas": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Total number of non-terminated machines targeted by this deployment"
+            }
+          },
+          "description": "HybridAKSNodePoolStatus defines the observed state of HybridAKSNodePool"
+        }
+      },
+      "description": "The agentPool resource provisioning status definition"
+    },
+    "agentPool": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/agentPoolProperties"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "description": "The agentPool resource definition"
+    },
+    "agentPoolListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/agentPool"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "The resource provider."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of this operation."
+            }
+          },
+          "description": "Display metadata associated with the operation."
+        }
+      },
+      "description": "Results of the request to list operations."
+    },
+    "AADProfileSecret": {
+      "type": "object",
+      "description": "The server AAD application secret.",
+      "properties": {
+        "serverAppSecret": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The server AAD application secret."
+        }
+      }
+    },
+    "AADProfileResponse": {
+      "type": "object",
+      "description": "AAD Profile specifies attributes for Azure Active Directory integration.",
+      "properties": {
+        "adminGroupObjectIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of AAD group object IDs that will have admin role of the cluster."
+        },
+        "clientAppID": {
+          "type": "string",
+          "description": "The client AAD application ID."
+        },
+        "enableAzureRbac": {
+          "type": "boolean",
+          "description": "Whether to enable Azure RBAC for Kubernetes authorization."
+        },
+        "managed": {
+          "type": "boolean",
+          "description": "Whether to enable managed AAD."
+        },
+        "serverAppID": {
+          "type": "string",
+          "description": "The server AAD application ID."
+        },
+        "tenantID": {
+          "type": "string",
+          "description": "The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription."
+        }
+      }
+    },
+    "AADProfile": {
+      "description": "AAD Profile specifies attributes for Azure Active Directory integration.",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AADProfileSecret"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AADProfileResponse"
+        }
+      ]
+    },
+    "LinuxProfile": {
+      "type": "object",
+      "description": "LinuxProfile - Profile for Linux VMs in the container service cluster.",
+      "properties": {
+        "linuxProfile": {
+          "description": "Profile for Linux VMs in the container service cluster.",
+          "$ref": "#/definitions/LinuxProfileProperties"
+        }
+      }
+    },
+    "LinuxProfileProperties": {
+      "type": "object",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "AdminUsername - The administrator username to use for Linux VMs."
+        },
+        "ssh": {
+          "type": "object",
+          "properties": {
+            "publicKeys": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "keyData": {
+                    "type": "string",
+                    "description": "KeyData - Certificate public key used to authenticate with VMs through SSH. The certificate must be in PEM format with or without headers."
+                  }
+                }
+              },
+              "x-ms-identifiers": [],
+              "description": "PublicKeys - The list of SSH public keys used to authenticate with Linux-based VMs. Only expect one key specified."
+            }
+          },
+          "description": "SSH - SSH configuration for Linux-based VMs running on Azure."
+        }
+      },
+      "description": "LinuxProfile - Profile for Linux VMs in the container service cluster."
+    },
+    "WindowsProfile": {
+      "description": "WindowsProfile - Profile for Windows VMs in the container service cluster.",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WindowsProfileResponse"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WindowsProfilePassword"
+        }
+      ]
+    },
+    "WindowsProfileResponse": {
+      "type": "object",
+      "description": "Profile for Windows VMs in the container service cluster.",
+      "properties": {
+        "adminUsername": {
+          "type": "string",
+          "description": "AdminUsername - Specifies the name of the administrator account. <br><br> **restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length:** 1 character <br><br> **Max-length:** 20 characters"
+        },
+        "enableCsiProxy": {
+          "type": "boolean",
+          "description": "EnableCSIProxy - Whether to enable CSI proxy."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "LicenseType - The licenseType to use for Windows VMs. Windows_Server is used to enable Azure Hybrid User Benefits for Windows VMs. Possible values include: 'None', 'Windows_Server'",
+          "enum": [
+            "Windows_Server",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "licenseType"
+          }
+        }
+      }
+    },
+    "WindowsProfilePassword": {
+      "type": "object",
+      "description": "Password for the Windows Profile to be used by the Windows VMs in the cluster",
+      "properties": {
+        "adminPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "AdminPassword - Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\""
+        }
+      }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "properties": {
+        "loadBalancerProfile": {
+          "description": "LoadBalancerProfile - Profile of the cluster load balancer.",
+          "$ref": "#/definitions/LoadBalancerProfile"
+        },
+        "loadBalancerSku": {
+          "type": "string",
+          "description": "LoadBalancerSku - The load balancer sku for the provisioned cluster. Possible values: 'unstacked-haproxy', 'stacked-kube-vip', 'stacked-metallb', 'unmanaged'. The default is 'unmanaged'.",
+          "enum": [
+            "unstacked-haproxy",
+            "stacked-kube-vip",
+            "stacked-metallb",
+            "unmanaged"
+          ],
+          "default": "unmanaged",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "loadBalancerSku"
+          }
+        },
+        "dnsServiceIP": {
+          "type": "string",
+          "description": "DNSServiceIP - An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr."
+        },
+        "networkPolicy": {
+          "type": "string",
+          "description": "NetworkPolicy - Network policy used for building Kubernetes network. Possible values include: 'calico', 'flannel'. Default is 'calico'",
+          "enum": [
+            "calico",
+            "flannel"
+          ],
+          "default": "calico",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "networkPolicy"
+          }
+        },
+        "podCidr": {
+          "type": "string",
+          "description": "PodCidr - A CIDR notation IP range from which to assign pod IPs when kubenet is used."
+        },
+        "podCidrs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR notation IP ranges from which to assign pod IPs. One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking."
+        },
+        "serviceCidr": {
+          "type": "string",
+          "description": "ServiceCidr - A CIDR notation IP range from which to assign service cluster IPs. It must not overlap with any Subnet IP ranges."
+        },
+        "serviceCidrs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR notation IP ranges from which to assign service cluster IPs. One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for each IP family (IPv4/IPv6), is expected for dual-stack networking. They must not overlap with any Subnet IP ranges."
+        }
+      },
+      "description": "NetworkProfile - Profile of network configuration."
+    },
+    "LoadBalancerProfile": {
+      "type": "object",
+      "description": "LoadBalancerProfile - Profile of the cluster load balancer.",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamedAgentPoolProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinuxProfile"
+        }
+      ]
+    },
+    "ControlPlaneEndpointProfile": {
+      "type": "object",
+      "description": "controlPlaneEndpoint - API server endpoint for the control plane",
+      "properties": {
+        "controlPlaneEndpoint": {
+          "type": "object",
+          "description": "API server endpoint for the control plane",
+          "properties": {
+            "hostIP": {
+              "type": "string",
+              "description": "Host IP address for API server"
+            },
+            "port": {
+              "type": "string",
+              "description": "Port for the API server"
+            }
+          }
+        }
+      }
+    },
+    "ControlPlaneProfile": {
+      "type": "object",
+      "description": "ControlPlaneProfile - The control plane properties for the provisioned cluster.",
+      "allOf": [
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamedAgentPoolProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ControlPlaneEndpointProfile"
+        },
+        {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinuxProfile"
+        }
+      ]
+    },
+    "CloudProviderProfile": {
+      "type": "object",
+      "description": "CloudProviderProfile - The underlying cloud infra provider properties.",
+      "properties": {
+        "infraNetworkProfile": {
+          "type": "object",
+          "description": "InfraNetworkProfile - List of infra network profiles for the provisioned cluster",
+          "properties": {
+            "vnetSubnetIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Array of references to azure resource corresponding to the new HybridAKSNetwork object e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}"
+            }
+          }
+        },
+        "infraStorageProfile": {
+          "type": "object",
+          "description": "InfraStorageProfile - List of infra storage profiles for the provisioned cluster",
+          "properties": {
+            "storageSpaceIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Reference to azure resource corresponding to the new HybridAKSStorage object e.g. /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/storageSpaces/{storageSpaceName}"
+            }
+          }
+        }
+      }
+    },
+    "ArcAgentProfile": {
+      "description": "Defines the Arc Agent properties for the Provisioned clusters.",
+      "type": "object",
+      "properties": {
+        "agentVersion": {
+          "type": "string",
+          "description": "Version of the Arc agents to be installed on the provisioned Provisioned cluster resource"
+        },
+        "agentAutoUpgrade": {
+          "type": "string",
+          "description": "Indicates whether the Arc agents on the provisioned clusters be upgraded automatically to the latest version. Defaults to Enabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AutoUpgradeOptions",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArcAgentStatus": {
+      "description": "Defines the observed Arc Agent status that is resourceSynced back to the ARM resource.",
+      "type": "object",
+      "properties": {
+        "deploymentState": {
+          "type": "string",
+          "description": "Observed deployment state of the Arc Agents on the target cluster. Possible values include: 'pending', 'provisioning', 'provisioned', 'deleting', 'failed', 'upgrading'",
+          "enum": [
+            "pending",
+            "provisioning",
+            "provisioned",
+            "deleting",
+            "failed",
+            "upgrading"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "deploymentState"
+          }
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error messages while onboarding/upgrading/uninstalling the Arc agents"
+        },
+        "onboardingPublicKey": {
+          "type": "string",
+          "description": "Onboarding public key for provisioning the Managed identity for the HybridAKS cluster. Will be used to create the hybridIdentityMetadata proxy resource and will not be persisted."
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Version of the Arc agents currently running on the Provisioned cluster resource."
+        },
+        "coreCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of CPU cores present in the Provisioned cluster resource"
+        },
+        "managedIdentityCertificateExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ManagedIdentity certificate expiration time (ValidUntil)."
+        },
+        "lastConnectivityTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last connected timestamp of the Provisioned cluster resource."
+        }
+      }
+    },
+    "provisionedClusterIdentity": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of provisioned cluster identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the provisioned cluster. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the provisioned cluster. The type SystemAssigned, includes a system created identity. The type None means no identity is assigned to the provisioned cluster.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the Provisioned cluster."
+    },
+    "hybridIdentityMetadata": {
+      "description": "Defines the hybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/hybridIdentityMetadataProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "hybridIdentityMetadataProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "Unique id of the parent provisioned cluster resource.",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "Onboarding public key for provisioning the Managed identity for the HybridAKS cluster.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/provisionedClusterIdentity",
+          "description": "The identity of the provisioned cluster."
+        },
+        "provisioningState": {
+          "description": "provisioning state of the hybridIdentityMetadata resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "hybridIdentityMetadataList": {
+      "description": "List of hybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of hybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of hybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OrchestratorVersionProfileListResult": {
+      "type": "object",
+      "description": "The list of versions for supported orchestrators.",
+      "properties": {
+        "orchestrators": {
+          "type": "array",
+          "description": "Profile of the orchestrator versions",
+          "items": {
+            "$ref": "#/definitions/OrchestratorVersionProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        }
+      }
+    },
+    "OrchestratorVersionProfile": {
+      "type": "object",
+      "description": "The profile of an orchestrator and its available versions.",
+      "properties": {
+        "isPreview": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether Kubernetes version is currently in preview."
+        },
+        "default": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Installed by default if version is not specified."
+        },
+        "orchestratorType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Orchestrator type."
+        },
+        "orchestratorVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Orchestrator version major.minor.patch, for example 1.21.9"
+        },
+        "upgrades": {
+          "type": "array",
+          "description": "The list of available upgrade versions.",
+          "items": {
+            "$ref": "#/definitions/OrchestratorProfile"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "OrchestratorProfile": {
+      "type": "object",
+      "description": "Contains information about orchestrator.",
+      "properties": {
+        "isPreview": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether Kubernetes version is currently in preview."
+        },
+        "orchestratorType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Orchestrator type."
+        },
+        "orchestratorVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Orchestrator version (major, minor, patch)."
+        }
+      }
+    },
+    "VMSkuListResult": {
+      "type": "object",
+      "description": "The list of supported VM SKUs.",
+      "properties": {
+        "vmSKUs": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Supported VM SKUs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        }
+      }
+    },
+    "ProvisionedClusterPoolUpgradeProfile": {
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kubernetes version (major.minor.patch)."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Agent Pool name."
+        },
+        "osType": {
+          "readOnly": true,
+          "$ref": "#/definitions/OSType"
+        },
+        "upgrades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfileProperties"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of orchestrator types and versions available for upgrade."
+        }
+      },
+      "description": "The list of available upgrade versions."
+    },
+    "ProvisionedClusterPoolUpgradeProfileProperties": {
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Kubernetes version (major.minor.patch)."
+        },
+        "isPreview": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether the Kubernetes version is currently in preview."
+        }
+      },
+      "description": "The upgrade properties."
+    },
+    "ProvisionedClusterUpgradeProfileProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "controlPlaneProfile": {
+          "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfile",
+          "description": "The list of available upgrade versions for the control plane."
+        },
+        "agentPoolProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProvisionedClusterPoolUpgradeProfile"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of available upgrade versions for agent pools."
+        }
+      },
+      "required": [
+        "controlPlaneProfile",
+        "agentPoolProfiles"
+      ],
+      "description": "Control plane and agent pool upgrade profiles."
+    },
+    "ProvisionedClusterUpgradeProfile": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProvisionedClusterUpgradeProfileProperties",
+          "description": "The properties of the upgrade profile.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The list of available upgrades for compute pools."
+    },
+    "OSType": {
+      "type": "string",
+      "description": "OsType - OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux. Possible values include: 'Linux', 'Windows'",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "osType"
+      },
+      "default": "Linux"
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$",
+      "description": "Parameter for the name of the provisioned cluster",
+      "x-ms-parameter-location": "method"
+    },
+    "hybridIdentityMetadataResourceNameParameter": {
+      "name": "hybridIdentityMetadataResourceName",
+      "description": "Parameter for the name of the hybrid identity metadata resource.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    },
+    "agentPoolNameParameter": {
+      "name": "agentPoolName",
+      "description": "Parameter for the name of the agent pool in the provisioned cluster",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    },
+    "customLocationResourceUriParameter": {
+      "name": "customLocationResourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The fully qualified Azure Resource manager identifier of the custom location resource.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

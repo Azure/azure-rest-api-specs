@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "catalogName": "CentralCatalog",
+    "projectName": "DevProject",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "conflicts": [
+          {
+            "name": "DuplicateEnvironmentName",
+            "path": "/Environments/Duplicate/manifest.yaml"
+          }
+        ],
+        "errors": [
+          {
+            "path": "/Environments/Invalid/manifest.yaml",
+            "errorDetails": [
+              {
+                "code": "ParseError",
+                "message": "Schema Error Within Catalog Item: Missing Name"
+              }
+            ]
+          }
+        ],
+        "operationError": {
+          "code": "Conflict",
+          "message": "The source control credentials could not be validated successfully."
+        }
+      }
+    }
+  },
+  "operationId": "ProjectCatalogs_GetSyncErrorDetails",
+  "title": "ProjectCatalogs_GetSyncErrorDetails"
+}

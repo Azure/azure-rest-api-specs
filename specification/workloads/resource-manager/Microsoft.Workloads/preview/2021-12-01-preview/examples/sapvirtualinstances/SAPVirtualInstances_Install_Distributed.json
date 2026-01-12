@@ -1,0 +1,340 @@
+{
+  "parameters": {
+    "subscriptionId": "8e17e36c-42e9-4cd5-a078-7b44883414e0",
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "api-version": "2021-12-01-preview",
+    "body": {
+      "tags": {
+        "created by": "azureuser"
+      },
+      "location": "eastus2",
+      "properties": {
+        "environment": "Prod",
+        "sapProduct": "S4HANA",
+        "configuration": {
+          "configurationType": "DeploymentWithOSConfig",
+          "appLocation": "eastus",
+          "infrastructureConfiguration": {
+            "deploymentType": "ThreeTier",
+            "appResourceGroup": "{{resourcegrp}}",
+            "networkConfiguration": {
+              "isSecondaryIpEnabled": true
+            },
+            "centralServer": {
+              "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_E4ds_v4",
+                "imageReference": {
+                  "sku": "8.2",
+                  "publisher": "RedHat",
+                  "version": "8.2.2021091201",
+                  "offer": "RHEL-SAP-HA"
+                },
+                "osProfile": {
+                  "adminUsername": "azureuser",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "sshKeyPair": {
+                      "publicKey": "{{sshkey}}",
+                      "privateKey": "{{privateKey}}"
+                    }
+                  }
+                }
+              },
+              "instanceCount": 1
+            },
+            "applicationServer": {
+              "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_E4ds_v4",
+                "imageReference": {
+                  "sku": "8.2",
+                  "publisher": "RedHat",
+                  "version": "8.2.2021091201",
+                  "offer": "RHEL-SAP-HA"
+                },
+                "osProfile": {
+                  "adminUsername": "azureuser",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "sshKeyPair": {
+                      "publicKey": "{{sshkey}}",
+                      "privateKey": "{{privateKey}}"
+                    }
+                  }
+                }
+              },
+              "instanceCount": 2
+            },
+            "databaseServer": {
+              "subnetId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+              "virtualMachineConfiguration": {
+                "vmSize": "Standard_M32ts",
+                "imageReference": {
+                  "sku": "8.2",
+                  "publisher": "RedHat",
+                  "version": "8.2.2021091201",
+                  "offer": "RHEL-SAP-HA"
+                },
+                "osProfile": {
+                  "adminUsername": "azureuser",
+                  "osConfiguration": {
+                    "osType": "Linux",
+                    "disablePasswordAuthentication": true,
+                    "sshKeyPair": {
+                      "publicKey": "{{sshkey}}",
+                      "privateKey": "{{privateKey}}"
+                    }
+                  }
+                }
+              },
+              "instanceCount": 1
+            }
+          },
+          "softwareConfiguration": {
+            "softwareInstallationType": "SAPInstallWithoutOSConfig",
+            "bomUrl": "https://teststorageaccount.blob.core.windows.net/sapbits/sapfiles/boms/S41909SPS03_v0011ms/S41909SPS03_v0011ms.yaml",
+            "softwareVersion": "SAP S/4HANA 1909 SPS 03",
+            "sapBitsStorageAccountId": "/subscriptions/8e17e36c-42e9-4cd5-a078-7b44883414e0/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+          },
+          "osSapConfiguration": {
+            "sapFqdn": "sap.bpaas.com"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/aa-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00",
+        "name": "X00",
+        "type": "microsoft.workloads/sapvirtualinstances",
+        "location": "eastus2",
+        "tags": {
+          "created by": "azureuser"
+        },
+        "systemData": {
+          "createdBy": "f1bc9460-9d57-4c16-99a8-5a19378a3a93",
+          "createdByType": "Application",
+          "createdAt": "2022-08-18T18:25:55.2406546Z",
+          "lastModifiedBy": "f1bc9460-9d57-4c16-99a8-5a19378a3a93",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-08-18T18:50:59.1945444Z"
+        },
+        "properties": {
+          "environment": "Prod",
+          "sapProduct": "S4HANA",
+          "configuration": {
+            "configurationType": "DeploymentWithOSConfig",
+            "appLocation": "eastus",
+            "infrastructureConfiguration": {
+              "deploymentType": "ThreeTier",
+              "networkConfiguration": {
+                "isSecondaryIpEnabled": true
+              },
+              "centralServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_E4ds_v4",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 1
+              },
+              "applicationServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_E4ds_v4",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 2
+              },
+              "databaseServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_M32ts",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 1
+              },
+              "appResourceGroup": "aa-rg"
+            },
+            "softwareConfiguration": {
+              "softwareInstallationType": "SAPInstallWithoutOSConfig",
+              "bomUrl": "https://teststorageaccount.blob.core.windows.net/sapbits/sapfiles/boms/S41909SPS03_v0011ms/S41909SPS03_v0011ms.yaml",
+              "softwareVersion": "SAP S/4HANA 1909 SPS 03",
+              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "sap.bpaas.com"
+            }
+          },
+          "state": "SoftwareInstallationInProgress",
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/aa-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00",
+        "name": "X00",
+        "type": "microsoft.workloads/sapvirtualinstances",
+        "location": "eastus2",
+        "tags": {
+          "created by": "azureuser"
+        },
+        "systemData": {
+          "createdBy": "f1bc9460-9d57-4c16-99a8-5a19378a3a93",
+          "createdByType": "Application",
+          "createdAt": "2022-08-18T18:25:55.2406546Z",
+          "lastModifiedBy": "f1bc9460-9d57-4c16-99a8-5a19378a3a93",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-08-18T18:50:59.1945444Z"
+        },
+        "properties": {
+          "environment": "Prod",
+          "sapProduct": "S4HANA",
+          "configuration": {
+            "configurationType": "DeploymentWithOSConfig",
+            "appLocation": "eastus",
+            "infrastructureConfiguration": {
+              "deploymentType": "ThreeTier",
+              "networkConfiguration": {
+                "isSecondaryIpEnabled": true
+              },
+              "centralServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_E4ds_v4",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 1
+              },
+              "applicationServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_E4ds_v4",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 2
+              },
+              "databaseServer": {
+                "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/app",
+                "virtualMachineConfiguration": {
+                  "vmSize": "Standard_M32ts",
+                  "imageReference": {
+                    "sku": "84sapha-gen2",
+                    "publisher": "RedHat",
+                    "version": "8.4.2021091202",
+                    "offer": "RHEL-SAP-HA"
+                  },
+                  "osProfile": {
+                    "adminUsername": "azureuser",
+                    "osConfiguration": {
+                      "osType": "Linux",
+                      "disablePasswordAuthentication": true,
+                      "sshKeyPair": {
+                        "publicKey": "ssh-rsa AAA generated-by-azure"
+                      }
+                    }
+                  }
+                },
+                "instanceCount": 1
+              },
+              "appResourceGroup": "aa-rg"
+            },
+            "softwareConfiguration": {
+              "softwareInstallationType": "SAPInstallWithoutOSConfig",
+              "bomUrl": "https://teststorageaccount.blob.core.windows.net/sapbits/sapfiles/boms/S41909SPS03_v0011ms/S41909SPS03_v0011ms.yaml",
+              "softwareVersion": "SAP S/4HANA 1909 SPS 03",
+              "sapBitsStorageAccountId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/teststorageaccount"
+            },
+            "osSapConfiguration": {
+              "sapFqdn": "sap.bpaas.com"
+            }
+          },
+          "state": "SoftwareInstallationInProgress",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

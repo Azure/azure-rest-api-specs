@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "name": "{virtualMachineName}",
+    "api-version": "2018-09-15",
+    "dataDiskProperties": {
+      "attachNewDataDiskOptions": {
+        "diskName": "{diskName}",
+        "diskSizeGiB": 127,
+        "diskType": "{diskType}"
+      }
+    },
+    "hostCaching": "none|readOnly|readWrite",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_AddDataDisk",
+  "title": "VirtualMachines_AddDataDisk"
+}

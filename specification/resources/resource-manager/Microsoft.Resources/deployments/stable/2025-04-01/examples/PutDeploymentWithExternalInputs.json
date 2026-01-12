@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "my-resource-group",
+    "deploymentName": "my-deployment",
+    "api-version": "2025-04-01",
+    "parameters": {
+      "properties": {
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "inputObj": {
+              "type": "object"
+            }
+          },
+          "resources": [],
+          "outputs": {
+            "inputObj": {
+              "type": "object",
+              "value": "[parameters('inputObj')]"
+            }
+          }
+        },
+        "parameters": {
+          "inputObj": {
+            "expression": "[createObject('foo', externalInputs('fooValue'))]"
+          }
+        },
+        "externalInputDefinitions": {
+          "fooValue": {
+            "kind": "sys.envVar",
+            "config": "FOO_VALUE"
+          }
+        },
+        "externalInputs": {
+          "fooValue": {
+            "value": "baz"
+          }
+        },
+        "mode": "Incremental"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "templateHash": "17686481789412793580",
+          "parameters": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "mode": "Incremental",
+          "provisioningState": "Succeeded",
+          "timestamp": "2025-04-09T14:36:48.2047169Z",
+          "correlationId": "ef613b6c-f76e-48fd-9da7-28884243c5e5",
+          "providers": [],
+          "dependencies": [],
+          "outputs": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "outputResources": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Resources/deployments/my-deployment",
+        "name": "my-deployment",
+        "type": "Microsoft.Resources/deployments",
+        "properties": {
+          "templateHash": "17686481789412793580",
+          "parameters": {
+            "inputObj": {
+              "type": "Object",
+              "value": {
+                "foo": "baz"
+              }
+            }
+          },
+          "mode": "Incremental",
+          "provisioningState": "Accepted",
+          "timestamp": "2025-04-09T14:36:47.6637583Z",
+          "duration": "PT0.0009164S",
+          "correlationId": "ef613b6c-f76e-48fd-9da7-28884243c5e5",
+          "providers": [],
+          "dependencies": []
+        }
+      }
+    }
+  }
+}

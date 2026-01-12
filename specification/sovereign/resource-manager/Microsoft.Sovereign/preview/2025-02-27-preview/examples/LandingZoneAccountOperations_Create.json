@@ -1,0 +1,92 @@
+{
+  "title": "LandingZoneAccountOperations_Create",
+  "operationId": "LandingZoneAccountOperations_Create",
+  "parameters": {
+    "api-version": "2025-02-27-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-RemApiExample",
+    "landingZoneAccountName": "lza-RemApiExample",
+    "resource": {
+      "properties": {
+        "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample"
+      },
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+        }
+      },
+      "tags": {
+        "tag1": "MCFS"
+      },
+      "location": "northeurope"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample",
+        "name": "lza-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts",
+        "location": "northeurope",
+        "tags": {
+          "tag1": "MCFS"
+        },
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-12T17:46:09.4305099Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-12T17:46:09.4305099Z"
+        },
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "11111111-1111-1111-1111-111111111111",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+          }
+        },
+        "properties": {
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://example.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Sovereign/landingZoneAccounts/lza-RemApiExample",
+        "name": "lza-RemApiExample",
+        "type": "microsoft.sovereign/landingzoneaccounts",
+        "location": "northeurope",
+        "tags": {
+          "tag1": "MCFS"
+        },
+        "systemData": {
+          "createdBy": "ExampleUser@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-03-12T17:46:09.4305099Z",
+          "lastModifiedBy": "ExampleUser@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-03-12T17:46:09.4305099Z"
+        },
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "11111111-1111-1111-1111-111111111111",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-RemApiExample": {}
+          }
+        },
+        "properties": {
+          "storageAccount": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-RemApiExample/providers/Microsoft.Storage/storageAccounts/saremapiexample",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

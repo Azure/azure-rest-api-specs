@@ -1,0 +1,47 @@
+{
+  "title": "Gets the details of a specific conversation",
+  "operationId": "ConversationAdministrationOperations_GetConversation",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "conversationId": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "19:34adfa4f-cedf-4dc0-ba29-b6d1a69ab345@thread.v2",
+        "topic": "Test",
+        "deliveryChannelIds": [
+          "0f0eb78e-a576-1dfc-b414-0f0756de3338"
+        ],
+        "outboundDeliveryStrategy": "allParticipants",
+        "participants": [
+          {
+            "id": "8:acs:uuid2",
+            "displayName": "Customer",
+            "kind": "external",
+            "contacts": [
+              {
+                "id": "12345678901",
+                "kind": "whatsApp"
+              },
+              {
+                "id": "8:acs:uuid2",
+                "kind": "communication"
+              }
+            ]
+          },
+          {
+            "id": "8:acs:uuid1",
+            "displayName": "Support",
+            "kind": "internal",
+            "contact": {
+              "id": "8:acs:uuid1",
+              "kind": "communication"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

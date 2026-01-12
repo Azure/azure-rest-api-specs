@@ -1,0 +1,134 @@
+{
+  "operationId": "RadiologyInsights_CreateJob",
+  "title": "Creates a Radiology Insights job with the given request body.",
+  "parameters": {
+    "endpoint": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version={api-version}",
+    "api-version": "2024-10-01",
+    "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12",
+    "resource": {
+      "jobData": {
+        "configuration": {
+          "inferenceOptions": {
+            "followupRecommendationOptions": {
+              "includeRecommendationsWithNoSpecifiedModality": false,
+              "includeRecommendationsInReferences": false,
+              "provideFocusedSentenceEvidence": false
+            },
+            "findingOptions": {
+              "provideFocusedSentenceEvidence": false
+            }
+          },
+          "inferenceTypes": [
+            "finding",
+            "ageMismatch",
+            "lateralityDiscrepancy",
+            "sexMismatch",
+            "completeOrderDiscrepancy",
+            "limitedOrderDiscrepancy",
+            "criticalResult",
+            "criticalRecommendation",
+            "followupRecommendation",
+            "followupCommunication",
+            "radiologyProcedure"
+          ],
+          "locale": "en-US",
+          "verbose": false,
+          "includeEvidence": true
+        },
+        "patients": [
+          {
+            "id": "sample id 1",
+            "details": {
+              "sex": "male",
+              "clinicalInfo": [
+                {
+                  "resourceType": "Observation",
+                  "status": "unknown",
+                  "code": {
+                    "coding": [
+                      {
+                        "system": "http://www.nlm.nih.gov/research/umls",
+                        "code": "C0018802",
+                        "display": "MalignantNeoplasms"
+                      }
+                    ]
+                  },
+                  "valueBoolean": "true"
+                }
+              ]
+            },
+            "encounters": [
+              {
+                "id": "encounterid1",
+                "period": {
+                  "start": "2023-12-21T00:00:00",
+                  "end": "2023-12-21T00:00:00"
+                },
+                "class": "inpatient"
+              }
+            ],
+            "patientDocuments": [
+              {
+                "type": "note",
+                "clinicalType": "radiologyReport",
+                "id": "docid1",
+                "language": "en",
+                "authors": [
+                  {
+                    "id": "authorid1",
+                    "fullName": "authorname1"
+                  }
+                ],
+                "specialtyType": "radiology",
+                "createdAt": "2023-12-21T00:00:00",
+                "administrativeMetadata": {
+                  "orderedProcedures": [
+                    {
+                      "code": {
+                        "coding": [
+                          {
+                            "system": "Http://hl7.org/fhir/ValueSet/cpt-all",
+                            "code": "111111",
+                            "display": "CT ABD/PELVIS"
+                          }
+                        ]
+                      },
+                      "description": "CT ABD/PELVIS"
+                    }
+                  ],
+                  "encounterId": "encounterid1"
+                },
+                "content": {
+                  "sourceType": "inline",
+                  "value": "[**2143-4-13**] 5:04 PM\r\nCT ABD W&W/O C; CT CHEST W&W/O C                                Clip # [**Clip Number (Radiology) 38350**]\r\nCT PELVIS W&W/O C\r\nReason: ? PE, evidence of pneumonia\r\nAdmitting Diagnosis: SEPSIS\r\nField of view: 38 Contrast: OPTIRAY Amt: 130\r\n______________________________________________________________________________\r\n[**Hospital 4**] MEDICAL CONDITION:\r\n52 year old man with urosepsis, s/p nephrostogram on [**4-12**], today with acute\r\nSOB, fever, rigors.\r\nREASON FOR THIS EXAMINATION:\r\n? PE, evidence of pneumonia\r\nNo contraindications for IV contrast\r\n______________________________________________________________________________\r\nFINAL REPORT\r\nINDICATION:  History of urosepsis status post nephrostogram on [**4-12**], today\r\nwith acute shortness of breath, fevers, and rigors.  Also reported hematocrit\r\ndrop.  Evaluate for pulmonary embolism or hematoma.\r\nCOMPARISON:  Non-contrast CT of the abdomen and pelvis dated [**2143-4-11**].\r\nTECHNIQUE:  MDCT acquired images of the chest, abdomen, and pelvis were\r\nobtained before and after the administration of IV contrast.  A true CT\r\nangiogram could not be performed due to lack of appropriate intravenous\r\naccess.\r\nCT OF THE CHEST WITHOUT AND WITH IV CONTRAST:  Evaluation of the pulmonary\r\narteries is limited with no large central pulmonary embolism seen.  Evaluation\r\nof the segmental and subsegmental branches is limited.  There is a central\r\nvenous catheter that terminates in the right atrium.  There are numerous small\r\nmesenteric and axillary lymph nodes that do not meet CT criteria for\r\npathologic enlargement.  There are coronary artery calcifications.  There are\r\nbilateral small layering pleural effusions with associated compressive\r\natelectasis.  The images of the lungs are limited due to motion.  There\r\nappears to be a patchy, predominantly ground-glass opacity in both lower\r\nlobes, left worse than right.  The aorta appears intact. There is debris in\r\nthe trachea.\r\nCT OF THE ABDOMEN WITHOUT AND WITH IV CONTRAST:  There is high-density\r\nmaterial tracking along the course of a dilated left ureter consistent with\r\nhemorrhage that is new compared to the previous study.  New stranding in the\r\nleft retroperitoneum is also present consistent with retroperitoneal\r\nhemorrhage.  Perinephric stranding is present, as was seen on the previous\r\nstudy.  The degree of dilatation of the left ureter is unchanged.  Several\r\nfoci of air outside of the collecting system are present, presumably\r\npostprocedural in nature.  Contrast-enhanced images show abnormal perfusion of\r\nthe left kidney with a striated appearance, most severe at the upper pole with\r\nperipheral wedge-shaped hypoenhancing areas also present on top of the areas\r\nof reduced perfusion.  No active extravasation of contrast is seen.  The right\r\nkidney is normal.  The liver, spleen, and adrenal glands are unremarkable.\r\nPancreas is unremarkable with slightly prominent distal common bile duct\r\nmeasuring up to 8-9 mm.  There is a small cystic lesion measuring 5 mm at the\r\nhead of the pancreas (series 10, image 143).  Small and large bowel are\r\n(Over)\r\n[**2143-4-13**] 5:04 PM\r\nCT ABD W&W/O C; CT CHEST W&W/O C                                Clip # [**Clip Number (Radiology) 38350**]\r\nCT PELVIS W&W/O C\r\nReason: ? PE, evidence of pneumonia\r\nAdmitting Diagnosis: SEPSIS\r\nField of view: 38 Contrast: OPTIRAY Amt: 130\r\n______________________________________________________________________________\r\nFINAL REPORT\r\n(Cont)\r\ngrossly unremarkable.  The aorta, celiac artery, superior mesenteric artery,\r\ninferior mesenteric artery, and renal arteries appear patent.\r\nCT OF THE PELVIS WITHOUT AND WITH IV CONTRAST:  The prostate gland is\r\nenlarged.  Thickening of the bladder wall is again demonstrated.  Several foci\r\nof air within the bladder are presumably secondary to the Foley catheter.  The\r\nrectum and sigmoid colon are unremarkable.\r\nBONE WINDOWS:  There are degenerative changes with no suspicious lytic or\r\nsclerotic lesions.\r\nIMPRESSION:\r\n1.  New high-density material surrounding the left ureter and tracking within\r\nthe retroperitoneum consistent with hemorrhage.\r\n2.  Abnormal perfusion of the left kidney, most severe at the upper pole.\r\nFindings are consistent with pyelonephritis.  Edema and abnormal perfusion at\r\nthe upper pole and interpolar region medially with multiple peripheral\r\nhypoenhancing wedge- shaped regions likely represent ischemia and a component\r\nof infarction.\r\n3.  Limited examination for pulmonary embolism due to suboptimal contrast\r\nbolus with no large central embolus seen.  Evaluation of distal segmental and\r\nsubsegmental branches is limited.\r\n4.  Small bilateral layering pleural effusions with associated compressive\r\natelectasis. Patchy predominantly ground-glass opacities in both lower lobes,\r\nleft worse than right could represent pneumonia or pneumonitis.\r\n5.  5mm cystic lesion in the head of the pancreas. Recommend 1 year follow up.\r\nThe above was discussed with Dr. [**First Name8 (NamePattern2) 951**] [**Last Name (NamePattern1) 1238**] at approximately 6:30 p.m. on\r\n[**2143-4-13**].\r\n"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
+        "Operation-Location": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version=2024-10-01"
+      },
+      "body": {
+        "status": "notStarted",
+        "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12"
+      }
+    },
+    "201": {
+      "headers": {
+        "x-ms-request-id": "c7e9a8d7-6b5f-4e3d-9a2c-1f8b0e2c3f4a",
+        "Operation-Location": "{endpoint}/health-insights/radiology-insights/jobs/{id}?api-version=2024-10-01"
+      },
+      "body": {
+        "status": "notStarted",
+        "id": "ad28aef5-87f3-4d2d-97eb-5cdeb4519d12"
+      }
+    }
+  }
+}

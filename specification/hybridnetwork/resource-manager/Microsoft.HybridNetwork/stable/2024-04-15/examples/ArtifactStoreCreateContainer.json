@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "publisherName": "TestPublisher",
+    "artifactStoreName": "TestArtifactStore",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "storeType": "AzureContainerRegistry",
+        "replicationStrategy": "SingleReplication",
+        "backingResourcePublicNetworkAccess": "Disabled",
+        "managedResourceGroupConfiguration": {
+          "name": "testRg",
+          "location": "eastus"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestArtifactStore",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "location": "eastus",
+        "properties": {
+          "storeType": "AzureContainerRegistry",
+          "replicationStrategy": "SingleReplication",
+          "backingResourcePublicNetworkAccess": "Disabled",
+          "storageResourceId": "TestResourceId",
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "TestArtifactStore",
+        "id": "/subscriptions/subid/providers/microsoft.hybridnetwork/publishers/TestPublisher/artifactStores/TestArtifactStore",
+        "type": "microsoft.hybridnetwork/publishers/artifactStores",
+        "location": "eastus",
+        "properties": {
+          "storeType": "AzureContainerRegistry",
+          "replicationStrategy": "SingleReplication",
+          "backingResourcePublicNetworkAccess": "Disabled",
+          "storageResourceId": "TestResourceId",
+          "managedResourceGroupConfiguration": {
+            "name": "testRg",
+            "location": "eastus"
+          }
+        }
+      }
+    }
+  }
+}

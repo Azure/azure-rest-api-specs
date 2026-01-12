@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rshhtestmdvmrg",
+    "vaultName": "rshvault",
+    "fabricName": "Azure",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "api-version": "2024-07-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382",
+            "name": "22244821112382",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRecoveryPoint",
+              "recoveryPointType": "CrashConsistent",
+              "recoveryPointTime": "2017-12-21T22:48:25.4353958Z",
+              "recoveryPointAdditionalInfo": "",
+              "sourceVMStorageType": "NormalStorage",
+              "isSourceVMEncrypted": false,
+              "isInstantIlrSessionActive": false,
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ],
+              "recoveryPointMoveReadinessInfo": {
+                "Archive": {
+                  "isReadyForMove": true
+                }
+              },
+              "isManagedVirtualMachine": true,
+              "virtualMachineSize": "Standard_D1",
+              "originalStorageAccountOption": false
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250",
+            "name": "24977149827250",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRecoveryPoint",
+              "recoveryPointType": "CrashConsistent",
+              "recoveryPointTime": "2017-12-20T22:49:44.3317945Z",
+              "recoveryPointAdditionalInfo": "",
+              "sourceVMStorageType": "NormalStorage",
+              "isSourceVMEncrypted": false,
+              "isInstantIlrSessionActive": false,
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "ArchivedRP",
+                  "status": "Rehydrated",
+                  "extendedInfo": {
+                    "RehydratedRPExpiryTime": "2020-12-21T22:48:25.4353958Z"
+                  }
+                }
+              ],
+              "recoveryPointMoveReadinessInfo": {
+                "ArchivedRP": {
+                  "isReadyForMove": false,
+                  "additionalInfo": "Recovery point cannot be moved to archive tier since it has already been moved."
+                }
+              },
+              "isManagedVirtualMachine": true,
+              "virtualMachineSize": "Standard_D1",
+              "originalStorageAccountOption": false,
+              "zones": [
+                "1"
+              ],
+              "isPrivateAccessEnabledOnAnyDisk": true
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/FijiValidation-asr-microsoftrrdclab3-408/providers/Microsoft.RecoveryServices/vaults/testVault408/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;fijivalidation-asr-microsoftrrdclab3-408;vm408/protectedItems/VM;iaasvmcontainerv2;fijivalidation-asr-microsoftrrdclab3-408;vm408/recoveryPoints/70477518625276",
+            "name": "70477518625276",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "properties": {
+              "objectType": "IaasVMRecoveryPoint",
+              "recoveryPointType": "CrashConsistent",
+              "recoveryPointTime": "2023-09-22T20:02:00.1225746Z",
+              "recoveryPointAdditionalInfo": "",
+              "sourceVMStorageType": "PremiumVMOnPartialPremiumStorage",
+              "isSourceVMEncrypted": true,
+              "isInstantIlrSessionActive": false,
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Valid"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ],
+              "isManagedVirtualMachine": true,
+              "virtualMachineSize": "Standard_D2s_v3",
+              "originalStorageAccountOption": false,
+              "osType": "Windows",
+              "recoveryPointMoveReadinessInfo": {
+                "ArchivedRP": {
+                  "isReadyForMove": false,
+                  "additionalInfo": "We're still determining if this Recovery Point can be moved.. Please check again after some time."
+                }
+              },
+              "extendedLocation": {
+                "name": "microsoftrrdclab3",
+                "type": "EdgeZone"
+              },
+              "securityType": "None",
+              "isPrivateAccessEnabledOnAnyDisk": false
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

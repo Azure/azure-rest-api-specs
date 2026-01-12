@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "properties": {
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "databaseInstanceName": "databaseServer",
+    "resourceGroupName": "test-rg",
+    "sapVirtualInstanceName": "X00",
+    "subscriptionId": "6d875e77-e412-4d7d-9af4-8895278b4443"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "databaseServer",
+        "type": "Microsoft.Workloads/sapVirtualInstances/databaseInstances",
+        "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Workloads/sapVirtualInstances/X00/databaseInstances/databaseServer",
+        "location": "westcentralus",
+        "properties": {
+          "databaseSid": "X00",
+          "databaseType": "hdb",
+          "errors": null,
+          "ipAddress": "10.0.0.5",
+          "provisioningState": "Succeeded",
+          "status": "Running",
+          "subnet": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "vmDetails": [
+            {
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/db-vm"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "SapDatabaseInstances_Update",
+  "title": "SAPDatabaseInstances_Update"
+}

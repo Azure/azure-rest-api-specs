@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/face"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}/.."
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Face.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-face"
+    namespace: "azure.ai.vision.face"
+    package-version: 1.0.0b2
+    package-mode: dataplane
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.AI.Vision.Face"
+    clear-output-folder: true
+    model-namespace: false
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.AI.Vision.Face
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-vision-face-rest"
+    generate-metadata: true
+    is-modular-library: false
+    flavor: azure
+    package-details:
+      name: "@azure-rest/ai-vision-face"
+      description: "Face API REST Client"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-vision-face"
+    namespace: com.azure.ai.vision.face
+    partial-update: true
+    use-eclipse-language-server: false
+    enable-subclient: true
+    generate-samples: false
+    generate-tests: false
+    flavor: azure
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+  disable:
+    "@azure-tools/typespec-azure-core/operation-missing-api-version": "API version located in the host template"
+    "@azure-tools/typespec-azure-core/use-standard-operations": "Most of our operation doesn't fit standard ops"
+    "@azure-tools/typespec-azure-core/use-standard-names": "Most of our operation doesn't fit standard ops"

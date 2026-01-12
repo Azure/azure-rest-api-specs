@@ -1,0 +1,40 @@
+{
+  "title": "Get a de-identification job.",
+  "operationId": "GetJob",
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "name": "job_smith_documents_1",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "job_smith_documents_1",
+        "operation": "Surrogate",
+        "sourceLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "documents/"
+        },
+        "targetLocation": {
+          "location": "https://blobtest.blob.core.windows.net/container",
+          "prefix": "_output/",
+          "overwrite": true
+        },
+        "customizations": {
+          "surrogateLocale": "en-US"
+        },
+        "status": "Succeeded",
+        "lastUpdatedAt": "2024-01-26T01:15:00.009Z",
+        "createdAt": "2024-01-25T23:27:43.009Z",
+        "startedAt": "2024-01-25T23:27:43.009Z",
+        "summary": {
+          "successful": 10,
+          "failed": 0,
+          "canceled": 0,
+          "total": 10,
+          "bytesProcessed": 4096
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "title": "Update_Asset",
+  "operationId": "Assets_Update",
+  "description": "Patch an Asset",
+  "parameters": {
+    "api-version": "2024-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "assetName": "my-asset",
+    "properties": {
+      "properties": {
+        "enabled": false,
+        "displayName": "NewAssetDisplayName"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/assets/my-asset",
+        "name": "my-asset",
+        "type": "Microsoft.DeviceRegistry/assets",
+        "location": "West Europe",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/location1"
+        },
+        "tags": {
+          "site": "building-1"
+        },
+        "systemData": {
+          "createdBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "createdByType": "Application",
+          "createdAt": "2022-11-16T00:36:43.2516899Z",
+          "lastModifiedBy": "2ta23112-4596-44ff-b773-19405922bfc1",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2022-11-16T01:37:16.0922793Z"
+        },
+        "properties": {
+          "uuid": "0796f7c1-f2c8-44d7-9f5b-9a6f9522a85d",
+          "enabled": true,
+          "externalAssetId": "8ZBA6LRHU0A458969",
+          "displayName": "NewAssetDisplayName",
+          "description": "This is a sample Asset",
+          "assetEndpointProfileRef": "myAssetEndpointProfile",
+          "version": 73766,
+          "manufacturer": "Contoso",
+          "manufacturerUri": "https://www.contoso.com/manufacturerUri",
+          "model": "ContosoModel",
+          "productCode": "SA34VDG",
+          "hardwareRevision": "1.0",
+          "softwareRevision": "2.0",
+          "documentationUri": "https://www.example.com/manual",
+          "serialNumber": "64-103816-519918-8",
+          "defaultDatasetsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+          "defaultEventsConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+          "defaultTopic": {
+            "path": "/path/defaultTopic",
+            "retain": "Keep"
+          },
+          "datasets": [
+            {
+              "name": "dataset1",
+              "datasetConfiguration": "{\"publishingInterval\":10,\"samplingInterval\":15,\"queueSize\":20}",
+              "topic": {
+                "path": "/path/dataset1",
+                "retain": "Keep"
+              },
+              "dataPoints": [
+                {
+                  "name": "dataPoint1",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt1",
+                  "observabilityMode": "Counter",
+                  "dataPointConfiguration": "{\"publishingInterval\":8,\"samplingInterval\":8,\"queueSize\":4}"
+                },
+                {
+                  "name": "dataPoint2",
+                  "dataSource": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt2",
+                  "observabilityMode": "None",
+                  "dataPointConfiguration": "{\"publishingInterval\":4,\"samplingInterval\":4,\"queueSize\":7}"
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "name": "event1",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt3",
+              "observabilityMode": "None",
+              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":1,\"queueSize\":8}",
+              "topic": {
+                "path": "/path/event1",
+                "retain": "Keep"
+              }
+            },
+            {
+              "name": "event2",
+              "eventNotifier": "nsu=http://microsoft.com/Opc/OpcPlc/;s=FastUInt4",
+              "observabilityMode": "Log",
+              "eventConfiguration": "{\"publishingInterval\":7,\"samplingInterval\":8,\"queueSize\":4}"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

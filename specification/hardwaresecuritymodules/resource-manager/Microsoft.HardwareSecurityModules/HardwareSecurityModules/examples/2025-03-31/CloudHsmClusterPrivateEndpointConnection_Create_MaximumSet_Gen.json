@@ -1,0 +1,47 @@
+{
+  "operationId": "CloudHsmClusterPrivateEndpointConnections_Create",
+  "parameters": {
+    "api-version": "2025-03-31",
+    "cloudHsmClusterName": "chsm1",
+    "peConnectionName": "sample-pec",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "description": "My name is Joe and I'm approving this.",
+          "status": "Approved"
+        }
+      }
+    },
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CloudHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-pec",
+        "type": "Microsoft.HardwareSecurityModules/cloudHsmClusters/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1/privateEndpointConnections/sample-pec",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.Network/privateEndpoints/sample-pec"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "My name is Joe and I'm approving this.",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "User2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "VectorStoreFiles_CreateVectorStoreFile_MinimumSet",
+  "operationId": "VectorStoreFiles_CreateVectorStoreFile",
+  "parameters": {
+    "api-version": "v1",
+    "vectorStoreId": "vs_abc123",
+    "body": {
+      "data_source": {
+        "uri": "https://example.com/document.pdf",
+        "type": "uri_asset"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "file_def456",
+        "object": "vector_store.file",
+        "usage_bytes": 1024000,
+        "created_at": 1736869300,
+        "vector_store_id": "vs_abc123",
+        "status": "completed",
+        "last_error": {
+          "code": "server_error",
+          "message": "o"
+        },
+        "chunking_strategy": {
+          "type": "other"
+        }
+      }
+    }
+  }
+}

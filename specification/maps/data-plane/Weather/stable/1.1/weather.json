@@ -17,14 +17,14 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management](https://aka.ms/amauthdetails) API.\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
     },
     "SharedKey": {
       "type": "apiKey",
-      "description": "This is a shared key that is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n\n With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.\n\n For publicly exposed applications, our recommendation is to use server-to-server access of Azure Maps REST APIs where this key can be securely stored.",
+      "description": "This is a shared key that is provisioned when you [Create an Azure Maps account](https://docs.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account) in the Azure portal or using PowerShell, CLI, Azure SDKs, or REST API.\n\n With this key, any application can access all REST API. In other words, this key can be used as a master key in the account that they are issued in.\n\n For publicly exposed applications, our recommendation is to use the [confidential client applications](https://docs.microsoft.com/azure/azure-maps/authentication-best-practices#confidential-client-applications) approach to access Azure Maps REST APIs so your key can be securely stored.",
       "name": "subscription-key",
       "in": "query"
     },
@@ -73,20 +73,20 @@
       "in": "query",
       "type": "string",
       "enum": [
-        "metric",
-        "imperial"
+        "imperial",
+        "metric"
       ],
       "x-ms-enum": {
         "name": "WeatherDataUnit",
         "modelAsString": true,
         "values": [
           {
-            "value": "metric",
-            "description": "Return data in metric units. Some example units of metric system are Celsius and kilometer."
+            "value": "imperial",
+            "description": "Return data using imperial units such as Fahrenheit (F) for temperature and mile (mi) for distance."
           },
           {
-            "value": "imperial",
-            "description": "Return data in imperial units. Some example units of imperial system are Fahrenheit and mile."
+            "value": "metric",
+            "description": "Return data using metric units such as Celsius (C) for temperature and kilometer (km) for distance."
           }
         ]
       },
@@ -104,16 +104,16 @@
     "RequiredWeatherBasinId": {
       "name": "basinId",
       "type": "string",
-      "description": "Basin identifier",
+      "description": "The `basinId` enum categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin.",
       "required": true,
       "in": "query",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -122,31 +122,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       },
@@ -155,15 +155,15 @@
     "OptionalWeatherBasinId": {
       "name": "basinId",
       "type": "string",
-      "description": "Basin identifier",
+      "description": "The `basinId` enum categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin.",
       "in": "query",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -172,31 +172,31 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       },
@@ -243,7 +243,7 @@
       "name": "query",
       "in": "query",
       "x-ms-client-name": "coordinates",
-      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".\n\nWeather information is generally available for locations on land, bodies of water surrounded by land, and areas of the ocean that are within approximately 50 nautical miles of a coastline.",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "array",
@@ -259,7 +259,8 @@
   "paths": {
     "/weather/forecast/hourly/{format}": {
       "get": {
-        "description": "**Get Hourly Forecast**\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nRequest detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index.\n\nIn S0 you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). In S1 you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
+        "summary": "Use to get a detailed hourly weather forecast for up to 24 hours or a daily forecast for up to 10 days.",
+        "description": "\n\nThe `Get Hourly Forecast` API is an HTTP `GET` that Request detailed weather forecast by the hour for the next 1, 12, 24 (1 day), 72 (3 days), 120 (5 days), and 240 hours (10 days) for the given the given coordinate location.  The API returns details such as temperature, humidity, wind, precipitation, and ultraviolet (UV) index. For more information, see [Request hourly weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-hourly-weather-forecast-data).\n\nIf you are using the Gen1 S0 pricing tier, you can request hourly forecast for the next 1, 12, 24 hours (1 day), and 72 hours (3 days). If you are using Gen1 S1 or Gen2 pricing tier, you can also request hourly forecast for the next 120 (5 days) and 240 hours (10 days).",
         "operationId": "Weather_GetHourlyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by the hour": {
@@ -307,7 +308,8 @@
     },
     "/weather/forecast/minute/{format}": {
       "get": {
-        "description": "**Get Minute Forecast**\n  \n  \n**Applies to**: S1 pricing tier.\n\n\nGet Minute Forecast service returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in the interval of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ).",
+        "summary": "Use to get a minute-by-minute forecast for the next 120 minutes in intervals of 1, 5 and 15 minutes.",
+        "description": "\n\nThe `Get Minute Forecast` API is an HTTP `GET` request that returns minute-by-minute forecasts for a given location for the next 120 minutes.  Users can request weather forecasts in intervals of 1, 5 and 15 minutes.  The response will include details such as the type of precipitation (including rain, snow, or a mixture of both), start time, and precipitation intensity value (dBZ). For more information, see [Request minute-by-minute weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-minute-by-minute-weather-forecast-data).",
         "operationId": "Weather_GetMinuteForecast",
         "x-ms-examples": {
           "Successfully retrieve minute-by-minute forecasts for a given location": {
@@ -352,7 +354,8 @@
     },
     "/weather/forecast/quarterDay/{format}": {
       "get": {
-        "description": "**Get Quarter-Day Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nService returns detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
+        "summary": "Use to get a Quarter-Day Forecast for the next 1, 5, 10, or 15 days.",
+        "description": "\n\nThe `Get Quarter-Day Forecast` API is an HTTP `GET` request that returns a detailed weather forecast by quarter-day for the next 1, 5, 10, or 15 days for a given location. Response data is presented by quarters of the day - morning, afternoon, evening, and overnight. Details such as temperature, humidity, wind, precipitation, and UV index are returned.",
         "operationId": "Weather_GetQuarterDayForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed weather forecast by a given location": {
@@ -400,7 +403,8 @@
     },
     "/weather/currentConditions/{format}": {
       "get": {
-        "description": "**Get Current Conditions**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nGet Current Conditions service returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with the response include details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned.",
+        "summary": "Use to get current weather conditions.",
+        "description": "\n\nThe `Get Current Conditions` API is an HTTP `GET` request that returns detailed current weather conditions such as precipitation, temperature and wind for a given coordinate location. Also, observations from the past 6 or 24 hours for a particular location can be retrieved. The basic information returned with The response includes details such as observation date and time, brief description of the weather conditions, weather icon, precipitation indicator flags, and temperature. Additional details such as RealFeel™ Temperature and UV index are also returned. For more information, see [Request real-time weather data](/azure/azure-maps/how-to-request-weather-data#request-real-time-weather-data)",
         "operationId": "Weather_GetCurrentConditions",
         "x-ms-examples": {
           "Successfully retrieve detailed current weather conditions for a given coordinate location": {
@@ -454,7 +458,8 @@
     },
     "/weather/forecast/daily/{format}": {
       "get": {
-        "description": "**Get Daily Forecast**\n  \n  \n**Applies to**: S0 and S1 pricing tiers.\n\n\nThe service returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response include details such as temperature, wind, precipitation, air quality, and UV index.\n\nIn S0 you can request daily forecast for the next 1, 5, 10, and 15 days. In S1 you can also request daily forecast for the next 25 days, and 45 days.",
+        "summary": "Use to get a daily detailed weather forecast for the next 1, 5, 10, 15, 25, or 45 days.",
+        "description": "\n\nThe `Get Daily Forecast` API is an HTTP `GET` request that returns detailed weather forecast such as temperature and wind by day for the next 1, 5, 10, 15, 25, or 45 days for a given coordinate location.  The response includes details such as temperature, wind, precipitation, air quality, and UV index. For more information, see [Request daily weather forecast data](/azure/azure-maps/how-to-request-weather-data#request-daily-weather-forecast-data).\n\n If you are using the Gen1 S0 pricing tier, you can request daily forecast for the next 1, 5, 10, and 15 days. If you are using Gen1 S1 or Gen2 pricing tier, you can also request daily forecast for the next 25 days, and 45 days.",
         "operationId": "Weather_GetDailyForecast",
         "x-ms-examples": {
           "Successfully retrieve detailed daily weather forecast for a given coordinate location": {
@@ -502,7 +507,8 @@
     },
     "/weather/route/{format}": {
       "get": {
-        "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
+        "summary": "Use to get a locationally precise, up-to-the-minute forecast that includes weather hazard assessments and notifications along a route.",
+        "description": "\n\nThe `Get Weather Along Route` API is an HTTP `GET` request that returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. When submitting the waypoints, it is recommended to stay within, or close to, the distance that can be traveled within 120-mins or shortly after. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "Weather_GetWeatherAlongRoute",
         "x-ms-examples": {
           "Successfully retrieve detailed weather casts along a route described as a sequence of waypoints": {
@@ -545,10 +551,11 @@
     },
     "/weather/severe/alerts/{format}": {
       "get": {
-        "description": "**Get Severe Weather Alerts**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products.  Azure Maps Severe Weather Alerts API returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires.",
+        "summary": "Use to get information about severe weather conditions such as hurricanes, thunderstorms, flooding, lightning, heat waves or forest fires for a given location.",
+        "description": "\n\nSevere weather phenomenon can significantly impact our everyday life and business operations. For example, severe weather conditions such as tropical storms, high winds or flooding can close roads and force logistics companies to reroute their fleet causing delays in reaching destinations and breaking the cold chain of refrigerated food products. \n\n The `Get Severe Weather Alerts` API is an HTTP `GET` request that returns the severe weather alerts that are available worldwide from both official Government Meteorological Agencies and leading global to regional weather alert providers. The service can return details such as alert type, category, level and detailed description about the active severe alerts for the requested location, like hurricanes, thunderstorms, lightning, heat waves or forest fires. For more information, see [Request severe weather alerts](/azure/azure-maps/how-to-request-weather-data#request-severe-weather-alerts)",
         "operationId": "Weather_GetSevereWeatherAlerts",
         "x-ms-examples": {
-          "Successfully retrieve severe weather alerts": {
+          "Successfully retrieve severe weather alerts": {
             "$ref": "./examples/GetSevereWeatherAlerts.json"
           }
         },
@@ -590,7 +597,8 @@
     },
     "/weather/indices/daily/{format}": {
       "get": {
-        "description": "**Get Daily Indices**\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThere may be times when you want to know if the weather conditions are optimal for a specific activity, for example, for outdoor construction, indoor activities, running or farming including soil moisture information.  Azure Maps Indices API returns index values that will guide end users to plan future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like for playing golf, and retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
+        "summary": "Use when you want to know if the weather conditions are optimal for a specific activity such as outdoor sporting activities, construction, or farming (results includes soil moisture information).",
+        "description": "\n\nThe `Get Daily Indices` API is an HTTP `GET` request returns index values that provide guidance to help when planning future activities. For example, a health mobile application can notify users that today is good weather for running or for other outdoors activities like playing golf or flying a kite. Retail stores can optimize their digital marketing campaigns based on predicted index values. The service returns in daily indices values for current and next 5, 10 and 15 days starting from current day.",
         "operationId": "Weather_GetDailyIndices",
         "x-ms-examples": {
           "Successfully retrieve daily indices values from current day": {
@@ -621,13 +629,13 @@
           },
           {
             "name": "indexId",
-            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported indices.",
+            "description": "Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported indices.",
             "in": "query",
             "type": "integer"
           },
           {
             "name": "indexGroupId",
-            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index groups.",
+            "description": "Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) for details and to see the supported index groups.",
             "in": "query",
             "type": "integer"
           }
@@ -647,7 +655,8 @@
     },
     "/weather/tropical/storms/active/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Active**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
+        "summary": "Use to get a list of the active tropical storms issued by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Active` API is an HTTP `GET` request that returns a list of all government-issued active tropical storms. Information about the tropical storms includes, government ID, basin ID, year of origin, name and if it is subtropical.",
         "operationId": "Weather_GetTropicalStormActive",
         "x-ms-examples": {
           "Get Tropical Storm Active": {
@@ -680,7 +689,8 @@
     },
     "/weather/tropical/storms/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Search**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nSearch government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
+        "summary": "Use to get a list of storms issued by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Search` API is an HTTP `GET` request that returns a list of government-issued tropical storms by year, basin ID, and government ID. Information about the tropical storms includes, government ID, basin ID, status, year, name and if it is subtropical.",
         "operationId": "Weather_GetTropicalStormSearch",
         "x-ms-client-name": "SearchTropicalStorm",
         "x-ms-examples": {
@@ -726,7 +736,8 @@
     },
     "/weather/tropical/storms/forecasts/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet individual government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
+        "summary": "Use to get a list of tropical storms forecasted by national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Forecasts` API is an HTTP `GET` request that returns individual government-issued tropical storm forecasts. Information about the forecasted tropical storms includes, location, status, date the forecast was created, window, wind speed and wind radii.",
         "operationId": "Weather_GetTropicalStormForecast",
         "x-ms-examples": {
           "Get Tropical Storm Forecasts": {
@@ -785,7 +796,8 @@
     },
     "/weather/tropical/storms/locations/{format}": {
       "get": {
-        "description": "**Get Tropical Storm Locations**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet location of individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
+        "summary": "Use to get the location of tropical storms from individual national weather forecasting agencies.",
+        "description": "\n\nThe `Get Tropical Storm Locations` API is an HTTP `GET` request that returns the location of individual government-issued tropical storms. Information about the tropical storms includes, location coordinates, geometry, basin ID, date, wind details and wind radii.",
         "operationId": "Weather_GetTropicalStormLocations",
         "x-ms-examples": {
           "Get Tropical Storm Locations": {
@@ -847,7 +859,8 @@
     },
     "/weather/airQuality/current/{format}": {
       "get": {
-        "description": "**Get Current Air Quality**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for current air quality. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get current air quality information that includes potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Current Air Quality` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status for current air quality, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetCurrentAirQuality",
         "x-ms-examples": {
           "Get Current Air Quality": {
@@ -889,7 +902,8 @@
     },
     "/weather/airQuality/forecasts/daily/{format}": {
       "get": {
-        "description": "**Get Air Quality Daily Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get daily air quality forecasts for the next one to seven days that include pollutant levels, potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Air Quality Daily Forecasts` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status of forecasted daily air quality. The service can provide forecasted daily air quality information for the upcoming 1 to 7 days, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetAirQualityDailyForecasts",
         "x-ms-examples": {
           "Get Daily Air Quality Forecasts": {
@@ -914,7 +928,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days from now we would like to know about the air quality. Available values are 1, 2, 3, 4, 5, 6, and 7. Default value is 1.",
+            "description": "Defines the duration for the air quality forecast, with options ranging from 1 to 7 days. The default duration is 1 day.",
             "default": 1,
             "in": "query",
             "type": "integer",
@@ -986,7 +1000,8 @@
     },
     "/weather/airQuality/forecasts/hourly/{format}": {
       "get": {
-        "description": "**Get Air Quality Hourly Forecasts**\n\n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\nGet detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours. Information includes, pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
+        "summary": "Use to get hourly air quality forecasts for the next one to 96 hours that include pollutant levels, potential risks and suggested precautions.",
+        "description": "\n\nThe `Get Air Quality Hourly Forecasts` API is an HTTP `GET` request that returns detailed information about the concentration of pollutants and overall status for forecasted upcoming hourly air quality. The service can provide forecasted hourly air quality information for the upcoming time spans of 1, 12, 24, 48, 72, and 96 hours, including pollution levels, air quality index values, the dominant pollutant, and a brief statement summarizing risk level and suggested precautions.",
         "operationId": "Weather_GetAirQualityHourlyForecasts",
         "x-ms-examples": {
           "Get Hourly Air Quality Forecasts": {
@@ -1011,7 +1026,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many hours from now we would like to know about the air quality. Available values are 1, 12, 24, 48, 72, 96. Default value is 1 hour.",
+            "description": "Defines the duration, in hours, for the air quality forecast. Available values are 1, 12, 24, 48, 72, and 96. The default value is 1 hour.",
             "default": 1,
             "in": "query",
             "type": "integer",
@@ -1080,7 +1095,8 @@
     },
     "/weather/historical/actuals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Actuals**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Actuals service returns climatology data such as past daily actual observed temperatures, precipitation, snowfall, snow depth and cooling/heating degree day information, for the day at a given coordinate location. The data is requested for a specified date range, up to 31 days in a single API request. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily actual observed temperatures, precipitation, snowfall and snow depth.",
+        "description": "\n\nThe `Get Daily Historical Actuals` API is an HTTP `GET` request that returns climatology data such as past daily actual observed temperatures, precipitation, snowfall, snow depth and cooling/heating degree day information, for the day at a given coordinate location. The data is requested for a specified date range, up to 31 days in a single API request. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalActuals",
         "x-ms-examples": {
           "Successful Daily Historical Actuals Request": {
@@ -1102,7 +1118,7 @@
           },
           {
             "name": "startDate",
-            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "Start date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1110,7 +1126,7 @@
           },
           {
             "name": "endDate",
-            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "End date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1135,7 +1151,8 @@
     },
     "/weather/historical/records/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Records**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Records service returns climatology data such as past daily record temperatures, precipitation and snowfall at a given coordinate location. Availability of records data will vary by location. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily record temperatures, precipitation and snowfall at a given location.",
+        "description": "\n\nThe `Get Daily Historical Records` API is an HTTP `GET` request that returns climatology data such as past daily record temperatures, precipitation and snowfall at a given coordinate location. Availability of records data will vary by location. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalRecords",
         "x-ms-examples": {
           "Successful Daily Historical Records Request": {
@@ -1157,7 +1174,7 @@
           },
           {
             "name": "startDate",
-            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "Start date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1165,7 +1182,7 @@
           },
           {
             "name": "endDate",
-            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "End date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1190,7 +1207,8 @@
     },
     "/weather/historical/normals/daily/{format}": {
       "get": {
-        "description": "**Get Daily Historical Normals**\n  \n  \n**Applies to**: Gen 1 (S0 and S1) and Gen 2 pricing tiers.\n\n\nGet Daily Historical Normals service returns climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for the day at a given coordinate location. Normals are a 30-year average for temperatures and precipitation for a specific location. As is standard practice in climatology, the 30-year average covers years 1991-2020, this data will be used for one decade and then will reset in the year 2030. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
+        "summary": "Use to get climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for a given location.",
+        "description": "\n\nThe `Get Daily Historical Normals` API is an HTTP `GET` request that returns climatology data such as past daily normal temperatures, precipitation and cooling/heating degree day information for the day at a given coordinate location. The historical normals are a 30-year average for temperatures and precipitation for a specific location. As is standard practice in climatology, the 30-year average covers years 1991-2020, this data will be used for one decade and then will reset in the year 2030. Generally, historical data may be available as far back as the last 5 to 40+ years, depending on the location.",
         "operationId": "Weather_GetDailyHistoricalNormals",
         "x-ms-examples": {
           "Successful Daily Historical Normals Request": {
@@ -1212,7 +1230,7 @@
           },
           {
             "name": "startDate",
-            "description": "Start date in ISO 8601 format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "Start date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1220,7 +1238,7 @@
           },
           {
             "name": "endDate",
-            "description": "End date in ISO 8601 format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
+            "description": "End date in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-28. The date range supported is 1 to 31 calendar days, so be sure to specify a startDate and endDate that does not exceed a maximum of 31 days (i.e.: startDate=2012-01-01&endDate=2012-01-31).",
             "in": "query",
             "type": "string",
             "format": "date",
@@ -1248,7 +1266,7 @@
     "IconCode": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric value representing an image that displays the `iconPhrase`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "Numeric value representing an image that corresponds to the current weather condition described by the `Phrase` property. For more information, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#weather-icons). May be NULL.",
       "enum": [
         1,
         2,
@@ -1505,7 +1523,7 @@
     "UnitType": {
       "type": "integer",
       "format": "int32",
-      "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details.",
+      "description": "An integer representing the unit type.  For example, 17 for Celsius, 18 for Fahrenheit. Can be used for unit translation. For a complete list, see [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#unit-types).",
       "enum": [
         0,
         1,
@@ -1624,12 +1642,12 @@
           {
             "value": 17,
             "name": "Celsius",
-            "description": "celsius"
+            "description": "Celsius"
           },
           {
             "value": 18,
             "name": "Fahrenheit",
-            "description": "fahrenheit"
+            "description": "Fahrenheit"
           },
           {
             "value": 19,
@@ -1661,25 +1679,17 @@
     },
     "PrecipitationType": {
       "type": "string",
-      "description": "Specifies the type of precipitation (\"Rain\" \"Snow\" \"Ice\" or \"Mix\"). If dbz is zero, precipitationType is not present in the response.",
+      "description": "Specifies the type of precipitation. Valid values are Rain, Snow, Ice, or Mix. This property is included in the response when dBZ is greater than zero.",
       "enum": [
-        "Rain",
-        "Snow",
         "Ice",
-        "Mix"
+        "Mix",
+        "Rain",
+        "Snow"
       ],
       "x-ms-enum": {
         "name": "PrecipitationType",
         "modelAsString": true,
         "values": [
-          {
-            "value": "Rain",
-            "description": "Rain"
-          },
-          {
-            "value": "Snow",
-            "description": "Snow"
-          },
           {
             "value": "Ice",
             "description": "Ice"
@@ -1687,6 +1697,14 @@
           {
             "value": "Mix",
             "description": "Mix"
+          },
+          {
+            "value": "Rain",
+            "description": "Rain"
+          },
+          {
+            "value": "Snow",
+            "description": "Snow"
           }
         ]
       }
@@ -1764,7 +1782,7 @@
     "HazardIndex": {
       "type": "integer",
       "format": "int32",
-      "description": "A severity/hazard index.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
+      "description": "The aggregated severity/hazard index for each waypoint, which can be used to color-code route segments to indicate driver safety.\n  * `0` - No hazard.\n  * `1` - Be informed, be aware.\n  * `2` - Pay attention, be prepared.\n  * `3` - Take action.\n  * `4` - Life threatening, emergency.",
       "enum": [
         0,
         1,
@@ -1810,7 +1828,7 @@
         "date": {
           "x-ms-client-name": "timestamp",
           "type": "string",
-          "description": "Date and time of the forecast in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00.",
+          "description": "Date and time of the forecast in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27T19:39:57-08:00.",
           "format": "date-time"
         },
         "iconCode": {
@@ -1822,7 +1840,7 @@
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or hail) is expected during the specified timeframe. Returns true if precipitation is expected, otherwise false."
         },
         "isDaylight": {
           "type": "boolean",
@@ -2000,7 +2018,7 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time for the start of the interval in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "The date and time for the start of the interval in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27T19:39:57-08:00."
         },
         "minute": {
           "type": "integer",
@@ -2020,15 +2038,15 @@
         },
         "threshold": {
           "type": "string",
-          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dbz is zero, not present in the response."
+          "description": "Key that specifies the threshold value. Along with precipitationType, can be used to determine the simplifiedColor. If dBZ is zero, not present in the response."
         },
         "color": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dbz is zero, color is not present in the response."
+          "description": "The full spectrum color that maps to the dBZ (decibel relative to Z). If dBZ is zero, color is not present in the response."
         },
         "simplifiedColor": {
           "$ref": "#/definitions/ColorValue",
-          "description": "The band color that maps to the precipitation type and threshold. If dbz is zero, not present in the response."
+          "description": "The band color that maps to the precipitation type and threshold. If dBZ is zero, not present in the response."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType"
@@ -2104,10 +2122,10 @@
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the beginning of the forecast quarter displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the beginning of the forecast quarter displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27T19:39:57-08:00."
         },
         "quarter": {
-          "description": "Quarter of the day.",
+          "description": "Divides the day into four 6-hour quarters. Valid values are 0-3:<ul><li>0: Morning (7am - 1pm)</li><li>1: Afternoon (1pm - 7pm)</li><li>2: Evening (7pm - 1am)</li><li>3: Overnight (1am - 7am)</li></ul>",
           "type": "integer",
           "format": "int32",
           "enum": [
@@ -2190,7 +2208,7 @@
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or hail) is expected during the specified timeframe. Returns true if precipitation is expected, otherwise false."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType"
@@ -2274,27 +2292,27 @@
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past hour."
         },
-        "pastThreeHours": {
+        "past3Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past three hours."
         },
-        "pastSixHours": {
+        "past6Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past six hours. Contains Metric and Imperial Values."
         },
-        "pastNineHours": {
+        "past9Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past nine hours."
         },
-        "pastTwelveHours": {
+        "past12Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 12 hours."
         },
-        "pastEighteenHours": {
+        "past18Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 18 hours."
         },
-        "pastTwentyFourHours": {
+        "past24Hours": {
           "$ref": "#/definitions/WeatherUnit",
           "description": "The amount of precipitation (liquid equivalent) that has fallen in the past 24 hours."
         }
@@ -2317,15 +2335,15 @@
     "TemperatureSummary": {
       "type": "object",
       "properties": {
-        "pastSixHours": {
+        "past6Hours": {
           "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 6 hours."
         },
-        "pastTwelveHours": {
+        "past12Hours": {
           "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 12 hours."
         },
-        "pastTwentyFourHours": {
+        "past24Hours": {
           "$ref": "#/definitions/PastHoursTemperature",
           "description": "Summary of temperature fluctuations over the past 24 hours."
         }
@@ -2337,7 +2355,7 @@
         "dateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27T19:39:57-08:00."
         },
         "phrase": {
           "x-ms-client-name": "description",
@@ -2349,7 +2367,7 @@
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or hail) is expected during the specified timeframe. Returns true if precipitation is expected, otherwise false."
         },
         "isDayTime": {
           "x-ms-client-name": "isDaytime",
@@ -2399,7 +2417,7 @@
         },
         "obstructionsToVisibility": {
           "type": "string",
-          "description": "Cause of limited visibility."
+          "description": "Cause of limited visibility.\n\nPossible values:\n\n- _A = heavy thunderstorm/hail_\n- _BD = blowing dust_\n- _BN = blowing sand_\n- _BS = blowing snow_\n- _D = dust_\n- _F = fog_\n- _GF = ground fog_\n- _HZ = haze_\n- _I = ice_\n- _IC = ice crystals_\n- _IF = ice fog_\n- _IP = ice pellets_\n- _IPW = ice pellets shower_\n- _K = smoke_\n- _L = drizzle_\n- _R = rain_\n- _RS = rain/snow_\n- _RW = rain shower_\n- _S = snow_\n- _SG = snow granules_\n- _SP = snow pellets_\n- _SW = snow shower_\n- _T = thunderstorm_\n- _UP = undefined precipitation_\n- _ZL = freezing drizzle_\n- _ZR = freezing rain_\n- _+ = heavy_\n- _- = light_"
         },
         "cloudCover": {
           "type": "integer",
@@ -2451,25 +2469,25 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time that the summary is in effect, displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "The start date and time for the forecast summary, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time that the summary period ends, displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "The end date and time for the forecast summary, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "severity"
+          "description": "Indicates the severity of the forecasted weather as an integer. Lower numbers represent higher severity: 0 = Unknown, 1 = Significant, 2 = Major, 3 = Moderate, 4 = Minor, 5 = Minimal, 6 = Insignificant, 7 = Informational."
         },
         "phrase": {
           "type": "string",
-          "description": "Summary phrase of the daily forecast.  Displayed in specified language."
+          "description": "Provides a brief textual summary of the daily weather conditions, displayed in the specified language."
         },
         "category": {
           "type": "string",
-          "description": "one or 2 word(s) to summarize the phrase."
+          "description": "Provides a one or two-word summary of the forecasted weather conditions, such as Sunny, Partly Cloudy, Rain, or Snow."
         }
       },
       "description": "Summary for the main conditions for the requested time period. Notice that summary can cover only part of the time period."
@@ -2489,63 +2507,65 @@
     },
     "AirAndPollen": {
       "type": "object",
+      "description": "The AirAndPollen object provides comprehensive environmental data. It identifies various pollen types such as tree, grass, ragweed, and mold, and pollutants including PM2.5, PM10, O3, NO2, SO2, and CO. Additionally, it reports the UV Index on a scale from 1 to 10, offers qualitative descriptions of air quality or pollen levels, and provides numerical measurements of the concentration of pollutants or pollen in the air. This detailed information helps users assess air quality and pollen conditions along their travel route.",
       "properties": {
         "name": {
           "x-ms-client-name": "description",
           "type": "string",
-          "description": "Name of the pollen or pollutant. For example, grass, mold, weed, air quality, tree and UV index."
+          "description": "**For pollen:**\nReturns the name of the pollen, such as tree, grass, ragweed, or mold.\n\n**For pollutants:**\nWhen the `name` property is `AirQuality`, the name of the pollutant is returned in the `type` property.\nValid pollutants include: PM2.5, PM10, O3, NO2, SO2, and CO.\n\n**For UV Index:**\nWhen the `name` property is `UVIndex`, the UV index is returned in the `value` property. Valid UV Index values range from 0 to 11+ and represent the intensity of ultraviolet radiation.\nUV Index values are categorized as follows:\n<ul><li><B>0-2</B>: Low</li><li><B>3-5</B>: Moderate</li><li><B>6-7</B>: High</li><li><B>8-10</B>: Very High</li><li><B>11+</B>: Extreme</li></ul>"
         },
         "value": {
           "type": "integer",
           "format": "int32",
-          "description": "Value of the given type above. Values associated with mold, grass, weed and tree are in units of parts per cubic meter. Both air quality and UV are indices, so they are unitless."
+          "description": "Provides a numerical measurement of the concentration of pollutants or pollen in the air. This value is typically expressed in units relevant to the type of pollutant or pollen being measured, such as micrograms per cubic meter (µg/m³) for particulate matter or parts per billion (ppb) for gases like ozone. Both air quality and UV are indices, so they are unitless."
         },
         "category": {
           "type": "string",
-          "description": "Category of the air quality or pollution type. For example, low, high, good, moderate, unhealthy, hazardous."
+          "description": "Provides a one-word qualitative description of the air quality or pollen level for the forecast period in the specified language. This property categorizes the air quality or pollen count into different levels, such as low, high, good, moderate, unhealthy, hazardous giving users an easy-to-understand assessment of the current conditions."
         },
         "categoryValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Value associated with the air quality or pollution category. These values range from 1 to 6. 1 implying good conditions, 6 implying hazardous conditions."
+          "description": "Provides a numerical representation of the air quality or pollen level. This value corresponds to the qualitative `category` property, offering a precise way to quantify the air quality or pollen level. These values range from 1 to 6, with 1 implying good conditions and 6 implying hazardous conditions."
         },
         "type": {
           "x-ms-client-name": "airQualityType",
           "type": "string",
-          "description": "Only exists for air quality. Examples include ozone and particle pollution."
+          "description": "Specifies the type of air pollutant being measured. Only used when the `name` property equals *AirQuality*. Examples of air pollutants include Particulate Matter (PM2.5, PM10), Ozone (O3), Nitrogen Dioxide (NO2), Sulfur Dioxide (SO2), and Carbon Monoxide (CO)."
         }
       }
     },
     "DailyForecast": {
       "type": "object",
+      "description": "Provides detailed weather information for a specific day, such as temperature, wind, precipitation, air quality, and UV index.",
       "properties": {
         "date": {
           "x-ms-client-name": "dateTime",
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitRange",
-          "description": "Temperature values for the day."
+          "description": "Provides the forecasted high and low temperatures for the day, in degrees Celsius (C) or Fahrenheit (F), depending on the `unit` specified in the request."
         },
         "realFeelTemperature": {
           "$ref": "#/definitions/WeatherUnitRange",
-          "description": "RealFeel™ Temperature being returned."
+          "description": "Provides RealFeel™ Temperature values for the specified day, measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in the request. This metric, developed by AccuWeather, incorporates over a dozen factors, including humidity, wind speed, cloud cover, and sun intensity, to offer a comprehensive measure of how the weather actually feels."
         },
         "realFeelTemperatureShade": {
           "$ref": "#/definitions/WeatherUnitRange",
-          "description": "RealFeel™ Temperature being returned. Describes what the temperature really feels like in the shade."
+          "description": "Provides RealFeel™ Temperature values for the specified day in shaded areas. This metric, developed by AccuWeather, incorporates over a dozen factors, including humidity, wind speed, cloud cover, and sun intensity, to offer a comprehensive measure of how the weather actually feels in the shade."
         },
         "hoursOfSun": {
           "type": "number",
           "format": "float",
-          "description": "Hours of sun."
+          "description": "Provides the expected number of hours of sunshine for the specified day."
         },
         "degreeDaySummary": {
           "x-ms-client-name": "meanTemperatureDeviation",
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary for mean temperature of Heating Degree Day or Cooling Degree Day information"
+          "description": "Provides a summary of heating and cooling degree days. Heating Degree Days (HDD) measure the demand for energy to heat a building, calculated based on the degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the demand for energy to cool a building, calculated based on the degrees a day's average temperature is above 65°F/18°C. This summary aids in energy management and planning."
         },
         "airAndPollen": {
           "x-ms-client-name": "airQuality",
@@ -2553,20 +2573,20 @@
           "items": {
             "$ref": "#/definitions/AirAndPollen"
           },
-          "description": "Air quality"
+          "description": "A list containing pollutants, pollen levels, and the UV index for the daily forecast. Each list item includes forecasted amounts and categories (e.g., low, high, good, moderate, unhealthy, hazardous) to assess potential health risks."
         },
         "day": {
           "x-ms-client-name": "daytimeForecast",
           "$ref": "#/definitions/DayOrNight",
-          "description": "Day forecast detail"
+          "description": "Provides detailed weather information for the daytime weather forecast, including temperature, precipitation, wind, and other key attributes."
         },
         "night": {
           "x-ms-client-name": "nighttimeForecast",
           "$ref": "#/definitions/DayOrNight",
-          "description": "Night forecast detail"
+          "description": "Provides detailed weather information for the nighttime weather forecast, including temperature, precipitation, wind, and other key attributes."
         },
         "sources": {
-          "description": "Source(s) of the forecast data.",
+          "description": "A list of sources contributing to the weather forecast data.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2626,7 +2646,7 @@
         },
         "hasPrecipitation": {
           "type": "boolean",
-          "description": "Indicates the presence or absence of precipitation. True indicates the presence of precipitation, false indicates the absence of precipitation."
+          "description": "A boolean value that indicates whether precipitation (rain, snow, sleet, or hail) is expected during the specified timeframe. Returns true if precipitation is expected, otherwise false."
         },
         "precipitationType": {
           "$ref": "#/definitions/PrecipitationType"
@@ -2996,12 +3016,12 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The start date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
+          "description": "The start date and time of the alert in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The end date and time of the alert in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00. If the alert crosses multiple time zones the returned time in the response is the local time to the requested coordinate location."
+          "description": "The date and time at which the alert ended or will end in [ISO 8601](https://en.wikipedia.org/wiki/ISO_format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*. If the alert spans multiple time zones, the response will provide the local time corresponding to the requested coordinates."
         },
         "latestStatus": {
           "$ref": "#/definitions/LatestStatus",
@@ -3010,12 +3030,12 @@
         "alertDetails": {
           "x-ms-client-name": "details",
           "type": "string",
-          "description": "Full details associated with the alert. Returned if `details`=True. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won’t apply to this field."
+          "description": "Full details associated with the alert. Returned if `details=True`. This field is always returned in the language(s) of choice by the issuing provider and Azure Maps only returns what is created by the provider. Please note, some countries/regions may offer their native language and English. Language parameter won't apply to this field."
         },
         "alertDetailsLanguageCode": {
           "x-ms-client-name": "language",
           "type": "string",
-          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details`=True. Language code has been derived from the ISO 639-1 Alpha-2 codes."
+          "description": "Language of the `alertDetails`. This field  helps to point out that the language of the `alertDetails` may differ from the requested language parameter. Returned if `details=True`. Language code has been derived from the ISO 639-1 Alpha-2 codes."
         }
       }
     },
@@ -3035,52 +3055,52 @@
     },
     "LatestStatusKeyword": {
       "type": "string",
-      "description": "Keyword for the latest status of the alert.",
+      "description": "A predefined list of eight keywords used to describe the current status of a severe weather alert.",
       "enum": [
-        "New",
-        "Extend",
         "Cancel",
+        "Continue",
         "Correct",
         "Expire",
-        "Upgrade",
-        "Continue",
-        "Update"
+        "Extend",
+        "New",
+        "Update",
+        "Upgrade"
       ],
       "x-ms-enum": {
         "name": "LatestStatusKeyword",
         "modelAsString": true,
         "values": [
           {
-            "value": "New",
-            "description": "\"New\" - the status of an alert upon initial issuance."
-          },
-          {
-            "value": "Extend",
-            "description": "\"Extend\" - the alert has been extended in time, in area, or both since its initial issuance."
-          },
-          {
             "value": "Cancel",
-            "description": "\"Cancel\" - the alert has been canceled prior to its original expiration time."
-          },
-          {
-            "value": "Correct",
-            "description": "\"Correct\" - the alert has been modified to correct a previous error."
-          },
-          {
-            "value": "Expire",
-            "description": "\"Expire\" - the alert has expired and is no longer active."
-          },
-          {
-            "value": "Upgrade",
-            "description": "\"Upgrade\" - the alert has been upgraded to a higher class or category since its initial issuance."
+            "description": "Indicates that the alert has been canceled before its originally scheduled expiration time."
           },
           {
             "value": "Continue",
-            "description": "\"Continue\" - the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
+            "description": "Indicates that the alert has been updated since its initial issuance, but no changes were made to `alertDetails`, `startTime`, `endTime`, or `class`."
+          },
+          {
+            "value": "Correct",
+            "description": "Indicates that the alert has been modified to correct a previous error."
+          },
+          {
+            "value": "Expire",
+            "description": "Indicates that the alert has expired and is no longer active."
+          },
+          {
+            "value": "Extend",
+            "description": "Indicates that the alert has been extended in duration, area, or both since its initial issuance."
+          },
+          {
+            "value": "New",
+            "description": "The status of an alert when first issued."
           },
           {
             "value": "Update",
-            "description": "\"Update\" - the alert has been updated since its initial issuance."
+            "description": "Indicates that the alert has been modified since its initial issuance."
+          },
+          {
+            "value": "Upgrade",
+            "description": "Indicates that the alert has been elevated to a higher class or category since first issued."
           }
         ]
       }
@@ -3101,51 +3121,51 @@
     },
     "DailyIndex": {
       "type": "object",
-      "description": "Information about a daily index.",
+      "description": "The DailyIndex object helps users plan outdoor activities based on weather conditions by providing the activity name, such as 'Ski Weather Forecast'; a numerical rating from 0.0 to 10.0 indicating suitability; a text rating, such as 'Poor'; and a brief description of the conditions, such as 'Expect poor conditions for skiing.'",
       "properties": {
         "indexName": {
           "type": "string",
-          "description": "Name of the index, for example, \"Construction\", \"Outdoor Activity\", \"Flight Delays\"."
+          "description": "The name of the index, indicating the type of activity or condition it relates to, such as running, golfing, or other outdoor activities. For more information, see [Index IDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) in the *Weather service in Azure Maps* concepts article."
         },
         "indexId": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID used to identify the specific index. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index IDs. For example, the index ID can support UI visualization scenarios."
+          "description": "A numeric identifier that uniquely represents a specific index type, distinguishing between different indices for various outdoor activities. For example, an 'indexId' of 1 corresponds to the 'Running' index, and an 'indexId' of 5 corresponds to the 'Golfing' index. For more information, see [Index IDs](/azure/azure-maps/weather-services-concepts#index-ids-and-index-groups-ids) in the *Weather service in Azure Maps* concepts article."
         },
         "dateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the observation in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "value": {
           "type": "number",
           "format": "float",
-          "description": "Index value. Ranges from 0.0 to 10.0. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported ranges."
+          "description": "A numerical index value ranging from 0.0 to 10.0 that quantifies the suitability of weather conditions for a specific activity or condition, such as running or golfing. Higher values typically indicate more favorable conditions, depending on the value of the `ascending` property. For example, a value of 8 for the 'Running' index suggests very good weather for running, while a value of 6 for the 'Golfing' index indicates good but slightly less ideal conditions. For more information, see [Daily index range sets](/azure/azure-maps/daily-index-range-sets) in the *Weather service in Azure Maps* concepts article."
         },
         "category": {
           "x-ms-client-name": "categoryDescription",
           "type": "string",
-          "description": "Textual description for `categoryValue` corresponding to the level that the index value falls under, for example \"Very Good\"."
+          "description": "Provides a qualitative assessment of the index, describing the `categoryValue` property. Categories vary among indices and may include values such as Excellent, Very Good, Good, Fair, and Poor."
         },
         "categoryValue": {
           "type": "integer",
           "format": "int32",
-          "description": "Level that the index value falls under, represented by an integer. This value can be 1 through 5 and should be used in combination with the `ascending` flag because it can differ among indices. For example, the following values apply for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, and Extreme=5."
+          "description": "Provides a numeric representation of the category property, indicating the qualitative assessment of the index. Values range from 1 to 5 and should be used with the ascending flag, as they can differ among indices. For example, for Mosquito Activity: Low=1, Moderate=2, High=3, Very High=4, Extreme=5."
         },
         "ascending": {
           "x-ms-client-name": "isAscending",
           "type": "boolean",
-          "description": "Describes the direction of the `value` and `categoryValue`. For example, when set to `true`, the poorest index value is 0 and the best index value is 10. When set to `true`, the poorest index value is 10 and the best index value is 0."
+          "description": "Indicates the direction of the `value` and `categoryValue` properties. When true, the poorest index value is 0 and the best index value is 10. When false, the poorest index value is 10 and the best index value is 0."
         },
         "description": {
           "type": "string",
-          "description": "A textual explanation that can be used for display purposes to summarize the index value and category. For example, when the index value for Flight Delays is very good, the description will be \"Conditions are excellent for flying!\"."
+          "description": "Provides a brief, user-friendly explanation of the index value, helping users understand its significance in relation to specific weather conditions or activities. For example, if the index value for Outdoor Barbecue is 'Excellent', the description will be 'This is a great day for an outdoor barbecue!'"
         }
       }
     },
     "ActiveStormResult": {
       "type": "object",
-      "description": "All government-issued active storms",
+      "description": "The ActiveStormResult object provides comprehensive information about ongoing tropical storms. It includes an array of [ActiveStorm](#ActiveStorm) objects, each detailing specific attributes of individual storms. These attributes encompass the storm's government ID, basin ID, year of origin, name, and subtropical status.",
       "properties": {
         "results": {
           "type": "array",
@@ -3153,7 +3173,7 @@
           "items": {
             "$ref": "#/definitions/ActiveStorm"
           },
-          "description": "All government-issued active storms"
+          "description": "An array of [ActiveStorm](#ActiveStorm) objects, each providing essential details about an ongoing tropical storm, as reported by national weather forecasting agencies."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3162,32 +3182,32 @@
     },
     "ActiveStorm": {
       "type": "object",
-      "description": "Government-issued active storm",
+      "description": "Provides essential details about ongoing tropical storms, as reported by national weather forecasting agencies.",
       "properties": {
         "year": {
           "type": "string",
-          "description": "Year of origination"
+          "description": "Specifies the year in which the tropical storm originated."
         },
         "basinId": {
           "$ref": "#/definitions/basinId",
-          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+          "description": "Categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP."
         },
         "name": {
           "type": "string",
-          "description": "The name of the depression."
+          "description": "The name of the storm."
         },
         "isActive": {
           "type": "boolean",
-          "description": "True if the depression has been updated recently."
+          "description": "Indicates whether the tropical storm is currently active. If true, the storm is active; if false, the storm is not active."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "A return value of true indicates that the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "Government storm ID. This will match the depression number."
+          "description": "A unique identifier assigned to tropical storms by national weather forecasting agencies. This identifier helps track and reference specific storms accurately, including its status, location, and intensity."
         }
       }
     },
@@ -3196,11 +3216,11 @@
       "description": "Basin identifier",
       "enum": [
         "AL",
-        "EP",
-        "SI",
-        "NI",
         "CP",
+        "EP",
+        "NI",
         "NP",
+        "SI",
         "SP"
       ],
       "x-ms-enum": {
@@ -3209,38 +3229,38 @@
         "values": [
           {
             "value": "AL",
-            "description": "Atlantic"
-          },
-          {
-            "value": "EP",
-            "description": "Eastern Pacific"
-          },
-          {
-            "value": "SI",
-            "description": "Southwest Indian Ocean"
-          },
-          {
-            "value": "NI",
-            "description": "North Indian Ocean"
+            "description": "**The Atlantic Ocean**. Crucial for tracking hurricanes that affect the Americas and the Caribbean. It is one of the most active regions for tropical storms."
           },
           {
             "value": "CP",
-            "description": "Central Pacific"
+            "description": "**The Central Pacific Ocean**. This basin is used for storms affecting Hawaii and surrounding areas."
+          },
+          {
+            "value": "EP",
+            "description": "**The Eastern Pacific Ocean**. This basin tracks storms impacting the western coast of the Americas, including Mexico and Central America. It is adjacent to the Central Pacific basin."
+          },
+          {
+            "value": "NI",
+            "description": "**The North Indian Ocean**. This basin covers storms impacting South Asia, including countries like India and Bangladesh, which are frequently affected by cyclones."
           },
           {
             "value": "NP",
-            "description": "Northwest Pacific"
+            "description": "**The Northwest Pacific Ocean**. This basin is important for tracking typhoons that affect East Asia, including countries like China, Japan, and the Philippines. It is the most active tropical storm regions globally."
+          },
+          {
+            "value": "SI",
+            "description": "**The South Indian Ocean**. This basin, positioned south of the equator, covers cyclones impacting Madagascar, Africa, and surrounding regions."
           },
           {
             "value": "SP",
-            "description": "South Pacific"
+            "description": "**The South Pacific Ocean**. This basin, positioned south of the equator, is relevant for cyclones affecting Australia and the South Pacific islands."
           }
         ]
       }
     },
     "StormSearchResult": {
       "type": "object",
-      "description": "Search government-issued storms",
+      "description": "Contains a list of government-issued storms that meet the specified search criteria, including details such as the storm's basin ID, government-issued ID and status.",
       "properties": {
         "results": {
           "type": "array",
@@ -3248,7 +3268,7 @@
           "items": {
             "$ref": "#/definitions/StormSearchResultItem"
           },
-          "description": "Search government-issued storms"
+          "description": "Array of [StormSearchResultItem](#stormsearchresultitem) objects, each representing a tropical storm matching the search criteria provided in the request."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3257,42 +3277,42 @@
     },
     "StormSearchResultItem": {
       "type": "object",
-      "description": "Government-issued active storm event",
+      "description": "A government-issued storm event, including the storm's basin identifier (basinId), government-issued identifier (govId) and status. This object is returned as part of an array within the [StormSearchResult](#stormsearchresult) object.",
       "properties": {
         "year": {
           "type": "string",
-          "description": "Year of origination"
+          "description": "Specifies the year in which the tropical storm originated."
         },
         "basinId": {
           "$ref": "#/definitions/basinId",
-          "description": "Basin identifier (AL, EP, SI, NI, CP, NP, SP)"
+          "description": "Categorizes the different ocean basins where tropical storms can originate. Each basin is assigned a unique identifier to help specify the location of the storm's origin. Valid Basin identifiers include AL, CP, EP, NI, NP, SI, and SP."
         },
         "name": {
           "type": "string",
-          "description": "The name of the depression."
+          "description": "Identifies the tropical storm by its official name, as designated by the relevant national weather forecasting agency."
         },
         "isActive": {
           "type": "boolean",
-          "description": "True if the depression has been updated recently."
+          "description": "Indicates whether the tropical storm is currently active. If true, the storm is active; if false, the storm is not active"
         },
         "isRetired": {
           "type": "boolean",
-          "description": "True if the storm name has been permanently retired in the source basin."
+          "description": "Returns true if the storm has been permanently retired in the source basin."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "Returns true if the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "govId": {
           "type": "integer",
           "format": "int32",
-          "description": "Government storm ID. This will match the depression number."
+          "description": "A unique identifier assigned to tropical storms by national weather forecasting agencies. This identifier helps track and reference specific storms accurately, including its status, location, and intensity. This will match the depression number."
         }
       }
     },
     "StormForecastResult": {
       "type": "object",
-      "description": "The list of Government-issued forecasts",
+      "description": "An array of [StormForecast](#stormforecast) objects, each detailing individual storm forecasts issued by government authorities.",
       "properties": {
         "results": {
           "type": "array",
@@ -3300,7 +3320,7 @@
           "items": {
             "$ref": "#/definitions/StormForecast"
           },
-          "description": "The list of Government-issued forecasts"
+          "description": "An array of forecast data for tropical storms, including predicted paths, intensities, and other relevant details. These forecasts are issued by government authorities."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3309,46 +3329,46 @@
     },
     "StormForecast": {
       "type": "object",
-      "description": "Government-issued storm forecast",
+      "description": "The StormForecast object contains detailed Government-issued information about forecasted tropical storms, including the storm's location, status, forecast creation date, wind speed, and wind radii.",
       "properties": {
         "dateTime": {
           "type": "string",
           "x-ms-client-name": "timestamp",
-          "description": "Datetime the forecast is valid, displayed in ISO8601 format."
+          "description": "Date and time that the current forecast is valid, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "initializedDateTime": {
           "type": "string",
           "x-ms-client-name": "initialized_timestamp",
-          "description": "Datetime the forecast was created, displayed in ISO8601 format."
+          "description": "Date and time that the forecast was created, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "location": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
           "x-ms-client-name": "coordinates",
-          "description": "Coordinates of the storm"
+          "description": "Specifies the geographical coordinates (latitude and longitude) of the storm's forecasted position."
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected during the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. Wind direction is given in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise. May be NULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+          "description": "Specifies the maximum sustained wind speed expected during the storm, measured in  kilometers per hour (km/h) or miles per hour (mph), based on the unit specified in the request. May be NULL."
         },
         "status": {
           "type": "string",
-          "description": "Storm status"
+          "description": "Indicates the current state or condition of the storm. This property provides information on whether the storm is active, dissipating, or has reached another significant status. Possible values:<ul><li>Cyclonic storm</li><li>Deep depression</li><li>Depression</li><li>Extremely severe cyclonic storm</li><li>Hurricane category (1-5)</li><li>Intense tropical cyclone</li><li>Moderate tropical storm</li><li>Post-tropical cyclone</li><li>Potential tropical cyclone</li><li>Severe cyclonic storm</li><li>Severe tropical storm</li><li>Subtropical</li><li>Super cyclonic storm</li><li>Tropical cyclone</li><li>Tropical cyclone category (1-5)</li><li>Tropical depression</li><li>Tropical disturbance</li><li>Tropical storm</li><li>Typhoon</li><li>Very intense tropical cyclone</li><li>Very severe cyclonic storm</li><li>Very strong typhoon</li><li>Violent typhoon</li></ul>"
         },
         "window": {
           "$ref": "#/definitions/WeatherWindow",
           "x-ms-client-name": "WeatherWindow",
-          "description": "Contains information about the forecast window for the storm during the specified time period (not the entire cone). If windowGeometry=true in the request, this object will include geoJSON details for window geometry."
+          "description": "Provides forecast details for the storm within the specified time frame. If the `windowGeometry` parameter is set to true in the API request, this property will include GeoJSON details for the window geometry."
         },
         "windRadiiSummary": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           },
-          "description": "Displayed when details=true or radiiGeometry=true in the request."
+          "description": "Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects, detailing wind radii in different quadrants around the storm's center. Displayed when `details=true` or `radiiGeometry=true` in the request."
         }
       }
     },
@@ -3394,33 +3414,33 @@
     },
     "StormWindRadiiSummary": {
       "type": "object",
-      "description": "Displayed when details=true or radiiGeometry=true in the request.",
+      "description": "The StormWindRadiiSummary object provides a high-level overview of the wind distribution around a tropical storm. It includes the geometric representation of wind radii (radiiGeometry), detailed sector-based wind data (radiusSectorData), and the wind speeds at various distances from the storm's center (windSpeed). These properties collectively help in understanding the spatial extent and intensity of winds associated with the storm. Displayed when the request includes `details=true` or `radiiGeometry=true`.",
       "properties": {
         "dateTime": {
           "type": "string",
           "x-ms-client-name": "timestamp",
-          "description": "DateTime for which the wind radii summary data is valid, displayed in ISO8601 format."
+          "description": "Date and time that the wind radii summary data is valid, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "windSpeed": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Wind speed associated with the radiusSectorData."
+          "description": "The overall wind speed associated with the storm's wind radii data. This single wind speed value applies collectively to all the sectors within the [radiusSectorData](#radiusSectorData) array, which provides detailed geographical information for the NE, SE, SW, and NW quadrants of the storm's wind radii."
         },
         "radiusSectorData": {
           "type": "array",
-          "description": "Contains the information needed to plot wind radius quadrants. Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+          "description": "An array of [RadiusSector](#RadiusSector) objects. Each object contains detailed geographical information (in geoJSON format) needed to plot wind radius quadrants: 0-90° for NE, 90-180° for SE, 180-270° for SW, and 270-360° for NW.",
           "items": {
             "$ref": "#/definitions/RadiusSector"
           }
         },
         "radiiGeometry": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry",
-          "description": "GeoJSON object. Displayed when radiiGeometry=true in request. Describes the outline of the wind radius quadrants."
+          "description": "A GeoJSON object that is returned when the `radiiGeometry` parameter is set to true in the request. It provides detailed geographical information about the storm's wind radii, including the spatial representation of areas affected by different wind speeds."
         }
       }
     },
     "RadiusSector": {
       "type": "object",
-      "description": "Bearing 0–90 = NE quadrant; 90–180 = SE quadrant; 180–270 = SW quadrant; 270–360 = NW quadrant.",
+      "description": "Bearing 0-90 = NE quadrant; 90-180 = SE quadrant; 180-270 = SW quadrant; 270-360 = NW quadrant.",
       "properties": {
         "beginBearing": {
           "type": "number",
@@ -3442,7 +3462,7 @@
     },
     "StormLocationsResult": {
       "type": "object",
-      "description": "Locations for an individual government-issued storm",
+      "description": "Contains an array of [StormLocation](#stormlocation) objects, representing government-issued active storm events. Includes details such as latitude and longitude coordinates, wind speed and direction, wind radii, basin identifier, minimum pressure, movement, status, and other relevant attributes.",
       "properties": {
         "results": {
           "type": "array",
@@ -3450,7 +3470,7 @@
           "items": {
             "$ref": "#/definitions/StormLocation"
           },
-          "description": "Locations for an individual government-issued storm"
+          "description": "Array of data points, each detailing the location of an individual government-issued storm, including coordinates, geometry, basin ID, date, wind details, and wind radii."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3459,41 +3479,41 @@
     },
     "StormLocation": {
       "type": "object",
-      "description": "Location for an individual Government-issued storm",
+      "description": "Contains detailed information about a tropical storm's location, including latitude and longitude coordinates, wind speed and direction, wind radii, and basin identifier. Essential for tracking and forecasting the storm's movement and intensity.",
       "properties": {
         "dateTime": {
           "type": "string",
           "x-ms-client-name": "timestamp",
-          "description": "Datetime the forecast is valid, displayed in ISO8601 format."
+          "description": "Date and time that the forecast is valid, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "location": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/LatLongPair",
           "x-ms-client-name": "coordinates",
-          "description": "Coordinates of the storm"
+          "description": "Specifies the latitude and longitude coordinates of the storm's center."
         },
         "maxWindGust": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum wind gust speed associated with the storm. May be NULL."
+          "description": "Specifies the expected maximum wind gust speed and direction expected during the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. Wind direction is given in azimuth degrees, ranging from 0° (true North) to 359°, moving clockwise. May be NULL."
         },
         "sustainedWind": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Maximum sustained wind speed associated with the storm. May be NULL."
+          "description": "Maximum sustained wind speed associated with the storm, measured in kilometers per hour (km/h) or miles per hour (mph), based on the specified unit. May be NULL."
         },
         "minimumPressure": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Minimum pressure associated with the storm. May be NULL."
+          "description": "Specifies the lowest atmospheric pressure associated with the storm, measured in millibars (mb) or  inches of mercury (inHg), depending on the unit specified in the request. This value may be NULL."
         },
         "movement": {
           "$ref": "#/definitions/WindDetails",
-          "description": "The storm movement information."
+          "description": "Returns the storm's current direction (in degrees) and speed, measured in kilometers per hour (km/h) or miles per hour (mph), depending on the specified unit."
         },
         "status": {
           "type": "string",
-          "description": "Storm status, in English."
+          "description": "Returns the current classification or stage of the storm in English, such as a tropical depression, tropical storm, or hurricane."
         },
         "isSubtropical": {
           "type": "boolean",
-          "description": "True when the depression is classified as a subtropical cyclone."
+          "description": "A return value of true indicates that the storm is classified as a subtropical cyclone, meaning it has both tropical and extratropical features."
         },
         "hasTropicalPotential": {
           "type": "boolean",
@@ -3501,20 +3521,20 @@
         },
         "isPostTropical": {
           "type": "boolean",
-          "description": "True when the storm is weakening away, and will no longer become a tropical system."
+          "description": "Returns true if the storm has transitioned from a tropical cyclone to a post-tropical cyclone, aiding in understanding the storm's lifecycle phase."
         },
         "windRadiiSummary": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/StormWindRadiiSummary"
           },
-          "description": "Displayed when details=true or radiiGeometry=true in the request."
+          "description": "Contains an array of [StormWindRadiiSummary](#stormwindradiisummary) objects, detailing wind radii in different quadrants around the storm's center. Displayed when `details=true` or `radiiGeometry=true` in the request."
         }
       }
     },
     "AirQualityResult": {
       "type": "object",
-      "description": "This object is returned from a successful Get Air Quality call.",
+      "description": "An array of [AirQuality](#airquality) objects, each providing comprehensive information about the current air quality at the specified location.",
       "properties": {
         "results": {
           "type": "array",
@@ -3522,7 +3542,7 @@
           "items": {
             "$ref": "#/definitions/AirQuality"
           },
-          "description": "A list of all air quality results for the queried location."
+          "description": "Detailed air quality results within the specified location, including properties such as the air quality index (AQI), dominant pollutant, pollutant levels, risk level, and suggested precautions."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3531,7 +3551,7 @@
     },
     "DailyAirQualityForecastResult": {
       "type": "object",
-      "description": "This object is returned from a successful Get Daily Air Quality Forecast call.",
+      "description": "Returns an array of [DailyAirQuality](#dailyairquality) objects, each detailing the forecasted air quality for a specific day. The number of days included is determined by the `duration` URI parameter (1-7 days, default is 1).",
       "properties": {
         "results": {
           "type": "array",
@@ -3539,7 +3559,7 @@
           "items": {
             "$ref": "#/definitions/DailyAirQuality"
           },
-          "description": "A list of all daily air quality forecasts for the queried location."
+          "description": "Detailed air quality forecast data for each day within the requested duration, including properties such as date, air quality index (AQI), dominant pollutant, pollutant levels, risk level, and suggested precautions."
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
@@ -3548,35 +3568,35 @@
     },
     "AirQuality": {
       "type": "object",
-      "description": "Information about the air quality in a specific location at a specific time.",
+      "description": "The AirQuality object provides comprehensive information about the current air quality at the specified location. This includes the concentration levels of various pollutants, numerical Air Quality Index (AQI) values indicating the overall air quality, and identification of the dominant pollutant affecting the air quality. Additionally, it offers a risk level summary, which briefly outlines potential health risks and suggests precautions.",
       "properties": {
         "dateTime": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "index": {
           "type": "number",
           "format": "float",
-          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+          "description": "The air quality index (AQI) is an air quality rating scale set by local regulating bodies. Scales can vary widely based on location. For more information, see [Air quality index](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+          "description": "Provides an internationally standardized way to understand the concentration of pollutants in the air. Ratings range from 0 to 300 and up, with higher numbers representing worse air quality. The pollutants measured includes PM2.5, PM10, NO2, SO2, CO, and O3."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
-          "description": "The pollutant with the highest concentration."
+          "description": "Identifies the pollutant with the highest concentration."
         },
         "category": {
           "type": "string",
-          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+          "description": "Provides a one-word description of the air quality for the forecast period in the specified language, such as Poor, Fair, or Excellent."
         },
         "categoryColor": {
           "type": "string",
-          "description": "A unique color corresponding to the category of this air quality result."
+          "description": "Provides a unique hexadecimal color code corresponding to the air quality category for each day in the forecast period. This color helps users quickly identify the air quality level visually, with each color corresponding to a category such as Poor, Fair, or Excellent."
         },
         "description": {
           "type": "string",
@@ -3587,29 +3607,29 @@
           "items": {
             "$ref": "#/definitions/Pollutant"
           },
-          "description": "Information about individual pollutants."
+          "description": "An array containing detailed information about each pollutant in the response. Returned when the `pollutants` URI Parameter is *true*."
         }
       }
     },
     "DailyAirQuality": {
       "type": "object",
-      "description": "Information about the air quality in a specific location at a specific time.",
+      "description": "Provides a summary of the forecasted air quality conditions for a specific day and location, in the requested language. This includes key metrics such as the air quality index (AQI), the dominant pollutant expected for that day, and a brief description of the overall air quality. The information helps users understand what to expect regarding air quality and any potential health implications for the forecasted day.",
       "properties": {
         "dateTime": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "index": {
           "type": "number",
           "format": "float",
-          "description": "Air quality rating on a scale set by local regulating bodies. Scales can vary widely based on location. See [Wikipedia](https://en.wikipedia.org/wiki/Air_quality_index) for more information."
+          "description": "The air quality index (AQI) is a rating scale set by local regulating bodies, which can vary widely by location. For more information, see [Air quality index](https://en.wikipedia.org/wiki/Air_quality_index) in Wikipedia."
         },
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "Internationally normalized air quality rating on a scale from 0 to 300 and up, with higher numbers representing worse air quality."
+          "description": "Provides an internationally standardized air quality rating from 0 to 300 and above, with higher numbers indicating worse air quality. The index measures pollutants such as PM2.5, PM10, NO2, SO2, CO, and O3."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
@@ -3617,15 +3637,15 @@
         },
         "category": {
           "type": "string",
-          "description": "One-word description of the air quality in the requested language. For example, \"Excellent\"."
+          "description": "Provides a one-word summary of the air quality for the forecast period in the specified language, such as Poor, Fair, or Excellent. This summary helps users quickly understand the overall air quality conditions."
         },
         "categoryColor": {
           "type": "string",
-          "description": "A unique color corresponding to the category of this air quality result."
+          "description": "Provides a unique hexadecimal color code for each air quality category in the daily forecast, visually representing levels such as Poor, Fair, or Excellent."
         },
         "description": {
           "type": "string",
-          "description": "A textual explanation of this air quality result in the requested language."
+          "description": "Provides a summary of the forecasted air quality conditions for a specific day and location, in the requested language."
         }
       }
     },
@@ -3659,7 +3679,7 @@
     },
     "PollutantType": {
       "type": "string",
-      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "description": "Specifies the six types of pollutants tracked by the Azure Maps Weather service.",
       "enum": [
         "CO",
         "NO2",
@@ -3674,34 +3694,34 @@
         "values": [
           {
             "value": "CO",
-            "description": "Carbon monoxide (\"CO\")"
+            "description": "Carbon monoxide"
           },
           {
             "value": "NO2",
-            "description": "Nitrogen dioxide (\"NO2\")"
+            "description": "Nitrogen dioxide"
           },
           {
             "value": "O3",
-            "description": "Ozone (\"O3\")"
+            "description": "Ozone"
           },
           {
             "value": "PM2.5",
-            "description": "Particulate matter 2.5 (\"PM2.5\")"
+            "description": "Particulate matter 2.5"
           },
           {
             "value": "PM10",
-            "description": "Particulate matter 10 (\"PM10\")"
+            "description": "Particulate matter 10"
           },
           {
             "value": "SO2",
-            "description": "Sulfur dioxide (\"SO2\")"
+            "description": "Sulfur dioxide"
           }
         ]
       }
     },
     "DominantPollutant": {
       "type": "string",
-      "description": "Type of pollutant. Please note that more may be added at any time.",
+      "description": "Identifies the pollutant with the highest concentration.",
       "enum": [
         "Carbon Monoxide",
         "Nitrogen Dioxide",
@@ -3716,37 +3736,38 @@
         "values": [
           {
             "value": "Carbon Monoxide",
-            "description": "Carbon monoxide (\"CO\")"
+            "description": "Carbon monoxide (CO) is a colorless, odorless, and tasteless but highly toxic gas produced by the incomplete combustion of carbon-containing fuels. Common sources include vehicle exhaust, gas stoves, furnaces, and wood fires."
           },
           {
             "value": "Nitrogen Dioxide",
-            "description": "Nitrogen dioxide (\"NO2\")"
+            "description": "Nitrogen dioxide (NO2) is a significant atmospheric pollutant. It is regulated and subject to recommended limit guidelines set by the World Health Organization (WHO)."
           },
           {
             "value": "Ozone",
-            "description": "Ozone (\"O3\")"
+            "description": "Ozone (O3) is a key component of photochemical smog, the brown, harmful haze that envelops many large cities, resulting from a photochemical reaction between sunlight and certain specific pollutants."
           },
           {
             "value": "Particulate Matter 2.5",
-            "description": "Particulate matter 2.5 (\"PM2.5\")"
+            "description": "Particulate matter 2.5 (PM2.5) refers to fine particles with diameters that are generally 2.5 micrometers and smaller. These particles are more than 100 times thinner than a human hair and can remain suspended in the air for extended periods"
           },
           {
             "value": "Particulate Matter 10",
-            "description": "Particulate matter 10 (\"PM10\")"
+            "description": "Particulate matter 10 (PM10) refers to particles with diameters that are generally 10 micrometers and smaller. These particles can include dust, pollen, soot, smoke, and liquid droplets."
           },
           {
             "value": "Sulfur Dioxide",
-            "description": "Sulfur dioxide (\"SO2\")"
+            "description": "Sulfur dioxide (SO2) is a heavy, colorless inorganic gas with a pungent, irritating odor. It is mainly produced by burning fossil fuels at power plants and industrial facilities, but it can also be emitted from natural sources such as volcanoes."
           }
         ]
       }
     },
     "DailyHistoricalActualsResult": {
       "type": "object",
+      "description": "Returns an array of [DailyHistoricalActuals](#dailyhistoricalactuals) objects, each detailing the observed historical weather data for the specified date and location. The number of days included is determined by the `startDate` and `endDate` URI parameters which can include up to 31 days.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "Historical actuals for each requested day.",
+          "description": "Aggregates detailed historical weather data for specific dates and locations, including temperature, precipitation, snowfall, snow depth, and degree day summaries.",
           "x-ms-client-name": "historicalActuals",
           "items": {
             "$ref": "#/definitions/DailyHistoricalActuals"
@@ -3759,41 +3780,43 @@
     },
     "DailyHistoricalActuals": {
       "type": "object",
+      "description": "Provides climatology data for a specific day, including observed temperatures, precipitation, snowfall, snow depth, and heating/cooling degree days.",
       "properties": {
         "date": {
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "The date and time for the requested weather data in ISO 8061 format displayed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitMaxMinAvg",
-          "description": "Temperature values."
+          "description": "Provides the observed maximum, minimum, and average temperatures for a specific day at a given location."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of heating or cooling degree day information. Degree days are measures of how cold or warm a location is. A degree day compares the mean (the average of the high and low) outdoor temperatures recorded for a location to a standard temperature of 65 degrees F/ 18 degree C."
+          "description": "Provides a summary of heating and cooling degree days. Heating Degree Days (HDD) measure the demand for energy to heat a building, calculated based on the degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the demand for energy to cool a building, calculated based on the degrees a day's average temperature is above 65°F/18°C. This summary aids in energy management and planning."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+          "description": "The amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), depending on the unit specified in the request."
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of snow that has fallen."
+          "description": "Provides the amount of snow that has fallen over the specified day, measured in centimeters (cm) or inches (in), based on the specified unit in the request."
         },
         "snowDepth": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "Snow depth."
+          "description": "Provides the average accumulated snow depth, measured in centimeters (cm) or inches (in), based on the specified unit in the request."
         }
       }
     },
     "DailyHistoricalRecordsResult": {
       "type": "object",
+      "description": "Provides an array of historical Daily Historical Records for specified dates and locations, each with aggregate detailed climatology data for the requested day, such as record temperatures, precipitation, and snowfall.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "Historical records for each requested day.",
+          "description": "Aggregates detailed climatology data for each requested day, including record temperatures, precipitation, snowfall, snow depth, and degree day summaries.",
           "x-ms-client-name": "historicalRecords",
           "items": {
             "$ref": "#/definitions/DailyHistoricalRecords"
@@ -3811,28 +3834,29 @@
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitYearMaxMinAvg",
-          "description": "Temperature value."
+          "description": "Returns the year in which both the minimum and the maximum temperatures occurred on a specified day, along with the recorded amounts. Also returns the average temperature for the given date. Measured in degrees Celsius (C) or Fahrenheit (F), depending on the unit specified in the request."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnitYearMax",
-          "description": "Maximum amount of precipitation (liquid equivalent) that has fallen."
+          "description": "The amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), based on the specified unit in the request."
         },
         "snowfall": {
           "$ref": "#/definitions/WeatherUnitYearMax",
-          "description": "Maximum snowfall."
+          "description": "Returns the year in which the record high snowfall occurred on a specified date, along with the recorded amounts, measured in centimeters (cm) or inches (in), based on the unit specified in the request."
         }
       }
     },
     "DailyHistoricalNormalsResult": {
       "type": "object",
+      "description": "Returns an array of [DailyHistoricalNormals](#dailyhistoricalnormals) objects, each detailing climatology data such as past daily normal temperatures, precipitation, and cooling/heating degree day information for the specified date range, calculated as a 30-year average (1991-2020). The number of days included is determined by the `startDate` and `endDate` URI parameters, which can include up to 31 days.",
       "properties": {
         "results": {
           "type": "array",
-          "description": "Historical normals for each requested day.",
+          "description": "Aggregates detailed climatology data for each requested day, including normal temperatures, precipitation, snowfall, snow depth, and degree day summaries.",
           "x-ms-client-name": "historicalNormals",
           "items": {
             "$ref": "#/definitions/DailyHistoricalNormals"
@@ -3850,19 +3874,19 @@
           "type": "string",
           "format": "date-time",
           "x-ms-client-name": "timestamp",
-          "description": "Date and time of the current observation displayed in ISO 8601 format, for example, 2019-10-27T19:39:57-08:00."
+          "description": "Date and time of the current observation, displayed in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*."
         },
         "temperature": {
           "$ref": "#/definitions/WeatherUnitMaxMinAvg",
-          "description": "Temperature values."
+          "description": "Provides the normal high, low, and average temperatures for a specific day at a given location, calculated as a 30-year average (1991-2020)."
         },
         "degreeDaySummary": {
           "$ref": "#/definitions/DegreeDaySummary",
-          "description": "Summary of heating or cooling degree day information"
+          "description": "Provides a summary of heating and cooling degree days. Heating Degree Days (HDD) measure the demand for energy to heat a building, calculated based on the degrees a day's average temperature is below 65°F/18°C. Cooling Degree Days (CDD) measure the demand for energy to cool a building, calculated based on the degrees a day's average temperature is above 65°F/18°C. This summary aids in energy management and planning."
         },
         "precipitation": {
           "$ref": "#/definitions/WeatherUnit",
-          "description": "The amount of precipitation (liquid equivalent) that has fallen."
+          "description": "Provides the amount of precipitation accumulated over the specified day, measured in millimeters (mm) or inches (in), based on the specified unit in the request."
         }
       }
     },
@@ -3931,7 +3955,7 @@
         "unitType": {
           "type": "integer",
           "format": "int32",
-          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details."
+          "description": "Numeric ID value associated with the type of unit being displayed. Can be used for unit translation. Please refer to [Weather services in Azure Maps](/azure/azure-maps/weather-services-concepts#daily-index-range-sets) for details."
         },
         "year": {
           "type": "integer",
@@ -3942,7 +3966,7 @@
     },
     "NextLink": {
       "type": "string",
-      "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
+      "description": "Contains the URL to fetch the next page of results if the response is paginated. This is useful when the response is too large to be returned in a single call, allowing users to navigate through multiple pages of results."
     }
   }
 }

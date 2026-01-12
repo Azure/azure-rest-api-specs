@@ -1,0 +1,203 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "myCluster",
+    "nodeTypeName": "BE",
+    "parameters": {
+      "properties": {
+        "capacities": {
+          "ClientConnections": "65536"
+        },
+        "dataDiskSizeGB": 200,
+        "dataDiskType": "Premium_LRS",
+        "isPrimary": false,
+        "isStateless": true,
+        "multiplePlacementGroups": true,
+        "placementProperties": {
+          "HasSSD": "true",
+          "NodeColor": "green",
+          "SomeProperty": "5"
+        },
+        "vmExtensions": [
+          {
+            "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+            "properties": {
+              "type": "GenevaMonitoring",
+              "autoUpgradeMinorVersion": true,
+              "publisher": "Microsoft.Azure.Geneva",
+              "settings": {},
+              "typeHandlerVersion": "2.0"
+            }
+          }
+        ],
+        "vmImageOffer": "WindowsServer",
+        "vmImagePublisher": "MicrosoftWindowsServer",
+        "vmImageSku": "2016-Datacenter-Server-Core",
+        "vmImageVersion": "latest",
+        "vmInstanceCount": -1,
+        "vmManagedIdentity": {
+          "userAssignedIdentities": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity2"
+          ]
+        },
+        "vmSecrets": [
+          {
+            "sourceVault": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+            },
+            "vaultCertificates": [
+              {
+                "certificateStore": "My",
+                "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+              }
+            ]
+          }
+        ],
+        "vmSize": "Standard_DS3"
+      }
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "BE",
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "properties": {
+          "capacities": {
+            "ClientConnections": "65536"
+          },
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "Premium_LRS",
+          "isPrimary": false,
+          "isStateless": true,
+          "multiplePlacementGroups": true,
+          "placementProperties": {
+            "HasSSD": "true",
+            "NodeColor": "green",
+            "SomeProperty": "5"
+          },
+          "provisioningState": "Creating",
+          "vmExtensions": [
+            {
+              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+              "properties": {
+                "type": "GenevaMonitoring",
+                "autoUpgradeMinorVersion": true,
+                "forceUpdateTag": "v.1.0",
+                "publisher": "Microsoft.Azure.Geneva",
+                "settings": {},
+                "typeHandlerVersion": "2.0"
+              }
+            }
+          ],
+          "vmImageOffer": "WindowsServer",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "vmManagedIdentity": {
+            "userAssignedIdentities": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity",
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity2"
+            ]
+          },
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ],
+          "vmSize": "Standard_DS3"
+        },
+        "sku": {
+          "name": "Standard_S2",
+          "capacity": 10,
+          "tier": "Standard"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-10-01-preview",
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-10-01-preview"
+      }
+    },
+    "202": {
+      "body": {
+        "name": "BE",
+        "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+        "properties": {
+          "capacities": {
+            "ClientConnections": "65536"
+          },
+          "dataDiskSizeGB": 200,
+          "dataDiskType": "Premium_LRS",
+          "isPrimary": false,
+          "isStateless": true,
+          "multiplePlacementGroups": true,
+          "placementProperties": {
+            "HasSSD": "true",
+            "NodeColor": "green",
+            "SomeProperty": "5"
+          },
+          "provisioningState": "Updating",
+          "vmExtensions": [
+            {
+              "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+              "properties": {
+                "type": "GenevaMonitoring",
+                "autoUpgradeMinorVersion": true,
+                "forceUpdateTag": "v.1.0",
+                "publisher": "Microsoft.Azure.Geneva",
+                "settings": {},
+                "typeHandlerVersion": "2.0"
+              }
+            }
+          ],
+          "vmImageOffer": "WindowsServer",
+          "vmImagePublisher": "MicrosoftWindowsServer",
+          "vmImageSku": "2016-Datacenter-Server-Core",
+          "vmImageVersion": "latest",
+          "vmInstanceCount": 10,
+          "vmSecrets": [
+            {
+              "sourceVault": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "My",
+                  "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                }
+              ]
+            }
+          ],
+          "vmSize": "Standard_DS3"
+        },
+        "sku": {
+          "name": "Standard_S2",
+          "capacity": 10,
+          "tier": "Standard"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-10-01-preview",
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-10-01-preview"
+      }
+    }
+  },
+  "operationId": "NodeTypes_CreateOrUpdate",
+  "title": "Put a node type with auto-scale parameters"
+}

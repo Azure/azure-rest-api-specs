@@ -11,16 +11,13 @@ typescript:
   generate-metadata: true
   payload-flattening-threshold: 1
 ```
-
 ``` yaml $(typescript) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-monitor"
   output-folder: "$(typescript-sdks-folder)/sdk/monitor/arm-monitor"
   clear-output-folder: true
 ```
-
 ### Profile: hybrid_2019_03_01
-
 These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is specified on the command line.
 
 ``` yaml $(profile-content)=='profile-hybrid-2019-03-01'

@@ -1,0 +1,454 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the hybrid network configuration group values.",
+    "version": "2024-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/configurationGroupValues/{configurationGroupValueName}": {
+      "delete": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_Delete",
+        "description": "Deletes the specified hybrid configuration group value.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ConfigurationGroupValueNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "The Location header contains the URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete hybrid configuration group resource": {
+            "$ref": "./examples/ConfigurationGroupValueDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_Get",
+        "description": "Gets information about the specified hybrid configuration group values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ConfigurationGroupValueNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the resulting hybrid configuration group resource.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get hybrid configuration group": {
+            "$ref": "./examples/ConfigurationGroupValueGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_CreateOrUpdate",
+        "description": "Creates or updates a hybrid configuration group value.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ConfigurationGroupValueNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValue"
+            },
+            "description": "Parameters supplied to the create or update configuration group value resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update operation has been completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValue"
+            }
+          },
+          "201": {
+            "description": "Create or update operation has been completed successfully. The header contains 'Azure-AsyncOperation' header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update configuration group value": {
+            "$ref": "./examples/ConfigurationGroupValueCreate.json"
+          },
+          "Create or update configuration group value with secrets": {
+            "$ref": "./examples/ConfigurationGroupValueCreateSecret.json"
+          },
+          "Create or update first party configuration group value": {
+            "$ref": "./examples/ConfigurationGroupValueFirstPartyCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_UpdateTags",
+        "description": "Updates a hybrid configuration group tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ConfigurationGroupValueNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update configuration group values tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update is successful. The operation returns the resulting hybrid configuration group resource.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValue"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update hybrid configuration group tags": {
+            "$ref": "./examples/ConfigurationGroupValueUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/configurationGroupValues": {
+      "get": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_ListBySubscription",
+        "description": "Lists all sites in the configuration group value in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of hybrid network site resources.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid network sites in a subscription.": {
+            "$ref": "./examples/ConfigurationGroupValueListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/configurationGroupValues": {
+      "get": {
+        "tags": [
+          "ConfigurationGroupValues"
+        ],
+        "operationId": "ConfigurationGroupValues_ListByResourceGroup",
+        "description": "Lists all the hybrid network configurationGroupValues in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns a list of hybrid configuration group value resources.",
+            "schema": {
+              "$ref": "#/definitions/configurationGroupValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid network configurationGroupValues in a subscription.": {
+            "$ref": "./examples/ConfigurationGroupValueListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "configurationGroupValue": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat",
+          "description": "Hybrid configuration group value properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Hybrid configuration group value resource."
+    },
+    "configurationGroupValuePropertiesFormat": {
+      "type": "object",
+      "description": "Hybrid configuration group value properties.",
+      "required": [
+        "configurationType"
+      ],
+      "discriminator": "configurationType",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the site resource."
+        },
+        "publisherName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The publisher name for the configuration group schema."
+        },
+        "publisherScope": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/PublisherScope",
+          "description": "The scope of the publisher."
+        },
+        "configurationGroupSchemaName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The configuration group schema name."
+        },
+        "configurationGroupSchemaOfferingLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the configuration group schema offering."
+        },
+        "configurationGroupSchemaResourceReference": {
+          "$ref": "./common.json#/definitions/DeploymentResourceIdReference",
+          "description": "The configuration group schema resource reference."
+        },
+        "configurationType": {
+          "$ref": "#/definitions/configurationGroupValueConfigurationType",
+          "description": "The value which indicates if configuration values are secrets"
+        }
+      }
+    },
+    "ConfigurationValueWithSecrets": {
+      "description": "The ConfigurationValue with secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
+        }
+      ],
+      "properties": {
+        "secretConfigurationValue": {
+          "type": "string",
+          "description": "Name and value pairs that define the configuration value secrets. It can be a well formed escaped JSON string.",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "Secret"
+    },
+    "ConfigurationValueWithoutSecrets": {
+      "description": "The ConfigurationValue with no secrets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/configurationGroupValuePropertiesFormat"
+        }
+      ],
+      "properties": {
+        "configurationValue": {
+          "type": "string",
+          "description": "Name and value pairs that define the configuration value. It can be a well formed escaped JSON string."
+        }
+      },
+      "x-ms-discriminator-value": "Open"
+    },
+    "configurationGroupValueListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/configurationGroupValue"
+          },
+          "description": "A list of hybrid configurationGroups."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for hybrid configurationGroups API service call."
+    },
+    "configurationGroupValueConfigurationType": {
+      "type": "string",
+      "description": "The secret type which indicates if secret or not.",
+      "enum": [
+        "Unknown",
+        "Secret",
+        "Open"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationGroupValueConfigurationType",
+        "modelAsString": true
+      }
+    }
+  }
+}

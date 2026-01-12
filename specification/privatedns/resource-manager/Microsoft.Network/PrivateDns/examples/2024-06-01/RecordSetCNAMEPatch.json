@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "CNAME",
+    "relativeRecordSetName": "recordCNAME",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordcname",
+        "type": "Microsoft.Network/privateDnsZones/CNAME",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/CNAME/recordcname",
+        "properties": {
+          "cnameRecord": {
+            "cname": "contoso.com"
+          },
+          "fqdn": "recordcname.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key2": "value2"
+          },
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "PATCH Private DNS Zone CNAME Record Set"
+}

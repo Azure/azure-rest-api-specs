@@ -1,0 +1,192 @@
+{
+  "parameters": {
+    "api-version": "2024-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/firewallRules/read",
+            "display": {
+              "description": "Return the list of firewall rules for a server or gets the properties for the specified firewall rule.",
+              "operation": "List/Get Firewall Rules",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Firewall Rules"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/firewallRules/write",
+            "display": {
+              "description": "Creates a firewall rule with the specified parameters or update an existing rule.",
+              "operation": "Create/Update Firewall Rule",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Firewall Rules"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/firewallRules/delete",
+            "display": {
+              "description": "Deletes an existing firewall rule.",
+              "operation": "Delete Firewall Rule",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Firewall Rules"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/read",
+            "display": {
+              "description": "Return the list of servers or gets the properties for the specified server.",
+              "operation": "List/Get MySQL Servers",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/write",
+            "display": {
+              "description": "Creates a server with the specified parameters or update the properties or tags for the specified server.",
+              "operation": "Create/Update MySQL Server",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/delete",
+            "display": {
+              "description": "Deletes an existing server.",
+              "operation": "Delete MySQL Server",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "MySQL Server"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Return types of metrics that are available for databases",
+              "operation": "Get database metric definitions",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Database Metric Definition"
+            },
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "cpu_percent",
+                    "aggregationType": "Average",
+                    "displayDescription": "CPU percent",
+                    "displayName": "CPU percent",
+                    "fillGapWithZero": true,
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "memory_percent",
+                    "aggregationType": "Average",
+                    "displayDescription": "Memory percent",
+                    "displayName": "Memory percent",
+                    "fillGapWithZero": true,
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "io_consumption_percent",
+                    "aggregationType": "Average",
+                    "displayDescription": "IO percent",
+                    "displayName": "IO percent",
+                    "fillGapWithZero": true,
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "storage_percent",
+                    "aggregationType": "Average",
+                    "displayDescription": "Storage percentage",
+                    "displayName": "Storage percentage",
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "storage_used",
+                    "aggregationType": "Average",
+                    "displayDescription": "Storage used",
+                    "displayName": "Storage used",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "storage_limit",
+                    "aggregationType": "Average",
+                    "displayDescription": "Storage limit",
+                    "displayName": "Storage limit",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "serverlog_storage_percent",
+                    "aggregationType": "Average",
+                    "displayDescription": "Server Log storage percent",
+                    "displayName": "Server Log storage percent",
+                    "unit": "Percent"
+                  },
+                  {
+                    "name": "serverlog_storage_usage",
+                    "aggregationType": "Average",
+                    "displayDescription": "Server Log storage used",
+                    "displayName": "Server Log storage used",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "serverlog_storage_limit",
+                    "aggregationType": "Average",
+                    "displayDescription": "Server Log storage limit",
+                    "displayName": "Server Log storage limit",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "active_connections",
+                    "aggregationType": "Average",
+                    "displayDescription": "Total active connections",
+                    "displayName": "Total active connections",
+                    "fillGapWithZero": true,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "connections_failed",
+                    "aggregationType": "Average",
+                    "displayDescription": "Total failed connections",
+                    "displayName": "Total failed connections",
+                    "fillGapWithZero": true,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "seconds_behind_master",
+                    "aggregationType": "Average",
+                    "displayDescription": "Replication lag in seconds",
+                    "displayName": "Replication lag in seconds",
+                    "fillGapWithZero": true,
+                    "unit": "Count"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "description": "Gets the disagnostic setting for the resource",
+              "operation": "Read diagnostic setting",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Database Metric Definition"
+            }
+          },
+          {
+            "name": "Microsoft.DBforMySQL/flexibleServers/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "description": "Creates or updates the diagnostic setting for the resource",
+              "operation": "Write diagnostic setting",
+              "provider": "Microsoft DB for MySQL",
+              "resource": "Database Metric Definition"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "OperationList"
+}

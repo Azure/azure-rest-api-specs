@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "name": "{vmName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "labVmsShutdown": {
+            "name": "LabVmsShutdown",
+            "type": "Microsoft.DevTestLab/labs/virtualMachines/schedules",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/schedules/myAutoShutdownSchedule",
+            "location": "{location}",
+            "properties": {
+              "createdDate": "2020-12-29T21:48:14.1369355+00:00",
+              "dailyRecurrence": {
+                "time": "1900"
+              },
+              "hourlyRecurrence": {
+                "minute": 30
+              },
+              "notificationSettings": {
+                "emailRecipient": "{email}",
+                "notificationLocale": "EN",
+                "status": "Enabled",
+                "timeInMinutes": 30,
+                "webhookUrl": "{webhookUrl}"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Enabled",
+              "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{vmName}",
+              "taskType": "LabVmsShutdownTask",
+              "timeZoneId": "Pacific Standard Time",
+              "uniqueIdentifier": "4acf0408-1c10-49cb-96b7-28ce655c8320",
+              "weeklyRecurrence": {
+                "time": "1700",
+                "weekdays": [
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ]
+              }
+            }
+          },
+          "labVmsStartup": {
+            "name": "LabVmAutoStart",
+            "type": "Microsoft.DevTestLab/labs/virtualMachines/schedules",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/schedules/myAutoStartSchedule",
+            "location": "{location}",
+            "properties": {
+              "createdDate": "2020-12-29T21:46:37.0473976+00:00",
+              "dailyRecurrence": {
+                "time": "0900"
+              },
+              "hourlyRecurrence": {
+                "minute": 30
+              },
+              "notificationSettings": {
+                "emailRecipient": "{email}",
+                "notificationLocale": "EN",
+                "status": "Enabled",
+                "timeInMinutes": 30,
+                "webhookUrl": "{webhookUrl}"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Enabled",
+              "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines/{vmName}",
+              "taskType": "LabVmsStartupTask",
+              "timeZoneId": "Pacific Standard Time",
+              "weeklyRecurrence": {
+                "time": "1000",
+                "weekdays": [
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachines_ListApplicableSchedules",
+  "title": "VirtualMachines_ListApplicableSchedules"
+}

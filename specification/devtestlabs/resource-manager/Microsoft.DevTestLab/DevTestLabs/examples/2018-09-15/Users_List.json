@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "labName": "{devtestlabName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{userName}",
+            "type": "Microsoft.DevTestLab/labs/users",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/users/{userName}",
+            "location": "{location}",
+            "properties": {
+              "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+              "identity": {
+                "appId": "{appId}",
+                "objectId": "{objectId}",
+                "principalId": "{principalId}",
+                "principalName": "{principalName}",
+                "tenantId": "{tenantId}"
+              },
+              "provisioningState": "Succeeded",
+              "secretStore": {
+                "keyVaultId": "{keyVaultId}",
+                "keyVaultUri": "{keyVaultUri}"
+              },
+              "uniqueIdentifier": "{uniqueIdentifier}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Users_List",
+  "title": "Users_List"
+}

@@ -1,0 +1,77 @@
+{
+  "operationId": "AnalyzeConversations",
+  "title": "SuccessfulAnalyzeConversationsArbitrationDirectTarget",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Content-Type": "application/json",
+    "api-version": "2024-11-01",
+    "body": {
+      "kind": "Conversation",
+      "analysisInput": {
+        "conversationItem": {
+          "text": "Ports and connectors",
+          "participantId": "1",
+          "id": "1"
+        }
+      },
+      "parameters": {
+        "projectName": "prj1",
+        "deploymentName": "dep1",
+        "directTarget": "qnaProject",
+        "targetProjectParameters": {
+          "qnaProject": {
+            "targetProjectKind": "QuestionAnswering",
+            "callingOptions": {
+              "context": {
+                "previousUserQuery": "Meet Surface Pro 4",
+                "previousQnaId": 4
+              },
+              "top": 1,
+              "question": "App Service overview"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ConversationResult",
+        "result": {
+          "query": "Ports and connectors",
+          "prediction": {
+            "projectKind": "Orchestration",
+            "topIntent": "qnaTargetApp",
+            "intents": {
+              "qnaTargetApp": {
+                "targetProjectKind": "QuestionAnswering",
+                "confidenceScore": 1,
+                "result": {
+                  "answers": [
+                    {
+                      "questions": [
+                        "App Service overview"
+                      ],
+                      "answer": "The compute resources you use are determined by the *App Service plan* that you run your apps on.",
+                      "confidenceScore": 0.7384000000000001,
+                      "id": 1,
+                      "source": "https://docs.microsoft.com/en-us/azure/app-service/overview",
+                      "metadata": {},
+                      "dialog": {
+                        "isContextOnly": false,
+                        "prompts": []
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2022-01-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "MigrateMySqlAzureDbForMySqlOfflineTaskInput": {
+      "type": "object",
+      "description": "Input for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
+      "properties": {
+        "sourceConnectionInfo": {
+          "description": "Connection information for source MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "targetConnectionInfo": {
+          "description": "Connection information for target Azure Database for MySQL",
+          "$ref": "./Common.json#/definitions/MySqlConnectionInfo"
+        },
+        "selectedDatabases": {
+          "type": "array",
+          "description": "Databases to migrate",
+          "items": {
+            "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlOfflineDatabaseInput"
+          }
+        },
+        "makeSourceServerReadOnly": {
+          "type": "boolean",
+          "description": "Setting to set the source server read only",
+          "default": false
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Parameter to specify when the migration started"
+        },
+        "optionalAgentSettings": {
+          "type": "object",
+          "description": "Optional parameters for fine tuning the data transfer rate during migration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "encryptedKeyForSecureFields": {
+          "type": "string",
+          "description": "encrypted key for secure fields"
+        }
+      },
+      "required": [
+        "sourceConnectionInfo",
+        "targetConnectionInfo",
+        "selectedDatabases"
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that migrates MySQL databases to Azure Database for MySQL for offline migrations",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Result identifier",
+          "readOnly": true
+        },
+        "resultType": {
+          "description": "Result type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resultType"
+      ],
+      "discriminator": "resultType"
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutputMigrationLevel": {
+      "x-ms-discriminator-value": "MigrationLevelOutput",
+      "type": "object",
+      "properties": {
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of task execution in seconds.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationStatus",
+          "description": "Current status of migration",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Migration status message",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "databases": {
+          "type": "string",
+          "description": "Selected databases as a map from database name to database id",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "databaseSummary": {
+          "type": "string",
+          "description": "Summary of database results in the migration",
+          "additionalProperties": {
+            "$ref": "#/definitions/DatabaseSummaryResult"
+          },
+          "readOnly": true
+        },
+        "migrationReportResult": {
+          "type": "object",
+          "description": "Migration Report Result, provides unique url for downloading your migration report.",
+          "$ref": "./MigrationValidation.json#/definitions/MigrationReportResult"
+        },
+        "sourceServerVersion": {
+          "type": "string",
+          "description": "Source server version",
+          "readOnly": true
+        },
+        "sourceServerBrandVersion": {
+          "type": "string",
+          "description": "Source server brand version",
+          "readOnly": true
+        },
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutputDatabaseLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "DatabaseLevelOutput",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "Name of the database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "stage": {
+          "$ref": "./TasksCommon.json#/definitions/DatabaseMigrationStage",
+          "description": "Migration stage that this database is in",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Migration progress message",
+          "readOnly": true
+        },
+        "numberOfObjects": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of objects",
+          "readOnly": true
+        },
+        "numberOfObjectsCompleted": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successfully completed objects",
+          "readOnly": true
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of database/object errors.",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all errors of the item",
+          "readOnly": true
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
+          "readOnly": true
+        },
+        "exceptionsAndWarnings": {
+          "description": "Migration exceptions and warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
+        },
+        "objectSummary": {
+          "type": "string",
+          "description": "Summary of object results in the migration",
+          "additionalProperties": {
+            "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutputTableLevel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TableLevelOutput",
+      "properties": {
+        "objectName": {
+          "type": "string",
+          "description": "Name of the item",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Migration end time",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/MigrationState",
+          "description": "Current state of migration",
+          "readOnly": true
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "Status message",
+          "readOnly": true
+        },
+        "itemsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of items",
+          "readOnly": true
+        },
+        "itemsCompletedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of successfully completed items",
+          "readOnly": true
+        },
+        "errorPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all errors of the item",
+          "readOnly": true
+        },
+        "resultPrefix": {
+          "type": "string",
+          "description": "Wildcard string prefix to use for querying all sub-tem results of the item",
+          "readOnly": true
+        },
+        "lastStorageUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the storage was updated",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineTaskOutputError": {
+      "type": "object",
+      "x-ms-discriminator-value": "ErrorOutput",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the exception",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "./Common.json#/definitions/ReportableException",
+          "description": "Migration error",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateMySqlAzureDbForMySqlOfflineTaskOutput"
+        }
+      ]
+    },
+    "MigrateMySqlAzureDbForMySqlOfflineDatabaseInput": {
+      "type": "object",
+      "description": "Database specific information for offline MySQL to Azure Database for MySQL migration task inputs",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the database"
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of target database. Note: Target database will be truncated before starting migration."
+        },
+        "tableMap": {
+          "type": "object",
+          "description": "Mapping of source to target tables",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatabaseSummaryResult": {
+      "type": "object",
+      "description": "Summary of database results in the migration",
+      "properties": {
+        "sizeMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Size of the database in megabytes",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./TasksCommon.json#/definitions/DataItemMigrationSummaryResult"
+        }
+      ]
+    }
+  }
+}

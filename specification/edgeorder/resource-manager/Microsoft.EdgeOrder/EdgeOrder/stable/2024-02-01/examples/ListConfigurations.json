@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "Content-Length": [
+      "360"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Referer": [
+      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/providers/Microsoft.EdgeOrder/listConfigurations?api-version=2024-02-01"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2024-02-01",
+    "configurationsRequest": {
+      "configurationFilter": {
+        "filterableProperty": [
+          {
+            "type": "ShipToCountries",
+            "supportedValues": [
+              "US"
+            ]
+          }
+        ],
+        "hierarchyInformation": {
+          "productFamilyName": "azurestackedge",
+          "productLineName": "azurestackedge",
+          "productName": "azurestackedgegpu"
+        }
+      }
+    },
+    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": {
+                "attributes": [],
+                "descriptionType": "Base",
+                "keywords": [
+                  "GPU"
+                ],
+                "links": [],
+                "longDescription": "",
+                "shortDescription": ""
+              },
+              "availabilityInformation": {
+                "availabilityStage": "Available",
+                "disabledReason": "None"
+              },
+              "costInformation": {
+                "billingMeterDetails": []
+              },
+              "dimensions": {
+                "depth": 2,
+                "height": 15,
+                "length": 50,
+                "lengthHeightUnit": "IN",
+                "weight": 50,
+                "weightUnit": "LBS",
+                "width": 5
+              },
+              "displayName": "Azure Stack Edge Pro - 1 GPU",
+              "filterableProperties": [
+                {
+                  "type": "ShipToCountries",
+                  "supportedValues": [
+                    "US"
+                  ]
+                }
+              ],
+              "hierarchyInformation": {
+                "configurationName": "edgep_base",
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azurestackedge",
+                "productName": "azurestackedgegpu"
+              },
+              "imageInformation": [],
+              "specifications": [
+                {
+                  "name": "Usable compute",
+                  "value": "40 vCPU"
+                },
+                {
+                  "name": "Usable memory",
+                  "value": "102 GB"
+                },
+                {
+                  "name": "Usable storage",
+                  "value": "4.2 TB"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ProductsAndConfigurations_ListConfigurations",
+  "title": "ListConfigurations"
+}

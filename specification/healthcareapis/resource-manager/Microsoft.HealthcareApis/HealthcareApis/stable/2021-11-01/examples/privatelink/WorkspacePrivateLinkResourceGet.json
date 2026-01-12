@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "groupName": "healthcareworkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/workspaces/workspace1/privateLinkResources/fhir",
+        "name": "fhir",
+        "type": "Microsoft.HealthcareApis/workspaces/privateLinkResources",
+        "properties": {
+          "groupId": "healthcareworkspace",
+          "requiredMembers": [
+            "fhirservices",
+            "dicomservices"
+          ],
+          "requiredZoneNames": [
+            "privatelink.fhir.azurehealthcareapis.com",
+            "privatelink.dicom.azurehealthcareapis.com"
+          ]
+        }
+      }
+    }
+  }
+}

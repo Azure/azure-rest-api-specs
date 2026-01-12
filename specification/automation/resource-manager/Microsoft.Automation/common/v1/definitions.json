@@ -125,6 +125,10 @@
           "$ref": "#/definitions/PrivateEndpointProperty",
           "description": "Private endpoint which the connection belongs to."
         },
+        "groupIds": {
+          "$ref": "#/definitions/GroupIdsProperty",
+          "description": "Gets the groupIds."
+        },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
           "description": "Connection State of the Private Endpoint Connection."
@@ -140,6 +144,13 @@
           "description": "Resource id of the private endpoint."
         }
       }
+    },
+    "GroupIdsProperty": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets the groupIds."
     },
     "PrivateLinkServiceConnectionStateProperty": {
       "type": "object",

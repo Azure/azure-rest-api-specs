@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "clusterId": "cluster-1",
+    "environmentId": "env-12132",
+    "organizationName": "myOrganization",
+    "pageSize": 10,
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/cluster-1/connectors?api-version=2024-07-01&$count=10&$skipToken=xoi3753asdfe",
+        "value": [
+          {
+            "name": "connector-1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/cluster-1/connectors/connector-1",
+            "properties": {
+              "connectorBasicInfo": {
+                "connectorClass": "AZUREBLOBSINK",
+                "connectorId": "lcc-l",
+                "connectorName": "connector-1",
+                "connectorState": "RUNNING",
+                "connectorType": "SINK"
+              },
+              "connectorServiceTypeInfo": {
+                "connectorServiceType": "AzureBlobStorageSinkConnector",
+                "storageAccountKey": "*******",
+                "storageAccountName": "stcfaccount-1",
+                "storageContainerName": "continer-1"
+              },
+              "partnerConnectorInfo": {
+                "apiKey": "xxxxxxx",
+                "apiSecret": "*******",
+                "authType": "KAFKA_API_KEY",
+                "flushSize": "1000",
+                "inputFormat": "JSON",
+                "maxTasks": "2",
+                "outputFormat": "JSON",
+                "partnerConnectorType": "KafkaAzureBlobStorageSink",
+                "timeInterval": "DAILY",
+                "topics": [
+                  "topic-1"
+                ],
+                "topicsDir": "topicsDir"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Connector_List",
+  "title": "Connector_List"
+}

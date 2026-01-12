@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+    "parameters": {
+      "numberOfBucket": 4,
+      "startTime": "2021-09-01T00:00:00.000Z",
+      "endTime": "2021-10-01T00:00:00.000Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "SecurityAlert",
+            "description": "The alert description",
+            "azureResourceId": "4467341f-fb73-4f99-a9b3-29473532cf5a_bf7c3a2f-b743-6410-3ff0-ec64b5995d50",
+            "productName": "Azure Sentinel",
+            "displayName": "Alert display name",
+            "severity": "Medium",
+            "endTimeUtc": "2021-09-01T23:31:28.02Z",
+            "startTimeUtc": "2021-09-01T23:32:28.01Z",
+            "timeGenerated": "2021-09-01T23:37:25.8136594Z",
+            "alertType": "4467341f-fb73-4f99-a9b3-29473532cf5a_c93bf33e-055e-4972-9e7d-f84fe3fb61ae",
+            "Intent": "Discovery"
+          },
+          {
+            "kind": "Activity",
+            "queryId": "e0459780-ac9d-4b72-8bd4-fecf6b46a0a1",
+            "bucketStartTimeUTC": "2021-09-01T21:31:28.02Z",
+            "bucketEndTimeUTC": "2021-09-01T23:31:28.02Z",
+            "firstActivityTimeUTC": "2021-09-01T21:35:28.02Z",
+            "lastActivityTimeUTC": "2021-09-01T21:35:28.02Z",
+            "content": "he user has deleted the account 3 time(s)",
+            "title": "The user has deleted an account"
+          },
+          {
+            "kind": "Anomaly",
+            "azureResourceId": "4467341f-fb73-4f99-a9b3-29473532cf5a_d56430ef-f421-2c9c-0b7d-d082285843c6",
+            "description": "Anomalous private to public port scanning activity with high destination port count along with low port ratio. The ratios are normalized by multiplying them by 10,000 to get them to a more usable value between 0.0 and 1.0.",
+            "productName": "Azure Sentinel",
+            "displayName": "(Preview) Anomalous scanning activity",
+            "endTimeUtc": "2021-09-01T23:31:28.02Z",
+            "startTimeUtc": "2021-09-01T23:32:28.01Z",
+            "timeGenerated": "2021-09-01T23:37:25.8136594Z",
+            "vendor": "Microsoft",
+            "intent": "Discovery",
+            "techniques": [
+              "T1046"
+            ],
+            "reasons": [
+              "High destination port count",
+              "Low port ratio"
+            ]
+          }
+        ],
+        "metaData": {
+          "totalCount": 6,
+          "aggregations": [
+            {
+              "count": 4,
+              "kind": "Activity"
+            },
+            {
+              "count": 2,
+              "kind": "SecurityAlert"
+            },
+            {
+              "count": 1,
+              "kind": "Anomaly"
+            }
+          ],
+          "errors": [
+            {
+              "kind": "Activity",
+              "queryId": "11067f9f-d6a7-4488-887f-0ba564268879",
+              "errorMessage": "syntax error"
+            },
+            {
+              "kind": "SecurityAlert",
+              "errorMessage": "internal server error"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

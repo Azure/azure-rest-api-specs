@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyMetadataClient",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.PolicyInsights/policyMetadata/{resourceName}": {
+      "get": {
+        "operationId": "PolicyMetadata_GetResource",
+        "description": "Get policy metadata resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Policy metadata resource definition.",
+            "schema": {
+              "$ref": "#/definitions/PolicyMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a single policy metadata resource": {
+            "$ref": "./examples/PolicyMetadata_GetResource.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PolicyInsights/policyMetadata": {
+      "get": {
+        "operationId": "PolicyMetadata_List",
+        "description": "Get a list of the policy metadata resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Policy metadata resource collection.",
+            "schema": {
+              "$ref": "#/definitions/PolicyMetadataCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get collection of policy metadata resources": {
+            "$ref": "./examples/PolicyMetadata_List.json"
+          },
+          "Get collection of policy metadata resources using top query parameter": {
+            "$ref": "./examples/PolicyMetadata_List_WithTop.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyMetadata": {
+      "description": "Policy metadata resource definition.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyMetadataProperties",
+          "description": "Properties of the policy metadata."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the policy metadata.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the policy metadata.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the policy metadata.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyMetadataSlimProperties": {
+      "description": "The properties of the policy metadata, excluding properties containing large strings",
+      "properties": {
+        "metadataId": {
+          "description": "The policy metadata identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "category": {
+          "description": "The category of the policy metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "description": "The title of the policy metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "owner": {
+          "description": "The owner of the policy metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalContentUrl": {
+          "description": "Url for getting additional content about the resource metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "metadata": {
+          "description": "Additional metadata.",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyMetadataProperties": {
+      "description": "The properties of the policy metadata.",
+      "properties": {
+        "description": {
+          "description": "The description of the policy metadata.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requirements": {
+          "description": "The requirements of the policy metadata.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PolicyMetadataSlimProperties"
+        }
+      ]
+    },
+    "SlimPolicyMetadata": {
+      "description": "Slim version of policy metadata resource definition, excluding properties with large strings",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyMetadataSlimProperties",
+          "description": "Properties of the policy metadata."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the policy metadata.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the policy metadata.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the policy metadata.",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyMetadataCollection": {
+      "description": "Collection of policy metadata resources.",
+      "properties": {
+        "value": {
+          "description": "Array of policy metadata definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SlimPolicyMetadata"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional scenario specific error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypedErrorInfo"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
+    "TypedErrorInfo": {
+      "description": "Scenario specific error details.",
+      "properties": {
+        "type": {
+          "description": "The type of included error details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "info": {
+          "description": "The scenario specific error details.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "resourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the policy metadata resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "topParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Maximum number of records to return.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Top"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

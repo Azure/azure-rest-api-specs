@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "resourceId": "subscriptions/a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2/resourcegroups/E2E-IBB0WX/providers/Microsoft.Security/securityconnectors/AwsConnectorAllOfferings",
+    "healthReportName": "909c629a-bf39-4521-8e4f-10b443a0bc02"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2/resourcegroups/E2E-IBB0WX/providers/Microsoft.Security/securityconnectors/AwsConnectorAllOfferings/providers/Microsoft.Security/healthReports/909c629a-bf39-4521-8e4f-10b443a0bc02",
+        "name": "909c629a-bf39-4521-8e4f-10b443a0bc02",
+        "type": "Microsoft.Security/healthReports",
+        "properties": {
+          "resourceDetails": {
+            "source": "Aws",
+            "id": "/subscriptions/a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2/resourcegroups/E2E-IBB0WX/providers/Microsoft.Security/securityconnectors/AwsConnectorAllOfferings",
+            "connectorId": "bb7ad9cc-26b6-48ec-a5b4-23fc23be2733"
+          },
+          "environmentDetails": {
+            "nativeResourceId": "arn:aws:iam::827098768879",
+            "environmentHierarchyId": "a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2",
+            "organizationalHierarchyId": "e81b978c-11be-449f-a392-42c0ed96bb91",
+            "subscriptionId": "a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2",
+            "tenantId": "a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2"
+          },
+          "healthDataClassification": {
+            "component": "Connectivity",
+            "scope": "Connectors"
+          },
+          "status": {
+            "code": "NotHealthy",
+            "statusChangeDate": "2023-01-12T09:07:18.6759138Z",
+            "firstEvaluationDate": "2023-01-12T09:07:18.6759138Z"
+          },
+          "affectedDefendersPlans": [],
+          "issues": [
+            {
+              "issueKey": "414af15d-207e-4c63-b8eb-624d1b652e45",
+              "issueName": "AWS CloudFormation StackSet name invalid or does not exist",
+              "securityValues": [
+                "Connectivity to AWS member accounts"
+              ],
+              "issueDescription": "A problem was identified with the AWS CloudFormation StackSet. The StackSet is used to create stacks across multiple accounts. To grant Defender for Cloud access to your member accounts, there is a need to run the StackSet on the member accounts.",
+              "remediationSteps": "Validate that the StackSet name in AWS matches the name provided in the onboarding set up: StackSet name can be found in AWS Management Console  -> CloudFormation -> StackSets -> StackSet name In case the names do not match, update the StackSet name to match the StackSet name provided in the onboarding set up.  In case the StackSet does not exist, re-run the CloudFormation template only for StackSet. Navigate to CloudFormation 'StackSets' in AWS Management Console -> Click 'Create StackSet' -> Choose 'Upload a template file', `Choose file` and select the downloaded template. Make sure to enter the exact StackSet name as it was provided in the onboarding set up. Download template link ",
+              "remediationScript": "",
+              "issueAdditionalData": {
+                "StacksetName": "ProdStackSet"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "operationId": "OracleSubscriptions_listActivationLinks",
+  "title": "OracleSubscriptions_listActivationLinks",
+  "parameters": {
+    "api-version": "2024-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "newCloudAccountActivationLink": "https://new-tenancy-activation-link",
+        "existingCloudAccountActivationLink": "https://existing-tenancy-activation-link"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 10000000,
+        "Location": "eastus"
+      }
+    }
+  }
+}

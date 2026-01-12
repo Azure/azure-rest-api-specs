@@ -1,0 +1,186 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/restoreDetails/{restoreDetailsName}": {
+      "get": {
+        "tags": [
+          "ManagedDatabaseRestoreDetails"
+        ],
+        "description": "Gets managed database restore details.",
+        "operationId": "ManagedDatabaseRestoreDetails_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "restoreDetailsName",
+            "in": "path",
+            "description": "The name of the restore details to retrieve.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "RestoreDetailsName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved restore details.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDatabaseRestoreDetailsResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 AutoCompleteMissingLastBackupName - Auto complete restore request must have lastBackupName parameter provided.\n\n * 400 MissingThumbprint - Can not find server certificate.\n\n * 400 BlobStorageServerFailure - Blob storage server failure has occurred.\n\n * 400 BackupSetNotFound - No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 XtpInitializedDuringRestore - Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance.\n\n * 400 RetriableMissingThumbprint - Can not find server certificate.\n\n * 400 FullBackupMissingChecksum - Provided full backup is missing checksum.\n\n * 400 FullBackupDamaged - Provided full backup is damaged.\n\n * 400 MissingStripeInBackupSet - Provided backup set has one or more missing stripes.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerWhileRestoreInProgress - There are backups from multiple databases in the container. Please make sure the container has backups from a single database.{0}\n\n * 400 BrokenRestorePlanWrongDiffBaseGUID - The restore plan is broken because DifferentialBaseGuid of diff backup does not match BackupSetGuid of full backup.\n\n * 400 PartiallyContainedDatabaseUnsupported - \"Backup for a partially contained database is not supported.\"\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 ExternalBackupAlreadySignaledToComplete - The restore request has already been signaled to complete.\n\n * 400 ExternalBackupRestoreHasNotBeenStarted - The restore request can only be completed once the restore has started.\n\n * 400 ExternalBackupUpgradeInProgress - The restore request cannot be completed, since upgrade is in progress.\n\n * 400 IncompatiblePhysicalLayoutTooManyXTPFiles - Database backup contains incompatible physical layout. Multiple files found in the filegroup that contains MEMORY_OPTIMIZED_DATA.\n\n * 400 BlobStorageFailure - Blob storage failure has occurred.\n\n * 400 BackupsFromMultipleDatabasesDetectedInTheContainerFromTheStart - There are backups from multiple databases in the container. Please make sure the container has backups from a single database.{0}\n\n * 400 BackupSetBroken - Backup set is broken.\n\n * 400 ManagedDatabaseNotInRestoringState - Managed database is not in Restoring state."
+          }
+        },
+        "x-ms-examples": {
+          "Managed database restore details.": {
+            "$ref": "./examples/ManagedDatabaseRestoreDetails.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedDatabaseRestoreDetailsProperties": {
+      "description": "The managed database's restore details properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Restore status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentRestoringFileName": {
+          "description": "Current restoring file name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRestoredFileName": {
+          "description": "Last restored file name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastRestoredFileTime": {
+          "format": "date-time",
+          "description": "Last restored file time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "percentCompleted": {
+          "format": "double",
+          "description": "Percent completed.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unrestorableFiles": {
+          "description": "List of unrestorable files.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "numberOfFilesDetected": {
+          "format": "int64",
+          "description": "Number of files detected.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lastUploadedFileName": {
+          "description": "Last uploaded file name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastUploadedFileTime": {
+          "format": "date-time",
+          "description": "Last uploaded file time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blockReason": {
+          "description": "The reason why restore is in Blocked state.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDatabaseRestoreDetailsResult": {
+      "description": "A managed database restore details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDatabaseRestoreDetailsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

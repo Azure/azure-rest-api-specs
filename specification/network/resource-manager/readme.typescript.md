@@ -15,6 +15,7 @@ typescript:
 typescript:
   package-name: "@azure/arm-network"
   output-folder: "$(typescript-sdks-folder)/sdk/network/arm-network"
+
 ```
 
 ### Profile: profile-hybrid-2019-03-01

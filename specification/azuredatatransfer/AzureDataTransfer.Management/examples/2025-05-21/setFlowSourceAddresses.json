@@ -1,0 +1,31 @@
+{
+  "operationId": "Flows_SetSourceAddresses",
+  "parameters": {
+    "api-version": "2025-05-21",
+    "connectionName": "testConnection",
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "sourceAddresses": {
+      "values": [
+        "0.0.0.0",
+        "1.0.0.0/24"
+      ]
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Set the flow stream source addresses",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/12345/providers/Microsoft.AzureDataTransfer/locations/eastUS?api-version=2025-05-21"
+      }
+    }
+  }
+}

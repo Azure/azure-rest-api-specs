@@ -1,0 +1,109 @@
+{
+  "operationId": "KnowledgeSources_Create",
+  "title": "SearchServiceCreateKnowledgeSourceAzureBlob",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "KnowledgeSource": {
+      "azureBlobParameters": {
+        "identity": {
+          "userAssignedIdentity": "/my/userassigned/id",
+          "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
+        },
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+        "containerName": "test-container",
+        "folderPath": "test-path",
+        "embeddingModel": {
+          "azureOpenAIParameters": {
+            "resourceUri": "https://test-sample.openai.azure.com/",
+            "deploymentId": "model",
+            "apiKey": "api-key",
+            "modelName": "text-embedding-3-large"
+          },
+          "name": "openai",
+          "kind": "azureOpenAI"
+        },
+        "chatCompletionModel": {
+          "azureOpenAIParameters": {
+            "resourceUri": "https://test-sample.openai.azure.com/",
+            "deploymentId": "myDeployment",
+            "apiKey": "api-key",
+            "modelName": "gpt-4o-mini"
+          },
+          "kind": "azureOpenAI"
+        },
+        "ingestionSchedule": {
+          "interval": "P1D",
+          "startTime": "2025-01-07T19:30:00Z"
+        },
+        "disableImageVerbalization": false
+      },
+      "name": "ks-preview-test",
+      "description": "Description of the knowledge source.",
+      "kind": "azureBlob",
+      "@odata.etag": "0x1234568AE7E58A1",
+      "encryptionKey": {
+        "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+        "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+        "keyVaultUri": "https://myKeyVault.vault.azure.net",
+        "accessCredentials": {
+          "applicationId": "00000000-0000-0000-0000-000000000000",
+          "applicationSecret": "<applicationSecret>"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-preview-test",
+        "kind": "azureBlob",
+        "description": "Description of the knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "azureBlobParameters": {
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+          "containerName": "test-container",
+          "folderPath": "test-path",
+          "disableImageVerbalization": false,
+          "identity": {
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+            "userAssignedIdentity": "/my/userassigned/id"
+          },
+          "embeddingModel": {
+            "name": "openai",
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "model",
+              "apiKey": "api-key",
+              "modelName": "text-embedding-3-large"
+            }
+          },
+          "chatCompletionModel": {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            }
+          },
+          "ingestionSchedule": {
+            "interval": "P1D",
+            "startTime": "2024-06-06T00:01:50.265Z"
+          }
+        }
+      }
+    }
+  }
+}

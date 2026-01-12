@@ -151,6 +151,7 @@
       "description": "A list of metric baselines."
     },
     "SingleMetricBaseline": {
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
@@ -181,6 +182,7 @@
       "description": "The baseline results of a single metric."
     },
     "TimeSeriesBaseline": {
+      "type": "object",
       "properties": {
         "aggregation": {
           "type": "string",
@@ -285,6 +287,7 @@
       "description": "The baseline values for a single sensitivity value."
     },
     "BaselineMetadata": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -312,6 +315,22 @@
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
+    "MetricNamesParameter": {
+      "name": "metricnames",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
+      "x-ms-parameter-location": "method"
+    },
+    "MetricNamespaceParameter": {
+      "name": "metricnamespace",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Metric namespace that contains the requested metric names.",
+      "x-ms-parameter-location": "method"
+    },
     "TimespanParameter": {
       "name": "timespan",
       "in": "query",
@@ -327,22 +346,6 @@
       "type": "string",
       "format": "duration",
       "description": "The interval (i.e. timegrain) of the query.",
-      "x-ms-parameter-location": "method"
-    },
-    "MetricNamesParameter": {
-      "name": "metricnames",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**",
-      "x-ms-parameter-location": "method"
-    },
-    "MetricNamespaceParameter": {
-      "name": "metricnamespace",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
       "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {

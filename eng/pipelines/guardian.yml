@@ -1,0 +1,26 @@
+trigger: none
+pr: none
+
+resources:
+  repositories:
+    - repository: 1ESPipelineTemplates
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+
+variables:
+  - template: /eng/pipelines/templates/variables/image.yml
+
+extends:
+  template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    featureFlags:
+      incrementalSDLSourceAnalysis: true
+    sdl:
+      enableAllTools: false
+      sourceAnalysisPool: 
+        name: $(WINDOWSPOOL)
+        image: $(WINDOWSVMIMAGE)
+        os: windows
+      policheck:
+        enabled: true

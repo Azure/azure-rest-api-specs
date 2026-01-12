@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "vmExtensionName": "myVMExtension",
+    "api-version": "2022-03-01",
+    "extensionParameters": {
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "publisher": "extPublisher",
+        "type": "extType",
+        "typeHandlerVersion": "1.2",
+        "settings": {
+          "UserName": "xyz@microsoft.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myVMExtension",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/extensions/myVMExtension",
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Creating",
+          "publisher": "extPublisher",
+          "type": "extType",
+          "typeHandlerVersion": "1.2",
+          "settings": {
+            "UserName": "xyz@microsoft.com"
+          }
+        }
+      }
+    }
+  }
+}

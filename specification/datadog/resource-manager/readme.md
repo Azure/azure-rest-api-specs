@@ -26,7 +26,87 @@ These are the global settings for the Datadog API.
 title: Microsoft Datadog Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-03
+tag: package-2025-06
+```
+
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11'
+input-file:
+- Microsoft.Datadog/preview/2025-11-03-preview/datadog.json
+```
+
+### Tag: package-2025-06
+
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-06'
+input-file:
+- Microsoft.Datadog/stable/2025-06-11/datadog.json
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+- Microsoft.Datadog/stable/2025-01-07/datadog.json
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03'
+input-file:
+- Microsoft.Datadog/stable/2024-03-01/datadog.json
+```
+
+### Tag: package-2023-10
+
+These settings apply only when `--tag=package-2023-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-10'
+input-file:
+- Microsoft.Datadog/stable/2023-10-20/datadog.json
+```
+### Tag: package-2023-07
+
+These settings apply only when `--tag=package-2023-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-07'
+input-file:
+- Microsoft.Datadog/stable/2023-07-07/datadog.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+- Microsoft.Datadog/stable/2023-01-01/datadog.json
+```
+
+### Tag: package-2022-08
+
+These settings apply only when `--tag=package-2022-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-08'
+input-file:
+- Microsoft.Datadog/stable/2022-08-01/datadog.json
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-06'
+input-file:
+- Microsoft.Datadog/stable/2022-06-01/datadog.json
 ```
 
 ### Tag: package-2021-03
@@ -57,10 +137,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -68,6 +147,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datadog']
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

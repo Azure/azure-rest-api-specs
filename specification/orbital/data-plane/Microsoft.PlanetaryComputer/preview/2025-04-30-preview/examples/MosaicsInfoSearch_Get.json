@@ -1,0 +1,67 @@
+{
+  "title": "MosaicsInfoSearch_Get",
+  "operationId": "MosaicsInfoSearch_Get",
+  "parameters": {
+    "searchId": "e32e0b12176246816953d75e3356d613",
+    "api-version": "2025-04-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "search": {
+          "hash": "e32e0b12176246816953d75e3356d613",
+          "search": {
+            "filter": {
+              "op": "and",
+              "args": [
+                {
+                  "op": "=",
+                  "args": [
+                    {
+                      "property": "collection"
+                    },
+                    "maxar"
+                  ]
+                }
+              ]
+            },
+            "sortby": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ],
+            "filter-lang": "cql2-json"
+          },
+          "_where": "(collection = 'maxar')",
+          "orderby": "datetime DESC, id DESC",
+          "lastused": "2025-01-07T19:53:36.547783Z",
+          "usecount": 1,
+          "metadata": {
+            "type": "mosaic"
+          }
+        },
+        "links": [
+          {
+            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/info",
+            "rel": "self",
+            "type": "application/json",
+            "title": "Mosaic metadata"
+          },
+          {
+            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/tilejson.json",
+            "rel": "tilejson",
+            "type": "application/json",
+            "title": "Link for TileJSON"
+          },
+          {
+            "href": "http://stacforge.axarcnccdbcsduc4.eastus.geocatalog.spatio.azure.com/data/mosaic/e32e0b12176246816953d75e3356d613/WMTSCapabilities.xml",
+            "rel": "wmts",
+            "type": "application/json",
+            "title": "Link for WMTS"
+          }
+        ]
+      }
+    }
+  }
+}

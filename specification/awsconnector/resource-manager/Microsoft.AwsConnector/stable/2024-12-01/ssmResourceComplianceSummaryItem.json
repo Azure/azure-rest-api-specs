@@ -1,0 +1,751 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-12-01",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SsmResourceComplianceSummaryItems"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/ssmResourceComplianceSummaryItems": {
+      "get": {
+        "operationId": "SsmResourceComplianceSummaryItems_ListBySubscription",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "List SsmResourceComplianceSummaryItem resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_ListBySubscription": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ssmResourceComplianceSummaryItems": {
+      "get": {
+        "operationId": "SsmResourceComplianceSummaryItems_ListByResourceGroup",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "List SsmResourceComplianceSummaryItem resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItemListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_ListByResourceGroup": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/ssmResourceComplianceSummaryItems/{name}": {
+      "get": {
+        "operationId": "SsmResourceComplianceSummaryItems_Get",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "Get a SsmResourceComplianceSummaryItem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SsmResourceComplianceSummaryItem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_Get": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SsmResourceComplianceSummaryItems_CreateOrReplace",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "Create a SsmResourceComplianceSummaryItem. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SsmResourceComplianceSummaryItem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SsmResourceComplianceSummaryItem' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+            }
+          },
+          "201": {
+            "description": "Resource 'SsmResourceComplianceSummaryItem' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_CreateOrReplace": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SsmResourceComplianceSummaryItems_Update",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "Update a SsmResourceComplianceSummaryItem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SsmResourceComplianceSummaryItem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItemTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_Update": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SsmResourceComplianceSummaryItems_Delete",
+        "tags": [
+          "SsmResourceComplianceSummaryItems"
+        ],
+        "description": "Delete a SsmResourceComplianceSummaryItem",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SsmResourceComplianceSummaryItem",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SsmResourceComplianceSummaryItems_Delete": {
+            "$ref": "./examples/SsmResourceComplianceSummaryItems_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsSsmResourceComplianceSummaryItemProperties": {
+      "type": "object",
+      "description": "Definition of awsSsmResourceComplianceSummaryItem",
+      "properties": {
+        "complianceType": {
+          "type": "string",
+          "description": "<p>The compliance type.</p>"
+        },
+        "compliantSummary": {
+          "$ref": "#/definitions/CompliantSummary",
+          "description": "<p>A list of items that are compliant for the resource.</p>"
+        },
+        "executionSummary": {
+          "$ref": "#/definitions/ComplianceExecutionSummary",
+          "description": "<p>Information about the execution.</p>"
+        },
+        "nonCompliantSummary": {
+          "$ref": "#/definitions/NonCompliantSummary",
+          "description": "<p>A list of items that aren't compliant for the resource.</p>"
+        },
+        "overallSeverity": {
+          "$ref": "#/definitions/ComplianceSeverityEnumValue",
+          "description": "<p>The highest severity item found for the resource. The resource is compliant for this item.</p>"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "<p>The resource ID.</p>"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "<p>The resource type.</p>"
+        },
+        "status": {
+          "$ref": "#/definitions/ComplianceStatusEnumValue",
+          "description": "<p>The compliance status for the resource.</p>"
+        }
+      }
+    },
+    "ComplianceExecutionSummary": {
+      "type": "object",
+      "description": "Definition of ComplianceExecutionSummary",
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "description": "<p>An ID created by the system when <code>PutComplianceItems</code> was called. For example, <code>CommandID</code> is a valid execution ID. You can use this ID in subsequent calls.</p>"
+        },
+        "executionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "<p>The time the execution ran as a datetime object that is saved in the following format: <code>yyyy-MM-dd'T'HH:mm:ss'Z'</code> </p>"
+        },
+        "executionType": {
+          "type": "string",
+          "description": "<p>The type of execution. For example, <code>Command</code> is a valid execution type.</p>"
+        }
+      }
+    },
+    "ComplianceSeverity": {
+      "type": "string",
+      "description": "ComplianceSeverity enum",
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "INFORMATIONAL",
+        "LOW",
+        "MEDIUM",
+        "UNSPECIFIED"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CRITICAL",
+            "value": "CRITICAL",
+            "description": "ComplianceSeverity enum CRITICAL"
+          },
+          {
+            "name": "HIGH",
+            "value": "HIGH",
+            "description": "ComplianceSeverity enum HIGH"
+          },
+          {
+            "name": "INFORMATIONAL",
+            "value": "INFORMATIONAL",
+            "description": "ComplianceSeverity enum INFORMATIONAL"
+          },
+          {
+            "name": "LOW",
+            "value": "LOW",
+            "description": "ComplianceSeverity enum LOW"
+          },
+          {
+            "name": "MEDIUM",
+            "value": "MEDIUM",
+            "description": "ComplianceSeverity enum MEDIUM"
+          },
+          {
+            "name": "UNSPECIFIED",
+            "value": "UNSPECIFIED",
+            "description": "ComplianceSeverity enum UNSPECIFIED"
+          }
+        ]
+      }
+    },
+    "ComplianceSeverityEnumValue": {
+      "type": "object",
+      "description": "Definition of ComplianceSeverityEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ComplianceSeverity",
+          "description": "Property value"
+        }
+      }
+    },
+    "ComplianceStatus": {
+      "type": "string",
+      "description": "ComplianceStatus enum",
+      "enum": [
+        "COMPLIANT",
+        "NON_COMPLIANT"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "COMPLIANT",
+            "value": "COMPLIANT",
+            "description": "ComplianceStatus enum COMPLIANT"
+          },
+          {
+            "name": "NON_COMPLIANT",
+            "value": "NON_COMPLIANT",
+            "description": "ComplianceStatus enum NON_COMPLIANT"
+          }
+        ]
+      }
+    },
+    "ComplianceStatusEnumValue": {
+      "type": "object",
+      "description": "Definition of ComplianceStatusEnumValue",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Property value"
+        }
+      }
+    },
+    "CompliantSummary": {
+      "type": "object",
+      "description": "Definition of CompliantSummary",
+      "properties": {
+        "compliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources that are compliant.</p>"
+        },
+        "severitySummary": {
+          "$ref": "#/definitions/SeveritySummary",
+          "description": "<p>A summary of the compliance severity by compliance type.</p>"
+        }
+      }
+    },
+    "NonCompliantSummary": {
+      "type": "object",
+      "description": "Definition of NonCompliantSummary",
+      "properties": {
+        "nonCompliantCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of compliance items that aren't compliant.</p>"
+        },
+        "severitySummary": {
+          "$ref": "#/definitions/SeveritySummary",
+          "description": "<p>A summary of the non-compliance severity by compliance type</p>"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SeveritySummary": {
+      "type": "object",
+      "description": "Definition of SeveritySummary",
+      "properties": {
+        "criticalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of <code>Critical</code>. Critical severity is determined by the organization that published the compliance items.</p>"
+        },
+        "highCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of high. High severity is determined by the organization that published the compliance items.</p>"
+        },
+        "informationalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of informational. Informational severity is determined by the organization that published the compliance items.</p>"
+        },
+        "lowCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of low. Low severity is determined by the organization that published the compliance items.</p>"
+        },
+        "mediumCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of medium. Medium severity is determined by the organization that published the compliance items.</p>"
+        },
+        "unspecifiedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "<p>The total number of resources or compliance items that have a severity level of unspecified. Unspecified severity is determined by the organization that published the compliance items.</p>"
+        }
+      }
+    },
+    "SsmResourceComplianceSummaryItem": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SsmResourceComplianceSummaryItemProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SsmResourceComplianceSummaryItemListResult": {
+      "type": "object",
+      "description": "The response of a SsmResourceComplianceSummaryItem list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SsmResourceComplianceSummaryItem items on this page",
+          "items": {
+            "$ref": "#/definitions/SsmResourceComplianceSummaryItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SsmResourceComplianceSummaryItemProperties": {
+      "type": "object",
+      "description": "Definition of SsmResourceComplianceSummaryItem",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsSsmResourceComplianceSummaryItemProperties",
+          "description": "AWS Properties"
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Public Cloud Connectors Resource ID"
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "AWS Account ID"
+        },
+        "arn": {
+          "type": "string",
+          "description": "Amazon Resource Name (ARN)"
+        },
+        "publicCloudResourceName": {
+          "type": "string",
+          "description": "Public Cloud Resource Name"
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "AWS Source Schema"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "AWS Region"
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "AWS Tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SsmResourceComplianceSummaryItemTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SsmResourceComplianceSummaryItem resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

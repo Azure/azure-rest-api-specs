@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2023-07-01-preview",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "recordType": "DS",
+    "relativeRecordSetName": "record1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "zoneName": "zone1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/DS",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/DS/record1",
+        "properties": {
+          "DSRecords": [
+            {
+              "algorithm": 5,
+              "digest": {
+                "algorithmType": 1,
+                "value": "2BB183AF5F22588179A53B0A98631FAD1A292118"
+              },
+              "keyTag": 60485
+            }
+          ],
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "metadata": {
+            "key2": "value2"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "Patch DS recordset"
+}

@@ -53,7 +53,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -89,7 +89,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         },
@@ -151,7 +151,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -195,7 +195,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -233,7 +233,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -279,7 +279,7 @@
           "default": {
             "description": "An error response received from the Azure Synapse service.",
             "schema": {
-              "$ref": "artifacts.json#/definitions/CloudError"
+              "$ref": "../../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -405,12 +405,13 @@
     },
     "Endpoint": {
       "name": "endpoint",
-      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "description": "The workspace development endpoint, for example `https://myworkspace.dev.azuresynapse.net`.",
       "required": true,
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "client",
+      "format": "uri"
     },
     "NotebookName": {
       "name": "notebookName",

@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "cache1",
+            "type": "Microsoft.Cache/Redis",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+            "location": "East US",
+            "properties": {
+              "enableNonSslPort": true,
+              "hostName": "cache1.redis.cache.windows.net",
+              "instances": [
+                {
+                  "isMaster": true,
+                  "isPrimary": true,
+                  "nonSslPort": 13000,
+                  "sslPort": 15000
+                },
+                {
+                  "isMaster": false,
+                  "isPrimary": false,
+                  "nonSslPort": 13001,
+                  "sslPort": 15001
+                },
+                {
+                  "isMaster": false,
+                  "isPrimary": false,
+                  "nonSslPort": 13002,
+                  "sslPort": 15002
+                }
+              ],
+              "port": 6379,
+              "provisioningState": "Creating",
+              "redisConfiguration": {},
+              "redisVersion": "3.2",
+              "replicasPerMaster": 2,
+              "replicasPerPrimary": 2,
+              "sku": {
+                "name": "Standard",
+                "capacity": 6,
+                "family": "C"
+              },
+              "sslPort": 6380,
+              "updateChannel": "Stable",
+              "zonalAllocationPolicy": "Automatic"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Redis_ListBySubscription",
+  "title": "RedisCacheList"
+}

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "registryName": "my-aml-registry",
+    "modelName": "string",
+    "version": "string",
+    "api-version": "2024-01-01-preview",
+    "body": {
+      "baseEnvironmentSource": {
+        "baseEnvironmentSourceType": "EnvironmentAsset",
+        "resourceId": "string"
+      },
+      "inferencingServer": {
+        "serverType": "AzureMLBatch",
+        "codeConfiguration": {
+          "codeId": "string",
+          "scoringScript": "string"
+        }
+      },
+      "environmentVariables": {
+        "string": "string"
+      },
+      "modelConfiguration": {
+        "mode": "ReadOnlyMount",
+        "mountPath": "string"
+      },
+      "inputs": [
+        {
+          "inputType": "UriFile",
+          "mode": "Download",
+          "path": {
+            "inputPathType": "Url",
+            "url": "string"
+          },
+          "mountPath": "string"
+        }
+      ],
+      "tags": {
+        "string": "string"
+      },
+      "targetEnvironmentId": "string"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "baseEnvironmentSource": {
+          "baseEnvironmentSourceType": "EnvironmentAsset",
+          "resourceId": "string"
+        },
+        "inferencingServer": {
+          "serverType": "AzureMLBatch",
+          "codeConfiguration": {
+            "codeId": "string",
+            "scoringScript": "string"
+          }
+        },
+        "environmentVariables": {
+          "string": "string"
+        },
+        "modelConfiguration": {
+          "mode": "ReadOnlyMount",
+          "mountPath": "string"
+        },
+        "inputs": [
+          {
+            "inputType": "UriFile",
+            "mode": "Download",
+            "path": {
+              "inputPathType": "Url",
+              "url": "string"
+            },
+            "mountPath": "string"
+          }
+        ],
+        "tags": {
+          "string": "string"
+        },
+        "targetEnvironmentId": "string",
+        "logUrl": "string",
+        "buildId": "string",
+        "buildState": "NotStarted"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  }
+}

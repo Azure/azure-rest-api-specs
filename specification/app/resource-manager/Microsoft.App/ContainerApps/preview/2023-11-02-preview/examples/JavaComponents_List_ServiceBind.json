@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "api-version": "2023-11-02-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
+            "name": "blueshark",
+            "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "properties": {
+              "componentType": "SpringBootAdmin",
+              "provisioningState": "Succeeded",
+              "configurations": [
+                {
+                  "propertyName": "spring.boot.admin.ui.enable-toasts",
+                  "value": "true"
+                },
+                {
+                  "propertyName": "spring.boot.admin.monitor.status-interval",
+                  "value": "10000ms"
+                }
+              ],
+              "serviceBinds": [
+                {
+                  "name": "yellowcat",
+                  "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
+            "name": "yellowcat",
+            "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "properties": {
+              "componentType": "SpringCloudEureka",
+              "provisioningState": "Succeeded",
+              "configurations": [
+                {
+                  "propertyName": "spring.cloud.config.server.git.uri",
+                  "value": "<GIT-URL>"
+                }
+              ],
+              "serviceBinds": [
+                {
+                  "name": "blueshark",
+                  "serviceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

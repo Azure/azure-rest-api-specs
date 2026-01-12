@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "location": "myLocation",
+    "api-version": "2023-07-03",
+    "publicGalleryName": "publicGalleryName",
+    "galleryImageName": "myGalleryImageName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "publishedDate": "2018-03-20T09:12:28Z",
+              "endOfLifeDate": "2022-03-20T09:12:28Z",
+              "excludeFromLatest": false,
+              "storageProfile": {
+                "osDiskImage": {
+                  "diskSizeGB": 29,
+                  "hostCaching": "None"
+                }
+              },
+              "artifactTags": {
+                "ShareTag-CommunityGallery": "CommunityGallery"
+              },
+              "disclaimer": "https://test-uri.com"
+            },
+            "location": "myLocation",
+            "name": "myGalleryImageVersionName",
+            "identifier": {
+              "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName/Versions/myGalleryImageVersionName"
+            }
+          }
+        ],
+        "nextLink": "http://svchost:99/subscriptions/{subscription-Id}/providers/Microsoft.Compute/communityGalleries/publicGalleryName/images/myGalleryImageName/versions?$skiptoken={token}/communityGalleries/publicGalleryName/images/myGalleryImageName/versions/myGalleryImageVersionName"
+      }
+    }
+  }
+}

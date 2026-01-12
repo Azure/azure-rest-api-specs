@@ -28,17 +28,147 @@ These are the global settings for the KubernetesConfiguration.
 title: SourceControlConfigurationClient
 description: KubernetesConfiguration Client
 openapi-type: arm
-tag: package-preview-2022-01
+tag: package-preview-2024-04
 ```
 
----
+### Tag: package-preview-2024-04
 
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+suppressions:  
+  - code: ResourceNameRestriction
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: AvoidAdditionalProperties
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+```
+
+### Tag: package-preview-2024-04-only
+
+These settings apply only when `--tag=package-preview-2024-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+```
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+```
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2023-05-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+  - Microsoft.KubernetesConfiguration/common/2023-05-01-preview/definitions.json
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-11-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-11-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-11-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-11-01/operations.json
+```
+
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-07-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-07-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-07-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-07-01/operations.json
+```
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+```
+
+``` yaml $(tag) == 'package-preview-2022-04-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+```
+
+### Tag: package-2022-03
+
+These settings apply only when `--tag=package-2022-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-03'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/extensions.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+```
+
+### Tag: package-preview-2022-01-15
+
+These settings apply only when `--tag=package-preview-2022-01-15` is specified on the command line..
+
+``` yaml $(tag) == 'package-preview-2022-01-15'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
+```
+
+``` yaml $(tag) == 'package-preview-2022-01-15-only'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+```
 
 ### Tag: package-preview-2022-01
 
 These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-01'
+``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensionTypes.json
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
@@ -46,6 +176,20 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
   - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
 ```
+
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
+  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
+```
+
 ### Tag: package-2021-09
 
 These settings apply only when `--tag=package-2021-09` is specified on the command line.
@@ -67,6 +211,9 @@ directive:
   - suppress: TopLevelResourcesListBySubscription
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
     from: extensions.json
+  - suppress: TopLevelResourcesListBySubscription
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+    from: extensionTypes.json
   - suppress: BodyTopLevelProperties
     where: $.definitions.Extension.properties
     from: extensions.json
@@ -96,28 +243,6 @@ directive:
           "comment": "Resource defined structure"
         }
       }
-```
-
-### Tag: package-preview-2021-11
-
-These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2021-11'
-input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
-```
-
-### Tag: package-2021-09
-
-These settings apply only when `--tag=package-2021-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-09'
-input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
 ```
 
 ### Tag: package-preview-2021-05
@@ -229,34 +354,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-powershell
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_kubernetesconfiguration']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-See configuration in [readme.python.md](./readme.python.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## CSharp
-
-See configuration in [readme.csharp.md](./readme.csharp.md)
