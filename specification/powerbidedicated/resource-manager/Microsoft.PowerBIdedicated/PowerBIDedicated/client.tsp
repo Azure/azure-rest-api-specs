@@ -15,3 +15,6 @@ using Microsoft.PowerBIDedicated;
   "csharp"
 );
 @@clientName(SkuDetailsForExistingResource, "SkuDetails", "csharp");
+@@alternateType(DedicatedCapacityMutableProperties.tenantId, uuid, "csharp");
+@@alternateType(CapacitiesOperationGroup.checkNameAvailability::parameters.location, Azure.Core.azureLocation, "csharp");
+@@clientName(CapacitiesOperationGroup.listSkus, "GetSkusCapacities", "csharp");
