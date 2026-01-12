@@ -162,7 +162,7 @@ interface ExpressRouteCrossConnections {
       @segment("routeTablesSummary")
       devicePath: string;
     },
-    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableSummaryListResult> &
+    Response = ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCrossConnectionsRoutesTableSummaryListResult> &
       Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
