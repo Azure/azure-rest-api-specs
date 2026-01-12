@@ -29,6 +29,19 @@ openapi-type: arm
 tag: package-policy-2025-03-stable
 ```
 
+### Tag: package-policy-2025-11-stable
+
+These settings apply only when `--tag=package-policy-2025-11-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2025-11-stable'
+input-file:
+  - stable/2025-11-01/openapi.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2025-03-stable
 
 These settings apply only when `--tag=package-policy-2025-03-stable` is specified on the command line.
