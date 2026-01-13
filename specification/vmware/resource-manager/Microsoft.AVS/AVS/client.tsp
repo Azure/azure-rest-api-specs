@@ -1,5 +1,4 @@
 import "./main.tsp";
-//import "./csharp-client.tsp";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
@@ -326,6 +325,80 @@ using Microsoft.AVS;
 @@clientName(Endpoints.vcenterIp, "VcenterIP", "csharp");
 @@clientName(Endpoints.hcxCloudManagerIp, "HcxCloudManagerIP", "csharp");
 @@clientName(ScriptParameterTypes, "ScriptParameterType", "csharp");
+@@clientName(ImpactedMaintenanceResource,
+  "ImpactedMaintenanceResourceDetails",
+  "csharp"
+);
+@@clientName(ImpactedMaintenanceResourceError.actionRequired,
+  "IsActionRequired",
+  "csharp"
+);
+@@clientName(License, "AvsLicense", "csharp");
+@@clientName(LicenseProperties, "AvsLicenseProperties", "csharp");
+@@clientName(Label, "AvsLicenseLabel", "csharp");
+@@clientName(LicenseName, "AvsLicenseName", "csharp");
+@@clientName(LicenseName.VmwareFirewall, "VMwareFirewall", "csharp");
+@@clientName(LicenseKind.VmwareFirewall, "VMwareFirewall", "csharp");
+@@clientName(LicenseProvisioningState, "AvsLicenseProvisioningState", "csharp");
+@@clientName(Maintenance, "AvsMaintenance", "csharp");
+@@clientName(MaintenanceProperties, "AvsMaintenanceProperties", "csharp");
+@@clientName(MaintenanceProperties.scheduledByMicrosoft,
+  "IsScheduledByMicrosoft",
+  "csharp"
+);
+@@clientName(MaintenanceCheckType, "AvsMaintenanceCheckType", "csharp");
+@@clientName(MaintenanceFailedCheck, "AvsMaintenanceFailedCheck", "csharp");
+@@clientName(MaintenanceManagementOperation,
+  "AvsMaintenanceManagementOperation",
+  "csharp"
+);
+@@clientName(MaintenanceProvisioningState,
+  "AvsMaintenanceProvisioningState",
+  "csharp"
+);
+@@clientName(MaintenanceReadiness, "AvsMaintenanceReadiness", "csharp");
+@@clientName(MaintenanceReadiness.lastUpdated, "LastUpdatedOn", "csharp");
+@@clientName(MaintenanceReadinessRefreshOperation,
+  "AvsMaintenanceReadinessRefreshOperation",
+  "csharp"
+);
+@@clientName(MaintenanceReadinessRefreshOperation.refreshedByMicrosoft,
+  "IsRefreshedByMicrosoft",
+  "csharp"
+);
+@@clientName(MaintenanceReadinessRefreshOperationStatus,
+  "AvsMaintenanceReadinessRefreshOperationStatus",
+  "csharp"
+);
+@@clientName(MaintenanceReadinessStatus,
+  "AvsMaintenanceReadinessStatus",
+  "csharp"
+);
+@@clientName(MaintenanceReschedule, "AvsMaintenanceReschedule", "csharp");
+@@clientName(MaintenanceSchedule, "AvsMaintenanceSchedule", "csharp");
+@@clientName(MaintenanceState, "AvsMaintenanceState", "csharp");
+@@clientName(MaintenanceStateName, "AvsMaintenanceStateName", "csharp");
+@@clientName(MaintenanceStatusFilter, "AvsMaintenanceStatusFilter", "csharp");
+@@clientName(MaintenanceType, "AvsMaintenanceType", "csharp");
+@@clientName(MaintenanceType.VCSA, "Vcsa", "csharp");
+@@clientName(MaintenanceType.ESXI, "Esxi", "csharp");
+@@clientName(MaintenanceType.NSXT, "Nsxt", "csharp");
+@@clientName(RescheduleOperation, "AvsRescheduleOperation", "csharp");
+@@clientName(RescheduleOperationConstraint,
+  "AvsRescheduleOperationConstraint",
+  "csharp"
+);
+@@clientName(ScheduleOperation, "AvsScheduleOperation", "csharp");
+@@clientName(ScheduleOperationConstraint,
+  "AvsScheduleOperationConstraint",
+  "csharp"
+);
+@@clientName(SchedulingWindow, "AvsSchedulingWindow", "csharp");
+@@clientName(SchedulingWindow, "AvsSchedulingWindow", "csharp");
+@@clientName(VmwareFirewallLicenseProperties,
+  "VMwareFirewallLicenseProperties",
+  "csharp"
+);
 
 @@clientName(WorkloadNetworkPublicIps.list, "list_public_ips", "python");
 @@clientName(WorkloadNetworkPublicIps.get, "getPublicIp", "java");
