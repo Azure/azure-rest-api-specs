@@ -1172,7 +1172,7 @@
     "/agents/{agent_name}/versions/{agent_version}/containers/default:logstream": {
       "post": {
         "operationId": "Agents_streamAgentContainerLogs",
-        "description": "Stream logs from a container for a specific version of an agent.",
+        "description": "Container log entry streamed from the container as text chunks.\nEach chunk is a UTF-8 string that may be either a plain text log line\nor a JSON-formatted log entry, depending on the type of container log being streamed.\nClients should treat each chunk as opaque text and, if needed, attempt\nto parse it as JSON based on their logging requirements.\n\nFor system logs, the format is JSON with the following structure:\n{\"TimeStamp\":\"2025-12-15T16:51:33Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Connecting to the events collector...\",\"Reason\":\"StartingGettingEvents\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n{\"TimeStamp\":\"2025-12-15T16:51:34Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Successfully connected to events server\",\"Reason\":\"ConnectedToEventsServer\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n\nFor console logs, the format is plain text as emitted by the container's stdout/stderr.\n2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...\n2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']\n2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - \"GET /readiness HTTP/1.1\" 200 OK",
         "parameters": [
           {
             "name": "api-version",
@@ -1237,28 +1237,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
             "content": {
               "application/json": {
                 "schema": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    },
-                    {
-                      "$ref": "#/components/schemas/ApiErrorResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -9902,6 +9888,10 @@
           "provisioning_state": {
             "type": "string",
             "description": "The provisioning state of the container."
+          },
+          "provisioning_error": {
+            "type": "string",
+            "description": "The provisioning error of the container, if any."
           },
           "state": {
             "type": "string",
