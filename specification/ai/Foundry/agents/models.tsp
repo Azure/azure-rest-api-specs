@@ -336,6 +336,10 @@ model AgentContainerObject {
   @visibility(Lifecycle.Read)
   object: "agent.container";
 
+  @doc("The identifier of the container.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
   @doc("The status of the container of a specific version of an agent.")
   @visibility(Lifecycle.Read)
   status: AgentContainerStatus;
@@ -359,6 +363,43 @@ model AgentContainerObject {
   @doc("The last update time of the container.")
   @visibility(Lifecycle.Read)
   updated_at: utcDateTime;
+
+  @doc("The detailed container information.")
+  @visibility(Lifecycle.Read)
+  container?: ContainerDetails;
+}
+
+@doc("Detailed information about the container.")
+model ContainerDetails {
+  @doc("The provisioning state of the container.")
+  provisioning_state: string;
+
+  @doc("The provisioning error of the container, if any.")
+  provisioning_error?: string;
+
+  @doc("The state of the container.")
+  state: string;
+
+  @doc("The health state of the container.")
+  health_state: string;
+
+  @doc("The list of replicas in the container.")
+  replicas: ContainerReplica[];
+
+  @doc("The last update time of the container.")
+  updated_on: utcDateTime;
+}
+
+@doc("Information about a container replica.")
+model ContainerReplica {
+  @doc("The name of the replica.")
+  name: string;
+
+  @doc("The state of the replica.")
+  state: string;
+
+  @doc("The container state of the replica.")
+  container_state: string;
 }
 
 @doc("Status of the container of a specific version of an agent.")
@@ -445,4 +486,13 @@ model AcceptedAgentContainerOperation {
 
   @body
   body: AgentContainerOperationObject;
+}
+
+/** The type of logs to stream from a container. */
+union ContainerLogKind {
+  /** Console logs from the container. */
+  console: "console",
+
+  /** System logs from the container. */
+  system: "system",
 }

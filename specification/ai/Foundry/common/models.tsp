@@ -40,6 +40,7 @@ alias AcceptJsonHeader = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "No polling operation yet"
+#suppress "@azure-tools/typespec-azure-core/no-response-body"
 op AgentOperation<
   Params extends Reflection.Model,
   Response,
