@@ -15,6 +15,7 @@ op MapsRenderOperation<
     ...TParams;
   },
   TResponse,
+  {},
   TError
 >;
 
