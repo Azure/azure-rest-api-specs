@@ -12,7 +12,7 @@ using Azure.AI.Projects;
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
 @@clientName(Azure.AI.Projects, "AgentsClient");
 
-@@clientName(OpenAI.ItemContentOutputText.logprobs, "logProbs");
+@@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
 @@clientName(OpenAI.LocalShellExecAction.timeout_ms, "Duration");
 @@clientName(OpenAI.LogProb.logprob, "logProb");
 @@clientName(MicrosoftFabricAgentTool.fabric_dataagent_preview,
@@ -31,7 +31,7 @@ using Azure.AI.Projects;
 @@clientName(AzureAISearchAgentTool.azure_ai_search, "AzureAISearch");
 
 @@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults");
-@@clientName(OpenAI.MCPApprovalResponseItemParam.approve, "approved");
+@@clientName(OpenAI.MCPApprovalResponse.approve, "approved");
 
 // ------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate agent container operations
@@ -51,7 +51,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@usage(OpenAI.ItemResource, Usage.json);
-@@usage(OpenAI.ResponseStreamEvent, Usage.json);
+@@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
 @@usage(AgentId, Usage.output);
 @@access(AgentId, Access.public);
