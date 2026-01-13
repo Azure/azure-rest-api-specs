@@ -225,7 +225,9 @@ interface Workspaces {
     void,
     Response = {
       @body body: void;
-    }
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
