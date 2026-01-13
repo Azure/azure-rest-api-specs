@@ -1033,12 +1033,12 @@ model ExternalEvaluationEndpointInvocationResult {
   /**
    * The details of the policy requiring the external endpoint invocation.
    */
-  policyInfo: PolicyLogInfo;
+  policyInfo?: PolicyLogInfo;
 
   /**
    * The result of the external endpoint. Possible values are Succeeded and Failed.
    */
-  result: ExternalEndpointResult;
+  result?: ExternalEndpointResult;
 
   /**
    * The external evaluation endpoint kind.
