@@ -503,6 +503,7 @@ model AzureBlobDefinition {
    * The account key (shared key) to access the storage account
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
+  @secret
   accountKey?: string | null;
 
   /**
