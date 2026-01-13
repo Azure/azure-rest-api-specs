@@ -1813,6 +1813,15 @@
             "diskEncryptionConfiguration": {
               "$ref": "#/definitions/DiskEncryptionConfiguration",
               "description": "Disk encryption configuration for the Managed Environment."
+            },
+            "environmentMode": {
+              "enum": [],
+              "description": "Mode of the environment. Allowed Values: 'ConsumptionOnly', 'WorkloadProfiles', 'Free', 'Standard', 'Archived'.",
+              "type": "string",
+              "x-ms-enum": {
+                "name": "EnvironmentMode",
+                "modelAsString": true
+              }
             }
           },
           "x-ms-client-flatten": true
