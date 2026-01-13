@@ -21,8 +21,10 @@ interface ContentUnderstandingClient {
 
   analyzeBinary is ContentAnalyzers.analyzeBinary;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   copyAnalyzer is ContentAnalyzers.copy;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Doesn't fit standard naming"
   createAnalyzer is ContentAnalyzers.createOrReplace;
 
@@ -75,6 +77,12 @@ interface ContentUnderstandingClient {
 @@clientName(AnalyzeInput.range, "inputRange");
 @@clientName(AnalyzeBinaryRequest.range, "inputRange");
 
+// .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
+@@clientName(ContentUnderstandingClient.listAnalyzers,
+  "getAnalyzers",
+  "csharp"
+);
+
 // Mark polling operations as internal - client generators automatically handle
 // the polling pattern for long-running operations. When users call analyze(), the
 // generated SDK returns a poller that internally uses these endpoints to check status
@@ -86,10 +94,4 @@ interface ContentUnderstandingClient {
 @@clientDoc(AnalyzeInput.data,
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
-);
-
-// .NET-specific naming: use GetAnalyzers instead of ListAnalyzers
-@@clientName(ContentUnderstandingClient.listAnalyzers,
-  "getAnalyzers",
-  "csharp"
 );
