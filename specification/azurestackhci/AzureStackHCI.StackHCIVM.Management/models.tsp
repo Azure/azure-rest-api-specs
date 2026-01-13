@@ -1977,7 +1977,7 @@ model CreationData {
     }
   ]>;
 
-  @doc("Unique ID of the source resource used for disk creation. Read-only and not required for disk creation.")
+  @doc("Unique ID identifying the source of this resource. Read-only and not required for disk creation. It is populated automatically with the uniqueId value from the source.")
   @visibility(Lifecycle.Read)
   sourceUniqueId?: string;
 }
@@ -1996,7 +1996,7 @@ model SnapshotProperties {
   @visibility(Lifecycle.Read)
   diskSizeBytes?: int64;
 
-  @doc("Unique identifier for the snapshot.")
+  @doc("Globally unique ID identifying the snapshot in the format of 32-character hexadecimal string.")
   @visibility(Lifecycle.Read)
   uniqueId?: string;
 
@@ -2116,7 +2116,7 @@ model VirtualHardDiskStatus {
   managedBy?: string[];
 
   @added(Versions.v2025_06_01_preview)
-  @doc("Unique Guid identifying the resource.")
+  @doc("Globally unique ID identifying the Virtual Hard Disk in the format of 32-character hexadecimal string.")
   uniqueId?: string;
 }
 
