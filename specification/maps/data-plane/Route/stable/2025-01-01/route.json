@@ -128,13 +128,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -190,13 +184,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -250,13 +238,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -310,13 +292,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -360,25 +336,13 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -434,25 +398,13 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -506,13 +458,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -559,13 +505,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -627,13 +567,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -691,13 +625,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "Error code of the error that occurred."
-              }
+              "$ref": "#/definitions/MapsErrorResponse"
             }
           }
         },
@@ -4586,11 +4514,13 @@
         },
         "interpolate": {
           "type": "boolean",
-          "description": "Specifies whether to return additional points between the snapped points to\ncomplete the full route path that smoothly follows the road geometry.\n\nThe interpolated points will have `isInterpolate:true` in the response which\ncan be used to identify the snapped points from interpolated points."
+          "description": "Specifies whether to return additional points between the snapped points to\ncomplete the full route path that smoothly follows the road geometry.\n\nThe interpolated points will have `isInterpolate:true` in the response which\ncan be used to identify the snapped points from interpolated points.",
+          "default": false
         },
         "includeSpeedLimit": {
           "type": "boolean",
-          "description": "Specifies whether to include speed limit information for the snapped points in\nthe response. The unit is in kilometers per hour."
+          "description": "Specifies whether to include speed limit information for the snapped points in\nthe response. The unit is in kilometers per hour.",
+          "default": false
         },
         "travelMode": {
           "type": "string",
@@ -4724,11 +4654,13 @@
         },
         "interpolate": {
           "type": "boolean",
-          "description": "Specifies whether to return additional points between the snapped points to\ncomplete the full route path that smoothly follows the road geometry.\n\nThe interpolated points will have `isInterpolate:true` in the response which\ncan be used to identify the snapped points from interpolated points."
+          "description": "Specifies whether to return additional points between the snapped points to\ncomplete the full route path that smoothly follows the road geometry.\n\nThe interpolated points will have `isInterpolate:true` in the response which\ncan be used to identify the snapped points from interpolated points.",
+          "default": false
         },
         "includeSpeedLimit": {
           "type": "boolean",
-          "description": "Specifies whether to include speed limit information for the snapped points in\nthe response. The unit is in kilometers per hour."
+          "description": "Specifies whether to include speed limit information for the snapped points in\nthe response. The unit is in kilometers per hour.",
+          "default": false
         },
         "travelMode": {
           "type": "string",

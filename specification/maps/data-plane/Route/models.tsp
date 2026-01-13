@@ -1842,13 +1842,13 @@ model SnapToRoadsRequest {
    * The interpolated points will have `isInterpolate:true` in the response which
    * can be used to identify the snapped points from interpolated points.
    */
-  interpolate?: boolean;
+  interpolate?: boolean = false;
 
   /**
    * Specifies whether to include speed limit information for the snapped points in
    * the response. The unit is in kilometers per hour.
    */
-  includeSpeedLimit?: boolean;
+  includeSpeedLimit?: boolean = false;
 
   /**
    * Specifies the routing profile for snapping the points. If unspecified, the

@@ -16,7 +16,7 @@ alias ContentTypeHeader<T extends string> = {
 op MapsRouteOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model | void,
-  TError extends TypeSpec.Reflection.Model = ErrorResponse
+  TError extends TypeSpec.Reflection.Model = MapsErrorResponse
 > is Azure.Core.Foundations.Operation<
   {
     ...ClientIdHeader;
@@ -635,9 +635,9 @@ interface Route {
     {
       ...OperationIdPathParameter;
     },
-    RouteOperation | (NotFoundResponse & ErrorResponse),
+    RouteOperation | (NotFoundResponse & MapsErrorResponse),
     {},
-    ErrorResponse
+    MapsErrorResponse
   >;
 
   /**
@@ -651,7 +651,7 @@ interface Route {
       ...AcceptLanguageHeader;
       ...OperationIdPathParameter;
     },
-    RouteOperationResponse | (NotFoundResponse & ErrorResponse)
+    RouteOperationResponse | (NotFoundResponse & MapsErrorResponse)
   >;
 
   /**
@@ -774,6 +774,6 @@ interface Route {
     },
     AcceptedResponse,
     {},
-    ErrorResponse
+    MapsErrorResponse
   >;
 }
