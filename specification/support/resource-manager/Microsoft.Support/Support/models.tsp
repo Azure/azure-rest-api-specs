@@ -268,7 +268,7 @@ model ServiceClassificationOutput {
   /**
    * Set of problem classification objects classified.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   serviceClassificationResults?: ServiceClassificationAnswer[];
 }
 
@@ -329,7 +329,7 @@ model ProblemClassificationsClassificationOutput {
   /**
    * Set of problem classification objects classified.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   problemClassificationResults?: ProblemClassificationsClassificationResult[];
 }
 
@@ -1032,7 +1032,6 @@ model DirectConnectEscalation {
   /**
    * An array containing the allowed severities for direct connect escalation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   allowedSeverities?: SeverityLevel[];
 
   /**
