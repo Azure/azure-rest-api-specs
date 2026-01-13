@@ -772,6 +772,30 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- Rust sub rules -----
+export class TspConfigRustMgmtCrateNameSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-rust",
+      "crate-name",
+      new RegExp(/^azure_resourcemanager_(?:[a-z0-9]+_)*[a-z0-9]+$/),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+}
+
+export class TspConfigRustAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-rust",
+      "emitter-output-dir",
+      new RegExp(/^{output-dir}\/{service-dir}\/{crate-name}$/),
+    );
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -821,6 +845,8 @@ export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
   new TspConfigGoDpContainingModuleMatchPatternSubRule(),
+  new TspConfigRustMgmtCrateNameSubRule(),
+  new TspConfigRustAzEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
