@@ -90,6 +90,6 @@ using Http;
 @@clientName(LlmDiagnosticSettings, "LlmDiagnosticSettings", "python");
 @@clientName(LlmMessageLogTypes, "LlmMessageLogTypes", "python");
 @@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
-  "Microsoft.ApiManagement",
+  Microsoft.ApiManagement,
   "python"
 );
