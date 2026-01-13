@@ -426,7 +426,7 @@ union ReaderEndpointReplicaState {
 }
 
 /**
- * SSpecifies the routing method for a request, whether it is rotational or performance-based.
+ * Specifies the routing method for a request, whether it is rotational or performance-based.
  */
 union ReaderEndpointRoutingMethod {
   string,
