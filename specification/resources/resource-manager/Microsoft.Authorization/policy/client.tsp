@@ -86,5 +86,45 @@ namespace Microsoft.Authorization {
     ...PolicyAssignmentIdParameter,
     ...Azure.Core.Foundations.ApiVersionParameter,
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
+
+  /**
+   * The parameter values for the policy rule. The keys are the parameter names.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  model ParameterValues is Record<Microsoft.Authorization.ParameterValuesValue>;
+
+  /**
+   * The parameter definitions for parameters used in the policy. The keys are the parameter names.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  model ParameterDefinitions
+    is Record<Microsoft.Authorization.ParameterDefinitionsValue>;
 }
+
 @@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
+
+@@alternateType(Microsoft.Authorization.PolicyAssignmentProperties.parameters,
+  Microsoft.Authorization.ParameterValues,
+  "powershell"
+);
+@@alternateType(Microsoft.Authorization.PolicyDefinitionReference.parameters,
+  Microsoft.Authorization.ParameterValues,
+  "powershell"
+);
+
+@@alternateType(Microsoft.Authorization.PolicyDefinitionProperties.parameters,
+  Microsoft.Authorization.ParameterDefinitions,
+  "powershell"
+);
+@@alternateType(Microsoft.Authorization.PolicyDefinitionVersionProperties.parameters,
+  Microsoft.Authorization.ParameterDefinitions,
+  "powershell"
+);
+@@alternateType(Microsoft.Authorization.PolicySetDefinitionProperties.parameters,
+  Microsoft.Authorization.ParameterDefinitions,
+  "powershell"
+);
+@@alternateType(Microsoft.Authorization.PolicySetDefinitionVersionProperties.parameters,
+  Microsoft.Authorization.ParameterDefinitions,
+  "powershell"
+);
