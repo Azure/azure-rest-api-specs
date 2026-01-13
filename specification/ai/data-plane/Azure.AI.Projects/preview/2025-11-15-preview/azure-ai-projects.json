@@ -12828,46 +12828,6 @@
       ],
       "x-ms-discriminator-value": "container_file_citation"
     },
-    "OpenAI.Conversation": {
-      "type": "object",
-      "title": "The conversation object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique ID of the conversation."
-        },
-        "object": {
-          "type": "string",
-          "description": "The object type, which is always `conversation`.",
-          "default": "conversation",
-          "enum": [
-            "conversation"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          },
-          "x-stainless-const": true
-        },
-        "metadata": {
-          "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
-        },
-        "created_at": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The time at which the conversation was created, measured in seconds since the Unix epoch."
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "metadata",
-        "created_at"
-      ],
-      "x-oaiMeta": {
-        "name": "The conversation object",
-        "group": "conversations"
-      }
-    },
     "OpenAI.ConversationItem": {
       "type": "object",
       "title": "Conversation item",
@@ -13859,6 +13819,20 @@
       "x-ms-discriminator-value": "web_search_call"
     },
     "OpenAI.ConversationParam": {},
+    "OpenAI.ConversationReference": {
+      "type": "object",
+      "title": "Conversation",
+      "description": "The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the conversation."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "OpenAI.ConversationResource": {
       "type": "object",
       "properties": {
@@ -19373,7 +19347,7 @@
           "default": true
         },
         "conversation": {
-          "$ref": "#/definitions/OpenAI.Conversation",
+          "$ref": "#/definitions/OpenAI.ConversationReference",
           "x-nullable": true
         },
         "agent": {
