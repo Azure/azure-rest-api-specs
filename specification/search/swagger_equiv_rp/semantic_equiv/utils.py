@@ -1464,19 +1464,22 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
 
         # Parse structured context into separate components
         if "||" in context:
-            # Structured context: operation_id||path_method
+            # Structured context: operation_id||path_method||detail (e.g., param_name, location)
             context_parts = context.split("||")
             operation_id = context_parts[0] if len(context_parts) > 0 else ""
             path_method = context_parts[1] if len(context_parts) > 1 else ""
+            detail = context_parts[2] if len(context_parts) > 2 else ""
         else:
             # Legacy context format
             operation_id = ""
             path_method = context
+            detail = ""
 
         row = {
             "Diff Type": diff_type,
             "Path-Method": path_method,
             "OperationID": operation_id,
+            "Detail": detail,
             "Message": message,
         }
 
@@ -1569,8 +1572,8 @@ def write_diffs_excel_v2(result, output_path: str) -> None:
                 # For Definitions sheet, rename Path-Method to Definition
                 if category == "Definitions":
                     df = df.rename(columns={"Path-Method": "Definition"})
-                    # Drop OperationID column since it's not applicable to definitions
-                    df = df.drop(columns=["OperationID"], errors="ignore")
+                    # Drop OperationID and Detail columns since they're not applicable to definitions
+                    df = df.drop(columns=["OperationID", "Detail"], errors="ignore")
 
                 # Limit sheet name length for Excel compatibility
                 sheet_name = category[:31] if len(category) > 31 else category
