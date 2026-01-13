@@ -1919,17 +1919,6 @@
         ]
       }
     },
-    "AccessRulePropertiesSubscriptionsItem": {
-      "type": "object",
-      "description": "Subscription identifiers",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000')"
-        }
-      }
-    },
     "ActionType": {
       "type": "string",
       "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
@@ -2930,10 +2919,7 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.",
-          "externalDocs": {
-            "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
-          }
+          "description": "The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service."
         },
         "identity": {
           "$ref": "#/definitions/Identity",
