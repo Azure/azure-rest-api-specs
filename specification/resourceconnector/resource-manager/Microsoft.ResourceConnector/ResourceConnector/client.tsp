@@ -69,4 +69,4 @@ op AppliancesUpdateCustomized(
   @body
   tags?: Record<string>,
 ): Appliance;
-@@override(Appliances.update, AppliancesUpdateCustomized, "javascript");
+@@override(Appliances.update, AppliancesUpdateCustomized, "javascript,python");
