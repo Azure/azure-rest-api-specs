@@ -1,0 +1,147 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "06a78e20-9358-41c9-923c-fb736d382a12",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a12",
+            "properties": {
+              "description": "Audit DB level audit setting for SQL databases",
+              "displayName": "Audit SQL DB Level Audit Setting",
+              "mode": "All",
+              "parameters": {
+                "setting": {
+                  "type": "String",
+                  "allowedValues": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "metadata": {
+                    "displayName": "Audit Setting"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "equals": "Microsoft.Sql/servers/databases",
+                  "field": "type"
+                },
+                "then": {
+                  "effect": "AuditIfNotExists",
+                  "details": {
+                    "name": "default",
+                    "type": "Microsoft.Sql/servers/databases/auditingSettings",
+                    "existenceCondition": {
+                      "allOf": [
+                        {
+                          "equals": "[parameters('setting')]",
+                          "field": "Microsoft.Sql/auditingSettings.state"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "policyType": "BuiltIn",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          },
+          {
+            "name": "7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "properties": {
+              "description": "This policy enables you to specify a set of storage account SKUs that your organization can deploy.",
+              "displayName": "Allowed storage account SKUs",
+              "mode": "All",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "type": "Array",
+                  "metadata": {
+                    "description": "The list of SKUs that can be specified for storage accounts.",
+                    "displayName": "Allowed SKUs",
+                    "strongType": "StorageSKUs"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "allOf": [
+                    {
+                      "equals": "Microsoft.Storage/storageAccounts",
+                      "field": "type"
+                    },
+                    {
+                      "not": {
+                        "field": "Microsoft.Storage/storageAccounts/sku.name",
+                        "in": "[parameters('listOfAllowedSKUs')]"
+                      }
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              },
+              "policyType": "Static",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          },
+          {
+            "name": "abeed54a-73c5-441d-8a8c-6b5e7a0c299e",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/abeed54a-73c5-441d-8a8c-6b5e7a0c299e",
+            "properties": {
+              "description": "Audit certificates that are stored in Azure Key Vault, that expire within 'X' number of days.",
+              "displayName": "Audit KeyVault certificates that expire within specified number of days",
+              "metadata": {
+                "category": "KeyVault DataPlane"
+              },
+              "mode": "Microsoft.KeyVault.Data",
+              "parameters": {
+                "daysToExpire": {
+                  "type": "Integer",
+                  "metadata": {
+                    "description": "The number of days for a certificate to expire.",
+                    "displayName": "Days to expire"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "field": "Microsoft.KeyVault.Data/vaults/certificates/attributes/expiresOn",
+                  "lessOrEquals": "[addDays(utcNow(), parameters('daysToExpire'))]"
+                },
+                "then": {
+                  "effect": "audit"
+                }
+              },
+              "policyType": "BuiltIn",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitions_ListBuiltIn",
+  "title": "List built-in policy definitions"
+}
