@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 
@@ -145,19 +146,15 @@ union Risk {
 union State {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  InProgress: "InProgress",
+  New: "New",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Postponed: "Postponed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dismissed: "Dismissed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completed: "Completed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  CompletedSysVerified: "Completed(System Verified)",
 }
 
 /**
@@ -528,6 +525,31 @@ model RecommendationProperties {
   impactedValue?: string;
 
   /**
+   * The state of the Recommendation
+   */
+  @added(Versions.v2026_02_01)
+  state?: State;
+
+   /**
+   * The reason the state of the Recommendation was changed.
+   */
+     @added(Versions.v2026_02_01)
+  reason?: Reason;
+
+   /**
+   * The time the Recommendation was postponed until.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+    @added(Versions.v2026_02_01)
+  postponedTime?: utcDateTime;
+
+    /**
+   * The Priority of the Recommendation.
+   */
+   @added(Versions.v2026_02_01)
+  priority?: Priority;
+
+  /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
@@ -616,6 +638,7 @@ model RecommendationProperties {
   /**
    * The properties of a tracked recommendation.
    */
+   @removed(Versions.v2026_02_01)
   trackedProperties?: TrackedRecommendationProperties;
 
   /**
