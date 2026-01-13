@@ -236,7 +236,7 @@ model AzureEventHubTriggerMetadata {
   /** Storage endpoint suffix (required when cloud = Private) */
   storageEndpointSuffix?: string;
 
-  /** Storage account name (required for pod identity auth) */
+  /** Storage account name (required for workload identity auth) */
   storageAccountName?: string;
 }
 
@@ -351,7 +351,7 @@ model AzureServiceBusTriggerMetadata {
   /** Subscription name (required when using topic) */
   subscriptionName?: string;
 
-  /** Service Bus namespace (required when using pod identity) */
+  /** Service Bus namespace (required when using workload identity) */
   serviceBusNamespace?: string;
 
   /** Environment variable name for Service Bus connection string */

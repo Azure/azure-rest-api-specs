@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./customoperations.tsp";
+import "./volumetypes.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -13,6 +14,9 @@ namespace Microsoft.ContainerService;
 /** App resource */
 model ManagedApp is Azure.ResourceManager.TrackedResource<AppProperties> {
   ...ResourceNameParameter<ManagedApp>;
+
+  /** Managed Identity for all deployments of the app, if specified */
+  ...ManagedServiceIdentityProperty;
 }
 
 /** App properties */
@@ -86,18 +90,6 @@ model DeploymentTemplate {
   /** Volumes for the app */
   @identifiers(#["name"])
   volumes?: Volume[];
-}
-
-/** Volume for a container */
-model Volume {
-  /** Name of the volume */
-  name: string;
-
-  /** Mount path for the volume */
-  mountPath: string;
-
-  /** Volume is ReadOnly or not */
-  readOnly: boolean;
 }
 
 /** Key Value Pair for labels/annotations */
@@ -354,7 +346,7 @@ interface AppDeployments {
     Azure.ResourceManager.Foundations.BaseParameters<AppDeployment>
   >;
   delete is ArmResourceDeleteWithoutOkAsync<AppDeployment>;
-
+  /** Rollback the app deployment to the previous revision */
   rollback is RollbackDeployment<AppDeployment, AppDeployment>;
 }
 

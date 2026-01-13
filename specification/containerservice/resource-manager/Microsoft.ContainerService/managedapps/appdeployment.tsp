@@ -40,6 +40,8 @@ model ManagedNamespaceProperties {
 @parentResource(ManagedNamespace)
 model AppDeployment is ProxyResource<AppDeploymentProperties> {
   ...ResourceNameParameter<AppDeployment>;
+
+  /** Managed Identity for the app deployment, if specified. Otherwise inherits from the App model */
   ...ManagedServiceIdentityProperty;
 }
 
@@ -71,7 +73,7 @@ model AppDeploymentProperties {
   previousAppRevisionId?: AppRevisionId;
 
   /** The override policy for list fields, Replace or Append. Default is replace */
-  listOverridePolicy: ListOverridePolicy;
+  listOverridePolicy?: ListOverridePolicy;
 
   /** An array of permissions for k8s resources in the same namespace associated with the app. This is an override only. Any value here will overwrite permissions inherited from the app */
   @identifiers(#["apiGroups", "resources", "verbs"])
@@ -83,13 +85,17 @@ model AppDeploymentProperties {
 
   /** An array of health checks for the app. This is an override only. Any value here will overwrite health checks inherited from the app */
   @identifiers(#["type"])
-  healthChecks: HealthCheck[];
+  healthChecks?: HealthCheck[];
 
   /** Scaling type for the app. This is an override only. Any value here will overwrite scaling inherited from the app */
-  scaling: ScalingType;
+  scaling?: ScalingType;
 
   /** Deployment Template for the app. Specify any configuration that will be needed or used for this deployment. This is an override only. Any value here will overwrite the template inherited from the app */
-  template: DeploymentTemplate;
+  template?: DeploymentTemplate;
+
+  /** An array of volume mounts for the app deployment */
+  @identifiers(#["name"])
+  volumeMounts?: VolumeMount[];
 
   /** An array of KEDA autoscaling triggers for the app deployment. */
   @identifiers(#["type"])
@@ -110,6 +116,18 @@ model AppDeploymentProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/** Volume for a container */
+model VolumeMount {
+  /** Name of the volume */
+  name: string;
+
+  /** Mount path for the volume */
+  mountPath: string;
+
+  /** Volume is ReadOnly or not */
+  readOnly: boolean;
 }
 
 /** KEDA Autoscaling Trigger */

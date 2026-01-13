@@ -1188,6 +1188,16 @@
           "$ref": "#/definitions/DeploymentTemplate",
           "description": "Deployment Template for the app. Specify any configuration that will be needed or used for this deployment. This is an override only. Any value here will overwrite the template inherited from the app"
         },
+        "volumeMounts": {
+          "type": "array",
+          "description": "An array of volume mounts for the app deployment",
+          "items": {
+            "$ref": "#/definitions/VolumeMount"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
         "autoscalingTriggers": {
           "type": "array",
           "description": "An array of KEDA autoscaling triggers for the app deployment.",
@@ -2027,6 +2037,61 @@
         }
       }
     },
+    "ConfigMapKeyToPath": {
+      "type": "object",
+      "description": "Maps a string key to a path within a volume.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to project."
+        },
+        "path": {
+          "type": "string",
+          "description": "The relative path of the file to map the key to."
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on this file."
+        }
+      },
+      "required": [
+        "key",
+        "path"
+      ]
+    },
+    "ConfigMapVolume": {
+      "type": "object",
+      "description": "Adapts a ConfigMap into a volume.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the ConfigMap."
+        },
+        "defaultMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on created files by default."
+        },
+        "items": {
+          "type": "array",
+          "description": "If unspecified, each key-value pair in the Data field of the referenced ConfigMap will be projected into the volume as a file.",
+          "items": {
+            "$ref": "#/definitions/ConfigMapKeyToPath"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Specify whether the ConfigMap or its keys must be defined."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "Container": {
       "type": "object",
       "description": "Container definition",
@@ -2157,6 +2222,20 @@
       "required": [
         "command"
       ]
+    },
+    "EmptyDirVolume": {
+      "type": "object",
+      "description": "EmptyDir represents a temporary directory that shares a pod's lifetime.",
+      "properties": {
+        "medium": {
+          "$ref": "#/definitions/StorageMedium",
+          "description": "What type of storage medium should back this directory."
+        },
+        "sizeLimit": {
+          "type": "string",
+          "description": "Total amount of local storage required for this EmptyDir volume."
+        }
+      }
     },
     "EnvironmentVariable": {
       "type": "object",
@@ -2467,6 +2546,10 @@
         "properties": {
           "$ref": "#/definitions/AppProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -2500,6 +2583,10 @@
       "type": "object",
       "description": "The type used for update operations of the ManagedApp.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -2670,6 +2757,23 @@
         }
       }
     },
+    "PersistentVolumeClaimVolume": {
+      "type": "object",
+      "description": "PersistentVolumeClaimVolume references a user's PVC in the same namespace.",
+      "properties": {
+        "claimName": {
+          "type": "string",
+          "description": "ClaimName is the name of a PersistentVolumeClaim in the same namespace as the pod using this volume."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Will force the ReadOnly setting in VolumeMounts."
+        }
+      },
+      "required": [
+        "claimName"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
@@ -2780,6 +2884,91 @@
         ]
       }
     },
+    "SecretKeyToPath": {
+      "type": "object",
+      "description": "Maps a string key to a path within a volume.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key to project."
+        },
+        "path": {
+          "type": "string",
+          "description": "The relative path of the file to map the key to."
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on this file."
+        }
+      },
+      "required": [
+        "key",
+        "path"
+      ]
+    },
+    "SecretVolume": {
+      "type": "object",
+      "description": "Adapts a Secret into a volume.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the secret."
+        },
+        "defaultMode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional: mode bits used to set permissions on created files by default."
+        },
+        "items": {
+          "type": "array",
+          "description": "If unspecified, each key-value pair in the Data field of the referenced Secret will be projected into the volume as a file.",
+          "items": {
+            "$ref": "#/definitions/SecretKeyToPath"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Specify whether the Secret or its keys must be defined."
+        }
+      },
+      "required": [
+        "secretName"
+      ]
+    },
+    "StorageMedium": {
+      "type": "string",
+      "description": "Storage medium type for EmptyDir volume.",
+      "enum": [
+        "",
+        "Memory",
+        "HugePages"
+      ],
+      "x-ms-enum": {
+        "name": "StorageMedium",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "",
+            "description": "Use default storage medium for the node"
+          },
+          {
+            "name": "Memory",
+            "value": "Memory",
+            "description": "Use memory (e.g. tmpfs on linux)"
+          },
+          {
+            "name": "HugePages",
+            "value": "HugePages",
+            "description": "Use hugepages"
+          }
+        ]
+      }
+    },
     "TrafficSplit": {
       "type": "object",
       "description": "Used to program a traffic split between 2 deployments in the same managed namespace",
@@ -2839,6 +3028,35 @@
       ]
     },
     "Volume": {
+      "type": "object",
+      "description": "Volume definition. Right now emptyDir,configmap,secret,persistentVolumeClaim",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume"
+        },
+        "emptyDir": {
+          "$ref": "#/definitions/EmptyDirVolume",
+          "description": "EmptyDir volume"
+        },
+        "configMap": {
+          "$ref": "#/definitions/ConfigMapVolume",
+          "description": "ConfigMap volume"
+        },
+        "secret": {
+          "$ref": "#/definitions/SecretVolume",
+          "description": "Secret volume"
+        },
+        "persistentVolumeClaim": {
+          "$ref": "#/definitions/PersistentVolumeClaimVolume",
+          "description": "Persistent Volume Claim volume"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "VolumeMount": {
       "type": "object",
       "description": "Volume for a container",
       "properties": {
