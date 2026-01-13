@@ -3092,11 +3092,6 @@ model BenefitValidateResponseProperty {
       type: "Microsoft.BillingBenefits/maccs";
     }
   ]>;
-
-  /**
-   * This is the globally unique identifier of the credit which will not change for its lifetime.
-   */
-  systemId?: string;
 }
 
 /**
@@ -3301,7 +3296,7 @@ model FreeServicesProperties {
   /**
    * This is the catalog UPN for the product.
    */
-  productCode: string;
+  productCode?: string;
 
   /**
    * Current status of the free services
@@ -3311,12 +3306,12 @@ model FreeServicesProperties {
   /**
    * Date and time when the free services become active
    */
-  startAt: utcDateTime;
+  startAt?: utcDateTime;
 
   /**
    * Expiration date and time of the free services
    */
-  endAt: utcDateTime;
+  endAt?: utcDateTime;
 
   /**
    * Provisioning state of Free Services as assigned by RPaaS. This indicates the last operation's status. For all practical purposes, this can be ignored. For current status of Free Services resource, refer to FreeServicesStatus.
@@ -3426,8 +3421,7 @@ model FreeServicesList {
    * The list of free services
    */
   @pageItems
-  @visibility(Lifecycle.Read)
-  value?: FreeService[];
+  value?: FreeServices[];
 
   /**
    * The URL to get the next set of results

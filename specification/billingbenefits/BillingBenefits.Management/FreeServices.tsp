@@ -16,10 +16,10 @@ namespace Microsoft.BillingBenefits;
 /**
  * Free Services resource definition
  */
-model FreeService
+model FreeServices
   is Azure.ResourceManager.TrackedResource<FreeServicesProperties> {
   ...ResourceNameParameter<
-    Resource = FreeService,
+    Resource = FreeServices,
     KeyName = "freeServiceName",
     SegmentName = "freeServices",
     NamePattern = "^[a-zA-Z0-9_\\-\\.]+$"
@@ -67,22 +67,22 @@ model FreeService
 }
 
 @armResourceOperations
-interface FreeServices {
+interface FreeServicesOperations {
   /**
    * Get a free service.
    */
-  get is ArmResourceRead<FreeService>;
+  get is ArmResourceRead<FreeServices>;
 
   /**
    * Create a free service.
    */
-  @Azure.Core.useFinalStateVia("original-uri")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
-    FreeService,
-    Response = (ArmResponse<FreeService> &
-      ArmAsyncOperationHeader<FinalResult = FreeService>) | (ArmResourceCreatedResponse<
-      FreeService,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeService>
+    FreeServices,
+    Response = (ArmResponse<FreeServices> &
+      ArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmResourceCreatedResponse<
+      FreeServices,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>
     > &
       Azure.Core.Foundations.RetryAfterHeader)
   >;
@@ -92,10 +92,10 @@ interface FreeServices {
    */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
-    FreeService,
+    FreeServices,
     PatchModel = FreeServicesPatchRequest,
-    Response = (ArmResponse<FreeService> &
-      ArmAsyncOperationHeader<FinalResult = FreeService>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeService>> &
+    Response = (ArmResponse<FreeServices> &
+      ArmAsyncOperationHeader<FinalResult = FreeServices>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = FreeServices>> &
       Azure.Core.Foundations.RetryAfterHeader)
   >;
 
@@ -103,7 +103,7 @@ interface FreeServices {
    * Delete a free service.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
-    FreeService,
+    FreeServices,
     Response = (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> &
       Azure.Core.Foundations.RetryAfterHeader) | (NoContentResponse &
       ArmAsyncOperationHeader)
@@ -113,7 +113,7 @@ interface FreeServices {
    * List free services under a resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
-    FreeService,
+    FreeServices,
     Response = ArmResponse<FreeServicesList>
   >;
 
@@ -121,14 +121,14 @@ interface FreeServices {
    * List free services under a subscription.
    */
   listBySubscription is ArmListBySubscription<
-    FreeService,
+    FreeServices,
     Response = ArmResponse<FreeServicesList>
   >;
 }
 
-@@doc(FreeService.name, "Name of the free service");
-@@doc(FreeService.properties, "Free services properties");
-@@doc(FreeServices.create::parameters.resource, "Free services create request");
-@@doc(FreeServices.update::parameters.properties,
+@@doc(FreeServices.name, "Name of the free service");
+@@doc(FreeServices.properties, "Free services properties");
+@@doc(FreeServicesOperations.create::parameters.resource, "Free services create request");
+@@doc(FreeServicesOperations.update::parameters.properties,
   "Free services patch request"
 );

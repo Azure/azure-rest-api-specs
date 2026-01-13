@@ -41,6 +41,12 @@ using Microsoft.BillingBenefits;
 @@clientLocation(CreditSources.update, "Sources");
 @@clientLocation(CreditSources.delete, "Sources");
 @@clientLocation(CreditSources.listByCredit, "Sources");
+@@clientLocation(FreeServicesOperations.get, "FreeServices");
+@@clientLocation(FreeServicesOperations.create, "FreeServices");
+@@clientLocation(FreeServicesOperations.update, "FreeServices");
+@@clientLocation(FreeServicesOperations.delete, "FreeServices");
+@@clientLocation(FreeServicesOperations.listByResourceGroup, "FreeServices");
+@@clientLocation(FreeServicesOperations.listBySubscription, "FreeServices");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoleAssignmentEntity.properties
@@ -115,7 +121,7 @@ using Microsoft.BillingBenefits;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanValidateModel.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeService.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServices.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServicesPatchRequest.properties
 );
@@ -130,8 +136,8 @@ using Microsoft.BillingBenefits;
 @@clientName(CreditSources.update::parameters.properties, "body");
 @@clientName(Maccs.create::parameters.resource, "body");
 @@clientName(Maccs.update::parameters.properties, "body");
-@@clientName(FreeServices.create::parameters.resource, "body");
-@@clientName(FreeServices.update::parameters.properties, "body");
+@@clientName(FreeServicesOperations.create::parameters.resource, "body");
+@@clientName(FreeServicesOperations.update::parameters.properties, "body");
 
 @@doc(Azure.ResourceManager.ArmAsyncOperationHeader.azureAsyncOperation,
   "URL for checking the ongoing status of the operation."
