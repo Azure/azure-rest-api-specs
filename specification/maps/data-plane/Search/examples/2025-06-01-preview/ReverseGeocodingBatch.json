@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "api-version": "2025-06-01-preview",
+    "reverseGeocodingBatchRequestBody": {
+      "batchItems": [
+        {
+          "coordinates": [
+            -122.138681,
+            47.630358
+          ],
+          "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B",
+          "resultTypes": [
+            "Address",
+            "PopulatedPlace"
+          ]
+        },
+        {
+          "coordinates": [
+            47.630358,
+            -122.138681
+          ],
+          "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "batchItems": [
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "bbox": [
+                  -122.1359181505759,
+                  47.63556628242932,
+                  -122.1206318494241,
+                  47.643291717570676
+                ],
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.128275,
+                    47.639429
+                  ]
+                },
+                "properties": {
+                  "type": "Address",
+                  "address": {
+                    "addressLine": "2267 152nd Ave NE",
+                    "adminDistricts": [
+                      {
+                        "name": "Washington",
+                        "shortName": "WA"
+                      },
+                      {
+                        "name": "King County",
+                        "shortName": "King Co."
+                      }
+                    ],
+                    "countryRegion": {
+                      "name": "United States",
+                      "ISO": "US"
+                    },
+                    "formattedAddress": "2267 152nd Ave NE, Redmond, Washington 98052, United States",
+                    "locality": "Redmond",
+                    "postalCode": "98052",
+                    "streetName": "152nd Ave NE",
+                    "streetNumber": "2267"
+                  },
+                  "confidence": "Medium",
+                  "geocodePoints": [
+                    {
+                      "calculationMethod": "Rooftop",
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.128275,
+                          47.639429
+                        ]
+                      },
+                      "usageTypes": [
+                        "Display",
+                        "Route"
+                      ]
+                    },
+                    {
+                      "calculationMethod": "Rooftop",
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.127028,
+                          47.638545
+                        ]
+                      },
+                      "usageTypes": [
+                        "Route"
+                      ]
+                    }
+                  ],
+                  "matchCodes": [
+                    "Good"
+                  ]
+                }
+              }
+            ],
+            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+          },
+          {
+            "error": {
+              "code": "Bad Request",
+              "message": "The provided coordinates (-122.138681,47.630358) in coordinates field are invalid or out of range"
+            },
+            "optionalId": "6M9W39P12SNHGAIZ4JQ7F57NWJLV2BRYEQRD7OH7"
+          }
+        ],
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        }
+      }
+    }
+  },
+  "operationId": "Search_GetReverseGeocodingBatch",
+  "title": "A Reverse Geocoding Batch API call containing 2 Reverse Geocoding queries"
+}

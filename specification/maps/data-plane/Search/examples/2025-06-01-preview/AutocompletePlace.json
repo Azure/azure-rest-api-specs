@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "api-version": "2025-06-01-preview",
+    "coordinates": "-122.581711,37.896980",
+    "query": "Muir Woods",
+    "resultTypeGroups": "Place"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "name": "Muir Woods",
+              "type": "Forest",
+              "address": {
+                "adminDistricts": [
+                  {
+                    "name": "Wisconsin"
+                  },
+                  {
+                    "name": "Dane County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "Wisconsin"
+              },
+              "typeGroup": "Place"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "type": "PopulatedPlace",
+              "address": {
+                "adminDistricts": [
+                  {
+                    "name": "Georgia"
+                  },
+                  {
+                    "name": "Fulton County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "Muir Woods, Georgia 30349, United States",
+                "locality": "Muir Woods",
+                "postalCode": "30349"
+              },
+              "typeGroup": "Place"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "name": "Muir Woods National Monument",
+              "type": "Park",
+              "address": {
+                "adminDistricts": [
+                  {
+                    "name": "California"
+                  },
+                  {
+                    "name": "Marin County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "California"
+              },
+              "typeGroup": "Place"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
+      }
+    }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for 'Muir Woods', filtered by place resultTypeGroups"
+}

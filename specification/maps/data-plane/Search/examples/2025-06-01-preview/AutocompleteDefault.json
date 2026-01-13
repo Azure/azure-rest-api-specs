@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "api-version": "2025-06-01-preview",
+    "coordinates": "-113.301894,49.201888",
+    "query": "1 Microsoft"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "type": "Address",
+              "address": {
+                "addressLine": "1 Microsoft Way",
+                "adminDistricts": [
+                  {
+                    "name": "Washington"
+                  },
+                  {
+                    "name": "King County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "1 Microsoft Way, Redmond, Washington 98052, United States",
+                "locality": "Redmond",
+                "postalCode": "98052",
+                "streetName": "Microsoft Way",
+                "streetNumber": "1"
+              },
+              "typeGroup": "Address"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "name": "Microsoft-Advanta C",
+              "type": "LandmarkBuilding",
+              "address": {
+                "adminDistricts": [
+                  {
+                    "name": "Washington"
+                  },
+                  {
+                    "name": "King County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "Bellevue, Washington, United States",
+                "locality": "Bellevue"
+              },
+              "typeGroup": "Place"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
+      }
+    }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for '1 Microsoft'"
+}

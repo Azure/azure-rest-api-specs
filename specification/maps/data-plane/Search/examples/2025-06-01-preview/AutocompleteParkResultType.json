@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "api-version": "2025-06-01-preview",
+    "coordinates": "-122.581711,37.896980",
+    "query": "Muir Woods",
+    "resultTypes": "Park"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "name": "Muir Woods National Monument",
+              "type": "Park",
+              "address": {
+                "adminDistricts": [
+                  {
+                    "name": "California"
+                  },
+                  {
+                    "name": "Marin County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "California"
+              },
+              "typeGroup": "Place"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
+      }
+    }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for 'Muir Woods', filtered by park resultTypes"
+}

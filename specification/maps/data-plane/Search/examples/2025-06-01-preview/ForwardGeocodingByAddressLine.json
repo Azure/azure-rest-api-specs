@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "addressLine": "15127 NE 24th Street Redmond WA",
+    "api-version": "2025-06-01-preview",
+    "countryRegion": "US"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "bbox": [
+              -122.14632282407,
+              47.626495282429325,
+              -122.13103917593001,
+              47.63422071757068
+            ],
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -122.138681,
+                47.630358
+              ]
+            },
+            "properties": {
+              "type": "Address",
+              "address": {
+                "addressLine": "15127 NE 24th St",
+                "adminDistricts": [
+                  {
+                    "shortName": "WA"
+                  },
+                  {
+                    "shortName": "King County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States"
+                },
+                "formattedAddress": "15127 NE 24th St, Redmond, WA 98052",
+                "locality": "Redmond",
+                "postalCode": "98052",
+                "streetName": "NE 24th St",
+                "streetNumber": "15127"
+              },
+              "confidence": "Medium",
+              "geocodePoints": [
+                {
+                  "calculationMethod": "Rooftop",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      -122.138681,
+                      47.630358
+                    ]
+                  },
+                  "usageTypes": [
+                    "Display"
+                  ]
+                },
+                {
+                  "calculationMethod": "Rooftop",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                      -122.1386787,
+                      47.6302179
+                    ]
+                  },
+                  "usageTypes": [
+                    "Route"
+                  ]
+                }
+              ],
+              "matchCodes": [
+                "Good"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
+      }
+    }
+  },
+  "operationId": "Search_GetGeocoding",
+  "title": "Search detail address 15127 NE 24th Street, Redmond, WA by addressLine"
+}

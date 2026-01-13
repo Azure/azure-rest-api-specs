@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "AzureKey": "[subscription-key]",
+    "api-version": "2025-06-01-preview",
+    "coordinates": "-113.301894,49.201888",
+    "query": "Muir Woods",
+    "resultTypeGroups": "Address",
+    "resultTypes": "RoadBlock"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": null,
+            "properties": {
+              "type": "RoadBlock",
+              "address": {
+                "addressLine": " Muir St",
+                "adminDistricts": [
+                  {
+                    "name": "Michigan"
+                  },
+                  {
+                    "name": "Wayne County"
+                  }
+                ],
+                "countryRegion": {
+                  "name": "United States",
+                  "ISO": "US"
+                },
+                "formattedAddress": "Muir St, Grosse Pointe Farms, Michigan 48236, United States",
+                "locality": "Grosse Pointe Farms",
+                "postalCode": "48236",
+                "streetName": "Muir St"
+              },
+              "typeGroup": "Address"
+            }
+          }
+        ]
+      },
+      "headers": {
+        "Content-Type": "application/geo+json"
+      }
+    }
+  },
+  "operationId": "Search_GetGeocodeAutocomplete",
+  "title": "Autocomplete API call to search for 'Muir Woods', filtered by roadblock resultTypes, address resultTypeGroups"
+}
