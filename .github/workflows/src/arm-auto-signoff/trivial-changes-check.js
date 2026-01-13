@@ -45,7 +45,7 @@ export async function checkTrivialChanges(core) {
   const changes = new PullRequestChanges();
 
   // Compare the pull request merge commit (HEAD) against its first parent (HEAD^).
-   const options = {
+  const options = {
     cwd: process.env.GITHUB_WORKSPACE,
     logger: new CoreLogger(core),
   };
