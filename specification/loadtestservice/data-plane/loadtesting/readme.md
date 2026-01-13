@@ -34,6 +34,10 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
   - preview/2025-11-01-preview/loadtestservice.json
+suppressions:
+  - code: AvoidAnonymousTypes
+    from: loadtestservice.json
+    reason: This is an incorrect failure due to a bug in the tool(https://github.com/Azure/typespec-azure/issues/2290)
 ```
 
 ### Tag: package-2025-03-01-preview
