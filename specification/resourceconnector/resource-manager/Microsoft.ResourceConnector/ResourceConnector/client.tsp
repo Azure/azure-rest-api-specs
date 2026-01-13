@@ -102,6 +102,10 @@ using Microsoft.ResourceConnector;
 @@clientName(Status.UpgradingKVAIO, "UpgradingKvaio", "csharp");
 @@clientName(Status.ValidatingETCDHealth, "ValidatingEtcdHealth ", "csharp");
 @@clientName(Status.WaitingForKVAIO, "WaitingForKvaio", "csharp");
+@@clientName(Status.NetworkDNSUpdateComplete, "NetworkDnsUpdateComplete", "csharp");
+@@clientName(Status.NetworkDNSUpdateFailed, "NetworkDnsUpdateFailed", "csharp");
+@@clientName(Status.NetworkDNSUpdatePreparing, "NetworkDnsUpdatePreparing", "csharp");
+@@clientName(Status.NetworkDNSUpdating, "NetworkDnsUpdating", "csharp");
 @@clientName(Distro, "ResourceConnectorDistro", "csharp");
 @@clientName(Event, "ResourceConnectorEvent", "csharp");
 @@clientName(NetworkProfile, "ResourceConnectorNetworkProfile", "csharp");
@@ -111,6 +115,7 @@ using Microsoft.ResourceConnector;
   "csharp"
 );
 @@clientName(Provider.SCVMM, "Scvmm", "csharp");
+@@clientName(Appliances.createOrUpdate::parameters.resource, "data", "csharp");
 @@clientName(Appliances.update::parameters.properties, "patch", "csharp");
 @@alternateType(Appliance.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
