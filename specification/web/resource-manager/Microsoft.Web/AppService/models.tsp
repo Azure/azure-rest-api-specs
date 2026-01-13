@@ -288,6 +288,7 @@ union RuntimeName {
 @added(Versions.v2025_05_01)
 union SiteUpdateStrategyType {
   string,
+
   /**
    * If the app is under load and a deployment or site state update occurs, all pods will be removed
    * and will need to be Recreated all at once. This is the default behavior.
