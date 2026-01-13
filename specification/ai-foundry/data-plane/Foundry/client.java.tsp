@@ -1,19 +1,19 @@
 import "@azure-tools/typespec-client-generator-core";
 
-import "./common/service.tsp";
+import "./src/common/service.tsp";
 
-import "./connections/routes.tsp";
-import "./datasets/routes.tsp";
-import "./indexes/routes.tsp";
-import "./deployments/routes.tsp";
-import "./red-teams/routes.tsp";
-import "./evaluationrules/routes.tsp";
+import "./src/connections/routes.tsp";
+import "./src/datasets/routes.tsp";
+import "./src/indexes/routes.tsp";
+import "./src/deployments/routes.tsp";
+import "./src/red-teams/routes.tsp";
+import "./src/evaluationrules/routes.tsp";
 // Don't import openai-evaluations, we'll use Stainless SDK like in AgentsV2
 // import "./openai-evaluations/routes.tsp";
-import "./evaluation_taxonomies/routes.tsp";
-import "./evaluators/routes.tsp";
-import "./insights/routes.tsp";
-import "./schedules/routes.tsp";
+import "./src/evaluation_taxonomies/routes.tsp";
+import "./src/evaluators/routes.tsp";
+import "./src/insights/routes.tsp";
+import "./src/schedules/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
