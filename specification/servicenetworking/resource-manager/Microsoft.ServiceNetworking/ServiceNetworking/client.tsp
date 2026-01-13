@@ -73,6 +73,14 @@ using Microsoft.ServiceNetworking;
   "ServiceNetworkingIPAccessRuleAction",
   "csharp"
 );
+@@clientName(IpAccessRulesPolicy,
+  "ServiceNetworkingIPAccessRulesPolicy",
+  "csharp"
+);
+@@clientName(IpAccessRulesSecurityPolicy,
+  "ServiceNetworkingIPAccessRulesSecurityPolicy",
+  "csharp"
+);
 @@clientName(PolicyType.IpAccessRules, "IPAccessRules", "csharp");
 @@clientName(SecurityPolicyConfigurations.ipAccessRulesSecurityPolicy,
   "IPAccessRulesSecurityPolicy",
