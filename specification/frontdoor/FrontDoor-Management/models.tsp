@@ -1780,12 +1780,12 @@ model ManagedRuleSet {
   /**
    * Defines the version of the rule set to use.
    */
-  @summary("ruleSetAction")
   ruleSetVersion: string;
 
   /**
    * Defines the rule set action.
    */
+  @summary("ruleSetAction")
   ruleSetAction?: ManagedRuleSetActionType;
 
   /**
@@ -1912,7 +1912,89 @@ model Sku {
 /**
  * Common resource representation.
  */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model BasicResourceWithSettableIDName {
+  /**
+   * Resource ID.
+   */
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model BasicResource {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
+  /**
+   * Resource ID.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Resource location.
+   */
+  location?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+}
+
+/**
+ * Common resource representation.
+ */
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+model ResourcewithSettableName {
   /**
    * Resource ID.
    */
@@ -2182,7 +2264,6 @@ model FrontDoorProperties extends FrontDoorUpdateParameters {
    * Rules Engine Configurations available to routing rules.
    */
   @visibility(Lifecycle.Read)
-  @summary("A rules engine configuration.")
   rulesEngines?: RulesEngine[];
 
   /**
@@ -2975,7 +3056,7 @@ model PreconfiguredEndpointList is Azure.Core.Page<PreconfiguredEndpoint>;
  * Defines the properties of a preconfigured endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model PreconfiguredEndpoint extends Resource {
+model PreconfiguredEndpoint extends ResourcewithSettableName {
   /**
    * The properties of a preconfiguredEndpoint
    */

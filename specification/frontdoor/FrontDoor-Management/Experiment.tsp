@@ -15,21 +15,16 @@ namespace Microsoft.Network;
  * Defines the properties of an Experiment
  */
 @parentResource(Profile)
-model Experiment is Azure.ResourceManager.ProxyResource<ExperimentProperties> {
-  ...ResourceNameParameter<
-    Resource = Experiment,
-    KeyName = "experimentName",
-    SegmentName = "Experiments",
-    NamePattern = "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Experiment extends Resource {
+  properties?: ExperimentProperties;
 
-  /** Resource tags. */
-  tags?: Record<string>;
-
-  /**
-   * Resource location.
-   */
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("experimentName")
+  @segment("Experiments")
+  @pattern("^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$")
+  name: string;
 }
 
 @armResourceOperations

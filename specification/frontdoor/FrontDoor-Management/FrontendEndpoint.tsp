@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * A frontend endpoint used for routing.
  */
 @parentResource(FrontDoor)
-model FrontendEndpoint
-  is Azure.ResourceManager.ProxyResource<FrontendEndpointProperties> {
-  ...ResourceNameParameter<
-    Resource = FrontendEndpoint,
-    KeyName = "frontendEndpointName",
-    SegmentName = "frontendEndpoints",
-    NamePattern = "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FrontendEndpoint extends BasicResourceWithSettableIDName {
+  properties?: FrontendEndpointProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("frontendEndpointName")
+  @segment("frontendEndpoints")
+  @pattern("^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$")
+  name: string;
 }
 
 @armResourceOperations

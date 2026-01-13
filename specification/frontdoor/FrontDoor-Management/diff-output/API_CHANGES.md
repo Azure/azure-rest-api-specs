@@ -142,6 +142,18 @@
 |------|------------|-------|
 | `definitions.RoutingRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
+### Changes for `BasicResource`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BasicResource__added` | added | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
+
+### Changes for `BasicResourceWithSettableIDName`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BasicResourceWithSettableIDName__added` | added | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
+
 ### Changes for `DefaultErrorResponseError`
 
 | Path | Change Type | Value |
@@ -165,6 +177,12 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.PolicySettingsLogScrubbing__added` | added | `{"type":"object","description":"Defines rules that scrub sensitive fields in the Web Application Fir...` |
+
+### Changes for `ResourcewithSettableName`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ResourcewithSettableName__added` | added | `{"type":"object","description":"Common resource representation.","properties":{"id":{"type":"string"...` |
 
 ### Changes for `RoutingRuleUpdateParametersWebApplicationFirewallPolicyLink`
 
@@ -258,24 +276,6 @@
 | `definitions.Profile.properties.name__deleted` | deleted | `{"type":"string","description":"The name of the Profile"}` |
 | `definitions.RulesEngine.properties.name__deleted` | deleted | `{"type":"string","description":"Resource name.","readOnly":true}` |
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Experiment.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.FrontDoor.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.Profile.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-| `definitions.WebApplicationFirewallPolicy.properties.tags__added` | added | `{"type":"object","description":"Resource tags.","additionalProperties":{"type":"string"}}` |
-
-### Changes for `location`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Experiment.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
-| `definitions.FrontDoor.properties.location__added` | added | `{"type":"string","description":"Resource location."}` |
-| `definitions.Profile.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-| `definitions.WebApplicationFirewallPolicy.properties.location__added` | added | `{"type":"string","description":"The geo-location where the resource lives","x-ms-mutability":["creat...` |
-
 ### Changes for `required`
 
 | Path | Change Type | Value |
@@ -289,14 +289,6 @@
 | `definitions.RulesEngineListResult.required__added` | added | `["value"]` |
 | `definitions.WebApplicationFirewallPolicyList.required__added` | added | `["value"]` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FrontDoorProperties.properties.rulesEngines.title__added` | added | `A rules engine configuration.` |
-| `definitions.ManagedRuleSet.properties.ruleSetAction.title__deleted` | deleted | `ruleSetAction` |
-| `definitions.ManagedRuleSet.properties.ruleSetVersion.title__added` | added | `ruleSetAction` |
-
 ### Changes for `readOnly`
 
 | Path | Change Type | Value |
@@ -309,7 +301,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.RulesEngine.allOf__added` | added | `[{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"}...` |
+| `definitions.RulesEngine.allOf__added` | added | `[{"$ref":"#/definitions/BasicResource"}]` |
 
 ### Changes for `id`
 
@@ -325,11 +317,11 @@
 | `definitions.BackendPoolProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
 | `definitions.BackendPoolUpdateParameters.properties.healthProbeSettings.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.BackendPoolUpdateParameters.properties.loadBalancingSettings.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.Experiment.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.Experiment.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.ForwardingConfiguration.properties.backendPool.$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
-| `definitions.FrontDoor.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FrontDoor.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.FrontDoorProperties.properties.resourceState.description` | `Resource status of the Front Door.` | `Resource status of the Front Door or Front Door SubResource.` |
-| `definitions.FrontendEndpoint.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FrontendEndpoint.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/BasicResourceWithSettableIDName` |
 | `definitions.FrontendEndpointProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
 | `definitions.HealthProbeSettingsModel.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.HealthProbeSettingsProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
@@ -338,8 +330,8 @@
 | `definitions.LoadBalancingSettingsModel.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.LoadBalancingSettingsProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
 | `definitions.ManagedRuleSetDefinition.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.PreconfiguredEndpoint.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.Profile.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.PreconfiguredEndpoint.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/ResourcewithSettableName` |
+| `definitions.Profile.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/ResourcewithSettableName` |
 | `definitions.ProfileUpdateProperties.properties.enabledState.description` | `The enabled state of the Profile` | `The state of the Experiment` |
 | `definitions.RoutingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `#/definitions/SubResource` |
 | `definitions.RoutingRuleProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
@@ -348,7 +340,7 @@
 | `definitions.RulesEngineProperties.properties.resourceState.description` | `Resource status.` | `Resource status of the Front Door or Front Door SubResource.` |
 | `definitions.RulesEngineRule.properties.priority.description` | `A priority assigned to this rule. ` | `A priority assigned to this rule.` |
 | `definitions.Timeseries.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
-| `definitions.WebApplicationFirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.WebApplicationFirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `#/definitions/Resource` |
 | `definitions.WebApplicationFirewallScrubbingRules.properties.selectorMatchOperator['x-ms-enum'].name` | ` scrubbingRuleEntryMatchOperator` | `ScrubbingRuleEntryMatchOperator` |
 | `definitions.WebApplicationFirewallScrubbingRules.properties.state['x-ms-enum'].name` | ` scrubbingRuleEntryState` | `ScrubbingRuleEntryState` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/frontDoorWebApplicationFirewallPolicies/{policyName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `#/definitions/TagsObject` |

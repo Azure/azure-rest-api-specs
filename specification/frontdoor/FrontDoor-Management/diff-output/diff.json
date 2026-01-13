@@ -655,6 +655,46 @@
         }
       }
     },
+    "BasicResource__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      }
+    },
+    "BasicResourceWithSettableIDName__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      }
+    },
     "DefaultErrorResponseError__added": {
       "type": "object",
       "description": "Error model.",
@@ -712,6 +752,38 @@
           "description": "List of log scrubbing rules applied to the Web Application Firewall logs.",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallScrubbingRules"
+          }
+        }
+      }
+    },
+    "ResourcewithSettableName__added": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -832,17 +904,6 @@
           "type": "string",
           "description": "The name of the Experiment",
           "readOnly": true
-        },
-        "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
         }
       },
       "allOf": [
@@ -851,7 +912,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -873,26 +934,13 @@
       }
     },
     "FrontDoor": {
-      "properties": {
-        "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location__added": {
-          "type": "string",
-          "description": "Resource location."
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]
@@ -912,7 +960,6 @@
           }
         },
         "rulesEngines": {
-          "title__added": "A rules engine configuration.",
           "items": {
             "description__deleted": "A rules engine configuration."
           }
@@ -966,7 +1013,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/BasicResourceWithSettableIDName"
             }
           }
         ]
@@ -1134,16 +1181,6 @@
         }
       }
     },
-    "ManagedRuleSet": {
-      "properties": {
-        "ruleSetVersion": {
-          "title__added": "ruleSetAction"
-        },
-        "ruleSetAction": {
-          "title__deleted": "ruleSetAction"
-        }
-      }
-    },
     "ManagedRuleSetDefinition": {
       "allOf": [
         [
@@ -1208,7 +1245,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "#/definitions/Resource"
+              "__new": "#/definitions/ResourcewithSettableName"
             }
           }
         ]
@@ -1224,21 +1261,6 @@
         "name__deleted": {
           "type": "string",
           "description": "The name of the Profile"
-        },
-        "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
         }
       },
       "allOf": [
@@ -1247,7 +1269,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/ResourcewithSettableName"
             }
           }
         ]
@@ -1331,7 +1353,7 @@
     "RulesEngine": {
       "allOf__added": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BasicResource"
         }
       ],
       "properties": {
@@ -1402,30 +1424,13 @@
       }
     },
     "WebApplicationFirewallPolicy": {
-      "properties": {
-        "tags__added": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location__added": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
       "allOf": [
         [
           "~",
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+              "__new": "#/definitions/Resource"
             }
           }
         ]

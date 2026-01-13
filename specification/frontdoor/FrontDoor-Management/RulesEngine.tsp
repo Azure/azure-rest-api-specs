@@ -15,14 +15,16 @@ namespace Microsoft.Network;
  * A rules engine configuration containing a list of rules that will run to modify the runtime behavior of the request and response.
  */
 @parentResource(FrontDoor)
-model RulesEngine
-  is Azure.ResourceManager.ProxyResource<RulesEngineProperties> {
-  ...ResourceNameParameter<
-    Resource = RulesEngine,
-    KeyName = "rulesEngineName",
-    SegmentName = "rulesEngines",
-    NamePattern = "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RulesEngine extends BasicResource {
+  properties?: RulesEngineProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("rulesEngineName")
+  @segment("rulesEngines")
+  @pattern("^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$")
+  name: string;
 }
 
 @armResourceOperations

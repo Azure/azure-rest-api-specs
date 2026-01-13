@@ -13,14 +13,15 @@ namespace Microsoft.Network;
 /**
  * Defines web application firewall policy.
  */
-model WebApplicationFirewallPolicy
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<WebApplicationFirewallPolicyProperties> {
-  ...ResourceNameParameter<
-    Resource = WebApplicationFirewallPolicy,
-    KeyName = "policyName",
-    SegmentName = "FrontDoorWebApplicationFirewallPolicies",
-    NamePattern = ""
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model WebApplicationFirewallPolicy extends Resource {
+  properties?: WebApplicationFirewallPolicyProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("policyName")
+  @segment("FrontDoorWebApplicationFirewallPolicies")
+  name: string;
 
   /**
    * Gets a unique read-only string that changes whenever the resource is updated.

@@ -2834,6 +2834,48 @@
         }
       }
     },
+    "BasicResource": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "BasicResourceWithSettableIDName": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "CacheConfiguration": {
       "type": "object",
       "description": "Caching settings for a caching-type route. To disable caching, do not provide a cacheConfiguration object.",
@@ -3266,22 +3308,11 @@
           "$ref": "#/definitions/ExperimentProperties",
           "description": "The properties of an Experiment",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -3412,22 +3443,11 @@
           "$ref": "#/definitions/FrontDoorProperties",
           "description": "Properties of the Front Door Load Balancer",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -3586,7 +3606,6 @@
         },
         "rulesEngines": {
           "type": "array",
-          "title": "A rules engine configuration.",
           "description": "Rules Engine Configurations available to routing rules.",
           "items": {
             "$ref": "#/definitions/RulesEngine"
@@ -3877,7 +3896,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BasicResourceWithSettableIDName"
         }
       ]
     },
@@ -4638,11 +4657,11 @@
         },
         "ruleSetVersion": {
           "type": "string",
-          "title": "ruleSetAction",
           "description": "Defines the version of the rule set to use."
         },
         "ruleSetAction": {
           "$ref": "#/definitions/ManagedRuleSetActionType",
+          "title": "ruleSetAction",
           "description": "Defines the rule set action."
         },
         "exclusions": {
@@ -5274,7 +5293,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourcewithSettableName"
         }
       ]
     },
@@ -5373,21 +5392,6 @@
           "description": "The properties of a Profile",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
@@ -5395,7 +5399,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/ResourcewithSettableName"
         }
       ]
     },
@@ -5546,7 +5550,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ResourceType": {
       "type": "string",
@@ -5571,6 +5576,39 @@
           }
         ]
       }
+    },
+    "ResourcewithSettableName": {
+      "type": "object",
+      "description": "Common resource representation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "RouteConfiguration": {
       "type": "object",
@@ -5750,7 +5788,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/BasicResource"
         }
       ]
     },
@@ -6546,21 +6584,6 @@
           "description": "Properties of the web application firewall policy.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "etag": {
           "type": "string",
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
@@ -6572,7 +6595,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },

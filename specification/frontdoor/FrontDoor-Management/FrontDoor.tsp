@@ -13,21 +13,16 @@ namespace Microsoft.Network;
 /**
  * Front Door represents a collection of backend endpoints to route traffic to along with rules that specify how traffic is sent there.
  */
-model FrontDoor is Azure.ResourceManager.ProxyResource<FrontDoorProperties> {
-  ...ResourceNameParameter<
-    Resource = FrontDoor,
-    KeyName = "frontDoorName",
-    SegmentName = "frontDoors",
-    NamePattern = "^[a-zA-Z0-9]+([-a-zA-Z0-9]?[a-zA-Z0-9])*$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model FrontDoor extends Resource {
+  properties?: FrontDoorProperties;
 
-  /** Resource tags. */
-  tags?: Record<string>;
-
-  /**
-   * Resource location.
-   */
-  location?: string;
+  @visibility(Lifecycle.Read)
+  @path
+  @key("frontDoorName")
+  @segment("frontDoors")
+  @pattern("^[a-zA-Z0-9]+([-a-zA-Z0-9]?[a-zA-Z0-9])*$")
+  name: string;
 }
 
 @armResourceOperations

@@ -13,14 +13,16 @@ namespace Microsoft.Network;
 /**
  * Defines an Network Experiment Profile and lists of Experiments
  */
-model Profile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "NetworkExperimentProfiles",
-    NamePattern = "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$"
-  >;
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model Profile extends ResourcewithSettableName {
+  properties?: ProfileProperties;
+
+  @visibility(Lifecycle.Read)
+  @path
+  @key("profileName")
+  @segment("NetworkExperimentProfiles")
+  @pattern("^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$")
+  name: string;
 
   /**
    * Gets a unique read-only string that changes whenever the resource is updated.
