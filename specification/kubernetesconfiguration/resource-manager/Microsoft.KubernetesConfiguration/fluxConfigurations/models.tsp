@@ -354,12 +354,12 @@ model GitRepositoryDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster git repository source with the remote.
    */
-  timeoutInSeconds?: int64 = 600;
+  timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster git repository source with the remote.
    */
-  syncIntervalInSeconds?: int64 = 600;
+  syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * The source reference for the GitRepository object.
@@ -448,12 +448,12 @@ model BucketDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster bucket source with the remote.
    */
-  timeoutInSeconds?: int64 = 600;
+  timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster bucket source with the remote.
    */
-  syncIntervalInSeconds?: int64 = 600;
+  syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * Plaintext access key used to securely access the S3 bucket
@@ -487,12 +487,12 @@ model AzureBlobDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.
    */
-  timeoutInSeconds?: int64 = 600;
+  timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster Azure Blob source with the remote.
    */
-  syncIntervalInSeconds?: int64 = 600;
+  syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * Parameters to authenticate using Service Principal.
@@ -593,12 +593,12 @@ model OCIRepositoryDefinition {
   /**
    * The maximum time to attempt to reconcile the cluster OCI repository source with the remote.
    */
-  timeoutInSeconds?: int64 = 600;
+  timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the cluster OCI repository source with the remote.
    */
-  syncIntervalInSeconds?: int64 = 600;
+  syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * The source reference for the OCIRepository object.
@@ -771,12 +771,12 @@ model KustomizationDefinition {
   /**
    * The maximum time to attempt to reconcile the Kustomization on the cluster.
    */
-  timeoutInSeconds?: int64 = 600;
+  timeoutInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster.
    */
-  syncIntervalInSeconds?: int64 = 600;
+  syncIntervalInSeconds?: int64 | null = 600;
 
   /**
    * The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation.
