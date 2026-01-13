@@ -14838,43 +14838,6 @@
           "64g"
         ]
       },
-      "OpenAI.Conversation": {
-        "type": "object",
-        "required": [
-          "id",
-          "object",
-          "metadata",
-          "created_at"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the conversation."
-          },
-          "object": {
-            "type": "string",
-            "enum": [
-              "conversation"
-            ],
-            "description": "The object type, which is always `conversation`.",
-            "x-stainless-const": true,
-            "default": "conversation"
-          },
-          "metadata": {
-            "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
-          },
-          "created_at": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The time at which the conversation was created, measured in seconds since the Unix epoch."
-          }
-        },
-        "title": "The conversation object",
-        "x-oaiMeta": {
-          "name": "The conversation object",
-          "group": "conversations"
-        }
-      },
       "OpenAI.ConversationItem": {
         "type": "object",
         "required": [
@@ -16174,6 +16137,20 @@
         },
         "description": "The conversation that this response belongs to.",
         "title": "Conversation object"
+      },
+      "OpenAI.ConversationReference": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the conversation."
+          }
+        },
+        "description": "The conversation that this response belongs to. Input items and output items from this response are automatically added to this conversation.",
+        "title": "Conversation"
       },
       "OpenAI.ConversationResource": {
         "type": "object",
@@ -25322,7 +25299,7 @@
             "type": "object",
             "allOf": [
               {
-                "$ref": "#/components/schemas/OpenAI.Conversation"
+                "$ref": "#/components/schemas/OpenAI.ConversationReference"
               }
             ],
             "nullable": true
