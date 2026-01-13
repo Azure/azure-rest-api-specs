@@ -1,0 +1,38 @@
+# Configuration for Swagger to Excel Converter
+# Azure Search Resource Manager API Analysis Tool
+
+input_files:
+  # Resource Manager swagger files
+  resource_manager:
+    - path: "../../resource-manager/Microsoft.Search/Search/stable/2025-05-01/rp-2025-05-01-search.json"
+      category: "ARM-2025-05-01"
+
+output:
+  directory: "./output"
+  file_prefix: "search_arm_swagger_2025-05-01"
+
+# Sheet configuration
+sheets:
+  api_overview:
+    name: "API Overview"
+
+  operation_overview:
+    name: "Operation Overview"
+
+  endpoints:
+    name: "Endpoints Detail"
+
+  parameters:
+    name: "Parameters"
+
+  responses:
+    name: "Responses"
+
+  data_models:
+    name: "Data Models"
+
+# Analysis options
+analysis:
+  include_deprecated: false
+  extract_security_info: true
+  include_vendor_extensions: true  # x-ms-* extensions are important for ARM
