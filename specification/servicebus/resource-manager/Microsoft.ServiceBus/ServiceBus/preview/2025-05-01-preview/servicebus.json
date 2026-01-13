@@ -1424,7 +1424,7 @@
             "description": "Parameters required to create an Alias(Disaster Recovery configuration)",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/FailoverProperties"
+              "$ref": "#/definitions/NamespaceFailoverProperties"
             }
           }
         ],
@@ -5013,17 +5013,6 @@
         }
       }
     },
-    "FailoverProperties": {
-      "type": "object",
-      "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FailoverPropertiesProperties",
-          "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "FailoverPropertiesProperties": {
       "type": "object",
       "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
@@ -5334,6 +5323,17 @@
         "ignoreMissingVnetServiceEndpoint": {
           "type": "boolean",
           "description": "Value that indicates whether to ignore missing VNet Service Endpoint"
+        }
+      }
+    },
+    "NamespaceFailoverProperties": {
+      "type": "object",
+      "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FailoverPropertiesProperties",
+          "description": "Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.",
+          "x-ms-client-flatten": true
         }
       }
     },
