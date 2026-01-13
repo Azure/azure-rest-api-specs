@@ -233,6 +233,39 @@ union ExternalEndpointResult {
 }
 
 /**
+ * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
+ */
+@added(Versions.v2025_11_01)
+union PolicyAction {
+  string,
+
+  /**
+   * Unknown
+   */
+  Unknown: "Unknown",
+
+  /**
+   * Allow
+   */
+  Allow: "Allow",
+
+  /**
+   * Audit
+   */
+  Audit: "Audit",
+  
+  /**
+   * Deny
+   */
+  Deny: "Deny",
+  
+  /**
+   * Error
+   */
+  Error: "Error"
+}
+
+/**
  * The identity type. This is the only required field when adding a system or user assigned identity to a resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -1028,10 +1061,10 @@ model ExternalEvaluationEndpointInvocationResult {
   claims?: unknown;
 
   /**
-   * The effective outcome of the policy evaluation based on both the policy effect and evaluation result.
+   * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
    */
   @added(Versions.v2025_11_01)
-  policyAction?: string;
+  policyAction?: PolicyAction;
 
   /**
    * The evaluation details returned by the policy evaluation engine.
