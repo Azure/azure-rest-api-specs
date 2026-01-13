@@ -1705,6 +1705,7 @@ model CustomRule {
   /**
    * List of match conditions.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchConditions: MatchCondition[];
 
   /**
@@ -1765,6 +1766,7 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   managedRuleSets?: ManagedRuleSet[];
 }
 
@@ -1791,11 +1793,13 @@ model ManagedRuleSet {
   /**
    * Describes the exclusions that are applied to all rules in the set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * Defines the rule group overrides to apply to the rule set.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroupOverrides?: ManagedRuleGroupOverride[];
 }
 
@@ -1831,11 +1835,13 @@ model ManagedRuleGroupOverride {
   /**
    * Describes the exclusions that are applied to all rules in the group.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: ManagedRuleExclusion[];
 
   /**
    * List of rules that will be disabled. If none specified, all rules in the group will be disabled.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ManagedRuleOverride[];
 }
 
@@ -1866,6 +1872,7 @@ model ManagedRuleOverride {
   /**
    * Describes the exclusions that are applied to this specific rule.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   exclusions?: ManagedRuleExclusion[];
 }
 
@@ -1912,7 +1919,11 @@ model Sku {
 /**
  * Common resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BasicResourceWithSettableIDName {
   /**
    * Resource ID.
@@ -1934,7 +1945,10 @@ model BasicResourceWithSettableIDName {
 /**
  * Common resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BasicResource {
   /**
    * Resource ID.
@@ -1958,7 +1972,10 @@ model BasicResource {
 /**
  * Common resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Resource {
   /**
    * Resource ID.
@@ -1993,7 +2010,10 @@ model Resource {
 /**
  * Common resource representation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourcewithSettableName {
   /**
    * Resource ID.
@@ -2091,6 +2111,8 @@ model ManagedRuleSetDefinitionList is Azure.Core.Page<ManagedRuleSetDefinition>;
  * Describes the a managed rule set definition.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedRuleSetDefinition extends Resource {
   /**
    * Properties for a managed rule set definition.
@@ -2130,6 +2152,7 @@ model ManagedRuleSetDefinitionProperties {
    * Rule groups of the managed rule set.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ruleGroups?: ManagedRuleGroupDefinition[];
 }
 
@@ -2153,6 +2176,7 @@ model ManagedRuleGroupDefinition {
    * List of rules within the managed rule group.
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rules?: ManagedRuleDefinition[];
 }
 
@@ -2320,6 +2344,7 @@ model RulesEngineRule {
   /**
    * A list of match conditions that must meet in order for the actions of this rule to run. Having no match conditions means the actions will always run.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   matchConditions?: RulesEngineMatchCondition[];
 
   /**
@@ -2335,11 +2360,13 @@ model RulesEngineAction {
   /**
    * A list of header actions to apply from the request from AFD to the origin.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestHeaderActions?: HeaderAction[];
 
   /**
    * A list of header actions to apply from the response from AFD to the client.
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   responseHeaderActions?: HeaderAction[];
 
   /**
@@ -2374,6 +2401,8 @@ model HeaderAction {
 @discriminator("@odata.type")
 model RouteConfiguration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.type`: string;
 }
 
@@ -2716,6 +2745,7 @@ model BackendPoolUpdateParameters {
   /**
    * The set of backends for this pool
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   backends?: Backend[];
 
   /**
@@ -3056,6 +3086,8 @@ model PreconfiguredEndpointList is Azure.Core.Page<PreconfiguredEndpoint>;
  * Defines the properties of a preconfigured endpoint
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PreconfiguredEndpoint extends ResourcewithSettableName {
   /**
    * The properties of a preconfiguredEndpoint
@@ -3149,6 +3181,7 @@ model Endpoint {
   /**
    * The endpoint URL
    */
+#suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpoint?: string;
 }
 
@@ -3187,6 +3220,8 @@ model ExperimentUpdateProperties {
  * Defines the LatencyScorecard
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LatencyScorecard extends Resource {
   /**
    * The properties of a latency scorecard
@@ -3233,6 +3268,7 @@ model LatencyScorecardProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startDateTimeUTC?: utcDateTime;
 
   /**
@@ -3240,6 +3276,7 @@ model LatencyScorecardProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endDateTimeUTC?: utcDateTime;
 
   /**
@@ -3268,6 +3305,7 @@ model LatencyMetric {
    * The end time of the Latency Scorecard in UTC
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endDateTimeUTC?: string;
 
   /**
@@ -3298,24 +3336,28 @@ model LatencyMetric {
    * The lower end of the 95% confidence interval for endpoint A
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aCLower95CI?: float32;
 
   /**
    * The upper end of the 95% confidence interval for endpoint A
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   aHUpper95CI?: float32;
 
   /**
    * The lower end of the 95% confidence interval for endpoint B
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bCLower95CI?: float32;
 
   /**
    * The upper end of the 95% confidence interval for endpoint B
    */
   @visibility(Lifecycle.Read)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   bUpper95CI?: float32;
 }
 
@@ -3323,6 +3365,8 @@ model LatencyMetric {
  * Defines the Timeseries
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Timeseries extends Resource {
   /**
    * The properties of a Timeseries
@@ -3342,11 +3386,13 @@ model TimeseriesProperties {
   /**
    * The start DateTime of the Timeseries in UTC
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   startDateTimeUTC?: string;
 
   /**
    * The end DateTime of the Timeseries in UTC
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endDateTimeUTC?: string;
 
   /**
@@ -3367,6 +3413,7 @@ model TimeseriesProperties {
   /**
    * The set of data points for the timeseries
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   timeseriesData?: TimeseriesDataPoint[];
 }
 
@@ -3377,6 +3424,7 @@ model TimeseriesDataPoint {
   /**
    * The DateTime of the Timeseries data point in UTC
    */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dateTimeUTC?: string;
 
   /**
@@ -3404,6 +3452,7 @@ model Error {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   target?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   details?: ErrorDetails[];
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   innerError?: string;
@@ -3451,6 +3500,7 @@ model ForwardingConfiguration extends RouteConfiguration {
    */
   backendPool?: SubResource;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.type`: "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration";
 }
 
@@ -3513,6 +3563,7 @@ model RedirectConfiguration extends RouteConfiguration {
    */
   customQueryString?: string;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `@odata.type`: "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration";
 }
 

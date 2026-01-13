@@ -15,7 +15,10 @@ namespace Microsoft.Network;
  * A frontend endpoint used for routing.
  */
 @parentResource(FrontDoor)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FrontendEndpoint extends BasicResourceWithSettableIDName {
   properties?: FrontendEndpointProperties;
 
@@ -46,6 +49,7 @@ interface FrontendEndpoints {
   /**
    * Enables a frontendEndpoint for HTTPS traffic
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   enableHttps is ArmResourceActionAsync<
     FrontendEndpoint,
     CustomHttpsConfiguration,
@@ -58,6 +62,7 @@ interface FrontendEndpoints {
   /**
    * Disables a frontendEndpoint for HTTPS traffic
    */
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableHttps is ArmResourceActionAsync<
     FrontendEndpoint,
     void,

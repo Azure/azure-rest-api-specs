@@ -15,7 +15,10 @@ namespace Microsoft.Network;
  * A rules engine configuration containing a list of rules that will run to modify the runtime behavior of the request and response.
  */
 @parentResource(FrontDoor)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RulesEngine extends BasicResource {
   properties?: RulesEngineProperties;
 
@@ -39,6 +42,7 @@ interface RulesEngines {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RulesEngine,
     Response = ArmResourceUpdatedResponse<RulesEngine> | ArmResourceCreatedResponse<

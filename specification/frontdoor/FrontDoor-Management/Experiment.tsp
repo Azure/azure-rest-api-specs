@@ -15,7 +15,10 @@ namespace Microsoft.Network;
  * Defines the properties of an Experiment
  */
 @parentResource(Profile)
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Experiment extends Resource {
   properties?: ExperimentProperties;
 
@@ -107,6 +110,7 @@ interface Experiments {
        * The end DateTime of the Latency Scorecard in UTC
        */
       @query("endDateTimeUTC")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       endDateTimeUTC?: string;
 
       /**
@@ -141,12 +145,14 @@ interface Experiments {
        * The start DateTime of the Timeseries in UTC
        */
       @query("startDateTimeUTC")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       startDateTimeUTC: utcDateTime;
 
       /**
        * The end DateTime of the Timeseries in UTC
        */
       @query("endDateTimeUTC")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       endDateTimeUTC: utcDateTime;
 
       /**
