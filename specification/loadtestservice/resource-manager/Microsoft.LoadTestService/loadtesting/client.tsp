@@ -60,3 +60,9 @@ interface LoadTests {
 @@clientName(ResourceState, "LoadTestingProvisioningState", "csharp");
 @@clientName(QuotaBucketRequestPropertiesDimensions, "LoadTestingQuotaBucketDimensions", "csharp");
 @@clientName(OutboundEnvironmentEndpoint, "LoadTestingOutboundEnvironmentEndpoint", "csharp");
+
+@@clientName(LoadTests.checkAvailabilityQuota, "CheckLoadTestingQuotaAvailability", "csharp");
+@@clientName(LoadTests.outboundNetworkDependenciesEndpoints,
+  "GetOutboundNetworkDependenciesEndpoints",
+  "csharp"
+);
