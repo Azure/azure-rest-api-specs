@@ -266,5 +266,6 @@ interface TestRunOperations {
   stopTestProfileRun is TestProfileRunAdministration.stop;
 
   getLatestTestRunInsights is LoadTestRun.getLatestInsights;
+  patchLatestTestRunInsights is LoadTestRun.patchLatestInsights;
   generateTestRunInsights is LoadTestRun.generateInsights;
 }

@@ -1,9 +1,16 @@
 {
-  "operationId": "LoadTestRun_GetLatestInsights",
-  "title": "Get the latest insights for the test run.",
+  "operationId": "LoadTestRun_PatchLatestInsights",
+  "title": "Update the latest insights for the test run.",
   "parameters": {
     "testRunId": "12316678-1234-1234-1234-122451189012",
-    "api-version": "2025-11-01-preview"
+    "api-version": "2025-11-01-preview",
+    "body": {
+      "rows": {
+        "1": {
+          "WorkItemUrl": "https://devdiv/workitems/1234"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
