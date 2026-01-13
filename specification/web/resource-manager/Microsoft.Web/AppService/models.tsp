@@ -1,3 +1,4 @@
+import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using Versioning;
 
 namespace Microsoft.Web;
 
@@ -283,6 +285,7 @@ union RuntimeName {
 /**
  * Function app site update strategy type. Available options: Recreate, RollingUpdate
  */
+@added(Versions.v2025_05_01)
 union SiteUpdateStrategyType {
   string,
   /**
@@ -3568,6 +3571,7 @@ model FunctionsScaleAndConcurrency {
 /**
  * Function app site update strategy configuration for deployments and site config updates.
  */
+@added(Versions.v2025_05_01)
 model FunctionsSiteUpdateStrategy {
   /**
    * Function app site update strategy type. Available options: Recreate, RollingUpdate
