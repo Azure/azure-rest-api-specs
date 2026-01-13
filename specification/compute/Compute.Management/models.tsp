@@ -3751,6 +3751,12 @@ model VirtualMachineScaleSetUpdateProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_04_01)
+  placement?: Placement;
 }
 
 /**
