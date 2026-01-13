@@ -106,7 +106,8 @@ const excludeExamples = {
 
 export class Swagger {
   /**
-   * Content of swagger file, either loaded from `#path` or passed in via `options`.
+   * Content of swagger file passed in via `options`.
+   * If undefined, content will be loaded from `#path`, but never cached.
    *
    * @type {string | undefined}
    */
