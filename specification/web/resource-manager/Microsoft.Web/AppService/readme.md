@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2025-03
+tag: package-2025-05
 ```
 
 ### Suppression
