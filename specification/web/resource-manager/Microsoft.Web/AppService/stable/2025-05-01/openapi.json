@@ -53456,28 +53456,6 @@
         ]
       }
     },
-    "SiteUpdateStrategyType": {
-      "type": "string",
-      "description": "Function app site update strategy type. Available options: Recreate, RollingUpdate",
-      "enum": [
-        "Recreate",
-        "RollingUpdate"
-      ],
-      "x-ms-enum": {
-        "name": "SiteUpdateStrategyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Recreate",
-            "value": "Recreate"
-          },
-          {
-            "name": "RollingUpdate",
-            "value": "RollingUpdate"
-          }
-        ]
-      }
-    },
     "SampleUtterance": {
       "type": "object",
       "description": "Sample utterance.",
@@ -55730,6 +55708,30 @@
           "$ref": "#/definitions/GitHubActionConfiguration",
           "description": "If GitHub Action is selected, than the associated configuration."
         }
+      }
+    },
+    "SiteUpdateStrategyType": {
+      "type": "string",
+      "description": "Function app site update strategy type. Available options: Recreate, RollingUpdate",
+      "enum": [
+        "Recreate",
+        "RollingUpdate"
+      ],
+      "x-ms-enum": {
+        "name": "SiteUpdateStrategyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Recreate",
+            "value": "Recreate",
+            "description": "If the app is under load and a deployment or site state update occurs, all pods will be removed\nand will need to be Recreated all at once. This is the default behavior."
+          },
+          {
+            "name": "RollingUpdate",
+            "value": "RollingUpdate",
+            "description": "If the app is under load and a deployment or site state update occurs, pods will be drained in\nbatches and gradually replaced, thus minimizing impact to throughput."
+          }
+        ]
       }
     },
     "SkuCapacity": {
