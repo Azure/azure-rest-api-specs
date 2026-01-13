@@ -55,7 +55,7 @@ model DrillProperties {
 
   @doc("ROPlan properties.")
   recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
-  
+
   @doc("Properties for internal resources that are created for the Drill.")
   drillAssetProperties: AssetPropertiesOfDrill;
 
@@ -280,7 +280,7 @@ model ChaosExperimentPropertiesOfDrill {
 model AssetPropertiesOfDrill {
   @doc("Subscription where Drill's internal resources will be created.")
   subscription: string;
-  
+
   @doc("Region where Drill's internal resources will be created.")
   region: string;
 
