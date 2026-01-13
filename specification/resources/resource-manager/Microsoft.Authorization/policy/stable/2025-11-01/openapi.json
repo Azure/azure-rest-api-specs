@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2025-03-01",
+    "version": "2025-11-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope.",
     "x-typespec-generated": [
       {
@@ -104,23 +104,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy assignment": {
-            "$ref": "./examples/getPolicyAssignment.json"
-          },
-          "Retrieve a policy assignment with a system assigned identity": {
-            "$ref": "./examples/getPolicyAssignmentWithIdentity.json"
-          },
-          "Retrieve a policy assignment with a user assigned identity": {
-            "$ref": "./examples/getPolicyAssignmentWithUserAssignedIdentity.json"
-          },
-          "Retrieve a policy assignment with overrides": {
-            "$ref": "./examples/getPolicyAssignmentWithOverrides.json"
-          },
-          "Retrieve a policy assignment with resource selectors": {
-            "$ref": "./examples/getPolicyAssignmentWithResourceSelectors.json"
-          }
         }
       },
       "put": {
@@ -171,32 +154,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a policy assignment": {
-            "$ref": "./examples/createPolicyAssignment.json"
-          },
-          "Create or update a policy assignment to enforce policy effect only on enrolled resources during resource creation or update.": {
-            "$ref": "./examples/createPolicyAssignmentWithEnrollEnforcement.json"
-          },
-          "Create or update a policy assignment with a system assigned identity": {
-            "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
-          },
-          "Create or update a policy assignment with a user assigned identity": {
-            "$ref": "./examples/createPolicyAssignmentWithUserAssignedIdentity.json"
-          },
-          "Create or update a policy assignment with multiple non-compliance messages": {
-            "$ref": "./examples/createPolicyAssignmentNonComplianceMessages.json"
-          },
-          "Create or update a policy assignment with overrides": {
-            "$ref": "./examples/createPolicyAssignmentWithOverrides.json"
-          },
-          "Create or update a policy assignment with resource selectors": {
-            "$ref": "./examples/createPolicyAssignmentWithResourceSelectors.json"
-          },
-          "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
-            "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
           }
         }
       },
@@ -249,20 +206,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Update a policy assignment with a system assigned identity": {
-            "$ref": "./examples/updatePolicyAssignmentWithIdentity.json"
-          },
-          "Update a policy assignment with a user assigned identity": {
-            "$ref": "./examples/updatePolicyAssignmentWithUserAssignedIdentity.json"
-          },
-          "Update a policy assignment with overrides": {
-            "$ref": "./examples/updatePolicyAssignmentWithOverrides.json"
-          },
-          "Update a policy assignment with resource selectors": {
-            "$ref": "./examples/updatePolicyAssignmentWithResourceSelectors.json"
-          }
         }
       },
       "delete": {
@@ -308,11 +251,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete a policy assignment": {
-            "$ref": "./examples/deletePolicyAssignment.json"
-          }
         }
       }
     },
@@ -339,11 +277,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List all built-in policy definition versions": {
-            "$ref": "./examples/listAllBuiltInPolicyDefinitionVersions.json"
-          }
         }
       }
     },
@@ -369,11 +302,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all built-in policy definition versions": {
-            "$ref": "./examples/listAllBuiltInPolicySetDefinitionVersions.json"
           }
         }
       }
@@ -421,11 +349,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List built-in policy definitions": {
-            "$ref": "./examples/listBuiltInPolicyDefinitions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -463,11 +386,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a built-in policy definition": {
-            "$ref": "./examples/getBuiltinPolicyDefinition.json"
           }
         }
       }
@@ -516,11 +434,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List built-in policy definition versions": {
-            "$ref": "./examples/listBuiltInPolicyDefinitionVersions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -566,11 +479,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a built-in policy definition version": {
-            "$ref": "./examples/getBuiltinPolicyDefinitionVersion.json"
           }
         }
       }
@@ -625,11 +533,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List built-in policy set definitions": {
-            "$ref": "./examples/listBuiltInPolicySetDefinitions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -674,11 +577,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a built-in policy set definition": {
-            "$ref": "./examples/getBuiltInPolicySetDefinition.json"
           }
         }
       }
@@ -734,11 +632,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List built-in policy set definitions": {
-            "$ref": "./examples/listBuiltInPolicySetDefinitionVersions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -792,11 +685,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Retrieve a built-in policy set definition version": {
-            "$ref": "./examples/getBuiltInPolicySetDefinitionVersion.json"
-          }
         }
       }
     },
@@ -835,11 +723,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Acquire a policy token at management group level": {
-            "$ref": "./examples/acquirePolicyTokenAtManagementGroup.json"
-          }
         }
       }
     },
@@ -869,11 +752,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at management group": {
-            "$ref": "./examples/listAllPolicyDefinitionVersionsByManagementGroup.json"
-          }
         }
       }
     },
@@ -902,11 +780,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at management group": {
-            "$ref": "./examples/listAllPolicySetDefinitionVersionsByManagementGroup.json"
           }
         }
       }
@@ -970,11 +843,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy assignments that apply to a management group": {
-            "$ref": "./examples/listPolicyAssignmentsForManagementGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1030,11 +898,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy definitions by management group": {
-            "$ref": "./examples/listPolicyDefinitionsByManagementGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1079,11 +942,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy definition at management group level": {
-            "$ref": "./examples/getPolicyDefinitionAtManagementGroup.json"
           }
         }
       },
@@ -1135,11 +993,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy definition at management group level": {
-            "$ref": "./examples/createOrUpdatePolicyDefinitionAtManagementGroup.json"
-          }
         }
       },
       "delete": {
@@ -1180,11 +1033,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy definition at management group level": {
-            "$ref": "./examples/deletePolicyDefinitionAtManagementGroup.json"
           }
         }
       }
@@ -1236,11 +1084,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy definition versions by management group": {
-            "$ref": "./examples/listPolicyDefinitionVersionsByManagementGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1289,11 +1132,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy definition version at management group level": {
-            "$ref": "./examples/getPolicyDefinitionVersionAtManagementGroup.json"
           }
         }
       },
@@ -1355,11 +1193,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy definition version at management group level": {
-            "$ref": "./examples/createOrUpdatePolicyDefinitionVersionAtManagementGroup.json"
-          }
         }
       },
       "delete": {
@@ -1404,11 +1237,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy definition version at management group level": {
-            "$ref": "./examples/deletePolicyDefinitionVersionAtManagementGroup.json"
           }
         }
       }
@@ -1470,11 +1298,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy set definitions at management group level": {
-            "$ref": "./examples/listPolicySetDefinitionsByManagementGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1526,11 +1349,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy set definition at management group level": {
-            "$ref": "./examples/getPolicySetDefinitionAtManagementGroup.json"
           }
         }
       },
@@ -1588,14 +1406,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy set definition at management group level": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinitionAtManagementGroup.json"
-          },
-          "Create or update a policy set definition with groups at management group level": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroupsAtManagementGroup.json"
-          }
         }
       },
       "delete": {
@@ -1636,11 +1446,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy set definition at management group level": {
-            "$ref": "./examples/deletePolicySetDefinitionAtManagementGroup.json"
           }
         }
       }
@@ -1699,11 +1504,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy set definitions at management group level": {
-            "$ref": "./examples/listPolicySetDefinitionVersionsByManagementGroup.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1759,11 +1559,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy set definition version at management group level": {
-            "$ref": "./examples/getPolicySetDefinitionVersionAtManagementGroup.json"
           }
         }
       },
@@ -1825,11 +1620,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy set definition version at management group level": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinitionVersionAtManagementGroup.json"
-          }
         }
       },
       "delete": {
@@ -1875,11 +1665,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Delete a policy set definition version at management group level": {
-            "$ref": "./examples/deletePolicySetDefinitionVersionAtManagementGroup.json"
-          }
         }
       }
     },
@@ -1918,11 +1703,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Acquire a policy token": {
-            "$ref": "./examples/acquirePolicyToken.json"
-          }
         }
       }
     },
@@ -1952,11 +1732,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at subscription": {
-            "$ref": "./examples/listAllPolicyDefinitionVersions.json"
-          }
         }
       }
     },
@@ -1985,11 +1760,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List all policy definition versions at subscription": {
-            "$ref": "./examples/listAllPolicySetDefinitionVersions.json"
           }
         }
       }
@@ -2048,11 +1818,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy assignments that apply to a subscription": {
-            "$ref": "./examples/listPolicyAssignments.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2104,11 +1869,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy definitions by subscription": {
-            "$ref": "./examples/listPolicyDefinitions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2149,11 +1909,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy definition": {
-            "$ref": "./examples/getPolicyDefinition.json"
           }
         }
       },
@@ -2201,17 +1956,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy definition": {
-            "$ref": "./examples/createOrUpdatePolicyDefinition.json"
-          },
-          "Create or update a policy definition with advanced parameters": {
-            "$ref": "./examples/createOrUpdatePolicyDefinitionAdvancedParams.json"
-          },
-          "Create or update a policy definition with external evaluation enforcement settings": {
-            "$ref": "./examples/createOrUpdatePolicyDefinitionExternalEvaluationEnforcementSettings.json"
-          }
         }
       },
       "delete": {
@@ -2248,11 +1992,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy definition": {
-            "$ref": "./examples/deletePolicyDefinition.json"
           }
         }
       }
@@ -2304,11 +2043,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy definition versions by subscription": {
-            "$ref": "./examples/listPolicyDefinitionVersions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2357,11 +2091,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy definition version": {
-            "$ref": "./examples/getPolicyDefinitionVersion.json"
           }
         }
       },
@@ -2423,11 +2152,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy definition version": {
-            "$ref": "./examples/createOrUpdatePolicyDefinitionVersion.json"
-          }
         }
       },
       "delete": {
@@ -2472,11 +2196,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy definition version": {
-            "$ref": "./examples/deletePolicyDefinitionVersion.json"
           }
         }
       }
@@ -2534,11 +2253,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy set definitions": {
-            "$ref": "./examples/listPolicySetDefinitions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2586,11 +2300,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy set definition": {
-            "$ref": "./examples/getPolicySetDefinition.json"
           }
         }
       },
@@ -2644,14 +2353,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy set definition": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinition.json"
-          },
-          "Create or update a policy set definition with groups": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroups.json"
-          }
         }
       },
       "delete": {
@@ -2688,11 +2389,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy set definition": {
-            "$ref": "./examples/deletePolicySetDefinition.json"
           }
         }
       }
@@ -2751,11 +2447,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy set definitions": {
-            "$ref": "./examples/listPolicySetDefinitionVersions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2811,11 +2502,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Retrieve a policy set definition version": {
-            "$ref": "./examples/getPolicySetDefinitionVersion.json"
           }
         }
       },
@@ -2877,11 +2563,6 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Create or update a policy set definition version": {
-            "$ref": "./examples/createOrUpdatePolicySetDefinitionVersion.json"
-          }
         }
       },
       "delete": {
@@ -2926,11 +2607,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a policy set definition version": {
-            "$ref": "./examples/deletePolicySetDefinitionVersion.json"
           }
         }
       }
@@ -3023,11 +2699,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List policy assignments that apply to a resource group": {
-            "$ref": "./examples/listPolicyAssignmentsForResource.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3087,11 +2758,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List policy assignments that apply to a resource group": {
-            "$ref": "./examples/listPolicyAssignmentsForResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -3173,6 +2839,10 @@
           "$ref": "#/definitions/ExternalEndpointResult",
           "description": "The result of the external endpoint. Possible values are Succeeded and Failed."
         },
+        "endpointKind": {
+          "type": "string",
+          "description": "The external evaluation endpoint kind."
+        },
         "message": {
           "type": "string",
           "description": "The status message with additional details about the invocation result."
@@ -3184,6 +2854,16 @@
         },
         "claims": {
           "description": "The set of claims that will be attached to the policy token as an attestation for the result of the endpoint invocation."
+        },
+        "policyAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error."
+        },
+        "policyEvaluationDetails": {
+          "description": "The evaluation details returned by the policy evaluation engine."
+        },
+        "additionalInfo": {
+          "description": "The endpoint specific metadata."
         },
         "expiration": {
           "type": "string",
@@ -3433,6 +3113,48 @@
         "value": {
           "description": "The value of the parameter."
         }
+      }
+    },
+    "PolicyAction": {
+      "type": "string",
+      "description": "The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.",
+      "enum": [
+        "Unknown",
+        "Allow",
+        "Audit",
+        "Deny",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
+          },
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow"
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Audit"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error"
+          }
+        ]
       }
     },
     "PolicyAssignment": {
@@ -4172,6 +3894,43 @@
         "policyDefinitions"
       ]
     },
+    "PolicyTokenEvaluatedRequestDetails": {
+      "type": "object",
+      "description": "The policy token evaluated request details.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The request URI of the resource operation that is targeted by the issued token."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource Id of the resource operation that is targeted by the issued token."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The api-version of the resource operation that is targeted by the issued token."
+        },
+        "authorizationAction": {
+          "type": "string",
+          "description": "The authorization action of the resource operation that is targeted by the issued token."
+        },
+        "httpMethod": {
+          "type": "string",
+          "description": "The http method of the resource operation that is targeted by the issued token."
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hashed payload of the resource operation that is targeted by the issued token."
+        }
+      },
+      "required": [
+        "uri",
+        "resourceId",
+        "apiVersion",
+        "authorizationAction",
+        "httpMethod"
+      ]
+    },
     "PolicyTokenOperation": {
       "type": "object",
       "description": "The resource operation to acquire a token for.",
@@ -4217,6 +3976,10 @@
         "result": {
           "$ref": "#/definitions/PolicyTokenResult",
           "description": "The result of the completed token acquisition operation. Possible values are Succeeded and Failed."
+        },
+        "requestDetails": {
+          "$ref": "#/definitions/PolicyTokenEvaluatedRequestDetails",
+          "description": "The external evaluation request details."
         },
         "message": {
           "type": "string",
