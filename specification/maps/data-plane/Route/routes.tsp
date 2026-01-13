@@ -23,6 +23,7 @@ op MapsRouteOperation<
     ...TParams;
   },
   TResponse,
+  {},
   TError
 >;
 
@@ -634,7 +635,9 @@ interface Route {
     {
       ...OperationIdPathParameter;
     },
-    RouteOperation | (NotFoundResponse & ErrorResponse)
+    RouteOperation,
+    {},
+    NotFoundResponse & ErrorResponse
   >;
 
   /**
