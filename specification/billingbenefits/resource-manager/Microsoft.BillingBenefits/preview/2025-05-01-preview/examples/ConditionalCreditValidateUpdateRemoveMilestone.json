@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/conditionalCredits/CACO1",
+            "systemId": "13810867107109237",
+            "displayName": "Validation Test Update CACO",
+            "milestones": [
+              {
+                "name": "Milestone 1",
+                "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+                "spendTarget": {
+                  "amount": 50000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 5000,
+                    "currencyCode": "USD"
+                  },
+                  "duration": "P3M"
+                },
+                "endAt": "2026-03-31T23:59:59Z",
+                "status": "Removed"
+              },
+              {
+                "name": "Milestone 2",
+                "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
+                "spendTarget": {
+                  "amount": 100000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "credit": {
+                    "amount": 5000,
+                    "currencyCode": "USD"
+                  },
+                  "duration": "P3M"
+                },
+                "endAt": "2026-06-30T23:59:59Z",
+                "status": "Removed"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/conditionalCredits/CACO1",
+            "valid": true
+          }
+        ]
+      }
+    }
+  }
+}

@@ -16,16 +16,16 @@ options:
     output-file: "{version-status}/{version}/support.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-support"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-support"
     namespace: "azure.mgmt.support"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-support"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-support"
     typespec-title-map:
       SupportClient: "MicrosoftSupport"
     package-details:

@@ -23,7 +23,7 @@ model AssessmentResult
 @armResourceOperations
 interface AssessmentResults {
   /**
-   * Get a existing Azure Advisor assessment.
+   * Get an existing Azure Advisor assessment.
    */
   get is ArmResourceRead<
     AssessmentResult,
@@ -31,7 +31,7 @@ interface AssessmentResults {
   >;
 
   /**
-   * Create or Overwrite Azure Advisor assessment resource.
+   * Create or Overwrite Azure Advisor assessment.
    */
   put is ArmResourceCreateOrReplaceSync<
     AssessmentResult,
@@ -39,7 +39,7 @@ interface AssessmentResults {
   >;
 
   /**
-   * Delete a existing Azure Advisor assessment.
+   * Delete an existing Azure Advisor assessment.
    */
   delete is ArmResourceDeleteSync<
     AssessmentResult,
@@ -47,7 +47,7 @@ interface AssessmentResults {
   >;
 
   /**
-   * Get list of Azure Advisor assessment.
+   * Get list of Azure Advisor assessments.
    */
   list is ArmResourceListByParent<
     AssessmentResult,

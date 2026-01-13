@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myMPEName",
+            "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName",
+            "location": "West US",
+            "properties": {
+              "connectionState": {
+                "description": "Auto-Approved",
+                "status": "Approved"
+              },
+              "groupIds": [
+                "grafana"
+              ],
+              "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource1",
+              "privateLinkResourceRegion": "West US",
+              "privateLinkServicePrivateIP": "10.0.0.5",
+              "privateLinkServiceUrl": "my-self-hosted-influxdb.westus.mydomain.com",
+              "provisioningState": "Succeeded",
+              "requestMessage": "Example Request Message"
+            }
+          },
+          {
+            "name": "myMPEName2",
+            "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName2",
+            "location": "West US",
+            "properties": {
+              "connectionState": {
+                "description": "Example Reject Reason",
+                "status": "Rejected"
+              },
+              "groupIds": [
+                "grafana"
+              ],
+              "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource2",
+              "privateLinkResourceRegion": "West US",
+              "provisioningState": "Succeeded",
+              "requestMessage": "Example Request Message 2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedPrivateEndpoints_List",
+  "title": "ManagedPrivateEndpoint_List"
+}

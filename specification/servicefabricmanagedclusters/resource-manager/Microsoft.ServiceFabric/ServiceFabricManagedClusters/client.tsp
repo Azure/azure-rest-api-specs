@@ -21,6 +21,7 @@ using Microsoft.ServiceFabric;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
 @@clientName(ApplicationTypes.createOrUpdate::parameters.resource,
@@ -28,6 +29,7 @@ using Microsoft.ServiceFabric;
 );
 @@clientName(ApplicationTypes.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeResource.properties
 );
 
@@ -38,18 +40,26 @@ using Microsoft.ServiceFabric;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationTypeVersionResource.properties
 );
 
 @@clientName(Applications.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
+@@clientName(Applications.updateUpgrade::parameters.body, "parameters");
+@@clientName(Applications.fetchHealth::parameters.body, "parameters");
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "parameters"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResource.properties
 );
 
 @@clientName(Services.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Services.update::parameters.properties, "parameters");
+@@clientName(Services.restartReplica::parameters.body, "parameters");
 
 @@clientName(ManagedClusters.createOrUpdate::parameters.resource, "parameters");
 @@clientName(ManagedClusters.update::parameters.properties, "parameters");
@@ -61,9 +71,11 @@ using Microsoft.ServiceFabric;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedClusterCodeVersionResult.properties
 );
 
@@ -79,6 +91,7 @@ using Microsoft.ServiceFabric;
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NodeType.properties);
 
 @@Azure.ResourceManager.identifiers(FaultSimulationListResult.value,
@@ -405,6 +418,17 @@ using Microsoft.ServiceFabric;
 
 @@clientName(SecurityEncryptionType,
   "NodeTypeSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(HealthFilter, "ApplicationFetchHealthFilter ", "csharp");
+@@clientName(RestartReplicaRequest,
+  "ManagedServiceRestartReplicaContent ",
+  "csharp"
+);
+@@clientName(RestartReplicaRequest.timeout, "TimeoutInSeconds", "csharp");
+@@clientName(RestartKind, "ManagedServiceRestartKind", "csharp");
+@@clientName(ApplicationFetchHealthRequest.timeout,
+  "TimeoutInSeconds",
   "csharp"
 );
 

@@ -23,6 +23,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2025-04-01-preview")
   v2025_04_01_Preview: "2025-04-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-11-01")
+  v2025_11_01: "2025-11-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -58,7 +62,8 @@ model SchedulerProperties {
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
   @doc("The name of the SKU")
-  name: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;
@@ -66,6 +71,19 @@ model SchedulerSku {
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
   redundancyState?: RedundancyState;
+}
+
+@added(Versions.v2025_11_01)
+@doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
+union SchedulerSkuName {
+  string,
+
+  @doc("Dedicated SKU")
+  Dedicated: "Dedicated",
+
+  @doc("Consumption SKU")
+  @added(Versions.v2025_04_01_Preview)
+  Consumption: "Consumption",
 }
 
 @doc("A Task Hub resource belonging to the scheduler")
@@ -123,10 +141,7 @@ model RetentionPolicyProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The orchestration retention policies")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["retentionPeriodInDays", "orchestrationState"]
-  )
+  @identifiers(#["retentionPeriodInDays", "orchestrationState"])
   retentionPolicies?: RetentionPolicyDetails[];
 }
 
@@ -201,7 +216,8 @@ model SchedulerPropertiesUpdate {
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
 model SchedulerSkuUpdate {
   @doc("The name of the SKU")
-  name?: string;
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name?: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
   capacity?: int32;

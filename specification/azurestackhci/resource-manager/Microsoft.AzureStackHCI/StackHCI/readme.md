@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-02-01-preview
+tag: package-preview-2025-12-01-preview
 
 directive:
   - from: edgeDevices.json
@@ -62,10 +62,10 @@ directive:
       - $.definitions.Update.allOf[0]
       - $.definitions.UpdateSummaries.allOf[0]
     transform: >
-      $['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+      $['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
   - from: swagger-document
     where: $.paths[*]..responses.default
-    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+    transform: $.schema['$ref'] = "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
 ```
 
 ## Suppression
@@ -97,6 +97,7 @@ suppressions:
       - arcSettings.json
       - clusters.json
       - extensions.json
+      - hci.json
       - operations.json
       - offers.json
       - publishers.json
@@ -149,6 +150,110 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+
+  - code: PutResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].put
+
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: hci.json
+    reason: already working without the properties section, adding it will break polymorphism
+    where:
+      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}"].put
+      - $.paths["/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices/{edgeDeviceName}/jobs/{jobsName}"].put
+
+  - code: ResourceNameRestriction
+    from: hci.json
+    reason: Resource name parameters didn't have a pattern initially, adding the constraint now will cause a breaking change
+    where: $.paths[?(@property.match(/clusters\/\{clusterName\}/))]
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"].delete
+
+  - code: ConsistentPatchProperties
+    from: hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].patch.parameters[5]["schema"]
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: LroLocationHeader
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}"].delete.responses["202"].headers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}"].patch.responses["202"].headers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/extensions/{extensionName}/upgrade"].post.responses["202"].headers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].delete.responses["202"].headers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].delete.responses["202"].headers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].delete.responses["202"].headers
+
+  - code: PostResponseCodes
+    from: hci.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/initializeDisableProcess"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/apply"].post
+    reason: already used in GA api version, fixing it will cause breaking change
+
+  - code: ParametersInPointGet
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause a breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}"].get.parameters
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}"].get.parameters
+
+  - code: PutResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+
+  - code: DeleteResponseCodes
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].delete
+
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: hci.json
+    reason: these are not tracked resources, so tags are not needed
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/updateRuns/{updateRunName}"].put
+
+  - code: TrackedResourcePatchOperation
+    from: hci.json
+    reason: these are not tracked resources, so no tags and corresponding patch operation is needed
+    where:
+      - $.definitions.UpdateSummaries
+      - $.definitions.Update
+      - $.definitions.UpdateRun
+
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: hci.json
+    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
+    where:
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
+      - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
+      - $.definitions.QosPolicyOverrides.properties.bandwidthPercentage_SMB
+
+  - code: AvoidAdditionalProperties
+    from: hci.json
+    reason: already used in GA api version, fixing it will cause breaking change
+    where:
+      - $.definitions.UpdateProperties.properties
     
   - code: ConsistentPatchProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -236,6 +341,72 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+```
+
+### Tag: package-preview-2025-12-01-preview
+
+These settings apply only when `--tag=package-preview-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-12-01-preview'
+input-file:
+  - preview/2025-12-01-preview/hci.json
+```
+
+### Tag: package-preview-2025-11-01-preview
+
+These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-11-01-preview'
+input-file:
+  - preview/2025-11-01-preview/hci.json
+```
+
+### Tag: package-2025-10-01
+
+These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01'
+input-file:
+  - stable/2025-10-01/arcSettings.json
+  - stable/2025-10-01/clusters.json
+  - stable/2025-10-01/deploymentSettings.json
+  - stable/2025-10-01/edgeDeviceJobs.json
+  - stable/2025-10-01/edgeDevices.json
+  - stable/2025-10-01/extensions.json
+  - stable/2025-10-01/hciCommon.json
+  - stable/2025-10-01/offers.json
+  - ../operations/stable/2025-10-01/operations.json
+  - stable/2025-10-01/publishers.json
+  - stable/2025-10-01/securitySettings.json
+  - stable/2025-10-01/skus.json
+  - stable/2025-10-01/updateRuns.json
+  - stable/2025-10-01/updates.json
+  - stable/2025-10-01/updateSummaries.json
+  - stable/2025-10-01/validatedSolutionRecipes.json
+```
+
+### Tag: package-preview-2025-09-15-preview
+
+These settings apply only when `--tag=package-preview-2025-09-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-15-preview'
+input-file:
+  - preview/2025-09-15-preview/arcSettings.json
+  - preview/2025-09-15-preview/clusters.json
+  - preview/2025-09-15-preview/deploymentSettings.json
+  - preview/2025-09-15-preview/edgeDeviceJobs.json
+  - preview/2025-09-15-preview/edgeDevices.json
+  - preview/2025-09-15-preview/extensions.json
+  - preview/2025-09-15-preview/hciCommon.json
+  - preview/2025-09-15-preview/offers.json
+  - ../operations/preview/2025-09-15-preview/operations.json
+  - preview/2025-09-15-preview/publishers.json
+  - preview/2025-09-15-preview/securitySettings.json
+  - preview/2025-09-15-preview/skus.json
+  - preview/2025-09-15-preview/updateRuns.json
+  - preview/2025-09-15-preview/updates.json
+  - preview/2025-09-15-preview/updateSummaries.json
+  - preview/2025-09-15-preview/validatedSolutionRecipes.json
 ```
 
 ### Tag: package-preview-2025-02-01-preview

@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "myWebAgent1",
+            "type": "Microsoft.Cdn/webAgents",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG1/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+            "location": "WestUs",
+            "properties": {
+              "description": "Primary web agent for content processing",
+              "paths": [
+                {
+                  "type": "Chat",
+                  "path": "/chat"
+                },
+                {
+                  "type": "McpServer",
+                  "path": "/mcp"
+                }
+              ],
+              "profileAgentLinks": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG1/providers/Microsoft.Cdn/profiles/profile1/agents/agent1"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "systemPrompt": "You are a helpful AI assistant for customer support. Please provide accurate and friendly responses."
+            },
+            "tags": {
+              "key1": "value1"
+            }
+          },
+          {
+            "name": "myWebAgent2",
+            "type": "Microsoft.Cdn/webAgents",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG2/providers/Microsoft.Cdn/webAgents/myWebAgent2",
+            "location": "EastUs",
+            "properties": {
+              "description": "Secondary web agent for backup processing",
+              "paths": [
+                {
+                  "type": "Chat",
+                  "path": "/chat/backup"
+                }
+              ],
+              "profileAgentLinks": [],
+              "provisioningState": "Succeeded",
+              "systemPrompt": "You are a backup AI assistant. Handle requests when the primary system is unavailable."
+            },
+            "tags": {
+              "environment": "production"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "WebAgents_ListBySubscription",
+  "title": "List Web Agents in a Subscription"
+}

@@ -18,7 +18,7 @@ options:
     namespace: "Azure.ResourceManager.BotService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-botservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-botservice"
     namespace: "azure.mgmt.botservice"
     generate-test: true
     generate-sample: true
@@ -29,7 +29,7 @@ options:
     service-name: "BotService" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-botservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-botservice"
     typespec-title-map:
       BotServiceClient: "AzureBotService"
     flavor: "azure"

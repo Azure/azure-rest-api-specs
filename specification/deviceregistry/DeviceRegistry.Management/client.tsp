@@ -16,7 +16,7 @@ using Microsoft.DeviceRegistry;
 );
 
 // Python Client configuration
-@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmt", "python");
+@@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmtClient", "python");
 
 // CSharp Client configuration
 @@scope(OperationStatus.get, "!csharp");
@@ -75,7 +75,6 @@ using Microsoft.DeviceRegistry;
   "csharp"
 );
 @@clientName(X509Credentials, "DeviceRegistryX509Credentials", "csharp");
-
 @@alternateType(SchemaRegistryProperties.storageAccountContainerUrl,
   url,
   "csharp"
@@ -89,6 +88,75 @@ using Microsoft.DeviceRegistry;
   url,
   "csharp"
 );
+@@clientName(Namespace, "DeviceRegistryNamespace", "csharp");
+@@clientName(NamespaceProperties,
+  "DeviceRegistryNamespaceProperties",
+  "csharp"
+);
+@@clientName(NamespaceAsset, "DeviceRegistryNamespaceAsset", "csharp");
+@@clientName(NamespaceAssetProperties,
+  "DeviceRegistryNamespaceAssetProperties",
+  "csharp"
+);
+@@clientName(NamespaceDevice, "DeviceRegistryNamespaceDevice", "csharp");
+@@clientName(NamespaceDeviceProperties,
+  "DeviceRegistryNamespaceDeviceProperties",
+  "csharp"
+);
+@@clientName(NamespaceDiscoveredAsset,
+  "DeviceRegistryNamespaceDiscoveredAsset",
+  "csharp"
+);
+@@clientName(NamespaceDiscoveredAssetProperties,
+  "DeviceRegistryNamespaceDiscoveredAssetProperties",
+  "csharp"
+);
+@@clientName(NamespaceDiscoveredDevice,
+  "DeviceRegistryNamespaceDiscoveredDevice",
+  "csharp"
+);
+@@clientName(NamespaceDiscoveredDeviceProperties,
+  "DeviceRegistryNamespaceDiscoveredDeviceProperties",
+  "csharp"
+);
+@@clientName(ErrorDetails, "DeviceRegistryErrorDetails", "csharp");
+@@clientName(NamespaceAssetStatus,
+  "DeviceRegistryNamespaceAssetStatus",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusDataset,
+  "DeviceRegistryNamespaceAssetStatusDataset",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusEvent,
+  "DeviceRegistryNamespaceAssetStatusEvent",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusEventGroup,
+  "DeviceRegistryNamespaceAssetStatusEventGroup",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusManagementAction,
+  "DeviceRegistryNamespaceAssetStatusManagementAction",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusManagementGroup,
+  "DeviceRegistryNamespaceAssetStatusManagementGroup",
+  "csharp"
+);
+@@clientName(NamespaceAssetStatusStream,
+  "DeviceRegistryNamespaceAssetStatusStream",
+  "csharp"
+);
+@@clientName(NamespaceMessageSchemaReference,
+  "DeviceRegistryNamespaceMessageSchemaReference",
+  "csharp"
+);
+@@clientName(StatusConfig, "DeviceRegistryStatusConfig", "csharp");
+@@clientName(StatusError, "DeviceRegistryStatusError", "csharp");
+@@clientName(NamespaceMigrateRequest, "NamespaceMigrateContent", "csharp");
+@@clientName(BillingContainer.etag, "ETag", "csharp");
+@@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
 // JavaScript Client configuration
 @@clientName(Microsoft.DeviceRegistry,

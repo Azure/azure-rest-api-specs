@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "billingAccountId": "12345:6789",
+    "customerId": "5678",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dimensions_ResourceGroup_2019-10-01_2019-10-31",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678/providers/microsoft.CostManagement/dimensions_ResourceGroup_2019-10-01_2019-10-31",
+            "properties": {
+              "description": "Resource group",
+              "category": "ResourceGroup",
+              "data": [],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 377,
+              "usageEnd": "2019-10-31T00:00:00-07:00",
+              "usageStart": "2019-10-01T00:00:00-07:00"
+            }
+          },
+          {
+            "name": "dimensions_ResourceType_2019-10-01_2019-10-31",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678/providers/microsoft.CostManagement/dimensions_ResourceType_2019-10-01_2019-10-31",
+            "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
+              "data": [],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 37,
+              "usageEnd": "2019-10-31T00:00:00-07:00",
+              "usageStart": "2019-10-01T00:00:00-07:00"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Dimensions_List",
+  "title": "CustomerDimensionsList-MCA"
+}

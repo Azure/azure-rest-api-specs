@@ -38,11 +38,11 @@ input-file:
 - stable/2021-07-01/containerregistry.json
 ```
 
-### Tag: package-2019-08
+### Tag: package-2019-08-preview
 
-These settings apply only when `--tag=package-2019-08` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - preview/2019-08-15-preview/containerregistry.json
 # This override adds support for directly passing in the acquired location link (Since it starts with /)
@@ -55,20 +55,20 @@ directive:
         replace( /_url = _url.Replace\("\{nextBlobUuidLink\}", location\);/g, "_url = _url.Replace(location.StartsWith(\"/\") ? \"/{nextBlobUuidLink}\" : \"{nextBlobUuidLink}\", location);")
 ```
 
-### Tag: package-2019-07
+### Tag: package-2019-07-preview
 
-These settings apply only when `--tag=package-2019-07` is specified on the command line.
+These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-07'
+``` yaml $(tag) == 'package-2019-07-preview'
 input-file:
 - preview/2019-07-15-preview/containerregistry.json
 ```
 
-### Tag: package-2018-08
+### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2018-08` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
 - preview/2018-08-10-preview/containerregistry.json
 ```

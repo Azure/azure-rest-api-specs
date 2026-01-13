@@ -12,19 +12,20 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
+    use-read-only-status-schema: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-dataprotection"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dataprotection"
     namespace: "azure.mgmt.dataprotection"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dataprotection"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dataprotection"
     namespace: "com.azure.resourcemanager.dataprotection"
     service-name: "Data Protection" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-dataprotection"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dataprotection"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
@@ -32,7 +33,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/dataprotection"
     emitter-output-dir: "{output-dir}/{service-dir}/armdataprotection"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdataprotection"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdataprotection/v4"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -21,8 +21,10 @@ model MetadataEntity
 
 @armResourceOperations
 interface MetadataEntities {
+  /**
+   * Gets the metadata entity.
+   */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Gets the list of metadata entities.")
   get is ArmResourceRead<
     MetadataEntity,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,

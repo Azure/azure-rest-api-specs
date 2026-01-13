@@ -38,12 +38,15 @@ interface TriageRecommendationOps
         @segment("resiliencyReviews")
         reviewId: string,
       },
-      KeysOf<ResourceNameParameter<
-        Resource = TriageRecommendation,
-        KeyName = "recommendationId",
-        SegmentName = "providers/Microsoft.Advisor/triageRecommendations",
-        NamePattern = ""
-      >>
+      {
+        /**
+         * Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).
+         */
+        @key
+        @path
+        @segment("providers/Microsoft.Advisor/triageRecommendations")
+        recommendationId: string,
+      }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -52,6 +55,7 @@ interface TriageRecommendations {
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
@@ -59,6 +63,7 @@ interface TriageRecommendations {
    * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get list of recommendations for an existing Resiliency Review Id.")
   @segment("providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
   list is TriageRecommendationOps.List<
@@ -83,6 +88,7 @@ interface TriageRecommendations {
    * Approve a triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Approve triage recommendation by id.")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   @action("approve")
   approveTriageRecommendation is TriageRecommendationOps.ActionSync<
@@ -95,6 +101,7 @@ interface TriageRecommendations {
    * Reject an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Reject existing triage recommendation by id.")
   @operationId("triageRecommendations_RejectTriageRecommendation")
   @action("reject")
   rejectTriageRecommendation is TriageRecommendationOps.ActionSync<
@@ -107,6 +114,7 @@ interface TriageRecommendations {
    * Reset an existing triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Reset existing triage recommendation by id.")
   @operationId("triageRecommendations_ResetTriageRecommendation")
   @action("reset")
   resetTriageRecommendation is TriageRecommendationOps.ActionSync<

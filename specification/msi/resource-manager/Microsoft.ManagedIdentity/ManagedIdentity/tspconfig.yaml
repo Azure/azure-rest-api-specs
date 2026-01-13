@@ -12,15 +12,15 @@ options:
     output-file: "{version-status}/{version}/ManagedIdentity.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-msi"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-msi"
     namespace: "azure.mgmt.msi"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-msi"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-msi"
     namespace: "com.azure.resourcemanager.msi"
     service-name: "Msi"
     flavor: azure
@@ -28,7 +28,7 @@ options:
     enable-sync-stack: false
     service-dir: "sdk/msi"
   "@azure-tools/typespec-ts":
-    package-dir: "arm-msi"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-msi"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

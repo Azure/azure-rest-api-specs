@@ -308,14 +308,14 @@ model CloudHsmClusterProperties {
    * An array of Cloud HSM Cluster's HSMs
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["fqdn"])
+  @identifiers(#["fqdn"])
   hsms?: CloudHsmProperties[];
 
   /**
    * List of private endpoint connection resources
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
@@ -623,7 +623,7 @@ model NetworkProfile {
   /**
    * Specifies the list of resource Ids for the network interfaces associated with the dedicated HSM.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterface[];
 }
 
@@ -718,7 +718,7 @@ model OutboundEnvironmentEndpoint {
   /**
    * The endpoints that dedicated hsm service connects to
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpoints?: EndpointDependency[];
 }
 
@@ -734,7 +734,7 @@ model EndpointDependency {
   /**
    * The Ports and Protocols used when connecting to domainName.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpointDetails?: EndpointDetail[];
 }
 

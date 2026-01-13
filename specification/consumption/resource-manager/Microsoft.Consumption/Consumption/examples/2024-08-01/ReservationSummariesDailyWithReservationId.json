@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "$filter": "properties/usageDate ge 2017-10-01 AND properties/usageDate le 2017-11-20",
+    "api-version": "2024-08-01",
+    "grain": "daily",
+    "reservationId": "00000000-0000-0000-0000-000000000000",
+    "reservationOrderId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000_00000000-0000-0000-0000-000000000000_20171001",
+            "type": "Microsoft.Consumption/reservationSummaries",
+            "id": "providers/Microsoft.Capacity/reservationOrders/00000000-0000-0000-0000-000000000000/reservations/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationSummaries/20171001",
+            "properties": {
+              "avgUtilizationPercentage": 0,
+              "kind": "Reservation",
+              "maxUtilizationPercentage": 0,
+              "minUtilizationPercentage": 0,
+              "purchasedQuantity": 0,
+              "remainingQuantity": 0,
+              "reservationId": "00000000-0000-0000-0000-000000000000",
+              "reservationOrderId": "00000000-0000-0000-0000-000000000000",
+              "reservedHours": 0,
+              "skuName": "Standard_D8s_v3",
+              "totalReservedQuantity": 155,
+              "usageDate": "2017-10-01T00:00:00Z",
+              "usedHours": 0,
+              "usedQuantity": 0,
+              "utilizedPercentage": 0
+            },
+            "tags": {
+              "dev": "tools",
+              "env": "newcrp"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ReservationsSummaries_ListByReservationOrderAndReservation",
+  "title": "ReservationSummariesDailyWithReservationId"
+}

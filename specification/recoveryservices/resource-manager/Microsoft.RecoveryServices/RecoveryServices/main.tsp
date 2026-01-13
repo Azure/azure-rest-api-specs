@@ -17,6 +17,7 @@ import "./PrivateLinkResource.tsp";
 import "./Vault.tsp";
 import "./VaultExtendedInfoResource.tsp";
 import "./routes.tsp";
+import "./DeletedVaults.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -41,6 +42,11 @@ enum Versions {
    * The 2025-02-01 API version.
    */
   v2025_02_01: "2025-02-01",
+
+  /**
+   * The 2025-08-01 API version.
+   */
+  v2025_08_01: "2025-08-01",
 }
 
 interface Operations

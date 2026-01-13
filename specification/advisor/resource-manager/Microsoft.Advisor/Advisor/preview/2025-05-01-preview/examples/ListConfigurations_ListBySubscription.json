@@ -1,23 +1,26 @@
 {
   "parameters": {
-    "api-version": "2025-05-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
     "resourceGroup": "resourceGroup",
-    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Advisor/configurations?api-version=2025-05-01-preview&$skipToken=abc123",
         "value": [
           {
-            "name": "default",
-            "type": "Microsoft.Advisor/configurations",
             "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+            "type": "Microsoft.Advisor/configurations",
+            "name": "default",
             "properties": {
+              "lowCpuThreshold": "5",
+              "duration": "7",
+              "exclude": false,
               "digests": [
                 {
                   "name": "digestConfigName",
                   "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                  "frequency": 30,
                   "categories": [
                     "HighAvailability",
                     "Security",
@@ -25,17 +28,14 @@
                     "Cost",
                     "OperationalExcellence"
                   ],
-                  "frequency": 30,
-                  "state": "Active",
-                  "language": "en"
+                  "language": "en",
+                  "state": "Active"
                 }
-              ],
-              "duration": "7",
-              "exclude": false,
-              "lowCpuThreshold": "5"
+              ]
             }
           }
-        ]
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Advisor/configurations?api-version=2025-05-01-preview&$skipToken=abc123"
       }
     }
   },

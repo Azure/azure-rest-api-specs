@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 /**

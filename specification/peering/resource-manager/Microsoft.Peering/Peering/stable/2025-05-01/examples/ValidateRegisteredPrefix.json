@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringName": "peeringName",
+    "registeredPrefixName": "registeredPrefixName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "registeredPrefixName",
+        "type": "Microsoft.Peering/registeredPrefixes",
+        "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredPrefixes/registeredPrefixName",
+        "properties": {
+          "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+          "prefix": "10.22.20.0/24",
+          "prefixValidationState": "Pending",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "RegisteredPrefixes_Validate",
+  "title": "Validate a registered prefix associated with the peering"
+}
