@@ -635,9 +635,9 @@ interface Route {
     {
       ...OperationIdPathParameter;
     },
-    RouteOperation,
+    RouteOperation | (NotFoundResponse & ErrorResponse),
     {},
-    NotFoundResponse & ErrorResponse
+    ErrorResponse
   >;
 
   /**
