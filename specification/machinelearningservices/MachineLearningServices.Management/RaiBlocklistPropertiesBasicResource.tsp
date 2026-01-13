@@ -106,7 +106,9 @@ interface RaiBlocklistPropertiesBasicResources {
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     string[],
-    Response = void
+    Response = void,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 
