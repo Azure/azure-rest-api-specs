@@ -37,8 +37,6 @@ model `search-management-request-options` {
 op servicesCheckNameAvailabilityCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  name: string,
   ...Azure.ResourceManager.Legacy.Provider,
 
   /**
