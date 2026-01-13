@@ -14,15 +14,15 @@ using Microsoft.AzureLargeInstance;
   "LargeInstanceHardwareTypeName",
   "csharp"
 );
-// @@clientName(AzureLargeInstanceHardwareTypeNamesEnum."Cisco_UCS",
-//   "CiscoUcs",
-//   "csharp"
-// );
-// @@clientName(AzureLargeInstanceHardwareTypeNamesEnum."HPE", "Hpe", "csharp");
-// @@clientName(AzureLargeInstanceHardwareTypeNamesEnum."SDFLEX",
-//   "SDFlex",
-//   "csharp"
-// );
+@@clientName(AzureLargeInstanceHardwareTypeNamesEnum.Cisco_UCS,
+  "CiscoUcs",
+  "csharp"
+);
+@@clientName(AzureLargeInstanceHardwareTypeNamesEnum.HPE, "Hpe", "csharp");
+@@clientName(AzureLargeInstanceHardwareTypeNamesEnum.SDFLEX,
+  "Sdflex",
+  "csharp"
+);
 @@clientName(AzureLargeInstancePowerStateEnum,
   "LargeInstancePowerState",
   "csharp"
@@ -35,14 +35,21 @@ using Microsoft.AzureLargeInstance;
   "LargeInstanceSizeName",
   "csharp"
 );
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S72m, "S72m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S144m, "S144m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S192m, "S192m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S224m, "S224m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S384m, "S384m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S448m, "S448m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S576m, "S576m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S672m, "S672m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S768m, "S768m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S896m, "S896m", "csharp");
-// @@clientName(AzureLargeInstanceSizeNamesEnum.S960m, "S960m", "csharp");
+@@clientName(Disk, "LargeInstanceDisk", "csharp");
+@@clientName(ForceState, "LargeInstanceForceState", "csharp");
+@@clientName(HardwareProfile, "LargeInstanceHardwareProfile", "csharp");
+@@clientName(IpAddress, "LargeInstanceIPAddress", "csharp");
+@@clientName(NetworkProfile, "LargeInstanceNetworkProfile", "csharp");
+@@clientName(OsProfile, "LargeInstanceOSProfile", "csharp");
+@@clientName(StorageBillingProperties,
+  "LargeInstanceStorageBillingProperties",
+  "csharp"
+);
+@@clientName(StorageProfile, "LargeInstanceStorageProfile", "csharp");
+@@clientName(StorageProperties, "LargeInstanceStorageProperties", "csharp");
+@@clientName(ProvisioningState,
+  "LargeStorageInstanceProvisioningState",
+  "csharp"
+);
+@@clientName(AzureLargeStorageInstanceTagsUpdate.tags, "Tags", "csharp");
+@@clientName(ForceState.forceState, "ForceState ", "csharp");

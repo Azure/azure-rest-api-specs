@@ -17,13 +17,13 @@ union AzureLargeInstanceHardwareTypeNamesEnum {
   string,
 
   @doc("Hardware type of UCS from vendor Cisco")
-  "Cisco_UCS",
+  Cisco_UCS: "Cisco_UCS",
 
   @doc("Hardware type of HPE from vendor Hewlett Packard Enterprise")
-  "HPE",
+  HPE: "HPE",
 
   @doc("Hardware type of SDFLEX")
-  "SDFLEX",
+  SDFLEX: "SDFLEX",
 }
 
 @doc("Enum of available model types (each of which have their own storage / memory sizes) for an Azure Large Instance type. See https://learn.microsoft.com/azure/sap/large-instances/hana-available-skus")
