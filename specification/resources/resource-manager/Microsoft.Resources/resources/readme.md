@@ -89,8 +89,8 @@ These settings apply only when `--tag=package-resources-2025-08-preview` is spec
 
 ``` yaml $(tag) == 'package-resources-2025-08-preview'
 input-file:
-- Microsoft.Resources/stable/2021-04-01/resources.json
-- Microsoft.Resources/preview/2025-08-01-preview/batch.json
+- stable/2021-04-01/resources.json
+- preview/2025-08-01-preview/batch.json
 ```
 
 ### Tag: package-resources-2022-09
