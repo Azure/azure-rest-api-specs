@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "workspaceName": "myWorkspace",
+    "definitionName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Dashboard/grafana/GrafanaDefinitions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Dashboard/grafana/myWorkspace/GrafanaDefinitions/default",
+        "properties": {
+          "serializedData": "{\"dashboard\":{\"id\":null,\"title\":\"Azure Monitor Dashboard\",\"tags\":[\"azure-monitor\"],\"timezone\":\"browser\",\"panels\":[{\"id\":1,\"title\":\"CPU Usage\",\"type\":\"graph\",\"targets\":[{\"expr\":\"avg(rate(cpu_usage_total[5m]))\",\"legendFormat\":\"CPU Usage\"}],\"gridPos\":{\"h\":9,\"w\":12,\"x\":0,\"y\":0}}],\"time\":{\"from\":\"now-6h\",\"to\":\"now\"},\"refresh\":\"30s\"}}"
+        }
+      }
+    }
+  },
+  "operationId": "GrafanaDefinitions_Get",
+  "title": "GrafanaDefinition_Get"
+}

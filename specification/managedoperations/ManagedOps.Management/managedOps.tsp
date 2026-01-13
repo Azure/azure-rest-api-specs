@@ -58,7 +58,6 @@ model ServiceInformation {
   changeTrackingAndInventory?: ChangeTrackingInformation;
 
   @doc("Azure Monitor Insights service information.")
-  @added(Versions.v2025_07_28_preview)
   @visibility(Lifecycle.Read)
   azureMonitorInsights?: AzureMonitorInformation;
 
@@ -89,6 +88,7 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
 alias enablementState =
   | "Enabled"
   | "InProgress"
@@ -110,7 +110,6 @@ model ChangeTrackingInformation {
 }
 
 @doc("Azure Monitor Insights service information.")
-@added(Versions.v2025_07_28_preview)
 model AzureMonitorInformation {
   @doc("ID of Data Collection Rule (DCR) associated with this service.")
   dcrId: armResourceIdentifier<[
@@ -163,7 +162,6 @@ model DesiredConfiguration {
   changeTrackingAndInventory: ChangeTrackingConfiguration;
 
   @doc("Configuration for the Azure Monitor Insights service.")
-  @added(Versions.v2025_07_28_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   azureMonitorInsights: AzureMonitorConfiguration;
 
@@ -184,6 +182,7 @@ model DesiredConfiguration {
   defenderCspm?: desiredEnablementState;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
 alias desiredEnablementState = "Enable" | "Disable" | string;
 
 @doc("Configuration for the Change Tracking and Inventory service.")
@@ -197,7 +196,6 @@ model ChangeTrackingConfiguration {
 }
 
 @doc("Configuration for the Azure Monitor Insights service.")
-@added(Versions.v2025_07_28_preview)
 model AzureMonitorConfiguration {
   @doc("Azure monitor workspace resource ID used by the service.")
   azureMonitorWorkspaceId: armResourceIdentifier<[
@@ -230,7 +228,6 @@ interface ManagedOps {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ManagedOp>;
 
   @doc("List all ManagedOps instances in the subscription.")
-  @added(Versions.v2025_07_28_preview)
   list is ArmListBySubscription<ManagedOp>;
 
   @doc("Updates the ManagedOps instance with the supplied fields.")

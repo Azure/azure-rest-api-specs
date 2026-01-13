@@ -55,6 +55,7 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
   @path
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
   ...Legacy.ManagedServiceIdentityV4Property;
 }
 
