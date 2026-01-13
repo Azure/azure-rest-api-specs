@@ -82,6 +82,15 @@ directive:
     reason: Common type operations api schema is not compatible with existing API spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
 ```
 
+### Tag: package-2026-01-preview
+
+These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01-preview'
+input-file:
+- preview/2026-01-01-preview/servicefabricmanagedclusters.json
+```
+
 ### Tag: package-2025-10-preview
 
 These settings apply only when `--tag=package-2025-10-preview` is specified on the command line.
