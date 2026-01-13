@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: ResourceManagementClient
 description: ResourceManagement Client
 openapi-type: arm
-tag: package-resources-2025-04
+tag: package-resources-2025-08
 ```
 
 ### Tag: package-resources-2023-07
@@ -81,6 +81,16 @@ These settings apply only when `--tag=package-resources-2025-04` is specified on
 ``` yaml $(tag) == 'package-resources-2025-04'
 input-file:
   - stable/2025-04-01/resources.json
+```
+
+### Tag: package-resources-2025-08-preview
+
+These settings apply only when `--tag=package-resources-2025-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2025-08-preview'
+input-file:
+- Microsoft.Resources/stable/2021-04-01/resources.json
+- Microsoft.Resources/preview/2025-08-01-preview/batch.json
 ```
 
 ### Tag: package-resources-2022-09
