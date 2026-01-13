@@ -1,0 +1,42 @@
+{
+  "operationId": "GetPartitionBackupList",
+  "description": "This example shows how to get the latest backup for the specified partition.",
+  "parameters": {
+    "api-version": "6.4",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "Latest": true
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "BackupId": "be06a49c-be67-4eb1-a602-b983605be862",
+            "BackupChainId": "be06a49c-be67-4eb1-a602-b983605be862",
+            "ApplicationName": "fabric:/CalcApp",
+            "ServiceManifestVersion": "1.0.0",
+            "ServiceName": "fabric:/CalcApp/CalcService",
+            "PartitionInformation": {
+              "LowKey": "-9223372036854775808",
+              "HighKey": "9223372036854775807",
+              "ServicePartitionKind": "Int64Range",
+              "Id": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d"
+            },
+            "BackupLocation": "CalcApp\\CalcService\\1daae3f5-7fd6-42e9-b1ba-8c05f873994d\\2018-01-02 08.59.53.zip",
+            "BackupType": "Full",
+            "EpochOfLastBackupRecord": {
+              "DataLossVersion": "131462452931584510",
+              "ConfigurationVersion": "8589934592"
+            },
+            "LsnOfLastBackupRecord": "639",
+            "CreationTimeUtc": "2018-01-02T08:59:53Z",
+            "FailureError": null
+          }
+        ]
+      }
+    }
+  }
+}

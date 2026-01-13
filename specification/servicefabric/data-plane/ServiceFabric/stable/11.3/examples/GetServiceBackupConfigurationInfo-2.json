@@ -1,0 +1,32 @@
+{
+  "operationId": "GetServiceBackupConfigurationInfo",
+  "description": "This example shows how to get list of backup configuration for this service and partitions under this service. The number of results in a page are limited to maximum of two using the MaxResult parameter. This example uses the ContinuationToken parameter. The value of this parameter is provided from the previous query; in this case the example shown above. The response contains the remaining results and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.4",
+    "serviceId": "CalcApp/CalcService",
+    "MaxResults": 2,
+    "ContinuationToken": "fabric:/CalcApp/CalcService#1daae3f5-7fd6-42e9-b1ba-8c05f873994d"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+      },
+      "body": {
+        "ContinuationToken": "",
+        "Items": [ 
+          {
+            "Kind": "Partition",
+            "PolicyName": "BackupPolicy1",
+            "PolicyInheritedFrom": "Application",
+            "ServiceName": "fabric:/CalcApp/CalcService",
+            "PartitionId": "7216486c-1ee9-4b00-99b2-92b26fcb07f6",
+            "SuspensionInfo": {
+              "IsSuspended": true,
+              "SuspensionInheritedFrom": "Partition"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

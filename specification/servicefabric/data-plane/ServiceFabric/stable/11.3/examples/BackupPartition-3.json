@@ -1,0 +1,20 @@
+{
+  "operationId": "BackupPartition",
+  "description": "This example shows how to trigger backup of a partition now, and save the backup to a specific file share accessible from all cluster nodes.",
+  "parameters": {
+    "api-version": "6.4",
+    "partitionId": "1daae3f5-7fd6-42e9-b1ba-8c05f873994d",
+    "BackupPartitionDescription": {
+      "BackupStorage": {
+        "StorageKind": "FileShare",
+        "Path": "\\\\myshare\\backupshare",
+        "PrimaryUserName": "mydomain\\backupaccount",
+        "PrimaryPassword": "abcd1234"
+      }
+    }  
+  },
+  "responses": {
+    "202": {
+    }
+  }
+}
