@@ -157,6 +157,8 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContent() {
+    this.#printMemory("Swagger.#getContent()");
+
     if (this.#content === undefined) {
       const path = this.#path;
 
@@ -167,6 +169,18 @@ export class Swagger {
     }
 
     return this.#content;
+  }
+
+  /**
+   * @param {string} label
+   */
+  #printMemory(label) {
+    const m = process.memoryUsage();
+    console.log(`\n=== ${label} ===`);
+    console.log(`rss:       ${(m.rss / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`heapTotal: ${(m.heapTotal / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`heapUsed:  ${(m.heapUsed / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`external:  ${(m.external / 1024 / 1024).toFixed(2)} MB`);
   }
 
   /**
