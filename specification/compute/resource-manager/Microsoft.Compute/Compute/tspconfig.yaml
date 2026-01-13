@@ -17,6 +17,15 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute"
+    namespace: "com.azure.resourcemanager.compute"
+    service-name: "Compute"
+    flavor: azure
+    enable-sync-stack: false
+    premium: true
+    client-side-validations: true
 
 linter:
   extends:
