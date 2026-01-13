@@ -128,7 +128,9 @@ interface FreeServicesOperations {
 
 @@doc(FreeServices.name, "Name of the free service");
 @@doc(FreeServices.properties, "Free services properties");
-@@doc(FreeServicesOperations.create::parameters.resource, "Free services create request");
+@@doc(FreeServicesOperations.create::parameters.resource,
+  "Free services create request"
+);
 @@doc(FreeServicesOperations.update::parameters.properties,
   "Free services patch request"
 );
