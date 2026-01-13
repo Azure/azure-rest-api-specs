@@ -10,21 +10,13 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "host": "management.azure.com",
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -53,9 +45,7 @@
     "/providers/Microsoft.StorageDiscovery/operations": {
       "get": {
         "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "description": "List the operations for the provider",
         "parameters": [
           {
@@ -89,9 +79,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces": {
       "get": {
         "operationId": "StorageDiscoveryWorkspaces_ListBySubscription",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "List StorageDiscoveryWorkspace resources by subscription ID",
         "parameters": [
           {
@@ -128,9 +116,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports": {
       "get": {
         "operationId": "Report_ListBySubscription",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "description": "List ReportResource resources by subscription ID",
         "parameters": [
           {
@@ -177,9 +163,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces": {
       "get": {
         "operationId": "StorageDiscoveryWorkspaces_ListByResourceGroup",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "List StorageDiscoveryWorkspace resources by resource group",
         "parameters": [
           {
@@ -219,9 +203,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}": {
       "get": {
         "operationId": "StorageDiscoveryWorkspaces_Get",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "Get a StorageDiscoveryWorkspace",
         "parameters": [
           {
@@ -266,9 +248,7 @@
       },
       "put": {
         "operationId": "StorageDiscoveryWorkspaces_CreateOrUpdate",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "Create a StorageDiscoveryWorkspace",
         "parameters": [
           {
@@ -328,9 +308,7 @@
       },
       "patch": {
         "operationId": "StorageDiscoveryWorkspaces_Update",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "Update a StorageDiscoveryWorkspace",
         "parameters": [
           {
@@ -384,9 +362,7 @@
       },
       "delete": {
         "operationId": "StorageDiscoveryWorkspaces_Delete",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "Delete a StorageDiscoveryWorkspace",
         "parameters": [
           {
@@ -433,9 +409,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/report": {
       "post": {
         "operationId": "StorageDiscoveryWorkspaces_Report",
-        "tags": [
-          "StorageDiscoveryWorkspaces"
-        ],
+        "tags": ["StorageDiscoveryWorkspaces"],
         "description": "A long-running resource action.",
         "parameters": [
           {
@@ -509,9 +483,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports": {
       "get": {
         "operationId": "Report_ListByResourceGroup",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "description": "List ReportResource resources by StorageDiscoveryWorkspace",
         "parameters": [
           {
@@ -561,9 +533,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}": {
       "get": {
         "operationId": "Report_Get",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "description": "Get a ReportResource",
         "parameters": [
           {
@@ -618,9 +588,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/{storageDiscoveryWorkspaceName}/reports/{discoveryResourceName}/generateReport": {
       "post": {
         "operationId": "Report_GenerateReport",
-        "tags": [
-          "Report"
-        ],
+        "tags": ["Report"],
         "description": "A long-running resource action.",
         "parameters": [
           {
@@ -704,11 +672,7 @@
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
+      "enum": ["Succeeded", "Failed", "Canceled"],
       "x-ms-enum": {
         "name": "ResourceProvisioningState",
         "modelAsString": true,
@@ -744,9 +708,7 @@
           }
         }
       },
-      "required": [
-        "queries"
-      ]
+      "required": ["queries"]
     },
     "GetReportResult": {
       "type": "object",
@@ -761,9 +723,7 @@
           "x-ms-identifiers": []
         }
       },
-      "required": [
-        "results"
-      ]
+      "required": ["results"]
     },
     "ReportProperties": {
       "type": "object",
@@ -808,9 +768,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "ReportResultColumn": {
       "type": "object",
@@ -825,10 +783,7 @@
           "description": "ADX type of the column"
         }
       },
-      "required": [
-        "name",
-        "type"
-      ]
+      "required": ["name", "type"]
     },
     "ReportResultSet": {
       "type": "object",
@@ -862,9 +817,7 @@
     "StorageDiscoveryResourceType": {
       "type": "string",
       "description": "Storage Discovery Resource Type",
-      "enum": [
-        "Microsoft.Storage/storageAccounts"
-      ],
+      "enum": ["Microsoft.Storage/storageAccounts"],
       "x-ms-enum": {
         "name": "StorageDiscoveryResourceType",
         "modelAsString": true,
@@ -910,18 +863,12 @@
           }
         }
       },
-      "required": [
-        "displayName",
-        "resourceTypes"
-      ]
+      "required": ["displayName", "resourceTypes"]
     },
     "StorageDiscoverySku": {
       "type": "string",
       "description": "Storage Discovery Sku",
-      "enum": [
-        "Standard",
-        "Free"
-      ],
+      "enum": ["Standard", "Free"],
       "x-ms-enum": {
         "name": "StorageDiscoverySku",
         "modelAsString": true,
@@ -975,9 +922,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "required": [
-        "value"
-      ]
+      "required": ["value"]
     },
     "StorageDiscoveryWorkspaceProperties": {
       "type": "object",
@@ -987,10 +932,7 @@
           "type": "string",
           "description": "The storage discovery sku",
           "default": "Standard",
-          "enum": [
-            "Standard",
-            "Free"
-          ],
+          "enum": ["Standard", "Free"],
           "x-ms-enum": {
             "name": "StorageDiscoverySku",
             "modelAsString": true,
@@ -1023,11 +965,7 @@
               "allowedResources": [
                 {
                   "type": "Microsoft.Storage/storageAccounts",
-                  "scopes": [
-                    "Tenant",
-                    "Subscription",
-                    "ResourceGroup"
-                  ]
+                  "scopes": ["Tenant", "Subscription", "ResourceGroup"]
                 }
               ]
             }
@@ -1039,9 +977,7 @@
           "items": {
             "$ref": "#/definitions/StorageDiscoveryScope"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": ["displayName"]
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1049,10 +985,7 @@
           "readOnly": true
         }
       },
-      "required": [
-        "workspaceRoots",
-        "scopes"
-      ]
+      "required": ["workspaceRoots", "scopes"]
     },
     "StorageDiscoveryWorkspacePropertiesUpdate": {
       "type": "object",
@@ -1077,11 +1010,7 @@
               "allowedResources": [
                 {
                   "type": "Microsoft.Storage/storageAccounts",
-                  "scopes": [
-                    "Tenant",
-                    "Subscription",
-                    "ResourceGroup"
-                  ]
+                  "scopes": ["Tenant", "Subscription", "ResourceGroup"]
                 }
               ]
             }
@@ -1093,9 +1022,7 @@
           "items": {
             "$ref": "#/definitions/StorageDiscoveryScope"
           },
-          "x-ms-identifiers": [
-            "displayName"
-          ]
+          "x-ms-identifiers": ["displayName"]
         }
       }
     },

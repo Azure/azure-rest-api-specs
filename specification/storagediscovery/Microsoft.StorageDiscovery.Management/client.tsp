@@ -15,6 +15,15 @@ using Microsoft.StorageDiscovery;
 @@scope(Report.listByResourceGroup, "!(python,javascript,go,java,csharp)");
 @@scope(Report.listBySubscription, "!(python,javascript,go,java,csharp)");
 
+@@clientName(Microsoft.StorageDiscovery,
+  "StorageDiscoveryMgmtClient",
+  "python"
+);
+
+@@clientName(Azure.ResourceManager.ResourceProvisioningState,
+  "StorageDiscoveryProvisioningState",
+  "csharp"
+);
 @@clientName(StorageDiscoveryResourceType,
   "StorageDiscoveryResourceKind",
   "csharp"
