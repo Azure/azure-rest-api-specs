@@ -112,20 +112,6 @@ export class Swagger {
    */
   #content;
 
-  /**
-   * Content of swagger file, represented as an untyped JSON object
-   *
-   *  @type {unknown | undefined}
-   */
-  #contentJSON;
-
-  /**
-   * Content of swagger file, represented as a typed object
-   *
-   * @type {SwaggerObject | undefined}
-   * */
-  #contentObject;
-
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
 
@@ -173,7 +159,7 @@ export class Swagger {
     if (this.#content === undefined) {
       const path = this.#path;
 
-      this.#content = await this.#wrapError(
+      return await this.#wrapError(
         async () => await readFile(path, { encoding: "utf8" }),
         "Failed to read file for swagger",
       );
@@ -187,16 +173,12 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContentJSON() {
-    if (this.#contentJSON === undefined) {
-      const content = await this.#getContent();
+    const content = await this.#getContent();
 
-      this.#contentJSON = await this.#wrapError(
-        () => /** @type {unknown} */ (JSON.parse(content)),
-        "Failed to parse JSON for swagger",
-      );
-    }
-
-    return this.#contentJSON;
+    return await this.#wrapError(
+      () => /** @type {unknown} */ (JSON.parse(content)),
+      "Failed to parse JSON for swagger",
+    );
   }
 
   /**
@@ -204,16 +186,12 @@ export class Swagger {
    * @throws {SpecModelError}
    */
   async #getContentObject() {
-    if (this.#contentObject === undefined) {
-      const contentJSON = await this.#getContentJSON();
+    const contentJSON = await this.#getContentJSON();
 
-      this.#contentObject = await this.#wrapError(
-        () => swaggerSchema.parse(contentJSON),
-        "Failed to parse schema for swagger",
-      );
-    }
-
-    return this.#contentObject;
+    return await this.#wrapError(
+      () => swaggerSchema.parse(contentJSON),
+      "Failed to parse schema for swagger",
+    );
   }
 
   /**
