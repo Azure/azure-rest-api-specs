@@ -1,6 +1,7 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { kebabCase } from "change-case";
-import { marked } from "marked";
+import { marked, Tokens } from "marked";
+import { inspect } from "util";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -88,9 +89,9 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-  } catch (e: any) {
+  } catch (e) {
     // TODO: Retry? Fail ungracefully?
-    console.log(`GET ${docUrl} failed with ${e.message} .`);
+    console.log(`GET ${docUrl} failed with ${inspect(e)}.`);
     rpcInfoCache.set(ruleName, rpcRules);
     return rpcRules;
   }
@@ -101,13 +102,13 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
     const token = tokens[i];
     if (
       token.type === "heading" &&
-      token.depth >= 1 &&
-      token.text.trim().toLowerCase() === "related arm guideline code"
+      (token as Tokens.Heading).depth >= 1 &&
+      (token as Tokens.Heading).text.trim().toLowerCase() === "related arm guideline code"
     ) {
       // The next token should be a list
       const next = tokens[i + 1];
-      if (next && next.type === "list" && Array.isArray(next.items)) {
-        for (const item of next.items) {
+      if (next && next.type === "list") {
+        for (const item of (next as Tokens.List).items) {
           // item.text may contain comma-separated codes
           if (typeof item.text === "string") {
             rpcRules.push(...item.text.split(",").map((c: string) => c.trim()));
