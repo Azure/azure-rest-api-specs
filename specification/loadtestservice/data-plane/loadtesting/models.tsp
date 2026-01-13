@@ -936,7 +936,6 @@ model TestRunInsights {
   columns?: TestRunInsightColumn[];
 
   @doc("The rows of the insights.")
-  @visibility(Lifecycle.Read)
   rows?: Record<Record<string>>;
 
   @doc("The version of the insights.")
