@@ -20,7 +20,7 @@ using Microsoft.AzureLargeInstance;
 );
 @@clientName(AzureLargeInstanceHardwareTypeNamesEnum.HPE, "Hpe", "csharp");
 @@clientName(AzureLargeInstanceHardwareTypeNamesEnum.SDFLEX,
-  "Sdflex",
+  "SDFlex",
   "csharp"
 );
 @@clientName(AzureLargeInstancePowerStateEnum,
