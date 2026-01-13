@@ -364,7 +364,9 @@
             "GcpProject",
             "GithubScope",
             "AzureDevOpsScope",
-            "GitlabScope"
+            "GitlabScope",
+            "DockerHubOrganization",
+            "JFrogArtifactory"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -619,6 +621,84 @@
       ],
       "properties": {}
     },
+    "DockerHubEnvironmentData": {
+      "type": "object",
+      "description": "The Docker Hub connector environment data",
+      "x-ms-discriminator-value": "DockerHubOrganization",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "authentication": {
+          "type": "object",
+          "description": "The Docker Hub organization authentication details",
+          "$ref": "#/definitions/Authentication"
+        },
+        "scanInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Scan interval in hours (value should be between 1-hour to 24-hours)"
+        }
+      }
+    },
+    "Authentication": {
+      "type": "object",
+      "description": "The environment authentication details",
+      "discriminator": "authenticationType",
+      "required": ["authenticationType"],
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "The authentication type",
+          "enum": ["AccessToken"],
+          "x-ms-enum": {
+            "name": "authenticationType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccessTokenAuthentication": {
+      "type": "object",
+      "description": "The environment authentication details",
+      "x-ms-discriminator-value": "AccessToken",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Authentication"
+        }
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user name that will be used while authenticating with the onboarded environment"
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "The access token that will be used while authenticating with the onboarded environment"
+        }
+      }
+    },
+    "JFrogEnvironmentData": {
+      "type": "object",
+      "description": "The JFrog Artifactory connector environment data",
+      "x-ms-discriminator-value": "JFrogArtifactory",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {
+        "scanInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scan interval in hours (value should be between 1-hour to 24-hours)",
+          "minimum": 1,
+          "maximum": 24
+        }
+      }
+    },
     "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
@@ -641,7 +721,13 @@
             "DefenderForDatabasesGcp",
             "DefenderCspmAws",
             "DefenderCspmGcp",
-            "CspmMonitorGitLab"
+            "CspmMonitorGitLab",
+            "CspmMonitorDockerHub",
+            "DefenderForContainersDockerHub",
+            "DefenderCspmDockerHub",
+            "CspmMonitorJFrog",
+            "DefenderForContainersJFrog",
+            "DefenderCspmJFrog"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -1438,6 +1524,81 @@
         }
       ],
       "properties": {}
+    },
+    "cspmMonitorDockerHubOffering": {
+      "type": "object",
+      "description": "The CSPM (Cloud security posture management) monitoring for Docker Hub offering",
+      "x-ms-discriminator-value": "CspmMonitorDockerHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderForContainersDockerHubOffering": {
+      "type": "object",
+      "description": "The Defender for containers Docker Hub offering configurations",
+      "x-ms-discriminator-value": "DefenderForContainersDockerHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderCspmDockerHubOffering": {
+      "type": "object",
+      "description": "The Defender for CSPM Docker Hub offering configurations",
+      "x-ms-discriminator-value": "DefenderCspmDockerHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "cspmMonitorJFrogOffering": {
+      "type": "object",
+      "description": "The CSPM (Cloud security posture management) monitoring for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "CspmMonitorJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ]
+    },
+    "defenderForContainersJFrogOffering": {
+      "type": "object",
+      "description": "The Defender for Containers for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "DefenderForContainersJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ]
+    },
+    "defenderCspmJFrogOffering": {
+      "type": "object",
+      "description": "The CSPM P1 for JFrog Artifactory offering",
+      "x-ms-discriminator-value": "DefenderCspmJFrog",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {
+        "mdcContainersImageAssessment": {
+          "type": "object",
+          "description": "The Microsoft Defender Container image assessment configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender container image assessment enabled"
+            }
+          }
+        }
+      }
     },
     "vmScannersBase": {
       "type": "object",
