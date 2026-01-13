@@ -4,20 +4,20 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-import "./common/service.tsp";
+import "./src/common/service.tsp";
 
-import "./connections/routes.tsp";
-import "./datasets/routes.tsp";
-import "./indexes/routes.tsp";
-import "./deployments/routes.tsp";
-import "./red-teams/routes.tsp";
-import "./evaluationrules/routes.tsp";
-import "./evaluation_taxonomies/routes.tsp";
-import "./evaluators/routes.tsp";
-import "./insights/routes.tsp";
-import "./schedules/routes.tsp";
-import "./agents/routes.tsp";
-import "./memory_stores/routes.tsp";
+import "./src/connections/routes.tsp";
+import "./src/datasets/routes.tsp";
+import "./src/indexes/routes.tsp";
+import "./src/deployments/routes.tsp";
+import "./src/red-teams/routes.tsp";
+import "./src/evaluationrules/routes.tsp";
+import "./src/evaluation_taxonomies/routes.tsp";
+import "./src/evaluators/routes.tsp";
+import "./src/insights/routes.tsp";
+import "./src/schedules/routes.tsp";
+import "./src/agents/routes.tsp";
+import "./src/memory_stores/routes.tsp";
 
 import "@azure-tools/typespec-client-generator-core";
 
