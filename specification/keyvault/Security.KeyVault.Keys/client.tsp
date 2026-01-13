@@ -587,3 +587,6 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKeyEncryptionAlgorithm, "EncryptionAlgorithm", "rust");
 @@clientName(JsonWebKeyCurveName, "CurveName", "rust");
 @@clientName(JsonWebKeySignatureAlgorithm, "SignatureAlgorithm", "rust");
+
+// Python configuration
+@@clientName(JsonWebKey, "NewJsonWebKey", "python");
