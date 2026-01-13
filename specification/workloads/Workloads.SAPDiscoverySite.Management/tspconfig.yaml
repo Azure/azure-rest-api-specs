@@ -22,6 +22,15 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-migrationdiscoverysap"
+    service-dir: "sdk/migrationdiscoverysap"
+    namespace: "com.azure.resourcemanager.migrationdiscoverysap"
+    service-name: "Migration Discovery Sap"
+    flavor: "azure"
+    rename-model:
+      SAPInstanceTagsUpdate: SapInstanceTagsUpdate
+      SAPDiscoverySiteTagsUpdate: SapDiscoverySiteTagsUpdate
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/migrationdiscovery"
     emitter-output-dir: "{output-dir}/{service-dir}/armmigrationdiscovery"
