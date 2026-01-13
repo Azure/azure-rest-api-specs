@@ -709,5 +709,6 @@ model UserMetricsProperties {
   /**
    * The key returned by the User Metrics operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: If this is a value that should be kept private, mark it with the @secret decorator"
   key?: string;
 }

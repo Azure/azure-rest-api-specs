@@ -11,13 +11,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/dynatrace.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: false
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Dynatrace"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dynatrace"
     package-dir: "azure-mgmt-dynatrace"
@@ -33,7 +29,6 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-dynatrace"
     package-dir: "arm-dynatrace"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -48,10 +43,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-name: "Azure.ResourceManager.Dynatrace"
-    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

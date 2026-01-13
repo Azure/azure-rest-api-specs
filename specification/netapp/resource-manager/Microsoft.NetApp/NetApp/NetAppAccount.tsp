@@ -23,6 +23,7 @@ model NetAppAccount
     SegmentName = "netAppAccounts",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,127}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
@@ -82,12 +83,23 @@ model AccountProperties {
    * LDAP Configuration for the account.
    */
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_08_01_preview)
+  @removed(Versions.v2025_08_01)
+  @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_09_01)
   ldapConfiguration?: LdapConfiguration;
 }
 
 /**
  * LDAP configuration
  */
+@added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_09_01)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain

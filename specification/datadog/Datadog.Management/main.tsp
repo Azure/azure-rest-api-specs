@@ -41,6 +41,11 @@ enum Versions {
    * The 2025-06-11 API version.
    */
   v2025_06_11: "2025-06-11",
+
+  /**
+   * The 2025-11-03-preview API version.
+   */
+  v2025_11_03_preview: "2025-11-03-preview",
 }
 
 /**

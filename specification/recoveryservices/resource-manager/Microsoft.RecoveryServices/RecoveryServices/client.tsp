@@ -172,3 +172,7 @@ namespace Microsoft.RecoveryServices;
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "java");
 @@clientName(DNSZone, "DnsZone", "java");
 @@clientName(DNSZoneResponse, "DnsZoneResponse", "java");
+@@clientName(ResourceCertificateAndAcsDetails.globalAcsHostName,
+  "globalAcsHostname",
+  "java"
+);
