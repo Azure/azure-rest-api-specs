@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * Defines the properties of an Experiment
  */
-@parentResource(Profile)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(Profile)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model Experiment extends Resource {
   properties?: ExperimentProperties;
 
@@ -40,8 +40,8 @@ interface Experiments {
   /**
    * Creates or updates an Experiment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates or updates an Experiment")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Experiment,
@@ -59,13 +59,14 @@ interface Experiments {
   /**
    * Updates an Experiment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates an Experiment by Experiment id")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Experiment,
     PatchModel = ExperimentUpdateModel,
-    Response = ArmResponse<Experiment> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Experiment> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Experiment> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Experiment;
     }),
@@ -75,7 +76,7 @@ interface Experiments {
   /**
    * Deletes an Experiment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Deletes an Experiment")
   delete is ArmResourceDeleteWithoutOkAsync<
     Experiment,
@@ -96,7 +97,7 @@ interface Experiments {
   /**
    * Gets a Latency Scorecard for a given Experiment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Reports_GetLatencyScorecards")
   @get
   @action("LatencyScorecard")
@@ -109,8 +110,8 @@ interface Experiments {
       /**
        * The end DateTime of the Latency Scorecard in UTC
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("endDateTimeUTC")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       endDateTimeUTC?: string;
 
       /**
@@ -131,7 +132,7 @@ interface Experiments {
   /**
    * Gets a Timeseries for a given Experiment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a Timeseries for a given Experiment")
   @operationId("Reports_GetTimeseries")
   @get
@@ -144,15 +145,15 @@ interface Experiments {
       /**
        * The start DateTime of the Timeseries in UTC
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("startDateTimeUTC")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       startDateTimeUTC: utcDateTime;
 
       /**
        * The end DateTime of the Timeseries in UTC
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @query("endDateTimeUTC")
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       endDateTimeUTC: utcDateTime;
 
       /**

@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * Defines an Network Experiment Profile and lists of Experiments
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model Profile extends ResourcewithSettableName {
   properties?: ProfileProperties;
 
@@ -30,7 +30,7 @@ model Profile extends ResourcewithSettableName {
   /**
    * Gets a unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -39,7 +39,7 @@ interface Profiles {
   /**
    * Gets an NetworkExperiment Profile by ProfileName
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkExperimentProfiles_Get")
   @summary("Gets an NetworkExperiment Profile by ProfileName")
   get is ArmResourceRead<Profile, Error = ErrorResponse>;
@@ -47,9 +47,9 @@ interface Profiles {
   /**
    * Creates an NetworkExperiment Profile
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkExperimentProfiles_CreateOrUpdate")
   @summary("Creates an NetworkExperiment Profile")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -68,15 +68,16 @@ interface Profiles {
   /**
    * Updates an NetworkExperimentProfiles
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkExperimentProfiles_Update")
   @summary("Updates an NetworkExperimentProfiles by NetworkExperimentProfile name")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Profile,
     PatchModel = ProfileUpdateModel,
-    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Profile> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Profile> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: Profile;
     }),
@@ -86,8 +87,8 @@ interface Profiles {
   /**
    * Deletes an NetworkExperiment Profile by ProfileName
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkExperimentProfiles_Delete")
   @summary("Deletes an NetworkExperiment Profile by ProfileName")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -99,7 +100,7 @@ interface Profiles {
   /**
    * Gets a list of Network Experiment Profiles within a resource group under a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of Network Experiment Profiles within a resource group under a subscription")
   @operationId("NetworkExperimentProfiles_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
@@ -111,7 +112,7 @@ interface Profiles {
   /**
    * Gets a list of Network Experiment Profiles under a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of Network Experiment Profiles under a subscription")
   @operationId("NetworkExperimentProfiles_List")
   list is ArmListBySubscription<
@@ -123,7 +124,7 @@ interface Profiles {
   /**
    * Gets a list of Preconfigured Endpoints
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets a list of Preconfigured Endpoints")
   @operationId("PreconfiguredEndpoints_List")
   @list

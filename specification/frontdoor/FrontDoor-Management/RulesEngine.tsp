@@ -14,11 +14,11 @@ namespace Microsoft.Network;
 /**
  * A rules engine configuration containing a list of rules that will run to modify the runtime behavior of the request and response.
  */
-@parentResource(FrontDoor)
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@parentResource(FrontDoor)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model RulesEngine extends BasicResource {
   properties?: RulesEngineProperties;
 
@@ -40,9 +40,9 @@ interface RulesEngines {
   /**
    * Creates a new Rules Engine Configuration with the specified name within the specified Front Door.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RulesEngine,
     Response = ArmResourceUpdatedResponse<RulesEngine> | ArmResourceCreatedResponse<
@@ -60,7 +60,7 @@ interface RulesEngines {
   /**
    * Deletes an existing Rules Engine Configuration with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     RulesEngine,
     LroHeaders = ArmAsyncOperationHeader &

@@ -14,9 +14,9 @@ namespace Microsoft.Network;
  * Defines web application firewall policy.
  */
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model WebApplicationFirewallPolicy extends Resource {
   properties?: WebApplicationFirewallPolicyProperties;
 
@@ -29,13 +29,13 @@ model WebApplicationFirewallPolicy extends Resource {
   /**
    * Gets a unique read-only string that changes whenever the resource is updated.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * The pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: Sku;
 }
 
@@ -44,16 +44,16 @@ interface WebApplicationFirewallPolicies {
   /**
    * Retrieve protection policy with specified name within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_Get")
   get is ArmResourceRead<WebApplicationFirewallPolicy, Error = ErrorResponse>;
 
   /**
    * Create or update policy with specified rule set name within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebApplicationFirewallPolicy,
@@ -71,7 +71,7 @@ interface WebApplicationFirewallPolicies {
   /**
    * Patch a specific frontdoor webApplicationFirewall policy for tags update under the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -86,8 +86,8 @@ interface WebApplicationFirewallPolicies {
   /**
    * Deletes Policy
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     WebApplicationFirewallPolicy,
@@ -98,7 +98,7 @@ interface WebApplicationFirewallPolicies {
   /**
    * Lists all of the protection policies within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_List")
   list is ArmResourceListByParent<
     WebApplicationFirewallPolicy,
@@ -109,7 +109,7 @@ interface WebApplicationFirewallPolicies {
   /**
    * Lists all of the protection policies within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Policies_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     WebApplicationFirewallPolicy,
