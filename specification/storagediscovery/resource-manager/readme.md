@@ -118,7 +118,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-01-01-preview'
+```yaml $(tag) == 'package-2026-01-01-preview'
 input-file:
   - Microsoft.StorageDiscovery/preview/2026-01-01-preview/storageDiscoveryWorkspace.json
 suppressions:
