@@ -65,7 +65,11 @@
           "runbookFaultRbacOnTargets": "Set",
           "drillRbacOnMonitoringResources": "Set",
           "drillMonitoringResources": "Exists",
-          "monitoringRbacOnDrillResources": "Set"
+          "monitoringRbacOnDrillResources": "Set",
+          "includedResourceInDrill": "Exists",
+          "missingRequiredResourceProviders": [
+            "Microsoft.Chaos"
+          ]
         },
         "systemMetadata": {
           "initialConfig": "Pending"
@@ -85,6 +89,14 @@
         "executionReadinessState": "Ready",
         "managedOnBehalfOfConfiguration": {},
         "recoveryPlanProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "drillAssetProperties": {
+          "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+          "region": "westus",
           "identity": {
             "type": "UserAssigned",
             "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
@@ -159,13 +171,19 @@
               "yvtpfipqppawimvylrqq"
             ],
             "runbookFaultRbacOnTargets": "Set",
-            "includedResourceInDrill": "Exists",
             "drillRbacOnMonitoringResources": "NotSet",
-            "drillMonitoringErrors": [
-              "Unable to assign Monitoring RBAC on target resource."
-            ],
             "drillMonitoringResources": "Exists",
-            "monitoringRbacOnDrillResources": "Set"
+            "monitoringRbacOnDrillResources": "Set",
+            "includedResourceInDrill": "Exists",
+            "drillMonitoringErrors": [
+              {
+                "code": "RHUBCloudInternalError",
+                "message": "Unable to assign Monitoring RBAC on target resource."
+              }
+            ],
+            "missingRequiredResourceProviders": [
+              "Microsoft.Chaos"
+            ]
           },
           "systemMetadata": {
             "initialConfig": "Pending"
@@ -202,6 +220,14 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            }
+          },
           "lastSyncTime": "2025-05-05T05:36:37.151Z"
         },
         "identity": {
@@ -287,10 +313,10 @@
               "yvtpfipqppawimvylrqq"
             ],
             "runbookFaultRbacOnTargets": "Set",
-            "includedResourceInDrill": "Exists",
             "drillRbacOnMonitoringResources": "Set",
             "drillMonitoringResources": "Exists",
-            "monitoringRbacOnDrillResources": "Set"
+            "monitoringRbacOnDrillResources": "Set",
+            "includedResourceInDrill": "Exists"
           },
           "systemMetadata": {
             "initialConfig": "Pending"
@@ -327,6 +353,14 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            }
+          },
           "lastSyncTime": "2025-05-05T05:36:37.151Z"
         },
         "identity": {

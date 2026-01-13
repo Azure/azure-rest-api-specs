@@ -55,6 +55,9 @@ model DrillProperties {
 
   @doc("ROPlan properties.")
   recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
+  
+  @doc("Properties for internal resources that are created for the Drill.")
+  drillAssetProperties: AssetPropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
@@ -270,6 +273,21 @@ model ChaosExperimentPropertiesOfDrill {
   faultDurationInMin?: int32;
 }
 
+/**
+ * Model that represents the properties for resources that are created for Drill
+ */
+@doc("Drill asset properties.")
+model AssetPropertiesOfDrill {
+  @doc("Subscription where Drill's internal resources will be created.")
+  subscription: string;
+  
+  @doc("Region where Drill's internal resources will be created.")
+  region: string;
+
+  @doc("Identity to use for Drill operations.")
+  identity: AssociatedIdentity;
+}
+
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
 model AttentionReason {
   @doc("Drill object does not have the necessary RBAC to run the chaos experiment.")
@@ -333,7 +351,8 @@ model AttentionReason {
   drillRbacOnMonitoringResources?: RBACState;
 
   @doc("Errors related to Drill Monitoring resources.")
-  drillMonitoringErrors?: string[];
+  @identifiers(#[])
+  drillMonitoringErrors?: ErrorDetails[];
 
   @doc("Monitoring Resources created for Drill")
   @visibility(Lifecycle.Read)
