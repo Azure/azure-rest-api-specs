@@ -33,3 +33,4 @@ namespace Azure.Ai.Speech.Transcription;
 @@access(transcribe, Access.internal, "csharp");
 @@access(TranscriptionContent, Access.internal, "java");
 @@clientName(TranscriptionContent.definition, "options", "java");
+@@clientName(TranscriptionContent.definition, "options", "csharp");
