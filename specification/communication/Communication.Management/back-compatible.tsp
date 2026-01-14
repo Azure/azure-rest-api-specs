@@ -57,3 +57,9 @@ using Microsoft.Communication;
 @@clientName(CommunicationServices.checkNameAvailability::parameters.body,
   "nameAvailabilityParameters"
 );
+
+@@visibility(CommunicationServiceResource.identity,
+  Lifecycle.Read,
+  Lifecycle.Create,
+  Lifecycle.Update
+);
