@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
-
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ResourceManager;
-
+using TypeSpec.Versioning;
 
 namespace SearchClient;
 
@@ -234,6 +232,7 @@ namespace SearchClient;
 /**
 * Type of suggestion
 */
+@added(Versions.v2025_06_01_preview)
     union AutocompleteResultTypeEnum {
         string,
 
@@ -1196,6 +1195,7 @@ model ReverseGeocodingBatchRequestItem {
 /**
 * This object is returned from a successful autocomplete call.
 */
+@added(Versions.v2025_06_01_preview)
 model AutocompleteResponse {
 /**
 * Specifies the `GeoJSON` type. The only supported object type is
@@ -1214,6 +1214,7 @@ model AutocompleteResponse {
 /**
 * Features of Autocomplete Result
 */
+@added(Versions.v2025_06_01_preview)
 model AutocompleteFeature {
 /**
 * Specifies the `GeoJSON` type. The only supported object type is Feature. For
@@ -1234,6 +1235,7 @@ model AutocompleteFeature {
 /**
 * Properties of Autocomplete Result
 */
+@added(Versions.v2025_06_01_preview)
 model AutocompleteProperties {
 /**
 * Address or Place

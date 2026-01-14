@@ -42,6 +42,11 @@ namespace SearchClient;
  */
 enum Versions {
   /**
+   * The 2025-01-01 API version.
+   */
+  v2025_01_01: "2025-01-01",
+
+  /**
    * The 2025-06-01-preview API version.
    */
   v2025_06_01_preview: "2025-06-01-preview",
