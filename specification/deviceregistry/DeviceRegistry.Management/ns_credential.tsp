@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -31,6 +32,54 @@ model CredentialProperties {
   provisioningState?: ProvisioningState;
 }
 
+@doc("Request payload for revoking device credentials.")
+@added(Versions.v2026_04_01_preview)
+model CredentialsRevokeByResourceRequest {
+  @doc("List of resource ids whose credentials should be revoked.")
+  resourceIds: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/devices";
+    },
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/assets";
+    }
+  ]>[];
+
+  @doc("Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued.")
+  disable?: boolean;
+}
+
+@doc("Request payload for revoking device credentials.")
+@added(Versions.v2026_04_01_preview)
+model CredentialsRevokeByResourceResponse {
+  @doc("Results for revocation action.")
+  @identifiers(#["resourceId"])
+  revocationResults: CredentialsRevokeByResourceRevocationResult[];
+}
+
+@doc("Represents revocation of resource result.")
+@added(Versions.v2026_04_01_preview)
+model CredentialsRevokeByResourceRevocationResult {
+  @doc("Resource id.")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/devices";
+    },
+    {
+      type: "Microsoft.DeviceRegistry/namespaces/assets";
+    }
+  ]>[];
+
+  @doc("Indicates whether revocation succeeded or failed.")
+  result: string;
+
+  @doc("Error.")
+  error?: Error;
+
+}
+
+
+
 @added(Versions.v2025_11_01_preview)
 @armResourceOperations
 interface Credentials {
@@ -50,4 +99,14 @@ interface Credentials {
   >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
+
+  @added(Versions.v2026_04_01_preview)
+  revokeByResource is ArmResourceActionAsync<
+    Credential,
+    CredentialsRevokeByResourceRequest,
+    CredentialsRevokeByResourceResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
