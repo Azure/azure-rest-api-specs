@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Mission",
-    "version": "2025-11-01-preview",
+    "version": "2026-01-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -4298,6 +4298,43 @@
           "format": "date-time",
           "description": "Approval request state change time, time at which approval request state changed from pending to approved or rejected."
         },
+        "mandatoryApprovers": {
+          "type": "array",
+          "description": "List of mandatory approvers for the approval request",
+          "items": {
+            "$ref": "#/definitions/MandatoryApprover"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "approverEntraId"
+          ]
+        },
+        "minimumApproversRequired": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum number of approvers required for the approval request",
+          "readOnly": true
+        },
+        "approversApprovedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current count of minimum approvers required",
+          "readOnly": true
+        },
+        "mandatoryApproversApprovedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current count of mandatory approvers that have approved",
+          "readOnly": true
+        },
+        "approvedByEntraIds": {
+          "type": "array",
+          "description": "Array of Entra IDs of approvers who have approved the approval request",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          },
+          "readOnly": true
+        },
         "requestMetadata": {
           "$ref": "#/definitions/RequestMetadata",
           "description": "Request metadata for the approval request."
@@ -4484,7 +4521,7 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Entra ObjectID of the approver"
         },
         "actionPerformed": {
@@ -4495,12 +4532,25 @@
           "type": "string",
           "format": "date-time",
           "description": "approval request last updated at"
+        },
+        "mandatoryApprovalGroupMembershipIds": {
+          "type": "array",
+          "description": "Indicates if this approver is part of a mandatory approver group with list of Entra IDs",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.uuid"
+          },
+          "readOnly": true
         }
       },
       "required": [
         "approverEntraId",
         "lastUpdatedAt"
       ]
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
       "type": "object",
@@ -4823,6 +4873,10 @@
         "maintenanceModeConfiguration": {
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettingsPatchModel",
+          "description": "Community Monitoring Settings for diagnostic and virtual network flow logs"
         }
       }
     },
@@ -4945,6 +4999,10 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettingsModel",
+          "description": "Community Monitoring Settings for diagnostic and virtual network flow logs"
         }
       }
     },
@@ -5193,7 +5251,8 @@
       "enum": [
         "CommunityOnly",
         "EnclaveOnly",
-        "Both"
+        "Both",
+        "Unspecified"
       ],
       "x-ms-enum": {
         "name": "DiagnosticDestination",
@@ -5213,6 +5272,11 @@
             "name": "Both",
             "value": "Both",
             "description": "DiagnosticDestination Type Both"
+          },
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "DiagnosticDestination Type Unspecified"
           }
         ]
       }
@@ -5457,7 +5521,8 @@
           "enum": [
             "CommunityOnly",
             "EnclaveOnly",
-            "Both"
+            "Both",
+            "Unspecified"
           ],
           "x-ms-enum": {
             "name": "DiagnosticDestination",
@@ -5477,6 +5542,11 @@
                 "name": "Both",
                 "value": "Both",
                 "description": "DiagnosticDestination Type Both"
+              },
+              {
+                "name": "Unspecified",
+                "value": "Unspecified",
+                "description": "DiagnosticDestination Type Unspecified"
               }
             ]
           }
@@ -5987,13 +6057,142 @@
       "description": "Approver Metadata for approvals request.",
       "properties": {
         "approverEntraId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "EntraId of the approver"
         }
       },
       "required": [
         "approverEntraId"
       ]
+    },
+    "MonitoringDestination": {
+      "type": "object",
+      "description": "Monitoring destination configuration with multiple workspaces",
+      "properties": {
+        "destinationType": {
+          "type": "string",
+          "description": "The type of monitoring workspace destination",
+          "default": "EnclaveWorkspace",
+          "enum": [
+            "CommunityWorkspace",
+            "EnclaveWorkspace",
+            "CustomWorkspace"
+          ],
+          "x-ms-enum": {
+            "name": "MonitoringDestinationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CommunityWorkspace",
+                "value": "CommunityWorkspace",
+                "description": "MonitoringDestinationType Type CommunityWorkspace"
+              },
+              {
+                "name": "EnclaveWorkspace",
+                "value": "EnclaveWorkspace",
+                "description": "MonitoringDestinationType Type EnclaveWorkspace"
+              },
+              {
+                "name": "CustomWorkspace",
+                "value": "CustomWorkspace",
+                "description": "MonitoringDestinationType Type CustomWorkspace"
+              }
+            ]
+          }
+        },
+        "customWorkspaceResourceId": {
+          "$ref": "#/definitions/LogAnalyticsResourceId",
+          "description": "Log analytics workspace resource ID for custom workspace"
+        },
+        "diagnosticSettingsName": {
+          "type": "string",
+          "description": "Custom name for diagnostic settings"
+        }
+      },
+      "required": [
+        "destinationType"
+      ]
+    },
+    "MonitoringDestinationUpdate": {
+      "type": "object",
+      "description": "Monitoring destination configuration with multiple workspaces",
+      "properties": {
+        "destinationType": {
+          "type": "string",
+          "description": "The type of monitoring workspace destination",
+          "default": "EnclaveWorkspace",
+          "enum": [
+            "CommunityWorkspace",
+            "EnclaveWorkspace",
+            "CustomWorkspace"
+          ],
+          "x-ms-enum": {
+            "name": "MonitoringDestinationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CommunityWorkspace",
+                "value": "CommunityWorkspace",
+                "description": "MonitoringDestinationType Type CommunityWorkspace"
+              },
+              {
+                "name": "EnclaveWorkspace",
+                "value": "EnclaveWorkspace",
+                "description": "MonitoringDestinationType Type EnclaveWorkspace"
+              },
+              {
+                "name": "CustomWorkspace",
+                "value": "CustomWorkspace",
+                "description": "MonitoringDestinationType Type CustomWorkspace"
+              }
+            ]
+          }
+        },
+        "customWorkspaceResourceId": {
+          "$ref": "#/definitions/LogAnalyticsResourceId",
+          "description": "Log analytics workspace resource ID for custom workspace"
+        },
+        "diagnosticSettingsName": {
+          "type": "string",
+          "description": "Custom name for diagnostic settings"
+        }
+      }
+    },
+    "MonitoringSettingsModel": {
+      "type": "object",
+      "description": "Monitoring Settings",
+      "properties": {
+        "diagnosticDestinations": {
+          "type": "array",
+          "description": "Log Analytics workspace destinations where diagnostic logs will be stored.",
+          "items": {
+            "$ref": "#/definitions/MonitoringDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "flowLogDestination": {
+          "$ref": "#/definitions/MonitoringDestination",
+          "description": "Log Analytics workspace destination where virtual network flow logs will be stored."
+        }
+      }
+    },
+    "MonitoringSettingsPatchModel": {
+      "type": "object",
+      "description": "Monitoring Settings Patch Model",
+      "properties": {
+        "diagnosticDestinations": {
+          "type": "array",
+          "description": "Log Analytics workspace destinations where diagnostic logs will be stored.",
+          "items": {
+            "$ref": "#/definitions/MonitoringDestination"
+          },
+          "x-ms-identifiers": []
+        },
+        "flowLogDestination": {
+          "$ref": "#/definitions/MonitoringDestinationUpdate",
+          "description": "Log Analytics workspace destination where virtual network flow logs will be stored."
+        }
+      }
     },
     "NsgResourceId": {
       "type": "string",
@@ -6258,6 +6457,30 @@
         "roleDefinitionId"
       ]
     },
+    "SecurityProvider": {
+      "type": "string",
+      "description": "Specifies the security provider for the transit hub.",
+      "enum": [
+        "None",
+        "AzureFirewall"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No security provider"
+          },
+          {
+            "name": "AzureFirewall",
+            "value": "AzureFirewall",
+            "description": "Azure Firewall security provider"
+          }
+        ]
+      }
+    },
     "ServiceIdentifier": {
       "type": "string",
       "description": "Identifier for governed services.",
@@ -6450,6 +6673,10 @@
         "transitOption": {
           "$ref": "#/definitions/TransitOption",
           "description": "The TransitOption of the transitHub."
+        },
+        "securityProvider": {
+          "$ref": "#/definitions/SecurityProvider",
+          "description": "Specifies the security provider for the transit hub."
         }
       }
     },
@@ -6479,6 +6706,10 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
+        },
+        "securityProvider": {
+          "$ref": "#/definitions/SecurityProvider",
+          "description": "Specifies the security provider for the transit hub."
         }
       }
     },
@@ -6780,6 +7011,10 @@
         "approvalSettings": {
           "$ref": "#/definitions/VirtualEnclaveApprovalSettingsPatchProperties",
           "description": "Approval requirements for various actions on the enclave's resources."
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettingsPatchModel",
+          "description": "Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs"
         }
       }
     },
@@ -6923,6 +7158,10 @@
         "approvalSettings": {
           "$ref": "#/definitions/VirtualEnclaveApprovalSettings",
           "description": "Approval requirements for various actions on the enclave's resources."
+        },
+        "monitoringSettings": {
+          "$ref": "#/definitions/MonitoringSettingsModel",
+          "description": "Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs"
         }
       },
       "required": [

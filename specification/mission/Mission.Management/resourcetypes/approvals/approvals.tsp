@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "../community/community.tsp";
 
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -63,13 +64,19 @@ model RequestMetadata {
 @doc("Approver Metadata for approvals request.")
 model Approver {
   @doc("Entra ObjectID of the approver")
-  approverEntraId: string;
+  @typeChangedFrom(Microsoft.Mission.Versions.v2026_01_01_preview, string)
+  approverEntraId: uuid;
 
   @doc("Action Performed by approver")
   actionPerformed?: ActionPerformed;
 
   @doc("approval request last updated at")
   lastUpdatedAt: utcDateTime;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Indicates if this approver is part of a mandatory approver group with list of Entra IDs")
+  @visibility(Lifecycle.Read)
+  mandatoryApprovalGroupMembershipIds?: uuid[];
 }
 
 @doc("Approval Base model.")
@@ -104,6 +111,32 @@ model ApprovalBaseModel {
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Approval request state change time, time at which approval request state changed from pending to approved or rejected.")
   stateChangedAt?: utcDateTime;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @identifiers(#["approverEntraId"])
+  @doc("List of mandatory approvers for the approval request")
+  @visibility(Lifecycle.Read)
+  mandatoryApprovers?: MandatoryApprover[];
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Minimum number of approvers required for the approval request")
+  @visibility(Lifecycle.Read)
+  minimumApproversRequired?: int64;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Current count of minimum approvers required")
+  @visibility(Lifecycle.Read)
+  approversApprovedCount?: int64;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Current count of mandatory approvers that have approved")
+  @visibility(Lifecycle.Read)
+  mandatoryApproversApprovedCount?: int64;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Array of Entra IDs of approvers who have approved the approval request")
+  @visibility(Lifecycle.Read)
+  approvedByEntraIds?: uuid[];
 }
 
 model ApprovalProperties is ApprovalBaseModel {

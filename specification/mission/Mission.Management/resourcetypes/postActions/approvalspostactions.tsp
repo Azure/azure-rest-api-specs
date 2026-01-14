@@ -15,11 +15,9 @@ model ApprovalCallbackRequest {
   @doc("Resource Id of the item being approved or rejected")
   resourceId: armResourceIdentifier;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
   resourceRequestAction: "Create" | "Delete" | "Update" | "Reset" | string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Approval status indicating 'Approved' or 'Rejected'")
   approvalStatus: "Approved" | "Rejected" | string;
 
@@ -31,7 +29,6 @@ model ApprovalCallbackRequest {
 // Define a model for the approval initator callback request
 @doc("Request body for calling post-action")
 model ApprovalActionRequest {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Approval status indicating 'Approved' or 'Rejected'")
   approvalStatus: "Approved" | "Rejected" | string;
 }
@@ -45,7 +42,6 @@ model ApprovalActionResponse {
 
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
   resourceRequestAction: "Create" | "Delete" | "Update" | string;
 }

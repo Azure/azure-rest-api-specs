@@ -2,7 +2,7 @@
   "title": "Community_CreateOrUpdate",
   "operationId": "Community_CreateOrUpdate",
   "parameters": {
-    "api-version": "2025-11-01-preview",
+    "api-version": "2026-01-01-preview",
     "subscriptionId": "c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c",
     "resourceGroupName": "rgopenapi",
     "communityName": "TestMyCommunity",
@@ -191,7 +191,33 @@
           ],
           "justification": "Off"
         },
-        "firewallSku": "Standard"
+        "firewallSku": "Standard",
+        "monitoringSettings": {
+          "diagnosticDestinations": [
+            {
+              "destinationType": "CommunityWorkspace"
+            },
+            {
+              "destinationType": "EnclaveWorkspace",
+              "diagnosticSettingsName": "customName"
+            },
+            {
+              "destinationType": "CustomWorkspace",
+              "customWorkspaceResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/rgopenapi/providers/Microsoft.OperationalInsights/workspaces/CustomWorkspace",
+              "diagnosticSettingsName": "customName"
+            },
+            {
+              "destinationType": "CustomWorkspace",
+              "customWorkspaceResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/rgopenapi/providers/Microsoft.OperationalInsights/workspaces/CustomWorkspace",
+              "diagnosticSettingsName": "customName"
+            }
+          ],
+          "flowLogDestination": {
+            "destinationType": "CustomWorkspace",
+            "customWorkspaceResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/rgopenapi/providers/Microsoft.OperationalInsights/workspaces/CustomWorkspace",
+            "diagnosticSettingsName": "customName"
+          }
+        }
       },
       "tags": {
         "sampletag": "samplevalue"

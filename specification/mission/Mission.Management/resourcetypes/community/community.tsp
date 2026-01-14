@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "../shared/maintenancemodeconfiguration.tsp";
+import "../shared/monitoring.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -43,7 +44,8 @@ union ApprovalPolicy {
 @doc("Approver Metadata for approvals request.")
 model MandatoryApprover {
   @doc("EntraId of the approver")
-  approverEntraId: string;
+  @typeChangedFrom(Microsoft.Mission.Versions.v2026_01_01_preview, string)
+  approverEntraId: uuid;
 }
 
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
@@ -205,7 +207,6 @@ model CommunityBaseModel {
   @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
   policyOverride?: "Enclave" | "None" | string;
@@ -242,6 +243,10 @@ model CommunityProperties is CommunityBaseModel {
   @doc("DedicatedHub List.")
   @visibility(Lifecycle.Read)
   dedicatedHubList?: DedicatedHubResource[];
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsModel;
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -273,6 +278,10 @@ model CommunityPatchProperties
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsPatchModel;
 }
 
 @doc("Community Patch Resource")

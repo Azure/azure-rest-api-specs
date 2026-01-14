@@ -26,6 +26,9 @@ union DiagnosticDestination {
 
   @doc("DiagnosticDestination Type Both")
   Both: "Both",
+
+  @doc("DiagnosticDestination Type Unspecified")
+  Unspecified: "Unspecified",
 }
 
 @doc("Rbac Inheritance Mode")
@@ -240,6 +243,10 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
   @added(Microsoft.Mission.Versions.v2025_11_01_preview)
   @doc("Approval requirements for various actions on the enclave's resources.")
   approvalSettings?: VirtualEnclaveApprovalSettings;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsModel;
 }
 
 @doc("Virtual Enclave Patchable Properties")
@@ -258,6 +265,10 @@ model VirtualEnclavePatchProperties
   @added(Microsoft.Mission.Versions.v2025_11_01_preview)
   @doc("Approval requirements for various actions on the enclave's resources.")
   approvalSettings?: VirtualEnclaveApprovalSettingsPatchProperties;
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsPatchModel;
 }
 
 @doc("Virtual Enclave Patch Model")
