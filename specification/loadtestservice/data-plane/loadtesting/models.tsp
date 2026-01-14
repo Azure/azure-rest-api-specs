@@ -958,16 +958,22 @@ model TestRun {
   ...SystemMetaData;
 }
 
-@doc("Represents insights for the test run.")
 @added(APIVersions.v2025_03_01_preview)
+@doc("Represents insights for the test run.")
 model TestRunInsights {
   @doc("The columns of the insights.")
   @visibility(Lifecycle.Read)
   columns?: TestRunInsightColumn[];
 
   @doc("The rows of the insights.")
+  @renamedFrom(APIVersions.v2025_11_01_preview, "rows")
+  @removed(APIVersions.v2025_11_01_preview)
   @visibility(Lifecycle.Read)
-  rows?: Record<string>[];
+  oldRows?: Record<string>[];
+
+  @doc("The rows of the insights.")
+  @added(APIVersions.v2025_11_01_preview)
+  rows?: Record<Record<string>>;
 
   @doc("The version of the insights.")
   @visibility(Lifecycle.Read)
@@ -1548,6 +1554,9 @@ model OperationStatus {
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
+  T;
+
+alias ResourceUpdatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<200> &
   T;
 
 alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &

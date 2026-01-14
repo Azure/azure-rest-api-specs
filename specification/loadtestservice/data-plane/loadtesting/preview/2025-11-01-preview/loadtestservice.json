@@ -1335,6 +1335,59 @@
             "$ref": "./examples/GetTestRunLatestInsights.json"
           }
         }
+      },
+      "patch": {
+        "operationId": "LoadTestRun_PatchLatestInsights",
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Update the latest insights for the test run.",
+        "description": "Update the latest insights for the test run.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TestRunIdParam"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Test run insights model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestRunInsights"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TestRunInsights"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update the latest insights for the test run.": {
+            "$ref": "./examples/PatchTestRunLatestInsights.json"
+          }
+        }
       }
     },
     "/test-runs/{testRunId}/insights:generate": {
@@ -6499,15 +6552,14 @@
           "readOnly": true
         },
         "rows": {
-          "type": "array",
+          "type": "object",
           "description": "The rows of the insights.",
-          "items": {
-            "type": "object",
+          "additionalProperties": {
             "additionalProperties": {
               "type": "string"
-            }
-          },
-          "readOnly": true
+            },
+            "type": "object"
+          }
         },
         "version": {
           "type": "integer",

@@ -299,6 +299,27 @@ interface LoadTestRun {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Update the latest insights for the test run.")
+  @doc("Update the latest insights for the test run.")
+  @added(APIVersions.v2025_11_01_preview)
+  @route("/test-runs/{testRunId}/insights/latest")
+  @patch(#{ implicitOptionality: true })
+  patchLatestInsights is Azure.Core.Foundations.Operation<
+    {
+      @header
+      @doc("Content type.")
+      contentType: "application/merge-patch+json";
+
+      ...TestRunIdParam;
+
+      @doc("Test run insights model.")
+      @bodyRoot
+      body: TestRunInsights;
+    },
+    ResourceUpdatedResponse<TestRunInsights>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Generate insights for the test run.")
   @doc("Generate insights for the test run.")
   @pollingOperation(LoadTestRun.getLatestInsights)
