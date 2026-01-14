@@ -148,7 +148,7 @@ interface BulkActions {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @autoRoute
   virtualMachinesExecuteCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
@@ -157,7 +157,7 @@ interface BulkActions {
     Parameters = LocationParameter
   >;
 
-  /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  /** [PRIVATE PREVIEW]: VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @autoRoute
   virtualMachinesExecuteDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,
