@@ -23,9 +23,9 @@ model CacheRule is Azure.ResourceManager.ProxyResource<CacheRuleProperties> {
   >;
 
   /**
-   * The identity of the import pipeline.
+   * The identity of the cache rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
   @added(Versions.vLatestPreview)
   identity?: IdentityProperties;
 }
