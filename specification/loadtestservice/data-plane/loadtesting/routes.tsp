@@ -310,7 +310,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      ...TestRunIdParam ;
+      ...TestRunIdParam;
 
       @doc("Test run insights model.")
       @bodyRoot
