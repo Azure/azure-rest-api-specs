@@ -11,7 +11,45 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace OperationsClient;
+namespace microsoft.KubernetesConfiguration;
+
+alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /**
+     * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.
+     */
+    @path
+    @segment("providers")
+    @key
+    clusterRp: string;
+
+    /**
+     * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.
+     */
+    @key
+    @path
+    clusterResourceName: string;
+
+    /**
+     * The name of the kubernetes cluster.
+     */
+    @key
+    @path
+    clusterName: string;
+  },
+  {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    @path
+    @key
+    @segment("providers")
+    providers: "Microsoft.KubernetesConfiguration";
+  },
+  {}
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface OperationStatusOperationGroup {
@@ -23,30 +61,8 @@ interface OperationStatusOperationGroup {
   @autoRoute
   @get
   @action("operations")
-  list is ArmProviderActionSync<
-    Response = OperationStatusList,
-    Scope = Extension.ResourceGroup,
-    Parameters = {
-      /**
-       * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.
-       */
-      @path
-      @segment("providers")
-      clusterRp: string;
-
-      /**
-       * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.
-       */
-      @path
-      @segment("{clusterRp}")
-      clusterResourceName: string;
-
-      /**
-       * The name of the kubernetes cluster.
-       */
-      @path
-      @segment("{clusterResourceName}")
-      clusterName: string;
-    }
+  list is OperationStatusOperationGroupOps.List<
+    {},
+    Response = OperationStatusList
   >;
 }

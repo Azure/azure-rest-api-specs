@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using OperationsClient;
+using microsoft.KubernetesConfiguration;
 
 @@clientLocation(OperationStatusOperationGroup.list, "OperationStatus");

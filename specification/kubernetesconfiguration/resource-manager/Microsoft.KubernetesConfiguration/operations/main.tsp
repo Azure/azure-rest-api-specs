@@ -22,14 +22,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Operations Client
+ * Use these APIs to create extension resources through ARM, for Kubernetes Clusters.
  */
 @armProviderNamespace
 @service(#{ title: "OperationsClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace OperationsClient;
+namespace microsoft.KubernetesConfiguration;
 
 /**
  * The available API versions.
@@ -42,3 +42,6 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+@@doc(Operations.list,
+  "List all the available operations the KubernetesConfiguration resource provider supports."
+);
