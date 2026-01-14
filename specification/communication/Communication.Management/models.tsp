@@ -1002,10 +1002,14 @@ model SuppressionListAddressProperties {
   dataLocation?: string;
 }
 
+/**
+ * List of FQDNs of verified domains in Exchange Online.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VerifiedExchangeOnlineDomainList is string[];
 
+/**
+ * List of email Domain resource Ids.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DomainsResourceList is string[];
