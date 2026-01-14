@@ -102,6 +102,7 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
   // Only proceed with auto sign-off logic if auto labels exist or we're about to add them
   const hasAutoSignedOffLabels = labelNames.includes(
     ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP,
+    ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest
   );
   core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
