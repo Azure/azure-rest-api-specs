@@ -70,7 +70,7 @@ export async function checkTrivialChanges(core) {
   if (hasNonRmChanges) {
     const nonRmFiles = changedFiles.filter((file) => !resourceManager(file));
     core.info(
-      `PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff`,
+      `PR contains ${nonRmFiles.length} non-resource-manager changes - not eligible for ARM auto-signoff. Also, no further validation to resournce manger files is oe`,
     );
     core.info(
       `Non-RM files: ${nonRmFiles.slice(0, 5).join(", ")}${nonRmFiles.length > 5 ? ` ... and ${nonRmFiles.length - 5} more` : ""}`,
