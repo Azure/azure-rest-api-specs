@@ -3808,6 +3808,73 @@
           }
         }
       },
+      "put": {
+        "operationId": "SessionHosts_Create",
+        "tags": [
+          "SessionHosts"
+        ],
+        "description": "create or update a sessionHost.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hostPoolName",
+            "in": "path",
+            "description": "The name of the host pool within the specified resource group",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "sessionHostName",
+            "in": "path",
+            "description": "The name of the session host within the specified host pool",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 48,
+            "pattern": "^[A-Za-z0-9@.\\-_ ]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SessionHost' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          },
+          "201": {
+            "description": "Resource 'SessionHost' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SessionHost"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "operationId": "SessionHosts_Update",
         "tags": [
