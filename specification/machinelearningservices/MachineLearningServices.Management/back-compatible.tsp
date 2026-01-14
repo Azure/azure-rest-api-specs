@@ -266,6 +266,15 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.createOrUpdate::parameters.resource, "body");
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
+@@clientName(GetBlobReferenceSASRequestDto, "GetBlobReferenceSasRequestDto", "java");
+@@clientName(GetBlobReferenceSASResponseDto, "GetBlobReferenceSasResponseDto", "java");
+@@clientName(SASCredential, "SasCredential", "java");
+@@clientName(SASCredentialDto, "SasCredentialDto", "java");
+@@clientName(SASAuthTypeWorkspaceConnectionProperties,
+  "SasAuthTypeWorkspaceConnectionProperties",
+  "java"
+);
+@@clientName(Registries.getBlobReferenceSAS, "getBlobReferenceSas", "java");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
