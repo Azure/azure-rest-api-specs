@@ -7,6 +7,14 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ChangeSafety;
 
+@doc("The resource Id scalar type for ChangeSafety reference.")
+scalar ChangeSafetyReferenceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ChangeSafety.ChangeRecordVerifyChangeValidityRequest.changeSafetyReferenceId",
+    }
+  ]>;
+
 @doc("The validator types.")
 union ValidatorType {
   string,
@@ -130,7 +138,7 @@ model ValidationProperties {
 
   @doc("The resource Id of the ChangeState/StageProgression resource that this operation is associated with. This will give users the capability to query all the validations that were for a particular change record.")
   @added(Versions.v2026_01_01_preview)
-  changeSafetyReferenceId?: string;
+  changeSafetyReferenceId?: ChangeSafetyReferenceId;
 }
 
 @doc("The validation properties extended.")
