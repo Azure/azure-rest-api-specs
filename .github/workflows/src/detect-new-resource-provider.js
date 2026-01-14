@@ -13,6 +13,9 @@ import { checkLease } from './detect-arm-leases.js';
 const SPECIFICATION_PATH = 'specification';
 // Match pattern: specification/<service>/resource-manager/<ResourceProvider.Namespace>/...
 const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)/;
+// Match pattern with optional service group: specification/<service>/resource-manager/<ResourceProvider.Namespace>/<ServiceGroup>/...
+// ServiceGroup folder name should not start with "stable" or "preview"
+const RESOURCE_MANAGER_WITH_GROUP_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\/(?!stable|preview)([^\/]+)\//;
 
 // ============================================
 // Utility Functions
@@ -52,9 +55,9 @@ function resourceProviderExists(specPath, namespace) {
 }
 
 /**
- * Extract resource provider namespaces and service names from file paths
+ * Extract resource provider namespaces, service names, and optional service groups from file paths
  * @param {string[]} files - Array of file paths
- * @returns {Map<string, string>} Map of namespace to service name
+ * @returns {Map<string, {serviceName: string, serviceGroup?: string}>} Map of namespace to service info
  */
 function extractResourceProviders(files) {
   const resourceProviders = new Map();
@@ -65,7 +68,15 @@ function extractResourceProviders(files) {
       const parts = file.split('/');
       const serviceName = parts[1];
       const namespace = match[1];
-      resourceProviders.set(namespace, serviceName);
+      
+      // Check if there's a service group
+      const groupMatch = file.match(RESOURCE_MANAGER_WITH_GROUP_PATTERN);
+      if (groupMatch) {
+        const serviceGroup = groupMatch[2];
+        resourceProviders.set(namespace, { serviceName, serviceGroup });
+      } else {
+        resourceProviders.set(namespace, { serviceName });
+      }
     }
   }
   
@@ -109,37 +120,35 @@ async function main() {
     process.exit(0);
   }
 
-  // Step 2: Extract resource providers from changed files
+  // Step 2: Extract resource providers and filter for new ones (don't exist in main branch)
   const changedResourceProviders = extractResourceProviders(rmFiles);
-  
-  console.log(`Resource provider namespaces in changed files: ${changedResourceProviders.size}`);
-  changedResourceProviders.forEach((serviceName, rp) => console.log(`  - ${rp} (service: ${serviceName})`));
-
-  // Step 3: Check which resource providers are new (don't exist in main branch)
   const specPath = join(repoRoot, SPECIFICATION_PATH);
   const newResourceProviders = [];
   
-  for (const [rp, serviceName] of changedResourceProviders) {
+  for (const [rp, info] of changedResourceProviders) {
     if (!resourceProviderExists(specPath, rp)) {
-      newResourceProviders.push({ namespace: rp, serviceName });
+      newResourceProviders.push({ 
+        namespace: rp, 
+        serviceName: info.serviceName,
+        serviceGroup: info.serviceGroup 
+      });
     } 
   }
   
-  // Step 4: Check ARM leases for new resource providers
+  // Step 3: Check ARM leases for new resource providers
   const leaseCheckResults = [];
   
   if (newResourceProviders.length > 0) {
     console.log(`\n🆕 Detected ${newResourceProviders.length} NEW resource provider namespace(s):\n`);
     
     for (const rp of newResourceProviders) {
-      console.log(`  ${rp.namespace} (service: ${rp.serviceName})`);
-      
-      const leaseValid = checkLease(rp.serviceName, rp.namespace);
+      const leaseValid = checkLease(rp.serviceName, rp.namespace, rp.serviceGroup || '');
       const leaseMessage = leaseValid ? 'Lease is valid' : 'No lease file found or lease has expired';
       
       leaseCheckResults.push({
         namespace: rp.namespace,
         serviceName: rp.serviceName,
+        serviceGroup: rp.serviceGroup,
         leaseValid: leaseValid,
         leaseMessage: leaseMessage
       });
@@ -150,7 +159,7 @@ async function main() {
     console.log('\nNew resource provider namespaces require attending "ARM API Modeling Office Hours".');
     console.log('A comment will be posted on the PR with lease validation results.\n');
     
-    // Step 5: Write output for GitHub Actions to use in PR comment
+    // Step 4: Write output for GitHub Actions to use in PR comment
     const outputData = {
       newResourceProviders: leaseCheckResults
     };

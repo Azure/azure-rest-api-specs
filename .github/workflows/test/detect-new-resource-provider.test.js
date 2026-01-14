@@ -9,13 +9,22 @@ function mockResourceProviderExists(specPath, namespace) {
 function mockExtractResourceProviders(files) {
   const resourceProviders = new Map();
   const pattern = /^specification\/([^\/]+)\/resource-manager\/([^\/]+)/;
+  const groupPattern = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\/([^\/]+)\/(stable|preview|preview-internal)\//;
   
   for (const file of files) {
     const match = file.match(pattern);
     if (match) {
       const serviceName = match[1];
       const namespace = match[2];
-      resourceProviders.set(namespace, serviceName);
+      
+      // Check if there's a service group (folder between namespace and version folder)
+      const groupMatch = file.match(groupPattern);
+      if (groupMatch && groupMatch[2] !== 'stable' && groupMatch[2] !== 'preview' && groupMatch[2] !== 'preview-internal') {
+        const serviceGroup = groupMatch[2];
+        resourceProviders.set(namespace, { serviceName, serviceGroup });
+      } else {
+        resourceProviders.set(namespace, { serviceName });
+      }
     }
   }
   
@@ -33,8 +42,8 @@ describe('detect-new-resource-provider', () => {
       const result = mockExtractResourceProviders(files);
 
       expect(result.size).toBe(2);
-      expect(result.get('Microsoft.App')).toBe('app');
-      expect(result.get('Microsoft.Compute')).toBe('compute');
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
+      expect(result.get('Microsoft.Compute')).toEqual({ serviceName: 'compute' });
     });
 
     it('handles multiple files from same namespace', () => {
@@ -47,7 +56,7 @@ describe('detect-new-resource-provider', () => {
       const result = mockExtractResourceProviders(files);
 
       expect(result.size).toBe(1);
-      expect(result.get('Microsoft.App')).toBe('app');
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
     });
 
     it('ignores non-resource-manager files', () => {
@@ -60,7 +69,7 @@ describe('detect-new-resource-provider', () => {
       const result = mockExtractResourceProviders(files);
 
       expect(result.size).toBe(1);
-      expect(result.get('Microsoft.App')).toBe('app');
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
     });
 
     it('handles empty file list', () => {
@@ -77,7 +86,78 @@ describe('detect-new-resource-provider', () => {
       const result = mockExtractResourceProviders(files);
 
       expect(result.size).toBe(1);
-      expect(result.get('Microsoft.TestService')).toBe('test-service');
+      expect(result.get('Microsoft.TestService')).toEqual({ serviceName: 'test-service' });
+    });
+
+    it('extracts service group when present', () => {
+      const files = [
+        'specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-01-01/disk.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(1);
+      expect(result.get('Microsoft.Compute')).toEqual({ serviceName: 'compute', serviceGroup: 'DiskRP' });
+    });
+
+    it('handles mix of files with and without service groups', () => {
+      const files = [
+        'specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-01-01/disk.json',
+        'specification/app/resource-manager/Microsoft.App/stable/2023-01-01/app.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(2);
+      expect(result.get('Microsoft.Compute')).toEqual({ serviceName: 'compute', serviceGroup: 'DiskRP' });
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
+    });
+
+    it('does not treat preview-<date> as service group', () => {
+      const files = [
+        'specification/app/resource-manager/Microsoft.App/preview-2025-10-11/app.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(1);
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
+    });
+
+    it('does not treat preview-internal as service group', () => {
+      const files = [
+        'specification/app/resource-manager/Microsoft.App/preview-internal/2023-01-01/app.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(1);
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
+    });
+
+    it('does not treat stable-<date> as service group', () => {
+      const files = [
+        'specification/app/resource-manager/Microsoft.App/stable-2024-01-01/app.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(1);
+      expect(result.get('Microsoft.App')).toEqual({ serviceName: 'app' });
+    });
+
+    it('extracts service group when folder does not start with stable or preview', () => {
+      const files = [
+        'specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-01-01/disk.json',
+        'specification/compute/resource-manager/Microsoft.Compute/ComputeRP/preview/2023-01-01/compute.json',
+        'specification/storage/resource-manager/Microsoft.Storage/StorageRP/stable/2023-01-01/storage.json',
+      ];
+
+      const result = mockExtractResourceProviders(files);
+
+      expect(result.size).toBe(2);
+      expect(result.get('Microsoft.Compute')).toEqual({ serviceName: 'compute', serviceGroup: 'ComputeRP' });
+      expect(result.get('Microsoft.Storage')).toEqual({ serviceName: 'storage', serviceGroup: 'StorageRP' });
     });
   });
 
@@ -108,15 +188,20 @@ describe('detect-new-resource-provider', () => {
       const changedResourceProviders = mockExtractResourceProviders(changedFiles);
       const newResourceProviders = [];
 
-      for (const [rp, serviceName] of changedResourceProviders) {
+      for (const [rp, info] of changedResourceProviders) {
         if (!mockResourceProviderExists('/spec', rp)) {
-          newResourceProviders.push({ namespace: rp, serviceName });
+          newResourceProviders.push({ 
+            namespace: rp, 
+            serviceName: info.serviceName,
+            serviceGroup: info.serviceGroup 
+          });
         }
       }
 
       expect(newResourceProviders.length).toBe(1);
       expect(newResourceProviders[0].namespace).toBe('Microsoft.NewService');
       expect(newResourceProviders[0].serviceName).toBe('newservice');
+      expect(newResourceProviders[0].serviceGroup).toBeUndefined();
     });
 
     it('handles no new resource providers', () => {
@@ -128,9 +213,13 @@ describe('detect-new-resource-provider', () => {
       const changedResourceProviders = mockExtractResourceProviders(changedFiles);
       const newResourceProviders = [];
 
-      for (const [rp, serviceName] of changedResourceProviders) {
+      for (const [rp, info] of changedResourceProviders) {
         if (!mockResourceProviderExists('/spec', rp)) {
-          newResourceProviders.push({ namespace: rp, serviceName });
+          newResourceProviders.push({ 
+            namespace: rp, 
+            serviceName: info.serviceName,
+            serviceGroup: info.serviceGroup 
+          });
         }
       }
 
@@ -146,15 +235,43 @@ describe('detect-new-resource-provider', () => {
       const changedResourceProviders = mockExtractResourceProviders(changedFiles);
       const newResourceProviders = [];
 
-      for (const [rp, serviceName] of changedResourceProviders) {
+      for (const [rp, info] of changedResourceProviders) {
         if (!mockResourceProviderExists('/spec', rp)) {
-          newResourceProviders.push({ namespace: rp, serviceName });
+          newResourceProviders.push({ 
+            namespace: rp, 
+            serviceName: info.serviceName,
+            serviceGroup: info.serviceGroup 
+          });
         }
       }
 
       expect(newResourceProviders.length).toBe(2);
       expect(newResourceProviders[0].namespace).toBe('Microsoft.Service1');
       expect(newResourceProviders[1].namespace).toBe('Microsoft.Service2');
+    });
+
+    it('identifies new resource providers with service groups', () => {
+      const changedFiles = [
+        'specification/compute/resource-manager/Microsoft.Compute/DiskRP/stable/2023-01-01/disk.json',
+      ];
+
+      const changedResourceProviders = mockExtractResourceProviders(changedFiles);
+      const newResourceProviders = [];
+
+      for (const [rp, info] of changedResourceProviders) {
+        if (!mockResourceProviderExists('/spec', rp)) {
+          newResourceProviders.push({ 
+            namespace: rp, 
+            serviceName: info.serviceName,
+            serviceGroup: info.serviceGroup 
+          });
+        }
+      }
+
+      expect(newResourceProviders.length).toBe(1);
+      expect(newResourceProviders[0].namespace).toBe('Microsoft.Compute');
+      expect(newResourceProviders[0].serviceName).toBe('compute');
+      expect(newResourceProviders[0].serviceGroup).toBe('DiskRP');
     });
   });
 
@@ -173,6 +290,7 @@ describe('detect-new-resource-provider', () => {
         leaseCheckResults.push({
           namespace: rp.namespace,
           serviceName: rp.serviceName,
+          serviceGroup: rp.serviceGroup,
           leaseValid: leaseValid,
           leaseMessage: leaseMessage
         });
@@ -186,14 +304,49 @@ describe('detect-new-resource-provider', () => {
       expect(outputData.newResourceProviders[0]).toEqual({
         namespace: 'Microsoft.NewService',
         serviceName: 'newservice',
+        serviceGroup: undefined,
         leaseValid: false,
         leaseMessage: 'No lease file found or lease has expired'
       });
     });
 
+    it('creates correct output structure with service group', () => {
+      const newResourceProviders = [
+        { namespace: 'Microsoft.Compute', serviceName: 'compute', serviceGroup: 'DiskRP' }
+      ];
+
+      const leaseCheckResults = [];
+      
+      for (const rp of newResourceProviders) {
+        const leaseValid = true; // Mock lease check
+        const leaseMessage = 'Lease is valid';
+        
+        leaseCheckResults.push({
+          namespace: rp.namespace,
+          serviceName: rp.serviceName,
+          serviceGroup: rp.serviceGroup,
+          leaseValid: leaseValid,
+          leaseMessage: leaseMessage
+        });
+      }
+
+      const outputData = {
+        newResourceProviders: leaseCheckResults
+      };
+
+      expect(outputData.newResourceProviders).toHaveLength(1);
+      expect(outputData.newResourceProviders[0]).toEqual({
+        namespace: 'Microsoft.Compute',
+        serviceName: 'compute',
+        serviceGroup: 'DiskRP',
+        leaseValid: true,
+        leaseMessage: 'Lease is valid'
+      });
+    });
+
     it('handles valid lease in output', () => {
       const newResourceProviders = [
-        { namespace: 'Microsoft.ValidLease', serviceName: 'validservice' }
+        { namespace: 'Microsoft.ValidLease', serviceName: 'validservice', serviceGroup: undefined }
       ];
 
       const leaseCheckResults = [];
@@ -225,12 +378,14 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.NewService',
           serviceName: 'newservice',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         },
         {
           namespace: 'Microsoft.AnotherNew',
           serviceName: 'anothernew',
+          serviceGroup: undefined,
           leaseValid: true,
           leaseMessage: 'Lease is valid'
         }
@@ -250,6 +405,7 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.Test',
           serviceName: 'test',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -262,6 +418,7 @@ describe('detect-new-resource-provider', () => {
       const rp = outputData.newResourceProviders[0];
       expect(rp).toHaveProperty('namespace');
       expect(rp).toHaveProperty('serviceName');
+      expect(rp).toHaveProperty('serviceGroup');
       expect(rp).toHaveProperty('leaseValid');
       expect(rp).toHaveProperty('leaseMessage');
       expect(typeof rp.namespace).toBe('string');
@@ -275,6 +432,7 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.NewRP',
           serviceName: 'newrp',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -297,18 +455,21 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.Valid',
           serviceName: 'valid',
+          serviceGroup: undefined,
           leaseValid: true,
           leaseMessage: 'Lease is valid'
         },
         {
           namespace: 'Microsoft.Expired',
           serviceName: 'expired',
+          serviceGroup: 'SomeRP',
           leaseValid: false,
           leaseMessage: 'Lease has expired'
         },
         {
           namespace: 'Microsoft.Missing',
           serviceName: 'missing',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -330,6 +491,7 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.NewService',
           serviceName: 'newservice',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -359,12 +521,14 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.WithLease',
           serviceName: 'withlease',
+          serviceGroup: undefined,
           leaseValid: true,
           leaseMessage: 'Lease is valid'
         },
         {
           namespace: 'Microsoft.WithoutLease',
           serviceName: 'withoutlease',
+          serviceGroup: 'TestRP',
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -388,6 +552,7 @@ describe('detect-new-resource-provider', () => {
         {
           namespace: 'Microsoft.Test',
           serviceName: 'testservice',
+          serviceGroup: undefined,
           leaseValid: false,
           leaseMessage: 'No lease file found or lease has expired'
         }
@@ -401,6 +566,32 @@ describe('detect-new-resource-provider', () => {
       const expectedLeasePath = `.github/arm-leases/${rp.serviceName}/${rp.namespace}/lease.yaml`;
 
       expect(expectedLeasePath).toBe('.github/arm-leases/testservice/Microsoft.Test/lease.yaml');
+    });
+
+    it('formats lease path with service group', () => {
+      const leaseCheckResults = [
+        {
+          namespace: 'Microsoft.Compute',
+          serviceName: 'compute',
+          serviceGroup: 'DiskRP',
+          leaseValid: false,
+          leaseMessage: 'No lease file found or lease has expired'
+        }
+      ];
+
+      const outputData = {
+        newResourceProviders: leaseCheckResults
+      };
+
+      const rp = outputData.newResourceProviders[0];
+      const leasePathParts = ['.github/arm-leases', rp.serviceName, rp.namespace];
+      if (rp.serviceGroup) {
+        leasePathParts.push(rp.serviceGroup);
+      }
+      leasePathParts.push('lease.yaml');
+      const expectedLeasePath = leasePathParts.join('/');
+
+      expect(expectedLeasePath).toBe('.github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml');
     });
   });
 });
