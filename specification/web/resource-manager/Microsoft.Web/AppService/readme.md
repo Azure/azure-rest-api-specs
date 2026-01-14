@@ -85,6 +85,9 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: Provider.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: openapi.json
+    reason: Retroactive addition of missing examples out of scope at this time.
 ```
 
 ### Tag: package-2025-05
