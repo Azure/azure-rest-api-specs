@@ -1010,6 +1010,93 @@
         }
       }
     },
+    "/agents/{agent_name}/versions/{agent_version}/containers/default:logstream": {
+      "post": {
+        "operationId": "Agents_StreamAgentContainerLogs",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Container log entry streamed from the container as text chunks.\nEach chunk is a UTF-8 string that may be either a plain text log line\nor a JSON-formatted log entry, depending on the type of container log being streamed.\nClients should treat each chunk as opaque text and, if needed, attempt\nto parse it as JSON based on their logging requirements.\n\nFor system logs, the format is JSON with the following structure:\n{\"TimeStamp\":\"2025-12-15T16:51:33Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Connecting to the events collector...\",\"Reason\":\"StartingGettingEvents\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n{\"TimeStamp\":\"2025-12-15T16:51:34Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Successfully connected to events server\",\"Reason\":\"ConnectedToEventsServer\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n\nFor console logs, the format is plain text as emitted by the container's stdout/stderr.\n2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...\n2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']\n2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - \"GET /readiness HTTP/1.1\" 200 OK",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "description": "The name of the agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agent_version",
+            "in": "path",
+            "description": "The version of the agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "console returns container stdout/stderr, system returns container app event stream. defaults to console",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "console",
+              "system"
+            ],
+            "x-ms-enum": {
+              "name": "ContainerLogKind",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "console",
+                  "value": "console",
+                  "description": "Console logs from the container."
+                },
+                {
+                  "name": "system",
+                  "value": "system",
+                  "description": "System logs from the container."
+                }
+              ]
+            }
+          },
+          {
+            "name": "replica_name",
+            "in": "query",
+            "description": "When omitted, the server chooses the first replica for console logs. Required to target a specific replica.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tail",
+            "in": "query",
+            "description": "Number of trailing lines returned. Enforced to 1-300. Defaults to 20",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/agents/{agent_name}/versions/{agent_version}/containers/default:start": {
       "post": {
         "operationId": "Agents_StartAgentContainer",
@@ -7059,6 +7146,11 @@
           },
           "readOnly": true
         },
+        "id": {
+          "type": "string",
+          "description": "The identifier of the container.",
+          "readOnly": true
+        },
         "status": {
           "$ref": "#/definitions/AgentContainerStatus",
           "description": "The status of the container of a specific version of an agent.",
@@ -7089,6 +7181,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The last update time of the container.",
+          "readOnly": true
+        },
+        "container": {
+          "$ref": "#/definitions/ContainerDetails",
+          "description": "The detailed container information.",
           "readOnly": true
         }
       },
@@ -8731,6 +8828,70 @@
         }
       ],
       "x-ms-discriminator-value": "container_app"
+    },
+    "ContainerDetails": {
+      "type": "object",
+      "description": "Detailed information about the container.",
+      "properties": {
+        "provisioning_state": {
+          "type": "string",
+          "description": "The provisioning state of the container."
+        },
+        "provisioning_error": {
+          "type": "string",
+          "description": "The provisioning error of the container, if any."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the container."
+        },
+        "health_state": {
+          "type": "string",
+          "description": "The health state of the container."
+        },
+        "replicas": {
+          "type": "array",
+          "description": "The list of replicas in the container.",
+          "items": {
+            "$ref": "#/definitions/ContainerReplica"
+          }
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the container."
+        }
+      },
+      "required": [
+        "provisioning_state",
+        "state",
+        "health_state",
+        "replicas",
+        "updated_on"
+      ]
+    },
+    "ContainerReplica": {
+      "type": "object",
+      "description": "Information about a container replica.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the replica."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the replica."
+        },
+        "container_state": {
+          "type": "string",
+          "description": "The container state of the replica."
+        }
+      },
+      "required": [
+        "name",
+        "state",
+        "container_state"
+      ]
     },
     "ContinuousEvaluationRuleAction": {
       "type": "object",
