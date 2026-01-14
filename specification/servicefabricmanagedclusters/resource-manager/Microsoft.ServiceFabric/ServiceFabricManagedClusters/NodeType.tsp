@@ -549,6 +549,12 @@ model NodeTypeProperties {
    */
   @added(Versions.v2025_06_01_preview)
   isOutboundOnly?: boolean;
+
+  /**
+   * Specifies whether the node type should use a resilient ephemeral OS disk when using a supported SKU size. A resilient ephemeral OS disk provides improved reliability for ephemeral OS disks by enabling full caching.
+   */
+  @added(Versions.v2026_02_01)
+  enableResilientEphemeralOsDisk?: boolean;
 }
 
 /**
