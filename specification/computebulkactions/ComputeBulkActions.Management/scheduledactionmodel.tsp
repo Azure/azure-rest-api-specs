@@ -8,6 +8,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ComputeBulkActions;
 
@@ -241,6 +242,7 @@ model RetryPolicy {
   @doc("Retry window in minutes for user request")
   retryWindowInMinutes?: int32;
 
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @doc("Action to take on failed retries for user request")
   onFailureAction?: ResourceOperationType;
 }
@@ -304,9 +306,11 @@ model ResourceOperationDetails {
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
 
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @doc("Resource notification details.")
   resourceNotificationDetails?: ResourceNotificationDetails;
 
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @doc("Fallback operation details if a fallback was performed")
   fallbackOperation?: FallbackOperation;
 }
@@ -390,6 +394,7 @@ model SubmitTypeRequest {
   @doc("The resources for the request")
   resources?: Resources;
 
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @doc("The resources for the request with operation context information needed for notification tracking.")
   resourcesWithContext?: ResourcesWithContext;
 
@@ -405,6 +410,7 @@ model ExecuteTypeRequest {
   @doc("The resources for the request")
   resources?: Resources;
 
+  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @doc("The resources for the request with operation context information")
   resourcesWithContext?: ResourcesWithContext;
 
