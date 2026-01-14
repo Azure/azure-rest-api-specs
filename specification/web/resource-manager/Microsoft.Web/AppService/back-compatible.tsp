@@ -2085,3 +2085,9 @@ using Microsoft.Web;
 @@flattenProperty(checkNameAvailability::parameters.body);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(regionalCheckNameAvailability::parameters.body);
+
+@@clientLocation(Users.getPublishingUser, Microsoft.Web, "python");
+@@clientLocation(Users.updatePublishingUser, Microsoft.Web, "python");
+@@clientLocation(SourceControls.getSourceControl, Microsoft.Web, "python");
+@@clientLocation(SourceControls.listSourceControls, Microsoft.Web, "python");
+@@clientLocation(SourceControls.updateSourceControl, Microsoft.Web, "python");
