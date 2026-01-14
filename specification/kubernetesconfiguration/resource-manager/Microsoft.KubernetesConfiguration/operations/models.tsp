@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace microsoft.KubernetesConfiguration;
+namespace Microsoft.KubernetesConfiguration;
 
 /**
  * Result of the request to list operations.
@@ -18,39 +18,16 @@ model ResourceProviderOperationList {
    * List of operations supported by this resource provider.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(["name"])
+  @identifiers(#["name"])
+  @pageItems
   value: ResourceProviderOperation[];
 
   /**
    * URL to the next set of results, if any.
    */
+  @nextLink
   @visibility(Lifecycle.Read)
   nextLink?: string;
-}
-
-/**
- * Supported operation of this resource provider.
- */
-model ResourceProviderOperation {
-  /**
-   * Operation name, in format of {provider}/{resource}/{operation}
-   */
-  name: string;
-
-  /**
-   * Display metadata associated with the operation.
-   */
-  display?: ResourceProviderOperationDisplay;
-
-  /**
-   * The flag that indicates whether the operation applies to data plane.
-   */
-  isDataAction?: boolean;
-
-  /**
-   * Origin of the operation.
-   */
-  origin?: string;
 }
 
 /**
@@ -81,6 +58,7 @@ model OperationStatusResult {
    * Additional information, if available.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   properties?: Record<string> | null;
 
   /**

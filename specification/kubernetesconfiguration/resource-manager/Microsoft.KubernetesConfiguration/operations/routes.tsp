@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
-namespace microsoft.KubernetesConfiguration;
+namespace Microsoft.KubernetesConfiguration;
 
 alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {

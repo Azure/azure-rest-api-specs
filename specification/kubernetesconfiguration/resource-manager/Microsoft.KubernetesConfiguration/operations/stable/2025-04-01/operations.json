@@ -44,7 +44,7 @@
     }
   ],
   "paths": {
-    "/providers/microsoft.KubernetesConfiguration/operations": {
+    "/providers/Microsoft.KubernetesConfiguration/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -60,7 +60,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/ResourceProviderOperationList"
             }
           },
           "default": {
@@ -195,6 +195,77 @@
       },
       "required": [
         "status"
+      ]
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "description": "Supported operation of this resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider: Microsoft KubernetesConfiguration."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this operation."
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "description": "Result of the request to list operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations supported by this resource provider.",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to the next set of results, if any.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
       ]
     }
   },
