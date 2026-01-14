@@ -456,6 +456,12 @@ model ManagedClusterProperties {
    */
   @added(Versions.v2025_06_01_preview)
   enableOutboundOnlyNodeTypes?: boolean;
+
+  /**
+   * Determines whether to skip the assignment of the managed network security group (SF-NSG) to the cluster subnet when using a bring-your-own virtual network (BYOVNET) configuration. The default value is false.
+   */
+  @added(Versions.v2026_02_01)
+  skipManagedNsgAssignment?: boolean;
 }
 
 /**

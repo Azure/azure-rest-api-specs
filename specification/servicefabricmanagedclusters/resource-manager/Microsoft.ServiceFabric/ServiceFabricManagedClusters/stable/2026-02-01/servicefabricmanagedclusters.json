@@ -5361,6 +5361,10 @@
         "enableOutboundOnlyNodeTypes": {
           "type": "boolean",
           "description": "Enable the creation of node types with only outbound traffic enabled. If set, a separate load balancer backend pool will be created for node types with inbound traffic enabled. Can only be set at the time of cluster creation."
+        },
+        "skipManagedNsgAssignment": {
+          "type": "boolean",
+          "description": "Determines whether to skip the assignment of the managed network security group (SF-NSG) to the cluster subnet when using a bring-your-own virtual network (BYOVNET) configuration. The default value is false."
         }
       },
       "required": [
