@@ -8,6 +8,7 @@ import "./ProviderInstance.tsp";
 import "./SapLandscapeMonitor.tsp";
 import "./Alert.tsp";
 import "./AlertTemplate.tsp";
+import "./back-compatible.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

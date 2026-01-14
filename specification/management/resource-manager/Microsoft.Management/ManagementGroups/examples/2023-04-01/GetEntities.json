@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "20000000-0001-0000-0000-000000000000",
+            "type": "Microsoft.Management/managementGroups",
+            "id": "/providers/Microsoft.Management/managementGroups/20000000-0001-0000-0000-000000000000",
+            "properties": {
+              "displayName": "Group 1 Tenant 2",
+              "inheritedPermissions": "view",
+              "numberOfChildGroups": 1,
+              "numberOfChildren": 2,
+              "numberOfDescendants": 3,
+              "parent": {
+                "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
+              },
+              "parentDisplayNameChain": [
+                "Tenant Root Group",
+                "Group 1 Tenant 2 Parent"
+              ],
+              "parentNameChain": [
+                "TenantRootGroup",
+                "Group1Tenant2Parent"
+              ],
+              "permissions": "view",
+              "tenantId": "20000000-0000-0000-0000-000000000000"
+            }
+          },
+          {
+            "name": "20000000-0004-0000-0000-000000000000",
+            "type": "Microsoft.Management/managementGroups",
+            "id": "/providers/Microsoft.Management/managementGroups/20000000-0004-0000-0000-000000000000",
+            "properties": {
+              "displayName": "Group 4 Tenant 2",
+              "inheritedPermissions": "delete",
+              "numberOfChildGroups": 0,
+              "numberOfChildren": 0,
+              "numberOfDescendants": 0,
+              "parent": {
+                "id": "/providers/Microsoft.Management/managementGroups/20000000-0000-0000-0000-000000000000"
+              },
+              "parentDisplayNameChain": [
+                "Tenant Root Group",
+                "Group 4 Tenant 2 Parent"
+              ],
+              "parentNameChain": [
+                "TenantRootGroup",
+                "Group4 Tenant2Parent"
+              ],
+              "permissions": "delete",
+              "tenantId": "20000000-0000-0000-0000-000000000000"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Entities_List",
+  "title": "GetEntities"
+}

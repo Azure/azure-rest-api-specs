@@ -1,3 +1,4 @@
+import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import {
@@ -13,7 +14,7 @@ import {
 } from "./command-helpers.js";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { APIViewRequestData, SpecGenSdkCmdInput } from "./types.js";
+import { SpecGenSdkCmdInput } from "./types.js";
 import { resetGitRepo, runSpecGenSdkCommand, SpecConfigs } from "./utils.js";
 
 /**
@@ -50,22 +51,28 @@ export async function generateSdkForSingleSpec(): Promise<number> {
     statusCode = 1;
   }
 
-  if (statusCode === 0) {
-    // Set the pipeline variables for the SDK pull request
-    let packageName: string =
+  // Always set the pipeline variables for the SDK pull request even if
+  // there are failures in the generation process since we allow the PR creation for such cases.
+  let packageName = "";
+  let installationInstructions = "";
+  if (executionReport) {
+    packageName =
       executionReport.packages[0]?.packageName ??
       commandInput.tspConfigPath ??
       commandInput.readmePath ??
       "missing-package-name";
-    packageName = packageName.replace("/", "-");
-    const installationInstructions = executionReport.packages[0]?.installationInstructions;
-    setPipelineVariables(
-      executionReport.stagedArtifactsFolder,
-      false,
-      packageName,
-      installationInstructions,
-    );
+    installationInstructions = executionReport.packages[0]?.installationInstructions;
+  } else {
+    packageName = commandInput.tspConfigPath ?? commandInput.readmePath ?? "missing-package-name";
   }
+
+  packageName = packageName.replace("/", "-");
+  setPipelineVariables(
+    executionReport?.stagedArtifactsFolder ?? "",
+    false,
+    packageName,
+    installationInstructions,
+  );
 
   logMessage("ending group logging", LogLevel.EndGroup);
   logIssuesToPipeline(executionReport?.vsoLogPath, specConfigPathText);

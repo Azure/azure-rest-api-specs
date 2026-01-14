@@ -1,5 +1,3 @@
-// @ts-check
-
 import debug from "debug";
 import { simpleGit } from "simple-git";
 import { includesSegment } from "./path.js";
@@ -170,6 +168,15 @@ export async function getChangedFilesStatuses(options = {}) {
 export function json(file) {
   // Extension "json" with any case is a valid JSON file
   return typeof file === "string" && file.toLowerCase().endsWith(".json");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function markdown(file) {
+  // Extension ".md" with any case is a valid markdown file
+  return typeof file === "string" && file.toLowerCase().endsWith(".md");
 }
 
 /**
