@@ -742,7 +742,7 @@ function getBlockedOnRpaas(
 ) {
   return (
     (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 
