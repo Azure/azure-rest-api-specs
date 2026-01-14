@@ -49,6 +49,7 @@ interface Servers {
    * Creates a new server or updates an existing server. The update action will overwrite the existing server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     Server,
     Response = ArmResourceUpdatedResponse<Server> | ArmResourceCreatedResponse<
@@ -61,7 +62,9 @@ interface Servers {
   /**
    * Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("original-uri")
   update is ArmCustomPatchAsync<Server, PatchModel = ServerForUpdate>;
 
   /**
@@ -69,6 +72,8 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -94,6 +99,8 @@ interface Servers {
   /**
    * Manual failover a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   failover is ArmResourceActionAsyncBase<
     Server,
     void,
@@ -114,6 +121,8 @@ interface Servers {
   /**
    * Restarts a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   restart is ArmResourceActionAsyncBase<
     Server,
     ServerRestartParameter,
@@ -125,6 +134,8 @@ interface Servers {
   /**
    * Starts a server.
    */
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("original-uri")
   start is ArmResourceActionAsyncBase<
     Server,
     void,
@@ -136,6 +147,7 @@ interface Servers {
   /**
    * Stops a server.
    */
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
