@@ -101,6 +101,15 @@ using Microsoft.EdgeOrder;
   "GetProductFamiliesMetadata",
   "csharp"
 );
+@@clientName(ConfigurationsRequest, "ConfigurationsContent", "csharp");
+@@clientName(Configurations, "ProductConfigurations", "csharp");
+@@clientName(ProductFamiliesRequest, "ProductFamiliesContent", "csharp");
+@@clientName(SupportedFilterTypes, "SupportedFilterType", "csharp");
+@@clientName(TransportShipmentTypes, "TransportShipmentType", "csharp");
+@@clientName(ProductFamilyProperties.resourceProviderDetails,
+  "ResourceProviderDetailsList",
+  "csharp"
+);
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -115,3 +124,4 @@ using Microsoft.EdgeOrder;
 @@alternateType(CostInformation.billingInfoUrl, url, "csharp");
 @@alternateType(ForwardShippingDetails.trackingUrl, url, "csharp");
 @@alternateType(Pav2MeterDetails.meterGuid, Azure.Core.uuid, "csharp");
+@@usage(OrderResource, Usage.input, "csharp");
