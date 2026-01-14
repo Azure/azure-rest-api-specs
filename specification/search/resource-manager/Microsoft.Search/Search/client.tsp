@@ -58,8 +58,7 @@ op servicesCheckNameAvailabilityCustomization(
 op usagesListBySubscriptionCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  name: string,
+  ...SubscriptionActionScope,
   ...Azure.ResourceManager.Legacy.Provider,
   ...LocationParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
