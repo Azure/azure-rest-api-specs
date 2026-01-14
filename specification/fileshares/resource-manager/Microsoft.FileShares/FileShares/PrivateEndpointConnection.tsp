@@ -25,14 +25,6 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the file share.
    */
-  @extension(
-    "x-ms-examples",
-    #{
-      PrivateEndpointConnections_Get: #{
-        $ref: "./examples/PrivateEndpointConnections_Get.json",
-      },
-    }
-  )
   get is PrivateEndpointOperations.Read<FileShare>;
 
   /**
@@ -40,14 +32,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("location")
-  @extension(
-    "x-ms-examples",
-    #{
-      PrivateEndpointConnections_Create: #{
-        $ref: "./examples/PrivateEndpointConnections_Create.json",
-      },
-    }
-  )
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     FileShare,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
@@ -59,14 +43,6 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("location")
-  @extension(
-    "x-ms-examples",
-    #{
-      PrivateEndpointConnections_Delete: #{
-        $ref: "./examples/PrivateEndpointConnections_Delete.json",
-      },
-    }
-  )
   delete is PrivateEndpointOperations.DeleteAsync<
     FileShare,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
@@ -77,14 +53,6 @@ interface PrivateEndpointConnections {
    * Get a PrivateEndpointConnection List.
    */
   @list
-  @extension(
-    "x-ms-examples",
-    #{
-      PrivateEndpointConnections_ListByFileShare: #{
-        $ref: "./examples/PrivateEndpointConnections_ListByFileShare.json",
-      },
-    }
-  )
   listByFileShare is Azure.ResourceManager.Legacy.PrivateEndpoints.ListSinglePageByParent<
     FileShare,
     PrivateEndpointConnection
