@@ -32,17 +32,6 @@ options:
     namespace: "com.azure.search.documents"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
-  "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azsearchdocuments"
-    service-dir: "sdk/search/azsearchdocuments"
-    emitter-output-dir: "{output-dir}/{service-dir}/azsearchdocuments"
-    fix-const-stuttering: false
-    generate-fakes: true
-    inject-spans: true
-    single-client: false
-    flavor: azure
-    generate-samples: true
-    head-as-boolean: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
