@@ -15,6 +15,28 @@ options:
     namespace: "com.azure.resourcemanager.apicenter"
     service-name: "Api Center"
     flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-apicenter"
+    namespace: "azure.mgmt.apicenter"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-apicenter"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-apicenter"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/apicenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/armapicenter"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapicenter"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

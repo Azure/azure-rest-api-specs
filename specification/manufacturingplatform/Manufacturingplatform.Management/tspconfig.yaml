@@ -1,4 +1,6 @@
-output-dir: "{project-root}/../"
+parameters:
+  "service-dir":
+    default: "sdk/manufacturingplatform"
 emit:
   - "@azure-tools/typespec-autorest"
 #  - "@azure-tools/typespec-providerhub-controller"
@@ -12,6 +14,23 @@ options:
   "@azure-tools/typespec-providerhub-controller":
     emitter-output-dir: "{output-dir}/generated"
     code-kind: model
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-manufacturingplatform"
+    namespace: "com.azure.resourcemanager.manufacturingplatform"
+    service-name: "Manufacturing Platform"
+    flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-manufacturingplatform"
+    namespace: "azure.mgmt.manufacturingplatform"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-manufacturingplatform"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-manufacturingplatform"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/manufacturingplatform"
     emitter-output-dir: "{output-dir}/{service-dir}/armmanufacturingplatform"

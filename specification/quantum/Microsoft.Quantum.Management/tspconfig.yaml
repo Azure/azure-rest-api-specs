@@ -18,6 +18,28 @@ options:
     namespace: "com.azure.resourcemanager.quantum"
     service-name: "Azure Quantum"
     flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-quantum"
+    namespace: "azure.mgmt.quantum"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-quantum"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-quantum"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/quantum"
+    emitter-output-dir: "{output-dir}/{service-dir}/armquantum"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armquantum"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
