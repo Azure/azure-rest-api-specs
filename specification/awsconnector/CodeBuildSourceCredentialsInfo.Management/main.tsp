@@ -41,7 +41,9 @@ enum Versions {
     "Build",
     "Source",
     "Credentials",
-    "Info"
+    "Info",
+    "test",
+    "details"
   ],
 })
 @doc("A Microsoft.AwsConnector resource")
