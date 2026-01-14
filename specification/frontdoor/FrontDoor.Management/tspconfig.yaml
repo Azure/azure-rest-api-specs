@@ -1,3 +1,6 @@
+parameters:
+  service-dir:
+    default: "sdk/frontdoor"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,7 +12,8 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/frontdoor/azure-mgmt-frontdoor"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-frontdoor"
+    package-dir: "azure-mgmt-frontdoor"
     namespace: "azure.mgmt.frontdoor"
     generate-test: true
     generate-sample: true
