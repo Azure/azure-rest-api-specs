@@ -77,12 +77,6 @@ model BehaviorTaxonomyInput extends EvaluationTaxonomyInput {
 
   @doc("Natural language definition of the behavior.")
   behavior_definition: string;
-
-  @doc("Indicates whether the behavior is desirable.")
-  desirable: boolean;
-
-  @doc("Impact level of the behavior.")
-  impact?: string;
 }
 
 @added(Versions.v2025_11_15_preview)
