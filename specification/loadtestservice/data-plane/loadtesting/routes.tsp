@@ -310,15 +310,7 @@ interface LoadTestRun {
       @doc("Content type.")
       contentType: "application/merge-patch+json";
 
-      @doc("""
-        Unique name for the load test run, must contain only lower-case alphabetic,
-        numeric, underscore or hyphen characters.
-        """)
-      @path
-      @maxLength(50)
-      @minLength(2)
-      @pattern("^[a-z0-9_-]*$")
-      testRunId: string;
+      ...TestRunIdParam ;
 
       @doc("Test run insights model.")
       @bodyRoot
