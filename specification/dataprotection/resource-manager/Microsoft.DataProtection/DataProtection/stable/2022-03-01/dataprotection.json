@@ -19,6 +19,48 @@
     "application/json"
   ],
   "paths": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/test": {
+      "get": {
+        "tags": [
+          "BackupVaults"
+        ],
+        "description": "Returns resource collection belonging to a subscription.",
+        "operationId": "BackupVaults_GetInSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupVaultResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get BackupVaults in Subscription": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultsInSubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/backupVaults": {
       "get": {
         "tags": [
