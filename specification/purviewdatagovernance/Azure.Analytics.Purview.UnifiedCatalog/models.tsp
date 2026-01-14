@@ -186,7 +186,6 @@ model CatalogApiServiceOrderBy {
 
 @doc("Filter configuration for searching managed attributes.")
 model SharedSearchManageAttributeSearchFilter {
-<<<<<<< HEAD
   @doc("The field name to filter on. Example: 'All Attributes Types.AttributeName'")
   field?: string;
 
@@ -197,18 +196,6 @@ model SharedSearchManageAttributeSearchFilter {
   value?: string;
 
   @doc("The data type of the filter value. Example: 'int','date','double','float',richtext','short','string','boolean','multiChoice'")
-=======
-  @doc("The field name to filter on.")
-  field?: string;
-
-  @doc("The comparison operator to use for filtering.")
-  operator?: string;
-
-  @doc("The value to compare against.")
-  value?: string;
-
-  @doc("The data type of the filter value.")
->>>>>>> upstream/main
   type?: string;
 }
 
@@ -489,11 +476,7 @@ model DataAssetQueryRequest {
   top?: int32;
 
   @doc("To order the records.")
-<<<<<<< HEAD
   orderBy?: CatalogApiServiceOrderBy[];
-=======
-  orderby?: CatalogApiServiceOrderBy[];
->>>>>>> upstream/main
 
   @doc("To filter by Ids.")
   ids?: string[];
@@ -509,12 +492,9 @@ model DataAssetQueryRequest {
 
   @doc("To filter by data map asset Ids.")
   dataMapAssetIds?: string[];
-<<<<<<< HEAD
 
   @doc("includingOrphans true or false")
   includingOrphans?: boolean;
-=======
->>>>>>> upstream/main
 }
 
 @doc("FacetValue.")
@@ -1240,11 +1220,7 @@ model ObjectiveQueryRequest {
   top?: int32;
 
   @doc("Order by specifications for the query.")
-<<<<<<< HEAD
   orderBy?: CatalogApiServiceOrderBy[];
-=======
-  orderby?: CatalogApiServiceOrderBy[];
->>>>>>> upstream/main
 
   @doc("Filter by objective IDs.")
   ids?: string[];
@@ -1263,12 +1239,9 @@ model ObjectiveQueryRequest {
 
   @doc("Filter by objective owners.")
   owners?: string[];
-<<<<<<< HEAD
 
   @doc("To filter by managed attributes.")
   managedAttributes?: SharedSearchManageAttributeSearchFilter[];
-=======
->>>>>>> upstream/main
 }
 
 @doc("Objective facet request model.")
@@ -1711,7 +1684,6 @@ alias PolicyIdParameters = {
   @doc("The unique identifier of the policy.")
   policyId: uuid;
 };
-<<<<<<< HEAD
 
 @doc("Initializes a new instance of the Entitycount class.")
 model EntityCount {
@@ -1742,5 +1714,3 @@ model DuplicateOkrQueryRequest {
   @doc("To filter by definition keyword.")
   definition: string;
 }
-=======
->>>>>>> upstream/main
