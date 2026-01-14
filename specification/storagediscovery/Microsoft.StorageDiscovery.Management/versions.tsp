@@ -27,5 +27,5 @@ enum ApiVersion {
   v2025_09_01: "2025-09-01",
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_01_01_preview: "2026-01-01-preview",
+  v2026_07_01_preview: "2026-07-01-preview",
 }
