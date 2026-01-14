@@ -169,7 +169,7 @@ else {
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
 
-      $notice = "Your service description will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
+      $notice = "Your PR is for a new API version using OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
       LogNoticeForFile $file $notice
 
       if ($env:GITHUB_OUTPUT) {
