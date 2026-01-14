@@ -9,12 +9,15 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
  * Triage recommendation data structure.
  */
 @parentResource(ResiliencyReview)
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 model TriageRecommendation
   is Azure.ResourceManager.ProxyResource<TriageRecommendationProperties> {
   ...ResourceNameParameter<
@@ -26,6 +29,8 @@ model TriageRecommendation
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface TriageRecommendationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -50,6 +55,8 @@ interface TriageRecommendationOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface TriageRecommendations {
   /**
    * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
@@ -88,6 +95,8 @@ interface TriageRecommendations {
    * Approve a triage recommendation for a given id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01)
   @summary("Approve triage recommendation by id.")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   @action("approve")

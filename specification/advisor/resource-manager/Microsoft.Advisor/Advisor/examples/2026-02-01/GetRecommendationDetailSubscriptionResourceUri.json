@@ -2,7 +2,7 @@
   "parameters": {
     "resourceUri": "subscriptions/a5481ee1-95df-47d0-85d4-dd3f0dfa19bc/resourceGroups/resourceGroup/providers/Microsoft.Compute/availabilitysets/armavset",
     "recommendationId": "bd27ddc6-1312-4067-b4af-cbb45e32cfd7",
-    "api-version": "2026-02-01"
+    "api-version": "2025-05-01-preview"
   },
   "responses": {
     "200": {
@@ -14,10 +14,6 @@
           "impact": "Medium",
           "impactedField": "Microsoft.Compute/availabilitysets",
           "impactedValue": "armavset",
-          "state": "New",
-          "reason": "",
-          "postponedTime": "0001-01-01T00:00:00Z",
-          "priority": "Medium",
           "lastUpdated": "2017-02-24T22:24:43.3216408Z",
           "risk": "Warning",
           "shortDescription": {
@@ -64,10 +60,13 @@
           "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
           "label": "Enable Soft Delete",
           "learnMoreLink": "https://link2",
-          "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted"
+          "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted",
+          "tracked": false
         },
         "type": "Microsoft.Advisor/recommendations"
       }
     }
-  }
+  },
+  "operationId": "Recommendations_Get",
+  "title": "GetRecommendationDetailSubscriptionResourceUri"
 }
