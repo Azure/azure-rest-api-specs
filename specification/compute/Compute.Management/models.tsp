@@ -3755,7 +3755,7 @@ model VirtualMachineScaleSetUpdateProperties {
   /**
    * User-defined constraints for virtual machine scale set hardware placement.
    */
-  @added(Versions.v2025_04_01)
+  @added(Versions.v2025_11_01)
   placement?: Placement;
 }
 
