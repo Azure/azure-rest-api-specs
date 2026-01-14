@@ -1,0 +1,512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/licenseReservations/{licenseReservationName}/cancel": {
+      "post": {
+        "tags": [
+          "LicenseReservation"
+        ],
+        "description": "Cancels a license reservation for VL Online services. Accepts an optional cancellation reason. This operation is supported for billing accounts of type Enterprise Agreement to cancel a license reservation under Volume Licensing (VL).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "LicenseReservations_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "licenseReservationName",
+            "description": "The ID that uniquely identifies a license reservation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z\\d-_]+"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Request parameters for cancel license reservation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelLicenseReservationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "LicenseReservationCancel": {
+            "$ref": "./examples/licenseReservationCancel.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/licenseReservations/{licenseReservationName}": {
+      "delete": {
+        "tags": [
+          "LicenseReservation"
+        ],
+        "description": "Cancels a license reservation for VL Online services. This operation is supported for billing accounts of type Enterprise Agreement to cancel a license reservation under Volume Licensing (VL).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "LicenseReservations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "licenseReservationName",
+            "description": "The ID that uniquely identifies a license reservation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z\\d-_]+"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "LicenseReservationDelete": {
+            "$ref": "./examples/licenseReservationDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "LicenseReservation"
+        ],
+        "description": "Gets a license reservation for VL Online Services by its ID. This operation is supported for billing accounts of type Enterprise Agreement to get a license reservation under Volume Licensing (VL).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "LicenseReservations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "licenseReservationName",
+            "description": "The ID that uniquely identifies a license reservation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z\\d-_]+"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The license reservation.",
+            "schema": {
+              "$ref": "#/definitions/LicenseReservation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseReservationGet": {
+            "$ref": "./examples/licenseReservationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LicenseReservation"
+        ],
+        "description": "Creates the license reservation for VL Online Services. This operation is supported for billing accounts of type Enterprise Agreement to create license reservations under Volume Licensing (VL).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "LicenseReservations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "licenseReservationName",
+            "description": "The ID that uniquely identifies a license reservation.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z\\d-_]+"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The licenses that need to be reserved.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LicenseReservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The license reservation was/is being updated. If the provisioningState in the response does not indicate a terminal state, an 'Azure-AsyncOperation' header will be included, allowing the client to poll for details about the operation's progress.",
+            "schema": {
+              "$ref": "#/definitions/LicenseReservation"
+            }
+          },
+          "201": {
+            "description": "The license reservation was/is being created. If the provisioningState in the response does not indicate a terminal state, an 'Azure-AsyncOperation' header will be included, allowing the client to poll for details about the operation's progress.",
+            "schema": {
+              "$ref": "#/definitions/LicenseReservation"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "LicenseReservationCreate": {
+            "$ref": "./examples/licenseReservationCreate.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/licenseReservations": {
+      "get": {
+        "tags": [
+          "LicenseReservation"
+        ],
+        "description": "Lists the license reservations for VL Online Services. This operation is supported for billing accounts of type Enterprise Agreement to list license reservations under Volume Licensing (VL).",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "LicenseReservations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of license reservations.",
+            "schema": {
+              "$ref": "#/definitions/LicenseReservationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LicenseReservationsList": {
+            "$ref": "./examples/licenseReservationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CancelLicenseReservationRequest": {
+      "description": "Request parameters for cancel license reservation.",
+      "type": "object",
+      "properties": {
+        "cancellationReason": {
+          "description": "Cancellation reason.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseReservation": {
+      "description": "The license reservation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) LicenseReservation",
+          "allOf": [
+            {
+              "$ref": "#/definitions/LicenseReservationProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "LicenseReservationLineItem": {
+      "description": "A license reservation line item (or license).",
+      "required": [
+        "quantity",
+        "skuId",
+        "usageCountry"
+      ],
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "skuDescription": {
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "usageCountry": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseReservationListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseReservation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseReservationProperties": {
+      "description": "The license reservation.",
+      "required": [
+        "lineItems",
+        "termStartDate"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the resource during a long-running operation.",
+          "enum": [
+            "Succeeded",
+            "Canceled",
+            "Failed",
+            "New",
+            "Pending",
+            "Provisioning"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "lineItems": {
+          "description": "The line items (or licenses) that are reserved.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LicenseReservationLineItem"
+          },
+          "x-ms-identifiers": [ ]
+        },
+        "termStartDate": {
+          "format": "date-time",
+          "description": "The date from which the license would be used.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the license reservation.",
+          "enum": [
+            "Active",
+            "Pending",
+            "CancelPending",
+            "Cancelled",
+            "RequestReceived",
+            "Held",
+            "Reconciled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ReservationStatus",
+            "modelAsString": true
+          }
+        },
+        "reservedBy": {
+          "description": "Name of the entity that created the license reservation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemOverrides": {
+          "description": "System imposed policies that regulate behavior of the license reservation.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ReservationSystemOverrides"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReservationSystemOverrides": {
+      "description": "System imposed policies that regulate behavior of the license reservation.",
+      "type": "object",
+      "properties": {
+        "cancellationAllowedEndDate": {
+          "format": "date-time",
+          "description": "The last date by which the license reservation can be canceled.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

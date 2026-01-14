@@ -1,0 +1,571 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/cancel": {
+      "post": {
+        "tags": [
+          "PartnerChangeRequest"
+        ],
+        "description": "Cancels a partner change request.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PartnerChangeRequests_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "partnerChangeRequestGuid",
+            "description": "The GUID that uniquely identifies a partner change request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerChangeRequestCancelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Partner change request has been cancelled.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}/download": {
+      "get": {
+        "tags": [
+          "PartnerChangeRequest"
+        ],
+        "description": "Downloads the partner change request document.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PartnerChangeRequests_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "partnerChangeRequestGuid",
+            "description": "The GUID that uniquely identifies a partner change request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A partner change request document resource.",
+            "schema": {
+              "$ref": "#/definitions/PartnerChangeRequestDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests/{partnerChangeRequestGuid}": {
+      "get": {
+        "tags": [
+          "PartnerChangeRequest"
+        ],
+        "description": "Gets the details of a partner change request.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PartnerChangeRequests_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "partnerChangeRequestGuid",
+            "description": "The GUID that uniquely identifies a partner change request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A partner change request resource.",
+            "schema": {
+              "$ref": "#/definitions/PartnerChangeRequestList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PartnerChangeRequest"
+        ],
+        "description": "Initiates a partner change request for the specified billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PartnerChangeRequests_ValidateInitiate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "path",
+            "name": "partnerChangeRequestGuid",
+            "description": "The GUID that uniquely identifies a partner change request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartnerChangeRequestInitiateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Partner change request has been initiated.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/partnerChangeRequests": {
+      "get": {
+        "tags": [
+          "PartnerChangeRequest"
+        ],
+        "description": "Lists partner change requests for a specific billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "PartnerChangeRequests_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "partnerChangeRequestGuid",
+            "type": "string"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of partner change requests.",
+            "schema": {
+              "$ref": "#/definitions/PartnerChangeRequestListListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PartnerChangeRequestCancelRequest": {
+      "description": "A partner change request cancellation resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "A partner change request cancellation resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PartnerChangeRequestCancelRequestProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestCancelRequestProperties": {
+      "required": [
+        "cancellationReason"
+      ],
+      "type": "object",
+      "properties": {
+        "cancellationReason": {
+          "description": "The reason for cancelling the partner change request.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestDocument": {
+      "description": "A partner change request document resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) PartnerChangeRequestDocument",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PartnerChangeRequestDocumentProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "PartnerChangeRequestDocumentProperties": {
+      "description": "A partner change request document resource.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "The download URL for the partner change request document.",
+          "type": "string"
+        },
+        "expiryTime": {
+          "format": "date-time",
+          "description": "The expiry time of the download URL.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestInitiateRequest": {
+      "description": "A partner change request resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the partner change request.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PartnerChangeRequestRequestProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestList": {
+      "description": "A list of partner change requests.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) PartnerChangeRequestList",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PartnerChangeRequestListProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "PartnerChangeRequestListListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartnerChangeRequestList"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestListProperties": {
+      "description": "A list of partner change requests.",
+      "type": "object",
+      "properties": {
+        "expirationTimeUTC": {
+          "format": "date-time",
+          "description": "The expiration time of the partner change request in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recipientEmailId": {
+          "description": "The email address of the recipient for the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initiatorEmailId": {
+          "description": "The email of the customer who initiated the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initiatorFirstName": {
+          "description": "The first name of the customer who initiated the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initiatorLastName": {
+          "description": "The last name of the customer who initiated the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestStatus": {
+          "description": "The current status of the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "effectiveDateUTC": {
+          "format": "date-time",
+          "description": "The effective date for the partner change in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerPrimaryContactEmailId": {
+          "description": "The primary contact email of the partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourcePartnerOrganizationPcn": {
+          "description": "The PCN of the source partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourcePartnerOrganizationName": {
+          "description": "The name of the source partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetPartnerOrganizationPcn": {
+          "description": "The Partner Center Number of the target partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetPartnerOrganizationName": {
+          "description": "The name of the target partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerOrganizationPcn": {
+          "description": "The PCN of the customer organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerOrganizationName": {
+          "description": "The name of the customer organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerChangeReasonCode": {
+          "description": "The code identifying the reason for the partner change.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerChangeReason": {
+          "description": "The reason for the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerType": {
+          "description": "The type of the partner organization.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initiatedOnUTC": {
+          "description": "The date and time when the partner change request was initiated in UTC.",
+          "type": "string",
+          "readOnly": true
+        },
+        "canceledBy": {
+          "description": "The user who cancelled the partner change request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerChangePackageId": {
+          "description": "The unique identifier for the partner change package.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartnerChangeRequestRequestProperties": {
+      "type": "object",
+      "properties": {
+        "recipientEmailId": {
+          "description": "The email address of the recipient for the partner change request.",
+          "type": "string"
+        },
+        "effectiveDateUTC": {
+          "description": "The effective date for the partner change in UTC.",
+          "type": "string"
+        },
+        "targetPartnerOrganizationPcn": {
+          "description": "The Partner Center Number of the target partner organization.",
+          "type": "string"
+        },
+        "partnerChangeReasonCode": {
+          "description": "The code identifying the reason for the partner change.",
+          "type": "string"
+        },
+        "partnerChangeReason": {
+          "description": "The reason for the partner change request.",
+          "type": "string"
+        },
+        "initiatorFirstName": {
+          "description": "The first name of the customer who initiated the partner change request.",
+          "type": "string"
+        },
+        "initiatorLastName": {
+          "description": "The last name of the customer who initiated the partner change request.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

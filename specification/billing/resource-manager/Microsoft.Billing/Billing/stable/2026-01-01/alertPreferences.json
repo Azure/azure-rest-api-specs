@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "pacebpexphot@microsoft.com"
+    },
+    "version": "2026-01-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/alertPreferences/{alertPreferenceName}": {
+      "get": {
+        "tags": [
+          "AlertPreferences"
+        ],
+        "description": "Gets the AlertPreference with the given Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AlertPreferences_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/alertPreferenceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertPreference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertPreferenceGet": {
+            "$ref": "./examples/alertPreferenceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AlertPreferences"
+        ],
+        "description": "Creates or updates an AlertPreference for the specifed Billing Account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AlertPreferences_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/alertPreferenceName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "An alert preference",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertPreference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertPreference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertPreferencePut": {
+            "$ref": "./examples/alertPreferencePut.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/alertPreferences": {
+      "get": {
+        "tags": [
+          "AlertPreferences"
+        ],
+        "description": "List the AlertPreferences for a specifed Billing Account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AlertPreferences_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertPreferenceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AlertPreferenceListByBillingAccount": {
+            "$ref": "./examples/alertPreferenceListByBillingAccount.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlertMethod": {
+      "description": "The details for the method in which an alert notification will be sent",
+      "type": "object",
+      "properties": {
+        "alertMethodType": {
+          "description": "The method in which an alert notification will be sent.",
+          "enum": [
+            "Other",
+            "ServiceBus"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertMethodType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "Describes whether notifications should be fired for a given alert method.",
+          "enum": [
+            "Other",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertNotificationStatus",
+            "modelAsString": true
+          }
+        },
+        "additionalProperties": {
+          "description": "Additional properties needed to enable specific alert types",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertNotificationPreference": {
+      "description": "The preferences for how to be notified of alerts",
+      "type": "object",
+      "properties": {
+        "alertType": {
+          "description": "Type of alert.",
+          "enum": [
+            "Unknown",
+            "Custom",
+            "Service",
+            "Maintenance",
+            "ThresholdBillingAuthSuccess",
+            "ThresholdBillingLimitDeclined",
+            "ThresholdBillingLimitDeclinedReminder",
+            "ThresholdBillingConsumption",
+            "PaymentSuccessful",
+            "PaymentFailed",
+            "PurchaseStarted",
+            "PurchaseCompleted",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertType",
+            "modelAsString": true
+          }
+        },
+        "alertMethods": {
+          "description": "The details for the method in which an alert notification will be sent",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertMethod"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertPreference": {
+      "description": "An alert preference",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) AlertPreference",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertPreferenceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-azure-resource": true
+    },
+    "AlertPreferenceListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertPreference"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AlertPreferenceProperties": {
+      "description": "An alert preference",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Other",
+            "Active",
+            "Deleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": true
+          }
+        },
+        "billingAccountId": {
+          "description": "The resource ID that uniquely identifies a billing account resource.",
+          "type": "string"
+        },
+        "billingAccountDisplayName": {
+          "description": "The name of the billing account.",
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The resource ID that uniquely identifies a billing profile resource.",
+          "type": "string"
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile.",
+          "type": "string"
+        },
+        "notificationPreferences": {
+          "description": "The preferences for how to be notified of alerts",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertNotificationPreference"
+          },
+          "x-ms-identifiers": [ ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}
