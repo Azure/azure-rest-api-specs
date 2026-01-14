@@ -28,10 +28,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * REST API for Azure Communication Services
+ * REST API for Email Services/Domains/SuppressionLists
  */
 @armProviderNamespace
-@service(#{ title: "CommunicationServiceManagementClient" })
+@service(#{ title: "Azure Communication Services Management API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.Communication;
@@ -47,3 +47,8 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list,
+  "Lists all of the available REST API operations of the Microsoft.Communication provider."
+);
+@@summary(Operations.list, "List Operations");

@@ -65,6 +65,7 @@ interface CommunicationServices {
   /**
    * Handles requests to list all resources in a subscription.
    */
+  @summary("List By Subscription")
   listBySubscription is ArmListBySubscription<
     CommunicationServiceResource,
     Response = ArmResponse<CommunicationServiceResourceList>

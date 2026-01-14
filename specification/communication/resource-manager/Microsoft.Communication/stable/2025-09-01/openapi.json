@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "CommunicationServiceManagementClient",
+    "title": "Azure Communication Services Management API",
     "version": "2025-09-01",
-    "description": "REST API for Azure Communication Services",
+    "description": "REST API for Email Services/Domains/SuppressionLists",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -71,7 +71,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "List Operations",
+        "description": "Lists all of the available REST API operations of the Microsoft.Communication provider.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -156,6 +157,7 @@
         "tags": [
           "CommunicationServices"
         ],
+        "summary": "List By Subscription",
         "description": "Handles requests to list all resources in a subscription.",
         "parameters": [
           {
