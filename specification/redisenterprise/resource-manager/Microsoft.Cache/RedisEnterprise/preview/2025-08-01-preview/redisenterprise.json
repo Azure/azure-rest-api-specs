@@ -3253,7 +3253,7 @@
           "format": "password",
           "description": "SAS URIs for the target blobs to import from",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/SecretUri"
           },
           "x-ms-secret": true
         }
@@ -3987,6 +3987,11 @@
           }
         ]
       }
+    },
+    "SecretUri": {
+      "type": "string",
+      "format": "password",
+      "x-ms-secret": true
     },
     "Sku": {
       "type": "object",

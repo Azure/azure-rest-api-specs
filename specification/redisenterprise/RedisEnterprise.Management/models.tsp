@@ -1403,8 +1403,11 @@ model ImportClusterParameters {
    * SAS URIs for the target blobs to import from
    */
   @secret
-  sasUris: string[];
+  sasUris: SecretUri[];
 }
+
+@secret
+scalar SecretUri extends string;
 
 /**
  * Parameters for a Redis Enterprise export operation.
