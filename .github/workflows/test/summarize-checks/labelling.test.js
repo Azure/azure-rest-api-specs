@@ -315,9 +315,39 @@ describe("update labels", () => {
         rpaasRPMissing: false,
         typeSpecChanged: true,
         isDraft: false,
-        targetBranch: "main"
-      }
-    }
+        targetBranch: "main",
+      },
+    },
+    {
+      description:
+        "Should remove ARMSignedOff when CI-RpaaSRPNotInPrivateRepo is set and RPaaSException is NOT present",
+      existingLabels: [
+        "ARMReview",
+        "ARMSignedOff",
+        "CI-RpaaSRPNotInPrivateRepo",
+        "new-api-version",
+        "new-rp-namespace",
+        "PublishToCustomers",
+        "resource-manager",
+        "RPaaS",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: ["NotReadyForARMReview"],
+      expectedLabelsToRemove: ["ARMSignedOff"],
+      impactAssessment: {
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        suppressionReviewRequired: false,
+        isNewApiVersion: true,
+        rpaasRpNotInPrivateRepo: true,
+        rpaasChange: true,
+        newRP: true,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",
