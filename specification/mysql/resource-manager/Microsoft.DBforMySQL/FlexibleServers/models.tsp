@@ -2160,6 +2160,22 @@ model LocationNameParameter {
 }
 
 /**
+ * The property of a subscription's location.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.extension("x-ms-parameter-location", "method")
+model LocationParameter {
+  /**
+   * The name of the location.
+   */
+  @minLength(1)
+  @pattern("^[ \\w]+$")
+  @path
+  @segment("locations")
+  location: string;
+}
+
+/**
  * A List of azure ad administrators.
  */
 model AdministratorListResult {
@@ -2428,6 +2444,90 @@ model OperationDisplay {
   /** The short, localized friendly description of the operation; suitable for tool tips and detailed views. */
   @visibility(Lifecycle.Read)
   description?: string;
+}
+
+/**
+ * Properties of SubscriptionUsageModel
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Object does not have provisioning state"
+model SubscriptionUsageProperties {
+  /** 
+  The customer subscription ID
+   */
+  @visibility(Lifecycle.Read)
+  subscriptionId?: string;
+
+  /** 
+    The name property of the usage type
+     */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Required for object"
+  name?: SubscriptionUsageNameProperties;
+
+  /** 
+    The limit of the SKU family. E.g. 300.
+     */
+  @visibility(Lifecycle.Read)
+  limit?: int32;
+
+  /** The current usage value of the SKU family. E.g. 254. */
+  @visibility(Lifecycle.Read)
+  usage?: int32;
+
+  /** 
+    The unit of usage. E.g. "Count".
+     */
+  @visibility(Lifecycle.Read)
+  unit?: string;
+
+  /** The current usage value of the SKU family. E.g. 254. */
+  @visibility(Lifecycle.Read)
+  currentValue?: int32;
+
+  /** 
+    The fully qualified ARM resource ID.
+     */
+  @visibility(Lifecycle.Read)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Required for object"
+  id?: string;
+}
+
+/**
+ * Properties of SubscriptionUsageModel's NameProperty
+ */
+model SubscriptionUsageNameProperties {
+  /** 
+  The string value of the name of the usage type. E.g. "StandardDDSv4Family".
+   */
+  @visibility(Lifecycle.Read)
+  value?: string;
+
+  /** 
+    The localized friendly name of the usage type. E.g. "StandardDDSv4Family".
+     */
+  @visibility(Lifecycle.Read)
+  localizedValue?: string;
+}
+
+/**
+ * A List of subscription usages.
+ */
+model UsageListResult {
+  /**
+   * The list of subscription usages.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("The Usage items on this page")
+  @pageItems
+  @added(Versions.v2025_12_01_preview)
+  value?: SubscriptionUsage[];
+
+  /**
+   * Link to the next page of results, if applicable
+   */
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: url;
 }
 
 /**

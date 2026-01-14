@@ -25,6 +25,7 @@ import "./Capability.tsp";
 import "./Maintenance.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
+import "./SubscriptionUsage.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

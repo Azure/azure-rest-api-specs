@@ -2,12 +2,14 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
@@ -27,6 +29,24 @@ interface LocationBasedCapabilities {
     Response = ArmResponse<CapabilitiesListResult>,
     Scope = SubscriptionActionScope,
     Parameters = LocationNameParameter
+  >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface LocationBasedUsages {
+  /**
+   * Get usages at specified location in a given subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @autoRoute
+  @list
+  @get
+  @action("usages")
+  @added(Versions.v2025_12_01_preview)
+  get is ArmProviderActionSync<
+    Response = ArmResponse<UsageListResult>,
+    Scope = SubscriptionActionScope,
+    Parameters = LocationParameter
   >;
 }
 
