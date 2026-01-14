@@ -35,6 +35,7 @@ interface Experiments {
   /**
    * Gets an Experiment by ExperimentName
    */
+  @summary("Gets an Experiment by ExperimentName")
   get is ArmResourceRead<Experiment, Error = ErrorResponse>;
 
   /**
