@@ -17,6 +17,10 @@ alias ListEvaluatorVersionsParameters = {
   @Http.query
   type?: EvaluatorType | "all";
 
+  @doc("Filter evaluators by taxonomy ID. Returns only evaluators with definition.type='taxonomy' and matching taxonomy_id.")
+  @Http.query
+  taxonomyId?: string;
+
   @doc("A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.")
   @Http.query
   limit?: int32 = 20;

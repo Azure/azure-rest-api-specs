@@ -60,6 +60,9 @@ union EvaluatorDefinitionType {
 
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
+
+  @doc("Taxonomy-based definition")
+  taxonomy: "taxonomy",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -99,6 +102,19 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
+}
+
+@doc("Taxonomy-based evaluator")
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+model TaxonomyBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.taxonomy;
+
+  @doc("The taxonomy id used for evaluation")
+  taxonomy_id: string;
+
+  @doc("The version of the taxonomy. If not specified, uses the latest version.")
+  taxonomy_version?: string;
 }
 
 @doc("Evaluator Definition")

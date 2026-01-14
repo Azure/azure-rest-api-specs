@@ -13,7 +13,15 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
-alias ListDatasetVersionsParameters = {};
+alias ListDatasetVersionsParameters = {
+  @doc("Filter datasets by taxonomy ID. Returns datasets where tags['taxonomy_id'] matches the provided value.")
+  @Http.query
+  taxonomyId?: string;
+
+  @doc("Filter datasets by evaluation run ID. Returns datasets where tags['eval_run_id'] matches the provided value.")
+  @Http.query
+  evalRunId?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @added(Versions.v2025_05_01)
