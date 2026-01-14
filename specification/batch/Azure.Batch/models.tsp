@@ -1089,10 +1089,12 @@ model BatchJobStatistics {
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
   @clientName("readIoGiB")
+  @clientName("readIoGib", "python")
   readIOGiB: float32;
 
   @doc("The total amount of data in GiB written to disk by all Tasks in the Job.")
   @clientName("writeIoGiB")
+  @clientName("writeIoGib", "python")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
@@ -1657,6 +1659,7 @@ model BatchUefiSettings {
   secureBootEnabled?: boolean;
 
   @doc("Specifies whether vTPM should be enabled on the virtual machine.")
+  @clientName("vtpmEnabled", "python")
   vTpmEnabled?: boolean;
 }
 
@@ -2442,10 +2445,12 @@ model BatchJobScheduleStatistics {
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
   @clientName("readIoGiB")
+  @clientName("readIoGib", "python")
   readIOGiB: float32;
 
   @doc("The total gibibytes written to disk by all Tasks in all Jobs created under the schedule.")
   @clientName("writeIoGiB")
+  @clientName("writeIoGib", "python")
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
@@ -3633,10 +3638,12 @@ model BatchTaskStatistics {
 
   @doc("The total gibibytes read from disk by the Task.")
   @clientName("readIoGiB")
+  @clientName("readIoGib", "python")
   readIOGiB: float32;
 
   @doc("The total gibibytes written to disk by the Task.")
   @clientName("writeIoGiB")
+  @clientName("writeIoGib", "python")
   writeIOGiB: float32;
 
   @doc("The total wait time of the Task. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.).")
@@ -3942,7 +3949,7 @@ model BatchNode {
 
   @doc("Information about the Compute Node agent version and the time the Compute Node upgraded to a new version.")
   @visibility(Lifecycle.Read)
-  nodeAgentInfo: BatchNodeAgentInfo;
+  nodeAgentInfo?: BatchNodeAgentInfo;
 
   @doc("Info about the current state of the virtual machine.")
   @visibility(Lifecycle.Read)

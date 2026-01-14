@@ -5,9 +5,7 @@ import "./DevBox/routes.tsp";
 import "./DevCenter/routes.tsp";
 import "./Environments/routes.tsp";
 
-using Azure.Core;
 using TypeSpec.Versioning;
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 @useAuth(
@@ -63,4 +61,7 @@ enum APIVersions {
 
   @doc("The 2025-08-01-preview service API version")
   v2025_08_01_preview: "2025-08-01-preview",
+
+  @doc("The 2026-01-01-preview service API version")
+  v2026_01_01_preview: "2026-01-01-preview",
 }
