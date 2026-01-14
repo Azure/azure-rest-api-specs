@@ -40,13 +40,16 @@
   },
   "tags": [
     {
+      "name": "DelegatedIdentityOperations"
+    },
+    {
+      "name": "PartnerBusinessOperations"
+    },
+    {
       "name": "Operations"
     },
     {
       "name": "DelegatedIdentities"
-    },
-    {
-      "name": "PartnerBusinesses"
     }
   ],
   "paths": {
@@ -117,9 +120,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses": {
       "get": {
-        "operationId": "PartnerBusinesses_ListBySubscription",
+        "operationId": "PartnerBusinessOperations_ListBySubscription",
         "tags": [
-          "PartnerBusinesses"
+          "PartnerBusinessOperations"
         ],
         "description": "List PartnerBusiness resources by subscription ID",
         "parameters": [
@@ -372,48 +375,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses": {
-      "get": {
-        "operationId": "PartnerBusinesses_ListByResourceGroup",
-        "tags": [
-          "PartnerBusinesses"
-        ],
-        "description": "List PartnerBusiness resources by resource group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartnerBusinessListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses/{partnerBusinessName}": {
       "get": {
-        "operationId": "PartnerBusinesses_Get",
+        "operationId": "PartnerBusinessOperations_Get",
         "tags": [
-          "PartnerBusinesses"
+          "PartnerBusinessOperations"
         ],
         "description": "Get a PartnerBusiness",
         "parameters": [
@@ -439,7 +405,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PartnerBusiness"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
             }
           },
           "default": {
@@ -451,9 +417,9 @@
         }
       },
       "put": {
-        "operationId": "PartnerBusinesses_CreateOrUpdate",
+        "operationId": "PartnerBusinessOperations_CreateOrUpdate",
         "tags": [
-          "PartnerBusinesses"
+          "PartnerBusinessOperations"
         ],
         "description": "Create a PartnerBusiness",
         "parameters": [
@@ -480,7 +446,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PartnerBusiness"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
             }
           }
         ],
@@ -488,13 +454,13 @@
           "200": {
             "description": "Resource 'PartnerBusiness' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PartnerBusiness"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
             }
           },
           "201": {
             "description": "Resource 'PartnerBusiness' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PartnerBusiness"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
             }
           },
           "default": {
@@ -506,9 +472,9 @@
         }
       },
       "patch": {
-        "operationId": "PartnerBusinesses_Update",
+        "operationId": "PartnerBusinessOperations_Update",
         "tags": [
-          "PartnerBusinesses"
+          "PartnerBusinessOperations"
         ],
         "description": "Update a PartnerBusiness",
         "parameters": [
@@ -535,7 +501,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PartnerBusinessUpdate"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusinessUpdate"
             }
           }
         ],
@@ -543,7 +509,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PartnerBusiness"
+              "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
             }
           },
           "default": {
@@ -555,9 +521,9 @@
         }
       },
       "delete": {
-        "operationId": "PartnerBusinesses_Delete",
+        "operationId": "PartnerBusinessOperations_Delete",
         "tags": [
-          "PartnerBusinesses"
+          "PartnerBusinessOperations"
         ],
         "description": "Delete a PartnerBusiness",
         "parameters": [
@@ -574,6 +540,269 @@
             "name": "partnerBusinessName",
             "in": "path",
             "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses/{partnerBusinessName}/delegatedIdentities": {
+      "get": {
+        "operationId": "DelegatedIdentityOperations_ListByParent",
+        "tags": [
+          "DelegatedIdentityOperations"
+        ],
+        "description": "List DelegatedIdentityV20260101Preview resources by PartnerBusiness",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedIdentityV20260101PreviewListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudDevicePlatform/partnerBusinesses/{partnerBusinessName}/delegatedIdentities/{delegatedIdentityV20260101PreviewName}": {
+      "get": {
+        "operationId": "DelegatedIdentityOperations_Get",
+        "tags": [
+          "DelegatedIdentityOperations"
+        ],
+        "description": "Get a DelegatedIdentityV20260101Preview",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "delegatedIdentityV20260101PreviewName",
+            "in": "path",
+            "description": "The name of the DelegatedIdentityV20260101Preview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DelegatedIdentityOperations_CreateOrUpdate",
+        "tags": [
+          "DelegatedIdentityOperations"
+        ],
+        "description": "Create a DelegatedIdentityV20260101Preview",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "delegatedIdentityV20260101PreviewName",
+            "in": "path",
+            "description": "The name of the DelegatedIdentityV20260101Preview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DelegatedIdentityV20260101Preview' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+            }
+          },
+          "201": {
+            "description": "Resource 'DelegatedIdentityV20260101Preview' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DelegatedIdentityOperations_Update",
+        "tags": [
+          "DelegatedIdentityOperations"
+        ],
+        "description": "Update a DelegatedIdentityV20260101Preview",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "delegatedIdentityV20260101PreviewName",
+            "in": "path",
+            "description": "The name of the DelegatedIdentityV20260101Preview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelegatedIdentityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DelegatedIdentityOperations_Delete",
+        "tags": [
+          "DelegatedIdentityOperations"
+        ],
+        "description": "Delete a DelegatedIdentityV20260101Preview",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "partnerBusinessName",
+            "in": "path",
+            "description": "The name of the PartnerBusiness",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+          },
+          {
+            "name": "delegatedIdentityV20260101PreviewName",
+            "in": "path",
+            "description": "The name of the DelegatedIdentityV20260101Preview",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,128}$"
@@ -732,6 +961,27 @@
         }
       }
     },
+    "DelegatedIdentityV20260101PreviewListResult": {
+      "type": "object",
+      "description": "The response of a DelegatedIdentityV20260101Preview list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DelegatedIdentityV20260101Preview items on this page",
+          "items": {
+            "$ref": "#/definitions/V20260101Preview.DelegatedIdentityV20260101Preview"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate": {
       "type": "object",
       "description": "Model defining updatable properties of a ManagedServiceIdentityWithDelegation",
@@ -764,12 +1014,33 @@
         }
       ]
     },
-    "PartnerBusiness": {
+    "PartnerBusinessListResult": {
       "type": "object",
-      "description": "Represents a CloudDevicePlatform partner business resource.",
+      "description": "The response of a PartnerBusiness list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PartnerBusiness items on this page",
+          "items": {
+            "$ref": "#/definitions/V20260101Preview.PartnerBusiness"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "V20260101Preview.DelegatedIdentityV20260101Preview": {
+      "type": "object",
+      "description": "Represents a CloudDevicePlatform delegated identity resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PartnerBusinessProperties",
+          "$ref": "#/definitions/DelegatedIdentityProperties",
           "description": "The resource-specific properties for this resource."
         },
         "identity": {
@@ -783,28 +1054,26 @@
         }
       ]
     },
-    "PartnerBusinessListResult": {
+    "V20260101Preview.PartnerBusiness": {
       "type": "object",
-      "description": "The response of a PartnerBusiness list operation.",
+      "description": "Represents a CloudDevicePlatform partner business resource.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PartnerBusiness items on this page",
-          "items": {
-            "$ref": "#/definitions/PartnerBusiness"
-          }
+        "properties": {
+          "$ref": "#/definitions/V20260101Preview.PartnerBusinessProperties",
+          "description": "The resource-specific properties for this resource."
         },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentitywithdelegation.json#/definitions/ManagedServiceIdentityWithDelegation",
+          "description": "The set of delegated resources. The delegated resources dictionary keys will be source resource internal ids"
         }
       },
-      "required": [
-        "value"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
       ]
     },
-    "PartnerBusinessProperties": {
+    "V20260101Preview.PartnerBusinessProperties": {
       "type": "object",
       "description": "Represents the properties of a CloudDevicePlatform partner business resource.",
       "properties": {
@@ -815,7 +1084,7 @@
         }
       }
     },
-    "PartnerBusinessUpdate": {
+    "V20260101Preview.PartnerBusinessUpdate": {
       "type": "object",
       "description": "Represents the properties of a PartnerBusiness resource that can be updated.",
       "properties": {

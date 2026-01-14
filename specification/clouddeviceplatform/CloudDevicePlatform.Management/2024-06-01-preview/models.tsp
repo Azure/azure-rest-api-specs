@@ -40,34 +40,6 @@ model DelegatedIdentityUpdate {
   identity?: Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
 }
 
-@added(Versions.v2026_01_01_preview)
-@doc("Represents a CloudDevicePlatform partner business resource.")
-model PartnerBusiness is TrackedResource<PartnerBusinessProperties> {
-  ...ResourceNameParameter<
-    Resource = PartnerBusiness,
-    NamePattern = "^[a-zA-Z0-9-]{3,128}$"
-  >;
-  ...Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationProperty;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updatable-properties"
-@added(Versions.v2026_01_01_preview)
-@doc("Represents the properties of a CloudDevicePlatform partner business resource.")
-model PartnerBusinessProperties {
-  @doc("The status of the last provisioning operation performed on the resource.")
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
-}
-
-@added(Versions.v2026_01_01_preview)
-@doc("Represents the properties of a PartnerBusiness resource that can be updated.")
-model PartnerBusinessUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  @doc("Updatable managed service identity")
-  identity?: Microsoft.ManagedServiceCommonTypes.ManagedServiceIdentityWithDelegationUpdate;
-}
-
 /*
  * Currently, the ManagedIdentityWithDelegation common type is not available to use. Below is a workaround provided by
  * the follow stack overflow post: https://stackoverflow.microsoft.com/questions/406446/407138#407138
